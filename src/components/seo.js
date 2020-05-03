@@ -1,16 +1,10 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
+import { graphql, useStaticQuery } from 'gatsby'
 
-import React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import { Helmet } from 'react-helmet'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ lang, title, description, meta, link }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -36,53 +30,56 @@ function SEO({ description, lang, meta, title }) {
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
-          name: `description`,
+          name: 'description',
           content: metaDescription,
         },
         {
-          property: `og:title`,
+          property: 'og:title',
           content: title,
         },
         {
-          property: `og:description`,
+          property: 'og:description',
           content: metaDescription,
         },
         {
-          property: `og:type`,
-          content: `website`,
+          property: 'og:type',
+          content: 'website',
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: 'summary',
         },
         {
-          name: `twitter:creator`,
+          name: 'twitter:creator',
           content: site.siteMetadata.author,
         },
         {
-          name: `twitter:title`,
+          name: 'twitter:title',
           content: title,
         },
         {
-          name: `twitter:description`,
+          name: 'twitter:description',
           content: metaDescription,
         },
       ].concat(meta)}
+      link={link}
     />
   )
 }
 
 SEO.defaultProps = {
-  lang: `en`,
+  lang: 'en',
+  description: '',
   meta: [],
-  description: ``,
+  link: [],
 }
 
 SEO.propTypes = {
-  description: PropTypes.string,
   lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  meta: PropTypes.arrayOf(PropTypes.object),
+  link: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default SEO

@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "docs-ng",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "The next generation of PingCAP Docs. Powered by Gatsby.",
+  "version": "0.1.0-beta.0",
+  "author": "Yue Yang <g1enyy0ung@gmail.com> (https://g1eny0ung.site)",
   "dependencies": {
     "gatsby": "^2.21.0",
     "gatsby-image": "^2.4.0",
@@ -19,6 +19,8 @@
     "react-helmet": "^6.0.0"
   },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
     "prettier": "2.0.5"
   },
   "keywords": [
@@ -27,18 +29,18 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
+    "start": "gatsby develop",
+    "start:0.0.0.0": "gatsby develop --host 0.0.0.0",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  "lint-staged": {
+    "*.js?(x)": "prettier --write"
   },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
