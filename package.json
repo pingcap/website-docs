@@ -5,6 +5,7 @@
   "version": "0.1.0-beta.0",
   "author": "Yue Yang <g1enyy0ung@gmail.com> (https://g1eny0ung.site)",
   "dependencies": {
+    "axios": "^0.19.2",
     "gatsby": "^2.21.0",
     "gatsby-image": "^2.4.0",
     "gatsby-plugin-manifest": "^2.4.0",
@@ -19,9 +20,13 @@
     "react-helmet": "^6.0.0"
   },
   "devDependencies": {
+    "chalk": "^4.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "replacestream": "^4.0.3",
+    "to-readable-stream": "^2.1.0",
+    "yargs": "^15.3.1"
   },
   "keywords": [
     "gatsby"
@@ -33,7 +38,11 @@
     "start:0.0.0.0": "gatsby develop --host 0.0.0.0",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "download:docs": "node markdown-pages/cli.js download docs",
+    "download:docs-cn": "node markdown-pages/cli.js download docs-cn",
+    "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
+    "download:docs-dm": "node markdown-pages/cli.js download docs-dm"
   },
   "lint-staged": {
     "*.js?(x)": "prettier --write"
