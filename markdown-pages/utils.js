@@ -9,7 +9,7 @@ const TIDB_DATA_MIGRATION_IMAGE_CDN_URL =
   BASE_IMAGE_CDN_URL + '/tidb-data-migration'
 
 function createReplaceImagePathStream(replaced) {
-  return replaceStream(/\(media\//g, `(${replaced}/`)
+  return replaceStream(/\(\/?media\//g, `(${replaced}/`)
 }
 
 module.exports = {

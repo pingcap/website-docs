@@ -25,6 +25,7 @@
     "lint-staged": "^10.2.2",
     "prettier": "2.0.5",
     "replacestream": "^4.0.3",
+    "rimraf": "^3.0.2",
     "to-readable-stream": "^2.1.0",
     "yargs": "^15.3.1"
   },
@@ -39,6 +40,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "clean:docs": "rimraf markdown-pages/contents/**/*.md",
     "download:docs": "node markdown-pages/cli.js download docs",
     "download:docs-cn": "node markdown-pages/cli.js download docs-cn",
     "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
