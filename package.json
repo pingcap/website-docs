@@ -20,12 +20,12 @@
     "react-helmet": "^6.0.0"
   },
   "devDependencies": {
-    "chalk": "^4.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "prettier": "2.0.5",
     "replacestream": "^4.0.3",
     "rimraf": "^3.0.2",
+    "signale": "^1.4.0",
     "to-readable-stream": "^2.1.0",
     "yargs": "^15.3.1"
   },

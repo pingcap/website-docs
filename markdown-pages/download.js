@@ -1,12 +1,15 @@
 const fs = require('fs')
-const chalk = require('chalk')
-const log = console.log
+const sig = require('signale')
 const http = require('./http')
 const axios = require('axios').default
 const toReadableStream = require('to-readable-stream')
 
 function getContents(owner, repo, ref, path = '') {
-  return http.get(`/repos/${owner}/${repo}/contents/${path}`, {
+  const url = `/repos/${owner}/${repo}/contents/${path}`
+
+  sig.info(`getContents URL: ${url}, ref: ${ref}`)
+
+  return http.get(url, {
     params: {
       ref,
     },
@@ -15,9 +18,7 @@ function getContents(owner, repo, ref, path = '') {
 
 async function writeContent(url, distPath, pipelines = []) {
   const writeStream = fs.createWriteStream(distPath)
-  writeStream.on('close', () => {
-    log(chalk.blue(`Downloaded: `) + url)
-  })
+  writeStream.on('close', () => sig.success(`Downloaded: ${url}`))
 
   let readableStream = toReadableStream((await axios.get(url)).data)
   if (pipelines.length) {
@@ -36,6 +37,12 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
     const { name, type, download_url } = el
 
     if (type === 'dir') {
+      const nextDistDir = `${distDir}/${name}`
+
+      if (!fs.existsSync(nextDistDir)) {
+        fs.mkdirSync(nextDistDir)
+      }
+
       retrieveAllMDs(
         {
           owner,
@@ -43,7 +50,7 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
           ref,
           path: `${path}/${name}`,
         },
-        `${distDir}/${path}`,
+        `${distDir}/${name}`,
         pipelines
       )
     } else {
