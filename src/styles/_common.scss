@@ -1,0 +1,62 @@
+@import './variables';
+@import '../../node_modules/bulma/sass/utilities/all';
+
+$socials: twitter linkedin facebook reddit slack youtube yc;
+
+@mixin VHCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Use in navbar and footer item
+@mixin has-item-active($bottom: false) {
+  position: relative;
+  color: $B4;
+
+  &:hover {
+    background: none;
+    color: $primary;
+
+    @if type-of($bottom) == number {
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: $bottom;
+        left: 50%;
+        width: 20px;
+        height: 3px;
+        background: $primary;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+// Common input style
+@mixin has-pingcap-style-input {
+  input {
+    padding-bottom: calc(0.6rem - 1px);
+    background: $B5;
+    color: $B3;
+    border-color: $C2;
+    box-shadow: none;
+
+    &::placeholder {
+      color: $B4;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: $primary;
+    }
+
+    &:focus ~ .icon {
+      color: $primary !important;
+    }
+  }
+}
+
+@mixin has-light-background {
+  background: $B5;
+}

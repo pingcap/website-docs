@@ -1,0 +1,89 @@
+.PingCAP-Navbar {
+  @include mobile {
+    height: 4.25rem;
+  }
+
+  height: 5.25rem;
+
+  &.has-border-and-shadow {
+    border-bottom: 1px solid $C2;
+    box-shadow: 0 2px 8px rgba(#000, 0.05);
+  }
+
+  .navbar-item {
+    &.with-brand {
+      padding-left: 1.5rem;
+    }
+
+    &.with-main-section {
+      @include has-item-active(1.5rem);
+      @include mobile {
+        margin: 0 1.5rem;
+        padding: 1rem 0;
+        font-size: $size-6;
+        border-bottom: 1px solid $C2;
+
+        &.has-no-border {
+          border: none;
+        }
+
+        &:hover {
+          &:after {
+            content: none;
+          }
+        }
+      }
+
+      margin: 0 0.25rem;
+
+      &:active {
+        background: #e9ecef;
+      }
+    }
+
+    &.with-contact-us {
+      @include mobile {
+        margin: 0 0.75rem;
+      }
+    }
+  }
+
+  .navbar-brand {
+    @include mobile {
+      width: 120px;
+    }
+    @include until($fullhd) {
+      margin-right: 1.5rem;
+    }
+
+    width: 150px;
+    margin-right: 5rem;
+    user-select: none;
+
+    .navbar-burger {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: none;
+      color: $B1;
+      border: none;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+
+      span {
+        width: $size-5;
+      }
+    }
+  }
+
+  .contact-us {
+    @include mobile {
+      width: 100%;
+      font-size: $size-6;
+      border-radius: 5px;
+    }
+
+    width: 140px;
+    font-size: $size-7;
+  }
+}

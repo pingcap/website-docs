@@ -1,0 +1,165 @@
+.PingCAP-Footer {
+  background: $B5;
+  padding-bottom: 3rem;
+
+  .column {
+    .title {
+      @include mobile {
+        margin-bottom: 0;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $C2;
+      }
+
+      margin-bottom: 2rem;
+      outline: none;
+
+      span.spread {
+        @include mobile {
+          display: flex;
+        }
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        color: $primary;
+        float: right;
+        transform-origin: center;
+        transition: transform 0.25s;
+
+        &.clicked {
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    .items {
+      @include mobile {
+        display: none;
+
+        &.displayed {
+          display: unset;
+        }
+      }
+
+      li {
+        margin: 1rem 0;
+
+        a {
+          @include has-item-active;
+          @include mobile {
+            width: 100%;
+          }
+
+          display: inline-block;
+
+          &:active {
+            background: #e9ecef;
+          }
+        }
+      }
+    }
+  }
+
+  .column.with-socials {
+    position: relative;
+  }
+
+  .footer-logo {
+    @include mobile {
+      display: none;
+    }
+
+    float: right;
+    width: 150px;
+  }
+
+  .socials-desktop,
+  .socials-mobile {
+    a {
+      font-size: 0;
+    }
+  }
+
+  .socials-desktop {
+    @include mobile {
+      display: none;
+    }
+
+    position: absolute;
+    top: calc(120px - 0.5rem);
+    right: 1.5rem;
+    width: 150px;
+
+    @each $social in $socials {
+      .#{$social} {
+        width: 36px;
+        height: 36px;
+        margin: 0 1.3rem 1rem 0;
+      }
+    }
+
+    .linkedin,
+    .youtube {
+      margin-right: 0;
+    }
+  }
+
+  .annotations {
+    color: $B4;
+
+    .lang {
+      cursor: pointer;
+
+      svg {
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .annotations-desktop {
+    @include mobile {
+      display: none;
+    }
+
+    position: absolute;
+    bottom: 1.75rem;
+    right: 0.75rem;
+    text-align: right;
+
+    .lang {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .annotations-mobile {
+    @include mobile {
+      display: block;
+      margin-bottom: 2rem;
+
+      .lang {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    display: none;
+
+    .lang {
+      cursor: pointer;
+
+      svg {
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .socials-mobile {
+    @include mobile {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    display: none;
+  }
+}

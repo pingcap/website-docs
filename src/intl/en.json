@@ -1,0 +1,9 @@
+{
+  "navbar": {
+    "tidb": "TiDB",
+    "tools": "Tools",
+    "cloud": "Cloud",
+    "developerGuide": "Developer Guide",
+    "contactUs": "Contact Us"
+  }
+}

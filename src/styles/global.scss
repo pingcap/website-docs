@@ -1,0 +1,81 @@
+// Predefined
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700&display=swap');
+@import './common';
+@import '../../node_modules/bulma/bulma.sass';
+
+// Socials' Background
+@each $social in $socials {
+  .#{$social} {
+    @include until($fullhd) {
+      width: 30px;
+      height: 30px;
+    }
+
+    background: url(../../images/socials/#{$social}.svg);
+    background-size: cover;
+
+    &:hover {
+      background: url(../../images/socials/#{$social}-hl.svg);
+      background-size: cover;
+    }
+
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+}
+
+body {
+  @extend .has-spaced-navbar-fixed-top; // padding-top: 5.25rem;
+  @include mobile {
+    padding-top: 4.25rem;
+  }
+}
+
+.button {
+  &.is-primary {
+    &:hover {
+      background-color: darken($color: $primary, $amount: 5%);
+    }
+  }
+}
+
+.card {
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+}
+
+.field {
+  .control {
+    @include has-pingcap-style-input;
+
+    .icon {
+      color: $B4;
+    }
+  }
+}
+
+.title {
+  color: $B3;
+
+  &.has-pingcap-style-underline {
+    .underline {
+      display: inline-block;
+      width: 12px;
+      height: 3px;
+      margin-right: 0.5rem;
+      background: $primary;
+    }
+  }
+
+  a {
+    color: $B3;
+  }
+}
+
+.subtitle {
+  color: $B4;
+}
+
+@import 'components/navbar';
+@import 'components/footer';

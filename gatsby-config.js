@@ -30,5 +30,30 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        useResolveUrlLoader: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        printRejected: true,
+        content: [
+          `${__dirname}/src/**/*.js`,
+          `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-intl`,
+      options: {
+        path: `${__dirname}/src/intl`,
+        languages: ['en', 'zh'],
+        defaultLanguage: 'en',
+        redirect: true,
+      },
+    },
   ],
 }
