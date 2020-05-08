@@ -42,6 +42,8 @@ function main() {
         `${__dirname}/contents/${path}/docs-tidb-operator/${ref}`,
         [() => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL)]
       )
+
+      break
     case 'docs-dm':
       if (!path) {
         sig.warn(
@@ -61,6 +63,8 @@ function main() {
         `${__dirname}/contents/${path}/docs-dm/${ref}`,
         [() => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL)]
       )
+
+      break
     default:
       break
   }
