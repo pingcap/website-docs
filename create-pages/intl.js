@@ -1,5 +1,5 @@
 const defaultLang = 'en'
-const langMapKeys = ['en', 'zh']
+const langMapKeys = ['zh']
 const dev404Page = '/dev-404-page'
 
 const identity = (x) => x
