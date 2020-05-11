@@ -6,7 +6,6 @@ const identity = (x) => x
 
 const createIntlPages = ({ page, actions }) => {
   const pagePath = page.path
-  console.log(pagePath)
 
   if (
     langMapKeys.map((lang) => pagePath.startsWith(lang)).some(identity) ||
