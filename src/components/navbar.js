@@ -1,8 +1,9 @@
-import { FormattedMessage, Link as IntlLink } from 'gatsby-plugin-intl'
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { Button } from '@seagreenio/react-bulma'
+import { FormattedMessage } from 'react-intl'
+import IntlLink from '../components/IntlLink'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(

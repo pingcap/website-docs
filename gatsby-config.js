@@ -19,7 +19,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'PingCAP Docs',
-        short_name: 'PingCAP',
+        short_name: 'Docs',
         start_url: '/',
         background_color: '#fff',
         theme_color: '#fff',
@@ -44,15 +44,6 @@ module.exports = {
           `${__dirname}/src/**/*.js`,
           `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-intl`,
-      options: {
-        path: `${__dirname}/src/intl`,
-        languages: ['en', 'zh'],
-        defaultLanguage: 'en',
-        redirect: true,
       },
     },
   ],

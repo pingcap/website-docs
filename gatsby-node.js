@@ -5,3 +5,9 @@
  */
 
 // You can delete this file if you're not using it
+
+const createIntlPages = require('./create-pages/intl')
+
+exports.onCreatePage = ({ page, actions }) => {
+  createIntlPages({ page, actions })
+}
