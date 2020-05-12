@@ -2,12 +2,10 @@ import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
-const TOC = ({ tocData }) => {
+const TOC = ({ data }) => {
   return (
     <MDXProvider>
-      {tocData.map((t, idx) => (
-        <MDXRenderer key={idx}>{t.node.body}</MDXRenderer>
-      ))}
+      <MDXRenderer>{data.body}</MDXRenderer>
     </MDXProvider>
   )
 }

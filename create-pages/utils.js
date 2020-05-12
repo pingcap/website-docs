@@ -1,42 +1,42 @@
-const originalVersionRegx = /release-\d+(\.\d)*/
-const masterRegx = /master/
+const originalVersionRegex = /release-\d+(\.\d+)*/
+const masterRegex = /master/
 
-function replaceDocsTypeDir(relativePath) {
-  var rp = relativePath
-  if (rp.includes('docs-tidb-operator')) {
-    rp = rp.replace('docs-tidb-operator', 'tidb-in-kubernetes')
-  } else if (rp.includes('docs-dm')) {
-    rp = rp.replace('docs-dm', 'tidb-data-migration')
+function renameDoc(name) {
+  switch (name) {
+    case 'docs-tidb-operator':
+      return 'tidb-in-kubernetes'
+    case 'docs-dm':
+      return 'tidb-data-migration'
+    default:
+      return name
   }
+}
 
-  return rp
+function renameDocVersion(version) {
+  if (version.match(masterRegex)) {
+    return 'dev'
+  } else if (version.match(originalVersionRegex)) {
+    return version.replace('release-', 'v')
+  } else {
+    return version
+  }
 }
 
 // replace docs path
-exports.replacePath = function (relativePath, basePath) {
-  var rp = relativePath
-  rp = replaceDocsTypeDir(relativePath)
+exports.replacePath = function (relativeDir, base) {
+  const splitPaths = relativeDir.split('/')
+  const docName = renameDoc(splitPaths[0])
+  const docVersion = renameDocVersion(splitPaths[1])
+  const baseName = base.replace('.md', '')
 
-  if (rp.match(originalVersionRegx)) {
-    rp = rp.replace('release-', 'v')
-  } else if (rp.match(masterRegx)) {
-    rp = rp.replace('master', 'dev')
-  }
-
-  const docsType = rp.split('/')[0]
-  const docsVersion = rp.split('/')[1]
-  rp = docsType + '/' + docsVersion + '/' + basePath
-
-  return rp.replace('.md', '')
+  return `/${docName}/${docVersion}/${baseName}`
 }
 
 // concate toc directory
-exports.tocDir = function (relativePath) {
-  var rp = relativePath
+exports.genTOCPath = function (relativeDir) {
+  const splitPaths = relativeDir.split('/')
+  const docName = splitPaths[0]
+  const docVersion = splitPaths[1]
 
-  const docsType = rp.split('/')[0]
-  const docsVersion = rp.split('/')[1]
-  tocPath = docsType + '/' + docsVersion + '/TOC.md'
-
-  return tocPath
+  return `${docName}/${docVersion}/TOC.md`
 }
