@@ -75,7 +75,6 @@ const createDocs = async ({ graphql, createPage }) => {
     const relativeDir = parent.relativeDirectory
     const base = parent.base
     const tocPath = genTOCPath(relativeDir)
-    console.log(tocPath)
 
     createPage({
       path: `/zh${replacePath(relativeDir, base)}`,
