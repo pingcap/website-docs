@@ -13,6 +13,26 @@ module.exports = {
         path: `${__dirname}/images`,
       },
     },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages/contents/en`,
+        path: `${__dirname}/markdown-pages/contents/en`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages/contents/zh`,
+        path: `${__dirname}/markdown-pages/contents/zh`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
