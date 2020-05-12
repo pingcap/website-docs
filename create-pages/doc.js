@@ -53,39 +53,27 @@ const createDocs = async ({ graphql, createPage }) => {
   `)
 
   // create pages for different language docs
-  docsEn.data.allMdx.nodes.forEach((node) => {
-    const parent = node.parent
-    const relativeDir = parent.relativeDirectory
-    const base = parent.base
-    const tocPath = genTOCPath(relativeDir)
+  function _createDocs(docs, pathPrefix = '') {
+    docs.data.allMdx.nodes.forEach((node) => {
+      const parent = node.parent
+      const relativeDir = parent.relativeDirectory
+      const base = parent.base
+      const tocPath = genTOCPath(relativeDir)
 
-    createPage({
-      path: replacePath(relativeDir, base),
-      component: docTemplate,
-      context: {
-        id: node.id,
-        langCollection: node.fields.langCollection,
-        tocPath,
-      },
+      createPage({
+        path: `${pathPrefix}${replacePath(relativeDir, base)}`,
+        component: docTemplate,
+        context: {
+          id: node.id,
+          langCollection: node.fields.langCollection,
+          tocPath,
+        },
+      })
     })
-  })
+  }
 
-  docsZh.data.allMdx.nodes.forEach((node) => {
-    const parent = node.parent
-    const relativeDir = parent.relativeDirectory
-    const base = parent.base
-    const tocPath = genTOCPath(relativeDir)
-
-    createPage({
-      path: `/zh${replacePath(relativeDir, base)}`,
-      component: docTemplate,
-      context: {
-        id: node.id,
-        langCollection: node.fields.langCollection,
-        tocPath,
-      },
-    })
-  })
+  _createDocs(docsEn)
+  _createDocs(docsZh, '/zh')
 }
 
 module.exports = createDocs
