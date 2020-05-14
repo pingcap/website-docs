@@ -1,0 +1,93 @@
+@import '../common';
+
+$navbar-height: 5.25rem; // 84px
+
+.PingCAP-TOC {
+  position: sticky;
+  top: $navbar-height;
+
+  a {
+    color: $B4;
+    line-height: 1.75;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  ul {
+    li {
+      position: relative;
+      padding-top: 1rem;
+      color: $B3;
+      font-weight: bold;
+      cursor: pointer;
+
+      &.can-unfold {
+        &:after {
+          content: '';
+          position: absolute;
+          top: calc(1rem + 9px);
+          right: 1rem;
+          width: 12px;
+          height: 12px;
+          background: url(../../../images/toc/arrow.svg) no-repeat;
+          background-size: contain;
+          transform-origin: 6px 3px;
+          transition: transform 0.5s ease;
+        }
+
+        &.unfolded {
+          &:after {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      &.unfolded {
+        > ul {
+          max-height: 1000px;
+        }
+      }
+
+      ul {
+        max-height: 0;
+        padding-left: 1.5rem;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+      }
+
+      a {
+        display: inline-block;
+        width: 90%;
+      }
+    }
+
+    &.top {
+      > li {
+        position: relative;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $C2;
+
+        &:first-child {
+          padding-right: 2.5rem;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: calc(1rem + 6px);
+          right: 1rem;
+          width: 12px;
+          height: 12px;
+          background: url(../../../images/toc/subject.svg);
+          background-size: cover;
+        }
+
+        &.has-no-subject:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

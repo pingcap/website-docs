@@ -1,0 +1,108 @@
+@import '../common';
+
+$navbar-height: 5.25rem; // 84px
+$navbar-height-mobile: 4.25rem; // 68px
+
+.PingCAP-Doc {
+  .section.container {
+    @include tablet {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .doc-progress {
+    @include mobile {
+      top: calc(#{$navbar-height-mobile} - 1px);
+    }
+
+    position: fixed;
+    top: calc(#{$navbar-height} - 1px);
+    height: 1px;
+    background: transparent;
+    border-radius: 0;
+    z-index: 30; // Same as .navbar.is-fixed-top
+
+    &:-webkit-progress-bar {
+      background: transparent;
+    }
+  }
+
+  // Custom markdown body
+  .doc-content {
+    @include tablet {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+
+    color: $M4;
+    line-height: 1.75;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @include mobile {
+        padding-top: $navbar-height-mobile;
+        margin-top: -$navbar-height-mobile;
+      }
+
+      padding-top: $navbar-height;
+      margin-top: -$navbar-height;
+
+      &:first-child {
+        @include mobile {
+          margin-top: -$navbar-height-mobile !important;
+        }
+
+        margin-top: -$navbar-height !important;
+      }
+    }
+
+    a {
+      color: $primary;
+
+      &.anchor {
+        @include mobile {
+          top: $navbar-height-mobile;
+        }
+
+        top: $navbar-height;
+      }
+    }
+
+    ul {
+      list-style: inherit;
+    }
+  }
+
+  .doc-toc-column {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .doc-toc {
+    position: sticky;
+    top: calc(#{$navbar-height} + 1rem);
+
+    a {
+      color: $B4;
+      line-height: 1.75;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    ul {
+      li {
+        ul {
+          padding-left: 1.5rem;
+        }
+      }
+    }
+  }
+}

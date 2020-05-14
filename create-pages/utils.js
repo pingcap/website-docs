@@ -32,6 +32,14 @@ exports.replacePath = function (relativeDir, base) {
   return `/${docName}/${docVersion}/${baseName}`
 }
 
+exports.genPathPrefix = function (relativeDir, locale) {
+  const splitPaths = relativeDir.split('/')
+  const docName = renameDoc(splitPaths[0])
+  const docVersion = renameDocVersion(splitPaths[1])
+
+  return `${locale === 'en' ? '' : `/${locale}`}/${docName}/${docVersion}/`
+}
+
 // concate toc directory
 exports.genTOCPath = function (relativeDir) {
   const splitPaths = relativeDir.split('/')

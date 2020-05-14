@@ -1,5 +1,5 @@
 const path = require('path')
-const { replacePath, genTOCPath } = require('./utils')
+const { replacePath, genPathPrefix, genTOCPath } = require('./utils')
 
 const createDocs = async ({ graphql, createPage }) => {
   const docTemplate = path.resolve(`${__dirname}/../src/templates/doc.js`)
@@ -32,7 +32,7 @@ const createDocs = async ({ graphql, createPage }) => {
     query {
       allMdx(
         filter: {
-          fields: { langCollection: { eq: "markdown-pages/contents/en" } }
+          fields: { langCollection: { eq: "markdown-pages/contents/zh" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
         }
       ) {
@@ -53,7 +53,7 @@ const createDocs = async ({ graphql, createPage }) => {
   `)
 
   // create pages for different language docs
-  function _createDocs(docs, pathPrefix = '') {
+  function _createDocs(docs, locale, pathPrefix = '') {
     docs.data.allMdx.nodes.forEach((node) => {
       const parent = node.parent
       const relativeDir = parent.relativeDirectory
@@ -67,13 +67,15 @@ const createDocs = async ({ graphql, createPage }) => {
           id: node.id,
           langCollection: node.fields.langCollection,
           tocPath,
+          locale,
+          pathPrefix: genPathPrefix(relativeDir, locale),
         },
       })
     })
   }
 
-  _createDocs(docsEn)
-  _createDocs(docsZh, '/zh')
+  _createDocs(docsEn, 'en')
+  _createDocs(docsZh, 'zh', '/zh')
 }
 
 module.exports = createDocs
