@@ -1,0 +1,43 @@
+@import '../common';
+
+.PingCAP-Message {
+  $border-width: 5;
+
+  &.note {
+    background: rgba($color: $B2, $alpha: 0.3);
+    border-left: #{$border-width}px solid $B2;
+  }
+
+  &.warning {
+    background: rgba($color: $T6, $alpha: 0.3);
+    border-left: #{$border-width}px solid $T6;
+  }
+
+  &.tips {
+    background: rgba($color: $T1, $alpha: 0.3);
+    border-left: #{$border-width}px solid $T1;
+  }
+
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  padding: 1rem;
+  color: $M4;
+
+  .top {
+    display: flex;
+  }
+
+  .message-icon {
+    margin-right: 1rem;
+  }
+
+  .message-title {
+    position: relative;
+    bottom: 0.125rem;
+  }
+
+  .message-text {
+    margin-top: 0.5rem;
+  }
+}

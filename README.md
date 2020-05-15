@@ -146,6 +146,21 @@ box-shadow: none;
 
 **Every new features must have a unit test.**
 
+## Shortcodes
+
+Currently, you can use these shortcodes into docs:
+
+```html
+<Note>This is a note.</Note>
+
+<Warning>This is a warning.</Warning>
+
+<Tips>This is a tip.</Tips>
+```
+
+Everything you needed is just to write a JSX tag, put the text into it. Then we will use
+`mdx` to convert it to JS code.
+
 ## Authors
 
 Made with love 💙 by PingCAP FE.

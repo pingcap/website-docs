@@ -5,5 +5,10 @@
     "cloud": "Cloud",
     "developerGuide": "开发者指南",
     "contactUs": "联系我们"
+  },
+  "shortcodes": {
+    "note": "注意",
+    "warning": "警告",
+    "tips": "小贴士"
   }
 }

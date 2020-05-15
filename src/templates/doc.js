@@ -1,5 +1,7 @@
 import '../styles/templates/doc.scss'
 
+import * as Shortcodes from '../components/shortcodes'
+
 import React, { useEffect, useState } from 'react'
 
 import Layout from '../components/layout'
@@ -90,7 +92,7 @@ const Doc = ({ pageContext: { locale, pathPrefix }, data }) => {
             </div>
             <div className="column is-6">
               <section className="markdown-body doc-content">
-                <MDXProvider>
+                <MDXProvider components={Shortcodes}>
                   <MDXRenderer>{mdx.body}</MDXRenderer>
                 </MDXProvider>
               </section>

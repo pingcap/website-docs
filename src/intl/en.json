@@ -5,5 +5,10 @@
     "cloud": "Cloud",
     "developerGuide": "Developer Guide",
     "contactUs": "Contact Us"
+  },
+  "shortcodes": {
+    "note": "Note",
+    "warning": "Warning",
+    "tips": "Tips"
   }
 }
