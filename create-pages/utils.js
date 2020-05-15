@@ -22,29 +22,33 @@ function renameDocVersion(version) {
   }
 }
 
+function genDocPath(relativeDir, needRename = true) {
+  const splitPaths = relativeDir.split('/')
+  const docName = needRename ? renameDoc(splitPaths[0]) : splitPaths[0]
+  const docVersion = needRename
+    ? renameDocVersion(splitPaths[1])
+    : splitPaths[1]
+
+  return `${docName}/${docVersion}`
+}
+
 // replace docs path
 exports.replacePath = function (relativeDir, base) {
-  const splitPaths = relativeDir.split('/')
-  const docName = renameDoc(splitPaths[0])
-  const docVersion = renameDocVersion(splitPaths[1])
+  const docPath = genDocPath(relativeDir)
   const baseName = base.replace('.md', '')
 
-  return `/${docName}/${docVersion}/${baseName}`
+  if (baseName === '_index') {
+    return docPath
+  }
+
+  return `/${docPath}/${baseName}`
 }
 
 exports.genPathPrefix = function (relativeDir, locale) {
-  const splitPaths = relativeDir.split('/')
-  const docName = renameDoc(splitPaths[0])
-  const docVersion = renameDocVersion(splitPaths[1])
-
-  return `${locale === 'en' ? '' : `/${locale}`}/${docName}/${docVersion}/`
+  return `${locale === 'en' ? '' : `/${locale}`}/${genDocPath(relativeDir)}/`
 }
 
 // concate toc directory
 exports.genTOCPath = function (relativeDir) {
-  const splitPaths = relativeDir.split('/')
-  const docName = splitPaths[0]
-  const docVersion = splitPaths[1]
-
-  return `${docName}/${docVersion}/TOC.md`
+  return `${genDocPath(relativeDir, false)}/TOC.md`
 }
