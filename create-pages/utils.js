@@ -38,7 +38,7 @@ exports.replacePath = function (relativeDir, base) {
   const baseName = base.replace('.md', '')
 
   if (baseName === '_index') {
-    return docPath
+    return `/${docPath}`
   }
 
   return `/${docPath}/${baseName}`
