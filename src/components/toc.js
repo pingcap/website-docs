@@ -20,21 +20,46 @@ const TOC = ({ data, pathPrefix }) => {
   const bindClickEventToTOC = () => {
     const toc = tocRef.current
 
+    function fold(li) {
+      Array.from(li.children).forEach((el) => {
+        requestAnimationFrame(() => {
+          el.style.height = el.scrollHeight + 'px'
+
+          requestAnimationFrame(() => {
+            el.style.height = null
+          })
+        })
+      })
+    }
+
+    function unfold(li) {
+      Array.from(li.children).forEach(
+        (el) => (el.style.height = el.scrollHeight + 'px')
+      )
+    }
+
     function clickEvent(e) {
       e.stopPropagation()
 
-      e.target.classList.toggle('unfolded')
+      const li = e.target
+      li.parentElement.style.height = null
+
+      if (li.classList.contains('folded')) {
+        unfold(li)
+      } else {
+        fold(li)
+      }
+
+      li.classList.toggle('folded')
     }
 
     function retrieveLi(ul) {
       Array.from(ul.children).forEach((li) => {
-        const liChildren = li.children
-
-        if (liChildren[0].tagName.toLowerCase() === 'ul') {
-          li.classList.add('can-unfold')
+        if (li.children[0].tagName.toLowerCase() === 'ul') {
+          li.classList.add('can-unfold', 'folded')
           li.addEventListener('click', clickEvent)
 
-          Array.from(liChildren).forEach(retrieveLi)
+          Array.from(li.children).forEach(retrieveLi)
         }
       })
     }
@@ -43,14 +68,12 @@ const TOC = ({ data, pathPrefix }) => {
       ul.classList.add('top')
 
       Array.from(ul.children).forEach((li) => {
-        li.addEventListener('click', clickEvent)
-
-        if (li.children[0].tagName.toLowerCase() === 'ul') {
-          Array.from(li.children).forEach(retrieveLi)
-        } else {
+        if (li.children[0].tagName.toLowerCase() !== 'ul') {
           li.classList.add('has-no-subject')
         }
       })
+
+      retrieveLi(ul)
     })
   }
 

@@ -28,33 +28,31 @@ $navbar-height: 5.25rem; // 84px
           content: '';
           position: absolute;
           top: calc(1rem + 9px);
-          right: 1rem;
+          right: 0;
           width: 12px;
           height: 12px;
           background: url(../../../images/toc/arrow.svg) no-repeat;
           background-size: contain;
+          transform: rotate(180deg);
           transform-origin: 6px 3px;
-          transition: transform 0.5s ease;
-        }
-
-        &.unfolded {
-          &:after {
-            transform: rotate(180deg);
-          }
+          transition: transform 0.5s ease-out;
         }
       }
 
-      &.unfolded {
-        > ul {
-          max-height: 1000px;
+      &.folded {
+        &:after {
+          transform: rotate(0deg);
+        }
+
+        ul {
+          height: 0;
         }
       }
 
       ul {
-        max-height: 0;
         padding-left: 1.5rem;
         overflow: hidden;
-        transition: max-height 0.5s ease;
+        transition: height 0.25s ease;
       }
 
       a {
@@ -65,23 +63,19 @@ $navbar-height: 5.25rem; // 84px
 
     &.top {
       > li {
-        position: relative;
         padding-bottom: 1rem;
         border-bottom: 1px solid $C2;
-
-        &:first-child {
-          padding-right: 2.5rem;
-        }
 
         &:after {
           content: '';
           position: absolute;
           top: calc(1rem + 6px);
-          right: 1rem;
+          right: 0;
           width: 12px;
           height: 12px;
           background: url(../../../images/toc/subject.svg);
           background-size: cover;
+          transform: rotate(0deg) !important;
         }
 
         &.has-no-subject:after {
