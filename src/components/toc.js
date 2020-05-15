@@ -13,7 +13,6 @@ const TOC = ({ data, pathPrefix }) => {
     .processSync(rawBody)
     .contents.replace(/\.md/g, '')
     .match(/<ul>(.|\n)*<\/ul>/g)[0]
-    .replace(/href="\/?/g, `href="${pathPrefix}`)
 
   const tocRef = useRef(null)
 
@@ -80,6 +79,15 @@ const TOC = ({ data, pathPrefix }) => {
   useEffect(() => {
     bindClickEventToTOC()
   }, [])
+
+  useEffect(() => {
+    Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
+      const href = a.href
+      const lastSegment = href.substring(href.lastIndexOf('/') + 1)
+
+      a.href = pathPrefix + lastSegment
+    })
+  }, [pathPrefix])
 
   return (
     <section
