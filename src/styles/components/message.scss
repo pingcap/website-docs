@@ -4,17 +4,17 @@
   $border-width: 5;
 
   &.note {
-    background: rgba($color: $B2, $alpha: 0.3);
+    background: rgba($color: $B2, $alpha: 0.1);
     border-left: #{$border-width}px solid $B2;
   }
 
   &.warning {
-    background: rgba($color: $T6, $alpha: 0.3);
+    background: rgba($color: $T6, $alpha: 0.1);
     border-left: #{$border-width}px solid $T6;
   }
 
   &.tips {
-    background: rgba($color: $T1, $alpha: 0.3);
+    background: rgba($color: $T1, $alpha: 0.1);
     border-left: #{$border-width}px solid $T1;
   }
 
