@@ -10,9 +10,10 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import SEO from '../components/seo'
 import TOC from '../components/toc'
+import VersionSwitcher from '../components/version'
 import { graphql } from 'gatsby'
 
-const Doc = ({ pageContext: { locale, pathPrefix }, data }) => {
+const Doc = ({ pageContext: { locale, relativeDir, pathPrefix }, data }) => {
   const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
 
@@ -97,6 +98,7 @@ const Doc = ({ pageContext: { locale, pathPrefix }, data }) => {
         <section className="section container">
           <div className="columns">
             <div className="column is-3 left-column">
+              <VersionSwitcher relativeDir={relativeDir} />
               <div
                 role="button"
                 tabIndex={0}

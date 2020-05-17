@@ -61,14 +61,14 @@ $navbar-height-mobile: 4.25rem; // 68px
       height: 12px;
       background: url(../../../images/toc/arrow.svg) no-repeat;
       background-size: contain;
-      transform: rotate(180deg);
+      transform: rotate(0deg);
       transform-origin: 6px 3px;
       transition: transform 0.5s ease-out;
     }
 
     &.active {
       &:after {
-        transform: rotate(0deg);
+        transform: rotate(180deg);
       }
     }
   }

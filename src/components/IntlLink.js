@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl'
 const IntlLink = ({ to, children, ...rest }) => {
   const intl = useIntl()
 
-  const localeTo = `/${intl.locale}${to}`
+  const localeTo = `${intl.locale === 'en' ? '' : '/' + intl.locale}${to}`
 
   return (
     <Link {...rest} to={localeTo}>

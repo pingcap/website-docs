@@ -1,0 +1,68 @@
+@import '../common';
+
+.PingCAP-version-switcher.dropdown {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  @include mobile {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    z-index: 1000;
+  }
+
+  .dropdown-trigger {
+    width: 100%;
+
+    .button {
+      justify-content: left;
+      color: $B4;
+      border-color: $C2;
+      font-size: $size-7;
+      cursor: pointer;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        width: 12px;
+        height: 12px;
+        background: url(../../../images/toc/arrow.svg) no-repeat;
+        background-size: contain;
+        transform: rotate(0deg);
+        transform-origin: 6px 3px;
+        transition: transform 0.5s ease-out;
+      }
+
+      &.is-active {
+        &:after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    width: 100%;
+
+    @include mobile {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .dropdown-content {
+    padding: 0;
+    border: 1px solid $C2;
+  }
+
+  .dropdown-item {
+    color: $B4;
+    font-size: $size-7;
+
+    &.is-active {
+      background: $B5;
+      color: $B3;
+    }
+  }
+}

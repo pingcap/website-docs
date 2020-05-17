@@ -62,7 +62,9 @@
     "download:docs": "node markdown-pages/cli.js download docs",
     "download:docs-cn": "node markdown-pages/cli.js download docs-cn",
     "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
-    "download:docs-dm": "node markdown-pages/cli.js download docs-dm"
+    "download:docs-dm": "node markdown-pages/cli.js download docs-dm",
+    "download:docs-tidb-operator:all": "./scripts/download-docs-tidb-operator.sh",
+    "download:docs-dm:all": "./scripts/download-docs-dm.sh"
   },
   "lint-staged": {
     "*.js?(x)": "prettier --write"
