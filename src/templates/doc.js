@@ -4,6 +4,7 @@ import * as Shortcodes from '../components/shortcodes'
 
 import React, { useEffect, useState } from 'react'
 
+import { FormattedMessage } from 'react-intl'
 import Layout from '../components/layout'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -63,6 +64,14 @@ const Doc = ({ pageContext: { locale, pathPrefix }, data }) => {
     )
   }
 
+  const handleShowDocMenu = (e) => {
+    const docMenu = e.target
+    const toc = docMenu.nextSibling
+
+    docMenu.classList.toggle('active')
+    toc.classList.toggle('show')
+  }
+
   return (
     <Layout locale={locale}>
       <SEO
@@ -87,7 +96,16 @@ const Doc = ({ pageContext: { locale, pathPrefix }, data }) => {
         )}
         <section className="section container">
           <div className="columns">
-            <div className="column is-3">
+            <div className="column is-3 left-column">
+              <div
+                role="button"
+                tabIndex={0}
+                className="doc-menu-mobile"
+                onClick={handleShowDocMenu}
+                onKeyDown={handleShowDocMenu}
+              >
+                <FormattedMessage id="doc.mobileDocMenu" />
+              </div>
               <TOC data={toc.nodes[0]} pathPrefix={pathPrefix} />
             </div>
             <div className="column is-6">

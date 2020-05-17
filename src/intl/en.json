@@ -6,6 +6,9 @@
     "developerGuide": "Developer Guide",
     "contactUs": "Contact Us"
   },
+  "doc": {
+    "mobileDocMenu": "Doc Menu"
+  },
   "shortcodes": {
     "note": "Note",
     "warning": "Warning",

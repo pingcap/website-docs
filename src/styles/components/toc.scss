@@ -6,6 +6,15 @@ $navbar-height: 5.25rem; // 84px
   position: sticky;
   top: $navbar-height;
 
+  @include mobile {
+    display: none;
+    background: $B5;
+  }
+
+  &.show {
+    display: unset;
+  }
+
   a {
     color: $B4;
     line-height: 1.75;
@@ -62,6 +71,11 @@ $navbar-height: 5.25rem; // 84px
     }
 
     &.top {
+      @include mobile {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
       > li {
         padding-bottom: 1rem;
         border-bottom: 1px solid $C2;

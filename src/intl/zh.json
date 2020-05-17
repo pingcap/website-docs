@@ -6,6 +6,9 @@
     "developerGuide": "开发者指南",
     "contactUs": "联系我们"
   },
+  "doc": {
+    "mobileDocMenu": "文档目录"
+  },
   "shortcodes": {
     "note": "注意",
     "warning": "警告",
