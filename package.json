@@ -10,6 +10,7 @@
     "@mdx-js/mdx": "^1.6.1",
     "@mdx-js/react": "^1.6.1",
     "@seagreenio/react-bulma": "^0.1.0-beta.2",
+    "algoliasearch": "^4.2.0",
     "axios": "^0.19.2",
     "flat": "^5.0.0",
     "gatsby": "^2.21.0",

@@ -1,0 +1,138 @@
+@import '../common';
+
+.Docs-search {
+  min-height: 50vh;
+  .filter-field {
+    position: relative;
+
+    .filter {
+      .label {
+        font-size: $size-7;
+        color: $B3;
+        font-weight: blod;
+      }
+
+      .label:not(:last-child) {
+        margin-bottom: 0;
+      }
+
+      .column {
+        @include mobile {
+          padding: 0.5rem;
+        }
+      }
+
+      .type-list {
+        display: flex;
+        flex-flow: row wrap;
+
+        .item {
+          padding: 0 2rem 0 0;
+          position: relative;
+          color: $B4;
+          font-size: $size-7;
+
+          &:hover {
+            color: $B1;
+            cursor: pointer;
+
+            .tools-dropdown {
+              display: block;
+            }
+          }
+
+          &.active {
+            color: $B1;
+          }
+
+          .tools-dropdown {
+            position: absolute;
+            z-index: 1;
+            display: none;
+            width: max-content;
+            border: 1px solid $C2;
+
+            .dropdown-item {
+              color: $B4;
+              background-color: $M1;
+
+              &:hover {
+                background-color: $B5;
+                color: $B3;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      width: 100%;
+      border-bottom: 1px solid $C2;
+    }
+  }
+
+  .search-result {
+    margin-top: 2rem;
+
+    .counts {
+      color: $B4;
+      opacity: 0.5;
+      font-size: $size-7;
+      margin: 2.5rem 0 3rem;
+    }
+
+    .results {
+      margin: 2rem 0;
+
+      .item {
+        margin-bottom: 2rem;
+
+        .title {
+          color: $B3;
+          font-size: $size-5;
+          margin-bottom: 1rem;
+          font-weight: normal;
+        }
+
+        .url,
+        .content {
+          color: $M4;
+          font-size: $size-7;
+          padding-bottom: 1rem;
+
+          .algolia-docsearch-suggestion--highlight {
+            color: $B1;
+          }
+        }
+
+        .url:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .no-result {
+      p {
+        margin: 1rem 0;
+      }
+
+      ul.tips {
+        list-style: inside;
+      }
+    }
+  }
+
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hide-loading {
+    display: none;
+  }
+}
