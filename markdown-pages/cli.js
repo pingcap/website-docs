@@ -1,6 +1,6 @@
 const yargs = require('yargs')
 const sig = require('signale')
-const { retrieveAllMDs } = require('./download')
+const { retrieveAllMDs, handleSync } = require('./download')
 const {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
@@ -9,19 +9,33 @@ const {
   createReplaceImagePathStream,
 } = require('./utils')
 
-const argv = yargs.command(
-  'download <repo> [path] [ref]',
-  'specify which repo of docs you want to download'
-).argv
+const argv = yargs
+  .command(
+    'download <repo> [path] [ref]',
+    'specify which repo of docs you want to download'
+  )
+  .command(
+    'sync <repo> <ref> <sha>',
+    "Sync the docs' changes by a single commit"
+  ).argv
 
-const repo = argv.repo
-const path = argv.path
-// If ref is not provided, use master as the default
-const ref = argv.ref || 'master'
+switch (argv._[0]) {
+  case 'download':
+    main(argv)
+    break
+  case 'sync':
+    sync(argv)
+    break
+  default:
+    break
+}
 
-main()
+function main(argv) {
+  const repo = argv.repo
+  const path = argv.path
+  // If ref is not provided, use master as the default
+  const ref = argv.ref || 'master'
 
-function main() {
   switch (repo) {
     case 'docs-tidb-operator':
       if (!path) {
@@ -63,6 +77,31 @@ function main() {
         `${__dirname}/contents/${path}/docs-dm/${ref}`,
         [() => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL)]
       )
+
+      break
+    default:
+      break
+  }
+}
+
+function sync(argv) {
+  const repo = argv.repo
+  const ref = argv.ref
+  const sha = argv.sha
+
+  sig.info(`Sync Info: repo => ${repo} ref => ${ref} sha => ${sha}`)
+
+  switch (repo) {
+    case 'docs-tidb-operator':
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+        () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
+      ])
+
+      break
+    case 'docs-dm':
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+        () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
+      ])
 
       break
     default:
