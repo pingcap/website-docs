@@ -1,5 +1,5 @@
 {
-  "name": "docs-ng",
+  "name": "website-docs",
   "private": true,
   "description": "The next generation of PingCAP Docs. Powered by Gatsby.",
   "version": "0.1.0-beta.0",
