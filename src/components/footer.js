@@ -1,8 +1,8 @@
 import { Link, graphql, useStaticQuery } from 'gatsby'
+import React, { useState } from 'react'
 
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
-import React from 'react'
 import Socials from './socials'
 import { footerColumns } from '../data/footer'
 
@@ -28,6 +28,42 @@ const Footer = () => {
     title.tabIndex = title.tabIndex === 0 ? 1 : 0
     spread.classList.toggle('clicked')
     title.nextSibling.classList.toggle('displayed')
+  }
+
+  const Lang = ({ align }) => {
+    const [dropdownActive, setDropdownActive] = useState('')
+
+    const handleMenuOpen = () => {
+      if (dropdownActive) {
+        setDropdownActive('')
+      } else {
+        setDropdownActive(' is-active')
+      }
+    }
+
+    return (
+      <div className={`dropdown is-${align} is-up lang${dropdownActive}`}>
+        <div
+          role="button"
+          tabIndex={0}
+          className="dropdown-trigger"
+          onClick={handleMenuOpen}
+          onKeyDown={handleMenuOpen}
+        >
+          <LanguageIcon /> Language
+        </div>
+        <div className="dropdown-menu">
+          <div className="dropdown-content">
+            <Link to="/" className="dropdown-item">
+              English
+            </Link>
+            <Link to="/zh" className="dropdown-item">
+              简体中文
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -69,9 +105,7 @@ const Footer = () => {
               <Socials className="column is-4" type="follow" />
             </div>
             <div className="annotations annotations-desktop">
-              <div className="lang">
-                <LanguageIcon /> Language
-              </div>
+              <Lang align="right" />
               <div className="copyright">
                 ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
               </div>
@@ -79,9 +113,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="annotations annotations-mobile">
-          <div className="lang">
-            <LanguageIcon /> Language
-          </div>
+          <Lang align="left" />
           <div className="copyright">
             ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
           </div>

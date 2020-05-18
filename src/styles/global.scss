@@ -45,6 +45,23 @@ body {
   border: 1px solid #f0f0f0;
 }
 
+.dropdown {
+  .dropdown-content {
+    padding: 0;
+    border: 1px solid $C2;
+  }
+
+  .dropdown-item {
+    color: $B4;
+    font-size: $size-7;
+
+    &.is-active {
+      background: $B5;
+      color: $B3;
+    }
+  }
+}
+
 .field {
   .control {
     @include has-pingcap-style-input;

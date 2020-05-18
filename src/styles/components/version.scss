@@ -50,19 +50,4 @@
       padding-right: 1rem;
     }
   }
-
-  .dropdown-content {
-    padding: 0;
-    border: 1px solid $C2;
-  }
-
-  .dropdown-item {
-    color: $B4;
-    font-size: $size-7;
-
-    &.is-active {
-      background: $B5;
-      color: $B3;
-    }
-  }
 }
