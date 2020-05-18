@@ -67,6 +67,7 @@ const createDocs = async ({ graphql, createPage }) => {
           id: node.id,
           langCollection: node.fields.langCollection,
           relativeDir,
+          base,
           tocPath,
           locale,
           pathPrefix: genPathPrefix(relativeDir, locale),

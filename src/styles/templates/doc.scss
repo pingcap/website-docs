@@ -8,6 +8,10 @@ $navbar-height-mobile: 4.25rem; // 68px
     @include mobile {
       padding-top: 1.5rem;
     }
+    @include tablet {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   .doc-progress {

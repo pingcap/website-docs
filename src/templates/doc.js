@@ -13,7 +13,10 @@ import TOC from '../components/toc'
 import VersionSwitcher from '../components/version'
 import { graphql } from 'gatsby'
 
-const Doc = ({ pageContext: { locale, relativeDir, pathPrefix }, data }) => {
+const Doc = ({
+  pageContext: { locale, relativeDir, base, pathPrefix },
+  data,
+}) => {
   const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
 
@@ -98,7 +101,7 @@ const Doc = ({ pageContext: { locale, relativeDir, pathPrefix }, data }) => {
         <section className="section container">
           <div className="columns">
             <div className="column is-3 left-column">
-              <VersionSwitcher relativeDir={relativeDir} />
+              <VersionSwitcher relativeDir={relativeDir} base={base} />
               <div
                 role="button"
                 tabIndex={0}

@@ -14,9 +14,11 @@ import PropTypes from 'prop-types'
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 
-const Version = ({ relativeDir }) => {
+const Version = ({ relativeDir, base }) => {
   const paths = relativeDir.split('/')
   const [doc, ref] = convertDocAndRef(paths[0], paths[1])
+
+  const baseName = base.replace('.md', '')
 
   const [dropdownActive, setDropdownActive] = useState('')
   const [buttonText, setButtonText] = useState('')
@@ -64,7 +66,7 @@ const Version = ({ relativeDir }) => {
             dropdownItems.map((item) => (
               <IntlLink
                 key={item}
-                to={`/${doc}/${item}/${window.location.href.split('/').pop()}`}
+                to={`/${doc}/${item}/${baseName === '_index' ? '' : baseName}`}
                 className="dropdown-item"
               >
                 {item}
@@ -78,6 +80,7 @@ const Version = ({ relativeDir }) => {
 
 Version.propTypes = {
   relativeDir: PropTypes.string.isRequired,
+  base: PropTypes.string.isRequired,
 }
 
 export default Version
