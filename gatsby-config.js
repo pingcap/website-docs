@@ -71,6 +71,7 @@ module.exports = {
           `${__dirname}/src/**/*.js`,
           `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
         ],
+        whitelistPatternsChildren: [/^PingCAP-Doc/],
       },
     },
   ],
