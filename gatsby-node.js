@@ -8,7 +8,6 @@
 
 const createDocs = require('./create-pages/doc')
 const createIntlPages = require('./create-pages/intl')
-const createSearchPage = require('./create-pages/search')
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
@@ -34,7 +33,6 @@ exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
 
   createDocs({ graphql, createPage })
-  createSearchPage({ createPage })
 }
 
 exports.onCreatePage = ({ page, actions }) => {
