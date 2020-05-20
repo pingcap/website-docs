@@ -7,6 +7,9 @@
 
 > Note: Currently WIP
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8d59fdbd-2ab5-4f97-b5c5-4c00d932feee/deploy-status)](https://app.netlify.com/sites/pingcap-docs-preview/deploys)
+![Update docs when receiving repo dispatch](https://github.com/pingcap/website-docs/workflows/Update%20docs%20when%20receiving%20repo%20dispatch/badge.svg)
+
 ## How to develop
 
 After clone this repo, run `yarn` to get all deps:
