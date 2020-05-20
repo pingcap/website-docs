@@ -43,6 +43,7 @@ cli.js [command]
 Commands:
   cli.js download <repo> [path] [ref]  specify which repo of docs you want to
                                        download
+  cli.js sync <repo> <ref> <sha>       Sync the docs' changes by a single commit
 
 Options:
   --help     Show help                                                 [boolean]
@@ -68,6 +69,16 @@ Run `yarn start` to develop:
 ```sh
 yarn start
 ```
+
+### CI
+
+We use GitHub actions to serve the build and deploy.
+
+The core of the CI is using `repository_dispatch` event which described at <https://help.github.com/en/actions/reference/events-that-trigger-workflows#external-events-repository_dispatch>.
+
+Once outside repo post this event, the master branch workflow will start to update the website.
+
+For more details, view: <https://github.com/pingcap/website-docs/blob/master/.github/workflows/update.yml>
 
 ### GitHub Outh2 token
 
