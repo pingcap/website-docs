@@ -1,0 +1,11 @@
+name: Update docs when receiving repo dispatch
+on:
+  repository_dispatch:
+    types: [updated]
+jobs:
+  run:
+    name: Test on repository_dispatch event
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "client_payload: ${{ toJSON(github.event.client_payload) }}"
