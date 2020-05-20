@@ -27,7 +27,7 @@ jobs:
         run: yarn
 
       - name: Restore en-docs-dm-cache
-        use: actions/cache@v1
+        uses: actions/cache@v1
         id: en-docs-dm-cache
         with:
           path: ./markdown-pages/contents/en/docs-dm
@@ -41,7 +41,7 @@ jobs:
         run: yarn download:docs-dm:all:en
 
       - name: Restore zh-docs-dm-cache
-        use: actions/cache@v1
+        uses: actions/cache@v1
         id: zh-docs-dm-cache
         with:
           path: ./markdown-pages/contents/zh/docs-dm
@@ -58,7 +58,7 @@ jobs:
         run: yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
-        use: actions/cache@V1
+        uses: actions/cache@V1
         id: gatsby-cache
         with:
           path: ./.cache
