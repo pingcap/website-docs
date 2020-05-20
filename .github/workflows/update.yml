@@ -58,7 +58,7 @@ jobs:
         run: yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
-        uses: actions/cache@V1
+        uses: actions/cache@v1
         id: gatsby-cache
         with:
           path: ./.cache
