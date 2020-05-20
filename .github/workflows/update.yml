@@ -4,8 +4,68 @@ on:
     types: [updated]
 jobs:
   run:
-    name: Test on repository_dispatch event
+    name: Retrieve docs incrementally and deploy the website
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "client_payload: ${{ toJSON(github.event.client_payload) }}"
+      - uses: actions/checkout@v2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-yarn-
+
+      - name: Install deps
+        run: yarn
+
+      - name: Restore en-docs-dm-cache
+        use: actions/cache@v1
+        id: en-docs-dm-cache
+        with:
+          path: ./markdown-pages/contents/en/docs-dm
+          key: ${{ runner.os }}-en-docs-dm-cache-build-0
+          restore-keys: |
+            ${{ runner.os }}-en-docs-dm-cache-build-0
+            ${{ runner.os }}-en-docs-dm-cache-
+
+      - name: Check en-docs-dm-cache
+        if: steps.en-docs-dm-cache.outputs.cache-hit != 'true'
+        run: yarn download:docs-dm:all:en
+
+      - name: Restore zh-docs-dm-cache
+        use: actions/cache@v1
+        id: zh-docs-dm-cache
+        with:
+          path: ./markdown-pages/contents/zh/docs-dm
+          key: ${{ runner.os }}-zh-docs-dm-cache-build-0
+          restore-keys: |
+            ${{ runner.os }}-zh-docs-dm-cache-build-0
+            ${{ runner.os }}-zh-docs-dm-cache-
+
+      - name: Check zh-docs-dm-cache
+        if: steps.zh-docs-dm-cache.outputs.cache-hit != 'true'
+        run: yarn download:docs-dm:all:zh
+
+      - name: Download docs based on dispatch payload
+        run: yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ github.event.client_payload.sha }}
+
+      - name: Restore gatsby cache
+        use: actions/cache@V1
+        id: gatsby-cache
+        with:
+          path: ./.cache
+          key: ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-gatsby-cache-
+
+      - name: Build website
+        run: yarn build
