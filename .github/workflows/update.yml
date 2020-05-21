@@ -99,3 +99,4 @@ jobs:
       - name: Deploy
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
