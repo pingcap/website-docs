@@ -13,7 +13,6 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
-          known_hosts: "${{ secrets.BJ_1_HOST }}\n${{ secrets.BJ_2_HOST }}\n${{ secrets.LA_1_HOST }}\n${{ secrets.LA_2_HOST }}"
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -88,4 +87,5 @@ jobs:
 
       - name: Deploy
         run: |
+          ssh-keyscan -H ${{ secrets.BJ_1_HOST }} >> ~/.ssh/known_hosts
           rsync -avz --delete public "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
