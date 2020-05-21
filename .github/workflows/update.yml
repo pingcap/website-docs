@@ -52,7 +52,6 @@ jobs:
           key: ${{ runner.os }}-en-docs-dm-cache-build-0
           restore-keys: |
             ${{ runner.os }}-en-docs-dm-cache-build-0
-            ${{ runner.os }}-en-docs-dm-cache-
 
       - name: Check en-docs-dm-cache
         if: steps.en-docs-dm-cache.outputs.cache-hit != 'true'
@@ -66,7 +65,6 @@ jobs:
           key: ${{ runner.os }}-zh-docs-dm-cache-build-0
           restore-keys: |
             ${{ runner.os }}-zh-docs-dm-cache-build-0
-            ${{ runner.os }}-zh-docs-dm-cache-
 
       - name: Check zh-docs-dm-cache
         if: steps.zh-docs-dm-cache.outputs.cache-hit != 'true'
