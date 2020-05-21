@@ -1,0 +1,45 @@
+[
+    {
+        "name": "All",
+        "versions": [
+            "v4.0",
+            "dev",
+            "v3.1",
+            "v3.0",
+            "v2.1",
+            "v1.1",
+            "v1.0"
+        ]
+    },
+    {
+        "name": "TiDB",
+        "versions": [
+            "v4.0",
+            "dev",
+            "v3.1",
+            "v3.0",
+            "v2.1"
+        ]
+    },
+    {
+        "name": "Tools",
+        "type": "Tools",
+        "items": [
+            {
+                "name": "TiDB Operator",
+                "versions": [
+                    "v1.1",
+                    "dev",
+                    "v1.0"
+                ]
+            },
+            {
+                "name": "TiDB Data Migration",
+                "versions": [
+                    "v1.0",
+                    "dev"
+                ]
+            }
+        ]
+    }
+]

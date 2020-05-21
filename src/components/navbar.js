@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
+import SearchInput from './searchInput'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
@@ -49,6 +50,9 @@ const Navbar = () => {
             />
           </IntlLink>
 
+          <div className="navbar-item search-input-mobile">
+            <SearchInput />
+          </div>
           <button
             className={`navbar-burger${burgerActive ? ' is-active' : ''}`}
             aria-label="menu"
@@ -96,6 +100,9 @@ const Navbar = () => {
               </Button>
             </div>
           </div>
+        </div>
+        <div className="navbar-item search-input-pc">
+          <SearchInput />
         </div>
       </div>
     </nav>

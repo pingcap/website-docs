@@ -60,3 +60,22 @@ $socials: twitter linkedin facebook reddit slack youtube yc;
 @mixin has-light-background {
   background: $B5;
 }
+
+// placeholder color
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
