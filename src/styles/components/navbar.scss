@@ -49,11 +49,15 @@
   }
 
   .navbar-brand {
+    display: flex;
+    align-items: center;
+
     @include mobile {
-      width: 120px;
+      width: 100px;
     }
+
     @include until($fullhd) {
-      margin-right: 1.5rem;
+      margin-right: 0;
     }
 
     width: 150px;
@@ -89,13 +93,12 @@
 
   .with-search-input {
     .search-input {
-      background: url('../../../images/search-icon.svg') no-repeat scroll 7px
-        7px;
+      background: url('../../../images/search-icon.svg') no-repeat scroll 12px 10px;
       padding-left: 40px;
       background-size: 18px;
       border: 1px solid $C2;
       border-radius: 30px;
-      height: 36px;
+      height: 40px;
       font-size: 1rem;
       color: $B4;
 
@@ -108,6 +111,25 @@
     textarea:focus,
     select:focus {
       outline: none;
+    }
+  }
+
+  .search-input-mobile {
+    display: none;
+
+    .search-input {
+      margin-left: 0;
+      width: 10rem;
+    }
+
+    @include mobile {
+      display: block;
+    }
+  }
+
+  .search-input-pc {
+    @include mobile {
+      display: none;
     }
   }
 }

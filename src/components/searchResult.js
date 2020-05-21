@@ -6,9 +6,12 @@ const SearchResult = (props) => {
 
   return (
     <div className="search-result">
-      <p className="counts">共 {results ? results.length : 0} 条搜索结果…</p>
+      {/* <p className="counts">共 {results ? results.length : 0} 条搜索结果…</p> */}
+
+      <p className="counts">
+        <FormattedMessage id="search.resultTips.counts" values={{ counts: <span>{results ? results.length : 0}</span> }} />
+      </p>
       <div className="results">
-        
         {results &&
           results.length > 0 &&
           results.map((r) => (
