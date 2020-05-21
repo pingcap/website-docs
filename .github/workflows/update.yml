@@ -11,7 +11,7 @@ jobs:
 
       - name: Set known_hosts
         id: know-hosts
-        run : |
+        run: |
           echo "::set-output name=BJ1::$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})"
           echo "::set-output name=BJ2::$(ssh-keyscan -H ${{ secrets.BJ_2_HOST }})"
           echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
@@ -100,5 +100,4 @@ jobs:
 
       - name: Deploy
         run: |
-           >> ~/.ssh/known_hosts
           rsync -avz --delete public "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
