@@ -50,9 +50,9 @@ const Navbar = () => {
             />
           </IntlLink>
 
-          <div className="navbar-item search-input-mobile">
+          {/* <div className="navbar-item search-input-mobile">
             <SearchInput />
-          </div>
+          </div> */}
           <button
             className={`navbar-burger${burgerActive ? ' is-active' : ''}`}
             aria-label="menu"
@@ -101,9 +101,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="navbar-item search-input-pc">
+        {/* <div className="navbar-item search-input-pc">
           <SearchInput />
-        </div>
+        </div> */}
       </div>
     </nav>
   )
