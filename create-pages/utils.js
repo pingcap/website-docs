@@ -1,4 +1,4 @@
-const originalVersionRegex = /release-\d+(\.\d+)*/
+const originalVersionRegex = /release-\d+(\.\d+)+/
 const masterRegex = /master/
 
 function renameDoc(name) {
