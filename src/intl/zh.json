@@ -4,7 +4,8 @@
     "tools": "Tools",
     "cloud": "Cloud",
     "developerGuide": "开发者指南",
-    "contactUs": "联系我们"
+    "contactUs": "联系我们",
+    "searchDocs": "搜索文档"
   },
   "doc": {
     "mobileDocMenu": "文档目录"
@@ -13,5 +14,15 @@
     "note": "注意",
     "warning": "警告",
     "tips": "小贴士"
+  },
+  "search": {
+    "type": "分类：",
+    "version": "版本：",
+    "resultTips": {
+      "counts": "共 {counts} 条搜索结果…",
+      "title": "很抱歉，我们没有找到您期望的内容。",
+      "content1": "请尝试其它搜索词，或者去 AskTUG (TiDB User Group) 提问试试。",
+      "content2": "如果您想搜索英文内容，请移步至英文文档进行搜索。"
+    }
   }
 }

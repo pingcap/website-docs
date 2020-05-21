@@ -4,7 +4,8 @@
     "tools": "Tools",
     "cloud": "Cloud",
     "developerGuide": "Developer Guide",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "searchDocs": "Search Docs"
   },
   "doc": {
     "mobileDocMenu": "Doc Menu"
@@ -13,5 +14,15 @@
     "note": "Note",
     "warning": "Warning",
     "tips": "Tips"
+  },
+  "search": {
+    "type": "Docs Type:",
+    "version": "Version:",
+    "resultTips": {
+      "counts": "{counts} results found...", 
+      "title": "Sorry. We couldn't find what you're looking for.",
+      "content1": "If you've come to pages of an unexpected language, go to Chinese documentationand try again.",
+      "content2": "If you do want to get some English content, PingCAP home page might be a better place for you to go."
+    }
   }
 }
