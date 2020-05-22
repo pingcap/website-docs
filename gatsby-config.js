@@ -74,5 +74,6 @@ module.exports = {
         whitelistPatternsChildren: [/^PingCAP-Doc/],
       },
     },
+    `gatsby-plugin-meta-redirect`,
   ],
 }

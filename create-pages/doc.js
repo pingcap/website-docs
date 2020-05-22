@@ -1,7 +1,7 @@
 const path = require('path')
 const { replacePath, genPathPrefix, genTOCPath } = require('./utils')
 
-const createDocs = async ({ graphql, createPage }) => {
+const createDocs = async ({ graphql, createPage, createRedirect }) => {
   const docTemplate = path.resolve(`${__dirname}/../src/templates/doc.js`)
 
   const docsEn = await graphql(`
@@ -16,6 +16,9 @@ const createDocs = async ({ graphql, createPage }) => {
           id
           fields {
             langCollection
+          }
+          frontmatter {
+            aliases
           }
           parent {
             ... on File {
@@ -40,6 +43,9 @@ const createDocs = async ({ graphql, createPage }) => {
           id
           fields {
             langCollection
+          }
+          frontmatter {
+            aliases
           }
           parent {
             ... on File {
@@ -73,6 +79,19 @@ const createDocs = async ({ graphql, createPage }) => {
           pathPrefix: genPathPrefix(relativeDir, locale),
         },
       })
+
+      // create redirect
+      if (node.frontmatter.aliases) {
+        const aliasesArr = node.frontmatter.aliases
+
+        aliasesArr.forEach((alias) => {
+          createRedirect({
+            fromPath: `${alias}`,
+            toPath: `${pathPrefix}${replacePath(relativeDir, base)}`,
+            isPermanent: true,
+          })
+        })
+      }
     })
   }
 

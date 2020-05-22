@@ -93,14 +93,14 @@
 
   .with-search-input {
     .search-input {
-      background: url('../../../images/search-icon.svg') no-repeat scroll 12px 10px;
       padding-left: 40px;
+      background: url('../../../images/search-icon.svg') no-repeat scroll 12px 10px;
       background-size: 18px;
+      height: 40px;
+      color: $B4;
+      font-size: 1rem;
       border: 1px solid $C2;
       border-radius: 30px;
-      height: 40px;
-      font-size: 1rem;
-      color: $B4;
 
       @include placeholder {
         color: $B4;

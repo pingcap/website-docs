@@ -2,6 +2,7 @@
 
 .Docs-search {
   min-height: 50vh;
+
   .filter-field {
     position: relative;
 
@@ -27,8 +28,8 @@
         flex-flow: row wrap;
 
         .item {
-          padding: 0 2rem 0 0;
           position: relative;
+          padding: 0 2rem 0 0;
           color: $B4;
           font-size: $size-7;
 
@@ -79,10 +80,10 @@
     margin-top: 2rem;
 
     .counts {
+      margin: 2.5rem 0 3rem;
       color: $B4;
       opacity: 0.5;
       font-size: $size-7;
-      margin: 2.5rem 0 3rem;
     }
 
     .results {
@@ -92,17 +93,17 @@
         margin-bottom: 2rem;
 
         .title {
+          margin-bottom: 1rem;
           color: $B3;
           font-size: $size-5;
-          margin-bottom: 1rem;
           font-weight: normal;
         }
 
         .url,
         .content {
+          padding-bottom: 1rem;
           color: $M4;
           font-size: $size-7;
-          padding-bottom: 1rem;
 
           .algolia-docsearch-suggestion--highlight {
             color: $B1;
