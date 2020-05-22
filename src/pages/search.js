@@ -1,7 +1,9 @@
+import '../styles/pages/search.scss'
+
+import React, { useEffect, useState } from 'react'
+
 import Layout from '../components/layout'
-import React, { useState, useEffect } from 'react'
 import SEO from '../components/seo'
-import '../styles/templates/search.scss'
 // import docsTypeVersions from '../data/docs-type-version'
 // import SearchResult from '../components/searchResult'
 // import algoliasearch from 'algoliasearch'

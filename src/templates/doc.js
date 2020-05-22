@@ -11,7 +11,10 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import SEO from '../components/seo'
 import TOC from '../components/toc'
 import VersionSwitcher from '../components/version'
+import { convertDocAndRef } from '../lib/version'
+import { getDocInfo } from '../state'
 import { graphql } from 'gatsby'
+import { useDispatch } from 'react-redux'
 
 const Doc = ({
   pageContext: { locale, relativeDir, base, pathPrefix },
@@ -19,6 +22,7 @@ const Doc = ({
 }) => {
   const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
+  const docRefArray = convertDocAndRef(relativeDir.split('/'))
 
   const [showProgress, setShowProgress] = useState(false)
   const [readingProgress, setReadingProgress] = useState(0)
@@ -55,6 +59,22 @@ const Doc = ({
     return () => window.removeEventListener('scroll', scrollListener)
   }, [])
 
+  const dispatch = useDispatch()
+
+  useEffect(
+    () => {
+      dispatch(
+        getDocInfo({
+          lang: locale,
+          type: docRefArray[0],
+          version: docRefArray[1],
+        })
+      )
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
   function renderItems(items) {
     return (
       <ul>
@@ -77,9 +97,23 @@ const Doc = ({
   }
 
   return (
-    <Layout locale={locale}>
+    <Layout locale={locale} forbidResetDocInfo={true}>
       <SEO
         title={frontmatter.title}
+        meta={[
+          {
+            name: 'doc:locale',
+            content: locale,
+          },
+          {
+            name: 'doc:type',
+            content: docRefArray[0],
+          },
+          {
+            name: 'doc:version',
+            content: docRefArray[1],
+          },
+        ]}
         link={[
           {
             rel: 'stylesheet',

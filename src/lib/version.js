@@ -9,7 +9,7 @@ export const docsDMVersion = {
   'release-1.0': 'v1.0',
 }
 
-export function convertDocAndRef(doc, ref) {
+export function convertDocAndRef([doc, ref]) {
   const result = [doc, ref]
 
   switch (doc) {

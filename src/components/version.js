@@ -15,8 +15,7 @@ const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 
 const Version = ({ relativeDir, base }) => {
-  const paths = relativeDir.split('/')
-  const [doc, ref] = convertDocAndRef(paths[0], paths[1])
+  const [doc, ref] = convertDocAndRef(relativeDir.split('/'))
 
   const baseName = base.replace('.md', '')
 

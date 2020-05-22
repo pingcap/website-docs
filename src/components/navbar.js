@@ -4,7 +4,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
-import SearchInput from './searchInput'
+import SearchInput from './search/input'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
@@ -16,6 +17,8 @@ const Navbar = () => {
       }
     `
   )
+
+  const docInfo = useSelector((state) => state.docInfo)
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
@@ -50,9 +53,10 @@ const Navbar = () => {
             />
           </IntlLink>
 
-          {/* <div className="navbar-item search-input-mobile">
-            <SearchInput />
-          </div> */}
+          <div className="navbar-item search-input-mobile">
+            <SearchInput docInfo={docInfo} />
+          </div>
+
           <button
             className={`navbar-burger${burgerActive ? ' is-active' : ''}`}
             aria-label="menu"
@@ -66,31 +70,18 @@ const Navbar = () => {
         </div>
         <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            <IntlLink
-              to="/tidb"
-              className="navbar-item with-main-section"
-              onTouchStart={() => {}}
-            >
+            <IntlLink to="/tidb" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
-            <IntlLink
-              to="/tools"
-              className="navbar-item with-main-section"
-              onTouchStart={() => {}}
-            >
+            <IntlLink to="/tools" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
-            <IntlLink
-              to="/cloud"
-              className="navbar-item with-main-section"
-              onTouchStart={() => {}}
-            >
+            <IntlLink to="/cloud" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.cloud" />
             </IntlLink>
             <IntlLink
               to="/developer-guide"
               className="navbar-item with-main-section has-no-border"
-              onTouchStart={() => {}}
             >
               <FormattedMessage id="navbar.developerGuide" />
             </IntlLink>
@@ -101,9 +92,10 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        {/* <div className="navbar-item search-input-pc">
-          <SearchInput />
-        </div> */}
+
+        <div className="navbar-item search-input-pc">
+          <SearchInput docInfo={docInfo} />
+        </div>
       </div>
     </nav>
   )
