@@ -12,6 +12,7 @@ const Input = ({ docInfo: { lang, type, version } }) => {
 
   return (
     <form
+      method="post"
       action={`${
         lang === 'en' ? '' : '/' + lang
       }/search?type=${type}&version=${version}&q=${searchQuery}`}
