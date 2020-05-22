@@ -100,7 +100,7 @@ const Doc = ({
         )}
         <section className="section container">
           <div className="columns">
-            <div className="column is-3 left-column">
+            <div className="column is-2 left-column">
               <VersionSwitcher relativeDir={relativeDir} base={base} />
               <div
                 role="button"
@@ -113,14 +113,14 @@ const Doc = ({
               </div>
               <TOC data={toc.nodes[0]} pathPrefix={pathPrefix} />
             </div>
-            <div className="column is-6">
+            <div className="column is-8">
               <section className="markdown-body doc-content">
                 <MDXProvider components={Shortcodes}>
                   <MDXRenderer>{mdx.body}</MDXRenderer>
                 </MDXProvider>
               </section>
             </div>
-            <div className="column is-3 doc-toc-column">
+            <div className="column is-2 doc-toc-column">
               <section className="doc-toc">
                 {tableOfContents.items && renderItems(tableOfContents.items)}
               </section>
