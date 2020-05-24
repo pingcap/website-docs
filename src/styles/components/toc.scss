@@ -77,9 +77,9 @@ $navbar-height: 5.25rem; // 84px
       }
 
       > li {
-        padding-right: 1rem;
         padding-bottom: 1rem;
         border-bottom: 1px solid $C2;
+        word-break: keep-all;
 
         &:after {
           content: '';
