@@ -3,6 +3,7 @@ import '../styles/components/version.scss'
 import React, { useEffect, useState } from 'react'
 import {
   convertDocAndRef,
+  docsTiDBVersion,
   docsDMVersion,
   docsTiDBOperatorVersion,
 } from '../lib/version'
@@ -11,6 +12,7 @@ import { Button } from '@seagreenio/react-bulma'
 import IntlLink from '../components/IntlLink'
 import PropTypes from 'prop-types'
 
+const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 
@@ -27,6 +29,9 @@ const Version = ({ relativeDir, base }) => {
     setButtonText(ref)
 
     switch (doc) {
+      case 'tidb':
+        setDropdownItems(docsTiDBVersionList)
+        break
       case 'tidb-in-kubernetes':
         setDropdownItems(docsTiDBOperatorVersionList)
         break

@@ -61,15 +61,24 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+
     "clean:docs": "rimraf markdown-pages/contents/**/*.md",
-    "download:docs": "node markdown-pages/cli.js download docs",
+    "clean:docs:tidb:en": "rimraf markdown-pages/contents/en/docs-tidb/**/*.md",
+    "clean:docs:tidb:zh": "rimraf markdown-pages/contents/zh/docs-tidb/**/*.md",
+
+    "download:docs-tidb": "node markdown-pages/cli.js download docs",
+    "download:docs-tidb:all:en": "./scripts/download-docs-tidb-en.sh",
+
     "download:docs-cn": "node markdown-pages/cli.js download docs-cn",
+
     "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
-    "download:docs-dm": "node markdown-pages/cli.js download docs-dm",
     "download:docs-tidb-operator:all": "./scripts/download-docs-tidb-operator.sh",
+
+    "download:docs-dm": "node markdown-pages/cli.js download docs-dm",
     "download:docs-dm:all": "./scripts/download-docs-dm.sh",
     "download:docs-dm:all:en": "./scripts/download-docs-dm-en.sh",
     "download:docs-dm:all:zh": "./scripts/download-docs-dm-zh.sh",
+
     "sync": "node markdown-pages/cli.js sync"
   },
   "lint-staged": {

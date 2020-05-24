@@ -3,6 +3,8 @@ const masterRegex = /master/
 
 function renameDoc(name) {
   switch (name) {
+    case 'docs-tidb':
+      return 'tidb'
     case 'docs-tidb-operator':
       return 'tidb-in-kubernetes'
     case 'docs-dm':
@@ -32,7 +34,13 @@ function genDocPath(relativeDir, needRename = true) {
   return `${docName}/${docVersion}`
 }
 
-// replace docs path
+/**
+ * Replace path by relativeDir and file basename.
+ *
+ * @param {string} relativeDir - GraphQL generated string.
+ * @param {string} base - GraphQL generated string.
+ * @returns {string} - Replaced path.
+ */
 exports.replacePath = function (relativeDir, base) {
   const docPath = genDocPath(relativeDir)
   const baseName = base.replace('.md', '')
@@ -48,7 +56,12 @@ exports.genPathPrefix = function (relativeDir, locale) {
   return `${locale === 'en' ? '' : `/${locale}`}/${genDocPath(relativeDir)}/`
 }
 
-// concate toc directory
+/**
+ * Generate TOC path by relativeDir.
+ *
+ * @param {string} relativeDir - GraphQL generated string.
+ * @returns {string} - The string of TOC path.
+ */
 exports.genTOCPath = function (relativeDir) {
   return `${genDocPath(relativeDir, false)}/TOC.md`
 }

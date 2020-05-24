@@ -37,6 +37,19 @@ function main(argv) {
   const ref = argv.ref || 'master'
 
   switch (repo) {
+    case 'docs':
+      retrieveAllMDs(
+        {
+          owner: 'pingcap',
+          repo,
+          ref,
+          path: path ? path : '',
+        },
+        `${__dirname}/contents/en/docs-tidb/${ref}`,
+        [() => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL)]
+      )
+
+      break
     case 'docs-tidb-operator':
       if (!path) {
         sig.warn(

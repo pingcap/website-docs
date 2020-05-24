@@ -3,9 +3,12 @@ const sig = require('signale')
 const http = require('./http')
 const axios = require('axios').default
 const toReadableStream = require('to-readable-stream')
+const { ignorePaths } = require('./utils')
 
 function getContents(owner, repo, ref, path = '') {
-  const url = `/repos/${owner}/${repo}/contents/${path}`
+  const url = `/repos/${owner}/${repo}/contents${
+    path.startsWith('/') ? path : `/${path}`
+  }`
 
   sig.info(`getContents URL: ${url}, ref: ${ref}`)
 
@@ -43,6 +46,10 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
 
   list.forEach((el) => {
     const { name, type, download_url } = el
+
+    if (ignorePaths.includes(name)) {
+      return
+    }
 
     if (type === 'dir') {
       const nextDistDir = `${distDir}/${name}`

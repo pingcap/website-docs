@@ -12,10 +12,23 @@ function createReplaceImagePathStream(replaced) {
   return replaceStream(/\(\/?media\//g, `(${replaced}/`)
 }
 
+const ignorePaths = [
+  '.circleci',
+  '.github',
+  'media',
+  'resources',
+  'scripts',
+  'templates',
+  'CONTRIBUTING.md',
+  'README.md',
+  'contribute.md',
+]
+
 module.exports = {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   createReplaceImagePathStream,
+  ignorePaths,
 }
