@@ -30,9 +30,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 }
 
 exports.createPages = async ({ actions, graphql }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
 
-  createDocs({ graphql, createPage })
+  createDocs({ graphql, createPage, createRedirect })
 }
 
 exports.onCreatePage = ({ page, actions }) => {
