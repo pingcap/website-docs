@@ -3,6 +3,7 @@ module.exports = {
     title: `PingCAP Docs`,
     description: `PingCAP Docs`,
     author: `@PingCAP`,
+    siteUrl: `https://docs.pingcap.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -75,5 +76,12 @@ module.exports = {
       },
     },
     `gatsby-plugin-meta-redirect`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/website-docs-sitemap.xml`,
+        exclude: [`/404`, `/search`],
+      },
+    },
   ],
 }
