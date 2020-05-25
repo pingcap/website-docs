@@ -1,12 +1,12 @@
-import React from 'react'
-import loaderSpinner from '../../images/loader-spinner.svg'
+import '../styles/components/loading.scss'
 
-const Loading = ({ isLoading }) => {
-    return (
-        <div className={`loading ${isLoading? '' : 'hide-loading'}`}>
-            <img src={loaderSpinner} alt="loading icon" />
-        </div>
-    )
-}
+import React from 'react'
+import loaderSpinner from '../../images/loading-spinner.svg'
+
+const Loading = () => (
+  <div className="PingCAP-Loading">
+    <img src={loaderSpinner} alt="loading spinner" />
+  </div>
+)
 
 export default Loading

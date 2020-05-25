@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSearchValue } from '../state'
 
 import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
-import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
@@ -18,11 +19,15 @@ const Navbar = () => {
     `
   )
 
-  const docInfo = useSelector((state) => state.docInfo)
+  const dispatch = useDispatch()
+
+  const { docInfo, searchValue } = useSelector((state) => state)
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
   const handleSetBurgerActive = () => setBurgerActive(!burgerActive)
+
+  const handleSetSearchValue = (value) => dispatch(setSearchValue(value))
 
   useEffect(() => {
     const scrollListener = () => {
@@ -54,7 +59,11 @@ const Navbar = () => {
           </IntlLink>
 
           <div className="navbar-item search-input-mobile">
-            <SearchInput docInfo={docInfo} />
+            <SearchInput
+              docInfo={docInfo}
+              searchValue={searchValue}
+              setSearchValue={handleSetSearchValue}
+            />
           </div>
 
           <button
@@ -94,7 +103,11 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-item search-input-pc">
-          <SearchInput docInfo={docInfo} />
+          <SearchInput
+            docInfo={docInfo}
+            searchValue={searchValue}
+            setSearchValue={handleSetSearchValue}
+          />
         </div>
       </div>
     </nav>
