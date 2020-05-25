@@ -91,29 +91,6 @@
     font-size: $size-7;
   }
 
-  .with-search-input {
-    .search-input {
-      padding-left: 40px;
-      background: url('../../../images/search-icon.svg') no-repeat scroll 12px 10px;
-      background-size: 18px;
-      height: 40px;
-      color: $B4;
-      font-size: 1rem;
-      border: 1px solid $C2;
-      border-radius: 30px;
-
-      @include placeholder {
-        color: $B4;
-      }
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-    }
-  }
-
   .search-input-mobile {
     display: none;
 
