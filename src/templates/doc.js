@@ -4,6 +4,7 @@ import * as Shortcodes from '../components/shortcodes'
 
 import React, { useEffect, useState } from 'react'
 
+import Download from '../components/download'
 import { FormattedMessage } from 'react-intl'
 import Layout from '../components/layout'
 import { MDXProvider } from '@mdx-js/react'
@@ -14,8 +15,8 @@ import VersionSwitcher from '../components/version'
 import { convertDocAndRef } from '../lib/version'
 import { getDocInfo } from '../state'
 import { graphql } from 'gatsby'
+import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
-import Download from '../components/download'
 
 const Doc = ({
   pageContext: { locale, relativeDir, base, pathPrefix, downloadURL },
@@ -64,6 +65,8 @@ const Doc = ({
 
   useEffect(
     () => {
+      replaceInternalHref(locale, docRefArray[0], docRefArray[1])
+
       dispatch(
         getDocInfo({
           lang: locale,
