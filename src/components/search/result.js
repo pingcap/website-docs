@@ -1,23 +1,22 @@
-import React from 'react'
 import { FormattedMessage } from 'react-intl'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-const SearchResult = (props) => {
-  const results = props.results
-
+const Result = ({ results }) => {
   return (
     <div className="search-result">
-      {/* <p className="counts">共 {results ? results.length : 0} 条搜索结果…</p> */}
-
       <p className="counts">
-        <FormattedMessage id="search.resultTips.counts" values={{ counts: <span>{results ? results.length : 0}</span> }} />
+        <FormattedMessage
+          id="search.resultTips.counts"
+          values={{ counts: results.length }}
+        />
       </p>
       <div className="results">
-        {results &&
-          results.length > 0 &&
+        {results.length > 0 &&
           results.map((r) => (
-            <div className="item" key={r.objectID}>
+            <div key={r.objectID} className="item">
               <a href={r.url}>
-                <div className="title">{r.hierarchy.lvl0}</div>
+                <div className="title is-5">{r.hierarchy.lvl0}</div>
               </a>
               <a href={r.url}>
                 <div className="url">{r.url}</div>
@@ -35,7 +34,7 @@ const SearchResult = (props) => {
           ))}
       </div>
       <div className="no-result">
-        {results && results.length === 0 && (
+        {results.length === 0 && (
           <>
             <p>
               <FormattedMessage id="search.resultTips.title" />
@@ -55,4 +54,8 @@ const SearchResult = (props) => {
   )
 }
 
-export default SearchResult
+Result.propTypes = {
+  results: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
+
+export default Result
