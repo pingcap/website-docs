@@ -1,0 +1,26 @@
+@import '../common';
+
+.PingCAP-Nav-Columns {
+  margin-top: 2rem;
+
+  .column-title {
+    margin-bottom: 1rem;
+    font-size: $size-7;
+    font-weight: bold;
+    color: $B3;
+  }
+
+  ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+
+    a {
+      color: $B4 !important;
+
+      &:hover {
+        color: $primary !important;
+        text-decoration: none;
+      }
+    }
+  }
+}

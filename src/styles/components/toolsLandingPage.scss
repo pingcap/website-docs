@@ -1,0 +1,51 @@
+@import '../common';
+
+.PingCAP-Tools {
+  .card {
+    padding: 2rem;
+    background-color: $B5;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+
+    &:hover {
+      box-shadow: 0 0.1875em 0.5em #f0f0f0;
+    }
+
+    .title {
+      font-size: $size-5;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .type-icon {
+      width: 40px;
+      height: 40px;
+      background-size: contain !important;
+    }
+
+    .tidb-operator-icon {
+      background: url('../../../images/tools/tidb-operator.svg') no-repeat;
+    }
+
+    .dm-icon {
+      background: url('../../../images/tools/dm.svg') no-repeat;
+    }
+
+    .tidb-tools-icon {
+      background: url('../../../images/tools/tidb-tools.svg') no-repeat;
+    }
+
+    .tiup-icon {
+      background: url('../../../images/tools/tiup.svg') no-repeat;
+    }
+
+    .desc {
+      color: $M4;
+    }
+  }
+}

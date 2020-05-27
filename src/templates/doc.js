@@ -15,9 +15,10 @@ import { convertDocAndRef } from '../lib/version'
 import { getDocInfo } from '../state'
 import { graphql } from 'gatsby'
 import { useDispatch } from 'react-redux'
+import Download from '../components/download'
 
 const Doc = ({
-  pageContext: { locale, relativeDir, base, pathPrefix },
+  pageContext: { locale, relativeDir, base, pathPrefix, downloadURL },
   data,
 }) => {
   const { mdx, toc } = data
@@ -155,7 +156,11 @@ const Doc = ({
               </section>
             </div>
             <div className="column is-2 doc-toc-column">
+              <Download downloadURL={downloadURL} />
               <section className="doc-toc">
+                <div className="title">
+                  <FormattedMessage id="doc.toc" />
+                </div>
                 {tableOfContents.items && renderItems(tableOfContents.items)}
               </section>
             </div>
