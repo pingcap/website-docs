@@ -1,4 +1,5 @@
 @import '../common';
+@import '../components/navCloumns';
 
 $navbar-height: 5.25rem; // 84px
 $navbar-height-mobile: 4.25rem; // 68px
@@ -100,6 +101,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
       padding-top: $navbar-height;
       margin-top: -$navbar-height;
+      border-bottom: none;
       z-index: 1;
 
       &:first-child {
@@ -148,6 +150,12 @@ $navbar-height-mobile: 4.25rem; // 68px
     position: sticky;
     top: calc(#{$navbar-height} + 1rem);
 
+    .title {
+      margin: 2rem 0 1rem;
+      color: $B3;
+      font-size: $size-7;
+    }
+
     a {
       color: $B4;
       line-height: 1.75;
@@ -163,6 +171,32 @@ $navbar-height-mobile: 4.25rem; // 68px
           padding-left: 1.5rem;
         }
       }
+    }
+  }
+
+  .doc-download {
+    position: relative;
+    margin: 1rem 0;
+    a {
+      color: $B4;
+      line-height: 1.75;
+      margin-left: 1.5rem;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 15px;
+      height: 15px;
+      transform: translateY(-50%);
+      background: url(../../../images/download-pdf.svg) no-repeat;
+      background-size: contain;
     }
   }
 }
