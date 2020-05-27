@@ -8,7 +8,8 @@
     "searchDocs": "Search Docs"
   },
   "doc": {
-    "mobileDocMenu": "Doc Menu"
+    "mobileDocMenu": "Doc Menu",
+    "toc": "What’s on this page"
   },
   "shortcodes": {
     "note": "Note",

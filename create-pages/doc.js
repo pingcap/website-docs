@@ -1,5 +1,5 @@
 const path = require('path')
-const { replacePath, genPathPrefix, genTOCPath } = require('./utils')
+const { replacePath, genPathPrefix, genTOCPath, genDownloadURL } = require('./utils')
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
   const docTemplate = path.resolve(`${__dirname}/../src/templates/doc.js`)
@@ -10,6 +10,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         filter: {
           fields: { langCollection: { eq: "markdown-pages/contents/en" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
+          frontmatter: { draft: {ne: true} }
         }
       ) {
         nodes {
@@ -37,6 +38,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         filter: {
           fields: { langCollection: { eq: "markdown-pages/contents/zh" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
+          frontmatter: { draft: {ne: true} }
         }
       ) {
         nodes {
@@ -76,6 +78,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           base,
           tocPath,
           locale,
+          downloadURL: `${genDownloadURL(relativeDir, locale)}`,
           pathPrefix: genPathPrefix(relativeDir, locale),
         },
       })

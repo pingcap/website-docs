@@ -172,6 +172,34 @@ Currently, you can use these shortcodes into docs:
 <Tips>This is a tip.</Tips>
 ```
 
+## Landing page for TiDB
+
+Edit file `_index.md` to generate custom landing page. All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column has to be wrapped by tag `<NavColumn></NavColumn>`and column title has to be wrapped by tag `<ColumnTitle></ColumnTitle>`. For example:
+
+```html
+<NavColumns>
+<NavColumn>
+<ColumnTitle>Column title</ColumnTitle>
+
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+
+</NavColumn>
+
+<NavColumn>
+<ColumnTitle>Column title</ColumnTitle>
+
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+
+</NavColumn>
+</NavColumns>
+```
+
 Everything you needed is just to write a JSX tag, put the text into it. Then we will use
 `mdx` to convert it to JS code.
 

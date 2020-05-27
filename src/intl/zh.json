@@ -8,7 +8,8 @@
     "searchDocs": "搜索文档"
   },
   "doc": {
-    "mobileDocMenu": "文档目录"
+    "mobileDocMenu": "文档目录",
+    "toc": "本页导航"
   },
   "shortcodes": {
     "note": "注意",

@@ -85,7 +85,7 @@ const Navbar = () => {
             <IntlLink to="/tools" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
-            <IntlLink to="/cloud" className="navbar-item with-main-section">
+            {/* <IntlLink to="/cloud" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.cloud" />
             </IntlLink>
             <IntlLink
@@ -93,7 +93,7 @@ const Navbar = () => {
               className="navbar-item with-main-section has-no-border"
             >
               <FormattedMessage id="navbar.developerGuide" />
-            </IntlLink>
+            </IntlLink> */}
             <div className="navbar-item with-contact-us">
               <Button as="a" className="contact-us" color="primary" rounded>
                 <FormattedMessage id="navbar.contactUs" />
