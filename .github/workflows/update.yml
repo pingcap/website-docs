@@ -44,18 +44,44 @@ jobs:
       - name: Install deps
         run: yarn
 
-      - name: Restore en-docs-dm-cache
+      - name: Restore zh-docs-tidb-cache
         uses: actions/cache@v1
-        id: en-docs-dm-cache
+        id: zh-docs-tidb-cache
         with:
-          path: ./markdown-pages/contents/en/docs-dm
-          key: ${{ runner.os }}-en-docs-dm-cache-build-0
+          path: ./markdown-pages/contents/zh/docs-tidb
+          key: ${{ runner.os }}-zh-docs-tidb-cache-build-0
           restore-keys: |
-            ${{ runner.os }}-en-docs-dm-cache-build-0
+            ${{ runner.os }}-zh-docs-tidb-cache-build-0
 
-      - name: Check en-docs-dm-cache
-        if: steps.en-docs-dm-cache.outputs.cache-hit != 'true'
-        run: yarn download:docs-dm:all:en
+      - name: Check zh-docs-tidb-cache
+        if: steps.zh-docs-tidb-cache.outputs.cache-hit != 'true'
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
+
+      - name: Restore zh-docs-tidb-operator-cache
+        uses: actions/cache@v1
+        id: zh-docs-tidb-operator-cache
+        with:
+          path: ./markdown-pages/contents/zh/docs-tidb-operator
+          key: ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
+          restore-keys: |
+            ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
+
+      - name: Check zh-docs-tidb-operator-cache
+        if: steps.zh-docs-tidb-operator-cache.outputs.cache-hit != 'true'
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:zh:all
+
+      # - name: Restore en-docs-dm-cache
+      #   uses: actions/cache@v1
+      #   id: en-docs-dm-cache
+      #   with:
+      #     path: ./markdown-pages/contents/en/docs-dm
+      #     key: ${{ runner.os }}-en-docs-dm-cache-build-0
+      #     restore-keys: |
+      #       ${{ runner.os }}-en-docs-dm-cache-build-0
+
+      # - name: Check en-docs-dm-cache
+      #   if: steps.en-docs-dm-cache.outputs.cache-hit != 'true'
+      #   run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:en:all
 
       - name: Restore zh-docs-dm-cache
         uses: actions/cache@v1
@@ -68,10 +94,10 @@ jobs:
 
       - name: Check zh-docs-dm-cache
         if: steps.zh-docs-dm-cache.outputs.cache-hit != 'true'
-        run: yarn download:docs-dm:all:zh
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:zh:all
 
       - name: Download docs based on dispatch payload
-        run: yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ github.event.client_payload.sha }}
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
         uses: actions/cache@v1
@@ -94,7 +120,7 @@ jobs:
             ${{ runner.os }}-gatsby-build-
 
       - name: Build website
-        run: yarn build
+        run: ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build
 
       - name: Deploy
         run: |
