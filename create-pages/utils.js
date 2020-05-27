@@ -34,7 +34,7 @@ function genDocPath(relativeDir, needRename = true) {
   return `${docName}/${docVersion}`
 }
 
-exports.genDownloadURL = function (relativeDir, locale) {
+exports.genDownloadPDFURL = function (relativeDir, locale) {
   const docPath = genDocPath(relativeDir).replace('/', '-')
 
   return `${docPath}-${locale}-manual.pdf`

@@ -7,7 +7,6 @@ import SEO from '../components/seo'
 import { toolsLandingPageData } from '../data/toolsLandingPage'
 
 const Tools = ({ pageContext: { locale } }) => {
-  console.log('data', toolsLandingPageData)
   return (
     <Layout locale={locale}>
       <SEO title="Tools" />
