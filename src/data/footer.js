@@ -24,24 +24,27 @@ const footerColumns = [
     items: [
       {
         name: '快速上手',
-        link: '',
+        link: '/zh/tidb/dev/quick-start-with-tidb/',
+        outbound: false,
       },
       {
         name: '最佳实践',
-        link: '',
+        link: '/zh/tidb/dev/tidb-best-practices/',
+        outbound: false,
       },
       {
         name: '常见问题解答',
-        link: '',
+        link: '/zh/tidb/dev/tidb-faq/',
+        outbound: false,
       },
       {
         name: 'Tools',
-        link: '',
+        link: '/zh/tools/',
         outbound: false,
       },
       {
         name: 'Release Notes',
-        link: '',
+        link: '/zh/tidb/dev/release-notes',
         outbound: false,
       },
       {
@@ -61,7 +64,7 @@ const footerColumns = [
     items: [
       {
         name: '文档',
-        link: '/tidb/',
+        link: '/zh/tidb/',
         outbound: false,
       },
       {

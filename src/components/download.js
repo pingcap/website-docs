@@ -5,7 +5,7 @@ const Download = ({ downloadURL }) => {
   return (
     <section>
       <div className="doc-download">
-        <a href={`https://download.pingcap.com/${downloadURL}`}>
+        <a href={`https://download.pingcap.org/${downloadURL}`}>
           <FormattedMessage id="download-pdf" />
         </a>
       </div>
