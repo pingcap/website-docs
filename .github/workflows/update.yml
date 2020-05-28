@@ -120,7 +120,7 @@ jobs:
             ${{ runner.os }}-gatsby-build-
 
       - name: Build website
-        run: ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build
+        run: GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build
 
       - name: Deploy
         run: |
