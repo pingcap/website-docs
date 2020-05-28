@@ -1,3 +1,5 @@
+const purgecssWhitelist = require('./purgecss-whitelist')
+
 module.exports = {
   siteMetadata: {
     title: `PingCAP Docs`,
@@ -73,6 +75,7 @@ module.exports = {
           `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
         ],
         whitelistPatternsChildren: [/^PingCAP-Doc/],
+        whitelist: purgecssWhitelist,
       },
     },
     `gatsby-plugin-meta-redirect`,

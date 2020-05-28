@@ -12,6 +12,10 @@ function createReplaceImagePathStream(replaced) {
   return replaceStream(/\(\/?media\//g, `(${replaced}/`)
 }
 
+function createReplaceCopyableStream() {
+  return replaceStream(/{{<\scopyable.+>}}/g, '')
+}
+
 const ignorePaths = [
   '.circleci',
   '.github',
@@ -24,11 +28,25 @@ const ignorePaths = [
   'contribute.md',
 ]
 
+function shouldIgnorePath(path) {
+  if (ignorePaths.includes(path)) {
+    return true
+  }
+
+  // Temporarily ignore docs-tidb-operator => api-references.md
+  if (path === 'api-references.md') {
+    return true
+  }
+
+  return false
+}
+
 module.exports = {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   createReplaceImagePathStream,
-  ignorePaths,
+  createReplaceCopyableStream,
+  shouldIgnorePath,
 }

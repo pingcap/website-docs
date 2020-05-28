@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearchValue } from '../state'
 
 // import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
+import { setSearchValue } from '../state'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
