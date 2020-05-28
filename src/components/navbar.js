@@ -82,7 +82,7 @@ const Navbar = () => {
             <IntlLink to="/tidb/v4.0" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
-            <IntlLink to="/tools" className="navbar-item with-main-section">
+            <IntlLink to="/tidb/v4.0/tools/" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
             {/* <IntlLink to="/cloud" className="navbar-item with-main-section">

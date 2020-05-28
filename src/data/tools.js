@@ -12,9 +12,9 @@ const toolsLandingPageData = [
     link: '/zh/tidb-data-migration/v1.0',
   },
   {
-    type: 'TiDB Tools',
+    type: 'DataBase Tools',
     desc:
-      'TiDB 是 PingCAP 公司设计的开源分布式 HTAP (Hybrid Transactional and Analytical Processing) 数据库，结合了传统的 RDBMS 和 NoSQL 的最佳特性。',
+      'TiDB 数据库工具是用于处理 TiDB 导入导出数据的命令行实用程序的集合。包括：Mydumper、Loader、Syncer、sync-diff-inspector',
     link: '/zh/tidb/dev/ecosystem-tool-user-guide',
   },
   {
