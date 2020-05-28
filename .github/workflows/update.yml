@@ -55,20 +55,20 @@ jobs:
 
       - name: Check zh-docs-tidb-cache
         if: steps.zh-docs-tidb-cache.outputs.cache-hit != 'true'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
 
-      # - name: Restore zh-docs-tidb-operator-cache
-      #   uses: actions/cache@v1
-      #   id: zh-docs-tidb-operator-cache
-      #   with:
-      #     path: ./markdown-pages/contents/zh/docs-tidb-operator
-      #     key: ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
-      #     restore-keys: |
-      #       ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
+      - name: Restore zh-docs-tidb-operator-cache
+        uses: actions/cache@v1
+        id: zh-docs-tidb-operator-cache
+        with:
+          path: ./markdown-pages/contents/zh/docs-tidb-operator
+          key: ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
+          restore-keys: |
+            ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
 
-      # - name: Check zh-docs-tidb-operator-cache
-      #   if: steps.zh-docs-tidb-operator-cache.outputs.cache-hit != 'true'
-      #   run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:zh:all
+      - name: Check zh-docs-tidb-operator-cache
+        if: steps.zh-docs-tidb-operator-cache.outputs.cache-hit != 'true'
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:zh:all
 
       # - name: Restore en-docs-dm-cache
       #   uses: actions/cache@v1
