@@ -12,6 +12,10 @@ function createReplaceImagePathStream(replaced) {
   return replaceStream(/\(\/?media\//g, `(${replaced}/`)
 }
 
+function createReplaceCopyableStream() {
+  return replaceStream(/{{<\scopyable.+>}}/g, '')
+}
+
 const ignorePaths = [
   '.circleci',
   '.github',
@@ -30,5 +34,6 @@ module.exports = {
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   createReplaceImagePathStream,
+  createReplaceCopyableStream,
   ignorePaths,
 }

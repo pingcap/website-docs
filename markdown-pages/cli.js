@@ -7,6 +7,7 @@ const {
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   createReplaceImagePathStream,
+  createReplaceCopyableStream,
 } = require('./utils')
 
 const argv = yargs
@@ -49,7 +50,10 @@ function main(argv) {
         `${__dirname}/contents/en/docs-tidb/${
           ref === 'docs-special-week' ? 'master' : ref
         }`,
-        [() => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL)]
+        [
+          () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+        ]
       )
 
       break
@@ -62,7 +66,10 @@ function main(argv) {
           path: path ? path : '',
         },
         `${__dirname}/contents/zh/docs-tidb/${ref}`,
-        [() => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL)]
+        [
+          () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+        ]
       )
 
       break
@@ -83,7 +90,10 @@ function main(argv) {
           path,
         },
         `${__dirname}/contents/${path}/docs-tidb-operator/${ref}`,
-        [() => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL)]
+        [
+          () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+        ]
       )
 
       break
@@ -104,7 +114,10 @@ function main(argv) {
           path,
         },
         `${__dirname}/contents/${path}/docs-dm/${ref}`,
-        [() => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL)]
+        [
+          () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+        ]
       )
 
       break
@@ -124,12 +137,14 @@ function sync(argv) {
     case 'docs-tidb-operator':
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
       ])
 
       break
     case 'docs-dm':
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
       ])
 
       break
