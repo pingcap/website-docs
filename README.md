@@ -23,11 +23,24 @@ We have pre-defined some commands to download the docs and clear docs, these com
 ```json
 {
   "scripts": {
-    "clean:docs": "rimraf markdown-pages/contents/**/*.md",
-    "download:docs": "node markdown-pages/cli.js download docs",
-    "download:docs-cn": "node markdown-pages/cli.js download docs-cn",
+    "clean:docs:docs-tidb:en": "rimraf ./markdown-pages/contents/en/docs-tidb/**/*.md",
+    "clean:docs:docs-tidb:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb/**/*.md",
+    "clean:docs:docs-tidb-operator:en": "rimraf ./markdown-pages/contents/en/docs-tidb-operator/**/*.md",
+    "clean:docs:docs-tidb-operator:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb-operator/**/*.md",
+    "clean:docs:docs-dm:en": "rimraf ./markdown-pages/contents/en/docs-dm/**/*.md",
+    "clean:docs:docs-dm:zh": "rimraf ./markdown-pages/contents/zh/docs-dm/**/*.md",
+    "download:docs-tidb:en": "node markdown-pages/cli.js download docs",
+    "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
+    "download:docs-tidb:zh": "node markdown-pages/cli.js download docs-cn",
+    "download:docs-tidb:zh:all": "./scripts/download-docs-tidb-zh.sh",
     "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
-    "download:docs-dm": "node markdown-pages/cli.js download docs-dm"
+    "download:docs-tidb-operator:all": "./scripts/download-docs-tidb-operator.sh",
+    "download:docs-tidb-operator:en:all": "./scripts/download-docs-tidb-operator-en.sh",
+    "download:docs-tidb-operator:zh:all": "./scripts/download-docs-tidb-operator-zh.sh",
+    "download:docs-dm": "node markdown-pages/cli.js download docs-dm",
+    "download:docs-dm:all": "./scripts/download-docs-dm.sh",
+    "download:docs-dm:en:all": "./scripts/download-docs-dm-en.sh",
+    "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh"
   }
 }
 ```
@@ -203,4 +216,4 @@ All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column h
 
 ## Authors
 
-Made with love 💙 by PingCAP FE.
+PingCAP FE
