@@ -5,6 +5,9 @@ $navbar-height: 5.25rem; // 84px
 .PingCAP-TOC {
   position: sticky;
   top: $navbar-height;
+  max-height: calc(100vh - 230px);
+  overflow: auto;
+  padding-right: 1rem;
 
   @include mobile {
     display: none;
@@ -58,8 +61,12 @@ $navbar-height: 5.25rem; // 84px
         }
       }
 
+      &.is-active > a {
+        color: $primary;
+      }
+
       ul {
-        padding-left: 1.5rem;
+        padding-left: 1rem;
         overflow: hidden;
         transition: height 0.25s ease;
       }
@@ -67,6 +74,7 @@ $navbar-height: 5.25rem; // 84px
       a {
         display: inline-block;
         width: 90%;
+        word-break: break-word;
       }
     }
 

@@ -103,6 +103,7 @@ $navbar-height-mobile: 4.25rem; // 68px
       margin-top: -$navbar-height;
       border-bottom: none;
       z-index: 1;
+      color: $B3;
 
       &:first-child {
         @include mobile {
@@ -111,6 +112,22 @@ $navbar-height-mobile: 4.25rem; // 68px
 
         margin-top: -$navbar-height !important;
       }
+    }
+
+    h1 {
+      font-size: $H1;
+    }
+
+    h2 {
+      font-size: $H2;
+    }
+
+    h3 {
+      font-size: $H3;
+    }
+
+    h4 {
+      font-size: $H4;
     }
 
     p,
@@ -168,7 +185,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     ul {
       li {
         ul {
-          padding-left: 1.5rem;
+          padding-left: 1rem;
         }
       }
     }

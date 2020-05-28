@@ -19,7 +19,7 @@ import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 
 const Doc = ({
-  pageContext: { locale, relativeDir, base, pathPrefix, downloadURL },
+  pageContext: { locale, relativeDir, base, pathPrefix, downloadURL, fullPath },
   data,
 }) => {
   const { mdx, toc } = data
@@ -149,7 +149,11 @@ const Doc = ({
               >
                 <FormattedMessage id="doc.mobileDocMenu" />
               </div>
-              <TOC data={toc.nodes[0]} pathPrefix={pathPrefix} />
+              <TOC
+                data={toc.nodes[0]}
+                pathPrefix={pathPrefix}
+                fullPath={fullPath}
+              />
             </div>
             <div className="column is-8">
               <section className="markdown-body doc-content">

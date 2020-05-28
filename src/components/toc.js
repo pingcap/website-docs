@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import html from 'remark-html'
 import remark from 'remark'
 
-const TOC = ({ data, pathPrefix }) => {
+const TOC = ({ data, pathPrefix, fullPath }) => {
   const rawBody = data.rawBody
   const _html = remark()
     .use(html)
@@ -86,6 +86,18 @@ const TOC = ({ data, pathPrefix }) => {
       const lastSegment = href.substring(href.lastIndexOf('/') + 1)
 
       a.href = pathPrefix + lastSegment
+
+      // unfold active nav item
+      if (pathPrefix + lastSegment === fullPath) {
+        let tagTempEle = a
+        tagTempEle.parentElement.classList.add('is-active')
+        while (!tagTempEle.classList.contains('top')) {
+          if (tagTempEle.classList.contains('folded')) {
+            tagTempEle.classList.remove('folded')
+          }
+          tagTempEle = tagTempEle.parentElement
+        }
+      }
     })
   }, [pathPrefix])
 
