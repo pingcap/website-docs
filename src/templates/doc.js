@@ -29,6 +29,38 @@ const Doc = ({
   const [showProgress, setShowProgress] = useState(false)
   const [readingProgress, setReadingProgress] = useState(0)
 
+  function addStyleToQuote(quote, type) {
+    quote.classList.add('doc-blockquote')
+    quote.classList.add(type)
+  }
+
+  function optimizeBlockquote() {
+    const blockquoteList = document.getElementsByTagName('blockquote')
+    Array.from(blockquoteList).forEach((quote) => {
+      const labelText = quote.children[0].children[0].innerHTML
+      switch (labelText) {
+        case '注意：':
+          addStyleToQuote(quote, 'note')
+          break
+        case '警告：':
+          addStyleToQuote(quote, 'warning')
+          break
+        case '建议：':
+          addStyleToQuote(quote, 'tips')
+          break
+        case '错误：':
+          addStyleToQuote(quote, 'error')
+          break
+        default:
+          break
+      }
+    })
+  }
+
+  useEffect(() => {
+    optimizeBlockquote()
+  }, [])
+
   useEffect(() => {
     const footer = document.querySelector('.footer.PingCAP-Footer')
     const footerHeight = footer.getBoundingClientRect().height

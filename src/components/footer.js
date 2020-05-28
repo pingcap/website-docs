@@ -87,9 +87,19 @@ const Footer = () => {
               <ul className="items">
                 {column.items.map((item) => (
                   <li key={item.name}>
-                    <Link to="/" onTouchStart={() => {}}>
-                      {item.name}
-                    </Link>
+                    {item.outbound ? (
+                      <a
+                        href={item.link}
+                        target="blank"
+                        onTouchStart={() => {}}
+                      >
+                        {item.name}
+                      </a>
+                    ) : (
+                      <Link to={item.link} onTouchStart={() => {}}>
+                        {item.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -1,30 +1,21 @@
 const footerColumns = [
   {
-    name: 'Open Source',
+    name: '产品',
     items: [
       {
         name: 'TiDB',
+        link: '/zh/tidb/v4.0/',
+        outbound: false,
       },
       {
-        name: 'TiKV',
+        name: 'TiDB Opeartor',
+        link: '/zh/tidb-in-kubernetes/v1.1/',
+        outbound: false,
       },
       {
-        name: 'TiSpark',
-      },
-      {
-        name: 'TiDB Ansible',
-      },
-      {
-        name: 'TiDB Operator',
-      },
-      {
-        name: 'Talent Plan',
-      },
-      {
-        name: 'Community events',
-      },
-      {
-        name: 'Share your TiDB story',
+        name: 'DM',
+        link: '/zh/tidb-data-migration/v1.0/',
+        outbound: false,
       },
     ],
   },
@@ -32,48 +23,91 @@ const footerColumns = [
     name: 'Resources',
     items: [
       {
-        name: 'Quick Start',
+        name: '快速上手',
+        link: '',
       },
       {
-        name: 'Best Practices',
+        name: '最佳实践',
+        link: '',
       },
       {
-        name: 'FAQ',
+        name: '常见问题解答',
+        link: '',
       },
       {
         name: 'Tools',
+        link: '',
+        outbound: false,
       },
       {
         name: 'Release Notes',
+        link: '',
+        outbound: false,
       },
       {
         name: 'Blog',
-      },
-      {
-        name: 'Weekly',
+        link: 'https://pingcap.com/blog-cn/',
+        outbound: true,
       },
       {
         name: 'GitHub',
+        link: 'https://github.com/pingcap',
+        outbound: true,
       },
     ],
   },
   {
-    name: 'Company',
+    name: '学习',
     items: [
       {
-        name: 'About',
+        name: '文档',
+        link: '/tidb/',
+        outbound: false,
       },
       {
-        name: 'Careers',
+        name: 'pingcap university',
+        link: 'https://university.pingcap.com',
+        outbound: true,
       },
       {
-        name: 'News',
+        name: 'Community events',
+        link: 'https://pingcap.com/community-cn/',
+        outbound: true,
       },
       {
-        name: 'Privacy Policy',
+        name: '案例',
+        link: 'https://pingcap.com/cases-cn/',
+        outbound: true,
+      },
+    ],
+  },
+  {
+    name: '支持',
+    items: [
+      {
+        name: '论坛',
+        link: 'https://asktug.com',
+        outbound: true,
       },
       {
-        name: 'Terms of Service',
+        name: '联系我们',
+        link: 'mailto:info@pingcap.com',
+        outbound: true,
+      },
+    ],
+  },
+  {
+    name: '公司',
+    items: [
+      {
+        name: '关于',
+        link: 'https://asktug.com',
+        outbound: true,
+      },
+      {
+        name: '新闻',
+        link: 'https://pingcap.com/about-cn/news/',
+        outbound: true,
       },
     ],
   },

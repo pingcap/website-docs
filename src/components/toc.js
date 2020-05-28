@@ -99,7 +99,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
         }
       }
     })
-  }, [pathPrefix])
+  }, [pathPrefix, fullPath])
 
   return (
     <section
