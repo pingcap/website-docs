@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearchValue } from '../state'
 
 import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
+import { setSearchValue } from '../state'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
@@ -79,7 +79,7 @@ const Navbar = () => {
         </div>
         <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            <IntlLink to="/tidb" className="navbar-item with-main-section">
+            <IntlLink to="/tidb/dev" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
             <IntlLink to="/tools" className="navbar-item with-main-section">
