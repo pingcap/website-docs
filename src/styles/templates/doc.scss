@@ -85,7 +85,7 @@ $navbar-height-mobile: 4.25rem; // 68px
       padding-right: 2.5rem;
     }
 
-    color: $M4;
+    color: $M3;
     line-height: 1.75;
 
     h1,
@@ -157,7 +157,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     a {
-      color: $B4;
+      color: $B3;
       line-height: 1.75;
 
       &:hover {
@@ -177,10 +177,11 @@ $navbar-height-mobile: 4.25rem; // 68px
   .doc-download {
     position: relative;
     margin: 1rem 0;
+
     a {
-      color: $B4;
-      line-height: 1.75;
       margin-left: 1.5rem;
+      color: $B3;
+      line-height: 1.75;
 
       &:hover {
         color: $primary;
@@ -190,13 +191,13 @@ $navbar-height-mobile: 4.25rem; // 68px
     &:before {
       content: '';
       position: absolute;
-      left: 0;
       top: 50%;
+      left: 0;
       width: 15px;
       height: 15px;
-      transform: translateY(-50%);
       background: url(../../../images/download-pdf.svg) no-repeat;
       background-size: contain;
+      transform: translateY(-50%);
     }
   }
 }

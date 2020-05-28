@@ -46,10 +46,18 @@ const Version = ({ relativeDir, base }) => {
   useEffect(handleRelativeDir, [])
 
   const handleMenuOpen = () => {
+    function handleClickOutside(e) {
+      e.stopPropagation()
+
+      setDropdownActive('')
+      document.removeEventListener('click', handleClickOutside)
+    }
+
     if (dropdownActive) {
       setDropdownActive('')
     } else {
       setDropdownActive('is-active')
+      document.addEventListener('click', handleClickOutside)
     }
   }
 

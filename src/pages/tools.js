@@ -1,10 +1,10 @@
-import '../styles/components/toolsLandingPage.scss'
+import '../styles/pages/tools.scss'
 
 import Layout from '../components/layout'
 import React from 'react'
 import SEO from '../components/seo'
 
-import { toolsLandingPageData } from '../data/toolsLandingPage'
+import { toolsLandingPageData } from '../data/tools'
 
 const Tools = ({ pageContext: { locale } }) => {
   return (
