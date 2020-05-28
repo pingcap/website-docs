@@ -85,6 +85,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           locale,
           downloadURL: `${genDownloadPDFURL(relativeDir, locale)}`,
           pathPrefix: genPathPrefix(relativeDir, locale),
+          fullPath: `${pathPrefix}${replacePath(relativeDir, base)}`,
         },
       })
 

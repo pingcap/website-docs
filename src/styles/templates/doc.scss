@@ -103,6 +103,7 @@ $navbar-height-mobile: 4.25rem; // 68px
       margin-top: -$navbar-height;
       border-bottom: none;
       z-index: 1;
+      color: $B3;
 
       &:first-child {
         @include mobile {
@@ -111,6 +112,22 @@ $navbar-height-mobile: 4.25rem; // 68px
 
         margin-top: -$navbar-height !important;
       }
+    }
+
+    h1 {
+      font-size: $size-4;
+    }
+
+    h2 {
+      font-size: $size-5;
+    }
+
+    h3 {
+      font-size: $size-6;
+    }
+
+    h4 {
+      font-size: $size-7;
     }
 
     p,
@@ -168,7 +185,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     ul {
       li {
         ul {
-          padding-left: 1.5rem;
+          padding-left: 1rem;
         }
       }
     }
@@ -198,6 +215,66 @@ $navbar-height-mobile: 4.25rem; // 68px
       background: url(../../../images/download-pdf.svg) no-repeat;
       background-size: contain;
       transform: translateY(-50%);
+    }
+  }
+
+  .doc-blockquote {
+    $border-width: 5;
+    position: relative;
+
+    &.note {
+      background: rgba($color: $B2, $alpha: 0.1);
+      border-left: #{$border-width}px solid $B2;
+
+      &:before {
+        background: url('../../../images/blockquotes/note.svg') no-repeat;
+      }
+    }
+
+    &.warning {
+      background: rgba($color: $T6, $alpha: 0.1);
+      border-left: #{$border-width}px solid $T6;
+
+      &:before {
+        background: url('../../../images/blockquotes/warning.svg') no-repeat;
+      }
+    }
+
+    &.tips {
+      background: rgba($color: $T1, $alpha: 0.1);
+      border-left: #{$border-width}px solid $T1;
+
+      &:before {
+        background: url('../../../images/blockquotes/tips.svg') no-repeat;
+      }
+    }
+
+    &.error {
+      background: rgba($color: $T3, $alpha: 0.1);
+      border-left: #{$border-width}px solid $T3;
+
+      &:before {
+        background: url('../../../images/blockquotes/error.svg') no-repeat;
+      }
+    }
+
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+    padding: 1rem;
+    color: $M4;
+
+    strong {
+      color: $M4 !important;
+      padding-left: 2rem;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      left: 1rem;
     }
   }
 }

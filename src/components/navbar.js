@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button } from '@seagreenio/react-bulma'
+// import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
@@ -79,7 +79,7 @@ const Navbar = () => {
         </div>
         <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            <IntlLink to="/tidb/dev" className="navbar-item with-main-section">
+            <IntlLink to="/tidb/v4.0" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
             <IntlLink to="/tools" className="navbar-item with-main-section">
@@ -94,11 +94,17 @@ const Navbar = () => {
             >
               <FormattedMessage id="navbar.developerGuide" />
             </IntlLink> */}
-            <div className="navbar-item with-contact-us">
+            {/* <div className="navbar-item with-contact-us">
               <Button as="a" className="contact-us" color="primary" rounded>
                 <FormattedMessage id="navbar.contactUs" />
               </Button>
-            </div>
+            </div> */}
+            <a
+              href="mailto:info@pingcap.com"
+              className="navbar-item with-main-section"
+            >
+              <FormattedMessage id="navbar.contactUs" />
+            </a>
           </div>
         </div>
 
