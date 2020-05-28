@@ -19,11 +19,7 @@ const Tools = ({ pageContext: { locale } }) => {
                   <div className="card">
                     <div className="header">
                       <div className="title">{tool.type}</div>
-                      <div
-                        className={`type-icon ${tool.type
-                          .replace(' ', '-')
-                          .toLowerCase()}-icon`}
-                      ></div>
+                      <div className={`type-icon ${tool.iconName}-icon`}></div>
                     </div>
                     <div className="desc">{tool.desc}</div>
                   </div>
