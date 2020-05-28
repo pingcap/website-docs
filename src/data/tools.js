@@ -2,19 +2,19 @@ const toolsLandingPageData = [
   {
     type: 'TiDB Operator',
     desc:
-      'TiDB Operator 是 Kubernetes 上的 TiDB 集群自动运维系统，提供包括部署、升级、扩缩容、备份恢复、配置变更的 TiDB 全生命周期管理。借助 TiDB Operator，TiDB 可以无缝运行在公有云或私有部署的 Kubernetes 集群上',
+      'TiDB Operator 是 Kubernetes 上的 TiDB 集群自动运维系统，提供包括部署、升级、扩缩容、备份恢复、配置变更的 TiDB 全生命周期管理。借助 TiDB Operator，TiDB 可以无缝运行在公有云或私有部署的 Kubernetes 集群上。',
     link: '/zh/tidb-in-kubernetes/v1.1',
   },
   {
-    type: 'DM',
+    type: 'TiDB Data Migration',
     desc:
-      'TiDB Data Migration (DM) 是一体化的数据同步任务管理平台，支持从 MySQL 或 MariaDB 到 TiDB 的全量数据迁移和增量数据同步。使用 DM 工具有利于简化错误处理流程，降低运维成本',
+      'TiDB Data Migration (DM) 是一体化的数据同步任务管理平台，支持从 MySQL 或 MariaDB 到 TiDB 的全量数据迁移和增量数据同步。使用 DM 工具有利于简化错误处理流程，降低运维成本。',
     link: '/zh/tidb-data-migration/v1.0',
   },
   {
-    type: 'DataBase Tools',
+    type: 'Database Tools',
     desc:
-      'TiDB 数据库工具是用于处理 TiDB 导入导出数据的命令行实用程序的集合。包括：Mydumper、Loader、Syncer、sync-diff-inspector',
+      'TiDB 数据库工具是用于处理 TiDB 导入导出数据的命令行实用程序的集合。包括：Mydumper、Loader、Syncer、sync-diff-inspector。',
     link: '/zh/tidb/dev/ecosystem-tool-user-guide',
   },
   {
