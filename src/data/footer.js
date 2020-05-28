@@ -43,7 +43,7 @@ const footerColumns = [
         outbound: false,
       },
       {
-        name: 'Release Notes',
+        name: '版本发布',
         link: '/zh/tidb/dev/release-notes',
         outbound: false,
       },
@@ -64,7 +64,7 @@ const footerColumns = [
     items: [
       {
         name: '文档',
-        link: '/zh/tidb/',
+        link: '/zh/tidb/v4.0',
         outbound: false,
       },
       {
@@ -104,7 +104,7 @@ const footerColumns = [
     items: [
       {
         name: '关于',
-        link: 'https://asktug.com',
+        link: 'https://pingcap.com/about-cn/',
         outbound: true,
       },
       {

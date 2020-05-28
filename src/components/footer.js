@@ -91,6 +91,7 @@ const Footer = () => {
                       <a
                         href={item.link}
                         target="_blank"
+                        rel="noreferrer"
                         onTouchStart={() => {}}
                       >
                         {item.name}
