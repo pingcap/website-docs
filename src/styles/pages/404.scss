@@ -1,0 +1,14 @@
+@import '../common';
+
+.PingCAP-404-Page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 450px;
+
+    h1 {
+        margin: 2rem auto;
+        padding: 0 1rem;
+        font-size: $size-4;
+    }
+}

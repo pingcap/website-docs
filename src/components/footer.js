@@ -90,7 +90,7 @@ const Footer = () => {
                     {item.outbound ? (
                       <a
                         href={item.link}
-                        target="blank"
+                        target="_blank"
                         onTouchStart={() => {}}
                       >
                         {item.name}
