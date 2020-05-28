@@ -183,25 +183,21 @@ All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column h
 
 ```jsx
 <NavColumns>
-  <NavColumn>
-    <ColumnTitle>Column title</ColumnTitle>
+<NavColumn>
+<ColumnTitle>Column title</ColumnTitle>
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+</NavColumn>
 
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-
-  </NavColumn>
-
-  <NavColumn>
-    <ColumnTitle>Column title</ColumnTitle>
-
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-
-    </NavColumn>
+<NavColumn>
+<ColumnTitle>Column title</ColumnTitle>
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+- [This is nav](/fileName.md)
+</NavColumn>
 </NavColumns>
 ```
 
