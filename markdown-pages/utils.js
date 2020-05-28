@@ -28,6 +28,19 @@ const ignorePaths = [
   'contribute.md',
 ]
 
+function shouldIgnorePath(path) {
+  if (ignorePaths.includes(path)) {
+    return true
+  }
+
+  // Temporarily ignore docs-tidb-operator => api-references.md
+  if (path === 'api-references.md') {
+    return true
+  }
+
+  return false
+}
+
 module.exports = {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
@@ -35,5 +48,5 @@ module.exports = {
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
-  ignorePaths,
+  shouldIgnorePath,
 }
