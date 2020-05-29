@@ -4,7 +4,7 @@ const footerColumns = [
     items: [
       {
         name: 'TiDB',
-        link: '/zh/tidb/stable',
+        link: '/zh/tidb/v4.0',
         outbound: false,
       },
       {
@@ -19,17 +19,17 @@ const footerColumns = [
     items: [
       {
         name: '快速上手',
-        link: '/zh/tidb/stable/quick-start-with-tidb',
+        link: '/zh/tidb/v4.0/quick-start-with-tidb',
         outbound: false,
       },
       {
         name: '最佳实践',
-        link: '/zh/tidb/stable/tidb-best-practices',
+        link: '/zh/tidb/v4.0/tidb-best-practices',
         outbound: false,
       },
       {
         name: '常见问题解答',
-        link: '/zh/tidb/stable/tidb-faq',
+        link: '/zh/tidb/v4.0/tidb-faq',
         outbound: false,
       },
       {
@@ -49,7 +49,7 @@ const footerColumns = [
     items: [
       {
         name: '文档',
-        link: '/zh/tidb/stable',
+        link: '/zh/tidb/v4.0',
         outbound: false,
       },
       {
