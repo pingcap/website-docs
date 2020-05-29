@@ -53,7 +53,7 @@ const footerColumns = [
         outbound: false,
       },
       {
-        name: 'Pingcap University',
+        name: 'PingCAP University',
         link: 'https://university.pingcap.com',
         outbound: true,
       },
