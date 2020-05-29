@@ -8,6 +8,13 @@ module.exports = {
     siteUrl: `https://docs.pingcap.com`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-99991864-7',
+        head: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
