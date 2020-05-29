@@ -4,17 +4,12 @@ const footerColumns = [
     items: [
       {
         name: 'TiDB',
-        link: '/zh/tidb/v4.0/',
+        link: '/zh/tidb/stable',
         outbound: false,
       },
       {
-        name: 'TiDB Opeartor',
-        link: '/zh/tidb-in-kubernetes/v1.1/',
-        outbound: false,
-      },
-      {
-        name: 'DM',
-        link: '/zh/tidb-data-migration/v1.0/',
+        name: 'Tools',
+        link: '/zh/tools',
         outbound: false,
       },
     ],
@@ -24,27 +19,17 @@ const footerColumns = [
     items: [
       {
         name: '快速上手',
-        link: '/zh/tidb/dev/quick-start-with-tidb/',
+        link: '/zh/tidb/stable/quick-start-with-tidb',
         outbound: false,
       },
       {
         name: '最佳实践',
-        link: '/zh/tidb/dev/tidb-best-practices/',
+        link: '/zh/tidb/stable/tidb-best-practices',
         outbound: false,
       },
       {
         name: '常见问题解答',
-        link: '/zh/tidb/dev/tidb-faq/',
-        outbound: false,
-      },
-      {
-        name: 'Tools',
-        link: '/zh/tools/',
-        outbound: false,
-      },
-      {
-        name: '版本发布',
-        link: '/zh/tidb/dev/release-notes',
+        link: '/zh/tidb/stable/tidb-faq',
         outbound: false,
       },
       {
@@ -64,16 +49,21 @@ const footerColumns = [
     items: [
       {
         name: '文档',
-        link: '/zh/tidb/v4.0',
+        link: '/zh/tidb/stable',
         outbound: false,
       },
       {
-        name: 'pingcap university',
+        name: 'PingCAP University',
         link: 'https://university.pingcap.com',
         outbound: true,
       },
       {
-        name: 'Community events',
+        name: 'TiDB in Action',
+        link: 'https://book.tidb.io/',
+        outbound: true,
+      },
+      {
+        name: '社区活动',
         link: 'https://pingcap.com/community-cn/',
         outbound: true,
       },
@@ -88,7 +78,7 @@ const footerColumns = [
     name: '支持',
     items: [
       {
-        name: '论坛',
+        name: 'AskTUG',
         link: 'https://asktug.com',
         outbound: true,
       },
@@ -103,12 +93,17 @@ const footerColumns = [
     name: '公司',
     items: [
       {
-        name: '关于',
+        name: '关于我们',
         link: 'https://pingcap.com/about-cn/',
         outbound: true,
       },
       {
-        name: '新闻',
+        name: '招贤纳士',
+        link: 'https://pingcap.com/about-cn/recruit/join/',
+        outbound: true,
+      },
+      {
+        name: '新闻报道',
         link: 'https://pingcap.com/about-cn/news/',
         outbound: true,
       },
