@@ -62,7 +62,14 @@ function SEO({ lang, title, description, meta, link }) {
           content: metaDescription,
         },
       ].concat(meta)}
-      link={link}
+      link={[
+        {
+          href: '../../images/pingcap-logo.ico',
+          rel: 'shortcut icon',
+          type: 'image/x-icon'
+        },
+        link
+      ]}
     />
   )
 }

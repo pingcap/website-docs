@@ -7,13 +7,15 @@
     background-color: $B5;
     box-shadow: none;
     border-radius: 0;
-    border: none;
+    border: 1px solid $B5;
 
     &:hover {
       box-shadow: 0 0.1875em 0.5em #f0f0f0;
+      border: 1px solid $B1;
     }
 
     .title {
+      font-weight: bold;
       font-size: $size-5;
     }
 

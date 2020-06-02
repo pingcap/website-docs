@@ -23,7 +23,7 @@ $navbar-height: 5.25rem; // 84px
     line-height: 1.75;
 
     &:hover {
-      color: $primary;
+      color: $primary
     }
   }
 
@@ -32,6 +32,8 @@ $navbar-height: 5.25rem; // 84px
       position: relative;
       padding-top: 0.5rem;
       color: $B3;
+      font-size: $p2;
+      font-weight: normal;
       cursor: pointer;
 
       &.can-unfold {
@@ -87,6 +89,8 @@ $navbar-height: 5.25rem; // 84px
         padding-bottom: 0.5rem;
         border-bottom: 1px solid $C2;
         word-break: keep-all;
+        font-weight: bold;
+        font-size: $p1;
 
         &:after {
           content: '';
