@@ -117,7 +117,10 @@ const Doc = ({
       <ul>
         {items.map((item) => (
           <li key={item.url}>
-            <a href={item.url}>{item.title}</a>
+            <a
+              href={item.url}
+              dangerouslySetInnerHTML={{ __html: item.title }}
+            ></a>
             {item.items && renderItems(item.items)}
           </li>
         ))}
