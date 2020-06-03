@@ -170,6 +170,8 @@ $navbar-height-mobile: 4.25rem; // 68px
   .doc-toc {
     position: sticky;
     top: calc(#{$navbar-height} + 1rem);
+    max-height: calc(100vh);
+    overflow: auto;
 
     .title {
       margin: 2rem 0 1rem;
@@ -187,6 +189,13 @@ $navbar-height-mobile: 4.25rem; // 68px
       }
     }
 
+    .toc-content {
+      position: sticky;
+      top: calc(#{$navbar-height} + 1rem);
+      max-height: calc(100vh - 230px);
+      overflow: auto;
+    }
+
     ul {
       li {
         ul {
@@ -198,7 +207,6 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   .doc-download {
     position: relative;
-    margin: 1rem 0;
 
     a {
       margin-left: 1.5rem;
@@ -221,6 +229,16 @@ $navbar-height-mobile: 4.25rem; // 68px
       background-size: contain;
       transform: translateY(-50%);
     }
+  }
+
+  .improve-doc::before {
+    background: url(../../../images/improve-docs-icon.svg) no-repeat;
+    background-size: contain;
+  }
+
+  .feedback-doc::before {
+    background: url(../../../images/feedback-docs-icon.svg) no-repeat;
+    background-size: contain;
   }
 
   .doc-blockquote {

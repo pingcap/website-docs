@@ -4,7 +4,7 @@ import * as Shortcodes from '../components/shortcodes'
 
 import React, { useEffect, useState } from 'react'
 
-import Download from '../components/download'
+import DownloadPDF from '../components/downloadPDF'
 import { FormattedMessage } from 'react-intl'
 import Layout from '../components/layout'
 import { MDXProvider } from '@mdx-js/react'
@@ -203,15 +203,16 @@ const Doc = ({
               </section>
             </div>
             <div className="column is-2 doc-toc-column">
-              <Download downloadURL={downloadURL} />
+              <DownloadPDF downloadURL={downloadURL} />
               <ImproveDocLink repoInfo={repoInfo} base={base} />
-              <br />
               <FeedbackDocLink repoInfo={repoInfo} base={base} />
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
                 </div>
-                {tableOfContents.items && renderItems(tableOfContents.items)}
+                <div className="toc-content">
+                  {tableOfContents.items && renderItems(tableOfContents.items)}
+                </div>
               </section>
             </div>
           </div>
