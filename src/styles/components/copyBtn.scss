@@ -1,0 +1,19 @@
+@import '../common';
+
+.PingCAP-copyBtn {
+    position: relative;
+    float: right;
+    margin-bottom: -32px;
+    padding: 16px .3rem 0;
+    z-index: 2;
+    width: 85px;
+    color: #94a3ea;
+    background: $M2;
+    font-family: inherit;
+    font-size: 13px;
+    font-style: italic;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0 3px 0 0;
+}

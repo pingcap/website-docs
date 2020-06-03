@@ -8,6 +8,7 @@ $navbar-height: 5.25rem; // 84px
   max-height: calc(100vh - 230px);
   overflow: auto;
   padding-right: 1rem;
+  animation: easeIn 1.5s;
 
   @include mobile {
     display: none;
@@ -32,6 +33,8 @@ $navbar-height: 5.25rem; // 84px
       position: relative;
       padding-top: 0.5rem;
       color: $B3;
+      font-size: $p2;
+      font-weight: normal;
       cursor: pointer;
 
       &.can-unfold {
@@ -51,6 +54,7 @@ $navbar-height: 5.25rem; // 84px
       }
 
       &.folded {
+        padding-right: 12px;
         &:after {
           transform: rotate(0deg);
         }
@@ -87,6 +91,8 @@ $navbar-height: 5.25rem; // 84px
         padding-bottom: 0.5rem;
         border-bottom: 1px solid $C2;
         word-break: keep-all;
+        font-weight: bold;
+        font-size: $p1;
 
         &:after {
           content: '';
@@ -105,5 +111,14 @@ $navbar-height: 5.25rem; // 84px
         }
       }
     }
+  }
+}
+
+@keyframes easeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -155,6 +155,10 @@ $navbar-height-mobile: 4.25rem; // 68px
     ul {
       list-style: inherit;
     }
+
+    pre {
+      background-color: $M2;
+    }
   }
 
   .doc-toc-column {
@@ -175,6 +179,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     a {
       color: $B3;
+      font-size: $p2;
       line-height: 1.75;
 
       &:hover {
