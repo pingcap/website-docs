@@ -8,8 +8,7 @@ $navbar-height: 5.25rem; // 84px
   max-height: calc(100vh - 230px);
   overflow: auto;
   padding-right: 1rem;
-  animation-name: easeIn;
-  animation-duration: 1.5s;
+  animation: easeIn 1.5s;
 
   @include mobile {
     display: none;
