@@ -105,10 +105,10 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
   useEffect(() => {
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-      const absPath = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}/g
+      const absPath = /https:\/\/docs.pingcap.com.*/g
 
       // escape absolute path replament
-      if (!absPath.test(a.href)) {
+      if (absPath.test(a.href)) {
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)
