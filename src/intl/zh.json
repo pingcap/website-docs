@@ -9,7 +9,9 @@
   },
   "doc": {
     "mobileDocMenu": "文档目录",
-    "toc": "本页导航"
+    "toc": "本页导航",
+    "improveDocLink": "修改本文",
+    "feedbackDocLink": "反馈文档问题"
   },
   "shortcodes": {
     "note": "注意",

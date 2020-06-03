@@ -14,7 +14,7 @@ function createReplaceImagePathStream(replaced) {
 
 function createReplaceCopyableStream() {
   return replaceStream(/{{<\scopyable(.+)>}}/g, function (match, p1) {
-    return `<WithCopy tag="${p1.replace(/"/g, '').trim()}"></WithCopy>`
+    return `<WithCopy tag="${p1.replace(/"/g, '').trim()}" />`
   })
 }
 

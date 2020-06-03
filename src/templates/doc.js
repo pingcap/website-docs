@@ -14,9 +14,12 @@ import TOC from '../components/toc'
 import VersionSwitcher from '../components/version'
 import { convertDocAndRef } from '../lib/version'
 import { getDocInfo } from '../state'
+import { getRepoInfo } from '../lib/docHelper'
 import { graphql } from 'gatsby'
 import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
+import ImproveDocLink from '../components/improveDocLink'
+import FeedbackDocLink from '../components/feedbackDocLink'
 
 const Doc = ({
   pageContext: { locale, relativeDir, base, pathPrefix, downloadURL, fullPath },
@@ -25,6 +28,7 @@ const Doc = ({
   const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
   const docRefArray = convertDocAndRef(relativeDir.split('/'))
+  const repoInfo = getRepoInfo(relativeDir, locale)
 
   const [showProgress, setShowProgress] = useState(false)
   const [readingProgress, setReadingProgress] = useState(0)
@@ -200,6 +204,9 @@ const Doc = ({
             </div>
             <div className="column is-2 doc-toc-column">
               <Download downloadURL={downloadURL} />
+              <ImproveDocLink repoInfo={repoInfo} base={base} />
+              <br />
+              <FeedbackDocLink repoInfo={repoInfo} base={base} />
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />

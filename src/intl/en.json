@@ -9,7 +9,9 @@
   },
   "doc": {
     "mobileDocMenu": "Doc Menu",
-    "toc": "What’s on this page"
+    "toc": "What’s on this page",
+    "improveDocLink": "Edit this page",
+    "feedbackDocLink": "Request docs changes"
   },
   "shortcodes": {
     "note": "Note",
