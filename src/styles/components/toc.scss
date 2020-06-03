@@ -8,6 +8,7 @@ $navbar-height: 5.25rem; // 84px
   max-height: calc(100vh - 230px);
   overflow: auto;
   padding-right: 1rem;
+  animation: easeIn 1.5s;
 
   @include mobile {
     display: none;
@@ -23,7 +24,7 @@ $navbar-height: 5.25rem; // 84px
     line-height: 1.75;
 
     &:hover {
-      color: $primary
+      color: $primary;
     }
   }
 
@@ -53,6 +54,7 @@ $navbar-height: 5.25rem; // 84px
       }
 
       &.folded {
+        padding-right: 12px;
         &:after {
           transform: rotate(0deg);
         }
@@ -109,5 +111,14 @@ $navbar-height: 5.25rem; // 84px
         }
       }
     }
+  }
+}
+
+@keyframes easeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
