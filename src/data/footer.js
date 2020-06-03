@@ -15,7 +15,7 @@ const footerColumns = [
     ],
   },
   {
-    name: 'Resources',
+    name: '资源',
     items: [
       {
         name: '快速上手',
@@ -33,7 +33,7 @@ const footerColumns = [
         outbound: false,
       },
       {
-        name: 'Blog',
+        name: '博客',
         link: 'https://pingcap.com/blog-cn/',
         outbound: true,
       },

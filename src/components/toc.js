@@ -11,8 +11,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
   const _html = remark()
     .use(html)
     .processSync(rawBody)
-    .contents.replace(/\.md/g, '')
-    .match(/<ul>(.|\n)*<\/ul>/g)[0]
+    .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
 
   const tocRef = useRef(null)
 
@@ -20,12 +19,21 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     const toc = tocRef.current
 
     function fold(li) {
-      Array.from(li.children).forEach((el) => {
+      Array.from(li.children).forEach((list) => {
+        Array.from(list.children).forEach((el) => {
+          if (
+            el.classList.contains('can-unfold') &&
+            !el.classList.contains('folded')
+          ) {
+            el.classList.add('folded')
+            fold(el)
+          }
+        })
         requestAnimationFrame(() => {
-          el.style.height = el.scrollHeight + 'px'
+          list.style.height = list.scrollHeight + 'px'
 
           requestAnimationFrame(() => {
-            el.style.height = null
+            list.style.height = null
           })
         })
       })
@@ -43,17 +51,18 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       const li = e.target
       li.parentElement.style.height = null
 
-      // keep only one list item unfolded
-      const canUnfoldEle = document
-        .querySelector('.PingCAP-TOC')
-        .getElementsByClassName('can-unfold')
+      // keep only one unfolded level
+      const canUnfoldEle = li.parentElement.children
       Array.from(canUnfoldEle).forEach((el) => {
         if (
+          el.classList.contains('can-unfold') &&
           !el.classList.contains('folded') &&
-          li.parentElement.classList.contains('top')
+          !el.classList.contains('has-no-subject') &&
+          li !== el
         ) {
           el.classList.add('folded')
           fold(el)
+          return
         }
       })
 
@@ -96,38 +105,45 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
   useEffect(() => {
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-      const href = a.href
-      const lastSegment = href.substring(href.lastIndexOf('/') + 1)
+      const absPath = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}/g
 
-      a.href = pathPrefix + lastSegment
+      // escape absolute path replament
+      if (!absPath.test(a.href)) {
+        const href = a.href
+        const lastSegment = href
+          .substring(href.lastIndexOf('/') + 1)
+          .replace(/\.md/g, '')
 
-      // unfold active nav item
-      if (pathPrefix + lastSegment === fullPath) {
-        let tagTempEle = a
-        const liClientRect = tagTempEle.parentElement.getBoundingClientRect()
-        const tocClientRect = tocRef.current.getBoundingClientRect()
-        const dy = liClientRect.top - tocClientRect.top - tocClientRect.height
+        a.href = pathPrefix + lastSegment
 
-        tagTempEle.parentElement.classList.add('is-active')
-        while (!tagTempEle.classList.contains('top')) {
-          if (tagTempEle.classList.contains('folded')) {
-            tagTempEle.classList.remove('folded')
+        // unfold active nav item
+        if (pathPrefix + lastSegment === fullPath) {
+          let tagTempEle = a
+          const liClientRect = tagTempEle.parentElement.getBoundingClientRect()
+          const tocClientRect = tocRef.current.getBoundingClientRect()
+          const dy = liClientRect.top - tocClientRect.top - tocClientRect.height
+
+          tagTempEle.parentElement.classList.add('is-active')
+          while (!tagTempEle.classList.contains('top')) {
+            if (tagTempEle.classList.contains('folded')) {
+              tagTempEle.classList.remove('folded')
+            }
+            tagTempEle = tagTempEle.parentElement
           }
-          tagTempEle = tagTempEle.parentElement
-        }
 
-        if (dy > 0) {
-          // polyfill
-          if (!tocRef.current.scrollTo) {
-            console.log('Your browser does not support scrollTo API')
-            tocRef.current.scrollTop = tocClientRect.height + dy
+          if (dy > 0) {
+            // polyfill
+            if (!tocRef.current.scrollTo) {
+              console.log('Your browser does not support scrollTo API')
+              tocRef.current.scrollTop = tocClientRect.height + dy
+            }
+            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
+            tocRef.current.scrollTo({
+              top: tocClientRect.height + dy,
+              left: 0,
+              behavior: 'smooth',
+            })
           }
-          // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-          tocRef.current.scrollTo({
-            top: tocClientRect.height + dy,
-            left: 0,
-            behavior: 'smooth',
-          })
         }
       }
     })
