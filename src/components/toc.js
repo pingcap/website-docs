@@ -43,6 +43,20 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       const li = e.target
       li.parentElement.style.height = null
 
+      // keep only one list item unfolded
+      const canUnfoldEle = document
+        .querySelector('.PingCAP-TOC')
+        .getElementsByClassName('can-unfold')
+      Array.from(canUnfoldEle).forEach((el) => {
+        if (
+          !el.classList.contains('folded') &&
+          li.parentElement.classList.contains('top')
+        ) {
+          el.classList.add('folded')
+          fold(el)
+        }
+      })
+
       if (li.classList.contains('folded')) {
         unfold(li)
       } else {
