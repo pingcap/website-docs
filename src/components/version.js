@@ -77,10 +77,10 @@ const Version = ({ relativeDir, base, versions }) => {
           {dropdownItems.length > 0 &&
             dropdownItems.map((item) => (
               <Fragment key={item}>
-                {versions.indexOf(item) === -1 ? (
+                {versions && versions.indexOf(item) === -1 ? (
                   <span className="dropdown-item unclickable-btn" >
                     {item}
-                    <span class="tooltiptext">
+                    <span className="tooltiptext">
                       This doc does not exist in {item}
                     </span>
                   </span>
