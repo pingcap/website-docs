@@ -51,7 +51,7 @@ const Doc = ({
     Array.from(blockquoteList).forEach((quote) => {
       if (quote.children[0] && quote.children[0].children[0]) {
         const labelText = quote.children[0].children[0].innerHTML
-      
+
         switch (labelText) {
           case '注意：':
             addStyleToQuote(quote, 'note')
@@ -133,7 +133,10 @@ const Doc = ({
         {items.map((item) => (
           <li key={item.url}>
             <a
-              href={item.url}
+              href={item.url
+                .replace(/\s/g, '-')
+                .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
+                .toLowerCase()}
               dangerouslySetInnerHTML={{ __html: item.title }}
             ></a>
             {item.items && renderItems(item.items)}

@@ -50,7 +50,7 @@ const Navbar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <IntlLink className="navbar-item with-brand" to="/">
+          <IntlLink className="navbar-item with-brand" to="/tidb/4.0">
             <img
               className="navbar-brand"
               src={BrandSVG.publicURL}
