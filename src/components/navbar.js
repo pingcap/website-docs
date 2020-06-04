@@ -50,13 +50,13 @@ const Navbar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <IntlLink className="navbar-item with-brand" to="/tidb/4.0">
+          <a className="navbar-item with-brand" href="/zh/tidb/4.0">
             <img
               className="navbar-brand"
               src={BrandSVG.publicURL}
               alt="brand"
             />
-          </IntlLink>
+          </a>
 
           <div className="navbar-item search-input-mobile">
             <SearchInput
