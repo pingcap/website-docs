@@ -76,14 +76,26 @@ const Version = ({ relativeDir, base, versions }) => {
         <div className="dropdown-content">
           {dropdownItems.length > 0 &&
             dropdownItems.map((item) => (
-              <IntlLink
-                key={item}
-                to={`/${doc}/${item}/${baseName === '_index' ? '' : baseName}`}
-                className="dropdown-item"
-              >
-                {item}
-                {versions.indexOf(item) === -1 && 'Not Exist'}
-              </IntlLink>
+              <>
+                {versions.indexOf(item) === -1 ? (
+                  <span className="dropdown-item unclickable-btn">
+                    {item}
+                    <span class="tooltiptext">
+                      This doc does not exist in {item}
+                    </span>
+                  </span>
+                ) : (
+                  <IntlLink
+                    key={item}
+                    to={`/${doc}/${item}/${
+                      baseName === '_index' ? '' : baseName
+                    }`}
+                    className="dropdown-item"
+                  >
+                    {item}
+                  </IntlLink>
+                )}
+              </>
             ))}
         </div>
       </div>
