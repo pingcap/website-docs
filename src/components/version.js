@@ -1,6 +1,6 @@
 import '../styles/components/version.scss'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import {
   convertDocAndRef,
   docsTiDBVersion,
@@ -76,9 +76,9 @@ const Version = ({ relativeDir, base, versions }) => {
         <div className="dropdown-content">
           {dropdownItems.length > 0 &&
             dropdownItems.map((item) => (
-              <>
+              <Fragment key={item}>
                 {versions.indexOf(item) === -1 ? (
-                  <span className="dropdown-item unclickable-btn">
+                  <span className="dropdown-item unclickable-btn" >
                     {item}
                     <span class="tooltiptext">
                       This doc does not exist in {item}
@@ -86,7 +86,6 @@ const Version = ({ relativeDir, base, versions }) => {
                   </span>
                 ) : (
                   <IntlLink
-                    key={item}
                     to={`/${doc}/${item}/${
                       baseName === '_index' ? '' : baseName
                     }`}
@@ -95,7 +94,7 @@ const Version = ({ relativeDir, base, versions }) => {
                     {item}
                   </IntlLink>
                 )}
-              </>
+              </Fragment>
             ))}
         </div>
       </div>
