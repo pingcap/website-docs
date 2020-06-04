@@ -2,6 +2,7 @@
 
 .PingCAP-Docs-Search {
   .section.container {
+    min-height: 70vh;
     @include tablet {
       padding-left: 0;
       padding-right: 0;

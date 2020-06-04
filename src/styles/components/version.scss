@@ -50,4 +50,46 @@
       padding-right: 1rem;
     }
   }
+
+  .unclickable-btn {
+    position: relative;
+    color: grey !important;
+    cursor: not-allowed !important;
+    opacity: 0.5;
+  
+     &:hover {
+       .tooltiptext {
+         visibility: visible;
+         opacity: 1;
+       }
+     }
+  }
+
+  .tooltiptext {
+    position: absolute;
+    left: 55px;
+    padding: 5px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity .3s;
+    z-index: 1;
+    visibility: hidden;
+    width: 180px;
+    background-color: black;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.7;
+    border-radius: 4px;
+  }
+  
+  .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
 }
