@@ -1,20 +1,24 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useLocation } from '@reach/router'
 import { FormattedMessage } from 'react-intl'
 
 const FeedbackDocLink = ({ repoInfo, base }) => {
   const { repo, pathPrefix } = repoInfo || {}
-  const pageUrl = window.location.href
+  const location = useLocation()
+  const origin = location.origin
+  const pageURL = location.pathname
+
   return (
-    <a
-      href={`https://github.com/pingcap/${repo}/issues/new?body=File:%20[/${pathPrefix}${base}](${pageUrl})`}
-      className="improve-doc"
-      target="_blank"
-      rel="noreferrer"
-    >
-      {/* {{ partial "svgs/request-docs-changes-icon.svg" (dict "fill" "#142848" "width" 14 "height" 14 ) }} */}
-      <FormattedMessage id="doc.feedbackDocLink" />
-    </a>
+    <div className="doc-download feedback-doc">
+      <a
+        href={`https://github.com/pingcap/${repo}/issues/new?body=File:%20[/${pathPrefix}${base}](${origin}${pageURL})`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <FormattedMessage id="doc.feedbackDocLink" />
+      </a>
+    </div>
   )
 }
 

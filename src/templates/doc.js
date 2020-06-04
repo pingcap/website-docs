@@ -4,7 +4,7 @@ import * as Shortcodes from '../components/shortcodes'
 
 import React, { useEffect, useState } from 'react'
 
-import Download from '../components/download'
+import DownloadPDF from '../components/downloadPDF'
 import { FormattedMessage } from 'react-intl'
 import Layout from '../components/layout'
 import { MDXProvider } from '@mdx-js/react'
@@ -49,22 +49,25 @@ const Doc = ({
   function optimizeBlockquote() {
     const blockquoteList = document.getElementsByTagName('blockquote')
     Array.from(blockquoteList).forEach((quote) => {
-      const labelText = quote.children[0].children[0].innerHTML
-      switch (labelText) {
-        case '注意：':
-          addStyleToQuote(quote, 'note')
-          break
-        case '警告：':
-          addStyleToQuote(quote, 'warning')
-          break
-        case '建议：':
-          addStyleToQuote(quote, 'tips')
-          break
-        case '错误：':
-          addStyleToQuote(quote, 'error')
-          break
-        default:
-          break
+      if (quote.children[0] && quote.children[0].children[0]) {
+        const labelText = quote.children[0].children[0].innerHTML
+      
+        switch (labelText) {
+          case '注意：':
+            addStyleToQuote(quote, 'note')
+            break
+          case '警告：':
+            addStyleToQuote(quote, 'warning')
+            break
+          case '建议：':
+            addStyleToQuote(quote, 'tips')
+            break
+          case '错误：':
+            addStyleToQuote(quote, 'error')
+            break
+          default:
+            break
+        }
       }
     })
   }
@@ -215,15 +218,16 @@ const Doc = ({
               </section>
             </div>
             <div className="column is-2 doc-toc-column">
-              <Download downloadURL={downloadURL} />
+              <DownloadPDF downloadURL={downloadURL} />
               <ImproveDocLink repoInfo={repoInfo} base={base} />
-              <br />
               <FeedbackDocLink repoInfo={repoInfo} base={base} />
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
                 </div>
-                {tableOfContents.items && renderItems(tableOfContents.items)}
+                <div className="toc-content">
+                  {tableOfContents.items && renderItems(tableOfContents.items)}
+                </div>
               </section>
             </div>
           </div>
