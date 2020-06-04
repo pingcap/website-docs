@@ -22,7 +22,15 @@ import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
 
 const Doc = ({
-  pageContext: { locale, relativeDir, base, pathPrefix, downloadURL, fullPath },
+  pageContext: {
+    locale,
+    relativeDir,
+    base,
+    pathPrefix,
+    downloadURL,
+    fullPath,
+    versions,
+  },
   data,
 }) => {
   const { mdx, toc } = data
@@ -179,7 +187,11 @@ const Doc = ({
         <section className="section container">
           <div className="columns">
             <div className="column is-2 left-column">
-              <VersionSwitcher relativeDir={relativeDir} base={base} />
+              <VersionSwitcher
+                relativeDir={relativeDir}
+                base={base}
+                versions={versions}
+              />
               <div
                 role="button"
                 tabIndex={0}

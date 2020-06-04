@@ -4,6 +4,7 @@ const {
   genPathPrefix,
   genTOCPath,
   genDownloadPDFURL,
+  genVersionChunks,
 } = require('./utils')
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
@@ -67,25 +68,51 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
 
   // create pages for different language docs
   function _createDocs(docs, locale, pathPrefix = '') {
-    docs.data.allMdx.nodes.forEach((node) => {
+    const nodes = docs.data.allMdx.nodes
+
+    // setup map for md versions
+    nodes.map((node) => {
       const parent = node.parent
       const relativeDir = parent.relativeDirectory
       const base = parent.base
-      const tocPath = genTOCPath(relativeDir)
+      node.tocPath = genTOCPath(relativeDir)
+      const _fullPath = `${replacePath(relativeDir, base)}`
+      const fullPath = `${pathPrefix}${_fullPath}`
+      node.path = fullPath
+      const vChunks = genVersionChunks(_fullPath)
+      node.version = vChunks[0]
+      node.pathWithoutVersion = vChunks[1]
+      node.downloadURL = `${genDownloadPDFURL(relativeDir, locale)}`
+      node.pathPrefix = genPathPrefix(relativeDir, locale)
+      return node
+    })
 
+    const versionsMap = nodes.reduce((map, { pathWithoutVersion, version }) => {
+      const arr = map[pathWithoutVersion]
+      if (arr) {
+        arr.push(version)
+      } else {
+        map[pathWithoutVersion] = [version]
+      }
+      return map
+    }, {})
+
+    nodes.forEach((node) => {
+      const { id, path, downloadURL, pathPrefix, tocPath, parent } = node
       createPage({
-        path: `${pathPrefix}${replacePath(relativeDir, base)}`,
+        path: path,
         component: docTemplate,
         context: {
-          id: node.id,
+          id,
           langCollection: node.fields.langCollection,
-          relativeDir,
-          base,
+          relativeDir: parent.relativeDirectory,
+          base: parent.base,
           tocPath,
           locale,
-          downloadURL: `${genDownloadPDFURL(relativeDir, locale)}`,
-          pathPrefix: genPathPrefix(relativeDir, locale),
-          fullPath: `${pathPrefix}${replacePath(relativeDir, base)}`,
+          pathPrefix,
+          downloadURL,
+          fullPath: path,
+          versions: versionsMap[node.pathWithoutVersion],
         },
       })
 
@@ -96,7 +123,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         aliasesArr.forEach((alias) => {
           createRedirect({
             fromPath: `${alias}`,
-            toPath: `${pathPrefix}${replacePath(relativeDir, base)}`,
+            toPath: path,
             isPermanent: true,
           })
         })

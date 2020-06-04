@@ -16,7 +16,7 @@ const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 
-const Version = ({ relativeDir, base }) => {
+const Version = ({ relativeDir, base, versions }) => {
   const [doc, ref] = convertDocAndRef(relativeDir.split('/'))
 
   const baseName = base.replace('.md', '')
@@ -82,6 +82,7 @@ const Version = ({ relativeDir, base }) => {
                 className="dropdown-item"
               >
                 {item}
+                {versions.indexOf(item) === -1 && 'Not Exist'}
               </IntlLink>
             ))}
         </div>
@@ -93,6 +94,7 @@ const Version = ({ relativeDir, base }) => {
 Version.propTypes = {
   relativeDir: PropTypes.string.isRequired,
   base: PropTypes.string.isRequired,
+  versions: PropTypes.array,
 }
 
 export default Version
