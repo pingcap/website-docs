@@ -158,6 +158,24 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     pre {
       background-color: $M2;
+      font-size: $p2;
+
+      code {
+        .number {
+          align-items: normal;
+          background-color: transparent;
+          border-radius: 290486px;
+          display: inline-flex;
+          font-size: 14px;
+          height: 0;
+          justify-content: center;
+          margin-right: 0;
+          min-width: 0;
+          padding: 0;
+          text-align: center;
+          vertical-align: top;
+        }
+      }
     }
   }
 

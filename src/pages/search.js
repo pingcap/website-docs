@@ -74,7 +74,7 @@ const Search = ({ pageContext: { locale } }) => {
   const [selectedVersionList, setSelectedVersionList] = useState(
     matchToVersionList(type)
   )
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState(null)
 
   useEffect(
     () => {
@@ -110,7 +110,7 @@ const Search = ({ pageContext: { locale } }) => {
     if (lang && selectedType && selectedVersion && query) {
       execSearch()
     } else {
-      setResults([])
+      setResults(null)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedVersion, query])
