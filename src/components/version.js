@@ -80,7 +80,7 @@ const Version = ({ relativeDir, base, versions }) => {
                 {versions && versions.indexOf(item) === -1 ? (
                   <span className="dropdown-item unclickable-btn" >
                     {item}
-                    <span class="tooltiptext">
+                    <span className="tooltiptext">
                       This doc does not exist in {item}
                     </span>
                   </span>
