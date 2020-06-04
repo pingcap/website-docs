@@ -43,7 +43,15 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
-        gatsbyRemarkPlugins: [`gatsby-remark-autolink-headers`],
+        gatsbyRemarkPlugins: [
+          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              showLineNumbers: false,
+            },
+          },
+        ],
       },
     },
     {

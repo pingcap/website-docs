@@ -8,4 +8,7 @@
 
 import './src/styles/global.scss'
 
+//www.gatsbyjs.org/packages/gatsby-plugin-mdx-prismjs/?=syntax
+require('prismjs/themes/prism-solarizedlight.css')
+
 export { default as wrapRootElement } from './src/state/ReduxWrapper'
