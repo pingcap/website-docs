@@ -127,16 +127,24 @@ const Doc = ({
     []
   )
 
+  function replaceItemURL(item) {
+    let itemURL
+    if(item) {
+      itemURL = item.replace(/\s/g, '-')
+      .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
+      .toLowerCase()
+    }
+    
+    return itemURL
+  }
+
   function renderItems(items) {
     return (
       <ul>
         {items.map((item) => (
           <li key={item.url}>
             <a
-              href={item.url
-                .replace(/\s/g, '-')
-                .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
-                .toLowerCase()}
+              href={'#' + replaceItemURL(item.url)}
               dangerouslySetInnerHTML={{ __html: item.title }}
             ></a>
             {item.items && renderItems(item.items)}
