@@ -74,7 +74,8 @@ const Search = ({ pageContext: { locale } }) => {
   const [selectedVersionList, setSelectedVersionList] = useState(
     matchToVersionList(type)
   )
-  const [results, setResults] = useState(null)
+  const [results, setResults] = useState([])
+  const [searched, setSearched] = useState(false)
 
   useEffect(
     () => {
@@ -97,7 +98,7 @@ const Search = ({ pageContext: { locale } }) => {
   }
 
   const handleSetVersionList = (match, versionList) => () => {
-    setSelectedVersion(null)
+    setSelectedVersion(matchToVersionList(match)[0])
     setSelectedType(match)
     setSelectedVersionList(versionList)
   }
@@ -110,10 +111,10 @@ const Search = ({ pageContext: { locale } }) => {
     if (lang && selectedType && selectedVersion && query) {
       execSearch()
     } else {
-      setResults(null)
+      setResults([])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedVersion, query])
+  }, [selectedType, selectedVersion, query])
 
   function execSearch() {
     dispatch(setLoading(true))
@@ -129,7 +130,7 @@ const Search = ({ pageContext: { locale } }) => {
       })
       .then(({ hits }) => {
         setResults(hits)
-
+        setSearched(true)
         dispatch(setLoading(false))
       })
   }
@@ -246,7 +247,7 @@ const Search = ({ pageContext: { locale } }) => {
             </div>
           </div>
 
-          <SearchResult results={results} />
+          <SearchResult results={results} searched={searched} />
 
           {loading && <Loading />}
         </section>
