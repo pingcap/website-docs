@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700&display=swap');
 @import './common';
 @import '../../node_modules/bulma/bulma.sass';
+@import '../../node_modules/prismjs/themes/prism-solarizedlight.css';
 
 // Socials' Background
 @each $social in $socials {

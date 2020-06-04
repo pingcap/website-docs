@@ -91,6 +91,9 @@ module.exports = {
         ],
         whitelistPatternsChildren: [/^PingCAP-Doc/],
         whitelist: purgecssWhitelist,
+        ignore: [
+          'prismjs/',
+        ],
       },
     },
     `gatsby-plugin-meta-redirect`,
