@@ -41,22 +41,25 @@ const Doc = ({
   function optimizeBlockquote() {
     const blockquoteList = document.getElementsByTagName('blockquote')
     Array.from(blockquoteList).forEach((quote) => {
-      const labelText = quote.children[0].children[0].innerHTML
-      switch (labelText) {
-        case '注意：':
-          addStyleToQuote(quote, 'note')
-          break
-        case '警告：':
-          addStyleToQuote(quote, 'warning')
-          break
-        case '建议：':
-          addStyleToQuote(quote, 'tips')
-          break
-        case '错误：':
-          addStyleToQuote(quote, 'error')
-          break
-        default:
-          break
+      if (quote.children[0] && quote.children[0].children[0]) {
+        const labelText = quote.children[0].children[0].innerHTML
+      
+        switch (labelText) {
+          case '注意：':
+            addStyleToQuote(quote, 'note')
+            break
+          case '警告：':
+            addStyleToQuote(quote, 'warning')
+            break
+          case '建议：':
+            addStyleToQuote(quote, 'tips')
+            break
+          case '错误：':
+            addStyleToQuote(quote, 'error')
+            break
+          default:
+            break
+        }
       }
     })
   }

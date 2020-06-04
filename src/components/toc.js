@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import html from 'remark-html'
 import remark from 'remark'
+import { useLocation } from '@reach/router'
 
 const TOC = ({ data, pathPrefix, fullPath }) => {
   const rawBody = data.rawBody
@@ -14,6 +15,8 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
 
   const tocRef = useRef(null)
+  const location = useLocation()
+  const origin = location.origin
 
   const bindClickEventToTOC = () => {
     const toc = tocRef.current
@@ -96,6 +99,10 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       })
 
       retrieveLi(ul)
+      const tocElement = document.getElementsByClassName('PingCAP-TOC')
+      if (tocElement) {
+        tocElement[0].classList.add('show-toc')
+      }
     })
   }
 
@@ -105,10 +112,9 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
   useEffect(() => {
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-      const absPath = /https:\/\/docs.pingcap.com.*/g
 
-      // escape absolute path replament
-      if (absPath.test(a.href)) {
+      // escape outbound path replacement
+      if (a.href.includes(origin)) {
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)
