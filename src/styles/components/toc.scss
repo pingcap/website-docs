@@ -12,7 +12,7 @@ $navbar-height: 5.25rem; // 84px
 
   &.show-toc {
     opacity: 1;
-    transition: opacity 2s;
+    transition: opacity 100ms;
   }
 
   @include mobile {
