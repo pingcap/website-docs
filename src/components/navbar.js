@@ -52,8 +52,8 @@ const Navbar = () => {
         <div className="navbar-brand">
           <IntlLink
             className="navbar-item with-brand"
-            to="/tidb/v4.0"
-            type="aHrefLink"
+            to="https://pingcap.com/"
+            type="outBoundLink"
           >
             <img
               className="navbar-brand"
