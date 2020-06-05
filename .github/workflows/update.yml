@@ -1,10 +1,12 @@
-name: Update docs when receiving repo dispatch
+name: Update docs on schedule and repository_dispatch
 on:
+  schedule:
+    - cron: '0 0 * * *'
   repository_dispatch:
     types: [updated]
 jobs:
   run:
-    name: Retrieve docs incrementally and deploy the website
+    name: Retrieve docs and deploy the website
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +34,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Restore yarn cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -44,63 +46,19 @@ jobs:
       - name: Install deps
         run: yarn
 
-      - name: Restore zh-docs-tidb-cache
-        uses: actions/cache@v1
-        id: zh-docs-tidb-cache
-        with:
-          path: ./markdown-pages/contents/zh/docs-tidb
-          key: ${{ runner.os }}-zh-docs-tidb-cache-build-0
-          restore-keys: |
-            ${{ runner.os }}-zh-docs-tidb-cache-build-0
+      - name: Download docs-tidb
+        run: |
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:en:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
 
-      - name: Check zh-docs-tidb-cache
-        if: steps.zh-docs-tidb-cache.outputs.cache-hit != 'true'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
+      - name: Download docs-tidb-operator
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:all
 
-      - name: Restore zh-docs-tidb-operator-cache
-        uses: actions/cache@v1
-        id: zh-docs-tidb-operator-cache
-        with:
-          path: ./markdown-pages/contents/zh/docs-tidb-operator
-          key: ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
-          restore-keys: |
-            ${{ runner.os }}-zh-docs-tidb-operator-cache-build-0
-
-      - name: Check zh-docs-tidb-operator-cache
-        if: steps.zh-docs-tidb-operator-cache.outputs.cache-hit != 'true'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:zh:all
-
-      # - name: Restore en-docs-dm-cache
-      #   uses: actions/cache@v1
-      #   id: en-docs-dm-cache
-      #   with:
-      #     path: ./markdown-pages/contents/en/docs-dm
-      #     key: ${{ runner.os }}-en-docs-dm-cache-build-0
-      #     restore-keys: |
-      #       ${{ runner.os }}-en-docs-dm-cache-build-0
-
-      # - name: Check en-docs-dm-cache
-      #   if: steps.en-docs-dm-cache.outputs.cache-hit != 'true'
-      #   run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:en:all
-
-      - name: Restore zh-docs-dm-cache
-        uses: actions/cache@v1
-        id: zh-docs-dm-cache
-        with:
-          path: ./markdown-pages/contents/zh/docs-dm
-          key: ${{ runner.os }}-zh-docs-dm-cache-build-0
-          restore-keys: |
-            ${{ runner.os }}-zh-docs-dm-cache-build-0
-
-      - name: Check zh-docs-dm-cache
-        if: steps.zh-docs-dm-cache.outputs.cache-hit != 'true'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:zh:all
-
-      - name: Download docs based on dispatch payload
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ github.event.client_payload.sha }}
+      - name: Download docs-dm
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
 
       - name: Restore gatsby cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: gatsby-cache
         with:
           path: ./.cache
@@ -110,7 +68,7 @@ jobs:
             ${{ runner.os }}-gatsby-cache-
 
       - name: Restore gatsby build
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: gatsby-build
         with:
           path: ./public
@@ -120,7 +78,7 @@ jobs:
             ${{ runner.os }}-gatsby-build-
 
       - name: Build website
-        run: GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build
+        run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build --log-pages
 
       - name: Deploy
         run: |
