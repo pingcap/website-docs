@@ -28,5 +28,31 @@
       "content2": "If you do want to get some English content, PingCAP home page might be a better place for you to go."
     }
   },
-  "download-pdf": "Download PDF"
+  "download-pdf": "Download PDF",
+  "footerColumnsTitle": {
+    "product": "Product",
+    "resources": "Resources",
+    "learn": "Learn",
+    "support": "Support",
+    "company": "Company"
+  },
+  "footerColumnItem": {
+    "tidb": "TiDB",
+    "tools": "Tools",
+    "quickStart": "Quick Start",
+    "bestPractices": "Best Practices",
+    "faq": "FAQ",
+    "releaseNotes": "Release Notes",
+    "blog": "Blog",
+    "github": "GitHub",
+    "docs": "Docs",
+    "case": "Cases",
+    "pu": "PingCAP University",
+    "tidbInAction": "TiDB in Action",
+    "communityEvents": "Community Events",
+    "asktug": "AskTUG",
+    "aboutUs": "About Us",
+    "recruit": "招贤纳士",
+    "news": "新闻报道"
+  }
 }

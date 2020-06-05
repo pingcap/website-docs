@@ -17,7 +17,7 @@ const followSocials = [
   },
   {
     name: 'slack',
-    href: 'https://pingcap.com/tidbslack',
+    href: 'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
   },
   {
     name: 'youtube',

@@ -28,5 +28,31 @@
       "content2": "如果您想搜索英文内容，请移步至英文文档进行搜索。"
     }
   },
-  "download-pdf": "下载 PDF"
+  "download-pdf": "下载 PDF",
+  "footerColumnsTitle": {
+    "product": "产品",
+    "resources": "资源",
+    "learn": "学习",
+    "support": "支持",
+    "company": "公司"
+  },
+  "footerColumnItem": {
+    "tidb": "TiDB",
+    "tools": "Tools",
+    "quickStart": "快速上手",
+    "bestPractices": "最佳实践",
+    "faq": "常见问题解答",
+    "releaseNotes": "版本发布",
+    "blog": "博客",
+    "github": "GitHub",
+    "docs": "文档",
+    "case": "案例",
+    "pu": "PingCAP University",
+    "tidbInAction": "TiDB in Action",
+    "communityEvents": "社区活动",
+    "asktug": "AskTUG",
+    "aboutUs": "关于我们",
+    "recruit": "招贤纳士",
+    "news": "新闻报道"
+  }
 }

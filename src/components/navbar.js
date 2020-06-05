@@ -50,13 +50,17 @@ const Navbar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item with-brand" href="/zh/tidb/4.0">
+          <IntlLink
+            className="navbar-item with-brand"
+            to="/tidb/v4.0"
+            type="aHrefLink"
+          >
             <img
               className="navbar-brand"
               src={BrandSVG.publicURL}
               alt="brand"
             />
-          </a>
+          </IntlLink>
 
           <div className="navbar-item search-input-mobile">
             <SearchInput
@@ -79,10 +83,18 @@ const Navbar = () => {
         </div>
         <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            <IntlLink to="/tidb/v4.0" className="navbar-item with-main-section">
+            <IntlLink
+              to="/tidb/v4.0"
+              className="navbar-item with-main-section"
+              type="innerLink"
+            >
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
-            <IntlLink to="/tools/" className="navbar-item with-main-section">
+            <IntlLink
+              to="/tools/"
+              className="navbar-item with-main-section"
+              type="innerLink"
+            >
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
             {/* <IntlLink to="/cloud" className="navbar-item with-main-section">
@@ -102,6 +114,7 @@ const Navbar = () => {
             <a
               href="mailto:info@pingcap.com"
               className="navbar-item with-main-section"
+              target="_blank"
             >
               <FormattedMessage id="navbar.contactUs" />
             </a>
