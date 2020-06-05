@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
+import { FormattedMessage } from 'react-intl'
+import IntlLink from '../components/IntlLink'
 import { footerColumns } from '../data/footer'
 
 const Footer = () => {
@@ -54,12 +56,20 @@ const Footer = () => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <Link to="/" className="dropdown-item">
+            <IntlLink
+              to="https://pingcap.com/docs/"
+              className="dropdown-item"
+              type="outBoundLink"
+            >
               English
-            </Link>
-            <Link to="/zh" className="dropdown-item">
+            </IntlLink>
+            <IntlLink
+              to="/tidb/v4.0"
+              className="dropdown-item"
+              type="innerLink"
+            >
               简体中文
-            </Link>
+            </IntlLink>
           </div>
         </div>
       </div>
@@ -79,7 +89,7 @@ const Footer = () => {
                 onClick={handleSpreadItems}
                 onKeyDown={handleSpreadItems}
               >
-                {column.name}
+                {<FormattedMessage id={column.name} />}
                 <span className="spread">
                   <AddIcon />
                 </span>
@@ -87,20 +97,9 @@ const Footer = () => {
               <ul className="items">
                 {column.items.map((item) => (
                   <li key={item.name}>
-                    {item.outbound ? (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        onTouchStart={() => {}}
-                      >
-                        {item.name}
-                      </a>
-                    ) : (
-                      <Link to={item.link} onTouchStart={() => {}}>
-                        {item.name}
-                      </Link>
-                    )}
+                    <IntlLink to={item.link} type={item.linkType}>
+                      {<FormattedMessage id={item.name} />}
+                    </IntlLink>
                   </li>
                 ))}
               </ul>

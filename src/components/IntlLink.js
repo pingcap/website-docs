@@ -3,15 +3,32 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-const IntlLink = ({ to, children, ...rest }) => {
+const IntlLink = ({ to, children, type, ...rest }) => {
   const intl = useIntl()
 
   const localeTo = `${intl.locale === 'en' ? '' : '/' + intl.locale}${to}`
+  const linkType = type
 
   return (
-    <Link {...rest} to={localeTo}>
-      {children}
-    </Link>
+    <>
+      {linkType === 'aHrefLink' ? (
+        <a {...rest} href={localeTo}>
+          {children}
+        </a>
+      ) : (
+        <>
+          {linkType === 'outBoundLink' ? (
+            <a {...rest} href={to} target="_blank">
+              {children}
+            </a>
+          ) : (
+            <Link {...rest} to={localeTo}>
+              {children}
+            </Link>
+          )}
+        </>
+      )}
+    </>
   )
 }
 

@@ -85,7 +85,7 @@ const Version = ({ relativeDir, base, versions }) => {
                     </span>
                   </span>
                 ) : (
-                  <IntlLink
+                  <IntlLink type="innerLink"
                     to={`/${doc}/${item}/${
                       baseName === '_index' ? '' : baseName
                     }`}

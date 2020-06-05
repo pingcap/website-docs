@@ -177,6 +177,10 @@ $navbar-height-mobile: 4.25rem; // 68px
         }
       }
     }
+
+    :not(pre)>code[class*=language-text] {
+      white-space: normal;
+    }
   }
 
   .gatsby-highlight {
