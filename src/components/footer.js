@@ -106,11 +106,14 @@ const Footer = () => {
             </div>
           ))}
           <div className="column with-socials">
-            <img
-              className="footer-logo"
-              src={FooterLogoSVG.publicURL}
-              alt="footer logo"
-            />
+            <IntlLink to="https://pingcap.com/" type="outBoundLink">
+              <img
+                className="footer-logo"
+                src={FooterLogoSVG.publicURL}
+                alt="footer logo"
+              />
+            </IntlLink>
+
             <div className="columns is-multiline socials-desktop">
               <Socials className="column is-4" type="follow" />
             </div>
