@@ -1,7 +1,7 @@
 import Layout from '../components/layout'
 import React from 'react'
 import SEO from '../components/seo'
-import { Link } from 'gatsby'
+import IntlLink from '../components/IntlLink'
 import '../styles/pages/404.scss'
 
 const NotFoundPage = ({ pageContext: { locale } }) => (
@@ -13,7 +13,10 @@ const NotFoundPage = ({ pageContext: { locale } }) => (
         <p>
           The page you were looking for appears to have been moved, deleted or
           does not exist. You could go back to where you were or head straight
-          to our <Link to="/">home page</Link>
+          to our{' '}
+          <IntlLink to="/" type="aHrefLink">
+            home page
+          </IntlLink>
         </p>
       </section>
     </div>

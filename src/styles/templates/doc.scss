@@ -94,13 +94,6 @@ $navbar-height-mobile: 4.25rem; // 68px
     h4,
     h5,
     h6 {
-      @include mobile {
-        padding-top: $navbar-height-mobile;
-        margin-top: -$navbar-height-mobile;
-      }
-
-      padding-top: $navbar-height;
-      margin-top: -$navbar-height;
       border-bottom: none;
       z-index: 1;
       color: $B3;
@@ -108,9 +101,11 @@ $navbar-height-mobile: 4.25rem; // 68px
       &:first-child {
         @include mobile {
           margin-top: -$navbar-height-mobile !important;
+          padding-top: $navbar-height-mobile;
         }
 
         margin-top: -$navbar-height !important;
+        padding-top: $navbar-height;
       }
     }
 
@@ -178,8 +173,9 @@ $navbar-height-mobile: 4.25rem; // 68px
       }
     }
 
-    :not(pre)>code[class*=language-text] {
+    :not(pre) > code[class*='language-text'] {
       white-space: normal;
+      word-break: break-word;
     }
   }
 
