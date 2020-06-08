@@ -135,14 +135,12 @@ $navbar-height-mobile: 4.25rem; // 68px
       color: $primary;
 
       &.anchor {
-        @include mobile {
-          top: $navbar-height-mobile;
-        }
-
-        top: $navbar-height;
-
         &.before {
           transform: translateX(-50%);
+
+          @include mobile {
+            transform: translateX(0);
+          }
         }
       }
     }
