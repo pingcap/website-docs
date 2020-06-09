@@ -310,7 +310,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     padding: 1rem;
     color: $M4;
 
-    strong {
+    p:first-child > strong:first-child {
       color: $M4 !important;
       padding-left: 2rem;
     }
