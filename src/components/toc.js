@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import html from 'remark-html'
 import remark from 'remark'
-import { useLocation } from '@reach/router'
 
 const TOC = ({ data, pathPrefix, fullPath }) => {
   const rawBody = data.rawBody
@@ -15,8 +14,6 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
 
   const tocRef = useRef(null)
-  const location = useLocation()
-  const origin = location.origin
 
   const bindClickEventToTOC = () => {
     const toc = tocRef.current
@@ -111,10 +108,11 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
   }, [])
 
   useEffect(() => {
+    const regx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}/
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
 
       // escape outbound path replacement
-      if (a.href.includes(origin)) {
+      if (!a.getAttribute('href').match(regx)) {
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)
