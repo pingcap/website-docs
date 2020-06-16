@@ -1,6 +1,6 @@
 import '../styles/components/version.scss'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import {
   convertDocAndRef,
   docsTiDBVersion,
@@ -16,7 +16,7 @@ const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 
-const Version = ({ relativeDir, base }) => {
+const Version = ({ relativeDir, base, versions }) => {
   const [doc, ref] = convertDocAndRef(relativeDir.split('/'))
 
   const baseName = base.replace('.md', '')
@@ -76,13 +76,25 @@ const Version = ({ relativeDir, base }) => {
         <div className="dropdown-content">
           {dropdownItems.length > 0 &&
             dropdownItems.map((item) => (
-              <IntlLink
-                key={item}
-                to={`/${doc}/${item}/${baseName === '_index' ? '' : baseName}`}
-                className="dropdown-item"
-              >
-                {item}
-              </IntlLink>
+              <Fragment key={item}>
+                {versions && versions.indexOf(item) === -1 ? (
+                  <span className="dropdown-item unclickable-btn" >
+                    {item}
+                    <span className="tooltiptext">
+                      This doc does not exist in {item}
+                    </span>
+                  </span>
+                ) : (
+                  <IntlLink type="innerLink"
+                    to={`/${doc}/${item}/${
+                      baseName === '_index' ? '' : baseName
+                    }`}
+                    className="dropdown-item"
+                  >
+                    {item}
+                  </IntlLink>
+                )}
+              </Fragment>
             ))}
         </div>
       </div>
@@ -93,6 +105,7 @@ const Version = ({ relativeDir, base }) => {
 Version.propTypes = {
   relativeDir: PropTypes.string.isRequired,
   base: PropTypes.string.isRequired,
+  versions: PropTypes.array,
 }
 
 export default Version

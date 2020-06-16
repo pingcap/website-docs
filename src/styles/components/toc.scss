@@ -7,7 +7,13 @@ $navbar-height: 5.25rem; // 84px
   top: $navbar-height;
   max-height: calc(100vh - 230px);
   overflow: auto;
+  opacity: 0;
   padding-right: 1rem;
+
+  &.show-toc {
+    opacity: 1;
+    transition: opacity 100ms;
+  }
 
   @include mobile {
     display: none;
@@ -32,6 +38,8 @@ $navbar-height: 5.25rem; // 84px
       position: relative;
       padding-top: 0.5rem;
       color: $B3;
+      font-size: $p2;
+      font-weight: normal;
       cursor: pointer;
 
       &.can-unfold {
@@ -51,6 +59,9 @@ $navbar-height: 5.25rem; // 84px
       }
 
       &.folded {
+        padding-right: 12px;
+        word-break: break-word;
+        
         &:after {
           transform: rotate(0deg);
         }
@@ -87,7 +98,7 @@ $navbar-height: 5.25rem; // 84px
         padding-bottom: 0.5rem;
         border-bottom: 1px solid $C2;
         word-break: keep-all;
-        padding-right: 12px;
+        font-weight: bold;
 
         &:after {
           content: '';
@@ -106,5 +117,14 @@ $navbar-height: 5.25rem; // 84px
         }
       }
     }
+  }
+}
+
+@keyframes easeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

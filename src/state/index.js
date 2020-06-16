@@ -1,4 +1,4 @@
-const defaultDocInfo = {
+export const defaultDocInfo = {
   lang: 'en',
   type: 'tidb',
   version: 'v4.0',
@@ -6,7 +6,6 @@ const defaultDocInfo = {
 
 const SET_LOADING = 'SET_LOADING'
 const GET_DOC_INFO = 'GET_DOC_INFO'
-const RESET_DOC_INFO = 'RESET_DOC_INFO'
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE'
 
 export const setLoading = (bool) => ({
@@ -17,11 +16,6 @@ export const setLoading = (bool) => ({
 export const getDocInfo = (info) => ({
   type: GET_DOC_INFO,
   info,
-})
-
-export const resetDocInfo = () => ({
-  type: RESET_DOC_INFO,
-  info: defaultDocInfo,
 })
 
 export const setSearchValue = (value) => ({
@@ -40,7 +34,6 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return { ...state, loading: action.loading }
     case GET_DOC_INFO:
-    case RESET_DOC_INFO:
       return { ...state, docInfo: action.info }
     case SET_SEARCH_VALUE:
       return { ...state, searchValue: action.value }

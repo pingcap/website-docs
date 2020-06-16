@@ -1,113 +1,117 @@
 const footerColumns = [
   {
-    name: '产品',
+    name: 'footerColumnsTitle.product',
     items: [
       {
-        name: 'TiDB',
-        link: '/zh/tidb/v4.0/',
-        outbound: false,
+        name: 'footerColumnItem.tidb',
+        link: '/tidb/v4.0',
+        linkType: 'aHrefLink',
       },
       {
-        name: 'TiDB Opeartor',
-        link: '/zh/tidb-in-kubernetes/v1.1/',
-        outbound: false,
-      },
-      {
-        name: 'DM',
-        link: '/zh/tidb-data-migration/v1.0/',
-        outbound: false,
+        name: 'footerColumnItem.tools',
+        link: '/tools',
+        linkType: 'aHrefLink',
       },
     ],
   },
   {
-    name: 'Resources',
+    name: 'footerColumnsTitle.resources',
     items: [
       {
-        name: '快速上手',
-        link: '',
+        name: 'footerColumnItem.quickStart',
+        link: '/tidb/v4.0/quick-start-with-tidb',
+        linkType: 'aHrefLink',
       },
       {
-        name: '最佳实践',
-        link: '',
+        name: 'footerColumnItem.bestPractices',
+        link: '/tidb/v4.0/tidb-best-practices',
+        linkType: 'aHrefLink',
       },
       {
-        name: '常见问题解答',
-        link: '',
+        name: 'footerColumnItem.faq',
+        link: '/tidb/v4.0/tidb-faq',
+        linkType: 'aHrefLink',
       },
       {
-        name: 'Tools',
-        link: '',
-        outbound: false,
+        name: 'footerColumnItem.releaseNotes',
+        link: '/tidb/v4.0/release-notes',
+        linkType: 'aHrefLink',
       },
       {
-        name: 'Release Notes',
-        link: '',
-        outbound: false,
-      },
-      {
-        name: 'Blog',
+        name: 'footerColumnItem.blog',
         link: 'https://pingcap.com/blog-cn/',
-        outbound: true,
-      },
-      {
-        name: 'GitHub',
-        link: 'https://github.com/pingcap',
-        outbound: true,
+        linkEn: 'https://pingcap.com/blog/',
+        linkType: 'outBoundLink',
       },
     ],
   },
   {
-    name: '学习',
+    name: 'footerColumnsTitle.learn',
     items: [
       {
-        name: '文档',
-        link: '/tidb/',
-        outbound: false,
+        name: 'footerColumnItem.docs',
+        link: '/tidb/v4.0',
+        linkType: 'aHrefLink',
       },
       {
-        name: 'pingcap university',
-        link: 'https://university.pingcap.com',
-        outbound: true,
-      },
-      {
-        name: 'Community events',
-        link: 'https://pingcap.com/community-cn/',
-        outbound: true,
-      },
-      {
-        name: '案例',
+        name: 'footerColumnItem.case',
         link: 'https://pingcap.com/cases-cn/',
-        outbound: true,
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'footerColumnItem.pu',
+        link: 'https://university.pingcap.com',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'footerColumnItem.tidbInAction',
+        link: 'https://book.tidb.io/',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'footerColumnItem.communityEvents',
+        link: 'https://pingcap.com/community-cn/',
+        linkType: 'outBoundLink',
       },
     ],
   },
   {
-    name: '支持',
+    name: 'footerColumnsTitle.support',
     items: [
       {
-        name: '论坛',
+        name: 'footerColumnItem.asktug',
         link: 'https://asktug.com',
-        outbound: true,
+        linkType: 'outBoundLink',
       },
       {
-        name: '联系我们',
+        name: 'footerColumnItem.aboutUs',
         link: 'mailto:info@pingcap.com',
-        outbound: true,
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'footerColumnItem.github',
+        link: 'https://github.com/pingcap',
+        linkType: 'outBoundLink',
       },
     ],
   },
   {
-    name: '公司',
+    name: 'footerColumnsTitle.company',
     items: [
       {
-        name: '关于',
-        link: 'https://asktug.com',
-        outbound: true,
+        name: 'footerColumnItem.aboutUs',
+        link: 'https://pingcap.com/about-cn/',
+        linkType: 'outBoundLink',
       },
       {
-        name: '新闻',
+        name: 'footerColumnItem.recruit',
+        link: 'https://pingcap.com/about-cn/recruit/join/',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'footerColumnItem.news',
         link: 'https://pingcap.com/about-cn/news/',
-        outbound: true,
+        linkType: 'outBoundLink',
       },
     ],
   },

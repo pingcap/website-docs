@@ -95,13 +95,13 @@
     display: none;
     width: 50vw;
 
-    @include mobile {
+    @media only screen and (max-width: 1024px) {
       display: block;
     }
   }
 
   .search-input-pc {
-    @include mobile {
+   @media only screen and (max-width: 1024px) {
       display: none;
     }
   }

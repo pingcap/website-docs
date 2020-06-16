@@ -40,6 +40,12 @@ exports.genDownloadPDFURL = function (relativeDir, locale) {
   return `${docPath}-${locale}-manual.pdf`
 }
 
+exports.genVersionChunks = function (_fullPath) {
+  const parts = _fullPath.split('/')
+  const _version = parts.splice(2, 1)
+  return [_version[0], parts.join('/')]
+}
+
 /**
  * Replace path by relativeDir and file basename.
  *

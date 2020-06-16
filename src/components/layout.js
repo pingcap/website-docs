@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { defaultDocInfo, getDocInfo } from '../state'
 
 import Footer from './footer'
 import { IntlProvider } from 'react-intl'
@@ -6,7 +7,6 @@ import Navbar from './navbar'
 import PropTypes from 'prop-types'
 import flat from 'flat'
 import langMap from '../intl'
-import { resetDocInfo } from '../state'
 import { useDispatch } from 'react-redux'
 
 const Layout = ({ locale, children, forbidResetDocInfo = false }) => {
@@ -15,7 +15,14 @@ const Layout = ({ locale, children, forbidResetDocInfo = false }) => {
   useEffect(
     () => {
       if (!forbidResetDocInfo) {
-        dispatch(resetDocInfo())
+        dispatch(
+          getDocInfo({
+            ...defaultDocInfo,
+            ...{
+              lang: locale,
+            },
+          })
+        )
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,7 +33,7 @@ const Layout = ({ locale, children, forbidResetDocInfo = false }) => {
     <IntlProvider locale={locale} messages={flat(langMap[locale])}>
       <Navbar />
       <main>{children}</main>
-      <Footer />
+      <Footer locale={locale} />
     </IntlProvider>
   )
 }

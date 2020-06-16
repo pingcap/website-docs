@@ -3,8 +3,10 @@ import '../styles/pages/tools.scss'
 import Layout from '../components/layout'
 import React from 'react'
 import SEO from '../components/seo'
+import { Link } from 'gatsby'
 
 import { toolsLandingPageData } from '../data/tools'
+import { FormattedMessage } from 'react-intl'
 
 const Tools = ({ pageContext: { locale } }) => {
   return (
@@ -14,20 +16,20 @@ const Tools = ({ pageContext: { locale } }) => {
         <section className="section container">
           <div className="columns is-multiline is-variable is-8">
             {toolsLandingPageData.map((tool) => (
-              <div key={tool.type} className="column is-6">
-                <a href={tool.link}>
+              <div key={tool.iconName} className="column is-6">
+                <Link to={`${locale === 'zh' ? '/zh' + tool.link : tool.link}`}>
                   <div className="card">
                     <div className="header">
-                      <div className="title">{tool.type}</div>
-                      <div
-                        className={`type-icon ${tool.type
-                          .replace(' ', '-')
-                          .toLowerCase()}-icon`}
-                      ></div>
+                      <div className="title">
+                        {<FormattedMessage id={tool.type} />}
+                      </div>
+                      <div className={`type-icon ${tool.iconName}-icon`}></div>
                     </div>
-                    <div className="desc">{tool.desc}</div>
+                    <div className="desc">
+                      {<FormattedMessage id={tool.desc} />}
+                    </div>
                   </div>
-                </a>
+                </Link>
               </div>
             ))}
           </div>

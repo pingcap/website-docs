@@ -8,6 +8,13 @@ module.exports = {
     siteUrl: `https://docs.pingcap.com`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-99991864-7',
+        head: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -36,7 +43,15 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
-        gatsbyRemarkPlugins: [`gatsby-remark-autolink-headers`],
+        gatsbyRemarkPlugins: [
+          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              showLineNumbers: false,
+            },
+          },
+        ],
       },
     },
     {
@@ -45,21 +60,21 @@ module.exports = {
         plugins: [`gatsby-remark-autolink-headers`],
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: 'PingCAP Docs',
-        short_name: 'Docs',
-        start_url: '/',
-        background_color: '#fff',
-        theme_color: '#fff',
-        display: 'minimal-ui',
-        icon: 'images/pingcap-icon.png', // This path is relative to the root of the site.
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-manifest`,
+    //   options: {
+    //     name: 'PingCAP Docs',
+    //     short_name: 'Docs',
+    //     start_url: '/',
+    //     background_color: '#fff',
+    //     theme_color: '#fff',
+    //     display: 'minimal-ui',
+    //     icon: 'images/pingcap-icon.png', // This path is relative to the root of the site.
+    //   },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -76,6 +91,9 @@ module.exports = {
         ],
         whitelistPatternsChildren: [/^PingCAP-Doc/],
         whitelist: purgecssWhitelist,
+        ignore: [
+          'prismjs/',
+        ],
       },
     },
     `gatsby-plugin-meta-redirect`,
@@ -83,7 +101,7 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         output: `/website-docs-sitemap.xml`,
-        exclude: [`/404`, `/search`],
+        exclude: ['/404', '/zh/404', '/search', '/zh/search'],
       },
     },
   ],

@@ -1,12 +1,17 @@
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
 
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
+import { FormattedMessage } from 'react-intl'
+import IntlLink from '../components/IntlLink'
 import { footerColumns } from '../data/footer'
 
-const Footer = () => {
+
+
+const Footer = prop => {
+  const locale = prop.locale
   const { FooterLogoSVG } = useStaticQuery(
     graphql`
       query {
@@ -54,12 +59,13 @@ const Footer = () => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <Link to="/" className="dropdown-item">
-              English
-            </Link>
-            <Link to="/zh" className="dropdown-item">
-              简体中文
-            </Link>
+            <IntlLink
+              to={`${locale} === 'zh' ? 'zh/tidb/v4.0' : '/tidb/v4.0'`}
+              className="dropdown-item"
+              type="innerLink"
+            >
+              {<FormattedMessage id="languageSwitcher" />}
+            </IntlLink>
           </div>
         </div>
       </div>
@@ -79,7 +85,7 @@ const Footer = () => {
                 onClick={handleSpreadItems}
                 onKeyDown={handleSpreadItems}
               >
-                {column.name}
+                {<FormattedMessage id={column.name} />}
                 <span className="spread">
                   <AddIcon />
                 </span>
@@ -87,41 +93,36 @@ const Footer = () => {
               <ul className="items">
                 {column.items.map((item) => (
                   <li key={item.name}>
-                    {item.outbound ? (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        onTouchStart={() => {}}
-                      >
-                        {item.name}
-                      </a>
-                    ) : (
-                      <Link to={item.link} onTouchStart={() => {}}>
-                        {item.name}
-                      </Link>
-                    )}
+                    <IntlLink to={item.link} type={item.linkType}>
+                      {<FormattedMessage id={item.name} />}
+                    </IntlLink>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
           <div className="column with-socials">
-            <img
-              className="footer-logo"
-              src={FooterLogoSVG.publicURL}
-              alt="footer logo"
-            />
+            <IntlLink to="https://pingcap.com/" type="outBoundLink">
+              <img
+                className="footer-logo"
+                src={FooterLogoSVG.publicURL}
+                alt="footer logo"
+              />
+            </IntlLink>
+
             <div className="columns is-multiline socials-desktop">
               <Socials className="column is-4" type="follow" />
             </div>
-            <div className="annotations annotations-desktop">
-              <Lang align="right" />
-              <div className="copyright">
-                ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
-              </div>
-            </div>
           </div>
         </div>
+
+        <div className="annotations annotations-desktop">
+          <div className="copyright">
+            ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
+          </div>
+          <Lang align="right" />
+        </div>
+
         <div className="annotations annotations-mobile">
           <Lang align="left" />
           <div className="copyright">

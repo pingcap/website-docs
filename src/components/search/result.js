@@ -2,7 +2,8 @@ import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Result = ({ results }) => {
+const Result = ({ results, searched }) => {
+  console.log('results', results)
   return (
     <div className="search-result">
       <p className="counts">
@@ -33,8 +34,9 @@ const Result = ({ results }) => {
             </div>
           ))}
       </div>
+
       <div className="no-result">
-        {results.length === 0 && (
+        {searched && results.length === 0 && (
           <>
             <p>
               <FormattedMessage id="search.resultTips.title" />

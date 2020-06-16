@@ -4,7 +4,7 @@ import * as Shortcodes from '../components/shortcodes'
 
 import React, { useEffect, useState } from 'react'
 
-import Download from '../components/download'
+import DownloadPDF from '../components/downloadPDF'
 import { FormattedMessage } from 'react-intl'
 import Layout from '../components/layout'
 import { MDXProvider } from '@mdx-js/react'
@@ -14,17 +14,29 @@ import TOC from '../components/toc'
 import VersionSwitcher from '../components/version'
 import { convertDocAndRef } from '../lib/version'
 import { getDocInfo } from '../state'
+import { getRepoInfo } from '../lib/docHelper'
 import { graphql } from 'gatsby'
 import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
+import ImproveDocLink from '../components/improveDocLink'
+import FeedbackDocLink from '../components/feedbackDocLink'
 
 const Doc = ({
-  pageContext: { locale, relativeDir, base, pathPrefix, downloadURL, fullPath },
+  pageContext: {
+    locale,
+    relativeDir,
+    base,
+    pathPrefix,
+    downloadURL,
+    fullPath,
+    versions,
+  },
   data,
 }) => {
   const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
   const docRefArray = convertDocAndRef(relativeDir.split('/'))
+  const repoInfo = getRepoInfo(relativeDir, locale)
 
   const [showProgress, setShowProgress] = useState(false)
   const [readingProgress, setReadingProgress] = useState(0)
@@ -37,28 +49,32 @@ const Doc = ({
   function optimizeBlockquote() {
     const blockquoteList = document.getElementsByTagName('blockquote')
     Array.from(blockquoteList).forEach((quote) => {
-      const labelText = quote.children[0].children[0].innerHTML
-      switch (labelText) {
-        case '注意：':
-          addStyleToQuote(quote, 'note')
-          break
-        case '警告：':
-          addStyleToQuote(quote, 'warning')
-          break
-        case '建议：':
-          addStyleToQuote(quote, 'tips')
-          break
-        case '错误：':
-          addStyleToQuote(quote, 'error')
-          break
-        default:
-          break
+      if (quote.children[0] && quote.children[0].children[0]) {
+        const labelText = quote.children[0].children[0].innerHTML
+
+        switch (labelText) {
+          case '注意：':
+            addStyleToQuote(quote, 'note')
+            break
+          case '警告：':
+            addStyleToQuote(quote, 'warning')
+            break
+          case '建议：':
+            addStyleToQuote(quote, 'tips')
+            break
+          case '错误：':
+            addStyleToQuote(quote, 'error')
+            break
+          default:
+            break
+        }
       }
     })
   }
 
   useEffect(() => {
     optimizeBlockquote()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -111,12 +127,26 @@ const Doc = ({
     []
   )
 
+  function replaceItemURL(item) {
+    let itemURL
+    if(item) {
+      itemURL = item.replace(/\s/g, '-')
+      .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
+      .toLowerCase()
+    }
+    
+    return itemURL
+  }
+
   function renderItems(items) {
     return (
       <ul>
         {items.map((item) => (
           <li key={item.url}>
-            <a href={item.url}>{item.title}</a>
+            <a
+              href={'#' + replaceItemURL(item.url)}
+              dangerouslySetInnerHTML={{ __html: item.title }}
+            ></a>
             {item.items && renderItems(item.items)}
           </li>
         ))}
@@ -171,7 +201,11 @@ const Doc = ({
         <section className="section container">
           <div className="columns">
             <div className="column is-2 left-column">
-              <VersionSwitcher relativeDir={relativeDir} base={base} />
+              <VersionSwitcher
+                relativeDir={relativeDir}
+                base={base}
+                versions={versions}
+              />
               <div
                 role="button"
                 tabIndex={0}
@@ -195,12 +229,16 @@ const Doc = ({
               </section>
             </div>
             <div className="column is-2 doc-toc-column">
-              <Download downloadURL={downloadURL} />
+              <DownloadPDF downloadURL={downloadURL} />
+              <ImproveDocLink repoInfo={repoInfo} base={base} />
+              <FeedbackDocLink repoInfo={repoInfo} base={base} />
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
                 </div>
-                {tableOfContents.items && renderItems(tableOfContents.items)}
+                <div className="toc-content">
+                  {tableOfContents.items && renderItems(tableOfContents.items)}
+                </div>
               </section>
             </div>
           </div>
