@@ -46,6 +46,7 @@ function main(argv) {
           ref,
           path: path ? path : '',
         },
+        `${__dirname}/contents/en/docs-tidb/${ref}`,
         [
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
