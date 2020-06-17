@@ -16,7 +16,6 @@ const Footer = (prop) => {
   // const currentPathname = location.pathname
   const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
 
-
   const { FooterLogoSVG } = useStaticQuery(
     graphql`
       query {
@@ -93,7 +92,7 @@ const Footer = (prop) => {
             </a>
             <Link to="/zh/tidb/v4.0" className="dropdown-item">
               简体中文
-            </IntlLink>
+            </Link>
           </div>
         </div>
       </div>
@@ -113,7 +112,7 @@ const Footer = (prop) => {
                 onClick={handleSpreadItems}
                 onKeyDown={handleSpreadItems}
               >
-                {<FormattedMessage id={column.name} />}
+                {column.name}
                 <span className="spread">
                   <AddIcon />
                 </span>
