@@ -134,7 +134,7 @@ function main(argv) {
       retrieveAllMDs(
         {
           owner: 'pingcap',
-          repo,
+          repo: 'dbaas-docs',
           ref,
           path: path ? path : '',
         },

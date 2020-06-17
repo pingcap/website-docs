@@ -58,7 +58,7 @@ jobs:
         run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
 
       - name: Download docs-dbaas
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas:all
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
