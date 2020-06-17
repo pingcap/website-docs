@@ -1,5 +1,6 @@
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
@@ -15,7 +16,6 @@ const Footer = (prop) => {
   // const location = useLocation()
   // const currentPathname = location.pathname
   const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
-
 
   const { FooterLogoSVG } = useStaticQuery(
     graphql`
@@ -84,16 +84,12 @@ const Footer = (prop) => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <a
-              href="https://pingcap.com/docs/"
-              target="_blank"
-              className="dropdown-item"
-            >
+            <Link to="/tidb/v4.0" className="dropdown-item">
               English
-            </a>
+            </Link>
             <Link to="/zh/tidb/v4.0" className="dropdown-item">
               简体中文
-            </IntlLink>
+            </Link>
           </div>
         </div>
       </div>
