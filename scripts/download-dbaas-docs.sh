@@ -1,1 +1,1 @@
-yarn download:dbaas-docs
+yarn download:docs-dbaas

@@ -130,7 +130,7 @@ function main(argv) {
       )
 
       break
-    case 'dbaas-docs':
+    case 'docs-dbaas':
       retrieveAllMDs(
         {
           owner: 'pingcap',
@@ -138,13 +138,13 @@ function main(argv) {
           ref,
           path: path ? path : '',
         },
-        `${__dirname}/contents/en/dbaas-docs/${ref}`,
+        `${__dirname}/contents/en/docs-dbaas/${ref}`,
         [
           () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
         ]
       )
-      
+
       break
     default:
       break
