@@ -1,6 +1,5 @@
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
@@ -109,7 +108,7 @@ const Footer = (prop) => {
                 onClick={handleSpreadItems}
                 onKeyDown={handleSpreadItems}
               >
-                {<FormattedMessage id={column.name} />}
+                {column.name}
                 <span className="spread">
                   <AddIcon />
                 </span>
