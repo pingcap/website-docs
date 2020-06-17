@@ -73,7 +73,7 @@
     "clean:docs:docs-tidb-operator:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb-operator/**/*.md",
     "clean:docs:docs-dm:en": "rimraf ./markdown-pages/contents/en/docs-dm/**/*.md",
     "clean:docs:docs-dm:zh": "rimraf ./markdown-pages/contents/zh/docs-dm/**/*.md",
-    "clean:docs:dbaas-docs:en": "rimraf ./markdown-pages/contents/en/dbaas-docs/**/*.md",
+    "clean:docs:docs-dbaas:en": "rimraf ./markdown-pages/contents/en/docs-dbaas/**/*.md",
     "download:docs-tidb:en": "node markdown-pages/cli.js download docs",
     "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
     "download:docs-tidb:zh": "node markdown-pages/cli.js download docs-cn",
@@ -86,8 +86,8 @@
     "download:docs-dm:all": "./scripts/download-docs-dm.sh",
     "download:docs-dm:en:all": "./scripts/download-docs-dm-en.sh",
     "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh",
-    "download:dbaas-docs": "node markdown-pages/cli.js download dbaas-docs",
-    "download:dbaas-docs:all": "./scripts/download-dbaas-docs.sh",
+    "download:docs-dbaas": "node markdown-pages/cli.js download docs-dbaas",
+    "download:docs-dbaas:all": "./scripts/download-docs-dbaas.sh",
     "sync": "node markdown-pages/cli.js sync"
   },
   "lint-staged": {

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Result = ({ results, searched }) => {
-  console.log('results', results)
   return (
     <div className="search-result">
       <p className="counts">

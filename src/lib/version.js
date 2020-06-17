@@ -17,6 +17,10 @@ export const docsDMVersion = {
   'release-1.0': 'v1.0',
 }
 
+export const docsCloudVersion = {
+  master: 'beta'
+}
+
 export function convertDocAndRef([doc, ref]) {
   const result = [doc, ref]
 
@@ -36,6 +40,9 @@ export function convertDocAndRef([doc, ref]) {
       result[1] = docsDMVersion[ref]
 
       break
+    case 'dbaas-docs':
+      result[0] = 'tidbcloud'
+      result[1] = docsCloudVersion[ref]
     default:
       break
   }

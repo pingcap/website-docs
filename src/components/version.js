@@ -6,6 +6,7 @@ import {
   docsTiDBVersion,
   docsDMVersion,
   docsTiDBOperatorVersion,
+  docsCloudVersion
 } from '../lib/version'
 
 import { Button } from '@seagreenio/react-bulma'
@@ -15,6 +16,7 @@ import PropTypes from 'prop-types'
 const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
+const docsCloudVersionList = Object.values(docsCloudVersion)
 
 const Version = ({ relativeDir, base, versions }) => {
   const [doc, ref] = convertDocAndRef(relativeDir.split('/'))
@@ -38,6 +40,8 @@ const Version = ({ relativeDir, base, versions }) => {
       case 'tidb-data-migration':
         setDropdownItems(docsDMVersionList)
         break
+      case 'tidbcloud':
+        setDropdownItems(docsCloudVersionList)
       default:
         break
     }

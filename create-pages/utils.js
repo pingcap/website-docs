@@ -9,7 +9,7 @@ function renameDoc(name) {
       return 'tidb-in-kubernetes'
     case 'docs-dm':
       return 'tidb-data-migration'
-    case 'dbaas-docs':
+    case 'docs-dbaas':
       return 'tidbcloud'
     default:
       return name
