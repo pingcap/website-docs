@@ -1,6 +1,6 @@
 const footerColumnsZh = [
   {
-    name: 'footerColumnsTitle.product',
+    name: '产品',
     items: [
       {
         name: 'TiDB',
@@ -11,7 +11,6 @@ const footerColumnsZh = [
         name: '周边工具',
         link: '/tools',
         linkType: 'innerLink',
-
       },
     ],
   },
@@ -42,12 +41,11 @@ const footerColumnsZh = [
         name: '博客',
         link: 'https://pingcap.com/blog-cn/',
         linkType: 'outBoundLink',
-      }
-
+      },
     ],
   },
   {
-    name: 'footerColumnsTitle.learn',
+    name: '学习',
     items: [
       {
         name: '文档',
@@ -66,7 +64,6 @@ const footerColumnsZh = [
       },
       {
         name: 'TiDB in Action',
-
         link: 'https://book.tidb.io/',
         linkType: 'outBoundLink',
       },
@@ -78,15 +75,15 @@ const footerColumnsZh = [
     ],
   },
   {
-    name: 'footerColumnsTitle.support',
+    name: '支持',
     items: [
       {
-        name: 'footerColumnItem.asktug',
+        name: 'AskTUG',
         link: 'https://asktug.com',
         linkType: 'outBoundLink',
       },
       {
-        name: 'footerColumnItem.aboutUs',
+        name: '关于我们',
         link: 'mailto:info@pingcap.com',
         linkType: 'outBoundLink',
       },
@@ -98,7 +95,7 @@ const footerColumnsZh = [
     ],
   },
   {
-    name: 'footerColumnsTitle.company',
+    name: '公司',
     items: [
       {
         name: '关于我们',
@@ -182,7 +179,7 @@ const footerColumnsEn = [
         name: 'TiDB In Action',
         link: 'https://book.tidb.io/',
         linkType: 'outBoundLink',
-      }
+      },
     ],
   },
   {
@@ -197,7 +194,6 @@ const footerColumnsEn = [
         name: 'GitHub',
         link: 'https://github.com/pingcap',
         linkType: 'outBoundLink',
-
       },
     ],
   },
