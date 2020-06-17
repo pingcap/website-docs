@@ -46,10 +46,7 @@ function main(argv) {
           ref,
           path: path ? path : '',
         },
-        // Use docs-special-week branch temporarily
-        `${__dirname}/contents/en/docs-tidb/${
-          ref === 'docs-special-week' ? 'master' : ref
-        }`,
+        `${__dirname}/contents/en/docs-tidb/${ref}`,
         [
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
