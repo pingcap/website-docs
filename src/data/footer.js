@@ -1,77 +1,77 @@
-const footerColumns = [
+const footerColumnsZh = [
   {
     name: 'footerColumnsTitle.product',
     items: [
       {
-        name: 'footerColumnItem.tidb',
+        name: 'TiDB',
         link: '/tidb/v4.0',
-        linkType: 'aHrefLink',
+        linkType: 'innerLink',
       },
       {
-        name: 'footerColumnItem.tools',
+        name: '周边工具',
         link: '/tools',
-        linkType: 'aHrefLink',
+        linkType: 'innerLink',
+
       },
     ],
   },
   {
-    name: 'footerColumnsTitle.resources',
+    name: '资源',
     items: [
       {
-        name: 'footerColumnItem.quickStart',
-        link: '/tidb/v4.0/quick-start-with-tidb',
-        linkType: 'aHrefLink',
+        name: '快速上手',
+        link: '/tidb/stable/quick-start-with-tidb',
+        linkType: 'innerLink',
       },
       {
-        name: 'footerColumnItem.bestPractices',
-        link: '/tidb/v4.0/tidb-best-practices',
-        linkType: 'aHrefLink',
+        name: '最佳实践',
+        link: '/tidb/stable/tidb-best-practices',
+        linkType: 'innerLink',
       },
       {
-        name: 'footerColumnItem.faq',
-        link: '/tidb/v4.0/tidb-faq',
-        linkType: 'aHrefLink',
+        name: '常见问题解答',
+        link: '/tidb/stable/tidb-faq',
+        linkType: 'innerLink',
       },
       {
-        name: 'footerColumnItem.releaseNotes',
-        link: '/tidb/v4.0/release-notes',
-        linkType: 'aHrefLink',
+        name: '版本发布',
+        link: '/tidb/dev/release-notes',
+        linkType: 'innerLink',
       },
       {
-        name: 'footerColumnItem.blog',
+        name: '博客',
         link: 'https://pingcap.com/blog-cn/',
-        linkEn: 'https://pingcap.com/blog/',
         linkType: 'outBoundLink',
-      },
+      }
+
     ],
   },
   {
     name: 'footerColumnsTitle.learn',
     items: [
       {
-        name: 'footerColumnItem.docs',
+        name: '文档',
         link: '/tidb/v4.0',
-        linkType: 'aHrefLink',
+        linkType: 'innerLink',
       },
       {
-        name: 'footerColumnItem.case',
+        name: '案例',
         link: 'https://pingcap.com/cases-cn/',
-        link: 'https://pingcap.com/cases/',
         linkType: 'outBoundLink',
       },
       {
-        name: 'footerColumnItem.pu',
+        name: 'PingCAP University',
         link: 'https://university.pingcap.com',
         linkType: 'outBoundLink',
-        notShowEn: true,
       },
       {
-        name: 'footerColumnItem.tidbInAction',
+        name: 'TiDB in Action',
+
         link: 'https://book.tidb.io/',
         linkType: 'outBoundLink',
       },
       {
-        name: 'footerColumnItem.communityEvents',
+        name: '社区活动',
         link: 'https://pingcap.com/community-cn/',
         linkType: 'outBoundLink',
       },
@@ -91,7 +91,7 @@ const footerColumns = [
         linkType: 'outBoundLink',
       },
       {
-        name: 'footerColumnItem.github',
+        name: 'GitHub',
         link: 'https://github.com/pingcap',
         linkType: 'outBoundLink',
       },
@@ -101,17 +101,17 @@ const footerColumns = [
     name: 'footerColumnsTitle.company',
     items: [
       {
-        name: 'footerColumnItem.aboutUs',
+        name: '关于我们',
         link: 'https://pingcap.com/about-cn/',
         linkType: 'outBoundLink',
       },
       {
-        name: 'footerColumnItem.recruit',
+        name: '招贤纳士',
         link: 'https://pingcap.com/about-cn/recruit/join/',
         linkType: 'outBoundLink',
       },
       {
-        name: 'footerColumnItem.news',
+        name: '新闻报道',
         link: 'https://pingcap.com/about-cn/news/',
         linkType: 'outBoundLink',
       },
@@ -119,4 +119,88 @@ const footerColumns = [
   },
 ]
 
-export { footerColumns }
+const footerColumnsEn = [
+  {
+    name: 'Product',
+    items: [
+      {
+        name: 'TiDB',
+        link: '/tidb/v4.0',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Cloud',
+        link: '/tidbcloud/beta',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Tools',
+        link: '/tools',
+        linkType: 'innerLink',
+      },
+    ],
+  },
+  {
+    name: 'Resources',
+    items: [
+      {
+        name: 'Quick Start',
+        link: '/tidb/v4.0/quick-start-with-tidb',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Best Practices',
+        link: '/tidb/v4.0/tidb-best-practices',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'FAQ',
+        link: '/tidb/v4.0/tidb-faq',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Release Notes',
+        link: '/tidb/v4.0/release-notes',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Blog',
+        link: 'https://pingcap.com/blog/',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+  {
+    name: 'Learn',
+    items: [
+      {
+        name: 'Docs',
+        link: '/tidb/v4.0',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'TiDB In Action',
+        link: 'https://book.tidb.io/',
+        linkType: 'outBoundLink',
+      }
+    ],
+  },
+  {
+    name: 'Support',
+    items: [
+      {
+        name: 'Contact Us',
+        link: 'mailto:info@pingcap.com',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'GitHub',
+        link: 'https://github.com/pingcap',
+        linkType: 'outBoundLink',
+
+      },
+    ],
+  },
+]
+
+export { footerColumnsZh, footerColumnsEn }

@@ -8,7 +8,8 @@ import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
 import { setSearchValue } from '../state'
 
-const Navbar = () => {
+const Navbar = (prop) => {
+  const locale = prop.locale
   const { BrandSVG } = useStaticQuery(
     graphql`
       query {
@@ -90,6 +91,7 @@ const Navbar = () => {
             >
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
+
             <IntlLink
               to="/tools/"
               className="navbar-item with-main-section"
@@ -97,20 +99,14 @@ const Navbar = () => {
             >
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
-            {/* <IntlLink to="/cloud" className="navbar-item with-main-section">
-              <FormattedMessage id="navbar.cloud" />
-            </IntlLink>
-            <IntlLink
-              to="/developer-guide"
-              className="navbar-item with-main-section has-no-border"
-            >
-              <FormattedMessage id="navbar.developerGuide" />
-            </IntlLink> */}
-            {/* <div className="navbar-item with-contact-us">
-              <Button as="a" className="contact-us" color="primary" rounded>
-                <FormattedMessage id="navbar.contactUs" />
-              </Button>
-            </div> */}
+            {locale === 'en' && (
+              <IntlLink
+                to="/tidbcloud/beta"
+                className="navbar-item with-main-section"
+              >
+                <FormattedMessage id="navbar.cloud" />
+              </IntlLink>
+            )}
             <a
               href="mailto:info@pingcap.com"
               className="navbar-item with-main-section"

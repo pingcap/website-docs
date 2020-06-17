@@ -3,7 +3,6 @@
     "tidb": "TiDB",
     "tools": "Tools",
     "cloud": "Cloud",
-    "developerGuide": "Developer Guide",
     "contactUs": "Contact Us",
     "searchDocs": "Search Docs"
   },
@@ -54,5 +53,25 @@
     "aboutUs": "About Us",
     "recruit": "招贤纳士",
     "news": "新闻报道"
-  }
+  },
+  "toolsCard": {
+    "tidbOperator": {
+      "type": "TiDB Operator",
+      "desc": "TiDB Operator is an automated operation and maintenance system for TiDB clusters in Kubernetes. It provides full life-cycle management for TiDB. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud."
+    },
+    "tidbDataMigration": {
+      "type": "TiDB Data Migration",
+      "desc": "TiDB Data Migration (DM) is an integrated data replication task management platform that supports full data migration and incremental data migration from MySQL or MariaDB to TiDB. It can help reduce the operations cost and simplify the troubleshooting process."
+    },
+    "databaseTools": {
+      "type": "Database Tools",
+      "desc": "TiDB database tools are a collection of useful toolkits for migrating to or from TiDB, including Dumpling, Mydumper, Loader, Syncer, sync-diff-inspector, Backup & Restore (BR), TiDB Lightning, TiCDC, and so on."
+    },
+    "tiup": {
+      "type": "TiUP",
+      "desc": "TiUP is a package manager that manages components in the TiDB ecosystem, such as TiDB, PD, TiKV, and so on. You can run any component with only a single line of TiUP commands, which is far easier to manage."
+    }
+  },
+  "languageSwitcher": "English"
+
 }

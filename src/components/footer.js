@@ -4,11 +4,19 @@ import React, { useState } from 'react'
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
-import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
-import { footerColumns } from '../data/footer'
+import { footerColumnsZh, footerColumnsEn } from '../data/footer'
+// import { useLocation } from '@reach/router'
 
-const Footer = () => {
+const Footer = (prop) => {
+  const locale = prop.locale
+
+  // uncomment and apply to language switcher when docs en online
+  // const location = useLocation()
+  // const currentPathname = location.pathname
+  const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
+
+
   const { FooterLogoSVG } = useStaticQuery(
     graphql`
       query {
@@ -43,6 +51,26 @@ const Footer = () => {
       }
     }
 
+    // uncomment and apply to language switcher when docs en online
+    // const switchLangLink = (lang) => {
+    //   switch (lang) {
+    //     case 'zh':
+    //       if (locale === 'zh') {
+    //         return currentPathname
+    //       } else {
+    //         return '/zh/' + currentPathname.split('/').slice(1).join('/')
+    //       }
+    //       break
+    //     case 'en':
+    //       if (locale === 'en') {
+    //         return currentPathname
+    //       } else {
+    //         return currentPathname.split('/').slice(2).join('/')
+    //       }
+    //       break
+    //   }
+    // }
+
     return (
       <div className={`dropdown is-${align} is-up lang${dropdownActive}`}>
         <div
@@ -56,18 +84,14 @@ const Footer = () => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <IntlLink
-              to="https://pingcap.com/docs/"
+            <a
+              href="https://pingcap.com/docs/"
+              target="_blank"
               className="dropdown-item"
-              type="outBoundLink"
             >
               English
-            </IntlLink>
-            <IntlLink
-              to="/tidb/v4.0"
-              className="dropdown-item"
-              type="innerLink"
-            >
+            </a>
+            <Link to="/zh/tidb/v4.0" className="dropdown-item">
               简体中文
             </IntlLink>
           </div>
@@ -98,7 +122,7 @@ const Footer = () => {
                 {column.items.map((item) => (
                   <li key={item.name}>
                     <IntlLink to={item.link} type={item.linkType}>
-                      {<FormattedMessage id={item.name} />}
+                      {item.name}
                     </IntlLink>
                   </li>
                 ))}

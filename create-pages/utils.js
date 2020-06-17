@@ -9,14 +9,20 @@ function renameDoc(name) {
       return 'tidb-in-kubernetes'
     case 'docs-dm':
       return 'tidb-data-migration'
+    case 'docs-dbaas':
+      return 'tidbcloud'
     default:
       return name
   }
 }
 
-function renameDocVersion(version) {
+function renameDocVersion(version, docName) {
   if (version.match(masterRegex)) {
-    return 'dev'
+    if (docName === 'tidbcloud') {
+      return 'beta'
+    } else {
+      return 'dev'
+    }
   } else if (version.match(originalVersionRegex)) {
     return version.replace('release-', 'v')
   } else {
@@ -28,7 +34,7 @@ function genDocPath(relativeDir, needRename = true) {
   const splitPaths = relativeDir.split('/')
   const docName = needRename ? renameDoc(splitPaths[0]) : splitPaths[0]
   const docVersion = needRename
-    ? renameDocVersion(splitPaths[1])
+    ? renameDocVersion(splitPaths[1], docName)
     : splitPaths[1]
 
   return `${docName}/${docVersion}`

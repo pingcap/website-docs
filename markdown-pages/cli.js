@@ -1,11 +1,12 @@
 const yargs = require('yargs')
 const sig = require('signale')
-const { retrieveAllMDs, handleSync } = require('./download')
+const { retrieveAllMDs, handleSync, writeContent } = require('./download')
 const {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
+  TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
 } = require('./utils')
@@ -38,6 +39,18 @@ function main(argv) {
   const ref = argv.ref || 'master'
 
   switch (repo) {
+    case 'local-test':
+      ;['_index.md', 'TOC.md', 'views.md'].forEach((m) => {
+        writeContent(
+          'https://raw.githubusercontent.com/pingcap/docs/master/' + m,
+          `${__dirname}/contents/en/docs-tidb/${ref}/${m}`,
+          [
+            () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
+            () => createReplaceCopyableStream(),
+          ]
+        )
+      })
+      break
     case 'docs':
       retrieveAllMDs(
         {
@@ -46,10 +59,7 @@ function main(argv) {
           ref,
           path: path ? path : '',
         },
-        // Use docs-special-week branch temporarily
-        `${__dirname}/contents/en/docs-tidb/${
-          ref === 'docs-special-week' ? 'master' : ref
-        }`,
+        `${__dirname}/contents/en/docs-tidb/${ref}`,
         [
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
@@ -121,6 +131,22 @@ function main(argv) {
       )
 
       break
+    case 'docs-dbaas':
+      retrieveAllMDs(
+        {
+          owner: 'pingcap',
+          repo: 'dbaas-docs',
+          ref,
+          path: path ? path : '',
+        },
+        `${__dirname}/contents/en/docs-dbaas/${ref}`,
+        [
+          () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+        ]
+      )
+
+      break
     default:
       break
   }
@@ -144,6 +170,14 @@ function sync(argv) {
     case 'docs-dm':
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
+      ])
+
+      break
+    
+      case 'dbaas-docs':
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+        () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
       ])
 

@@ -108,11 +108,12 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
   }, [])
 
   useEffect(() => {
-    const regx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}/
+    const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}/
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
 
       // escape outbound path replacement
-      if (!a.getAttribute('href').match(regx)) {
+      if (!a.getAttribute('href').match(absPathRegx)) {
+
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)

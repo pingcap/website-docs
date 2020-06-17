@@ -120,6 +120,7 @@ async function handleSync(metaInfo, pipelines = []) {
 }
 
 module.exports = {
+  writeContent,
   retrieveAllMDs,
   handleSync,
 }
