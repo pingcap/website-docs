@@ -31,7 +31,7 @@ const Layout = ({ locale, children, forbidResetDocInfo = false }) => {
 
   return (
     <IntlProvider locale={locale} messages={flat(langMap[locale])}>
-      <Navbar />
+      <Navbar locale={locale} />
       <main>{children}</main>
       <Footer locale={locale} />
     </IntlProvider>

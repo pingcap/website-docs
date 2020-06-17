@@ -7,6 +7,7 @@ const TIDB_IN_KUBERNETES_IMAGE_CDN_URL =
   BASE_IMAGE_CDN_URL + '/tidb-in-kubernetes'
 const TIDB_DATA_MIGRATION_IMAGE_CDN_URL =
   BASE_IMAGE_CDN_URL + '/tidb-data-migration'
+const TIDB_CLOUD_IMAGE_CDN_URL = BASE_IMAGE_CDN_URL + '/tidbcloud'
 
 function createReplaceImagePathStream(replaced) {
   return replaceStream(/\(\/?media\//g, `(${replaced}/`)
@@ -48,6 +49,7 @@ module.exports = {
   DOCS_CN_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
+  TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
   shouldIgnorePath,

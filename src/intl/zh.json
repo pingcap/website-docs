@@ -2,8 +2,6 @@
   "navbar": {
     "tidb": "TiDB",
     "tools": "Tools",
-    "cloud": "Cloud",
-    "developerGuide": "开发者指南",
     "contactUs": "联系我们",
     "searchDocs": "搜索文档"
   },

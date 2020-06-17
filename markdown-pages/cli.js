@@ -6,6 +6,7 @@ const {
   DOCS_CN_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
+  TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
 } = require('./utils')
@@ -140,7 +141,7 @@ function main(argv) {
         },
         `${__dirname}/contents/en/docs-dbaas/${ref}`,
         [
-          () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
+          () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
         ]
       )
@@ -169,6 +170,14 @@ function sync(argv) {
     case 'docs-dm':
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
+      ])
+
+      break
+    
+      case 'dbaas-docs':
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+        () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
       ])
 
