@@ -22,6 +22,7 @@ const toolsLandingPageData = [
     iconName: 'tiup',
     desc: 'toolsCard.tiup.desc',
     link: '/tidb/dev/tiup-documentation-guide',
+
   },
 ]
 

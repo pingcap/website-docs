@@ -27,6 +27,7 @@ const Tools = ({ pageContext: { locale } }) => {
                     </div>
                     <div className="desc">
                       {<FormattedMessage id={tool.desc} />}
+
                     </div>
                   </div>
                 </Link>

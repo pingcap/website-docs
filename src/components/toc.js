@@ -113,6 +113,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
       // escape outbound path replacement
       if (!a.getAttribute('href').match(absPathRegx)) {
+
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)

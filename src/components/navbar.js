@@ -91,6 +91,7 @@ const Navbar = (prop) => {
             >
               <FormattedMessage id="navbar.tidb" />
             </IntlLink>
+
             <IntlLink
               to="/tools/"
               className="navbar-item with-main-section"
