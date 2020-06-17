@@ -130,6 +130,22 @@ function main(argv) {
       )
 
       break
+    case 'dbaas-docs':
+      retrieveAllMDs(
+        {
+          owner: 'pingcap',
+          repo,
+          ref,
+          path: path ? path : '',
+        },
+        `${__dirname}/contents/en/dbaas-docs/${ref}`,
+        [
+          () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+        ]
+      )
+      
+      break
     default:
       break
   }

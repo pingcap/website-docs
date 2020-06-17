@@ -97,20 +97,9 @@ const Navbar = () => {
             >
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
-            {/* <IntlLink to="/cloud" className="navbar-item with-main-section">
+           <IntlLink to="/tidbcloud/beta" className="navbar-item with-main-section">
               <FormattedMessage id="navbar.cloud" />
             </IntlLink>
-            <IntlLink
-              to="/developer-guide"
-              className="navbar-item with-main-section has-no-border"
-            >
-              <FormattedMessage id="navbar.developerGuide" />
-            </IntlLink> */}
-            {/* <div className="navbar-item with-contact-us">
-              <Button as="a" className="contact-us" color="primary" rounded>
-                <FormattedMessage id="navbar.contactUs" />
-              </Button>
-            </div> */}
             <a
               href="mailto:info@pingcap.com"
               className="navbar-item with-main-section"
