@@ -20,6 +20,7 @@ import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
+import { useLocation } from '@reach/router'
 
 const Doc = ({
   pageContext: {
@@ -53,15 +54,19 @@ const Doc = ({
         const labelText = quote.children[0].children[0].innerHTML
 
         switch (labelText) {
+          case 'Note:':
           case '注意：':
             addStyleToQuote(quote, 'note')
             break
+          case 'Warning:':
           case '警告：':
             addStyleToQuote(quote, 'warning')
             break
+          case 'Tip:':
           case '建议：':
             addStyleToQuote(quote, 'tips')
             break
+          case 'Error:':
           case '错误：':
             addStyleToQuote(quote, 'error')
             break
@@ -129,13 +134,41 @@ const Doc = ({
 
   function replaceItemURL(item) {
     let itemURL
-    if(item) {
-      itemURL = item.replace(/\s/g, '-')
-      .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
-      .toLowerCase()
+    if (item) {
+      itemURL = item
+        .replace(/\s/g, '-')
+        .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
+        .toLowerCase()
     }
-    
+
     return itemURL
+  }
+
+  function smoothScroll(hash) {
+    // const liClientRect = e.target.getBoundingClientRect()
+    // const location = useLocation()
+    // const hash = location.hash
+
+    // function _scrollListener() {
+    //   const headClinetRect = document.getElementById(hash).getBoundingClientRect()
+    //       const docClientRect = document.getElementsByClassName('container')[0].getBoundingClientRect()
+    //       const dy = headClinetRect.top - docClientRect.top - docClientRect.height
+
+
+    //   headID.scrollTo({
+    //     top: headY.top + 500,
+    //     behavior: 'smooth',
+    //   })
+
+
+    //   window.removeEventListener('scroll', _scrollListener)
+
+    // console.log('cancel')
+    // }
+    // window.addEventListener('scroll', _scrollListener)
+    // console.log('set')
+    // const docID = document.getElementsByClassName('PingCAP-Doc')[0]
+    // const docY = docID.getBoundingClientRect()
   }
 
   function renderItems(items) {
@@ -146,6 +179,7 @@ const Doc = ({
             <a
               href={'#' + replaceItemURL(item.url)}
               dangerouslySetInnerHTML={{ __html: item.title }}
+              onClick={() => smoothScroll(replaceItemURL(item.url))}
             ></a>
             {item.items && renderItems(item.items)}
           </li>
