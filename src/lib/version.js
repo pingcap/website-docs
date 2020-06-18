@@ -40,9 +40,11 @@ export function convertDocAndRef([doc, ref]) {
       result[1] = docsDMVersion[ref]
 
       break
-    case 'dbaas-docs':
+    case 'docs-dbaas':
       result[0] = 'tidbcloud'
       result[1] = docsCloudVersion[ref]
+      
+      break
     default:
       break
   }
