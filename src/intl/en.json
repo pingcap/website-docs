@@ -15,8 +15,7 @@
   "shortcodes": {
     "note": "Note",
     "warning": "Warning",
-    "tip": "Tip",
-    "error": "Error"
+    "tips": "Tips"
   },
   "search": {
     "type": "Type:",
