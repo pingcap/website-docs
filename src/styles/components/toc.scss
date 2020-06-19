@@ -76,7 +76,7 @@ $navbar-height: 5.25rem; // 84px
       }
 
       ul {
-        padding-left: 1rem;
+        padding-left: 0.5rem;
         overflow: hidden;
         transition: height 0.25s ease;
       }
@@ -95,6 +95,7 @@ $navbar-height: 5.25rem; // 84px
       }
 
       > li {
+        padding-right: 12px;
         padding-bottom: 0.5rem;
         border-bottom: 1px solid $C2;
         word-break: keep-all;

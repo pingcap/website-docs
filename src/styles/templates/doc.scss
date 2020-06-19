@@ -98,14 +98,19 @@ $navbar-height-mobile: 4.25rem; // 68px
       z-index: 1;
       color: $B3;
 
-      &:first-child {
-        @include mobile {
-          margin-top: -$navbar-height-mobile !important;
-          padding-top: $navbar-height-mobile;
-        }
+      &:target:before {
+        content: '';
+        display: block;
+        height: $navbar-height;
+        margin-top: -$navbar-height;
+      }
 
-        margin-top: -$navbar-height !important;
-        padding-top: $navbar-height;
+      &:target > a.anchor.before {
+        transform: translate(-20px, $navbar-height);
+
+        @include mobile {
+          transform: translate(0, $navbar-height);
+        }
       }
     }
 
@@ -133,11 +138,8 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     a {
       color: $primary;
-
       &.anchor {
         &.before {
-          transform: translateX(-50%);
-
           @include mobile {
             transform: translateX(0);
           }
@@ -242,13 +244,12 @@ $navbar-height-mobile: 4.25rem; // 68px
     &:before {
       content: '';
       position: absolute;
-      top: 50%;
+      top: 5px;
       left: 0;
       width: 15px;
       height: 15px;
       background: url(../../../images/download-pdf.svg) no-repeat;
       background-size: contain;
-      transform: translateY(-50%);
     }
   }
 
@@ -284,12 +285,12 @@ $navbar-height-mobile: 4.25rem; // 68px
       }
     }
 
-    &.tips {
+    &.tip {
       background: rgba($color: $T1, $alpha: 0.1);
       border-left: #{$border-width}px solid $T1;
 
       &:before {
-        background: url('../../../images/blockquotes/tips.svg') no-repeat;
+        background: url('../../../images/blockquotes/tip.svg') no-repeat;
       }
     }
 

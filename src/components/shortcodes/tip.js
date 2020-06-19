@@ -4,18 +4,18 @@ import Message from './message'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Tips = ({ children }) => (
+const Tip = ({ children }) => (
   <Message
-    type="tips"
+    type="tip"
     icon={<AttachmentIcon style={{ color: '#a9d359' }} />}
-    title={<FormattedMessage id="shortcodes.tips" />}
+    title={<FormattedMessage id="shortcodes.tip" />}
   >
     {children}
   </Message>
 )
 
-Tips.propTypes = {
+Tip.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Tips
+export default Tip
