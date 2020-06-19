@@ -20,7 +20,7 @@ const Navbar = (prop) => {
       }
     `
   )
-  const [activeNav, setActiveNav] = useState('TiDB')
+  const [activeNav, setActiveNav] = useState('tidb')
 
   const dispatch = useDispatch()
 

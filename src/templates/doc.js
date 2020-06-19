@@ -20,7 +20,6 @@ import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
-import { useLocation } from '@reach/router'
 
 const Doc = ({
   pageContext: {
@@ -64,7 +63,7 @@ const Doc = ({
             break
           case 'Tip:':
           case '建议：':
-            addStyleToQuote(quote, 'tips')
+            addStyleToQuote(quote, 'tip')
             break
           case 'Error:':
           case '错误：':
@@ -144,33 +143,6 @@ const Doc = ({
     return itemURL
   }
 
-  function smoothScroll(hash) {
-    // const liClientRect = e.target.getBoundingClientRect()
-    // const location = useLocation()
-    // const hash = location.hash
-
-    // function _scrollListener() {
-    //   const headClinetRect = document.getElementById(hash).getBoundingClientRect()
-    //       const docClientRect = document.getElementsByClassName('container')[0].getBoundingClientRect()
-    //       const dy = headClinetRect.top - docClientRect.top - docClientRect.height
-
-
-    //   headID.scrollTo({
-    //     top: headY.top + 500,
-    //     behavior: 'smooth',
-    //   })
-
-
-    //   window.removeEventListener('scroll', _scrollListener)
-
-    // console.log('cancel')
-    // }
-    // window.addEventListener('scroll', _scrollListener)
-    // console.log('set')
-    // const docID = document.getElementsByClassName('PingCAP-Doc')[0]
-    // const docY = docID.getBoundingClientRect()
-  }
-
   function renderItems(items) {
     return (
       <ul>
@@ -179,7 +151,6 @@ const Doc = ({
             <a
               href={'#' + replaceItemURL(item.url)}
               dangerouslySetInnerHTML={{ __html: item.title }}
-              onClick={() => smoothScroll(replaceItemURL(item.url))}
             ></a>
             {item.items && renderItems(item.items)}
           </li>
