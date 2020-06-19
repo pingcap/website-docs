@@ -53,19 +53,15 @@ const Doc = ({
         const labelText = quote.children[0].children[0].innerHTML
 
         switch (labelText) {
-          case 'Note:':
           case '注意：':
             addStyleToQuote(quote, 'note')
             break
-          case 'Warning:':
           case '警告：':
             addStyleToQuote(quote, 'warning')
             break
-          case 'Tip:':
           case '建议：':
-            addStyleToQuote(quote, 'tip')
+            addStyleToQuote(quote, 'tips')
             break
-          case 'Error:':
           case '错误：':
             addStyleToQuote(quote, 'error')
             break
@@ -133,13 +129,12 @@ const Doc = ({
 
   function replaceItemURL(item) {
     let itemURL
-    if (item) {
-      itemURL = item
-        .replace(/\s/g, '-')
-        .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
-        .toLowerCase()
+    if(item) {
+      itemURL = item.replace(/\s/g, '-')
+      .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
+      .toLowerCase()
     }
-
+    
     return itemURL
   }
 
