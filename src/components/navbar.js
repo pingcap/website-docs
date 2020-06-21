@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
 import { setSearchValue } from '../state'
+import { useLocation } from '@reach/router'
 
 const Navbar = (prop) => {
   const locale = prop.locale
@@ -19,10 +20,13 @@ const Navbar = (prop) => {
       }
     `
   )
+  const [activeNav, setActiveNav] = useState('tidb')
 
   const dispatch = useDispatch()
 
   const { docInfo, searchValue } = useSelector((state) => state)
+
+  const location = useLocation()
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
@@ -31,6 +35,12 @@ const Navbar = (prop) => {
   const handleSetSearchValue = (value) => dispatch(setSearchValue(value))
 
   useEffect(() => {
+    const pageType =
+      locale === 'zh'
+        ? location.pathname.split('/')[2]
+        : location.pathname.split('/')[1]
+    setActiveNav(pageType)
+
     const scrollListener = () => {
       const winScrollTop = document.documentElement.scrollTop
 
@@ -86,7 +96,9 @@ const Navbar = (prop) => {
           <div className="navbar-end">
             <IntlLink
               to="/tidb/v4.0"
-              className="navbar-item with-main-section"
+              className={`navbar-item with-main-section ${
+                activeNav === 'tidb' && !burgerActive ? 'is-active' : ''
+              }`}
               type="innerLink"
             >
               <FormattedMessage id="navbar.tidb" />
@@ -94,7 +106,9 @@ const Navbar = (prop) => {
 
             <IntlLink
               to="/tools/"
-              className="navbar-item with-main-section"
+              className={`navbar-item with-main-section ${
+                activeNav === 'tools' && !burgerActive ? 'is-active' : ''
+              }`}
               type="innerLink"
             >
               <FormattedMessage id="navbar.tools" />
@@ -102,7 +116,9 @@ const Navbar = (prop) => {
             {locale === 'en' && (
               <IntlLink
                 to="/tidbcloud/beta"
-                className="navbar-item with-main-section"
+                className={`navbar-item with-main-section ${
+                  activeNav === 'tidbcloud' && !burgerActive ? 'is-active' : ''
+                }`}
               >
                 <FormattedMessage id="navbar.cloud" />
               </IntlLink>
