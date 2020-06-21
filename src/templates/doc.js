@@ -234,9 +234,18 @@ const Doc = ({
               </section>
             </div>
             <div className="column is-2 doc-toc-column">
-              <DownloadPDF downloadURL={downloadURL} />
-              <ImproveDocLink repoInfo={repoInfo} base={base} />
-              <FeedbackDocLink repoInfo={repoInfo} base={base} />
+              <>
+                {docRefArray[0] === 'tidbcloud' ? (
+                  ''
+                ) : (
+                  <div className="docs-operation">
+                    <DownloadPDF downloadURL={downloadURL} />
+                    <ImproveDocLink repoInfo={repoInfo} base={base} />
+                    <FeedbackDocLink repoInfo={repoInfo} base={base} />
+                  </div>
+                )}
+              </>
+
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
