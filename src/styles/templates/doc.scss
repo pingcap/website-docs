@@ -112,6 +112,15 @@ $navbar-height-mobile: 4.25rem; // 68px
           transform: translate(0, $navbar-height);
         }
       }
+
+      &::before {
+        content: '';
+        display: block;
+        position: relative;
+        width: 0;
+        height: $navbar-height;
+        margin-top: -$navbar-height;
+      }
     }
 
     h1 {
@@ -140,8 +149,10 @@ $navbar-height-mobile: 4.25rem; // 68px
       color: $primary;
       &.anchor {
         &.before {
+          transform: translate(-50%, $navbar-height);
+
           @include mobile {
-            transform: translateX(0);
+            transform: translate(0, $navbar-height);
           }
         }
       }
