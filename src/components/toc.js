@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import html from 'remark-html'
 import remark from 'remark'
+import { useLocation } from '@reach/router'
 
 const TOC = ({ data, pathPrefix, fullPath }) => {
   const rawBody = data.rawBody
@@ -14,6 +15,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
 
   const tocRef = useRef(null)
+  const location = useLocation()
 
   const bindClickEventToTOC = () => {
     const toc = tocRef.current
@@ -110,19 +112,21 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
   useEffect(() => {
     const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-
       // escape outbound path replacement
       if (!a.getAttribute('href').match(absPathRegx)) {
-
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)
           .replace(/\.md/g, '')
 
         a.href = pathPrefix + lastSegment
+        
+        const _fullPath = location.hash
+          ? location.pathname.slice(0, -1) + location.hash
+          : fullPath
 
         // unfold active nav item
-        if (pathPrefix + lastSegment === fullPath) {
+        if (pathPrefix + lastSegment === _fullPath) {
           let tagTempEle = a
           const liClientRect = tagTempEle.parentElement.getBoundingClientRect()
           const tocClientRect = tocRef.current.getBoundingClientRect()

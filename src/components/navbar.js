@@ -20,7 +20,7 @@ const Navbar = (prop) => {
       }
     `
   )
-  const [activeNav, setActiveNav] = useState('tidb')
+  const [activeNav, setActiveNav] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -107,7 +107,12 @@ const Navbar = (prop) => {
             <IntlLink
               to="/tools/"
               className={`navbar-item with-main-section ${
-                activeNav === 'tools' && !burgerActive ? 'is-active' : ''
+                (activeNav === 'tools' ||
+                  activeNav === 'tidb-data-migration' ||
+                  activeNav === 'tidb-in-kubernetes') &&
+                !burgerActive
+                  ? 'is-active'
+                  : ''
               }`}
               type="innerLink"
             >

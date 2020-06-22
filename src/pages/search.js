@@ -5,6 +5,7 @@ import {
   docsDMVersion,
   docsTiDBOperatorVersion,
   docsTiDBVersion,
+  docsCloudVersion,
 } from '../lib/version'
 import { getDocInfo, setLoading, setSearchValue } from '../state'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +21,7 @@ import { useLocation } from '@reach/router'
 const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
+const docsCloudVersionList = Object.values(docsCloudVersion)
 
 const matchToVersionList = (match) => {
   switch (match) {
@@ -29,6 +31,8 @@ const matchToVersionList = (match) => {
       return docsTiDBOperatorVersionList
     case 'tidb-data-migration':
       return docsDMVersionList
+    case 'tidbcloud':
+      return docsCloudVersionList
     default:
       return docsTiDBVersionList
   }
@@ -54,6 +58,11 @@ const types = [
         version: docsDMVersionList,
       },
     ],
+  },
+  {
+    name: 'Cloud',
+    match: 'tidbcloud',
+    version: docsCloudVersionList,
   },
 ]
 

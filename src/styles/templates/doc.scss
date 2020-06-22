@@ -196,7 +196,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     overflow: auto;
 
     .title {
-      margin: 2rem 0 1rem;
+      margin: 0 0 1rem;
       color: $B3;
       font-size: $size-7;
     }
@@ -251,6 +251,10 @@ $navbar-height-mobile: 4.25rem; // 68px
       background: url(../../../images/download-pdf.svg) no-repeat;
       background-size: contain;
     }
+  }
+
+  .docs-operation {
+    margin-bottom: 2rem;
   }
 
   .improve-doc::before {

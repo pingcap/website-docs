@@ -118,22 +118,27 @@ const footerColumnsZh = [
 
 const footerColumnsEn = [
   {
-    name: 'Product',
+    name: 'Open Source Ecosystem',
     items: [
       {
         name: 'TiDB',
-        link: '/tidb/v4.0',
-        linkType: 'innerLink',
+        link: 'https://pingcap.com/products/tidb',
+        linkType: 'outBoundLink',
       },
       {
-        name: 'Cloud',
-        link: '/tidbcloud/beta',
-        linkType: 'innerLink',
+        name: 'TiKV',
+        link: 'https://github.com/tikv/tikv',
+        linkType: 'outBoundLink',
       },
       {
-        name: 'Tools',
-        link: '/tools',
-        linkType: 'innerLink',
+        name: 'TiSpark',
+        link: 'https://github.com/pingcap/tispark',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Chaos Mesh®',
+        link: 'https://github.com/pingcap/chaos-mesh',
+        linkType: 'outBoundLink',
       },
     ],
   },
@@ -146,53 +151,74 @@ const footerColumnsEn = [
         linkType: 'innerLink',
       },
       {
-        name: 'Best Practices',
-        link: '/tidb/v4.0/tidb-best-practices',
-        linkType: 'innerLink',
-      },
-      {
-        name: 'FAQ',
-        link: '/tidb/v4.0/tidb-faq',
-        linkType: 'innerLink',
-      },
-      {
-        name: 'Release Notes',
-        link: '/tidb/v4.0/release-notes',
-        linkType: 'innerLink',
-      },
-      {
-        name: 'Blog',
-        link: 'https://pingcap.com/blog/',
-        linkType: 'outBoundLink',
-      },
-    ],
-  },
-  {
-    name: 'Learn',
-    items: [
-      {
-        name: 'Docs',
+        name: 'Documentation',
         link: '/tidb/v4.0',
         linkType: 'innerLink',
       },
       {
-        name: 'TiDB In Action',
-        link: 'https://book.tidb.io/',
+        name: 'Blog',
+        link: 'https://pingcap.com/blog',
         linkType: 'outBoundLink',
       },
-    ],
-  },
-  {
-    name: 'Support',
-    items: [
       {
-        name: 'Contact Us',
-        link: 'mailto:info@pingcap.com',
+        name: 'Community',
+        link: 'https://pingcap.com/community',
+
         linkType: 'outBoundLink',
       },
       {
         name: 'GitHub',
         link: 'https://github.com/pingcap',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+  {
+    name: 'Use Cases',
+    items: [
+      {
+        name: 'Internet',
+        link: 'https://pingcap.com/case-studies/Internet',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Gaming',
+        link: 'https://pingcap.com/case-studies/Gaming',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Financial services',
+        link: 'https://pingcap.com/case-studies/Financial-Services',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+  {
+    name: 'Company',
+    items: [
+      {
+        name: 'About',
+        link: 'https://pingcap.com/about',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Contact',
+        link: 'https://pingcap.com/contact-us',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Careers',
+        link: 'https://pingcap.com/careers',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Cookie Policy',
+        link: 'https://pingcap.com/cookie-policy',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Privacy Policy',
+        link: 'https://pingcap.com/privacy-policy',
         linkType: 'outBoundLink',
       },
     ],
