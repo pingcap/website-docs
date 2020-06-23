@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import html from 'remark-html'
 import remark from 'remark'
-import { useLocation } from '@reach/router'
 
 const TOC = ({ data, pathPrefix, fullPath }) => {
   const rawBody = data.rawBody
@@ -15,7 +14,6 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
 
   const tocRef = useRef(null)
-  const location = useLocation()
 
   const bindClickEventToTOC = () => {
     const toc = tocRef.current
@@ -120,13 +118,15 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
           .replace(/\.md/g, '')
 
         a.href = pathPrefix + lastSegment
-        
-        const _fullPath = location.hash
-          ? location.pathname.slice(0, -1) + location.hash
-          : fullPath
+
+        let hrefWithoutHash = pathPrefix + lastSegment
+
+        if (hrefWithoutHash.split('#').length > 1) {
+          hrefWithoutHash = (pathPrefix + lastSegment).split('#') [0]
+        }
 
         // unfold active nav item
-        if (pathPrefix + lastSegment === _fullPath) {
+        if (hrefWithoutHash === fullPath) {
           let tagTempEle = a
           const liClientRect = tagTempEle.parentElement.getBoundingClientRect()
           const tocClientRect = tocRef.current.getBoundingClientRect()
