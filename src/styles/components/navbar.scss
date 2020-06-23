@@ -51,6 +51,7 @@
   .navbar-brand {
     display: flex;
     align-items: center;
+    margin-left: 0;
 
     @include mobile {
       width: 100px;
