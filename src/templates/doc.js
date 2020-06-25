@@ -239,7 +239,9 @@ const Doc = ({
                   ''
                 ) : (
                   <div className="docs-operation">
-                    <DownloadPDF downloadURL={downloadURL} />
+                    {locale == 'zh' && (
+                      <DownloadPDF downloadURL={downloadURL} />
+                    )}
                     <ImproveDocLink repoInfo={repoInfo} base={base} />
                     <FeedbackDocLink repoInfo={repoInfo} base={base} />
                   </div>
