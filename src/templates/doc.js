@@ -138,6 +138,7 @@ const Doc = ({
         .replace(/\s/g, '-')
         .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
         .toLowerCase()
+        .replace(/-span-classversion-mark(.+)/, '')
     }
 
     return itemURL
