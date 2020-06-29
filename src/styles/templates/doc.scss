@@ -148,7 +148,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     ul {
-      list-style: inherit;
+      list-style: initial;
     }
 
     pre {
@@ -176,6 +176,26 @@ $navbar-height-mobile: 4.25rem; // 68px
     :not(pre) > code[class*='language-text'] {
       white-space: normal;
       word-break: break-word;
+    }
+
+    .version-mark {
+      position: relative;
+      padding: 0 7px 0 25px;
+      font-style: italic;
+      font-size: 16px;
+      color: $B4;
+    }
+
+    .version-mark::before {
+        content: '';
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        transform: translateY(-50%);
+        background-image: url(../../../images/version-mark.png);
+        background-size: 20px;
     }
   }
 
