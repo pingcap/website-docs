@@ -240,7 +240,7 @@ const Doc = ({
                   ''
                 ) : (
                   <div className="docs-operation">
-                    {locale == 'zh' && (
+                    {locale === 'zh' && (
                       <DownloadPDF downloadURL={downloadURL} />
                     )}
                     <ImproveDocLink repoInfo={repoInfo} base={base} />

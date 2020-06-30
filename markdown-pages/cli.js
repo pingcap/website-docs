@@ -9,6 +9,7 @@ const {
   TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
+  createReplaceTabPanelStream
 } = require('./utils')
 
 const argv = yargs
@@ -63,6 +64,7 @@ function main(argv) {
         [
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
         ]
       )
 
