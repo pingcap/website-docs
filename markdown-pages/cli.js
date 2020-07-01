@@ -9,7 +9,7 @@ const {
   TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
-  createReplaceTabPanelStream
+  createReplaceTabPanelStream,
 } = require('./utils')
 
 const argv = yargs
@@ -48,6 +48,7 @@ function main(argv) {
           [
             () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
             () => createReplaceCopyableStream(),
+            () => createReplaceTabPanelStream(),
           ]
         )
       })
@@ -81,6 +82,7 @@ function main(argv) {
         [
           () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
         ]
       )
 
@@ -105,6 +107,7 @@ function main(argv) {
         [
           () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
         ]
       )
 
@@ -129,6 +132,7 @@ function main(argv) {
         [
           () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
         ]
       )
 
@@ -145,6 +149,7 @@ function main(argv) {
         [
           () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
         ]
       )
 
@@ -166,6 +171,7 @@ function sync(argv) {
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
       ])
 
       break
@@ -173,14 +179,16 @@ function sync(argv) {
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
       ])
 
       break
-    
-      case 'dbaas-docs':
+
+    case 'dbaas-docs':
       handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
       ])
 
       break
