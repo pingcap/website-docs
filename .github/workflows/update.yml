@@ -66,9 +66,9 @@ jobs:
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}-1
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}-1
             ${{ runner.os }}-gatsby-cache-
 
       - name: Restore gatsby build
@@ -76,9 +76,9 @@ jobs:
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-gatsby-build-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-gatsby-build-${{ hashFiles('yarn.lock') }}-1
           restore-keys: |
-            ${{ runner.os }}-gatsby-build-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-gatsby-build-${{ hashFiles('yarn.lock') }}-1
             ${{ runner.os }}-gatsby-build-
 
       - name: Build website
