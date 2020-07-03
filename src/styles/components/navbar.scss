@@ -1,9 +1,13 @@
 .PingCAP-Navbar {
   @include mobile {
     height: 4.25rem;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   height: 5.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 
   &.has-border-and-shadow {
     border-bottom: 1px solid $C2;

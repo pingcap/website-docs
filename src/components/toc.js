@@ -122,7 +122,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
         let hrefWithoutHash = pathPrefix + lastSegment
 
         if (hrefWithoutHash.split('#').length > 1) {
-          hrefWithoutHash = (pathPrefix + lastSegment).split('#') [0]
+          hrefWithoutHash = (pathPrefix + lastSegment).split('#')[0]
         }
 
         // unfold active nav item

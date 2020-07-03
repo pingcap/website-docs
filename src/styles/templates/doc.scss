@@ -10,7 +10,13 @@ $navbar-height-mobile: 4.25rem; // 68px
     @include mobile {
       padding-top: 1.5rem;
     }
+
+    @include desktop {
+      padding-top: 1.5rem !important;
+    }
+
     @include tablet {
+      padding-top: $navbar-height;
       padding-left: 0.75rem;
       padding-right: 0.75rem;
     }
