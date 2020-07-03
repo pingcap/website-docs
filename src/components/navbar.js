@@ -132,6 +132,7 @@ const Navbar = (prop) => {
               href="mailto:info@pingcap.com"
               className="navbar-item with-main-section"
               target="_blank"
+              rel="noreferrer"
             >
               <FormattedMessage id="navbar.contactUs" />
             </a>
