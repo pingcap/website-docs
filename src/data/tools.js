@@ -3,13 +3,13 @@ const toolsLandingPageData = [
     type: 'toolsCard.tidbOperator.type',
     iconName: 'tidb-operator',
     desc: 'toolsCard.tidbOperator.desc',
-    link: '/tidb-in-kubernetes/v1.1',
+    link: '/tidb-in-kubernetes/stable',
   },
   {
     type: 'toolsCard.tidbDataMigration.type',
     iconName: 'dm',
     desc: 'toolsCard.tidbDataMigration.desc',
-    link: '/tidb-data-migration/v1.0',
+    link: '/tidb-data-migration/stable',
   },
   {
     type: 'toolsCard.databaseTools.type',

@@ -83,10 +83,10 @@ const Footer = (prop) => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <Link to="/tidb/v4.0" className="dropdown-item">
+            <Link to="/tidb/stable" className="dropdown-item">
               English
             </Link>
-            <Link to="/zh/tidb/v4.0" className="dropdown-item">
+            <Link to="/zh/tidb/stable" className="dropdown-item">
               简体中文
             </Link>
           </div>
