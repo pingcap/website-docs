@@ -6,7 +6,7 @@ import {
   docsTiDBVersion,
   docsDMVersion,
   docsTiDBOperatorVersion,
-  docsCloudVersion
+  docsCloudVersion,
 } from '../lib/version'
 
 import { Button } from '@seagreenio/react-bulma'
@@ -19,7 +19,7 @@ const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
 
 const Version = ({ relativeDir, base, versions }) => {
-  const [doc, ref] = convertDocAndRef(relativeDir.split('/'))
+  const [doc, ref, stableVersion] = convertDocAndRef(relativeDir.split('/'))
 
   const baseName = base.replace('.md', '')
 
@@ -83,20 +83,25 @@ const Version = ({ relativeDir, base, versions }) => {
             dropdownItems.map((item) => (
               <Fragment key={item}>
                 {versions && versions.indexOf(item) === -1 ? (
-                  <span className="dropdown-item unclickable-btn" >
-                    {item}
+                  <span className="dropdown-item unclickable-btn">
+                    {item === 'stable'
+                      ? `${stableVersion} (stable)`
+                      : `${item}`}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
                     </span>
                   </span>
                 ) : (
-                  <IntlLink type="innerLink"
+                  <IntlLink
+                    type="innerLink"
                     to={`/${doc}/${item}/${
                       baseName === '_index' ? '' : baseName
                     }`}
                     className="dropdown-item"
                   >
-                    {item}
+                    {item === 'stable'
+                      ? `${stableVersion} (stable)`
+                      : `${item}`}
                   </IntlLink>
                 )}
               </Fragment>

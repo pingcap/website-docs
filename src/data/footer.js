@@ -4,7 +4,7 @@ const footerColumnsZh = [
     items: [
       {
         name: 'TiDB',
-        link: '/tidb/v4.0',
+        link: '/tidb/stable',
         linkType: 'innerLink',
       },
       {
@@ -49,7 +49,7 @@ const footerColumnsZh = [
     items: [
       {
         name: '文档',
-        link: '/tidb/v4.0',
+        link: '/tidb/stable',
         linkType: 'innerLink',
       },
       {
@@ -147,12 +147,12 @@ const footerColumnsEn = [
     items: [
       {
         name: 'Quick Start',
-        link: '/tidb/v4.0/quick-start-with-tidb',
+        link: '/tidb/stable/quick-start-with-tidb',
         linkType: 'innerLink',
       },
       {
         name: 'Documentation',
-        link: '/tidb/v4.0',
+        link: '/tidb/stable',
         linkType: 'innerLink',
       },
       {

@@ -1,5 +1,7 @@
-const originalVersionRegex = /release-\d+(\.\d+)+/
 const masterRegex = /master/
+const tidbStableRegx = /release-4.0/
+const dmStableRegx = /release-1.0/
+const operatorStableRegx = /release-1.1/
 
 function renameDoc(name) {
   switch (name) {
@@ -16,17 +18,26 @@ function renameDoc(name) {
   }
 }
 
-function renameDocVersion(version, docName) {
-  if (version.match(masterRegex)) {
-    if (docName === 'tidbcloud') {
-      return 'beta'
-    } else {
-      return 'dev'
-    }
-  } else if (version.match(originalVersionRegex)) {
-    return version.replace('release-', 'v')
+function renameVersion(version, stableRegx) {
+  if (version.match(stableRegx)) {
+    return 'stable'
+  } else if (version.match(masterRegex)) {
+    return 'dev'
   } else {
-    return version
+    return version.replace('release-', 'v')
+  }
+}
+
+function renameDocVersion(version, docName) {
+  switch (docName) {
+    case 'tidb':
+      return renameVersion(version, tidbStableRegx)
+    case 'tidb-in-kubernetes':
+      return renameVersion(version, operatorStableRegx)
+    case 'tidb-data-migration':
+      return renameVersion(version, dmStableRegx)
+    default:
+      return 'beta'
   }
 }
 

@@ -95,7 +95,7 @@ const Navbar = (prop) => {
         <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
           <div className="navbar-end">
             <IntlLink
-              to="/tidb/v4.0"
+              to="/tidb/stable"
               className={`navbar-item with-main-section ${
                 activeNav === 'tidb' && !burgerActive ? 'is-active' : ''
               }`}
