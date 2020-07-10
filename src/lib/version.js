@@ -24,7 +24,7 @@ export const docsDMVersion = {
 }
 
 export const docsCloudVersion = {
-  master: 'beta'
+  master: 'beta',
 }
 
 export function convertDocAndRef([doc, ref]) {
@@ -41,20 +41,20 @@ export function convertDocAndRef([doc, ref]) {
     case 'docs-tidb-operator':
       result[0] = 'tidb-in-kubernetes'
       result[1] = docsTiDBOperatorVersion[ref]
-      result[2] = dmStableVersion
+      result[2] = operatorStableVersion
 
       break
     case 'docs-dm':
       result[0] = 'tidb-data-migration'
       result[1] = docsDMVersion[ref]
-      result[2] = operatorStableVersion
+      result[2] = dmStableVersion
 
       break
     case 'docs-dbaas':
       result[0] = 'tidbcloud'
       result[1] = docsCloudVersion[ref]
       result[2] = ''
-      
+
       break
     default:
       break
