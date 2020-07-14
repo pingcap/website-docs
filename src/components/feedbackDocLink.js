@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 const FeedbackDocLink = ({ repoInfo, base }) => {
   const { repo, pathPrefix } = repoInfo || {}
   const location = useLocation()
-  const origin = location.origin
+  const origin = 'https://docs.pingcap.com'
   const pageURL = location.pathname
 
   return (
