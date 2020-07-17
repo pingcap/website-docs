@@ -60,15 +60,18 @@ jobs:
       - name: Download docs-dbaas
         run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
 
+      - name: Current Time
+        uses: gerred/current-time@v1.0.0
+        id: current-time
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-gatsby-cache-${{ steps.current-time.outputs.time }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-gatsby-cache-${{ steps.current-time.outputs.time }}
             ${{ runner.os }}-gatsby-cache-
 
       - name: Restore gatsby build
@@ -76,9 +79,9 @@ jobs:
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-gatsby-build-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-gatsby-build-${{ steps.current-time.outputs.time }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-build-${{ hashFiles('yarn.lock') }}
+            ${{ runner.os }}-gatsby-build-${{ steps.current-time.outputs.time }}
             ${{ runner.os }}-gatsby-build-
 
       - name: Build website
