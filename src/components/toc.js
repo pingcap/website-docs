@@ -148,7 +148,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
             }
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
             tocRef.current.scrollTo({
-              top: tocClientRect.height + dy,
+              top: tocClientRect.height + dy - 100,
               left: 0,
               behavior: 'smooth',
             })
