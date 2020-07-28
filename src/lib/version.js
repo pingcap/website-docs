@@ -27,10 +27,6 @@ export const docsCloudVersion = {
   master: 'beta',
 }
 
-export const docsCloudVersion = {
-  master: 'beta'
-}
-
 export function convertDocAndRef([doc, ref]) {
   let stableVersion = ''
   const result = [doc, ref, stableVersion]
