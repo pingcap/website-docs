@@ -5,8 +5,12 @@ import {
   docsDMVersion,
   docsTiDBOperatorVersion,
   docsTiDBVersion,
+  docsCloudVersion,
+  tidbStableVersion,
+  dmStableVersion,
+  operatorStableVersion
 } from '../lib/version'
-import { getDocInfo, setLoading, setSearchValue } from '../state'
+import { getDocInfo, setLoading, setSearchValue, defaultDocInfo } from '../state'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FormattedMessage } from 'react-intl'
@@ -20,6 +24,7 @@ import { useLocation } from '@reach/router'
 const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
+const docsCloudVersionList = Object.values(docsCloudVersion)
 
 const matchToVersionList = (match) => {
   switch (match) {
@@ -29,6 +34,8 @@ const matchToVersionList = (match) => {
       return docsTiDBOperatorVersionList
     case 'tidb-data-migration':
       return docsDMVersionList
+    case 'tidbcloud':
+      return docsCloudVersionList
     default:
       return docsTiDBVersionList
   }
@@ -55,14 +62,19 @@ const types = [
       },
     ],
   },
+  {
+    name: 'Cloud',
+    match: 'tidbcloud',
+    version: docsCloudVersionList,
+  },
 ]
 
 const Search = ({ pageContext: { locale } }) => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const lang = searchParams.get('lang')
-  const type = searchParams.get('type')
-  const version = searchParams.get('version')
+  const lang = searchParams.get('lang') || defaultDocInfo['lang']
+  const type = searchParams.get('type') || defaultDocInfo['type']
+  const version = searchParams.get('version') || defaultDocInfo['version']
   const query = searchParams.get('q')
 
   const dispatch = useDispatch()
@@ -104,7 +116,8 @@ const Search = ({ pageContext: { locale } }) => {
   }
 
   const handleSetVersionAndExecSearch = (version) => () => {
-    setSelectedVersion(version)
+    const _version = version === 'stable' ? replaceStableVersion() : `${version}`
+    setSelectedVersion(_version)
   }
 
   useEffect(() => {
@@ -126,7 +139,7 @@ const Search = ({ pageContext: { locale } }) => {
     index
       .search(query, {
         hitsPerPage: 300,
-        facetFilters: [`version:${selectedVersion}`],
+        facetFilters: [`version:${selectedVersion === 'stable' ? replaceStableVersion() : `${selectedVersion}`}`],
       })
       .then(({ hits }) => {
         setResults(hits)
@@ -201,6 +214,19 @@ const Search = ({ pageContext: { locale } }) => {
     </div>
   )
 
+  function replaceStableVersion() {
+    switch (selectedType) {
+      case 'tidb':
+        return tidbStableVersion
+      case 'tidb-data-migration':
+        return dmStableVersion
+      case 'tidb-in-kubernetes':
+        return operatorStableVersion
+      default:
+        break
+    }
+  }
+
   const VersionList = () => (
     <div className="version-list">
       {selectedVersionList &&
@@ -213,7 +239,7 @@ const Search = ({ pageContext: { locale } }) => {
             onClick={handleSetVersionAndExecSearch(version)}
             onKeyDown={handleSetVersionAndExecSearch(version)}
           >
-            {version}
+            {version === 'stable' ? replaceStableVersion() : `${version}`}
           </span>
         ))}
     </div>

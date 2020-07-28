@@ -14,7 +14,8 @@
   "shortcodes": {
     "note": "注意",
     "warning": "警告",
-    "tips": "小贴士"
+    "tip": "小贴士",
+    "error": "错误"
   },
   "search": {
     "type": "分类：",

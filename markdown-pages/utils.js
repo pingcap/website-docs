@@ -14,8 +14,14 @@ function createReplaceImagePathStream(replaced) {
 }
 
 function createReplaceCopyableStream() {
-  return replaceStream(/{{<\scopyable(.+)>}}/g, function (match, p1) {
-    return `<WithCopy tag="${p1.replace(/"/g, '').trim()}" />`
+  return replaceStream(/{{<\scopyable(.+)>}}/g, function (match, copyMsg) {
+    return `<WithCopy tag="${copyMsg.replace(/"/g, '').trim()}" />`
+  })
+}
+
+function createReplaceTabPanelStream() {
+  return replaceStream(/{{<\stabs-panel(.+)>}}/g, function (match, letters) {
+    return `<TabsPanel letters='${letters.replace(/"|\s/g, '')}' />`
   })
 }
 
@@ -52,5 +58,6 @@ module.exports = {
   TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
+  createReplaceTabPanelStream,
   shouldIgnorePath,
 }

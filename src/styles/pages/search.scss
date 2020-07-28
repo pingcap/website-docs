@@ -3,7 +3,7 @@
 .PingCAP-Docs-Search {
   .section.container {
     min-height: 70vh;
-    @include tablet {
+    @include fullhd {
       padding-left: 0;
       padding-right: 0;
     }
@@ -23,10 +23,12 @@
 
       .dropdown {
         outline: none;
+        padding-right: 2rem;
       }
 
       .dropdown-item {
         cursor: pointer;
+        outline: none;
 
         &.is-active {
           color: $B1;
@@ -42,6 +44,7 @@
         padding-right: 2rem;
         color: $B4;
         font-size: $size-7;
+        outline: none;
 
         &:last-child {
           padding-right: 0;

@@ -18,7 +18,7 @@ const IntlLink = ({ to, children, type, ...rest }) => {
       ) : (
         <>
           {linkType === 'outBoundLink' ? (
-            <a {...rest} href={to} target="_blank">
+            <a {...rest} href={to} target="_blank" rel="noreferrer">
               {children}
             </a>
           ) : (

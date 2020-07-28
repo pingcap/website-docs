@@ -14,42 +14,41 @@ const Input = ({
   }
 
   const handleSearchInputKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      navigate(
-        `${
-          lang === 'en' ? '' : '/' + lang
-        }/search?lang=${lang}&type=${type}&version=${version}&q=${searchValue}`,
-        {
-          state: {
-            lang,
-            type,
-            version,
-            query: searchValue,
-          },
-        }
-      )
-    }
+    e.preventDefault()
+    navigate(
+      `${
+        lang === 'en' ? '' : '/' + lang
+      }/search?lang=${lang}&type=${type}&version=${version}&q=${searchValue}`,
+      {
+        state: {
+          lang,
+          type,
+          version,
+          query: searchValue,
+        },
+      }
+    )
   }
 
   return (
     <FormattedMessage id="navbar.searchDocs">
       {(placeholder) => (
-        <div className="field">
+        <form className="field" onSubmit={handleSearchInputKeyDown}>
           <p className="control has-icons-left">
             <input
               aria-label="Search"
               className="input is-small is-rounded"
               type="search"
+              name="q"
               placeholder={placeholder}
               value={searchValue}
               onChange={handleSearchInputChange}
-              onKeyDown={handleSearchInputKeyDown}
             />
             <span className="icon is-left">
               <SearchIcon />
             </span>
           </p>
-        </div>
+        </form>
       )}
     </FormattedMessage>
   )

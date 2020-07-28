@@ -108,12 +108,10 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
   }, [])
 
   useEffect(() => {
-    const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}/
+    const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-
       // escape outbound path replacement
       if (!a.getAttribute('href').match(absPathRegx)) {
-
         const href = a.href
         const lastSegment = href
           .substring(href.lastIndexOf('/') + 1)
@@ -121,8 +119,14 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
         a.href = pathPrefix + lastSegment
 
+        let hrefWithoutHash = pathPrefix + lastSegment
+
+        if (hrefWithoutHash.split('#').length > 1) {
+          hrefWithoutHash = (pathPrefix + lastSegment).split('#')[0]
+        }
+
         // unfold active nav item
-        if (pathPrefix + lastSegment === fullPath) {
+        if (hrefWithoutHash === fullPath) {
           let tagTempEle = a
           const liClientRect = tagTempEle.parentElement.getBoundingClientRect()
           const tocClientRect = tocRef.current.getBoundingClientRect()
@@ -144,7 +148,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
             }
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
             tocRef.current.scrollTo({
-              top: tocClientRect.height + dy,
+              top: tocClientRect.height + dy - 100,
               left: 0,
               behavior: 'smooth',
             })

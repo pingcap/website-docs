@@ -1,7 +1,7 @@
 export const defaultDocInfo = {
   lang: 'en',
   type: 'tidb',
-  version: 'v4.0',
+  version: 'stable',
 }
 
 const SET_LOADING = 'SET_LOADING'

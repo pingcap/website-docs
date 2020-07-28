@@ -1,5 +1,6 @@
 @import '../common';
 @import '../components/navCloumns';
+@import '../components/tabsPanel';
 
 $navbar-height: 5.25rem; // 84px
 $navbar-height-mobile: 4.25rem; // 68px
@@ -9,9 +10,15 @@ $navbar-height-mobile: 4.25rem; // 68px
     @include mobile {
       padding-top: 1.5rem;
     }
+
+    @include desktop {
+      padding-top: 1.5rem !important;
+    }
+
     @include tablet {
-      padding-left: 0;
-      padding-right: 0;
+      padding-top: $navbar-height;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
     }
   }
 
@@ -98,14 +105,19 @@ $navbar-height-mobile: 4.25rem; // 68px
       z-index: 1;
       color: $B3;
 
-      &:first-child {
-        @include mobile {
-          margin-top: -$navbar-height-mobile !important;
-          padding-top: $navbar-height-mobile;
-        }
+      &:target:before {
+        content: '';
+        display: block;
+        height: $navbar-height;
+        margin-top: -$navbar-height;
+      }
 
-        margin-top: -$navbar-height !important;
-        padding-top: $navbar-height;
+      &:target > a.anchor.before {
+        transform: translate(-20px, $navbar-height);
+
+        @include mobile {
+          transform: translate(0, $navbar-height);
+        }
       }
     }
 
@@ -133,11 +145,8 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     a {
       color: $primary;
-
       &.anchor {
         &.before {
-          transform: translateX(-50%);
-
           @include mobile {
             transform: translateX(0);
           }
@@ -146,7 +155,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     ul {
-      list-style: inherit;
+      list-style: initial;
     }
 
     pre {
@@ -175,6 +184,26 @@ $navbar-height-mobile: 4.25rem; // 68px
       white-space: normal;
       word-break: break-word;
     }
+
+    .version-mark {
+      position: relative;
+      padding: 0 7px 0 25px;
+      font-style: italic;
+      font-size: 16px;
+      color: $B4;
+    }
+
+    .version-mark::before {
+        content: '';
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        transform: translateY(-50%);
+        background-image: url(../../../images/version-mark.png);
+        background-size: 20px;
+    }
   }
 
   .gatsby-highlight {
@@ -194,7 +223,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     overflow: auto;
 
     .title {
-      margin: 2rem 0 1rem;
+      margin: 0 0 1rem;
       color: $B3;
       font-size: $size-7;
     }
@@ -242,14 +271,17 @@ $navbar-height-mobile: 4.25rem; // 68px
     &:before {
       content: '';
       position: absolute;
-      top: 50%;
+      top: 5px;
       left: 0;
       width: 15px;
       height: 15px;
       background: url(../../../images/download-pdf.svg) no-repeat;
       background-size: contain;
-      transform: translateY(-50%);
     }
+  }
+
+  .docs-operation {
+    margin-bottom: 2rem;
   }
 
   .improve-doc::before {
@@ -284,12 +316,12 @@ $navbar-height-mobile: 4.25rem; // 68px
       }
     }
 
-    &.tips {
+    &.tip {
       background: rgba($color: $T1, $alpha: 0.1);
       border-left: #{$border-width}px solid $T1;
 
       &:before {
-        background: url('../../../images/blockquotes/tips.svg') no-repeat;
+        background: url('../../../images/blockquotes/tip.svg') no-repeat;
       }
     }
 
