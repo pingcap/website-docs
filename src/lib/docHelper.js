@@ -1,18 +1,39 @@
+const { defaultDocInfo } = require("../state")
+
 /**
  * Get repo info(repo name, branch, pathPrefix) from relativeDir
  */
 exports.getRepoInfo = function (relativeDir, locale) {
   const splitPaths = relativeDir.split('/')
-  const isDocs = splitPaths[0] === 'docs-tidb'
-  const isCloudDocs = splitPaths[0] === 'docs-dbaas'
+  let repo = ''
+  let hasPathPrefix = false
+  const docsType = splitPaths[0]
 
-  const repo = isDocs ? (locale === 'zh' ? 'docs-cn' : 'docs') : splitPaths[0]
+  switch (docsType) {
+    case "docs-tidb":
+      repo = locale === 'zh' ? 'docs-cn' : 'docs'
+      break
+
+    case "docs-dbaas":
+      repo = "dbaas-docs"
+      break
+
+    case "docs-dev-guide":
+      repo = "dev-guide"
+      hasPathPrefix = true
+      break
+
+    default:
+      hasPathPrefix = true
+      repo = docsType
+  }
+  
   let pathPrefix = splitPaths.slice(2).join('/')
   pathPrefix = pathPrefix ? pathPrefix + '/' : ''
-  return {
-    repo: isCloudDocs ? "dbaas-docs" : repo, // doc-cn,
-    ref: splitPaths[1], // master, release-1
-    pathPrefix: (isDocs || isCloudDocs) ? pathPrefix :`${locale}/${pathPrefix}`,
 
+  return {
+    repo: repo,
+    ref: splitPaths[1], // master, release-1
+    pathPrefix: hasPathPrefix ? pathPrefix :`${locale}/${pathPrefix}`,
   }
 }
