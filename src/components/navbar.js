@@ -50,7 +50,7 @@ const Navbar = (prop) => {
     window.addEventListener('scroll', scrollListener)
 
     return () => window.removeEventListener('scroll', scrollListener)
-  }, [])
+  }, [locale, location.pathname])
 
   return (
     <nav
@@ -126,6 +126,16 @@ const Navbar = (prop) => {
                 }`}
               >
                 <FormattedMessage id="navbar.cloud" />
+              </IntlLink>
+            )}
+            {locale === 'zh' && (
+              <IntlLink
+                to="/dev-guide/dev"
+                className={`navbar-item with-main-section ${
+                  activeNav === 'dev-guide' && !burgerActive ? 'is-active' : ''
+                }`}
+              >
+                <FormattedMessage id="navbar.devGuide" />
               </IntlLink>
             )}
             <a

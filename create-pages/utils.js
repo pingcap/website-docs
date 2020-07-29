@@ -13,16 +13,18 @@ function renameDoc(name) {
       return 'tidb-data-migration'
     case 'docs-dbaas':
       return 'tidbcloud'
+    case 'docs-dev-guide':
+      return 'dev-guide'
     default:
       return name
   }
 }
 
 function renameVersion(version, stableRegx) {
-  if (version.match(stableRegx)) {
-    return 'stable'
-  } else if (version.match(masterRegex)) {
+  if (version.match(masterRegex)) {
     return 'dev'
+  } else if (version.match(stableRegx)) {
+    return 'stable'
   } else {
     return version.replace('release-', 'v')
   }
@@ -36,6 +38,8 @@ function renameDocVersion(version, docName) {
       return renameVersion(version, operatorStableRegx)
     case 'tidb-data-migration':
       return renameVersion(version, dmStableRegx)
+    case 'dev-guide':
+      return renameVersion(version, '')
     default:
       return 'beta'
   }
