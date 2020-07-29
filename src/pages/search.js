@@ -6,11 +6,17 @@ import {
   docsTiDBOperatorVersion,
   docsTiDBVersion,
   docsCloudVersion,
+  docsDevGuideVersion,
   tidbStableVersion,
   dmStableVersion,
-  operatorStableVersion
+  operatorStableVersion,
 } from '../lib/version'
-import { getDocInfo, setLoading, setSearchValue, defaultDocInfo } from '../state'
+import {
+  getDocInfo,
+  setLoading,
+  setSearchValue,
+  defaultDocInfo,
+} from '../state'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FormattedMessage } from 'react-intl'
@@ -25,6 +31,7 @@ const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
+const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
 
 const matchToVersionList = (match) => {
   switch (match) {
@@ -36,6 +43,8 @@ const matchToVersionList = (match) => {
       return docsDMVersionList
     case 'tidbcloud':
       return docsCloudVersionList
+    case 'dev-guide':
+      return docsDevGuideVersionList
     default:
       return docsTiDBVersionList
   }
@@ -46,6 +55,8 @@ const types = [
     name: 'TiDB',
     match: 'tidb',
     version: docsTiDBVersionList,
+    showInEn: true,
+    ShowInZh: true
   },
   {
     name: 'Tools',
@@ -66,6 +77,13 @@ const types = [
     name: 'Cloud',
     match: 'tidbcloud',
     version: docsCloudVersionList,
+    showInEn: true
+  },
+  {
+    name: 'Dev Guide',
+    match: 'dev-guide',
+    version: docsDevGuideVersionList,
+    ShowInZh: true
   },
 ]
 
@@ -116,7 +134,8 @@ const Search = ({ pageContext: { locale } }) => {
   }
 
   const handleSetVersionAndExecSearch = (version) => () => {
-    const _version = version === 'stable' ? replaceStableVersion() : `${version}`
+    const _version =
+      version === 'stable' ? replaceStableVersion() : `${version}`
     setSelectedVersion(_version)
   }
 
@@ -139,7 +158,13 @@ const Search = ({ pageContext: { locale } }) => {
     index
       .search(query, {
         hitsPerPage: 300,
-        facetFilters: [`version:${selectedVersion === 'stable' ? replaceStableVersion() : `${selectedVersion}`}`],
+        facetFilters: [
+          `version:${
+            selectedVersion === 'stable'
+              ? replaceStableVersion()
+              : `${selectedVersion}`
+          }`,
+        ],
       })
       .then(({ hits }) => {
         setResults(hits)
@@ -196,18 +221,43 @@ const Search = ({ pageContext: { locale } }) => {
           )
         } else {
           return (
-            <div
-              key={type.name}
-              role="button"
-              tabIndex={0}
-              className={`item${
-                selectedType === type.match ? ' is-active' : ''
-              }`}
-              onClick={handleSetVersionList(type.match, type.version)}
-              onKeyDown={handleSetVersionList(type.match, type.version)}
-            >
-              {type.name}
-            </div>
+            <>
+              {locale === 'zh' ? (
+                <>
+                  {type.ShowInZh && (
+                    <div
+                      key={type.name}
+                      role="button"
+                      tabIndex={0}
+                      className={`item${
+                        selectedType === type.match ? ' is-active' : ''
+                      }`}
+                      onClick={handleSetVersionList(type.match, type.version)}
+                      onKeyDown={handleSetVersionList(type.match, type.version)}
+                    >
+                      {type.name}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {type.showInEn && (
+                    <div
+                      key={type.name}
+                      role="button"
+                      tabIndex={0}
+                      className={`item${
+                        selectedType === type.match ? ' is-active' : ''
+                      }`}
+                      onClick={handleSetVersionList(type.match, type.version)}
+                      onKeyDown={handleSetVersionList(type.match, type.version)}
+                    >
+                      {type.name}
+                    </div>
+                  )}
+                </>
+              )}
+            </>
           )
         }
       })}

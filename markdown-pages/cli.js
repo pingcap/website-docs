@@ -4,6 +4,7 @@ const { retrieveAllMDs, handleSync, writeContent } = require('./download')
 const {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
+  DEV_GUIDE_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   TIDB_CLOUD_IMAGE_CDN_URL,
@@ -154,18 +155,27 @@ function main(argv) {
       )
 
       break
-    case 'docs-dbaas':
+    case 'dev-guide':
+      if (!path) {
+        sig.warn(
+          'For docs-dm, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
+        )
+
+        return
+      }
+
       retrieveAllMDs(
         {
           owner: 'pingcap',
-          repo: 'dbaas-docs',
+          repo,
           ref,
-          path: path ? path : '',
+          path,
         },
-        `${__dirname}/contents/en/docs-dbaas/${ref}`,
+        `${__dirname}/contents/${path}/docs-dev-guide/${ref}`,
         [
-          () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
+          () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
         ]
       )
 
