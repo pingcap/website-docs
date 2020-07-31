@@ -19,8 +19,8 @@ function getContents(owner, repo, ref, path = '') {
   })
 }
 
-function getCommitInfo(owner, repo, ref) {
-  const url = `/repos/${owner}/${repo}/commits/${ref}`
+function getCommitInfo(owner, repo, base, head) {
+  const url = `/repos/${owner}/${repo}/compare/${base}...${head}`
 
   sig.info(`getCommitInfo URL: ${url}`)
 
@@ -77,46 +77,47 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
 }
 
 async function handleSync(metaInfo, pipelines = []) {
-  const { owner, repo, ref, sha } = metaInfo
+  const { owner, repo, ref, base, head } = metaInfo
+  if (base && head) {
+    const { files } = (await getCommitInfo(owner, repo, base, head)).data
 
-  const { files } = (await getCommitInfo(owner, repo, sha)).data
+    files.forEach((file) => {
+      const { filename, status, raw_url } = file
 
-  files.forEach((file) => {
-    const { filename, status, raw_url } = file
+      let path
+      if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
+        const base = filename.split('/').slice(1).join('/')
 
-    let path
-    if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
-      const base = filename.split('/').slice(1).join('/')
-
-      if (filename.startsWith('en')) {
-        path = `${__dirname}/contents/en/${repo}/${ref}/${base}`
-      } else if (filename.startsWith('zh')) {
-        path = `${__dirname}/contents/zh/${repo}/${ref}/${base}`
-      } else {
-        return
+        if (filename.startsWith('en')) {
+          path = `${__dirname}/contents/en/${repo}/${ref}/${base}`
+        } else if (filename.startsWith('zh')) {
+          path = `${__dirname}/contents/zh/${repo}/${ref}/${base}`
+        } else {
+          return
+        }
       }
-    }
 
-    switch (status) {
-      case 'added':
-      case 'modified':
-        writeContent(raw_url, path, pipelines)
+      switch (status) {
+        case 'added':
+        case 'modified':
+          writeContent(raw_url, path, pipelines)
 
-        break
-      case 'deleted':
-        fs.unlink(path, (err) => {
-          if (err) {
-            sig.error(`Fail to unlink ${path}: ${err}`)
-          } else {
-            sig.success(`Deleted: ${path}`)
-          }
-        })
+          break
+        case 'removed':
+          fs.unlink(path, (err) => {
+            if (err) {
+              sig.error(`Fail to unlink ${path}: ${err}`)
+            } else {
+              sig.success(`Deleted: ${path}`)
+            }
+          })
 
-        break
-      default:
-        break
-    }
-  })
+          break
+        default:
+          break
+      }
+    })
+  }
 }
 
 module.exports = {
