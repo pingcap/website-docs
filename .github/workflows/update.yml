@@ -70,7 +70,7 @@ jobs:
         uses: andstor/file-existence-action@v1.0.1
         id: check_files
         with:
-          files: "./markdown-pages/contents/en/docs-dm/master/index.md"
+          files: "./markdown-pages/contents/en/docs-dm/master/_index.md"
 
       # if restore markdown-pages fialed, download all docs
       - name: Check restore status
