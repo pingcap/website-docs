@@ -44,16 +44,20 @@
     "remark-html": "^11.0.1"
   },
   "devDependencies": {
+    "@prantlf/railroad-diagrams": "^1.0.1",
+    "anafanafo": "^1.0.0",
     "bulma": "^0.8.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "node-sass": "^4.14.1",
+    "pegjs":"^0.10.0",
     "prettier": "2.0.5",
     "replacestream": "^4.0.3",
     "resolve-url-loader": "^3.1.1",
     "rimraf": "^3.0.2",
     "signale": "^1.4.0",
     "to-readable-stream": "^2.1.0",
+    "unist-util-flatmap": "^1.0.0",
     "yargs": "^15.3.1"
   },
   "keywords": [

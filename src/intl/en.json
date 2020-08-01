@@ -18,6 +18,10 @@
     "tip": "Tip",
     "error": "Error"
   },
+  "syntaxDiagram": {
+    "syntaxDiagram": "Diagram",
+    "ebnf": "Source"
+  },
   "search": {
     "type": "Type:",
     "version": "Version:",

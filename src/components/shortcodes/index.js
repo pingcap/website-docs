@@ -6,5 +6,16 @@ import NavColumn from './navColumn'
 import ColumnTitle from './columnTitle'
 import WithCopy from './withCopy'
 import TabsPanel from './tabsPanel'
+import SyntaxDiagram from './syntaxDiagram'
 
-export { Note, Warning, Tip, NavColumns, NavColumn, ColumnTitle, WithCopy, TabsPanel }
+export {
+  Note,
+  Warning,
+  Tip,
+  NavColumns,
+  NavColumn,
+  ColumnTitle,
+  WithCopy,
+  TabsPanel,
+  SyntaxDiagram,
+}
