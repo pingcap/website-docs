@@ -84,17 +84,29 @@ async function handleSync(metaInfo, pipelines = []) {
     files.forEach((file) => {
       const { filename, status, raw_url } = file
 
+      if (shouldIgnorePath(filename)) {
+        return
+      }
+
       let path
       if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
-        const base = filename.split('/').slice(1).join('/')
+        const basePath = filename.split('/').slice(1).join('/')
 
         if (filename.startsWith('en')) {
-          path = `${__dirname}/contents/en/${repo}/${ref}/${base}`
+          path = `${__dirname}/contents/en/${repo}/${ref}/${basePath}`
         } else if (filename.startsWith('zh')) {
-          path = `${__dirname}/contents/zh/${repo}/${ref}/${base}`
+          path = `${__dirname}/contents/zh/${repo}/${ref}/${basePath}`
         } else {
           return
         }
+      } else if (repo === 'dbaas-docs') {
+        path = `${__dirname}/contents/en/docs-dbaas/${ref}/${filename}`
+      } else if (repo === 'docs') {
+        path = `${__dirname}/contents/en/docs-tidb/${ref}/${filename}`
+      } else if (repo === 'docs-cn') {
+        path = `${__dirname}/contents/zh/docs-tidb/${ref}/${filename}`
+      } else {
+        return
       }
 
       switch (status) {
