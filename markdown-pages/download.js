@@ -76,6 +76,24 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
   })
 }
 
+function generateDistPath(lang, repo, ref, path) {
+  let filePathWitoutLang = path
+  let filename = '/' + filePathWitoutLang.slice(-1)[0] 
+  let repoDirPath = `${__dirname}/contents/${lang}/${repo}/${ref}`
+
+  if(filePathWitoutLang.length > 1) {
+    filePathWitoutLang.splice(-1, 1)
+    const subDir = '/' + filePathWitoutLang.join('/')
+    repoDirPath = repoDirPath + subDir
+    
+    if (!fs.existsSync(repoDirPath)) {
+      fs.mkdirSync(repoDirPath, {recursive: true})
+    }
+  }
+
+  return repoDirPath + filename
+}
+
 async function handleSync(metaInfo, pipelines = []) {
   const { owner, repo, ref, base, head } = metaInfo
   if (base && head) {
@@ -83,30 +101,42 @@ async function handleSync(metaInfo, pipelines = []) {
 
     files.forEach((file) => {
       const { filename, status, raw_url } = file
-
       if (shouldIgnorePath(filename)) {
         return
       }
 
       let path
-      if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
-        const basePath = filename.split('/').slice(1).join('/')
+      let filePathArrWitoutLang
 
-        if (filename.startsWith('en')) {
-          path = `${__dirname}/contents/en/${repo}/${ref}/${basePath}`
-        } else if (filename.startsWith('zh')) {
-          path = `${__dirname}/contents/zh/${repo}/${ref}/${basePath}`
-        } else {
-          return
-        }
-      } else if (repo === 'dbaas-docs') {
-        path = `${__dirname}/contents/en/docs-dbaas/${ref}/${filename}`
-      } else if (repo === 'docs') {
-        path = `${__dirname}/contents/en/docs-tidb/${ref}/${filename}`
-      } else if (repo === 'docs-cn') {
-        path = `${__dirname}/contents/zh/docs-tidb/${ref}/${filename}`
-      } else {
-        return
+      switch (repo) {
+        case 'docs-dm':
+        case 'docs-tidb-operator':
+          filePathArrWitoutLang = filename.split('/').slice(1)
+          let lang = 'en'
+          if(filename.startsWith('zh')) {
+            lang = 'zh'
+          }
+
+          path = generateDistPath(lang, repo, ref, filePathArrWitoutLang)
+          break;
+        
+        case 'dbaas-docs':
+          filePathArrWitoutLang = filename.split('/')
+          path = generateDistPath('en', 'docs-dbaas', ref, filePathArrWitoutLang)
+          break;
+        
+        case 'docs':
+          filePathArrWitoutLang = filename.split('/')
+          path = generateDistPath('en', 'docs-tidb', ref, filePathArrWitoutLang)
+          break;
+
+        case 'docs-cn':
+          filePathArrWitoutLang = filename.split('/')
+          path = generateDistPath('zh', 'docs-tidb', ref, filePathArrWitoutLang)
+          break;
+
+        default:
+          break;
       }
 
       switch (status) {
