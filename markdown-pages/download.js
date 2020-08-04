@@ -78,16 +78,16 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
 
 function generateDistPath(lang, repo, ref, path) {
   let filePathWitoutLang = path
-  let filename = '/' + filePathWitoutLang.slice(-1)[0] 
+  let filename = '/' + filePathWitoutLang.slice(-1)[0]
   let repoDirPath = `${__dirname}/contents/${lang}/${repo}/${ref}`
 
-  if(filePathWitoutLang.length > 1) {
+  if (filePathWitoutLang.length > 1) {
     filePathWitoutLang.splice(-1, 1)
     const subDir = '/' + filePathWitoutLang.join('/')
     repoDirPath = repoDirPath + subDir
-    
+
     if (!fs.existsSync(repoDirPath)) {
-      fs.mkdirSync(repoDirPath, {recursive: true})
+      fs.mkdirSync(repoDirPath, { recursive: true })
     }
   }
 
@@ -112,31 +112,33 @@ async function handleSync(metaInfo, pipelines = []) {
         case 'docs-dm':
         case 'docs-tidb-operator':
           filePathArrWitoutLang = filename.split('/').slice(1)
-          let lang = 'en'
-          if(filename.startsWith('zh')) {
-            lang = 'zh'
-          }
+          const lang = filename.substring(0, 2)
 
           path = generateDistPath(lang, repo, ref, filePathArrWitoutLang)
-          break;
-        
+          break
+
         case 'dbaas-docs':
           filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath('en', 'docs-dbaas', ref, filePathArrWitoutLang)
-          break;
-        
+          path = generateDistPath(
+            'en',
+            'docs-dbaas',
+            ref,
+            filePathArrWitoutLang
+          )
+          break
+
         case 'docs':
           filePathArrWitoutLang = filename.split('/')
           path = generateDistPath('en', 'docs-tidb', ref, filePathArrWitoutLang)
-          break;
+          break
 
         case 'docs-cn':
           filePathArrWitoutLang = filename.split('/')
           path = generateDistPath('zh', 'docs-tidb', ref, filePathArrWitoutLang)
-          break;
+          break
 
         default:
-          break;
+          break
       }
 
       switch (status) {
