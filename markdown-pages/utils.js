@@ -38,8 +38,7 @@ const ignorePaths = [
 ]
 
 function shouldIgnorePath(path) {
-  const startPath = path.split('/')[0]
-  if (ignorePaths.includes(startPath)) {
+  if (ignorePaths.includes(path)) {
     return true
   }
 

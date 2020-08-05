@@ -18,7 +18,7 @@ const argv = yargs
     'specify which repo of docs you want to download'
   )
   .command(
-    'sync <repo> <ref> <base> <head>',
+    'sync <repo> <ref> <sha>',
     "Sync the docs' changes by a single commit"
   ).argv
 
@@ -162,54 +162,36 @@ function main(argv) {
 function sync(argv) {
   const repo = argv.repo
   const ref = argv.ref
-  const base = argv.base
-  const head = argv.head
+  const sha = argv.sha
 
-  sig.info(
-    `Sync Info: repo => ${repo} ref => ${ref} base => ${base} head => ${head}`
-  )
+  sig.info(`Sync Info: repo => ${repo} ref => ${ref} sha => ${sha}`)
 
   switch (repo) {
     case 'docs-tidb-operator':
-      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
       ])
-      break
 
+      break
     case 'docs-dm':
-      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
       ])
+
       break
 
     case 'dbaas-docs':
-      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+      handleSync({ owner: 'pingcap', repo, ref, sha }, [
         () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
       ])
-      break
 
-    case 'docs':
-      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
-        () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
-        () => createReplaceCopyableStream(),
-        () => createReplaceTabPanelStream(),
-      ])
       break
-
-    case 'docs-cn':
-      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
-        () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
-        () => createReplaceCopyableStream(),
-        () => createReplaceTabPanelStream(),
-      ])
-      break
-
     default:
       break
   }
