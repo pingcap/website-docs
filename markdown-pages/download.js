@@ -19,8 +19,8 @@ function getContents(owner, repo, ref, path = '') {
   })
 }
 
-function getCommitInfo(owner, repo, base, head) {
-  const url = `/repos/${owner}/${repo}/compare/${base}...${head}`
+function getCommitInfo(owner, repo, ref) {
+  const url = `/repos/${owner}/${repo}/commits/${ref}`
 
   sig.info(`getCommitInfo URL: ${url}`)
 
@@ -76,92 +76,47 @@ async function retrieveAllMDs(metaInfo, distDir, pipelines = []) {
   })
 }
 
-function generateDistPath(lang, repo, ref, path) {
-  let filePathWitoutLang = path
-  let filename = '/' + filePathWitoutLang.slice(-1)[0]
-  let repoDirPath = `${__dirname}/contents/${lang}/${repo}/${ref}`
-
-  if (filePathWitoutLang.length > 1) {
-    filePathWitoutLang.splice(-1, 1)
-    const subDir = '/' + filePathWitoutLang.join('/')
-    repoDirPath = repoDirPath + subDir
-
-    if (!fs.existsSync(repoDirPath)) {
-      fs.mkdirSync(repoDirPath, { recursive: true })
-    }
-  }
-
-  return repoDirPath + filename
-}
-
 async function handleSync(metaInfo, pipelines = []) {
-  const { owner, repo, ref, base, head } = metaInfo
-  if (base && head) {
-    const { files } = (await getCommitInfo(owner, repo, base, head)).data
+  const { owner, repo, ref, sha } = metaInfo
 
-    files.forEach((file) => {
-      const { filename, status, raw_url } = file
-      if (shouldIgnorePath(filename)) {
+  const { files } = (await getCommitInfo(owner, repo, sha)).data
+
+  files.forEach((file) => {
+    const { filename, status, raw_url } = file
+
+    let path
+    if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
+      const base = filename.split('/').slice(1).join('/')
+
+      if (filename.startsWith('en')) {
+        path = `${__dirname}/contents/en/${repo}/${ref}/${base}`
+      } else if (filename.startsWith('zh')) {
+        path = `${__dirname}/contents/zh/${repo}/${ref}/${base}`
+      } else {
         return
       }
+    }
 
-      let path
-      let filePathArrWitoutLang
+    switch (status) {
+      case 'added':
+      case 'modified':
+        writeContent(raw_url, path, pipelines)
 
-      switch (repo) {
-        case 'docs-dm':
-        case 'docs-tidb-operator':
-          filePathArrWitoutLang = filename.split('/').slice(1)
-          const lang = filename.substring(0, 2)
+        break
+      case 'deleted':
+        fs.unlink(path, (err) => {
+          if (err) {
+            sig.error(`Fail to unlink ${path}: ${err}`)
+          } else {
+            sig.success(`Deleted: ${path}`)
+          }
+        })
 
-          path = generateDistPath(lang, repo, ref, filePathArrWitoutLang)
-          break
-
-        case 'dbaas-docs':
-          filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath(
-            'en',
-            'docs-dbaas',
-            ref,
-            filePathArrWitoutLang
-          )
-          break
-
-        case 'docs':
-          filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath('en', 'docs-tidb', ref, filePathArrWitoutLang)
-          break
-
-        case 'docs-cn':
-          filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath('zh', 'docs-tidb', ref, filePathArrWitoutLang)
-          break
-
-        default:
-          break
-      }
-
-      switch (status) {
-        case 'added':
-        case 'modified':
-          writeContent(raw_url, path, pipelines)
-
-          break
-        case 'removed':
-          fs.unlink(path, (err) => {
-            if (err) {
-              sig.error(`Fail to unlink ${path}: ${err}`)
-            } else {
-              sig.success(`Deleted: ${path}`)
-            }
-          })
-
-          break
-        default:
-          break
-      }
-    })
-  }
+        break
+      default:
+        break
+    }
+  })
 }
 
 module.exports = {
