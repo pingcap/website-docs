@@ -1,15 +1,23 @@
-name: Update docs on schedule and repository_dispatch
+name: Incremental Building Triggered By Push Events
 on:
-  schedule:
-    - cron: '0 */4 * * *'
   repository_dispatch:
-    types: [updated]
+    types: [triggered]
 jobs:
-  run:
+  build:
     name: Retrieve docs and deploy the website
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Print repo info
+        run: |
+          echo "${{ github.event.client_payload.repo }}"
+          echo "${{ github.event.client_payload.ref }}"
+          echo "${{ github.event.client_payload.sha }}"
+      
+      # make sure there is only one workflow running 
+      - name: Turnstyle
+        uses: softprops/turnstyle@v1
 
       - name: Set known_hosts
         id: know-hosts
@@ -45,33 +53,73 @@ jobs:
 
       - name: Install deps
         run: yarn
+      
+      - name: Restore markdown contents
+        uses: actions/cache@v2
+        id: markdown-contents
+        with: 
+          path: ./markdown-pages/contents/
+          key: ${{ runner.os }}-markdown-contents-cache-${{ github.event.client_payload.sha }}
+          restore-keys: |
+            ${{ runner.os }}-markdown-contents-cache-
+            ${{ runner.os }}-
+      
+      # check if the markdown-contents been stored successfully
+      - name: File Existence
+        uses: andstor/file-existence-action@v1.0.1
+        id: check_files
+        with:
+          files: "./markdown-pages/contents/en/docs-dm/master/_index.md"
 
-      - name: Download docs-tidb
+      # if restore markdown-pages fialed, download all docs
+      - name: Check restore status
+        if: steps.check_files.outputs.files_exists != 'true'
         run: |
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:all
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:en:all
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
-
-      - name: Download docs-tidb-operator
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:all
-
-      - name: Download docs-dm
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
-
-      - name: Download docs-dbaas
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
-
-      - name: Current Time
-        uses: gerred/current-time@v1.0.0
-        id: current-time
+      
+      # set ref and repo name of the repo, which triggering website build
+      - name: Split ref
+        id: git-ref
+        run: |
+          ref=${{ github.event.client_payload.ref }}
+          repo=${{ github.event.client_payload.repo }}
+          echo "::set-output name=ref::${ref##*/}"
+          echo "::set-output name=repo::${repo##*/}"
+      
+      # print ref and repo to debug
+      - name: Get ref
+        run: |
+          echo "get ${{ steps.git-ref.outputs.ref }}, ${{ steps.git-ref.outputs.repo }}"
+      
+      # if markdown-pages restored successfully, get the base commit of the triggering repo for furthur use.
+      - name: Get base commit cache
+        if: steps.check_files.outputs.files_exists == 'true' && steps.git-ref.outputs.repo != 'website-docs'
+        id: cache-commit
+        run: |
+           path=/home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
+           base=""
+           if [ -f "$path" ];then
+           base=$(cat $path)  
+           fi
+           echo "get cache base hash: $base"
+           echo "::set-output name=base::${base}"
+      
+      # Incremental download the triggering repo by comparing the base and head commits
+      - name: Sync docs
+        if: steps.check_files.outputs.files_exists == 'true' && steps.git-ref.outputs.repo != 'website-docs'
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} 
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-gatsby-cache-${{ steps.current-time.outputs.time }}
+          key: ${{ runner.os }}-gatsby-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-${{ steps.current-time.outputs.time }}
             ${{ runner.os }}-gatsby-cache-
 
       - name: Restore gatsby build
@@ -79,9 +127,8 @@ jobs:
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-gatsby-build-${{ steps.current-time.outputs.time }}
+          key: ${{ runner.os }}-gatsby-build-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-build-${{ steps.current-time.outputs.time }}
             ${{ runner.os }}-gatsby-build-
 
       - name: Build website
@@ -90,6 +137,18 @@ jobs:
       - name: Move changed files from gatsby
         run: (yes|cp -f .cache/*Pages.txt public)|true
 
+      # update cache commit to corresponding file
+      - name: Update cache commit hash
+        if: steps.git-ref.outputs.repo != 'website-docs'
+        run: |
+          echo "${{ github.event.client_payload.sha }}" > /home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
+    
+      # if does full building, store commits of all repo-refs
+      - name: Update all commit hash
+        if: steps.check_files.outputs.files_exists != 'true'
+        run: |
+          ls ./scripts/
+          bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}
 
       - name: Deploy
         run: |
