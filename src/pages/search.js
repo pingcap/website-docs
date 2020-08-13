@@ -222,40 +222,20 @@ const Search = ({ pageContext: { locale } }) => {
         } else {
           return (
             <>
-              {locale === 'zh' ? (
-                <>
-                  {type.ShowInZh && (
-                    <div
-                      key={type.name}
-                      role="button"
-                      tabIndex={0}
-                      className={`item${
-                        selectedType === type.match ? ' is-active' : ''
-                      }`}
-                      onClick={handleSetVersionList(type.match, type.version)}
-                      onKeyDown={handleSetVersionList(type.match, type.version)}
-                    >
-                      {type.name}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <>
-                  {type.showInEn && (
-                    <div
-                      key={type.name}
-                      role="button"
-                      tabIndex={0}
-                      className={`item${
-                        selectedType === type.match ? ' is-active' : ''
-                      }`}
-                      onClick={handleSetVersionList(type.match, type.version)}
-                      onKeyDown={handleSetVersionList(type.match, type.version)}
-                    >
-                      {type.name}
-                    </div>
-                  )}
-                </>
+              {((locale === 'zh' && type.ShowInZh) ||
+                (locale === 'en' && type.showInEn)) && (
+                <div
+                  key={type.name}
+                  role="button"
+                  tabIndex={0}
+                  className={`item${
+                    selectedType === type.match ? ' is-active' : ''
+                  }`}
+                  onClick={handleSetVersionList(type.match, type.version)}
+                  onKeyDown={handleSetVersionList(type.match, type.version)}
+                >
+                  {type.name}
+                </div>
               )}
             </>
           )

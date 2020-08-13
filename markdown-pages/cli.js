@@ -159,7 +159,7 @@ function main(argv) {
     case 'dev-guide':
       if (!path) {
         sig.warn(
-          'For docs-dm, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
+          'For dev-guide, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
         )
 
         return
