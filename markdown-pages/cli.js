@@ -142,7 +142,7 @@ function main(argv) {
     case 'docs-dbaas':
       retrieveAllMDs(
         {
-          owner: 'pingcap',
+          owner: 'tidbcloud',
           repo: 'dbaas-docs',
           ref,
           path: path ? path : '',
@@ -214,7 +214,7 @@ function sync(argv) {
       break
 
     case 'dbaas-docs':
-      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+      handleSync({ owner: 'tidbcloud', repo, ref, base, head }, [
         () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),

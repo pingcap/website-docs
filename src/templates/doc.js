@@ -236,19 +236,11 @@ const Doc = ({
               </section>
             </div>
             <div className="column is-2 doc-toc-column">
-              <>
-                {docRefArray[0] === 'tidbcloud' ? (
-                  ''
-                ) : (
-                  <div className="docs-operation">
-                    {locale === 'zh' && (
-                      <DownloadPDF downloadURL={downloadURL} />
-                    )}
-                    <ImproveDocLink repoInfo={repoInfo} base={base} />
-                    <FeedbackDocLink repoInfo={repoInfo} base={base} />
-                  </div>
-                )}
-              </>
+              <div className="docs-operation">
+                {locale === 'zh' && <DownloadPDF downloadURL={downloadURL} />}
+                <ImproveDocLink repoInfo={repoInfo} base={base} />
+                <FeedbackDocLink repoInfo={repoInfo} base={base} />
+              </div>
 
               <section className="doc-toc">
                 <div className="title">
