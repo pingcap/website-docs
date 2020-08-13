@@ -55,8 +55,6 @@ const types = [
     name: 'TiDB',
     match: 'tidb',
     version: docsTiDBVersionList,
-    showInEn: true,
-    ShowInZh: true,
   },
   {
     name: 'Tools',
@@ -72,18 +70,6 @@ const types = [
         version: docsDMVersionList,
       },
     ],
-  },
-  {
-    name: 'Cloud',
-    match: 'tidbcloud',
-    version: docsCloudVersionList,
-    showInEn: true,
-  },
-  {
-    name: '开发指南',
-    match: 'dev-guide',
-    version: docsDevGuideVersionList,
-    ShowInZh: true,
   },
 ]
 
@@ -107,6 +93,26 @@ const Search = ({ pageContext: { locale } }) => {
   const [results, setResults] = useState([])
   const [searched, setSearched] = useState(false)
 
+  const setDocsTypesByLang = (lang) => {
+    switch (lang) {
+      case 'zh':
+        types.push({
+          name: '开发指南',
+          match: 'dev-guide',
+          version: docsDevGuideVersionList,
+        })
+        break
+
+      default:
+        types.push({
+          name: 'Cloud',
+          match: 'tidbcloud',
+          version: docsCloudVersionList,
+        })
+        break
+    }
+  }
+
   useEffect(
     () => {
       dispatch(
@@ -116,6 +122,8 @@ const Search = ({ pageContext: { locale } }) => {
           version,
         })
       )
+
+      setDocsTypesByLang(locale)
 
       return () => dispatch(setSearchValue(''))
     },
@@ -221,23 +229,18 @@ const Search = ({ pageContext: { locale } }) => {
           )
         } else {
           return (
-            <>
-              {((locale === 'zh' && type.ShowInZh) ||
-                (locale === 'en' && type.showInEn)) && (
-                <div
-                  key={type.name}
-                  role="button"
-                  tabIndex={0}
-                  className={`item${
-                    selectedType === type.match ? ' is-active' : ''
-                  }`}
-                  onClick={handleSetVersionList(type.match, type.version)}
-                  onKeyDown={handleSetVersionList(type.match, type.version)}
-                >
-                  {type.name}
-                </div>
-              )}
-            </>
+            <div
+              key={type.name}
+              role="button"
+              tabIndex={0}
+              className={`item${
+                selectedType === type.match ? ' is-active' : ''
+              }`}
+              onClick={handleSetVersionList(type.match, type.version)}
+              onKeyDown={handleSetVersionList(type.match, type.version)}
+            >
+              {type.name}
+            </div>
           )
         }
       })}
