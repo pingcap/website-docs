@@ -141,7 +141,7 @@ function main(argv) {
     case 'docs-dbaas':
       retrieveAllMDs(
         {
-          owner: 'pingcap',
+          owner: 'tidbcloud',
           repo: 'dbaas-docs',
           ref,
           path: path ? path : '',

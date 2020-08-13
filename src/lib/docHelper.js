@@ -6,6 +6,7 @@ const { defaultDocInfo } = require('../state')
 exports.getRepoInfo = function (relativeDir, locale) {
   const splitPaths = relativeDir.split('/')
   let repo = ''
+  let owner = ''
   let hasPathPrefix = false
   const docsType = splitPaths[0]
 
@@ -15,6 +16,7 @@ exports.getRepoInfo = function (relativeDir, locale) {
       break
 
     case 'docs-dbaas':
+      owner = 'tidbcloud'
       repo = 'dbaas-docs'
       break
 
@@ -32,6 +34,7 @@ exports.getRepoInfo = function (relativeDir, locale) {
   pathPrefix = pathPrefix ? pathPrefix + '/' : ''
 
   return {
+    owner: owner || 'pingcap',
     repo: repo,
     ref: splitPaths[1], // master, release-1
     pathPrefix: hasPathPrefix ? `${locale}/${pathPrefix}` : pathPrefix,
