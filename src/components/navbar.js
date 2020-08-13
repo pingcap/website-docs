@@ -52,7 +52,7 @@ const Navbar = (prop) => {
     window.addEventListener('scroll', scrollListener)
 
     return () => window.removeEventListener('scroll', scrollListener)
-  })
+  }, [])
 
   return (
     <nav
