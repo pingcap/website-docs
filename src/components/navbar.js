@@ -130,7 +130,7 @@ const Navbar = (prop) => {
                 <FormattedMessage id="navbar.cloud" />
               </IntlLink>
             )}
-            {/* {locale === 'zh' && (
+            {locale === 'zh' && (
               <IntlLink
                 to="/dev-guide/dev"
                 className={`navbar-item with-main-section ${
@@ -139,7 +139,7 @@ const Navbar = (prop) => {
               >
                 <FormattedMessage id="navbar.devGuide" />
               </IntlLink>
-            )} */}
+            )}
             <a
               href="mailto:info@pingcap.com"
               className="navbar-item with-main-section"
