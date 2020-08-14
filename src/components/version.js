@@ -7,6 +7,7 @@ import {
   docsDMVersion,
   docsTiDBOperatorVersion,
   docsCloudVersion,
+  docsDevGuideVersion,
 } from '../lib/version'
 
 import { Button } from '@seagreenio/react-bulma'
@@ -17,6 +18,7 @@ const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
+const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
 
 const Version = ({ relativeDir, base, versions }) => {
   const [doc, ref, stableVersion] = convertDocAndRef(relativeDir.split('/'))
@@ -42,6 +44,9 @@ const Version = ({ relativeDir, base, versions }) => {
         break
       case 'tidbcloud':
         setDropdownItems(docsCloudVersionList)
+        break
+      case 'dev-guide':
+        setDropdownItems(docsDevGuideVersionList)
         break
       default:
         break

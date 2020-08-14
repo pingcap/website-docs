@@ -6,11 +6,17 @@ import {
   docsTiDBOperatorVersion,
   docsTiDBVersion,
   docsCloudVersion,
+  docsDevGuideVersion,
   tidbStableVersion,
   dmStableVersion,
-  operatorStableVersion
+  operatorStableVersion,
 } from '../lib/version'
-import { getDocInfo, setLoading, setSearchValue, defaultDocInfo } from '../state'
+import {
+  getDocInfo,
+  setLoading,
+  setSearchValue,
+  defaultDocInfo,
+} from '../state'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FormattedMessage } from 'react-intl'
@@ -25,6 +31,7 @@ const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
+const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
 
 const matchToVersionList = (match) => {
   switch (match) {
@@ -36,6 +43,8 @@ const matchToVersionList = (match) => {
       return docsDMVersionList
     case 'tidbcloud':
       return docsCloudVersionList
+    case 'dev-guide':
+      return docsDevGuideVersionList
     default:
       return docsTiDBVersionList
   }
@@ -62,11 +71,6 @@ const types = [
       },
     ],
   },
-  {
-    name: 'Cloud',
-    match: 'tidbcloud',
-    version: docsCloudVersionList,
-  },
 ]
 
 const Search = ({ pageContext: { locale } }) => {
@@ -88,6 +92,30 @@ const Search = ({ pageContext: { locale } }) => {
   )
   const [results, setResults] = useState([])
   const [searched, setSearched] = useState(false)
+  const [docsTypesByLang, setDocsTypesByLang] = useState([])
+
+  const getDocsTypesByLang = (lang) => {
+    let _docsTypesByLang = types
+
+    switch (lang) {
+      case 'zh':
+        _docsTypesByLang.push({
+          name: '开发指南',
+          match: 'dev-guide',
+          version: docsDevGuideVersionList,
+        })
+        break
+
+      default:
+        _docsTypesByLang.push({
+          name: 'Cloud',
+          match: 'tidbcloud',
+          version: docsCloudVersionList,
+        })
+        break
+    }
+    return _docsTypesByLang
+  }
 
   useEffect(
     () => {
@@ -105,6 +133,10 @@ const Search = ({ pageContext: { locale } }) => {
     []
   )
 
+  useEffect(() => {
+    setDocsTypesByLang(getDocsTypesByLang(lang))
+  }, [lang])
+
   const handleDropdownActive = (e) => {
     e.currentTarget.classList.toggle('is-active')
   }
@@ -116,7 +148,8 @@ const Search = ({ pageContext: { locale } }) => {
   }
 
   const handleSetVersionAndExecSearch = (version) => () => {
-    const _version = version === 'stable' ? replaceStableVersion() : `${version}`
+    const _version =
+      version === 'stable' ? replaceStableVersion() : `${version}`
     setSelectedVersion(_version)
   }
 
@@ -139,7 +172,13 @@ const Search = ({ pageContext: { locale } }) => {
     index
       .search(query, {
         hitsPerPage: 300,
-        facetFilters: [`version:${selectedVersion === 'stable' ? replaceStableVersion() : `${selectedVersion}`}`],
+        facetFilters: [
+          `version:${
+            selectedVersion === 'stable'
+              ? replaceStableVersion()
+              : `${selectedVersion}`
+          }`,
+        ],
       })
       .then(({ hits }) => {
         setResults(hits)
@@ -150,7 +189,7 @@ const Search = ({ pageContext: { locale } }) => {
 
   const TypeList = () => (
     <div className="type-list">
-      {types.map((type) => {
+      {docsTypesByLang.map((type) => {
         if (type.dropdown) {
           return (
             <div
