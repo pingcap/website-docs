@@ -54,6 +54,7 @@ function main(argv) {
         )
       })
       break
+
     case 'docs':
       retrieveAllMDs(
         {
@@ -69,8 +70,8 @@ function main(argv) {
           () => createReplaceTabPanelStream(),
         ]
       )
-
       break
+
     case 'docs-cn':
       retrieveAllMDs(
         {
@@ -86,8 +87,8 @@ function main(argv) {
           () => createReplaceTabPanelStream(),
         ]
       )
-
       break
+
     case 'docs-tidb-operator':
       if (!path) {
         sig.warn(
@@ -111,8 +112,8 @@ function main(argv) {
           () => createReplaceTabPanelStream(),
         ]
       )
-
       break
+
     case 'docs-dm':
       if (!path) {
         sig.warn(
@@ -136,8 +137,8 @@ function main(argv) {
           () => createReplaceTabPanelStream(),
         ]
       )
-
       break
+
     case 'docs-dbaas':
       retrieveAllMDs(
         {
@@ -153,12 +154,12 @@ function main(argv) {
           () => createReplaceTabPanelStream(),
         ]
       )
-
       break
+
     case 'dev-guide':
       if (!path) {
         sig.warn(
-          'For docs-dm, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
+          'For dev-guide, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
         )
 
         return
@@ -169,7 +170,7 @@ function main(argv) {
           owner: 'pingcap',
           repo,
           ref,
-          path,
+          path: path,
         },
         `${__dirname}/contents/${path}/docs-dev-guide/${ref}`,
         [
@@ -178,7 +179,6 @@ function main(argv) {
           () => createReplaceTabPanelStream(),
         ]
       )
-
       break
     default:
       break
@@ -231,6 +231,14 @@ function sync(argv) {
     case 'docs-cn':
       handleSync({ owner: 'pingcap', repo, ref, base, head }, [
         () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
+      ])
+      break
+
+    case 'dev-guide':
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+        () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
       ])

@@ -149,6 +149,7 @@ const Doc = ({
       <ul>
         {items.map((item) => (
           <li key={item.url}>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <a
               href={'#' + replaceItemURL(item.url)}
               dangerouslySetInnerHTML={{ __html: item.title }}

@@ -28,7 +28,7 @@ export const docsCloudVersion = {
 }
 
 export const docsDevGuideVersion = {
-  master: 'dev'
+  master: 'dev',
 }
 
 export function convertDocAndRef([doc, ref]) {
@@ -65,7 +65,6 @@ export function convertDocAndRef([doc, ref]) {
       result[1] = docsDevGuideVersion[ref]
       result[2] = ''
       break
-      
     default:
       break
   }

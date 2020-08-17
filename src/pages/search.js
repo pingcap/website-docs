@@ -73,18 +73,6 @@ const types = [
       },
     ],
   },
-  {
-    name: 'Cloud',
-    match: 'tidbcloud',
-    version: docsCloudVersionList,
-    showInEn: true
-  },
-  {
-    name: 'Dev Guide',
-    match: 'dev-guide',
-    version: docsDevGuideVersionList,
-    ShowInZh: true
-  },
 ]
 
 const Search = ({ pageContext: { locale } }) => {
@@ -106,6 +94,30 @@ const Search = ({ pageContext: { locale } }) => {
   )
   const [results, setResults] = useState([])
   const [searched, setSearched] = useState(false)
+  const [docsTypesByLang, setDocsTypesByLang] = useState([])
+
+  const getDocsTypesByLang = (lang) => {
+    let _docsTypesByLang = types.slice(0, 2)
+
+    switch (lang) {
+      case 'zh':
+        _docsTypesByLang.push({
+          name: '开发指南',
+          match: 'dev-guide',
+          version: docsDevGuideVersionList,
+        })
+        break
+
+      default:
+        _docsTypesByLang.push({
+          name: 'Cloud',
+          match: 'tidbcloud',
+          version: docsCloudVersionList,
+        })
+        break
+    }
+    return _docsTypesByLang
+  }
 
   useEffect(
     () => {
@@ -122,6 +134,10 @@ const Search = ({ pageContext: { locale } }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
+
+  useEffect(() => {
+    setDocsTypesByLang(getDocsTypesByLang(lang))
+  }, [lang])
 
   const handleDropdownActive = (e) => {
     e.currentTarget.classList.toggle('is-active')
@@ -175,7 +191,7 @@ const Search = ({ pageContext: { locale } }) => {
 
   const TypeList = () => (
     <div className="type-list">
-      {types.map((type) => {
+      {docsTypesByLang.map((type) => {
         if (type.dropdown) {
           return (
             <div

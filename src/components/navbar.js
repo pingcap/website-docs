@@ -40,7 +40,9 @@ const Navbar = (prop) => {
         ? location.pathname.split('/')[2]
         : location.pathname.split('/')[1]
     setActiveNav(pageType)
+  }, [locale, location.pathname])
 
+  useEffect(() => {
     const scrollListener = () => {
       const winScrollTop = document.documentElement.scrollTop
 
