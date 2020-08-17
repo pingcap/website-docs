@@ -95,7 +95,7 @@ const Search = ({ pageContext: { locale } }) => {
   const [docsTypesByLang, setDocsTypesByLang] = useState([])
 
   const getDocsTypesByLang = (lang) => {
-    let _docsTypesByLang = types
+    let _docsTypesByLang = types.slice(0, 2)
 
     switch (lang) {
       case 'zh':
