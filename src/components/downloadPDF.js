@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 const DownloadPDF = ({ downloadURL }) => {
   return (
-    <div className="doc-download">
+    <div className="doc-download download-pdf">
       <a
         href={`https://download.pingcap.org/${downloadURL}`}
         target="_blank"

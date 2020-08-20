@@ -166,8 +166,10 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
               console.log('Your browser does not support scrollTo API')
               tocRef.current.scrollTop = tocClientRect.height + dy
             }
+
+            const leftTOCColumn = document.getElementsByClassName('left-column')
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-            tocRef.current.scrollTo({
+            leftTOCColumn[0].scrollTo({
               top: tocClientRect.height + dy - 100,
               left: 0,
               behavior: 'smooth',

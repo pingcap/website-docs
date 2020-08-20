@@ -3,9 +3,11 @@
 $navbar-height: 5.25rem; // 84px
 
 .PingCAP-TOC {
+  opacity: 0;
+  
   &.show-toc {
     opacity: 1;
-    transition: opacity 100ms;
+    transition: opacity 10ms;
   }
 
   @include mobile {
@@ -54,10 +56,14 @@ $navbar-height: 5.25rem; // 84px
         }
 
         ul:first-child {
-          padding-top: 5px;
+          li:first-child {
+            padding-top: 10px;
+          }
         }
 
         &:hover {
+          color: $B1;
+
           .remove-icon {
             background: url(../../../images/toc/remove-hl.svg) no-repeat;
             background-size: contain;
@@ -122,8 +128,6 @@ $navbar-height: 5.25rem; // 84px
         width: 90%;
         word-break: break-word;
       }
-
-
     }
 
     &.top {
