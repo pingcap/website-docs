@@ -48,7 +48,15 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     function clickEvent(e) {
       e.stopPropagation()
 
-      const li = e.target
+      let li = e.target
+
+      if (
+        e.target.classList.contains('add-icon') ||
+        e.target.classList.contains('remove-icon')
+      ) {
+        li = e.target.parentElement
+      }
+
       li.parentElement.style.height = null
 
       // keep only one unfolded level
@@ -79,7 +87,19 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       Array.from(ul.children).forEach((li) => {
         if (li.children[0].tagName.toLowerCase() === 'ul') {
           li.classList.add('can-unfold', 'folded')
-          li.addEventListener('click', clickEvent)
+
+          if (!li.parentElement.classList.contains('top')) {
+            let unfoldEle = document.createElement('span')
+            let foldEle = document.createElement('span')
+            unfoldEle.classList.add('add-icon')
+            foldEle.classList.add('remove-icon')
+            li.insertBefore(unfoldEle, li.children[0])
+            li.insertBefore(foldEle, li.children[0])
+            unfoldEle.addEventListener('click', clickEvent)
+            foldEle.addEventListener('click', clickEvent)
+          } else {
+            li.addEventListener('click', clickEvent)
+          }
 
           Array.from(li.children).forEach(retrieveLi)
         }
