@@ -40,12 +40,31 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .left-column {
+  .content-columns {
+    display: flex;
+
     @include mobile {
+      display: block;
+    }
+  }
+
+  .left-column {
+    position: sticky;
+    top: $navbar-height;
+    max-height: calc(100vh - #{$navbar-height});
+    overflow: auto;
+    min-width: 240px;
+    padding-right: 1rem;
+
+    @include mobile {
+      position: relative;
       margin-left: -0.75rem;
       margin-right: -0.75rem;
       padding-left: 0;
       padding-right: 0;
+      top: 0;
+      max-height: 100%;
+      overflow: visible;
     }
   }
 
@@ -88,9 +107,11 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   // Custom markdown body
   .doc-content {
+    min-width: calc(100% - 240px - 200px);
+
     @include tablet {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
     }
 
     color: $M3;
@@ -212,6 +233,8 @@ $navbar-height-mobile: 4.25rem; // 68px
   }
 
   .doc-toc-column {
+    min-width: 200px;
+
     @include mobile {
       display: none;
     }
@@ -231,7 +254,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     a {
       color: $B3;
-      font-size: $p2;
+      font-size: $size-9;
       line-height: 1.75;
 
       &:hover {
@@ -258,6 +281,7 @@ $navbar-height-mobile: 4.25rem; // 68px
   .doc-download {
     position: relative;
     font-size: $p2;
+    padding-bottom: 0.5rem;
 
     a {
       margin-left: 1.5rem;
