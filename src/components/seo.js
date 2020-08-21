@@ -56,6 +56,10 @@ function SEO({ lang, title, description, meta, link }) {
           content: openGraph.publicURL,
         },
         {
+          property: 'twitter:image',
+          content: openGraph.publicURL,
+        },
+        {
           name: `twitter:card`,
           content: 'summary',
         },
