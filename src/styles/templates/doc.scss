@@ -40,12 +40,31 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .left-column {
+  .content-columns {
+    display: flex;
+
     @include mobile {
+      display: block;
+    }
+  }
+
+  .left-column {
+    position: sticky;
+    top: $navbar-height;
+    max-height: calc(100vh - #{$navbar-height});
+    overflow: auto;
+    min-width: 240px;
+    padding-right: 1rem;
+
+    @include mobile {
+      position: relative;
       margin-left: -0.75rem;
       margin-right: -0.75rem;
       padding-left: 0;
       padding-right: 0;
+      top: 0;
+      max-height: 100%;
+      overflow: visible;
     }
   }
 
@@ -88,9 +107,11 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   // Custom markdown body
   .doc-content {
+    min-width: calc(100% - 240px - 200px);
+
     @include tablet {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+      padding-left: 4rem;
+      padding-right: 4rem;
     }
 
     color: $M3;
@@ -104,7 +125,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     h6 {
       border-bottom: none;
       z-index: 1;
-      color: $B3;
+      color: $M3;
 
       &:target:before {
         content: '';
@@ -195,15 +216,15 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     .version-mark::before {
-        content: '';
-        position: absolute;
-        left: 2px;
-        top: 50%;
-        width: 20px;
-        height: 20px;
-        transform: translateY(-50%);
-        background-image: url(../../../images/version-mark.png);
-        background-size: 20px;
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      transform: translateY(-50%);
+      background-image: url(../../../images/version-mark.png);
+      background-size: 20px;
     }
   }
 
@@ -212,6 +233,8 @@ $navbar-height-mobile: 4.25rem; // 68px
   }
 
   .doc-toc-column {
+    min-width: 200px;
+
     @include mobile {
       display: none;
     }
@@ -231,8 +254,8 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     a {
       color: $B3;
-      font-size: $p2;
-      line-height: 1.75;
+      font-size: $size-9;
+      line-height: 1.5;
 
       &:hover {
         color: $primary;
@@ -248,6 +271,14 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     ul {
       li {
+        line-height: 1;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &:first-child {
+          padding-top: 10px;
+        }
+        
         ul {
           padding-left: 1rem;
         }
@@ -258,6 +289,7 @@ $navbar-height-mobile: 4.25rem; // 68px
   .doc-download {
     position: relative;
     font-size: $p2;
+    padding-bottom: 0.5rem;
 
     a {
       margin-left: 1.5rem;
@@ -276,8 +308,6 @@ $navbar-height-mobile: 4.25rem; // 68px
       left: 0;
       width: 15px;
       height: 15px;
-      background: url(../../../images/download-pdf.svg) no-repeat;
-      background-size: contain;
     }
   }
 
@@ -285,14 +315,46 @@ $navbar-height-mobile: 4.25rem; // 68px
     margin-bottom: 2rem;
   }
 
-  .improve-doc::before {
-    background: url(../../../images/improve-docs-icon.svg) no-repeat;
-    background-size: contain;
+  .download-pdf {
+    &:before {
+      background: url(../../../images/download-pdf.svg) no-repeat;
+      background-size: contain;
+    }
+
+    &:hover {
+      &:before {
+        background: url(../../../images/download-pdf-hl.svg) no-repeat;
+        background-size: contain;
+      }
+    }
   }
 
-  .feedback-doc::before {
-    background: url(../../../images/feedback-docs-icon.svg) no-repeat;
-    background-size: contain;
+  .improve-doc {
+    &:before {
+      background: url(../../../images/improve-docs-icon.svg) no-repeat;
+      background-size: contain;
+    }
+
+    &:hover {
+      &:before {
+        background: url(../../../images/improve-docs-hl-icon.svg) no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  .feedback-doc {
+    &:before {
+      background: url(../../../images/feedback-docs-icon.svg) no-repeat;
+      background-size: contain;
+    }
+
+    &:hover {
+      &:before {
+        background: url(../../../images/feedback-docs-hl-icon.svg) no-repeat;
+        background-size: contain;
+      }
+    }
   }
 
   .doc-blockquote {

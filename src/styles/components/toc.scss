@@ -3,16 +3,11 @@
 $navbar-height: 5.25rem; // 84px
 
 .PingCAP-TOC {
-  position: sticky;
-  top: $navbar-height;
-  max-height: calc(100vh - 230px);
-  overflow: auto;
   opacity: 0;
-  padding-right: 1rem;
-
+  
   &.show-toc {
     opacity: 1;
-    transition: opacity 100ms;
+    transition: opacity 10ms;
   }
 
   @include mobile {
@@ -36,43 +31,90 @@ $navbar-height: 5.25rem; // 84px
   ul {
     li {
       position: relative;
-      padding-top: 0.5rem;
+      padding: 5px 0;
       color: $B3;
-      font-size: $p2;
+      font-size: $size-9;
       font-weight: normal;
       cursor: pointer;
 
       &.can-unfold {
-        &:after {
-          content: '';
-          position: absolute;
-          top: calc(0.5rem + 9px);
-          right: 0;
+        padding-left: 0.5rem;
+        padding-bottom: 0;
+
+        .remove-icon {
+          display: inline-block;
           width: 12px;
-          height: 12px;
-          background: url(../../../images/toc/arrow.svg) no-repeat;
+          height: 12px !important;
+          margin-bottom: -2px;
+          margin-left: 0.5rem;
+          background: url(../../../images/toc/remove.svg) no-repeat;
           background-size: contain;
-          transform: rotate(180deg);
-          transform-origin: 6px 3px;
-          transition: transform 0.5s ease-out;
+        }
+
+        li > a {
+          padding-left: 0.5rem;
+        }
+
+        ul:first-child {
+          li:first-child {
+            padding-top: 10px;
+          }
+        }
+
+        &:hover {
+          color: $B1;
+
+          .remove-icon {
+            background: url(../../../images/toc/remove-hl.svg) no-repeat;
+            background-size: contain;
+          }
         }
       }
 
+      .add-icon {
+        display: none;
+      }
+
       &.folded {
-        padding-right: 12px;
         word-break: break-word;
-        
-        &:after {
-          transform: rotate(0deg);
+        padding-bottom: 5px;
+
+        .remove-icon {
+          display: none;
+        }
+
+        .add-icon {
+          display: inline-block;
+          width: 12px;
+          height: 12px !important;
+          margin-bottom: -2px;
+          margin-left: 0.5rem;
+          background: url(../../../images/toc/add.svg) no-repeat;
+          background-size: contain;
         }
 
         ul {
           height: 0;
+
+          &:first-child {
+            padding-top: 0px;
+          }
+        }
+
+        &:hover {
+          .add-icon {
+            background: url(../../../images/toc/add-hl.svg) no-repeat;
+            background-size: contain;
+          }
         }
       }
 
-      &.is-active > a {
-        color: $primary;
+      &.is-active {
+        background: $B5;
+
+        > a {
+          color: $primary;
+        }
       }
 
       ul {
@@ -95,11 +137,14 @@ $navbar-height: 5.25rem; // 84px
       }
 
       > li {
-        padding-right: 12px;
-        padding-bottom: 0.5rem;
+        padding: 9px 12px 9px 0;
         border-bottom: 1px solid $C2;
-        word-break: keep-all;
+        word-break: break-word;
         font-weight: bold;
+
+        > ul {
+          padding-left: 0;
+        }
 
         &:after {
           content: '';
