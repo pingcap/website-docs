@@ -272,8 +272,13 @@ $navbar-height-mobile: 4.25rem; // 68px
     ul {
       li {
         line-height: 1;
-        padding-top: 6px;
-        padding-bottom: 6px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &:first-child {
+          padding-top: 10px;
+        }
+        
         ul {
           padding-left: 1rem;
         }
