@@ -60,6 +60,8 @@ $navbar-height: 5.25rem; // 84px
         }
 
         &:hover {
+          color: $B1;
+
           .remove-icon {
             background: url(../../../images/toc/remove-hl.svg) no-repeat;
             background-size: contain;
@@ -124,8 +126,6 @@ $navbar-height: 5.25rem; // 84px
         width: 90%;
         word-break: break-word;
       }
-
-
     }
 
     &.top {

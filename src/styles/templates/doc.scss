@@ -117,6 +117,10 @@ $navbar-height-mobile: 4.25rem; // 68px
     color: $M3;
     line-height: 1.75;
 
+    h1 {
+      color: $M3 !important;
+    }
+
     h1,
     h2,
     h3,
@@ -216,15 +220,15 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     .version-mark::before {
-        content: '';
-        position: absolute;
-        left: 2px;
-        top: 50%;
-        width: 20px;
-        height: 20px;
-        transform: translateY(-50%);
-        background-image: url(../../../images/version-mark.png);
-        background-size: 20px;
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      transform: translateY(-50%);
+      background-image: url(../../../images/version-mark.png);
+      background-size: 20px;
     }
   }
 
@@ -303,8 +307,6 @@ $navbar-height-mobile: 4.25rem; // 68px
       left: 0;
       width: 15px;
       height: 15px;
-      background: url(../../../images/download-pdf.svg) no-repeat;
-      background-size: contain;
     }
   }
 
@@ -312,14 +314,46 @@ $navbar-height-mobile: 4.25rem; // 68px
     margin-bottom: 2rem;
   }
 
-  .improve-doc::before {
-    background: url(../../../images/improve-docs-icon.svg) no-repeat;
-    background-size: contain;
+  .download-pdf {
+    &:before {
+      background: url(../../../images/download-pdf.svg) no-repeat;
+      background-size: contain;
+    }
+
+    &:hover {
+      &:before {
+        background: url(../../../images/download-pdf-hl.svg) no-repeat;
+        background-size: contain;
+      }
+    }
   }
 
-  .feedback-doc::before {
-    background: url(../../../images/feedback-docs-icon.svg) no-repeat;
-    background-size: contain;
+  .improve-doc {
+    &:before {
+      background: url(../../../images/improve-docs-icon.svg) no-repeat;
+      background-size: contain;
+    }
+
+    &:hover {
+      &:before {
+        background: url(../../../images/improve-docs-hl-icon.svg) no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  .feedback-doc {
+    &:before {
+      background: url(../../../images/feedback-docs-icon.svg) no-repeat;
+      background-size: contain;
+    }
+
+    &:hover {
+      &:before {
+        background: url(../../../images/feedback-docs-hl-icon.svg) no-repeat;
+        background-size: contain;
+      }
+    }
   }
 
   .doc-blockquote {
