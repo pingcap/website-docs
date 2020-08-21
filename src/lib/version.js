@@ -21,6 +21,7 @@ export const docsTiDBOperatorVersion = {
 export const docsDMVersion = {
   master: 'dev',
   'release-1.0': 'stable',
+  // 'release-2.0': 'v2.0',
 }
 
 export const docsCloudVersion = {
