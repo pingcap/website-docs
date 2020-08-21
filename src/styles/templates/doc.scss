@@ -117,10 +117,6 @@ $navbar-height-mobile: 4.25rem; // 68px
     color: $M3;
     line-height: 1.75;
 
-    h1 {
-      color: $M3 !important;
-    }
-
     h1,
     h2,
     h3,
@@ -129,7 +125,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     h6 {
       border-bottom: none;
       z-index: 1;
-      color: $B3;
+      color: $M3;
 
       &:target:before {
         content: '';
