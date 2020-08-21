@@ -56,7 +56,9 @@ $navbar-height: 5.25rem; // 84px
         }
 
         ul:first-child {
-          padding-top: 5px;
+          li:first-child {
+            padding-top: 10px;
+          }
         }
 
         &:hover {
