@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 function SEO({ lang, title, description, meta, link }) {
-  const { site, favicon, openGraph } = useStaticQuery(
+  const { site, favicon } = useStaticQuery(
     graphql`
       query {
         site {
@@ -18,12 +18,11 @@ function SEO({ lang, title, description, meta, link }) {
         favicon: file(relativePath: { eq: "pingcap-logo.ico" }) {
           publicURL
         }
-        openGraph: file(relativePath: { eq: "open-graph.png" }) {
-          publicURL
-        }
       }
     `
   )
+
+  const openGraph = 'https://download.pingcap.com/images/pingcap-opengraph.jpg'
 
   const metaDescription = description || site.siteMetadata.description
 
@@ -53,11 +52,7 @@ function SEO({ lang, title, description, meta, link }) {
         },
         {
           property: 'og:image',
-          content: openGraph.publicURL,
-        },
-        {
-          property: 'twitter:image',
-          content: openGraph.publicURL,
+          content: openGraph,
         },
         {
           property: 'og:image:width',
@@ -68,7 +63,7 @@ function SEO({ lang, title, description, meta, link }) {
           content: '400',
         },
         {
-          name: `twitter:card`,
+          name: 'twitter:card',
           content: 'summary',
         },
         {
