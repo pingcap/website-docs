@@ -3,11 +3,11 @@
 $navbar-height: 5.25rem; // 84px
 
 .PingCAP-TOC {
-  opacity: 0;
+  display: none;
   
   &.show-toc {
-    opacity: 1;
-    transition: opacity 10ms;
+    display: block;
+    transition: display 10ms;
   }
 
   @include mobile {
