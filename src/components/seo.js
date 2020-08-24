@@ -60,6 +60,14 @@ function SEO({ lang, title, description, meta, link }) {
           content: openGraph.publicURL,
         },
         {
+          property: 'og:image:width',
+          content: '400',
+        },
+        {
+          property: 'og:image:height',
+          content: '400',
+        },
+        {
           name: `twitter:card`,
           content: 'summary',
         },
