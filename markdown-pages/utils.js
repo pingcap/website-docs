@@ -27,7 +27,6 @@ function createReplaceTabPanelStream() {
 }
 
 function createReplaceTrailingWhiteSpaceStream() {
-  console.log('hello replace')
   return replaceStream(/[ \t]+$/gm, '')
 }
 

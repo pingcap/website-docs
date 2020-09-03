@@ -215,7 +215,7 @@ function sync(argv) {
       break
 
     case 'docs-dm':
-      handleSync({ owner: 'yinixu9506', repo, ref, base, head }, [
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
