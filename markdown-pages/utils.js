@@ -40,6 +40,8 @@ const ignorePaths = [
   'CONTRIBUTING.md',
   'README.md',
   'contribute.md',
+  'hack',
+  'assets/get-started',
 ]
 
 function shouldIgnorePath(path) {
