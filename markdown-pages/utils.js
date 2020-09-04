@@ -26,6 +26,10 @@ function createReplaceTabPanelStream() {
   })
 }
 
+function createReplaceTrailingWhiteSpaceStream() {
+  return replaceStream(/[ \t]+$/gm, '')
+}
+
 const ignorePaths = [
   '.circleci',
   '.github',
@@ -62,5 +66,6 @@ module.exports = {
   createReplaceImagePathStream,
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
+  createReplaceTrailingWhiteSpaceStream,
   shouldIgnorePath,
 }
