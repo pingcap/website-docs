@@ -4,7 +4,7 @@ $navbar-height: 5.25rem; // 84px
 
 .PingCAP-TOC {
   display: none;
-  
+
   &.show-toc {
     display: block;
     transition: display 10ms;
@@ -91,6 +91,10 @@ $navbar-height: 5.25rem; // 84px
           margin-left: 0.5rem;
           background: url(../../../images/toc/add.svg) no-repeat;
           background-size: contain;
+        }
+
+        > ul {
+          display: none;
         }
 
         ul {
