@@ -233,6 +233,10 @@ $navbar-height-mobile: 4.25rem; // 68px
   }
 
   .doc-toc-column {
+    position: sticky;
+    top: calc(#{$navbar-height} + 1rem);
+    max-height: calc(100vh);
+    overflow: auto;
     min-width: 200px;
 
     @include mobile {
@@ -241,11 +245,6 @@ $navbar-height-mobile: 4.25rem; // 68px
   }
 
   .doc-toc {
-    position: sticky;
-    top: calc(#{$navbar-height} + 1rem);
-    max-height: calc(100vh);
-    overflow: auto;
-
     .title {
       margin: 0 0 1rem;
       color: $B3;
@@ -278,7 +277,7 @@ $navbar-height-mobile: 4.25rem; // 68px
         &:first-child {
           padding-top: 10px;
         }
-        
+
         ul {
           padding-left: 1rem;
         }
