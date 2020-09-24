@@ -63,10 +63,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-markdown-new-contents-cache-
 
-      - name: print restored markdown contents
-        run: |
-          cat ./markdown-pages/contents/en/docs-tidb/master/tidb-binlog/binlog-slave-client.md
-
       # check if the markdown-contents been stored successfully
       - name: File Existence
         uses: andstor/file-existence-action@v1.0.1
