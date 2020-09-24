@@ -59,14 +59,12 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-new-contents-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-contents-cache-
-            ${{ runner.os }}-
+            ${{ runner.os }}-markdown-new-contents-cache-
 
       - name: print restored markdown contents
         run: |
-          cat ./markdown-pages/contents/en/docs-tidb/master/tidb-binlog/binlog-consumer-client.md
           cat ./markdown-pages/contents/en/docs-tidb/master/tidb-binlog/binlog-slave-client.md
 
       # check if the markdown-contents been stored successfully
