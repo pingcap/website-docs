@@ -100,59 +100,94 @@ async function handleSync(metaInfo, pipelines = []) {
     const { files } = (await getCommitInfo(owner, repo, base, head)).data
 
     files.forEach((file) => {
-      const { filename, status, raw_url } = file
+      const { filename, status, raw_url, previous_filename } = file
       if (shouldIgnorePath(filename)) {
         return
       }
 
-      let path
-      let filePathArrWitoutLang
+      let downloadToPath,
+        renamedFilePath,
+        renamedFilePathArrWithoutLang,
+        lang,
+        finalRepo
+
+      let downloadToPathArrWithoutLang = filename.split('/')
+
+      if (previous_filename) {
+        renamedFilePathArrWithoutLang = previous_filename.split('/')
+      }
 
       switch (repo) {
         case 'docs-dm':
         case 'docs-tidb-operator':
-          filePathArrWitoutLang = filename.split('/').slice(1)
-          const lang = filename.substring(0, 2)
+          downloadToPathArrWithoutLang = downloadToPathArrWithoutLang.slice(1)
+          lang = filename.substring(0, 2)
+          finalRepo = repo
 
-          path = generateDistPath(lang, repo, ref, filePathArrWitoutLang)
+          if (previous_filename) {
+            renamedFilePathArrWithoutLang = renamedFilePathArrWithoutLang.slice(
+              1
+            )
+          }
           break
 
         case 'dbaas-docs':
-          filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath(
-            'en',
-            'docs-dbaas',
-            ref,
-            filePathArrWitoutLang
-          )
+          finalRepo = 'docs-dbaas'
+          lang = 'en'
           break
 
         case 'docs':
-          filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath('en', 'docs-tidb', ref, filePathArrWitoutLang)
+          finalRepo = 'docs-tidb'
+          lang = 'en'
           break
 
         case 'docs-cn':
-          filePathArrWitoutLang = filename.split('/')
-          path = generateDistPath('zh', 'docs-tidb', ref, filePathArrWitoutLang)
+          lang = 'zh'
+          finalRepo = 'docs-tidb'
           break
 
         default:
           break
       }
 
+      downloadToPath = generateDistPath(
+        lang,
+        finalRepo,
+        ref,
+        downloadToPathArrWithoutLang
+      )
+      if (previous_filename) {
+        renamedFilePath = generateDistPath(
+          lang,
+          finalRepo,
+          ref,
+          renamedFilePathArrWithoutLang
+        )
+      }
+
       switch (status) {
         case 'added':
         case 'modified':
-          writeContent(raw_url, path, pipelines)
+          writeContent(raw_url, downloadToPath, pipelines)
 
           break
         case 'removed':
-          fs.unlink(path, (err) => {
+          fs.unlink(downloadToPath, (err) => {
             if (err) {
-              sig.error(`Fail to unlink ${path}: ${err}`)
+              sig.error(`Fail to unlink ${downloadToPath}: ${err}`)
             } else {
-              sig.success(`Deleted: ${path}`)
+              sig.success(`Deleted: ${downloadToPath}`)
+            }
+          })
+
+          break
+        case 'renamed':
+          writeContent(raw_url, downloadToPath, pipelines)
+          fs.unlink(renamedFilePath, (err) => {
+            if (err) {
+              sig.error(`Fail to unlink ${renamedFilePath}: ${err}`)
+            } else {
+              sig.success(`Deleted: ${renamedFilePath}`)
             }
           })
 
