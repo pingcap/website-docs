@@ -113,10 +113,6 @@ async function handleSync(metaInfo, pipelines = []) {
 
       let downloadToPathArrWithoutLang = filename.split('/')
 
-      if (previous_filename) {
-        renamedFilePathArrWithoutLang = previous_filename.split('/')
-      }
-
       switch (repo) {
         case 'docs-dm':
         case 'docs-tidb-operator':
@@ -124,11 +120,6 @@ async function handleSync(metaInfo, pipelines = []) {
           lang = filename.substring(0, 2)
           finalRepo = repo
 
-          if (previous_filename) {
-            renamedFilePathArrWithoutLang = renamedFilePathArrWithoutLang.slice(
-              1
-            )
-          }
           break
 
         case 'dbaas-docs':
@@ -156,14 +147,6 @@ async function handleSync(metaInfo, pipelines = []) {
         ref,
         downloadToPathArrWithoutLang
       )
-      if (previous_filename) {
-        renamedFilePath = generateDistPath(
-          lang,
-          finalRepo,
-          ref,
-          renamedFilePathArrWithoutLang
-        )
-      }
 
       switch (status) {
         case 'added':
@@ -182,6 +165,13 @@ async function handleSync(metaInfo, pipelines = []) {
 
           break
         case 'renamed':
+          renamedFilePathArrWithoutLang = previous_filename.split('/').slice(1)
+          renamedFilePath = generateDistPath(
+            lang,
+            finalRepo,
+            ref,
+            renamedFilePathArrWithoutLang
+          )
           writeContent(raw_url, downloadToPath, pipelines)
           fs.unlink(renamedFilePath, (err) => {
             if (err) {
