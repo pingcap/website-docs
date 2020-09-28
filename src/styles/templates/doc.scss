@@ -230,6 +230,24 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   .gatsby-highlight {
     background: $M2;
+
+    pre {
+      &::before {
+        padding-right: 0.5rem;
+      }
+
+      &.shell-root::before {
+        content: '#';
+      }
+
+      &.shell-regular::before {
+        content: '$';
+      }
+
+      &.sql::before {
+        content: '>';
+      }
+    }
   }
 
   .doc-toc-column {
