@@ -184,7 +184,7 @@ Currently, you can use these shortcodes into docs:
 
 <Tips>This is a tip.</Tips>
 
-<Error>This is an errro<Error>
+<Error>This is an errro</Error>
 ```
 
 Everything you needed is just to write a JSX tag, put the text into it. Then we will use

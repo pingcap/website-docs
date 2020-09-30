@@ -59,17 +59,16 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-new-contents-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-contents-cache-
-            ${{ runner.os }}-
+            ${{ runner.os }}-markdown-new-contents-cache-
 
       # check if the markdown-contents been stored successfully
       - name: File Existence
         uses: andstor/file-existence-action@v1.0.1
         id: check_files
         with:
-          files: './markdown-pages/contents/zh/docs-dev-guide/master/_index.md'
+          files: './markdown-pages/contents/zh/docs-dm/release-2.0/_index.md'
 
       # if restore markdown-pages fialed, download all docs
       - name: Check restore status
@@ -104,7 +103,7 @@ jobs:
           path=/home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
           base=""
           if [ -f "$path" ];then
-          base=$(cat $path)  
+          base=$(cat $path)
           fi
           echo "get cache base hash: $base"
           echo "::set-output name=base::${base}"

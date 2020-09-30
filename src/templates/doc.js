@@ -20,6 +20,7 @@ import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
+import GitCommitInfo from '../components/gitCommitInfo'
 
 const Doc = ({
   pageContext: {
@@ -232,6 +233,11 @@ const Doc = ({
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>
+              <GitCommitInfo
+                repoInfo={repoInfo}
+                base={base}
+                title={frontmatter.title}
+              />
             </section>
             <div className="doc-toc-column column">
               <div className="docs-operation">

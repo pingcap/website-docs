@@ -3,11 +3,11 @@
 $navbar-height: 5.25rem; // 84px
 
 .PingCAP-TOC {
-  opacity: 0;
-  
+  display: none;
+
   &.show-toc {
-    opacity: 1;
-    transition: opacity 10ms;
+    display: block;
+    transition: display 10ms;
   }
 
   @include mobile {
@@ -16,7 +16,7 @@ $navbar-height: 5.25rem; // 84px
   }
 
   &.show {
-    display: unset;
+    display: none;
   }
 
   a {
@@ -93,6 +93,10 @@ $navbar-height: 5.25rem; // 84px
           background-size: contain;
         }
 
+        > ul {
+          display: none;
+        }
+
         ul {
           height: 0;
 
@@ -125,7 +129,7 @@ $navbar-height: 5.25rem; // 84px
 
       a {
         display: inline-block;
-        width: 90%;
+        width: 100%;
         word-break: break-word;
       }
     }

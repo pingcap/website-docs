@@ -20,6 +20,12 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
     function fold(li) {
       Array.from(li.children).forEach((list) => {
+        if (list.tagName === 'SPAN') {
+          list.style.display = 'inlin-block'
+        } else if (list.tagName === 'UL') {
+          list.style.display = 'none'
+        }
+
         Array.from(list.children).forEach((el) => {
           if (
             el.classList.contains('can-unfold') &&
@@ -29,6 +35,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
             fold(el)
           }
         })
+
         requestAnimationFrame(() => {
           list.style.height = list.scrollHeight + 'px'
 
@@ -40,9 +47,15 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     }
 
     function unfold(li) {
-      Array.from(li.children).forEach(
-        (el) => (el.style.height = el.scrollHeight + 'px')
-      )
+      Array.from(li.children).forEach((el) => {
+        if (el.tagName === 'SPAN') {
+          el.style.display = 'inlin-block'
+        } else if (el.tagName === 'UL') {
+          el.style.display = 'block'
+        }
+
+        return (el.style.height = el.scrollHeight + 'px')
+      })
     }
 
     function clickEvent(e) {
