@@ -226,6 +226,12 @@ $navbar-height-mobile: 4.25rem; // 68px
       background-image: url(../../../images/version-mark.png);
       background-size: 20px;
     }
+
+    .commit-info {
+      margin-top: 5rem;
+      padding: 1rem;
+      background-color: $M2;
+    }
   }
 
   .gatsby-highlight {
