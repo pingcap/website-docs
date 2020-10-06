@@ -59,16 +59,16 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-new-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-latest-contents-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-new-contents-cache-
+            ${{ runner.os }}-markdown-latest-contents-cache-
 
       # check if the markdown-contents been stored successfully
       - name: File Existence
         uses: andstor/file-existence-action@v1.0.1
         id: check_files
         with:
-          files: './markdown-pages/contents/zh/docs-dm/release-2.0/file_does_not_exist.md'
+          files: './markdown-pages/contents/zh/docs-dm/release-2.0/_index.md'
 
       # if restore markdown-pages fialed, download all docs
       - name: Check restore status
