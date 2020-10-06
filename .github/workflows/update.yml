@@ -59,9 +59,9 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-latest-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-new-contents-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-latest-contents-cache-
+            ${{ runner.os }}-markdown-new-contents-cache-
 
       # check if the markdown-contents been stored successfully
       - name: File Existence
@@ -118,18 +118,18 @@ jobs:
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-gatsby-latest-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-gatsby-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-latest-cache-
+            ${{ runner.os }}-gatsby-cache-
 
       - name: Restore gatsby build
         uses: actions/cache@v2
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-gatsby-latest-build-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-gatsby-build-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-latest-build-
+            ${{ runner.os }}-gatsby-build-
 
       - name: Build website
         run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build --write-to-file
