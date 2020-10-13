@@ -28,6 +28,6 @@ export default function replaceInternalHref(lang, type, version) {
   })
 
   if (window.location.hash) {
-    window.location.href = window.location.pathname + window.location.hash
+    window.location.href = window.location.hash
   }
 }
