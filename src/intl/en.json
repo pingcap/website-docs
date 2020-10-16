@@ -74,6 +74,11 @@
       "desc": "TiUP is a package manager that manages components in the TiDB ecosystem, such as TiDB, PD, TiKV, and so on. You can run any component with only a single line of TiUP commands, which is far easier to manage."
     }
   },
-  "languageSwitcher": "English"
+  "languageSwitcher": "English",
 
+  "docHelpful": {
+    "header": "Was this page helpful?",
+    "thumbUp": "Yes",
+    "thumbDown": "No"
+  }
 }

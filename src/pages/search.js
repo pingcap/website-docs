@@ -314,7 +314,7 @@ const Search = ({ pageContext: { locale } }) => {
 
           <SearchResult results={results} searched={searched} />
 
-          {loading && <Loading />}
+          {loading && <Loading wholeSreen={true} />}
         </section>
       </article>
     </Layout>
