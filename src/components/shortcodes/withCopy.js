@@ -13,7 +13,11 @@ const WithCopy = ({ tag }) => {
   }, [])
 
   useEffect(() => {
-    if (tag) {
+    if (
+      btnEl.current.nextElementSibling.firstChild &&
+      btnEl.current.nextElementSibling.firstChild.classList &&
+      tag
+    ) {
       btnEl.current.nextElementSibling.firstChild.classList.add(tag)
     }
   }, [tag])

@@ -165,7 +165,12 @@ async function handleSync(metaInfo, pipelines = []) {
 
           break
         case 'renamed':
-          renamedFilePathArrWithoutLang = previous_filename.split('/').slice(1)
+          renamedFilePathArrWithoutLang = previous_filename.split('/')
+          if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
+            renamedFilePathArrWithoutLang = renamedFilePathArrWithoutLang.slice(
+              1
+            )
+          }
           renamedFilePath = generateDistPath(
             lang,
             finalRepo,
