@@ -18,8 +18,16 @@ export default function replaceInternalHref(lang, type, version) {
     }
 
     if (a.classList.contains('anchor')) {
-      a.href = decodeURIComponent(a.getAttribute('href')).replace(reAnchor, '').replace(sliceVersionMark, '')
-      a.parentElement.id = a.parentElement.id.replace(reAnchor, '').replace(sliceVersionMark, '')
+      a.href = decodeURIComponent(a.getAttribute('href'))
+        .replace(reAnchor, '')
+        .replace(sliceVersionMark, '')
+      a.parentElement.id = a.parentElement.id
+        .replace(reAnchor, '')
+        .replace(sliceVersionMark, '')
     }
   })
+
+  if (window.location.hash) {
+    window.location.href = window.location.hash
+  }
 }

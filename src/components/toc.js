@@ -20,6 +20,12 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
     function fold(li) {
       Array.from(li.children).forEach((list) => {
+        if (list.tagName === 'SPAN') {
+          list.style.display = 'inlin-block'
+        } else if (list.tagName === 'UL') {
+          list.style.display = 'none'
+        }
+
         Array.from(list.children).forEach((el) => {
           if (
             el.classList.contains('can-unfold') &&
@@ -29,6 +35,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
             fold(el)
           }
         })
+
         requestAnimationFrame(() => {
           list.style.height = list.scrollHeight + 'px'
 
@@ -40,15 +47,29 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     }
 
     function unfold(li) {
-      Array.from(li.children).forEach(
-        (el) => (el.style.height = el.scrollHeight + 'px')
-      )
+      Array.from(li.children).forEach((el) => {
+        if (el.tagName === 'SPAN') {
+          el.style.display = 'inlin-block'
+        } else if (el.tagName === 'UL') {
+          el.style.display = 'block'
+        }
+
+        return (el.style.height = el.scrollHeight + 'px')
+      })
     }
 
     function clickEvent(e) {
       e.stopPropagation()
 
-      const li = e.target
+      let li = e.target
+
+      if (
+        e.target.classList.contains('add-icon') ||
+        e.target.classList.contains('remove-icon')
+      ) {
+        li = e.target.parentElement
+      }
+
       li.parentElement.style.height = null
 
       // keep only one unfolded level
@@ -79,7 +100,19 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       Array.from(ul.children).forEach((li) => {
         if (li.children[0].tagName.toLowerCase() === 'ul') {
           li.classList.add('can-unfold', 'folded')
-          li.addEventListener('click', clickEvent)
+
+          if (!li.parentElement.classList.contains('top')) {
+            let unfoldEle = document.createElement('span')
+            let foldEle = document.createElement('span')
+            unfoldEle.classList.add('add-icon')
+            foldEle.classList.add('remove-icon')
+            li.insertBefore(unfoldEle, li.children[0])
+            li.insertBefore(foldEle, li.children[0])
+            unfoldEle.addEventListener('click', clickEvent)
+            foldEle.addEventListener('click', clickEvent)
+          } else {
+            li.addEventListener('click', clickEvent)
+          }
 
           Array.from(li.children).forEach(retrieveLi)
         }
@@ -146,8 +179,10 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
               console.log('Your browser does not support scrollTo API')
               tocRef.current.scrollTop = tocClientRect.height + dy
             }
+
+            const leftTOCColumn = document.getElementsByClassName('left-column')
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-            tocRef.current.scrollTo({
+            leftTOCColumn[0].scrollTo({
               top: tocClientRect.height + dy - 100,
               left: 0,
               behavior: 'smooth',

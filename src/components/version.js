@@ -7,6 +7,7 @@ import {
   docsDMVersion,
   docsTiDBOperatorVersion,
   docsCloudVersion,
+  docsDevGuideVersion,
 } from '../lib/version'
 
 import { Button } from '@seagreenio/react-bulma'
@@ -17,6 +18,7 @@ const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
+const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
 
 const Version = ({ relativeDir, base, versions }) => {
   const [doc, ref, stableVersion] = convertDocAndRef(relativeDir.split('/'))
@@ -42,6 +44,9 @@ const Version = ({ relativeDir, base, versions }) => {
         break
       case 'tidbcloud':
         setDropdownItems(docsCloudVersionList)
+        break
+      case 'dev-guide':
+        setDropdownItems(docsDevGuideVersionList)
         break
       default:
         break
@@ -84,9 +89,15 @@ const Version = ({ relativeDir, base, versions }) => {
               <Fragment key={item}>
                 {versions && versions.indexOf(item) === -1 ? (
                   <span className="dropdown-item unclickable-btn">
-                    {item === 'stable'
-                      ? `${stableVersion} (stable)`
-                      : `${item}`}
+                    {doc === 'tidb-data-migration' && item === 'v2.0' ? (
+                      `${item} (rc)`
+                    ) : (
+                      <>
+                        {item === 'stable'
+                          ? `${stableVersion} (stable)`
+                          : `${item}`}
+                      </>
+                    )}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
                     </span>
@@ -99,9 +110,15 @@ const Version = ({ relativeDir, base, versions }) => {
                     }`}
                     className="dropdown-item"
                   >
-                    {item === 'stable'
-                      ? `${stableVersion} (stable)`
-                      : `${item}`}
+                    {doc === 'tidb-data-migration' && item === 'v2.0' ? (
+                      `${item} (rc)`
+                    ) : (
+                      <>
+                        {item === 'stable'
+                          ? `${stableVersion} (stable)`
+                          : `${item}`}
+                      </>
+                    )}
                   </IntlLink>
                 )}
               </Fragment>

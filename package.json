@@ -24,6 +24,7 @@
     "gatsby-plugin-purgecss": "^5.0.0",
     "gatsby-plugin-react-helmet": "^3.3.0",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
+    "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sass": "^2.3.1",
     "gatsby-plugin-sharp": "^2.6.9",
     "gatsby-plugin-sitemap": "^2.4.3",
@@ -79,6 +80,7 @@
     "clean:docs:docs-dm:en": "rimraf ./markdown-pages/contents/en/docs-dm/**/*.md",
     "clean:docs:docs-dm:zh": "rimraf ./markdown-pages/contents/zh/docs-dm/**/*.md",
     "clean:docs:docs-dbaas:en": "rimraf ./markdown-pages/contents/en/docs-dbaas/**/*.md",
+    "clean:docs:docs-dev-guide:zh": "rimraf ./markdown-pages/contents/zh/docs-dev-guide/**/*.md",
     "download:docs-tidb:en": "node markdown-pages/cli.js download docs",
     "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
     "download:docs-tidb:zh": "node markdown-pages/cli.js download docs-cn",
@@ -93,6 +95,8 @@
     "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh",
     "download:docs-dbaas": "node markdown-pages/cli.js download docs-dbaas",
     "download:docs-dbaas:all": "./scripts/download-docs-dbaas.sh",
+    "download:docs-dev-guide": "node markdown-pages/cli.js download dev-guide",
+    "download:docs-dev-guide:zh:all": "./scripts/download-docs-dev-guide-zh.sh",
     "sync": "node markdown-pages/cli.js sync"
   },
   "lint-staged": {

@@ -2,6 +2,7 @@
   "navbar": {
     "tidb": "TiDB",
     "tools": "Tools",
+    "devGuide": "开发指南",
     "contactUs": "联系我们",
     "searchDocs": "搜索文档"
   },
@@ -32,6 +33,7 @@
     }
   },
   "download-pdf": "下载 PDF",
+  "latestCommit": "更新于",
   "footerColumnsTitle": {
     "product": "产品",
     "resources": "资源",

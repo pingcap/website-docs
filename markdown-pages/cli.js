@@ -4,12 +4,14 @@ const { retrieveAllMDs, handleSync, writeContent } = require('./download')
 const {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
+  DEV_GUIDE_IMAGE_CDN_URL,
   TIDB_IN_KUBERNETES_IMAGE_CDN_URL,
   TIDB_DATA_MIGRATION_IMAGE_CDN_URL,
   TIDB_CLOUD_IMAGE_CDN_URL,
   createReplaceImagePathStream,
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
+  createReplaceTrailingWhiteSpaceStream,
 } = require('./utils')
 
 const argv = yargs
@@ -18,7 +20,7 @@ const argv = yargs
     'specify which repo of docs you want to download'
   )
   .command(
-    'sync <repo> <ref> <sha>',
+    'sync <repo> <ref> <base> <head>',
     "Sync the docs' changes by a single commit"
   ).argv
 
@@ -49,10 +51,12 @@ function main(argv) {
             () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
             () => createReplaceCopyableStream(),
             () => createReplaceTabPanelStream(),
+            // () => createReplaceTrailingWhiteSpaceStream(),
           ]
         )
       })
       break
+
     case 'docs':
       retrieveAllMDs(
         {
@@ -66,10 +70,11 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
-
       break
+
     case 'docs-cn':
       retrieveAllMDs(
         {
@@ -83,10 +88,11 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
-
       break
+
     case 'docs-tidb-operator':
       if (!path) {
         sig.warn(
@@ -108,10 +114,11 @@ function main(argv) {
           () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
-
       break
+
     case 'docs-dm':
       if (!path) {
         sig.warn(
@@ -133,14 +140,15 @@ function main(argv) {
           () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
-
       break
+
     case 'docs-dbaas':
       retrieveAllMDs(
         {
-          owner: 'pingcap',
+          owner: 'tidbcloud',
           repo: 'dbaas-docs',
           ref,
           path: path ? path : '',
@@ -150,10 +158,37 @@ function main(argv) {
           () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
-
       break
+
+    case 'dev-guide':
+      if (!path) {
+        sig.warn(
+          'For dev-guide, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
+        )
+
+        return
+      }
+
+      retrieveAllMDs(
+        {
+          owner: 'pingcap',
+          repo,
+          ref,
+          path: path,
+        },
+        `${__dirname}/contents/${path}/docs-dev-guide/${ref}`,
+        [
+          () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
+          () => createReplaceCopyableStream(),
+          () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
+        ]
+      )
+      break
+
     default:
       break
   }
@@ -162,35 +197,66 @@ function main(argv) {
 function sync(argv) {
   const repo = argv.repo
   const ref = argv.ref
-  const sha = argv.sha
+  const base = argv.base
+  const head = argv.head
 
-  sig.info(`Sync Info: repo => ${repo} ref => ${ref} sha => ${sha}`)
+  sig.info(
+    `Sync Info: repo => ${repo} ref => ${ref} base => ${base} head => ${head}`
+  )
 
   switch (repo) {
     case 'docs-tidb-operator':
-      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
         () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
-
       break
+
     case 'docs-dm':
-      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
-
       break
 
     case 'dbaas-docs':
-      handleSync({ owner: 'pingcap', repo, ref, sha }, [
+      handleSync({ owner: 'tidbcloud', repo, ref, base, head }, [
         () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
+      break
 
+    case 'docs':
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+        () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
+      ])
+      break
+
+    case 'docs-cn':
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+        () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
+      ])
+      break
+
+    case 'dev-guide':
+      handleSync({ owner: 'pingcap', repo, ref, base, head }, [
+        () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
+        () => createReplaceCopyableStream(),
+        () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
+      ])
       break
     default:
       break

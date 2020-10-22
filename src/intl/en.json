@@ -33,6 +33,7 @@
     }
   },
   "download-pdf": "Download PDF",
+  "latestCommit": "was last updated",
   "footerColumnsTitle": {
     "product": "Product",
     "resources": "Resources",

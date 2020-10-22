@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 const Result = ({ results, searched }) => {
-
   return (
     <div className="search-result">
       <p className="counts">
@@ -17,7 +16,10 @@ const Result = ({ results, searched }) => {
           results.map((r) => (
             <div key={r.objectID} className="item">
               <a href={r.url}>
-                <div className="title is-5">{r.hierarchy.lvl0}</div>
+                <div
+                  className="title is-5"
+                  dangerouslySetInnerHTML={{ __html: r.hierarchy.lvl0 }}
+                />
               </a>
               <a href={r.url}>
                 <div className="url">{r.url}</div>

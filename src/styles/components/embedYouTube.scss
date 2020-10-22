@@ -1,0 +1,18 @@
+@import '../common';
+
+.PingCAP-Video-Wrapper {
+  @include mobile {
+    margin-bottom: 2rem;
+  }
+
+  width: 100%;
+
+  iframe {
+    width: 100%;
+    height: 400px;
+
+    @include mobile {
+      height: 200px;
+    }
+  }
+}

@@ -20,6 +20,7 @@ import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
+import GitCommitInfo from '../components/gitCommitInfo'
 
 const Doc = ({
   pageContext: {
@@ -149,6 +150,7 @@ const Doc = ({
       <ul>
         {items.map((item) => (
           <li key={item.url}>
+            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <a
               href={'#' + replaceItemURL(item.url)}
               dangerouslySetInnerHTML={{ __html: item.title }}
@@ -205,8 +207,8 @@ const Doc = ({
           </progress>
         )}
         <section className="section container">
-          <div className="columns">
-            <div className="column is-2 left-column">
+          <div className="content-columns columns">
+            <div className="left-column column">
               <VersionSwitcher
                 relativeDir={relativeDir}
                 base={base}
@@ -227,28 +229,22 @@ const Doc = ({
                 fullPath={fullPath}
               />
             </div>
-            <div className="column is-8">
-              <section className="markdown-body doc-content">
-                <MDXProvider components={Shortcodes}>
-                  <MDXRenderer>{mdx.body}</MDXRenderer>
-                </MDXProvider>
-              </section>
-            </div>
-            <div className="column is-2 doc-toc-column">
-              <>
-                {docRefArray[0] === 'tidbcloud' ? (
-                  ''
-                ) : (
-                  <div className="docs-operation">
-                    {locale === 'zh' && (
-                      <DownloadPDF downloadURL={downloadURL} />
-                    )}
-                    <ImproveDocLink repoInfo={repoInfo} base={base} />
-                    <FeedbackDocLink repoInfo={repoInfo} base={base} />
-                  </div>
-                )}
-              </>
-
+            <section className="markdown-body doc-content column">
+              <MDXProvider components={Shortcodes}>
+                <MDXRenderer>{mdx.body}</MDXRenderer>
+              </MDXProvider>
+              <GitCommitInfo
+                repoInfo={repoInfo}
+                base={base}
+                title={frontmatter.title}
+              />
+            </section>
+            <div className="doc-toc-column column">
+              <div className="docs-operation">
+                {locale === 'zh' && <DownloadPDF downloadURL={downloadURL} />}
+                <ImproveDocLink repoInfo={repoInfo} base={base} />
+                <FeedbackDocLink repoInfo={repoInfo} base={base} />
+              </div>
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
