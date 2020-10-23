@@ -442,6 +442,10 @@ $navbar-height-mobile: 4.25rem; // 68px
 }
 
 .feedback-prompt {
+  @include mobile {
+    display: none;
+  }
+
   position: fixed;
   bottom: 0;
   right: 1rem;

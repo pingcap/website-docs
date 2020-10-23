@@ -78,13 +78,7 @@
   "docHelpful": {
     "header": "文档内容是否有帮助？",
     "thumbUp": "是",
-    "thumbDown": "否",
-    "yesFollowUpText": {
-      "inputLabel": "订阅 TiDB 最新动态：",
-      "inputPlaceHolder": "邮箱地址",
-      "submitBtn": "提交"
-    },
-    "endThanks": "提交成功！"
+    "thumbDown": "否"
   }
 
 }

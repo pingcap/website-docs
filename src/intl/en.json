@@ -79,12 +79,6 @@
   "docHelpful": {
     "header": "Was this page helpful?",
     "thumbUp": "Yes",
-    "thumbDown": "No",
-    "yesFollowUpText": {
-      "inputLabel": "Stay informed of TiDB updates:",
-      "inputPlaceHolder": "Email address",
-      "submitBtn": "Submit"
-    },
-    "endThanks": "Thank you!"
+    "thumbDown": "No"
   }
 }

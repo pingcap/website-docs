@@ -309,29 +309,44 @@ const Doc = ({
 
       <section className="feedback-prompt">
         <div className="feedback-header">
-          <p className="feedback-title" onClick={showThumbs}>
+          <div
+            role="button"
+            tabIndex={0}
+            className="feedback-title"
+            onClick={showThumbs}
+            onKeyDown={showThumbs}
+          >
             <FormattedMessage id="docHelpful.header" />
-          </p>
-          <p
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
             className="close-icon"
             onClick={closeFeedback}
+            onKeyDown={closeFeedback}
             ref={feedbackCloseRef}
           >
             x
-          </p>
+          </div>
         </div>
         <div className="feedback-body" ref={feedbackBodyRef}>
           {!showNoFollowUp && !showYesFollowUp && (
             <div className="thumbs">
               <div
+                role="button"
+                tabIndex={0}
                 className="thumb thumb-up"
                 onClick={() => setDocHelpful(frontmatter.title, true)}
+                onKeyDown={() => setDocHelpful(frontmatter.title, true)}
               >
                 <FormattedMessage id="docHelpful.thumbUp" />
               </div>
               <div
+                role="button"
+                tabIndex={0}
                 className="thumb thumb-down"
                 onClick={() => setDocHelpful(frontmatter.title, false)}
+                onKeyDown={() => setDocHelpful(frontmatter.title, false)}
               >
                 <FormattedMessage id="docHelpful.thumbDown" />
               </div>
