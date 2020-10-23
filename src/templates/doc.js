@@ -251,6 +251,90 @@ const Doc = ({
           </div>
         </section>
       </article>
+
+      <section className="feedback-prompt">
+        <div className="feedback-header">
+          <div
+            role="button"
+            tabIndex={0}
+            className="feedback-title"
+            onClick={showThumbs}
+            onKeyDown={showThumbs}
+          >
+            <FormattedMessage id="docHelpful.header" />
+          </div>
+          <div
+            role="button"
+            tabIndex={0}
+            className="close-icon"
+            onClick={closeFeedback}
+            onKeyDown={closeFeedback}
+            ref={feedbackCloseRef}
+          >
+            x
+          </div>
+        </div>
+        <div className="feedback-body" ref={feedbackBodyRef}>
+          {!showNoFollowUp && !showYesFollowUp && (
+            <div className="thumbs">
+              <div
+                role="button"
+                tabIndex={0}
+                className="thumb thumb-up"
+                onClick={() => setDocHelpful(frontmatter.title, true)}
+                onKeyDown={() => setDocHelpful(frontmatter.title, true)}
+              >
+                <FormattedMessage id="docHelpful.thumbUp" />
+              </div>
+              <div
+                role="button"
+                tabIndex={0}
+                className="thumb thumb-down"
+                onClick={() => setDocHelpful(frontmatter.title, false)}
+                onKeyDown={() => setDocHelpful(frontmatter.title, false)}
+              >
+                <FormattedMessage id="docHelpful.thumbDown" />
+              </div>
+            </div>
+          )}
+
+          {showYesFollowUp && (
+            <div className="feedback-form">
+              {locale === 'en' ? (
+                <HubspotForm
+                  portalId="4466002"
+                  formId="7ff20dd1-f319-4474-a974-2c8d4e0ebf19"
+                  loading={<Loading wholeSreen={false} />}
+                />
+              ) : (
+                <HubspotForm
+                  portalId="4466002"
+                  formId="dc1710fa-3191-4e32-8686-9cb904abdac0"
+                  loading={<Loading wholeSreen={false} />}
+                />
+              )}
+            </div>
+          )}
+
+          {showNoFollowUp && (
+            <div className="feedback-form">
+              {locale === 'en' ? (
+                <HubspotForm
+                  portalId="4466002"
+                  formId="9471870a-6ef3-4c8c-a0ff-fc0fe7e23f0a"
+                  loading={<Loading wholeSreen={false} />}
+                />
+              ) : (
+                <HubspotForm
+                  portalId="4466002"
+                  formId="81d6e8fe-25f9-4cdc-bf81-356bfd255aea"
+                  loading={<Loading wholeSreen={false} />}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      </section>
     </Layout>
   )
 }
