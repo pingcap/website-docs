@@ -14,7 +14,7 @@ jobs:
           echo "${{ github.event.client_payload.repo }}"
           echo "${{ github.event.client_payload.ref }}"
           echo "${{ github.event.client_payload.sha }}"
-          echo "${{ github.event.client_payload.full_download }}"
+          echo "${{ github.event.client_payload.download_type }}"
 
       # make sure there is only one workflow running
       - name: Turnstyle
@@ -64,9 +64,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-markdown-new-contents-cache-
 
-      # if full_download is true, download all docs
+      # if download_type is full, download all docs
       - name: Check restore status
-        if: github.event.client_payload.full_download == 'true'
+        if: github.event.client_payload.download_type == 'full'
         run: |
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
@@ -84,9 +84,9 @@ jobs:
           echo "::set-output name=ref::${ref##*/}"
           echo "::set-output name=repo::${repo##*/}"
 
-      # if full_download is false, get the base commit of the triggering repo for furthur use.
+      # if download_type is incremental, get the base commit of the triggering repo for furthur use.
       - name: Get base commit cache
-        if: github.event.client_payload.full_download != 'true' && steps.git-ref.outputs.repo != 'website-docs'
+        if: github.event.client_payload.download_type == 'incremental' && steps.git-ref.outputs.repo != 'website-docs'
         id: cache-commit
         run: |
           path=/home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
@@ -99,7 +99,7 @@ jobs:
 
       # Incremental download the triggering repo by comparing the base and head commits
       - name: Sync docs
-        if: github.event.client_payload.full_download != 'true' && steps.git-ref.outputs.repo != 'website-docs'
+        if: github.event.client_payload.download_type == 'incremental' && steps.git-ref.outputs.repo != 'website-docs'
         run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
@@ -150,7 +150,7 @@ jobs:
 
       # if does full building, store commits of all repo-refs
       - name: Update all commit hash
-        if: github.event.client_payload.full_download  == 'true'
+        if: github.event.client_payload.download_type  == 'full'
         run: |
           ls ./scripts/
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}
