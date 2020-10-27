@@ -18,4 +18,4 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           repository: pingcap/website-docs/
           event-type: triggered
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repo": "${{ github.repository }}", "download_type": "incremental" }'
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repo": "${{ github.repository }}"}'
