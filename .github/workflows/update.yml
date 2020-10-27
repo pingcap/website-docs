@@ -14,6 +14,7 @@ jobs:
           echo "${{ github.event.client_payload.repo }}"
           echo "${{ github.event.client_payload.ref }}"
           echo "${{ github.event.client_payload.sha }}"
+          echo "${{ github.event.client_payload.full_download }}"
 
       # make sure there is only one workflow running
       - name: Turnstyle
@@ -63,16 +64,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-markdown-new-contents-cache-
 
-      # check if the markdown-contents been stored successfully
-      - name: File Existence
-        uses: andstor/file-existence-action@v1.0.1
-        id: check_files
-        with:
-          files: './markdown-pages/contents/zh/docs-dm/release-2.0/_index.md'
-
-      # if restore markdown-pages fialed, download all docs
+      # if full_download is true, download all docs
       - name: Check restore status
-        if: steps.check_files.outputs.files_exists != 'true'
+        if: github.event.client_payload.full_download == 'true'
         run: |
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
@@ -81,7 +75,7 @@ jobs:
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
           GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dev-guide:zh:all
 
-      # set ref and repo name of the repo, which triggering website build
+      # set ref and name of the repo, which triggering website build
       - name: Split ref
         id: git-ref
         run: |
@@ -90,14 +84,9 @@ jobs:
           echo "::set-output name=ref::${ref##*/}"
           echo "::set-output name=repo::${repo##*/}"
 
-      # print ref and repo to debug
-      - name: Get ref
-        run: |
-          echo "get ${{ steps.git-ref.outputs.ref }}, ${{ steps.git-ref.outputs.repo }}"
-
-      # if markdown-pages restored successfully, get the base commit of the triggering repo for furthur use.
+      # if full_download is false, get the base commit of the triggering repo for furthur use.
       - name: Get base commit cache
-        if: steps.check_files.outputs.files_exists == 'true' && steps.git-ref.outputs.repo != 'website-docs'
+        if: github.event.client_payload.full_download != 'true' && steps.git-ref.outputs.repo != 'website-docs'
         id: cache-commit
         run: |
           path=/home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
@@ -110,7 +99,7 @@ jobs:
 
       # Incremental download the triggering repo by comparing the base and head commits
       - name: Sync docs
-        if: steps.check_files.outputs.files_exists == 'true' && steps.git-ref.outputs.repo != 'website-docs'
+        if: github.event.client_payload.full_download != 'true' && steps.git-ref.outputs.repo != 'website-docs'
         run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
@@ -161,7 +150,7 @@ jobs:
 
       # if does full building, store commits of all repo-refs
       - name: Update all commit hash
-        if: steps.check_files.outputs.files_exists != 'true'
+        if: github.event.client_payload.full_download  == 'true'
         run: |
           ls ./scripts/
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}
