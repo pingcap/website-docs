@@ -137,6 +137,12 @@ async function handleSync(metaInfo, pipelines = []) {
           finalRepo = 'docs-tidb'
           break
 
+        case 'dev-guide':
+          downloadToPathArrWithoutLang = downloadToPathArrWithoutLang.slice(1)
+          lang = filename.substring(0, 2)
+          finalRepo = 'docs-dev-guide'
+          break
+
         default:
           break
       }
@@ -166,7 +172,11 @@ async function handleSync(metaInfo, pipelines = []) {
           break
         case 'renamed':
           renamedFilePathArrWithoutLang = previous_filename.split('/')
-          if (repo === 'docs-tidb-operator' || repo === 'docs-dm') {
+          if (
+            repo === 'docs-tidb-operator' ||
+            repo === 'docs-dm' ||
+            repo === 'dev-guide'
+          ) {
             renamedFilePathArrWithoutLang = renamedFilePathArrWithoutLang.slice(
               1
             )
