@@ -89,9 +89,15 @@ const Version = ({ relativeDir, base, versions }) => {
               <Fragment key={item}>
                 {versions && versions.indexOf(item) === -1 ? (
                   <span className="dropdown-item unclickable-btn">
-                    {item === 'stable'
-                      ? `${stableVersion} (stable)`
-                      : `${item}`}
+                    {doc === 'tidb-data-migration' && item === 'v2.0' ? (
+                      `${item} (rc)`
+                    ) : (
+                      <>
+                        {item === 'stable'
+                          ? `${stableVersion} (stable)`
+                          : `${item}`}
+                      </>
+                    )}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
                     </span>
@@ -104,9 +110,15 @@ const Version = ({ relativeDir, base, versions }) => {
                     }`}
                     className="dropdown-item"
                   >
-                    {item === 'stable'
-                      ? `${stableVersion} (stable)`
-                      : `${item}`}
+                    {doc === 'tidb-data-migration' && item === 'v2.0' ? (
+                      `${item} (rc)`
+                    ) : (
+                      <>
+                        {item === 'stable'
+                          ? `${stableVersion} (stable)`
+                          : `${item}`}
+                      </>
+                    )}
                   </IntlLink>
                 )}
               </Fragment>

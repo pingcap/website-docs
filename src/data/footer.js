@@ -84,7 +84,7 @@ const footerColumnsZh = [
         linkType: 'outBoundLink',
       },
       {
-        name: '关于我们',
+        name: '联系我们',
         link: 'mailto:info@pingcap.com',
         linkType: 'outBoundLink',
       },

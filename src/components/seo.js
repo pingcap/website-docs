@@ -22,6 +22,8 @@ function SEO({ lang, title, description, meta, link }) {
     `
   )
 
+  const openGraph = 'https://download.pingcap.com/images/pingcap-opengraph.jpg'
+
   const metaDescription = description || site.siteMetadata.description
 
   return (
@@ -49,7 +51,19 @@ function SEO({ lang, title, description, meta, link }) {
           content: 'website',
         },
         {
-          name: `twitter:card`,
+          property: 'og:image',
+          content: openGraph,
+        },
+        {
+          property: 'og:image:width',
+          content: '400',
+        },
+        {
+          property: 'og:image:height',
+          content: '400',
+        },
+        {
+          name: 'twitter:card',
           content: 'summary',
         },
         {
@@ -69,9 +83,9 @@ function SEO({ lang, title, description, meta, link }) {
         {
           href: favicon.publicURL,
           rel: 'shortcut icon',
-          type: 'image/x-icon'
+          type: 'image/x-icon',
         },
-        {link}
+        { link },
       ].concat(link)}
     />
   )

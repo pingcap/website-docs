@@ -204,7 +204,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     :not(pre) > code[class*='language-text'] {
       white-space: normal;
-      word-break: break-word;
+      word-break: initial;
     }
 
     .version-mark {
@@ -226,13 +226,41 @@ $navbar-height-mobile: 4.25rem; // 68px
       background-image: url(../../../images/version-mark.png);
       background-size: 20px;
     }
+
+    .commit-info {
+      margin-top: 5rem;
+      padding: 1rem;
+      background-color: $M2;
+    }
   }
 
   .gatsby-highlight {
     background: $M2;
+
+    pre {
+      &::before {
+        padding-right: 0.5rem;
+      }
+
+      &.shell-root::before {
+        content: '#';
+      }
+
+      &.shell-regular::before {
+        content: '$';
+      }
+
+      &.sql::before {
+        content: '>';
+      }
+    }
   }
 
   .doc-toc-column {
+    position: sticky;
+    top: calc(#{$navbar-height} + 1rem);
+    max-height: calc(100vh);
+    overflow: auto;
     min-width: 200px;
 
     @include mobile {
@@ -241,11 +269,6 @@ $navbar-height-mobile: 4.25rem; // 68px
   }
 
   .doc-toc {
-    position: sticky;
-    top: calc(#{$navbar-height} + 1rem);
-    max-height: calc(100vh);
-    overflow: auto;
-
     .title {
       margin: 0 0 1rem;
       color: $B3;
@@ -278,7 +301,6 @@ $navbar-height-mobile: 4.25rem; // 68px
         &:first-child {
           padding-top: 10px;
         }
-
         ul {
           padding-left: 1rem;
         }

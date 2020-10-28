@@ -11,6 +11,7 @@ const {
   createReplaceImagePathStream,
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
+  createReplaceTrailingWhiteSpaceStream,
 } = require('./utils')
 
 const argv = yargs
@@ -50,6 +51,7 @@ function main(argv) {
             () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
             () => createReplaceCopyableStream(),
             () => createReplaceTabPanelStream(),
+            // () => createReplaceTrailingWhiteSpaceStream(),
           ]
         )
       })
@@ -68,6 +70,7 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -85,6 +88,7 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -110,6 +114,7 @@ function main(argv) {
           () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -135,6 +140,7 @@ function main(argv) {
           () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -152,6 +158,7 @@ function main(argv) {
           () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -177,6 +184,7 @@ function main(argv) {
           () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -201,6 +209,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(TIDB_IN_KUBERNETES_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 
@@ -209,6 +218,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(TIDB_DATA_MIGRATION_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 
@@ -217,6 +227,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(TIDB_CLOUD_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 
@@ -225,6 +236,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 
@@ -233,6 +245,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 
@@ -241,6 +254,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
     default:

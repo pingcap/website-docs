@@ -2,7 +2,7 @@ import '../styles/templates/doc.scss'
 
 import * as Shortcodes from '../components/shortcodes'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import DownloadPDF from '../components/downloadPDF'
 import { FormattedMessage } from 'react-intl'
@@ -20,6 +20,10 @@ import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
+import GitCommitInfo from '../components/gitCommitInfo'
+import HubspotForm from 'react-hubspot-form'
+import Loading from '../components/loading'
+import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
 const Doc = ({
   pageContext: {
@@ -40,6 +44,11 @@ const Doc = ({
 
   const [showProgress, setShowProgress] = useState(false)
   const [readingProgress, setReadingProgress] = useState(0)
+
+  const feedbackBodyRef = useRef(null)
+  const feedbackCloseRef = useRef(null)
+  const [showNoFollowUp, setShowNoFollowUp] = useState(false)
+  const [showYesFollowUp, setShowYesFollowUp] = useState(false)
 
   function addStyleToQuote(quote, type) {
     quote.classList.add('doc-blockquote')
@@ -169,6 +178,47 @@ const Doc = ({
     toc.classList.toggle('show')
   }
 
+  const setDocHelpful = (docTitle, isHelpful) => {
+    trackCustomEvent({
+      category: isHelpful
+        ? `doc-${locale}-useful-test`
+        : `doc-${locale}-useless-test`,
+      action: 'click',
+      label: docTitle,
+      transport: 'beacon',
+    })
+    setShowYesFollowUp(false)
+    setShowNoFollowUp(false)
+    switch (isHelpful) {
+      case true:
+        setShowYesFollowUp(true)
+        break
+
+      case false:
+        setShowNoFollowUp(true)
+        break
+
+      default:
+        break
+    }
+  }
+
+  const showThumbs = () => {
+    if (!feedbackCloseRef.current.classList.contains('show-feedback-close')) {
+      feedbackBodyRef.current.classList.add('show-feedback-body')
+      feedbackCloseRef.current.classList.add('show-feedback-close')
+    }
+  }
+
+  const closeFeedback = () => {
+    if (feedbackCloseRef.current.classList.contains('show-feedback-close')) {
+      setShowYesFollowUp(false)
+      setShowNoFollowUp(false)
+      feedbackBodyRef.current.classList.remove('show-feedback-body')
+      feedbackCloseRef.current.classList.remove('show-feedback-close')
+    }
+  }
+
   return (
     <Layout locale={locale} forbidResetDocInfo={true}>
       <SEO
@@ -232,6 +282,11 @@ const Doc = ({
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>
+              <GitCommitInfo
+                repoInfo={repoInfo}
+                base={base}
+                title={frontmatter.title}
+              />
             </section>
             <div className="doc-toc-column column">
               <div className="docs-operation">
