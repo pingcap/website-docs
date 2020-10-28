@@ -426,7 +426,7 @@ $navbar-height-mobile: 4.25rem; // 68px
   position: fixed;
   bottom: 0;
   right: 1rem;
-  width: 280px;
+  width: 230px;
   z-index: 2;
   font-size: $size-8;
   background: #f7f8f9;
@@ -435,9 +435,9 @@ $navbar-height-mobile: 4.25rem; // 68px
   .feedback-header {
     display: flex;
     position: relative;
-    padding: 1rem;
+    padding: 10px;
     color: $M1;
-    background: $B3;
+    background: $B1;
     border-radius: 10px 10px 0 0;
 
     .feedback-title {
@@ -461,7 +461,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    padding: 1rem 3rem;
+    padding: 10px 3rem;
 
     .thumb {
       position: relative;
@@ -559,6 +559,14 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     .hs-form-required {
+      color: $T3;
+    }
+
+    .hs_error_rollup {
+      display: none;
+    }
+
+    .hs-error-msgs {
       color: $T3;
     }
 

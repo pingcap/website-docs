@@ -254,18 +254,16 @@ const Doc = ({
 
       <section className="feedback-prompt">
         <div className="feedback-header">
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
-            role="button"
-            tabIndex={0}
             className="feedback-title"
             onClick={showThumbs}
             onKeyDown={showThumbs}
           >
             <FormattedMessage id="docHelpful.header" />
           </div>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div
-            role="button"
-            tabIndex={0}
             className="close-icon"
             onClick={closeFeedback}
             onKeyDown={closeFeedback}
