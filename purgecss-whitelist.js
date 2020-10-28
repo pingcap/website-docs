@@ -11,6 +11,8 @@ const docs = [
   'actions',
   'hs-form-checkbox-display',
   'hs-input',
+  'hs_error_rollup',
+  'hs-error-msgs',
 ]
 
 module.exports = [...logos, ...algolia, ...docs]

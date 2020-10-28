@@ -546,10 +546,9 @@ $navbar-height-mobile: 4.25rem; // 68px
           display: flex;
           flex-flow: row wrap;
           align-items: center;
-          margin-right: 1rem;
 
           input {
-            margin: 5px 1rem 5px 0;
+            margin: 5px 8px 5px 0;
           }
         }
       }
@@ -601,7 +600,7 @@ $navbar-height-mobile: 4.25rem; // 68px
           padding: 7px;
           width: 100%;
           border: none;
-          background: $B3;
+          background: $B1;
           color: $M1;
         }
       }
