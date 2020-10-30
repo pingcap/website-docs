@@ -1,6 +1,6 @@
 const masterRegex = /master/
 const tidbStableRegx = /release-4.0/
-const dmStableRegx = /release-1.0/
+const dmStableRegx = /release-2.0/
 const operatorStableRegx = /release-1.1/
 
 function renameDoc(name) {
