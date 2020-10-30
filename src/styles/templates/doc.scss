@@ -258,7 +258,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   .doc-toc-column {
     position: sticky;
-    top: calc(#{$navbar-height} + 1rem);
+    top: calc(#{$navbar-height});
     max-height: calc(100vh);
     overflow: auto;
     min-width: 200px;
@@ -287,8 +287,8 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     .toc-content {
       position: sticky;
-      top: calc(#{$navbar-height} + 1rem);
-      max-height: calc(100vh - 230px);
+      top: calc(#{$navbar-height});
+      max-height: calc(100vh - 250px);
       overflow: auto;
     }
 
