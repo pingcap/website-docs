@@ -20,9 +20,9 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
     function fold(li) {
       Array.from(li.children).forEach((list) => {
-        if (list.tagName && list.tagName === 'SPAN') {
+        if (list && list.tagName === 'SPAN') {
           list.style.display = 'inlin-block'
-        } else if (list.tagName && list.tagName === 'UL') {
+        } else if (list && list.tagName === 'UL') {
           list.style.display = 'none'
         }
 
@@ -48,9 +48,9 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
     function unfold(li) {
       Array.from(li.children).forEach((el) => {
-        if (el.tagName && el.tagName === 'SPAN') {
+        if (el && el.tagName === 'SPAN') {
           el.style.display = 'inlin-block'
-        } else if (el.tagName && el.tagName === 'UL') {
+        } else if (el && el.tagName === 'UL') {
           el.style.display = 'block'
         }
 
@@ -98,10 +98,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
 
     function retrieveLi(ul) {
       Array.from(ul.children).forEach((li) => {
-        if (
-          li.children[0].tagName &&
-          li.children[0].tagName.toLowerCase() === 'ul'
-        ) {
+        if (li.children[0] && li.children[0].tagName.toLowerCase() === 'ul') {
           li.classList.add('can-unfold', 'folded')
 
           if (!li.parentElement.classList.contains('top')) {
@@ -126,10 +123,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       ul.classList.add('top')
 
       Array.from(ul.children).forEach((li) => {
-        if (
-          li.children[0].tagName &&
-          li.children[0].tagName.toLowerCase() !== 'ul'
-        ) {
+        if (li.children[0] && li.children[0].tagName.toLowerCase() !== 'ul') {
           li.classList.add('has-no-subject')
         }
       })
