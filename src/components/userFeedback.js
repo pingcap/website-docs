@@ -14,9 +14,7 @@ const UserFeedback = ({ title, locale }) => {
 
   const setDocHelpful = (docTitle, isHelpful) => {
     trackCustomEvent({
-      category: isHelpful
-        ? `doc-${locale}-useful-test`
-        : `doc-${locale}-useless-test`,
+      category: isHelpful ? `doc-${locale}-useful` : `doc-${locale}-useless`,
       action: 'click',
       label: docTitle,
       transport: 'beacon',

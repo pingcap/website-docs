@@ -124,7 +124,7 @@
       }
 
       ::placeholder,
-      :-ms-input-placeholder,
+      ::-ms-input-placeholder,
       ::-ms-input-placeholder {
         color: $B4;
         opacity: 50%;
@@ -138,16 +138,13 @@
         border-width: 1px;
       }
 
+      .hs-error-msgs,
       .hs-form-required {
         color: $T3;
       }
 
       .hs_error_rollup {
         display: none;
-      }
-
-      .hs-error-msgs {
-        color: $T3;
       }
 
       .hs_submit {
