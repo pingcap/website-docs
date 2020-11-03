@@ -29,14 +29,10 @@
       }
 
       .close-icon {
-        display: none;
+        display: inline;
         position: absolute;
         right: 1rem;
         cursor: pointer;
-      }
-
-      .show-feedback-close {
-        display: inline;
       }
     }
 

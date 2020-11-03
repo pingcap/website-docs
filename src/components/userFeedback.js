@@ -1,13 +1,13 @@
 import '../styles/components/userFeedback.scss'
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import HubspotForm from 'react-hubspot-form'
 import Loading from '../components/loading'
 import { FormattedMessage } from 'react-intl'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
 const UserFeedback = ({ title, locale }) => {
-  const feedbackCloseRef = useRef(null)
+  const [showCloseBtn, setShowCloseBtn] = useState(false)
   const [showFeedbackBody, setShowFeedbackBody] = useState(false)
   const [showYesFollowUp, setShowYesFollowUp] = useState('unset')
 
@@ -27,18 +27,14 @@ const UserFeedback = ({ title, locale }) => {
   }
 
   const showThumbs = () => {
-    if (!feedbackCloseRef.current.classList.contains('show-feedback-close')) {
-      setShowFeedbackBody(true)
-      feedbackCloseRef.current.classList.add('show-feedback-close')
-    }
+    setShowCloseBtn(true)
+    setShowFeedbackBody(true)
   }
 
   const closeFeedback = () => {
-    if (feedbackCloseRef.current.classList.contains('show-feedback-close')) {
-      setShowFeedbackBody(false)
-      setShowYesFollowUp('unset')
-      feedbackCloseRef.current.classList.remove('show-feedback-close')
-    }
+    setShowFeedbackBody(false)
+    setShowCloseBtn(false)
+    setShowYesFollowUp('unset')
   }
 
   return (
@@ -52,15 +48,16 @@ const UserFeedback = ({ title, locale }) => {
         >
           <FormattedMessage id="docHelpful.header" />
         </div>
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-        <div
-          className="close-icon"
-          onClick={closeFeedback}
-          onKeyDown={closeFeedback}
-          ref={feedbackCloseRef}
-        >
-          x
-        </div>
+        {showCloseBtn && (
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+          <div
+            className="close-icon"
+            onClick={closeFeedback}
+            onKeyDown={closeFeedback}
+          >
+            x
+          </div>
+        )}
       </div>
       {showFeedbackBody && (
         <div className="feedback-body">
