@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
 import GitCommitInfo from '../components/gitCommitInfo'
+import UserFeedback from '../components/userFeedback'
 
 const Doc = ({
   pageContext: {
@@ -257,6 +258,8 @@ const Doc = ({
           </div>
         </section>
       </article>
+
+      <UserFeedback title={frontmatter.title} locale={locale} />
     </Layout>
   )
 }
