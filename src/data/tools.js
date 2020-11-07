@@ -9,7 +9,7 @@ const toolsLandingPageData = [
     type: 'toolsCard.tidbDataMigration.type',
     iconName: 'dm',
     desc: 'toolsCard.tidbDataMigration.desc',
-    link: '/tidb-data-migration/v2.0',
+    link: '/tidb-data-migration/stable',
   },
   {
     type: 'toolsCard.databaseTools.type',
