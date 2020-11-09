@@ -125,25 +125,24 @@ const Footer = (prop) => {
             </div>
           ))}
           <div className="column with-socials">
-            <IntlLink to="https://pingcap.com/" type="outBoundLink">
-              <img
-                className="footer-logo"
-                src={FooterLogoSVG.publicURL}
-                alt="footer logo"
-              />
-            </IntlLink>
-
             <div className="columns is-multiline socials-desktop">
-              <Socials className="column is-4" type="follow" />
+              <Socials className="column is-3" locale={locale} />
             </div>
           </div>
         </div>
 
         <div className="annotations annotations-desktop">
+          <Lang align="left" />
           <div className="copyright">
             ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
           </div>
-          <Lang align="right" />
+          <IntlLink to="https://pingcap.com/" type="outBoundLink">
+            <img
+              className="footer-logo"
+              src={FooterLogoSVG.publicURL}
+              alt="footer logo"
+            />
+          </IntlLink>
         </div>
 
         <div className="annotations annotations-mobile">
@@ -153,7 +152,7 @@ const Footer = (prop) => {
           </div>
         </div>
         <div className="socials-mobile">
-          <Socials type="follow" />
+          <Socials locale={locale} />
         </div>
       </div>
     </footer>

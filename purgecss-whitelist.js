@@ -4,7 +4,7 @@ const algolia = ['algolia-docsearch-suggestion--highlight']
 
 const docs = [
   'textarea',
-  'input',
+  'feedback-prompt input',
   'hs_email',
   'hs-form-required',
   'hs_submit',
