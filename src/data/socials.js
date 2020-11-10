@@ -1,51 +1,73 @@
-const followSocials = [
+const followSocialsEN = [
+  {
+    name: 'github',
+    href: 'https://github.com/pingcap',
+  },
+  {
+    name: 'stackOverflow',
+    href: 'https://stackoverflow.com/questions/tagged/tidb',
+  },
   {
     name: 'twitter',
     href: 'https://twitter.com/PingCAP',
-  },
-  {
-    name: 'facebook',
-    href: 'https://facebook.com/pingcap2015',
   },
   {
     name: 'linkedin',
     href: 'https://linkedin.com/company/pingcap',
   },
   {
-    name: 'reddit',
-    href: 'https://reddit.com/r/TiDB/',
+    name: 'facebook',
+    href: 'https://facebook.com/pingcap2015',
   },
   {
     name: 'slack',
-    href: 'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
+    href:
+      'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
   },
   {
     name: 'youtube',
     href: 'https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA',
   },
+  {
+    name: 'reddit',
+    href: 'https://reddit.com/r/TiDB/',
+  },
 ]
 
-const shareSocials = (link, title) => [
+const followSocialsZH = [
   {
-    name: 'twitter',
-    href: `https://twitter.com/intent/tweet?text=${title}&url=${link}`,
+    name: 'github',
+    href: 'https://github.com/pingcap',
   },
   {
-    name: 'facebook',
-    href: `https://facebook.com/sharer/sharer.php?u=${link}`,
+    name: 'asktug',
+    href: 'https://asktug.com/',
+  },
+  {
+    name: 'twitter',
+    href: 'https://twitter.com/PingCAP',
   },
   {
     name: 'linkedin',
-    href: `https://linkedin.com/shareArticle?mini=true&url=${link}&title=${title}`,
+    href: 'https://linkedin.com/company/pingcap',
+  },
+  {
+    name: 'facebook',
+    href: 'https://facebook.com/pingcap2015',
+  },
+  {
+    name: 'slack',
+    href:
+      'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
+  },
+  {
+    name: 'youtube',
+    href: 'https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA',
   },
   {
     name: 'reddit',
-    href: `https://reddit.com/submit?url=${link}&title=${title}`,
-  },
-  {
-    name: 'yc',
-    href: `https://news.ycombinator.com/submitlink?u=${link}&t=${title}`,
+    href: 'https://reddit.com/r/TiDB/',
   },
 ]
 
-export { followSocials, shareSocials }
+export { followSocialsEN, followSocialsZH }

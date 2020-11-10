@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { followSocials, shareSocials } from '../data/socials'
+import { followSocialsEN, followSocialsZH } from '../data/socials'
 
 import PropTypes from 'prop-types'
 
-const Socials = ({ className, type, title }) => {
+const Socials = ({ className, locale }) => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    setData(
-      type === 'follow'
-        ? followSocials
-        : type === 'share'
-        ? shareSocials(window.location.href, title)
-        : followSocials
-    )
+    setData(locale === 'en' ? followSocialsEN : followSocialsZH)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -38,8 +32,7 @@ const Socials = ({ className, type, title }) => {
 
 Socials.propTypes = {
   className: PropTypes.string,
-  type: PropTypes.string,
-  title: PropTypes.string,
+  locale: PropTypes.string,
 }
 
 export default Socials
