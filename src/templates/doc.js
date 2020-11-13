@@ -258,11 +258,11 @@ const Doc = ({
                   {tableOfContents.items && renderItems(tableOfContents.items)}
                 </div>
               </section>
-              {currentPath === '/zh/tidb/stable' && (
-                // eslint-disable-next-line react/jsx-no-target-blank
+              {currentPath === '/zh/tidb-data-migration/dev' && (
                 <a
                   className="Promote"
                   href="https://pingcap.com/community-cn/careers/join/"
+                  // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
                 >
                   <img src={PromptBanner} alt="PingCAP community careers" />
