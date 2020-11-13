@@ -17,8 +17,6 @@ const Layout = ({
 }) => {
   const dispatch = useDispatch()
 
-  console.log('langxxxxx', langSwitchable)
-
   useEffect(
     () => {
       if (!forbidResetDocInfo) {

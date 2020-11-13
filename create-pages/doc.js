@@ -117,7 +117,6 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         parent,
         langSwitchable,
       } = node
-      console.log('lang', langSwitchable)
       createPage({
         path: path,
         component: docTemplate,

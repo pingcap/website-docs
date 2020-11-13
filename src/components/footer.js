@@ -11,11 +11,8 @@ import { useLocation } from '@reach/router'
 const Footer = (prop) => {
   const locale = prop.locale
   const langSwitchable = prop.langSwitchable
-
-  // uncomment and apply to language switcher when docs en online
   const location = useLocation()
   const currentPathname = location.pathname
-  console.log('currentPaht', currentPathname)
   const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
 
   const { FooterLogoSVG } = useStaticQuery(
@@ -54,7 +51,6 @@ const Footer = (prop) => {
 
     // uncomment and apply to language switcher when docs en online
     const switchToLang = (lang) => {
-      console.log('langSwitchable', langSwitchable)
       switch (lang) {
         case 'zh':
           return langSwitchable
@@ -89,12 +85,20 @@ const Footer = (prop) => {
               className="dropdown-item"
             >
               English
+              {!langSwitchable && locale === 'zh' && (
+                <span className="tooltiptext">
+                  The corresponding doc in Chinses does not exist
+                </span>
+              )}
             </Link>
             <Link
               to={locale === 'zh' ? currentPathname : switchToLang('zh')}
               className="dropdown-item"
             >
               简体中文
+              {!langSwitchable && locale === 'en' && (
+                <span className="tooltiptext">该文档不存在对应中文文档</span>
+              )}
             </Link>
           </div>
         </div>
