@@ -6,14 +6,13 @@ import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
 import IntlLink from '../components/IntlLink'
 import { footerColumnsZh, footerColumnsEn } from '../data/footer'
-// import { useLocation } from '@reach/router'
+import { useLocation } from '@reach/router'
 
 const Footer = (prop) => {
   const locale = prop.locale
-
-  // uncomment and apply to language switcher when docs en online
-  // const location = useLocation()
-  // const currentPathname = location.pathname
+  const langSwitchable = prop.langSwitchable
+  const location = useLocation()
+  const currentPathname = location.pathname
   const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
 
   const { FooterLogoSVG } = useStaticQuery(
@@ -51,24 +50,22 @@ const Footer = (prop) => {
     }
 
     // uncomment and apply to language switcher when docs en online
-    // const switchLangLink = (lang) => {
-    //   switch (lang) {
-    //     case 'zh':
-    //       if (locale === 'zh') {
-    //         return currentPathname
-    //       } else {
-    //         return '/zh/' + currentPathname.split('/').slice(1).join('/')
-    //       }
-    //       break
-    //     case 'en':
-    //       if (locale === 'en') {
-    //         return currentPathname
-    //       } else {
-    //         return currentPathname.split('/').slice(2).join('/')
-    //       }
-    //       break
-    //   }
-    // }
+    const switchToLang = (lang) => {
+      switch (lang) {
+        case 'zh':
+          return langSwitchable
+            ? '/zh/' + currentPathname.split('/').slice(1).join('/')
+            : '/zh/tidb/stable/'
+
+        case 'en':
+          return langSwitchable
+            ? currentPathname.split('/').slice(2).join('/')
+            : '/tidb/stable/'
+
+        default:
+          return
+      }
+    }
 
     return (
       <div className={`dropdown is-${align} is-up lang${dropdownActive}`}>
@@ -83,11 +80,25 @@ const Footer = (prop) => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <Link to="/tidb/stable" className="dropdown-item">
+            <Link
+              to={locale === 'en' ? currentPathname : switchToLang('en')}
+              className="dropdown-item"
+            >
               English
+              {!langSwitchable && locale === 'zh' && (
+                <span className="tooltiptext">
+                  The corresponding doc in Chinses does not exist
+                </span>
+              )}
             </Link>
-            <Link to="/zh/tidb/stable" className="dropdown-item">
+            <Link
+              to={locale === 'zh' ? currentPathname : switchToLang('zh')}
+              className="dropdown-item"
+            >
               简体中文
+              {!langSwitchable && locale === 'en' && (
+                <span className="tooltiptext">该文档不存在对应中文文档</span>
+              )}
             </Link>
           </div>
         </div>
@@ -125,25 +136,24 @@ const Footer = (prop) => {
             </div>
           ))}
           <div className="column with-socials">
-            <IntlLink to="https://pingcap.com/" type="outBoundLink">
-              <img
-                className="footer-logo"
-                src={FooterLogoSVG.publicURL}
-                alt="footer logo"
-              />
-            </IntlLink>
-
             <div className="columns is-multiline socials-desktop">
-              <Socials className="column is-4" type="follow" />
+              <Socials className="column is-3" locale={locale} />
             </div>
           </div>
         </div>
 
         <div className="annotations annotations-desktop">
+          <Lang align="left" />
           <div className="copyright">
             ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
           </div>
-          <Lang align="right" />
+          <IntlLink to="https://pingcap.com/" type="outBoundLink">
+            <img
+              className="footer-logo"
+              src={FooterLogoSVG.publicURL}
+              alt="footer logo"
+            />
+          </IntlLink>
         </div>
 
         <div className="annotations annotations-mobile">
@@ -153,7 +163,7 @@ const Footer = (prop) => {
           </div>
         </div>
         <div className="socials-mobile">
-          <Socials type="follow" />
+          <Socials locale={locale} />
         </div>
       </div>
     </footer>

@@ -141,7 +141,11 @@ const Navbar = (prop) => {
               </IntlLink>
             )}
             <a
-              href="mailto:info@pingcap.com"
+              href={
+                locale === 'zh'
+                  ? 'mailto:info@pingcap.com'
+                  : 'https://pingcap.com/contact-us/'
+              }
               className="navbar-item with-main-section"
               target="_blank"
               rel="noreferrer"

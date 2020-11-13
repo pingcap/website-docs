@@ -1,7 +1,7 @@
 @import './variables';
 @import '../../node_modules/bulma/sass/utilities/all';
 
-$socials: twitter linkedin facebook reddit slack youtube yc;
+$socials: twitter linkedin facebook reddit slack youtube yc github slack stackOverflow asktug;
 
 @mixin VHCenter {
   display: flex;
