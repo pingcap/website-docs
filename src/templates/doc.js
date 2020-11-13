@@ -258,7 +258,7 @@ const Doc = ({
                   {tableOfContents.items && renderItems(tableOfContents.items)}
                 </div>
               </section>
-              {currentPath === '/zh/tidb-data-migration/dev' && (
+              {currentPath === '/zh/tidb/stable' && (
                 <a
                   className="Promote"
                   href="https://pingcap.com/community-cn/careers/join/"
