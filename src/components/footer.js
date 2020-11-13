@@ -6,14 +6,16 @@ import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
 import IntlLink from '../components/IntlLink'
 import { footerColumnsZh, footerColumnsEn } from '../data/footer'
-// import { useLocation } from '@reach/router'
+import { useLocation } from '@reach/router'
 
 const Footer = (prop) => {
   const locale = prop.locale
+  const langSwitchable = prop.langSwitchable
 
   // uncomment and apply to language switcher when docs en online
-  // const location = useLocation()
-  // const currentPathname = location.pathname
+  const location = useLocation()
+  const currentPathname = location.pathname
+  console.log('currentPaht', currentPathname)
   const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
 
   const { FooterLogoSVG } = useStaticQuery(
@@ -51,24 +53,23 @@ const Footer = (prop) => {
     }
 
     // uncomment and apply to language switcher when docs en online
-    // const switchLangLink = (lang) => {
-    //   switch (lang) {
-    //     case 'zh':
-    //       if (locale === 'zh') {
-    //         return currentPathname
-    //       } else {
-    //         return '/zh/' + currentPathname.split('/').slice(1).join('/')
-    //       }
-    //       break
-    //     case 'en':
-    //       if (locale === 'en') {
-    //         return currentPathname
-    //       } else {
-    //         return currentPathname.split('/').slice(2).join('/')
-    //       }
-    //       break
-    //   }
-    // }
+    const switchToLang = (lang) => {
+      console.log('langSwitchable', langSwitchable)
+      switch (lang) {
+        case 'zh':
+          return langSwitchable
+            ? '/zh/' + currentPathname.split('/').slice(1).join('/')
+            : '/zh/tidb/stable/'
+
+        case 'en':
+          return langSwitchable
+            ? currentPathname.split('/').slice(2).join('/')
+            : '/tidb/stable/'
+
+        default:
+          return
+      }
+    }
 
     return (
       <div className={`dropdown is-${align} is-up lang${dropdownActive}`}>
@@ -83,10 +84,16 @@ const Footer = (prop) => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <Link to="/tidb/stable" className="dropdown-item">
+            <Link
+              to={locale === 'en' ? currentPathname : switchToLang('en')}
+              className="dropdown-item"
+            >
               English
             </Link>
-            <Link to="/zh/tidb/stable" className="dropdown-item">
+            <Link
+              to={locale === 'zh' ? currentPathname : switchToLang('zh')}
+              className="dropdown-item"
+            >
               简体中文
             </Link>
           </div>

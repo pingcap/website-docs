@@ -9,8 +9,15 @@ import flat from 'flat'
 import langMap from '../intl'
 import { useDispatch } from 'react-redux'
 
-const Layout = ({ locale, children, forbidResetDocInfo = false }) => {
+const Layout = ({
+  locale,
+  children,
+  forbidResetDocInfo = false,
+  langSwitchable,
+}) => {
   const dispatch = useDispatch()
+
+  console.log('langxxxxx', langSwitchable)
 
   useEffect(
     () => {
@@ -33,7 +40,7 @@ const Layout = ({ locale, children, forbidResetDocInfo = false }) => {
     <IntlProvider locale={locale} messages={flat(langMap[locale])}>
       <Navbar locale={locale} />
       <main>{children}</main>
-      <Footer locale={locale} />
+      <Footer locale={locale} langSwitchable={langSwitchable} />
     </IntlProvider>
   )
 }

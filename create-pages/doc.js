@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const {
   replacePath,
   genPathPrefix,
@@ -30,6 +31,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           parent {
             ... on File {
               relativeDirectory
+              relativePath
               base
             }
           }
@@ -58,6 +60,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           parent {
             ... on File {
               relativeDirectory
+              relativePath
               base
             }
           }
@@ -75,10 +78,17 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       const parent = node.parent
       const relativeDir = parent.relativeDirectory
       const base = parent.base
+      const relativePath = parent.relativePath
       node.tocPath = genTOCPath(relativeDir)
       const _fullPath = `${replacePath(relativeDir, base)}`
       const fullPath = `${pathPrefix}${_fullPath}`
       node.path = fullPath
+      const filePath = path.resolve(
+        `${__dirname}/../markdown-pages/contents${
+          locale === 'en' ? '/zh/' : '/en/'
+        }${relativePath}`
+      )
+      node.langSwitchable = fs.existsSync(filePath) ? true : false
       const vChunks = genVersionChunks(_fullPath)
       node.version = vChunks[0]
       node.pathWithoutVersion = vChunks[1]
@@ -98,7 +108,16 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     }, {})
 
     nodes.forEach((node) => {
-      const { id, path, downloadURL, pathPrefix, tocPath, parent } = node
+      const {
+        id,
+        path,
+        downloadURL,
+        pathPrefix,
+        tocPath,
+        parent,
+        langSwitchable,
+      } = node
+      console.log('lang', langSwitchable)
       createPage({
         path: path,
         component: docTemplate,
@@ -113,6 +132,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           downloadURL,
           fullPath: path,
           versions: versionsMap[node.pathWithoutVersion],
+          langSwitchable,
         },
       })
 
