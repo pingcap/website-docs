@@ -139,8 +139,8 @@
           position: absolute;
           visibility: hidden;
           padding: 5px;
-          right: -70%;
-          top: 0;
+          left: 0;
+          top: -100%;
           text-align: center;
           z-index: 1;
           transition: opacity .3s;
@@ -153,18 +153,24 @@
         .tooltiptext::after {
           content: "";
           position: absolute;
-          top: 50%;
-          left: -5px;
+          top: 100%;
+          left: 20%;
           margin-left: -5px;
           border-width: 5px;
           border-style: solid;
-          border-color: transparent $M4 transparent transparent;
+          border-color: #707070 transparent transparent transparent;
         }
 
         &:hover {
           .tooltiptext {
             visibility: visible;
           }
+        }
+      }
+
+      .dropdown-trigger {
+        &:focus {
+          outline: 0;
         }
       }
     }
