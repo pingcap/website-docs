@@ -56,7 +56,7 @@
     color: grey !important;
     cursor: not-allowed !important;
     opacity: 0.5;
-  
+
      &:hover {
        .tooltiptext {
          visibility: visible;
@@ -81,7 +81,7 @@
     line-height: 1.7;
     border-radius: 4px;
   }
-  
+
   .tooltiptext::after {
     content: "";
     position: absolute;

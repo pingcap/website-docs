@@ -7,8 +7,10 @@ import Socials from './socials'
 import IntlLink from '../components/IntlLink'
 import { footerColumnsZh, footerColumnsEn } from '../data/footer'
 import { useLocation } from '@reach/router'
+import { useSelector } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
 
-const Footer = (prop) => {
+const Footer = React.memo((prop) => {
   const locale = prop.locale
   const langSwitchable = prop.langSwitchable
   const location = useLocation()
@@ -24,6 +26,8 @@ const Footer = (prop) => {
       }
     `
   )
+
+  const { docInfo } = useSelector((state) => state)
 
   const handleSpreadItems = (e) => {
     const screenWidth = window.screen.width
@@ -49,22 +53,29 @@ const Footer = (prop) => {
       }
     }
 
-    // uncomment and apply to language switcher when docs en online
     const switchToLang = (lang) => {
+      let preLang
+      let path
       switch (lang) {
         case 'zh':
-          return langSwitchable
-            ? '/zh/' + currentPathname.split('/').slice(1).join('/')
-            : '/zh/tidb/stable/'
+          preLang = '/zh'
+          path = '/' + currentPathname.split('/').slice(1).join('/')
+          break
 
         case 'en':
-          return langSwitchable
-            ? currentPathname.split('/').slice(2).join('/')
-            : '/tidb/stable/'
+          preLang = ''
+          path = '/' + currentPathname.split('/').slice(2).join('/')
+          break
 
         default:
-          return
+          break
       }
+
+      return langSwitchable
+        ? preLang + path
+        : docInfo.type === 'tidbcloud' || docInfo.type === 'dev-guide'
+        ? preLang + '/tidb/stable/'
+        : preLang + '/' + docInfo.type + '/' + docInfo.version
     }
 
     return (
@@ -87,7 +98,7 @@ const Footer = (prop) => {
               English
               {!langSwitchable && locale === 'zh' && (
                 <span className="tooltiptext">
-                  The corresponding doc in Chinses does not exist
+                  <FormattedMessage id="langSwitchTip" />
                 </span>
               )}
             </Link>
@@ -97,7 +108,15 @@ const Footer = (prop) => {
             >
               简体中文
               {!langSwitchable && locale === 'en' && (
-                <span className="tooltiptext">该文档不存在对应中文文档</span>
+                <span className="tooltiptext">
+                  <FormattedMessage
+                    id={
+                      docInfo.type === 'tidbcloud'
+                        ? 'cloudLangSwitchTip'
+                        : 'langSwitchTip'
+                    }
+                  />
+                </span>
               )}
             </Link>
           </div>
@@ -168,6 +187,6 @@ const Footer = (prop) => {
       </div>
     </footer>
   )
-}
+})
 
 export default Footer

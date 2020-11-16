@@ -75,6 +75,9 @@
     }
   },
 
+  "langSwitchTip": "暂未提供本页面对应的中文页面",
+  "cloudLangSwitchTip": "暂不提供 TiDB Cloud 中文文档",
+
   "docHelpful": {
     "header": "Was this page helpful?",
     "thumbUp": "Yes",
