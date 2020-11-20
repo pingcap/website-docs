@@ -131,6 +131,48 @@
 
     .lang {
       margin-bottom: 0.5rem;
+
+      .dropdown-item {
+        position: relative;
+
+        .tooltiptext {
+          position: absolute;
+          visibility: hidden;
+          padding: 5px;
+          left: 0;
+          top: -100%;
+          text-align: center;
+          z-index: 1;
+          transition: opacity .3s;
+          background-color: $M4;
+          color: #fff;
+          font-size: 12px;
+          border-radius: 4px;
+        }
+
+        .tooltiptext::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 20%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-top-color: #707070;
+        }
+
+        &:hover {
+          .tooltiptext {
+            visibility: visible;
+          }
+        }
+      }
+
+      .dropdown-trigger {
+        &:focus {
+          outline: 0;
+        }
+      }
     }
   }
 

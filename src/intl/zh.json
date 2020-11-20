@@ -74,7 +74,9 @@
       "desc": "TiUP 承担着包管理器的角色，管理着 TiDB 生态下众多的组件，如 TiDB、PD、TiKV 等。用户想要运行 TiDB 生态中任何组件时，只需要执行 TiUP 一行命令即可，相比以前，极大地降低了管理难度。"
     }
   },
-  "languageSwitcher": "简体中文",
+
+  "langSwitchTip": "The English version of this page is temporarily not available.",
+
   "docHelpful": {
     "header": "文档内容是否有帮助？",
     "thumbUp": "是",

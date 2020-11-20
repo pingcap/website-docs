@@ -6,14 +6,15 @@ import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
 import IntlLink from '../components/IntlLink'
 import { footerColumnsZh, footerColumnsEn } from '../data/footer'
-// import { useLocation } from '@reach/router'
+import { useLocation } from '@reach/router'
+import { useSelector } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
 
-const Footer = (prop) => {
+const Footer = React.memo((prop) => {
   const locale = prop.locale
-
-  // uncomment and apply to language switcher when docs en online
-  // const location = useLocation()
-  // const currentPathname = location.pathname
+  const langSwitchable = prop.langSwitchable
+  const location = useLocation()
+  const currentPathname = location.pathname
   const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
 
   const { FooterLogoSVG } = useStaticQuery(
@@ -25,6 +26,8 @@ const Footer = (prop) => {
       }
     `
   )
+
+  const { docInfo } = useSelector((state) => state)
 
   const handleSpreadItems = (e) => {
     const screenWidth = window.screen.width
@@ -50,25 +53,29 @@ const Footer = (prop) => {
       }
     }
 
-    // uncomment and apply to language switcher when docs en online
-    // const switchLangLink = (lang) => {
-    //   switch (lang) {
-    //     case 'zh':
-    //       if (locale === 'zh') {
-    //         return currentPathname
-    //       } else {
-    //         return '/zh/' + currentPathname.split('/').slice(1).join('/')
-    //       }
-    //       break
-    //     case 'en':
-    //       if (locale === 'en') {
-    //         return currentPathname
-    //       } else {
-    //         return currentPathname.split('/').slice(2).join('/')
-    //       }
-    //       break
-    //   }
-    // }
+    const switchToLang = (lang) => {
+      let currentPathnameArr = currentPathname.split('/')
+      let preLang
+      switch (lang) {
+        case 'zh':
+          preLang = '/zh'
+          break
+
+        case 'en':
+          preLang = ''
+          currentPathnameArr.splice(1, 1)
+          break
+
+        default:
+          break
+      }
+
+      return langSwitchable
+        ? preLang + currentPathnameArr.join('/')
+        : docInfo.type === 'tidbcloud' || docInfo.type === 'dev-guide'
+        ? preLang + '/tidb/stable/'
+        : preLang + '/' + docInfo.type + '/' + docInfo.version
+    }
 
     return (
       <div className={`dropdown is-${align} is-up lang${dropdownActive}`}>
@@ -83,11 +90,33 @@ const Footer = (prop) => {
         </div>
         <div className="dropdown-menu">
           <div className="dropdown-content">
-            <Link to="/tidb/stable" className="dropdown-item">
+            <Link
+              to={locale === 'en' ? currentPathname : switchToLang('en')}
+              className="dropdown-item"
+            >
               English
+              {!langSwitchable && locale === 'zh' && (
+                <span className="tooltiptext">
+                  <FormattedMessage id="langSwitchTip" />
+                </span>
+              )}
             </Link>
-            <Link to="/zh/tidb/stable" className="dropdown-item">
+            <Link
+              to={locale === 'zh' ? currentPathname : switchToLang('zh')}
+              className="dropdown-item"
+            >
               简体中文
+              {!langSwitchable && locale === 'en' && (
+                <span className="tooltiptext">
+                  <FormattedMessage
+                    id={
+                      docInfo.type === 'tidbcloud'
+                        ? 'cloudLangSwitchTip'
+                        : 'langSwitchTip'
+                    }
+                  />
+                </span>
+              )}
             </Link>
           </div>
         </div>
@@ -157,6 +186,6 @@ const Footer = (prop) => {
       </div>
     </footer>
   )
-}
+})
 
 export default Footer
