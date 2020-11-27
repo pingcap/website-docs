@@ -147,9 +147,14 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
         const type = current.tagName
 
         if (type === 'A') {
-          e.preventDefault()
+          const href = current.getAttribute('href')
+          const isInternal = /^\/(?!\/)/.test(href)
 
-          navigate(current.getAttribute('href'))
+          if (isInternal) {
+            e.preventDefault()
+
+            navigate(href)
+          }
         }
       },
       true
