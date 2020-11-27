@@ -1,6 +1,7 @@
 import '../styles/components/toc.scss'
 
 import React, { useEffect, useRef } from 'react'
+import { navigate } from 'gatsby'
 
 import PropTypes from 'prop-types'
 import html from 'remark-html'
@@ -136,12 +137,33 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     })
   }
 
+  const bindNavigateToAllLinks = () => {
+    const toc = tocRef.current
+
+    toc.addEventListener(
+      'click',
+      (e) => {
+        const current = e.target
+        const type = current.tagName
+
+        if (type === 'A') {
+          e.preventDefault()
+
+          navigate(current.getAttribute('href'))
+        }
+      },
+      true
+    )
+  }
+
   useEffect(() => {
     bindClickEventToTOC()
+    bindNavigateToAllLinks()
   }, [])
 
   useEffect(() => {
     const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
+
     Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
       // escape outbound path replacement
       if (!a.getAttribute('href').match(absPathRegx)) {
