@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import flat from 'flat'
 import langMap from '../intl'
 import { useDispatch } from 'react-redux'
+import { navigate } from 'gatsby-link'
 
 const Layout = ({
   locale,
@@ -16,6 +17,12 @@ const Layout = ({
   langSwitchable,
 }) => {
   const dispatch = useDispatch()
+
+  const setGlobalForPluginsUse = () => {
+    window.DOCS_PINGCAP = {
+      navigate,
+    }
+  }
 
   useEffect(
     () => {
@@ -29,6 +36,8 @@ const Layout = ({
           })
         )
       }
+
+      setGlobalForPluginsUse()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
