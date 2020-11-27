@@ -6,7 +6,9 @@ import { IntlProvider } from 'react-intl'
 import Navbar from './navbar'
 import PropTypes from 'prop-types'
 import flat from 'flat'
+import { globalHistory } from '@reach/router'
 import langMap from '../intl'
+import { navigate } from 'gatsby-link'
 import { useDispatch } from 'react-redux'
 
 const Layout = ({
@@ -16,6 +18,13 @@ const Layout = ({
   langSwitchable,
 }) => {
   const dispatch = useDispatch()
+
+  const setGlobalForPluginsUse = () => {
+    window.DOCS_PINGCAP = {
+      globalHistory,
+      navigate,
+    }
+  }
 
   useEffect(
     () => {
@@ -29,6 +38,8 @@ const Layout = ({
           })
         )
       }
+
+      setGlobalForPluginsUse()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
