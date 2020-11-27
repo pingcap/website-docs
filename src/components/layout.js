@@ -6,9 +6,10 @@ import { IntlProvider } from 'react-intl'
 import Navbar from './navbar'
 import PropTypes from 'prop-types'
 import flat from 'flat'
+import { globalHistory } from '@reach/router'
 import langMap from '../intl'
-import { useDispatch } from 'react-redux'
 import { navigate } from 'gatsby-link'
+import { useDispatch } from 'react-redux'
 
 const Layout = ({
   locale,
@@ -20,6 +21,7 @@ const Layout = ({
 
   const setGlobalForPluginsUse = () => {
     window.DOCS_PINGCAP = {
+      globalHistory,
       navigate,
     }
   }
