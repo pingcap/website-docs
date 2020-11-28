@@ -5,10 +5,8 @@
 }
 
 .PingCAP-Doc-syntax-diagram-toolbar {
-  align-self: flex-end;
-
-  .MuiButton-label {
-    padding: 0 $p2;
+  button {
+    height: $size-3;
   }
 }
 

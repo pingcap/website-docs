@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import { FormattedMessage } from 'react-intl'
 import React from 'react'
-import { Button, ButtonGroup, Grid } from '@material-ui/core'
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded'
 import CodeIcon from '@material-ui/icons/Code'
 import '../../styles/components/syntaxDiagram.scss'
@@ -10,37 +9,33 @@ const SyntaxDiagram = ({ children }) => {
   const [value, setValue] = React.useState(0)
 
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      wrap="nowrap"
-      className="PingCAP-Doc-syntax-diagram-root"
-    >
-      <Grid item className="PingCAP-Doc-syntax-diagram-toolbar">
-        <ButtonGroup size="small" variant="text">
-          <Button
-            startIcon={<AccountTreeRoundedIcon />}
-            onClick={() => setValue(0)}
-          >
+    <div className="PingCAP-Doc-syntax-diagram-root">
+      <div className="PingCAP-Doc-syntax-diagram-toolbar buttons are-small are-light has-addons is-right">
+        <button className="button is-light" onClick={() => setValue(0)}>
+          <span className="icon">
+            <AccountTreeRoundedIcon fontSize="small" />
+          </span>
+          <span>
             <FormattedMessage id="syntaxDiagram.syntaxDiagram" />
-          </Button>
-          <Button startIcon={<CodeIcon />} onClick={() => setValue(1)}>
+          </span>
+        </button>
+        <button className="button is-light" onClick={() => setValue(1)}>
+          <span className="icon">
+            <CodeIcon fontSize="small" />
+          </span>
+          <span>
             <FormattedMessage id="syntaxDiagram.ebnf" />
-          </Button>
-        </ButtonGroup>
-      </Grid>
-      <Grid
-        item
+          </span>
+        </button>
+      </div>
+      <div
         hidden={value !== 0}
         className="PingCAP-Doc-syntax-diagram-container"
       >
         {children[0]}
-      </Grid>
-      <Grid item hidden={value !== 1}>
-        {children[1]}
-      </Grid>
-    </Grid>
+      </div>
+      <div hidden={value !== 1}>{children[1]}</div>
+    </div>
   )
 }
 
