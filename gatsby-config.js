@@ -53,7 +53,7 @@ module.exports = {
             },
           },
         ],
-        remarkPlugins: [remarkSyntaxDiagram],
+        remarkPlugins: [() => remarkSyntaxDiagram],
       },
     },
     {
