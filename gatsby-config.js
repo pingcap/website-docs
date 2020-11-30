@@ -1,4 +1,5 @@
 const purgecssWhitelist = require('./purgecss-whitelist')
+const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
 
 module.exports = {
   siteMetadata: {
@@ -52,6 +53,7 @@ module.exports = {
             },
           },
         ],
+        remarkPlugins: [() => remarkSyntaxDiagram],
       },
     },
     {
