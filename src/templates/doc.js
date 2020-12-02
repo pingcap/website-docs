@@ -251,7 +251,7 @@ const Doc = ({
             </section>
             <div className="doc-toc-column column">
               <div className="docs-operation">
-                {locale === 'zh' && <DownloadPDF downloadURL={downloadURL} />}
+                <DownloadPDF downloadURL={downloadURL} />
                 <ImproveDocLink repoInfo={repoInfo} base={base} />
                 <FeedbackDocLink repoInfo={repoInfo} base={base} />
               </div>
