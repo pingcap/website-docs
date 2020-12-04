@@ -20,24 +20,6 @@ jobs:
       - name: Turnstyle
         uses: softprops/turnstyle@v1
 
-      - name: Set known_hosts
-        id: know-hosts
-        run: |
-          echo "::set-output name=BJ1::$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})"
-          echo "::set-output name=BJ2::$(ssh-keyscan -H ${{ secrets.BJ_2_HOST }})"
-          echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
-          echo "::set-output name=LA2::$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})"
-
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: |
-            ${{ steps.know-hosts.outputs.BJ1 }}
-            ${{ steps.know-hosts.outputs.BJ2 }}
-            ${{ steps.know-hosts.outputs.LA1 }}
-            ${{ steps.know-hosts.outputs.LA2 }}
-
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -128,19 +110,19 @@ jobs:
 
       - name: Deploy to LA1
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete -e 'ssh -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to LA2
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete -e 'ssh -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ1
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ2
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       # update cache commit to corresponding file
       - name: Update cache commit hash
