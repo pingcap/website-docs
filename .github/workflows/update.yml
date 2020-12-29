@@ -58,9 +58,8 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-new-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-newest-contents-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-new-contents-cache-
             ${{ runner.os }}-markdown-newest-contents-cache-
 
       # if download_type is full, download all docs
@@ -106,9 +105,8 @@ jobs:
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-gatsby-new-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-newest-gatsby-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-new-cache-
             ${{ runner.os }}-newest-gatsby-cache-
 
       - name: Restore gatsby build
@@ -116,9 +114,8 @@ jobs:
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-new-gatsby-build-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-newest-gatsby-build-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-new-gatsby-build-
             ${{ runner.os }}-newest-gatsby-build-
 
       - name: Build website
