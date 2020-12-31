@@ -18,6 +18,10 @@
     "tip": "小贴士",
     "error": "错误"
   },
+  "syntaxDiagram": {
+    "syntaxDiagram": "语法图",
+    "ebnf": "代码"
+  },
   "search": {
     "type": "分类：",
     "version": "版本：",

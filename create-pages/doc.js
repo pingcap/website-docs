@@ -83,12 +83,12 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       const _fullPath = `${replacePath(relativeDir, base)}`
       const fullPath = `${pathPrefix}${_fullPath}`
       node.path = fullPath
-      const filePath = path.resolve(
+      const filePathInDiffLang = path.resolve(
         `${__dirname}/../markdown-pages/contents${
           locale === 'en' ? '/zh/' : '/en/'
         }${relativePath}`
       )
-      node.langSwitchable = fs.existsSync(filePath) ? true : false
+      node.langSwitchable = fs.existsSync(filePathInDiffLang) ? true : false
       const vChunks = genVersionChunks(_fullPath)
       node.version = vChunks[0]
       node.pathWithoutVersion = vChunks[1]

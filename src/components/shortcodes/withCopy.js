@@ -14,6 +14,7 @@ const WithCopy = ({ tag }) => {
 
   useEffect(() => {
     if (
+      btnEl.current.nextElementSibling &&
       btnEl.current.nextElementSibling.firstChild &&
       btnEl.current.nextElementSibling.firstChild.classList &&
       tag

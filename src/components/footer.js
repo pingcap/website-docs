@@ -54,17 +54,16 @@ const Footer = React.memo((prop) => {
     }
 
     const switchToLang = (lang) => {
+      let currentPathnameArr = currentPathname.split('/')
       let preLang
-      let path
       switch (lang) {
         case 'zh':
           preLang = '/zh'
-          path = '/' + currentPathname.split('/').slice(1).join('/')
           break
 
         case 'en':
           preLang = ''
-          path = '/' + currentPathname.split('/').slice(2).join('/')
+          currentPathnameArr.splice(1, 1)
           break
 
         default:
@@ -72,7 +71,7 @@ const Footer = React.memo((prop) => {
       }
 
       return langSwitchable
-        ? preLang + path
+        ? preLang + currentPathnameArr.join('/')
         : docInfo.type === 'tidbcloud' || docInfo.type === 'dev-guide'
         ? preLang + '/tidb/stable/'
         : preLang + '/' + docInfo.type + '/' + docInfo.version

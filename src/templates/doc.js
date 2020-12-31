@@ -22,6 +22,8 @@ import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
 import GitCommitInfo from '../components/gitCommitInfo'
 import UserFeedback from '../components/userFeedback'
+import { useLocation } from '@reach/router'
+import PromptBanner from '../../images/community-careers-banner.jpg'
 
 const Doc = ({
   pageContext: {
@@ -40,6 +42,8 @@ const Doc = ({
   const { frontmatter, tableOfContents } = mdx
   const docRefArray = convertDocAndRef(relativeDir.split('/'))
   const repoInfo = getRepoInfo(relativeDir, locale)
+  const location = useLocation()
+  const currentPath = location.pathname
 
   const [showProgress, setShowProgress] = useState(false)
   const [readingProgress, setReadingProgress] = useState(0)
@@ -247,7 +251,7 @@ const Doc = ({
             </section>
             <div className="doc-toc-column column">
               <div className="docs-operation">
-                {locale === 'zh' && <DownloadPDF downloadURL={downloadURL} />}
+                <DownloadPDF downloadURL={downloadURL} />
                 <ImproveDocLink repoInfo={repoInfo} base={base} />
                 <FeedbackDocLink repoInfo={repoInfo} base={base} />
               </div>
@@ -259,6 +263,16 @@ const Doc = ({
                   {tableOfContents.items && renderItems(tableOfContents.items)}
                 </div>
               </section>
+              {currentPath === '/zh/tidb/stable' && (
+                <a
+                  className="Promote"
+                  href="https://pingcap.com/community-cn/careers/join/"
+                  // eslint-disable-next-line react/jsx-no-target-blank
+                  target="_blank"
+                >
+                  <img src={PromptBanner} alt="PingCAP community careers" />
+                </a>
+              )}
             </div>
           </div>
         </section>

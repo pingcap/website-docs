@@ -180,6 +180,13 @@ $navbar-height-mobile: 4.25rem; // 68px
       list-style: initial;
     }
 
+    table {
+      th,
+      td {
+        text-align: left;
+      }
+    }
+
     pre {
       background-color: $M2;
       font-size: $p2;

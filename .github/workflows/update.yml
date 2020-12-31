@@ -23,8 +23,7 @@ jobs:
       - name: Set known_hosts
         id: know-hosts
         run: |
-          echo "::set-output name=BJ1::$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})"
-          echo "::set-output name=BJ2::$(ssh-keyscan -H ${{ secrets.BJ_2_HOST }})"
+          echo "::set-output name=BJ_PROXY::$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})"
           echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
           echo "::set-output name=LA2::$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})"
 
@@ -33,8 +32,7 @@ jobs:
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: |
-            ${{ steps.know-hosts.outputs.BJ1 }}
-            ${{ steps.know-hosts.outputs.BJ2 }}
+            ${{ steps.know-hosts.outputs.BJ_PROXY }}
             ${{ steps.know-hosts.outputs.LA1 }}
             ${{ steps.know-hosts.outputs.LA2 }}
 
@@ -60,9 +58,9 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-new-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-newest-contents-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-new-contents-cache-
+            ${{ runner.os }}-markdown-newest-contents-cache-
 
       # if download_type is full, download all docs
       - name: Check restore status
@@ -107,18 +105,18 @@ jobs:
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-gatsby-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-newest-gatsby-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-
+            ${{ runner.os }}-newest-gatsby-cache-
 
       - name: Restore gatsby build
         uses: actions/cache@v2
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-gatsby-build-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-newest-gatsby-build-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-build-
+            ${{ runner.os }}-newest-gatsby-build-
 
       - name: Build website
         run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build --write-to-file
@@ -136,11 +134,11 @@ jobs:
 
       - name: Deploy to BJ1
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ2
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       # update cache commit to corresponding file
       - name: Update cache commit hash
@@ -150,7 +148,7 @@ jobs:
 
       # if does full building, store commits of all repo-refs
       - name: Update all commit hash
-        if: github.event.client_payload.download_type  == 'full'
+        if: github.event.client_payload.download_type == 'full'
         run: |
           ls ./scripts/
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}

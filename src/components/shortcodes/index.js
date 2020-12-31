@@ -6,6 +6,7 @@ import NavColumn from './navColumn'
 import ColumnTitle from './columnTitle'
 import WithCopy from './withCopy'
 import TabsPanel from './tabsPanel'
+import SyntaxDiagram from './syntaxDiagram'
 import EmbedYouTube from './embedYouTube'
 
 export {
@@ -17,5 +18,6 @@ export {
   ColumnTitle,
   WithCopy,
   TabsPanel,
+  SyntaxDiagram,
   EmbedYouTube,
 }
