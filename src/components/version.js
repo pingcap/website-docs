@@ -3,7 +3,7 @@ import '../styles/components/version.scss'
 import React, { useEffect, useState, Fragment } from 'react'
 import {
   convertDocAndRef,
-  docsTiDBVersion,
+  dropdownDocsTiDBVersionList,
   docsDMVersion,
   docsTiDBOperatorVersion,
   docsCloudVersion,
@@ -14,7 +14,7 @@ import { Button } from '@seagreenio/react-bulma'
 import IntlLink from '../components/IntlLink'
 import PropTypes from 'prop-types'
 
-const docsTiDBVersionList = Object.values(docsTiDBVersion)
+const docsTiDBVersionList = Object.values(dropdownDocsTiDBVersionList)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
