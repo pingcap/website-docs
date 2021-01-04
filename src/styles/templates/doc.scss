@@ -184,6 +184,11 @@ $navbar-height-mobile: 4.25rem; // 68px
       th,
       td {
         text-align: left;
+
+        code[class*='language-text'] {
+          white-space: normal;
+          word-break: initial;
+        }
       }
     }
 
@@ -211,7 +216,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     :not(pre) > code[class*='language-text'] {
       white-space: normal;
-      word-break: initial;
+      word-break: break-word;
     }
 
     .version-mark {
