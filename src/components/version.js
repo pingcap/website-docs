@@ -3,7 +3,7 @@ import '../styles/components/version.scss'
 import React, { useEffect, useState, Fragment } from 'react'
 import {
   convertDocAndRef,
-  dropdownDocsTiDBVersionList,
+  docsTiDBVersion,
   docsDMVersion,
   docsTiDBOperatorVersion,
   docsCloudVersion,
@@ -14,7 +14,7 @@ import { Button } from '@seagreenio/react-bulma'
 import IntlLink from '../components/IntlLink'
 import PropTypes from 'prop-types'
 
-const docsTiDBVersionList = Object.values(dropdownDocsTiDBVersionList)
+const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
@@ -91,6 +91,8 @@ const Version = ({ relativeDir, base, versions }) => {
                   <span className="dropdown-item unclickable-btn">
                     {item === 'stable'
                       ? `${stableVersion} (stable)`
+                      : item === 'v5.0'
+                      ? `v5.0 (rc)`
                       : `${item}`}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
@@ -106,6 +108,8 @@ const Version = ({ relativeDir, base, versions }) => {
                   >
                     {item === 'stable'
                       ? `${stableVersion} (stable)`
+                      : item === 'v5.0'
+                      ? `v5.0 (rc)`
                       : `${item}`}
                   </IntlLink>
                 )}
