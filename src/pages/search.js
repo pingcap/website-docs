@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import {
   docsDMVersion,
   docsTiDBOperatorVersion,
-  dropdownDocsTiDBVersionList,
+  docsTiDBVersion,
   docsCloudVersion,
   docsDevGuideVersion,
   tidbStableVersion,
@@ -27,7 +27,7 @@ import SearchResult from '../components/search/result'
 import { algoliaClient } from '../lib/algolia'
 import { useLocation } from '@reach/router'
 
-const docsTiDBVersionList = Object.values(dropdownDocsTiDBVersionList)
+const docsTiDBVersionList = Object.values(docsTiDBVersion)
 const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
 const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)

@@ -13,14 +13,6 @@ export const docsTiDBVersion = {
   'release-2.1': 'v2.1',
 }
 
-export const dropdownDocsTiDBVersionList = {
-  master: 'dev',
-  'release-4.0': 'stable',
-  'release-3.1': 'v3.1',
-  'release-3.0': 'v3.0',
-  'release-2.1': 'v2.1',
-}
-
 export const docsTiDBOperatorVersion = {
   master: 'dev',
   'release-1.1': 'stable',
