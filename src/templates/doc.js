@@ -45,8 +45,6 @@ const Doc = ({
   const location = useLocation()
   const currentPath = location.pathname
 
-  const [showProgress, setShowProgress] = useState(false)
-
   function addStyleToQuote(quote, type) {
     quote.classList.add('doc-blockquote')
     quote.classList.add(type)
@@ -99,8 +97,6 @@ const Doc = ({
       const winScrollTop = document.documentElement.scrollTop
       const toFooter = winScrollHeight - winClientHeight - footerHeight
 
-      setShowProgress(winScrollTop > 0)
-
       if (winScrollTop > toFooter && !isReachFooter) {
         isReachFooter = true
       }
@@ -112,8 +108,13 @@ const Doc = ({
       const height = winScrollHeight - winClientHeight
       const scrolled = ((winScrollTop / height) * 100).toFixed()
 
+      const progressEle = document.querySelector('progress')
+      progressEle.value = scrolled
+
       if (winScrollTop > 0) {
-        document.getElementsByTagName('progress')[0].value = scrolled
+        progressEle.classList.add('show')
+      } else {
+        progressEle.classList.remove('show')
       }
     }
 
@@ -209,13 +210,11 @@ const Doc = ({
         ]}
       />
       <article className="PingCAP-Doc">
-        {showProgress && (
-          <progress
-            className="progress is-primary doc-progress"
-            value="0"
-            max="100"
-          />
-        )}
+        <progress
+          className="progress is-primary doc-progress"
+          value="0"
+          max="100"
+        />
         <section className="section container">
           <div className="content-columns columns">
             <div className="left-column column">

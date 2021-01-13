@@ -28,6 +28,11 @@ $navbar-height-mobile: 4.25rem; // 68px
       top: calc(#{$navbar-height-mobile} - 1px);
     }
 
+    &.show {
+      display: block;
+    }
+
+    display: none;
     position: fixed;
     top: calc(#{$navbar-height} - 1px);
     height: 1px;
