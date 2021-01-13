@@ -2,7 +2,7 @@ import '../styles/templates/doc.scss'
 
 import * as Shortcodes from '../components/shortcodes'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import DownloadPDF from '../components/downloadPDF'
 import { FormattedMessage } from 'react-intl'
@@ -44,9 +44,6 @@ const Doc = ({
   const repoInfo = getRepoInfo(relativeDir, locale)
   const location = useLocation()
   const currentPath = location.pathname
-
-  const [showProgress, setShowProgress] = useState(false)
-  const [readingProgress, setReadingProgress] = useState(0)
 
   function addStyleToQuote(quote, type) {
     quote.classList.add('doc-blockquote')
@@ -100,8 +97,6 @@ const Doc = ({
       const winScrollTop = document.documentElement.scrollTop
       const toFooter = winScrollHeight - winClientHeight - footerHeight
 
-      setShowProgress(winScrollTop > 0)
-
       if (winScrollTop > toFooter && !isReachFooter) {
         isReachFooter = true
       }
@@ -112,7 +107,15 @@ const Doc = ({
 
       const height = winScrollHeight - winClientHeight
       const scrolled = ((winScrollTop / height) * 100).toFixed()
-      setReadingProgress(scrolled)
+
+      const progressEle = document.querySelector('progress')
+      progressEle.value = scrolled
+
+      if (winScrollTop > 0) {
+        progressEle.classList.add('show')
+      } else {
+        progressEle.classList.remove('show')
+      }
     }
 
     window.addEventListener('scroll', scrollListener)
@@ -207,15 +210,11 @@ const Doc = ({
         ]}
       />
       <article className="PingCAP-Doc">
-        {showProgress && (
-          <progress
-            className="progress is-primary doc-progress"
-            value={readingProgress}
-            max="100"
-          >
-            {readingProgress}
-          </progress>
-        )}
+        <progress
+          className="progress is-primary doc-progress"
+          value="0"
+          max="100"
+        />
         <section className="section container">
           <div className="content-columns columns">
             <div className="left-column column">
