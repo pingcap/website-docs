@@ -46,7 +46,6 @@ const Doc = ({
   const currentPath = location.pathname
 
   const [showProgress, setShowProgress] = useState(false)
-  const [readingProgress, setReadingProgress] = useState(0)
 
   function addStyleToQuote(quote, type) {
     quote.classList.add('doc-blockquote')
@@ -112,7 +111,10 @@ const Doc = ({
 
       const height = winScrollHeight - winClientHeight
       const scrolled = ((winScrollTop / height) * 100).toFixed()
-      setReadingProgress(scrolled)
+
+      if (winScrollTop > 0) {
+        document.getElementsByTagName('progress')[0].value = scrolled
+      }
     }
 
     window.addEventListener('scroll', scrollListener)
@@ -210,11 +212,9 @@ const Doc = ({
         {showProgress && (
           <progress
             className="progress is-primary doc-progress"
-            value={readingProgress}
+            value="0"
             max="100"
-          >
-            {readingProgress}
-          </progress>
+          />
         )}
         <section className="section container">
           <div className="content-columns columns">
