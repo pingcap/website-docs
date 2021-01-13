@@ -2,7 +2,7 @@ import '../styles/templates/doc.scss'
 
 import * as Shortcodes from '../components/shortcodes'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import DownloadPDF from '../components/downloadPDF'
 import { FormattedMessage } from 'react-intl'
