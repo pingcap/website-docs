@@ -1,0 +1,15 @@
+@import '../common';
+
+.PingCAP-simpleTab {
+  header {
+    margin-bottom: 2rem;
+
+    &.MuiAppBar-colorPrimary {
+      background-color: $B4;
+
+      .MuiTabs-indicator {
+        background-color: $T6;
+      }
+    }
+  }
+}

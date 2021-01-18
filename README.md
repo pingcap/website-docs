@@ -177,6 +177,8 @@ box-shadow: none;
 
 Currently, you can use these shortcodes into docs:
 
+### Shortcodes for notification
+
 ```html
 <Note>This is a note.</Note>
 
@@ -189,6 +191,24 @@ Currently, you can use these shortcodes into docs:
 
 Everything you needed is just to write a JSX tag, put the text into it. Then we will use
 `mdx` to convert it to JS code.
+
+### Shortcodes for tab panels
+
+```html
+<SimpleTab>
+<Tab label="LABEL_SHOW_ON_FIRST_TAB">
+
+This is the first content, which is markdown format. The content will show on the corresponding panel when users switch the tabs.
+
+</Tab>
+
+<Tab label="LABEL_SHOW_ON_SECOND_TAB">
+
+This is the second content.
+
+</Tab>
+</SimpleTab>
+```
 
 ## Landing page for TiDB
 
