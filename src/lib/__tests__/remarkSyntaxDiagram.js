@@ -203,6 +203,54 @@ describe('deepEq', () => {
   })
 })
 
+describe('isRTLCapable', () => {
+  it('treats leaf nodes as RTL capable', () => {
+    expect(isRTLCapable({ type: 'Terminal', text: 'a' })).toBeTruthy()
+    expect(isRTLCapable({ type: 'NonTerminal', text: 'a' })).toBeTruthy()
+    expect(isRTLCapable({ type: 'Skip' })).toBeTruthy()
+  })
+  it('treats sequences to be not RTL capable', () => {
+    expect(isRTLCapable({
+      type: 'Sequence',
+      items: [
+        { type: 'Terminal', text: 'a' },
+        { type: 'Terminal', text: 'b' },
+      ],
+    })).toBeFalsy();
+    expect(isRTLCapable({
+      type: 'OptionalSequence',
+      items: [
+        { type: 'Terminal', text: 'a' },
+        { type: 'Terminal', text: 'b' },
+      ],
+    })).toBeFalsy()
+  })
+  it('can see through choices', () => {
+    expect(isRTLCapable({
+      type: 'Choice',
+      normalIndex: 0,
+      options: [
+        { type: 'Terminal', text: 'a' },
+        { type: 'Terminal', text: 'b' },
+      ],
+    })).toBeTruthy()
+    expect(isRTLCapable({
+      type: 'Choice',
+      normalIndex: 0,
+      options: [
+        { type: 'Terminal', text: 'a' },
+        {
+          type: 'Sequence',
+          items: [
+            { type: 'Terminal', text: 'a' },
+            { type: 'Terminal', text: 'b' },
+          ],
+        }
+      ],
+    })).toBeFalsy()
+  })
+})
+
 describe('appendNodeToChoices', () => {
   it('can recognize the `a | a? b` pattern', () => {
     let opts = [
@@ -299,14 +347,17 @@ describe('appendNodeToSequence', () => {
       { type: 'Terminal', text: 'a' },
     ]
     appendNodeToSequence(items, {
-      type: 'OneOrMore',
-      item: { type: 'Skip' },
-      repeat: {
-        type: 'Sequence',
-        items: [
-          { type: 'Terminal', text: ',' },
-          { type: 'Terminal', text: 'a' },
-        ],
+      type: 'Optional',
+      item: {
+        type: 'OneOrMore',
+        item: {
+          type: 'Sequence',
+          items: [
+            { type: 'Terminal', text: ',' },
+            { type: 'Terminal', text: 'a' },
+          ],
+        },
+        repeat: { type: 'Skip' },
       },
     })
     expect(items).toEqual([
@@ -318,36 +369,62 @@ describe('appendNodeToSequence', () => {
       },
     ])
   })
+  it('just appends when repeating part is not RTL capable', () => {
+    let items = [
+      { type: 'Terminal', text: 'x' },
+      { type: 'Terminal', text: 'a' },
+    ]
+    const tail = {
+      type: 'Optional',
+      item: {
+        type: 'OneOrMore',
+        item: {
+          type: 'Sequence',
+          items: [
+            {
+              type: 'Sequence',
+              items: [
+                { type: 'Terminal', text: 'AND' },
+                { type: 'Terminal', text: 'THEN' },
+              ],
+            },
+            { type: 'Terminal', text: 'a' },
+          ],
+        },
+        repeat: { type: 'Skip' },
+      },
+    }
+    appendNodeToSequence(items, tail)
+    expect(items).toEqual([
+      { type: 'Terminal', text: 'x' },
+      { type: 'Terminal', text: 'a' },
+      tail,
+    ])
+  })
   it('just appends without special patterns', () => {
     let items = [
       { type: 'Terminal', text: 'x' },
       { type: 'Terminal', text: 'a' },
     ]
-    appendNodeToSequence(items, {
-      type: 'OneOrMore',
-      item: { type: 'Skip' },
-      repeat: {
-        type: 'Sequence',
-        items: [
-          { type: 'Terminal', text: ',' },
-          { type: 'Terminal', text: 'b' },
-        ],
-      },
-    })
-    expect(items).toEqual([
-      { type: 'Terminal', text: 'x' },
-      { type: 'Terminal', text: 'a' },
-      {
+    const tail = {
+      type: 'Optional',
+      item: {
         type: 'OneOrMore',
-        item: { type: 'Skip' },
-        repeat: {
+        item: {
           type: 'Sequence',
           items: [
             { type: 'Terminal', text: ',' },
             { type: 'Terminal', text: 'b' },
           ],
         },
+        repeat: { type: 'Skip' },
       },
+    }
+    appendNodeToSequence(items, tail)
+    expect(items).toEqual([
+      { type: 'Terminal', text: 'x' },
+      { type: 'Terminal', text: 'a' },
+      tail,
     ])
   })
 })
