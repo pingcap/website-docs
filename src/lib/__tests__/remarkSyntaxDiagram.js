@@ -526,7 +526,7 @@ describe('remarkSyntaxDiagram', () => {
     })
   })
   it('skip code blocks with syntax error', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => { })
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {})
 
     expect(
       remarkSyntaxDiagram({

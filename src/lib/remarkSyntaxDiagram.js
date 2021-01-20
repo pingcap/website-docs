@@ -177,7 +177,8 @@ function appendNodeToChoices(opts, node) {
  * Appends an EBNF node to a Sequence container.
  *
  * This function will also try to optimize the pattern `a (b a)*` into the
- * specialized railroad component `OneOrMore(item=a, repeat=b)`.
+ * specialized railroad component `OneOrMore(item=a, repeat=b)`, if the node
+ * `b` is capable to be read RTL (e.g. a single terminal, but not a sequence).
  *
  * @param {RRComponent[]} items -
  *  a list of existing items, the new node will be appended here
