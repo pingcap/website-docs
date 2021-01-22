@@ -12,10 +12,25 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+
+    - name: Extract repo name
+      shell: bash
+      run: echo "##[set-output name=repo;]$(echo $(cut -d'/' -f2 <<< ${{ github.repository }} ))"
+      id: extract_repo
+
+    - name: Extract git sha
+      shell: bash
+      run: echo "##[set-output name=sha;]$(sha=${{ github.sha }}; echo ${sha:0:6})"
+      id: extract_sha
+
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.1.1
       with:
           token: ${{ secrets.GH_TOKEN }}
           repository: pingcap/website-docs/
-          event-type: triggered
+          event-type: ${{ steps.extract_repo.outputs.repo }}/${{ steps.extract_branch.outputs.branch }}-${{ steps.extract_sha.outputs.sha }}
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repo": "${{ github.repository }}"}'

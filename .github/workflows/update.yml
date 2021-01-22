@@ -1,7 +1,6 @@
 name: Incremental Building Triggered By Push Events
-on:
-  repository_dispatch:
-    types: [triggered]
+on: repository_dispatch
+
 jobs:
   build:
     name: Retrieve docs and deploy the website
