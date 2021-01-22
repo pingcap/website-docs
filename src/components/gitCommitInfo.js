@@ -12,7 +12,7 @@ const GitCommitInfo = ({ repoInfo, base, title }) => {
       try {
         const res = (
           await axios.get(
-            `https://api.github.com/repos/${owner}/${repo}/commits?path=${pathPrefix}${base}`
+            `https://api.github.com/repos/${owner}/${repo}/commits?sha=${ref}&path=${pathPrefix}${base}`
           )
         ).data[0]
         setLatestCommit(res)
