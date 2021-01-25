@@ -7,8 +7,6 @@ const GitCommitInfo = ({ repoInfo, base, title }) => {
   const { owner, repo, ref, pathPrefix } = repoInfo || {}
   const [latestCommit, setLatestCommit] = useState(null)
 
-  console.log('ref', ref)
-
   useEffect(() => {
     async function fetchLatestCommit() {
       try {
