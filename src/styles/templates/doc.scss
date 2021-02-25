@@ -196,6 +196,11 @@ $navbar-height-mobile: 4.25rem; // 68px
         }
       }
     }
+    
+    img {
+      display: block;
+      margin: auto;
+    }
 
     pre {
       background-color: $M2;
