@@ -10,13 +10,18 @@
     "mobileDocMenu": "文档目录",
     "toc": "本页导航",
     "improveDocLink": "修改本文",
-    "feedbackDocLink": "反馈文档问题"
+    "feedbackDocLink": "反馈文档问题",
+    "deprecation": {
+      "context": "您当前浏览的文档版本是 TiDB Operator v1.0，该版本已不再维护。点击{link}查看最新稳定版本。",
+      "link": "此处"
+    }
   },
   "shortcodes": {
     "note": "注意",
     "warning": "警告",
     "tip": "小贴士",
-    "error": "错误"
+    "error": "错误",
+    "important": "重要"
   },
   "syntaxDiagram": {
     "syntaxDiagram": "语法图",
