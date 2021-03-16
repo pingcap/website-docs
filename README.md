@@ -194,6 +194,8 @@ Everything you needed is just to write a JSX tag, put the text into it. Then we 
 
 ### Shortcodes for tab panels
 
+**Each label in a single doc have to be unique.**
+
 ```html
 <SimpleTab>
 <div label="LABEL_SHOW_ON_FIRST_TAB">
