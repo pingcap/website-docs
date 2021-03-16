@@ -1,0 +1,37 @@
+@import '../common';
+
+.PingCAP-simpleTab {
+  margin-top: 3rem;
+
+  .tabs {
+    li + li {
+      margin-top: 0;
+    }
+
+    &.is-boxed {
+      font-size: $size-7;
+
+      ul {
+        padding-left: 0;
+      }
+
+      a {
+        color: $B4;
+
+        &:hover {
+          color: $B1;
+          background: $M2;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .tabpanel {
+    display: none;
+
+    &.is-active {
+      display: block !important;
+    }
+  }
+}
