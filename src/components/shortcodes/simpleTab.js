@@ -5,7 +5,7 @@ import { useLocation } from '@reach/router'
 
 const SimpleTab = React.memo(({ children }) => {
   const location = useLocation()
-  const selectedTab = location.hash ? location.hash.split('#')[1] : null
+  const selectedTab = location.hash ? location.hash.slice(1) : null
 
   const [value, setValue] = useState(0)
   const [tabLabelList, setTabLabelList] = useState([])
@@ -25,32 +25,34 @@ const SimpleTab = React.memo(({ children }) => {
 
     setTabLabelList(_tabLabelList)
     setTabPanelList(_tabPanelList)
+  }, [children, multiTabs])
 
-    if (_tabLabelList.includes(selectedTab)) {
-      const selectedTabIdx = _tabLabelList.findIndex((el) => el === selectedTab)
+  useEffect(() => {
+    if (tabLabelList.includes(selectedTab)) {
+      const selectedTabIdx = tabLabelList.findIndex((el) => el === selectedTab)
       setValue(selectedTabIdx)
     } else {
       setValue(0)
     }
-  }, [children, multiTabs, selectedTab])
+  }, [selectedTab, tabLabelList])
 
   function a11yProps(type, index) {
-    if(type === 'panel') {
+    if (type === 'panel') {
       return {
-        id: (`${tabLabelList[index]}`).replace(/\s/g, '-'),
-        'aria-labelledby': (`${tabLabelList[index]}-tab`).replace(/\s/g, '-'),
-        role: "tabpanel"
+        id: `${tabLabelList[index]}`.replace(/\s/g, '-'),
+        'aria-labelledby': `${tabLabelList[index]}-tab`.replace(/\s/g, '-'),
+        role: 'tabpanel',
       }
     } else {
       return {
-        id: (`${tabLabelList[index]}-tab`).replace(/\s/g, '-'),
-        'aria-controls': (`${tabLabelList[index]}`).replace(/\s/g, '-'),
-        role: 'tab'
+        id: `${tabLabelList[index]}-tab`.replace(/\s/g, '-'),
+        'aria-controls': `${tabLabelList[index]}`.replace(/\s/g, '-'),
+        role: 'tab',
       }
     }
   }
 
-  const TabPanel = React.memo((props) => {
+  const TabPanel = (props) => {
     const { children, value, index, ...other } = props
 
     return (
@@ -62,12 +64,12 @@ const SimpleTab = React.memo(({ children }) => {
         {children}
       </div>
     )
-  })
+  }
 
   TabPanel.propTypes = {
     children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
   }
 
   return (
