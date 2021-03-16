@@ -196,17 +196,17 @@ Everything you needed is just to write a JSX tag, put the text into it. Then we 
 
 ```html
 <SimpleTab>
-<Tab label="LABEL_SHOW_ON_FIRST_TAB">
+<div label="LABEL_SHOW_ON_FIRST_TAB">
 
 This is the first content, which is markdown format. The content will show on the corresponding panel when users switch the tabs.
 
-</Tab>
+</div>
 
-<Tab label="LABEL_SHOW_ON_SECOND_TAB">
+<div label="LABEL_SHOW_ON_SECOND_TAB">
 
 This is the second content.
 
-</Tab>
+</div>
 </SimpleTab>
 ```
 
