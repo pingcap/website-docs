@@ -10,6 +10,7 @@ import WithCopy from './withCopy'
 import TabsPanel from './tabsPanel'
 import SyntaxDiagram from './syntaxDiagram'
 import EmbedYouTube from './embedYouTube'
+import SimpleTab from './simpleTab'
 
 export {
   Note,
@@ -24,4 +25,5 @@ export {
   TabsPanel,
   SyntaxDiagram,
   EmbedYouTube,
+  SimpleTab
 }
