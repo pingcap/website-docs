@@ -267,11 +267,13 @@ const Doc = ({
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>
-              <GitCommitInfo
-                repoInfo={repoInfo}
-                base={base}
-                title={frontmatter.title}
-              />
+              {docRefArray[0] !== 'tidbcloud' && (
+                <GitCommitInfo
+                  repoInfo={repoInfo}
+                  base={base}
+                  title={frontmatter.title}
+                />
+              )}
             </section>
             <div className="doc-toc-column column">
               <div className="docs-operation">
