@@ -18,6 +18,16 @@
     border-left: #{$border-width}px solid $T1;
   }
 
+  &.error {
+    background: rgba($color: $T3, $alpha: 0.1);
+    border-left: #{$border-width}px solid $T3;
+  }
+
+  &.important {
+    background: rgba($color: $T5, $alpha: 0.1);
+    border-left: #{$border-width}px solid $T5;
+  }
+
   display: flex;
   flex-direction: column;
   margin: 1rem 0;

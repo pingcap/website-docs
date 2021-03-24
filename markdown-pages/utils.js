@@ -30,6 +30,20 @@ function createReplaceTrailingWhiteSpaceStream() {
   return replaceStream(/[ \t]+$/gm, '')
 }
 
+function createReplaceZHVersionMarkStrem() {
+  return replaceStream(
+    /\<span class="version-mark">从 v5.0 GA 版本开始引入<\/span>/g,
+    ''
+  )
+}
+
+function createReplaceENVersionMarkStrem() {
+  return replaceStream(
+    /\<span class="version-mark">New in v5.0 GA<\/span>/g,
+    ''
+  )
+}
+
 const ignorePaths = [
   '.circleci',
   '.github',
@@ -42,6 +56,8 @@ const ignorePaths = [
   'contribute.md',
   'hack',
   'assets/get-started',
+  '.markdownlint.yaml',
+  'markdownlint-rules.md',
 ]
 
 function shouldIgnorePath(path) {
@@ -69,5 +85,7 @@ module.exports = {
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
   createReplaceTrailingWhiteSpaceStream,
+  createReplaceZHVersionMarkStrem,
+  createReplaceENVersionMarkStrem,
   shouldIgnorePath,
 }

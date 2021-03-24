@@ -91,6 +91,8 @@ const Version = ({ relativeDir, base, versions }) => {
                   <span className="dropdown-item unclickable-btn">
                     {item === 'stable'
                       ? `${stableVersion} (stable)`
+                      : item === 'v5.0'
+                      ? `v5.0 (rc)`
                       : `${item}`}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
@@ -106,6 +108,8 @@ const Version = ({ relativeDir, base, versions }) => {
                   >
                     {item === 'stable'
                       ? `${stableVersion} (stable)`
+                      : item === 'v5.0'
+                      ? `v5.0 (rc)`
                       : `${item}`}
                   </IntlLink>
                 )}

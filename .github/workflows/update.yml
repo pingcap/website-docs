@@ -1,7 +1,6 @@
 name: Incremental Building Triggered By Push Events
-on:
-  repository_dispatch:
-    types: [triggered]
+on: repository_dispatch
+
 jobs:
   build:
     name: Retrieve docs and deploy the website
@@ -120,6 +119,9 @@ jobs:
 
       - name: Build website
         run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build --write-to-file
+
+      - name: Consolidate duplicate urls
+        run: cd public && bash ../scripts/consolidate-duplicate-urls.sh
 
       - name: Move changed files from gatsby
         run: (yes|cp -f .cache/*Pages.txt public)|true

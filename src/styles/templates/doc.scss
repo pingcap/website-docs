@@ -28,6 +28,11 @@ $navbar-height-mobile: 4.25rem; // 68px
       top: calc(#{$navbar-height-mobile} - 1px);
     }
 
+    &.show {
+      display: block;
+    }
+
+    display: none;
     position: fixed;
     top: calc(#{$navbar-height} - 1px);
     height: 1px;
@@ -184,7 +189,17 @@ $navbar-height-mobile: 4.25rem; // 68px
       th,
       td {
         text-align: left;
+
+        code[class*='language-text'] {
+          white-space: normal;
+          word-break: initial;
+        }
       }
+    }
+    
+    img {
+      display: block;
+      margin: auto;
     }
 
     pre {
@@ -211,7 +226,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     :not(pre) > code[class*='language-text'] {
       white-space: normal;
-      word-break: initial;
+      word-break: break-word;
     }
 
     .version-mark {
