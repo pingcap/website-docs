@@ -1,7 +1,7 @@
 {
   "navbar": {
     "tidb": "TiDB",
-    "tools": "Tools",
+    "tools": "周边工具",
     "devGuide": "开发指南",
     "contactUs": "联系我们",
     "searchDocs": "搜索文档"
@@ -75,8 +75,8 @@
       "desc": "TiDB Data Migration (DM) 是一体化的数据同步任务管理平台，支持从 MySQL 或 MariaDB 到 TiDB 的全量数据迁移和增量数据同步。使用 DM 工具有利于简化错误处理流程，降低运维成本。"
     },
     "databaseTools": {
-      "type": "Database Tools",
-      "desc": "TiDB 数据库工具是用于处理 TiDB 导入导出数据的命令行实用程序的集合。包括：Mydumper、Loader、Syncer、sync-diff-inspector。"
+      "type": "TiDB 数据库工具",
+      "desc": "TiDB 数据库工具是处理 TiDB 导入导出数据的命令行实用程序的集合，包括全量导出工具 Dumpling、全量导入工具 TiDB Lightning、备份恢复工具 BR、增量同步工具 TiCDC、校验工具 sync-diff-inspector 等。"
     },
     "tiup": {
       "type": "TiUP",

@@ -76,7 +76,7 @@
     },
     "databaseTools": {
       "type": "Database Tools",
-      "desc": "TiDB database tools are a collection of useful toolkits for migrating to or from TiDB, including Dumpling, Mydumper, Loader, Syncer, sync-diff-inspector, Backup & Restore (BR), TiDB Lightning, TiCDC, and so on."
+      "desc": "TiDB database tools are a collection of useful toolkits for migrating to or from TiDB, including Dumpling, TiDB Lightning, Backup & Restore (BR), TiCDC, sync-diff-inspector, and so on."
     },
     "tiup": {
       "type": "TiUP",
