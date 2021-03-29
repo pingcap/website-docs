@@ -1,4 +1,4 @@
-export const tidbStableVersion = 'v4.0'
+export const tidbStableVersion = 'v5.0'
 
 export const dmStableVersion = 'v2.0'
 
@@ -6,8 +6,8 @@ export const operatorStableVersion = 'v1.1'
 
 export const docsTiDBVersion = {
   master: 'dev',
-  'release-5.0': 'v5.0',
-  'release-4.0': 'stable',
+  'release-5.0': 'stable',
+  'release-4.0': 'v4.0',
   'release-3.1': 'v3.1',
   'release-3.0': 'v3.0',
   'release-2.1': 'v2.1',
