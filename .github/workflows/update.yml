@@ -97,7 +97,7 @@ jobs:
       # incremental download the triggering repo by comparing the base and head commits
       - name: Sync docs
         if: github.event.client_payload.download_type != 'full' && steps.git-ref.outputs.repo != 'website-docs'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} 38b21562aee581b77d384be0157f89af10bfd87f ${{ github.event.client_payload.sha }}
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
