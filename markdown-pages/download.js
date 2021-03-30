@@ -31,7 +31,7 @@ async function writeContent(url, distPath, pipelines = []) {
   const writeStream = fs.createWriteStream(distPath)
   writeStream.on('close', () => sig.success(`Downloaded: ${url}`))
 
-  let readableStream = toReadableStream((await axios.get(url)).data)
+  let readableStream = toReadableStream((await http.get(url)).data)
   if (pipelines.length) {
     pipelines.forEach((p) => (readableStream = readableStream.pipe(p())))
   }
@@ -100,7 +100,7 @@ async function handleSync(metaInfo, pipelines = []) {
     const { files } = (await getCommitInfo(owner, repo, base, head)).data
 
     files.forEach((file) => {
-      const { filename, status, raw_url, previous_filename } = file
+      const { filename, status, contents_url, previous_filename } = file
       if (shouldIgnorePath(filename)) {
         return
       }
@@ -157,7 +157,7 @@ async function handleSync(metaInfo, pipelines = []) {
       switch (status) {
         case 'added':
         case 'modified':
-          writeContent(raw_url, downloadToPath, pipelines)
+          writeContent(contents_url, downloadToPath, pipelines)
 
           break
         case 'removed':
@@ -187,7 +187,7 @@ async function handleSync(metaInfo, pipelines = []) {
             ref,
             renamedFilePathArrWithoutLang
           )
-          writeContent(raw_url, downloadToPath, pipelines)
+          writeContent(contents_url, downloadToPath, pipelines)
           fs.unlink(renamedFilePath, (err) => {
             if (err) {
               sig.error(`Fail to unlink ${renamedFilePath}: ${err}`)
