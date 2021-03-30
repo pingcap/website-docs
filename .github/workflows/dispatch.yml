@@ -23,7 +23,7 @@ jobs:
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.1.1
       with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.DISPATCH_TOKEN }}
           repository: pingcap/website-docs/
           event-type: ${{ steps.extract_info.outputs.repo }}/${{ steps.extract_info.outputs.branch }}-${{ steps.extract_info.outputs.sha }}
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repo": "${{ github.repository }}"}'
