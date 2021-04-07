@@ -11,8 +11,6 @@ const {
   createReplaceImagePathStream,
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
-  createReplaceZHVersionMarkStrem,
-  createReplaceENVersionMarkStrem,
   createReplaceTrailingWhiteSpaceStream,
 } = require('./utils')
 
@@ -72,7 +70,6 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
-          () => createReplaceENVersionMarkStrem(),
           // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
@@ -91,7 +88,6 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
-          () => createReplaceZHVersionMarkStrem(),
           // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
@@ -241,7 +237,6 @@ function sync(argv) {
         () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
-        () => createReplaceENVersionMarkStrem(),
         // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
@@ -251,7 +246,6 @@ function sync(argv) {
         () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
-        () => createReplaceZHVersionMarkStrem(),
         // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
