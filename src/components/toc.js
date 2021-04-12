@@ -188,29 +188,29 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
         // unfold active nav item
         if (hrefWithoutHash === fullPath) {
           let tagTempEle = a
-          const liClientRect = tagTempEle.parentElement.getBoundingClientRect()
-          const tocClientRect = tocRef.current.getBoundingClientRect()
-          const dy = liClientRect.top - tocClientRect.top - tocClientRect.height
 
           tagTempEle.parentElement.classList.add('is-active')
-          while (!tagTempEle.classList.contains('top')) {
+          while (tagTempEle && !tagTempEle.classList.contains('top')) {
             if (tagTempEle.classList.contains('folded')) {
               tagTempEle.classList.remove('folded')
             }
             tagTempEle = tagTempEle.parentElement
           }
 
+          const liClientRect = a.parentElement.getBoundingClientRect()
+          const dy = liClientRect.top - window.innerHeight / 2
+
           if (dy > 0) {
             // polyfill
             if (!tocRef.current.scrollTo) {
               console.log('Your browser does not support scrollTo API')
-              tocRef.current.scrollTop = tocClientRect.height + dy
+              tocRef.current.scrollTop = dy
             }
 
             const leftTOCColumn = document.getElementsByClassName('left-column')
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
             leftTOCColumn[0].scrollTo({
-              top: tocClientRect.height + dy - 100,
+              top: dy,
               left: 0,
               behavior: 'smooth',
             })
