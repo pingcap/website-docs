@@ -50,29 +50,6 @@ const matchToVersionList = (match) => {
   }
 }
 
-const types = [
-  {
-    name: 'TiDB',
-    match: 'tidb',
-    version: docsTiDBVersionList,
-  },
-  {
-    name: 'Tools',
-    dropdown: [
-      {
-        name: 'TiDB in Kubernetes',
-        match: 'tidb-in-kubernetes',
-        version: docsTiDBOperatorVersionList,
-      },
-      {
-        name: 'TiDB Data Migration (DM)',
-        match: 'tidb-data-migration',
-        version: docsDMVersionList,
-      },
-    ],
-  },
-]
-
 const Search = ({ pageContext: { locale } }) => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
@@ -93,6 +70,29 @@ const Search = ({ pageContext: { locale } }) => {
   const [results, setResults] = useState([])
   const [searched, setSearched] = useState(false)
   const [docsTypesByLang, setDocsTypesByLang] = useState([])
+
+  const types = [
+    {
+      name: 'TiDB',
+      match: 'tidb',
+      version: docsTiDBVersionList,
+    },
+    {
+      name: lang === 'zh' ? '周边工具' : 'Tools',
+      dropdown: [
+        {
+          name: 'TiDB in Kubernetes',
+          match: 'tidb-in-kubernetes',
+          version: docsTiDBOperatorVersionList,
+        },
+        {
+          name: 'TiDB Data Migration (DM)',
+          match: 'tidb-data-migration',
+          version: docsDMVersionList,
+        },
+      ],
+    },
+  ]
 
   const getDocsTypesByLang = (lang) => {
     let _docsTypesByLang = types.slice(0, 2)
@@ -135,6 +135,7 @@ const Search = ({ pageContext: { locale } }) => {
 
   useEffect(() => {
     setDocsTypesByLang(getDocsTypesByLang(lang))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang])
 
   const handleDropdownActive = (e) => {
