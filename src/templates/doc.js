@@ -210,6 +210,7 @@ const Doc = ({
     >
       <SEO
         title={frontmatter.title}
+        description={frontmatter.summary}
         meta={[
           {
             name: 'doc:locale',
@@ -318,6 +319,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       frontmatter {
         title
+        summary
       }
       body
       tableOfContents
