@@ -12,8 +12,21 @@
     "improveDocLink": "Edit this page",
     "feedbackDocLink": "Request docs changes",
     "deprecation": {
-      "context": "You are viewing TiDB Operator v1.0 documentation, which is no longer actively maintained. For the latest stable version, click {link}.",
-      "link": "here"
+      "tidb": {
+        "firstContext": "You are viewing the documentation for an older major version of the TiDB database (TiDB { curDocVersion }).",
+        "secondContext": "TiDB { stableVersion }, the latest major version of the TiDB database, is now stable and recommended for general use. To view this page for TiDB { stableVersion }, click { link }.",
+        "link": "here"
+      },
+      "tidb-in-kubernetes": {
+        "firstContext": "You are viewing the documentation for an older major version of the TiDB Operator tool (TiDB Operator { curDocVersion }).",
+        "secondContext": "TiDB Operator { stableVersion }, the latest major version of TiDB Operator, is now stable and recommended for general use. To view this page for TiDB Operator { stableVersion }, click { link }.",
+        "link": "here"
+      },
+      "tidb-data-migration": {
+        "firstContext": "You are viewing the documentation for an older major version of the TiDB Data Migration tool (TiDB Data Migration { curDocVersion }).",
+        "secondContext": "TiDB Data Migration { stableVersion }, the latest major version of TiDB Data Migration, is now stable and recommended for general use. To view this page for TiDB Data Migration { stableVersion }, click { link }.",
+        "link": "here"
+      }
     }
   },
   "shortcodes": {
@@ -83,10 +96,8 @@
       "desc": "TiUP is a package manager that manages components in the TiDB ecosystem, such as TiDB, PD, TiKV, and so on. You can run any component with only a single line of TiUP commands, which is far easier to manage."
     }
   },
-
   "langSwitchTip": "暂未提供本页面对应的中文页面",
   "cloudLangSwitchTip": "暂不提供 TiDB Cloud 中文文档",
-
   "docHelpful": {
     "header": "Was this page helpful?",
     "thumbUp": "Yes",

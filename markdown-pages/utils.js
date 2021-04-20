@@ -39,7 +39,6 @@ const ignorePaths = [
   'templates',
   'CONTRIBUTING.md',
   'README.md',
-  'contribute.md',
   'hack',
   'assets/get-started',
   '.markdownlint.yaml',
