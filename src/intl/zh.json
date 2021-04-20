@@ -12,8 +12,21 @@
     "improveDocLink": "修改本文",
     "feedbackDocLink": "反馈文档问题",
     "deprecation": {
-      "context": "您当前浏览的文档版本是 TiDB Operator v1.0，该版本已不再维护。点击{link}查看最新稳定版本。",
-      "link": "此处"
+      "tidb": {
+        "firstContext": "你正在查看 TiDB 数据库的较旧主版本 (TiDB { curDocVersion }) 的文档。",
+        "secondContext": "TiDB { stableVersion } 是 TiDB 数据库的最新稳定主版本，如无特殊需求，建议使用该版本。点击{ link }查看 TiDB { stableVersion } 文档。",
+        "link": "此处"
+      },
+      "tidb-in-kubernetes": {
+        "firstContext": "你正在查看 TiDB Operator 工具的较旧主版本 (TiDB Operator { curDocVersion }) 的文档。",
+        "secondContext": "TiDB Operator { stableVersion } 是 TiDB Operator 的最新稳定主版本，如无特殊需求，建议使用该版本。点击{ link }查看 TiDB Operator { stableVersion } 文档。",
+        "link": "此处"
+      },
+      "tidb-data-migration": {
+        "firstContext": "你正在查看 TiDB Data Migration 工具的较旧主版本 (TiDB Data Migration { curDocVersion }) 的文档。",
+        "secondContext": "TiDB Data Migration { stableVersion } 是 TiDB Data Migration 的最新稳定主版本，如无特殊需求，建议使用该版本。点击{ link }查看 TiDB Data Migration { stableVersion } 文档。",
+        "link": "此处"
+      }
     }
   },
   "shortcodes": {
