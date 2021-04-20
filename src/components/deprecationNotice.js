@@ -33,7 +33,7 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
               }}
             />
           </p>
-          <p>
+          <div>
             <FormattedMessage
               id={`doc.deprecation.${docType}.secondContext`}
               values={{
@@ -45,7 +45,7 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
                 ),
               }}
             />
-          </p>
+          </div>
         </Shortcodes.Important>
       )}
     </>
