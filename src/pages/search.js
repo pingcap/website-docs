@@ -53,7 +53,7 @@ const matchToVersionList = (match) => {
 const Search = ({ pageContext: { locale } }) => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const lang = searchParams.get('lang') || defaultDocInfo['lang']
+  const lang = searchParams.get('lang') || locale
   const type = searchParams.get('type') || defaultDocInfo['type']
   const version = searchParams.get('version') || defaultDocInfo['version']
   const query = searchParams.get('q')
