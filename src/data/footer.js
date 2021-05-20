@@ -202,23 +202,18 @@ const footerColumnsEn = [
         linkType: 'outBoundLink',
       },
       {
-        name: 'Contact',
-        link: 'https://pingcap.com/contact-us',
-        linkType: 'outBoundLink',
-      },
-      {
         name: 'Careers',
         link: 'https://pingcap.com/careers',
         linkType: 'outBoundLink',
       },
       {
-        name: 'Cookie Policy',
-        link: 'https://pingcap.com/cookie-policy',
+        name: 'Legal',
+        link: 'https://pingcap.com/legal',
         linkType: 'outBoundLink',
       },
       {
-        name: 'Privacy Policy',
-        link: 'https://pingcap.com/privacy-policy',
+        name: 'Contact',
+        link: 'https://pingcap.com/contact-us',
         linkType: 'outBoundLink',
       },
     ],
