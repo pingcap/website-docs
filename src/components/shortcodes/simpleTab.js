@@ -5,7 +5,9 @@ import { useLocation } from '@reach/router'
 
 const SimpleTab = React.memo(({ children }) => {
   const location = useLocation()
-  const selectedTab = location.hash ? location.hash.slice(1) : null
+  const selectedTab = location.hash
+    ? decodeURIComponent(location.hash).slice(1)
+    : null
 
   const [value, setValue] = useState(0)
   const [tabLabelList, setTabLabelList] = useState([])
@@ -28,8 +30,14 @@ const SimpleTab = React.memo(({ children }) => {
   }, [children, multiTabs])
 
   useEffect(() => {
-    if (tabLabelList.includes(selectedTab)) {
-      const selectedTabIdx = tabLabelList.findIndex((el) => el === selectedTab)
+    const _tabLabelWithHyphenList = tabLabelList.map((tab) =>
+      tab.replace(/\s/g, '-')
+    )
+
+    if (_tabLabelWithHyphenList.includes(selectedTab)) {
+      const selectedTabIdx = _tabLabelWithHyphenList.findIndex(
+        (el) => el === selectedTab
+      )
       setValue(selectedTabIdx)
     } else {
       setValue(0)
@@ -85,7 +93,7 @@ const SimpleTab = React.memo(({ children }) => {
                     key={tabLabel + idx}
                     {...a11yProps('tab', `${idx}`)}
                   >
-                    <a href={`#${tabLabel}`}>{tabLabel}</a>
+                    <a href={`#${tabLabel}`.replace(/\s/g, '-')}>{tabLabel}</a>
                   </li>
                 ))}
             </ul>
