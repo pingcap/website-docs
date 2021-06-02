@@ -1,5 +1,12 @@
-export default function replaceInternalHref(lang, type, version) {
-  const aTags = document.querySelector('.doc-content').getElementsByTagName('a')
+export default function replaceInternalHref(
+  lang,
+  type,
+  version,
+  simpletab = false
+) {
+  const aTags = document
+    .querySelector(`${simpletab ? '.PingCAP-simpleTab' : '.doc-content'}`)
+    .getElementsByTagName('a')
   const re = /\/?.*\.md/
   const reAnchor = /[^#-\w\u4E00-\u9FFF]*/g
   const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
@@ -27,7 +34,7 @@ export default function replaceInternalHref(lang, type, version) {
     }
   })
 
-  if (window.location.hash) {
+  if (!simpletab && window.location.hash) {
     window.location.href = window.location.hash
   }
 }

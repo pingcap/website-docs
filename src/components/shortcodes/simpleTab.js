@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../styles/components/simpletab.scss'
+import replaceInternalHref from '../../lib/replaceInternalHref.js'
 import { useLocation } from '@reach/router'
 
 const SimpleTab = React.memo(({ children }) => {
   const location = useLocation()
+  const pathArr = location.pathname.split('/')
+  let lang, type, version
+  if (pathArr[1] === 'zh') {
+    lang = pathArr[1]
+    type = pathArr[2]
+    version = pathArr[3]
+  } else {
+    lang = ''
+    type = pathArr[1]
+    version = pathArr[2]
+  }
   const selectedTab = location.hash
     ? decodeURIComponent(location.hash).slice(1)
     : null
@@ -62,6 +74,10 @@ const SimpleTab = React.memo(({ children }) => {
 
   const TabPanel = (props) => {
     const { children, value, index, ...other } = props
+
+    useEffect(() => {
+      replaceInternalHref(lang, type, version, true)
+    }, [])
 
     return (
       <div
