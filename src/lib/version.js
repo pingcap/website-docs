@@ -26,7 +26,7 @@ export const docsDMVersion = {
 }
 
 export const docsCloudVersion = {
-  master: 'beta',
+  master: 'public-preview',
 }
 
 export const docsDevGuideVersion = {
