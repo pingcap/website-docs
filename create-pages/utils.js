@@ -41,7 +41,7 @@ function renameDocVersion(version, docName) {
     case 'dev-guide':
       return renameVersion(version, '')
     default:
-      return 'beta'
+      return 'public-preview'
   }
 }
 

@@ -122,7 +122,7 @@ const Navbar = (prop) => {
             </IntlLink>
             {locale === 'en' && (
               <IntlLink
-                to="/tidbcloud/beta"
+                to="/tidbcloud/public-preview"
                 className={`navbar-item with-main-section ${
                   activeNav === 'tidbcloud' && !burgerActive ? 'is-active' : ''
                 }`}
