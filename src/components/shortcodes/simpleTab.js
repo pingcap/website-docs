@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../styles/components/simpletab.scss'
 import replaceInternalHref from '../../lib/replaceInternalHref.js'
+import optimizeBlockquote from '../../lib/optimizeBlockquote.js'
 import { useLocation } from '@reach/router'
 
 const SimpleTab = React.memo(({ children }) => {
@@ -76,6 +77,7 @@ const SimpleTab = React.memo(({ children }) => {
     const { children, value, index, ...other } = props
 
     useEffect(() => {
+      optimizeBlockquote()
       replaceInternalHref(lang, type, version, true)
     }, [])
 
