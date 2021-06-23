@@ -17,6 +17,7 @@ import { getDocInfo } from '../state'
 import { getRepoInfo } from '../lib/docHelper'
 import { graphql } from 'gatsby'
 import replaceInternalHref from '../lib/replaceInternalHref'
+import optimizeBlockquote from '../lib/optimizeBlockquote.js'
 import { useDispatch } from 'react-redux'
 import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
@@ -45,41 +46,6 @@ const Doc = ({
   const repoInfo = getRepoInfo(relativeDir, locale)
   const location = useLocation()
   const currentPath = location.pathname
-
-  function addStyleToQuote(quote, type) {
-    quote.classList.add('doc-blockquote')
-    quote.classList.add(type)
-  }
-
-  function optimizeBlockquote() {
-    const blockquoteList = document.getElementsByTagName('blockquote')
-    Array.from(blockquoteList).forEach((quote) => {
-      if (quote.children[0] && quote.children[0].children[0]) {
-        const labelText = quote.children[0].children[0].innerHTML
-
-        switch (labelText) {
-          case 'Note:':
-          case '注意：':
-            addStyleToQuote(quote, 'note')
-            break
-          case 'Warning:':
-          case '警告：':
-            addStyleToQuote(quote, 'warning')
-            break
-          case 'Tip:':
-          case '建议：':
-            addStyleToQuote(quote, 'tip')
-            break
-          case 'Error:':
-          case '错误：':
-            addStyleToQuote(quote, 'error')
-            break
-          default:
-            break
-        }
-      }
-    })
-  }
 
   useEffect(() => {
     optimizeBlockquote()
