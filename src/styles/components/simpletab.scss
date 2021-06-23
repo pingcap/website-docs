@@ -15,14 +15,15 @@
         padding-left: 0;
       }
 
+      .is-active a,
+      a:hover {
+        color: $B1;
+        background: $M2;
+        text-decoration: none;
+      }
+
       a {
         color: $B4;
-
-        &:hover {
-          color: $B1;
-          background: $M2;
-          text-decoration: none;
-        }
       }
     }
   }
