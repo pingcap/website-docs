@@ -60,9 +60,9 @@ jobs:
         id: markdown-contents
         with:
           path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-newest-contents-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-markdown-contents-newest-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-newest-contents-cache-
+            ${{ runner.os }}-markdown-contents-newest-cache-
 
       # if download_type is full, download all docs
       - name: Check restore status
