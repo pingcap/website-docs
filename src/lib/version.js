@@ -13,10 +13,6 @@ export const docsTiDBVersion = {
   'release-2.1': 'v2.1',
 }
 
-export const docsTiDBNewVersion = {
-  'release-5.1': 'v5.1',
-}
-
 export const docsTiDBOperatorVersion = {
   master: 'dev',
   'release-1.1': 'stable',
@@ -44,7 +40,7 @@ export function convertDocAndRef([doc, ref]) {
   switch (doc) {
     case 'docs-tidb':
       result[0] = 'tidb'
-      result[1] = { ...docsTiDBVersion, ...docsTiDBNewVersion }[ref]
+      result[1] = result[1] = docsTiDBVersion[ref]
       result[2] = tidbStableVersion
       break
 
