@@ -6,6 +6,7 @@ export const operatorStableVersion = 'v1.1'
 
 export const docsTiDBVersion = {
   master: 'dev',
+  'release-5.1': 'v5.1',
   'release-5.0': 'stable',
   'release-4.0': 'v4.0',
   'release-3.1': 'v3.1',
