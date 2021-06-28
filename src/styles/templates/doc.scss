@@ -229,6 +229,10 @@ $navbar-height-mobile: 4.25rem; // 68px
       word-break: break-word;
     }
 
+    a code {
+      color: $B1;
+    }
+
     .version-mark {
       position: relative;
       padding: 0 7px 0 25px;
