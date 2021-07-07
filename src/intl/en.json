@@ -13,9 +13,9 @@
     "feedbackDocLink": "Request docs changes",
     "deprecation": {
       "tidb": {
-        "firstContext": "You are viewing the documentation for an older major version of the TiDB database (TiDB { curDocVersion }).",
-        "secondContext": "TiDB { stableVersion }, the latest major version of the TiDB database, is now stable and recommended for general use. To view this page for TiDB { stableVersion }, click { link }.",
-        "link": "here"
+        "firstContext": "You are viewing the documentation of an older version of the TiDB database (TiDB { curDocVersion }).",
+        "secondContext": "It is recommended that you use { link } of the TiDB database. ",
+        "link": "the latest stable version"
       },
       "tidb-in-kubernetes": {
         "firstContext": "You are viewing the documentation for an older major version of the TiDB Operator tool (TiDB Operator { curDocVersion }).",

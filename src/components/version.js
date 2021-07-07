@@ -90,7 +90,9 @@ const Version = ({ relativeDir, base, versions }) => {
                 {versions && versions.indexOf(item) === -1 ? (
                   <span className="dropdown-item unclickable-btn">
                     {item === 'stable'
-                      ? `${stableVersion} (stable)`
+                      ? doc === 'tidb'
+                        ? `${stableVersion}`
+                        : `${stableVersion} (stable)`
                       : `${item}`}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
@@ -105,7 +107,9 @@ const Version = ({ relativeDir, base, versions }) => {
                     className="dropdown-item"
                   >
                     {item === 'stable'
-                      ? `${stableVersion} (stable)`
+                      ? doc === 'tidb'
+                        ? `${stableVersion}`
+                        : `${stableVersion} (stable)`
                       : `${item}`}
                   </IntlLink>
                 )}

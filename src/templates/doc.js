@@ -231,7 +231,9 @@ const Doc = ({
                 <DownloadPDF downloadURL={downloadURL} />
                 {docRefArray[0] !== 'tidbcloud' && (
                   <>
-                    <ImproveDocLink repoInfo={repoInfo} base={base} />
+                    {docRefArray[1] === 'dev' && (
+                      <ImproveDocLink repoInfo={repoInfo} base={base} />
+                    )}
                     <FeedbackDocLink repoInfo={repoInfo} base={base} />
                   </>
                 )}

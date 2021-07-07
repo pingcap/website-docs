@@ -41,7 +41,7 @@ export function convertDocAndRef([doc, ref]) {
   switch (doc) {
     case 'docs-tidb':
       result[0] = 'tidb'
-      result[1] = result[1] = docsTiDBVersion[ref]
+      result[1] = docsTiDBVersion[ref]
       result[2] = tidbStableVersion
       break
 
