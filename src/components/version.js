@@ -30,7 +30,7 @@ const Version = ({ relativeDir, base, versions }) => {
   const [dropdownItems, setDropdownItems] = useState([])
 
   function handleRelativeDir() {
-    setButtonText(ref)
+    setButtonText(ref === 'stable' ? stableVersion : ref)
 
     switch (doc) {
       case 'tidb':
@@ -89,11 +89,7 @@ const Version = ({ relativeDir, base, versions }) => {
               <Fragment key={item}>
                 {versions && versions.indexOf(item) === -1 ? (
                   <span className="dropdown-item unclickable-btn">
-                    {item === 'stable'
-                      ? doc === 'tidb'
-                        ? `${stableVersion}`
-                        : `${stableVersion} (stable)`
-                      : `${item}`}
+                    {item === 'stable' ? `${stableVersion}` : `${item}`}
                     <span className="tooltiptext">
                       This doc does not exist in {item}
                     </span>
@@ -106,11 +102,7 @@ const Version = ({ relativeDir, base, versions }) => {
                     }`}
                     className="dropdown-item"
                   >
-                    {item === 'stable'
-                      ? doc === 'tidb'
-                        ? `${stableVersion}`
-                        : `${stableVersion} (stable)`
-                      : `${item}`}
+                    {item === 'stable' ? `${stableVersion}` : `${item}`}
                   </IntlLink>
                 )}
               </Fragment>
