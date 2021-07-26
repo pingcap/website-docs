@@ -6,6 +6,7 @@ export const operatorStableVersion = 'v1.1'
 
 export const docsTiDBVersion = {
   master: 'dev',
+  'refactor-migration-docs': 'refactor-migration-docs',
   'release-5.1': 'stable',
   'release-5.0': 'v5.0',
   'release-4.0': 'v4.0',
