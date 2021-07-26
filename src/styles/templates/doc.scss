@@ -314,7 +314,7 @@ $navbar-height-mobile: 4.25rem; // 68px
     .toc-content {
       position: sticky;
       top: calc(#{$navbar-height});
-      max-height: calc(100vh - 250px);
+      max-height: calc(100vh - 300px);
       overflow: auto;
     }
 
