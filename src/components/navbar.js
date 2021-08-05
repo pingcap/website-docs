@@ -65,7 +65,7 @@ const Navbar = (prop) => {
         <div className="navbar-brand">
           <IntlLink
             className="navbar-item with-brand"
-            to="https://pingcap.com/"
+            to={`https://pingcap.com/${locale === 'zh' ? 'zh' : ''}`}
             type="outBoundLink"
           >
             <img
