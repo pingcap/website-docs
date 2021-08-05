@@ -1,7 +1,6 @@
 const fs = require('fs')
 const sig = require('signale')
 const http = require('./http')
-const axios = require('axios').default
 const toReadableStream = require('to-readable-stream')
 const { shouldIgnorePath } = require('./utils')
 

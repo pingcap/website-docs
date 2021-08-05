@@ -1,0 +1,9 @@
+- TiCDC
+  - [Overview](/ticdc/ticdc-overview.md)
+  - [Deploy](/ticdc/deploy-ticdc.md)
+  - [Maintain](/ticdc/manage-ticdc.md)
+  - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+  - [Monitor](/ticdc/monitor-ticdc.md)
+  - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+  - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+  - [Glossary](/ticdc/ticdc-glossary.md)

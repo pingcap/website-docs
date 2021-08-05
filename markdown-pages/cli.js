@@ -1,6 +1,6 @@
 const yargs = require('yargs')
 const sig = require('signale')
-const { retrieveAllMDs, handleSync, writeContent } = require('./download')
+const { retrieveAllMDs, handleSync } = require('./download')
 const {
   DOCS_IMAGE_CDN_URL,
   DOCS_CN_IMAGE_CDN_URL,
@@ -11,7 +11,6 @@ const {
   createReplaceImagePathStream,
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
-  createReplaceTrailingWhiteSpaceStream,
 } = require('./utils')
 
 const argv = yargs
@@ -42,21 +41,6 @@ function main(argv) {
   const ref = argv.ref || 'master'
 
   switch (repo) {
-    case 'local-test':
-      ;['_index.md', 'TOC.md', 'views.md'].forEach((m) => {
-        writeContent(
-          'https://raw.githubusercontent.com/pingcap/docs/master/' + m,
-          `${__dirname}/contents/en/docs-tidb/${ref}/${m}`,
-          [
-            () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
-            () => createReplaceCopyableStream(),
-            () => createReplaceTabPanelStream(),
-            // () => createReplaceTrailingWhiteSpaceStream(),
-          ]
-        )
-      })
-      break
-
     case 'docs':
       retrieveAllMDs(
         {

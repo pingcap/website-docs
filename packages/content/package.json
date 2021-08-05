@@ -1,0 +1,12 @@
+{
+  "name": "@pingcap/docs-content",
+  "version": "1.0.0",
+  "description": "Processing document content",
+  "main": "index.js",
+  "author": "Yue Yang <g1enyy0ung@gmail.com> (https://g1eny0ung.site)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "replacestream": "^4.0.3"
+  }
+}
