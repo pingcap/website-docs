@@ -11,9 +11,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@pingcap/docs-content": "1.0.0",
     "axios": "^0.21.1",
+    "mdast-util-from-markdown": "^1.0.0",
     "signale": "^1.4.0",
-    "yargs": "^17.0.1",
-    "@pingcap/docs-content": "1.0.0"
+    "yargs": "^17.0.1"
   }
 }

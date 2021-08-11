@@ -1,7 +1,8 @@
+import { replaceFrontMatter, replaceImagePath } from '@pingcap/docs-content'
+
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import fs from 'fs'
 import path from 'path'
-import { replaceFrontMatter } from 'content'
 import sig from 'signale'
 
 /**
@@ -29,13 +30,19 @@ export function genContentFromOutline(repo, from, to) {
             case 'paragraph':
               switch (children[0].type) {
                 case 'link':
-                  const { url } = children[0]
+                  const { url, children: text } = children[0]
+
+                  if (isExternal(url)) {
+                    ws.write('\n# ' + text[0].value + '\n\n' + url + '\n')
+
+                    break
+                  }
 
                   const rsPath = path.join(path.dirname(from), repo, url)
                   sig.info('Read', rsPath)
-                  const file = replaceFrontMatter(
-                    fs.readFileSync(rsPath).toString(),
-                    ''
+                  const file = replaceImagePath(
+                    replaceFrontMatter(fs.readFileSync(rsPath).toString(), ''),
+                    `./${repo}/media`
                   )
                   ws.write(file)
 
@@ -67,4 +74,8 @@ export function genContentFromOutline(repo, from, to) {
 
     recurAppendDocs(list)
   })
+}
+
+function isExternal(url) {
+  return /^https?.*/.test(url)
 }
