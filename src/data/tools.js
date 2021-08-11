@@ -15,13 +15,13 @@ const toolsLandingPageData = [
     type: 'toolsCard.databaseTools.type',
     iconName: 'tidb-tools',
     desc: 'toolsCard.databaseTools.desc',
-    link: '/tidb/dev/ecosystem-tool-user-guide',
+    link: '/tidb/stable/ecosystem-tool-user-guide',
   },
   {
     type: 'toolsCard.tiup.type',
     iconName: 'tiup',
     desc: 'toolsCard.tiup.desc',
-    link: '/tidb/dev/tiup-documentation-guide',
+    link: '/tidb/stable/tiup-documentation-guide',
   },
 ]
 
