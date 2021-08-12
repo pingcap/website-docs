@@ -143,7 +143,7 @@ const Navbar = (prop) => {
             <a
               href={
                 locale === 'zh'
-                  ? 'https://pingcap.com/about-cn/#contact-us'
+                  ? 'https://pingcap.com/zh/contact/'
                   : 'https://pingcap.com/contact-us/'
               }
               className="navbar-item with-main-section"
