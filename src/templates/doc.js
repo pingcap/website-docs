@@ -249,7 +249,7 @@ const Doc = ({
               {currentPath === '/zh/tidb/stable' && (
                 <a
                   className="Promote"
-                  href="https://pingcap.com/community-cn/careers/join/"
+                  href="https://tidb-jobs.pingcap.com/"
                   // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
                 >
