@@ -101,7 +101,7 @@ function download(argv) {
 }
 
 function gen(argv) {
-  const { repo, ref, from, to } = argv
+  const { repo, ref, from, output } = argv
   const repoDest = `${nPath.dirname(from)}/${repo}`
 
   if (!fs.existsSync(repoDest)) {
@@ -110,10 +110,10 @@ function gen(argv) {
     exec(
       `git clone https://github.com/${repo}.git ${repoDest} --branch ${ref} --depth 1`,
       () => {
-        genContentFromOutline(repo, from, to)
+        genContentFromOutline(repo, from, output)
       }
     )
   } else {
-    genContentFromOutline(repo, from, to)
+    genContentFromOutline(repo, from, output)
   }
 }
