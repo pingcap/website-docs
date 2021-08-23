@@ -2,6 +2,7 @@ const replaceStream = require('replacestream')
 
 const frontMatter = /^---(.|\n)*---\n/
 const media = /\(\/?media\//g
+const copyable = /{{< copyable.*}}\n/g
 
 /**
  * Replace front matter.
@@ -18,8 +19,8 @@ function replaceImagePath(str, replaced) {
   return str.replace(media, `(${replaced}/`)
 }
 
-function replaceFrontMatterStream(replaced) {
-  return replaceStream(frontMatter, replaced)
+function replaceCopyable(str, replaced) {
+  return str.replace(copyable, replaced)
 }
 
 function replaceImagePathStream(replaced) {
@@ -29,7 +30,7 @@ function replaceImagePathStream(replaced) {
 module.exports = {
   replaceFrontMatter,
   replaceImagePath,
+  replaceCopyable,
   replaceStream,
-  replaceFrontMatterStream,
   replaceImagePathStream,
 }

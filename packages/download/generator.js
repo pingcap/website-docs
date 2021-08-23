@@ -1,4 +1,8 @@
-import { replaceFrontMatter, replaceImagePath } from '@pingcap/docs-content'
+import {
+  replaceCopyable,
+  replaceFrontMatter,
+  replaceImagePath,
+} from '@pingcap/docs-content'
 
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import fs from 'fs'
@@ -40,9 +44,15 @@ export function genContentFromOutline(repo, from, to) {
 
                   const rsPath = path.join(path.dirname(from), repo, url)
                   sig.info('Read', rsPath)
-                  const file = replaceImagePath(
-                    replaceFrontMatter(fs.readFileSync(rsPath).toString(), ''),
-                    `./${repo}/media`
+                  const file = replaceCopyable(
+                    replaceImagePath(
+                      replaceFrontMatter(
+                        fs.readFileSync(rsPath).toString(),
+                        ''
+                      ),
+                      `./${repo}/media`
+                    ),
+                    ''
                   )
                   ws.write(file)
 
