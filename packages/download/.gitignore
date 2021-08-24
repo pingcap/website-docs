@@ -1,1 +1,2 @@
-contents
+markdown-pages/*
+!markdown-pages/.gitkeep

@@ -29,3 +29,11 @@ export function getContent(repo, ref, path = '') {
     },
   })
 }
+
+export function compare(repo, base, head) {
+  const url = `/repos/${repo}/compare/${base}...${head}`
+
+  sig.info(`Compare: ${base}...${head}`)
+
+  return http.get(url)
+}

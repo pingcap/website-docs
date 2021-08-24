@@ -2,7 +2,8 @@ const replaceStream = require('replacestream')
 
 const frontMatter = /^---(.|\n)*---\n/
 const media = /\(\/?media\//g
-const copyable = /{{< copyable.*}}\n/g
+const copyable = /{{< copyable\s+(.+)\s+}}\n/g
+const tabsPanel = /{{< tabs-panel\s+(.+)\s+}}\n/g
 
 /**
  * Replace front matter.
@@ -27,10 +28,24 @@ function replaceImagePathStream(replaced) {
   return replaceStream(media, `(${replaced}/`)
 }
 
+function replaceCopyableStream() {
+  return replaceStream(copyable, function (_, p1) {
+    return `<WithCopy tag=${p1} />\n`
+  })
+}
+
+function replaceTabsPanelStream() {
+  return replaceStream(tabsPanel, function (_, p1) {
+    return `<TabsPanel letters="${p1.replace(/"|\s/g, '')}" />\n`
+  })
+}
+
 module.exports = {
   replaceFrontMatter,
   replaceImagePath,
   replaceCopyable,
   replaceStream,
   replaceImagePathStream,
+  replaceCopyableStream,
+  replaceTabsPanelStream,
 }

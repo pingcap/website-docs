@@ -1,0 +1,103 @@
+{
+  "docs": [
+    {
+      "name": "docs-dbaas",
+      "languages": [
+        {
+          "lang": "en",
+          "repo": "tidbcloud/dbaas-docs",
+          "versions": ["master"]
+        }
+      ]
+    },
+    {
+      "name": "docs-dev-guide",
+      "languages": [
+        {
+          "lang": "zh",
+          "repo": "pingcap/dev-guide",
+          "versions": ["master"]
+        }
+      ]
+    },
+    {
+      "name": "docs-dm",
+      "languages": [
+        {
+          "lang": "en",
+          "repo": "pingcap/docs-dm",
+          "path": "en",
+          "versions": ["master", "release-1.0", "release-2.0"]
+        },
+        {
+          "lang": "zh",
+          "repo": "pingcap/docs-dm",
+          "path": "zh",
+          "versions": ["master", "release-1.0", "release-2.0"]
+        }
+      ]
+    },
+    {
+      "name": "docs-tidb",
+      "languages": [
+        {
+          "lang": "en",
+          "repo": "pingcap/docs",
+          "versions": [
+            "master",
+            "release-2.1",
+            "release-3.0",
+            "release-3.1",
+            "release-4.0",
+            "release-5.0",
+            "release-5.1"
+          ]
+        },
+        {
+          "lang": "zh",
+          "repo": "pingcap/docs-cn",
+          "versions": [
+            "master",
+            "release-2.1",
+            "release-3.0",
+            "release-3.1",
+            "release-4.0",
+            "release-5.0",
+            "release-5.1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docs-tidb-operator",
+      "languages": [
+        {
+          "lang": "en",
+          "repo": "pingcap/docs-tidb-operator",
+          "path": "en",
+          "versions": ["master", "release-1.0", "release-1.1", "release-1.2"]
+        },
+        {
+          "lang": "zh",
+          "repo": "pingcap/docs-tidb-operator",
+          "path": "zh",
+          "versions": ["master", "release-1.0", "release-1.1", "release-1.2"]
+        }
+      ]
+    }
+  ],
+  "ignore": [
+    ".circleci",
+    ".github",
+    "CONTRIBUTING.md",
+    "README.md",
+    "TOC.md",
+    "_index.md",
+    "assets",
+    "hack",
+    "media",
+    "resources",
+    "scripts",
+    "templates"
+  ]
+}

@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 
-import { exec } from 'child_process'
-import fs from 'fs'
-import { genContentFromOutline } from './generator.js'
+import { clean, download, gen, sync } from './index.js'
+
 import { hideBin } from 'yargs/helpers'
-import nPath from 'path'
-import { retrieveAllMDs } from './utils.js'
 import sig from 'signale'
 import yargs from 'yargs'
 
 const argv = yargs(hideBin(process.argv))
   .command(
-    'download <repo> [path] [ref]',
+    ['download <repo> [path] [ref]', 'dl <repo> [path] [ref]'],
     'specify which repo of docs you want to download',
     (yargs) => {
       yargs
@@ -25,6 +22,15 @@ const argv = yargs(hideBin(process.argv))
           default: 'master',
         })
     }
+  )
+  .command(['clean <path>', 'cl <path>'], 'use rimraf to delete', (yargs) =>
+    yargs.positional('path', {
+      type: 'string',
+    })
+  )
+  .command(
+    'sync <repo> <ref> <base> <head>',
+    'Synchronize doc changes between base and head'
   )
   .command(
     [
@@ -50,7 +56,11 @@ const argv = yargs(hideBin(process.argv))
       alias: 'dest',
       desc: 'The root directory where documents are stored',
       type: 'string',
-      default: 'contents',
+      default: 'markdown-pages',
+    },
+    config: {
+      desc: 'Specify the config',
+      type: 'string',
     },
     debug: {
       alias: 'd',
@@ -67,7 +77,21 @@ if (argv.debug) {
 }
 switch (argv._[0]) {
   case 'download':
+  case 'dl':
     download(argv)
+
+    break
+  case 'clean':
+  case 'cl':
+    clean(argv.path, {}, (err) => {
+      if (err) {
+        throw err
+      }
+    })
+
+    break
+  case 'sync':
+    sync(argv)
 
     break
   case 'generate':
@@ -75,45 +99,4 @@ switch (argv._[0]) {
     gen(argv)
 
     break
-}
-
-function download(argv) {
-  const { repo, path, ref, destination } = argv
-  const dest = nPath.resolve(destination)
-
-  switch (repo) {
-    case 'pingcap/docs':
-    case 'pingcap/docs-cn':
-      retrieveAllMDs(
-        {
-          repo,
-          path,
-          ref,
-        },
-        nPath.resolve(
-          dest,
-          `${repo.endsWith('-cn') ? 'zh' : 'en'}/docs-tidb/${ref}`
-        )
-      )
-
-      break
-  }
-}
-
-function gen(argv) {
-  const { repo, ref, from, output } = argv
-  const repoDest = `${nPath.dirname(from)}/${repo}`
-
-  if (!fs.existsSync(repoDest)) {
-    sig.start('Clone', repoDest, '...')
-
-    exec(
-      `git clone https://github.com/${repo}.git ${repoDest} --branch ${ref} --depth 1`,
-      () => {
-        genContentFromOutline(repo, from, output)
-      }
-    )
-  } else {
-    genContentFromOutline(repo, from, output)
-  }
 }

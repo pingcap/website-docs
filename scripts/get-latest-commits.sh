@@ -22,9 +22,9 @@ do
     for v in "${!versions}"
     do
        curl -H "Authorization: token $GITHUB_AUTHORIZATION_TOKEN" -s "https://api.github.com/repos/pingcap/$docs_repo/commits/$v"|\
-         python3 -c "import sys,json; print(json.load(sys.stdin)['sha'])" > $DIR/../markdown-pages/contents/$docs_repo-$v-hash.lock
+         python3 -c "import sys,json; print(json.load(sys.stdin)['sha'])" > $DIR/../markdown-pages/$docs_repo-$v-hash.lock
         echo "$docs_repo-$v-hash.lock"
-        cat $DIR/../markdown-pages/contents/$docs_repo-$v-hash.lock
+        cat $DIR/../markdown-pages/$docs_repo-$v-hash.lock
     done
 done
 
@@ -35,8 +35,8 @@ do
     for v in "${!versions}"
     do
        curl -H "Authorization: token $GITHUB_AUTHORIZATION_TOKEN" -s "https://api.github.com/repos/tidbcloud/$docs_repo/commits/$v"|\
-         python3 -c "import sys,json; print(json.load(sys.stdin)['sha'])" > $DIR/../markdown-pages/contents/$docs_repo-$v-hash.lock
+         python3 -c "import sys,json; print(json.load(sys.stdin)['sha'])" > $DIR/../markdown-pages/$docs_repo-$v-hash.lock
         echo "$docs_repo-$v-hash.lock"
-        cat $DIR/../markdown-pages/contents/$docs_repo-$v-hash.lock
+        cat $DIR/../markdown-pages/$docs_repo-$v-hash.lock
     done
 done

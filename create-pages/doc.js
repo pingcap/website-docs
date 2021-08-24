@@ -15,7 +15,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     query {
       allMdx(
         filter: {
-          fields: { langCollection: { eq: "markdown-pages/contents/en" } }
+          fields: { langCollection: { eq: "markdown-pages/en" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
           frontmatter: { draft: { ne: true } }
         }
@@ -44,7 +44,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     query {
       allMdx(
         filter: {
-          fields: { langCollection: { eq: "markdown-pages/contents/zh" } }
+          fields: { langCollection: { eq: "markdown-pages/zh" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
           frontmatter: { draft: { ne: true } }
         }
@@ -84,7 +84,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       const fullPath = `${pathPrefix}${_fullPath}`
       node.path = fullPath
       const filePathInDiffLang = path.resolve(
-        `${__dirname}/../markdown-pages/contents${
+        `${__dirname}/../markdown-pages/${
           locale === 'en' ? '/zh/' : '/en/'
         }${relativePath}`
       )

@@ -18,29 +18,34 @@ After clone this repo, run `yarn` to get all deps:
 yarn
 ```
 
-We have pre-defined some commands to download the docs and clear docs, these commands are:
+We have pre-defined some commands to download the docs and clean docs, these commands are:
 
 ```json
 {
   "scripts": {
-    "clean:docs:docs-tidb:en": "rimraf ./markdown-pages/contents/en/docs-tidb/**/*.md",
-    "clean:docs:docs-tidb:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb/**/*.md",
-    "clean:docs:docs-tidb-operator:en": "rimraf ./markdown-pages/contents/en/docs-tidb-operator/**/*.md",
-    "clean:docs:docs-tidb-operator:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb-operator/**/*.md",
-    "clean:docs:docs-dm:en": "rimraf ./markdown-pages/contents/en/docs-dm/**/*.md",
-    "clean:docs:docs-dm:zh": "rimraf ./markdown-pages/contents/zh/docs-dm/**/*.md",
-    "download:docs-tidb:en": "node markdown-pages/cli.js download docs",
+    "download:docs-tidb:en": "pingcap-docs-download dl pingcap/docs --config docs.json",
     "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
-    "download:docs-tidb:zh": "node markdown-pages/cli.js download docs-cn",
+    "download:docs-tidb:zh": "pingcap-docs-download dl pingcap/docs-cn --config docs.json",
     "download:docs-tidb:zh:all": "./scripts/download-docs-tidb-zh.sh",
-    "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
+
+    "download:docs-dm": "pingcap-docs-download dl pingcap/docs-dm",
+    "download:docs-dm:all": "./scripts/download-docs-dm.sh",
+    "download:docs-dm:en:all": "./scripts/download-docs-dm-en.sh",
+    "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh",
+
+    "download:docs-tidb-operator": "pingcap-docs-download dl pingcap/docs-tidb-operator",
     "download:docs-tidb-operator:all": "./scripts/download-docs-tidb-operator.sh",
     "download:docs-tidb-operator:en:all": "./scripts/download-docs-tidb-operator-en.sh",
     "download:docs-tidb-operator:zh:all": "./scripts/download-docs-tidb-operator-zh.sh",
-    "download:docs-dm": "node markdown-pages/cli.js download docs-dm",
-    "download:docs-dm:all": "./scripts/download-docs-dm.sh",
-    "download:docs-dm:en:all": "./scripts/download-docs-dm-en.sh",
-    "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh"
+
+    "download:docs-dbaas": "pingcap-docs-download dl tidbcloud/dbaas-docs",
+    "download:docs-dbaas:all": "./scripts/download-docs-dbaas.sh",
+
+    "download:docs-dev-guide": "pingcap-docs-download dl pingcap/docs-dev-guide",
+    "download:docs-dev-guide:zh:all": "./scripts/download-docs-dev-guide-zh.sh",
+
+    "clean:docs": "pingcap-docs-download cl",
+    "sync": "pingcap-docs-download sync"
   }
 }
 ```
