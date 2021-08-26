@@ -30,20 +30,19 @@ export const imageCDNs = {
  */
 export async function retrieveAllMDs(metaInfo, destDir, options) {
   const { repo, ref, path } = metaInfo
-  const dest = genDest(repo, path, destDir)
   const { ignore = [], pipelines = [] } = options
 
   const data = (await getContent(repo, ref, path)).data
 
   // Create destDir if not exist
-  if (data && !fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true })
+  if (data && !fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true })
   }
 
   if (Array.isArray(data)) {
     data.forEach((d) => {
       const { type, name, download_url } = d
-      const nextDest = `${dest}/${name}`
+      const nextDest = `${destDir}/${name}`
 
       if (ignore.includes(name)) {
         return
@@ -71,7 +70,7 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
     })
   } else {
     if (data.name.endsWith('.md')) {
-      writeContent(data.download_url, `${dest}/${data.name}`, pipelines)
+      writeContent(data.download_url, `${destDir}/${data.name}`, pipelines)
     }
   }
 }
@@ -92,7 +91,9 @@ export function genDest(repo, path, destDir) {
       'pingcap/docs-dev-guide',
     ].includes(repo)
   ) {
-    return `${destDir}/${path.split('/').slice(1).join('/')}`
+    const pathWithoutLang = path.split('/').slice(1).join('/')
+
+    return `${destDir}${pathWithoutLang ? '/' + pathWithoutLang : ''}`
   }
 
   return path ? `${destDir}/${path}` : destDir

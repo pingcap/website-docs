@@ -1,4 +1,4 @@
-import { imageCDNs, retrieveAllMDs } from './utils.js'
+import { genDest, imageCDNs, retrieveAllMDs } from './utils.js'
 import {
   replaceCopyableStream,
   replaceImagePathStream,
@@ -43,9 +43,13 @@ export function download(argv) {
           path,
           ref,
         },
-        nPath.resolve(
-          dest,
-          `${repo.endsWith('-cn') ? 'zh' : 'en'}/docs-tidb/${ref}`
+        genDest(
+          repo,
+          path,
+          nPath.resolve(
+            dest,
+            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+          )
         ),
         options
       )
@@ -62,15 +66,29 @@ export function download(argv) {
         return
       }
 
+      let name
+      switch (repo) {
+        case 'pingcap/docs-dm':
+          name = 'tidb-data-migration'
+          break
+        case 'pingcap/docs-tidb-operator':
+          name = 'tidb-in-kubernetes'
+          break
+        case 'pingcap/docs-dev-guide':
+          name = 'dev-guide'
+          break
+      }
+
       retrieveAllMDs(
         {
           repo,
           path,
           ref,
         },
-        nPath.resolve(
-          dest,
-          `${path.split('/')[0]}/${repo.split('/')[1]}/${ref}`
+        genDest(
+          repo,
+          path,
+          nPath.resolve(dest, `${path.split('/')[0]}/${name}/${ref}`)
         ),
         options
       )
@@ -83,7 +101,7 @@ export function download(argv) {
           path,
           ref,
         },
-        nPath.resolve(dest, `en/docs-dbaas/${ref}`),
+        genDest(repo, path, nPath.resolve(dest, `en/tidbcloud/${ref}`)),
         options
       )
 
