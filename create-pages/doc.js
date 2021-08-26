@@ -1,38 +1,29 @@
 const path = require('path')
 const fs = require('fs')
-const {
-  replacePath,
-  genPathPrefix,
-  genTOCPath,
-  genDownloadPDFURL,
-  genVersionChunks,
-} = require('./utils')
+const { replacePath, genTOCPath, genPDFDownloadURL } = require('./utils')
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
-  const docTemplate = path.resolve(`${__dirname}/../src/templates/doc.js`)
+  const template = path.resolve(__dirname, '../src/templates/doc.js')
 
-  const docsEn = await graphql(`
-    query {
+  const docs = await graphql(`
+    {
       allMdx(
         filter: {
-          fields: { langCollection: { eq: "markdown-pages/en" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
           frontmatter: { draft: { ne: true } }
         }
       ) {
         nodes {
           id
-          fields {
-            langCollection
-          }
           frontmatter {
             aliases
           }
+          slug
           parent {
             ... on File {
-              relativeDirectory
+              sourceInstanceName
               relativePath
-              base
+              name
             }
           }
         }
@@ -40,118 +31,80 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     }
   `)
 
-  const docsZh = await graphql(`
-    query {
-      allMdx(
-        filter: {
-          fields: { langCollection: { eq: "markdown-pages/zh" } }
-          fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
-          frontmatter: { draft: { ne: true } }
-        }
-      ) {
-        nodes {
-          id
-          fields {
-            langCollection
-          }
-          frontmatter {
-            aliases
-          }
-          parent {
-            ... on File {
-              relativeDirectory
-              relativePath
-              base
-            }
-          }
-        }
-      }
+  const nodes = docs.data.allMdx.nodes.map((node) => {
+    const { slug } = node
+    const { sourceInstanceName, relativePath, name } = node.parent
+    const [topFolder, lang] = sourceInstanceName.split('/') // [markdown-pages, en|zh]
+
+    node.path = replacePath(slug, name, lang)
+
+    const filePathInDiffLang = path.resolve(
+      __dirname,
+      '..'`${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath}`
+    )
+    node.langSwitchable = fs.existsSync(filePathInDiffLang)
+
+    const chunks = slug.split('/').slice(1)
+    node.version = chunks[0]
+    node.pathWithoutVersion = chunks.slice(1).join('/')
+
+    node.pathPrefix = node.path.split('/').slice(0, -1).join('/')
+    node.tocPath = genTOCPath(slug)
+    node.downloadURL = genPDFDownloadURL(slug, lang)
+
+    return node
+  })
+
+  const versionsMap = nodes.reduce((map, { pathWithoutVersion, version }) => {
+    const arr = map[pathWithoutVersion]
+    if (arr) {
+      arr.push(version)
+    } else {
+      map[pathWithoutVersion] = [version]
     }
-  `)
+    return map
+  }, {})
 
-  // create pages for different language docs
-  function _createDocs(docs, locale, pathPrefix = '') {
-    const nodes = docs.data.allMdx.nodes
+  nodes.forEach((node) => {
+    const {
+      id,
+      parent,
+      path,
+      langSwitchable,
+      pathPrefix,
+      tocPath,
+      downloadURL,
+    } = node
 
-    // setup map for md versions
-    nodes.map((node) => {
-      const parent = node.parent
-      const relativeDir = parent.relativeDirectory
-      const base = parent.base
-      const relativePath = parent.relativePath
-      node.tocPath = genTOCPath(relativeDir)
-      const _fullPath = `${replacePath(relativeDir, base)}`
-      const fullPath = `${pathPrefix}${_fullPath}`
-      node.path = fullPath
-      const filePathInDiffLang = path.resolve(
-        `${__dirname}/../markdown-pages/${
-          locale === 'en' ? '/zh/' : '/en/'
-        }${relativePath}`
-      )
-      node.langSwitchable = fs.existsSync(filePathInDiffLang) ? true : false
-      const vChunks = genVersionChunks(_fullPath)
-      node.version = vChunks[0]
-      node.pathWithoutVersion = vChunks[1]
-      node.downloadURL = `${genDownloadPDFURL(relativeDir, locale)}`
-      node.pathPrefix = genPathPrefix(relativeDir, locale)
-      return node
-    })
-
-    const versionsMap = nodes.reduce((map, { pathWithoutVersion, version }) => {
-      const arr = map[pathWithoutVersion]
-      if (arr) {
-        arr.push(version)
-      } else {
-        map[pathWithoutVersion] = [version]
-      }
-      return map
-    }, {})
-
-    nodes.forEach((node) => {
-      const {
+    createPage({
+      path,
+      component: template,
+      context: {
         id,
-        path,
-        downloadURL,
-        pathPrefix,
+        langCollection: parent.sourceInstanceName,
+        relativeDir: parent.relativeDirectory,
+        base: parent.base,
         tocPath,
-        parent,
+        locale,
+        pathPrefix,
+        downloadURL,
+        fullPath: path,
+        versions: versionsMap[node.pathWithoutVersion],
         langSwitchable,
-      } = node
-      createPage({
-        path: path,
-        component: docTemplate,
-        context: {
-          id,
-          langCollection: node.fields.langCollection,
-          relativeDir: parent.relativeDirectory,
-          base: parent.base,
-          tocPath,
-          locale,
-          pathPrefix,
-          downloadURL,
-          fullPath: path,
-          versions: versionsMap[node.pathWithoutVersion],
-          langSwitchable,
-        },
-      })
-
-      // create redirect
-      if (node.frontmatter.aliases) {
-        const aliasesArr = node.frontmatter.aliases
-
-        aliasesArr.forEach((alias) => {
-          createRedirect({
-            fromPath: `${alias}`,
-            toPath: path,
-            isPermanent: true,
-          })
-        })
-      }
+      },
     })
-  }
 
-  _createDocs(docsEn, 'en')
-  _createDocs(docsZh, 'zh', '/zh')
+    // create redirects
+    if (node.frontmatter.aliases) {
+      node.frontmatter.aliases.forEach((fromPath) => {
+        createRedirect({
+          fromPath,
+          toPath: path,
+          isPermanent: true,
+        })
+      })
+    }
+  })
 }
 
 module.exports = createDocs

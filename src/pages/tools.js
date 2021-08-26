@@ -1,17 +1,16 @@
 import '../styles/pages/tools.scss'
 
-import Layout from '../components/layout'
-import React from 'react'
-import SEO from '../components/seo'
-import { Link } from 'gatsby'
-
-import { toolsLandingPageData } from '../data/tools'
 import { FormattedMessage } from 'react-intl'
+import Layout from '../components/layout'
+import { Link } from 'gatsby'
+import React from 'react'
+import Seo from '../components/seo'
+import { toolsLandingPageData } from '../data/tools'
 
 const Tools = ({ pageContext: { locale } }) => {
   return (
     <Layout locale={locale} langSwitchable={true}>
-      <SEO title="Tools" />
+      <Seo title="Tools" />
       <div className="PingCAP-Tools">
         <section className="section container">
           <div className="columns is-multiline is-variable is-8">

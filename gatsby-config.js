@@ -56,12 +56,6 @@ module.exports = {
         remarkPlugins: [() => remarkSyntaxDiagram],
       },
     },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [`gatsby-remark-autolink-headers`],
-      },
-    },
     `gatsby-plugin-remove-serviceworker`,
     {
       resolve: `gatsby-plugin-sass`,
@@ -87,7 +81,7 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         output: `/sitemap.xml`,
-        exclude: ['/404', '/zh/404', '/search', '/zh/search'],
+        excludes: ['/404', '/zh/404', '/search', '/zh/search'],
       },
     },
     {

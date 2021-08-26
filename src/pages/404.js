@@ -1,12 +1,13 @@
+import '../styles/pages/404.scss'
+
+import IntlLink from '../components/IntlLink'
 import Layout from '../components/layout'
 import React from 'react'
-import SEO from '../components/seo'
-import IntlLink from '../components/IntlLink'
-import '../styles/pages/404.scss'
+import Seo from '../components/seo'
 
 const NotFoundPage = ({ pageContext: { locale } }) => (
   <Layout locale={locale}>
-    <SEO title="404: Not Found" />
+    <Seo title="404: Not Found" />
     <div className="PingCAP-404-Page">
       <section className="container">
         <h1>Sorry... 404!</h1>

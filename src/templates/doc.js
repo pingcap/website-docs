@@ -4,28 +4,28 @@ import * as Shortcodes from '../components/shortcodes'
 
 import React, { useEffect } from 'react'
 
+import DeprecationNotice from '../components/deprecationNotice'
 import DownloadPDF from '../components/downloadPDF'
+import FeedbackDocLink from '../components/feedbackDocLink'
 import { FormattedMessage } from 'react-intl'
+import GitCommitInfo from '../components/gitCommitInfo'
+import ImproveDocLink from '../components/improveDocLink'
 import Layout from '../components/layout'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import SEO from '../components/seo'
-import TOC from '../components/toc'
+import PromptBanner from '../../images/community-careers-banner.jpg'
+import Seo from '../components/seo'
+import Toc from '../components/toc'
+import UserFeedback from '../components/userFeedback'
 import VersionSwitcher from '../components/version'
 import { convertDocAndRef } from '../lib/version'
 import { getDocInfo } from '../state'
 import { getRepoInfo } from '../lib/docHelper'
 import { graphql } from 'gatsby'
-import replaceInternalHref from '../lib/replaceInternalHref'
 import optimizeBlockquote from '../lib/optimizeBlockquote.js'
+import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
-import ImproveDocLink from '../components/improveDocLink'
-import FeedbackDocLink from '../components/feedbackDocLink'
-import GitCommitInfo from '../components/gitCommitInfo'
-import UserFeedback from '../components/userFeedback'
-import DeprecationNotice from '../components/deprecationNotice'
 import { useLocation } from '@reach/router'
-import PromptBanner from '../../images/community-careers-banner.jpg'
 
 const Doc = ({
   pageContext: {
@@ -152,7 +152,7 @@ const Doc = ({
       forbidResetDocInfo={true}
       langSwitchable={langSwitchable}
     >
-      <SEO
+      <Seo
         title={frontmatter.title}
         description={frontmatter.summary}
         meta={[
@@ -172,8 +172,7 @@ const Doc = ({
         link={[
           {
             rel: 'stylesheet',
-            href:
-              'https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@3.0.1/github-markdown.css',
+            href: 'https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@3.0.1/github-markdown.css',
           },
         ]}
       />
@@ -200,7 +199,7 @@ const Doc = ({
               >
                 <FormattedMessage id="doc.mobileDocMenu" />
               </div>
-              <TOC
+              <Toc
                 data={toc.nodes[0]}
                 pathPrefix={pathPrefix}
                 fullPath={fullPath}
@@ -250,8 +249,8 @@ const Doc = ({
                 <a
                   className="Promote"
                   href="https://pingcap.com/community-cn/careers/join/"
-                  // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <img src={PromptBanner} alt="PingCAP community careers" />
                 </a>
@@ -267,7 +266,7 @@ const Doc = ({
 }
 
 export const query = graphql`
-  query($id: String, $langCollection: String, $tocPath: String) {
+  query ($id: String, $langCollection: String, $tocPath: String) {
     mdx(id: { eq: $id }) {
       frontmatter {
         title

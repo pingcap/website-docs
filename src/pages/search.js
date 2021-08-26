@@ -2,28 +2,28 @@ import '../styles/pages/search.scss'
 
 import React, { useEffect, useState } from 'react'
 import {
-  docsDMVersion,
-  docsTiDBOperatorVersion,
-  docsTiDBVersion,
-  docsCloudVersion,
-  docsDevGuideVersion,
-  tidbStableVersion,
-  dmStableVersion,
-  operatorStableVersion,
-} from '../lib/version'
-import {
+  defaultDocInfo,
   getDocInfo,
   setLoading,
   setSearchValue,
-  defaultDocInfo,
 } from '../state'
+import {
+  dmStableVersion,
+  docsCloudVersion,
+  docsDMVersion,
+  docsDevGuideVersion,
+  docsTiDBOperatorVersion,
+  docsTiDBVersion,
+  operatorStableVersion,
+  tidbStableVersion,
+} from '../lib/version'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FormattedMessage } from 'react-intl'
 import Layout from '../components/layout'
 import Loading from '../components/loading'
-import SEO from '../components/seo'
 import SearchResult from '../components/search/result'
+import Seo from '../components/seo'
 import { algoliaClient } from '../lib/algolia'
 import { useLocation } from '@reach/router'
 
@@ -287,7 +287,7 @@ const Search = ({ pageContext: { locale } }) => {
 
   return (
     <Layout locale={locale} forbidResetDocInfo={true} langSwitchable={true}>
-      <SEO title="Search" />
+      <Seo title="Search" />
       <article className="PingCAP-Docs-Search">
         <section className="section container">
           <div className="filter-panel">

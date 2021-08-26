@@ -1,13 +1,13 @@
 import '../styles/components/version.scss'
 
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import {
   convertDocAndRef,
-  docsTiDBVersion,
-  docsDMVersion,
-  docsTiDBOperatorVersion,
   docsCloudVersion,
+  docsDMVersion,
   docsDevGuideVersion,
+  docsTiDBOperatorVersion,
+  docsTiDBVersion,
 } from '../lib/version'
 
 import { Button } from '@seagreenio/react-bulma'
@@ -53,7 +53,7 @@ const Version = ({ relativeDir, base, versions }) => {
     }
   }
 
-  useEffect(handleRelativeDir, [])
+  useEffect(handleRelativeDir, [doc, ref, stableVersion])
 
   const handleMenuOpen = () => {
     function handleClickOutside(e) {

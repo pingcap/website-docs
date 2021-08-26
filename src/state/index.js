@@ -29,7 +29,7 @@ const initialState = {
   searchValue: '',
 }
 
-export default (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOADING:
       return { ...state, loading: action.loading }
@@ -41,3 +41,5 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+export default reducer

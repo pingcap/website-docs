@@ -1,44 +1,7 @@
 {
-  "docs": [
-    {
-      "name": "docs-dbaas",
-      "languages": [
-        {
-          "lang": "en",
-          "repo": "tidbcloud/dbaas-docs",
-          "versions": ["master"]
-        }
-      ]
-    },
-    {
-      "name": "docs-dev-guide",
-      "languages": [
-        {
-          "lang": "zh",
-          "repo": "pingcap/dev-guide",
-          "versions": ["master"]
-        }
-      ]
-    },
-    {
-      "name": "docs-dm",
-      "languages": [
-        {
-          "lang": "en",
-          "repo": "pingcap/docs-dm",
-          "path": "en",
-          "versions": ["master", "release-1.0", "release-2.0"]
-        },
-        {
-          "lang": "zh",
-          "repo": "pingcap/docs-dm",
-          "path": "zh",
-          "versions": ["master", "release-1.0", "release-2.0"]
-        }
-      ]
-    },
-    {
-      "name": "docs-tidb",
+  "docs": {
+    "tidb": {
+      "stable": "release-5.1",
       "languages": [
         {
           "lang": "en",
@@ -68,8 +31,26 @@
         }
       ]
     },
-    {
-      "name": "docs-tidb-operator",
+    "tidb-data-migration": {
+      "stable": "release-2.0",
+      "languages": [
+        {
+          "lang": "en",
+          "repo": "pingcap/docs-dm",
+          "path": "en",
+          "versions": ["master", "release-1.0", "release-2.0"]
+        },
+        {
+          "lang": "zh",
+          "repo": "pingcap/docs-dm",
+          "path": "zh",
+          "versions": ["master", "release-1.0", "release-2.0"]
+        }
+      ]
+    },
+
+    "tidb-in-kubernetes": {
+      "stable": "release-1.2",
       "languages": [
         {
           "lang": "en",
@@ -84,8 +65,26 @@
           "versions": ["master", "release-1.0", "release-1.1", "release-1.2"]
         }
       ]
+    },
+    "tidbcloud": {
+      "languages": [
+        {
+          "lang": "en",
+          "repo": "tidbcloud/dbaas-docs",
+          "versions": ["master"]
+        }
+      ]
+    },
+    "dev-guide": {
+      "languages": [
+        {
+          "lang": "zh",
+          "repo": "pingcap/dev-guide",
+          "versions": ["master"]
+        }
+      ]
     }
-  ],
+  },
   "ignore": [
     ".circleci",
     ".github",

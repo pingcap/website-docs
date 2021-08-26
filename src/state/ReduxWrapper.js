@@ -3,6 +3,8 @@ import React from 'react'
 import { createStore } from 'redux'
 import rootReducer from '.'
 
-export default ({ element }) => (
+const provider = ({ element }) => (
   <Provider store={createStore(rootReducer)}>{element}</Provider>
 )
+
+export default provider

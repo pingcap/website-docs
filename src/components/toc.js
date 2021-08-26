@@ -1,18 +1,19 @@
 import '../styles/components/toc.scss'
 
 import React, { useEffect, useRef } from 'react'
-import { navigate } from 'gatsby'
 
 import PropTypes from 'prop-types'
-import html from 'remark-html'
-import remark from 'remark'
+import { navigate } from 'gatsby'
+
+// import html from 'remark-html'
+// import remark from 'remark'
 
 const TOC = ({ data, pathPrefix, fullPath }) => {
-  const rawBody = data.rawBody
-  const _html = remark()
-    .use(html)
-    .processSync(rawBody)
-    .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
+  // const rawBody = data.rawBody
+  // const _html = remark()
+  //   .use(html)
+  //   .processSync(rawBody)
+  //   .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
 
   const tocRef = useRef(null)
 
@@ -224,7 +225,7 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     <section
       ref={tocRef}
       className="PingCAP-TOC"
-      dangerouslySetInnerHTML={{ __html: _html }}
+      // dangerouslySetInnerHTML={{ __html }}
     />
   )
 }
