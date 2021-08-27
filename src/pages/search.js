@@ -175,10 +175,8 @@ const Search = ({ pageContext: { locale } }) => {
         hitsPerPage: 300,
         facetFilters: [
           `version:${
-            selectedVersion === 'stable' || selectedVersion === 'v5.2'
-              ? selectedType === 'tidb'
-                ? 'v5.1'
-                : replaceStableVersion()
+            selectedVersion === 'stable'
+              ? replaceStableVersion()
               : `${selectedVersion}`
           }`,
         ],
