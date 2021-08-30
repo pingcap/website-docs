@@ -1,6 +1,13 @@
 const path = require('path')
 const fs = require('fs')
-const { replacePath, genTOCPath, genPDFDownloadURL } = require('./utils')
+const {
+  getStable,
+  renameVersionByDoc,
+  replacePath,
+  genTOCPath,
+  genPDFDownloadURL,
+  getRepo,
+} = require('./utils')
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
   const template = path.resolve(__dirname, '../src/templates/doc.js')
@@ -32,48 +39,67 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
   `)
 
   const nodes = docs.data.allMdx.nodes.map((node) => {
-    const { slug } = node
-    const { sourceInstanceName, relativePath, name } = node.parent
-    const [topFolder, lang] = sourceInstanceName.split('/') // [markdown-pages, en|zh]
+    // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
+    const slug = node.slug.split('/').slice(1).join('/')
+    const { sourceInstanceName: topFolder, relativePath, name } = node.parent
+    const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path]
+    const [doc, version] = pathWithoutLang
 
+    node.repo = getRepo(doc, lang)
+    node.ref = version
+    node.lang = lang
+    node.docVersionStable = JSON.stringify({
+      doc,
+      version: renameVersionByDoc(doc, version),
+      stable: getStable(doc),
+    })
     node.path = replacePath(slug, name, lang)
+    node.pathPrefix = node.path.split('/').slice(0, -1).join('/')
 
     const filePathInDiffLang = path.resolve(
       __dirname,
-      '..'`${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath}`
+      `..${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${pathWithoutLang.join(
+        '/'
+      )}`
     )
     node.langSwitchable = fs.existsSync(filePathInDiffLang)
 
-    const chunks = slug.split('/').slice(1)
-    node.version = chunks[0]
-    node.pathWithoutVersion = chunks.slice(1).join('/')
-
-    node.pathPrefix = node.path.split('/').slice(0, -1).join('/')
     node.tocPath = genTOCPath(slug)
     node.downloadURL = genPDFDownloadURL(slug, lang)
+
+    const chunks = slug.split('/').slice(1) // e.g. => ['master', 'benchmark-v1.0-ga']
+    node.version = chunks[0]
+    node.pathWithoutVersion = chunks.slice(1).join('/')
 
     return node
   })
 
-  const versionsMap = nodes.reduce((map, { pathWithoutVersion, version }) => {
-    const arr = map[pathWithoutVersion]
+  const versionsMap = nodes.reduce((acc, { version, pathWithoutVersion }) => {
+    const arr = acc[pathWithoutVersion]
+
     if (arr) {
       arr.push(version)
     } else {
-      map[pathWithoutVersion] = [version]
+      acc[pathWithoutVersion] = [version]
     }
-    return map
+
+    return acc
   }, {})
 
   nodes.forEach((node) => {
     const {
       id,
       parent,
+      repo,
+      ref,
+      lang,
+      docVersionStable,
       path,
-      langSwitchable,
       pathPrefix,
+      langSwitchable,
       tocPath,
       downloadURL,
+      pathWithoutVersion,
     } = node
 
     createPage({
@@ -81,16 +107,18 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       component: template,
       context: {
         id,
-        langCollection: parent.sourceInstanceName,
-        relativeDir: parent.relativeDirectory,
-        base: parent.base,
-        tocPath,
-        locale,
-        pathPrefix,
-        downloadURL,
+        name: parent.name,
+        repo,
+        ref,
+        lang,
+        docVersionStable,
         fullPath: path,
-        versions: versionsMap[node.pathWithoutVersion],
+        pathPrefix,
         langSwitchable,
+        tocPath,
+        downloadURL,
+        pathWithoutVersion,
+        versions: versionsMap[node.pathWithoutVersion],
       },
     })
 

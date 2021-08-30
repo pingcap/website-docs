@@ -5,6 +5,15 @@ const config = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../docs.json'))
 )
 
+exports.getRepo = function (doc, lang) {
+  return config.docs[doc].languages[lang].repo
+}
+
+function getStable(doc) {
+  return config.docs[doc].stable
+}
+exports.getStable = getStable
+
 function renameVersion(version, versionStable) {
   if (version === 'master') {
     return 'dev'
@@ -20,15 +29,16 @@ function renameVersionByDoc(doc, version) {
     case 'tidb':
     case 'tidb-data-migration':
     case 'tidb-in-kubernetes':
-      return renameVersion(version, config.docs[doc].stable)
+      return renameVersion(version, getStable(doc))
     case 'tidbcloud':
       return 'public-preview'
     case 'dev-guide':
       return 'dev'
   }
 }
+exports.renameVersionByDoc = renameVersionByDoc
 
-function genDocCategory(slug, separator) {
+function genDocCategory(slug, separator = '/') {
   const [name, branch] = slug.split('/')
 
   return `${name}${separator}${renameVersionByDoc(name, branch)}`

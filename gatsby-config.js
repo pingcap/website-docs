@@ -29,15 +29,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `markdown-pages/en`,
-        path: `${__dirname}/markdown-pages/en`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `markdown-pages/zh`,
-        path: `${__dirname}/markdown-pages/zh`,
+        name: `markdown-pages`,
+        path: `${__dirname}/markdown-pages`,
       },
     },
     {

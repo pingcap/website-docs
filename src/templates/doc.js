@@ -17,10 +17,8 @@ import PromptBanner from '../../images/community-careers-banner.jpg'
 import Seo from '../components/seo'
 import Toc from '../components/toc'
 import UserFeedback from '../components/userFeedback'
-import VersionSwitcher from '../components/version'
-import { convertDocAndRef } from '../lib/version'
+import VersionSwitcher from '../components/versionSwitcher'
 import { getDocInfo } from '../state'
-import { getRepoInfo } from '../lib/docHelper'
 import { graphql } from 'gatsby'
 import optimizeBlockquote from '../lib/optimizeBlockquote.js'
 import replaceInternalHref from '../lib/replaceInternalHref'
@@ -29,84 +27,89 @@ import { useLocation } from '@reach/router'
 
 const Doc = ({
   pageContext: {
-    locale,
-    relativeDir,
-    base,
-    pathPrefix,
-    downloadURL,
+    name,
+    repo,
+    ref,
+    lang,
+    docVersionStable,
     fullPath,
-    versions,
+    pathPrefix,
     langSwitchable,
+    downloadURL,
+    pathWithoutVersion,
+    versions,
   },
   data,
 }) => {
-  const { mdx, toc } = data
+  const { mdx } = data
   const { frontmatter, tableOfContents } = mdx
-  const docRefArray = convertDocAndRef(relativeDir.split('/'))
-  const repoInfo = getRepoInfo(relativeDir, locale)
+  const docVersionStableMap = JSON.parse(docVersionStable)
+  const { doc, version } = docVersionStableMap
+
+  const repoInfo = {
+    repo,
+    ref,
+    pathWithoutVersion,
+  }
+
   const location = useLocation()
-  const currentPath = location.pathname
-
-  useEffect(() => {
-    optimizeBlockquote()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    const footer = document.querySelector('.footer.PingCAP-Footer')
-    const footerHeight = footer.getBoundingClientRect().height
-
-    let isReachFooter = false
-
-    const scrollListener = () => {
-      const winScrollHeight = document.documentElement.scrollHeight
-      const winClientHeight = document.documentElement.clientHeight
-      const winScrollTop = document.documentElement.scrollTop
-      const toFooter = winScrollHeight - winClientHeight - footerHeight
-
-      if (winScrollTop > toFooter && !isReachFooter) {
-        isReachFooter = true
-      }
-
-      if (winScrollTop < toFooter && isReachFooter) {
-        isReachFooter = false
-      }
-
-      const height = winScrollHeight - winClientHeight
-      const scrolled = ((winScrollTop / height) * 100).toFixed()
-
-      const progressEle = document.querySelector('progress')
-      progressEle.value = scrolled
-
-      if (winScrollTop > 0) {
-        progressEle.classList.add('show')
-      } else {
-        progressEle.classList.remove('show')
-      }
-    }
-
-    window.addEventListener('scroll', scrollListener)
-
-    return () => window.removeEventListener('scroll', scrollListener)
-  }, [])
+  const { currentPath } = location
 
   const dispatch = useDispatch()
 
-  useEffect(
-    () => {
-      replaceInternalHref(locale, docRefArray[0], docRefArray[1])
+  useEffect(() => {
+    optimizeBlockquote()
+  }, [])
 
-      dispatch(
-        getDocInfo({
-          lang: locale,
-          type: docRefArray[0],
-          version: docRefArray[1],
-        })
-      )
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
+  // useEffect(() => {
+  //   const footer = document.querySelector('.footer.PingCAP-Footer')
+  //   const footerHeight = footer.getBoundingClientRect().height
+
+  //   let isReachFooter = false
+
+  //   const scrollListener = () => {
+  //     const winScrollHeight = document.documentElement.scrollHeight
+  //     const winClientHeight = document.documentElement.clientHeight
+  //     const winScrollTop = document.documentElement.scrollTop
+  //     const toFooter = winScrollHeight - winClientHeight - footerHeight
+
+  //     if (winScrollTop > toFooter && !isReachFooter) {
+  //       isReachFooter = true
+  //     }
+
+  //     if (winScrollTop < toFooter && isReachFooter) {
+  //       isReachFooter = false
+  //     }
+
+  //     const height = winScrollHeight - winClientHeight
+  //     const scrolled = ((winScrollTop / height) * 100).toFixed()
+
+  //     const progressEle = document.querySelector('progress')
+  //     progressEle.value = scrolled
+
+  //     if (winScrollTop > 0) {
+  //       progressEle.classList.add('show')
+  //     } else {
+  //       progressEle.classList.remove('show')
+  //     }
+  //   }
+
+  //   window.addEventListener('scroll', scrollListener)
+
+  //   return () => window.removeEventListener('scroll', scrollListener)
+  // }, [])
+
+  useEffect(() => {
+    replaceInternalHref(lang, doc, version)
+
+    dispatch(
+      getDocInfo({
+        lang: lang,
+        type: doc,
+        version: version,
+      })
+    )
+  }, [dispatch, lang, doc, version])
 
   function replaceItemURL(item) {
     let itemURL
@@ -148,7 +151,7 @@ const Doc = ({
 
   return (
     <Layout
-      locale={locale}
+      locale={lang}
       forbidResetDocInfo={true}
       langSwitchable={langSwitchable}
     >
@@ -157,16 +160,16 @@ const Doc = ({
         description={frontmatter.summary}
         meta={[
           {
-            name: 'doc:locale',
-            content: locale,
+            name: 'doc:lang',
+            content: lang,
           },
           {
             name: 'doc:type',
-            content: docRefArray[0],
+            content: doc,
           },
           {
             name: 'doc:version',
-            content: docRefArray[1],
+            content: version,
           },
         ]}
         link={[
@@ -186,8 +189,8 @@ const Doc = ({
           <div className="content-columns columns">
             <div className="left-column column">
               <VersionSwitcher
-                relativeDir={relativeDir}
-                base={base}
+                name={name}
+                docVersionStable={docVersionStableMap}
                 versions={versions}
               />
               <div
@@ -199,28 +202,27 @@ const Doc = ({
               >
                 <FormattedMessage id="doc.mobileDocMenu" />
               </div>
-              <Toc
+              {/* <Toc
                 data={toc.nodes[0]}
                 pathPrefix={pathPrefix}
                 fullPath={fullPath}
-              />
+              /> */}
             </div>
             <section className="markdown-body doc-content column">
-              {docRefArray[0] !== 'tidbcloud' &&
-                docRefArray[0] !== 'dev-guide' && (
-                  <DeprecationNotice
-                    relativeDir={relativeDir}
-                    versions={versions}
-                    base={base}
-                  />
-                )}
+              {doc !== 'tidbcloud' && doc !== 'dev-guide' && (
+                <DeprecationNotice
+                  name={name}
+                  docVersionStable={docVersionStableMap}
+                  versions={versions}
+                />
+              )}
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>
-              {docRefArray[0] !== 'tidbcloud' && (
+              {doc !== 'tidbcloud' && (
                 <GitCommitInfo
                   repoInfo={repoInfo}
-                  base={base}
+                  lang={lang}
                   title={frontmatter.title}
                 />
               )}
@@ -228,12 +230,12 @@ const Doc = ({
             <div className="doc-toc-column column">
               <div className="docs-operation">
                 <DownloadPDF downloadURL={downloadURL} />
-                {docRefArray[0] !== 'tidbcloud' && (
+                {doc !== 'tidbcloud' && (
                   <>
-                    {docRefArray[1] === 'dev' && (
-                      <ImproveDocLink repoInfo={repoInfo} base={base} />
+                    {version === 'dev' && (
+                      <ImproveDocLink repoInfo={repoInfo} lang={lang} />
                     )}
-                    <FeedbackDocLink repoInfo={repoInfo} base={base} />
+                    <FeedbackDocLink repoInfo={repoInfo} lang={lang} />
                   </>
                 )}
               </div>
@@ -260,13 +262,13 @@ const Doc = ({
         </section>
       </article>
 
-      <UserFeedback title={frontmatter.title} locale={locale} />
+      <UserFeedback title={frontmatter.title} lang={lang} />
     </Layout>
   )
 }
 
 export const query = graphql`
-  query ($id: String, $langCollection: String, $tocPath: String) {
+  query ($id: String) {
     mdx(id: { eq: $id }) {
       frontmatter {
         title
@@ -274,19 +276,6 @@ export const query = graphql`
       }
       body
       tableOfContents
-    }
-
-    toc: allMdx(
-      filter: {
-        fields: {
-          langCollection: { eq: $langCollection }
-          relativePath: { eq: $tocPath }
-        }
-      }
-    ) {
-      nodes {
-        rawBody
-      }
     }
   }
 `

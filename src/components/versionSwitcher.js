@@ -2,7 +2,6 @@ import '../styles/components/version.scss'
 
 import React, { Fragment, useEffect, useState } from 'react'
 import {
-  convertDocAndRef,
   docsCloudVersion,
   docsDMVersion,
   docsDevGuideVersion,
@@ -11,7 +10,7 @@ import {
 } from '../lib/version'
 
 import { Button } from '@seagreenio/react-bulma'
-import IntlLink from '../components/IntlLink'
+import IntlLink from './IntlLink'
 import PropTypes from 'prop-types'
 
 const docsTiDBVersionList = Object.values(docsTiDBVersion)
@@ -20,17 +19,15 @@ const docsDMVersionList = Object.values(docsDMVersion)
 const docsCloudVersionList = Object.values(docsCloudVersion)
 const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
 
-const Version = ({ relativeDir, base, versions }) => {
-  const [doc, ref, stableVersion] = convertDocAndRef(relativeDir.split('/'))
-
-  const baseName = base.replace('.md', '')
+const VersionSwitcher = ({ name, docVersionStable, versions }) => {
+  const { doc, version, stable: stableVersion } = docVersionStable
 
   const [dropdownActive, setDropdownActive] = useState('')
   const [buttonText, setButtonText] = useState('')
   const [dropdownItems, setDropdownItems] = useState([])
 
   function handleRelativeDir() {
-    setButtonText(ref === 'stable' ? stableVersion : ref)
+    setButtonText(version === 'stable' ? stableVersion : version)
 
     switch (doc) {
       case 'tidb':
@@ -53,7 +50,7 @@ const Version = ({ relativeDir, base, versions }) => {
     }
   }
 
-  useEffect(handleRelativeDir, [doc, ref, stableVersion])
+  useEffect(handleRelativeDir, [doc, version, stableVersion])
 
   const handleMenuOpen = () => {
     function handleClickOutside(e) {
@@ -97,9 +94,7 @@ const Version = ({ relativeDir, base, versions }) => {
                 ) : (
                   <IntlLink
                     type="innerLink"
-                    to={`/${doc}/${item}/${
-                      baseName === '_index' ? '' : baseName
-                    }`}
+                    to={`/${doc}/${item}/${name === '_index' ? '' : name}`}
                     className="dropdown-item"
                   >
                     {item === 'stable' ? `${stableVersion}` : `${item}`}
@@ -113,10 +108,10 @@ const Version = ({ relativeDir, base, versions }) => {
   )
 }
 
-Version.propTypes = {
-  relativeDir: PropTypes.string.isRequired,
-  base: PropTypes.string.isRequired,
+VersionSwitcher.propTypes = {
+  name: PropTypes.string.isRequired,
+  docVersionStable: PropTypes.object.isRequired,
   versions: PropTypes.array,
 }
 
-export default Version
+export default VersionSwitcher

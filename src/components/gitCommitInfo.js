@@ -1,49 +1,64 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
+import PropTypes from 'prop-types'
 import axios from 'axios'
+import { wrapPathWithLang } from '../lib/docHelper'
 
-const GitCommitInfo = ({ repoInfo, base, title }) => {
-  const { owner, repo, ref, pathPrefix } = repoInfo || {}
+const GitCommitInfo = ({ repoInfo, lang, title }) => {
+  const { repo, ref, pathWithoutVersion } = repoInfo
+  const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
+
   const [latestCommit, setLatestCommit] = useState(null)
 
   useEffect(() => {
     async function fetchLatestCommit() {
       try {
         const res = (
-          await axios.get(
-            `https://api.github.com/repos/${owner}/${repo}/commits?sha=${ref}&path=${pathPrefix}${base}`
-          )
+          await axios.get(`https://api.github.com/repos/${repo}/commits`, {
+            params: {
+              sha: ref,
+              path,
+              per_page: 1,
+            },
+          })
         ).data[0]
+
         setLatestCommit(res)
-      } catch (e) {
-        console.log('Fail to fetch lasted commit')
-        return
+      } catch (err) {
+        // TODO: perform error handling
       }
     }
 
     fetchLatestCommit()
-  }, [owner, repo, ref, pathPrefix, base])
+  }, [repo, ref, path])
 
   return (
     <div className="commit-info">
       {latestCommit && (
         <>
           <IntlLink
-            to={`https://github.com/${owner}/${repo}/blob/${ref}/${pathPrefix}${base}`}
             type="outBoundLink"
+            to={`https://github.com/${repo}/blob/${ref}/${path}`}
           >
             {title}
           </IntlLink>{' '}
           <FormattedMessage id="latestCommit" />{' '}
           {latestCommit.commit.author.date}:{' '}
-          <IntlLink to={latestCommit.html_url} type="outBoundLink">
+          <IntlLink type="outBoundLink" to={latestCommit.html_url}>
             {latestCommit.commit.message.split('\n')[0]}
           </IntlLink>
         </>
       )}
     </div>
   )
+}
+
+GitCommitInfo.propTypes = {
+  repoInfo: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default GitCommitInfo

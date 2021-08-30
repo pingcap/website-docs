@@ -1,8 +1,9 @@
-import React from 'react'
 import * as Shortcodes from '../components/shortcodes'
+
 import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
-import { convertDocAndRef } from '../lib/version'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const deprecatedDocsVersions = {
   tidb: ['v2.1', 'v3.0', 'v3.1'],
@@ -10,16 +11,13 @@ const deprecatedDocsVersions = {
   'tidb-in-kubernetes': ['v1.0'],
 }
 
-const DeprecationNotice = ({ relativeDir, versions, base }) => {
-  const docRefArray = convertDocAndRef(relativeDir.split('/'))
-  const docType = docRefArray[0]
-  const docVersion = docRefArray[1]
-  const docStableVersion = docRefArray[2]
-  const baseName = base.replace('.md', '')
-  const showNoitce = deprecatedDocsVersions[docType].includes(docVersion)
+const DeprecationNotice = ({ name, docVersionStable, versions }) => {
+  const { doc, version, stable: stableVersion } = docVersionStable
+
+  const showNoitce = deprecatedDocsVersions[doc].includes(version)
   const stableDocLink = versions.includes('stable')
-    ? `/${docType}/stable/${baseName === '_index' ? '' : baseName}`
-    : `/${docType}/stable`
+    ? `/${doc}/stable/${name === '_index' ? '' : name}`
+    : `/${doc}/stable`
 
   return (
     <>
@@ -27,20 +25,20 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
         <Shortcodes.Important>
           <p>
             <FormattedMessage
-              id={`doc.deprecation.${docType}.firstContext`}
+              id={`doc.deprecation.${doc}.firstContext`}
               values={{
-                curDocVersion: `${docVersion}`,
+                curversion: `${version}`,
               }}
             />
           </p>
           <div>
             <FormattedMessage
-              id={`doc.deprecation.${docType}.secondContext`}
+              id={`doc.deprecation.${doc}.secondContext`}
               values={{
-                stableVersion: `${docStableVersion}`,
+                stableVersion,
                 link: (
                   <IntlLink type="innerLink" to={stableDocLink}>
-                    <FormattedMessage id={`doc.deprecation.${docType}.link`} />
+                    <FormattedMessage id={`doc.deprecation.${doc}.link`} />
                   </IntlLink>
                 ),
               }}
@@ -50,6 +48,12 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
       )}
     </>
   )
+}
+
+DeprecationNotice.propTypes = {
+  name: PropTypes.string.isRequired,
+  docVersionStable: PropTypes.object.isRequired,
+  versions: PropTypes.array,
 }
 
 export default DeprecationNotice

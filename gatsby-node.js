@@ -1,10 +1,10 @@
 const createDocs = require('./create-pages/doc')
 const createIntlPages = require('./create-pages/intl')
 
-exports.createPages = async ({ actions, graphql }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
-  // createDocs({ graphql, createPage, createRedirect })
+  createDocs({ graphql, createPage, createRedirect })
 }
 
 exports.onCreatePage = ({ page, actions }) => {
