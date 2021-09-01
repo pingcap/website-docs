@@ -1,7 +1,7 @@
 import * as Shortcodes from '../components/shortcodes'
 
 import { FormattedMessage } from 'react-intl'
-import IntlLink from '../components/IntlLink'
+import { Link } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -37,9 +37,9 @@ const DeprecationNotice = ({ name, docVersionStable, versions }) => {
               values={{
                 stableVersion,
                 link: (
-                  <IntlLink type="innerLink" to={stableDocLink}>
+                  <Link to={stableDocLink}>
                     <FormattedMessage id={`doc.deprecation.${doc}.link`} />
-                  </IntlLink>
+                  </Link>
                 ),
               }}
             />

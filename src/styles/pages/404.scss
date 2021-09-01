@@ -1,14 +1,9 @@
 @import '../common';
 
-.PingCAP-404-Page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
+.PingCAP-404 {
+  @include VHCenter;
 
-    h1 {
-        margin: 2rem auto;
-        padding: 0 1rem;
-        font-size: $size-4;
-    }
+  flex-direction: column;
+  align-items: flex-start;
+  height: 50vh;
 }

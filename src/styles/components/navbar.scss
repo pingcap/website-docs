@@ -15,10 +15,6 @@
   }
 
   .navbar-item {
-    &.with-brand {
-      padding-left: 1.5rem;
-    }
-
     &.with-main-section {
       @include has-item-active(1.5rem);
       @include mobile {
@@ -53,21 +49,11 @@
   }
 
   .navbar-brand {
-    display: flex;
-    align-items: center;
-    margin-left: 0;
-
     @include mobile {
       width: 100px;
     }
 
-    @include until($fullhd) {
-      margin-right: 0;
-    }
-
     width: 150px;
-    margin-right: 5rem;
-    user-select: none;
 
     .navbar-burger {
       position: absolute;
@@ -106,7 +92,7 @@
   }
 
   .search-input-pc {
-   @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: 1024px) {
       display: none;
     }
   }

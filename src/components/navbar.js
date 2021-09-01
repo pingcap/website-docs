@@ -1,16 +1,13 @@
+import { FormattedMessage, Link, useIntl } from 'gatsby-plugin-react-intl'
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
-// import { Button } from '@seagreenio/react-bulma'
-import { FormattedMessage } from 'react-intl'
-import IntlLink from '../components/IntlLink'
 import SearchInput from './search/input'
 import { setSearchValue } from '../state'
 import { useLocation } from '@reach/router'
 
-const Navbar = (prop) => {
-  const locale = prop.locale
+const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
     graphql`
       query {
@@ -20,27 +17,31 @@ const Navbar = (prop) => {
       }
     `
   )
-  const [activeNav, setActiveNav] = useState(null)
 
-  const dispatch = useDispatch()
-
-  const { docInfo, searchValue } = useSelector((state) => state)
+  const intl = useIntl()
+  const { locale } = intl
 
   const location = useLocation()
+  console.log(location.pathname)
 
+  const dispatch = useDispatch()
+  const { docInfo, searchValue } = useSelector((state) => state)
+
+  const [activeNav, setActiveNav] = useState(null)
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
   const handleSetBurgerActive = () => setBurgerActive(!burgerActive)
 
   const handleSetSearchValue = (value) => dispatch(setSearchValue(value))
 
-  useEffect(() => {
-    const pageType =
-      locale === 'zh'
-        ? location.pathname.split('/')[2]
-        : location.pathname.split('/')[1]
-    setActiveNav(pageType)
-  }, [locale, location.pathname])
+  // useEffect(() => {
+  //   const nav =
+  //     locale === 'zh'
+  //       ? location.pathname.split('/')[2]
+  //       : location.pathname.split('/')[1]
+
+  //   setActiveNav(nav)
+  // }, [locale, location.pathname])
 
   useEffect(() => {
     const scrollListener = () => {
@@ -63,17 +64,7 @@ const Navbar = (prop) => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <IntlLink
-            className="navbar-item with-brand"
-            to={`https://pingcap.com/${locale === 'zh' ? 'zh' : ''}`}
-            type="outBoundLink"
-          >
-            <img
-              className="navbar-brand"
-              src={BrandSVG.publicURL}
-              alt="brand"
-            />
-          </IntlLink>
+          <img className="navbar-item" src={BrandSVG.publicURL} alt="brand" />
 
           <div className="navbar-item search-input-mobile">
             <SearchInput
@@ -96,18 +87,17 @@ const Navbar = (prop) => {
         </div>
         <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
           <div className="navbar-end">
-            <IntlLink
+            <Link
               to="/tidb/stable"
               className={`navbar-item with-main-section ${
                 activeNav === 'tidb' && !burgerActive ? 'is-active' : ''
               }`}
-              type="innerLink"
             >
               <FormattedMessage id="navbar.tidb" />
-            </IntlLink>
+            </Link>
 
-            <IntlLink
-              to="/tools/"
+            <Link
+              to="/tools"
               className={`navbar-item with-main-section ${
                 (activeNav === 'tools' ||
                   activeNav === 'tidb-data-migration' ||
@@ -116,35 +106,34 @@ const Navbar = (prop) => {
                   ? 'is-active'
                   : ''
               }`}
-              type="innerLink"
             >
               <FormattedMessage id="navbar.tools" />
-            </IntlLink>
+            </Link>
             {locale === 'en' && (
-              <IntlLink
+              <Link
                 to="/tidbcloud/public-preview"
                 className={`navbar-item with-main-section ${
                   activeNav === 'tidbcloud' && !burgerActive ? 'is-active' : ''
                 }`}
               >
                 <FormattedMessage id="navbar.cloud" />
-              </IntlLink>
+              </Link>
             )}
             {locale === 'zh' && (
-              <IntlLink
+              <Link
                 to="/dev-guide/dev"
                 className={`navbar-item with-main-section ${
                   activeNav === 'dev-guide' && !burgerActive ? 'is-active' : ''
                 }`}
               >
                 <FormattedMessage id="navbar.devGuide" />
-              </IntlLink>
+              </Link>
             )}
             <a
               href={
                 locale === 'zh'
-                  ? 'https://pingcap.com/about-cn/#contact-us'
-                  : 'https://pingcap.com/contact-us/'
+                  ? 'https://pingcap.com/about-cn'
+                  : 'https://pingcap.com/contact-us'
               }
               className="navbar-item with-main-section"
               target="_blank"

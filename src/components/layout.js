@@ -1,63 +1,54 @@
+import { Container, Section } from '@seagreenio/react-bulma'
 import React, { useEffect } from 'react'
-import { defaultDocInfo, getDocInfo } from '../state'
+import { defaultDocInfo, setDocInfo } from '../state'
 
 import Footer from './footer'
-import { IntlProvider } from 'react-intl'
 import Navbar from './navbar'
 import PropTypes from 'prop-types'
-import flat from 'flat'
 import { globalHistory } from '@reach/router'
-import langMap from '../intl'
-import { navigate } from 'gatsby-link'
+import { navigate } from 'gatsby'
 import { useDispatch } from 'react-redux'
 
-const Layout = ({
-  locale,
-  children,
-  forbidResetDocInfo = false,
-  langSwitchable,
-}) => {
+const Layout = ({ children }) => {
   const dispatch = useDispatch()
 
   const setGlobalForPluginsUse = () => {
-    window.DOCS_PINGCAP = {
-      globalHistory,
-      navigate,
+    if (!window.DOCS_PINGCAP) {
+      window.DOCS_PINGCAP = {
+        globalHistory,
+        navigate,
+      }
     }
   }
 
-  useEffect(
-    () => {
-      if (!forbidResetDocInfo) {
-        dispatch(
-          getDocInfo({
-            ...defaultDocInfo,
-            ...{
-              lang: locale,
-            },
-          })
-        )
-      }
+  // useEffect(() => {
+  //   if (autoResetDocInfo) {
+  //     dispatch(
+  //       setDocInfo({
+  //         ...defaultDocInfo,
+  //         ...{
+  //           lang: locale,
+  //         },
+  //       })
+  //     )
+  //   }
+  // }, [dispatch, autoResetDocInfo, locale])
 
-      setGlobalForPluginsUse()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
+  useEffect(setGlobalForPluginsUse, [])
 
   return (
-    <IntlProvider locale={locale} messages={flat(langMap[locale])}>
-      <Navbar locale={locale} />
-      <main>{children}</main>
-      <Footer locale={locale} langSwitchable={langSwitchable} />
-    </IntlProvider>
+    <>
+      <Navbar />
+      <Section as="main">
+        <Container>{children}</Container>
+      </Section>
+      <Footer />
+    </>
   )
 }
 
 Layout.propTypes = {
-  locale: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  forbidResetDocInfo: PropTypes.bool,
 }
 
 export default Layout

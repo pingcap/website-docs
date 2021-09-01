@@ -4,7 +4,7 @@ const {
   getStable,
   renameVersionByDoc,
   replacePath,
-  genTOCPath,
+  genTOCSlug,
   genPDFDownloadURL,
   getRepo,
 } = require('./utils')
@@ -54,7 +54,6 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       stable: getStable(doc),
     })
     node.path = replacePath(slug, name, lang)
-    node.pathPrefix = node.path.split('/').slice(0, -1).join('/')
 
     const filePathInDiffLang = path.resolve(
       __dirname,
@@ -64,11 +63,11 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     )
     node.langSwitchable = fs.existsSync(filePathInDiffLang)
 
-    node.tocPath = genTOCPath(slug)
+    node.tocSlug = genTOCSlug(node.slug)
     node.downloadURL = genPDFDownloadURL(slug, lang)
 
     const chunks = slug.split('/').slice(1) // e.g. => ['master', 'benchmark-v1.0-ga']
-    node.version = chunks[0]
+    node.version = chunks[0] // master
     node.pathWithoutVersion = chunks.slice(1).join('/')
 
     return node
@@ -95,9 +94,8 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       lang,
       docVersionStable,
       path,
-      pathPrefix,
       langSwitchable,
-      tocPath,
+      tocSlug,
       downloadURL,
       pathWithoutVersion,
     } = node
@@ -112,10 +110,8 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         ref,
         lang,
         docVersionStable,
-        fullPath: path,
-        pathPrefix,
         langSwitchable,
-        tocPath,
+        tocSlug,
         downloadURL,
         pathWithoutVersion,
         versions: versionsMap[node.pathWithoutVersion],

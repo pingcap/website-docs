@@ -7,10 +7,11 @@
     "searchDocs": "搜索文档"
   },
   "doc": {
-    "mobileDocMenu": "文档目录",
     "toc": "本页导航",
-    "improveDocLink": "修改本文",
-    "feedbackDocLink": "反馈文档问题",
+    "download-pdf": "下载 PDF",
+    "improve": "修改本文",
+    "feedback": "反馈文档问题",
+    "latestCommit": "更新于",
     "deprecation": {
       "tidb": {
         "firstContext": "你正在查看 TiDB 数据库的较旧版本 (TiDB { curDocVersion }) 的文档。",
@@ -50,8 +51,6 @@
       "content2": "如果您想搜索英文内容，请移步至英文文档进行搜索。"
     }
   },
-  "download-pdf": "下载 PDF",
-  "latestCommit": "更新于",
   "footerColumnsTitle": {
     "product": "产品",
     "resources": "资源",
@@ -78,7 +77,7 @@
     "recruit": "招贤纳士",
     "news": "新闻报道"
   },
-  "toolsCard": {
+  "tools": {
     "tidbOperator": {
       "type": "TiDB Operator",
       "desc": "TiDB Operator 是 Kubernetes 上的 TiDB 集群自动运维系统，提供包括部署、升级、扩缩容、备份恢复、配置变更的 TiDB 全生命周期管理。借助 TiDB Operator，TiDB 可以无缝运行在公有云或私有部署的 Kubernetes 集群上。"
@@ -104,5 +103,4 @@
     "thumbUp": "是",
     "thumbDown": "否"
   }
-
 }

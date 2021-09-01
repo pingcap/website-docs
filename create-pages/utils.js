@@ -44,8 +44,8 @@ function genDocCategory(slug, separator = '/') {
   return `${name}${separator}${renameVersionByDoc(name, branch)}`
 }
 
-exports.genTOCPath = function (slug) {
-  return `${genDocCategory(slug)}/TOC.md`
+exports.genTOCSlug = function (slug) {
+  return `${slug.split('/').slice(0, 3).join('/')}/TOC`
 }
 
 exports.genPDFDownloadURL = function (slug, lang) {

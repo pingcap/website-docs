@@ -3,7 +3,7 @@ import '../styles/pages/search.scss'
 import React, { useEffect, useState } from 'react'
 import {
   defaultDocInfo,
-  getDocInfo,
+  setDocInfo,
   setLoading,
   setSearchValue,
 } from '../state'
@@ -20,7 +20,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FormattedMessage } from 'react-intl'
-import Layout from '../components/layout'
 import Loading from '../components/loading'
 import SearchResult from '../components/search/result'
 import Seo from '../components/seo'
@@ -120,7 +119,7 @@ const Search = ({ pageContext: { locale } }) => {
   useEffect(
     () => {
       dispatch(
-        getDocInfo({
+        setDocInfo({
           lang,
           type,
           version,
@@ -286,7 +285,7 @@ const Search = ({ pageContext: { locale } }) => {
   )
 
   return (
-    <Layout locale={locale} forbidResetDocInfo={true} langSwitchable={true}>
+    <>
       <Seo title="Search" />
       <article className="PingCAP-Docs-Search">
         <section className="section container">
@@ -318,7 +317,7 @@ const Search = ({ pageContext: { locale } }) => {
           {loading && <Loading wholeSreen={true} />}
         </section>
       </article>
-    </Layout>
+    </>
   )
 }
 

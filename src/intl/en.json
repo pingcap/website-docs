@@ -7,10 +7,11 @@
     "searchDocs": "Search Docs"
   },
   "doc": {
-    "mobileDocMenu": "Doc Menu",
     "toc": "What’s on this page",
-    "improveDocLink": "Edit this page",
-    "feedbackDocLink": "Request docs changes",
+    "download-pdf": "Download PDF",
+    "improve": "Edit this page",
+    "feedback": "Request docs changes",
+    "latestCommit": "was last updated",
     "deprecation": {
       "tidb": {
         "firstContext": "You are viewing the documentation of an older version of the TiDB database (TiDB { curDocVersion }).",
@@ -50,8 +51,6 @@
       "content2": "If you do want to get some English content, PingCAP home page might be a better place for you to go."
     }
   },
-  "download-pdf": "Download PDF",
-  "latestCommit": "was last updated",
   "footerColumnsTitle": {
     "product": "Product",
     "resources": "Resources",
@@ -78,7 +77,7 @@
     "recruit": "招贤纳士",
     "news": "新闻报道"
   },
-  "toolsCard": {
+  "tools": {
     "tidbOperator": {
       "type": "TiDB Operator",
       "desc": "TiDB Operator is an automated operation and maintenance system for TiDB clusters in Kubernetes. It provides full life-cycle management for TiDB. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud."

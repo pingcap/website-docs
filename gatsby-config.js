@@ -16,6 +16,26 @@ module.exports = {
         head: true,
       },
     },
+    `gatsby-plugin-root-import`,
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`${__dirname}/src/components/layout.js`),
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-intl`,
+      options: {
+        path: `${__dirname}/src/intl`,
+        languages: ['en', 'zh'],
+        defaultLanguage: 'en',
+        redirectDefaultLanguageToRoot: true,
+        ignoredPaths: [
+          '?(/zh)/(tidb|tidb-data-migration|tidb-in-kubernetes|dev-guide|tidbcloud)/**',
+        ],
+        fallbackLanguage: 'en',
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -49,7 +69,6 @@ module.exports = {
         remarkPlugins: [() => remarkSyntaxDiagram],
       },
     },
-    `gatsby-plugin-remove-serviceworker`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -69,6 +88,7 @@ module.exports = {
         ignore: ['prismjs/'],
       },
     },
+    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-meta-redirect`,
     {
       resolve: `gatsby-plugin-sitemap`,

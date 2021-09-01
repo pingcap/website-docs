@@ -1,15 +1,6 @@
 @import '../common';
 
-$navbar-height: 5.25rem; // 84px
-
 .PingCAP-TOC {
-  display: none;
-
-  &.show-toc {
-    display: block;
-    transition: display 10ms;
-  }
-
   @include mobile {
     display: none;
     background: $B5;

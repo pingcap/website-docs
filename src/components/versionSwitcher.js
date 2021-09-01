@@ -7,10 +7,11 @@ import {
   docsDevGuideVersion,
   docsTiDBOperatorVersion,
   docsTiDBVersion,
-} from '../lib/version'
+} from 'lib/version'
 
+import { Block } from '@seagreenio/react-bulma'
 import { Button } from '@seagreenio/react-bulma'
-import IntlLink from './IntlLink'
+import { Link } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 
 const docsTiDBVersionList = Object.values(docsTiDBVersion)
@@ -69,42 +70,43 @@ const VersionSwitcher = ({ name, docVersionStable, versions }) => {
   }
 
   return (
-    <div
-      className={`PingCAP-version-switcher dropdown${
-        dropdownActive ? ' ' + dropdownActive : ''
-      }`}
-    >
-      <div className="dropdown-trigger">
-        <Button className={dropdownActive} fullwidth onClick={handleMenuOpen}>
-          {buttonText}
-        </Button>
-      </div>
-      <div className="dropdown-menu">
-        <div className="dropdown-content">
-          {dropdownItems.length > 0 &&
-            dropdownItems.map((item) => (
-              <Fragment key={item}>
-                {versions && versions.indexOf(item) === -1 ? (
-                  <span className="dropdown-item unclickable-btn">
-                    {item === 'stable' ? `${stableVersion}` : `${item}`}
-                    <span className="tooltiptext">
-                      This doc does not exist in {item}
+    <Block>
+      <div
+        className={`PingCAP-version-switcher dropdown${
+          dropdownActive ? ' ' + dropdownActive : ''
+        }`}
+      >
+        <div className="dropdown-trigger">
+          <Button className={dropdownActive} fullwidth onClick={handleMenuOpen}>
+            {buttonText}
+          </Button>
+        </div>
+        <div className="dropdown-menu">
+          <div className="dropdown-content">
+            {dropdownItems.length > 0 &&
+              dropdownItems.map((item) => (
+                <Fragment key={item}>
+                  {versions && versions.indexOf(item) === -1 ? (
+                    <span className="dropdown-item unclickable-btn">
+                      {item === 'stable' ? `${stableVersion}` : `${item}`}
+                      <span className="tooltiptext">
+                        This doc does not exist in {item}
+                      </span>
                     </span>
-                  </span>
-                ) : (
-                  <IntlLink
-                    type="innerLink"
-                    to={`/${doc}/${item}/${name === '_index' ? '' : name}`}
-                    className="dropdown-item"
-                  >
-                    {item === 'stable' ? `${stableVersion}` : `${item}`}
-                  </IntlLink>
-                )}
-              </Fragment>
-            ))}
+                  ) : (
+                    <Link
+                      to={`/${doc}/${item}/${name === '_index' ? '' : name}`}
+                      className="dropdown-item"
+                    >
+                      {item === 'stable' ? `${stableVersion}` : `${item}`}
+                    </Link>
+                  )}
+                </Fragment>
+              ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Block>
   )
 }
 

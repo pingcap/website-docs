@@ -2,15 +2,16 @@ import '../styles/templates/doc.scss'
 
 import * as Shortcodes from '../components/shortcodes'
 
+import { Block, Column, Columns, Progress } from '@seagreenio/react-bulma'
 import React, { useEffect } from 'react'
+import { setDocInfo, setLangSwitchable } from '../state'
 
 import DeprecationNotice from '../components/deprecationNotice'
-import DownloadPDF from '../components/downloadPDF'
-import FeedbackDocLink from '../components/feedbackDocLink'
+import DownloadPDF from '../components/doc/downloadPDF'
+import FeedbackDoc from '../components/doc/feedback'
 import { FormattedMessage } from 'react-intl'
 import GitCommitInfo from '../components/gitCommitInfo'
-import ImproveDocLink from '../components/improveDocLink'
-import Layout from '../components/layout'
+import ImproveDoc from '../components/doc/improve'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PromptBanner from '../../images/community-careers-banner.jpg'
@@ -18,9 +19,8 @@ import Seo from '../components/seo'
 import Toc from '../components/toc'
 import UserFeedback from '../components/userFeedback'
 import VersionSwitcher from '../components/versionSwitcher'
-import { getDocInfo } from '../state'
 import { graphql } from 'gatsby'
-import optimizeBlockquote from '../lib/optimizeBlockquote.js'
+import optimizeBlockquote from '../lib/optimizeBlockquote'
 import replaceInternalHref from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import { useLocation } from '@reach/router'
@@ -32,8 +32,6 @@ const Doc = ({
     ref,
     lang,
     docVersionStable,
-    fullPath,
-    pathPrefix,
     langSwitchable,
     downloadURL,
     pathWithoutVersion,
@@ -41,7 +39,7 @@ const Doc = ({
   },
   data,
 }) => {
-  const { mdx } = data
+  const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version } = docVersionStableMap
@@ -58,6 +56,8 @@ const Doc = ({
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(setLangSwitchable(langSwitchable))
+
     optimizeBlockquote()
   }, [])
 
@@ -103,7 +103,7 @@ const Doc = ({
     replaceInternalHref(lang, doc, version)
 
     dispatch(
-      getDocInfo({
+      setDocInfo({
         lang: lang,
         type: doc,
         version: version,
@@ -141,20 +141,8 @@ const Doc = ({
     )
   }
 
-  const handleShowDocMenu = (e) => {
-    const docMenu = e.target
-    const toc = docMenu.nextSibling
-
-    docMenu.classList.toggle('active')
-    toc.classList.toggle('show')
-  }
-
   return (
-    <Layout
-      locale={lang}
-      forbidResetDocInfo={true}
-      langSwitchable={langSwitchable}
-    >
+    <>
       <Seo
         title={frontmatter.title}
         description={frontmatter.summary}
@@ -175,40 +163,31 @@ const Doc = ({
         link={[
           {
             rel: 'stylesheet',
-            href: 'https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@3.0.1/github-markdown.css',
+            href: 'https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@4.0.0/github-markdown.css',
           },
         ]}
       />
       <article className="PingCAP-Doc">
-        <progress
-          className="progress is-primary doc-progress"
-          value="0"
-          max="100"
+        <Progress
+          className="doc-progress"
+          color="primary"
+          value={0}
+          max={100}
         />
-        <section className="section container">
-          <div className="content-columns columns">
-            <div className="left-column column">
+        <Columns gap={6}>
+          <Column>
+            <div className="left-aside">
               <VersionSwitcher
                 name={name}
                 docVersionStable={docVersionStableMap}
                 versions={versions}
               />
-              <div
-                role="button"
-                tabIndex={0}
-                className="doc-menu-mobile"
-                onClick={handleShowDocMenu}
-                onKeyDown={handleShowDocMenu}
-              >
-                <FormattedMessage id="doc.mobileDocMenu" />
-              </div>
-              {/* <Toc
-                data={toc.nodes[0]}
-                pathPrefix={pathPrefix}
-                fullPath={fullPath}
-              /> */}
+              <Toc data={toc} />
             </div>
-            <section className="markdown-body doc-content column">
+          </Column>
+
+          <Column size={8}>
+            <div className="markdown-body doc-content">
               {doc !== 'tidbcloud' && doc !== 'dev-guide' && (
                 <DeprecationNotice
                   name={name}
@@ -216,29 +195,34 @@ const Doc = ({
                   versions={versions}
                 />
               )}
+
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>
-              {doc !== 'tidbcloud' && (
+
+              {/* {doc !== 'tidbcloud' && (
                 <GitCommitInfo
                   repoInfo={repoInfo}
                   lang={lang}
                   title={frontmatter.title}
                 />
-              )}
-            </section>
-            <div className="doc-toc-column column">
-              <div className="docs-operation">
+              )} */}
+            </div>
+          </Column>
+
+          <Column>
+            <div className="right-aside">
+              <Block>
                 <DownloadPDF downloadURL={downloadURL} />
                 {doc !== 'tidbcloud' && (
                   <>
                     {version === 'dev' && (
-                      <ImproveDocLink repoInfo={repoInfo} lang={lang} />
+                      <ImproveDoc repoInfo={repoInfo} lang={lang} />
                     )}
-                    <FeedbackDocLink repoInfo={repoInfo} lang={lang} />
+                    <FeedbackDoc repoInfo={repoInfo} lang={lang} />
                   </>
                 )}
-              </div>
+              </Block>
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
@@ -258,17 +242,17 @@ const Doc = ({
                 </a>
               )}
             </div>
-          </div>
-        </section>
+          </Column>
+        </Columns>
       </article>
 
       <UserFeedback title={frontmatter.title} lang={lang} />
-    </Layout>
+    </>
   )
 }
 
 export const query = graphql`
-  query ($id: String) {
+  query ($id: String, $tocSlug: String) {
     mdx(id: { eq: $id }) {
       frontmatter {
         title
@@ -276,6 +260,10 @@ export const query = graphql`
       }
       body
       tableOfContents
+    }
+
+    toc: mdx(slug: { eq: $tocSlug }) {
+      body
     }
   }
 `

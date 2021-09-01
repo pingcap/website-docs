@@ -1,21 +1,11 @@
-export const defaultDocInfo = {
-  lang: 'en',
-  type: 'tidb',
-  version: 'stable',
-}
-
 const SET_LOADING = 'SET_LOADING'
-const GET_DOC_INFO = 'GET_DOC_INFO'
+const SET_DOC_INFO = 'GET_DOC_INFO'
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE'
+const SET_LANG_SWITCHABLE = 'SET_LANG_SWITCHABLE'
 
 export const setLoading = (bool) => ({
   type: SET_LOADING,
   loading: bool,
-})
-
-export const getDocInfo = (info) => ({
-  type: GET_DOC_INFO,
-  info,
 })
 
 export const setSearchValue = (value) => ({
@@ -23,20 +13,39 @@ export const setSearchValue = (value) => ({
   value,
 })
 
+export const setDocInfo = (info) => ({
+  type: SET_DOC_INFO,
+  info,
+})
+
+export const setLangSwitchable = (langSwitchable) => ({
+  type: SET_LANG_SWITCHABLE,
+  langSwitchable,
+})
+
+export const defaultDocInfo = {
+  lang: 'en',
+  type: 'tidb',
+  version: 'stable',
+}
+
 const initialState = {
   loading: false,
   docInfo: defaultDocInfo,
   searchValue: '',
+  langSwitchable: true,
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOADING:
       return { ...state, loading: action.loading }
-    case GET_DOC_INFO:
+    case SET_DOC_INFO:
       return { ...state, docInfo: action.info }
     case SET_SEARCH_VALUE:
       return { ...state, searchValue: action.value }
+    case SET_LANG_SWITCHABLE:
+      return { ...state, langSwitchable: action.langSwitchable }
     default:
       return state
   }

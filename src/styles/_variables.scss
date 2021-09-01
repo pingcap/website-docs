@@ -16,15 +16,6 @@ $H3: 1.125rem;
 $p1: $size-7;
 $p2: $size-8;
 
-$LH1: 3;
-$LH2: 2.5;
-$LH3: 2;
-$LH4: 1.75;
-$LH5: 1.5;
-$LH6: 1.25;
-$LH7: 1;
-$LH8: 0.5;
-
 $M1: #fff;
 $M2: #fafafa;
 $M3: #30323e;
@@ -56,17 +47,5 @@ $primary: $B1;
 // widescreen false
 $widescreen-enabled: false;
 
-$shadow: 0 0.1875em 0.5em #f0f0f0;
-$shadow-hover: 0 0.375em 0.75em #eaeaea;
-
-// box
-$box-shadow: $shadow;
-
-// card
-$card-shadow: $shadow;
-
 // navbar
 $navbar-item-hover-background-color: #e9ecef;
-
-// title
-$title-line-height: 1.2;

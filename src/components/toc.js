@@ -1,24 +1,14 @@
 import '../styles/components/toc.scss'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 
+import { Block } from '@seagreenio/react-bulma'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
-import { navigate } from 'gatsby'
 
-// import html from 'remark-html'
-// import remark from 'remark'
-
-const TOC = ({ data, pathPrefix, fullPath }) => {
-  // const rawBody = data.rawBody
-  // const _html = remark()
-  //   .use(html)
-  //   .processSync(rawBody)
-  //   .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
-
-  const tocRef = useRef(null)
-
+const TOC = React.memo(({ data }) => {
   const bindClickEventToTOC = () => {
-    const toc = tocRef.current
+    const toc = document.querySelector('.PingCAP-TOC')
 
     function fold(li) {
       Array.from(li.children).forEach((list) => {
@@ -138,101 +128,33 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
     })
   }
 
-  const bindNavigateToAllLinks = () => {
-    const toc = tocRef.current
-
-    toc.addEventListener(
-      'click',
-      (e) => {
-        const current = e.target
-        const type = current.tagName
-
-        if (type === 'A') {
-          const href = current.getAttribute('href')
-          const isInternal = /^\/(?!\/)/.test(href)
-
-          if (isInternal) {
-            e.preventDefault()
-
-            navigate(href)
-          }
-        }
-      },
-      true
-    )
-  }
-
   useEffect(() => {
     bindClickEventToTOC()
-    bindNavigateToAllLinks()
   }, [])
 
   useEffect(() => {
-    const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
-
-    Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-      // escape outbound path replacement
-      if (!a.getAttribute('href').match(absPathRegx)) {
-        const href = a.href
-        const lastSegment = href
-          .substring(href.lastIndexOf('/') + 1)
-          .replace(/\.md/g, '')
-
-        a.href = pathPrefix + lastSegment
-
-        let hrefWithoutHash = pathPrefix + lastSegment
-
-        if (hrefWithoutHash.split('#').length > 1) {
-          hrefWithoutHash = (pathPrefix + lastSegment).split('#')[0]
-        }
-
-        // unfold active nav item
-        if (hrefWithoutHash === fullPath) {
-          let tagTempEle = a
-
-          tagTempEle.parentElement.classList.add('is-active')
-          while (tagTempEle && !tagTempEle.classList.contains('top')) {
-            if (tagTempEle.classList.contains('folded')) {
-              tagTempEle.classList.remove('folded')
-            }
-            tagTempEle = tagTempEle.parentElement
-          }
-
-          const liClientRect = a.parentElement.getBoundingClientRect()
-          const dy = liClientRect.top - window.innerHeight / 2
-
-          if (dy > 0) {
-            // polyfill
-            if (!tocRef.current.scrollTo) {
-              console.log('Your browser does not support scrollTo API')
-              tocRef.current.scrollTop = dy
-            }
-
-            const leftTOCColumn = document.getElementsByClassName('left-column')
-            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-            leftTOCColumn[0].scrollTo({
-              top: dy,
-              left: 0,
-              behavior: 'smooth',
-            })
-          }
-        }
-      }
+    document.querySelectorAll('.PingCAP-TOC a').forEach((el) => {
+      el.setAttribute('href', el.getAttribute('href').replace('.md', ''))
     })
-  }, [pathPrefix, fullPath])
+  }, [])
 
   return (
-    <section
-      ref={tocRef}
-      className="PingCAP-TOC"
-      // dangerouslySetInnerHTML={{ __html }}
-    />
+    <Block className="PingCAP-TOC">
+      <MDXRenderer>{data.body}</MDXRenderer>
+    </Block>
   )
-}
+})
 
 TOC.propTypes = {
   data: PropTypes.object.isRequired,
-  pathPrefix: PropTypes.string.isRequired,
+}
+
+function areEqual(prevProps, nextProps) {
+  /*
+  return true if passing nextProps to render would return
+  the same result as passing prevProps to render,
+  otherwise return false
+  */
 }
 
 export default TOC

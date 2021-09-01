@@ -1,21 +1,24 @@
+import {
+  FormattedMessage,
+  Link as IntlLink,
+  useIntl,
+} from 'gatsby-plugin-react-intl'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
+import { footerColumnsEn, footerColumnsZh } from '../data/footer'
 
 import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
-import IntlLink from '../components/IntlLink'
-import { footerColumnsZh, footerColumnsEn } from '../data/footer'
 import { useLocation } from '@reach/router'
 import { useSelector } from 'react-redux'
-import { FormattedMessage } from 'react-intl'
 
-const Footer = React.memo((prop) => {
-  const locale = prop.locale
-  const langSwitchable = prop.langSwitchable
+const Footer = () => {
+  const intl = useIntl()
+  const { locale } = intl
+
   const location = useLocation()
-  const currentPathname = location.pathname
-  const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
+  const { pathname } = location
 
   const { FooterLogoSVG } = useStaticQuery(
     graphql`
@@ -26,8 +29,9 @@ const Footer = React.memo((prop) => {
       }
     `
   )
+  const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
 
-  const { docInfo } = useSelector((state) => state)
+  const { docInfo, langSwitchable } = useSelector((state) => state)
 
   const handleSpreadItems = (e) => {
     const screenWidth = window.screen.width
@@ -54,7 +58,7 @@ const Footer = React.memo((prop) => {
     }
 
     const switchToLang = (lang) => {
-      let currentPathnameArr = currentPathname.split('/')
+      let pathnameArr = pathname.split('/')
       let preLang
       switch (lang) {
         case 'zh':
@@ -63,7 +67,7 @@ const Footer = React.memo((prop) => {
 
         case 'en':
           preLang = ''
-          currentPathnameArr.splice(1, 1)
+          pathnameArr.splice(1, 1)
           break
 
         default:
@@ -71,7 +75,7 @@ const Footer = React.memo((prop) => {
       }
 
       return langSwitchable
-        ? preLang + currentPathnameArr.join('/')
+        ? preLang + pathnameArr.join('/')
         : docInfo.type === 'tidbcloud' || docInfo.type === 'dev-guide'
         ? preLang + '/tidb/stable/'
         : preLang + '/' + docInfo.type + '/' + docInfo.version
@@ -91,7 +95,7 @@ const Footer = React.memo((prop) => {
         <div className="dropdown-menu">
           <div className="dropdown-content">
             <Link
-              to={locale === 'en' ? currentPathname : switchToLang('en')}
+              to={locale === 'en' ? pathname : switchToLang('en')}
               className="dropdown-item"
             >
               English
@@ -102,7 +106,7 @@ const Footer = React.memo((prop) => {
               )}
             </Link>
             <Link
-              to={locale === 'zh' ? currentPathname : switchToLang('zh')}
+              to={locale === 'zh' ? pathname : switchToLang('zh')}
               className="dropdown-item"
             >
               简体中文
@@ -186,6 +190,6 @@ const Footer = React.memo((prop) => {
       </div>
     </footer>
   )
-})
+}
 
 export default Footer

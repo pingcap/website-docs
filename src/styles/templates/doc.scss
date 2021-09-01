@@ -7,22 +7,6 @@ $navbar-height: 5.25rem; // 84px
 $navbar-height-mobile: 4.25rem; // 68px
 
 .PingCAP-Doc {
-  .section {
-    @include mobile {
-      padding-top: 1.5rem;
-    }
-
-    @include desktop {
-      padding-top: 1.5rem !important;
-    }
-
-    @include tablet {
-      padding-top: $navbar-height;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-    }
-  }
-
   .doc-progress {
     @include mobile {
       top: calc(#{$navbar-height-mobile} - 1px);
@@ -53,24 +37,9 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .left-column {
+  .left-aside {
     position: sticky;
-    top: $navbar-height;
-    max-height: calc(100vh - #{$navbar-height});
-    overflow: auto;
-    min-width: 240px;
-    padding-right: 1rem;
-
-    @include mobile {
-      position: relative;
-      margin-left: -0.75rem;
-      margin-right: -0.75rem;
-      padding-left: 0;
-      padding-right: 0;
-      top: 0;
-      max-height: 100%;
-      overflow: visible;
-    }
+    top: $navbar-height + 1rem;
   }
 
   .doc-menu-mobile {
@@ -112,13 +81,6 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   // Custom markdown body
   .doc-content {
-    min-width: calc(100% - 240px - 200px);
-
-    @include tablet {
-      padding-left: 4rem;
-      padding-right: 4rem;
-    }
-
     color: $M3;
     line-height: 1.75;
 
@@ -282,12 +244,9 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .doc-toc-column {
+  .right-aside {
     position: sticky;
-    top: calc(#{$navbar-height});
-    max-height: calc(100vh);
-    overflow: auto;
-    min-width: 200px;
+    top: $navbar-height + 1.5rem;
 
     @include mobile {
       display: none;
@@ -335,73 +294,38 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .doc-download {
+  .doc-help-link {
     position: relative;
+    display: block;
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: $B3;
     font-size: $p2;
-    padding-bottom: 0.5rem;
-
-    a {
-      margin-left: 1.5rem;
-      color: $B3;
-      line-height: 1.75;
-
-      &:hover {
-        color: $primary;
-      }
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 5px;
-      left: 0;
-      width: 15px;
-      height: 15px;
-    }
-  }
-
-  .docs-operation {
-    margin-bottom: 2rem;
-  }
-
-  .download-pdf {
-    &:before {
-      background: url(../../../images/download-pdf.svg) no-repeat;
-      background-size: contain;
-    }
 
     &:hover {
-      &:before {
-        background: url(../../../images/download-pdf-hl.svg) no-repeat;
-        background-size: contain;
-      }
-    }
-  }
-
-  .improve-doc {
-    &:before {
-      background: url(../../../images/improve-docs-icon.svg) no-repeat;
-      background-size: contain;
+      color: $primary;
     }
 
-    &:hover {
-      &:before {
-        background: url(../../../images/improve-docs-hl-icon.svg) no-repeat;
-        background-size: contain;
-      }
-    }
-  }
+    $icons: download-pdf improve feedback;
+    @each $icon in $icons {
+      &.#{$icon} {
+        &:before {
+          content: '';
+          position: absolute;
+          top: 3px;
+          left: -24px;
+          width: 16px;
+          height: 16px;
+          background-image: url(../../components/doc/images/#{$icon}.svg);
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
 
-  .feedback-doc {
-    &:before {
-      background: url(../../../images/feedback-docs-icon.svg) no-repeat;
-      background-size: contain;
-    }
-
-    &:hover {
-      &:before {
-        background: url(../../../images/feedback-docs-hl-icon.svg) no-repeat;
-        background-size: contain;
+        &:hover {
+          &:before {
+            background-image: url(../../components/doc/images/#{$icon}-hl.svg);
+          }
+        }
       }
     }
   }
