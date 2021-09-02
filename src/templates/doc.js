@@ -2,14 +2,20 @@ import '../styles/templates/doc.scss'
 
 import * as Shortcodes from '../components/shortcodes'
 
-import { Block, Column, Columns, Progress } from '@seagreenio/react-bulma'
+import {
+  Block,
+  Column,
+  Columns,
+  Progress,
+  Title,
+} from '@seagreenio/react-bulma'
 import React, { useEffect } from 'react'
 import { setDocInfo, setLangSwitchable } from '../state'
 
 import DeprecationNotice from '../components/deprecationNotice'
 import DownloadPDF from '../components/doc/downloadPDF'
 import FeedbackDoc from '../components/doc/feedback'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
 import GitCommitInfo from '../components/gitCommitInfo'
 import ImproveDoc from '../components/doc/improve'
 import { MDXProvider } from '@mdx-js/react'
@@ -103,7 +109,7 @@ const Doc = ({
   // }, [])
 
   useEffect(() => {
-    replaceInternalHref(lang, doc, version)
+    // replaceInternalHref(lang, doc, version)
 
     dispatch(
       setDocInfo({
@@ -132,7 +138,6 @@ const Doc = ({
       <ul>
         {items.map((item) => (
           <li key={item.url}>
-            {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <a
               href={'#' + replaceItemURL(item.url)}
               dangerouslySetInnerHTML={{ __html: item.title }}
@@ -219,21 +224,19 @@ const Doc = ({
                 <DownloadPDF downloadURL={downloadURL} />
                 {doc !== 'tidbcloud' && (
                   <>
+                    <FeedbackDoc repoInfo={repoInfo} lang={lang} />
                     {version === 'dev' && (
                       <ImproveDoc repoInfo={repoInfo} lang={lang} />
                     )}
-                    <FeedbackDoc repoInfo={repoInfo} lang={lang} />
                   </>
                 )}
               </Block>
-              <section className="doc-toc">
-                <div className="title">
+              <div className="doc-toc">
+                <Title size={6} style={{ marginBottom: 0 }}>
                   <FormattedMessage id="doc.toc" />
-                </div>
-                <div className="toc-content">
-                  {tableOfContents.items && renderItems(tableOfContents.items)}
-                </div>
-              </section>
+                </Title>
+                {tableOfContents.items && renderItems(tableOfContents.items)}
+              </div>
               {currentPath === '/zh/tidb/stable' && (
                 <a
                   className="Promote"

@@ -1,13 +1,13 @@
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Icon } from '@seagreenio/react-bulma'
 import Message from './message'
 import PropTypes from 'prop-types'
 import React from 'react'
-import WarningIcon from '@material-ui/icons/Warning'
 
 const Warning = ({ children }) => (
   <Message
     type="warning"
-    icon={<WarningIcon style={{ color: '#f15a24' }} />}
+    icon={<Icon name="mdi mdi-alert" />}
     title={<FormattedMessage id="shortcodes.warning" />}
   >
     {children}

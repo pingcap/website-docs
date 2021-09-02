@@ -1,25 +1,29 @@
 @import '../common';
 
 .PingCAP-TOC {
-  a {
-    color: $B3;
-    line-height: 1.75;
-
-    &:hover {
-      color: $primary;
-    }
+  &.hidden {
+    display: none;
   }
 
   ul {
     li {
       position: relative;
-      padding: 5px 0;
+      padding-top: 0.5rem;
       color: $B3;
       cursor: pointer;
 
+      ul {
+        padding-left: 1rem;
+        transition: height 0.25s ease;
+      }
+
+      a {
+        font-weight: normal;
+        word-break: break-word;
+      }
+
       &.can-unfold {
-        padding-left: 0.5rem;
-        padding-bottom: 0;
+        font-weight: bold;
 
         .remove-icon {
           display: inline-block;
@@ -29,16 +33,6 @@
           margin-left: 0.5rem;
           background: url(../../../images/toc/remove.svg) no-repeat;
           background-size: contain;
-        }
-
-        li > a {
-          padding-left: 0.5rem;
-        }
-
-        ul:first-child {
-          li:first-child {
-            padding-top: 10px;
-          }
         }
 
         &:hover {
@@ -57,7 +51,6 @@
 
       &.folded {
         word-break: break-word;
-        padding-bottom: 5px;
 
         .remove-icon {
           display: none;
@@ -92,45 +85,15 @@
           }
         }
       }
-
-      &.is-active {
-        background: $M2;
-
-        > a {
-          color: $primary;
-        }
-      }
-
-      ul {
-        padding-left: 0.5rem;
-        overflow: hidden;
-        transition: height 0.25s ease;
-      }
-
-      a {
-        display: inline-block;
-        width: 100%;
-        word-break: break-word;
-      }
     }
 
     &.top {
-      @include mobile {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-
       > li {
-        padding: 9px 12px 9px 0;
+        padding: 0.5rem;
         border-bottom: 1px solid $T2;
         word-break: break-word;
-        font-weight: bold;
 
-        > ul {
-          padding-left: 0;
-        }
-
-        &:after {
+        &:not(.has-no-subject):after {
           content: '';
           position: absolute;
           top: calc(0.5rem + 6px);
@@ -139,22 +102,8 @@
           height: 12px;
           background: url(../../../images/toc/subject.svg);
           background-size: cover;
-          transform: rotate(0deg) !important;
-        }
-
-        &.has-no-subject:after {
-          display: none;
         }
       }
     }
-  }
-}
-
-@keyframes easeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

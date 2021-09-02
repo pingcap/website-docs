@@ -6,20 +6,23 @@ $family-primary: $family-custom;
 
 @import 'bulma';
 
-$socials: twitter linkedin facebook reddit slack youtube yc github slack stackOverflow asktug;
+.social {
+  width: 36px;
+  height: 36px;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+$socials: twitter linkedin facebook reddit slack youtube yc github slack
+  stackOverflow asktug;
 @each $social in $socials {
   .#{$social} {
     background-image: url(images/socials/#{$social}.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
 
     &:hover {
       background-image: url(images/socials/#{$social}-hl.svg);
     }
-
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
   }
 }
 
@@ -27,65 +30,21 @@ body {
   @extend .has-navbar-fixed-top;
 }
 
-.button {
-  &.is-primary {
-    &:hover {
-      background-color: darken($color: $primary, $amount: 5%);
-    }
-  }
-}
+a {
+  color: $primary;
 
-.section.container {
-  min-height: 55vh;
+  &:hover {
+    color: $B1;
+  }
 }
 
 .card {
-  border-radius: 8px;
-  border: 1px solid #f0f0f0;
-}
-
-.container {
-  @include desktop {
-    max-width: 1344px;
-  }
-}
-
-.dropdown {
-  .dropdown-content {
-    padding: 0;
-  }
-
-  .dropdown-item {
-    color: $B4;
-
-    &.is-active {
-      background: $M2;
-      color: $B3;
-    }
-  }
+  border: 1px solid $T2;
 }
 
 .field {
   .control {
     @include has-pingcap-style-input;
-  }
-}
-
-.title {
-  color: $B3;
-
-  &.has-pingcap-style-underline {
-    .underline {
-      display: inline-block;
-      width: 12px;
-      height: 3px;
-      margin-right: 0.5rem;
-      background: $primary;
-    }
-  }
-
-  a {
-    color: $B3;
   }
 }
 

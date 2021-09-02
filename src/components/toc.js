@@ -1,4 +1,4 @@
-import '../styles/components/toc.scss'
+import 'styles/components/toc.scss'
 
 import React, { useEffect } from 'react'
 
@@ -7,8 +7,10 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
 
 const TOC = React.memo(({ data }) => {
-  const bindClickEventToTOC = () => {
-    const toc = document.querySelector('.PingCAP-TOC')
+  const generate = () => {
+    const wrapper = document.querySelector('.PingCAP-TOC')
+    const toc = wrapper.firstChild
+    toc.classList.add('top')
 
     function fold(li) {
       Array.from(li.children).forEach((list) => {
@@ -32,7 +34,7 @@ const TOC = React.memo(({ data }) => {
           list.style.height = list.scrollHeight + 'px'
 
           requestAnimationFrame(() => {
-            list.style.height = null
+            list.style.height = 0
           })
         })
       })
@@ -111,25 +113,19 @@ const TOC = React.memo(({ data }) => {
       })
     }
 
-    Array.from(toc.children).forEach((ul) => {
-      ul.classList.add('top')
-
-      Array.from(ul.children).forEach((li) => {
-        if (li.children[0] && li.children[0].tagName.toLowerCase() !== 'ul') {
-          li.classList.add('has-no-subject')
-        }
-      })
-
-      retrieveLi(ul)
-      const tocElement = document.getElementsByClassName('PingCAP-TOC')
-      if (tocElement) {
-        tocElement[0].classList.add('show-toc')
+    Array.from(toc.children).forEach((li) => {
+      if (li.children[0] && li.children[0].tagName.toLowerCase() !== 'ul') {
+        li.classList.add('has-no-subject')
       }
     })
+
+    retrieveLi(toc)
+
+    wrapper.classList.remove('hidden')
   }
 
   useEffect(() => {
-    bindClickEventToTOC()
+    generate()
   }, [])
 
   useEffect(() => {
@@ -139,7 +135,7 @@ const TOC = React.memo(({ data }) => {
   }, [])
 
   return (
-    <Block className="PingCAP-TOC">
+    <Block className="PingCAP-TOC hidden">
       <MDXRenderer>{data.body}</MDXRenderer>
     </Block>
   )
