@@ -1,99 +1,30 @@
 .PingCAP-Navbar {
-  @include mobile {
-    height: 4.25rem;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  height: 5.25rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-
   &.has-border-and-shadow {
-    border-bottom: 1px solid $C2;
-    box-shadow: 0 2px 8px rgba(#000, 0.05);
+    border-bottom: 1px solid $T2;
+    box-shadow: $shadow;
   }
 
   .navbar-item {
-    &.with-main-section {
+    .logo {
+      width: 150px;
+    }
+
+    &.main {
       @include has-item-active(1.5rem);
       @include mobile {
-        margin: 0 1.5rem;
-        padding: 1rem 0;
-        font-size: $size-6;
-        border-bottom: 1px solid $C2;
-
-        &.has-no-border {
-          border: none;
-        }
-
-        &:hover {
-          &:after {
-            content: none;
-          }
-        }
-      }
-
-      margin: 0 0.25rem;
-
-      &:active {
-        background: #e9ecef;
-      }
-    }
-
-    &.with-contact-us {
-      @include mobile {
-        margin: 0 0.75rem;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid $T2;
       }
     }
   }
 
-  .navbar-brand {
-    @include mobile {
-      width: 100px;
-    }
-
-    width: 150px;
-
-    .navbar-burger {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: none;
-      color: $B1;
-      border: none;
-      outline: none;
-      -webkit-tap-highlight-color: transparent;
-
-      span {
-        width: $size-5;
-      }
-    }
+  .navbar-burger {
+    color: $B3;
   }
 
-  .contact-us {
-    @include mobile {
-      width: 100%;
-      font-size: $size-6;
-      border-radius: 5px;
-    }
-
-    width: 140px;
-    font-size: $size-7;
-  }
-
-  .search-input-mobile {
-    display: none;
-    width: 50vw;
-
-    @media only screen and (max-width: 1024px) {
-      display: block;
-    }
-  }
-
-  .search-input-pc {
-    @media only screen and (max-width: 1024px) {
-      display: none;
+  .lang-switch {
+    .navbar-item:hover {
+      color: $B1 !important;
     }
   }
 }

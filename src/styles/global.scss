@@ -1,23 +1,20 @@
-// Predefined
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700&display=swap');
-@import './common';
-@import '../../node_modules/bulma/bulma.sass';
-@import '../../node_modules/prismjs/themes/prism-solarizedlight.css';
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
+@import 'common';
 
-// Socials' Background
+$family-custom: 'Titillium Web', #{$family-sans-serif};
+$family-primary: $family-custom;
+
+@import 'bulma';
+
+$socials: twitter linkedin facebook reddit slack youtube yc github slack stackOverflow asktug;
 @each $social in $socials {
   .#{$social} {
-    @include until($fullhd) {
-      width: 30px;
-      height: 30px;
-    }
-
-    background: url(../../images/socials/#{$social}.svg);
-    background-size: cover;
+    background-image: url(images/socials/#{$social}.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
 
     &:hover {
-      background: url(../../images/socials/#{$social}-hl.svg);
-      background-size: cover;
+      background-image: url(images/socials/#{$social}-hl.svg);
     }
 
     width: 36px;
@@ -27,10 +24,7 @@
 }
 
 body {
-  @extend .has-spaced-navbar-fixed-top; // padding-top: 5.25rem;
-  @include mobile {
-    padding-top: 4.25rem;
-  }
+  @extend .has-navbar-fixed-top;
 }
 
 .button {
@@ -59,15 +53,13 @@ body {
 .dropdown {
   .dropdown-content {
     padding: 0;
-    border: 1px solid $C2;
   }
 
   .dropdown-item {
     color: $B4;
-    font-size: $size-7;
 
     &.is-active {
-      background: $B5;
+      background: $M2;
       color: $B3;
     }
   }
@@ -76,10 +68,6 @@ body {
 .field {
   .control {
     @include has-pingcap-style-input;
-
-    .icon {
-      color: $B4;
-    }
   }
 }
 

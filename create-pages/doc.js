@@ -8,6 +8,12 @@ const {
   genPDFDownloadURL,
   getRepo,
 } = require('./utils')
+const flatten = require('flat')
+
+const messages = {
+  en: flatten(require('../src/intl/en.json')),
+  zh: flatten(require('../src/intl/zh.json')),
+}
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
   const template = path.resolve(__dirname, '../src/templates/doc.js')
@@ -109,6 +115,15 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         repo,
         ref,
         lang,
+        // gatsby-plugin-react-intl
+        intl: {
+          language: lang,
+          messages: messages[lang],
+          defaultLanguage: 'en',
+          ignoredPaths: [
+            '?(/zh)/(tidb|tidb-data-migration|tidb-in-kubernetes|dev-guide|tidbcloud)/**',
+          ],
+        },
         docVersionStable,
         langSwitchable,
         tocSlug,

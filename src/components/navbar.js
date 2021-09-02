@@ -1,11 +1,27 @@
-import { FormattedMessage, Link, useIntl } from 'gatsby-plugin-react-intl'
+import {
+  Navbar as BulmaNavbar,
+  Container,
+  NavbarBrand,
+  NavbarBurger,
+  NavbarDropdown,
+  NavbarEnd,
+  NavbarItem,
+  NavbarLink,
+  NavbarMenu,
+  NavbarStart,
+} from '@seagreenio/react-bulma'
+import {
+  FormattedMessage,
+  Link,
+  changeLocale,
+  useIntl,
+} from 'gatsby-plugin-react-intl'
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
 import SearchInput from './search/input'
-import { setSearchValue } from '../state'
-import { useLocation } from '@reach/router'
+import { setSearchValue } from 'state'
 
 const Navbar = () => {
   const { BrandSVG } = useStaticQuery(
@@ -21,27 +37,13 @@ const Navbar = () => {
   const intl = useIntl()
   const { locale } = intl
 
-  const location = useLocation()
-  console.log(location.pathname)
-
   const dispatch = useDispatch()
-  const { docInfo, searchValue } = useSelector((state) => state)
+  const { docInfo, langSwitchable, searchValue } = useSelector((state) => state)
 
-  const [activeNav, setActiveNav] = useState(null)
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
-  const handleSetBurgerActive = () => setBurgerActive(!burgerActive)
 
   const handleSetSearchValue = (value) => dispatch(setSearchValue(value))
-
-  // useEffect(() => {
-  //   const nav =
-  //     locale === 'zh'
-  //       ? location.pathname.split('/')[2]
-  //       : location.pathname.split('/')[1]
-
-  //   setActiveNav(nav)
-  // }, [locale, location.pathname])
 
   useEffect(() => {
     const scrollListener = () => {
@@ -56,103 +58,107 @@ const Navbar = () => {
   }, [])
 
   return (
-    <nav
-      className={`navbar is-fixed-top PingCAP-Navbar${
-        showBorder ? ' has-border-and-shadow' : ''
-      }`}
-      role="navigation"
+    <BulmaNavbar
+      as="nav"
+      className={`PingCAP-Navbar${showBorder ? ' has-border-and-shadow' : ''}`}
+      fixed="top"
+      transparent
     >
-      <div className="container">
-        <div className="navbar-brand">
-          <img className="navbar-item" src={BrandSVG.publicURL} alt="brand" />
+      <Container>
+        <NavbarBrand>
+          <NavbarItem>
+            <img className="logo" src={BrandSVG.publicURL} alt="PingCAP" />
+          </NavbarItem>
 
-          <div className="navbar-item search-input-mobile">
-            <SearchInput
-              docInfo={docInfo}
-              searchValue={searchValue}
-              setSearchValue={handleSetSearchValue}
-            />
-          </div>
-
-          <button
-            className={`navbar-burger${burgerActive ? ' is-active' : ''}`}
+          <NavbarBurger
+            role="button"
             aria-label="menu"
-            aria-expanded="false"
-            onClick={handleSetBurgerActive}
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </button>
-        </div>
-        <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
-          <div className="navbar-end">
-            <Link
-              to="/tidb/stable"
-              className={`navbar-item with-main-section ${
-                activeNav === 'tidb' && !burgerActive ? 'is-active' : ''
-              }`}
-            >
+            aria-expanded={burgerActive}
+            active={burgerActive}
+            onClick={() => setBurgerActive(!burgerActive)}
+          />
+        </NavbarBrand>
+        <NavbarMenu active={burgerActive}>
+          <NavbarStart>
+            <NavbarItem as={Link} className="main" to="/tidb/stable">
               <FormattedMessage id="navbar.tidb" />
-            </Link>
+            </NavbarItem>
 
-            <Link
-              to="/tools"
-              className={`navbar-item with-main-section ${
-                (activeNav === 'tools' ||
-                  activeNav === 'tidb-data-migration' ||
-                  activeNav === 'tidb-in-kubernetes') &&
-                !burgerActive
-                  ? 'is-active'
-                  : ''
-              }`}
-            >
+            <NavbarItem as={Link} className="main" to="/tools">
               <FormattedMessage id="navbar.tools" />
-            </Link>
+            </NavbarItem>
+
             {locale === 'en' && (
-              <Link
+              <NavbarItem
+                as={Link}
+                className="main"
                 to="/tidbcloud/public-preview"
-                className={`navbar-item with-main-section ${
-                  activeNav === 'tidbcloud' && !burgerActive ? 'is-active' : ''
-                }`}
               >
                 <FormattedMessage id="navbar.cloud" />
-              </Link>
+              </NavbarItem>
             )}
+
             {locale === 'zh' && (
-              <Link
-                to="/dev-guide/dev"
-                className={`navbar-item with-main-section ${
-                  activeNav === 'dev-guide' && !burgerActive ? 'is-active' : ''
-                }`}
-              >
+              <NavbarItem as={Link} className="main" to="/dev-guide/dev">
                 <FormattedMessage id="navbar.devGuide" />
-              </Link>
+              </NavbarItem>
             )}
-            <a
+          </NavbarStart>
+
+          <NavbarEnd>
+            <NavbarItem
+              className="main"
               href={
-                locale === 'zh'
-                  ? 'https://pingcap.com/about-cn'
-                  : 'https://pingcap.com/contact-us'
+                locale === 'en'
+                  ? 'https://pingcap.com/contact-us'
+                  : 'https://pingcap.com/zh/about-us'
               }
-              className="navbar-item with-main-section"
               target="_blank"
               rel="noreferrer"
             >
               <FormattedMessage id="navbar.contactUs" />
-            </a>
-          </div>
-        </div>
+            </NavbarItem>
 
-        <div className="navbar-item search-input-pc">
-          <SearchInput
-            docInfo={docInfo}
-            searchValue={searchValue}
-            setSearchValue={handleSetSearchValue}
-          />
-        </div>
-      </div>
-    </nav>
+            <NavbarItem as="div" className="lang-switch" dropdown hoverable>
+              <NavbarLink>
+                <FormattedMessage id="lang.title" />
+              </NavbarLink>
+
+              <NavbarDropdown boxed>
+                <NavbarItem onClick={() => changeLocale('en')}>
+                  {!langSwitchable && locale === 'zh' ? (
+                    <FormattedMessage id="lang.cannotswitch" />
+                  ) : (
+                    <FormattedMessage id="lang.en" />
+                  )}
+                </NavbarItem>
+                <NavbarItem onClick={() => changeLocale('zh')}>
+                  {!langSwitchable && locale === 'en' ? (
+                    <FormattedMessage
+                      id={
+                        docInfo.type === 'tidbcloud'
+                          ? 'lang.cannotswitchtocloud'
+                          : 'lang.cannotswitch'
+                      }
+                    />
+                  ) : (
+                    <FormattedMessage id="lang.zh" />
+                  )}
+                </NavbarItem>
+              </NavbarDropdown>
+            </NavbarItem>
+
+            <NavbarItem as="div" className="search-input">
+              <SearchInput
+                docInfo={docInfo}
+                searchValue={searchValue}
+                setSearchValue={handleSetSearchValue}
+              />
+            </NavbarItem>
+          </NavbarEnd>
+        </NavbarMenu>
+      </Container>
+    </BulmaNavbar>
   )
 }
 

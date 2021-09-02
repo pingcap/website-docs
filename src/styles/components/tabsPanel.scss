@@ -1,7 +1,4 @@
-@import '../common';
-
-$navbar-height: 5.25rem; // 84px
-$navbar-height-mobile: 4.25rem; // 68px
+@import '../variables';
 
 .PingCAP-Tabs-Panel {
   display: flex;
@@ -32,8 +29,4 @@ $navbar-height-mobile: 4.25rem; // 68px
 
 .letter {
   padding-top: $navbar-height;
-
-  @include mobile {
-    padding-top: $navbar-height-mobile;
-  }
 }

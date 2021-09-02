@@ -1,17 +1,14 @@
-@import '../common';
+@import '../variables';
+@import 'bulma/sass/utilities/mixins';
+
 @import '../components/navCloumns';
 @import '../components/tabsPanel';
 @import '../components/embedYouTube';
 
-$navbar-height: 5.25rem; // 84px
-$navbar-height-mobile: 4.25rem; // 68px
+@import '../../../node_modules/prismjs/themes/prism-solarizedlight.css';
 
 .PingCAP-Doc {
   .doc-progress {
-    @include mobile {
-      top: calc(#{$navbar-height-mobile} - 1px);
-    }
-
     &.show {
       display: block;
     }
@@ -53,7 +50,7 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     position: relative;
     padding: 1rem 0;
-    background: $B5;
+    background: $M2;
     color: $B3;
     font-weight: bold;
     z-index: 28;
@@ -81,7 +78,6 @@ $navbar-height-mobile: 4.25rem; // 68px
 
   // Custom markdown body
   .doc-content {
-    color: $M3;
     line-height: 1.75;
 
     h1,
@@ -92,7 +88,6 @@ $navbar-height-mobile: 4.25rem; // 68px
     h6 {
       border-bottom: none;
       z-index: 1;
-      color: $M3;
 
       &:target:before {
         content: '';
@@ -108,22 +103,6 @@ $navbar-height-mobile: 4.25rem; // 68px
           transform: translate(0, $navbar-height);
         }
       }
-    }
-
-    h1 {
-      font-size: $H0;
-    }
-
-    h2 {
-      font-size: $H1;
-    }
-
-    h3 {
-      font-size: $H2;
-    }
-
-    h4 {
-      font-size: $H3;
     }
 
     p,
@@ -166,7 +145,6 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     pre {
       background-color: $M2;
-      font-size: $p2;
 
       code {
         .number {
@@ -257,12 +235,10 @@ $navbar-height-mobile: 4.25rem; // 68px
     .title {
       margin: 0 0 1rem;
       color: $B3;
-      font-size: $size-7;
     }
 
     a {
       color: $B3;
-      font-size: $size-9;
       line-height: 1.5;
 
       &:hover {
@@ -300,7 +276,6 @@ $navbar-height-mobile: 4.25rem; // 68px
     margin-left: 1.5rem;
     margin-bottom: 0.5rem;
     color: $B3;
-    font-size: $p2;
 
     &:hover {
       color: $primary;
@@ -372,10 +347,8 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     margin: 1rem 0;
     padding: 1rem;
-    color: $M4;
 
     p:first-child > strong:first-child {
-      color: $M4 !important;
       padding-left: 2rem;
     }
 

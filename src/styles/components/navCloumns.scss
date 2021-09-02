@@ -1,11 +1,10 @@
-@import '../common';
+@import '../variables';
 
 .PingCAP-Nav-Columns {
   margin-top: 2rem;
 
   .column-title {
     margin-bottom: 1rem;
-    font-size: $size-7;
     font-weight: bold;
     color: $B3;
   }

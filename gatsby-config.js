@@ -3,10 +3,10 @@ const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
 
 module.exports = {
   siteMetadata: {
-    title: `PingCAP Docs`,
-    description: `PingCAP Docs`,
-    author: `@PingCAP`,
-    siteUrl: `https://docs.pingcap.com`,
+    title: 'PingCAP Docs',
+    description: 'PingCAP Docs',
+    author: '@PingCAP',
+    siteUrl: 'https://docs.pingcap.com',
   },
   plugins: [
     {

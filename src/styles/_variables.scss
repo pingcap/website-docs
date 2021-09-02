@@ -1,51 +1,21 @@
-$size-1: 4rem;
-$size-2: 3rem;
-$size-3: 2rem;
-$size-4: 1.5rem;
-$size-5: 1.25rem;
-$size-6: 1.125rem;
-$size-7: 1rem;
-$size-8: 0.875rem;
-$size-9: 0.8125rem;
-
-$H0: 1.875rem;
-$H1: 1.5rem;
-$H2: 1.25rem;
-$H3: 1.125rem;
-
-$p1: $size-7;
-$p2: $size-8;
-
 $M1: #fff;
 $M2: #fafafa;
-$M3: #30323e;
-$M4: #707070;
 
-$C1: #e7f0fc;
-$C2: #dbe4f0;
-$C3: #b8c4d6;
-$C4: #9fa8b9;
-$C5: #5d6d86;
+$F1: #2c2c2c; // title
+$F2: #565656; // text
 
-$B1: #2e2fff;
-$B2: #10a6fa;
+$B1: #3d3fea; // highlight
+$B2: #00aeef;
 $B3: #172d72;
-$B4: #6e77a3;
-$B5: #f7f8f9;
+$B4: #000431;
 
-$T1: #a9d359;
-$T2: #35ced5;
-$T3: #ff4f5e;
-$T4: #7d3f98;
-$T5: #f8c200;
-$T6: #f15a24;
+$T1: #4fc172; // success
+$T2: #e9eaee; // divider
+$T3: #ff6d78; // warning
+$T6: #e30c34; // error
 
-$family-sans-serif: 'Titillium Web', sans-serif;
+$primary: $B3;
 
-$primary: $B1;
+$navbar-height: 5.25rem;
 
-// widescreen false
 $widescreen-enabled: false;
-
-// navbar
-$navbar-item-hover-background-color: #e9ecef;

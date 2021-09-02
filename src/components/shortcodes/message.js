@@ -1,4 +1,4 @@
-import '../../styles/components/message.scss'
+import 'styles/components/message.scss'
 
 import PropTypes from 'prop-types'
 import React from 'react'

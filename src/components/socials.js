@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { followSocialsEN, followSocialsZH } from '../data/socials'
+import { en, zh } from '../data/socials'
 
 import PropTypes from 'prop-types'
+import React from 'react'
 
 const Socials = ({ className, locale }) => {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    setData(locale === 'en' ? followSocialsEN : followSocialsZH)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const data = locale === 'en' ? en : zh
 
   return (
     <>
       {data &&
         data.map((social) => (
-          // eslint-disable-next-line jsx-a11y/anchor-has-content
           <a
             key={social.name}
             className={className ? className + ' ' + social.name : social.name}
+            href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            href={social.href}
-          >
-            {social.name}
-          </a>
+            title={social.name}
+          />
         ))}
     </>
   )
@@ -32,7 +25,7 @@ const Socials = ({ className, locale }) => {
 
 Socials.propTypes = {
   className: PropTypes.string,
-  locale: PropTypes.string,
+  locale: PropTypes.string.isRequired,
 }
 
 export default Socials

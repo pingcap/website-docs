@@ -41,7 +41,7 @@ const TOC = React.memo(({ data }) => {
     function unfold(li) {
       Array.from(li.children).forEach((el) => {
         if (el && el.tagName === 'SPAN') {
-          el.style.display = 'inlin-block'
+          el.style.display = 'inline-block'
         } else if (el && el.tagName === 'UL') {
           el.style.display = 'block'
         }

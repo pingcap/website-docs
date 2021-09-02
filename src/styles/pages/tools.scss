@@ -4,6 +4,7 @@
   .card {
     padding: 1.5rem;
     box-shadow: none;
+    transition: all 0.5s;
 
     &:hover {
       box-shadow: $shadow;
@@ -23,7 +24,7 @@
     $icons: tidb-operator dm tidb-tools tiup;
     @each $icon in $icons {
       &.#{$icon} {
-        background-image: url(../../pages/images/tools/#{$icon}.svg);
+        background-image: url(images/tools/#{$icon}.svg);
       }
     }
   }

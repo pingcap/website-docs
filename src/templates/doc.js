@@ -58,7 +58,10 @@ const Doc = ({
   useEffect(() => {
     dispatch(setLangSwitchable(langSwitchable))
 
+    // TODO: remove
     optimizeBlockquote()
+
+    return () => dispatch(setLangSwitchable(true))
   }, [])
 
   // useEffect(() => {
