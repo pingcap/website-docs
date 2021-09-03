@@ -10,11 +10,8 @@
 // Use in navbar and footer item
 @mixin has-item-active($bottom: false) {
   position: relative;
-  color: $B4;
 
   &:hover {
-    color: $B1;
-
     @if type-of($bottom) == number {
       &:after {
         content: '';
@@ -39,16 +36,12 @@
 
     & ~ .icon,
     &::placeholder {
-      color: rgba($F2, 0.6);
+      color: $grey;
     }
 
     &:hover,
     &:focus {
       border-color: $B1;
-
-      & ~ .icon {
-        color: $B4;
-      }
     }
   }
 }

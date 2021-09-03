@@ -258,8 +258,8 @@
     }
 
     &.error {
-      background: rgba($color: $T3, $alpha: 0.1);
-      border-left: #{$border-width}px solid $T3;
+      background: rgba($color: $danger, $alpha: 0.1);
+      border-left: #{$border-width}px solid $danger;
 
       &:before {
         background: url('../../../images/blockquotes/error.svg') no-repeat;

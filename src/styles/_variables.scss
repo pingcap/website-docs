@@ -1,5 +1,5 @@
 $M1: #fff;
-$M2: #fafafa;
+$M2: #f7f8f9;
 
 $F1: #2c2c2c; // title
 $F2: #565656; // text
@@ -7,19 +7,20 @@ $F2: #565656; // text
 $B1: #3d3fea; // highlight
 $B2: #00aeef;
 $B3: #172d72;
-$B4: #000431;
+$B4: #000431; // dark
 
 $T1: #4fc172; // success
 $T2: #e9eaee; // divider
-$T3: #ff6d78; // warning
 $T6: #e30c34; // error
 
 $primary: $B3;
+$info: $B2;
 $success: $T1;
-$warning: $T3;
 $danger: $T6;
+$dark: $B4;
 $title-color: $F1;
 $subtitle-color: $F2;
+$text: $F2;
 
 $size-7: 0.875rem;
 

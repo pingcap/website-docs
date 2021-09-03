@@ -9,14 +9,12 @@
         border-bottom: 1px solid $T2;
       }
 
-      span.spread {
+      .spread {
         @include mobile {
-          display: flex;
+          @include VHCenter;
         }
 
         display: none;
-        justify-content: center;
-        align-items: center;
         width: 16px;
         height: 16px;
         color: $primary;
@@ -31,11 +29,14 @@
     }
 
     .items {
+      transition: 0.25s;
+      overflow: hidden;
+
       @include mobile {
-        display: none;
+        max-height: 0;
 
         &.displayed {
-          display: unset;
+          max-height: 500px;
         }
       }
 
@@ -43,142 +44,40 @@
         margin: 1rem 0;
 
         a {
-          @include has-item-active;
-          @include mobile {
-            width: 100%;
-          }
-
           display: inline-block;
-
-          &:active {
-            background: #e9ecef;
-          }
+          width: 100%;
         }
       }
     }
   }
 
-  .footer-logo {
+  .socials {
     @include mobile {
-      display: none;
-    }
-
-    float: right;
-    width: 150px;
-  }
-
-  .socials-desktop {
-    @include mobile {
-      display: none;
+      margin-top: 1rem;
     }
 
     .column {
+      @include mobile {
+        display: inline-block;
+        margin-left: 1rem;
+      }
+
       margin-bottom: 1rem;
       background-position: right;
     }
   }
 
   .annotations {
-    color: $B4;
-
-    .lang {
-      cursor: pointer;
-
-      svg {
-        vertical-align: bottom;
-      }
-    }
-  }
-
-  .annotations-desktop {
-    @include mobile {
-      display: none;
-    }
-
-    bottom: 1.75rem;
     display: flex;
-    right: 0.75rem;
-    flex-flow: row wrap;
     justify-content: space-between;
-
-    .lang {
-      margin-bottom: 0.5rem;
-
-      .dropdown-item {
-        position: relative;
-
-        .tooltiptext {
-          position: absolute;
-          visibility: hidden;
-          padding: 5px;
-          left: 0;
-          top: -100%;
-          text-align: center;
-          z-index: 1;
-          transition: opacity .3s;
-          background-color: $M2;
-          color: #fff;
-          font-size: 12px;
-          border-radius: 4px;
-        }
-
-        .tooltiptext::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 20%;
-          margin-left: -5px;
-          border-width: 5px;
-          border-style: solid;
-          border-top-color: #707070;
-        }
-
-        &:hover {
-          .tooltiptext {
-            visibility: visible;
-          }
-        }
-      }
-
-      .dropdown-trigger {
-        &:focus {
-          outline: 0;
-        }
-      }
-    }
+    align-items: center;
   }
 
-  .annotations-mobile {
-    @include mobile {
-      display: block;
-      margin-bottom: 2rem;
-
-      .lang {
-        margin-bottom: 0.5rem;
-
-        .tooltiptext {
-          display: none;
-        }
-      }
-    }
-
-    display: none;
-
-    .lang {
-      cursor: pointer;
-
-      svg {
-        vertical-align: bottom;
-      }
-    }
+  .copyright {
+    @include VHCenter;
   }
 
-  .socials-mobile {
-    @include mobile {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    display: none;
+  .logo {
+    width: 150px;
   }
 }

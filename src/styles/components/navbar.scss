@@ -6,25 +6,41 @@
 
   .navbar-item {
     .logo {
-      width: 150px;
+      height: 30px;
     }
 
     &.main {
       @include has-item-active(1.5rem);
       @include mobile {
-        padding: 1rem 2rem;
         border-bottom: 1px solid $T2;
       }
     }
-  }
 
-  .navbar-burger {
-    color: $B3;
+    &.disabled {
+      color: $grey-light;
+      pointer-events: none;
+    }
   }
 
   .lang-switch {
     .navbar-item:hover {
       color: $B1 !important;
     }
+  }
+
+  .navbar-link {
+    &:after {
+      border-color: $primary;
+    }
+
+    &:hover {
+      &:after {
+        border-color: $B1;
+      }
+    }
+  }
+
+  .navbar-burger {
+    color: $primary;
   }
 }

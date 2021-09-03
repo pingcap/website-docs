@@ -21,24 +21,26 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
 import SearchInput from './search/input'
+import clsx from 'clsx'
 import { setSearchValue } from 'state'
 
 const Navbar = () => {
-  const { BrandSVG } = useStaticQuery(
-    graphql`
-      query {
-        BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
-          publicURL
-        }
+  const { BrandSVG } = useStaticQuery(graphql`
+    query {
+      BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
+        publicURL
       }
-    `
-  )
+    }
+  `)
 
   const intl = useIntl()
   const { locale } = intl
 
   const dispatch = useDispatch()
   const { docInfo, langSwitchable, searchValue } = useSelector((state) => state)
+
+  const enDisabled = !langSwitchable && locale === 'zh'
+  const zhDisabled = !langSwitchable && locale === 'en'
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
@@ -60,7 +62,7 @@ const Navbar = () => {
   return (
     <BulmaNavbar
       as="nav"
-      className={`PingCAP-Navbar${showBorder ? ' has-border-and-shadow' : ''}`}
+      className={clsx('PingCAP-Navbar', showBorder && 'has-border-and-shadow')}
       fixed="top"
       transparent
     >
@@ -71,7 +73,6 @@ const Navbar = () => {
           </NavbarItem>
 
           <NavbarBurger
-            role="button"
             aria-label="menu"
             aria-expanded={burgerActive}
             active={burgerActive}
@@ -106,34 +107,28 @@ const Navbar = () => {
           </NavbarStart>
 
           <NavbarEnd>
-            <NavbarItem
-              className="main"
-              href={
-                locale === 'en'
-                  ? 'https://pingcap.com/contact-us'
-                  : 'https://pingcap.com/zh/about-us'
-              }
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FormattedMessage id="navbar.contactUs" />
-            </NavbarItem>
-
             <NavbarItem as="div" className="lang-switch" dropdown hoverable>
               <NavbarLink>
                 <FormattedMessage id="lang.title" />
               </NavbarLink>
 
               <NavbarDropdown boxed>
-                <NavbarItem onClick={() => changeLocale('en')}>
-                  {!langSwitchable && locale === 'zh' ? (
+                <NavbarItem
+                  className={clsx(enDisabled && 'disabled')}
+                  onClick={() => !enDisabled && changeLocale('en')}
+                >
+                  {enDisabled ? (
                     <FormattedMessage id="lang.cannotswitch" />
                   ) : (
                     <FormattedMessage id="lang.en" />
                   )}
                 </NavbarItem>
-                <NavbarItem onClick={() => changeLocale('zh')}>
-                  {!langSwitchable && locale === 'en' ? (
+
+                <NavbarItem
+                  className={clsx(zhDisabled && 'disabled')}
+                  onClick={() => !zhDisabled && changeLocale('zh')}
+                >
+                  {zhDisabled ? (
                     <FormattedMessage
                       id={
                         docInfo.type === 'tidbcloud'

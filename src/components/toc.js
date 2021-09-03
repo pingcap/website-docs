@@ -92,7 +92,7 @@ const TOC = React.memo(({ data }) => {
 
     function retrieveLi(ul) {
       Array.from(ul.children).forEach((li) => {
-        if (li.children[0] && li.children[0].tagName.toLowerCase() === 'ul') {
+        if (li.firstElementChild.tagName === 'UL') {
           li.classList.add('can-unfold', 'folded')
 
           if (!li.parentElement.classList.contains('top')) {
@@ -114,7 +114,7 @@ const TOC = React.memo(({ data }) => {
     }
 
     Array.from(toc.children).forEach((li) => {
-      if (li.children[0] && li.children[0].tagName.toLowerCase() !== 'ul') {
+      if (li.firstElementChild.tagName !== 'UL') {
         li.classList.add('has-no-subject')
       }
     })
