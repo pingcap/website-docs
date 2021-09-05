@@ -119,10 +119,9 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         intl: {
           language: lang,
           messages: messages[lang],
+          routed: true,
           defaultLanguage: 'en',
-          ignoredPaths: [
-            '?(/zh)/(tidb|tidb-data-migration|tidb-in-kubernetes|dev-guide|tidbcloud)/**',
-          ],
+          ignoredPaths: [],
         },
         docVersionStable,
         langSwitchable,

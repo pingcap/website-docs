@@ -7,8 +7,10 @@
 
 @import 'prismjs/themes/prism-solarizedlight.css';
 
+$top: $navbar-height + 1rem;
+
 .PingCAP-Doc {
-  .doc-progress {
+  .progress {
     &.show {
       display: block;
     }
@@ -26,9 +28,12 @@
     }
   }
 
-  .left-aside {
+  .left-aside,
+  .right-aside {
     position: sticky;
-    top: $navbar-height + 1rem;
+    top: $top;
+    max-height: calc(100vh - #{$top});
+    overflow-y: scroll;
   }
 
   // Custom markdown body
@@ -39,14 +44,13 @@
     h4,
     h5,
     h6 {
-      $height: $navbar-height + 1rem;
       z-index: 1;
 
       &:before {
         content: '';
         display: block;
-        height: $height;
-        margin-top: -$height;
+        height: $top;
+        margin-top: -$top;
       }
     }
 
@@ -166,8 +170,6 @@
   }
 
   .right-aside {
-    position: sticky;
-    top: $navbar-height + 1.5rem;
     font-size: $size-7;
 
     @include mobile {

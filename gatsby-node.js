@@ -3,7 +3,7 @@ const createDocs = require('./create-pages/doc')
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions
 
-  createDocs({ graphql, createPage, createRedirect })
+  await createDocs({ graphql, createPage, createRedirect })
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

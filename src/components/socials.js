@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import clsx from 'clsx'
 
-const Socials = ({ className, locale }) => {
+const Socials = ({ locale, className }) => {
   const data = locale === 'en' ? en : zh
 
   return (
     <>
       {data &&
         data.map((social) => (
+          // eslint-disable-next-line jsx-a11y/anchor-has-content
           <a
             key={social.name}
             className={clsx('social', social.name, className)}
@@ -18,6 +19,7 @@ const Socials = ({ className, locale }) => {
             target="_blank"
             rel="noopener noreferrer"
             title={social.name}
+            aria-label={social.name}
           />
         ))}
     </>
@@ -25,8 +27,8 @@ const Socials = ({ className, locale }) => {
 }
 
 Socials.propTypes = {
-  className: PropTypes.string,
   locale: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }
 
 export default Socials

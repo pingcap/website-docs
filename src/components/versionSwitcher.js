@@ -1,6 +1,15 @@
 import '../styles/components/version.scss'
 
-import React, { Fragment, useEffect, useState } from 'react'
+import {
+  Button,
+  Dropdown,
+  DropdownContent,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Icon,
+} from '@seagreenio/react-bulma'
+import React, { useEffect, useState } from 'react'
 import {
   docsCloudVersion,
   docsDMVersion,
@@ -9,8 +18,6 @@ import {
   docsTiDBVersion,
 } from 'lib/version'
 
-import { Block } from '@seagreenio/react-bulma'
-import { Button } from '@seagreenio/react-bulma'
 import { Link } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 
@@ -23,7 +30,6 @@ const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
 const VersionSwitcher = ({ name, docVersionStable, versions }) => {
   const { doc, version, stable: stableVersion } = docVersionStable
 
-  const [dropdownActive, setDropdownActive] = useState('')
   const [buttonText, setButtonText] = useState('')
   const [dropdownItems, setDropdownItems] = useState([])
 
@@ -53,60 +59,31 @@ const VersionSwitcher = ({ name, docVersionStable, versions }) => {
 
   useEffect(handleRelativeDir, [doc, version, stableVersion])
 
-  const handleMenuOpen = () => {
-    function handleClickOutside(e) {
-      e.stopPropagation()
-
-      setDropdownActive('')
-      document.removeEventListener('click', handleClickOutside)
-    }
-
-    if (dropdownActive) {
-      setDropdownActive('')
-    } else {
-      setDropdownActive('is-active')
-      document.addEventListener('click', handleClickOutside)
-    }
-  }
-
   return (
-    <Block>
-      <div
-        className={`PingCAP-version-switcher dropdown${
-          dropdownActive ? ' ' + dropdownActive : ''
-        }`}
-      >
-        <div className="dropdown-trigger">
-          <Button className={dropdownActive} fullwidth onClick={handleMenuOpen}>
-            {buttonText}
-          </Button>
-        </div>
-        <div className="dropdown-menu">
-          <div className="dropdown-content">
-            {dropdownItems.length > 0 &&
-              dropdownItems.map((item) => (
-                <Fragment key={item}>
-                  {versions && versions.indexOf(item) === -1 ? (
-                    <span className="dropdown-item unclickable-btn">
-                      {item === 'stable' ? `${stableVersion}` : `${item}`}
-                      <span className="tooltiptext">
-                        This doc does not exist in {item}
-                      </span>
-                    </span>
-                  ) : (
-                    <Link
-                      to={`/${doc}/${item}/${name === '_index' ? '' : name}`}
-                      className="dropdown-item"
-                    >
-                      {item === 'stable' ? `${stableVersion}` : `${item}`}
-                    </Link>
-                  )}
-                </Fragment>
-              ))}
-          </div>
-        </div>
-      </div>
-    </Block>
+    <Dropdown className="PingCAP-Version-Switcher" hoverable>
+      <DropdownTrigger>
+        <Button fullwidth>
+          <span>{buttonText}</span>
+          <Icon name="mdi mdi-menu-down" />
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownContent>
+          {dropdownItems.length &&
+            dropdownItems.map((item) => (
+              <DropdownItem key={item}>
+                {versions.indexOf(item) === -1 ? (
+                  <span>{item === 'stable' ? stableVersion : item}</span>
+                ) : (
+                  <Link to={`/${doc}/${item}/${name === '_index' ? '' : name}`}>
+                    {item === 'stable' ? stableVersion : item}
+                  </Link>
+                )}
+              </DropdownItem>
+            ))}
+        </DropdownContent>
+      </DropdownMenu>
+    </Dropdown>
   )
 }
 

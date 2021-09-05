@@ -70,44 +70,6 @@ const Doc = ({
     return () => dispatch(setLangSwitchable(true))
   }, [])
 
-  // useEffect(() => {
-  //   const footer = document.querySelector('.footer.PingCAP-Footer')
-  //   const footerHeight = footer.getBoundingClientRect().height
-
-  //   let isReachFooter = false
-
-  //   const scrollListener = () => {
-  //     const winScrollHeight = document.documentElement.scrollHeight
-  //     const winClientHeight = document.documentElement.clientHeight
-  //     const winScrollTop = document.documentElement.scrollTop
-  //     const toFooter = winScrollHeight - winClientHeight - footerHeight
-
-  //     if (winScrollTop > toFooter && !isReachFooter) {
-  //       isReachFooter = true
-  //     }
-
-  //     if (winScrollTop < toFooter && isReachFooter) {
-  //       isReachFooter = false
-  //     }
-
-  //     const height = winScrollHeight - winClientHeight
-  //     const scrolled = ((winScrollTop / height) * 100).toFixed()
-
-  //     const progressEle = document.querySelector('progress')
-  //     progressEle.value = scrolled
-
-  //     if (winScrollTop > 0) {
-  //       progressEle.classList.add('show')
-  //     } else {
-  //       progressEle.classList.remove('show')
-  //     }
-  //   }
-
-  //   window.addEventListener('scroll', scrollListener)
-
-  //   return () => window.removeEventListener('scroll', scrollListener)
-  // }, [])
-
   useEffect(() => {
     // replaceInternalHref(lang, doc, version)
 
@@ -176,21 +138,20 @@ const Doc = ({
         ]}
       />
       <article className="PingCAP-Doc">
-        <Progress
-          className="doc-progress"
-          color="primary"
-          value={0}
-          max={100}
-        />
+        <Progress color="primary" value={0} max={100} />
         <Columns gap={6}>
           <Column>
             <div className="left-aside">
-              <VersionSwitcher
-                name={name}
-                docVersionStable={docVersionStableMap}
-                versions={versions}
-              />
-              <Toc data={toc} />
+              <Block>
+                <VersionSwitcher
+                  name={name}
+                  docVersionStable={docVersionStableMap}
+                  versions={versions}
+                />
+              </Block>
+              <Block>
+                <Toc data={toc} docVersionStable={docVersionStableMap} />
+              </Block>
             </div>
           </Column>
 

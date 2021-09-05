@@ -7,89 +7,41 @@
 
   ul {
     li {
-      position: relative;
       padding-top: 0.5rem;
-      color: $B3;
+      color: $primary;
       cursor: pointer;
+      word-break: break-word;
 
       ul {
         padding-left: 1rem;
-        transition: height 0.25s;
       }
 
       a {
         font-weight: normal;
-        word-break: break-word;
       }
 
       &.can-unfold {
+        position: relative;
         font-weight: bold;
 
-        .remove-icon {
-          display: inline-block;
-          width: 12px;
-          height: 12px !important;
-          margin-bottom: -2px;
-          margin-left: 0.5rem;
-          background: url(../../../images/toc/remove.svg) no-repeat;
-          background-size: contain;
-        }
-
-        &:hover {
-          color: $B1;
-
-          .remove-icon {
-            background: url(../../../images/toc/remove-hl.svg) no-repeat;
-            background-size: contain;
-          }
-        }
-      }
-
-      .add-icon {
-        display: none;
-      }
-
-      &.folded {
-        word-break: break-word;
-
-        .remove-icon {
-          display: none;
-        }
-
-        .add-icon {
-          display: inline-block;
-          width: 12px;
-          height: 12px !important;
-          margin-bottom: -2px;
-          margin-left: 0.5rem;
-          background: url(../../../images/toc/add.svg) no-repeat;
-          background-size: contain;
-        }
-
         > ul {
-          display: none;
+          height: 0;
+          overflow: hidden;
         }
 
-        ul {
-          &:first-child {
-            padding-top: 0px;
-          }
-        }
-
-        &:hover {
-          .add-icon {
-            background: url(../../../images/toc/add-hl.svg) no-repeat;
-            background-size: contain;
-          }
+        span.icon {
+          position: absolute;
+          top: 0.5rem;
+          left: -24px;
         }
       }
     }
 
     &.top {
       > li {
-        padding: 0.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
         border-bottom: 1px solid $T2;
-        word-break: break-word;
 
         &:not(.has-no-subject):after {
           content: '';
@@ -98,7 +50,7 @@
           right: 0;
           width: 12px;
           height: 12px;
-          background: url(../../../images/toc/subject.svg);
+          background: url(images/toc/subject.svg);
           background-size: cover;
         }
       }

@@ -2,84 +2,83 @@ import 'styles/components/toc.scss'
 
 import React, { useEffect } from 'react'
 
-import { Block } from '@seagreenio/react-bulma'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
+import { navigate } from 'gatsby-plugin-react-intl'
 
-const TOC = React.memo(({ data }) => {
+const TOC = React.memo(({ data, docVersionStable }) => {
+  const { doc, version } = docVersionStable
+
   const generate = () => {
     const wrapper = document.querySelector('.PingCAP-TOC')
     const toc = wrapper.firstChild
-    toc.classList.add('top')
+    toc.className = 'top'
 
     function fold(li) {
-      Array.from(li.children).forEach((list) => {
-        if (list && list.tagName === 'SPAN') {
-          list.style.display = 'inlin-block'
-        } else if (list && list.tagName === 'UL') {
-          list.style.display = 'none'
-        }
+      const start = performance.now()
 
-        Array.from(list.children).forEach((el) => {
-          if (
-            el.classList.contains('can-unfold') &&
-            !el.classList.contains('folded')
-          ) {
-            el.classList.add('folded')
-            fold(el)
-          }
-        })
+      Array.from(li.children).forEach((el) => {
+        // ignore icon
+        if (el.tagName !== 'SPAN') {
+          requestAnimationFrame(function animate(timestamp) {
+            const elapsed = timestamp - start
+            const progress = Math.min(elapsed / 250, 1)
 
-        requestAnimationFrame(() => {
-          list.style.height = list.scrollHeight + 'px'
+            if (progress < 1) {
+              el.style.height = `${
+                el.scrollHeight - progress * el.scrollHeight
+              }px`
+              el.style.overflow = 'hidden'
 
-          requestAnimationFrame(() => {
-            list.style.height = 0
+              requestAnimationFrame(animate)
+            }
+
+            if (progress === 1) {
+              el.style.height = ''
+              el.style.overflow = ''
+            }
           })
-        })
+        }
       })
     }
 
     function unfold(li) {
-      Array.from(li.children).forEach((el) => {
-        if (el && el.tagName === 'SPAN') {
-          el.style.display = 'inline-block'
-        } else if (el && el.tagName === 'UL') {
-          el.style.display = 'block'
-        }
+      const start = performance.now()
 
-        return (el.style.height = el.scrollHeight + 'px')
+      Array.from(li.children).forEach((el) => {
+        if (el.tagName !== 'SPAN') {
+          requestAnimationFrame(function animate(timestamp) {
+            const elapsed = timestamp - start
+            const progress = Math.min(elapsed / 250, 1)
+
+            if (progress < 1) {
+              el.style.height = `${progress * el.scrollHeight}px`
+
+              requestAnimationFrame(animate)
+            }
+
+            if (progress === 1) {
+              el.style.height = 'auto'
+              el.style.overflow = 'initial'
+            }
+          })
+        }
       })
     }
 
     function clickEvent(e) {
       e.stopPropagation()
 
-      let li = e.target
+      if (e.target.tagName === 'A') {
+        e.preventDefault()
 
-      if (
-        e.target.classList.contains('add-icon') ||
-        e.target.classList.contains('remove-icon')
-      ) {
-        li = e.target.parentElement
+        const href = e.target.getAttribute('href').replace('.md', '')
+        navigate(`/${doc}/${version}/${href}`)
+
+        return
       }
 
-      li.parentElement.style.height = null
-
-      // keep only one unfolded level
-      const canUnfoldEle = li.parentElement.children
-      Array.from(canUnfoldEle).forEach((el) => {
-        if (
-          el.classList.contains('can-unfold') &&
-          !el.classList.contains('folded') &&
-          !el.classList.contains('has-no-subject') &&
-          li !== el
-        ) {
-          el.classList.add('folded')
-          fold(el)
-          return
-        }
-      })
+      const li = e.currentTarget
 
       if (li.classList.contains('folded')) {
         unfold(li)
@@ -88,25 +87,41 @@ const TOC = React.memo(({ data }) => {
       }
 
       li.classList.toggle('folded')
+
+      const icon = li.lastChild.firstChild
+      // ensure icon
+      if (icon.tagName === 'SPAN') {
+        icon.className = icon.className.endsWith('plus')
+          ? 'mdi mdi-minus'
+          : 'mdi mdi-plus'
+      }
     }
 
     function retrieveLi(ul) {
+      // ignore icon
+      if (ul.tagName === 'SPAN') {
+        return
+      }
+
       Array.from(ul.children).forEach((li) => {
-        if (li.firstElementChild.tagName === 'UL') {
+        const first = li.firstElementChild
+
+        if (
+          first.tagName === 'UL' ||
+          (first.tagName === 'A' &&
+            first.nextElementSibling &&
+            first.nextElementSibling.tagName === 'UL')
+        ) {
           li.classList.add('can-unfold', 'folded')
 
-          if (!li.parentElement.classList.contains('top')) {
-            let unfoldEle = document.createElement('span')
-            let foldEle = document.createElement('span')
-            unfoldEle.classList.add('add-icon')
-            foldEle.classList.add('remove-icon')
-            li.insertBefore(unfoldEle, li.children[0])
-            li.insertBefore(foldEle, li.children[0])
-            unfoldEle.addEventListener('click', clickEvent)
-            foldEle.addEventListener('click', clickEvent)
-          } else {
-            li.addEventListener('click', clickEvent)
+          if (li.parentElement.className !== 'top') {
+            const icon = document.createElement('span')
+            icon.className = 'icon'
+            icon.innerHTML = '<i class="mdi mdi-plus"></i>'
+            li.append(icon)
           }
+
+          li.addEventListener('click', clickEvent)
 
           Array.from(li.children).forEach(retrieveLi)
         }
@@ -115,7 +130,7 @@ const TOC = React.memo(({ data }) => {
 
     Array.from(toc.children).forEach((li) => {
       if (li.firstElementChild.tagName !== 'UL') {
-        li.classList.add('has-no-subject')
+        li.className = 'has-no-subject'
       }
     })
 
@@ -124,33 +139,28 @@ const TOC = React.memo(({ data }) => {
     wrapper.classList.remove('hidden')
   }
 
-  useEffect(() => {
-    generate()
-  }, [])
-
-  useEffect(() => {
-    document.querySelectorAll('.PingCAP-TOC a').forEach((el) => {
-      el.setAttribute('href', el.getAttribute('href').replace('.md', ''))
-    })
-  }, [])
+  useEffect(generate, [])
 
   return (
-    <Block className="PingCAP-TOC hidden">
+    <div className="PingCAP-TOC hidden">
       <MDXRenderer>{data.body}</MDXRenderer>
-    </Block>
+    </div>
   )
 })
 
 TOC.propTypes = {
   data: PropTypes.object.isRequired,
+  docVersionStable: PropTypes.object.isRequired,
 }
 
 function areEqual(prevProps, nextProps) {
-  /*
-  return true if passing nextProps to render would return
-  the same result as passing prevProps to render,
-  otherwise return false
-  */
+  const { prevDocVersionStable } = prevProps
+  const { docVersionStable } = nextProps
+
+  return (
+    prevDocVersionStable.doc === docVersionStable.doc &&
+    prevDocVersionStable.version === docVersionStable.version
+  )
 }
 
-export default TOC
+export default React.memo(TOC, areEqual)

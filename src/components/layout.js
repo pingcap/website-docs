@@ -12,15 +12,6 @@ import { useDispatch } from 'react-redux'
 const Layout = ({ children }) => {
   const dispatch = useDispatch()
 
-  const setGlobalForPluginsUse = () => {
-    if (!window.DOCS_PINGCAP) {
-      window.DOCS_PINGCAP = {
-        globalHistory,
-        navigate,
-      }
-    }
-  }
-
   // useEffect(() => {
   //   if (autoResetDocInfo) {
   //     dispatch(
@@ -34,7 +25,44 @@ const Layout = ({ children }) => {
   //   }
   // }, [dispatch, autoResetDocInfo, locale])
 
-  useEffect(setGlobalForPluginsUse, [])
+  useEffect(() => {
+    const documentElement = document.documentElement
+
+    const scrollListener = () => {
+      const progressEl = document.querySelector('progress')
+      if (!progressEl) {
+        return
+      }
+
+      const scrollHeight = documentElement.scrollHeight
+      const clientHeight = documentElement.clientHeight
+      const scrollTop = documentElement.scrollTop
+
+      const height = scrollHeight - clientHeight
+      const progress = ((scrollTop / height) * 100).toFixed()
+
+      progressEl.value = progress
+
+      if (scrollTop > 0) {
+        progressEl.classList.add('show')
+      } else {
+        progressEl.classList.remove('show')
+      }
+    }
+
+    window.addEventListener('scroll', scrollListener)
+
+    return () => window.removeEventListener('scroll', scrollListener)
+  }, [])
+
+  useEffect(() => {
+    if (!window.DOCS_PINGCAP) {
+      window.DOCS_PINGCAP = {
+        globalHistory,
+        navigate,
+      }
+    }
+  }, [])
 
   return (
     <>
