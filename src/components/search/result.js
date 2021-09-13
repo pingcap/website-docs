@@ -18,12 +18,26 @@ const Result = ({ results, searched }) => {
               <a href={r.url}>
                 <div
                   className="title is-5"
-                  dangerouslySetInnerHTML={{ __html: r.hierarchy.lvl0 }}
+                  dangerouslySetInnerHTML={{
+                    __html: r._highlightResult.hierarchy.lvl0.value,
+                  }}
                 />
               </a>
-              <a href={r.url}>
-                <div className="url">{r.url}</div>
-              </a>
+              {r._highlightResult.url ? (
+                <a href={r._highlightResult.url.value}>
+                  <div
+                    className="url"
+                    dangerouslySetInnerHTML={{
+                      __html: r._highlightResult.url.value,
+                    }}
+                  ></div>
+                </a>
+              ) : (
+                <a href={r.url}>
+                  <div className="url">{r.url}</div>
+                </a>
+              )}
+
               <div
                 className="content"
                 dangerouslySetInnerHTML={{
