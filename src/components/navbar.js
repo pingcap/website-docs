@@ -143,6 +143,18 @@ const Navbar = (prop) => {
             <a
               href={
                 locale === 'zh'
+                  ? 'https://pingcap.com/zh/product#SelectProduct'
+                  : 'https://en.pingcap.com/download'
+              }
+              className="navbar-item with-main-section"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FormattedMessage id="navbar.download" />
+            </a>
+            <a
+              href={
+                locale === 'zh'
                   ? 'https://pingcap.com/zh/contact/'
                   : 'https://pingcap.com/contact-us/'
               }
