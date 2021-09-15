@@ -24,7 +24,7 @@ const Result = ({ results, searched }) => {
                 />
               </a>
               {r._highlightResult.url ? (
-                <a href={r._highlightResult.url.value}>
+                <a href={r.url}>
                   <div
                     className="url"
                     dangerouslySetInnerHTML={{
