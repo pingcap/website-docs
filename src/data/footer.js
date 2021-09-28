@@ -58,8 +58,8 @@ const footerColumnsZh = [
         linkType: 'outBoundLink',
       },
       {
-        name: 'PingCAP University',
-        link: 'https://university.pingcap.com',
+        name: 'PingCAP Education',
+        link: 'https://pingcap.com/zh/education/',
         linkType: 'outBoundLink',
       },
       {
