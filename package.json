@@ -12,7 +12,7 @@
     "@mdx-js/react": "^1.6.22",
     "@seagreenio/react-bulma": "^0.1.0-beta.4",
     "algoliasearch": "^4.2.0",
-    "axios": "^0.21.1",
+    "axios": "^0.22.0",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1",
     "flat": "^5.0.2",
@@ -46,14 +46,16 @@
   },
   "devDependencies": {
     "@prantlf/railroad-diagrams": "^1.0.1",
+    "@ti-fe/cli": "^0.11.1",
+    "@ti-fe/prettier-config": "^1.0.3",
     "anafanafo": "^1.0.0",
     "bulma": "^0.9.3",
     "gatsby-plugin-root-import": "^2.0.7",
-    "husky": "^4.2.5",
+    "husky": "^7.0.0",
     "jest": "^26.2.2",
-    "lint-staged": "^10.2.6",
+    "lint-staged": "^11.2.3",
     "pegjs": "^0.10.0",
-    "prettier": "2.3.2",
+    "prettier": "2.4.1",
     "resolve-url-loader": "^4.0.0",
     "sass": "^1.38.1",
     "unist-util-flatmap": "^1.0.0"
@@ -86,14 +88,11 @@
     "download:docs-dev-guide": "pingcap-docs-download dl pingcap/docs-dev-guide --config docs.json",
     "download:docs-dev-guide:zh:all": "./scripts/download-docs-dev-guide-zh.sh",
     "clean:docs": "pingcap-docs-download cl",
-    "sync": "pingcap-docs-download sync"
+    "sync": "pingcap-docs-download sync",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.js?(x)": "prettier --write"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
