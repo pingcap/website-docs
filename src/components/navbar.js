@@ -20,6 +20,7 @@ import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Progress } from '@seagreenio/react-bulma'
 import SearchInput from './search/input'
 import clsx from 'clsx'
 import { setSearchValue } from 'state'
@@ -37,7 +38,7 @@ const Navbar = () => {
   const { locale } = intl
 
   const dispatch = useDispatch()
-  const { docInfo, langSwitchable, searchValue } = useSelector((state) => state)
+  const { docInfo, langSwitchable, searchValue } = useSelector(state => state)
 
   const enDisabled = !langSwitchable && locale === 'zh'
   const zhDisabled = !langSwitchable && locale === 'en'
@@ -45,13 +46,29 @@ const Navbar = () => {
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
 
-  const handleSetSearchValue = (value) => dispatch(setSearchValue(value))
+  const handleSetSearchValue = value => dispatch(setSearchValue(value))
 
   useEffect(() => {
-    const scrollListener = () => {
-      const winScrollTop = document.documentElement.scrollTop
+    const documentElement = document.documentElement
 
-      setShowBorder(winScrollTop > 0)
+    const scrollListener = () => {
+      const progressEl = document.querySelector('progress')
+      if (!progressEl) {
+        return
+      }
+
+      const scrollHeight = documentElement.scrollHeight
+      const clientHeight = documentElement.clientHeight
+      const scrollTop = documentElement.scrollTop
+      const scrolled = scrollTop > 0
+
+      const height = scrollHeight - clientHeight
+      const progress = ((scrollTop / height) * 100).toFixed()
+
+      progressEl.value = progress
+      progressEl.classList[scrolled ? 'add' : 'remove']('show')
+
+      setShowBorder(scrolled)
     }
 
     window.addEventListener('scroll', scrollListener)
@@ -153,6 +170,8 @@ const Navbar = () => {
           </NavbarEnd>
         </NavbarMenu>
       </Container>
+
+      <Progress color="primary" value={0} max={100} />
     </BulmaNavbar>
   )
 }

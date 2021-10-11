@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby-plugin-react-intl'
 
-const TOC = React.memo(({ data, docVersionStable }) => {
+const TOC = ({ data, docVersionStable }) => {
   const { doc, version } = docVersionStable
 
   const generate = () => {
@@ -17,7 +17,7 @@ const TOC = React.memo(({ data, docVersionStable }) => {
     function fold(li) {
       const start = performance.now()
 
-      Array.from(li.children).forEach((el) => {
+      Array.from(li.children).forEach(el => {
         // ignore icon
         if (el.tagName !== 'SPAN') {
           requestAnimationFrame(function animate(timestamp) {
@@ -45,7 +45,7 @@ const TOC = React.memo(({ data, docVersionStable }) => {
     function unfold(li) {
       const start = performance.now()
 
-      Array.from(li.children).forEach((el) => {
+      Array.from(li.children).forEach(el => {
         if (el.tagName !== 'SPAN') {
           requestAnimationFrame(function animate(timestamp) {
             const elapsed = timestamp - start
@@ -103,7 +103,7 @@ const TOC = React.memo(({ data, docVersionStable }) => {
         return
       }
 
-      Array.from(ul.children).forEach((li) => {
+      Array.from(ul.children).forEach(li => {
         const first = li.firstElementChild
 
         if (
@@ -128,7 +128,7 @@ const TOC = React.memo(({ data, docVersionStable }) => {
       })
     }
 
-    Array.from(toc.children).forEach((li) => {
+    Array.from(toc.children).forEach(li => {
       if (li.firstElementChild.tagName !== 'UL') {
         li.className = 'has-no-subject'
       }
@@ -146,21 +146,11 @@ const TOC = React.memo(({ data, docVersionStable }) => {
       <MDXRenderer>{data.body}</MDXRenderer>
     </div>
   )
-})
+}
 
 TOC.propTypes = {
   data: PropTypes.object.isRequired,
   docVersionStable: PropTypes.object.isRequired,
 }
 
-function areEqual(prevProps, nextProps) {
-  const { prevDocVersionStable } = prevProps
-  const { docVersionStable } = nextProps
-
-  return (
-    prevDocVersionStable.doc === docVersionStable.doc &&
-    prevDocVersionStable.version === docVersionStable.version
-  )
-}
-
-export default React.memo(TOC, areEqual)
+export default TOC

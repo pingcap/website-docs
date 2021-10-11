@@ -19,9 +19,9 @@ import { toolsData } from 'data/tools'
 const Tools = () => (
   <>
     <Seo title="Tools" />
-    <div className="PingCAP-Tools">
+    <article className="PingCAP-Tools">
       <Columns multiline>
-        {toolsData.map((tool) => (
+        {toolsData.map(tool => (
           <Column key={tool.icon} size={6}>
             <Link to={tool.link}>
               <Card>
@@ -41,7 +41,7 @@ const Tools = () => (
           </Column>
         ))}
       </Columns>
-    </div>
+    </article>
   </>
 )
 

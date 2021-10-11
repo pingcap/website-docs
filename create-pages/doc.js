@@ -44,7 +44,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     }
   `)
 
-  const nodes = docs.data.allMdx.nodes.map((node) => {
+  const nodes = docs.data.allMdx.nodes.map(node => {
     // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
     const slug = node.slug.split('/').slice(1).join('/')
     const { sourceInstanceName: topFolder, relativePath, name } = node.parent
@@ -91,7 +91,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     return acc
   }, {})
 
-  nodes.forEach((node) => {
+  nodes.forEach(node => {
     const {
       id,
       parent,
@@ -110,6 +110,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       path,
       component: template,
       context: {
+        layout: 'doc',
         id,
         name: parent.name,
         repo,
@@ -134,7 +135,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
 
     // create redirects
     if (node.frontmatter.aliases) {
-      node.frontmatter.aliases.forEach((fromPath) => {
+      node.frontmatter.aliases.forEach(fromPath => {
         createRedirect({
           fromPath,
           toPath: path,
