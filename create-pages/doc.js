@@ -46,11 +46,14 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
 
   const nodes = docs.data.allMdx.nodes.map(node => {
     // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
-    const slug = node.slug.split('/').slice(1).join('/')
+    const slug = node.slug.slice(3)
     const { sourceInstanceName: topFolder, relativePath, name } = node.parent
-    const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path]
+    const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path with .md]
     const [doc, version] = pathWithoutLang
 
+    // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
+    node.pathWithoutVersion = slug.split('/').slice(2).join('/')
+    node.path = replacePath(slug, name, lang, node.pathWithoutVersion)
     node.repo = getRepo(doc, lang)
     node.ref = version
     node.lang = lang
@@ -60,21 +63,15 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       version: node.version,
       stable: getStable(doc),
     })
-    node.path = replacePath(slug, name, lang)
 
     const filePathInDiffLang = path.resolve(
       __dirname,
-      `..${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${pathWithoutLang.join(
-        '/'
-      )}`
+      `../${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath.slice(3)}`
     )
     node.langSwitchable = fs.existsSync(filePathInDiffLang)
 
     node.tocSlug = genTOCSlug(node.slug)
     node.downloadURL = genPDFDownloadURL(slug, lang)
-
-    // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
-    node.pathWithoutVersion = slug.split('/').slice(2).join('/')
 
     return node
   })
@@ -99,17 +96,17 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
 
   nodes.forEach(node => {
     const {
-      id,
       parent,
+      id,
       repo,
       ref,
       lang,
-      docVersionStable,
+      pathWithoutVersion,
       path,
+      docVersionStable,
       langSwitchable,
       tocSlug,
       downloadURL,
-      pathWithoutVersion,
     } = node
 
     createPage({
@@ -117,8 +114,8 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       component: template,
       context: {
         layout: 'doc',
-        id,
         name: parent.name,
+        id,
         repo,
         ref,
         lang,
@@ -126,16 +123,17 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         intl: {
           language: lang,
           messages: messages[lang],
-          routed: true,
+          routed: lang !== 'en',
           defaultLanguage: 'en',
+          redirectDefaultLanguageToRoot: true,
           ignoredPaths: [],
         },
+        pathWithoutVersion,
         docVersionStable,
         langSwitchable,
         tocSlug,
         downloadURL,
-        pathWithoutVersion,
-        versions: versionsMap[lang][node.pathWithoutVersion],
+        versions: versionsMap[lang][pathWithoutVersion],
       },
     })
 

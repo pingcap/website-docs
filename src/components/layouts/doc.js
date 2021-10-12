@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 
 const Layout = ({
   children,
-  pageContext: { name, docVersionStable, versions },
+  pageContext: { name, docVersionStable, pathWithoutVersion, versions },
 }) => {
   const docVersionStableMap = JSON.parse(docVersionStable)
 
@@ -25,6 +25,7 @@ const Layout = ({
                 <VersionSwitcher
                   name={name}
                   docVersionStable={docVersionStableMap}
+                  pathWithoutVersion={pathWithoutVersion}
                   versions={versions}
                 />
               </Block>

@@ -59,9 +59,10 @@ exports.genPDFDownloadURL = function (slug, lang) {
  * @param {string} slug - mdx slug.
  * @param {string} name - filename.
  * @param {string} lang
+ * @param {string} pathWithoutVersion
  * @returns {string} - Replaced path.
  */
-exports.replacePath = function (slug, name, lang) {
+exports.replacePath = function (slug, name, lang, pathWithoutVersion) {
   const docPath = genDocCategory(slug)
   lang = lang === 'en' ? '' : '/' + lang
 
@@ -69,5 +70,5 @@ exports.replacePath = function (slug, name, lang) {
     return `${lang}/${docPath}`
   }
 
-  return `${lang}/${docPath}/${name}`
+  return `${lang}/${docPath}/${pathWithoutVersion}`
 }

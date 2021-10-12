@@ -15,7 +15,12 @@ import { cloud, devGuide, dm, operator, tidb } from 'lib/version'
 import { Link } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 
-const VersionSwitcher = ({ name, docVersionStable, versions }) => {
+const VersionSwitcher = ({
+  name,
+  docVersionStable,
+  pathWithoutVersion,
+  versions,
+}) => {
   const { doc, version, stable: stableVersion } = docVersionStable
 
   const [text, setText] = useState('')
@@ -64,7 +69,11 @@ const VersionSwitcher = ({ name, docVersionStable, versions }) => {
                   {item === 'stable' ? stableVersion + ' (stable)' : item}
                 </span>
               ) : (
-                <Link to={`/${doc}/${item}/${name === '_index' ? '' : name}`}>
+                <Link
+                  to={`/${doc}/${item}/${
+                    name === '_index' ? '' : pathWithoutVersion
+                  }`}
+                >
                   {item === 'stable' ? stableVersion + ' (stable)' : item}
                 </Link>
               )}
@@ -79,6 +88,7 @@ const VersionSwitcher = ({ name, docVersionStable, versions }) => {
 VersionSwitcher.propTypes = {
   name: PropTypes.string.isRequired,
   docVersionStable: PropTypes.object.isRequired,
+  pathWithoutVersion: PropTypes.string.isRequired,
   versions: PropTypes.array,
 }
 

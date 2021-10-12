@@ -177,6 +177,7 @@ const TOC = ({ data, name, docVersionStable }) => {
     wrapper.classList.remove('hidden')
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(generate, [data.body])
 
   return (
