@@ -54,9 +54,10 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     node.repo = getRepo(doc, lang)
     node.ref = version
     node.lang = lang
+    node.version = renameVersionByDoc(doc, version)
     node.docVersionStable = JSON.stringify({
       doc,
-      version: renameVersionByDoc(doc, version),
+      version: node.version,
       stable: getStable(doc),
     })
     node.path = replacePath(slug, name, lang)
@@ -72,24 +73,29 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     node.tocSlug = genTOCSlug(node.slug)
     node.downloadURL = genPDFDownloadURL(slug, lang)
 
-    const chunks = slug.split('/').slice(1) // e.g. => ['master', 'benchmark-v1.0-ga']
-    node.version = chunks[0] // master
-    node.pathWithoutVersion = chunks.slice(1).join('/')
+    // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
+    node.pathWithoutVersion = slug.split('/').slice(2).join('/')
 
     return node
   })
 
-  const versionsMap = nodes.reduce((acc, { version, pathWithoutVersion }) => {
-    const arr = acc[pathWithoutVersion]
+  const versionsMap = nodes.reduce(
+    (acc, { lang, version, pathWithoutVersion }) => {
+      const arr = acc[lang][pathWithoutVersion]
 
-    if (arr) {
-      arr.push(version)
-    } else {
-      acc[pathWithoutVersion] = [version]
+      if (arr) {
+        arr.push(version)
+      } else {
+        acc[lang][pathWithoutVersion] = [version]
+      }
+
+      return acc
+    },
+    {
+      en: {},
+      zh: {},
     }
-
-    return acc
-  }, {})
+  )
 
   nodes.forEach(node => {
     const {
@@ -129,7 +135,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         tocSlug,
         downloadURL,
         pathWithoutVersion,
-        versions: versionsMap[node.pathWithoutVersion],
+        versions: versionsMap[lang][node.pathWithoutVersion],
       },
     })
 

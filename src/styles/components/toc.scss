@@ -18,6 +18,11 @@
 
       a {
         font-weight: normal;
+
+        &.active {
+          color: $B1;
+          font-weight: bold;
+        }
       }
 
       &.can-unfold {

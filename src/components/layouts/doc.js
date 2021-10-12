@@ -28,7 +28,13 @@ const Layout = ({
                   versions={versions}
                 />
               </Block>
-              {toc && <Toc data={toc} docVersionStable={docVersionStableMap} />}
+              {toc && (
+                <Toc
+                  data={toc}
+                  name={name}
+                  docVersionStable={docVersionStableMap}
+                />
+              )}
             </div>
           </Column>
           {children}

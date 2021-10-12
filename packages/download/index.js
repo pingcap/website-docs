@@ -5,6 +5,7 @@ import {
   replaceTabsPanelStream,
 } from '@pingcap/docs-content'
 
+import dotenv from 'dotenv'
 import { execSync } from 'child_process'
 import fs from 'fs'
 import { genContentFromOutline } from './gen.js'
@@ -12,6 +13,8 @@ import { handleSync } from './sync.js'
 import nPath from 'path'
 import rimraf from 'rimraf'
 import sig from 'signale'
+
+dotenv.config()
 
 function genOptions(repo, config) {
   const options = {
@@ -23,7 +26,14 @@ function genOptions(repo, config) {
   }
 
   if (config) {
-    options.ignore = JSON.parse(fs.readFileSync(config)).ignore
+    let contents
+    try {
+      contents = fs.readFileSync(config)
+    } catch (err) {
+      return options
+    }
+
+    options.ignore = JSON.parse(contents).ignore
   }
 
   return options

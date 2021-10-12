@@ -4,17 +4,12 @@ import { FormattedMessage } from 'react-intl'
 import { Link } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
-
-const deprecatedDocsVersions = {
-  tidb: ['v2.1', 'v3.0', 'v3.1'],
-  'tidb-data-migration': ['v1.0'],
-  'tidb-in-kubernetes': ['v1.0'],
-}
+import { deprecated } from 'lib/version'
 
 const DeprecationNotice = ({ name, docVersionStable, versions }) => {
   const { doc, version, stable: stableVersion } = docVersionStable
 
-  const showNoitce = deprecatedDocsVersions[doc].includes(version)
+  const showNoitce = deprecated[doc].includes(version)
   const stableDocLink = versions.includes('stable')
     ? `/${doc}/stable/${name === '_index' ? '' : name}`
     : `/${doc}/stable`
@@ -27,7 +22,7 @@ const DeprecationNotice = ({ name, docVersionStable, versions }) => {
             <FormattedMessage
               id={`doc.deprecation.${doc}.firstContext`}
               values={{
-                curversion: `${version}`,
+                curDocVersion: version,
               }}
             />
           </p>

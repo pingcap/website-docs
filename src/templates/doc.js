@@ -37,7 +37,7 @@ const Doc = ({
   },
   data,
 }) => {
-  const { mdx } = data
+  const { mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version } = docVersionStableMap
@@ -54,8 +54,8 @@ const Doc = ({
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setDocData(data))
-  }, [dispatch, data])
+    dispatch(setDocData({ toc }))
+  }, [dispatch, toc])
 
   useEffect(() => {
     dispatch(setLangSwitchable(langSwitchable))
@@ -67,6 +67,7 @@ const Doc = ({
   }, [dispatch, langSwitchable])
 
   useEffect(() => {
+    // TODO: refactor
     // replaceInternalHref(lang, doc, version)
 
     dispatch(

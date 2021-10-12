@@ -9,7 +9,6 @@ import fs from 'fs'
  * @export
  * @param {Object} metaInfo
  * @param {string} metaInfo.repo - Short for owner/repo
- * @param {string} metaInfo.ref - which branch
  * @param {string} metaInfo.base
  * @param {string} metaInfo.head
  * @param {Object} [options]
@@ -17,7 +16,7 @@ import fs from 'fs'
  * @param {Array} [options.pipelines]
  */
 export async function handleSync(metaInfo, destDir, options) {
-  const { repo, ref, base, head } = metaInfo
+  const { repo, base, head } = metaInfo
   const { ignore = [], pipelines = [] } = options
 
   let files
@@ -27,7 +26,7 @@ export async function handleSync(metaInfo, destDir, options) {
     throw err
   }
 
-  files.forEach((file) => {
+  files.forEach(file => {
     const { filename, status, download_url, previous_filename } = file
 
     if (ignore.includes(filename)) {
@@ -43,7 +42,7 @@ export async function handleSync(metaInfo, destDir, options) {
 
         break
       case 'removed':
-        fs.unlink(dest, (err) => {
+        fs.unlink(dest, err => {
           if (err) {
             sig.error(`Fail to unlink ${dest}: ${err}`)
           } else {
@@ -56,7 +55,7 @@ export async function handleSync(metaInfo, destDir, options) {
         writeContent(download_url, dest, pipelines)
 
         const previous = genDest(repo, previous_filename, destDir)
-        fs.unlink(previous, (err) => {
+        fs.unlink(previous, err => {
           if (err) {
             sig.error(`Fail to unlink ${previous}: ${err}`)
           } else {

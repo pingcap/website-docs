@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.22.0",
+    "dotenv": "^10.0.0",
     "mdast-util-from-markdown": "^1.0.0",
     "rimraf": "^3.0.2",
     "signale": "^1.4.0",

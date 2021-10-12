@@ -23,9 +23,9 @@ We have pre-defined some commands to download the docs and clean docs, these com
 ```json
 {
   "scripts": {
-    "download:docs-tidb:en": "pingcap-docs-download dl pingcap/docs --config docs.json",
+    "download:docs-tidb:en": "pingcap-docs-download dl pingcap/docs",
     "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
-    "download:docs-tidb:zh": "pingcap-docs-download dl pingcap/docs-cn --config docs.json",
+    "download:docs-tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
     "download:docs-tidb:zh:all": "./scripts/download-docs-tidb-zh.sh",
 
     "download:docs-dm": "pingcap-docs-download dl pingcap/docs-dm",

@@ -2,21 +2,21 @@ import '../styles/pages/search.scss'
 
 import React, { useEffect, useState } from 'react'
 import {
+  cloud,
+  devGuide,
+  dm,
+  dmStable,
+  operator,
+  operatorStable,
+  tidb,
+  tidbStable,
+} from 'lib/version'
+import {
   defaultDocInfo,
   setDocInfo,
   setLoading,
   setSearchValue,
 } from '../state'
-import {
-  dmStableVersion,
-  docsCloudVersion,
-  docsDMVersion,
-  docsDevGuideVersion,
-  docsTiDBOperatorVersion,
-  docsTiDBVersion,
-  operatorStableVersion,
-  tidbStableVersion,
-} from '../lib/version'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FormattedMessage } from 'react-intl'
@@ -26,26 +26,20 @@ import Seo from '../components/seo'
 import { algoliaClient } from '../lib/algolia'
 import { useLocation } from '@reach/router'
 
-const docsTiDBVersionList = Object.values(docsTiDBVersion)
-const docsTiDBOperatorVersionList = Object.values(docsTiDBOperatorVersion)
-const docsDMVersionList = Object.values(docsDMVersion)
-const docsCloudVersionList = Object.values(docsCloudVersion)
-const docsDevGuideVersionList = Object.values(docsDevGuideVersion)
-
-const matchToVersionList = (match) => {
+const matchToVersionList = match => {
   switch (match) {
     case 'tidb':
-      return docsTiDBVersionList
-    case 'tidb-in-kubernetes':
-      return docsTiDBOperatorVersionList
+      return tidb
     case 'tidb-data-migration':
-      return docsDMVersionList
+      return dm
+    case 'tidb-in-kubernetes':
+      return operator
     case 'tidbcloud':
-      return docsCloudVersionList
+      return cloud
     case 'dev-guide':
-      return docsDevGuideVersionList
+      return devGuide
     default:
-      return docsTiDBVersionList
+      return tidb
   }
 }
 
@@ -59,7 +53,7 @@ const Search = ({ pageContext: { locale } }) => {
 
   const dispatch = useDispatch()
 
-  const loading = useSelector((state) => state.loading)
+  const loading = useSelector(state => state.loading)
 
   const [selectedType, setSelectedType] = useState(type)
   const [selectedVersion, setSelectedVersion] = useState(version)
@@ -74,7 +68,7 @@ const Search = ({ pageContext: { locale } }) => {
     {
       name: 'TiDB',
       match: 'tidb',
-      version: docsTiDBVersionList,
+      version: tidb,
     },
     {
       name: lang === 'zh' ? '周边工具' : 'Tools',
@@ -82,18 +76,18 @@ const Search = ({ pageContext: { locale } }) => {
         {
           name: 'TiDB in Kubernetes',
           match: 'tidb-in-kubernetes',
-          version: docsTiDBOperatorVersionList,
+          version: operator,
         },
         {
           name: 'TiDB Data Migration (DM)',
           match: 'tidb-data-migration',
-          version: docsDMVersionList,
+          version: dm,
         },
       ],
     },
   ]
 
-  const getDocsTypesByLang = (lang) => {
+  const getDocsTypesByLang = lang => {
     let _docsTypesByLang = types.slice(0, 2)
 
     switch (lang) {
@@ -101,7 +95,7 @@ const Search = ({ pageContext: { locale } }) => {
         _docsTypesByLang.push({
           name: '开发指南',
           match: 'dev-guide',
-          version: docsDevGuideVersionList,
+          version: devGuide,
         })
         break
 
@@ -109,7 +103,7 @@ const Search = ({ pageContext: { locale } }) => {
         _docsTypesByLang.push({
           name: 'Cloud',
           match: 'tidbcloud',
-          version: docsCloudVersionList,
+          version: cloud,
         })
         break
     }
@@ -137,7 +131,7 @@ const Search = ({ pageContext: { locale } }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang])
 
-  const handleDropdownActive = (e) => {
+  const handleDropdownActive = e => {
     e.currentTarget.classList.toggle('is-active')
   }
 
@@ -147,7 +141,7 @@ const Search = ({ pageContext: { locale } }) => {
     setSelectedVersionList(versionList)
   }
 
-  const handleSetVersionAndExecSearch = (version) => () => {
+  const handleSetVersionAndExecSearch = version => () => {
     const _version =
       version === 'stable' ? replaceStableVersion() : `${version}`
     setSelectedVersion(_version)
@@ -189,7 +183,7 @@ const Search = ({ pageContext: { locale } }) => {
 
   const TypeList = () => (
     <div className="type-list">
-      {docsTypesByLang.map((type) => {
+      {docsTypesByLang.map(type => {
         if (type.dropdown) {
           return (
             <div
@@ -203,9 +197,7 @@ const Search = ({ pageContext: { locale } }) => {
               <div className="dropdown-trigger">
                 <div
                   className={`item${
-                    type.dropdown
-                      .map((item) => item.match)
-                      .includes(selectedType)
+                    type.dropdown.map(item => item.match).includes(selectedType)
                       ? ' is-active'
                       : ''
                   }`}
@@ -215,7 +207,7 @@ const Search = ({ pageContext: { locale } }) => {
               </div>
               <div className="dropdown-menu">
                 <div className="dropdown-content">
-                  {type.dropdown.map((item) => (
+                  {type.dropdown.map(item => (
                     <div
                       key={item.name}
                       role="button"
@@ -256,11 +248,11 @@ const Search = ({ pageContext: { locale } }) => {
   function replaceStableVersion() {
     switch (selectedType) {
       case 'tidb':
-        return tidbStableVersion
+        return tidbStable
       case 'tidb-data-migration':
-        return dmStableVersion
+        return dmStable
       case 'tidb-in-kubernetes':
-        return operatorStableVersion
+        return operatorStable
       default:
         break
     }
@@ -269,7 +261,7 @@ const Search = ({ pageContext: { locale } }) => {
   const VersionList = () => (
     <div className="version-list">
       {selectedVersionList &&
-        selectedVersionList.map((version) => (
+        selectedVersionList.map(version => (
           <span
             key={version}
             role="button"

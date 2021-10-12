@@ -14,14 +14,15 @@ function getStable(doc) {
 }
 exports.getStable = getStable
 
-function renameVersion(version, versionStable) {
-  if (version === 'master') {
-    return 'dev'
-  } else if (version === versionStable) {
-    return 'stable'
+function renameVersion(version, stable) {
+  switch (version) {
+    case 'master':
+      return 'dev'
+    case stable:
+      return 'stable'
+    default:
+      return version.replace('release-', 'v')
   }
-
-  return version.replace('release-', 'v')
 }
 
 function renameVersionByDoc(doc, version) {

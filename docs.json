@@ -7,27 +7,28 @@
           "repo": "pingcap/docs",
           "versions": [
             "master",
-            "release-2.1",
-            "release-3.0",
-            "release-3.1",
-            "release-4.0",
+            "release-5.1",
             "release-5.0",
-            "release-5.1"
+            "release-4.0",
+            "release-3.1",
+            "release-3.0",
+            "release-2.1"
           ]
         },
         "zh": {
           "repo": "pingcap/docs-cn",
           "versions": [
             "master",
-            "release-2.1",
-            "release-3.0",
-            "release-3.1",
-            "release-4.0",
+            "release-5.1",
             "release-5.0",
-            "release-5.1"
+            "release-4.0",
+            "release-3.1",
+            "release-3.0",
+            "release-2.1"
           ]
         }
-      }
+      },
+      "deprecated": ["v2.1", "v3.0", "v3.1"]
     },
     "tidb-data-migration": {
       "stable": "release-2.0",
@@ -35,14 +36,15 @@
         "en": {
           "repo": "pingcap/docs-dm",
           "path": "en",
-          "versions": ["master", "release-1.0", "release-2.0"]
+          "versions": ["master", "release-2.0", "release-1.0"]
         },
         "zh": {
           "repo": "pingcap/docs-dm",
           "path": "zh",
-          "versions": ["master", "release-1.0", "release-2.0"]
+          "versions": ["master", "release-2.0", "release-1.0"]
         }
-      }
+      },
+      "deprecated": ["v1.0"]
     },
 
     "tidb-in-kubernetes": {
@@ -51,14 +53,15 @@
         "en": {
           "repo": "pingcap/docs-tidb-operator",
           "path": "en",
-          "versions": ["master", "release-1.0", "release-1.1", "release-1.2"]
+          "versions": ["master", "release-1.2", "release-1.1", "release-1.0"]
         },
         "zh": {
           "repo": "pingcap/docs-tidb-operator",
           "path": "zh",
-          "versions": ["master", "release-1.0", "release-1.1", "release-1.2"]
+          "versions": ["master", "release-1.2", "release-1.1", "release-1.0"]
         }
-      }
+      },
+      "deprecated": ["v1.0"]
     },
     "tidbcloud": {
       "languages": {
@@ -70,7 +73,7 @@
     },
     "dev-guide": {
       "languages": {
-        "zn": {
+        "zh": {
           "repo": "pingcap/dev-guide",
           "versions": ["master"]
         }

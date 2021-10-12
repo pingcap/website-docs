@@ -10,7 +10,7 @@ const argv = yargs(hideBin(process.argv))
   .command(
     ['download <repo> [path] [ref]', 'dl <repo> [path] [ref]'],
     'specify which repo of docs you want to download',
-    (yargs) => {
+    yargs => {
       yargs
         .positional('path', {
           desc: 'Specify the subpath of the repo',
@@ -23,7 +23,7 @@ const argv = yargs(hideBin(process.argv))
         })
     }
   )
-  .command(['clean <path>', 'cl <path>'], 'use rimraf to delete', (yargs) =>
+  .command(['clean <path>', 'cl <path>'], 'use rimraf to delete', yargs =>
     yargs.positional('path', {
       type: 'string',
     })
@@ -38,7 +38,7 @@ const argv = yargs(hideBin(process.argv))
       'gen <repo> [ref] <from> [output]',
     ],
     'generate content from a outline',
-    (yargs) => {
+    yargs => {
       yargs
         .positional('ref', {
           desc: 'Specify the branch of the repo',
@@ -61,6 +61,7 @@ const argv = yargs(hideBin(process.argv))
     config: {
       desc: 'Specify the config',
       type: 'string',
+      default: 'docs.json',
     },
     debug: {
       alias: 'd',
@@ -83,7 +84,7 @@ switch (argv._[0]) {
     break
   case 'clean':
   case 'cl':
-    clean(argv.path, {}, (err) => {
+    clean(argv.path, {}, err => {
       if (err) {
         throw err
       }

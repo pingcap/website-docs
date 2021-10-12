@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby-plugin-react-intl'
 
-const TOC = ({ data, docVersionStable }) => {
+const TOC = ({ data, name, docVersionStable }) => {
   const { doc, version } = docVersionStable
 
   const generate = () => {
@@ -72,8 +72,9 @@ const TOC = ({ data, docVersionStable }) => {
       if (e.target.tagName === 'A') {
         e.preventDefault()
 
-        const href = e.target.getAttribute('href').replace('.md', '')
-        navigate(`/${doc}/${version}/${href}`)
+        navigate(e.target.getAttribute('href'))
+        toc.querySelector('a.active').className = ''
+        e.target.className = 'active'
 
         return
       }
@@ -94,6 +95,37 @@ const TOC = ({ data, docVersionStable }) => {
         icon.className = icon.className.endsWith('plus')
           ? 'mdi mdi-minus'
           : 'mdi mdi-plus'
+      }
+    }
+
+    function modifyHref(el) {
+      const href = el.getAttribute('href').replace('.md', '')
+      const chunks = href.split('/')
+      const _name = chunks[chunks.length - 1]
+
+      el.href = `/${doc}/${version}/${href}`
+
+      if (_name === name) {
+        el.className = 'active'
+
+        while (el.parentElement) {
+          const p = el.parentElement
+
+          if (p.classList.contains('top')) {
+            break
+          }
+
+          if (p.classList.contains('folded')) {
+            p.classList.remove('folded')
+            Array.from(p.children).forEach(d => {
+              if (d.tagName === 'UL') {
+                d.style = 'height: auto; overflow: initial;'
+              }
+            })
+          }
+
+          el = p
+        }
       }
     }
 
@@ -123,7 +155,13 @@ const TOC = ({ data, docVersionStable }) => {
 
           li.addEventListener('click', clickEvent)
 
+          if (first.tagName === 'A') {
+            modifyHref(first)
+          }
+
           Array.from(li.children).forEach(retrieveLi)
+        } else {
+          modifyHref(li.firstChild)
         }
       })
     }
@@ -139,7 +177,7 @@ const TOC = ({ data, docVersionStable }) => {
     wrapper.classList.remove('hidden')
   }
 
-  useEffect(generate, [])
+  useEffect(generate, [data.body])
 
   return (
     <div className="PingCAP-TOC hidden">
@@ -150,6 +188,7 @@ const TOC = ({ data, docVersionStable }) => {
 
 TOC.propTypes = {
   data: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
   docVersionStable: PropTypes.object.isRequired,
 }
 
