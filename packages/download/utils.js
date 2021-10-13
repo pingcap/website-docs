@@ -29,7 +29,7 @@ export const imageCDNs = {
  * @param {Array} [options.pipelines]
  */
 export async function retrieveAllMDs(metaInfo, destDir, options) {
-  const { repo, ref, path } = metaInfo
+  const { repo, ref, path = '' } = metaInfo
   const { ignore = [], pipelines = [] } = options
 
   const data = (await getContent(repo, ref, path)).data
@@ -40,7 +40,7 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
   }
 
   if (Array.isArray(data)) {
-    data.forEach((d) => {
+    data.forEach(d => {
       const { type, name, download_url } = d
       const nextDest = `${destDir}/${name}`
 
@@ -112,5 +112,5 @@ export async function writeContent(url, destPath, pipelines = []) {
   const writeStream = fs.createWriteStream(destPath)
   writeStream.on('close', () => sig.success('Downloaded:', url))
 
-  pipeline(readableStream, ...pipelines.map((p) => p()), writeStream)
+  pipeline(readableStream, ...pipelines.map(p => p()), writeStream)
 }

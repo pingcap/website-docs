@@ -1,4 +1,4 @@
 DIR=$(cd $(dirname $0) && pwd)
 
-sh $DIR/download-docs-tidb-operator-en.sh
-sh $DIR/download-docs-tidb-operator-zh.sh
+sh $DIR/download-tidb-operator-en.sh
+sh $DIR/download-tidb-operator-zh.sh

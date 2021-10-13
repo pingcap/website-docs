@@ -86,7 +86,7 @@ const Navbar = () => {
     >
       <Container>
         <NavbarBrand>
-          <NavbarItem>
+          <NavbarItem href="/">
             <img
               className={styles.logo}
               src={BrandSVG.publicURL}

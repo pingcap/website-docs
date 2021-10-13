@@ -1,6 +1,9 @@
 import axios from 'axios'
+import dotenv from 'dotenv'
 import nPath from 'path'
 import sig from 'signale'
+
+dotenv.config()
 
 const GITHUB_AUTHORIZATION_TOKEN = process.env.GITHUB_AUTHORIZATION_TOKEN
 const baseURL = 'https://api.github.com'
@@ -18,8 +21,8 @@ export const http = axios.create({
     : defaultHeaders,
 })
 
-export function getContent(repo, ref, path = '') {
-  const url = nPath.resolve(`/repos/${repo}/contents`, path)
+export function getContent(repo, ref, path) {
+  const url = nPath.join(`/repos/${repo}/contents`, path)
 
   sig.start(`Get content(ref: ${ref}) from:`, url)
 
