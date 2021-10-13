@@ -1,4 +1,4 @@
-import '../styles/components/version.scss'
+import * as styles from './versionSwitcher.module.scss'
 
 import {
   Button,
@@ -53,9 +53,9 @@ const VersionSwitcher = ({
   useEffect(handleRelativeDir, [doc, version, stableVersion])
 
   return (
-    <Dropdown className="PingCAP-Version-Switcher" hoverable>
-      <DropdownTrigger>
-        <Button fullwidth>
+    <Dropdown className={styles.dropdown} hoverable>
+      <DropdownTrigger className={styles.dropdownTrigger}>
+        <Button className={styles.button} fullwidth>
           <span>{text}</span>
           <Icon name="mdi mdi-menu-down" />
         </Button>

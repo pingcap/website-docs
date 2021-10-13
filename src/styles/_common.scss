@@ -1,6 +1,8 @@
 @import 'variables';
-@import 'bulma/sass/utilities/mixins';
+// Use fullpath to make it easier for editors to locate this file
+@import '../../node_modules/bulma/sass/utilities/mixins.sass';
 
+// Vertical and horizontal centering in flexbox
 @mixin VHCenter {
   display: flex;
   justify-content: center;

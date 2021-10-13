@@ -1,0 +1,29 @@
+@import '../common';
+
+.card {
+  padding: 1.5rem;
+  box-shadow: none;
+  transition: all 0.5s;
+
+  &:hover {
+    box-shadow: $shadow;
+    border: 1px solid $B1;
+  }
+}
+
+.cardHeader {
+  align-items: center;
+  box-shadow: none;
+}
+
+.toolIcon {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+$icons: tidbOperator dm tidbTools tiup;
+@each $icon in $icons {
+  .#{$icon} {
+    background-image: url(images/tools/#{$icon}.svg);
+  }
+}

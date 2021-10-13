@@ -1,7 +1,7 @@
 export const toolsData = [
   {
     type: 'tools.tidbOperator.type',
-    icon: 'tidb-operator',
+    icon: 'tidbOperator',
     desc: 'tools.tidbOperator.desc',
     link: '/tidb-in-kubernetes/stable',
   },
@@ -13,7 +13,7 @@ export const toolsData = [
   },
   {
     type: 'tools.databaseTools.type',
-    icon: 'tidb-tools',
+    icon: 'tidbTools',
     desc: 'tools.databaseTools.desc',
     link: '/tidb/dev/ecosystem-tool-user-guide',
   },

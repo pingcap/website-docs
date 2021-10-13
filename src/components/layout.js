@@ -1,3 +1,5 @@
+import 'styles/global.scss'
+
 import Default from './layouts/default'
 import Doc from './layouts/doc'
 import PropTypes from 'prop-types'

@@ -1,0 +1,59 @@
+@import 'styles/common';
+
+.hasBorder {
+  border-bottom: 1px solid $T2;
+}
+
+.logo {
+  height: 30px;
+}
+
+.main {
+  @include has-item-active(1.5rem);
+  @include mobile {
+    border-bottom: 1px solid $T2;
+  }
+}
+
+.langSwitch {
+  &:after {
+    border-color: $primary;
+  }
+
+  &:hover {
+    &:after {
+      border-color: $B1;
+    }
+  }
+}
+
+.langItem:hover {
+  color: $B1 !important;
+}
+
+.disabled {
+  color: $grey-light;
+  pointer-events: none;
+}
+
+.navbarBurger {
+  color: $primary;
+}
+
+.progress {
+  display: none;
+  position: fixed;
+  top: calc(#{$navbar-height} - 1px);
+  height: 1px;
+  background: transparent;
+  border-radius: 0;
+  z-index: 30; // same as .navbar.is-fixed-top
+
+  &:-webkit-progress-bar {
+    background: transparent;
+  }
+}
+
+.show {
+  display: block;
+}

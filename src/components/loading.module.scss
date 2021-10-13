@@ -1,0 +1,15 @@
+@import 'styles/common';
+
+.loading {
+  @include VHCenter;
+}
+
+.wholeScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: $M2;
+  z-index: 999;
+}

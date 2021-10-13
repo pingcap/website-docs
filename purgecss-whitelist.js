@@ -1,4 +1,4 @@
-const logos = ['tidb-operator-icon', 'dm-icon', 'tidb-tools-icon', 'tiup-icon']
+const logos = ['tidb-operator', 'dm', 'tidb-tools', 'tiup']
 
 const algolia = ['algolia-docsearch-suggestion--highlight']
 

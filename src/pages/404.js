@@ -1,15 +1,15 @@
-import '../styles/pages/404.scss'
+import * as styles from 'styles/pages/404.module.scss'
 
 import { Content, Title } from '@seagreenio/react-bulma'
 
 import { Link } from 'gatsby-plugin-react-intl'
 import React from 'react'
-import Seo from '../components/seo'
+import Seo from 'components/seo'
 
 const NotFoundPage = () => (
   <>
     <Seo title="404 Not Found" />
-    <div className="PingCAP-404">
+    <div className={styles.box}>
       <Title as="h1">Sorry...404!</Title>
       <Content>
         The page you were looking for appears to have been moved, deleted or

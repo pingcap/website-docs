@@ -5,17 +5,15 @@ import { useLocation } from '@reach/router'
 import { wrapPathWithLang } from 'lib/docHelper'
 
 const FeedbackDocLink = ({ repoInfo, lang }) => {
-  const { repo, pathWithoutVersion } = repoInfo
+  const { repo, ref, pathWithoutVersion } = repoInfo
   const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
 
-  const origin = 'https://docs.pingcap.com'
-  const location = useLocation()
-  const { pathname } = location
+  const { host, pathname } = useLocation()
 
   return (
     <a
       className="doc-help-link feedback"
-      href={`https://github.com/${repo}/issues/new?body=File:%20[/${path}](${origin}${pathname})`}
+      href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${host}${pathname})`}
       target="_blank"
       rel="noreferrer"
     >

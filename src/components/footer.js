@@ -1,3 +1,5 @@
+import * as styles from './footer.module.scss'
+
 import {
   Footer as BulmaFooter,
   Column,
@@ -26,7 +28,7 @@ const Footer = () => {
   `)
   const footerColumns = locale === 'zh' ? zh : en
 
-  const handleSpreadItems = (e) => {
+  const handleSpreadItems = e => {
     const screenWidth = window.screen.width
     if (screenWidth > 768) {
       return
@@ -39,11 +41,11 @@ const Footer = () => {
   }
 
   return (
-    <BulmaFooter className="PingCAP-Footer">
+    <BulmaFooter className={styles.footer}>
       <Container>
         <Columns>
-          {footerColumns.map((column) => (
-            <Column key={column.name}>
+          {footerColumns.map(column => (
+            <Column key={column.name} className={styles.column}>
               <Title size={6} onClick={handleSpreadItems}>
                 {column.name}
                 <span className="spread">
@@ -51,7 +53,7 @@ const Footer = () => {
                 </span>
               </Title>
               <ul className="items">
-                {column.items.map((item) => (
+                {column.items.map(item => (
                   <li key={item.name}>
                     {item.url.startsWith('/') ? (
                       <Link to={item.url}>{item.name}</Link>
@@ -67,18 +69,22 @@ const Footer = () => {
           ))}
 
           <Column>
-            <Columns className="socials" multiline>
+            <Columns className={styles.socials} multiline>
               <Socials className="column is-4" locale={locale} />
             </Columns>
           </Column>
         </Columns>
 
-        <div className="annotations">
-          <div className="copyright">
+        <div className={styles.annotations}>
+          <div className={styles.copyright}>
             ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
           </div>
           <a href="https://pingcap.com" target="_blank" rel="noreferrer">
-            <img className="logo" src={FooterLogoSVG.publicURL} alt="PingCAP" />
+            <img
+              className={styles.logo}
+              src={FooterLogoSVG.publicURL}
+              alt="PingCAP"
+            />
           </a>
         </div>
       </Container>
