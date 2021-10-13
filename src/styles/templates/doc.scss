@@ -1,6 +1,5 @@
 @import '../common';
 
-@import '../components/navCloumns';
 @import '../components/tabsPanel';
 @import '../components/embedYouTube';
 
@@ -36,8 +35,7 @@ $top: $navbar-height + 1rem;
     }
 
     a {
-      color: $primary;
-      text-decoration: underline;
+      color: rgba($B1, 0.9);
 
       &:hover {
         color: $B1;

@@ -14,6 +14,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 import React from 'react'
 import Socials from './socials'
+import clsx from 'clsx'
 
 const Footer = () => {
   const intl = useIntl()
@@ -70,7 +71,10 @@ const Footer = () => {
 
           <Column>
             <Columns className={styles.socials} multiline>
-              <Socials className="column is-4" locale={locale} />
+              <Socials
+                className={clsx('column is-4', styles.column)}
+                locale={locale}
+              />
             </Columns>
           </Column>
         </Columns>

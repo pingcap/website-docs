@@ -58,16 +58,16 @@
   @include mobile {
     margin-top: 1rem;
   }
+}
 
-  .column {
-    @include mobile {
-      display: inline-block;
-      margin-left: 1rem;
-    }
-
-    margin-bottom: 1rem;
-    background-position: right;
+.column {
+  @include mobile {
+    display: inline-block;
+    margin-left: 1rem;
   }
+
+  margin-bottom: 1rem;
+  background-position: right;
 }
 
 .annotations {

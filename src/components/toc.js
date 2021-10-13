@@ -73,7 +73,10 @@ const TOC = ({ data, name, docVersionStable }) => {
         e.preventDefault()
 
         navigate(e.target.getAttribute('href'))
-        toc.querySelector('a.active').className = ''
+        const activeAnchor = toc.querySelector('a.active')
+        if (activeAnchor) {
+          activeAnchor.className = ''
+        }
         e.target.className = 'active'
 
         return
@@ -103,7 +106,7 @@ const TOC = ({ data, name, docVersionStable }) => {
       const chunks = href.split('/')
       const _name = chunks[chunks.length - 1]
 
-      el.href = `/${doc}/${version}/${href}`
+      el.href = `/${doc}/${version}/${href[0] === '/' ? href.slice(1) : href}`
 
       if (_name === name) {
         el.className = 'active'

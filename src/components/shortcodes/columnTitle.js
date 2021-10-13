@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import { Title } from '@seagreenio/react-bulma'
 
 const ColumnTitle = ({ children }) => (
-  <div className="column-title">{children}</div>
+  <Title className="has-text-primary mb-3" size={5}>
+    {children}
+  </Title>
 )
-
-ColumnTitle.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default ColumnTitle
