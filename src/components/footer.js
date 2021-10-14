@@ -47,13 +47,17 @@ const Footer = () => {
         <Columns>
           {footerColumns.map(column => (
             <Column key={column.name} className={styles.column}>
-              <Title size={6} onClick={handleSpreadItems}>
+              <Title
+                className={styles.title}
+                size={6}
+                onClick={handleSpreadItems}
+              >
                 {column.name}
-                <span className="spread">
+                <span className={styles.spread}>
                   <Icon name="mdi mdi-plus" />
                 </span>
               </Title>
-              <ul className="items">
+              <ul className={styles.items}>
                 {column.items.map(item => (
                   <li key={item.name}>
                     {item.url.startsWith('/') ? (

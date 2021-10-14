@@ -4,52 +4,50 @@
   background: $M2;
 }
 
-.column {
-  .title {
-    @include mobile {
-      margin-bottom: 0;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid $T2;
-    }
+.title {
+  @include mobile {
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $T2;
+  }
+}
 
-    .spread {
-      @include mobile {
-        @include VHCenter;
-      }
+.spread {
+  @include mobile {
+    @include VHCenter;
+  }
 
-      display: none;
-      width: 16px;
-      height: 16px;
-      color: $primary;
-      float: right;
-      transform-origin: center;
-      transition: transform 0.25s;
+  display: none;
+  width: 16px;
+  height: 16px;
+  color: $primary;
+  float: right;
+  transform-origin: center;
+  transition: transform 0.25s;
 
-      &.clicked {
-        transform: rotate(45deg);
-      }
+  &.clicked {
+    transform: rotate(45deg);
+  }
+}
+
+.items {
+  transition: 0.25s;
+  overflow: hidden;
+
+  @include mobile {
+    max-height: 0;
+
+    &.displayed {
+      max-height: 500px;
     }
   }
 
-  .items {
-    transition: 0.25s;
-    overflow: hidden;
+  li {
+    margin: 1rem 0;
 
-    @include mobile {
-      max-height: 0;
-
-      &.displayed {
-        max-height: 500px;
-      }
-    }
-
-    li {
-      margin: 1rem 0;
-
-      a {
-        display: inline-block;
-        width: 100%;
-      }
+    a {
+      display: inline-block;
+      width: 100%;
     }
   }
 }

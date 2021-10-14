@@ -1,4 +1,3 @@
-const purgecssWhitelist = require('./purgecss-whitelist')
 const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
 
 module.exports = {
@@ -88,9 +87,10 @@ module.exports = {
           `${__dirname}/src/**/*.js`,
           `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
         ],
-        whitelistPatternsChildren: [/^PingCAP-Doc/],
-        whitelist: purgecssWhitelist,
-        ignore: ['prismjs/'],
+        ignore: ['prismjs/', '/userFeedback.scss'],
+        purgeCSSOptions: {
+          safelist: ['algolia-docsearch-suggestion--highlight', /^PingCAP-Doc/], // https://github.com/FullHuman/purgecss/releases/v3.0.0
+        },
       },
     },
     `gatsby-plugin-remove-serviceworker`,

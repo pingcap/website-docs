@@ -1,3 +1,5 @@
+import { graphql, useStaticQuery } from 'gatsby'
+
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -8,12 +10,21 @@ const FeedbackDocLink = ({ repoInfo, lang }) => {
   const { repo, ref, pathWithoutVersion } = repoInfo
   const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
 
-  const { host, pathname } = useLocation()
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          siteUrl
+        }
+      }
+    }
+  `)
+  const { pathname } = useLocation()
 
   return (
     <a
       className="doc-help-link feedback"
-      href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${host}${pathname})`}
+      href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${data.site.siteMetadata.siteUrl}${pathname})`}
       target="_blank"
       rel="noreferrer"
     >
