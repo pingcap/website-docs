@@ -72,7 +72,7 @@ const Footer = React.memo((prop) => {
 
       return langSwitchable
         ? preLang + currentPathnameArr.join('/')
-        : docInfo.type === 'tidbcloud' || docInfo.type === 'dev-guide'
+        : docInfo.type === 'tidbcloud'
         ? preLang + '/tidb/stable/'
         : preLang + '/' + docInfo.type + '/' + docInfo.version
     }

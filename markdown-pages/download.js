@@ -140,7 +140,7 @@ async function handleSync(metaInfo, pipelines = []) {
         case 'dev-guide':
           downloadToPathArrWithoutLang = downloadToPathArrWithoutLang.slice(1)
           lang = filename.substring(0, 2)
-          finalRepo = 'docs-dev-guide'
+          finalRepo = 'docs-developer'
           break
 
         default:

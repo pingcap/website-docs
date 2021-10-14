@@ -65,8 +65,8 @@ export function convertDocAndRef([doc, ref]) {
       result[2] = ''
       break
 
-    case 'docs-dev-guide':
-      result[0] = 'dev-guide'
+    case 'docs-developer':
+      result[0] = 'developer'
       result[1] = docsDevGuideVersion[ref]
       result[2] = ''
       break

@@ -43,7 +43,7 @@ const matchToVersionList = (match) => {
       return docsDMVersionList
     case 'tidbcloud':
       return docsCloudVersionList
-    case 'dev-guide':
+    case 'developer':
       return docsDevGuideVersionList
     default:
       return docsTiDBVersionList
