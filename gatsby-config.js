@@ -6,7 +6,7 @@ module.exports = {
     title: `PingCAP Docs`,
     description: `PingCAP Docs`,
     author: `@PingCAP`,
-    siteUrl: `https://docs.pingcap.com`,
+    siteUrl: `https://docs-zh-preview.netlify.app`,
   },
   plugins: [
     {
