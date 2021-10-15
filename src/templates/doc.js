@@ -19,7 +19,7 @@ import Seo from '../components/seo'
 import UserFeedback from '../components/userFeedback'
 import { graphql } from 'gatsby'
 import optimizeBlockquote from '../lib/optimizeBlockquote'
-// import replaceInternalHref from '../lib/replaceInternalHref'
+import { unifyAnchor } from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import { useLocation } from '@reach/router'
 
@@ -79,25 +79,12 @@ const Doc = ({
     )
   }, [dispatch, lang, doc, version])
 
-  function replaceItemURL(item) {
-    let itemURL
-    if (item) {
-      itemURL = item
-        .replace(/\s/g, '-')
-        .replace(/[^-\w\u4E00-\u9FFF]*/g, '')
-        .toLowerCase()
-        .replace(/span-classversion-mark|span$/g, '')
-    }
-
-    return itemURL
-  }
-
   function renderItems(items) {
     return (
       <ul>
         {items.map(item => (
           <li key={item.url}>
-            <a href={'#' + replaceItemURL(item.url)}>{item.title}</a>
+            <a href={'#' + unifyAnchor(item.url)}>{item.title}</a>
             {item.items && renderItems(item.items)}
           </li>
         ))}

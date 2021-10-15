@@ -1,27 +1,35 @@
+export function unifyAnchor(item) {
+  return item
+    .replace(/\s/g, '-')
+    .replace(/[^-\w\u4E00-\u9FFF]*/g, '') // GitHub Specific
+    .replace(/span-classversion-mark|span$/g, '') // Same as above
+    .toLowerCase()
+}
+
 export default function replaceInternalHref(
   lang,
-  type,
+  doc,
   version,
   simpletab = false
 ) {
-  const aTags = document
-    .querySelector(`${simpletab ? '.PingCAP-simpleTab' : '.doc-content'}`)
-    .getElementsByTagName('a')
+  const aTags = document.querySelectorAll(
+    `${simpletab ? '.PingCAP-simpleTab' : '.doc-content'} a`
+  )
+
   const re = /\/?.*\.md/
   const reAnchor = /[^#-\w\u4E00-\u9FFF]*/g
   const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
   const sliceVersionMark = /span-classversion-mark|span$/g
 
-  Array.from(aTags).forEach((a) => {
+  Array.from(aTags).forEach(a => {
     const hrefText = a.getAttribute('href')
 
     if (!absPathRegx.test(hrefText) && re.test(hrefText)) {
       const hrefTextArr = hrefText.replace('.md', '').split('/')
 
-      a.href =
-        lang === 'zh'
-          ? `/${lang}/${type}/${version}/${hrefTextArr[hrefTextArr.length - 1]}`
-          : `/${type}/${version}/${hrefTextArr[hrefTextArr.length - 1]}`
+      a.href = `${lang === 'zh' ? `/${lang}` : ''}/${doc}/${version}/${
+        hrefTextArr[hrefTextArr.length - 1]
+      }`
     }
 
     if (a.classList.contains('anchor')) {

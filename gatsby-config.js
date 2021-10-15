@@ -3,7 +3,8 @@ const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
 module.exports = {
   siteMetadata: {
     title: 'PingCAP Docs',
-    description: 'PingCAP Docs',
+    description:
+      'Browse documentation about TiDB and its ecosystem, including TiDB Operator, TiDB Data Migration, Database Tools, TiUP, etc.',
     author: '@PingCAP',
     siteUrl: 'https://docs.pingcap.com',
   },
@@ -83,13 +84,17 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
-        content: [
-          `${__dirname}/src/**/*.js`,
-          `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
-        ],
-        ignore: ['prismjs/', '/userFeedback.scss'],
+        ignore: ['/doc.scss', '/userFeedback.scss'],
         purgeCSSOptions: {
-          safelist: ['algolia-docsearch-suggestion--highlight', /^PingCAP-Doc/], // https://github.com/FullHuman/purgecss/releases/v3.0.0
+          content: [
+            `${__dirname}/src/**/*.js`,
+            `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
+          ],
+          safelist: [
+            // @seagreenio/react-bulma
+            /^is-|has-/,
+            'algolia-docsearch-suggestion--highlight',
+          ], // https://github.com/FullHuman/purgecss/releases/v3.0.0
         },
       },
     },
