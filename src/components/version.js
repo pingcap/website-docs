@@ -45,7 +45,7 @@ const Version = ({ relativeDir, base, versions }) => {
       case 'tidbcloud':
         setDropdownItems(docsCloudVersionList)
         break
-      case 'developer':
+      case 'developers':
         setDropdownItems(docsDevGuideVersionList)
         break
       default:

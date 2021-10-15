@@ -18,7 +18,7 @@ exports.getRepoInfo = function (relativeDir, locale) {
       repo = 'dbaas-docs'
       break
 
-    case 'docs-developer':
+    case 'docs-developers':
       repo = 'dev-guide'
       hasPathPrefix = true
       break

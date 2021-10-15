@@ -13,8 +13,8 @@ function renameDoc(name) {
       return 'tidb-data-migration'
     case 'docs-dbaas':
       return 'tidbcloud'
-    case 'docs-developer':
-      return 'developer'
+    case 'docs-developers':
+      return 'developers'
     default:
       return name
   }
@@ -38,7 +38,7 @@ function renameDocVersion(version, docName) {
       return renameVersion(version, operatorStableRegx)
     case 'tidb-data-migration':
       return renameVersion(version, dmStableRegx)
-    case 'developer':
+    case 'developers':
       return renameVersion(version, '')
     default:
       return 'public-preview'

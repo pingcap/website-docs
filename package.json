@@ -82,7 +82,7 @@
     "clean:docs:docs-dm:en": "rimraf ./markdown-pages/contents/en/docs-dm/**/*.md",
     "clean:docs:docs-dm:zh": "rimraf ./markdown-pages/contents/zh/docs-dm/**/*.md",
     "clean:docs:docs-dbaas:en": "rimraf ./markdown-pages/contents/en/docs-dbaas/**/*.md",
-    "clean:docs:docs-developer:zh": "rimraf ./markdown-pages/contents/zh/docs-developer/**/*.md",
+    "clean:docs:docs-developers:zh": "rimraf ./markdown-pages/contents/zh/docs-developers/**/*.md",
     "download:docs-tidb:en": "node markdown-pages/cli.js download docs",
     "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
     "download:docs-tidb:zh": "node markdown-pages/cli.js download docs-cn",
@@ -97,10 +97,10 @@
     "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh",
     "download:docs-dbaas": "node markdown-pages/cli.js download docs-dbaas",
     "download:docs-dbaas:all": "./scripts/download-docs-dbaas.sh",
-    "download:docs-developer": "node markdown-pages/cli.js download dev-guide",
-    "download:docs-developer:all": "./scripts/download-docs-developer.sh",
-    "download:docs-dev-developer:zh:all": "./scripts/download-docs-developer-zh.sh",
-    "download:docs-dev-developer:en:all": "./scripts/download-docs-developer-en.sh",
+    "download:docs-developers": "node markdown-pages/cli.js download dev-guide",
+    "download:docs-developers:all": "./scripts/download-docs-developers.sh",
+    "download:docs-dev-developers:zh:all": "./scripts/download-docs-developers-zh.sh",
+    "download:docs-dev-developers:en:all": "./scripts/download-docs-developers-en.sh",
     "sync": "node markdown-pages/cli.js sync"
   },
   "lint-staged": {
