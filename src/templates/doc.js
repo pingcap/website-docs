@@ -4,13 +4,14 @@ import * as Shortcodes from '../components/shortcodes'
 
 import { Block, Column, Title } from '@seagreenio/react-bulma'
 import React, { useEffect } from 'react'
+import replaceInternalHref, { unifyAnchor } from '../lib/replaceInternalHref'
 import { setDocData, setDocInfo, setLangSwitchable } from '../state'
 
 import DeprecationNotice from '../components/deprecationNotice'
 import DownloadPDF from '../components/doc/downloadPDF'
 import FeedbackDoc from '../components/doc/feedback'
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
-// import GitCommitInfo from '../components/gitCommitInfo'
+import GitCommitInfo from '../components/gitCommitInfo'
 import ImproveDoc from '../components/doc/improve'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -19,7 +20,6 @@ import Seo from '../components/seo'
 import UserFeedback from '../components/userFeedback'
 import { graphql } from 'gatsby'
 import optimizeBlockquote from '../lib/optimizeBlockquote'
-import { unifyAnchor } from '../lib/replaceInternalHref'
 import { useDispatch } from 'react-redux'
 import { useLocation } from '@reach/router'
 
@@ -67,8 +67,7 @@ const Doc = ({
   }, [dispatch, langSwitchable])
 
   useEffect(() => {
-    // TODO: refactor
-    // replaceInternalHref(lang, doc, version)
+    replaceInternalHref(lang, doc, version)
 
     dispatch(
       setDocInfo({
@@ -132,13 +131,13 @@ const Doc = ({
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </MDXProvider>
 
-          {/* {doc !== 'tidbcloud' && (
-                <GitCommitInfo
-                  repoInfo={repoInfo}
-                  lang={lang}
-                  title={frontmatter.title}
-                />
-              )} */}
+          {doc !== 'tidbcloud' && (
+            <GitCommitInfo
+              repoInfo={repoInfo}
+              lang={lang}
+              title={frontmatter.title}
+            />
+          )}
         </div>
       </Column>
 
