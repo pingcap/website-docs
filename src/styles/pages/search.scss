@@ -2,6 +2,7 @@
 
 .PingCAP-Docs-Search {
   .section.container {
+    min-height: 65vh;
     @include fullhd {
       padding-left: 0;
       padding-right: 0;
@@ -82,6 +83,10 @@
         color: $B3;
         margin-bottom: 1rem;
         font-weight: normal;
+
+        .algolia-docsearch-suggestion--highlight {
+          color: $B1;
+        }
       }
 
       .url,

@@ -160,19 +160,16 @@ const Search = ({ pageContext: { locale } }) => {
     dispatch(setLoading(true))
 
     const index = algoliaClient.initIndex(
-      `website-docs-${lang}-${selectedType}`
+      `${lang}-${selectedType}-${
+        selectedVersion === 'stable'
+          ? replaceStableVersion()
+          : `${selectedVersion}`
+      }`
     )
 
     index
       .search(query, {
         hitsPerPage: 300,
-        facetFilters: [
-          `version:${
-            selectedVersion === 'stable'
-              ? replaceStableVersion()
-              : `${selectedVersion}`
-          }`,
-        ],
       })
       .then(({ hits }) => {
         setResults(hits)
@@ -266,7 +263,14 @@ const Search = ({ pageContext: { locale } }) => {
             key={version}
             role="button"
             tabIndex={0}
-            className={`item${selectedVersion === version ? ' is-active' : ''}`}
+            className={`item${
+              (selectedVersion === 'stable'
+                ? replaceStableVersion()
+                : `${selectedVersion}`) ===
+              (version === 'stable' ? replaceStableVersion() : `${version}`)
+                ? ' is-active'
+                : ''
+            }`}
             onClick={handleSetVersionAndExecSearch(version)}
             onKeyDown={handleSetVersionAndExecSearch(version)}
           >
