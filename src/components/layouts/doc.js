@@ -46,7 +46,7 @@ const Layout = ({
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   pageContext: PropTypes.object.isRequired,
 }
 

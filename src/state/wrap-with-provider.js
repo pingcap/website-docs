@@ -3,10 +3,10 @@ import React from 'react'
 import { createStore } from 'redux'
 import reducer from '.'
 
-const wrapWithProvider = ({ element }) => {
-  const store = createStore(reducer)
+const store = createStore(reducer)
 
-  return <Provider store={store}>{element}</Provider>
-}
+const wrapWithProvider = ({ element }) => (
+  <Provider store={store}>{element}</Provider>
+)
 
 export default wrapWithProvider

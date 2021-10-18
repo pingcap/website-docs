@@ -19,7 +19,10 @@ const FeedbackDocLink = ({ repoInfo, lang }) => {
       }
     }
   `)
-  const { pathname } = useLocation()
+  let { pathname } = useLocation()
+  if (pathname.endsWith('/')) {
+    pathname = pathname.slice(0, -1) // unify client and ssr
+  }
 
   return (
     <a
