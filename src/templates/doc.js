@@ -37,10 +37,10 @@ const Doc = ({
   },
   data,
 }) => {
-  const { mdx, toc } = data
+  const { site, mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
   const docVersionStableMap = JSON.parse(docVersionStable)
-  const { doc, version } = docVersionStableMap
+  const { doc, version, stable } = docVersionStableMap
 
   const repoInfo = {
     repo,
@@ -49,7 +49,7 @@ const Doc = ({
   }
 
   const location = useLocation()
-  const { currentPath } = location
+  const { pathname } = location
 
   const dispatch = useDispatch()
 
@@ -115,6 +115,17 @@ const Doc = ({
             rel: 'stylesheet',
             href: 'https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@4.0.0/github-markdown.css',
           },
+          ...(version !== stable
+            ? [
+                {
+                  rel: 'canonical',
+                  href: `${site.siteMetadata.siteUrl}${pathname.replace(
+                    version,
+                    'stable'
+                  )}`,
+                },
+              ]
+            : []),
         ]}
       />
       <Column size={8}>
@@ -160,7 +171,7 @@ const Doc = ({
             </Title>
             {tableOfContents.items && renderItems(tableOfContents.items)}
           </div>
-          {currentPath === '/zh/tidb/stable' && (
+          {pathname === '/zh/tidb/stable' && (
             <a
               className="Promote"
               href="https://pingcap.com/community-cn/careers/join/"
@@ -180,6 +191,12 @@ const Doc = ({
 
 export const query = graphql`
   query ($id: String, $tocSlug: String) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+
     mdx(id: { eq: $id }) {
       frontmatter {
         title

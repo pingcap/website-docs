@@ -10,7 +10,7 @@ const FeedbackDocLink = ({ repoInfo, lang }) => {
   const { repo, ref, pathWithoutVersion } = repoInfo
   const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
 
-  const data = useStaticQuery(graphql`
+  const { site } = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
@@ -27,7 +27,7 @@ const FeedbackDocLink = ({ repoInfo, lang }) => {
   return (
     <a
       className="doc-help-link feedback"
-      href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${data.site.siteMetadata.siteUrl}${pathname})`}
+      href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${site.siteMetadata.siteUrl}${pathname})`}
       target="_blank"
       rel="noreferrer"
     >
