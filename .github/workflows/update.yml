@@ -1,4 +1,5 @@
 name: Incremental Building Triggered By Push Events
+
 on: repository_dispatch
 
 jobs:
@@ -8,15 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup kernel for react native, increase watchers
+      # https://github.com/gatsbyjs/gatsby/issues/11406
+      - name: Increase file watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-      - name: Print repo info
-        run: |
-          echo "${{ github.event.client_payload.repo }}"
-          echo "${{ github.event.client_payload.ref }}"
-          echo "${{ github.event.client_payload.sha }}"
-          echo "${{ github.event.client_payload.download_type }}"
 
       # make sure there is only one workflow running
       - name: Turnstyle
@@ -68,39 +63,30 @@ jobs:
       - name: Check restore status
         if: github.event.client_payload.download_type == 'full'
         run: |
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:en:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dev-guide:zh:all
-
-      # set ref and name of the repo, which triggering website build
-      - name: Split ref
-        id: git-ref
-        run: |
-          ref=${{ github.event.client_payload.ref }}
-          repo=${{ github.event.client_payload.repo }}
-          echo "::set-output name=ref::${ref##*/}"
-          echo "::set-output name=repo::${repo##*/}"
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:tidb:en:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:tidb:zh:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:dm:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:tidb-operator:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:dbaas:all
+          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:dev-guide:zh:all
 
       # incremental download and get the base commit of the triggering repo for furthur use.
       - name: Get base commit cache
-        if: github.event.client_payload.download_type != 'full' && steps.git-ref.outputs.repo != 'website-docs'
+        if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
         id: cache-commit
         run: |
-          path=/home/runner/work/website-docs/website-docs/markdown-pages/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
+          path=/home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash.lock
           base=""
-          if [ -f "$path" ];then
-          base=$(cat $path)
+          if [ -f "$path" ]; then
+            base=$(cat $path)
           fi
           echo "get cache base hash: $base"
           echo "::set-output name=base::${base}"
 
       # incremental download the triggering repo by comparing the base and head commits
       - name: Sync docs
-        if: github.event.client_payload.download_type != 'full' && steps.git-ref.outputs.repo != 'website-docs'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
+        if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
@@ -121,13 +107,7 @@ jobs:
             ${{ runner.os }}-v1-gatsby-build-
 
       - name: Build website
-        run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build --write-to-file
-
-      - name: Consolidate duplicate urls
-        run: cd public && bash ../scripts/consolidate-duplicate-urls.sh
-
-      - name: Move changed files from gatsby
-        run: (yes|cp -f .cache/*Pages.txt public)|true
+        run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build
 
       - name: Deploy to LA1
         run: |
@@ -146,14 +126,13 @@ jobs:
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       # update cache commit to corresponding file
-      - name: Update cache commit hash
-        if: steps.git-ref.outputs.repo != 'website-docs'
+      - name: Update current commit sha to cache
+        if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
         run: |
-          echo "${{ github.event.client_payload.sha }}" > /home/runner/work/website-docs/website-docs/markdown-pages/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
+          echo "${{ github.event.client_payload.sha }}" > /home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash.lock
 
-      # if does full building, store commits of all repo-refs
+      # if does full building, store latest commit shas of all docs repo
       - name: Update all commit hash
         if: github.event.client_payload.download_type == 'full'
         run: |
-          ls ./scripts/
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}
