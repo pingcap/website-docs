@@ -137,10 +137,10 @@ async function handleSync(metaInfo, pipelines = []) {
           finalRepo = 'docs-tidb'
           break
 
-        case 'dev-guide':
+        case 'docs-appdev':
           downloadToPathArrWithoutLang = downloadToPathArrWithoutLang.slice(1)
           lang = filename.substring(0, 2)
-          finalRepo = 'docs-developers'
+          finalRepo = 'docs-appdev'
           break
 
         default:
@@ -175,7 +175,7 @@ async function handleSync(metaInfo, pipelines = []) {
           if (
             repo === 'docs-tidb-operator' ||
             repo === 'docs-dm' ||
-            repo === 'dev-guide'
+            repo === 'docs-appdev'
           ) {
             renamedFilePathArrWithoutLang = renamedFilePathArrWithoutLang.slice(
               1

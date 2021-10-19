@@ -208,7 +208,7 @@ const Doc = ({
             </div>
             <section className="markdown-body doc-content column">
               {docRefArray[0] !== 'tidbcloud' &&
-                docRefArray[0] !== 'developers' && (
+                docRefArray[0] !== 'appdev' && (
                   <DeprecationNotice
                     relativeDir={relativeDir}
                     versions={versions}

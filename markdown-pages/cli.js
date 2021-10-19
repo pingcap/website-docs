@@ -163,10 +163,10 @@ function main(argv) {
       )
       break
 
-    case 'dev-guide':
+    case 'docs-appdev':
       if (!path) {
         sig.warn(
-          'For dev-guide, you must provide the path of en or zh. Details: https://github.com/pingcap/dev-guide'
+          'For docs-appdev, you must provide the path of en or zh. Details: https://github.com/pingcap/docs-appdev'
         )
 
         return
@@ -179,7 +179,7 @@ function main(argv) {
           ref,
           path: path,
         },
-        `${__dirname}/contents/${path}/docs-developers/${ref}`,
+        `${__dirname}/contents/${path}/docs-appdev/${ref}`,
         [
           () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
@@ -250,7 +250,7 @@ function sync(argv) {
       ])
       break
 
-    case 'dev-guide':
+    case 'docs-appdev':
       handleSync({ owner: 'pingcap', repo, ref, base, head }, [
         () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),

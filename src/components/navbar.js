@@ -131,13 +131,13 @@ const Navbar = (prop) => {
               </IntlLink>
             )}
             <IntlLink
-              to="/developers/dev"
+              to="/appdev/dev"
               className={`navbar-item with-main-section ${
-                activeNav === 'developers' && !burgerActive ? 'is-active' : ''
+                activeNav === 'appdev' && !burgerActive ? 'is-active' : ''
               }`}
               type="innerLink"
             >
-              <FormattedMessage id="navbar.developers" />
+              <FormattedMessage id="navbar.appdev" />
             </IntlLink>
             <a
               href={
