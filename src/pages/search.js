@@ -43,7 +43,7 @@ const matchToVersionList = (match) => {
       return docsDMVersionList
     case 'tidbcloud':
       return docsCloudVersionList
-    case 'dev-guide':
+    case 'appdev':
       return docsDevGuideVersionList
     default:
       return docsTiDBVersionList
@@ -101,17 +101,24 @@ const Search = ({ pageContext: { locale } }) => {
       case 'zh':
         _docsTypesByLang.push({
           name: '开发指南',
-          match: 'dev-guide',
+          match: 'appdev',
           version: docsDevGuideVersionList,
         })
         break
 
       default:
-        _docsTypesByLang.push({
-          name: 'Cloud',
-          match: 'tidbcloud',
-          version: docsCloudVersionList,
-        })
+        _docsTypesByLang.push(
+          {
+            name: 'Cloud',
+            match: 'tidbcloud',
+            version: docsCloudVersionList,
+          },
+          {
+            name: 'App Dev',
+            match: 'appdev',
+            version: docsCloudVersionList,
+          }
+        )
         break
     }
     return _docsTypesByLang

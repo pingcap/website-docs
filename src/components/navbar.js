@@ -130,16 +130,15 @@ const Navbar = (prop) => {
                 <FormattedMessage id="navbar.cloud" />
               </IntlLink>
             )}
-            {locale === 'zh' && (
-              <IntlLink
-                to="/dev-guide/dev"
-                className={`navbar-item with-main-section ${
-                  activeNav === 'dev-guide' && !burgerActive ? 'is-active' : ''
-                }`}
-              >
-                <FormattedMessage id="navbar.devGuide" />
-              </IntlLink>
-            )}
+            <IntlLink
+              to="/appdev/dev"
+              className={`navbar-item with-main-section ${
+                activeNav === 'appdev' && !burgerActive ? 'is-active' : ''
+              }`}
+              type="innerLink"
+            >
+              <FormattedMessage id="navbar.appdev" />
+            </IntlLink>
             <a
               href={
                 locale === 'zh'
