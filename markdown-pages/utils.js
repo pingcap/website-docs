@@ -3,7 +3,7 @@ const replaceStream = require('replacestream')
 const BASE_IMAGE_CDN_URL = 'https://download.pingcap.com/images'
 const DOCS_IMAGE_CDN_URL = BASE_IMAGE_CDN_URL + '/docs'
 const DOCS_CN_IMAGE_CDN_URL = BASE_IMAGE_CDN_URL + '/docs-cn'
-const DEV_GUIDE_IMAGE_CDN_URL = BASE_IMAGE_CDN_URL + '/docs-appdev'
+const DEV_GUIDE_IMAGE_CDN_URL = BASE_IMAGE_CDN_URL + '/appdev'
 const TIDB_IN_KUBERNETES_IMAGE_CDN_URL =
   BASE_IMAGE_CDN_URL + '/tidb-in-kubernetes'
 const TIDB_DATA_MIGRATION_IMAGE_CDN_URL =
