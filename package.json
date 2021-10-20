@@ -67,7 +67,7 @@
   "license": "MIT",
   "scripts": {
     "start": "gatsby develop",
-    "start:0.0.0.0": "gatsby develop --host 0.0.0.0",
+    "start:0.0.0.0": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

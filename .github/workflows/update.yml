@@ -129,7 +129,7 @@ jobs:
       - name: Update current commit sha to cache
         if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
         run: |
-          echo "${{ github.event.client_payload.sha }}" > /home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash.lock
+          echo ${{ github.event.client_payload.sha }} > /home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash.lock
 
       # if does full building, store latest commit shas of all docs repo
       - name: Update all commit hash
