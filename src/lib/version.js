@@ -36,8 +36,8 @@ export const operator = docs['tidb-in-kubernetes']['languages']['en'][
   'versions'
 ].map(d => convertVersionName(d, operatorStable))
 export const cloud = ['public-preview']
-export const devGuide =
-  docs['dev-guide']['languages']['zh']['versions'].map(convertVersionName)
+export const appdev =
+  docs['appdev']['languages']['en']['versions'].map(convertVersionName)
 
 export const deprecated = {
   tidb: docs['tidb']['deprecated'],

@@ -2,8 +2,8 @@ import '../styles/pages/search.scss'
 
 import React, { useEffect, useState } from 'react'
 import {
+  appdev,
   cloud,
-  devGuide,
   dm,
   dmStable,
   operator,
@@ -36,8 +36,8 @@ const matchToVersionList = match => {
       return operator
     case 'tidbcloud':
       return cloud
-    case 'dev-guide':
-      return devGuide
+    case 'appdev':
+      return appdev
     default:
       return tidb
   }
@@ -94,17 +94,24 @@ const Search = ({ pageContext: { locale } }) => {
       case 'zh':
         _docsTypesByLang.push({
           name: '开发指南',
-          match: 'dev-guide',
-          version: devGuide,
+          match: 'appdev',
+          version: appdev,
         })
         break
 
       default:
-        _docsTypesByLang.push({
-          name: 'Cloud',
-          match: 'tidbcloud',
-          version: cloud,
-        })
+        _docsTypesByLang.push(
+          {
+            name: 'Cloud',
+            match: 'tidbcloud',
+            version: cloud,
+          },
+          {
+            name: 'App Dev',
+            match: 'appdev',
+            version: appdev,
+          }
+        )
         break
     }
     return _docsTypesByLang

@@ -71,10 +71,14 @@
         }
       }
     },
-    "dev-guide": {
+    "appdev": {
       "languages": {
+        "en": {
+          "repo": "pingcap/docs-appdev",
+          "versions": ["master"]
+        },
         "zh": {
-          "repo": "pingcap/dev-guide",
+          "repo": "pingcap/docs-appdev",
           "versions": ["master"]
         }
       }

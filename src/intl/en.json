@@ -10,6 +10,9 @@
     "tidb": "TiDB",
     "tools": "Tools",
     "cloud": "Cloud",
+    "appdev": "App Dev",
+    "download": "Get TiDB",
+    "contactUs": "Contact Us",
     "searchDocs": "Search Docs"
   },
   "doc": {

@@ -30,11 +30,10 @@ function renameVersionByDoc(doc, version) {
     case 'tidb':
     case 'tidb-data-migration':
     case 'tidb-in-kubernetes':
+    case 'appdev':
       return renameVersion(version, getStable(doc))
     case 'tidbcloud':
       return 'public-preview'
-    case 'dev-guide':
-      return 'dev'
   }
 }
 exports.renameVersionByDoc = renameVersionByDoc

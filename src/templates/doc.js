@@ -130,7 +130,7 @@ const Doc = ({
       />
       <Column size={8}>
         <div className="markdown-body doc-content">
-          {doc !== 'tidbcloud' && doc !== 'dev-guide' && (
+          {doc !== 'tidbcloud' && (
             <DeprecationNotice
               name={name}
               docVersionStable={docVersionStableMap}
