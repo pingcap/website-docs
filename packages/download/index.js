@@ -64,10 +64,10 @@ export function download(argv) {
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
-    case 'pingcap/docs-dev-guide':
+    case 'pingcap/docs-appdev':
       if (!path) {
         sig.warn(
-          'For docs-dm/docs-tidb-operator/docs-dev-guide, you must provide en or zh path.'
+          'For docs-dm/docs-tidb-operator/docs-appdev, you must provide en or zh path.'
         )
 
         return
@@ -81,8 +81,8 @@ export function download(argv) {
         case 'pingcap/docs-tidb-operator':
           name = 'tidb-in-kubernetes'
           break
-        case 'pingcap/docs-dev-guide':
-          name = 'dev-guide'
+        case 'pingcap/docs-appdev':
+          name = 'appdev'
           break
       }
 
@@ -143,7 +143,7 @@ export function sync(argv) {
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
-    case 'pingcap/docs-dev-guide':
+    case 'pingcap/docs-appdev':
       handleSync(
         {
           repo,

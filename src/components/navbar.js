@@ -123,8 +123,8 @@ const Navbar = () => {
             )}
 
             {locale === 'zh' && (
-              <NavbarItem as={Link} className={styles.main} to="/dev-guide/dev">
-                <FormattedMessage id="navbar.devGuide" />
+              <NavbarItem as={Link} className={styles.main} to="/appdev/dev">
+                <FormattedMessage id="navbar.appdev" />
               </NavbarItem>
             )}
           </NavbarStart>

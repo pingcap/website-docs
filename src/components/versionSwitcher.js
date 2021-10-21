@@ -10,7 +10,7 @@ import {
   Icon,
 } from '@seagreenio/react-bulma'
 import React, { useEffect, useState } from 'react'
-import { cloud, devGuide, dm, operator, tidb } from 'lib/version'
+import { appdev, cloud, dm, operator, tidb } from 'lib/version'
 
 import { Link } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
@@ -42,8 +42,8 @@ const VersionSwitcher = ({
       case 'tidbcloud':
         setDropdownItems(cloud)
         break
-      case 'dev-guide':
-        setDropdownItems(devGuide)
+      case 'appdev':
+        setDropdownItems(appdev)
         break
       default:
         break

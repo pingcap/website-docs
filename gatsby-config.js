@@ -31,7 +31,7 @@ module.exports = {
         defaultLanguage: 'en',
         redirectDefaultLanguageToRoot: true,
         ignoredPaths: [
-          '?(/zh)/(tidb|tidb-data-migration|tidb-in-kubernetes|dev-guide|tidbcloud)/**',
+          '?(/zh)/(tidb|tidb-data-migration|tidb-in-kubernetes|appdev|tidbcloud)/**',
         ],
         fallbackLanguage: 'en',
       },

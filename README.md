@@ -37,8 +37,10 @@ We have pre-defined some commands to download the docs and clean docs, these com
     "download:tidb-operator:zh:all": "./scripts/download-docs-tidb-operator-zh.sh",
     "download:dbaas": "pingcap-docs-download dl tidbcloud/dbaas-docs",
     "download:dbaas:all": "./scripts/download-docs-dbaas.sh",
-    "download:dev-guide": "pingcap-docs-download dl pingcap/docs-dev-guide",
-    "download:dev-guide:zh:all": "./scripts/download-docs-dev-guide-zh.sh",
+    "download:appdev": "pingcap-docs-download dl pingcap/docs-appdev",
+    "download:appdev:all": "./scripts/download-docs-appdev.sh",
+    "download:appdev:en:all": "./scripts/download-docs-appdev-en.sh",
+    "download:appdev:zh:all": "./scripts/download-docs-appdev-zh.sh",
     "clean:docs": "pingcap-docs-download cl",
     "sync": "pingcap-docs-download sync",
   }

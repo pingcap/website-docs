@@ -12,7 +12,7 @@ export const imageCDNs = {
   'docs-dm': IMAGE_CDN_PREFIX + '/tidb-data-migration',
   'docs-tidb-operator': IMAGE_CDN_PREFIX + '/tidb-in-kubernetes',
   'docs-dbaas': IMAGE_CDN_PREFIX + '/tidbcloud',
-  'docs-dev-guide': IMAGE_CDN_PREFIX + '/dev-guide',
+  'docs-appdev': IMAGE_CDN_PREFIX + '/appdev',
 }
 
 /**
@@ -88,7 +88,7 @@ export function genDest(repo, path, destDir) {
     [
       'pingcap/docs-dm',
       'pingcap/docs-tidb-operator',
-      'pingcap/docs-dev-guide',
+      'pingcap/docs-appdev',
     ].includes(repo)
   ) {
     const pathWithoutLang = path.split('/').slice(1).join('/')

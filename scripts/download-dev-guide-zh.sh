@@ -1,1 +1,1 @@
-yarn download:dev-guide zh
+yarn download:appdev zh

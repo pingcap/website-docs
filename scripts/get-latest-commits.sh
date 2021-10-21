@@ -4,12 +4,12 @@ CACHE_DIR="$DIR/../markdown-pages"
 GITHUB_AUTHORIZATION_TOKEN=$1
 
 # repos in pingcap
-repos=(docs docs-cn docs-dm docs-tidb-operator dev-guide)
+repos=(docs docs-cn docs-dm docs-tidb-operator docs-appdev)
 docs=(master release-5.2 release-5.1 release-5.0 release-4.0 release-3.1 release-3.0 release-2.1)
 docs_cn=(master release-5.2 release-5.1 release-5.0 release-4.0 release-3.1 release-3.0 release-2.1)
 docs_dm=(master release-1.0 release-2.0)
 docs_tidb_operator=(master release-1.1 release-1.0 release-1.2)
-dev_guide=(master)
+docs_appdev=(master)
 
 for repo in ${repos[@]}
 do
