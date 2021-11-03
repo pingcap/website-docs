@@ -8,6 +8,8 @@ const {
   genVersionChunks,
 } = require('./utils')
 
+const languages = ['en', 'zh', 'ja']
+
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
   const docTemplate = path.resolve(`${__dirname}/../src/templates/doc.js`)
 
@@ -69,6 +71,35 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     }
   `)
 
+  const docsJa = await graphql(`
+    query {
+      allMdx(
+        filter: {
+          fields: { langCollection: { eq: "markdown-pages/contents/ja" } }
+          fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
+          frontmatter: { draft: { ne: true } }
+        }
+      ) {
+        nodes {
+          id
+          fields {
+            langCollection
+          }
+          frontmatter {
+            aliases
+          }
+          parent {
+            ... on File {
+              relativeDirectory
+              relativePath
+              base
+            }
+          }
+        }
+      }
+    }
+  `)
+
   // create pages for different language docs
   function _createDocs(docs, locale, pathPrefix = '') {
     const nodes = docs.data.allMdx.nodes
@@ -83,12 +114,23 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       const _fullPath = `${replacePath(relativeDir, base)}`
       const fullPath = `${pathPrefix}${_fullPath}`
       node.path = fullPath
-      const filePathInDiffLang = path.resolve(
-        `${__dirname}/../markdown-pages/contents${
-          locale === 'en' ? '/zh/' : '/en/'
-        }${relativePath}`
-      )
-      node.langSwitchable = fs.existsSync(filePathInDiffLang) ? true : false
+      const switchableLangs = {}
+
+      languages.forEach((lang) => {
+        if (locale != lang) {
+          const filePathInDiffLang = path.resolve(
+            `${__dirname}/../markdown-pages/contents/${lang}/${relativePath}`
+          )
+
+          iSSwitchable = fs.existsSync(filePathInDiffLang) ? true : false
+
+          switchableLangs[lang] = iSSwitchable
+        } else {
+          switchableLangs[lang] = true
+        }
+      })
+
+      node.switchableLangs = switchableLangs
       const vChunks = genVersionChunks(_fullPath)
       node.version = vChunks[0]
       node.pathWithoutVersion = vChunks[1]
@@ -115,7 +157,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         pathPrefix,
         tocPath,
         parent,
-        langSwitchable,
+        switchableLangs,
       } = node
       createPage({
         path: path,
@@ -131,7 +173,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           downloadURL,
           fullPath: path,
           versions: versionsMap[node.pathWithoutVersion],
-          langSwitchable,
+          switchableLangs,
         },
       })
 
@@ -152,6 +194,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
 
   _createDocs(docsEn, 'en')
   _createDocs(docsZh, 'zh', '/zh')
+  _createDocs(docsJa, 'ja', '/ja')
 }
 
 module.exports = createDocs

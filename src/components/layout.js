@@ -15,7 +15,7 @@ const Layout = ({
   locale,
   children,
   forbidResetDocInfo = false,
-  langSwitchable,
+  switchableLangs = { en: true, zh: true },
 }) => {
   const dispatch = useDispatch()
 
@@ -49,7 +49,7 @@ const Layout = ({
     <IntlProvider locale={locale} messages={flat(langMap[locale])}>
       <Navbar locale={locale} />
       <main>{children}</main>
-      <Footer locale={locale} langSwitchable={langSwitchable} />
+      <Footer locale={locale} switchableLangs={switchableLangs} />
     </IntlProvider>
   )
 }

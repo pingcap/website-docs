@@ -35,6 +35,17 @@ const createIntlPages = ({ page, actions }) => {
       },
     })
   )
+
+  if (pagePath === '/search/') {
+    createPage({
+      ...page,
+      path: `/ja${pagePath}`,
+      context: {
+        ...page.context,
+        locale: 'ja',
+      },
+    })
+  }
 }
 
 module.exports = createIntlPages

@@ -297,7 +297,7 @@ const Search = ({ pageContext: { locale } }) => {
   )
 
   return (
-    <Layout locale={locale} forbidResetDocInfo={true} langSwitchable={true}>
+    <Layout locale={locale} forbidResetDocInfo={true}>
       <SEO title="Search" />
       <article className="PingCAP-Docs-Search">
         <section className="section container">

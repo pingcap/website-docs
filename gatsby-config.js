@@ -41,6 +41,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages/contents/ja`,
+        path: `${__dirname}/markdown-pages/contents/ja`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.mdx`, `.md`],
@@ -87,7 +94,7 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         output: `/sitemap.xml`,
-        exclude: ['/404', '/zh/404', '/search', '/zh/search'],
+        exclude: ['/404', '/zh/404', '/search', '/zh/search', '/jp/search'],
       },
     },
     {

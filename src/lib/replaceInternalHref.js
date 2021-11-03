@@ -19,9 +19,9 @@ export default function replaceInternalHref(
       const hrefTextArr = hrefText.replace('.md', '').split('/')
 
       a.href =
-        lang === 'zh'
-          ? `/${lang}/${type}/${version}/${hrefTextArr[hrefTextArr.length - 1]}`
-          : `/${type}/${version}/${hrefTextArr[hrefTextArr.length - 1]}`
+        lang === 'en'
+          ? `/${type}/${version}/${hrefTextArr[hrefTextArr.length - 1]}`
+          : `/${lang}/${type}/${version}/${hrefTextArr[hrefTextArr.length - 1]}`
     }
 
     if (a.classList.contains('anchor')) {

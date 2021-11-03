@@ -102,6 +102,7 @@
     "download:docs-appdev:all": "./scripts/download-docs-appdev.sh",
     "download:docs-appdev:zh:all": "./scripts/download-docs-appdev-zh.sh",
     "download:docs-appdev:en:all": "./scripts/download-docs-appdev-en.sh",
+    "download:docs-appdev:ja:all": "./scripts/download-docs-appdev-ja.sh",
     "sync": "node markdown-pages/cli.js sync"
   },
   "lint-staged": {
