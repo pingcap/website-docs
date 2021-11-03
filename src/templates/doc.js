@@ -26,6 +26,8 @@ import UserFeedback from '../components/userFeedback'
 import DeprecationNotice from '../components/deprecationNotice'
 import { useLocation } from '@reach/router'
 import PromptBanner from '../../images/community-careers-banner.jpg'
+import QuestionnaireZH from '../../images/questionnaire-zh.svg'
+import QuestionnaireEN from '../../images/questionnaire-en.svg'
 
 const Doc = ({
   pageContext: {
@@ -238,6 +240,21 @@ const Doc = ({
                   </>
                 )}
               </div>
+              <a
+                className="Promote"
+                href={
+                  locale === 'zh'
+                    ? 'http://pingcap-docs-feedback.mikecrm.com/r7zoQkk'
+                    : 'http://pingcap-docs-feedback.mikecrm.com/8iJibLD'
+                }
+                // eslint-disable-next-line react/jsx-no-target-blank
+                target="_blank"
+              >
+                <img
+                  src={locale === 'en' ? QuestionnaireEN : QuestionnaireZH}
+                  alt="PingCAP docs questionnaire"
+                />
+              </a>
               <section className="doc-toc">
                 <div className="title">
                   <FormattedMessage id="doc.toc" />
