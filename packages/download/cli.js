@@ -70,8 +70,8 @@ const argv = yargs(hideBin(process.argv))
       default: false,
     },
   })
-  .help()
-  .alias('help', 'h').argv
+  .alias('help', 'h')
+  .wrap(120).argv
 
 if (argv.debug) {
   sig.debug('Argv:', argv)

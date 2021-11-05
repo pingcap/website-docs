@@ -5,8 +5,6 @@
 
 <p align="center">The next generation of PingCAP Docs. Powered by Gatsby ⚛️.</p>
 
-> Note: Currently WIP
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8d59fdbd-2ab5-4f97-b5c5-4c00d932feee/deploy-status)](https://app.netlify.com/sites/pingcap-docs-preview/deploys)
 ![Update docs when receiving repo dispatch](https://github.com/pingcap/website-docs/workflows/Update%20docs%20when%20receiving%20repo%20dispatch/badge.svg)
 
@@ -18,7 +16,7 @@ After clone this repo, run `yarn` to get all deps:
 yarn
 ```
 
-We have pre-defined some commands to download the docs and clean docs, these commands are:
+Usually you have to download some docs before dev. We have pre-defined some commands to download the docs and clean docs, these commands are:
 
 ```json
 {
@@ -47,38 +45,13 @@ We have pre-defined some commands to download the docs and clean docs, these com
 }
 ```
 
-But the download commands must pass some parameters to work properly. You can understand that it is just a partial command. For example, run:
+There are two types of scripts here, one starts with `pingcap-docs-download` and the other starts with `./scripts`.
 
-```sh
-node markdown-pages/cli.js help
-```
+For `pingcap-docs-download`, it's an package binary which you can find the definition in [packages/download/package.json](packages/download/package.json). You must add some parameters to exec it.
 
-You will see:
+Please refer to [packages/download/README.md](packages/download/README.md) for more details.
 
-```sh
-cli.js [command]
-
-Commands:
-  cli.js download <repo> [path] [ref]  specify which repo of docs you want to
-                                       download
-  cli.js sync <repo> <ref> <sha>       Sync the docs' changes by a single commit
-
-Options:
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
-```
-
-Let us explain with this example: `yarn download:docs-tidb-operator en master`.
-
-This will expand as: `node markdown-pages/cli.js download docs-tidb-operator en master`.
-
-The `<repo>` is `docs-tidb-operator`, which is required. It means we will download the docs from this repo.
-
-The second, `[path]` is a subpath of the repo. In <https://github.com/pingcap/docs-tidb-operator>, we want to download all docs under the `en`.
-
-The last, `[ref]` is the branch of the repo. In this example, we want to download All documents in the `master` branch, under the `en` folder.
-
-Other usage methods can refer to `scripts/download-*.sh`.
+And all scripts in `./scripts` are already predefined commands, they use `pingcap-docs-download` to download the docs.
 
 ### After download
 
@@ -242,6 +215,6 @@ All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column h
 </NavColumns>
 ```
 
-## Authors
+## License
 
-PingCAP FE
+MIT
