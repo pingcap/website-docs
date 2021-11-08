@@ -22,9 +22,13 @@ function convertVersionName(version, stable) {
   }
 }
 
-export const tidbStable = docs['tidb']['stable']
-export const dmStable = docs['tidb-data-migration']['stable']
-export const operatorStable = docs['tidb-in-kubernetes']['stable']
+export const tidbStable = convertVersionName(docs['tidb']['stable'])
+export const dmStable = convertVersionName(
+  docs['tidb-data-migration']['stable']
+)
+export const operatorStable = convertVersionName(
+  docs['tidb-in-kubernetes']['stable']
+)
 
 export const tidb = docs['tidb']['languages']['en']['versions'].map(d =>
   convertVersionName(d, tidbStable)

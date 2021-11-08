@@ -20,7 +20,7 @@ const Input = ({
     setSearchValue(e.target.value)
   }
 
-  const handleSearchInputKeyDown = (e) => {
+  const handleSearchInputKeyDown = e => {
     e.preventDefault()
 
     navigate(
@@ -37,7 +37,7 @@ const Input = ({
   }
 
   return (
-    <Field onSubmit={handleSearchInputKeyDown}>
+    <Field as="form" onSubmit={handleSearchInputKeyDown}>
       <Control hasIcons="left">
         <BulmaInput
           type="search"

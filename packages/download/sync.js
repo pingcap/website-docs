@@ -27,18 +27,18 @@ export async function handleSync(metaInfo, destDir, options) {
   }
 
   files.forEach(file => {
-    const { filename, status, download_url, previous_filename } = file
+    const { filename, status, contents_url, previous_filename } = file
 
     if (ignore.includes(filename)) {
       return
     }
 
-    const dest = genDest(repo, filename, destDir)
+    const dest = genDest(repo, filename, destDir, true)
 
     switch (status) {
       case 'added':
       case 'modified':
-        writeContent(download_url, dest, pipelines)
+        writeContent(contents_url, dest, pipelines)
 
         break
       case 'removed':
@@ -52,7 +52,7 @@ export async function handleSync(metaInfo, destDir, options) {
 
         break
       case 'renamed':
-        writeContent(download_url, dest, pipelines)
+        writeContent(contents_url, dest, pipelines)
 
         const previous = genDest(repo, previous_filename, destDir)
         fs.unlink(previous, err => {

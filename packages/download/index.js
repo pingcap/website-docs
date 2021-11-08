@@ -36,6 +36,17 @@ function genOptions(repo, config) {
   return options
 }
 
+function renameDoc(repo) {
+  switch (repo) {
+    case 'pingcap/docs-dm':
+      return 'tidb-data-migration'
+    case 'pingcap/docs-tidb-operator':
+      return 'tidb-in-kubernetes'
+    case 'pingcap/docs-appdev':
+      return 'appdev'
+  }
+}
+
 export function download(argv) {
   const { repo, path, ref, destination, config } = argv
   const dest = nPath.resolve(destination)
@@ -73,18 +84,7 @@ export function download(argv) {
         return
       }
 
-      let name
-      switch (repo) {
-        case 'pingcap/docs-dm':
-          name = 'tidb-data-migration'
-          break
-        case 'pingcap/docs-tidb-operator':
-          name = 'tidb-in-kubernetes'
-          break
-        case 'pingcap/docs-appdev':
-          name = 'appdev'
-          break
-      }
+      const name = renameDoc(repo)
 
       retrieveAllMDs(
         {
@@ -135,7 +135,7 @@ export function sync(argv) {
         },
         nPath.resolve(
           dest,
-          `${repo.endsWith('-cn') ? 'zh' : 'en'}/docs-tidb/${ref}`
+          `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
         ),
         options
       )
@@ -144,6 +144,8 @@ export function sync(argv) {
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
     case 'pingcap/docs-appdev':
+      const name = renameDoc(repo)
+
       handleSync(
         {
           repo,
@@ -151,10 +153,7 @@ export function sync(argv) {
           base,
           head,
         },
-        nPath.resolve(
-          dest,
-          `${path.split('/')[0]}/${repo.split('/')[1]}/${ref}`
-        ),
+        nPath.resolve(dest, `en/${name}/${ref}`), // use en as a placeholder
         options
       )
 
@@ -167,7 +166,7 @@ export function sync(argv) {
           base,
           head,
         },
-        nPath.resolve(dest, `en/docs-dbaas/${ref}`),
+        nPath.resolve(dest, `en/tidbcloud/${ref}`),
         options
       )
 

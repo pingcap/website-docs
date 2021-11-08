@@ -290,7 +290,7 @@ const Search = ({ pageContext: { locale } }) => {
   return (
     <>
       <Seo title="Search" />
-      <article className="PingCAP-Docs-Search">
+      <div className="PingCAP-Docs-Search">
         <section className="section container">
           <div className="filter-panel">
             <div className="columns">
@@ -319,7 +319,7 @@ const Search = ({ pageContext: { locale } }) => {
 
           {loading && <Loading wholeScreen={true} />}
         </section>
-      </article>
+      </div>
     </>
   )
 }

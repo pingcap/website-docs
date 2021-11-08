@@ -83,7 +83,7 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
  * @param {string} path
  * @param {string} destDir
  */
-export function genDest(repo, path, destDir) {
+export function genDest(repo, path, destDir, sync) {
   if (
     [
       'pingcap/docs-dm',
@@ -91,7 +91,13 @@ export function genDest(repo, path, destDir) {
       'pingcap/docs-appdev',
     ].includes(repo)
   ) {
-    const pathWithoutLang = path.split('/').slice(1).join('/')
+    const pathArr = path.split('/')
+    const lang = pathArr[0]
+    const pathWithoutLang = pathArr.slice(1).join('/')
+
+    if (sync) {
+      destDir = destDir.replace('en', lang)
+    }
 
     return `${destDir}${pathWithoutLang ? '/' + pathWithoutLang : ''}`
   }

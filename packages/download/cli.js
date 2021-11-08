@@ -29,8 +29,15 @@ const argv = yargs(hideBin(process.argv))
     })
   )
   .command(
-    'sync <repo> <ref> <base> <head>',
-    'Synchronize doc changes between base and head'
+    'sync <repo> [ref] <base> <head>',
+    'Synchronize doc changes between base and head',
+    yargs => {
+      yargs.positional('ref', {
+        desc: 'Specify the branch of the repo',
+        type: 'string',
+        default: 'master',
+      })
+    }
   )
   .command(
     [
