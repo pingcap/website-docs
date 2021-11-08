@@ -152,9 +152,9 @@ box-shadow: none;
 
 Currently, you can use these shortcodes into docs:
 
-### Shortcodes for notification
+### Notifications
 
-```html
+```jsx
 <Note>This is a note.</Note>
 
 <Warning>This is a warning.</Warning>
@@ -169,23 +169,19 @@ Currently, you can use these shortcodes into docs:
 Everything you needed is just to write a JSX tag, put the text into it. Then we will use
 `mdx` to convert it to JS code.
 
-### Shortcodes for tab panels
+### Tab Panels
 
 **Each label in a single doc have to be unique.**
 
-```html
+```jsx
 <SimpleTab>
-<div label="LABEL_SHOW_ON_FIRST_TAB">
+  <div label="LABEL_SHOW_ON_FIRST_TAB">
+  This is the first content, which is markdown format. The content will show on the corresponding panel when users switch the tabs.
+  </div>
 
-This is the first content, which is markdown format. The content will show on the corresponding panel when users switch the tabs.
-
-</div>
-
-<div label="LABEL_SHOW_ON_SECOND_TAB">
-
-This is the second content.
-
-</div>
+  <div label="LABEL_SHOW_ON_SECOND_TAB">
+  This is the second content.
+  </div>
 </SimpleTab>
 ```
 
@@ -197,21 +193,23 @@ All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column h
 
 ```jsx
 <NavColumns>
-<NavColumn>
-<ColumnTitle>Column title</ColumnTitle>
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-</NavColumn>
+  <NavColumn>
+    <ColumnTitle>Column title</ColumnTitle>
 
-<NavColumn>
-<ColumnTitle>Column title</ColumnTitle>
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-</NavColumn>
+    - [This is nav](/fileName.md)
+    - [This is nav](/fileName.md)
+    - [This is nav](/fileName.md)
+    - [This is nav](/fileName.md)
+  </NavColumn>
+
+  <NavColumn>
+    <ColumnTitle>Column title</ColumnTitle>
+
+    - [This is nav](/fileName.md)
+    - [This is nav](/fileName.md)
+    - [This is nav](/fileName.md)
+    - [This is nav](/fileName.md)
+  </NavColumn>
 </NavColumns>
 ```
 

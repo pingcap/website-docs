@@ -38,13 +38,11 @@ Options:
 
 Let us explain with this example: `npx @pingcap/docs-download download docs-tidb-operator en master`.
 
-The `<repo>` is `docs-tidb-operator`, which is required. It means we will download the docs from this repo.
+The `<repo>` is [docs-tidb-operator](https://github.com/pingcap/docs-tidb-operator), which is required. It means we will download the docs from this repo.
 
-The second, `[path]` is a subpath of the repo. In <https://github.com/pingcap/docs-tidb-operator>, we want to download all docs under the `en`.
+The second, `[path]` is a subpath of the repo. We want to download all docs under the `en` directory.
 
-The last, `[ref]` is the branch of the repo. In this example, we want to download All documents in the `master` branch, under the `en` folder.
-
-Other usage methods can refer to `scripts/download-*.sh`.
+The last, `[ref]` is the branch of the repo. In this example, we want to download all docs in the `master` branch.
 
 ## License
 
