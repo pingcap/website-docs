@@ -18,7 +18,7 @@ jobs:
         uses: softprops/turnstyle@v1
 
       - name: Set known_hosts
-        id: know-hosts
+        id: known-hosts
         run: |
           echo "::set-output name=BJ_PROXY::$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})"
           echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
@@ -29,9 +29,9 @@ jobs:
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: |
-            ${{ steps.know-hosts.outputs.BJ_PROXY }}
-            ${{ steps.know-hosts.outputs.LA1 }}
-            ${{ steps.know-hosts.outputs.LA2 }}
+            ${{ steps.known-hosts.outputs.BJ_PROXY }}
+            ${{ steps.known-hosts.outputs.LA1 }}
+            ${{ steps.known-hosts.outputs.LA2 }}
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -63,30 +63,33 @@ jobs:
       - name: Check restore status
         if: github.event.client_payload.download_type == 'full'
         run: |
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:tidb:en:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:tidb:zh:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:dm:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:tidb-operator:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:dbaas:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:appdev:all
+          export GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }}
+          yarn download:tidb:en:all
+          yarn download:tidb:zh:all
+          yarn download:dm:all
+          yarn download:tidb-operator:all
+          yarn download:dbaas:all
+          yarn download:appdev:all
 
-      # incremental download and get the base commit of the triggering repo for furthur use.
+      - name: Incremental or not
+
+      # incremental: get the base commit from cache for furthur use
       - name: Get base commit cache
         if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
         id: cache-commit
         run: |
-          path=/home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash.lock
-          base=""
-          if [ -f "$path" ]; then
-            base=$(cat $path)
+          PATH=/home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash
+          if [ -f "$PATH" ]; then
+            BASE=$(cat $PATH)
           fi
-          echo "get cache base hash: $base"
-          echo "::set-output name=base::${base}"
+          echo "get base hash: $BASE"
+          echo "::set-output name=path::$PATH"
+          echo "::set-output name=base::$BASE"
 
-      # incremental download the triggering repo by comparing the base and head commits
+      # incremental: download changed files
       - name: Sync docs
         if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ github.event.client_payload.repo }} ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
+        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
@@ -125,14 +128,13 @@ jobs:
         run: |
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      # update cache commit to corresponding file
       - name: Update current commit sha to cache
         if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'website-docs'
         run: |
-          echo ${{ github.event.client_payload.sha }} > /home/runner/work/website-docs/website-docs/markdown-pages/${{ github.event.client_payload.repo }}-${{ github.event.client_payload.ref }}-hash.lock
+          echo ${{ github.event.client_payload.sha }} > ${{ steps.cache-commit.outputs.path }}
 
       # if does full building, store latest commit shas of all docs repo
-      - name: Update all commit hash
+      - name: Update all commit hashes
         if: github.event.client_payload.download_type == 'full'
         run: |
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}

@@ -1,0 +1,8 @@
+// Use with `act`: act -e .github/workflows/client_payload.sample.json
+{
+  "client_payload": {
+    "repo": "sample",
+    "ref": "sample",
+    "sha": "sample"
+  }
+}
