@@ -13,13 +13,14 @@ import nPath from 'path'
 import rimraf from 'rimraf'
 import sig from 'signale'
 
-function genOptions(repo, config) {
+function genOptions(repo, config, dryRun) {
   const options = {
     pipelines: [
       () => replaceImagePathStream(imageCDNs[repo.split('/')[1]]),
       replaceCopyableStream,
       replaceTabsPanelStream,
     ],
+    dryRun,
   }
 
   if (config) {
@@ -48,9 +49,9 @@ function renameDoc(repo) {
 }
 
 export function download(argv) {
-  const { repo, path, ref, destination, config } = argv
+  const { repo, path, ref, destination, config, dryRun } = argv
   const dest = nPath.resolve(destination)
-  const options = genOptions(repo, config)
+  const options = genOptions(repo, config, dryRun)
 
   switch (repo) {
     case 'pingcap/docs':
@@ -119,9 +120,9 @@ export function download(argv) {
 export const clean = rimraf
 
 export function sync(argv) {
-  const { repo, ref, base, head, destination, config } = argv
+  const { repo, ref, base, head, destination, config, dryRun } = argv
   const dest = nPath.resolve(destination)
-  const options = genOptions(repo, config)
+  const options = genOptions(repo, config, dryRun)
 
   switch (repo) {
     case 'pingcap/docs':

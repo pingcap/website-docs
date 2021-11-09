@@ -1,7 +1,6 @@
 import { getContent, http } from './http.js'
 
 import fs from 'fs'
-import { pipeline } from 'stream/promises'
 import sig from 'signale'
 import stream from 'stream'
 
@@ -118,5 +117,5 @@ export async function writeContent(url, destPath, pipelines = []) {
   const writeStream = fs.createWriteStream(destPath)
   writeStream.on('close', () => sig.success('Downloaded:', url))
 
-  pipeline(readableStream, ...pipelines.map(p => p()), writeStream)
+  stream.pipeline(readableStream, ...pipelines.map(p => p()), writeStream)
 }

@@ -2,6 +2,7 @@ import { genDest, writeContent } from './utils.js'
 
 import { compare } from './http.js'
 import fs from 'fs'
+import sig from 'signale'
 
 /**
  * Synchronize doc changes between base and head.
@@ -17,7 +18,7 @@ import fs from 'fs'
  */
 export async function handleSync(metaInfo, destDir, options) {
   const { repo, base, head } = metaInfo
-  const { ignore = [], pipelines = [] } = options
+  const { ignore = [], pipelines = [], dryRun } = options
 
   let files
   try {
@@ -28,6 +29,12 @@ export async function handleSync(metaInfo, destDir, options) {
 
   files.forEach(file => {
     const { filename, status, contents_url, previous_filename } = file
+
+    if (dryRun) {
+      sig.debug('dryRun:', status, filename)
+
+      return
+    }
 
     if (ignore.includes(filename)) {
       return

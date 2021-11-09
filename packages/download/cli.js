@@ -76,6 +76,10 @@ const argv = yargs(hideBin(process.argv))
       type: 'boolean',
       default: false,
     },
+    'dry-run': {
+      type: 'boolean',
+      default: false,
+    },
   })
   .alias('help', 'h')
   .wrap(120).argv

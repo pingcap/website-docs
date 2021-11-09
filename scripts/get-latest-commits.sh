@@ -18,8 +18,8 @@ do
 
   for v in ${!versions}
   do
-    git ls-remote https://github.com/pingcap/$repo.git refs/heads/$v | awk '{ print $1 }' > $CACHE_DIR/$repo-$v-hash.lock
-    echo "$repo-$v-hash.lock" $(cat $CACHE_DIR/$repo-$v-hash.lock)
+    git ls-remote https://github.com/pingcap/$repo.git refs/heads/$v | awk '{ print $1 }' > $CACHE_DIR/$repo-$v.hash
+    echo "$repo-$v.hash" $(cat $CACHE_DIR/$repo-$v.hash)
   done
 done
 
@@ -36,7 +36,7 @@ do
   do
     $(curl -s -H "Authorization: token $GITHUB_AUTHORIZATION_TOKEN" \
     -H "Accept: application/vnd.github.VERSION.sha" \
-    "https://api.github.com/repos/tidbcloud/$repo/commits/$v") > $CACHE_DIR/$repo-$v-hash.lock
-    echo "$repo-$v-hash.lock" $(cat $CACHE_DIR/$repo-$v-hash.lock)
+    "https://api.github.com/repos/tidbcloud/$repo/commits/$v") > $CACHE_DIR/$repo-$v.hash
+    echo "$repo-$v.hash" $(cat $CACHE_DIR/$repo-$v.hash)
   done
 done
