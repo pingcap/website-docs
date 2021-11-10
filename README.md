@@ -5,9 +5,6 @@
 
 <p align="center">The next generation of PingCAP Docs. Powered by Gatsby ⚛️.</p>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8d59fdbd-2ab5-4f97-b5c5-4c00d932feee/deploy-status)](https://app.netlify.com/sites/pingcap-docs-preview/deploys)
-![Update docs when receiving repo dispatch](https://github.com/pingcap/website-docs/workflows/Update%20docs%20when%20receiving%20repo%20dispatch/badge.svg)
-
 ## How to develop
 
 After clone this repo, run `yarn` to get all deps:
@@ -22,25 +19,25 @@ Usually you have to download some docs before dev. We have pre-defined some comm
 {
   "scripts": {
     "download:tidb:en": "pingcap-docs-download dl pingcap/docs",
-    "download:tidb:en:all": "./scripts/download-docs-tidb-en.sh",
+    "download:tidb:en:all": "./scripts/download-tidb-en.sh",
     "download:tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
-    "download:tidb:zh:all": "./scripts/download-docs-tidb-zh.sh",
+    "download:tidb:zh:all": "./scripts/download-tidb-zh.sh",
     "download:dm": "pingcap-docs-download dl pingcap/docs-dm",
-    "download:dm:all": "./scripts/download-docs-dm.sh",
-    "download:dm:en:all": "./scripts/download-docs-dm-en.sh",
-    "download:dm:zh:all": "./scripts/download-docs-dm-zh.sh",
+    "download:dm:all": "./scripts/download-dm.sh",
+    "download:dm:en:all": "./scripts/download-dm-en.sh",
+    "download:dm:zh:all": "./scripts/download-dm-zh.sh",
     "download:tidb-operator": "pingcap-docs-download dl pingcap/docs-tidb-operator",
-    "download:tidb-operator:all": "./scripts/download-docs-tidb-operator.sh",
-    "download:tidb-operator:en:all": "./scripts/download-docs-tidb-operator-en.sh",
-    "download:tidb-operator:zh:all": "./scripts/download-docs-tidb-operator-zh.sh",
+    "download:tidb-operator:all": "./scripts/download-tidb-operator.sh",
+    "download:tidb-operator:en:all": "./scripts/download-tidb-operator-en.sh",
+    "download:tidb-operator:zh:all": "./scripts/download-tidb-operator-zh.sh",
     "download:dbaas": "pingcap-docs-download dl tidbcloud/dbaas-docs",
-    "download:dbaas:all": "./scripts/download-docs-dbaas.sh",
+    "download:dbaas:all": "./scripts/download-dbaas.sh",
     "download:appdev": "pingcap-docs-download dl pingcap/docs-appdev",
-    "download:appdev:all": "./scripts/download-docs-appdev.sh",
-    "download:appdev:en:all": "./scripts/download-docs-appdev-en.sh",
-    "download:appdev:zh:all": "./scripts/download-docs-appdev-zh.sh",
+    "download:appdev:all": "./scripts/download-appdev.sh",
+    "download:appdev:en:all": "./scripts/download-appdev-en.sh",
+    "download:appdev:zh:all": "./scripts/download-appdev-zh.sh",
     "clean:docs": "pingcap-docs-download cl",
-    "sync": "pingcap-docs-download sync",
+    "sync": "pingcap-docs-download sync"
   }
 }
 ```
@@ -61,21 +58,18 @@ Run `yarn start` to develop:
 yarn start
 ```
 
-### CI
+In order to debug algolia searches, you need to provide two additional environment variables:
 
-We use GitHub actions to serve the build and deploy.
+- `GATSBY_ALGOLIA_APPLICATION_ID`
+- `GATSBY_ALGOLIA_API_KEY`
 
-The core of the CI is using `repository_dispatch` event which described at <https://help.github.com/en/actions/reference/events-that-trigger-workflows#external-events-repository_dispatch>.
-
-Once outside repo post this event, the master branch workflow will start to update the website.
-
-For more details, view: <https://github.com/pingcap/website-docs/blob/master/.github/workflows/update.yml>
+Put them in `.env.development` to make them take effect. (Ref: <https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/>)
 
 ### GitHub Outh2 token
 
-Because of most of our text data stored in GitHub. So, It's needed to apply a GitHub API token in development **when you are prompted for `rate-limiting`**.
+Because of most of our text data stored in GitHub. It's needed to apply a GitHub API token in development **when you are prompted for `rate-limiting`**.
 
-For more details, view <https://developer.github.com/v3/#rate-limiting>
+For more details, view <https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting>.
 
 You must set the token as an env when you start some commands, defined as:
 
@@ -83,11 +77,17 @@ You must set the token as an env when you start some commands, defined as:
 GITHUB_AUTHORIZATION_TOKEN=token
 ```
 
-Some scripts will need this env variable, for example:
+### CI
 
-```sh
-GITHUB_AUTHORIZATION_TOKEN=token yarn download:docs-tidb-operator en master
-```
+We use GitHub actions to serve the build and deploy.
+
+The core of the CI is using `repository_dispatch` event which described at <https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#repository_dispatch>.
+
+Once outside repo post this event, the master branch workflow will start to update the website.
+
+For more details, view: <https://github.com/pingcap/website-docs/blob/master/.github/workflows/update.yml>.
+
+For how to test CI, view: [.github/workflows/tests/README.md](.github/workflows/tests/README.md).
 
 ## The rules we followed
 
@@ -104,7 +104,7 @@ For better collaboration and review, we have developed a few rules to help us de
 
 First, we use [husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged) to make [prettier](https://prettier.io/) format our code automatically before commit.
 
-And also, because some of us use vscode to develop the dashboard, we recommend to use [sort-imports](https://marketplace.visualstudio.com/items?itemName=amatiasq.sort-imports) to format all imports. (This is optional, we will not force you to use)
+And also, because some of us use vscode to develop, we recommend to use [sort-imports](https://marketplace.visualstudio.com/items?itemName=amatiasq.sort-imports) to format all imports. (This is optional, we will not force you to use)
 
 ### Styles
 
@@ -176,12 +176,11 @@ Everything you needed is just to write a JSX tag, put the text into it. Then we 
 ```jsx
 <SimpleTab>
   <div label="LABEL_SHOW_ON_FIRST_TAB">
-  This is the first content, which is markdown format. The content will show on the corresponding panel when users switch the tabs.
+    This is the first content, which is markdown format. The content will show
+    on the corresponding panel when users switch the tabs.
   </div>
 
-  <div label="LABEL_SHOW_ON_SECOND_TAB">
-  This is the second content.
-  </div>
+  <div label="LABEL_SHOW_ON_SECOND_TAB">This is the second content.</div>
 </SimpleTab>
 ```
 
@@ -194,21 +193,15 @@ All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column h
 ```jsx
 <NavColumns>
   <NavColumn>
-    <ColumnTitle>Column title</ColumnTitle>
-
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
+    <ColumnTitle>Column title</ColumnTitle>- [This is nav](/fileName.md) - [This
+    is nav](/fileName.md) - [This is nav](/fileName.md) - [This is
+    nav](/fileName.md)
   </NavColumn>
 
   <NavColumn>
-    <ColumnTitle>Column title</ColumnTitle>
-
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
-    - [This is nav](/fileName.md)
+    <ColumnTitle>Column title</ColumnTitle>- [This is nav](/fileName.md) - [This
+    is nav](/fileName.md) - [This is nav](/fileName.md) - [This is
+    nav](/fileName.md)
   </NavColumn>
 </NavColumns>
 ```

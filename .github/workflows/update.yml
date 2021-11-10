@@ -11,6 +11,7 @@ jobs:
 
       # https://github.com/gatsbyjs/gatsby/issues/11406
       - name: Increase file watchers
+        if: ${{ !env.ACT }}
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       # make sure there is only one workflow running
@@ -143,7 +144,7 @@ jobs:
         run: |
           echo ${{ github.event.client_payload.sha }} > ${{ steps.cache-commit.outputs.path }}
 
-      # if does full building, store latest commit shas of all docs repo
+      # if does full building, store latest commit sha of all docs repo
       - name: Update all commit hashes
         if: github.event.client_payload.download_type == 'full'
         run: |

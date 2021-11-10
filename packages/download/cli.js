@@ -78,6 +78,7 @@ const argv = yargs(hideBin(process.argv))
     },
     'dry-run': {
       type: 'boolean',
+      desc: 'Dry run mode does not download docs',
       default: false,
     },
   })
