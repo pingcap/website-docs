@@ -1,8 +1,8 @@
 import { getContent, http } from './http.js'
+import stream, { pipeline } from 'stream'
 
 import fs from 'fs'
 import sig from 'signale'
-import stream from 'stream'
 
 const IMAGE_CDN_PREFIX = 'https://download.pingcap.com/images'
 export const imageCDNs = {
@@ -117,5 +117,9 @@ export async function writeContent(url, destPath, pipelines = []) {
   const writeStream = fs.createWriteStream(destPath)
   writeStream.on('close', () => sig.success('Downloaded:', url))
 
-  stream.pipeline(readableStream, ...pipelines.map(p => p()), writeStream)
+  pipeline(readableStream, ...pipelines.map(p => p()), writeStream, err => {
+    if (err) {
+      sig.error('Pipeline failed:', err)
+    }
+  })
 }

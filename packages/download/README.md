@@ -37,7 +37,7 @@ Options:
       --dry-run              Dry run mode does not download docs                              [boolean] [default: false]
 ```
 
-Let us explain with this example: `npx @pingcap/docs-download download pingcap/docs-tidb-operator en master`.
+Let us explain with this example: `npx @pingcap/docs-download download pingcap/docs-tidb-operator en --ref master`.
 
 The `<repo>` is [docs-tidb-operator](https://github.com/pingcap/docs-tidb-operator), which is required. It means we will download the docs from this repo.
 

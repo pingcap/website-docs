@@ -8,7 +8,7 @@ dotenv.config()
 const GITHUB_AUTHORIZATION_TOKEN = process.env.GITHUB_AUTHORIZATION_TOKEN
 const baseURL = 'https://api.github.com'
 const defaultHeaders = {
-  Accept: 'application/vnd.github.v3.raw+json',
+  Accept: 'application/vnd.github.v3+json',
 }
 
 export const http = axios.create({
