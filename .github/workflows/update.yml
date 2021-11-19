@@ -1,4 +1,4 @@
-name: Incremental Building Triggered By Push Events
+name: Incremental Build Triggered By Push Events
 
 on: repository_dispatch
 
@@ -117,25 +117,28 @@ jobs:
             ${{ runner.os }}-v1-gatsby-build-
 
       - name: Build website
-        run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build
+        env:
+          GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        run: yarn build
 
       - name: Deploy to LA1
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to LA2
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ1
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ2
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
