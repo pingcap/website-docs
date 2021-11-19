@@ -3,8 +3,8 @@
 # mark all duplicate pages with a rel="canonical" link element
 set -e
 
-consolidate_tidb_versions=(dev v2.1 v3.0 v3.1 v4.0 v5.0 v5.1)
-consolidate_dm_versions=(dev v1.0)
+consolidate_tidb_versions=(dev v2.1 v3.0 v3.1 v4.0 v5.0 v5.1 v5.2)
+consolidate_dm_versions=(dev v1.0 v2.0)
 consolidate_operator_versions=(dev v1.0 v1.1)
 
 consolidate_duplicate_urls() {
