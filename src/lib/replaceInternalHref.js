@@ -1,7 +1,7 @@
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g // with CJKLanguage
 
-export function unifyAnchor(item) {
-  return item
+export function unifyAnchor(url) {
+  return url
     .replace(/\s/g, '-')
     .replace(reAnchor, '')
     .replace(/span-classversion-mark|span$/g, '')

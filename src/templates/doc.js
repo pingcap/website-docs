@@ -81,12 +81,16 @@ const Doc = ({
   function renderItems(items) {
     return (
       <ul>
-        {items.map(item => (
-          <li key={item.url}>
-            <a href={'#' + unifyAnchor(item.url)}>{item.title}</a>
-            {item.items && renderItems(item.items)}
-          </li>
-        ))}
+        {items.map((item, i) =>
+          item.url ? (
+            <li key={item.url}>
+              <a href={'#' + unifyAnchor(item.url)}>{item.title}</a>
+              {item.items && renderItems(item.items)}
+            </li>
+          ) : (
+            <li key={`item${i}`}>{item.items && renderItems(item.items)}</li>
+          )
+        )}
       </ul>
     )
   }
