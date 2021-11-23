@@ -154,7 +154,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: ${{ github.repository_owner == 'Ti-FE' }}
         with:
-          name: actions/runs/${{ github.run_id }}
+          tag_name: actions/runs/${{ github.run_id }}
           files: public.zip
 
       - name: Update current commit sha to cache
