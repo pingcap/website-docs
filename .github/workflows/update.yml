@@ -11,7 +11,7 @@ jobs:
 
       # https://github.com/gatsbyjs/gatsby/issues/11406
       - name: Increase file watchers
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       # make sure there is only one workflow running
@@ -20,7 +20,7 @@ jobs:
         uses: softprops/turnstyle@v1
 
       - name: Set known_hosts
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         id: known-hosts
         run: |
           echo "::set-output name=BJ_PROXY::$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})"
@@ -28,7 +28,7 @@ jobs:
           echo "::set-output name=LA2::$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})"
 
       - name: Install SSH Key
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
