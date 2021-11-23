@@ -120,8 +120,8 @@ export const zh = [
         url: 'https://pingcap.com/zh/case',
       },
       {
-        name: 'PingCAP University',
-        url: 'https://university.pingcap.com',
+        name: 'PingCAP Education',
+        url: 'https://learn.pingcap.com',
       },
       {
         name: 'TiDB in Action',

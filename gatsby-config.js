@@ -30,10 +30,6 @@ module.exports = {
         languages: ['en', 'zh'],
         defaultLanguage: 'en',
         redirectDefaultLanguageToRoot: true,
-        ignoredPaths: [
-          '?(/zh)/(tidb|tidb-data-migration|tidb-in-kubernetes|appdev|tidbcloud)/**',
-        ],
-        fallbackLanguage: 'en',
       },
     },
     `gatsby-plugin-react-helmet`,
