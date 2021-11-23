@@ -175,16 +175,6 @@ const Doc = ({
             </Title>
             {tableOfContents.items && renderItems(tableOfContents.items)}
           </div>
-          {pathname === '/zh/tidb/stable' && (
-            <a
-              className="Promote"
-              href="https://pingcap.com/community-cn/careers/join/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img src={PromptBanner} alt="PingCAP community careers" />
-            </a>
-          )}
         </div>
       </Column>
 

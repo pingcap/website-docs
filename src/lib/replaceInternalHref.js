@@ -26,7 +26,7 @@ export default function replaceInternalHref(
     if (href.includes('.md')) {
       a.href = `${
         lang === 'zh' ? `/${lang}` : ''
-      }/${doc}/${version}/${href.replace('.md', '')}`
+      }/${doc}/${version}${href.replace('.md', '')}`
     }
 
     if (a.classList.contains('anchor')) {

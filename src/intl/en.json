@@ -9,7 +9,7 @@
   "navbar": {
     "tidb": "TiDB",
     "tools": "Tools",
-    "cloud": "Cloud",
+    "cloud": "TiDB Cloud",
     "appdev": "App Dev",
     "download": "Get TiDB",
     "contactUs": "Contact Us",

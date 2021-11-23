@@ -65,6 +65,9 @@ const Navbar = () => {
       const scrolled = scrollTop > 0
 
       const height = scrollHeight - clientHeight
+      if (height === 0) {
+        return
+      }
       const progress = ((scrollTop / height) * 100).toFixed()
 
       progressEl.value = progress
@@ -86,7 +89,7 @@ const Navbar = () => {
     >
       <Container>
         <NavbarBrand>
-          <NavbarItem>
+          <NavbarItem as="a" href="https://pingcap.com" target="_blank">
             <img
               className={styles.logo}
               src={BrandSVG.publicURL}
@@ -122,11 +125,9 @@ const Navbar = () => {
               </NavbarItem>
             )}
 
-            {locale === 'zh' && (
-              <NavbarItem as={Link} className={styles.main} to="/appdev/dev">
-                <FormattedMessage id="navbar.appdev" />
-              </NavbarItem>
-            )}
+            <NavbarItem as={Link} className={styles.main} to="/appdev/dev">
+              <FormattedMessage id="navbar.appdev" />
+            </NavbarItem>
           </NavbarStart>
 
           <NavbarEnd>
