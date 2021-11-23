@@ -44,6 +44,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install yarn
+        # Since actions/setup-node currently errors out when run locally, here is a manual installation
         if: ${{ env.ACT }}
         run: |
           echo "node version:"
@@ -67,8 +68,9 @@ jobs:
       # if download_type is full, download all docs
       - name: Check restore status
         if: github.event.client_payload.download_type == 'full'
+        env:
+          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          export GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }}
           yarn download:tidb:en:all
           yarn download:tidb:zh:all
           yarn download:dm:all
@@ -94,9 +96,11 @@ jobs:
       # incremental: download changed files
       - name: Sync docs
         if: steps.cache-commit.outputs.base != '' && github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'pingcap/website-docs'
+        env:
+          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           [[ ${{ env.ACT }} = "true" ]] && dryRun="true" || dryRun="false"
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
+          yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
@@ -141,6 +145,17 @@ jobs:
         if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+
+      - name: Zip public
+        if: ${{ github.repository_owner == 'Ti-FE' }}
+        run: zip public.zip -r public
+
+      - name: Create test release
+        uses: softprops/action-gh-release@v1
+        if: ${{ github.repository_owner == 'Ti-FE' }}
+        with:
+          name: actions/runs/${{ github.run_id }}
+          files: public.zip
 
       - name: Update current commit sha to cache
         if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'pingcap/website-docs'
