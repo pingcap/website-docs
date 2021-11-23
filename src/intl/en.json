@@ -16,6 +16,7 @@
     "searchDocs": "Search Docs"
   },
   "doc": {
+    "notExist": "This doc does not exist",
     "toc": "What’s on this page",
     "download-pdf": "Download PDF",
     "improve": "Edit this page",

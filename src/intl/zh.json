@@ -9,11 +9,12 @@
     "tidb": "TiDB",
     "tools": "生态工具",
     "appdev": "开发指南",
-    "download": "免费试用",
+    "download": "获取 TiDB",
     "contactUs": "联系我们",
     "searchDocs": "搜索文档"
   },
   "doc": {
+    "notExist": "此文档不存在",
     "toc": "本页导航",
     "download-pdf": "下载 PDF",
     "improve": "修改本文",

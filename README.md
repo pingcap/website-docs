@@ -5,6 +5,8 @@
 
 <p align="center">The next generation of PingCAP Docs. Powered by Gatsby ⚛️.</p>
 
+[![Incremental Build Triggered By Push Events](https://github.com/PingCAP/website-docs/actions/workflows/update.yml/badge.svg?event=repository_dispatch)](https://github.com/PingCAP/website-docs/actions/workflows/update.yml)
+
 ## How to develop
 
 After clone this repo, run `yarn` to get all deps:

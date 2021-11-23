@@ -21,12 +21,11 @@ export default function replaceInternalHref(
   const sliceVersionMark = /span-classversion-mark|span$/g
 
   Array.from(aTags).forEach(a => {
-    const href = a.getAttribute('href')
+    let href = a.getAttribute('href').replace('.md', '')
+    href = href[0] === '/' ? href.slice(1) : href
 
     if (href.includes('.md')) {
-      a.href = `${
-        lang === 'zh' ? `/${lang}` : ''
-      }/${doc}/${version}${href.replace('.md', '')}`
+      a.href = [lang === 'zh' ? `/${lang}` : '', doc, version, href].join('/')
     }
 
     if (a.classList.contains('anchor')) {
