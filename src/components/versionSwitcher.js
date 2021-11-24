@@ -36,7 +36,7 @@ const VersionSwitcher = ({
   const [dropdownItems, setDropdownItems] = useState([])
 
   function handleRelativeDir() {
-    setText(version === 'stable' ? stableVersion : version)
+    setText(version === 'stable' ? convertVersionName(stableVersion) : version)
 
     switch (doc) {
       case 'tidb':
