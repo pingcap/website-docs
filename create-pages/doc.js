@@ -51,8 +51,9 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path with .md]
     const [doc, version] = pathWithoutLang
 
+    const slugArray = slug.split('/')
     // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
-    node.pathWithoutVersion = slug.split('/').slice(2).join('/')
+    node.pathWithoutVersion = slugArray[slugArray.length - 1]
     node.path = replacePath(slug, name, lang, node.pathWithoutVersion)
     node.repo = getRepo(doc, lang)
     node.ref = version
