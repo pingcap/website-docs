@@ -99,7 +99,8 @@ jobs:
         env:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          [[ ${{ env.ACT }} = "true" ]] && dryRun="true" || dryRun="false"
+          ACT=${{ env.ACT }}
+          [[ "${ACT:-false}" = "true" ]] && dryRun="true" || dryRun="false"
           yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
 
       - name: Restore gatsby cache
