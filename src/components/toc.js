@@ -106,7 +106,7 @@ const TOC = ({ data, name, docVersionStable }) => {
       const chunks = href.split('/')
       const _name = chunks[chunks.length - 1]
 
-      el.href = `/${doc}/${version}/${href[0] === '/' ? href.slice(1) : href}`
+      el.href = `/${doc}/${version}/${_name}`
 
       if (_name === name) {
         el.className = 'active'
