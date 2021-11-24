@@ -66,25 +66,26 @@ const VersionSwitcher = ({
         <DropdownContent className={styles.dropdownContent}>
           {dropdownItems.map((item, i) => (
             <Fragment key={item}>
-              <DropdownItem as="div">
-                {versions.indexOf(item) === -1 ? (
+              {versions.indexOf(item) === -1 ? (
+                <DropdownItem as="div">
                   <span
-                    className="has-text-grey"
+                    className={styles.noExistSpan}
                     data-tooltip={intl.formatMessage({ id: 'doc.notExist' })}
                     data-flow="right"
                   >
                     {item === 'stable' ? stableVersion + ' (stable)' : item}
                   </span>
-                ) : (
-                  <Link
-                    to={`/${doc}/${item}/${
-                      name === '_index' ? '' : pathWithoutVersion
-                    }`}
-                  >
-                    {item === 'stable' ? stableVersion + ' (stable)' : item}
-                  </Link>
-                )}
-              </DropdownItem>
+                </DropdownItem>
+              ) : (
+                <DropdownItem
+                  as={Link}
+                  to={`/${doc}/${item}/${
+                    name === '_index' ? '' : pathWithoutVersion
+                  }`}
+                >
+                  {item === 'stable' ? stableVersion + ' (stable)' : item}
+                </DropdownItem>
+              )}
               {i < dropdownItems.length - 1 && <DropdownDivider />}
             </Fragment>
           ))}
