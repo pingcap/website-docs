@@ -49,7 +49,7 @@
     "@prantlf/railroad-diagrams": "^1.0.1",
     "@ti-fe/cli": "^0.12.0",
     "@ti-fe/prettier-config": "^1.0.3",
-    "anafanafo": "^2.0.0",
+    "anafanafo": "^1.0.0",
     "bulma": "^0.9.3",
     "gatsby-plugin-root-import": "^2.0.8",
     "husky": "^7.0.4",
