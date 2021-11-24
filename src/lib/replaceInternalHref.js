@@ -23,14 +23,17 @@ export default function replaceInternalHref(
     let href = a.getAttribute('href')
 
     if (href.includes('.md')) {
-      href = (href[0] === '/' ? href.slice(1) : href).replace('.md', '')
+      const hrefArray = href.split('/')
+      href = hrefArray[hrefArray.length - 1].replace('.md', '')
       a.href = [lang === 'zh' ? `/${lang}` : '', doc, version, href].join('/')
     }
 
     if (a.classList.contains('anchor')) {
-      a.href = decodeURIComponent(href)
-        .replace(reAnchor, '')
-        .replace(sliceVersionMark, '')
+      a.href =
+        '#' +
+        decodeURIComponent(href)
+          .replace(reAnchor, '')
+          .replace(sliceVersionMark, '')
       a.parentElement.id = a.parentElement.id
         .replace(reAnchor, '')
         .replace(sliceVersionMark, '')

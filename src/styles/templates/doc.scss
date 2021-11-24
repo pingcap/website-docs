@@ -40,6 +40,11 @@ $top: $navbar-height + 1rem;
       &:hover {
         color: $B1;
       }
+
+      &.anchor.before {
+        top: unset;
+        left: 1rem;
+      }
     }
 
     p,

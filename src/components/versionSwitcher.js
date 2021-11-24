@@ -12,7 +12,14 @@ import {
 } from '@seagreenio/react-bulma'
 import { Link, useIntl } from 'gatsby-plugin-react-intl'
 import React, { Fragment, useEffect, useState } from 'react'
-import { appdev, cloud, dm, operator, tidb } from 'lib/version'
+import {
+  appdev,
+  cloud,
+  convertVersionName,
+  dm,
+  operator,
+  tidb,
+} from 'lib/version'
 
 import PropTypes from 'prop-types'
 
@@ -54,6 +61,9 @@ const VersionSwitcher = ({
 
   useEffect(handleRelativeDir, [doc, version, stableVersion])
 
+  const renderItem = item =>
+    item === 'stable' ? convertVersionName(stableVersion) + ' (stable)' : item
+
   return (
     <Dropdown className={styles.dropdown} hoverable>
       <DropdownTrigger className={styles.dropdownTrigger}>
@@ -73,7 +83,7 @@ const VersionSwitcher = ({
                     data-tooltip={intl.formatMessage({ id: 'doc.notExist' })}
                     data-flow="right"
                   >
-                    {item === 'stable' ? stableVersion + ' (stable)' : item}
+                    {renderItem(item)}
                   </span>
                 </DropdownItem>
               ) : (
@@ -83,7 +93,7 @@ const VersionSwitcher = ({
                     name === '_index' ? '' : pathWithoutVersion
                   }`}
                 >
-                  {item === 'stable' ? stableVersion + ' (stable)' : item}
+                  {renderItem(item)}
                 </DropdownItem>
               )}
               {i < dropdownItems.length - 1 && <DropdownDivider />}

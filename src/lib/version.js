@@ -11,7 +11,7 @@ const docs = data['docs']
  * @param {string} stable
  * @return {string}
  */
-function convertVersionName(version, stable) {
+export function convertVersionName(version, stable) {
   switch (version) {
     case 'master':
       return 'dev'
