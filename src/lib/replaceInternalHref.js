@@ -1,10 +1,11 @@
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g // with CJKLanguage
+const sliceVersionMark = /span-classversion-mark|span$/g
 
 export function unifyAnchor(url) {
   return url
     .replace(/\s/g, '-')
     .replace(reAnchor, '')
-    .replace(/span-classversion-mark|span$/g, '')
+    .replace(sliceVersionMark, '')
     .toLowerCase()
 }
 
@@ -18,13 +19,11 @@ export default function replaceInternalHref(
     `${simpletab ? '.PingCAP-simpleTab' : '.doc-content'} a`
   )
 
-  const sliceVersionMark = /span-classversion-mark|span$/g
-
   Array.from(aTags).forEach(a => {
-    let href = a.getAttribute('href').replace('.md', '')
-    href = href[0] === '/' ? href.slice(1) : href
+    let href = a.getAttribute('href')
 
     if (href.includes('.md')) {
+      href = (href[0] === '/' ? href.slice(1) : href).replace('.md', '')
       a.href = [lang === 'zh' ? `/${lang}` : '', doc, version, href].join('/')
     }
 
