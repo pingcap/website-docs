@@ -1,6 +1,8 @@
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g // with CJKLanguage
 const sliceVersionMark = /span-classversion-mark|span$/g
 
+import { withPrefix } from 'gatsby'
+
 export function unifyAnchor(url) {
   return url
     .replace(/\s/g, '-')
@@ -25,7 +27,9 @@ export default function replaceInternalHref(
     if (href.includes('.md')) {
       const hrefArray = href.split('/')
       href = hrefArray[hrefArray.length - 1].replace('.md', '')
-      a.href = [lang === 'zh' ? `/${lang}` : '', doc, version, href].join('/')
+      a.href = withPrefix(
+        [lang === 'zh' ? `/${lang}` : '', doc, version, href].join('/')
+      )
     }
 
     if (a.classList.contains('anchor')) {
