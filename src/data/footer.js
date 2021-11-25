@@ -15,7 +15,7 @@ export const en = [
         url: 'https://github.com/pingcap/tispark',
       },
       {
-        name: 'Chaos Mesh®',
+        name: 'Chaos Mesh',
         url: 'https://github.com/pingcap/chaos-mesh',
       },
     ],
