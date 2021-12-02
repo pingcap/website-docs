@@ -1,4 +1,4 @@
-const path = require('path')
+const nPath = require('path')
 const fs = require('fs')
 const {
   getStable,
@@ -16,7 +16,7 @@ const messages = {
 }
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
-  const template = path.resolve(__dirname, '../src/templates/doc.js')
+  const template = nPath.resolve(__dirname, '../src/templates/doc.js')
 
   const docs = await graphql(`
     {
@@ -65,7 +65,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       stable: getStable(doc),
     })
 
-    const filePathInDiffLang = path.resolve(
+    const filePathInDiffLang = nPath.resolve(
       __dirname,
       `../${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath.slice(3)}`
     )
@@ -78,13 +78,14 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
   })
 
   const versionsMap = nodes.reduce(
-    (acc, { lang, version, pathWithoutVersion }) => {
-      const arr = acc[lang][pathWithoutVersion]
+    (acc, { lang, version, repo, pathWithoutVersion }) => {
+      const key = nPath.join(repo, pathWithoutVersion)
+      const arr = acc[lang][key]
 
       if (arr) {
         arr.push(version)
       } else {
-        acc[lang][pathWithoutVersion] = [version]
+        acc[lang][key] = [version]
       }
 
       return acc
@@ -134,7 +135,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         langSwitchable,
         tocSlug,
         downloadURL,
-        versions: versionsMap[lang][pathWithoutVersion],
+        versions: versionsMap[lang][nPath.join(repo, pathWithoutVersion)],
       },
     })
 
