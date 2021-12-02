@@ -128,6 +128,28 @@ const Navbar = () => {
             <NavbarItem as={Link} className={styles.main} to="/appdev/dev">
               <FormattedMessage id="navbar.appdev" />
             </NavbarItem>
+
+            <NavbarItem
+              className={styles.main}
+              href={
+                locale === 'en'
+                  ? 'https://en.pingcap.com/download'
+                  : 'https://pingcap.com/zh/product#SelectProduct'
+              }
+            >
+              <FormattedMessage id="navbar.download" />
+            </NavbarItem>
+
+            <NavbarItem
+              className={styles.main}
+              href={
+                locale === 'en'
+                  ? 'https://en.pingcap.com/contact-us/'
+                  : 'https://pingcap.com/zh/contact/'
+              }
+            >
+              <FormattedMessage id="navbar.contactUs" />
+            </NavbarItem>
           </NavbarStart>
 
           <NavbarEnd>

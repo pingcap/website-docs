@@ -13,6 +13,7 @@ $top: $navbar-height + 1rem;
     position: sticky;
     top: $top;
     max-height: calc(100vh - #{$top});
+    padding-right: 1rem;
     overflow-y: auto;
   }
 

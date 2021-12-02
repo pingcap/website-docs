@@ -1,4 +1,4 @@
-import { Block, Column, Columns } from '@seagreenio/react-bulma'
+import { Block, Columns } from '@seagreenio/react-bulma'
 
 import Default from './default'
 import PropTypes from 'prop-types'
@@ -18,8 +18,8 @@ const Layout = ({
   return (
     <Default>
       <article className="PingCAP-Doc">
-        <Columns gap={6}>
-          <Column size={2}>
+        <Columns>
+          <div className="column is-one-fifth">
             <div className="left-aside">
               <Block>
                 <VersionSwitcher
@@ -37,7 +37,7 @@ const Layout = ({
                 />
               )}
             </div>
-          </Column>
+          </div>
           {children}
         </Columns>
       </article>
