@@ -1,7 +1,7 @@
+import { withPrefix } from 'gatsby'
+
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g // with CJKLanguage
 const sliceVersionMark = /span-classversion-mark|span$/g
-
-import { withPrefix } from 'gatsby'
 
 export function unifyAnchor(url) {
   return url
