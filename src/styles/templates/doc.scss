@@ -163,6 +163,8 @@ $top: $navbar-height + 1rem;
   }
 
   .doc-toc {
+    word-break: break-word;
+
     .title {
       color: $primary;
     }
