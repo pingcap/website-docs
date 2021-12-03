@@ -227,7 +227,17 @@ const Search = () => {
 
         <Block style={{ position: 'relative' }}>
           <SearchResult results={results} searched={searched} />
-          {loading && <Loading stretched style={{ alignItems: 'start' }} />}
+          {loading && (
+            <Loading
+              stretched
+              style={{ alignItems: 'start' }}
+              imgProps={{
+                style: {
+                  marginTop: '2rem',
+                },
+              }}
+            />
+          )}
         </Block>
       </div>
     </>

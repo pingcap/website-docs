@@ -5,7 +5,7 @@ import React from 'react'
 import clsx from 'clsx'
 import loaderSpinner from '../../images/loading-spinner.svg'
 
-const Loading = ({ wholeScreen, stretched, ...rest }) => {
+const Loading = ({ wholeScreen, stretched, imgProps, ...rest }) => {
   return (
     <div
       className={clsx(
@@ -15,7 +15,7 @@ const Loading = ({ wholeScreen, stretched, ...rest }) => {
       )}
       {...rest}
     >
-      <img src={loaderSpinner} alt="loading spinner" />
+      <img {...imgProps} src={loaderSpinner} alt="loading spinner" />
     </div>
   )
 }
@@ -23,6 +23,7 @@ const Loading = ({ wholeScreen, stretched, ...rest }) => {
 Loading.propTypes = {
   wholeScreen: PropTypes.bool,
   stretched: PropTypes.bool,
+  imgProps: PropTypes.object,
 }
 
 export default Loading
