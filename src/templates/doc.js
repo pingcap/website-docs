@@ -36,7 +36,7 @@ const Doc = ({
     downloadURL,
     fullPath,
     versions,
-    langSwitchable,
+    switchableLangs,
   },
   data,
 }) => {
@@ -150,7 +150,7 @@ const Doc = ({
     <Layout
       locale={locale}
       forbidResetDocInfo={true}
-      langSwitchable={langSwitchable}
+      switchableLangs={switchableLangs}
     >
       <SEO
         title={frontmatter.title}

@@ -1,0 +1,64 @@
+{
+  "navbar": {
+    "tidb": "TiDB",
+    "tools": "ツール",
+    "cloud": "Cloud",
+    "appdev": "開発ガイド",
+    "download": "ダウンロード",
+    "contactUs": "お問い合わせ",
+    "searchDocs": "ドキュメント検索"
+  },
+  "doc": {
+    "mobileDocMenu": "ドキュメントメニュー",
+    "toc": "このページの内容",
+    "improveDocLink": "このページを編集する",
+    "feedbackDocLink": "ドキュメントのフィードバック",
+    "deprecation": {
+      "tidb": {
+        "firstContext": "TiDBデータベースの旧バージョン（TiDB { curDocVersion }）のドキュメントが表示されています。",
+        "secondContext": "TiDBデータベースの{ link }のご利用ください。",
+        "link": "最新安定版"
+      },
+      "tidb-in-kubernetes": {
+        "firstContext": "TiDB Operatorの旧バージョン（TiDB Operator{ curDocVersion }）のドキュメントが表示されています。",
+        "secondContext": "TiDB Operator { stableVersion }, the latest major version of TiDB Operator, is now stable and recommended for general use. To view this page for TiDB Operator { stableVersion }, click { link }.",
+        "link": "ここ"
+      },
+      "tidb-data-migration": {
+        "firstContext": "TiDB Data Migrationの旧バージョン（TiDB Data Migration{ curDocVersion }）のドキュメントが表示されています。",
+        "secondContext": "TiDB Data Migration { stableVersion }, the latest major version of TiDB Data Migration, is now stable and recommended for general use. To view this page for TiDB Data Migration { stableVersion }, click { link }.",
+        "link": "ここ"
+      }
+    }
+  },
+  "shortcodes": {
+    "note": "注意",
+    "warning": "警告",
+    "tip": "チップ",
+    "error": "エラー",
+    "important": "重要"
+  },
+  "syntaxDiagram": {
+    "syntaxDiagram": "図",
+    "ebnf": "ソース"
+  },
+  "search": {
+    "type": "タイプ：",
+    "version": "バージョン：",
+    "resultTips": {
+      "counts": "{counts} 件の結果が見つかりました。",
+      "title": "申し訳ありません。お探しのものは見つかりませんでした。",
+      "content1": "予期しない言語のページにアクセスした場合は、中国語のドキュメントにアクセスして再試行してください。",
+      "content2": "英語のコンテンツを入手したい場合は、PingCAPホームページの方が適しているかもしれません。"
+    }
+  },
+  "download-pdf": "PDFダウンロード",
+  "latestCommit": "更新",
+  "langSwitchTip": "このページの日本語版は一時的に利用できません。",
+  "cloudLangSwitchTip": "暂不提供 TiDB Cloud 中文文档",
+  "docHelpful": {
+    "header": "このページは役に立ちましたか？",
+    "thumbUp": "はい",
+    "thumbDown": "いいえ"
+  }
+}

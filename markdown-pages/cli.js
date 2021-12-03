@@ -179,7 +179,7 @@ function main(argv) {
           ref,
           path: path,
         },
-        `${__dirname}/contents/${path}/docs-appdev/${ref}`,
+        `${__dirname}/contents/${path}/docs-appdev/master`,
         [
           () => createReplaceImagePathStream(DEV_GUIDE_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),

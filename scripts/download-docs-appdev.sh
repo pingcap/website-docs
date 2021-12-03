@@ -1,2 +1,3 @@
-yarn download:docs-appdev zh
-yarn download:docs-appdev en
+yarn download:docs-appdev zh add-tdds-documents
+yarn download:docs-appdev en add-tdds-documents
+yarn download:docs-appdev ja add-tdds-documents

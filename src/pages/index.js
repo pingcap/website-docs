@@ -3,7 +3,7 @@ import React from 'react'
 import SEO from '../components/seo'
 
 const IndexPage = ({ pageContext: { locale } }) => (
-  <Layout locale={locale} langSwitchable={true}>
+  <Layout locale={locale}>
     <SEO title="Home" />
   </Layout>
 )

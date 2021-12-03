@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl'
 
 const Tools = ({ pageContext: { locale } }) => {
   return (
-    <Layout locale={locale} langSwitchable={true}>
+    <Layout locale={locale}>
       <SEO title="Tools" />
       <div className="PingCAP-Tools">
         <section className="section container">

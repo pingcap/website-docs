@@ -5,17 +5,26 @@ import AddIcon from '@material-ui/icons/Add'
 import LanguageIcon from '@material-ui/icons/Language'
 import Socials from './socials'
 import IntlLink from '../components/IntlLink'
-import { footerColumnsZh, footerColumnsEn } from '../data/footer'
+import {
+  footerColumnsZh,
+  footerColumnsEn,
+  footerColumnsJa,
+} from '../data/footer'
 import { useLocation } from '@reach/router'
 import { useSelector } from 'react-redux'
 import { FormattedMessage } from 'react-intl'
 
 const Footer = React.memo((prop) => {
   const locale = prop.locale
-  const langSwitchable = prop.langSwitchable
+  const switchableLangs = prop.switchableLangs
   const location = useLocation()
   const currentPathname = location.pathname
-  const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
+  const footerColumns =
+    locale === 'en'
+      ? footerColumnsEn
+      : locale === 'zh'
+      ? footerColumnsZh
+      : footerColumnsJa
 
   const { FooterLogoSVG } = useStaticQuery(
     graphql`
@@ -55,22 +64,13 @@ const Footer = React.memo((prop) => {
 
     const switchToLang = (lang) => {
       let currentPathnameArr = currentPathname.split('/')
-      let preLang
-      switch (lang) {
-        case 'zh':
-          preLang = '/zh'
-          break
 
-        case 'en':
-          preLang = ''
-          currentPathnameArr.splice(1, 1)
-          break
-
-        default:
-          break
+      const preLang = lang === 'en' ? '' : lang
+      if (locale !== 'en') {
+        currentPathnameArr.splice(1, 1)
       }
 
-      return langSwitchable
+      return switchableLangs[lang]
         ? preLang + currentPathnameArr.join('/')
         : docInfo.type === 'tidbcloud'
         ? preLang + '/tidb/stable/'
@@ -95,7 +95,7 @@ const Footer = React.memo((prop) => {
               className="dropdown-item"
             >
               English
-              {!langSwitchable && locale === 'zh' && (
+              {locale !== 'en' && !switchableLangs['en'] && (
                 <span className="tooltiptext">
                   <FormattedMessage id="langSwitchTip" />
                 </span>
@@ -106,7 +106,7 @@ const Footer = React.memo((prop) => {
               className="dropdown-item"
             >
               简体中文
-              {!langSwitchable && locale === 'en' && (
+              {locale !== 'zh' && !switchableLangs['zh'] && (
                 <span className="tooltiptext">
                   <FormattedMessage
                     id={
@@ -118,6 +118,19 @@ const Footer = React.memo((prop) => {
                 </span>
               )}
             </Link>
+            {docInfo.type === 'appdev' && (
+              <Link
+                to={locale === 'ja' ? currentPathname : switchToLang('ja')}
+                className="dropdown-item"
+              >
+                日本語
+                {locale !== 'ja' && !switchableLangs['ja'] && (
+                  <span className="tooltiptext">
+                    <FormattedMessage id="langSwitchTip" />
+                  </span>
+                )}
+              </Link>
+            )}
           </div>
         </div>
       </div>

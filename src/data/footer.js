@@ -220,4 +220,108 @@ const footerColumnsEn = [
   },
 ]
 
-export { footerColumnsZh, footerColumnsEn }
+const footerColumnsJa = [
+  {
+    name: 'Open Source Ecosystem',
+    items: [
+      {
+        name: 'TiDB',
+        link: 'https://pingcap.com/products/tidb',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'TiKV',
+        link: 'https://github.com/tikv/tikv',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'TiSpark',
+        link: 'https://github.com/pingcap/tispark',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Chaos Mesh®',
+        link: 'https://github.com/pingcap/chaos-mesh',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+  {
+    name: 'Resources',
+    items: [
+      {
+        name: 'Quick Start',
+        link: '/tidb/stable/quick-start-with-tidb',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Documentation',
+        link: '/tidb/stable',
+        linkType: 'innerLink',
+      },
+      {
+        name: 'Blog',
+        link: 'https://pingcap.com/blog',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Community',
+        link: 'https://pingcap.com/community',
+
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'GitHub',
+        link: 'https://github.com/pingcap',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+  {
+    name: 'Use Cases',
+    items: [
+      {
+        name: 'Internet',
+        link: 'https://pingcap.com/case-studies/Internet',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Gaming',
+        link: 'https://pingcap.com/case-studies/Gaming',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Financial services',
+        link: 'https://pingcap.com/case-studies/Financial-Services',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+  {
+    name: 'Company',
+    items: [
+      {
+        name: 'About',
+        link: 'https://pingcap.com/about',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Careers',
+        link: 'https://pingcap.com/careers',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Legal',
+        link: 'https://pingcap.com/legal',
+        linkType: 'outBoundLink',
+      },
+      {
+        name: 'Contact',
+        link: 'https://pingcap.com/contact-us',
+        linkType: 'outBoundLink',
+      },
+    ],
+  },
+]
+
+export { footerColumnsZh, footerColumnsEn, footerColumnsJa }

@@ -36,9 +36,9 @@ const Navbar = (prop) => {
 
   useEffect(() => {
     const pageType =
-      locale === 'zh'
-        ? location.pathname.split('/')[2]
-        : location.pathname.split('/')[1]
+      locale === 'en'
+        ? location.pathname.split('/')[1]
+        : location.pathname.split('/')[2]
     setActiveNav(pageType)
   }, [locale, location.pathname])
 
@@ -107,7 +107,7 @@ const Navbar = (prop) => {
             </IntlLink>
 
             <IntlLink
-              to="/tools/"
+              to="/tools"
               className={`navbar-item with-main-section ${
                 (activeNav === 'tools' ||
                   activeNav === 'tidb-data-migration' ||
@@ -120,7 +120,7 @@ const Navbar = (prop) => {
             >
               <FormattedMessage id="navbar.tools" />
             </IntlLink>
-            {locale === 'en' && (
+            {locale !== 'zh' && (
               <IntlLink
                 to="/tidbcloud/public-preview"
                 className={`navbar-item with-main-section ${
