@@ -43,7 +43,7 @@
 .progress {
   display: none;
   position: fixed;
-  top: calc(#{$navbar-height} - 1px);
+  top: $navbar-height;
   height: 1px;
   background: transparent;
   border-radius: 0;
