@@ -2,6 +2,9 @@
 
 .loading {
   @include VHCenter;
+
+  background: rgba($color: $M2, $alpha: 0.75);
+  z-index: 999;
 }
 
 .wholeScreen {
@@ -10,6 +13,12 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: $M2;
-  z-index: 999;
+}
+
+.stretched {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

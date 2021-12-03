@@ -70,9 +70,9 @@ const Doc = ({
 
     dispatch(
       setDocInfo({
-        lang: lang,
+        lang,
         type: doc,
-        version: version,
+        version,
       })
     )
   }, [dispatch, lang, doc, version])

@@ -9,11 +9,7 @@ import { navigate, useIntl } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-const Input = ({
-  docInfo: { lang, type, version },
-  searchValue,
-  setSearchValue,
-}) => {
+const Input = ({ docInfo: { type, version }, searchValue, setSearchValue }) => {
   const intl = useIntl()
 
   function handleSearchInputChange(e) {
@@ -23,17 +19,13 @@ const Input = ({
   const handleSearchInputKeyDown = e => {
     e.preventDefault()
 
-    navigate(
-      `/search?lang=${lang}&type=${type}&version=${version}&q=${searchValue}`,
-      {
-        state: {
-          lang,
-          type,
-          version,
-          query: searchValue,
-        },
-      }
-    )
+    navigate(`/search?type=${type}&version=${version}&q=${searchValue}`, {
+      state: {
+        type,
+        version,
+        query: searchValue,
+      },
+    })
   }
 
   return (

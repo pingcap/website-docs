@@ -1,9 +1,12 @@
 import '../styles/pages/search.scss'
 
+import { Block, Button } from '@seagreenio/react-bulma'
+import { FormattedMessage, useIntl } from 'gatsby-plugin-react-intl'
 import React, { useEffect, useState } from 'react'
 import {
   appdev,
   cloud,
+  convertVersionName,
   dm,
   dmStable,
   operator,
@@ -11,19 +14,14 @@ import {
   tidb,
   tidbStable,
 } from 'lib/version'
-import {
-  defaultDocInfo,
-  setDocInfo,
-  setLoading,
-  setSearchValue,
-} from '../state'
+import { defaultDocInfo, setLoading, setSearchValue } from '../state'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { FormattedMessage } from 'react-intl'
-import Loading from '../components/loading'
-import SearchResult from '../components/search/result'
-import Seo from '../components/seo'
-import { algoliaClient } from '../lib/algolia'
+import Loading from 'components/loading'
+import SearchResult from 'components/search/result'
+import Seo from 'components/seo'
+import { algoliaClient } from 'lib/algolia'
+import clsx from 'clsx'
 import { useLocation } from '@reach/router'
 
 const matchToVersionList = match => {
@@ -43,10 +41,25 @@ const matchToVersionList = match => {
   }
 }
 
-const Search = ({ pageContext: { locale } }) => {
+function replaceStableVersion(match) {
+  switch (match) {
+    case 'tidb':
+      return tidbStable
+    case 'tidb-data-migration':
+      return dmStable
+    case 'tidb-in-kubernetes':
+      return operatorStable
+    default:
+      break
+  }
+}
+
+const Search = () => {
+  const intl = useIntl()
+  const { locale } = intl
+
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
-  const lang = searchParams.get('lang') || locale
   const type = searchParams.get('type') || defaultDocInfo['type']
   const version = searchParams.get('version') || defaultDocInfo['version']
   const query = searchParams.get('q')
@@ -56,7 +69,15 @@ const Search = ({ pageContext: { locale } }) => {
   const loading = useSelector(state => state.loading)
 
   const [selectedType, setSelectedType] = useState(type)
-  const [selectedVersion, setSelectedVersion] = useState(version)
+  const toAlgoliaVersion = version =>
+    version === 'stable'
+      ? convertVersionName(replaceStableVersion(selectedType))
+      : version
+  const [selectedVersion, _setSelectedVersion] = useState(
+    toAlgoliaVersion(version)
+  )
+  const setSelectedVersion = version =>
+    _setSelectedVersion(toAlgoliaVersion(version))
   const [selectedVersionList, setSelectedVersionList] = useState(
     matchToVersionList(type)
   )
@@ -64,114 +85,69 @@ const Search = ({ pageContext: { locale } }) => {
   const [searched, setSearched] = useState(false)
   const [docsTypesByLang, setDocsTypesByLang] = useState([])
 
-  const types = [
-    {
-      name: 'TiDB',
-      match: 'tidb',
-      version: tidb,
-    },
-    {
-      name: lang === 'zh' ? '周边工具' : 'Tools',
-      dropdown: [
-        {
-          name: 'TiDB in Kubernetes',
-          match: 'tidb-in-kubernetes',
-          version: operator,
-        },
-        {
-          name: 'TiDB Data Migration (DM)',
-          match: 'tidb-data-migration',
-          version: dm,
-        },
-      ],
-    },
-  ]
-
-  const getDocsTypesByLang = lang => {
-    let _docsTypesByLang = types.slice(0, 2)
-
-    switch (lang) {
-      case 'zh':
-        _docsTypesByLang.push({
-          name: '开发指南',
-          match: 'appdev',
-          version: appdev,
-        })
-        break
-
-      default:
-        _docsTypesByLang.push(
-          {
-            name: 'Cloud',
-            match: 'tidbcloud',
-            version: cloud,
-          },
-          {
-            name: 'App Dev',
-            match: 'appdev',
-            version: appdev,
-          }
-        )
-        break
-    }
-    return _docsTypesByLang
-  }
-
-  useEffect(
-    () => {
-      dispatch(
-        setDocInfo({
-          lang,
-          type,
-          version,
-        })
-      )
-
-      return () => dispatch(setSearchValue(''))
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
+  useEffect(() => {
+    return () => dispatch(setSearchValue(''))
+  }, [dispatch])
 
   useEffect(() => {
-    setDocsTypesByLang(getDocsTypesByLang(lang))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang])
+    const types = [
+      {
+        name: 'TiDB',
+        match: 'tidb',
+      },
+      {
+        name: 'TiDB in Kubernetes',
+        match: 'tidb-in-kubernetes',
+      },
+      {
+        name: 'TiDB Data Migration (DM)',
+        match: 'tidb-data-migration',
+      },
+    ]
 
-  const handleDropdownActive = e => {
-    e.currentTarget.classList.toggle('is-active')
-  }
+    const getDocsTypesByLang = () => {
+      switch (locale) {
+        case 'zh':
+          types.push({
+            name: '开发指南',
+            match: 'appdev',
+          })
 
-  const handleSetVersionList = (match, versionList) => () => {
-    setSelectedVersion(matchToVersionList(match)[0])
+          break
+        default:
+          types.push(
+            {
+              name: 'Cloud',
+              match: 'tidbcloud',
+            },
+            {
+              name: 'App Dev',
+              match: 'appdev',
+            }
+          )
+
+          break
+      }
+
+      return types
+    }
+
+    setDocsTypesByLang(getDocsTypesByLang())
+  }, [intl, locale])
+
+  const handleSetVersionList = match => () => {
+    const versionList = matchToVersionList(match)
+
     setSelectedType(match)
     setSelectedVersionList(versionList)
+    setSelectedVersion(versionList[0])
   }
-
-  const handleSetVersionAndExecSearch = version => () => {
-    const _version =
-      version === 'stable' ? replaceStableVersion() : `${version}`
-    setSelectedVersion(_version)
-  }
-
-  useEffect(() => {
-    if (lang && selectedType && selectedVersion && query) {
-      execSearch()
-    } else {
-      setResults([])
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedType, selectedVersion, query])
 
   function execSearch() {
     dispatch(setLoading(true))
 
     const index = algoliaClient.initIndex(
-      `${lang}-${selectedType}-${
-        selectedVersion === 'stable'
-          ? replaceStableVersion()
-          : `${selectedVersion}`
-      }`
+      `${locale}-${selectedType}-${selectedVersion}`
     )
 
     index
@@ -185,105 +161,47 @@ const Search = ({ pageContext: { locale } }) => {
       })
   }
 
+  useEffect(() => {
+    if (selectedType && selectedVersion && query) {
+      execSearch()
+    } else {
+      setResults([])
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedType, selectedVersion, query])
+
   const TypeList = () => (
-    <div className="type-list">
-      {docsTypesByLang.map(type => {
-        if (type.dropdown) {
-          return (
-            <div
-              key={type.name}
-              role="button"
-              tabIndex={0}
-              className="dropdown"
-              onClick={handleDropdownActive}
-              onKeyDown={handleDropdownActive}
-            >
-              <div className="dropdown-trigger">
-                <div
-                  className={`item${
-                    type.dropdown.map(item => item.match).includes(selectedType)
-                      ? ' is-active'
-                      : ''
-                  }`}
-                >
-                  {type.name}
-                </div>
-              </div>
-              <div className="dropdown-menu">
-                <div className="dropdown-content">
-                  {type.dropdown.map(item => (
-                    <div
-                      key={item.name}
-                      role="button"
-                      tabIndex={0}
-                      className={`dropdown-item${
-                        selectedType === item.match ? ' is-active' : ''
-                      }`}
-                      onClick={handleSetVersionList(item.match, item.version)}
-                      onKeyDown={handleSetVersionList(item.match, item.version)}
-                    >
-                      {item.name}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )
-        } else {
-          return (
-            <div
-              key={type.name}
-              role="button"
-              tabIndex={0}
-              className={`item${
-                selectedType === type.match ? ' is-active' : ''
-              }`}
-              onClick={handleSetVersionList(type.match, type.version)}
-              onKeyDown={handleSetVersionList(type.match, type.version)}
-            >
-              {type.name}
-            </div>
-          )
-        }
-      })}
+    <div className="list">
+      {docsTypesByLang.map(type => (
+        <Button
+          key={type.name}
+          color="white"
+          size="small"
+          className={clsx('item', selectedType === type.match && 'is-active')}
+          onClick={handleSetVersionList(type.match)}
+        >
+          {type.name}
+        </Button>
+      ))}
     </div>
   )
 
-  function replaceStableVersion() {
-    switch (selectedType) {
-      case 'tidb':
-        return tidbStable
-      case 'tidb-data-migration':
-        return dmStable
-      case 'tidb-in-kubernetes':
-        return operatorStable
-      default:
-        break
-    }
-  }
-
   const VersionList = () => (
-    <div className="version-list">
-      {selectedVersionList &&
-        selectedVersionList.map(version => (
-          <span
-            key={version}
-            role="button"
-            tabIndex={0}
-            className={`item${
-              (selectedVersion === 'stable'
-                ? replaceStableVersion()
-                : `${selectedVersion}`) ===
-              (version === 'stable' ? replaceStableVersion() : `${version}`)
-                ? ' is-active'
-                : ''
-            }`}
-            onClick={handleSetVersionAndExecSearch(version)}
-            onKeyDown={handleSetVersionAndExecSearch(version)}
-          >
-            {version === 'stable' ? replaceStableVersion() : `${version}`}
-          </span>
-        ))}
+    <div className="list">
+      {selectedVersionList.map(version => (
+        <Button
+          key={version}
+          color="white"
+          size="small"
+          className={clsx(
+            'item',
+            selectedVersion === toAlgoliaVersion(version) && 'is-active'
+          )}
+          onClick={() => setSelectedVersion(toAlgoliaVersion(version))}
+        >
+          {version}
+        </Button>
+      ))}
     </div>
   )
 
@@ -291,34 +209,26 @@ const Search = ({ pageContext: { locale } }) => {
     <>
       <Seo title="Search" />
       <div className="PingCAP-Docs-Search">
-        <section className="section container">
-          <div className="filter-panel">
-            <div className="columns">
-              <div className="column is-1">
-                <span className="label">
-                  <FormattedMessage id="search.type" />
-                </span>
-              </div>
-              <div className="column">
-                <TypeList />
-              </div>
+        <Block className="filter-panel">
+          <Block>
+            <div className="list-label">
+              <FormattedMessage id="search.type" />
             </div>
-            <div className="columns">
-              <div className="column is-1">
-                <span className="label">
-                  <FormattedMessage id="search.version" />
-                </span>
-              </div>
-              <div className="column">
-                <VersionList />
-              </div>
+            <TypeList />
+          </Block>
+          <Block>
+            <div className="list-label">
+              <FormattedMessage id="search.version" />
             </div>
-          </div>
 
+            <VersionList />
+          </Block>
+        </Block>
+
+        <Block style={{ position: 'relative' }}>
           <SearchResult results={results} searched={searched} />
-
-          {loading && <Loading wholeScreen={true} />}
-        </section>
+          {loading && <Loading stretched style={{ alignItems: 'start' }} />}
+        </Block>
       </div>
     </>
   )
