@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Extract branch and sha
-      shell: bash
+    - name: Extract sha
       id: extract
+      shell: bash
       run: |
         echo "::set-output name=sha::$(sha=${{ github.sha }}; echo ${sha:0:6})"
 
