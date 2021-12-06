@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import '../../styles/components/simpletab.scss'
-import replaceInternalHref from '../../lib/replaceInternalHref.js'
+
+import React, { useEffect, useState } from 'react'
+
+import PropTypes from 'prop-types'
 import optimizeBlockquote from '../../lib/optimizeBlockquote.js'
+import replaceInternalHref from '../../lib/replaceInternalHref.js'
 import { useLocation } from '@reach/router'
 
 const SimpleTab = React.memo(({ children }) => {
   const location = useLocation()
   const pathArr = location.pathname.split('/')
-  let lang, type, version
+  let type, version
   if (pathArr[1] === 'zh') {
-    lang = pathArr[1]
     type = pathArr[2]
     version = pathArr[3]
   } else {
-    lang = ''
     type = pathArr[1]
     version = pathArr[2]
   }
@@ -32,7 +32,7 @@ const SimpleTab = React.memo(({ children }) => {
     const _tabPanelList = []
 
     if (multiTabs) {
-      children.forEach((child) => {
+      children.forEach(child => {
         _tabLabelList.push(child.props.label)
         _tabPanelList.push(child.props.children)
       })
@@ -43,13 +43,13 @@ const SimpleTab = React.memo(({ children }) => {
   }, [children, multiTabs])
 
   useEffect(() => {
-    const _tabLabelWithHyphenList = tabLabelList.map((tab) =>
+    const _tabLabelWithHyphenList = tabLabelList.map(tab =>
       tab.replace(/\s/g, '-')
     )
 
     if (_tabLabelWithHyphenList.includes(selectedTab)) {
       const selectedTabIdx = _tabLabelWithHyphenList.findIndex(
-        (el) => el === selectedTab
+        el => el === selectedTab
       )
       setValue(selectedTabIdx)
     } else {
@@ -73,12 +73,12 @@ const SimpleTab = React.memo(({ children }) => {
     }
   }
 
-  const TabPanel = (props) => {
+  const TabPanel = props => {
     const { children, value, index, ...other } = props
 
     useEffect(() => {
       optimizeBlockquote()
-      replaceInternalHref(lang, type, version, true)
+      replaceInternalHref(type, version, true)
     }, [])
 
     return (
