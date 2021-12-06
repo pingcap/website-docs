@@ -181,7 +181,7 @@ const TOC = ({ data, name, docVersionStable }) => {
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(generate, [data.body])
+  useEffect(generate, [data.body, name])
 
   return (
     <div className="PingCAP-TOC hidden">

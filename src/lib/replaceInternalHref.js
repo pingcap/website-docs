@@ -12,12 +12,7 @@ export function unifyAnchor(url) {
     .toLowerCase()
 }
 
-export default function replaceInternalHref(
-  lang,
-  doc,
-  version,
-  simpletab = false
-) {
+export default function replaceInternalHref(doc, version, simpletab = false) {
   const aTags = document.querySelectorAll(
     `${simpletab ? '.PingCAP-simpleTab' : '.doc-content'} a`
   )
