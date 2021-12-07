@@ -3,7 +3,6 @@
 .loading {
   @include VHCenter;
 
-  background: rgba($color: $M2, $alpha: 0.75);
   z-index: 999;
 }
 
@@ -13,6 +12,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  background: rgba($color: $M2, $alpha: 0.75);
 }
 
 .stretched {
