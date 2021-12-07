@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import { wrapPathWithLang } from 'lib/docHelper'
+import { wrapPathWithLang } from 'lib/utils'
 
 const GitCommitInfo = ({ repoInfo, lang, title }) => {
   const { repo, ref, pathWithoutVersion } = repoInfo

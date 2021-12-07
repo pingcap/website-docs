@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useLocation } from '@reach/router'
-import { wrapPathWithLang } from 'lib/docHelper'
+import { wrapPathWithLang } from 'lib/utils'
 
 const FeedbackDocLink = ({ repoInfo, lang }) => {
   const { repo, ref, pathWithoutVersion } = repoInfo

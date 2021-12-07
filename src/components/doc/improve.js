@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { wrapPathWithLang } from 'lib/docHelper'
+import { wrapPathWithLang } from 'lib/utils'
 
 const Improve = ({ repoInfo, lang }) => {
   const { repo, ref, pathWithoutVersion } = repoInfo

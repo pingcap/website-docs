@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
-import { navigate } from 'gatsby-plugin-react-intl'
+import { navigateInsideEventListener } from '../lib/utils'
 
 const TOC = ({ data, name, docVersionStable }) => {
   const { doc, version } = docVersionStable
@@ -69,16 +69,17 @@ const TOC = ({ data, name, docVersionStable }) => {
     function clickEvent(e) {
       e.stopPropagation()
 
-      if (e.target.tagName === 'A') {
-        e.preventDefault()
-
-        navigate(e.target.getAttribute('href'))
+      if (e.target.tagName === 'A' && navigateInsideEventListener(e)) {
         const activeAnchor = toc.querySelector('a.active')
         if (activeAnchor) {
           activeAnchor.className = ''
         }
         e.target.className = 'active'
 
+        return
+      }
+
+      if (e.target.tagName === 'A') {
         return
       }
 
