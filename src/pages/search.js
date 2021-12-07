@@ -152,7 +152,7 @@ const Search = () => {
 
     index
       .search(query, {
-        hitsPerPage: 300,
+        hitsPerPage: 150,
       })
       .then(({ hits }) => {
         setResults(hits)

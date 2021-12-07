@@ -27,6 +27,11 @@ jobs:
           echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
           echo "::set-output name=LA2::$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})"
 
+      - name: Setup node version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       - name: Install SSH Key
         if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         uses: shimataro/ssh-key-action@v2
@@ -108,18 +113,18 @@ jobs:
         id: gatsby-cache
         with:
           path: ./.cache
-          key: ${{ runner.os }}-v1-gatsby-cache-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-20211020-gatsby-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-v1-gatsby-cache-
+            ${{ runner.os }}-20211020-gatsby-cache-
 
       - name: Restore gatsby build
         uses: actions/cache@v2
         id: gatsby-build
         with:
           path: ./public
-          key: ${{ runner.os }}-v1-gatsby-build-${{ github.event.client_payload.sha }}
+          key: ${{ runner.os }}-20211020-gatsby-build-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-v1-gatsby-build-
+            ${{ runner.os }}-20211020-gatsby-build-
 
       - name: Build website
         env:
