@@ -1,5 +1,9 @@
 @import '../common';
 
+.columns {
+  min-height: 60vh;
+}
+
 .card {
   padding: 1.5rem;
   box-shadow: none;

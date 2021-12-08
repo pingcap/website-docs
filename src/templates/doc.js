@@ -131,7 +131,7 @@ const Doc = ({
             : []),
         ]}
       />
-      <Column size={8}>
+      <Column size={7}>
         <div className="markdown-body doc-content">
           {doc !== 'tidbcloud' && doc !== 'appdev' && (
             <DeprecationNotice
