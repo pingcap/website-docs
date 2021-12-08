@@ -23,12 +23,9 @@ export function wrapPathWithLang(repo, path, lang) {
  * @return {[string, string, string]}
  */
 export function generateHrefs(href, lang, doc, version) {
-  let result = href
-
   const hrefArray = href.split('/')
-  const name = hrefArray[hrefArray.length - 1]
-  result = name.replace('.md', '')
-  result = [lang === 'en' ? '' : '/' + lang, doc, version, result].join('/')
+  const name = hrefArray[hrefArray.length - 1].replace('.md', '')
+  const result = [lang === 'en' ? '' : '/' + lang, doc, version, name].join('/')
 
   return [withPrefix(result), result, name]
 }

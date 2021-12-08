@@ -10,7 +10,7 @@ export const imageCDNs = {
   'docs-cn': IMAGE_CDN_PREFIX + '/docs-cn',
   'docs-dm': IMAGE_CDN_PREFIX + '/tidb-data-migration',
   'docs-tidb-operator': IMAGE_CDN_PREFIX + '/tidb-in-kubernetes',
-  'docs-dbaas': IMAGE_CDN_PREFIX + '/tidbcloud',
+  'dbaas-docs': IMAGE_CDN_PREFIX + '/tidbcloud',
   'docs-appdev': IMAGE_CDN_PREFIX + '/appdev',
 }
 

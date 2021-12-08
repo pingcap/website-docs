@@ -191,8 +191,7 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
   }
 
   /* eslint-disable */
-  useEffect(generate, [])
-  useEffect(generate, [data.body, name])
+  useEffect(generate, [data.body])
   /* eslint-enable */
 
   return (
