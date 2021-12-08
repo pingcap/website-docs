@@ -1,6 +1,7 @@
 const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
 
 module.exports = {
+  pathPrefix: '/docs-pingcap-v1-preview',
   siteMetadata: {
     title: 'PingCAP Docs',
     description:

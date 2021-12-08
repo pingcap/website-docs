@@ -28,9 +28,9 @@ export function generateHrefs(href, lang, doc, version) {
   const hrefArray = href.split('/')
   const name = hrefArray[hrefArray.length - 1]
   result = name.replace('.md', '')
-  result = [lang, doc, version, result].join('/')
+  result = [lang === 'en' ? '' : '/' + lang, doc, version, result].join('/')
 
-  return [withPrefix(result), '/' + result, name]
+  return [withPrefix(result), result, name]
 }
 
 /**

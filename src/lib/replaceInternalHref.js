@@ -25,12 +25,7 @@ export default function replaceInternalHref(
     let href = a.getAttribute('href')
 
     if (href.includes('.md')) {
-      const [realHref, internalHref] = generateHrefs(
-        href,
-        lang === 'en' ? '' : lang,
-        doc,
-        version
-      )
+      const [realHref, internalHref] = generateHrefs(href, lang, doc, version)
 
       a.href = realHref
       a.setAttribute('data-href', internalHref)
