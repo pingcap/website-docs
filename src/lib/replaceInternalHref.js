@@ -1,5 +1,4 @@
-import { navigateInsideEventListener } from './utils'
-import { withPrefix } from 'gatsby'
+import { generateHrefs, navigateInsideEventListener } from './utils'
 
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g // with CJKLanguage
 const sliceVersionMark = /span-classversion-mark|span$/g
@@ -12,7 +11,12 @@ export function unifyAnchor(url) {
     .toLowerCase()
 }
 
-export default function replaceInternalHref(doc, version, simpletab = false) {
+export default function replaceInternalHref(
+  lang,
+  doc,
+  version,
+  simpletab = false
+) {
   const aTags = document.querySelectorAll(
     `${simpletab ? '.PingCAP-simpleTab' : '.doc-content'} a`
   )
@@ -21,9 +25,15 @@ export default function replaceInternalHref(doc, version, simpletab = false) {
     let href = a.getAttribute('href')
 
     if (href.includes('.md')) {
-      const hrefArray = href.split('/')
-      href = hrefArray[hrefArray.length - 1].replace('.md', '')
-      a.href = withPrefix([doc, version, href].join('/'))
+      const [realHref, internalHref] = generateHrefs(
+        href,
+        lang === 'en' ? '' : lang,
+        doc,
+        version
+      )
+
+      a.href = realHref
+      a.setAttribute('data-href', internalHref)
       a.addEventListener('click', navigateInsideEventListener)
     }
 

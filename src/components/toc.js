@@ -1,18 +1,23 @@
 import 'styles/components/toc.scss'
 
 import React, { useEffect } from 'react'
+import { generateHrefs, navigateInsideEventListener } from '../lib/utils'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
-import { navigateInsideEventListener } from '../lib/utils'
 
-const TOC = ({ data, name, docVersionStable }) => {
+const TOC = ({ data, name, lang, docVersionStable }) => {
   const { doc, version } = docVersionStable
 
   const generate = () => {
     const wrapper = document.querySelector('.PingCAP-TOC')
     const toc = wrapper.firstChild
     toc.className = 'top'
+    // clear previous active anchor
+    const activeAnchor = toc.querySelector('a.active')
+    if (activeAnchor) {
+      activeAnchor.className = ''
+    }
 
     function fold(li) {
       const start = performance.now()
@@ -103,11 +108,15 @@ const TOC = ({ data, name, docVersionStable }) => {
     }
 
     function modifyHref(el) {
-      const href = el.getAttribute('href').replace('.md', '')
-      const chunks = href.split('/')
-      const _name = chunks[chunks.length - 1]
+      const [realHref, internalHref, _name] = generateHrefs(
+        el.getAttribute('href'),
+        lang,
+        doc,
+        version
+      )
 
-      el.href = `/${doc}/${version}/${_name}`
+      el.href = realHref
+      el.setAttribute('data-href', internalHref)
 
       if (_name === name) {
         el.className = 'active'
@@ -194,6 +203,7 @@ const TOC = ({ data, name, docVersionStable }) => {
 TOC.propTypes = {
   data: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
   docVersionStable: PropTypes.object.isRequired,
 }
 

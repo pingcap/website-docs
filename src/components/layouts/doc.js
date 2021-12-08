@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 
 const Layout = ({
   children,
-  pageContext: { name, docVersionStable, pathWithoutVersion, versions },
+  pageContext: { name, lang, docVersionStable, pathWithoutVersion, versions },
 }) => {
   const docVersionStableMap = JSON.parse(docVersionStable)
 
@@ -33,6 +33,7 @@ const Layout = ({
                 <Toc
                   data={toc}
                   name={name}
+                  lang={lang}
                   docVersionStable={docVersionStableMap}
                 />
               )}

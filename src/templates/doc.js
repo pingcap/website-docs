@@ -66,7 +66,7 @@ const Doc = ({
   }, [dispatch, langSwitchable])
 
   useEffect(() => {
-    replaceInternalHref(doc, version)
+    replaceInternalHref(lang, doc, version)
 
     dispatch(
       setDocInfo({
