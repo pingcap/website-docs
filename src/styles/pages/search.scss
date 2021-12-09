@@ -36,6 +36,7 @@
 }
 
 .search-result {
+  min-height: 768px;
   .counts {
     color: $B4;
     opacity: 0.5;
@@ -43,7 +44,6 @@
 
   .results {
     margin: 2rem 0;
-    min-height: 768px;
 
     .item {
       margin-bottom: 2rem;
