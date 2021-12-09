@@ -12,6 +12,7 @@ $top: $navbar-height + 1rem;
   .right-aside {
     position: sticky;
     top: $top;
+    height: 100%;
     max-height: calc(100vh - #{$top});
     padding-right: 1rem;
     overflow-y: auto;

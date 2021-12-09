@@ -1,6 +1,6 @@
 import 'styles/components/toc.scss'
 
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { generateHrefs, navigateInsideEventListener } from '../lib/utils'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -8,10 +8,10 @@ import PropTypes from 'prop-types'
 
 const TOC = ({ data, name, lang, docVersionStable }) => {
   const { doc, version } = docVersionStable
+  const wrapper = useRef()
 
   const generate = () => {
-    const wrapper = document.querySelector('.PingCAP-TOC')
-    const toc = wrapper.firstChild
+    const toc = wrapper.current.firstChild
     toc.className = 'top'
     // clear previous active anchor
     const activeAnchor = toc.querySelector('a.active')
@@ -74,17 +74,15 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
     function clickEvent(e) {
       e.stopPropagation()
 
-      if (e.target.tagName === 'A' && navigateInsideEventListener(e)) {
-        const activeAnchor = toc.querySelector('a.active')
-        if (activeAnchor) {
-          activeAnchor.className = ''
-        }
-        e.target.className = 'active'
-
-        return
-      }
-
       if (e.target.tagName === 'A') {
+        if (navigateInsideEventListener(e)) {
+          const activeAnchor = toc.querySelector('a.active')
+          if (activeAnchor) {
+            activeAnchor.className = ''
+          }
+          e.target.className = 'active'
+        }
+
         return
       }
 
@@ -108,36 +106,40 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
     }
 
     function modifyHref(el) {
-      const [realHref, internalHref, _name] = generateHrefs(
-        el.getAttribute('href'),
-        lang,
-        doc,
-        version
-      )
+      const href = el.getAttribute('href')
 
-      el.href = realHref
-      el.setAttribute('data-href', internalHref)
+      if (href && !href.includes('http') && href.includes('.md')) {
+        const [realHref, internalHref, _name] = generateHrefs(
+          href,
+          lang,
+          doc,
+          version
+        )
 
-      if (_name === name) {
-        el.className = 'active'
+        el.href = realHref
+        el.setAttribute('data-href', internalHref)
 
-        while (el.parentElement) {
-          const p = el.parentElement
+        if (_name === name) {
+          el.className = 'active'
 
-          if (p.classList.contains('top')) {
-            break
+          while (el.parentElement) {
+            const p = el.parentElement
+
+            if (p.classList.contains('top')) {
+              break
+            }
+
+            if (p.classList.contains('folded')) {
+              p.classList.remove('folded')
+              Array.from(p.children).forEach(d => {
+                if (d.tagName === 'UL') {
+                  d.style = 'height: auto; overflow: initial;'
+                }
+              })
+            }
+
+            el = p
           }
-
-          if (p.classList.contains('folded')) {
-            p.classList.remove('folded')
-            Array.from(p.children).forEach(d => {
-              if (d.tagName === 'UL') {
-                d.style = 'height: auto; overflow: initial;'
-              }
-            })
-          }
-
-          el = p
         }
       }
     }
@@ -186,16 +188,14 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
     })
 
     retrieveLi(toc)
-
-    wrapper.classList.remove('hidden')
   }
 
   /* eslint-disable */
-  useEffect(generate, [data.body])
+  useLayoutEffect(generate, [data.body])
   /* eslint-enable */
 
   return (
-    <div className="PingCAP-TOC hidden">
+    <div ref={wrapper} className="PingCAP-TOC">
       <MDXRenderer>{data.body}</MDXRenderer>
     </div>
   )

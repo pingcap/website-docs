@@ -38,7 +38,10 @@ export function generateHrefs(href, lang, doc, version) {
  * @return {boolean}
  */
 export function navigateInsideEventListener(e) {
+  const dataHref = e.target.getAttribute('data-href')
+
   if (
+    dataHref &&
     // ref: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-link/src/index.js
     e.button === 0 && // ignore right clicks
     !e.defaultPrevented && // onClick prevented default
@@ -49,7 +52,7 @@ export function navigateInsideEventListener(e) {
   ) {
     e.preventDefault()
 
-    navigate(e.target.getAttribute('data-href'))
+    navigate(dataHref)
 
     return true
   }
