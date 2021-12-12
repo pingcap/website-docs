@@ -105,10 +105,15 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
       }
     }
 
+    /**
+     * modifyHref
+     *
+     * @param {HTMLAnchorElement} el
+     */
     function modifyHref(el) {
       const href = el.getAttribute('href')
 
-      if (href && !href.includes('http') && href.includes('.md')) {
+      if (href && !href.startsWith('http') && href.includes('.md')) {
         const [realHref, internalHref, _name] = generateHrefs(
           href,
           lang,

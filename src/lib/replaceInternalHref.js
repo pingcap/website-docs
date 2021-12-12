@@ -24,7 +24,7 @@ export default function replaceInternalHref(
   Array.from(aTags).forEach(a => {
     let href = a.getAttribute('href')
 
-    if (href && !href.includes('http') && href.includes('.md')) {
+    if (href && !href.startsWith('http') && href.includes('.md')) {
       const [realHref, internalHref] = generateHrefs(href, lang, doc, version)
 
       a.href = realHref
