@@ -35,17 +35,17 @@
       "deprecated": ["v2.1", "v3.0", "v3.1"]
     },
     "tidb-data-migration": {
-      "stable": "release-2.0",
+      "stable": "release-5.3",
       "languages": {
         "en": {
           "repo": "pingcap/docs-dm",
           "path": "en",
-          "versions": ["master", "release-2.0", "release-1.0"]
+          "versions": ["master", "release-5.3", "release-2.0", "release-1.0"]
         },
         "zh": {
           "repo": "pingcap/docs-dm",
           "path": "zh",
-          "versions": ["master", "release-2.0", "release-1.0"]
+          "versions": ["master", "release-5.3", "release-2.0", "release-1.0"]
         }
       },
       "deprecated": ["v1.0"]
