@@ -1,42 +1,51 @@
-import '../styles/pages/tools.scss'
+import * as styles from 'styles/pages/tools.module.scss'
 
-import Layout from '../components/layout'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardHeaderIcon,
+  CardHeaderTitle,
+  Column,
+  Columns,
+  Content,
+} from '@seagreenio/react-bulma'
+import { FormattedMessage, Link } from 'gatsby-plugin-react-intl'
+
 import React from 'react'
-import SEO from '../components/seo'
-import { Link } from 'gatsby'
+import Seo from 'components/seo'
+import clsx from 'clsx'
+import { toolsData } from 'data/tools'
 
-import { toolsLandingPageData } from '../data/tools'
-import { FormattedMessage } from 'react-intl'
-
-const Tools = ({ pageContext: { locale } }) => {
-  return (
-    <Layout locale={locale} langSwitchable={true}>
-      <SEO title="Tools" />
-      <div className="PingCAP-Tools">
-        <section className="section container">
-          <div className="columns is-multiline is-variable is-8">
-            {toolsLandingPageData.map((tool) => (
-              <div key={tool.iconName} className="column is-6">
-                <Link to={`${locale === 'zh' ? '/zh' + tool.link : tool.link}`}>
-                  <div className="card">
-                    <div className="header">
-                      <div className="title">
-                        {<FormattedMessage id={tool.type} />}
-                      </div>
-                      <div className={`type-icon ${tool.iconName}-icon`}></div>
-                    </div>
-                    <div className="desc">
-                      {<FormattedMessage id={tool.desc} />}
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    </Layout>
-  )
-}
+const Tools = () => (
+  <>
+    <Seo title="Tools" />
+    <div className={styles.columns}>
+      <Columns multiline>
+        {toolsData.map(tool => (
+          <Column key={tool.icon} size={6}>
+            <Link to={tool.link}>
+              <Card className={styles.card}>
+                <CardHeader className={styles.cardHeader}>
+                  <CardHeaderTitle>
+                    <FormattedMessage id={tool.type} />
+                  </CardHeaderTitle>
+                  <CardHeaderIcon
+                    className={clsx(styles.toolIcon, styles[tool.icon])}
+                  />
+                </CardHeader>
+                <CardContent>
+                  <Content>
+                    <FormattedMessage id={tool.desc} />
+                  </Content>
+                </CardContent>
+              </Card>
+            </Link>
+          </Column>
+        ))}
+      </Columns>
+    </div>
+  </>
+)
 
 export default Tools

@@ -11,7 +11,6 @@
     right: 1rem;
     width: 230px;
     z-index: 2;
-    font-size: $size-8;
     background: #f7f8f9;
     font-family: Arial, Helvetica, sans-serif;
 
@@ -72,7 +71,6 @@
 
     .feedback-form {
       padding: 1rem;
-      font-size: $size-9;
       color: $B3;
 
       iframe {
@@ -128,7 +126,7 @@
 
       .hs-error-msgs,
       .hs-form-required {
-        color: $T3;
+        color: $danger;
       }
 
       .hs_error_rollup {

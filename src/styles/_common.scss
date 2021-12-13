@@ -1,8 +1,8 @@
-@import './variables';
-@import '../../node_modules/bulma/sass/utilities/all';
+@import 'variables';
+// Use fullpath to make it easier for editors to locate this file
+@import '../../node_modules/bulma/sass/utilities/mixins.sass';
 
-$socials: twitter linkedin facebook reddit slack youtube yc github slack stackOverflow asktug;
-
+// Vertical and horizontal centering in flexbox
 @mixin VHCenter {
   display: flex;
   justify-content: center;
@@ -12,13 +12,8 @@ $socials: twitter linkedin facebook reddit slack youtube yc github slack stackOv
 // Use in navbar and footer item
 @mixin has-item-active($bottom: false) {
   position: relative;
-  color: $B4;
 
-  &.is-active,
   &:hover {
-    background: none;
-    color: $primary;
-
     @if type-of($bottom) == number {
       &:after {
         content: '';
@@ -27,7 +22,7 @@ $socials: twitter linkedin facebook reddit slack youtube yc github slack stackOv
         left: 50%;
         width: 20px;
         height: 3px;
-        background: $primary;
+        background: $B1;
         transform: translateX(-50%);
       }
     }
@@ -37,27 +32,18 @@ $socials: twitter linkedin facebook reddit slack youtube yc github slack stackOv
 // Common input style
 @mixin has-pingcap-style-input {
   input {
-    padding-bottom: calc(0.6rem - 1px);
-    background: $B5;
-    color: $B3;
-    border-color: $C2;
+    background: $M2;
+    border-color: $T2;
     box-shadow: none;
 
+    & ~ .icon,
     &::placeholder {
-      color: $B4;
+      color: $grey;
     }
 
     &:hover,
     &:focus {
-      border-color: $primary;
-    }
-
-    &:focus ~ .icon {
-      color: $primary !important;
+      border-color: $B1;
     }
   }
-}
-
-@mixin has-light-background {
-  background: $B5;
 }

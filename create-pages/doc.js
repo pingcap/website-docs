@@ -1,38 +1,42 @@
-const path = require('path')
+const nPath = require('path')
 const fs = require('fs')
 const {
+  getStable,
+  renameVersionByDoc,
   replacePath,
-  genPathPrefix,
-  genTOCPath,
-  genDownloadPDFURL,
-  genVersionChunks,
+  genTOCSlug,
+  genPDFDownloadURL,
+  getRepo,
 } = require('./utils')
+const flatten = require('flat')
+
+const messages = {
+  en: flatten(require('../src/intl/en.json')),
+  zh: flatten(require('../src/intl/zh.json')),
+}
 
 const createDocs = async ({ graphql, createPage, createRedirect }) => {
-  const docTemplate = path.resolve(`${__dirname}/../src/templates/doc.js`)
+  const template = nPath.resolve(__dirname, '../src/templates/doc.js')
 
-  const docsEn = await graphql(`
-    query {
+  const docs = await graphql(`
+    {
       allMdx(
         filter: {
-          fields: { langCollection: { eq: "markdown-pages/contents/en" } }
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
           frontmatter: { draft: { ne: true } }
         }
       ) {
         nodes {
           id
-          fields {
-            langCollection
-          }
           frontmatter {
             aliases
           }
+          slug
           parent {
             ... on File {
-              relativeDirectory
+              sourceInstanceName
               relativePath
-              base
+              name
             }
           }
         }
@@ -40,118 +44,112 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     }
   `)
 
-  const docsZh = await graphql(`
-    query {
-      allMdx(
-        filter: {
-          fields: { langCollection: { eq: "markdown-pages/contents/zh" } }
-          fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
-          frontmatter: { draft: { ne: true } }
-        }
-      ) {
-        nodes {
-          id
-          fields {
-            langCollection
-          }
-          frontmatter {
-            aliases
-          }
-          parent {
-            ... on File {
-              relativeDirectory
-              relativePath
-              base
-            }
-          }
-        }
-      }
-    }
-  `)
+  const nodes = docs.data.allMdx.nodes.map(node => {
+    // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
+    const slug = node.slug.slice(3)
+    const { sourceInstanceName: topFolder, relativePath, name } = node.parent
+    const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path with .md]
+    const [doc, version] = pathWithoutLang
 
-  // create pages for different language docs
-  function _createDocs(docs, locale, pathPrefix = '') {
-    const nodes = docs.data.allMdx.nodes
-
-    // setup map for md versions
-    nodes.map((node) => {
-      const parent = node.parent
-      const relativeDir = parent.relativeDirectory
-      const base = parent.base
-      const relativePath = parent.relativePath
-      node.tocPath = genTOCPath(relativeDir)
-      const _fullPath = `${replacePath(relativeDir, base)}`
-      const fullPath = `${pathPrefix}${_fullPath}`
-      node.path = fullPath
-      const filePathInDiffLang = path.resolve(
-        `${__dirname}/../markdown-pages/contents${
-          locale === 'en' ? '/zh/' : '/en/'
-        }${relativePath}`
-      )
-      node.langSwitchable = fs.existsSync(filePathInDiffLang) ? true : false
-      const vChunks = genVersionChunks(_fullPath)
-      node.version = vChunks[0]
-      node.pathWithoutVersion = vChunks[1]
-      node.downloadURL = `${genDownloadPDFURL(relativeDir, locale)}`
-      node.pathPrefix = genPathPrefix(relativeDir, locale)
-      return node
+    const slugArray = slug.split('/')
+    // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
+    node.pathWithoutVersion = slugArray[slugArray.length - 1]
+    node.path = replacePath(slug, name, lang, node.pathWithoutVersion)
+    node.repo = getRepo(doc, lang)
+    node.ref = version
+    node.lang = lang
+    node.version = renameVersionByDoc(doc, version)
+    node.docVersionStable = JSON.stringify({
+      doc,
+      version: node.version,
+      stable: getStable(doc),
     })
 
-    const versionsMap = nodes.reduce((map, { pathWithoutVersion, version }) => {
-      const arr = map[pathWithoutVersion]
+    const filePathInDiffLang = nPath.resolve(
+      __dirname,
+      `../${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath.slice(3)}`
+    )
+    node.langSwitchable = fs.existsSync(filePathInDiffLang)
+
+    node.tocSlug = genTOCSlug(node.slug)
+    node.downloadURL = genPDFDownloadURL(slug, lang)
+
+    return node
+  })
+
+  const versionsMap = nodes.reduce(
+    (acc, { lang, version, repo, pathWithoutVersion }) => {
+      const key = nPath.join(repo, pathWithoutVersion)
+      const arr = acc[lang][key]
+
       if (arr) {
         arr.push(version)
       } else {
-        map[pathWithoutVersion] = [version]
+        acc[lang][key] = [version]
       }
-      return map
-    }, {})
 
-    nodes.forEach((node) => {
-      const {
+      return acc
+    },
+    {
+      en: {},
+      zh: {},
+    }
+  )
+
+  nodes.forEach(node => {
+    const {
+      parent,
+      id,
+      repo,
+      ref,
+      lang,
+      pathWithoutVersion,
+      path,
+      docVersionStable,
+      langSwitchable,
+      tocSlug,
+      downloadURL,
+    } = node
+
+    createPage({
+      path,
+      component: template,
+      context: {
+        layout: 'doc',
+        name: parent.name,
         id,
-        path,
-        downloadURL,
-        pathPrefix,
-        tocPath,
-        parent,
-        langSwitchable,
-      } = node
-      createPage({
-        path: path,
-        component: docTemplate,
-        context: {
-          id,
-          langCollection: node.fields.langCollection,
-          relativeDir: parent.relativeDirectory,
-          base: parent.base,
-          tocPath,
-          locale,
-          pathPrefix,
-          downloadURL,
-          fullPath: path,
-          versions: versionsMap[node.pathWithoutVersion],
-          langSwitchable,
+        repo,
+        ref,
+        lang,
+        // gatsby-plugin-react-intl
+        intl: {
+          language: lang,
+          messages: messages[lang],
+          routed: lang !== 'en',
+          defaultLanguage: 'en',
+          redirectDefaultLanguageToRoot: true,
+          ignoredPaths: [],
         },
-      })
-
-      // create redirect
-      if (node.frontmatter.aliases) {
-        const aliasesArr = node.frontmatter.aliases
-
-        aliasesArr.forEach((alias) => {
-          createRedirect({
-            fromPath: `${alias}`,
-            toPath: path,
-            isPermanent: true,
-          })
-        })
-      }
+        pathWithoutVersion,
+        docVersionStable,
+        langSwitchable,
+        tocSlug,
+        downloadURL,
+        versions: versionsMap[lang][nPath.join(repo, pathWithoutVersion)],
+      },
     })
-  }
 
-  _createDocs(docsEn, 'en')
-  _createDocs(docsZh, 'zh', '/zh')
+    // create redirects
+    if (node.frontmatter.aliases) {
+      node.frontmatter.aliases.forEach(fromPath => {
+        createRedirect({
+          fromPath,
+          toPath: path,
+          isPermanent: true,
+        })
+      })
+    }
+  })
 }
 
 module.exports = createDocs

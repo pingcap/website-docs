@@ -1,5 +1,5 @@
-import AttachmentIcon from '@material-ui/icons/Attachment'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Icon } from '@seagreenio/react-bulma'
 import Message from './message'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -7,7 +7,7 @@ import React from 'react'
 const Error = ({ children }) => (
   <Message
     type="error"
-    icon={<AttachmentIcon style={{ color: '#ff4f5e' }} />}
+    icon={<Icon name="mdi mdi-close-circle" />}
     title={<FormattedMessage id="shortcodes.error" />}
   >
     {children}

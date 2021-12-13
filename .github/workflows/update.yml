@@ -1,4 +1,5 @@
-name: Incremental Building Triggered By Push Events
+name: Incremental Build Triggered By Push Events
+
 on: repository_dispatch
 
 jobs:
@@ -8,22 +9,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup kernel for react native, increase watchers
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-      - name: Print repo info
-        run: |
-          echo "${{ github.event.client_payload.repo }}"
-          echo "${{ github.event.client_payload.ref }}"
-          echo "${{ github.event.client_payload.sha }}"
-          echo "${{ github.event.client_payload.download_type }}"
+      # https://github.com/gatsbyjs/gatsby/issues/11406
+      # - name: Increase file watchers
+      #   if: ${{ !env.ACT }}
+      #   run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       # make sure there is only one workflow running
       - name: Turnstyle
+        if: ${{ !env.ACT }}
         uses: softprops/turnstyle@v1
 
       - name: Set known_hosts
-        id: know-hosts
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
+        id: known-hosts
         run: |
           echo "::set-output name=BJ_PROXY::$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})"
           echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
@@ -35,77 +33,80 @@ jobs:
           node-version: '14'
 
       - name: Install SSH Key
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: |
-            ${{ steps.know-hosts.outputs.BJ_PROXY }}
-            ${{ steps.know-hosts.outputs.LA1 }}
-            ${{ steps.know-hosts.outputs.LA2 }}
+            ${{ steps.known-hosts.outputs.BJ_PROXY }}
+            ${{ steps.known-hosts.outputs.LA1 }}
+            ${{ steps.known-hosts.outputs.LA2 }}
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - uses: actions/setup-node@v2
+        if: ${{ !env.ACT }}
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-            ${{ runner.os }}-yarn
+          node-version: '14'
+          cache: 'yarn'
+
+      - name: Install yarn
+        # Since actions/setup-node currently errors out when run locally, here is a manual installation
+        if: ${{ env.ACT }}
+        run: |
+          echo "node version:"
+          node -v
+          echo "npm version:"
+          npm -v
+          npm install -g yarn
 
       - name: Install deps
         run: yarn
 
-      - name: Restore markdown contents
+      - name: Restore docs
         uses: actions/cache@v2
-        id: markdown-contents
+        id: docs
         with:
-          path: ./markdown-pages/contents/
-          key: ${{ runner.os }}-markdown-contents-20211020-cache-${{ github.event.client_payload.sha }}
+          path: ./markdown-pages
+          key: ${{ runner.os }}-docs-newest-cache-${{ github.event.client_payload.sha }}
           restore-keys: |
-            ${{ runner.os }}-markdown-contents-20211020-cache-
+            ${{ runner.os }}-docs-newest-cache-
 
       # if download_type is full, download all docs
       - name: Check restore status
         if: github.event.client_payload.download_type == 'full'
+        env:
+          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dm:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-dbaas
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb-operator:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:en:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-tidb:zh:all
-          GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn download:docs-appdev:all
+          yarn download:tidb:en:all
+          yarn download:tidb:zh:all
+          yarn download:dm:all
+          yarn download:tidb-operator:all
+          yarn download:dbaas:all
+          yarn download:appdev:all
 
-      # set ref and name of the repo, which triggering website build
-      - name: Split ref
-        id: git-ref
-        run: |
-          ref=${{ github.event.client_payload.ref }}
-          repo=${{ github.event.client_payload.repo }}
-          echo "::set-output name=ref::${ref##*/}"
-          echo "::set-output name=repo::${repo##*/}"
-
-      # incremental download and get the base commit of the triggering repo for furthur use.
+      # incremental: get the base commit from cache for furthur use
       - name: Get base commit cache
-        if: github.event.client_payload.download_type != 'full' && steps.git-ref.outputs.repo != 'website-docs'
+        if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'pingcap/website-docs'
         id: cache-commit
         run: |
-          path=/home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
-          base=""
-          if [ -f "$path" ];then
-          base=$(cat $path)
+          REPO=$(cut -d"/" -f2 <<< "${{ github.event.client_payload.repo }}")
+          HASH=${{ github.workspace }}/markdown-pages/$REPO-${{ github.event.client_payload.ref }}.hash
+          BASE=""
+          if [ -f "$HASH" ]; then
+            BASE=$(cat $HASH)
           fi
-          echo "get cache base hash: $base"
-          echo "::set-output name=base::${base}"
+          echo "get base hash: $BASE"
+          echo "::set-output name=path::$HASH"
+          echo "::set-output name=base::$BASE"
 
-      # incremental download the triggering repo by comparing the base and head commits
+      # incremental: download changed files
       - name: Sync docs
-        if: github.event.client_payload.download_type != 'full' && steps.git-ref.outputs.repo != 'website-docs'
-        run: GITHUB_AUTHORIZATION_TOKEN=${{ secrets.GH_TOKEN }} yarn sync ${{ steps.git-ref.outputs.repo }} ${{ steps.git-ref.outputs.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }}
+        if: steps.cache-commit.outputs.base != '' && github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'pingcap/website-docs'
+        env:
+          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          ACT=${{ env.ACT }}
+          [[ "${ACT:-false}" = "true" ]] && dryRun="true" || dryRun="false"
+          yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
 
       - name: Restore gatsby cache
         uses: actions/cache@v2
@@ -126,39 +127,49 @@ jobs:
             ${{ runner.os }}-20211020-gatsby-build-
 
       - name: Build website
-        run: GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true GATSBY_ALGOLIA_APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }} GATSBY_ALGOLIA_API_KEY=${{ secrets.ALGOLIA_API_KEY }} yarn build --write-to-file
-
-      - name: Consolidate duplicate urls
-        run: cd public && bash ../scripts/consolidate-duplicate-urls.sh
-
-      - name: Move changed files from gatsby
-        run: (yes|cp -f .cache/*Pages.txt public)|true
+        env:
+          GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        run: yarn build
 
       - name: Deploy to LA1
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to LA2
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ1
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ2
+        if: ${{ !env.ACT && github.repository_owner == 'pingcap'}}
         run: |
           rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      # update cache commit to corresponding file
-      - name: Update cache commit hash
-        if: steps.git-ref.outputs.repo != 'website-docs'
-        run: |
-          echo "${{ github.event.client_payload.sha }}" > /home/runner/work/website-docs/website-docs/markdown-pages/contents/${{ steps.git-ref.outputs.repo }}-${{ steps.git-ref.outputs.ref }}-hash.lock
+      - name: Zip public
+        if: ${{ github.repository_owner == 'Ti-FE' }}
+        run: zip public.zip -r public
 
-      # if does full building, store commits of all repo-refs
-      - name: Update all commit hash
+      - name: Create test release
+        uses: softprops/action-gh-release@v1
+        if: ${{ github.repository_owner == 'Ti-FE' }}
+        with:
+          tag_name: actions/runs/${{ github.run_id }}
+          files: public.zip
+
+      - name: Update current commit sha to cache
+        if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'pingcap/website-docs'
+        run: |
+          echo ${{ github.event.client_payload.sha }} > ${{ steps.cache-commit.outputs.path }}
+
+      # if does full building, store latest commit sha of all docs repo
+      - name: Update all commit hashes
         if: github.event.client_payload.download_type == 'full'
         run: |
-          ls ./scripts/
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}

@@ -1,0 +1,13 @@
+.tabs ul {
+  padding-left: 0;
+}
+
+.tabs li {
+  & + li {
+    margin-top: 0;
+  }
+
+  & > a:hover {
+    text-decoration: none;
+  }
+}

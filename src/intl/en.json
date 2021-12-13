@@ -1,18 +1,27 @@
 {
+  "lang": {
+    "title": "Language",
+    "en": "English",
+    "zh": "简体中文",
+    "cannotswitch": "This page is not available in Chinese",
+    "cannotswitchtocloud": "TiDB Cloud Chinese documentation is not available at this time"
+  },
   "navbar": {
     "tidb": "TiDB",
     "tools": "Tools",
-    "cloud": "Cloud",
+    "cloud": "TiDB Cloud",
     "appdev": "App Dev",
     "download": "Get TiDB",
     "contactUs": "Contact Us",
     "searchDocs": "Search Docs"
   },
   "doc": {
-    "mobileDocMenu": "Doc Menu",
+    "notExist": "This doc does not exist",
     "toc": "What’s on this page",
-    "improveDocLink": "Edit this page",
-    "feedbackDocLink": "Request docs changes",
+    "download-pdf": "Download PDF",
+    "improve": "Edit this page",
+    "feedback": "Request docs changes",
+    "latestCommit": "was last updated",
     "deprecation": {
       "tidb": {
         "firstContext": "You are viewing the documentation of an older version of the TiDB database (TiDB { curDocVersion }).",
@@ -52,35 +61,7 @@
       "content2": "If you do want to get some English content, PingCAP home page might be a better place for you to go."
     }
   },
-  "download-pdf": "Download PDF",
-  "latestCommit": "was last updated",
-  "footerColumnsTitle": {
-    "product": "Product",
-    "resources": "Resources",
-    "learn": "Learn",
-    "support": "Support",
-    "company": "Company"
-  },
-  "footerColumnItem": {
-    "tidb": "TiDB",
-    "tools": "Tools",
-    "quickStart": "Quick Start",
-    "bestPractices": "Best Practices",
-    "faq": "FAQ",
-    "releaseNotes": "Release Notes",
-    "blog": "Blog",
-    "github": "GitHub",
-    "docs": "Docs",
-    "case": "Cases",
-    "pu": "PingCAP University",
-    "tidbInAction": "TiDB in Action",
-    "communityEvents": "Community Events",
-    "asktug": "AskTUG",
-    "aboutUs": "About Us",
-    "recruit": "招贤纳士",
-    "news": "新闻报道"
-  },
-  "toolsCard": {
+  "tools": {
     "tidbOperator": {
       "type": "TiDB Operator",
       "desc": "TiDB Operator is an automated operation and maintenance system for TiDB clusters in Kubernetes. It provides full life-cycle management for TiDB. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud."
@@ -98,8 +79,6 @@
       "desc": "TiUP is a package manager that manages components in the TiDB ecosystem, such as TiDB, PD, TiKV, and so on. You can run any component with only a single line of TiUP commands, which is far easier to manage."
     }
   },
-  "langSwitchTip": "暂未提供本页面对应的中文页面",
-  "cloudLangSwitchTip": "暂不提供 TiDB Cloud 中文文档",
   "docHelpful": {
     "header": "Was this page helpful?",
     "thumbUp": "Yes",

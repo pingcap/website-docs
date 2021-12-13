@@ -1,52 +1,78 @@
+import * as styles from './navbar.module.scss'
+
+import {
+  Navbar as BulmaNavbar,
+  Container,
+  NavbarBrand,
+  NavbarBurger,
+  NavbarDropdown,
+  NavbarEnd,
+  NavbarItem,
+  NavbarLink,
+  NavbarMenu,
+  NavbarStart,
+} from '@seagreenio/react-bulma'
+import {
+  FormattedMessage,
+  Link,
+  changeLocale,
+  useIntl,
+} from 'gatsby-plugin-react-intl'
 import React, { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
-// import { Button } from '@seagreenio/react-bulma'
-import { FormattedMessage } from 'react-intl'
-import IntlLink from '../components/IntlLink'
+import { Progress } from '@seagreenio/react-bulma'
 import SearchInput from './search/input'
-import { setSearchValue } from '../state'
-import { useLocation } from '@reach/router'
+import clsx from 'clsx'
+import { setSearchValue } from 'state'
 
-const Navbar = (prop) => {
-  const locale = prop.locale
-  const { BrandSVG } = useStaticQuery(
-    graphql`
-      query {
-        BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
-          publicURL
-        }
+const Navbar = () => {
+  const { BrandSVG } = useStaticQuery(graphql`
+    query {
+      BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
+        publicURL
       }
-    `
-  )
-  const [activeNav, setActiveNav] = useState(null)
+    }
+  `)
+
+  const intl = useIntl()
+  const { locale } = intl
 
   const dispatch = useDispatch()
+  const { docInfo, langSwitchable, searchValue } = useSelector(state => state)
 
-  const { docInfo, searchValue } = useSelector((state) => state)
-
-  const location = useLocation()
+  const enDisabled = !langSwitchable && locale === 'zh'
+  const zhDisabled = !langSwitchable && locale === 'en'
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
-  const handleSetBurgerActive = () => setBurgerActive(!burgerActive)
 
-  const handleSetSearchValue = (value) => dispatch(setSearchValue(value))
-
-  useEffect(() => {
-    const pageType =
-      locale === 'zh'
-        ? location.pathname.split('/')[2]
-        : location.pathname.split('/')[1]
-    setActiveNav(pageType)
-  }, [locale, location.pathname])
+  const handleSetSearchValue = value => dispatch(setSearchValue(value))
 
   useEffect(() => {
+    const documentElement = document.documentElement
+
     const scrollListener = () => {
-      const winScrollTop = document.documentElement.scrollTop
+      const progressEl = document.querySelector('progress')
+      if (!progressEl) {
+        return
+      }
 
-      setShowBorder(winScrollTop > 0)
+      const scrollHeight = documentElement.scrollHeight
+      const clientHeight = documentElement.clientHeight
+      const scrollTop = documentElement.scrollTop
+      const scrolled = scrollTop > 0
+
+      const height = scrollHeight - clientHeight
+      if (height === 0) {
+        return
+      }
+      const progress = ((scrollTop / height) * 100).toFixed()
+
+      progressEl.value = progress
+
+      setShowBorder(scrolled)
     }
 
     window.addEventListener('scroll', scrollListener)
@@ -55,126 +81,138 @@ const Navbar = (prop) => {
   }, [])
 
   return (
-    <nav
-      className={`navbar is-fixed-top PingCAP-Navbar${
-        showBorder ? ' has-border-and-shadow' : ''
-      }`}
-      role="navigation"
+    <BulmaNavbar
+      as="nav"
+      className={showBorder && styles.hasBorder}
+      fixed="top"
+      transparent
     >
-      <div className="container">
-        <div className="navbar-brand">
-          <IntlLink
-            className="navbar-item with-brand"
-            to={`https://pingcap.com/${locale === 'zh' ? 'zh' : ''}`}
-            type="outBoundLink"
-          >
+      <Container>
+        <NavbarBrand>
+          <NavbarItem as="a" href="https://pingcap.com" target="_blank">
             <img
-              className="navbar-brand"
+              className={styles.logo}
               src={BrandSVG.publicURL}
-              alt="brand"
+              alt="PingCAP"
             />
-          </IntlLink>
+          </NavbarItem>
 
-          <div className="navbar-item search-input-mobile">
-            <SearchInput
-              docInfo={docInfo}
-              searchValue={searchValue}
-              setSearchValue={handleSetSearchValue}
-            />
-          </div>
-
-          <button
-            className={`navbar-burger${burgerActive ? ' is-active' : ''}`}
+          <NavbarBurger
+            className={styles.navbarBurger}
             aria-label="menu"
-            aria-expanded="false"
-            onClick={handleSetBurgerActive}
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </button>
-        </div>
-        <div className={`navbar-menu${burgerActive ? ' is-active' : ''}`}>
-          <div className="navbar-end">
-            <IntlLink
-              to="/tidb/stable"
-              className={`navbar-item with-main-section ${
-                activeNav === 'tidb' && !burgerActive ? 'is-active' : ''
-              }`}
-              type="innerLink"
-            >
+            aria-expanded={burgerActive}
+            active={burgerActive}
+            onClick={() => setBurgerActive(!burgerActive)}
+          />
+        </NavbarBrand>
+        <NavbarMenu active={burgerActive}>
+          <NavbarStart>
+            <NavbarItem as={Link} className={styles.main} to="/tidb/stable">
               <FormattedMessage id="navbar.tidb" />
-            </IntlLink>
+            </NavbarItem>
 
-            <IntlLink
-              to="/tools/"
-              className={`navbar-item with-main-section ${
-                (activeNav === 'tools' ||
-                  activeNav === 'tidb-data-migration' ||
-                  activeNav === 'tidb-in-kubernetes') &&
-                !burgerActive
-                  ? 'is-active'
-                  : ''
-              }`}
-              type="innerLink"
-            >
+            <NavbarItem as={Link} className={styles.main} to="/tools">
               <FormattedMessage id="navbar.tools" />
-            </IntlLink>
+            </NavbarItem>
+
             {locale === 'en' && (
-              <IntlLink
+              <NavbarItem
+                as={Link}
+                className={styles.main}
                 to="/tidbcloud/public-preview"
-                className={`navbar-item with-main-section ${
-                  activeNav === 'tidbcloud' && !burgerActive ? 'is-active' : ''
-                }`}
               >
                 <FormattedMessage id="navbar.cloud" />
-              </IntlLink>
+              </NavbarItem>
             )}
-            <IntlLink
-              to="/appdev/dev"
-              className={`navbar-item with-main-section ${
-                activeNav === 'appdev' && !burgerActive ? 'is-active' : ''
-              }`}
-              type="innerLink"
-            >
+
+            <NavbarItem as={Link} className={styles.main} to="/appdev/dev">
               <FormattedMessage id="navbar.appdev" />
-            </IntlLink>
-            <a
+            </NavbarItem>
+
+            <NavbarItem
+              className={styles.main}
               href={
-                locale === 'zh'
-                  ? 'https://pingcap.com/zh/product#SelectProduct'
-                  : 'https://en.pingcap.com/download'
+                locale === 'en'
+                  ? 'https://en.pingcap.com/download'
+                  : 'https://pingcap.com/zh/product#SelectProduct'
               }
-              className="navbar-item with-main-section"
-              target="_blank"
-              rel="noreferrer"
             >
               <FormattedMessage id="navbar.download" />
-            </a>
-            <a
+            </NavbarItem>
+
+            <NavbarItem
+              className={styles.main}
               href={
-                locale === 'zh'
-                  ? 'https://pingcap.com/zh/contact/'
-                  : 'https://pingcap.com/contact-us/'
+                locale === 'en'
+                  ? 'https://en.pingcap.com/contact-us/'
+                  : 'https://pingcap.com/zh/contact/'
               }
-              className="navbar-item with-main-section"
-              target="_blank"
-              rel="noreferrer"
             >
               <FormattedMessage id="navbar.contactUs" />
-            </a>
-          </div>
-        </div>
+            </NavbarItem>
+          </NavbarStart>
 
-        <div className="navbar-item search-input-pc">
-          <SearchInput
-            docInfo={docInfo}
-            searchValue={searchValue}
-            setSearchValue={handleSetSearchValue}
-          />
-        </div>
-      </div>
-    </nav>
+          <NavbarEnd>
+            <NavbarItem as="div" dropdown hoverable>
+              <NavbarLink className={styles.langSwitch}>
+                <FormattedMessage id="lang.title" />
+              </NavbarLink>
+
+              <NavbarDropdown boxed>
+                <NavbarItem
+                  className={clsx(
+                    styles.langItem,
+                    enDisabled && styles.disabled
+                  )}
+                  onClick={() => !enDisabled && changeLocale('en')}
+                >
+                  {enDisabled ? (
+                    <FormattedMessage id="lang.cannotswitch" />
+                  ) : (
+                    <FormattedMessage id="lang.en" />
+                  )}
+                </NavbarItem>
+
+                <NavbarItem
+                  className={clsx(
+                    styles.langItem,
+                    zhDisabled && styles.disabled
+                  )}
+                  onClick={() => !zhDisabled && changeLocale('zh')}
+                >
+                  {zhDisabled ? (
+                    <FormattedMessage
+                      id={
+                        docInfo.type === 'tidbcloud'
+                          ? 'lang.cannotswitchtocloud'
+                          : 'lang.cannotswitch'
+                      }
+                    />
+                  ) : (
+                    <FormattedMessage id="lang.zh" />
+                  )}
+                </NavbarItem>
+              </NavbarDropdown>
+            </NavbarItem>
+
+            <NavbarItem as="div" className="search-input">
+              <SearchInput
+                docInfo={docInfo}
+                searchValue={searchValue}
+                setSearchValue={handleSetSearchValue}
+              />
+            </NavbarItem>
+          </NavbarEnd>
+        </NavbarMenu>
+      </Container>
+
+      <Progress
+        className={clsx(styles.progress, showBorder && styles.show)}
+        color="primary"
+        value={0}
+        max={100}
+      />
+    </BulmaNavbar>
   )
 }
 

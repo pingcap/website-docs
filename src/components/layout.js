@@ -1,63 +1,20 @@
-import React, { useEffect } from 'react'
-import { defaultDocInfo, getDocInfo } from '../state'
+import 'styles/global.scss'
 
-import Footer from './footer'
-import { IntlProvider } from 'react-intl'
-import Navbar from './navbar'
+import Default from './layouts/default'
+import Doc from './layouts/doc'
 import PropTypes from 'prop-types'
-import flat from 'flat'
-import { globalHistory } from '@reach/router'
-import langMap from '../intl'
-import { navigate } from 'gatsby-link'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 
-const Layout = ({
-  locale,
-  children,
-  forbidResetDocInfo = false,
-  langSwitchable,
-}) => {
-  const dispatch = useDispatch()
-
-  const setGlobalForPluginsUse = () => {
-    window.DOCS_PINGCAP = {
-      globalHistory,
-      navigate,
-    }
+const Layout = ({ children, pageContext }) => {
+  if (pageContext.layout === 'doc') {
+    return <Doc pageContext={pageContext}>{children}</Doc>
   }
 
-  useEffect(
-    () => {
-      if (!forbidResetDocInfo) {
-        dispatch(
-          getDocInfo({
-            ...defaultDocInfo,
-            ...{
-              lang: locale,
-            },
-          })
-        )
-      }
-
-      setGlobalForPluginsUse()
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
-
-  return (
-    <IntlProvider locale={locale} messages={flat(langMap[locale])}>
-      <Navbar locale={locale} />
-      <main>{children}</main>
-      <Footer locale={locale} langSwitchable={langSwitchable} />
-    </IntlProvider>
-  )
+  return <Default>{children}</Default>
 }
 
 Layout.propTypes = {
-  locale: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  forbidResetDocInfo: PropTypes.bool,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 }
 
 export default Layout

@@ -1,0 +1,21 @@
+{
+  "name": "@pingcap/docs-download",
+  "version": "1.0.0",
+  "description": "Download GitHub markdown files in a flexible way",
+  "main": "index.js",
+  "bin": {
+    "pingcap-docs-download": "./cli.js"
+  },
+  "type": "module",
+  "author": "Yue Yang <g1enyy0ung@gmail.com> (https://g1eny0ung.site)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "mdast-util-from-markdown": "^1.2.0",
+    "rimraf": "^3.0.2",
+    "signale": "^1.4.0",
+    "yargs": "^17.1.1"
+  }
+}

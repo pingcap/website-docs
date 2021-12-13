@@ -1,185 +1,59 @@
 @import '../common';
-@import '../components/navCloumns';
+
 @import '../components/tabsPanel';
 @import '../components/embedYouTube';
 
-$navbar-height: 5.25rem; // 84px
-$navbar-height-mobile: 4.25rem; // 68px
+@import 'prismjs/themes/prism-solarizedlight.css';
+
+$top: $navbar-height + 1rem;
 
 .PingCAP-Doc {
-  min-height: 65vh;
-  .section {
-    @include mobile {
-      padding-top: 1.5rem;
-    }
-
-    @include desktop {
-      padding-top: 1.5rem !important;
-    }
-
-    @include tablet {
-      padding-top: $navbar-height;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-    }
-  }
-
-  .doc-progress {
-    @include mobile {
-      top: calc(#{$navbar-height-mobile} - 1px);
-    }
-
-    &.show {
-      display: block;
-    }
-
-    display: none;
-    position: fixed;
-    top: calc(#{$navbar-height} - 1px);
-    height: 1px;
-    background: transparent;
-    border-radius: 0;
-    z-index: 30; // Same as .navbar.is-fixed-top
-
-    &:-webkit-progress-bar {
-      background: transparent;
-    }
-  }
-
-  .content-columns {
-    display: flex;
-
-    @include mobile {
-      display: block;
-    }
-  }
-
-  .left-column {
+  .left-aside,
+  .right-aside {
     position: sticky;
-    top: $navbar-height;
-    max-height: calc(100vh - #{$navbar-height});
-    overflow: auto;
-    min-width: 240px;
+    top: $top;
+    height: 100%;
+    max-height: calc(100vh - #{$top});
     padding-right: 1rem;
-
-    @include mobile {
-      position: relative;
-      margin-left: -0.75rem;
-      margin-right: -0.75rem;
-      padding-left: 0;
-      padding-right: 0;
-      top: 0;
-      max-height: 100%;
-      overflow: visible;
-    }
-  }
-
-  .doc-menu-mobile {
-    @include mobile {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    @include tablet {
-      display: none;
-    }
-
-    position: relative;
-    padding: 1rem 0;
-    background: $B5;
-    color: $B3;
-    font-weight: bold;
-    z-index: 28;
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: calc(1rem + 9px);
-      right: 1.5rem;
-      width: 12px;
-      height: 12px;
-      background: url(../../../images/toc/arrow.svg) no-repeat;
-      background-size: contain;
-      transform: rotate(0deg);
-      transform-origin: 6px 3px;
-      transition: transform 0.5s ease-out;
-    }
-
-    &.active {
-      &:after {
-        transform: rotate(180deg);
-      }
-    }
+    overflow-y: auto;
   }
 
   // Custom markdown body
   .doc-content {
-    min-width: calc(100% - 240px - 200px);
-
-    @include tablet {
-      padding-left: 4rem;
-      padding-right: 4rem;
-    }
-
-    color: $M3;
-    line-height: 1.75;
-
     h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      border-bottom: none;
       z-index: 1;
-      color: $M3;
 
-      &:target:before {
+      &:before {
         content: '';
         display: block;
-        height: $navbar-height;
-        margin-top: -$navbar-height;
+        height: $top;
+        margin-top: -$top;
       }
-
-      &:target > a.anchor.before {
-        transform: translate(-20px, $navbar-height);
-
-        @include mobile {
-          transform: translate(0, $navbar-height);
-        }
-      }
-    }
-
-    h1 {
-      font-size: $H0;
-    }
-
-    h2 {
-      font-size: $H1;
-    }
-
-    h3 {
-      font-size: $H2;
-    }
-
-    h4 {
-      font-size: $H3;
-    }
-
-    p,
-    ul {
-      position: relative;
-      z-index: 2;
     }
 
     a {
-      color: $primary;
-      &.anchor {
-        &.before {
-          @include mobile {
-            transform: translateX(0);
-          }
-        }
+      color: rgba($B1, 0.9);
+
+      &:hover {
+        color: $B1;
       }
+
+      &.anchor.before {
+        top: unset;
+        left: 1rem;
+      }
+    }
+
+    p,
+    ul,
+    blockquote {
+      position: relative;
+      z-index: 2; // prevents being overwritten by h*
     }
 
     ul {
@@ -205,7 +79,6 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     pre {
       background-color: $M2;
-      font-size: $p2;
 
       code {
         .number {
@@ -283,12 +156,9 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .doc-toc-column {
-    position: sticky;
-    top: calc(#{$navbar-height});
-    max-height: calc(100vh);
-    overflow: auto;
-    min-width: 200px;
+  .right-aside {
+    font-size: $size-7;
+    margin-left: .75rem;
 
     @include mobile {
       display: none;
@@ -296,38 +166,15 @@ $navbar-height-mobile: 4.25rem; // 68px
   }
 
   .doc-toc {
+    word-break: break-word;
+
     .title {
-      margin: 0 0 1rem;
-      color: $B3;
-      font-size: $size-7;
-    }
-
-    a {
-      color: $B3;
-      font-size: $size-9;
-      line-height: 1.5;
-
-      &:hover {
-        color: $primary;
-      }
-    }
-
-    .toc-content {
-      position: sticky;
-      top: calc(#{$navbar-height});
-      max-height: calc(100vh - 300px);
-      overflow: auto;
+      color: $primary;
     }
 
     ul {
       li {
-        line-height: 1;
-        padding-top: 5px;
-        padding-bottom: 5px;
-
-        &:first-child {
-          padding-top: 10px;
-        }
+        padding-top: 0.5rem;
 
         ul {
           padding-left: 1rem;
@@ -336,73 +183,37 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
   }
 
-  .doc-download {
+  .doc-help-link {
     position: relative;
-    font-size: $p2;
-    padding-bottom: 0.5rem;
-
-    a {
-      margin-left: 1.5rem;
-      color: $B3;
-      line-height: 1.75;
-
-      &:hover {
-        color: $primary;
-      }
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 5px;
-      left: 0;
-      width: 15px;
-      height: 15px;
-    }
-  }
-
-  .docs-operation {
-    margin-bottom: 2rem;
-  }
-
-  .download-pdf {
-    &:before {
-      background: url(../../../images/download-pdf.svg) no-repeat;
-      background-size: contain;
-    }
+    display: block;
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: $primary;
 
     &:hover {
-      &:before {
-        background: url(../../../images/download-pdf-hl.svg) no-repeat;
-        background-size: contain;
-      }
-    }
-  }
-
-  .improve-doc {
-    &:before {
-      background: url(../../../images/improve-docs-icon.svg) no-repeat;
-      background-size: contain;
+      color: $B1;
     }
 
-    &:hover {
-      &:before {
-        background: url(../../../images/improve-docs-hl-icon.svg) no-repeat;
-        background-size: contain;
-      }
-    }
-  }
+    $icons: download-pdf improve feedback;
+    @each $icon in $icons {
+      &.#{$icon} {
+        &:before {
+          content: '';
+          position: absolute;
+          top: 3px;
+          left: -24px;
+          width: 16px;
+          height: 16px;
+          background-image: url(images/doc/#{$icon}.svg);
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
 
-  .feedback-doc {
-    &:before {
-      background: url(../../../images/feedback-docs-icon.svg) no-repeat;
-      background-size: contain;
-    }
-
-    &:hover {
-      &:before {
-        background: url(../../../images/feedback-docs-hl-icon.svg) no-repeat;
-        background-size: contain;
+        &:hover {
+          &:before {
+            background-image: url(images/doc/#{$icon}-hl.svg);
+          }
+        }
       }
     }
   }
@@ -439,8 +250,8 @@ $navbar-height-mobile: 4.25rem; // 68px
     }
 
     &.error {
-      background: rgba($color: $T3, $alpha: 0.1);
-      border-left: #{$border-width}px solid $T3;
+      background: rgba($color: $danger, $alpha: 0.1);
+      border-left: #{$border-width}px solid $danger;
 
       &:before {
         background: url('../../../images/blockquotes/error.svg') no-repeat;
@@ -449,10 +260,8 @@ $navbar-height-mobile: 4.25rem; // 68px
 
     margin: 1rem 0;
     padding: 1rem;
-    color: $M4;
 
     p:first-child > strong:first-child {
-      color: $M4 !important;
       padding-left: 2rem;
     }
 

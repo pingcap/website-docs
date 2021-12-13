@@ -8,31 +8,31 @@
     border-left: #{$border-width}px solid $B2;
   }
 
-  &.warning {
-    background: rgba($color: $T6, $alpha: 0.1);
-    border-left: #{$border-width}px solid $T6;
-  }
-
   &.tip {
     background: rgba($color: $T1, $alpha: 0.1);
-    border-left: #{$border-width}px solid $T1;
+    border-left: #{$border-width}px solid $success;
+  }
+
+  &.warning {
+    background: rgba($color: $warning, $alpha: 0.1);
+    border-left: #{$border-width}px solid $warning;
   }
 
   &.error {
-    background: rgba($color: $T3, $alpha: 0.1);
-    border-left: #{$border-width}px solid $T3;
+    background: rgba($color: $T6, $alpha: 0.1);
+    border-left: #{$border-width}px solid $danger;
   }
 
   &.important {
-    background: rgba($color: $T5, $alpha: 0.1);
-    border-left: #{$border-width}px solid $T5;
+    background: rgba($color: $B1, $alpha: 0.1);
+    border-left: #{$border-width}px solid $B1;
   }
 
   display: flex;
   flex-direction: column;
   margin: 1rem 0;
   padding: 1rem;
-  color: $M4;
+  color: $F2;
 
   .top {
     display: flex;

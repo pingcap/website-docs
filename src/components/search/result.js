@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -13,7 +13,7 @@ const Result = ({ results, searched }) => {
       </p>
       <div className="results">
         {results.length > 0 &&
-          results.map((r) => (
+          results.map(r => (
             <div key={r.objectID} className="item">
               {r._highlightResult && r._highlightResult.hierarchy && (
                 <>

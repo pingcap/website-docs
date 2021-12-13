@@ -1,71 +1,42 @@
 @import '../common';
 
-.PingCAP-Docs-Search {
-  .section.container {
-    min-height: 65vh;
-    @include fullhd {
-      padding-left: 0;
-      padding-right: 0;
-    }
+.PingCAP-Docs-Search .filter-panel {
+  .block {
+    display: flex;
+    align-items: center;
   }
 
-  .filter-panel {
-    .label {
-      color: $B3;
-      font-size: $size-7;
-      font-weight: bold;
-    }
+  .list-label {
+    margin-right: 2rem;
+    color: $B3;
+    font-weight: bold;
+  }
 
-    .type-list,
-    .version-list {
-      display: flex;
-      flex-flow: row wrap;
+  .list {
+    display: flex;
+    flex-flow: row wrap;
 
-      .dropdown {
-        outline: none;
-        padding-right: 2rem;
+    .item {
+      margin-right: 1rem;
+      color: $B4;
+
+      &:last-child {
+        margin-right: 0;
       }
 
-      .dropdown-item {
-        cursor: pointer;
-        outline: none;
-
-        &.is-active {
-          color: $B1;
-        }
-
-        &:hover {
-          color: $B1;
-        }
+      &.is-active {
+        color: $B1;
       }
 
-      .item {
-        position: relative;
-        padding-right: 2rem;
-        color: $B4;
-        font-size: $size-7;
-        outline: none;
-
-        &:last-child {
-          padding-right: 0;
-        }
-
-        &.is-active {
-          color: $B1;
-        }
-
-        &:hover {
-          color: $B1;
-          cursor: pointer;
-        }
+      &:hover {
+        color: $B1;
       }
     }
   }
 }
 
 .search-result {
-  margin-top: 2rem;
-
+  min-height: 768px;
   .counts {
     color: $B4;
     opacity: 0.5;
@@ -93,8 +64,7 @@
 
       .url,
       .content {
-        color: $M4;
-        font-size: $size-7;
+        color: $F2;
         padding-bottom: 1rem;
 
         .algolia-docsearch-suggestion--highlight {

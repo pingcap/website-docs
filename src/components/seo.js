@@ -1,28 +1,24 @@
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { Helmet } from 'react-helmet'
+import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 function SEO({ lang, title, description, meta, link }) {
-  const { site, favicon } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-        favicon: file(relativePath: { eq: "pingcap-logo.ico" }) {
-          publicURL
+  const { site, favicon } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
         }
       }
-    `
-  )
-
-  const openGraph = 'https://download.pingcap.com/images/pingcap-opengraph.jpg'
+      favicon: file(relativePath: { eq: "pingcap-logo.ico" }) {
+        publicURL
+      }
+    }
+  `)
 
   const metaDescription = description || site.siteMetadata.description
 
@@ -47,12 +43,8 @@ function SEO({ lang, title, description, meta, link }) {
           content: metaDescription,
         },
         {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
           property: 'og:image',
-          content: openGraph,
+          content: 'https://download.pingcap.com/images/pingcap-opengraph.jpg',
         },
         {
           property: 'og:image:width',
@@ -78,15 +70,20 @@ function SEO({ lang, title, description, meta, link }) {
           name: 'twitter:description',
           content: metaDescription,
         },
-      ].concat(meta)}
+        ...meta,
+      ]}
       link={[
         {
-          href: favicon.publicURL,
           rel: 'shortcut icon',
+          href: favicon.publicURL,
           type: 'image/x-icon',
         },
-        { link },
-      ].concat(link)}
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css',
+        },
+        ...link,
+      ]}
     />
   )
 }

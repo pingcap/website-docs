@@ -1,0 +1,26 @@
+@import 'styles/common';
+
+.dropdown {
+  width: 100%;
+}
+
+.dropdownTrigger {
+  width: 100%;
+}
+
+.button {
+  justify-content: space-between !important;
+}
+
+.dropdownMenu {
+  min-width: 100%;
+}
+
+.dropdownContent {
+  border: 1px solid $border;
+}
+
+.noExistSpan {
+  color: $grey;
+  text-decoration: line-through;
+}

@@ -5,10 +5,7 @@
 
 <p align="center">The next generation of PingCAP Docs. Powered by Gatsby ⚛️.</p>
 
-> Note: Currently WIP
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8d59fdbd-2ab5-4f97-b5c5-4c00d932feee/deploy-status)](https://app.netlify.com/sites/pingcap-docs-preview/deploys)
-![Update docs when receiving repo dispatch](https://github.com/pingcap/website-docs/workflows/Update%20docs%20when%20receiving%20repo%20dispatch/badge.svg)
+[![Incremental Build Triggered By Push Events](https://github.com/PingCAP/website-docs/actions/workflows/update.yml/badge.svg?event=repository_dispatch)](https://github.com/PingCAP/website-docs/actions/workflows/update.yml)
 
 ## How to develop
 
@@ -18,65 +15,42 @@ After clone this repo, run `yarn` to get all deps:
 yarn
 ```
 
-We have pre-defined some commands to download the docs and clear docs, these commands are:
+Usually you have to download some docs before dev. We have pre-defined some commands to download the docs and clean docs, these commands are:
 
 ```json
 {
   "scripts": {
-    "clean:docs:docs-tidb:en": "rimraf ./markdown-pages/contents/en/docs-tidb/**/*.md",
-    "clean:docs:docs-tidb:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb/**/*.md",
-    "clean:docs:docs-tidb-operator:en": "rimraf ./markdown-pages/contents/en/docs-tidb-operator/**/*.md",
-    "clean:docs:docs-tidb-operator:zh": "rimraf ./markdown-pages/contents/zh/docs-tidb-operator/**/*.md",
-    "clean:docs:docs-dm:en": "rimraf ./markdown-pages/contents/en/docs-dm/**/*.md",
-    "clean:docs:docs-dm:zh": "rimraf ./markdown-pages/contents/zh/docs-dm/**/*.md",
-    "download:docs-tidb:en": "node markdown-pages/cli.js download docs",
-    "download:docs-tidb:en:all": "./scripts/download-docs-tidb-en.sh",
-    "download:docs-tidb:zh": "node markdown-pages/cli.js download docs-cn",
-    "download:docs-tidb:zh:all": "./scripts/download-docs-tidb-zh.sh",
-    "download:docs-tidb-operator": "node markdown-pages/cli.js download docs-tidb-operator",
-    "download:docs-tidb-operator:all": "./scripts/download-docs-tidb-operator.sh",
-    "download:docs-tidb-operator:en:all": "./scripts/download-docs-tidb-operator-en.sh",
-    "download:docs-tidb-operator:zh:all": "./scripts/download-docs-tidb-operator-zh.sh",
-    "download:docs-dm": "node markdown-pages/cli.js download docs-dm",
-    "download:docs-dm:all": "./scripts/download-docs-dm.sh",
-    "download:docs-dm:en:all": "./scripts/download-docs-dm-en.sh",
-    "download:docs-dm:zh:all": "./scripts/download-docs-dm-zh.sh"
+    "download:tidb:en": "pingcap-docs-download dl pingcap/docs",
+    "download:tidb:en:all": "./scripts/download-tidb-en.sh",
+    "download:tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
+    "download:tidb:zh:all": "./scripts/download-tidb-zh.sh",
+    "download:dm": "pingcap-docs-download dl pingcap/docs-dm",
+    "download:dm:all": "./scripts/download-dm.sh",
+    "download:dm:en:all": "./scripts/download-dm-en.sh",
+    "download:dm:zh:all": "./scripts/download-dm-zh.sh",
+    "download:tidb-operator": "pingcap-docs-download dl pingcap/docs-tidb-operator",
+    "download:tidb-operator:all": "./scripts/download-tidb-operator.sh",
+    "download:tidb-operator:en:all": "./scripts/download-tidb-operator-en.sh",
+    "download:tidb-operator:zh:all": "./scripts/download-tidb-operator-zh.sh",
+    "download:dbaas": "pingcap-docs-download dl tidbcloud/dbaas-docs",
+    "download:dbaas:all": "./scripts/download-dbaas.sh",
+    "download:appdev": "pingcap-docs-download dl pingcap/docs-appdev",
+    "download:appdev:all": "./scripts/download-appdev.sh",
+    "download:appdev:en:all": "./scripts/download-appdev-en.sh",
+    "download:appdev:zh:all": "./scripts/download-appdev-zh.sh",
+    "clean:docs": "pingcap-docs-download cl",
+    "sync": "pingcap-docs-download sync"
   }
 }
 ```
 
-But the download commands must pass some parameters to work properly. You can understand that it is just a partial command. For example, run:
+There are two types of scripts here, one starts with `pingcap-docs-download` and the other starts with `./scripts`.
 
-```sh
-node markdown-pages/cli.js help
-```
+For `pingcap-docs-download`, it's an package binary which you can find the definition in [packages/download/package.json](packages/download/package.json). You must add some parameters to exec it.
 
-You will see:
+Please refer to [packages/download/README.md](packages/download/README.md) for more details.
 
-```sh
-cli.js [command]
-
-Commands:
-  cli.js download <repo> [path] [ref]  specify which repo of docs you want to
-                                       download
-  cli.js sync <repo> <ref> <sha>       Sync the docs' changes by a single commit
-
-Options:
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
-```
-
-Let us explain with this example: `yarn download:docs-tidb-operator en master`.
-
-This will expand as: `node markdown-pages/cli.js download docs-tidb-operator en master`.
-
-The `<repo>` is `docs-tidb-operator`, which is required. It means we will download the docs from this repo.
-
-The second, `[path]` is a subpath of the repo. In <https://github.com/pingcap/docs-tidb-operator>, we want to download all docs under the `en`.
-
-The last, `[ref]` is the branch of the repo. In this example, we want to download All documents in the `master` branch, under the `en` folder.
-
-Other usage methods can refer to `scripts/download-*.sh`.
+And all scripts in `./scripts` are already predefined commands, they use `pingcap-docs-download` to download the docs.
 
 ### After download
 
@@ -86,21 +60,18 @@ Run `yarn start` to develop:
 yarn start
 ```
 
-### CI
+In order to debug algolia searches, you need to provide two additional environment variables:
 
-We use GitHub actions to serve the build and deploy.
+- `GATSBY_ALGOLIA_APPLICATION_ID`
+- `GATSBY_ALGOLIA_API_KEY`
 
-The core of the CI is using `repository_dispatch` event which described at <https://help.github.com/en/actions/reference/events-that-trigger-workflows#external-events-repository_dispatch>.
-
-Once outside repo post this event, the master branch workflow will start to update the website.
-
-For more details, view: <https://github.com/pingcap/website-docs/blob/master/.github/workflows/update.yml>
+Put them in `.env.development` to make them take effect. (Ref: <https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/>)
 
 ### GitHub Outh2 token
 
-Because of most of our text data stored in GitHub. So, It's needed to apply a GitHub API token in development **when you are prompted for `rate-limiting`**.
+Because of most of our text data stored in GitHub. It's needed to apply a GitHub API token in development **when you are prompted for `rate-limiting`**.
 
-For more details, view <https://developer.github.com/v3/#rate-limiting>
+For more details, view <https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting>.
 
 You must set the token as an env when you start some commands, defined as:
 
@@ -108,11 +79,17 @@ You must set the token as an env when you start some commands, defined as:
 GITHUB_AUTHORIZATION_TOKEN=token
 ```
 
-Some scripts will need this env variable, for example:
+### CI
 
-```sh
-GITHUB_AUTHORIZATION_TOKEN=token yarn download:docs-tidb-operator en master
-```
+We use GitHub actions to serve the build and deploy.
+
+The core of the CI is using `repository_dispatch` event which described at <https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#repository_dispatch>.
+
+Once outside repo post this event, the master branch workflow will start to update the website.
+
+For more details, view: <https://github.com/pingcap/website-docs/blob/master/.github/workflows/update.yml>.
+
+For how to test CI, view: [.github/workflows/tests/README.md](.github/workflows/tests/README.md).
 
 ## The rules we followed
 
@@ -129,7 +106,7 @@ For better collaboration and review, we have developed a few rules to help us de
 
 First, we use [husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged) to make [prettier](https://prettier.io/) format our code automatically before commit.
 
-And also, because some of us use vscode to develop the dashboard, we recommend to use [sort-imports](https://marketplace.visualstudio.com/items?itemName=amatiasq.sort-imports) to format all imports. (This is optional, we will not force you to use)
+And also, because some of us use vscode to develop, we recommend to use [sort-imports](https://marketplace.visualstudio.com/items?itemName=amatiasq.sort-imports) to format all imports. (This is optional, we will not force you to use)
 
 ### Styles
 
@@ -177,9 +154,9 @@ box-shadow: none;
 
 Currently, you can use these shortcodes into docs:
 
-### Shortcodes for notification
+### Notifications
 
-```html
+```jsx
 <Note>This is a note.</Note>
 
 <Warning>This is a warning.</Warning>
@@ -194,23 +171,18 @@ Currently, you can use these shortcodes into docs:
 Everything you needed is just to write a JSX tag, put the text into it. Then we will use
 `mdx` to convert it to JS code.
 
-### Shortcodes for tab panels
+### Tab Panels
 
 **Each label in a single doc have to be unique.**
 
-```html
+```jsx
 <SimpleTab>
-<div label="LABEL_SHOW_ON_FIRST_TAB">
+  <div label="LABEL_SHOW_ON_FIRST_TAB">
+    This is the first content, which is markdown format. The content will show
+    on the corresponding panel when users switch the tabs.
+  </div>
 
-This is the first content, which is markdown format. The content will show on the corresponding panel when users switch the tabs.
-
-</div>
-
-<div label="LABEL_SHOW_ON_SECOND_TAB">
-
-This is the second content.
-
-</div>
+  <div label="LABEL_SHOW_ON_SECOND_TAB">This is the second content.</div>
 </SimpleTab>
 ```
 
@@ -222,24 +194,20 @@ All columns have to be wrapped by tag `<NavColumns></NavColumns>`, each column h
 
 ```jsx
 <NavColumns>
-<NavColumn>
-<ColumnTitle>Column title</ColumnTitle>
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-</NavColumn>
+  <NavColumn>
+    <ColumnTitle>Column title</ColumnTitle>- [This is nav](/fileName.md) - [This
+    is nav](/fileName.md) - [This is nav](/fileName.md) - [This is
+    nav](/fileName.md)
+  </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Column title</ColumnTitle>
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-- [This is nav](/fileName.md)
-</NavColumn>
+  <NavColumn>
+    <ColumnTitle>Column title</ColumnTitle>- [This is nav](/fileName.md) - [This
+    is nav](/fileName.md) - [This is nav](/fileName.md) - [This is
+    nav](/fileName.md)
+  </NavColumn>
 </NavColumns>
 ```
 
-## Authors
+## License
 
-PingCAP FE
+MIT

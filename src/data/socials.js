@@ -1,4 +1,4 @@
-const followSocialsEN = [
+export const en = [
   {
     name: 'github',
     href: 'https://github.com/pingcap',
@@ -21,8 +21,7 @@ const followSocialsEN = [
   },
   {
     name: 'slack',
-    href:
-      'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
+    href: 'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
   },
   {
     name: 'youtube',
@@ -34,7 +33,7 @@ const followSocialsEN = [
   },
 ]
 
-const followSocialsZH = [
+export const zh = [
   {
     name: 'github',
     href: 'https://github.com/pingcap',
@@ -57,8 +56,7 @@ const followSocialsZH = [
   },
   {
     name: 'slack',
-    href:
-      'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
+    href: 'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
   },
   {
     name: 'youtube',
@@ -69,5 +67,3 @@ const followSocialsZH = [
     href: 'https://reddit.com/r/TiDB/',
   },
 ]
-
-export { followSocialsEN, followSocialsZH }

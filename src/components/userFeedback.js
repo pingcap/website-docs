@@ -1,9 +1,10 @@
 import '../styles/components/userFeedback.scss'
 
 import React, { useState } from 'react'
+
+import { FormattedMessage } from 'react-intl'
 import HubspotForm from 'react-hubspot-form'
 import Loading from '../components/loading'
-import { FormattedMessage } from 'react-intl'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
 const UserFeedback = ({ title, locale }) => {
@@ -97,7 +98,7 @@ const UserFeedback = ({ title, locale }) => {
                     ? '3c501775-c64d-4a9e-898b-7efef630bbf4'
                     : '4bf44ac7-4104-4eca-a57c-4dd9e5cc87b9'
                 }`}
-                loading={<Loading wholeSreen={false} />}
+                loading={<Loading wholeScreen={false} />}
               />
             </div>
           )}

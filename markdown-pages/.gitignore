@@ -1,1 +1,2 @@
-contents/**/*.md
+*
+!.gitkeep

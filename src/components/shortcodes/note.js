@@ -1,5 +1,5 @@
-import FlagIcon from '@material-ui/icons/Flag'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Icon } from '@seagreenio/react-bulma'
 import Message from './message'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -7,7 +7,7 @@ import React from 'react'
 const Note = ({ children }) => (
   <Message
     type="note"
-    icon={<FlagIcon style={{ color: '#10a6fa' }} />}
+    icon={<Icon name="mdi mdi-flag" />}
     title={<FormattedMessage id="shortcodes.note" />}
   >
     {children}

@@ -1,5 +1,5 @@
-import AttachmentIcon from '@material-ui/icons/Attachment'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Icon } from '@seagreenio/react-bulma'
 import Message from './message'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -7,7 +7,7 @@ import React from 'react'
 const Tip = ({ children }) => (
   <Message
     type="tip"
-    icon={<AttachmentIcon style={{ color: '#a9d359' }} />}
+    icon={<Icon name="mdi mdi-paperclip" />}
     title={<FormattedMessage id="shortcodes.tip" />}
   >
     {children}

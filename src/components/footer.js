@@ -1,191 +1,103 @@
-import { Link, graphql, useStaticQuery } from 'gatsby'
-import React, { useState } from 'react'
+import * as styles from './footer.module.scss'
 
-import AddIcon from '@material-ui/icons/Add'
-import LanguageIcon from '@material-ui/icons/Language'
+import {
+  Footer as BulmaFooter,
+  Column,
+  Columns,
+  Container,
+  Icon,
+  Title,
+} from '@seagreenio/react-bulma'
+import { Link, useIntl } from 'gatsby-plugin-react-intl'
+import { en, zh } from 'data/footer'
+import { graphql, useStaticQuery } from 'gatsby'
+
+import React from 'react'
 import Socials from './socials'
-import IntlLink from '../components/IntlLink'
-import { footerColumnsZh, footerColumnsEn } from '../data/footer'
-import { useLocation } from '@reach/router'
-import { useSelector } from 'react-redux'
-import { FormattedMessage } from 'react-intl'
+import clsx from 'clsx'
 
-const Footer = React.memo((prop) => {
-  const locale = prop.locale
-  const langSwitchable = prop.langSwitchable
-  const location = useLocation()
-  const currentPathname = location.pathname
-  const footerColumns = locale === 'zh' ? footerColumnsZh : footerColumnsEn
+const Footer = () => {
+  const intl = useIntl()
+  const { locale } = intl
 
-  const { FooterLogoSVG } = useStaticQuery(
-    graphql`
-      query {
-        FooterLogoSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
-          publicURL
-        }
+  const { FooterLogoSVG } = useStaticQuery(graphql`
+    query {
+      FooterLogoSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
+        publicURL
       }
-    `
-  )
+    }
+  `)
+  const footerColumns = locale === 'zh' ? zh : en
 
-  const { docInfo } = useSelector((state) => state)
-
-  const handleSpreadItems = (e) => {
+  const handleSpreadItems = e => {
     const screenWidth = window.screen.width
     if (screenWidth > 768) {
       return
     }
 
     const title = e.currentTarget
-    const spread = title.children[0]
-    title.tabIndex = title.tabIndex === 0 ? 1 : 0
+    const spread = title.firstElementChild
     spread.classList.toggle('clicked')
     title.nextSibling.classList.toggle('displayed')
   }
 
-  const Lang = ({ align }) => {
-    const [dropdownActive, setDropdownActive] = useState('')
-
-    const handleMenuOpen = () => {
-      if (dropdownActive) {
-        setDropdownActive('')
-      } else {
-        setDropdownActive(' is-active')
-      }
-    }
-
-    const switchToLang = (lang) => {
-      let currentPathnameArr = currentPathname.split('/')
-      let preLang
-      switch (lang) {
-        case 'zh':
-          preLang = '/zh'
-          break
-
-        case 'en':
-          preLang = ''
-          currentPathnameArr.splice(1, 1)
-          break
-
-        default:
-          break
-      }
-
-      return langSwitchable
-        ? preLang + currentPathnameArr.join('/')
-        : docInfo.type === 'tidbcloud'
-        ? preLang + '/tidb/stable/'
-        : preLang + '/' + docInfo.type + '/' + docInfo.version
-    }
-
-    return (
-      <div className={`dropdown is-${align} is-up lang${dropdownActive}`}>
-        <div
-          role="button"
-          tabIndex={0}
-          className="dropdown-trigger"
-          onClick={handleMenuOpen}
-          onKeyDown={handleMenuOpen}
-        >
-          <LanguageIcon /> Language
-        </div>
-        <div className="dropdown-menu">
-          <div className="dropdown-content">
-            <Link
-              to={locale === 'en' ? currentPathname : switchToLang('en')}
-              className="dropdown-item"
-            >
-              English
-              {!langSwitchable && locale === 'zh' && (
-                <span className="tooltiptext">
-                  <FormattedMessage id="langSwitchTip" />
-                </span>
-              )}
-            </Link>
-            <Link
-              to={locale === 'zh' ? currentPathname : switchToLang('zh')}
-              className="dropdown-item"
-            >
-              简体中文
-              {!langSwitchable && locale === 'en' && (
-                <span className="tooltiptext">
-                  <FormattedMessage
-                    id={
-                      docInfo.type === 'tidbcloud'
-                        ? 'cloudLangSwitchTip'
-                        : 'langSwitchTip'
-                    }
-                  />
-                </span>
-              )}
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <footer className="footer PingCAP-Footer">
-      <div className="container">
-        <div className="columns">
-          {footerColumns.map((column) => (
-            <div key={column.name} className="column">
-              <div
-                role="button"
-                tabIndex={0}
-                className="title is-7"
+    <BulmaFooter className={styles.footer}>
+      <Container>
+        <Columns>
+          {footerColumns.map(column => (
+            <Column key={column.name} className={styles.column}>
+              <Title
+                className={styles.title}
+                size={6}
                 onClick={handleSpreadItems}
-                onKeyDown={handleSpreadItems}
               >
                 {column.name}
-                <span className="spread">
-                  <AddIcon />
+                <span className={styles.spread}>
+                  <Icon name="mdi mdi-plus" />
                 </span>
-              </div>
-              <ul className="items">
-                {column.items.map((item) => (
+              </Title>
+              <ul className={styles.items}>
+                {column.items.map(item => (
                   <li key={item.name}>
-                    <IntlLink to={item.link} type={item.linkType}>
-                      {item.name}
-                    </IntlLink>
+                    {item.url.startsWith('/') ? (
+                      <Link to={item.url}>{item.name}</Link>
+                    ) : (
+                      <a href={item.url} target="_blank" rel="noreferrer">
+                        {item.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
-            </div>
+            </Column>
           ))}
-          <div className="column with-socials">
-            <div className="columns is-multiline socials-desktop">
-              <Socials className="column is-3" locale={locale} />
-            </div>
-          </div>
-        </div>
 
-        <div className="annotations annotations-desktop">
-          <Lang align="left" />
-          <div className="copyright">
+          <Column>
+            <Columns className={styles.socials} multiline>
+              <Socials
+                className={clsx('column is-4', styles.column)}
+                locale={locale}
+              />
+            </Columns>
+          </Column>
+        </Columns>
+
+        <div className={styles.annotations}>
+          <div className={styles.copyright}>
             ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
           </div>
-          <IntlLink to="https://pingcap.com/" type="outBoundLink">
+          <a href="https://pingcap.com" target="_blank" rel="noreferrer">
             <img
-              className="footer-logo"
+              className={styles.logo}
               src={FooterLogoSVG.publicURL}
-              alt="footer logo"
+              alt="PingCAP"
             />
-          </IntlLink>
+          </a>
         </div>
-
-        <div className="annotations annotations-mobile">
-          <Lang align="left" />
-          <div className="copyright">
-            ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
-          </div>
-        </div>
-        <div className="socials-mobile">
-          <Socials locale={locale} />
-        </div>
-      </div>
-    </footer>
+      </Container>
+    </BulmaFooter>
   )
-})
+}
 
 export default Footer

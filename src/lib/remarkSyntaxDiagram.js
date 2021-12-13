@@ -124,18 +124,18 @@ function isRTLCapable(a) {
     case 'Skip':
     case 'Terminal':
     case 'NonTerminal':
-      return true;
+      return true
     case 'Optional':
-      return isRTLCapable(a.item);
+      return isRTLCapable(a.item)
     case 'OneOrMore':
-      return isRTLCapable(a.item) && isRTLCapable(a.repeat);
+      return isRTLCapable(a.item) && isRTLCapable(a.repeat)
     case 'Choice':
-      return a.options.every(isRTLCapable);
+      return a.options.every(isRTLCapable)
     case 'Sequence':
     case 'OptionalSequence':
     case 'Stack':
-      const length = a.items.length;
-      return length === 1 ? isRTLCapable(a.items[0]) : length === 0;
+      const length = a.items.length
+      return length === 1 ? isRTLCapable(a.items[0]) : length === 0
   }
 }
 
@@ -194,7 +194,7 @@ function appendNodeToSequence(items, node) {
     node.item.item.items.length === 2
   ) {
     const left = items[items.length - 1]
-    const [ repeat, right ] = node.item.item.items;
+    const [repeat, right] = node.item.item.items
     if (isRTLCapable(repeat) && deepEq(left, right)) {
       items[items.length - 1] = {
         type: 'OneOrMore',
@@ -272,7 +272,7 @@ function toRailroad(node) {
  *  the transformed AST
  */
 function remarkSyntaxDiagram(tree) {
-  return flatMap(tree, (node) => {
+  return flatMap(tree, node => {
     if (node.type === 'code' && node.lang === 'ebnf+diagram') {
       try {
         /** @type {{name: string, content: RRComponent}[]} */
@@ -303,6 +303,7 @@ function remarkSyntaxDiagram(tree) {
 
 module.exports = {
   deepEq,
+  isRTLCapable,
   appendNodeToChoices,
   appendNodeToSequence,
   toRailroad,

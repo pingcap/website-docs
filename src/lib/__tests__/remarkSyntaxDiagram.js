@@ -4,6 +4,7 @@ const {
   appendNodeToSequence,
   toRailroad,
   remarkSyntaxDiagram,
+  isRTLCapable,
 } = require('../remarkSyntaxDiagram')
 
 describe('deepEq', () => {
@@ -210,44 +211,52 @@ describe('isRTLCapable', () => {
     expect(isRTLCapable({ type: 'Skip' })).toBeTruthy()
   })
   it('treats sequences to be not RTL capable', () => {
-    expect(isRTLCapable({
-      type: 'Sequence',
-      items: [
-        { type: 'Terminal', text: 'a' },
-        { type: 'Terminal', text: 'b' },
-      ],
-    })).toBeFalsy();
-    expect(isRTLCapable({
-      type: 'OptionalSequence',
-      items: [
-        { type: 'Terminal', text: 'a' },
-        { type: 'Terminal', text: 'b' },
-      ],
-    })).toBeFalsy()
+    expect(
+      isRTLCapable({
+        type: 'Sequence',
+        items: [
+          { type: 'Terminal', text: 'a' },
+          { type: 'Terminal', text: 'b' },
+        ],
+      })
+    ).toBeFalsy()
+    expect(
+      isRTLCapable({
+        type: 'OptionalSequence',
+        items: [
+          { type: 'Terminal', text: 'a' },
+          { type: 'Terminal', text: 'b' },
+        ],
+      })
+    ).toBeFalsy()
   })
   it('can see through choices', () => {
-    expect(isRTLCapable({
-      type: 'Choice',
-      normalIndex: 0,
-      options: [
-        { type: 'Terminal', text: 'a' },
-        { type: 'Terminal', text: 'b' },
-      ],
-    })).toBeTruthy()
-    expect(isRTLCapable({
-      type: 'Choice',
-      normalIndex: 0,
-      options: [
-        { type: 'Terminal', text: 'a' },
-        {
-          type: 'Sequence',
-          items: [
-            { type: 'Terminal', text: 'a' },
-            { type: 'Terminal', text: 'b' },
-          ],
-        }
-      ],
-    })).toBeFalsy()
+    expect(
+      isRTLCapable({
+        type: 'Choice',
+        normalIndex: 0,
+        options: [
+          { type: 'Terminal', text: 'a' },
+          { type: 'Terminal', text: 'b' },
+        ],
+      })
+    ).toBeTruthy()
+    expect(
+      isRTLCapable({
+        type: 'Choice',
+        normalIndex: 0,
+        options: [
+          { type: 'Terminal', text: 'a' },
+          {
+            type: 'Sequence',
+            items: [
+              { type: 'Terminal', text: 'a' },
+              { type: 'Terminal', text: 'b' },
+            ],
+          },
+        ],
+      })
+    ).toBeFalsy()
   })
 })
 

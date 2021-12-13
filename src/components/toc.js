@@ -1,92 +1,92 @@
-import '../styles/components/toc.scss'
+import 'styles/components/toc.scss'
 
-import React, { useEffect, useRef } from 'react'
-import { navigate } from 'gatsby'
+import React, { useLayoutEffect, useRef } from 'react'
+import { generateHrefs, navigateInsideEventListener } from '../lib/utils'
 
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
-import html from 'remark-html'
-import remark from 'remark'
 
-const TOC = ({ data, pathPrefix, fullPath }) => {
-  const rawBody = data.rawBody
-  const _html = remark()
-    .use(html)
-    .processSync(rawBody)
-    .contents.match(/<ul>(.|\n)*<\/ul>/g)[0]
+const TOC = ({ data, name, lang, docVersionStable }) => {
+  const { doc, version } = docVersionStable
+  const wrapper = useRef()
 
-  const tocRef = useRef(null)
-
-  const bindClickEventToTOC = () => {
-    const toc = tocRef.current
+  const generate = () => {
+    const toc = wrapper.current.firstChild
+    toc.className = 'top'
+    // clear previous active anchor
+    const activeAnchor = toc.querySelector('a.active')
+    if (activeAnchor) {
+      activeAnchor.className = ''
+    }
 
     function fold(li) {
-      Array.from(li.children).forEach((list) => {
-        if (list && list.tagName === 'SPAN') {
-          list.style.display = 'inlin-block'
-        } else if (list && list.tagName === 'UL') {
-          list.style.display = 'none'
-        }
+      const start = performance.now()
 
-        Array.from(list.children).forEach((el) => {
-          if (
-            el.classList.contains('can-unfold') &&
-            !el.classList.contains('folded')
-          ) {
-            el.classList.add('folded')
-            fold(el)
-          }
-        })
+      Array.from(li.children).forEach(el => {
+        // ignore icon
+        if (el.tagName !== 'SPAN') {
+          requestAnimationFrame(function animate(timestamp) {
+            const elapsed = timestamp - start
+            const progress = Math.min(elapsed / 250, 1)
 
-        requestAnimationFrame(() => {
-          list.style.height = list.scrollHeight + 'px'
+            if (progress < 1) {
+              el.style.height = `${
+                el.scrollHeight - progress * el.scrollHeight
+              }px`
+              el.style.overflow = 'hidden'
 
-          requestAnimationFrame(() => {
-            list.style.height = null
+              requestAnimationFrame(animate)
+            }
+
+            if (progress === 1) {
+              el.style.height = ''
+              el.style.overflow = ''
+            }
           })
-        })
+        }
       })
     }
 
     function unfold(li) {
-      Array.from(li.children).forEach((el) => {
-        if (el && el.tagName === 'SPAN') {
-          el.style.display = 'inlin-block'
-        } else if (el && el.tagName === 'UL') {
-          el.style.display = 'block'
-        }
+      const start = performance.now()
 
-        return (el.style.height = el.scrollHeight + 'px')
+      Array.from(li.children).forEach(el => {
+        if (el.tagName !== 'SPAN') {
+          requestAnimationFrame(function animate(timestamp) {
+            const elapsed = timestamp - start
+            const progress = Math.min(elapsed / 250, 1)
+
+            if (progress < 1) {
+              el.style.height = `${progress * el.scrollHeight}px`
+
+              requestAnimationFrame(animate)
+            }
+
+            if (progress === 1) {
+              el.style.height = 'auto'
+              el.style.overflow = 'initial'
+            }
+          })
+        }
       })
     }
 
     function clickEvent(e) {
       e.stopPropagation()
 
-      let li = e.target
+      if (e.target.tagName === 'A') {
+        if (navigateInsideEventListener(e)) {
+          const activeAnchor = toc.querySelector('a.active')
+          if (activeAnchor) {
+            activeAnchor.className = ''
+          }
+          e.target.className = 'active'
+        }
 
-      if (
-        e.target.classList.contains('add-icon') ||
-        e.target.classList.contains('remove-icon')
-      ) {
-        li = e.target.parentElement
+        return
       }
 
-      li.parentElement.style.height = null
-
-      // keep only one unfolded level
-      const canUnfoldEle = li.parentElement.children
-      Array.from(canUnfoldEle).forEach((el) => {
-        if (
-          el.classList.contains('can-unfold') &&
-          !el.classList.contains('folded') &&
-          !el.classList.contains('has-no-subject') &&
-          li !== el
-        ) {
-          el.classList.add('folded')
-          fold(el)
-          return
-        }
-      })
+      const li = e.currentTarget
 
       if (li.classList.contains('folded')) {
         unfold(li)
@@ -95,143 +95,122 @@ const TOC = ({ data, pathPrefix, fullPath }) => {
       }
 
       li.classList.toggle('folded')
+
+      const icon = li.lastChild.firstChild
+      // ensure icon
+      if (icon.tagName === 'SPAN') {
+        icon.className = icon.className.endsWith('plus')
+          ? 'mdi mdi-minus'
+          : 'mdi mdi-plus'
+      }
+    }
+
+    /**
+     * modifyHref
+     *
+     * @param {HTMLAnchorElement} el
+     */
+    function modifyHref(el) {
+      const href = el.getAttribute('href')
+
+      if (href && !href.startsWith('http') && href.includes('.md')) {
+        const [realHref, internalHref, _name] = generateHrefs(
+          href,
+          lang,
+          doc,
+          version
+        )
+
+        el.href = realHref
+        el.setAttribute('data-href', internalHref)
+
+        if (_name === name) {
+          el.className = 'active'
+
+          while (el.parentElement) {
+            const p = el.parentElement
+
+            if (p.classList.contains('top')) {
+              break
+            }
+
+            if (p.classList.contains('folded')) {
+              p.classList.remove('folded')
+              Array.from(p.children).forEach(d => {
+                if (d.tagName === 'UL') {
+                  d.style = 'height: auto; overflow: initial;'
+                }
+              })
+            }
+
+            el = p
+          }
+        }
+      }
     }
 
     function retrieveLi(ul) {
-      Array.from(ul.children).forEach((li) => {
-        if (li.children[0] && li.children[0].tagName.toLowerCase() === 'ul') {
+      // ignore icon
+      if (ul.tagName === 'SPAN') {
+        return
+      }
+
+      Array.from(ul.children).forEach(li => {
+        const first = li.firstElementChild
+
+        if (
+          first.tagName === 'UL' ||
+          (first.tagName === 'A' &&
+            first.nextElementSibling &&
+            first.nextElementSibling.tagName === 'UL')
+        ) {
           li.classList.add('can-unfold', 'folded')
 
-          if (!li.parentElement.classList.contains('top')) {
-            let unfoldEle = document.createElement('span')
-            let foldEle = document.createElement('span')
-            unfoldEle.classList.add('add-icon')
-            foldEle.classList.add('remove-icon')
-            li.insertBefore(unfoldEle, li.children[0])
-            li.insertBefore(foldEle, li.children[0])
-            unfoldEle.addEventListener('click', clickEvent)
-            foldEle.addEventListener('click', clickEvent)
-          } else {
-            li.addEventListener('click', clickEvent)
+          if (li.parentElement.className !== 'top') {
+            const icon = document.createElement('span')
+            icon.className = 'icon'
+            icon.innerHTML = '<i class="mdi mdi-plus"></i>'
+            li.append(icon)
+          }
+
+          li.addEventListener('click', clickEvent)
+
+          if (first.tagName === 'A') {
+            modifyHref(first)
           }
 
           Array.from(li.children).forEach(retrieveLi)
+        } else {
+          modifyHref(li.firstChild)
         }
       })
     }
 
-    Array.from(toc.children).forEach((ul) => {
-      ul.classList.add('top')
-
-      Array.from(ul.children).forEach((li) => {
-        if (li.children[0] && li.children[0].tagName.toLowerCase() !== 'ul') {
-          li.classList.add('has-no-subject')
-        }
-      })
-
-      retrieveLi(ul)
-      const tocElement = document.getElementsByClassName('PingCAP-TOC')
-      if (tocElement) {
-        tocElement[0].classList.add('show-toc')
+    Array.from(toc.children).forEach(li => {
+      if (li.firstElementChild.tagName !== 'UL') {
+        li.className = 'has-no-subject'
       }
     })
+
+    retrieveLi(toc)
   }
 
-  const bindNavigateToAllLinks = () => {
-    const toc = tocRef.current
-
-    toc.addEventListener(
-      'click',
-      (e) => {
-        const current = e.target
-        const type = current.tagName
-
-        if (type === 'A') {
-          const href = current.getAttribute('href')
-          const isInternal = /^\/(?!\/)/.test(href)
-
-          if (isInternal) {
-            e.preventDefault()
-
-            navigate(href)
-          }
-        }
-      },
-      true
-    )
-  }
-
-  useEffect(() => {
-    bindClickEventToTOC()
-    bindNavigateToAllLinks()
-  }, [])
-
-  useEffect(() => {
-    const absPathRegx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}/
-
-    Array.from(tocRef.current.getElementsByTagName('a')).forEach((a) => {
-      // escape outbound path replacement
-      if (!a.getAttribute('href').match(absPathRegx)) {
-        const href = a.href
-        const lastSegment = href
-          .substring(href.lastIndexOf('/') + 1)
-          .replace(/\.md/g, '')
-
-        a.href = pathPrefix + lastSegment
-
-        let hrefWithoutHash = pathPrefix + lastSegment
-
-        if (hrefWithoutHash.split('#').length > 1) {
-          hrefWithoutHash = (pathPrefix + lastSegment).split('#')[0]
-        }
-
-        // unfold active nav item
-        if (hrefWithoutHash === fullPath) {
-          let tagTempEle = a
-
-          tagTempEle.parentElement.classList.add('is-active')
-          while (tagTempEle && !tagTempEle.classList.contains('top')) {
-            if (tagTempEle.classList.contains('folded')) {
-              tagTempEle.classList.remove('folded')
-            }
-            tagTempEle = tagTempEle.parentElement
-          }
-
-          const liClientRect = a.parentElement.getBoundingClientRect()
-          const dy = liClientRect.top - window.innerHeight / 2
-
-          if (dy > 0) {
-            // polyfill
-            if (!tocRef.current.scrollTo) {
-              console.log('Your browser does not support scrollTo API')
-              tocRef.current.scrollTop = dy
-            }
-
-            const leftTOCColumn = document.getElementsByClassName('left-column')
-            // https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
-            leftTOCColumn[0].scrollTo({
-              top: dy,
-              left: 0,
-              behavior: 'smooth',
-            })
-          }
-        }
-      }
-    })
-  }, [pathPrefix, fullPath])
+  /* eslint-disable */
+  useLayoutEffect(generate, [data.body])
+  /* eslint-enable */
 
   return (
-    <section
-      ref={tocRef}
-      className="PingCAP-TOC"
-      dangerouslySetInnerHTML={{ __html: _html }}
-    />
+    <div ref={wrapper} className="PingCAP-TOC">
+      <MDXRenderer>{data.body}</MDXRenderer>
+    </div>
   )
 }
 
 TOC.propTypes = {
   data: PropTypes.object.isRequired,
-  pathPrefix: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
+  docVersionStable: PropTypes.object.isRequired,
 }
 
 export default TOC

@@ -1,26 +1,23 @@
-import Layout from '../components/layout'
-import React from 'react'
-import SEO from '../components/seo'
-import IntlLink from '../components/IntlLink'
-import '../styles/pages/404.scss'
+import * as styles from 'styles/pages/404.module.scss'
 
-const NotFoundPage = ({ pageContext: { locale } }) => (
-  <Layout locale={locale}>
-    <SEO title="404: Not Found" />
-    <div className="PingCAP-404-Page">
-      <section className="container">
-        <h1>Sorry... 404!</h1>
-        <p>
-          The page you were looking for appears to have been moved, deleted or
-          does not exist. You could go back to where you were or head straight
-          to our{' '}
-          <IntlLink to="/" type="aHrefLink">
-            home page
-          </IntlLink>
-        </p>
-      </section>
+import { Content, Title } from '@seagreenio/react-bulma'
+
+import { Link } from 'gatsby-plugin-react-intl'
+import React from 'react'
+import Seo from 'components/seo'
+
+const NotFoundPage = () => (
+  <>
+    <Seo title="404 Not Found" />
+    <div className={styles.box}>
+      <Title as="h1">Sorry...404!</Title>
+      <Content>
+        The page you were looking for appears to have been moved, deleted or
+        does not exist. You could go back to where you were or head straight to
+        our <Link to="/">home page</Link>.
+      </Content>
     </div>
-  </Layout>
+  </>
 )
 
 export default NotFoundPage

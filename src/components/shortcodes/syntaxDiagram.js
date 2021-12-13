@@ -1,9 +1,9 @@
+import 'styles/components/syntaxDiagram.scss'
+
+import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Icon } from '@seagreenio/react-bulma'
 import PropTypes from 'prop-types'
-import { FormattedMessage } from 'react-intl'
 import React from 'react'
-import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded'
-import CodeIcon from '@material-ui/icons/Code'
-import '../../styles/components/syntaxDiagram.scss'
 
 const SyntaxDiagram = ({ children }) => {
   const [value, setValue] = React.useState(0)
@@ -13,7 +13,7 @@ const SyntaxDiagram = ({ children }) => {
       <div className="PingCAP-Doc-syntax-diagram-toolbar buttons are-small are-light has-addons is-right">
         <button className="button is-light" onClick={() => setValue(0)}>
           <span className="icon">
-            <AccountTreeRoundedIcon fontSize="small" />
+            <Icon name="mdi mdi-file-tree" />
           </span>
           <span>
             <FormattedMessage id="syntaxDiagram.syntaxDiagram" />
@@ -21,7 +21,7 @@ const SyntaxDiagram = ({ children }) => {
         </button>
         <button className="button is-light" onClick={() => setValue(1)}>
           <span className="icon">
-            <CodeIcon fontSize="small" />
+            <Icon name="mdi mdi-code-tags" />
           </span>
           <span>
             <FormattedMessage id="syntaxDiagram.ebnf" />

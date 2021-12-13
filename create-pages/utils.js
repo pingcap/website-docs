@@ -1,100 +1,73 @@
-const masterRegex = /master/
-const tidbStableRegx = /release-5.3/
-const dmStableRegx = /release-5.3/
-const operatorStableRegx = /release-1.2/
+const fs = require('fs')
+const path = require('path')
 
-function renameDoc(name) {
-  switch (name) {
-    case 'docs-tidb':
-      return 'tidb'
-    case 'docs-tidb-operator':
-      return 'tidb-in-kubernetes'
-    case 'docs-dm':
-      return 'tidb-data-migration'
-    case 'docs-dbaas':
-      return 'tidbcloud'
-    case 'docs-appdev':
-      return 'appdev'
+const config = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '../docs.json'))
+)
+
+exports.getRepo = function (doc, lang) {
+  return config.docs[doc].languages[lang].repo
+}
+
+function getStable(doc) {
+  return config.docs[doc].stable
+}
+exports.getStable = getStable
+
+function renameVersion(version, stable) {
+  switch (version) {
+    case 'master':
+      return 'dev'
+    case stable:
+      return 'stable'
     default:
-      return name
+      return version.replace('release-', 'v')
   }
 }
 
-function renameVersion(version, stableRegx) {
-  if (version.match(masterRegex)) {
-    return 'dev'
-  } else if (version.match(stableRegx)) {
-    return 'stable'
-  } else {
-    return version.replace('release-', 'v')
-  }
-}
-
-function renameDocVersion(version, docName) {
-  switch (docName) {
+function renameVersionByDoc(doc, version) {
+  switch (doc) {
     case 'tidb':
-      return renameVersion(version, tidbStableRegx)
-    case 'tidb-in-kubernetes':
-      return renameVersion(version, operatorStableRegx)
     case 'tidb-data-migration':
-      return renameVersion(version, dmStableRegx)
+    case 'tidb-in-kubernetes':
     case 'appdev':
-      return renameVersion(version, '')
-    default:
+      return renameVersion(version, getStable(doc))
+    case 'tidbcloud':
       return 'public-preview'
   }
 }
+exports.renameVersionByDoc = renameVersionByDoc
 
-function genDocPath(relativeDir, needRename = true) {
-  const splitPaths = relativeDir.split('/')
-  const docName = needRename ? renameDoc(splitPaths[0]) : splitPaths[0]
-  const docVersion = needRename
-    ? renameDocVersion(splitPaths[1], docName)
-    : splitPaths[1]
+function genDocCategory(slug, separator = '/') {
+  const [name, branch] = slug.split('/')
 
-  return `${docName}/${docVersion}`
+  return `${name}${separator}${renameVersionByDoc(name, branch)}`
 }
 
-exports.genDownloadPDFURL = function (relativeDir, locale) {
-  const docPath = genDocPath(relativeDir).replace('/', '-')
-
-  return `${docPath}-${locale}-manual.pdf`
+exports.genTOCSlug = function (slug) {
+  return `${slug.split('/').slice(0, 3).join('/')}/TOC`
 }
 
-exports.genVersionChunks = function (_fullPath) {
-  const parts = _fullPath.split('/')
-  const _version = parts.splice(2, 1)
-  return [_version[0], parts.join('/')]
+exports.genPDFDownloadURL = function (slug, lang) {
+  return `${genDocCategory(slug, '-')}-${lang}-manual.pdf`
 }
 
 /**
- * Replace path by relativeDir and file basename.
+ * Replace disk path to url path.
  *
- * @param {string} relativeDir - GraphQL generated string.
- * @param {string} base - GraphQL generated string.
+ * @param {string} slug - mdx slug.
+ * @param {string} name - filename.
+ * @param {string} lang
+ * @param {string} pathWithoutVersion
  * @returns {string} - Replaced path.
  */
-exports.replacePath = function (relativeDir, base) {
-  const docPath = genDocPath(relativeDir)
-  const baseName = base.replace('.md', '')
+exports.replacePath = function (slug, name, lang, pathWithoutVersion) {
+  const docPath = genDocCategory(slug)
+  lang = lang === 'en' ? '' : '/' + lang
 
-  if (baseName === '_index') {
-    return `/${docPath}`
+  if (name === '_index') {
+    return `${lang}/${docPath}`
   }
 
-  return `/${docPath}/${baseName}`
-}
-
-exports.genPathPrefix = function (relativeDir, locale) {
-  return `${locale === 'en' ? '' : `/${locale}`}/${genDocPath(relativeDir)}/`
-}
-
-/**
- * Generate TOC path by relativeDir.
- *
- * @param {string} relativeDir - GraphQL generated string.
- * @returns {string} - The string of TOC path.
- */
-exports.genTOCPath = function (relativeDir) {
-  return `${genDocPath(relativeDir, false)}/TOC.md`
+  return `${lang}/${docPath}/${pathWithoutVersion}`
 }

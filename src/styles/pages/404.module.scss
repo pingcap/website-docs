@@ -1,0 +1,9 @@
+@import '../common';
+
+.box {
+  @include VHCenter;
+
+  flex-direction: column;
+  align-items: flex-start;
+  height: 50vh;
+}
