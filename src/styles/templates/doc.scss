@@ -26,14 +26,7 @@ $top: $navbar-height + 1rem;
     h4,
     h5,
     h6 {
-      z-index: 1;
-
-      &:before {
-        content: '';
-        display: block;
-        height: $top;
-        margin-top: -$top;
-      }
+      scroll-margin-top: $navbar-height;
     }
 
     a {
@@ -44,16 +37,8 @@ $top: $navbar-height + 1rem;
       }
 
       &.anchor.before {
-        top: unset;
         left: 1rem;
       }
-    }
-
-    p,
-    ul,
-    blockquote {
-      position: relative;
-      z-index: 2; // prevents being overwritten by h*
     }
 
     ul {
@@ -158,7 +143,7 @@ $top: $navbar-height + 1rem;
 
   .right-aside {
     font-size: $size-7;
-    margin-left: .75rem;
+    margin-left: 0.75rem;
 
     @include mobile {
       display: none;

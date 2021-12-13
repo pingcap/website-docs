@@ -36,6 +36,8 @@ const Doc = ({
   },
   data,
 }) => {
+  const { pathname } = useLocation()
+
   const { site, mdx, toc } = data
   const { frontmatter, tableOfContents } = mdx
   const docVersionStableMap = JSON.parse(docVersionStable)
@@ -47,9 +49,6 @@ const Doc = ({
     pathWithoutVersion,
   }
 
-  const location = useLocation()
-  const { pathname } = location
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -59,14 +58,14 @@ const Doc = ({
   useEffect(() => {
     dispatch(setLangSwitchable(langSwitchable))
 
-    // TODO: remove
-    optimizeBlockquote()
-
     return () => dispatch(setLangSwitchable(true))
   }, [dispatch, langSwitchable])
 
   useEffect(() => {
     replaceInternalHref(lang, doc, version)
+
+    // TODO: remove
+    optimizeBlockquote()
 
     dispatch(
       setDocInfo({
