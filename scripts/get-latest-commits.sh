@@ -34,9 +34,9 @@ do
 
   for v in ${!versions}
   do
-    $(curl -s -H "Authorization: token $GITHUB_AUTHORIZATION_TOKEN" \
+    curl -s -H "Authorization: token $GITHUB_AUTHORIZATION_TOKEN" \
     -H "Accept: application/vnd.github.VERSION.sha" \
-    "https://api.github.com/repos/tidbcloud/$repo/commits/$v") > $CACHE_DIR/$repo-$v.hash
+    "https://api.github.com/repos/tidbcloud/$repo/commits/$v" > $CACHE_DIR/$repo-$v.hash
     echo "$repo-$v.hash" $(cat $CACHE_DIR/$repo-$v.hash)
   done
 done
