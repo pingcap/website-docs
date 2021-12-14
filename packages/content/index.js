@@ -2,7 +2,7 @@ const replaceStream = require('replacestream')
 
 const frontMatter = /^---(.|\n)*---\n/
 const media = /\(\/?media\//g
-const copyable = /{{< copyable\s+(.+)\s+>}}\n/g
+const copyable = /{{< copyable\s+(.+)\s+>}}\r?\n/g
 const tabsPanel = /{{< tabs-panel\s+(.+)\s+>}}\n/g
 
 /**
