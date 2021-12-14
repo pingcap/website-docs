@@ -78,6 +78,12 @@ jobs:
           yarn download:dbaas:all
           yarn download:appdev:all
 
+      - name: Download specific docs
+        if: github.event.client_payload.download_type == 'partial'
+        env:
+          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: eval "${{ github.event.client_payload.command }}"
+
       # incremental: get the base commit from cache for furthur use
       - name: Get base commit cache
         if: github.event.client_payload.download_type != 'full' && github.event.client_payload.repo != 'pingcap/website-docs'

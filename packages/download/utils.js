@@ -34,7 +34,9 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
   const data = (await getContent(repo, ref, path)).data
 
   // Create destDir if not exist
-  if (data && !fs.existsSync(destDir)) {
+  //
+  // Note: destDir may be a file ends with '.md'
+  if (data && !destDir.endsWith('.md') && !fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true })
   }
 
@@ -69,7 +71,11 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
     })
   } else {
     if (data.name.endsWith('.md')) {
-      writeContent(data.download_url, `${destDir}/${data.name}`, pipelines)
+      writeContent(
+        data.download_url,
+        destDir.endsWith('.md') ? destDir : `${destDir}/${data.name}`,
+        pipelines
+      )
     }
   }
 }
