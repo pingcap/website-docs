@@ -2,6 +2,7 @@ import { getContent, http } from './http.js'
 import stream, { pipeline } from 'stream'
 
 import fs from 'fs'
+import path from 'path'
 import sig from 'signale'
 
 const IMAGE_CDN_PREFIX = 'https://download.pingcap.com/images'
@@ -33,13 +34,6 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
 
   const data = (await getContent(repo, ref, path)).data
 
-  // Create destDir if not exist
-  //
-  // Note: destDir may be a file ends with '.md'
-  if (data && !destDir.endsWith('.md') && !fs.existsSync(destDir)) {
-    fs.mkdirSync(destDir, { recursive: true })
-  }
-
   if (Array.isArray(data)) {
     data.forEach(d => {
       const { type, name, download_url } = d
@@ -50,10 +44,6 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
       }
 
       if (type === 'dir') {
-        if (!fs.existsSync(nextDest)) {
-          fs.mkdirSync(nextDest)
-        }
-
         retrieveAllMDs(
           {
             repo,
@@ -119,6 +109,13 @@ export function genDest(repo, path, destDir, sync) {
  * @param {Array} [pipelines=[]]
  */
 export async function writeContent(url, destPath, pipelines = []) {
+  const dir = path.dirname(destPath)
+
+  if (!fs.existsSync(dir)) {
+    sig.info(`Create empty dir: ${dir}`)
+    fs.mkdirSync(dir, { recursive: true })
+  }
+
   const readableStream = stream.Readable.from((await http.get(url)).data)
   const writeStream = fs.createWriteStream(destPath)
   writeStream.on('close', () => sig.success('Downloaded:', url))

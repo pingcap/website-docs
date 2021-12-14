@@ -46,15 +46,6 @@ export async function handleSync(metaInfo, destDir, options) {
     switch (status) {
       case 'added':
       case 'modified':
-        if (!fs.existsSync(dest)) {
-          const dir = path.dirname(dest)
-
-          if (!fs.existsSync(dir)) {
-            sig.info(`Create empty dir: ${dir}`)
-            fs.mkdirSync(dir, { recursive: true })
-          }
-        }
-
         writeContent(raw_url, dest, pipelines)
 
         break
