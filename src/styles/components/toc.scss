@@ -57,6 +57,10 @@
         padding-bottom: 0.5rem;
         border-bottom: 1px solid $T2;
 
+        &.has-no-subject > a {
+          font-weight: bold;
+        }
+
         &:not(.has-no-subject):after {
           content: '';
           position: absolute;
