@@ -7,8 +7,8 @@ import { useLocation } from '@reach/router'
 import { wrapPathWithLang } from 'lib/utils'
 
 const FeedbackDocLink = ({ repoInfo, lang }) => {
-  const { repo, ref, pathWithoutVersion } = repoInfo
-  const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
+  const { repo, ref, realPath } = repoInfo
+  const path = wrapPathWithLang(repo, realPath, lang)
 
   const { site } = useStaticQuery(graphql`
     query {

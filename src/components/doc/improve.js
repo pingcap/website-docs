@@ -4,8 +4,8 @@ import React from 'react'
 import { wrapPathWithLang } from 'lib/utils'
 
 const Improve = ({ repoInfo, lang }) => {
-  const { repo, ref, pathWithoutVersion } = repoInfo
-  const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
+  const { repo, ref, realPath } = repoInfo
+  const path = wrapPathWithLang(repo, realPath, lang)
 
   return (
     <a

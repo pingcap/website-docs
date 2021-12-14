@@ -6,8 +6,8 @@ import axios from 'axios'
 import { wrapPathWithLang } from 'lib/utils'
 
 const GitCommitInfo = ({ repoInfo, lang, title }) => {
-  const { repo, ref, pathWithoutVersion } = repoInfo
-  const path = wrapPathWithLang(repo, pathWithoutVersion, lang) + '.md'
+  const { repo, ref, realPath } = repoInfo
+  const path = wrapPathWithLang(repo, realPath, lang)
 
   const [latestCommit, setLatestCommit] = useState(null)
 

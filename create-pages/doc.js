@@ -49,7 +49,8 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     const slug = node.slug.slice(3)
     const { sourceInstanceName: topFolder, relativePath, name } = node.parent
     const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path with .md]
-    const [doc, version] = pathWithoutLang
+    const [doc, version, ...rest] = pathWithoutLang
+    node.realPath = rest.join('/')
 
     const slugArray = slug.split('/')
     // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
@@ -103,6 +104,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       repo,
       ref,
       lang,
+      realPath,
       pathWithoutVersion,
       path,
       docVersionStable,
@@ -130,6 +132,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
           redirectDefaultLanguageToRoot: true,
           ignoredPaths: [],
         },
+        realPath,
         pathWithoutVersion,
         docVersionStable,
         langSwitchable,

@@ -41,6 +41,8 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
             if (progress === 1) {
               el.style.height = ''
               el.style.overflow = ''
+              el.style.visibility = 'hidden'
+              li.classList.toggle('folded')
             }
           })
         }
@@ -52,6 +54,8 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
 
       Array.from(li.children).forEach(el => {
         if (el.tagName !== 'SPAN') {
+          el.style.visibility = 'initial'
+
           requestAnimationFrame(function animate(timestamp) {
             const elapsed = timestamp - start
             const progress = Math.min(elapsed / 250, 1)
@@ -65,6 +69,7 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
             if (progress === 1) {
               el.style.height = 'auto'
               el.style.overflow = 'initial'
+              li.classList.toggle('folded')
             }
           })
         }
@@ -93,8 +98,6 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
       } else {
         fold(li)
       }
-
-      li.classList.toggle('folded')
 
       const icon = li.lastChild.firstChild
       // ensure icon

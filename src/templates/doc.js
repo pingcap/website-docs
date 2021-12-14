@@ -28,10 +28,11 @@ const Doc = ({
     repo,
     ref,
     lang,
+    realPath,
+    pathWithoutVersion,
     docVersionStable,
     langSwitchable,
     downloadURL,
-    pathWithoutVersion,
     versions,
   },
   data,
@@ -46,7 +47,7 @@ const Doc = ({
   const repoInfo = {
     repo,
     ref,
-    pathWithoutVersion,
+    realPath,
   }
 
   const dispatch = useDispatch()

@@ -33,9 +33,21 @@
 
         span.icon {
           position: absolute;
-          top: 0.5rem;
-          left: -24px;
+          top: 7px;
+          left: -7px;
+
+          & > i:before {
+            font-weight: bold;
+          }
         }
+      }
+
+      &.folded > ul {
+        visibility: hidden;
+      }
+
+      & > * .can-unfold {
+        padding-left: 1rem;
       }
     }
 

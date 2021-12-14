@@ -1,9 +1,13 @@
+import { Columns, withSpacing } from '@seagreenio/react-bulma'
+
 import React from 'react'
 
+const SpacingColumns = withSpacing(Columns)
+
 const NavColumns = ({ children }) => (
-  <div className="mt-6">
-    <div className="columns is-multiline">{children}</div>
-  </div>
+  <SpacingColumns multiline mt={3}>
+    {children}
+  </SpacingColumns>
 )
 
 export default NavColumns

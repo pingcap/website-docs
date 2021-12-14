@@ -62,7 +62,7 @@ const VersionSwitcher = ({
   useEffect(handleRelativeDir, [doc, version, stableVersion])
 
   const renderItem = item =>
-    item === 'stable' ? convertVersionName(stableVersion) + ' (stable)' : item
+    item === 'stable' ? convertVersionName(stableVersion) : item
 
   return (
     <Dropdown className={styles.dropdown} hoverable>
