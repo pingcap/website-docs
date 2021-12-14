@@ -131,7 +131,7 @@ jobs:
         env:
           GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
           GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-        run: yarn build
+        run: yarn build --verbose
 
       - name: Deploy to LA1
         if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
