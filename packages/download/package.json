@@ -16,6 +16,6 @@
     "mdast-util-from-markdown": "^1.2.0",
     "rimraf": "^3.0.2",
     "signale": "^1.4.0",
-    "yargs": "^17.1.1"
+    "yargs": "^17.3.0"
   }
 }

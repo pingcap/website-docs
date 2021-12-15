@@ -60,10 +60,10 @@ jobs:
         uses: actions/cache@v2
         id: docs
         with:
-          path: ./markdown-pages
-          key: ${{ runner.os }}-docs-newest-cache-${{ github.event.client_payload.sha }}
+          path: markdown-pages
+          key: ${{ runner.os }}-docs-cache-1-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-newest-cache-
+            ${{ runner.os }}-docs-1-cache-
 
       # if download_type is full, download all docs
       - name: Check restore status
@@ -113,22 +113,16 @@ jobs:
         uses: actions/cache@v2
         id: gatsby-cache
         with:
-          path: ./.cache
-          key: ${{ runner.os }}-20211020-gatsby-cache-${{ github.event.client_payload.sha }}
+          path: |
+            .cache
+            public
+          key: ${{ runner.os }}-gatsby-cache-1-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-20211020-gatsby-cache-
-
-      - name: Restore gatsby build
-        uses: actions/cache@v2
-        id: gatsby-build
-        with:
-          path: ./public
-          key: ${{ runner.os }}-20211020-gatsby-build-${{ github.event.client_payload.sha }}
-          restore-keys: |
-            ${{ runner.os }}-20211020-gatsby-build-
+            ${{ runner.os }}-gatsby-cache-1-
 
       - name: Build website
         env:
+          CI: true
           GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
           GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
         run: yarn build --verbose
