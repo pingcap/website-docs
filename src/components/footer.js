@@ -9,16 +9,16 @@ import {
   Title,
 } from '@seagreenio/react-bulma'
 import { Link, useIntl } from 'gatsby-plugin-react-intl'
+import React, { useState } from 'react'
 import { en, zh } from 'data/footer'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import React from 'react'
 import Socials from './socials'
 import clsx from 'clsx'
 
 const Footer = () => {
-  const intl = useIntl()
-  const { locale } = intl
+  const { locale } = useIntl()
+  const [spread, setSpread] = useState(-1)
 
   const { FooterLogoSVG } = useStaticQuery(graphql`
     query {
@@ -29,35 +29,42 @@ const Footer = () => {
   `)
   const footerColumns = locale === 'zh' ? zh : en
 
-  const handleSpreadItems = e => {
+  const handleSpreadItems = index => () => {
     const screenWidth = window.screen.width
     if (screenWidth > 768) {
       return
     }
 
-    const title = e.currentTarget
-    const spread = title.firstElementChild
-    spread.classList.toggle('clicked')
-    title.nextSibling.classList.toggle('displayed')
+    setSpread(spread === index ? -1 : index)
   }
 
   return (
     <BulmaFooter className={styles.footer}>
       <Container>
         <Columns>
-          {footerColumns.map(column => (
-            <Column key={column.name} className={styles.column}>
+          {footerColumns.map((column, index) => (
+            <Column key={column.name}>
               <Title
                 className={styles.title}
                 size={6}
-                onClick={handleSpreadItems}
+                onClick={handleSpreadItems(index)}
               >
                 {column.name}
-                <span className={styles.spread}>
+                <span
+                  className={clsx(
+                    styles.spread,
+                    index === spread && styles.clicked
+                  )}
+                >
                   <Icon name="mdi mdi-plus" />
                 </span>
               </Title>
-              <ul className={styles.items}>
+              <ul
+                className={clsx(
+                  styles.items,
+                  index === spread && styles.displayed
+                )}
+              >
                 {column.items.map(item => (
                   <li key={item.name}>
                     {item.url.startsWith('/') ? (
