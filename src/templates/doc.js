@@ -4,7 +4,10 @@ import * as Shortcodes from '../components/shortcodes'
 
 import { Block, Column, Title } from '@seagreenio/react-bulma'
 import React, { useEffect } from 'react'
-import replaceInternalHref, { unifyAnchor } from '../lib/replaceInternalHref'
+import replaceInternalHref, {
+  fullVersionMark,
+  unifyAnchor,
+} from '../lib/replaceInternalHref'
 import { setDocData, setDocInfo, setLangSwitchable } from '../state'
 
 import DeprecationNotice from '../components/deprecationNotice'
@@ -83,7 +86,9 @@ const Doc = ({
         {items.map((item, i) =>
           item.url ? (
             <li key={item.url}>
-              <a href={'#' + unifyAnchor(item.url)}>{item.title}</a>
+              <a href={'#' + unifyAnchor(item.url)}>
+                {item.title.replace(fullVersionMark, '')}
+              </a>
               {item.items && renderItems(item.items)}
             </li>
           ) : (

@@ -2,6 +2,7 @@ import { generateHrefs, navigateInsideEventListener } from './utils'
 
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g // with CJKLanguage
 const sliceVersionMark = /span-classversion-mark|span$/g
+export const fullVersionMark = /<span class="version-mark">.+<\/span>/g
 
 export function unifyAnchor(url) {
   return url
