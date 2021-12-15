@@ -61,9 +61,9 @@ jobs:
         id: docs
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-1-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-2-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-1
+            ${{ runner.os }}-docs-cache-2
 
       # if download_type is full, download all docs
       - name: Download all docs
@@ -116,9 +116,9 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-1-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-gatsby-cache-2-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-1-
+            ${{ runner.os }}-gatsby-cache-2-
 
       - name: Build website
         env:
