@@ -66,7 +66,7 @@ jobs:
             ${{ runner.os }}-docs-1-cache-
 
       # if download_type is full, download all docs
-      - name: Check restore status
+      - name: Download all docs
         if: github.event.client_payload.download_type == 'full'
         env:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
