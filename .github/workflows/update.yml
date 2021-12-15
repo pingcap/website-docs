@@ -63,7 +63,7 @@ jobs:
           path: markdown-pages
           key: ${{ runner.os }}-docs-cache-1-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-1-cache-
+            ${{ runner.os }}-docs-cache-1
 
       # if download_type is full, download all docs
       - name: Download all docs
