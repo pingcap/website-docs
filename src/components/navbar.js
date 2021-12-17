@@ -111,9 +111,9 @@ const Navbar = () => {
               <FormattedMessage id="navbar.tidb" />
             </NavbarItem>
 
-            <NavbarItem as={Link} className={styles.main} to="/tools">
+            {/* <NavbarItem as={Link} className={styles.main} to="/tools">
               <FormattedMessage id="navbar.tools" />
-            </NavbarItem>
+            </NavbarItem> */}
 
             {locale === 'en' && (
               <NavbarItem

@@ -85,10 +85,10 @@ export const zh = [
         name: 'TiDB',
         url: '/tidb/stable',
       },
-      {
-        name: '生态工具',
-        url: '/tools',
-      },
+      // {
+      //   name: '生态工具',
+      //   url: '/tools',
+      // },
     ],
   },
   {
