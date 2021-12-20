@@ -71,12 +71,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-docs-cache-4-
 
-      - name: Bailout no doc
-        if: github.event.client_payload.download_type != 'full' && steps.docs-cache.outputs.cache-hit != 'true'
-        run: |
-          echo ${{steps.docs-cache.outputs.cache-hit}}
-          exit 1
-
       # if download_type is full, download all docs
       - name: Download all docs
         if: github.event.client_payload.download_type == 'full'
