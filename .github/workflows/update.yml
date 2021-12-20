@@ -9,6 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # if there's a action without sha1, it will write a cahce
+      # in linux-gatsby-cache-2- and will be used everytime latter action being dispatched
+      - name: Bailout
+        if: ${{ !github.event.client_payload.sha }}
+        run: exit 1
+
       # https://github.com/gatsbyjs/gatsby/issues/11406
       # - name: Increase file watchers
       #   if: ${{ !env.ACT }}
@@ -61,9 +67,9 @@ jobs:
         id: docs
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-3-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-4-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-3-
+            ${{ runner.os }}-docs-cache-4-
 
       # if download_type is full, download all docs
       - name: Download all docs
@@ -116,9 +122,9 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-2-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-gatsby-cache-3-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-2-
+            ${{ runner.os }}-gatsby-cache-3-
 
       - name: Build website
         env:
