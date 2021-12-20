@@ -121,7 +121,7 @@ const Doc = ({
         link={[
           {
             rel: 'stylesheet',
-            href: 'https://cdn.jsdelivr.net/gh/sindresorhus/github-markdown-css@4.0.0/github-markdown.css',
+            href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
           },
           ...(version !== stable
             ? [

@@ -80,7 +80,7 @@ function SEO({ lang, title, description, meta, link }) {
         },
         {
           rel: 'stylesheet',
-          href: 'https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css',
         },
         ...link,
       ]}
