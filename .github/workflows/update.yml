@@ -64,7 +64,7 @@ jobs:
 
       - name: Restore docs
         uses: actions/cache@v2
-        id: docs
+        id: docs-cache
         with:
           path: markdown-pages
           key: ${{ runner.os }}-docs-cache-4-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
@@ -72,8 +72,10 @@ jobs:
             ${{ runner.os }}-docs-cache-4-
 
       - name: Bailout no doc
-        if: github.event.client_payload.download_type != 'full' && steps.docs.outputs.cache-hit != 'true'
-        run: exit 1
+        if: github.event.client_payload.download_type != 'full' && steps.docs-cache.outputs.cache-hit != 'true'
+        run: |
+          echo ${{steps.docs-cache.outputs.cache-hit}}
+          exit 1
 
       # if download_type is full, download all docs
       - name: Download all docs
