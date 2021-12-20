@@ -8,6 +8,7 @@ module.exports = {
     author: '@PingCAP',
     siteUrl: 'https://docs.pingcap.com',
   },
+  jsxRuntime: 'automatic',
   plugins: [
     {
       resolve: `gatsby-plugin-google-analytics`,
