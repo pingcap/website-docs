@@ -1,3 +1,4 @@
+import '@mdi/font/css/materialdesignicons.min.css'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import Helmet from 'react-helmet'
@@ -77,10 +78,6 @@ function SEO({ lang, title, description, meta, link }) {
           rel: 'shortcut icon',
           href: favicon.publicURL,
           type: 'image/x-icon',
-        },
-        {
-          rel: 'stylesheet',
-          href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css',
         },
         ...link,
       ]}

@@ -13,6 +13,7 @@
     "last 2 ios_saf major versions"
   ],
   "dependencies": {
+    "@mdi/font": "^5.9.55",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@seagreenio/react-bulma": "^0.1.0-beta.4",
@@ -41,6 +42,7 @@
     "gatsby-remark-prismjs": "^6.4.0",
     "gatsby-source-filesystem": "^4.4.0",
     "gatsby-transformer-sharp": "^4.4.0",
+    "github-markdown-css": "4.0.0",
     "prismjs": "^1.24.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

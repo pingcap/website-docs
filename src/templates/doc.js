@@ -1,4 +1,5 @@
 import '../styles/templates/doc.scss'
+import 'github-markdown-css/github-markdown.css'
 
 import * as Shortcodes from '../components/shortcodes'
 
@@ -119,10 +120,6 @@ const Doc = ({
           },
         ]}
         link={[
-          {
-            rel: 'stylesheet',
-            href: 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
-          },
           ...(version !== stable
             ? [
                 {
