@@ -81,7 +81,7 @@ module.exports = {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
-        ignore: ['/doc.scss', '/userFeedback.scss'],
+        ignore: ['/doc.scss', '/userFeedback.scss', 'github-markdown-css'],
         purgeCSSOptions: {
           content: [
             `${__dirname}/src/**/*.js`,
