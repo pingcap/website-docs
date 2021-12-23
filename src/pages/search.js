@@ -199,7 +199,7 @@ const Search = () => {
           )}
           onClick={() => setSelectedVersion(toAlgoliaVersion(version))}
         >
-          {version}
+          {toAlgoliaVersion(version)}
         </Button>
       ))}
     </div>
