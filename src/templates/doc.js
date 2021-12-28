@@ -12,11 +12,11 @@ import replaceInternalHref, {
 import { setDocData, setDocInfo, setLangSwitchable } from '../state'
 
 import DeprecationNotice from '../components/deprecationNotice'
-import DownloadPDF from '../components/doc/downloadPDF'
-import FeedbackDoc from '../components/doc/feedback'
+import { DownloadPDF } from '../components/doc/downloadPDF'
+import { FeedbackDoc } from '../components/doc/feedback'
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
 import GitCommitInfo from '../components/gitCommitInfo'
-import ImproveDoc from '../components/doc/improve'
+import { Improve } from '../components/doc/improve'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Seo from '../components/seo'
@@ -165,7 +165,7 @@ const Doc = ({
               <>
                 <FeedbackDoc repoInfo={repoInfo} lang={lang} />
                 {version === 'dev' && (
-                  <ImproveDoc repoInfo={repoInfo} lang={lang} />
+                  <Improve repoInfo={repoInfo} lang={lang} />
                 )}
               </>
             )}

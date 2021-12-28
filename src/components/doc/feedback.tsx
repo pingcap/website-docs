@@ -1,12 +1,15 @@
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { FormattedMessage } from 'react-intl'
-import PropTypes from 'prop-types'
-import React from 'react'
 import { useLocation } from '@reach/router'
 import { wrapPathWithLang } from 'lib/utils'
 
-const FeedbackDocLink = ({ repoInfo, lang }) => {
+interface Props {
+  repoInfo: any
+  lang: string
+}
+
+export function FeedbackDoc({ repoInfo, lang }: Props) {
   const { repo, ref, realPath } = repoInfo
   const path = wrapPathWithLang(repo, realPath, lang)
 
@@ -29,16 +32,8 @@ const FeedbackDocLink = ({ repoInfo, lang }) => {
       className="doc-help-link feedback"
       href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${site.siteMetadata.siteUrl}${pathname})`}
       target="_blank"
-      rel="noreferrer"
-    >
+      rel="noreferrer">
       <FormattedMessage id="doc.feedback" />
     </a>
   )
 }
-
-FeedbackDocLink.propTypes = {
-  repoInfo: PropTypes.object.isRequired,
-  lang: PropTypes.string.isRequired,
-}
-
-export default FeedbackDocLink

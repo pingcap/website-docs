@@ -1,17 +1,17 @@
 import { FormattedMessage } from 'react-intl'
-import React from 'react'
 
-const DownloadPDF = ({ downloadURL }) => {
+interface Props {
+  downloadURL: string
+}
+
+export const DownloadPDF = ({ downloadURL }: Props) => {
   return (
     <a
       className="doc-help-link download-pdf"
       href={`https://download.pingcap.org/${downloadURL}`}
       target="_blank"
-      rel="noreferrer"
-    >
+      rel="noreferrer">
       <FormattedMessage id="doc.download-pdf" />
     </a>
   )
 }
-
-export default DownloadPDF
