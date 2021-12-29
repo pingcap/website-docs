@@ -28,8 +28,9 @@ export async function handleSync(metaInfo, destDir, options) {
     throw err
   }
 
+  // TODO: use patch directly
   files.forEach(file => {
-    const { filename, status, raw_url, previous_filename } = file
+    const { filename, status, contents_url, previous_filename } = file
 
     if (dryRun) {
       sig.debug('dryRun:', status, filename)
@@ -46,7 +47,7 @@ export async function handleSync(metaInfo, destDir, options) {
     switch (status) {
       case 'added':
       case 'modified':
-        writeContent(raw_url, dest, pipelines)
+        writeContent(contents_url, dest, pipelines)
 
         break
       case 'removed':
@@ -60,7 +61,7 @@ export async function handleSync(metaInfo, destDir, options) {
 
         break
       case 'renamed':
-        writeContent(raw_url, dest, pipelines)
+        writeContent(contents_url, dest, pipelines)
 
         const previous = genDest(repo, previous_filename, destDir)
         fs.unlink(previous, err => {
