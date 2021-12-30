@@ -29,50 +29,57 @@ export async function handleSync(metaInfo, destDir, options) {
   }
 
   // TODO: use patch directly
-  files.forEach(file => {
-    const { filename, status, contents_url, previous_filename } = file
+  await Promise.all(
+    files.map(async file => {
+      const { filename, status, contents_url, previous_filename } = file
 
-    if (dryRun) {
-      sig.debug('dryRun:', status, filename)
+      const { download_url } = (await http.get(contents_url)).data
 
-      return
-    }
+      if (dryRun) {
+        sig.debug('dryRun:', status, filename)
 
-    if (ignore.includes(filename) || ignore.some(i => filename.startsWith(i))) {
-      return
-    }
+        return
+      }
 
-    const dest = genDest(repo, filename, destDir, true)
+      if (
+        ignore.includes(filename) ||
+        ignore.some(i => filename.startsWith(i))
+      ) {
+        return
+      }
 
-    switch (status) {
-      case 'added':
-      case 'modified':
-        writeContent(contents_url, dest, pipelines)
+      const dest = genDest(repo, filename, destDir, true)
 
-        break
-      case 'removed':
-        fs.unlink(dest, err => {
-          if (err) {
-            sig.error(`Fail to unlink ${dest}: ${err}`)
-          } else {
-            sig.success(`Removed: ${dest}`)
-          }
-        })
+      switch (status) {
+        case 'added':
+        case 'modified':
+          writeContent(download_url, dest, pipelines)
 
-        break
-      case 'renamed':
-        writeContent(contents_url, dest, pipelines)
+          break
+        case 'removed':
+          fs.unlink(dest, err => {
+            if (err) {
+              sig.error(`Fail to unlink ${dest}: ${err}`)
+            } else {
+              sig.success(`Removed: ${dest}`)
+            }
+          })
 
-        const previous = genDest(repo, previous_filename, destDir)
-        fs.unlink(previous, err => {
-          if (err) {
-            sig.error(`Fail to unlink ${previous}: ${err}`)
-          } else {
-            sig.success(`Renamed: ${previous} => ${dest}`)
-          }
-        })
+          break
+        case 'renamed':
+          writeContent(download_url, dest, pipelines)
 
-        break
-    }
-  })
+          const previous = genDest(repo, previous_filename, destDir)
+          fs.unlink(previous, err => {
+            if (err) {
+              sig.error(`Fail to unlink ${previous}: ${err}`)
+            } else {
+              sig.success(`Renamed: ${previous} => ${dest}`)
+            }
+          })
+
+          break
+      }
+    })
+  )
 }

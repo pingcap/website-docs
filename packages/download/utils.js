@@ -108,7 +108,7 @@ export function genDest(repo, path, destDir, sync) {
  * @param {fs.PathLike} destPath
  * @param {Array} [pipelines=[]]
  */
-export async function writeContent(url, destPath, pipelines = []) {
+export async function writeContent(download_url, destPath, pipelines = []) {
   const dir = path.dirname(destPath)
 
   if (!fs.existsSync(dir)) {
@@ -116,12 +116,11 @@ export async function writeContent(url, destPath, pipelines = []) {
     fs.mkdirSync(dir, { recursive: true })
   }
 
-  const { download_url } = (await http.get(url)).data
   const readableStream = stream.Readable.from(
     (await http.get(download_url)).data
   )
   const writeStream = fs.createWriteStream(destPath)
-  writeStream.on('close', () => sig.success('Downloaded:', url))
+  writeStream.on('close', () => sig.success('Downloaded:', download_url))
 
   pipeline(readableStream, ...pipelines.map(p => p()), writeStream, err => {
     if (err) {
