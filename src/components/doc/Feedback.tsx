@@ -5,7 +5,7 @@ import { useLocation } from '@reach/router'
 import { wrapPathWithLang } from 'lib/utils'
 
 interface Props {
-  repoInfo: any
+  repoInfo: Record<string, any>
   lang: string
 }
 

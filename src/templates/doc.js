@@ -4,7 +4,7 @@ import 'github-markdown-css/github-markdown.css'
 import * as Shortcodes from '../components/shortcodes'
 
 import { Block, Column, Title } from '@seagreenio/react-bulma'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import replaceInternalHref, {
   fullVersionMark,
   unifyAnchor,
@@ -12,11 +12,11 @@ import replaceInternalHref, {
 import { setDocData, setDocInfo, setLangSwitchable } from '../state'
 
 import DeprecationNotice from '../components/deprecationNotice'
-import { DownloadPDF } from '../components/doc/downloadPDF'
-import { FeedbackDoc } from '../components/doc/feedback'
+import { DownloadPDF } from '../components/doc/DownloadPDF'
+import { FeedbackDoc } from '../components/doc/Feedback'
+import { Improve } from '../components/doc/Improve'
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
 import GitCommitInfo from '../components/gitCommitInfo'
-import { Improve } from '../components/doc/improve'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Seo from '../components/seo'

@@ -1,9 +1,8 @@
 import { FormattedMessage } from 'react-intl'
-import PropTypes from 'prop-types'
 import { wrapPathWithLang } from 'lib/utils'
 
 interface Props {
-  repoInfo: any
+  repoInfo: Record<string, any>
   lang: string
 }
 

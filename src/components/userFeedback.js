@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { FormattedMessage } from 'react-intl'
 import HubspotForm from 'react-hubspot-form'
-import Loading from '../components/loading'
+import { Loading } from '../components/Loading'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
 
 const UserFeedback = ({ title, locale }) => {
