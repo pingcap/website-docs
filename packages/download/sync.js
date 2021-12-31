@@ -1,8 +1,7 @@
 import { genDest, writeContent } from './utils.js'
 
-import { compare } from './http.js'
+import { compare, http } from './http.js'
 import fs from 'fs'
-import path from 'path'
 import sig from 'signale'
 
 /**
