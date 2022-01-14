@@ -1,4 +1,4 @@
-require('ts-node').register({ transpileOnly: true })
+const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
 
 module.exports = {
   siteMetadata: {
@@ -62,15 +62,13 @@ module.exports = {
             },
           },
           {
-            resolve: require.resolve('./gatsby/plugin/syntax-diagram'),
-          },
-          {
             resolve: `gatsby-remark-prismjs`,
             options: {
               showLineNumbers: false,
             },
           },
         ],
+        remarkPlugins: [() => remarkSyntaxDiagram],
       },
     },
     {

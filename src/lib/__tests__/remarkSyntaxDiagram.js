@@ -5,7 +5,7 @@ const {
   toRailroad,
   remarkSyntaxDiagram,
   isRTLCapable,
-} = require('..')
+} = require('../remarkSyntaxDiagram')
 
 describe('deepEq', () => {
   it('returns false when type differs', () => {
