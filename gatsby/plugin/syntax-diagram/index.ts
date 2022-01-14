@@ -2,8 +2,53 @@ const flatMap = require('unist-util-flatmap')
 const rr = require('@prantlf/railroad-diagrams')
 const pegjs = require('pegjs')
 const anafanafo = require('anafanafo')
+import { Root } from 'mdast'
 
 rr.Options.INTERNAL_ALIGNMENT = 'left'
+
+// @prantlf/railroad-diagrams JSON types
+
+type RRComponent = RRLeaf | RRSkip | RRSeq | RRChoice | RROptional | RROneOrMore
+
+interface RRDiagram {
+  type: 'Diagram'
+  items: RRComponent[]
+}
+
+interface RRLeaf {
+  type: 'Terminal' | 'NonTerminal'
+  text: string
+}
+
+interface RRSkip {
+  type: 'Skip'
+}
+
+interface RRSeq {
+  type: 'Sequence' | 'Stack' | 'OptionalSequence'
+  items: RRComponent[]
+}
+
+interface RRChoice {
+  type: 'Choice'
+  normalIndex: 0
+  options: RRComponent[]
+}
+
+interface RROptional {
+  type: 'Optional'
+  item: RRComponent
+}
+
+interface RROneOrMore {
+  type: 'OneOrMore'
+  item: RRComponent
+  repeat: RRComponent
+}
+
+interface CalculatedWidth {
+  width: number
+}
 
 /**
  * The scale factor to convert the `anafanafo` width into display with for
@@ -76,37 +121,36 @@ const ebnfParser = pegjs.generate(`
  *  second node
  * @returns {boolean} whether the two nodes are the same.
  */
-function deepEq(a, b) {
+function deepEq<T extends RRComponent>(a: T, b: T): boolean {
   if (a.type !== b.type) {
     return false
   }
 
-  /** @type {RRComponent[]} */
-  let aa
-  /** @type {RRComponent[]} */
-  let bb
+  let aa: RRComponent[]
+  let bb: RRComponent[]
   switch (a.type) {
     case 'Skip':
       return true
     case 'Terminal':
     case 'NonTerminal':
-      return a.text === b.text
+      return a.text === (b as RRLeaf).text
     case 'Optional':
-      return deepEq(a.item, b.item)
+      return deepEq(a.item, (b as RROptional).item)
     case 'OneOrMore':
-      return deepEq(a.item, b.item) && deepEq(a.repeat, b.repeat)
+      return (
+        deepEq(a.item, (b as RROneOrMore).item) &&
+        deepEq(a.repeat, (b as RROneOrMore).repeat)
+      )
     case 'Choice':
       aa = a.options
-      bb = b.options
+      bb = (b as RRChoice).options
       break
     case 'Sequence':
     case 'OptionalSequence':
     case 'Stack':
       aa = a.items
-      bb = b.items
+      bb = (b as RRSeq).items
       break
-    default:
-      throw new Error('unsupported railroad type ' + a.type)
   }
   return aa.length === bb.length && aa.every((n, i) => deepEq(n, bb[i]))
 }
@@ -119,7 +163,7 @@ function deepEq(a, b) {
  *  the railroad component
  * @returns {boolean} whether the component can be read from right to left
  */
-function isRTLCapable(a) {
+function isRTLCapable(a: RRComponent): boolean {
   switch (a.type) {
     case 'Skip':
     case 'Terminal':
@@ -150,7 +194,7 @@ function isRTLCapable(a) {
  * @param {RRComponent} node -
  *  the current node to be added
  */
-function appendNodeToChoices(opts, node) {
+function appendNodeToChoices(opts: RRComponent[], node: RRComponent) {
   if (node.type === 'Sequence' && node.items.length >= 2) {
     const a = node.items[0]
     const b = node.items[node.items.length - 1]
@@ -180,12 +224,12 @@ function appendNodeToChoices(opts, node) {
  * specialized railroad component `OneOrMore(item=a, repeat=b)`, if the node
  * `b` is capable to be read RTL (e.g. a single terminal, but not a sequence).
  *
- * @param {RRComponent[]} items -
+ * @param {} items -
  *  a list of existing items, the new node will be appended here
- * @param {RRComponent} node -
+ * @param {} node -
  *  the current node to be added
  */
-function appendNodeToSequence(items, node) {
+function appendNodeToSequence(items: RRComponent[], node: RRComponent) {
   if (
     node.type === 'Optional' &&
     node.item.type === 'OneOrMore' &&
@@ -208,14 +252,14 @@ function appendNodeToSequence(items, node) {
 }
 
 // Replace the shape of "Start" and "End" to mimic https://www.bottlecaps.de/rr/ui.
-rr.Start.prototype.format = function (x, y) {
+rr.Start.prototype.format = function (x: number, y: number) {
   let path = new rr.Path(x, y - 4)
   path.attrs.d += 'v8l8-4Zm8 0v8l8-4Zm8 4h4' // ▶▶-
   path.attrs.class = 'start-end'
   path.addTo(this)
   return this
 }
-rr.End.prototype.format = function (x, y) {
+rr.End.prototype.format = function (x: number, y: number) {
   this.attrs.d = `M${x} ${y}h4m0-4v8l16-8v8Z` // -▶◀
   this.attrs.class = 'start-end'
   return this
@@ -232,7 +276,7 @@ rr.End.prototype.format = function (x, y) {
  *  the root node
  * @returns {rr.FakeSVG} the converted node
  */
-function toRailroad(node) {
+function toRailroad(node: RRComponent): void {
   switch (node.type) {
     case 'Skip':
       return new rr.Skip()
@@ -262,17 +306,14 @@ function toRailroad(node) {
   }
 }
 
-/**
- * Runs the remark plugin, replacing `ebnf+diagram` code blocks by the
- * SyntaxDiagram shortcode.
- *
- * @param {mdast.Root} tree -
- *  parsed Markdown AST root
- * @returns {mdast.Root}
- *  the transformed AST
- */
-function remarkSyntaxDiagram(tree) {
-  return flatMap(tree, node => {
+module.exports = ({
+  markdownAST,
+  markdownNode,
+}: {
+  markdownAST: Root
+  markdownNode: { fileAbsolutePath: string }
+}) => {
+  return flatMap(markdownAST, (node: any) => {
     if (node.type === 'code' && node.lang === 'ebnf+diagram') {
       try {
         /** @type {{name: string, content: RRComponent}[]} */
@@ -280,7 +321,7 @@ function remarkSyntaxDiagram(tree) {
           context: { appendNodeToChoices, appendNodeToSequence, isRTLCapable },
         })
         const diagrams = grammar
-          .map(({ name, content }) => {
+          .map(({ name, content }: any) => {
             const diagram = new rr.Diagram(toRailroad(content)).format(2)
             return `<dt>${name}</dt><dd>${diagram}</dd>`
           })
@@ -294,18 +335,9 @@ function remarkSyntaxDiagram(tree) {
           { type: 'jsx', value: '</SyntaxDiagram>' },
         ]
       } catch (e) {
-        console.error('invalid EBNF', e)
+        console.error('invalid EBNF', markdownNode.fileAbsolutePath)
       }
     }
     return [node]
   })
-}
-
-module.exports = {
-  deepEq,
-  isRTLCapable,
-  appendNodeToChoices,
-  appendNodeToSequence,
-  toRailroad,
-  remarkSyntaxDiagram,
 }
