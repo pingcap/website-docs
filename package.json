@@ -24,7 +24,6 @@
     "flat": "^5.0.2",
     "gatsby": "^4.4.0",
     "gatsby-plugin-google-analytics": "^4.4.0",
-    "gatsby-plugin-hotjar": "^1.1.1",
     "gatsby-plugin-layout": "^3.4.0",
     "gatsby-plugin-manifest": "^4.4.0",
     "gatsby-plugin-mdx": "^3.4.0",
