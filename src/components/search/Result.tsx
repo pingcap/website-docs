@@ -1,5 +1,4 @@
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
-import PropTypes from 'prop-types'
 
 interface Props {
   results: Record<string, any>[]

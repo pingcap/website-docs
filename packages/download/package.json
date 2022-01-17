@@ -17,5 +17,8 @@
     "rimraf": "^3.0.2",
     "signale": "^1.4.0",
     "yargs": "^17.3.0"
+  },
+  "devDependencies": {
+    "@types/signale": "^1.4.3"
   }
 }

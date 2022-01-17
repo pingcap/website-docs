@@ -1,4 +1,4 @@
-const { remarkSyntaxDiagram } = require('./src/lib/remarkSyntaxDiagram')
+require('ts-node').register({ transpileOnly: true })
 
 module.exports = {
   siteMetadata: {
@@ -62,13 +62,15 @@ module.exports = {
             },
           },
           {
+            resolve: require.resolve('./gatsby/plugin/syntax-diagram'),
+          },
+          {
             resolve: `gatsby-remark-prismjs`,
             options: {
               showLineNumbers: false,
             },
           },
         ],
-        remarkPlugins: [() => remarkSyntaxDiagram],
       },
     },
     {
@@ -84,7 +86,10 @@ module.exports = {
         ignore: ['/doc.scss', '/userFeedback.scss', 'github-markdown-css'],
         purgeCSSOptions: {
           content: [
+            `${__dirname}/gatsby/**/*.js`,
+            `${__dirname}/gatsby/**/*.ts`,
             `${__dirname}/src/**/*.js`,
+            `${__dirname}/src/**/*.tsx`,
             `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
           ],
           safelist: [
