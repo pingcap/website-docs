@@ -3,7 +3,7 @@ import { box } from './404.module.scss'
 import { Content, Title } from '@seagreenio/react-bulma'
 
 import { Link } from 'gatsby-plugin-react-intl'
-import Seo from 'components/seo'
+import { Seo } from 'components/Seo'
 
 const NotFoundPage = () => (
   <>

@@ -1,8 +1,8 @@
 import { Container, Section } from '@seagreenio/react-bulma'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
-import Footer from 'components/footer'
-import Navbar from 'components/navbar'
+import { Footer } from './comp/Footer'
+import { Navbar } from 'components/layouts/comp/Navbar'
 import PropTypes from 'prop-types'
 import { globalHistory } from '@reach/router'
 import { navigate } from 'gatsby'

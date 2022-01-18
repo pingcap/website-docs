@@ -33,7 +33,7 @@ module.exports = {
         redirectDefaultLanguageToRoot: true,
       },
     },
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-react-helmet-async`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -89,6 +89,7 @@ module.exports = {
             `${__dirname}/gatsby/**/*.js`,
             `${__dirname}/gatsby/**/*.ts`,
             `${__dirname}/src/**/*.js`,
+            `${__dirname}/src/**/*.ts`,
             `${__dirname}/src/**/*.tsx`,
             `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
           ],

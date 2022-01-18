@@ -1,11 +1,24 @@
 import '@mdi/font/css/materialdesignicons.min.css'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import PropTypes from 'prop-types'
-import React from 'react'
 
-function SEO({ lang, title, description, meta, link }) {
+interface Props {
+  lang?: string
+  title: string
+  description?: string
+  meta?: Record<string, unknown>[]
+  link?: Record<string, unknown>[]
+}
+
+export function Seo({
+  lang = 'en',
+  title,
+  description = '',
+  meta = [],
+  link = [],
+}: Props) {
   const { site, favicon } = useStaticQuery(graphql`
     query {
       site {
@@ -84,20 +97,3 @@ function SEO({ lang, title, description, meta, link }) {
     />
   )
 }
-
-SEO.defaultProps = {
-  lang: 'en',
-  description: '',
-  meta: [],
-  link: [],
-}
-
-SEO.propTypes = {
-  lang: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  link: PropTypes.arrayOf(PropTypes.object),
-}
-
-export default SEO

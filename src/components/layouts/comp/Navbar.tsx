@@ -11,6 +11,7 @@ import {
   NavbarLink,
   NavbarMenu,
   NavbarStart,
+  NavbarItemProps,
 } from '@seagreenio/react-bulma'
 import {
   FormattedMessage,
@@ -18,16 +19,16 @@ import {
   changeLocale,
   useIntl,
 } from 'gatsby-plugin-react-intl'
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Progress } from '@seagreenio/react-bulma'
-import { SearchInput } from './search/Input'
+import { SearchInput } from '../../search/Input'
 import clsx from 'clsx'
 import { setSearchValue } from 'state'
 
-const Navbar = () => {
+export function Navbar() {
   const { BrandSVG } = useStaticQuery(graphql`
     query {
       BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
@@ -40,7 +41,9 @@ const Navbar = () => {
   const { locale } = intl
 
   const dispatch = useDispatch()
-  const { docInfo, langSwitchable, searchValue } = useSelector(state => state)
+  const { docInfo, langSwitchable, searchValue } = useSelector(
+    state => state
+  ) as any
 
   const enDisabled = !langSwitchable && locale === 'zh'
   const zhDisabled = !langSwitchable && locale === 'en'
@@ -48,7 +51,8 @@ const Navbar = () => {
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
 
-  const handleSetSearchValue = value => dispatch(setSearchValue(value))
+  const handleSetSearchValue = (value: string) =>
+    dispatch(setSearchValue(value))
 
   useEffect(() => {
     const documentElement = document.documentElement
@@ -68,7 +72,7 @@ const Navbar = () => {
       if (height === 0) {
         return
       }
-      const progress = ((scrollTop / height) * 100).toFixed()
+      const progress = Number(((scrollTop / height) * 100).toFixed())
 
       progressEl.value = progress
 
@@ -85,8 +89,7 @@ const Navbar = () => {
       as="nav"
       className={showBorder && styles.hasBorder}
       fixed="top"
-      transparent
-    >
+      transparent>
       <Container>
         <NavbarBrand>
           <NavbarItem as="a" href="https://pingcap.com" target="_blank">
@@ -107,47 +110,48 @@ const Navbar = () => {
         </NavbarBrand>
         <NavbarMenu active={burgerActive}>
           <NavbarStart>
-            <NavbarItem as={Link} className={styles.main} to="/tidb/stable">
+            <NavbarItem
+              // @ts-ignore
+              as={Link}
+              className={styles.main}
+              to="/tidb/stable">
               <FormattedMessage id="navbar.tidb" />
             </NavbarItem>
-
             {/* <NavbarItem as={Link} className={styles.main} to="/tools">
               <FormattedMessage id="navbar.tools" />
             </NavbarItem> */}
-
             {locale === 'en' && (
               <NavbarItem
+                // @ts-ignore
                 as={Link}
                 className={styles.main}
-                to="/tidbcloud/public-preview"
-              >
+                to="/tidbcloud/public-preview">
                 <FormattedMessage id="navbar.cloud" />
               </NavbarItem>
             )}
-
-            <NavbarItem as={Link} className={styles.main} to="/appdev/dev">
+            <NavbarItem
+              // @ts-ignore
+              as={Link}
+              className={styles.main}
+              to="/appdev/dev">
               <FormattedMessage id="navbar.appdev" />
             </NavbarItem>
-
             <NavbarItem
               className={styles.main}
               href={
                 locale === 'en'
                   ? 'https://en.pingcap.com/download'
                   : 'https://pingcap.com/zh/product#SelectProduct'
-              }
-            >
+              }>
               <FormattedMessage id="navbar.download" />
             </NavbarItem>
-
             <NavbarItem
               className={styles.main}
               href={
                 locale === 'en'
                   ? 'https://en.pingcap.com/contact-us/'
                   : 'https://pingcap.com/zh/contact/'
-              }
-            >
+              }>
               <FormattedMessage id="navbar.contactUs" />
             </NavbarItem>
           </NavbarStart>
@@ -164,8 +168,7 @@ const Navbar = () => {
                     styles.langItem,
                     enDisabled && styles.disabled
                   )}
-                  onClick={() => !enDisabled && changeLocale('en')}
-                >
+                  onClick={() => !enDisabled && changeLocale('en')}>
                   {enDisabled ? (
                     <FormattedMessage id="lang.cannotswitch" />
                   ) : (
@@ -178,8 +181,7 @@ const Navbar = () => {
                     styles.langItem,
                     zhDisabled && styles.disabled
                   )}
-                  onClick={() => !zhDisabled && changeLocale('zh')}
-                >
+                  onClick={() => !zhDisabled && changeLocale('zh')}>
                   {zhDisabled ? (
                     <FormattedMessage
                       id={
@@ -215,5 +217,3 @@ const Navbar = () => {
     </BulmaNavbar>
   )
 }
-
-export default Navbar

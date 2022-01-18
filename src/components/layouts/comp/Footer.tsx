@@ -1,4 +1,16 @@
-import * as styles from './footer.module.scss'
+import {
+  annotations,
+  clicked,
+  column,
+  copyright,
+  displayed,
+  footer,
+  items,
+  logo,
+  title,
+  spread as spreadStyle,
+  socials,
+} from './footer.module.scss'
 
 import {
   Footer as BulmaFooter,
@@ -9,16 +21,16 @@ import {
   Title,
 } from '@seagreenio/react-bulma'
 import { Link, useIntl } from 'gatsby-plugin-react-intl'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { en, zh } from 'data/footer'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Socials from './socials'
+import Socials from '../../socials'
 import clsx from 'clsx'
 
-const Footer = () => {
+export function Footer() {
   const { locale } = useIntl()
-  const [spread, setSpread] = useState(-1)
+  const [spread, setSpread] = useState<number | undefined>(undefined)
 
   const { FooterLogoSVG } = useStaticQuery(graphql`
     query {
@@ -29,42 +41,32 @@ const Footer = () => {
   `)
   const footerColumns = locale === 'zh' ? zh : en
 
-  const handleSpreadItems = index => () => {
+  const handleSpreadItems = (index: number) => () => {
     const screenWidth = window.screen.width
     if (screenWidth > 768) {
       return
     }
 
-    setSpread(spread === index ? -1 : index)
+    setSpread(spread === index ? undefined : index)
   }
 
   return (
-    <BulmaFooter className={styles.footer}>
+    <BulmaFooter className={footer}>
       <Container>
         <Columns>
           {footerColumns.map((column, index) => (
             <Column key={column.name}>
               <Title
-                className={styles.title}
+                className={title}
                 size={6}
-                onClick={handleSpreadItems(index)}
-              >
+                onClick={handleSpreadItems(index)}>
                 {column.name}
                 <span
-                  className={clsx(
-                    styles.spread,
-                    index === spread && styles.clicked
-                  )}
-                >
+                  className={clsx(spreadStyle, index === spread && clicked)}>
                   <Icon name="mdi mdi-plus" />
                 </span>
               </Title>
-              <ul
-                className={clsx(
-                  styles.items,
-                  index === spread && styles.displayed
-                )}
-              >
+              <ul className={clsx(items, index === spread && displayed)}>
                 {column.items.map(item => (
                   <li key={item.name}>
                     {item.url.startsWith('/') ? (
@@ -81,30 +83,24 @@ const Footer = () => {
           ))}
 
           <Column>
-            <Columns className={styles.socials} multiline>
+            <Columns className={socials} multiline>
               <Socials
-                className={clsx('column is-4', styles.column)}
+                className={clsx('column is-4', column)}
                 locale={locale}
               />
             </Columns>
           </Column>
         </Columns>
 
-        <div className={styles.annotations}>
-          <div className={styles.copyright}>
+        <div className={annotations}>
+          <div className={copyright}>
             ©{new Date().getFullYear()} PingCAP. All Rights Reserved.
           </div>
           <a href="https://pingcap.com" target="_blank" rel="noreferrer">
-            <img
-              className={styles.logo}
-              src={FooterLogoSVG.publicURL}
-              alt="PingCAP"
-            />
+            <img className={logo} src={FooterLogoSVG.publicURL} alt="PingCAP" />
           </a>
         </div>
       </Container>
     </BulmaFooter>
   )
 }
-
-export default Footer

@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Loading } from 'components/Loading'
 import { SearchResult } from 'components/search/Result'
-import Seo from 'components/seo'
+import { Seo } from 'components/Seo'
 import { algoliaClient } from 'lib/algolia'
 import clsx from 'clsx'
 import { useLocation } from '@reach/router'
