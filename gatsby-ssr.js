@@ -23,7 +23,7 @@ const script = `if (Promise == null || Promise.allSettled == null) {
   const div = document.createElement('div')
   div.classList.add('notification', 'is-danger', 'is-light')
   div.style = 'position: fixed; top: 0; left: 0; width: 100%;text-align:center; z-index: 9999'
-  div.innerText = 'Your current browser is not supported. Please use the latest version of Chrome or Firefox.'
+  div.innerText = /^\\/?zh/.exec(location.pathname) ? '当前浏览器不受支持，请使用最新版本的 Chrome 或者 Firefox' : 'Your current browser is not supported. Please use the latest version of Chrome or Firefox.'
   document.body.appendChild(div)
 }`
 
