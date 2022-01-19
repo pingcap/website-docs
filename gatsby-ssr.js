@@ -19,7 +19,7 @@ export const onPreRenderHTML = ({ getHeadComponents }) => {
 }
 
 // TODO: remove after we staticize everything
-const script = `if (Promise == null || Promise.allSetled == null) {
+const script = `if (Promise == null || Promise.allSettled == null) {
   const div = document.createElement('div')
   div.classList.add('notification', 'is-danger', 'is-light')
   div.style = 'position: fixed; top: 0; left: 0; width: 100%;text-align:center; z-index: 9999'
