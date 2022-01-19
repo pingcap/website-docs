@@ -25,7 +25,7 @@ export function genContentFromOutline(repo, from, to) {
   )
 
   function recurAppendDocs(list) {
-    list.children.forEach((listItem) => {
+    list.children.forEach(listItem => {
       if (listItem.type === 'list') {
         recurAppendDocs(listItem)
       } else {
@@ -42,7 +42,9 @@ export function genContentFromOutline(repo, from, to) {
                     break
                   }
 
-                  const rsPath = path.join(path.dirname(from), repo, url)
+                  const rsPath = path
+                    .join(path.dirname(from), repo, url)
+                    .split('#')[0]
                   sig.info('Read', rsPath)
                   const file = replaceCopyable(
                     replaceImagePath(
@@ -80,7 +82,7 @@ export function genContentFromOutline(repo, from, to) {
     }
 
     const tree = fromMarkdown(data)
-    const list = tree.children.find((d) => d.type === 'list')
+    const list = tree.children.find(d => d.type === 'list')
 
     recurAppendDocs(list)
   })

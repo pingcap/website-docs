@@ -183,7 +183,8 @@ export function gen(argv) {
     sig.start('Clone', repoDest, '...')
 
     execSync(
-      `git clone https://github.com/${repo}.git ${repoDest} --branch ${ref} --depth 1`
+      `git clone git@github.com:${repo}.git ${repoDest} --branch ${ref} --depth 1`,
+      { stdio: 'inherit' }
     )
   }
 
