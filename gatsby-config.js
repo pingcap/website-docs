@@ -77,13 +77,26 @@ module.exports = {
       resolve: `gatsby-plugin-sass`,
       options: {
         useResolveUrlLoader: true,
+        cssLoaderOptions: {
+          modules: {
+            localIdentName:
+              process.env.NODE_ENV === 'production'
+                ? '[hash:base64:8]'
+                : '[path][name]__[local]--[hash:base64:5]',
+          },
+        },
       },
     },
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true,
-        ignore: ['/doc.scss', '/userFeedback.scss', 'github-markdown-css'],
+        ignore: [
+          '/doc.scss',
+          '/userFeedback.scss',
+          'github-markdown-css',
+          `.module.scss`,
+        ],
         purgeCSSOptions: {
           content: [
             `${__dirname}/gatsby/**/*.js`,

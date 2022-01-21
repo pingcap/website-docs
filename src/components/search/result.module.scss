@@ -1,0 +1,54 @@
+@import '../../styles/common';
+
+.search-result {
+  min-height: 768px;
+}
+
+.counts {
+  color: $B4;
+  opacity: 0.5;
+}
+
+.result-list {
+  margin: 2rem 0;
+}
+
+.item {
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .title {
+    color: $B3;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    font-size: 1.25rem;
+    line-height: 1.125;
+  }
+
+  .url,
+  .content {
+    color: $F2;
+    padding-bottom: 1rem;
+  }
+
+  a.url:hover {
+    text-decoration: underline;
+  }
+}
+
+.no-result {
+  p {
+    margin: 1rem 0;
+  }
+
+  ul.tips {
+    list-style: inside;
+  }
+}
+
+:global(.algolia-docsearch-suggestion--highlight) {
+  color: $B1;
+}
