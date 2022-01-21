@@ -1,12 +1,24 @@
-import * as Shortcodes from '../components/shortcodes'
+import { Important } from './shortcodes'
 
 import { FormattedMessage } from 'react-intl'
 import { Link } from 'gatsby-plugin-react-intl'
-import PropTypes from 'prop-types'
-import React from 'react'
 import { deprecated } from 'lib/version'
 
-const DeprecationNotice = ({ name, docVersionStable, versions }) => {
+interface Props {
+  name: string
+  docVersionStable: {
+    doc: keyof typeof deprecated
+    version: string
+    stable: string
+  }
+  versions: string[]
+}
+
+export const DeprecationNotice = ({
+  name,
+  docVersionStable,
+  versions,
+}: Props) => {
   const { doc, version, stable: stableVersion } = docVersionStable
 
   const showNoitce = deprecated[doc].includes(version)
@@ -17,7 +29,7 @@ const DeprecationNotice = ({ name, docVersionStable, versions }) => {
   return (
     <>
       {showNoitce && (
-        <Shortcodes.Important>
+        <Important>
           <p>
             <FormattedMessage
               id={`doc.deprecation.${doc}.firstContext`}
@@ -39,16 +51,8 @@ const DeprecationNotice = ({ name, docVersionStable, versions }) => {
               }}
             />
           </div>
-        </Shortcodes.Important>
+        </Important>
       )}
     </>
   )
 }
-
-DeprecationNotice.propTypes = {
-  name: PropTypes.string.isRequired,
-  docVersionStable: PropTypes.object.isRequired,
-  versions: PropTypes.array,
-}
-
-export default DeprecationNotice

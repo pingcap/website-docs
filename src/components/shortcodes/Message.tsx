@@ -43,17 +43,8 @@ const Message = ({ type, icon, title, children }: Props) => (
       <span className={messageIcon}>{icon}</span>
       <span>{title}</span>
     </div>
-    <div className={messageText}>{children}</div>
+    <div>{children}</div>
   </div>
-)
-
-export const Error: FC = ({ children }) => (
-  <Message
-    type="error"
-    icon={<Icon name="mdi mdi-close-circle" />}
-    title={<FormattedMessage id="shortcodes.error" />}>
-    {children}
-  </Message>
 )
 
 export const Important: FC = ({ children }) => (

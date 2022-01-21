@@ -11,7 +11,7 @@ import replaceInternalHref, {
 } from '../lib/replaceInternalHref'
 import { setDocData, setDocInfo, setLangSwitchable } from '../state'
 
-import DeprecationNotice from '../components/deprecationNotice'
+import { DeprecationNotice } from '../components/DeprecationNotice'
 import { DownloadPDF } from '../components/doc/DownloadPDF'
 import { FeedbackDoc } from '../components/doc/Feedback'
 import { Improve } from '../components/doc/Improve'
