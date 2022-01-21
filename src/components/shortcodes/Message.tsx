@@ -7,7 +7,6 @@ import {
   tip,
   messageTitle,
   messageIcon,
-  messageText,
 } from './message.module.scss'
 
 import { FC, ReactNode } from 'react'
@@ -17,7 +16,6 @@ import {
   MdNotifications,
   MdOutlineWarning,
 } from 'react-icons/md'
-import { Icon } from '@seagreenio/react-bulma'
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
 
 type MessageType = 'warning' | 'error' | 'important' | 'note' | 'tip'
@@ -26,7 +24,6 @@ interface Props {
   type: MessageType
   icon: ReactNode
   title: ReactNode
-  children: ReactNode
 }
 
 const MessageClass: Record<MessageType, string> = {
@@ -37,7 +34,7 @@ const MessageClass: Record<MessageType, string> = {
   tip,
 }
 
-const Message = ({ type, icon, title, children }: Props) => (
+const Message: FC<Props> = ({ type, icon, title, children }) => (
   <div className={`${message} ${MessageClass[type]}`}>
     <div className={messageTitle}>
       <span className={messageIcon}>{icon}</span>
@@ -52,7 +49,7 @@ export const Important: FC = ({ children }) => (
     type="important"
     icon={<MdNotifications />}
     title={<FormattedMessage id="shortcodes.important" />}>
-    {children!}
+    {children}
   </Message>
 )
 
@@ -61,7 +58,7 @@ export const Warning: FC = ({ children }) => (
     type="warning"
     icon={<MdOutlineWarning />}
     title={<FormattedMessage id="shortcodes.warning" />}>
-    {children!}
+    {children}
   </Message>
 )
 
