@@ -2,10 +2,10 @@ import {
   Input as BulmaInput,
   Control,
   Field,
-  Icon,
 } from '@seagreenio/react-bulma'
 import { navigate, useIntl } from 'gatsby-plugin-react-intl'
 import { FormEvent, useCallback } from 'react'
+import { MdSearch } from 'react-icons/md/'
 
 interface Props {
   docInfo: Record<string, any>
@@ -44,7 +44,9 @@ export function SearchInput({
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
         />
-        <Icon name="mdi mdi-magnify" alignment="left" />
+        <span className="icon is-left">
+          <MdSearch />
+        </span>
       </Control>
     </Field>
   )

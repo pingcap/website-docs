@@ -11557,6 +11557,11 @@ react-hubspot-form@^1.3.7:
   dependencies:
     styled-jsx "^2.2.4"
 
+react-icons@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
+  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
+
 react-intl@^5.13.2:
   version "5.24.3"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-5.24.3.tgz#e5c929f71603f1aa04404f66205a8f55092ce964"
@@ -13816,11 +13821,6 @@ unist-builder@2.0.3, unist-builder@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/unist-builder/-/unist-builder-2.0.3.tgz#77648711b5d86af0942f334397a33c5e91516436"
   integrity sha512-f98yt5pnlMWlzP539tPc4grGMsFaQQlP/vM396b00jngsiINumNmsY8rkXjfoi1c6QaM8nQ3vaGDuoKWbe/1Uw==
-
-unist-util-flatmap@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/unist-util-flatmap/-/unist-util-flatmap-1.0.0.tgz#f914ed6b36ff040afce938d848f379f88b94b448"
-  integrity sha512-IG32jcKJlhARCYT2LsYPJWdoXYkzz3ESAdl1aa2hn9Auh+cgUmU6wgkII4yCc/1GgeWibRdELdCZh/p3QKQ1dQ==
 
 unist-util-generated@^1.0.0:
   version "1.1.6"

@@ -1,0 +1,50 @@
+@import '../../styles/common';
+
+$border-width: 5;
+
+.message {
+  margin: 1rem 0;
+  padding: 1rem;
+  color: $F2;
+}
+
+.note {
+  background: rgba($color: $B2, $alpha: 0.1);
+  border-left: #{$border-width}px solid $B2;
+}
+
+.tip {
+  background: rgba($color: $T1, $alpha: 0.1);
+  border-left: #{$border-width}px solid $success;
+}
+
+.warning {
+  background: rgba($color: $warning, $alpha: 0.1);
+  border-left: #{$border-width}px solid $warning;
+}
+
+.error {
+  background: rgba($color: $T6, $alpha: 0.1);
+  border-left: #{$border-width}px solid $danger;
+}
+
+.important {
+  background: rgba($color: $B1, $alpha: 0.1);
+  border-left: #{$border-width}px solid $B1;
+}
+
+.message-title {
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.message-icon {
+  margin-right: 0.5rem;
+  line-height: 100%;
+  vertical-align: middle;
+  svg {
+    height: 1.125rem;
+    width: 1.125rem;
+    vertical-align: -0.125rem;
+  }
+}

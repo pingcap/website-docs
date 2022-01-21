@@ -2,7 +2,6 @@ import '@mdi/font/css/materialdesignicons.min.css'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { Helmet } from 'react-helmet-async'
-import PropTypes from 'prop-types'
 
 interface Props {
   lang?: string

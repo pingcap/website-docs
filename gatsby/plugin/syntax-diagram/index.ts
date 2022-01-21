@@ -1,8 +1,8 @@
-const flatMap = require('unist-util-flatmap')
 const rr = require('@prantlf/railroad-diagrams')
 const pegjs = require('pegjs')
 const anafanafo = require('anafanafo')
 import { Root } from 'mdast'
+import visit from 'unist-util-visit'
 
 rr.Options.INTERNAL_ALIGNMENT = 'left'
 
@@ -312,32 +312,38 @@ module.exports = ({
 }: {
   markdownAST: Root
   markdownNode: { fileAbsolutePath: string }
-}) => {
-  return flatMap(markdownAST, (node: any) => {
-    if (node.type === 'code' && node.lang === 'ebnf+diagram') {
-      try {
-        /** @type {{name: string, content: RRComponent}[]} */
-        const grammar = ebnfParser.parse(node.value, {
-          context: { appendNodeToChoices, appendNodeToSequence, isRTLCapable },
-        })
-        const diagrams = grammar
-          .map(({ name, content }: any) => {
-            const diagram = new rr.Diagram(toRailroad(content)).format(2)
-            return `<dt>${name}</dt><dd>${diagram}</dd>`
-          })
-          .join('')
+}) =>
+  visit(markdownAST, (node: any) => {
+    if (Array.isArray(node.children)) {
+      node.children = node.children.flatMap((node: any) => {
+        if (node.type === 'code' && node.lang === 'ebnf+diagram') {
+          node.lang = 'ebnf'
+          try {
+            const grammar = ebnfParser.parse(node.value, {
+              context: {
+                appendNodeToChoices,
+                appendNodeToSequence,
+                isRTLCapable,
+              },
+            })
+            const diagrams = grammar
+              .map(({ name, content }: any) => {
+                const diagram = new rr.Diagram(toRailroad(content)).format(2)
+                return `<dt>${name}</dt><dd>${diagram}</dd>`
+              })
+              .join('')
 
-        node.lang = 'ebnf'
-        return [
-          { type: 'jsx', value: '<SyntaxDiagram>' },
-          { type: 'html', value: `<dl>${diagrams}</dl>` },
-          node,
-          { type: 'jsx', value: '</SyntaxDiagram>' },
-        ]
-      } catch (e) {
-        console.error('invalid EBNF', markdownNode.fileAbsolutePath)
-      }
+            return [
+              { type: 'jsx', value: '<SyntaxDiagram>' },
+              { type: 'html', value: `<dl>${diagrams}</dl>` },
+              node,
+              { type: 'jsx', value: '</SyntaxDiagram>' },
+            ]
+          } catch (e) {
+            console.error('invalid EBNF', markdownNode.fileAbsolutePath)
+          }
+        }
+        return node
+      })
     }
-    return [node]
   })
-}
