@@ -1,16 +1,16 @@
-@import '../common';
+@import '../../styles/common';
 
-.PingCAP-Doc-syntax-diagram-root {
+.root {
   background: $M2;
 }
 
-.PingCAP-Doc-syntax-diagram-toolbar {
+.toolbar {
   button {
     height: $size-3;
   }
 }
 
-.PingCAP-Doc-syntax-diagram-container {
+.container {
   $stroke: #0e2336;
 
   padding: 0 1rem;
@@ -47,16 +47,18 @@
     stroke: $stroke;
   }
 
-  .start-end {
-    fill: $stroke;
-  }
-
-  .terminal {
-    rect {
-      fill: #d0e2f3;
+  :global {
+    .start-end {
+      fill: $stroke;
     }
-    text {
-      font-weight: bold;
+
+    .terminal {
+      rect {
+        fill: #d0e2f3;
+      }
+      text {
+        font-weight: bold;
+      }
     }
   }
 }
