@@ -6,8 +6,8 @@ import { CSSProperties } from 'react'
 
 interface Props {
   wholeScreen?: boolean
-  stretched: boolean
-  imgProps: Record<string, any>
+  stretched?: boolean
+  imgProps?: Record<string, any>
   style?: CSSProperties
 }
 

@@ -9,6 +9,12 @@
   align-items: center;
 }
 
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content
+  }
+}
+
 // Use in navbar and footer item
 @mixin has-item-active($bottom: false) {
   position: relative;

@@ -10,7 +10,8 @@ export const DownloadPDF = ({ downloadURL }: Props) => {
       className="doc-help-link download-pdf"
       href={`https://download.pingcap.org/${downloadURL}`}
       target="_blank"
-      rel="noreferrer">
+      rel="noreferrer"
+      download>
       <FormattedMessage id="doc.download-pdf" />
     </a>
   )

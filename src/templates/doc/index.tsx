@@ -1,28 +1,28 @@
-import '../styles/templates/doc.scss'
+import '../../styles/templates/doc.scss'
 import 'github-markdown-css/github-markdown.css'
 
-import * as Shortcodes from '../components/shortcodes'
+import * as Shortcodes from '../../components/shortcodes'
 
 import { Block, Column, Title } from '@seagreenio/react-bulma'
 import { useEffect } from 'react'
 import replaceInternalHref, {
   fullVersionMark,
   unifyAnchor,
-} from '../lib/replaceInternalHref'
-import { setDocData, setDocInfo, setLangSwitchable } from '../state'
+} from '../../lib/replaceInternalHref'
+import { setDocData, setDocInfo, setLangSwitchable } from '../../state'
 
-import { DeprecationNotice } from '../components/DeprecationNotice'
-import { DownloadPDF } from '../components/doc/DownloadPDF'
-import { FeedbackDoc } from '../components/doc/Feedback'
-import { Improve } from '../components/doc/Improve'
+import { DeprecationNotice } from './component/DeprecationNotice'
+import { DownloadPDF } from './component/DownloadPDF'
+import { FeedbackDoc } from './component/Feedback'
+import { Improve } from './component/Improve'
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
-import GitCommitInfo from '../components/gitCommitInfo'
+import GitCommitInfo from '../../components/gitCommitInfo'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { Seo } from '../components/Seo'
-import UserFeedback from '../components/userFeedback'
+import { Seo } from '../../components/Seo'
+import { UserFeedback } from './component/UserFeedback'
 import { graphql } from 'gatsby'
-import optimizeBlockquote from '../lib/optimizeBlockquote'
+import optimizeBlockquote from '../../lib/optimizeBlockquote'
 import { useDispatch } from 'react-redux'
 import { useLocation } from '@reach/router'
 
@@ -33,7 +33,6 @@ const Doc = ({
     ref,
     lang,
     realPath,
-    pathWithoutVersion,
     docVersionStable,
     langSwitchable,
     downloadURL,

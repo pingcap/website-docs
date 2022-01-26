@@ -1,7 +1,7 @@
-import { Important } from './shortcodes'
+import { Important } from 'components/shortcodes'
 
 import { FormattedMessage } from 'react-intl'
-import { Link } from 'gatsby-plugin-react-intl'
+import { Link } from 'gatsby-plugin-react-i18next'
 import { deprecated } from 'lib/version'
 
 interface Props {

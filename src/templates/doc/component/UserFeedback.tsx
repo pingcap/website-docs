@@ -1,18 +1,35 @@
-import '../styles/components/userFeedback.scss'
+import {
+  closeIcon,
+  feedbackPrompt,
+  feedbackHeader,
+  feedbackTitle,
+  feedbackBody,
+  feedbackForm,
+  thumbs,
+  thumb,
+} from './user-feedback.module.scss'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { FormattedMessage } from 'react-intl'
 import HubspotForm from 'react-hubspot-form'
-import { Loading } from '../components/Loading'
+import { Loading } from 'components/Loading'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
+import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi'
 
-const UserFeedback = ({ title, locale }) => {
+import { Locale } from 'typing'
+
+interface Props {
+  title: string
+  locale: Locale
+}
+
+export function UserFeedback({ title, locale }: Props) {
   const [showCloseBtn, setShowCloseBtn] = useState(false)
   const [showFeedbackBody, setShowFeedbackBody] = useState(false)
   const [showYesFollowUp, setShowYesFollowUp] = useState('unset')
 
-  const setDocHelpful = (docTitle, isHelpful) => () => {
+  const setDocHelpful = (docTitle: string, isHelpful: boolean) => () => {
     trackCustomEvent({
       category: isHelpful ? `doc-${locale}-useful` : `doc-${locale}-useless`,
       action: 'click',
@@ -39,54 +56,46 @@ const UserFeedback = ({ title, locale }) => {
   }
 
   return (
-    <section className="PingCAP-UserFeedback feedback-prompt">
-      <div className="feedback-header">
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+    <section className={feedbackPrompt}>
+      <div className={feedbackHeader}>
         <div
-          className="feedback-title"
+          className={feedbackTitle}
           onClick={showThumbs}
-          onKeyDown={showThumbs}
-        >
+          onKeyDown={showThumbs}>
           <FormattedMessage id="docHelpful.header" />
         </div>
         {showCloseBtn && (
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-          <div
-            className="close-icon"
+          <button
+            className={closeIcon}
             onClick={closeFeedback}
-            onKeyDown={closeFeedback}
-          >
+            onKeyDown={closeFeedback}>
             x
-          </div>
+          </button>
         )}
       </div>
       {showFeedbackBody && (
-        <div className="feedback-body">
+        <div className={feedbackBody}>
           {showYesFollowUp === 'unset' && (
-            <div className="thumbs">
-              <div
-                role="button"
-                tabIndex={0}
-                className="thumb thumb-up"
+            <div className={thumbs}>
+              <button
+                className={thumb}
                 onClick={setDocHelpful(title, true)}
-                onKeyDown={setDocHelpful(title, true)}
-              >
-                <FormattedMessage id="docHelpful.thumbUp" />
-              </div>
-              <div
-                role="button"
-                tabIndex={0}
-                className="thumb thumb-down"
+                onKeyDown={setDocHelpful(title, true)}>
+                <FiThumbsUp />
+                <span><FormattedMessage id="docHelpful.thumbUp" /></span>
+              </button>
+              <button
+                className={thumb}
                 onClick={setDocHelpful(title, false)}
-                onKeyDown={setDocHelpful(title, false)}
-              >
-                <FormattedMessage id="docHelpful.thumbDown" />
-              </div>
+                onKeyDown={setDocHelpful(title, false)}>
+                <FiThumbsDown />
+                <span><FormattedMessage id="docHelpful.thumbDown" /></span>
+              </button>
             </div>
           )}
 
           {showYesFollowUp !== 'unset' && (
-            <div className="feedback-form">
+            <div className={feedbackForm}>
               <HubspotForm
                 portalId="4466002"
                 formId={`${
@@ -107,5 +116,3 @@ const UserFeedback = ({ title, locale }) => {
     </section>
   )
 }
-
-export default UserFeedback

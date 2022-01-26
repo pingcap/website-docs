@@ -11,7 +11,6 @@ import {
   NavbarLink,
   NavbarMenu,
   NavbarStart,
-  NavbarItemProps,
 } from '@seagreenio/react-bulma'
 import {
   FormattedMessage,
@@ -19,7 +18,7 @@ import {
   changeLocale,
   useIntl,
 } from 'gatsby-plugin-react-intl'
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 

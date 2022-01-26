@@ -1,22 +1,46 @@
-const nPath = require('path')
-const fs = require('fs')
-const {
+import { resolve, join } from 'path'
+import { existsSync } from 'fs'
+
+import type { CreatePagesArgs } from 'gatsby'
+import {
   getStable,
   renameVersionByDoc,
   replacePath,
   genTOCSlug,
   genPDFDownloadURL,
   getRepo,
-} = require('./utils')
-const flatten = require('flat')
+} from './utils'
+import en from '../src/intl/en.json'
+import zh from '../src/intl/zh.json'
 
-const messages = {
-  en: flatten(require('../src/intl/en.json')),
-  zh: flatten(require('../src/intl/zh.json')),
+const flattenMessages = (nestedMessages: any, prefix = '') => {
+  if (nestedMessages === null) {
+    return {}
+  }
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    const value = nestedMessages[key]
+    const prefixedKey = prefix ? `${prefix}.${key}` : key
+
+    if (typeof value === 'string') {
+      Object.assign(messages, { [prefixedKey]: value })
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey))
+    }
+
+    return messages
+  }, {})
 }
 
-const createDocs = async ({ graphql, createPage, createRedirect }) => {
-  const template = nPath.resolve(__dirname, '../src/templates/doc.js')
+const messages = {
+  en: flattenMessages(en),
+  zh: flattenMessages(zh),
+}
+
+export const createDocs = async ({
+  actions: { createPage, createRedirect },
+  graphql,
+}: CreatePagesArgs) => {
+  const template = resolve(__dirname, '../src/templates/doc/index.tsx')
 
   const docs = await graphql(`
     {
@@ -66,11 +90,11 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
       stable: getStable(doc),
     })
 
-    const filePathInDiffLang = nPath.resolve(
+    const filePathInDiffLang = resolve(
       __dirname,
       `../${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath.slice(3)}`
     )
-    node.langSwitchable = fs.existsSync(filePathInDiffLang)
+    node.langSwitchable = existsSync(filePathInDiffLang)
 
     node.tocSlug = genTOCSlug(node.slug)
     node.downloadURL = genPDFDownloadURL(slug, lang)
@@ -80,7 +104,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
 
   const versionsMap = nodes.reduce(
     (acc, { lang, version, repo, pathWithoutVersion }) => {
-      const key = nPath.join(repo, pathWithoutVersion)
+      const key = join(repo, pathWithoutVersion)
       const arr = acc[lang][key]
 
       if (arr) {
@@ -138,7 +162,7 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
         langSwitchable,
         tocSlug,
         downloadURL,
-        versions: versionsMap[lang][nPath.join(repo, pathWithoutVersion)],
+        versions: versionsMap[lang][join(repo, pathWithoutVersion)],
       },
     })
 
@@ -154,5 +178,3 @@ const createDocs = async ({ graphql, createPage, createRedirect }) => {
     }
   })
 }
-
-module.exports = createDocs

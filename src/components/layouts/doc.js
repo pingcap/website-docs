@@ -2,7 +2,6 @@ import { Block, Columns } from '@seagreenio/react-bulma'
 
 import Default from './default'
 import PropTypes from 'prop-types'
-import React from 'react'
 import Toc from 'components/toc'
 import VersionSwitcher from 'components/versionSwitcher'
 import { useSelector } from 'react-redux'

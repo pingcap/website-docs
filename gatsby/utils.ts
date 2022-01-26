@@ -1,18 +1,12 @@
-const fs = require('fs')
-const path = require('path')
+import config from '../docs.json'
 
-const config = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../docs.json'))
-)
-
-exports.getRepo = function (doc, lang) {
+export function getRepo(doc, lang) {
   return config.docs[doc].languages[lang].repo
 }
 
-function getStable(doc) {
+export function getStable(doc) {
   return config.docs[doc].stable
 }
-exports.getStable = getStable
 
 function renameVersion(version, stable) {
   switch (version) {
@@ -25,7 +19,7 @@ function renameVersion(version, stable) {
   }
 }
 
-function renameVersionByDoc(doc, version) {
+export function renameVersionByDoc(doc, version) {
   switch (doc) {
     case 'tidb':
     case 'tidb-data-migration':
@@ -36,7 +30,6 @@ function renameVersionByDoc(doc, version) {
       return 'public-preview'
   }
 }
-exports.renameVersionByDoc = renameVersionByDoc
 
 function genDocCategory(slug, separator = '/') {
   const [name, branch] = slug.split('/')
@@ -44,11 +37,11 @@ function genDocCategory(slug, separator = '/') {
   return `${name}${separator}${renameVersionByDoc(name, branch)}`
 }
 
-exports.genTOCSlug = function (slug) {
+export function genTOCSlug(slug) {
   return `${slug.split('/').slice(0, 3).join('/')}/TOC`
 }
 
-exports.genPDFDownloadURL = function (slug, lang) {
+export function genPDFDownloadURL(slug, lang) {
   return `${genDocCategory(slug, '-')}-${lang}-manual.pdf`
 }
 
@@ -61,7 +54,7 @@ exports.genPDFDownloadURL = function (slug, lang) {
  * @param {string} pathWithoutVersion
  * @returns {string} - Replaced path.
  */
-exports.replacePath = function (slug, name, lang, pathWithoutVersion) {
+export function replacePath(slug, name, lang, pathWithoutVersion) {
   const docPath = genDocCategory(slug)
   lang = lang === 'en' ? '' : '/' + lang
 

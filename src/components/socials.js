@@ -1,7 +1,6 @@
 import { en, zh } from '../data/socials'
 
 import PropTypes from 'prop-types'
-import React from 'react'
 import clsx from 'clsx'
 
 const Socials = ({ locale, className }) => {
@@ -10,7 +9,7 @@ const Socials = ({ locale, className }) => {
   return (
     <>
       {data &&
-        data.map((social) => (
+        data.map(social => (
           // eslint-disable-next-line jsx-a11y/anchor-has-content
           <a
             key={social.name}

@@ -1,6 +1,6 @@
 @import 'styles/common';
 
-.hasBorder {
+.has-border {
   border-bottom: 1px solid $T2;
 }
 
@@ -15,7 +15,7 @@
   }
 }
 
-.langSwitch {
+.lang-switch {
   &:after {
     border-color: $primary;
   }
@@ -27,7 +27,7 @@
   }
 }
 
-.langItem:hover {
+.lang-item:hover {
   color: $B1 !important;
 }
 
@@ -36,7 +36,7 @@
   pointer-events: none;
 }
 
-.navbarBurger {
+.navbar-burger {
   color: $primary;
 }
 

@@ -2,7 +2,7 @@ import '../styles/pages/search.scss'
 
 import { Block, Button } from '@seagreenio/react-bulma'
 import { FormattedMessage, useIntl } from 'gatsby-plugin-react-intl'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   appdev,
   cloud,

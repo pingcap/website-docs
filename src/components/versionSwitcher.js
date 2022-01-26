@@ -11,7 +11,7 @@ import {
   Icon,
 } from '@seagreenio/react-bulma'
 import { Link, useIntl } from 'gatsby-plugin-react-intl'
-import React, { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import {
   appdev,
   cloud,

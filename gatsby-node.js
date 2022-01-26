@@ -1,9 +1,9 @@
-const createDocs = require('./create-pages/doc')
+require('ts-node').register({ transpileOnly: true })
+
+const { createDocs } = require('./gatsby/create-pages')
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions
-
-  await createDocs({ graphql, createPage, createRedirect })
+  await createDocs({ graphql, actions })
 }
 
 exports.createSchemaCustomization = ({ actions }) => {
