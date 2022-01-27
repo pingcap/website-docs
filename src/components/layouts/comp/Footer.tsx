@@ -24,6 +24,7 @@ import { Link, useIntl } from 'gatsby-plugin-react-intl'
 import { useState } from 'react'
 import { en, zh } from 'data/footer'
 import { graphql, useStaticQuery } from 'gatsby'
+import { MdAdd } from 'react-icons/md'
 
 import { Socials } from './Socials'
 import clsx from 'clsx'
@@ -64,7 +65,7 @@ export function Footer() {
                 {column.name}
                 <span
                   className={clsx(spreadStyle, index === spread && clicked)}>
-                  <Icon name="mdi mdi-plus" />
+                  <MdAdd />
                 </span>
               </Title>
               <ul className={clsx(items, index === spread && displayed)}>
