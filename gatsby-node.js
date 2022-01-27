@@ -1,9 +1,15 @@
 require('ts-node').register({ transpileOnly: true })
 
+const path = require('path')
+
 const { createDocs } = require('./gatsby/create-pages')
 
 exports.createPages = async ({ graphql, actions }) => {
   await createDocs({ graphql, actions })
+  actions.createPage({
+    path: '/search',
+    component: path.resolve(__dirname, './src/templates/search/index.tsx'),
+  })
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

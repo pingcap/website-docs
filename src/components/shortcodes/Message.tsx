@@ -1,7 +1,6 @@
 import {
   message,
   warning,
-  error,
   important,
   note,
   tip,
@@ -19,7 +18,7 @@ import {
 } from 'react-icons/md'
 import { FormattedMessage } from 'gatsby-plugin-react-intl'
 
-type MessageType = 'warning' | 'error' | 'important' | 'note' | 'tip'
+type MessageType = 'warning' | 'important' | 'note' | 'tip'
 
 interface Props {
   type: MessageType
@@ -29,7 +28,6 @@ interface Props {
 
 const MessageClass: Record<MessageType, string> = {
   warning,
-  error,
   important,
   note,
   tip,

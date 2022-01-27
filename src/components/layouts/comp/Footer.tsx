@@ -25,11 +25,12 @@ import { useState } from 'react'
 import { en, zh } from 'data/footer'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Socials from '../../socials'
+import { Socials } from './Socials'
 import clsx from 'clsx'
+import { Locale } from 'typing'
 
 export function Footer() {
-  const { locale } = useIntl()
+  const { locale } = useIntl() as { locale: Locale }
   const [spread, setSpread] = useState<number | undefined>(undefined)
 
   const { FooterLogoSVG } = useStaticQuery(graphql`

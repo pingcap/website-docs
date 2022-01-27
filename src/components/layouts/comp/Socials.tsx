@@ -1,9 +1,14 @@
-import { en, zh } from '../data/socials'
+import { en, zh } from '../../../data/socials'
 
-import PropTypes from 'prop-types'
 import clsx from 'clsx'
+import { Locale } from 'typing'
 
-const Socials = ({ locale, className }) => {
+interface Props {
+  locale: Locale
+  className?: string
+}
+
+export const Socials = ({ locale, className }: Props) => {
   const data = locale === 'en' ? en : zh
 
   return (
@@ -24,10 +29,3 @@ const Socials = ({ locale, className }) => {
     </>
   )
 }
-
-Socials.propTypes = {
-  locale: PropTypes.string.isRequired,
-  className: PropTypes.string,
-}
-
-export default Socials

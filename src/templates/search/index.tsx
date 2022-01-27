@@ -1,4 +1,4 @@
-import '../styles/pages/search.scss'
+import '../../styles/pages/search.scss'
 
 import { Block, Button } from '@seagreenio/react-bulma'
 import { FormattedMessage, useIntl } from 'gatsby-plugin-react-intl'
@@ -14,11 +14,11 @@ import {
   tidb,
   tidbStable,
 } from 'lib/version'
-import { defaultDocInfo, setLoading, setSearchValue } from '../state'
+import { defaultDocInfo, setLoading, setSearchValue } from '../../state'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Loading } from 'components/Loading'
-import { SearchResult } from 'components/search/Result'
+import { SearchResult } from 'templates/search/Result'
 import { Seo } from 'components/Seo'
 import { algoliaClient } from 'lib/algolia'
 import clsx from 'clsx'

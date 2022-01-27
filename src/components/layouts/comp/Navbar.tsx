@@ -23,7 +23,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Progress } from '@seagreenio/react-bulma'
-import { SearchInput } from '../../search/Input'
+import { SearchInput } from './Input'
 import clsx from 'clsx'
 import { setSearchValue } from 'state'
 
