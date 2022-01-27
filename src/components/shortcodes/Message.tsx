@@ -5,6 +5,7 @@ import {
   important,
   note,
   tip,
+  messageBody,
   messageTitle,
   messageIcon,
 } from './message.module.scss'
@@ -40,7 +41,7 @@ const Message: FC<Props> = ({ type, icon, title, children }) => (
       <span className={messageIcon}>{icon}</span>
       <span>{title}</span>
     </div>
-    <div>{children}</div>
+    <div className={messageBody}>{children}</div>
   </div>
 )
 

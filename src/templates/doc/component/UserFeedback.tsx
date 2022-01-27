@@ -3,7 +3,6 @@ import {
   feedbackPrompt,
   feedbackHeader,
   feedbackTitle,
-  feedbackBody,
   feedbackForm,
   thumbs,
   thumb,
@@ -74,7 +73,7 @@ export function UserFeedback({ title, locale }: Props) {
         )}
       </div>
       {showFeedbackBody && (
-        <div className={feedbackBody}>
+        <div>
           {showYesFollowUp === 'unset' && (
             <div className={thumbs}>
               <button
@@ -82,14 +81,18 @@ export function UserFeedback({ title, locale }: Props) {
                 onClick={setDocHelpful(title, true)}
                 onKeyDown={setDocHelpful(title, true)}>
                 <FiThumbsUp />
-                <span><FormattedMessage id="docHelpful.thumbUp" /></span>
+                <span>
+                  <FormattedMessage id="docHelpful.thumbUp" />
+                </span>
               </button>
               <button
                 className={thumb}
                 onClick={setDocHelpful(title, false)}
                 onKeyDown={setDocHelpful(title, false)}>
                 <FiThumbsDown />
-                <span><FormattedMessage id="docHelpful.thumbDown" /></span>
+                <span>
+                  <FormattedMessage id="docHelpful.thumbDown" />
+                </span>
               </button>
             </div>
           )}

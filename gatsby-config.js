@@ -65,6 +65,9 @@ module.exports = {
               showLineNumbers: false,
             },
           },
+          {
+            resolve: require.resolve('./gatsby/plugin/content'),
+          },
         ],
       },
     },

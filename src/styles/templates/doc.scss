@@ -206,42 +206,6 @@ $top: $navbar-height + 1rem;
     $border-width: 5;
     position: relative;
 
-    &.note {
-      background: rgba($color: $B2, $alpha: 0.1);
-      border-left: #{$border-width}px solid $B2;
-
-      &:before {
-        background: url('../../../images/blockquotes/note.svg') no-repeat;
-      }
-    }
-
-    &.warning {
-      background: rgba($color: $T6, $alpha: 0.1);
-      border-left: #{$border-width}px solid $T6;
-
-      &:before {
-        background: url('../../../images/blockquotes/warning.svg') no-repeat;
-      }
-    }
-
-    &.tip {
-      background: rgba($color: $T1, $alpha: 0.1);
-      border-left: #{$border-width}px solid $T1;
-
-      &:before {
-        background: url('../../../images/blockquotes/tip.svg') no-repeat;
-      }
-    }
-
-    &.error {
-      background: rgba($color: $danger, $alpha: 0.1);
-      border-left: #{$border-width}px solid $danger;
-
-      &:before {
-        background: url('../../../images/blockquotes/error.svg') no-repeat;
-      }
-    }
-
     margin: 1rem 0;
     padding: 1rem;
 

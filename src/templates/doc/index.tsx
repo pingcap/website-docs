@@ -62,14 +62,13 @@ const Doc = ({
   useEffect(() => {
     dispatch(setLangSwitchable(langSwitchable))
 
-    return () => dispatch(setLangSwitchable(true))
+    return () => {
+      dispatch(setLangSwitchable(true))
+    }
   }, [dispatch, langSwitchable])
 
   useEffect(() => {
     replaceInternalHref(lang, doc, version)
-
-    // TODO: remove
-    optimizeBlockquote()
 
     dispatch(
       setDocInfo({
