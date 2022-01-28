@@ -1,6 +1,4 @@
-import '../../styles/pages/search.scss'
-
-import { Block, Button } from '@seagreenio/react-bulma'
+import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage, useIntl } from 'gatsby-plugin-react-intl'
 import { useEffect, useState } from 'react'
 import {
@@ -23,6 +21,8 @@ import { Seo } from 'components/Seo'
 import { algoliaClient } from 'lib/algolia'
 import clsx from 'clsx'
 import { useLocation } from '@reach/router'
+
+import { select, optionItem, optionLabel, isActive } from './search.module.scss'
 
 const matchToVersionList = match => {
   switch (match) {
@@ -54,7 +54,7 @@ function replaceStableVersion(match) {
   }
 }
 
-const Search = () => {
+export default function Search() {
   const intl = useIntl()
   const { locale } = intl
 
@@ -170,62 +170,49 @@ const Search = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedType, selectedVersion, query])
 
-  const TypeList = () => (
-    <div className="list">
-      {docsTypesByLang.map(type => (
-        <Button
-          key={type.name}
-          color="white"
-          size="small"
-          className={clsx('item', selectedType === type.match && 'is-active')}
-          onClick={handleSetVersionList(type.match)}
-        >
-          {type.name}
-        </Button>
-      ))}
-    </div>
-  )
-
-  const VersionList = () => (
-    <div className="list">
-      {selectedVersionList.map(version => (
-        <Button
-          key={version}
-          color="white"
-          size="small"
-          className={clsx(
-            'item',
-            selectedVersion === toAlgoliaVersion(version) && 'is-active'
-          )}
-          onClick={() => setSelectedVersion(toAlgoliaVersion(version))}
-        >
-          {toAlgoliaVersion(version)}
-        </Button>
-      ))}
-    </div>
-  )
-
   return (
     <>
-      <Seo title="Search" />
-      <div className="PingCAP-Docs-Search">
-        <Block className="filter-panel">
-          <Block>
-            <div className="list-label">
+      <Seo title="Search" noindex />
+      <div>
+        <div>
+          <div className={select}>
+            <span className={optionLabel}>
               <FormattedMessage id="search.type" />
-            </div>
-            <TypeList />
-          </Block>
-          <Block>
-            <div className="list-label">
+            </span>
+
+            {docsTypesByLang.map(type => (
+              <button
+                key={type.name}
+                className={clsx(
+                  optionItem,
+                  selectedType === type.match && isActive
+                )}
+                onClick={handleSetVersionList(type.match)}>
+                {type.name}
+              </button>
+            ))}
+          </div>
+
+          <div className={select}>
+            <span className={optionLabel}>
               <FormattedMessage id="search.version" />
-            </div>
+            </span>
 
-            <VersionList />
-          </Block>
-        </Block>
+            {selectedVersionList.map(version => (
+              <button
+                key={version}
+                className={clsx(
+                  optionItem,
+                  selectedVersion === toAlgoliaVersion(version) && isActive
+                )}
+                onClick={() => setSelectedVersion(toAlgoliaVersion(version))}>
+                {toAlgoliaVersion(version)}
+              </button>
+            ))}
+          </div>
+        </div>
 
-        <Block style={{ position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
           <SearchResult results={results} searched={searched} />
           {loading && (
             <Loading
@@ -238,10 +225,8 @@ const Search = () => {
               }}
             />
           )}
-        </Block>
+        </div>
       </div>
     </>
   )
 }
-
-export default Search

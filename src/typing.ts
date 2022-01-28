@@ -1,10 +1,9 @@
-export enum Repo {
+export enum DOC {
   tidb = 'docs',
-  tidb_zh = 'docs-cn',
   dm = 'tidb-data-migration',
   operator = 'tidb-in-kubernetes',
-  appdev = 'tidbcloud',
-  dbaas = 'appdev',
+  tidbcloud = 'tidbcloud',
+  appdev = 'appdev',
 }
 
 export interface FrontMatter {

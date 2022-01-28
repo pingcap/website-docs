@@ -1,18 +1,21 @@
 import '@mdi/font/css/materialdesignicons.min.css'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { Helmet } from 'react-helmet-async'
+import { Helmet, type MetaProps, type LinkProps } from 'react-helmet-async'
+import { Locale } from 'typing'
 
 interface Props {
-  lang?: string
+  noindex?: boolean
+  lang?: Locale
   title: string
   description?: string
-  meta?: Record<string, unknown>[]
-  link?: Record<string, unknown>[]
+  meta?: MetaProps[]
+  link?: LinkProps[]
 }
 
 export function Seo({
-  lang = 'en',
+  noindex = false,
+  lang = Locale.en,
   title,
   description = '',
   meta = [],
@@ -34,6 +37,13 @@ export function Seo({
   `)
 
   const metaDescription = description || site.siteMetadata.description
+
+  if (noindex) {
+    meta.push({
+      name: 'robots',
+      content: 'noindex',
+    })
+  }
 
   return (
     <Helmet
