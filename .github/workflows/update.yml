@@ -15,11 +15,6 @@ jobs:
         if: ${{ !github.event.client_payload.sha }}
         run: exit 1
 
-      # https://github.com/gatsbyjs/gatsby/issues/11406
-      # - name: Increase file watchers
-      #   if: ${{ !env.ACT }}
-      #   run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
       # make sure there is only one workflow running
       - name: Turnstyle
         if: ${{ !env.ACT }}
