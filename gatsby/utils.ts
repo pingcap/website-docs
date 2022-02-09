@@ -35,10 +35,6 @@ export function renameVersionByDoc(doc: DOC, version: string) {
 function genDocCategory(slug: string, separator = '/') {
   const [name, branch] = slug.split('/')
 
-  if (!(name in DOC)) {
-    throw new Error(`invalid repo name ${name}`)
-  }
-
   return `${name}${separator}${renameVersionByDoc(name as DOC, branch)}`
 }
 
