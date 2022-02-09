@@ -22,7 +22,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { Seo } from '../../components/Seo'
 import { UserFeedback } from './component/UserFeedback'
 import { graphql } from 'gatsby'
-import optimizeBlockquote from '../../lib/optimizeBlockquote'
+
 import { useDispatch } from 'react-redux'
 import { useLocation } from '@reach/router'
 
@@ -177,7 +177,7 @@ const Doc = ({
         </div>
       </Column>
 
-      <UserFeedback title={frontmatter.title} lang={lang} />
+      <UserFeedback title={frontmatter.title} />
     </>
   )
 }

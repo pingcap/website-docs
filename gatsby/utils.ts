@@ -1,14 +1,15 @@
+import { DOC, Locale } from '../src/typing'
 import config from '../docs.json'
 
-export function getRepo(doc, lang) {
+export function getRepo(doc: DOC, lang: Locale) {
   return config.docs[doc].languages[lang].repo
 }
 
-export function getStable(doc) {
+export function getStable(doc: DOC) {
   return config.docs[doc].stable
 }
 
-function renameVersion(version, stable) {
+function renameVersion(version: string, stable: string) {
   switch (version) {
     case 'master':
       return 'dev'
@@ -19,7 +20,7 @@ function renameVersion(version, stable) {
   }
 }
 
-export function renameVersionByDoc(doc, version) {
+export function renameVersionByDoc(doc: DOC, version: string) {
   switch (doc) {
     case 'tidb':
     case 'tidb-data-migration':
@@ -31,17 +32,21 @@ export function renameVersionByDoc(doc, version) {
   }
 }
 
-function genDocCategory(slug, separator = '/') {
+function genDocCategory(slug: string, separator = '/') {
   const [name, branch] = slug.split('/')
 
-  return `${name}${separator}${renameVersionByDoc(name, branch)}`
+  if (!(name in DOC)) {
+    throw new Error('invalid repo name')
+  }
+
+  return `${name}${separator}${renameVersionByDoc(name as DOC, branch)}`
 }
 
-export function genTOCSlug(slug) {
+export function genTOCSlug(slug: string) {
   return `${slug.split('/').slice(0, 3).join('/')}/TOC`
 }
 
-export function genPDFDownloadURL(slug, lang) {
+export function genPDFDownloadURL(slug: string, lang: Locale) {
   return `${genDocCategory(slug, '-')}-${lang}-manual.pdf`
 }
 
@@ -54,13 +59,13 @@ export function genPDFDownloadURL(slug, lang) {
  * @param {string} pathWithoutVersion
  * @returns {string} - Replaced path.
  */
-export function replacePath(slug, name, lang, pathWithoutVersion) {
+export function replacePath(slug: string, name: string, lang: Locale, pathWithoutVersion: string) {
   const docPath = genDocCategory(slug)
-  lang = lang === 'en' ? '' : '/' + lang
+  const language = lang === 'en' ? '' : '/' + lang
 
   if (name === '_index') {
-    return `${lang}/${docPath}`
+    return `${language}/${docPath}`
   }
 
-  return `${lang}/${docPath}/${pathWithoutVersion}`
+  return `${language}/${docPath}/${pathWithoutVersion}`
 }

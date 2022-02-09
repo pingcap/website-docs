@@ -1,5 +1,5 @@
 export enum DOC {
-  tidb = 'docs',
+  tidb = 'tidb',
   dm = 'tidb-data-migration',
   operator = 'tidb-in-kubernetes',
   tidbcloud = 'tidbcloud',
