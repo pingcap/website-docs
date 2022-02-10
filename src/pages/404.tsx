@@ -1,6 +1,4 @@
-import { box } from './404.module.scss'
-
-import { Content, Title } from '@seagreenio/react-bulma'
+import { box, content, title } from './404.module.scss'
 
 import { Link } from 'gatsby-plugin-react-intl'
 import { Seo } from 'components/Seo'
@@ -9,12 +7,12 @@ const NotFoundPage = () => (
   <>
     <Seo title="404 Not Found" noindex />
     <div className={box}>
-      <Title as="h1">Sorry...404!</Title>
-      <Content>
+      <h1 className={title}>Sorry...404!</h1>
+      <main className={content}>
         The page you were looking for appears to have been moved, deleted or
         does not exist. You could go back to where you were or head straight to
         our <Link to="/">home page</Link>.
-      </Content>
+      </main>
     </div>
   </>
 )

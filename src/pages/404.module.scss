@@ -7,3 +7,11 @@
   align-items: flex-start;
   height: 50vh;
 }
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: $title-color;
+  font-weight: 600;
+  line-height: $title-lh;
+}

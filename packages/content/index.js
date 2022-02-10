@@ -34,12 +34,6 @@ function replaceCopyableStream() {
   })
 }
 
-function replaceTabsPanelStream() {
-  return replaceStream(tabsPanel, function (_, p1) {
-    return `<TabsPanel letters="${p1.replace(/"|\s/g, '')}" />\n`
-  })
-}
-
 module.exports = {
   replaceFrontMatter,
   replaceImagePath,
@@ -47,5 +41,4 @@ module.exports = {
   replaceStream,
   replaceImagePathStream,
   replaceCopyableStream,
-  replaceTabsPanelStream,
 }

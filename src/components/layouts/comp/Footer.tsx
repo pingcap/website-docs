@@ -17,7 +17,6 @@ import {
   Column,
   Columns,
   Container,
-  Icon,
   Title,
 } from '@seagreenio/react-bulma'
 import { Link, useIntl } from 'gatsby-plugin-react-intl'

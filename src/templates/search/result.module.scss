@@ -25,12 +25,12 @@
     margin-bottom: 1rem;
     font-weight: normal;
     font-size: 1.25rem;
-    line-height: 1.125;
+    line-height: $title-lh;
   }
 
   .url,
   .content {
-    color: $F2;
+    color: $text-color;
     padding-bottom: 1rem;
   }
 

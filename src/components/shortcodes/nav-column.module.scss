@@ -1,4 +1,14 @@
-.column ul {
-  list-style: none !important;
-  padding: 0 !important;
+@use 'sass:math';
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.column {
+  ul {
+    list-style: none !important;
+    padding: 0 !important;
+  }
 }

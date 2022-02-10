@@ -2,7 +2,6 @@ import { genDest, imageCDNs, retrieveAllMDs } from './utils.js'
 import {
   replaceCopyableStream,
   replaceImagePathStream,
-  replaceTabsPanelStream,
 } from '@pingcap/docs-content'
 
 import { execSync } from 'child_process'
@@ -18,7 +17,6 @@ function genOptions(repo, config, dryRun) {
     pipelines: [
       () => replaceImagePathStream(imageCDNs[repo.split('/')[1]]),
       replaceCopyableStream,
-      replaceTabsPanelStream,
     ],
     dryRun,
   }

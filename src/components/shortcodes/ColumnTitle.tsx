@@ -1,8 +1,6 @@
-import { Title } from '@seagreenio/react-bulma'
+import { title } from './column-title.module.scss'
 import { FC } from 'react'
 
 export const ColumnTitle: FC = ({ children }) => (
-  <Title className="has-text-primary mb-3" size={5}>
-    {children}
-  </Title>
+  <h5 className={title}>{children}</h5>
 )
