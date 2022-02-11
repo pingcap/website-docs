@@ -1,3 +1,5 @@
+@import '../../styles/common';
+
 ul.tabs {
   display: flex;
   padding-left: 0;
@@ -5,6 +7,8 @@ ul.tabs {
   white-space: nowrap;
 
   li {
+    // could be used as anchor
+    scroll-margin-top: $navbar-height;
     list-style: none;
     border-color: #dbdbdb;
     & + li {

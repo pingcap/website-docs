@@ -13,18 +13,20 @@ export function SimpleTab({
   const [activeTab, setActiveTab] = useState(0)
 
   useEffect(() => {
-    setActiveTab(
-      children.findIndex(
-        child => child.props.label === location.hash.slice(1)
-      ) ?? 0
+    let active = children.findIndex(
+      child => child.props.label === location.hash.slice(1)
     )
+    if (active === -1) {
+      active = 0
+    }
+    setActiveTab(active)
   }, [location.hash, children])
 
   return (
     <>
       <ul className={tabs}>
         {children.map((child, index) => (
-          <li key={child.props.label}>
+          <li key={child.props.label} id={child.props.label}>
             <a
               href={'#' + child.props.label}
               className={clsx(activeTab === index && active)}>
