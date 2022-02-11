@@ -6,7 +6,7 @@ module.exports = {
     description:
       'Browse documentation about TiDB and its ecosystem, including TiDB Operator, TiDB Data Migration, Database Tools, TiUP, etc.',
     author: '@PingCAP',
-    siteUrl: 'https://docs.pingcap.com',
+    siteUrl: 'https://docs-zh-preview.netlify.app/',
   },
   jsxRuntime: 'automatic',
   plugins: [
@@ -123,8 +123,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://docs.pingcap.com',
-        sitemap: 'https://docs.pingcap.com/sitemap.xml',
+        host: 'https://docs-zh-preview.netlify.app/',
+        sitemap: 'https://docs-zh-preview.netlify.app/sitemap/index.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
