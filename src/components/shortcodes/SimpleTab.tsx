@@ -1,28 +1,42 @@
-import { tabs } from './simple-tab.module.scss'
+import { tabs, active, hidden } from './simple-tab.module.scss'
 
-import { ReactElement, useState } from 'react'
-
-import { Tabs } from '@seagreenio/react-bulma'
+import { ReactElement, useEffect, useState } from 'react'
+import { useLocation } from '@reach/router'
 import clsx from 'clsx'
 
-export function SimpleTab({ children }: { children: ReactElement[] }) {
+export function SimpleTab({
+  children,
+}: {
+  children: ReactElement<{ label: string; children: ReactElement[] }>[]
+}) {
+  const location = useLocation()
   const [activeTab, setActiveTab] = useState(0)
+
+  useEffect(() => {
+    setActiveTab(
+      children.findIndex(
+        child => child.props.label === location.hash.slice(1)
+      ) ?? 0
+    )
+  }, [location.hash, children])
 
   return (
     <>
-      <Tabs className={tabs} boxed>
+      <ul className={tabs}>
         {children.map((child, index) => (
-          // eslint-disable-next-line
-          <li
-            key={child.props.label}
-            className={clsx(activeTab === index && 'is-active')}
-            onClick={() => setActiveTab(index)}>
-            <a href={'#' + child.props.label}>{child.props.label}</a>
+          <li key={child.props.label}>
+            <a
+              href={'#' + child.props.label}
+              className={clsx(activeTab === index && active)}>
+              {child.props.label}
+            </a>
           </li>
         ))}
-      </Tabs>
+      </ul>
       {children.map((child, index) => (
-        <div className={clsx(activeTab !== index && 'is-hidden')}>
+        <div
+          key={child.props.label}
+          className={clsx(activeTab !== index && hidden)}>
           {child.props.children}
         </div>
       ))}

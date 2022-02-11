@@ -1,4 +1,3 @@
-import { Button } from '@seagreenio/react-bulma'
 import { FormattedMessage, useIntl } from 'gatsby-plugin-react-intl'
 import { useEffect, useState } from 'react'
 import {
