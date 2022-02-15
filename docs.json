@@ -37,7 +37,6 @@
       "deprecated": ["v2.1", "v3.0", "v3.1"]
     },
     "tidb-data-migration": {
-      "stable": "release-5.3",
       "languages": {
         "en": {
           "repo": "pingcap/docs-dm",
