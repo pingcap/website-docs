@@ -14,7 +14,7 @@ export function SimpleTab({
 
   useEffect(() => {
     let active = children.findIndex(
-      child => child.props.label === location.hash.slice(1)
+      child => child.props.label === decodeURIComponent(location.hash.slice(1))
     )
     if (active === -1) {
       active = 0
