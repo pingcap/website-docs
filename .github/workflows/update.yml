@@ -133,7 +133,6 @@ jobs:
           GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
         run: |
           yarn build --verbose
-          mv public/sitemap/sitemap-0.xml public/sitemap.xml
 
       - name: Deploy to LA1
         if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
