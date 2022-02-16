@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { FormattedMessage } from 'react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { wrapPathWithLang } from 'lib/utils'
@@ -43,9 +43,9 @@ const GitCommitInfo = ({ repoInfo, lang, title }) => {
             rel="noreferrer"
           >
             {title}
-          </a>{' '}
-          <FormattedMessage id="doc.latestCommit" />{' '}
-          {latestCommit.commit.author.date}:{' '}
+          </a>
+          <Trans>doc.latestCommit</Trans>
+          {latestCommit.commit.author.date}:
           <a href={latestCommit.html_url} target="_blank" rel="noreferrer">
             {latestCommit.commit.message.split('\n')[0]}
           </a>

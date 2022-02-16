@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { FormattedMessage } from 'react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 import { useLocation } from '@reach/router'
 import { wrapPathWithLang } from 'lib/utils'
 
@@ -33,7 +33,7 @@ export function FeedbackDoc({ repoInfo, lang }: Props) {
       href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${site.siteMetadata.siteUrl}${pathname})`}
       target="_blank"
       rel="noreferrer">
-      <FormattedMessage id="doc.feedback" />
+      <Trans i18nKey="doc.feedback" />
     </a>
   )
 }

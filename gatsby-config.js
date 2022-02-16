@@ -25,12 +25,35 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-react-intl`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/intl`,
-        languages: ['en', 'zh'],
-        defaultLanguage: 'en',
-        redirectDefaultLanguageToRoot: true,
+        path: `${__dirname}/locale`,
+        name: `locale`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
+        languages: [`en`, `zh`],
+        defaultLanguage: `en`,
+        redirect: false,
+        // if you are using Helmet, you must include siteUrl, and make sure you add http:https
+        siteUrl: 'https://docs.pingcap.com',
+        // you can pass any i18next options
+        i18nextOptions: {
+          interpolation: {
+            escapeValue: false, // not needed for react as it escapes by default
+          },
+          nsSeparator: false,
+        },
+        pages: [
+          {
+            matchPath:
+              '/:lang?/(tidb|tidb-data-migration|tidbcloud|tidb-in-kubernetes|appdev|)/(.*)',
+            getLanguageFromPath: true,
+          },
+        ],
       },
     },
     `gatsby-plugin-react-helmet-async`,
@@ -124,7 +147,7 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: 'https://docs.pingcap.com',
-        sitemap: 'https://docs.pingcap.com/sitemap.xml',
+        sitemap: 'https://docs.pingcap.com/sitemap/sitemap-index.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },

@@ -1,4 +1,4 @@
-import { en, zh } from '../../../data/socials'
+import { en, zh } from './socials.data'
 
 import clsx from 'clsx'
 import { Locale } from 'typing'

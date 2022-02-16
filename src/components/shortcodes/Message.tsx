@@ -16,7 +16,7 @@ import {
   MdNotifications,
   MdOutlineWarning,
 } from 'react-icons/md'
-import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 
 type MessageType = 'warning' | 'important' | 'note' | 'tip'
 
@@ -47,7 +47,7 @@ export const Important: FC = ({ children }) => (
   <Message
     type="important"
     icon={<MdNotifications />}
-    title={<FormattedMessage id="shortcodes.important" />}>
+    title={<Trans i18nKey="shortcodes.important" />}>
     {children}
   </Message>
 )
@@ -56,7 +56,7 @@ export const Warning: FC = ({ children }) => (
   <Message
     type="warning"
     icon={<MdOutlineWarning />}
-    title={<FormattedMessage id="shortcodes.warning" />}>
+    title={<Trans i18nKey="shortcodes.warning" />}>
     {children}
   </Message>
 )
@@ -65,7 +65,7 @@ export const Note: FC = ({ children }) => (
   <Message
     type="note"
     icon={<MdFlag />}
-    title={<FormattedMessage id="shortcodes.note" />}>
+    title={<Trans i18nKey="shortcodes.note" />}>
     {children}
   </Message>
 )
@@ -74,7 +74,7 @@ export const Tip: FC = ({ children }) => (
   <Message
     type="tip"
     icon={<MdAttachment />}
-    title={<FormattedMessage id="shortcodes.tip" />}>
+    title={<Trans i18nKey="shortcodes.tip" />}>
     {children}
   </Message>
 )

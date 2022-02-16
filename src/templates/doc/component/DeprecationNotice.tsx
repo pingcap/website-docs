@@ -1,7 +1,6 @@
 import { Important } from 'components/shortcodes'
 
-import { FormattedMessage } from 'react-intl'
-import { Link } from 'gatsby-plugin-react-i18next'
+import { Link, Trans } from 'gatsby-plugin-react-i18next'
 import { deprecated } from 'lib/version'
 
 interface Props {
@@ -14,13 +13,11 @@ interface Props {
   versions: string[]
 }
 
-export const DeprecationNotice = ({
+export function DeprecationNotice({
   name,
-  docVersionStable,
+  docVersionStable: { doc, version, stable: stableVersion },
   versions,
-}: Props) => {
-  const { doc, version, stable: stableVersion } = docVersionStable
-
+}: Props) {
   const showNoitce = deprecated[doc].includes(version)
   const stableDocLink = versions.includes('stable')
     ? `/${doc}/stable/${name === '_index' ? '' : name}`
@@ -31,23 +28,19 @@ export const DeprecationNotice = ({
       {showNoitce && (
         <Important>
           <p>
-            <FormattedMessage
-              id={`doc.deprecation.${doc}.firstContext`}
+            <Trans
+              i18nKey={`doc.deprecation.${doc}.firstContext`}
               values={{
                 curDocVersion: version,
               }}
             />
           </p>
           <div>
-            <FormattedMessage
-              id={`doc.deprecation.${doc}.secondContext`}
+            <Trans
+              i18nKey={`doc.deprecation.${doc}.secondContext`}
+              components={[<Link to={stableDocLink} />]}
               values={{
                 stableVersion,
-                link: (
-                  <Link to={stableDocLink}>
-                    <FormattedMessage id={`doc.deprecation.${doc}.link`} />
-                  </Link>
-                ),
               }}
             />
           </div>

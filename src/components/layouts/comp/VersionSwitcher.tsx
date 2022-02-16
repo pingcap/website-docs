@@ -1,4 +1,4 @@
-import * as styles from './versionSwitcher.module.scss'
+import * as styles from './version-switcher.module.scss'
 
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   DropdownTrigger,
   Icon,
 } from '@seagreenio/react-bulma'
-import { Link, useIntl } from 'gatsby-plugin-react-intl'
+import { Link, useI18next } from 'gatsby-plugin-react-i18next'
 import { Fragment, useEffect, useState } from 'react'
 import {
   appdev,
@@ -21,15 +21,20 @@ import {
   tidb,
 } from 'lib/version'
 
-import PropTypes from 'prop-types'
+interface Props {
+  name: string
+  docVersionStable: Record<string, any>
+  pathWithoutVersion: string
+  versions: string[]
+}
 
-const VersionSwitcher = ({
+export function VersionSwitcher({
   name,
   docVersionStable,
   pathWithoutVersion,
   versions,
-}) => {
-  const intl = useIntl()
+}: Props) {
+  const { t } = useI18next()
   const { doc, version, stable: stableVersion } = docVersionStable
 
   const [text, setText] = useState('')
@@ -80,9 +85,8 @@ const VersionSwitcher = ({
                 <DropdownItem as="div">
                   <span
                     className={styles.noExistSpan}
-                    data-tooltip={intl.formatMessage({ id: 'doc.notExist' })}
-                    data-flow="right"
-                  >
+                    data-tooltip={t('doc.notExist')}
+                    data-flow="right">
                     {renderItem(item)}
                   </span>
                 </DropdownItem>
@@ -91,8 +95,7 @@ const VersionSwitcher = ({
                   as={Link}
                   to={`/${doc}/${item}/${
                     name === '_index' ? '' : pathWithoutVersion
-                  }`}
-                >
+                  }`}>
                   {renderItem(item)}
                 </DropdownItem>
               )}
@@ -104,12 +107,3 @@ const VersionSwitcher = ({
     </Dropdown>
   )
 }
-
-VersionSwitcher.propTypes = {
-  name: PropTypes.string.isRequired,
-  docVersionStable: PropTypes.object.isRequired,
-  pathWithoutVersion: PropTypes.string.isRequired,
-  versions: PropTypes.array,
-}
-
-export default VersionSwitcher

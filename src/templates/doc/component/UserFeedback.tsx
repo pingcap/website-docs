@@ -10,7 +10,7 @@ import {
 
 import { useState } from 'react'
 
-import { FormattedMessage } from 'react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 import HubspotForm from 'react-hubspot-form'
 import { Loading } from 'components/Loading'
 import { trackCustomEvent } from 'gatsby-plugin-google-analytics'
@@ -61,7 +61,7 @@ export function UserFeedback({ title, locale }: Props) {
           className={feedbackTitle}
           onClick={showThumbs}
           onKeyDown={showThumbs}>
-          <FormattedMessage id="docHelpful.header" />
+          <Trans i18nKey="docHelpful.header" />
         </div>
         {showCloseBtn && (
           <button
@@ -82,7 +82,7 @@ export function UserFeedback({ title, locale }: Props) {
                 onKeyDown={setDocHelpful(title, true)}>
                 <FiThumbsUp />
                 <span>
-                  <FormattedMessage id="docHelpful.thumbUp" />
+                  <Trans i18nKey="docHelpful.thumbUp" />
                 </span>
               </button>
               <button
@@ -91,7 +91,7 @@ export function UserFeedback({ title, locale }: Props) {
                 onKeyDown={setDocHelpful(title, false)}>
                 <FiThumbsDown />
                 <span>
-                  <FormattedMessage id="docHelpful.thumbDown" />
+                  <Trans i18nKey="docHelpful.thumbDown" />
                 </span>
               </button>
             </div>

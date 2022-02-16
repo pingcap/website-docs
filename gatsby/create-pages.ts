@@ -10,31 +10,6 @@ import {
   genPDFDownloadURL,
   getRepo,
 } from './utils'
-import en from '../src/intl/en.json'
-import zh from '../src/intl/zh.json'
-
-const flattenMessages = (nestedMessages: any, prefix = '') => {
-  if (nestedMessages === null) {
-    return {}
-  }
-  return Object.keys(nestedMessages).reduce((messages, key) => {
-    const value = nestedMessages[key]
-    const prefixedKey = prefix ? `${prefix}.${key}` : key
-
-    if (typeof value === 'string') {
-      Object.assign(messages, { [prefixedKey]: value })
-    } else {
-      Object.assign(messages, flattenMessages(value, prefixedKey))
-    }
-
-    return messages
-  }, {})
-}
-
-const messages = {
-  en: flattenMessages(en),
-  zh: flattenMessages(zh),
-}
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
@@ -147,15 +122,6 @@ export const createDocs = async ({
         repo,
         ref,
         lang,
-        // gatsby-plugin-react-intl
-        intl: {
-          language: lang,
-          messages: messages[lang],
-          routed: lang !== 'en',
-          defaultLanguage: 'en',
-          redirectDefaultLanguageToRoot: true,
-          ignoredPaths: [],
-        },
         realPath,
         pathWithoutVersion,
         docVersionStable,

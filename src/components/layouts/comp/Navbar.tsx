@@ -12,12 +12,7 @@ import {
   NavbarMenu,
   NavbarStart,
 } from '@seagreenio/react-bulma'
-import {
-  FormattedMessage,
-  Link,
-  changeLocale,
-  useIntl,
-} from 'gatsby-plugin-react-intl'
+import { Link, Trans, useI18next } from 'gatsby-plugin-react-i18next'
 import { useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,16 +31,15 @@ export function Navbar() {
     }
   `)
 
-  const intl = useIntl()
-  const { locale } = intl
+  const { language, changeLanguage } = useI18next()
 
   const dispatch = useDispatch()
   const { docInfo, langSwitchable, searchValue } = useSelector(
     state => state
   ) as any
 
-  const enDisabled = !langSwitchable && locale === 'zh'
-  const zhDisabled = !langSwitchable && locale === 'en'
+  const enDisabled = !langSwitchable && language === 'zh'
+  const zhDisabled = !langSwitchable && language === 'en'
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
@@ -114,18 +108,15 @@ export function Navbar() {
               as={Link}
               className={styles.main}
               to="/tidb/stable">
-              <FormattedMessage id="navbar.tidb" />
+              <Trans i18nKey="navbar.tidb" />
             </NavbarItem>
-            {/* <NavbarItem as={Link} className={styles.main} to="/tools">
-              <FormattedMessage id="navbar.tools" />
-            </NavbarItem> */}
-            {locale === 'en' && (
+            {language === 'en' && (
               <NavbarItem
                 // @ts-ignore
                 as={Link}
                 className={styles.main}
                 to="/tidbcloud/public-preview">
-                <FormattedMessage id="navbar.cloud" />
+                <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
             <NavbarItem
@@ -133,32 +124,32 @@ export function Navbar() {
               as={Link}
               className={styles.main}
               to="/appdev/dev">
-              <FormattedMessage id="navbar.appdev" />
+              <Trans i18nKey="navbar.appdev" />
             </NavbarItem>
             <NavbarItem
               className={styles.main}
               href={
-                locale === 'en'
+                language === 'en'
                   ? 'https://en.pingcap.com/download'
                   : 'https://pingcap.com/zh/product#SelectProduct'
               }>
-              <FormattedMessage id="navbar.download" />
+              <Trans i18nKey="navbar.download" />
             </NavbarItem>
             <NavbarItem
               className={styles.main}
               href={
-                locale === 'en'
+                language === 'en'
                   ? 'https://en.pingcap.com/contact-us/'
                   : 'https://pingcap.com/zh/contact/'
               }>
-              <FormattedMessage id="navbar.contactUs" />
+              <Trans i18nKey="navbar.contactUs" />
             </NavbarItem>
           </NavbarStart>
 
           <NavbarEnd>
             <NavbarItem as="div" dropdown hoverable>
               <NavbarLink className={styles.langSwitch}>
-                <FormattedMessage id="lang.title" />
+                <Trans i18nKey="lang.title" />
               </NavbarLink>
 
               <NavbarDropdown boxed>
@@ -167,11 +158,11 @@ export function Navbar() {
                     styles.langItem,
                     enDisabled && styles.disabled
                   )}
-                  onClick={() => !enDisabled && changeLocale('en')}>
+                  onClick={() => !enDisabled && changeLanguage('en')}>
                   {enDisabled ? (
-                    <FormattedMessage id="lang.cannotswitch" />
+                    <Trans i18nKey="lang.cannotswitch" />
                   ) : (
-                    <FormattedMessage id="lang.en" />
+                    <Trans i18nKey="lang.en" />
                   )}
                 </NavbarItem>
 
@@ -180,17 +171,17 @@ export function Navbar() {
                     styles.langItem,
                     zhDisabled && styles.disabled
                   )}
-                  onClick={() => !zhDisabled && changeLocale('zh')}>
+                  onClick={() => !zhDisabled && changeLanguage('zh')}>
                   {zhDisabled ? (
-                    <FormattedMessage
-                      id={
+                    <Trans
+                      i18nKey={
                         docInfo.type === 'tidbcloud'
                           ? 'lang.cannotswitchtocloud'
                           : 'lang.cannotswitch'
                       }
                     />
                   ) : (
-                    <FormattedMessage id="lang.zh" />
+                    <Trans i18nKey='lang.zh' />
                   )}
                 </NavbarItem>
               </NavbarDropdown>

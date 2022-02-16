@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 
 import {
   counts,
@@ -20,8 +20,8 @@ interface Props {
 export const SearchResult = ({ results, searched }: Props) => (
   <div className={searchResult}>
     <p className={counts}>
-      <FormattedMessage
-        id="search.resultTips.counts"
+      <Trans
+        i18nKey="search.resultTips.counts"
         values={{ counts: results.length }}
       />
     </p>
@@ -71,14 +71,14 @@ export const SearchResult = ({ results, searched }: Props) => (
       {searched && results.length === 0 && (
         <>
           <p>
-            <FormattedMessage id="search.resultTips.title" />
+            <Trans i18nKey="search.resultTips.title" />
           </p>
           <ul className={tips}>
             <li>
-              <FormattedMessage id="search.resultTips.content1" />
+              <Trans i18nKey="search.resultTips.content1" />
             </li>
             <li>
-              <FormattedMessage id="search.resultTips.content2" />
+              <Trans i18nKey="search.resultTips.content2" />
             </li>
           </ul>
         </>

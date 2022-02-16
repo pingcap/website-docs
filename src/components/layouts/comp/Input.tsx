@@ -1,9 +1,5 @@
-import {
-  Input as BulmaInput,
-  Control,
-  Field,
-} from '@seagreenio/react-bulma'
-import { navigate, useIntl } from 'gatsby-plugin-react-intl'
+import { Input as BulmaInput, Control, Field } from '@seagreenio/react-bulma'
+import { useI18next } from 'gatsby-plugin-react-i18next'
 import { FormEvent, useCallback } from 'react'
 import { MdSearch } from 'react-icons/md/'
 
@@ -18,7 +14,7 @@ export function SearchInput({
   searchValue,
   setSearchValue,
 }: Props) {
-  const intl = useIntl()
+  const { t, navigate } = useI18next()
 
   const handleSearchInputKeyDown = useCallback(
     (e: FormEvent) => {
@@ -40,7 +36,7 @@ export function SearchInput({
       <Control hasIcons="left">
         <BulmaInput
           type="search"
-          placeholder={intl.formatMessage({ id: 'navbar.searchDocs' })}
+          placeholder={t('navbar.searchDocs')}
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
         />

@@ -3,7 +3,7 @@ import { Block, Columns } from '@seagreenio/react-bulma'
 import Default from './default'
 import PropTypes from 'prop-types'
 import Toc from 'components/toc'
-import VersionSwitcher from 'components/versionSwitcher'
+import { VersionSwitcher } from 'components/layouts/comp/VersionSwitcher'
 import { useSelector } from 'react-redux'
 
 const Layout = ({

@@ -1,7 +1,8 @@
 import { box, title } from './404.module.scss'
 
-import { Link } from 'gatsby-plugin-react-intl'
+import { Link } from 'gatsby-plugin-react-i18next'
 import { Seo } from 'components/Seo'
+import { graphql } from 'gatsby'
 
 const NotFoundPage = () => (
   <>
@@ -18,3 +19,17 @@ const NotFoundPage = () => (
 )
 
 export default NotFoundPage
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`

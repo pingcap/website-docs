@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 
 interface Props {
   downloadURL: string
@@ -11,6 +11,6 @@ export const DownloadPDF = ({ downloadURL }: Props) => (
     target="_blank"
     rel="noreferrer"
     download>
-    <FormattedMessage id="doc.download-pdf" />
+    <Trans i18nKey="doc.download-pdf" />
   </a>
 )

@@ -10,6 +10,10 @@ exports.createPages = async ({ graphql, actions }) => {
     path: '/search',
     component: path.resolve(__dirname, './src/templates/search/index.tsx'),
   })
+  actions.createPage({
+    path: '/404',
+    component: path.resolve(__dirname, './src/templates/404/index.tsx'),
+  })
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

@@ -15,7 +15,7 @@ import { DeprecationNotice } from './component/DeprecationNotice'
 import { DownloadPDF } from './component/DownloadPDF'
 import { FeedbackDoc } from './component/Feedback'
 import { Improve } from './component/Improve'
-import { FormattedMessage } from 'gatsby-plugin-react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 import GitCommitInfo from '../../components/gitCommitInfo'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -170,20 +170,20 @@ const Doc = ({
           </Block>
           <div className="doc-toc">
             <Title size={6} style={{ marginBottom: 0 }}>
-              <FormattedMessage id="doc.toc" />
+              <Trans i18nKey="doc.toc" />
             </Title>
             {tableOfContents.items && renderItems(tableOfContents.items)}
           </div>
         </div>
       </Column>
 
-      <UserFeedback title={frontmatter.title} locale={lang}/>
+      <UserFeedback title={frontmatter.title} locale={lang} />
     </>
   )
 }
 
 export const query = graphql`
-  query ($id: String, $tocSlug: String) {
+  query ($id: String, $tocSlug: String, $language: String!) {
     site {
       siteMetadata {
         siteUrl
@@ -201,6 +201,16 @@ export const query = graphql`
 
     toc: mdx(slug: { eq: $tocSlug }) {
       body
+    }
+
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
     }
   }
 `

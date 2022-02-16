@@ -19,18 +19,18 @@ import {
   Container,
   Title,
 } from '@seagreenio/react-bulma'
-import { Link, useIntl } from 'gatsby-plugin-react-intl'
+import { Link, useI18next } from 'gatsby-plugin-react-i18next'
 import { useState } from 'react'
-import { en, zh } from 'data/footer'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MdAdd } from 'react-icons/md'
 
+import { en, zh } from './footer.data'
 import { Socials } from './Socials'
 import clsx from 'clsx'
 import { Locale } from 'typing'
 
 export function Footer() {
-  const { locale } = useIntl() as { locale: Locale }
+  const { language } = useI18next()
   const [spread, setSpread] = useState<number | undefined>(undefined)
 
   const { FooterLogoSVG } = useStaticQuery(graphql`
@@ -40,7 +40,7 @@ export function Footer() {
       }
     }
   `)
-  const footerColumns = locale === 'zh' ? zh : en
+  const footerColumns = language === 'zh' ? zh : en
 
   const handleSpreadItems = (index: number) => () => {
     const screenWidth = window.screen.width
@@ -87,7 +87,7 @@ export function Footer() {
             <Columns className={socials} multiline>
               <Socials
                 className={clsx('column is-4', column)}
-                locale={locale}
+                locale={language as Locale}
               />
             </Columns>
           </Column>

@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'gatsby-plugin-react-intl'
+import { Trans, useI18next } from 'gatsby-plugin-react-i18next'
 import { useEffect, useState } from 'react'
 import {
   appdev,
@@ -22,6 +22,7 @@ import clsx from 'clsx'
 import { useLocation } from '@reach/router'
 
 import { select, optionItem, optionLabel, isActive } from './search.module.scss'
+import { graphql } from 'gatsby'
 
 const matchToVersionList = match => {
   switch (match) {
@@ -54,8 +55,7 @@ function replaceStableVersion(match) {
 }
 
 export default function Search() {
-  const intl = useIntl()
-  const { locale } = intl
+  const { language } = useI18next()
 
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
@@ -105,7 +105,7 @@ export default function Search() {
     ]
 
     const getDocsTypesByLang = () => {
-      switch (locale) {
+      switch (language) {
         case 'zh':
           types.push({
             name: '开发指南',
@@ -132,7 +132,7 @@ export default function Search() {
     }
 
     setDocsTypesByLang(getDocsTypesByLang())
-  }, [intl, locale])
+  }, [language])
 
   const handleSetVersionList = match => () => {
     const versionList = matchToVersionList(match)
@@ -146,7 +146,7 @@ export default function Search() {
     dispatch(setLoading(true))
 
     const index = algoliaClient.initIndex(
-      `${locale}-${selectedType}-${selectedVersion}`
+      `${language}-${selectedType}-${selectedVersion}`
     )
 
     index
@@ -176,7 +176,7 @@ export default function Search() {
         <div>
           <div className={select}>
             <span className={optionLabel}>
-              <FormattedMessage id="search.type" />
+              <Trans i18nKey="search.type" />
             </span>
 
             {docsTypesByLang.map(type => (
@@ -194,7 +194,7 @@ export default function Search() {
 
           <div className={select}>
             <span className={optionLabel}>
-              <FormattedMessage id="search.version" />
+              <Trans i18nKey="search.version" />
             </span>
 
             {selectedVersionList.map(version => (
@@ -229,3 +229,17 @@ export default function Search() {
     </>
   )
 }
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`

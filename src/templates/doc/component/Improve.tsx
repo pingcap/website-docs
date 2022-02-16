@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { Trans } from 'gatsby-plugin-react-i18next'
 import { wrapPathWithLang } from 'lib/utils'
 
 interface Props {
@@ -16,7 +16,7 @@ export function Improve({ repoInfo, lang }: Props) {
       href={`https://github.com/${repo}/edit/${ref}/${path}`}
       target="_blank"
       rel="noreferrer">
-      <FormattedMessage id="doc.improve" />
+      <Trans i18nKey="doc.improve" />
     </a>
   )
 }
