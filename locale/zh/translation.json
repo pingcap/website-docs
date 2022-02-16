@@ -50,7 +50,7 @@
     "type": "分类：",
     "version": "版本：",
     "resultTips": {
-      "counts": "共 {counts} 条搜索结果...",
+      "counts": "共 {{ counts} } 条搜索结果...",
       "title": "很抱歉，我们没有找到您期望的内容。",
       "content1": "请尝试其它搜索词，或者尝试前往 AskTUG (TiDB User Group) 进行提问。",
       "content2": "如果您想搜索英文内容，请移步至英文文档进行搜索。"
