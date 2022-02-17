@@ -24,7 +24,6 @@
     "copy-to-clipboard": "^3.3.1",
     "gatsby": "^4.4.0",
     "gatsby-plugin-google-analytics": "^4.4.0",
-    "gatsby-plugin-layout": "^3.4.0",
     "gatsby-plugin-mdx": "^3.4.0",
     "gatsby-plugin-meta-redirect": "^1.1.1",
     "gatsby-plugin-purgecss": "^6.1.0",

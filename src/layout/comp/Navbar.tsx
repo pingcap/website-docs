@@ -1,4 +1,14 @@
-import * as styles from './navbar.module.scss'
+import {
+  show,
+  progress,
+  navbarBurger,
+  hasBorder,
+  logo,
+  main,
+  langSwitch,
+  langItem,
+  disabled,
+} from './navbar.module.scss'
 
 import {
   Navbar as BulmaNavbar,
@@ -22,7 +32,11 @@ import { SearchInput } from './Input'
 import clsx from 'clsx'
 import { setSearchValue } from 'state'
 
-export function Navbar() {
+interface Props {
+  langSwitchable: boolean
+}
+
+export function Navbar({ langSwitchable }: Props) {
   const { BrandSVG } = useStaticQuery(graphql`
     query {
       BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
@@ -34,9 +48,7 @@ export function Navbar() {
   const { language, changeLanguage } = useI18next()
 
   const dispatch = useDispatch()
-  const { docInfo, langSwitchable, searchValue } = useSelector(
-    state => state
-  ) as any
+  const { docInfo, searchValue } = useSelector(state => state) as any
 
   const enDisabled = !langSwitchable && language === 'zh'
   const zhDisabled = !langSwitchable && language === 'en'
@@ -80,21 +92,17 @@ export function Navbar() {
   return (
     <BulmaNavbar
       as="nav"
-      className={showBorder && styles.hasBorder}
+      className={showBorder && hasBorder}
       fixed="top"
       transparent>
       <Container>
         <NavbarBrand>
           <NavbarItem as="a" href="https://pingcap.com" target="_blank">
-            <img
-              className={styles.logo}
-              src={BrandSVG.publicURL}
-              alt="PingCAP"
-            />
+            <img className={logo} src={BrandSVG.publicURL} alt="PingCAP" />
           </NavbarItem>
 
           <NavbarBurger
-            className={styles.navbarBurger}
+            className={navbarBurger}
             aria-label="menu"
             aria-expanded={burgerActive}
             active={burgerActive}
@@ -106,7 +114,7 @@ export function Navbar() {
             <NavbarItem
               // @ts-ignore
               as={Link}
-              className={styles.main}
+              className={main}
               to="/tidb/stable">
               <Trans i18nKey="navbar.tidb" />
             </NavbarItem>
@@ -114,7 +122,7 @@ export function Navbar() {
               <NavbarItem
                 // @ts-ignore
                 as={Link}
-                className={styles.main}
+                className={main}
                 to="/tidbcloud/public-preview">
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
@@ -122,12 +130,12 @@ export function Navbar() {
             <NavbarItem
               // @ts-ignore
               as={Link}
-              className={styles.main}
+              className={main}
               to="/appdev/dev">
               <Trans i18nKey="navbar.appdev" />
             </NavbarItem>
             <NavbarItem
-              className={styles.main}
+              className={main}
               href={
                 language === 'en'
                   ? 'https://en.pingcap.com/download'
@@ -136,7 +144,7 @@ export function Navbar() {
               <Trans i18nKey="navbar.download" />
             </NavbarItem>
             <NavbarItem
-              className={styles.main}
+              className={main}
               href={
                 language === 'en'
                   ? 'https://en.pingcap.com/contact-us/'
@@ -148,16 +156,13 @@ export function Navbar() {
 
           <NavbarEnd>
             <NavbarItem as="div" dropdown hoverable>
-              <NavbarLink className={styles.langSwitch}>
+              <NavbarLink className={langSwitch}>
                 <Trans i18nKey="lang.title" />
               </NavbarLink>
 
               <NavbarDropdown boxed>
                 <NavbarItem
-                  className={clsx(
-                    styles.langItem,
-                    enDisabled && styles.disabled
-                  )}
+                  className={clsx(langItem, enDisabled && disabled)}
                   onClick={() => !enDisabled && changeLanguage('en')}>
                   {enDisabled ? (
                     <Trans i18nKey="lang.cannotswitch" />
@@ -167,10 +172,7 @@ export function Navbar() {
                 </NavbarItem>
 
                 <NavbarItem
-                  className={clsx(
-                    styles.langItem,
-                    zhDisabled && styles.disabled
-                  )}
+                  className={clsx(langItem, zhDisabled && disabled)}
                   onClick={() => !zhDisabled && changeLanguage('zh')}>
                   {zhDisabled ? (
                     <Trans
@@ -181,7 +183,7 @@ export function Navbar() {
                       }
                     />
                   ) : (
-                    <Trans i18nKey='lang.zh' />
+                    <Trans i18nKey="lang.zh" />
                   )}
                 </NavbarItem>
               </NavbarDropdown>
@@ -199,7 +201,7 @@ export function Navbar() {
       </Container>
 
       <Progress
-        className={clsx(styles.progress, showBorder && styles.show)}
+        className={clsx(progress, showBorder && show)}
         color="primary"
         value={0}
         max={100}

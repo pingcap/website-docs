@@ -1,12 +1,12 @@
 import 'styles/components/toc.scss'
 
-import React, { useLayoutEffect, useRef } from 'react'
-import { generateHrefs, navigateInsideEventListener } from '../lib/utils'
+import { useLayoutEffect, useRef } from 'react'
+import { generateHrefs, navigateInsideEventListener } from '../../../lib/utils'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import PropTypes from 'prop-types'
 
-const TOC = ({ data, name, lang, docVersionStable }) => {
+export function Toc({ data, name, lang, docVersionStable }) {
   const { doc, version } = docVersionStable
   const wrapper = useRef()
 
@@ -209,11 +209,9 @@ const TOC = ({ data, name, lang, docVersionStable }) => {
   )
 }
 
-TOC.propTypes = {
+Toc.propTypes = {
   data: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   lang: PropTypes.string.isRequired,
   docVersionStable: PropTypes.object.isRequired,
 }
-
-export default TOC

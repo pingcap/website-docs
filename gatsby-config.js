@@ -1,5 +1,7 @@
 require('ts-node').register({ transpileOnly: true })
 
+const docs = require('./docs.json')
+
 module.exports = {
   siteMetadata: {
     title: 'PingCAP Docs',
@@ -18,12 +20,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-root-import`,
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(`${__dirname}/src/components/layout.js`),
-      },
-    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -49,8 +45,11 @@ module.exports = {
         },
         pages: [
           {
-            matchPath:
-              '/:lang?/(tidb|tidb-data-migration|tidbcloud|tidb-in-kubernetes|appdev|)/(.*)',
+            matchPath: '/:lang?/404',
+            getLanguageFromPath: true,
+          },
+          {
+            matchPath: `/:lang?/(${Object.keys(docs.docs).join('|')})/(.*)`,
             getLanguageFromPath: true,
           },
         ],

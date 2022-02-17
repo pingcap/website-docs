@@ -23,6 +23,7 @@ import { useLocation } from '@reach/router'
 
 import { select, optionItem, optionLabel, isActive } from './search.module.scss'
 import { graphql } from 'gatsby'
+import { Layout } from 'layout'
 
 const matchToVersionList = match => {
   switch (match) {
@@ -170,7 +171,7 @@ export default function Search() {
   }, [selectedType, selectedVersion, query])
 
   return (
-    <>
+    <Layout>
       <Seo title="Search" noindex />
       <div>
         <div>
@@ -226,7 +227,7 @@ export default function Search() {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

@@ -40,7 +40,8 @@
   color: $primary;
 }
 
-.progress {
+// TODO: remove this after we remove bulma
+progress.progress {
   display: none;
   position: fixed;
   top: $navbar-height;
@@ -53,6 +54,6 @@
   }
 }
 
-.show {
+progress.show {
   display: block;
 }

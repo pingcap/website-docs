@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # if there's a action without sha1, it will write a cahce
+      # if there's a action without sha1, it will write a cache
       # in linux-gatsby-cache-2- and will be used everytime latter action being dispatched
       - name: Bailout
         if: ${{ !github.event.client_payload.sha }}

@@ -1,13 +1,26 @@
 import { Container, Section } from '@seagreenio/react-bulma'
-import { useEffect } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
 import { Footer } from './comp/Footer'
-import { Navbar } from 'components/layouts/comp/Navbar'
-import PropTypes from 'prop-types'
+import { Navbar } from 'layout/comp/Navbar'
 import { globalHistory } from '@reach/router'
 import { navigate } from 'gatsby'
+import 'styles/global.scss'
 
-const Layout = ({ children }) => {
+declare global {
+  interface Window {
+    DOCS_PINGCAP: any
+  }
+}
+
+interface Props {
+  langSwitchable?: boolean
+}
+
+export function Layout({
+  children,
+  langSwitchable = true,
+}: PropsWithChildren<Props>) {
   useEffect(() => {
     if (!window.DOCS_PINGCAP) {
       window.DOCS_PINGCAP = {
@@ -19,7 +32,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Navbar />
+      <Navbar langSwitchable={langSwitchable} />
       <Section as="main">
         <Container>{children}</Container>
       </Section>
@@ -27,9 +40,3 @@ const Layout = ({ children }) => {
     </>
   )
 }
-
-Layout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-}
-
-export default Layout
