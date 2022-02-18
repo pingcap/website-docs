@@ -16,14 +16,14 @@ import replaceInternalHref, {
   fullVersionMark,
   unifyAnchor,
 } from 'lib/replaceInternalHref'
-import { setDocData, setDocInfo, setLangSwitchable } from 'state'
+import { setDocInfo } from 'state'
 import { Seo } from 'components/Seo'
 
 import { DeprecationNotice } from './comp/DeprecationNotice'
 import { DownloadPDF } from './comp/DownloadPDF'
 import { FeedbackDoc } from './comp/Feedback'
 import { Improve } from './comp/Improve'
-import GitCommitInfo from './comp/gitCommitInfo'
+import { GitCommitInfo } from './comp/GitCommitInfo'
 import { UserFeedback } from './comp/UserFeedback'
 import { Toc } from './comp/Toc'
 import {} from './doc.module.scss'

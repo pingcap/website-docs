@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react'
 
 import { Trans } from 'gatsby-plugin-react-i18next'
-import PropTypes from 'prop-types'
 import axios from 'axios'
 import { wrapPathWithLang } from 'lib/utils'
+import { commitInfo } from './git-commit.module.scss'
 
-const GitCommitInfo = ({ repoInfo, lang, title }) => {
+interface Props {
+  repoInfo: Record<string, any>
+  lang: string
+  title: string
+}
+
+export function GitCommitInfo({ repoInfo, lang, title }: Props) {
   const { repo, ref, realPath } = repoInfo
   const path = wrapPathWithLang(repo, realPath, lang)
 
@@ -34,14 +40,13 @@ const GitCommitInfo = ({ repoInfo, lang, title }) => {
   }, [repo, ref, path])
 
   return (
-    <div className="commit-info">
+    <div className={commitInfo}>
       {latestCommit && (
         <>
           <a
             href={`https://github.com/${repo}/blob/${ref}/${path}`}
             target="_blank"
-            rel="noreferrer"
-          >
+            rel="noreferrer">
             {title}
           </a>
           <Trans>doc.latestCommit</Trans>
@@ -54,11 +59,3 @@ const GitCommitInfo = ({ repoInfo, lang, title }) => {
     </div>
   )
 }
-
-GitCommitInfo.propTypes = {
-  repoInfo: PropTypes.object.isRequired,
-  lang: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-}
-
-export default GitCommitInfo

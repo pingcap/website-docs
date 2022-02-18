@@ -4,9 +4,15 @@ import { useLayoutEffect, useRef } from 'react'
 import { generateHrefs, navigateInsideEventListener } from '../../../lib/utils'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import PropTypes from 'prop-types'
 
-export function Toc({ data, name, lang, docVersionStable }) {
+interface Props {
+  data: Record<string, any>
+  name: string
+  lang: string
+  docVersionStable: Record<string, any>
+}
+
+export function Toc({ data, name, lang, docVersionStable }: Props) {
   const { doc, version } = docVersionStable
   const wrapper = useRef()
 
@@ -207,11 +213,4 @@ export function Toc({ data, name, lang, docVersionStable }) {
       <MDXRenderer>{data.body}</MDXRenderer>
     </div>
   )
-}
-
-Toc.propTypes = {
-  data: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
-  lang: PropTypes.string.isRequired,
-  docVersionStable: PropTypes.object.isRequired,
 }

@@ -10,6 +10,23 @@ import {
   genPDFDownloadURL,
   getRepo,
 } from './utils'
+import sig from 'signale'
+import { FrontMatter } from 'typing'
+
+interface PageQueryData {
+  allMdx: {
+    nodes: {
+      id: string
+      frontmatter: FrontMatter
+      slug: string
+      parent: {
+        sourceInstanceName: string
+        relativePath: string
+        name: string
+      }
+    }[]
+  }
+}
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
@@ -17,7 +34,7 @@ export const createDocs = async ({
 }: CreatePagesArgs) => {
   const template = resolve(__dirname, '../src/templates/doc/index.tsx')
 
-  const docs = await graphql(`
+  const docs = await graphql<PageQueryData>(`
     {
       allMdx(
         filter: {
@@ -43,7 +60,11 @@ export const createDocs = async ({
     }
   `)
 
-  const nodes = docs.data.allMdx.nodes.map(node => {
+  if (docs.errors) {
+    sig.error(docs.errors)
+  }
+
+  const nodes = docs.data!.allMdx.nodes.map(node => {
     // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
     const slug = node.slug.slice(3)
     const { sourceInstanceName: topFolder, relativePath, name } = node.parent
