@@ -108,12 +108,12 @@ a {
   color: $primary;
 
   &:hover {
-    color: $B1;
+    color: $highlight;
   }
 }
 
 .card {
-  border: 1px solid $T2;
+  border: 1px solid $divider-color;
 }
 
 .field {

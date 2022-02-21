@@ -19,7 +19,7 @@
   position: relative;
   padding: 10px;
   color: $M1;
-  background: $B1;
+  background: $highlight;
   border-radius: 10px 10px 0 0;
 
   .feedback-title {
@@ -141,7 +141,7 @@
           padding: 7px;
           width: 100%;
           border: none;
-          background: $B1;
+          background: $highlight;
           color: $M1;
         }
       }

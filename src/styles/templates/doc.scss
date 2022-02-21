@@ -29,10 +29,10 @@ $top: $navbar-height + 1rem;
     }
 
     a {
-      color: rgba($B1, 0.9);
+      color: rgba($highlight, 0.9);
 
       &:hover {
-        color: $B1;
+        color: $highlight;
       }
 
       &.anchor.before {
@@ -88,7 +88,7 @@ $top: $navbar-height + 1rem;
     }
 
     a code {
-      color: $B1;
+      color: $highlight;
     }
 
     .version-mark {
@@ -169,7 +169,7 @@ $top: $navbar-height + 1rem;
     color: $primary;
 
     &:hover {
-      color: $B1;
+      color: $highlight;
     }
 
     $icons: download-pdf improve feedback;

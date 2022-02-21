@@ -11,7 +11,7 @@
 
 @mixin mobile {
   @media screen and (max-width: 768px) {
-    @content
+    @content;
   }
 }
 
@@ -28,7 +28,7 @@
         left: 50%;
         width: 20px;
         height: 3px;
-        background: $B1;
+        background: $highlight;
         transform: translateX(-50%);
       }
     }
@@ -39,7 +39,7 @@
 @mixin has-pingcap-style-input {
   input {
     background: $M2;
-    border-color: $T2;
+    border-color: $divider-color;
     box-shadow: none;
 
     & ~ .icon,
@@ -49,7 +49,11 @@
 
     &:hover,
     &:focus {
-      border-color: $B1;
+      border-color: $highlight;
     }
   }
+}
+
+@mixin svg {
+  vertical-align: -0.125rem;
 }

@@ -10,23 +10,12 @@ import {
   genPDFDownloadURL,
   getRepo,
 } from './utils'
+import { mdxAstToToc } from './toc'
 import sig from 'signale'
-import { FrontMatter } from 'typing'
+import { Root, List } from 'mdast'
 
-interface PageQueryData {
-  allMdx: {
-    nodes: {
-      id: string
-      frontmatter: FrontMatter
-      slug: string
-      parent: {
-        sourceInstanceName: string
-        relativePath: string
-        name: string
-      }
-    }[]
-  }
-}
+import { FrontMatter, Locale, Repo, RepoToc } from 'typing'
+import { generateConfig } from './path'
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
@@ -45,6 +34,8 @@ export const createDocs = async ({
         nodes {
           id
           frontmatter {
+            title
+            summary
             aliases
           }
           slug
@@ -60,9 +51,34 @@ export const createDocs = async ({
     }
   `)
 
-  if (docs.errors) {
-    sig.error(docs.errors)
+  const repoToc = await graphql<TocQuery>(`
+    {
+      allMdx(filter: { slug: { glob: "**/TOC" } }) {
+        nodes {
+          mdxAST
+          slug
+        }
+      }
+    }
+  `)
+
+  if (docs.errors || repoToc.errors) {
+    sig.error(docs.errors, repoToc.errors)
   }
+
+  const toc = repoToc.data!.allMdx.nodes.reduce((toc, curr) => {
+    const config = generateConfig(curr.slug)
+    const res = mdxAstToToc(
+      (curr.mdxAST.children.find(node => node.type === 'list')! as List)
+        .children,
+      config
+    )
+
+    // TODO: don't
+    toc[curr.slug] = res
+
+    return toc
+  }, {} as Record<string, RepoToc>)
 
   const nodes = docs.data!.allMdx.nodes.map(node => {
     // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
@@ -131,15 +147,18 @@ export const createDocs = async ({
       langSwitchable,
       tocSlug,
       downloadURL,
+      frontmatter,
+      body,
+      tableOfContents,
     } = node
 
     createPage({
       path,
       component: template,
       context: {
+        id,
         layout: 'doc',
         name: parent.name,
-        id,
         repo,
         ref,
         lang,
@@ -149,7 +168,11 @@ export const createDocs = async ({
         langSwitchable,
         tocSlug,
         downloadURL,
+        frontmatter,
+        body,
+        tableOfContents,
         versions: versionsMap[lang][join(repo, pathWithoutVersion)],
+        toc: toc[tocSlug],
       },
     })
 
@@ -164,4 +187,27 @@ export const createDocs = async ({
       })
     }
   })
+}
+
+interface PageQueryData {
+  allMdx: {
+    nodes: {
+      frontmatter: FrontMatter
+      slug: string
+      parent: {
+        sourceInstanceName: string
+        relativePath: string
+        name: string
+      }
+    }[]
+  }
+}
+
+interface TocQuery {
+  allMdx: {
+    nodes: {
+      mdxAST: Root
+      slug: string
+    }[]
+  }
 }

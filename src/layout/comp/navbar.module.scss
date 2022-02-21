@@ -1,7 +1,7 @@
 @import 'styles/common';
 
 .has-border {
-  border-bottom: 1px solid $T2;
+  border-bottom: 1px solid $divider-color;
 }
 
 .logo {
@@ -11,7 +11,7 @@
 .main {
   @include has-item-active(1.5rem);
   @include mobile {
-    border-bottom: 1px solid $T2;
+    border-bottom: 1px solid $divider-color;
   }
 }
 
@@ -22,13 +22,13 @@
 
   &:hover {
     &:after {
-      border-color: $B1;
+      border-color: $highlight;
     }
   }
 }
 
 .lang-item:hover {
-  color: $B1 !important;
+  color: $highlight !important;
 }
 
 .disabled {

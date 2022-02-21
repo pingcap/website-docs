@@ -32,6 +32,7 @@ import { VersionSwitcher } from './comp/VersionSwitcher'
 
 export default function Doc({
   pageContext: {
+    toc,
     name,
     repo,
     ref,
@@ -42,13 +43,16 @@ export default function Doc({
     langSwitchable,
     downloadURL,
     versions,
+    frontmatter,
   },
   data,
 }) {
   const { pathname } = useLocation()
 
-  const { site, mdx, toc } = data
-  const { frontmatter, tableOfContents } = mdx
+  const {
+    site,
+    mdx: { tableOfContents, body },
+  } = data
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version, stable } = docVersionStableMap
 
@@ -158,7 +162,7 @@ export default function Doc({
               )}
 
               <MDXProvider components={Shortcodes}>
-                <MDXRenderer>{mdx.body}</MDXRenderer>
+                <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
 
               {doc !== 'tidbcloud' && (
@@ -201,7 +205,7 @@ export default function Doc({
 }
 
 export const query = graphql`
-  query ($id: String, $tocSlug: String, $language: String!) {
+  query ($id: String, $language: String!) {
     site {
       siteMetadata {
         siteUrl
@@ -209,16 +213,8 @@ export const query = graphql`
     }
 
     mdx(id: { eq: $id }) {
-      frontmatter {
-        title
-        summary
-      }
       body
       tableOfContents
-    }
-
-    toc: mdx(slug: { eq: $tocSlug }) {
-      body
     }
 
     locales: allLocale(filter: { language: { eq: $language } }) {

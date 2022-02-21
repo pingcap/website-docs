@@ -28,11 +28,11 @@
 
   &.is-active {
     background-color: #f2f2f2;
-    color: $B1;
+    color: $highlight;
   }
 
   &:hover {
-    color: $B1;
+    color: $highlight;
     background-color: #f9f9f9;
   }
 }

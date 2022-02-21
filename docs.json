@@ -57,12 +57,24 @@
         "en": {
           "repo": "pingcap/docs-tidb-operator",
           "path": "en",
-          "versions": ["master", "release-1.3", "release-1.2", "release-1.1", "release-1.0"]
+          "versions": [
+            "master",
+            "release-1.3",
+            "release-1.2",
+            "release-1.1",
+            "release-1.0"
+          ]
         },
         "zh": {
           "repo": "pingcap/docs-tidb-operator",
           "path": "zh",
-          "versions": ["master", "release-1.3", "release-1.2", "release-1.1", "release-1.0"]
+          "versions": [
+            "master",
+            "release-1.3",
+            "release-1.2",
+            "release-1.1",
+            "release-1.0"
+          ]
         }
       },
       "deprecated": ["v1.0"]

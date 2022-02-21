@@ -1,12 +1,24 @@
-import { DOC, Locale } from '../src/typing'
+import { Repo, Locale, RepoToc, RepoTocLink } from '../src/typing'
 import config from '../docs.json'
 
-export function getRepo(doc: DOC, lang: Locale) {
-  return config.docs[doc].languages[lang].repo
+export function getRepo(doc: Repo, lang: Locale) {
+  const { languages } = config.docs[doc]
+
+  if (lang in languages) {
+    return languages[lang as Locale.en].repo
+  }
+
+  throw new Error(`no ${lang} in repo ${doc}`)
 }
 
-export function getStable(doc: DOC) {
-  return config.docs[doc].stable
+export function getStable(doc: Repo) {
+  const docInfo = config.docs[doc]
+
+  if ('stable' in docInfo) {
+    return docInfo.stable
+  }
+
+  return undefined
 }
 
 function renameVersion(version: string, stable: string) {
@@ -20,7 +32,7 @@ function renameVersion(version: string, stable: string) {
   }
 }
 
-export function renameVersionByDoc(doc: DOC, version: string) {
+export function renameVersionByDoc(doc: Repo, version: string) {
   switch (doc) {
     case 'tidb':
     case 'tidb-data-migration':
@@ -35,7 +47,7 @@ export function renameVersionByDoc(doc: DOC, version: string) {
 function genDocCategory(slug: string, separator = '/') {
   const [name, branch] = slug.split('/')
 
-  return `${name}${separator}${renameVersionByDoc(name as DOC, branch)}`
+  return `${name}${separator}${renameVersionByDoc(name as Repo, branch)}`
 }
 
 export function genTOCSlug(slug: string) {
@@ -55,7 +67,12 @@ export function genPDFDownloadURL(slug: string, lang: Locale) {
  * @param {string} pathWithoutVersion
  * @returns {string} - Replaced path.
  */
-export function replacePath(slug: string, name: string, lang: Locale, pathWithoutVersion: string) {
+export function replacePath(
+  slug: string,
+  name: string,
+  lang: Locale,
+  pathWithoutVersion: string
+) {
   const docPath = genDocCategory(slug)
   const language = lang === 'en' ? '' : '/' + lang
 

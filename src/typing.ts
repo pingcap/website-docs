@@ -1,4 +1,4 @@
-export enum DOC {
+export enum Repo {
   tidb = 'tidb',
   dm = 'tidb-data-migration',
   operator = 'tidb-in-kubernetes',
@@ -9,7 +9,7 @@ export enum DOC {
 export interface FrontMatter {
   title: string
   summary?: string
-  aliases?: string
+  aliases?: string[]
   keywords?: string[]
 }
 
@@ -18,6 +18,12 @@ export enum Locale {
   zh = 'zh',
 }
 
-export interface PageData {
+export interface PageData {}
 
+export interface RepoTocLink {
+  content: ({ code: boolean; value: string } | string)[]
+  link?: string
+  children?: RepoTocLink[]
 }
+
+export type RepoToc = RepoTocLink[]

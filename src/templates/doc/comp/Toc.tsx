@@ -1,216 +1,114 @@
-import 'styles/components/toc.scss'
+import { Link } from 'gatsby'
+import { useI18next } from 'gatsby-plugin-react-i18next'
+import { MdAdd, MdRemove, MdSort, MdMenu } from 'react-icons/md'
 
-import { useLayoutEffect, useRef } from 'react'
-import { generateHrefs, navigateInsideEventListener } from '../../../lib/utils'
+import { activeLink, toc, tocItem, menu, listOpen } from './toc.module.scss'
 
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { RepoToc, RepoTocLink } from 'typing'
+import { useMemo, useState } from 'react'
+import clsx from 'clsx'
 
-interface Props {
-  data: Record<string, any>
-  name: string
-  lang: string
-  docVersionStable: Record<string, any>
+const TocContent = ({ content }: { content: RepoTocLink['content'] }) => (
+  <>
+    {content.map((content, index) =>
+      typeof content === 'string' ? (
+        content
+      ) : (
+        <code key={index} className="language-text">
+          {content.value}
+        </code>
+      )
+    )}
+  </>
+)
+
+interface ItemProps {
+  data: RepoTocLink
+  level: number
+  active: RepoTocLink[]
 }
 
-export function Toc({ data, name, lang, docVersionStable }: Props) {
-  const { doc, version } = docVersionStable
-  const wrapper = useRef()
+function TocMenu({ data, level, active }: ItemProps) {
+  const [head, ...rest] = active
 
-  const generate = () => {
-    const toc = wrapper.current.firstChild
-    toc.className = 'top'
-    // clear previous active anchor
-    const activeAnchor = toc.querySelector('a.active')
-    if (activeAnchor) {
-      activeAnchor.className = ''
-    }
+  const [open, setOpen] = useState(data === head)
+  const content = <TocContent content={data.content} />
+  const children = (
+    <ul className={open ? listOpen : undefined}>
+      {data.children!.map((child, index) => (
+        <TocItem data={child} level={level + 1} active={rest} key={index} />
+      ))}
+    </ul>
+  )
 
-    function fold(li) {
-      const start = performance.now()
-
-      Array.from(li.children).forEach(el => {
-        // ignore icon
-        if (el.tagName !== 'SPAN') {
-          requestAnimationFrame(function animate(timestamp) {
-            const elapsed = timestamp - start
-            const progress = Math.min(elapsed / 250, 1)
-
-            if (progress < 1) {
-              el.style.height = `${
-                el.scrollHeight - progress * el.scrollHeight
-              }px`
-              el.style.overflow = 'hidden'
-
-              requestAnimationFrame(animate)
-            }
-
-            if (progress === 1) {
-              el.style.height = ''
-              el.style.overflow = ''
-              el.style.visibility = 'hidden'
-              li.classList.toggle('folded')
-            }
-          })
-        }
-      })
-    }
-
-    function unfold(li) {
-      const start = performance.now()
-
-      Array.from(li.children).forEach(el => {
-        if (el.tagName !== 'SPAN') {
-          el.style.visibility = 'initial'
-
-          requestAnimationFrame(function animate(timestamp) {
-            const elapsed = timestamp - start
-            const progress = Math.min(elapsed / 250, 1)
-
-            if (progress < 1) {
-              el.style.height = `${progress * el.scrollHeight}px`
-
-              requestAnimationFrame(animate)
-            }
-
-            if (progress === 1) {
-              el.style.height = 'auto'
-              el.style.overflow = 'initial'
-              li.classList.toggle('folded')
-            }
-          })
-        }
-      })
-    }
-
-    function clickEvent(e) {
-      e.stopPropagation()
-
-      if (e.target.tagName === 'A') {
-        if (navigateInsideEventListener(e)) {
-          const activeAnchor = toc.querySelector('a.active')
-          if (activeAnchor) {
-            activeAnchor.className = ''
-          }
-          e.target.className = 'active'
-        }
-
-        return
-      }
-
-      const li = e.currentTarget
-
-      if (li.classList.contains('folded')) {
-        unfold(li)
-      } else {
-        fold(li)
-      }
-
-      const icon = li.lastChild.firstChild
-      // ensure icon
-      if (icon.tagName === 'SPAN') {
-        icon.className = icon.className.endsWith('plus')
-          ? 'mdi mdi-minus'
-          : 'mdi mdi-plus'
-      }
-    }
-
-    /**
-     * modifyHref
-     *
-     * @param {HTMLAnchorElement} el
-     */
-    function modifyHref(el) {
-      const href = el.getAttribute('href')
-
-      if (href && !href.startsWith('http') && href.includes('.md')) {
-        const [realHref, internalHref, _name] = generateHrefs(
-          href,
-          lang,
-          doc,
-          version
-        )
-
-        el.href = realHref
-        el.setAttribute('data-href', internalHref)
-
-        if (_name === name) {
-          el.className = 'active'
-
-          while (el.parentElement) {
-            const p = el.parentElement
-
-            if (p.classList.contains('top')) {
-              break
-            }
-
-            if (p.classList.contains('folded')) {
-              p.classList.remove('folded')
-              Array.from(p.children).forEach(d => {
-                if (d.tagName === 'UL') {
-                  d.style = 'height: auto; overflow: initial;'
-                }
-              })
-            }
-
-            el = p
-          }
-        }
-      }
-    }
-
-    function retrieveLi(ul) {
-      // ignore icon
-      if (ul.tagName === 'SPAN') {
-        return
-      }
-
-      Array.from(ul.children).forEach(li => {
-        const first = li.firstElementChild
-
-        if (
-          first.tagName === 'UL' ||
-          (first.tagName === 'A' &&
-            first.nextElementSibling &&
-            first.nextElementSibling.tagName === 'UL')
-        ) {
-          li.classList.add('can-unfold', 'folded')
-
-          if (li.parentElement.className !== 'top') {
-            const icon = document.createElement('span')
-            icon.className = 'icon'
-            icon.innerHTML = '<i class="mdi mdi-plus"></i>'
-            li.append(icon)
-          }
-
-          li.addEventListener('click', clickEvent)
-
-          if (first.tagName === 'A') {
-            modifyHref(first)
-          }
-
-          Array.from(li.children).forEach(retrieveLi)
-        } else {
-          modifyHref(li.firstChild)
-        }
-      })
-    }
-
-    Array.from(toc.children).forEach(li => {
-      if (li.firstElementChild.tagName !== 'UL') {
-        li.className = 'has-no-subject'
-      }
-    })
-
-    retrieveLi(toc)
+  if (level === 0) {
+    const icon = open ? <MdSort /> : <MdMenu />
+    return (
+      <li className={tocItem}>
+        <div className={menu} onClick={() => setOpen(open => !open)}>
+          {content}
+          {icon}
+        </div>
+        {children}
+      </li>
+    )
   }
+  const icon = open ? <MdRemove /> : <MdAdd />
+  return (
+    <li className={tocItem}>
+      <div className={menu} onClick={() => setOpen(open => !open)}>
+        {icon}
+        {content}
+      </div>
+      {children}
+    </li>
+  )
+}
 
-  /* eslint-disable */
-  useLayoutEffect(generate, [data.body])
-  /* eslint-enable */
+function TocItem({ data, level, active }: ItemProps) {
+  if (data.children) {
+    return <TocMenu data={data} level={level} active={active} />
+  }
+  if (data.link == null) throw new Error('plain text node is unsupported')
+  return (
+    <li className={tocItem}>
+      <Link to={data.link} className={clsx(data === active[0] && activeLink)}>
+        <TocContent content={data.content} />
+      </Link>
+    </li>
+  )
+}
+
+interface Props {
+  data: RepoToc
+}
+
+export function Toc({ data }: Props) {
+  const { path } = useI18next()
+  const active = useMemo(() => findActiveItem(path, data) ?? [], [path, data])
 
   return (
-    <div ref={wrapper} className="PingCAP-TOC">
-      <MDXRenderer>{data.body}</MDXRenderer>
-    </div>
+    <ul className={toc}>
+      {data.map((data, index) => (
+        <TocItem data={data} level={0} active={active} key={index} />
+      ))}
+    </ul>
   )
+}
+
+function findActiveItem(
+  path: string,
+  data: RepoToc
+): RepoTocLink[] | undefined {
+  for (const item of data) {
+    if (item.link === path) {
+      return [item]
+    }
+    if (item.children) {
+      const childFind = findActiveItem(path, item.children)
+      if (childFind != null) {
+        return [item, ...childFind]
+      }
+    }
+  }
 }

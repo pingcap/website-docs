@@ -14,7 +14,6 @@
     "last 2 ios_saf major versions"
   ],
   "dependencies": {
-    "@mdi/font": "^5.9.55",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@seagreenio/react-bulma": "^0.1.0-beta.4",

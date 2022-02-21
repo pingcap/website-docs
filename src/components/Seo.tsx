@@ -1,4 +1,3 @@
-import '@mdi/font/css/materialdesignicons.min.css'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { Helmet, type MetaProps, type LinkProps } from 'react-helmet-async'
