@@ -22,7 +22,7 @@ export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoToc {
       return ret
     }
 
-    sig.error(ast)
+    console.error(JSON.stringify(node))
 
     throw new Error(`incorrect format in TOC.md`)
   })

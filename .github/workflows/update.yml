@@ -62,9 +62,9 @@ jobs:
         id: docs-cache
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-5-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-4-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-5-
+            ${{ runner.os }}-docs-cache-4-
 
       - name: Check file exists
         if: github.event.client_payload.download_type != 'full'
