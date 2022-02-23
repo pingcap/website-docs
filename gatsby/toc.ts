@@ -1,5 +1,4 @@
 import { ListItem, List, Link, Paragraph, Text } from 'mdast'
-import sig from 'signale'
 
 import { RepoToc, RepoTocLink } from '../src/typing'
 import { generateUrl, PathConfig } from './path'
@@ -21,8 +20,6 @@ export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoToc {
 
       return ret
     }
-
-    console.error(JSON.stringify(node))
 
     throw new Error(`incorrect format in TOC.md`)
   })

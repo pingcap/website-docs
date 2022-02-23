@@ -4,7 +4,7 @@ import 'github-markdown-css/github-markdown.css'
 import * as Shortcodes from '../../components/shortcodes'
 
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Trans } from 'gatsby-plugin-react-i18next'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -29,10 +29,11 @@ import { Toc } from './comp/Toc'
 import {} from './doc.module.scss'
 import { Layout } from 'layout'
 import { VersionSwitcher } from './comp/VersionSwitcher'
+import { mdxAstToToc } from '../../../gatsby/toc'
+import { generateConfig } from '../../../gatsby/path'
 
 export default function Doc({
   pageContext: {
-    toc,
     name,
     repo,
     ref,
@@ -51,9 +52,20 @@ export default function Doc({
   const {
     site,
     mdx: { frontmatter, tableOfContents, body },
+    toc,
   } = data
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version, stable } = docVersionStableMap
+
+  const tocData = useMemo(() => {
+    const config = generateConfig(toc.slug)
+    const res = mdxAstToToc(
+      (toc.mdxAST.children.find(node => node.type === 'list')!)
+        .children,
+      config
+    )
+    return res
+  }, [toc])
 
   const repoInfo = {
     repo,
@@ -108,14 +120,7 @@ export default function Doc({
                   versions={versions}
                 />
               </Block>
-              {toc && (
-                <Toc
-                  data={toc}
-                  name={name}
-                  lang={lang}
-                  docVersionStable={docVersionStableMap}
-                />
-              )}
+              {toc && <Toc data={tocData} />}
             </div>
           </div>
 
@@ -204,7 +209,7 @@ export default function Doc({
 }
 
 export const query = graphql`
-  query ($id: String, $language: String!) {
+  query ($id: String, $language: String!, $tocSlug: String!) {
     site {
       siteMetadata {
         siteUrl
@@ -228,6 +233,11 @@ export const query = graphql`
           language
         }
       }
+    }
+
+    toc: mdx(slug: { eq: $tocSlug }) {
+      mdxAST
+      slug
     }
   }
 `

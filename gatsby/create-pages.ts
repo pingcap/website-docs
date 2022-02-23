@@ -49,34 +49,9 @@ export const createDocs = async ({
     }
   `)
 
-  const repoToc = await graphql<TocQuery>(`
-    {
-      allMdx(filter: { slug: { glob: "**/TOC" } }) {
-        nodes {
-          mdxAST
-          slug
-        }
-      }
-    }
-  `)
-
-  if (docs.errors || repoToc.errors) {
-    sig.error(docs.errors, repoToc.errors)
+  if (docs.errors) {
+    sig.error(docs.errors)
   }
-
-  const toc = repoToc.data!.allMdx.nodes.reduce((toc, curr) => {
-    const config = generateConfig(curr.slug)
-    const res = mdxAstToToc(
-      (curr.mdxAST.children.find(node => node.type === 'list')! as List)
-        .children,
-      config
-    )
-
-    // TODO: don't
-    toc[curr.slug] = res
-
-    return toc
-  }, {} as Record<string, RepoToc>)
 
   const nodes = docs.data!.allMdx.nodes.map(node => {
     // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
@@ -164,7 +139,6 @@ export const createDocs = async ({
         tocSlug,
         downloadURL,
         versions: versionsMap[lang][join(repo, pathWithoutVersion)],
-        toc: toc[tocSlug],
       },
     })
 
@@ -191,15 +165,6 @@ interface PageQueryData {
         relativePath: string
         name: string
       }
-    }[]
-  }
-}
-
-interface TocQuery {
-  allMdx: {
-    nodes: {
-      mdxAST: Root
-      slug: string
     }[]
   }
 }
