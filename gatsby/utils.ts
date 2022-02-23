@@ -1,4 +1,4 @@
-import { Repo, Locale, RepoToc, RepoTocLink } from '../src/typing'
+import { Repo, Locale } from '../src/typing'
 import config from '../docs.json'
 
 export function getRepo(doc: Repo, lang: Locale) {
@@ -21,7 +21,7 @@ export function getStable(doc: Repo) {
   return undefined
 }
 
-function renameVersion(version: string, stable: string) {
+function renameVersion(version: string, stable: string | undefined) {
   switch (version) {
     case 'master':
       return 'dev'
