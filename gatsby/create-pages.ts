@@ -34,8 +34,6 @@ export const createDocs = async ({
         nodes {
           id
           frontmatter {
-            title
-            summary
             aliases
           }
           slug
@@ -146,10 +144,7 @@ export const createDocs = async ({
       docVersionStable,
       langSwitchable,
       tocSlug,
-      downloadURL,
-      frontmatter,
-      body,
-      tableOfContents,
+      downloadURL
     } = node
 
     createPage({
@@ -168,9 +163,6 @@ export const createDocs = async ({
         langSwitchable,
         tocSlug,
         downloadURL,
-        frontmatter,
-        body,
-        tableOfContents,
         versions: versionsMap[lang][join(repo, pathWithoutVersion)],
         toc: toc[tocSlug],
       },

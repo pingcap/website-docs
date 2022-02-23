@@ -43,7 +43,6 @@ export default function Doc({
     langSwitchable,
     downloadURL,
     versions,
-    frontmatter,
   },
   data,
 }) {
@@ -51,7 +50,7 @@ export default function Doc({
 
   const {
     site,
-    mdx: { tableOfContents, body },
+    mdx: { frontmatter, tableOfContents, body },
   } = data
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version, stable } = docVersionStableMap
@@ -213,6 +212,10 @@ export const query = graphql`
     }
 
     mdx(id: { eq: $id }) {
+      frontmatter {
+        title
+        summary
+      }
       body
       tableOfContents
     }
