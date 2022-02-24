@@ -57,15 +57,7 @@ export default function Doc({
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version, stable } = docVersionStableMap
 
-  const tocData = useMemo(() => {
-    const config = generateConfig(toc.slug)
-    const res = mdxAstToToc(
-      (toc.mdxAST.children.find(node => node.type === 'list')!)
-        .children,
-      config
-    )
-    return res
-  }, [toc])
+  const tocData = useMemo(() => JSON.parse(toc.repoToc), [toc.repoToc])
 
   const repoInfo = {
     repo,
@@ -236,8 +228,7 @@ export const query = graphql`
     }
 
     toc: mdx(slug: { eq: $tocSlug }) {
-      mdxAST
-      slug
+      repoToc
     }
   }
 `
