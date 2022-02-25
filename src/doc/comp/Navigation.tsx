@@ -78,9 +78,15 @@ function TocItem({ data, level, active }: ItemProps) {
   if (data.link == null) throw new Error('plain text node is unsupported')
   return (
     <li className={navItem}>
-      <Link to={data.link} className={clsx(data === active[0] && activeLink)}>
-        <TocContent content={data.content} />
-      </Link>
+      {data.link.startsWith('https://') ? (
+        <a target="_blank" href={data.link}>
+          <TocContent content={data.content} />
+        </a>
+      ) : (
+        <Link to={data.link} className={clsx(data === active[0] && activeLink)}>
+          <TocContent content={data.content} />
+        </Link>
+      )}
     </li>
   )
 }

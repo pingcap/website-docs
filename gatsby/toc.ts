@@ -51,9 +51,9 @@ function getContentFromLink(
       }
     })
 
-    if (child.url.startsWith('https://docs.pingcap.com')) {
+    if (child.url.startsWith('https://')) {
       return {
-        link: child.url.replace('https://docs.pingcap.com', ''),
+        link: child.url,
         content,
       }
     }
