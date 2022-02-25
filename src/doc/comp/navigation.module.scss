@@ -1,6 +1,6 @@
 @import 'styles/common';
 
-.toc {
+.nav {
   li {
     color: $primary;
     font-size: $size-7;
@@ -19,7 +19,7 @@
   }
 }
 
-.toc > .toc-item {
+.nav > .nav-item {
   border-bottom: 1px solid $divider-color;
   padding: 0.5rem 0;
   > a {
@@ -34,7 +34,7 @@
   }
 }
 
-.toc-item {
+.nav-item {
   word-break: break-word;
   padding-top: 0.5rem;
 }

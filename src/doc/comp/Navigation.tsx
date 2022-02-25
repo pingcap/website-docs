@@ -2,13 +2,19 @@ import { Link } from 'gatsby'
 import { useI18next } from 'gatsby-plugin-react-i18next'
 import { MdAdd, MdRemove, MdSort, MdMenu } from 'react-icons/md'
 
-import { activeLink, toc, tocItem, menu, listOpen } from './navigation.module.scss'
+import {
+  activeLink,
+  nav,
+  navItem,
+  menu,
+  listOpen,
+} from './navigation.module.scss'
 
-import { RepoToc, RepoTocLink } from 'typing'
+import { RepoNav, RepoNavLink } from 'typing'
 import { useMemo, useState } from 'react'
 import clsx from 'clsx'
 
-const TocContent = ({ content }: { content: RepoTocLink['content'] }) => (
+const TocContent = ({ content }: { content: RepoNavLink['content'] }) => (
   <>
     {content.map((content, index) =>
       typeof content === 'string' ? (
@@ -23,9 +29,9 @@ const TocContent = ({ content }: { content: RepoTocLink['content'] }) => (
 )
 
 interface ItemProps {
-  data: RepoTocLink
+  data: RepoNavLink
   level: number
-  active: RepoTocLink[]
+  active: RepoNavLink[]
 }
 
 function TocMenu({ data, level, active }: ItemProps) {
@@ -44,7 +50,7 @@ function TocMenu({ data, level, active }: ItemProps) {
   if (level === 0) {
     const icon = open ? <MdSort /> : <MdMenu />
     return (
-      <li className={tocItem}>
+      <li className={navItem}>
         <div className={menu} onClick={() => setOpen(open => !open)}>
           {content}
           {icon}
@@ -55,7 +61,7 @@ function TocMenu({ data, level, active }: ItemProps) {
   }
   const icon = open ? <MdRemove /> : <MdAdd />
   return (
-    <li className={tocItem}>
+    <li className={navItem}>
       <div className={menu} onClick={() => setOpen(open => !open)}>
         {icon}
         {content}
@@ -71,7 +77,7 @@ function TocItem({ data, level, active }: ItemProps) {
   }
   if (data.link == null) throw new Error('plain text node is unsupported')
   return (
-    <li className={tocItem}>
+    <li className={navItem}>
       <Link to={data.link} className={clsx(data === active[0] && activeLink)}>
         <TocContent content={data.content} />
       </Link>
@@ -80,7 +86,7 @@ function TocItem({ data, level, active }: ItemProps) {
 }
 
 interface Props {
-  data: RepoToc
+  data: RepoNav
 }
 
 export function Navigation({ data }: Props) {
@@ -88,7 +94,7 @@ export function Navigation({ data }: Props) {
   const active = useMemo(() => findActiveItem(path, data) ?? [], [path, data])
 
   return (
-    <ul className={toc}>
+    <ul className={nav}>
       {data.map((data, index) => (
         <TocItem data={data} level={0} active={active} key={index} />
       ))}
@@ -98,8 +104,8 @@ export function Navigation({ data }: Props) {
 
 function findActiveItem(
   path: string,
-  data: RepoToc
-): RepoTocLink[] | undefined {
+  data: RepoNav
+): RepoNavLink[] | undefined {
   for (const item of data) {
     if (item.link === path) {
       return [item]

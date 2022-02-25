@@ -37,7 +37,7 @@
     "gatsby-remark-prismjs": "^6.4.0",
     "gatsby-source-filesystem": "^4.4.0",
     "gatsby-transformer-sharp": "^4.4.0",
-    "github-markdown-css": "4.0.0",
+    "github-markdown-css": "^5.1.0",
     "i18next": "^21.6.9",
     "prismjs": "^1.24.1",
     "react": "^17.0.2",

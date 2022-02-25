@@ -1,9 +1,9 @@
 import { ListItem, List, Link, Paragraph, Text } from 'mdast'
 
-import { RepoToc, RepoTocLink } from '../src/typing'
+import { RepoNav, RepoNavLink } from '../src/typing'
 import { generateUrl, PathConfig } from './path'
 
-export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoToc {
+export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoNav {
   return ast.map(node => {
     const content = node.children as [Paragraph, List | undefined]
     if (content.length > 0 && content.length <= 2) {
@@ -28,7 +28,7 @@ export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoToc {
 function getContentFromLink(
   content: Paragraph,
   config: PathConfig
-): RepoTocLink {
+): RepoNavLink {
   if (content.type !== 'paragraph' || content.children.length === 0) {
     throw new Error(`incorrect format in TOC.md`)
   }

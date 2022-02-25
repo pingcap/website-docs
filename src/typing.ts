@@ -20,10 +20,16 @@ export enum Locale {
 
 export interface PageData {}
 
-export interface RepoTocLink {
+export interface RepoNavLink {
   content: ({ code: boolean; value: string } | string)[]
   link?: string
-  children?: RepoTocLink[]
+  children?: RepoNavLink[]
 }
 
-export type RepoToc = RepoTocLink[]
+export type RepoNav = RepoNavLink[]
+
+export interface TableOfContent {
+  title: string
+  url: string
+  items?: TableOfContent[]
+}

@@ -43,7 +43,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs)
 
   createFieldExtension({
-    name: 'repoToc',
+    name: 'navigation',
     extend(_) {
       return {
         async resolve(mdxNode, args, context, info) {
@@ -56,20 +56,20 @@ exports.createSchemaCustomization = ({ actions }) => {
             fieldName: 'mdxAST',
           })
 
-          if (!slug.endsWith('TOC')) return ''
+          if (!slug.endsWith('TOC')) return []
           const config = generateConfig(slug)
           const res = mdxAstToToc(
             mdxAST.children.find(node => node.type === 'list').children,
             config
           )
-          return JSON.stringify(res)
+          return res
         },
       }
     },
   })
   createTypes(`
     type Mdx implements Node {
-      repoToc: String! @repoToc
+      navigation: JSON! @navigation
     }
   `)
 }

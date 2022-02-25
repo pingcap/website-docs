@@ -12,10 +12,7 @@ import { graphql } from 'gatsby'
 import { useDispatch } from 'react-redux'
 import { useLocation } from '@reach/router'
 
-import replaceInternalHref, {
-  fullVersionMark,
-  unifyAnchor,
-} from 'lib/replaceInternalHref'
+import replaceInternalHref from 'lib/replaceInternalHref'
 import { setDocInfo } from 'state'
 import { Seo } from 'components/Seo'
 
@@ -29,6 +26,7 @@ import { Navigation } from './comp/Navigation'
 import {} from './doc.module.scss'
 import { Layout } from 'layout'
 import { VersionSwitcher } from './comp/VersionSwitcher'
+import { Toc } from './comp/Toc'
 
 export default function Doc({
   pageContext: {
@@ -50,12 +48,17 @@ export default function Doc({
   const {
     site,
     mdx: { frontmatter, tableOfContents, body },
-    toc,
+    navigation: { navigation },
   } = data
   const docVersionStableMap = JSON.parse(docVersionStable)
   const { doc, version, stable } = docVersionStableMap
 
-  const tocData = useMemo(() => JSON.parse(toc.repoToc), [toc.repoToc])
+  const tocData = useMemo(() => {
+    if (tableOfContents.items.length === 1) {
+      return tableOfContents.items[0].items
+    }
+    return tableOfContents.items
+  }, [tableOfContents.items])
 
   const repoInfo = {
     repo,
@@ -77,25 +80,6 @@ export default function Doc({
     )
   }, [dispatch, lang, doc, version])
 
-  function renderItems(items) {
-    return (
-      <ul>
-        {items.map((item, i) =>
-          item.url ? (
-            <li key={item.url}>
-              <a href={'#' + unifyAnchor(item.url)}>
-                {item.title.replace(fullVersionMark, '')}
-              </a>
-              {item.items && renderItems(item.items)}
-            </li>
-          ) : (
-            <li key={`item${i}`}>{item.items && renderItems(item.items)}</li>
-          )
-        )}
-      </ul>
-    )
-  }
-
   return (
     <Layout langSwitchable={langSwitchable}>
       <article className="PingCAP-Doc">
@@ -110,7 +94,7 @@ export default function Doc({
                   versions={versions}
                 />
               </Block>
-              <Navigation data={tocData} />
+              <Navigation data={navigation} />
             </div>
           </div>
 
@@ -186,7 +170,7 @@ export default function Doc({
                 <Title size={6} style={{ marginBottom: 0 }}>
                   <Trans i18nKey="doc.toc" />
                 </Title>
-                {tableOfContents.items && renderItems(tableOfContents.items)}
+                {tocData && <Toc data={tocData} />}
               </div>
             </div>
           </Column>
@@ -225,8 +209,8 @@ export const query = graphql`
       }
     }
 
-    toc: mdx(slug: { eq: $tocSlug }) {
-      repoToc
+    navigation: mdx(slug: { eq: $tocSlug }) {
+      navigation
     }
   }
 `
