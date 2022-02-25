@@ -47,6 +47,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     extend(_) {
       return {
         async resolve(mdxNode, args, context, info) {
+          if (mdxNode.nav) return mdxNode.nav
           const types = info.schema.getType('Mdx').getFields()
           const slug = await types['slug'].resolve(mdxNode, args, context, {
             fieldName: 'slug',
@@ -62,6 +63,7 @@ exports.createSchemaCustomization = ({ actions }) => {
             mdxAST.children.find(node => node.type === 'list').children,
             config
           )
+          mdxNode.nav = res
           return res
         },
       }
