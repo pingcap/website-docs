@@ -1,7 +1,7 @@
-import '../../styles/templates/doc.scss'
+import 'styles/templates/doc.scss'
 import 'github-markdown-css/github-markdown.css'
 
-import * as Shortcodes from '../../components/shortcodes'
+import * as Shortcodes from 'components/shortcodes'
 
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
 import { useEffect, useMemo } from 'react'
@@ -25,12 +25,10 @@ import { FeedbackDoc } from './comp/Feedback'
 import { Improve } from './comp/Improve'
 import { GitCommitInfo } from './comp/GitCommitInfo'
 import { UserFeedback } from './comp/UserFeedback'
-import { Toc } from './comp/Toc'
+import { Navigation } from './comp/Navigation'
 import {} from './doc.module.scss'
 import { Layout } from 'layout'
 import { VersionSwitcher } from './comp/VersionSwitcher'
-import { mdxAstToToc } from '../../../gatsby/toc'
-import { generateConfig } from '../../../gatsby/path'
 
 export default function Doc({
   pageContext: {
@@ -112,7 +110,7 @@ export default function Doc({
                   versions={versions}
                 />
               </Block>
-              {toc && <Toc data={tocData} />}
+              <Navigation data={tocData} />
             </div>
           </div>
 

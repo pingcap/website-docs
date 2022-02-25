@@ -11,11 +11,11 @@ import {
   tidb,
   tidbStable,
 } from 'lib/version'
-import { defaultDocInfo, setLoading, setSearchValue } from '../../state'
+import { defaultDocInfo, setLoading, setSearchValue } from 'state'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Loading } from 'components/Loading'
-import { SearchResult } from 'templates/search/Result'
+import { SearchResult } from './Result'
 import { Seo } from 'components/Seo'
 import { algoliaClient } from 'lib/algolia'
 import clsx from 'clsx'

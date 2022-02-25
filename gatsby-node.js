@@ -10,11 +10,11 @@ exports.createPages = async ({ graphql, actions }) => {
   await createDocs({ graphql, actions })
   actions.createPage({
     path: '/search',
-    component: path.resolve(__dirname, './src/templates/search/index.tsx'),
+    component: path.resolve(__dirname, './src/search/index.tsx'),
   })
   actions.createPage({
     path: '/404',
-    component: path.resolve(__dirname, './src/templates/404/index.tsx'),
+    component: path.resolve(__dirname, './src/404/index.tsx'),
   })
 }
 

@@ -2,7 +2,7 @@ import { Link } from 'gatsby'
 import { useI18next } from 'gatsby-plugin-react-i18next'
 import { MdAdd, MdRemove, MdSort, MdMenu } from 'react-icons/md'
 
-import { activeLink, toc, tocItem, menu, listOpen } from './toc.module.scss'
+import { activeLink, toc, tocItem, menu, listOpen } from './navigation.module.scss'
 
 import { RepoToc, RepoTocLink } from 'typing'
 import { useMemo, useState } from 'react'
@@ -83,7 +83,7 @@ interface Props {
   data: RepoToc
 }
 
-export function Toc({ data }: Props) {
+export function Navigation({ data }: Props) {
   const { path } = useI18next()
   const active = useMemo(() => findActiveItem(path, data) ?? [], [path, data])
 

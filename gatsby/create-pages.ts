@@ -18,7 +18,7 @@ export const createDocs = async ({
   actions: { createPage, createRedirect },
   graphql,
 }: CreatePagesArgs) => {
-  const template = resolve(__dirname, '../src/templates/doc/index.tsx')
+  const template = resolve(__dirname, '../src/doc/index.tsx')
 
   const docs = await graphql<PageQueryData>(`
     {
