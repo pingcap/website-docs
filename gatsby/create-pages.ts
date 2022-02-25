@@ -10,12 +10,9 @@ import {
   genPDFDownloadURL,
   getRepo,
 } from './utils'
-import { mdxAstToToc } from './toc'
 import sig from 'signale'
-import { Root, List } from 'mdast'
 
-import { FrontMatter, Locale, Repo, RepoToc } from 'typing'
-import { generateConfig } from './path'
+import { FrontMatter } from 'typing'
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
