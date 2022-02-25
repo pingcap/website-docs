@@ -1,5 +1,5 @@
 import 'styles/templates/doc.scss'
-import 'github-markdown-css/github-markdown.css'
+import 'github-markdown-css/github-markdown-light.css'
 
 import * as Shortcodes from 'components/shortcodes'
 
@@ -86,14 +86,12 @@ export default function Doc({
         <Columns>
           <div className="column is-one-fifth">
             <div className="left-aside">
-              <Block>
-                <VersionSwitcher
-                  name={name}
-                  docVersionStable={docVersionStableMap}
-                  pathWithoutVersion={pathWithoutVersion}
-                  versions={versions}
-                />
-              </Block>
+              <VersionSwitcher
+                name={name}
+                docVersionStable={docVersionStableMap}
+                pathWithoutVersion={pathWithoutVersion}
+                versions={versions}
+              />
               <Navigation data={navigation} />
             </div>
           </div>
