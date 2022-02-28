@@ -4,10 +4,10 @@ import * as Shortcodes from 'components/shortcodes'
 
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
 import { useMemo } from 'react'
-import { Link, Trans } from 'gatsby-plugin-react-i18next'
+import { Trans } from 'gatsby-plugin-react-i18next'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import { Seo } from 'components/Seo'
 
@@ -118,7 +118,7 @@ export default function Doc({
                 availIn={availIn.version}
               />
 
-              <MDXProvider components={{...Shortcodes, Link}}>
+              <MDXProvider components={{ ...Shortcodes, Link }}>
                 <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
 
