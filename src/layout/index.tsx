@@ -6,6 +6,7 @@ import { Navbar } from 'layout/comp/Navbar'
 import { globalHistory } from '@reach/router'
 import { navigate } from 'gatsby'
 import 'styles/global.scss'
+import { Locale } from 'typing'
 
 declare global {
   interface Window {
@@ -14,12 +15,12 @@ declare global {
 }
 
 interface Props {
-  langSwitchable?: boolean
+  locale?: Locale[]
 }
 
 export function Layout({
   children,
-  langSwitchable = true,
+  locale = [Locale.en, Locale.zh],
 }: PropsWithChildren<Props>) {
   useEffect(() => {
     if (!window.DOCS_PINGCAP) {
@@ -32,7 +33,7 @@ export function Layout({
 
   return (
     <>
-      <Navbar langSwitchable={langSwitchable} />
+      <Navbar locale={locale} />
       <Section as="main">
         <Container>{children}</Container>
       </Section>

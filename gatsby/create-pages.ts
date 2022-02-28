@@ -1,18 +1,10 @@
-import { resolve, join } from 'path'
-import { existsSync } from 'fs'
+import { resolve } from 'path'
 
 import type { CreatePagesArgs } from 'gatsby'
-import {
-  getStable,
-  renameVersionByDoc,
-  replacePath,
-  genTOCSlug,
-  genPDFDownloadURL,
-  getRepo,
-} from './utils'
 import sig from 'signale'
 
-import { FrontMatter } from 'typing'
+import { Locale, Repo } from '../src/typing'
+import { generateConfig, generateUrl, generateNav } from './path'
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
@@ -36,9 +28,7 @@ export const createDocs = async ({
           slug
           parent {
             ... on File {
-              sourceInstanceName
               relativePath
-              name
             }
           }
         }
@@ -51,91 +41,58 @@ export const createDocs = async ({
   }
 
   const nodes = docs.data!.allMdx.nodes.map(node => {
-    // e.g. => zh/tidb-data-migration/master/benchmark-v1.0-ga => tidb-data-migration/master/benchmark-v1.0-ga
-    const slug = node.slug.slice(3)
-    const { sourceInstanceName: topFolder, relativePath, name } = node.parent
-    const [lang, ...pathWithoutLang] = relativePath.split('/') // [en|zh, pure path with .md]
-    const [doc, version, ...rest] = pathWithoutLang
-    node.realPath = rest.join('/')
-
-    const slugArray = slug.split('/')
-    // e.g. => tidb-data-migration/master/benchmark-v1.0-ga => benchmark-v1.0-ga
-    node.pathWithoutVersion = slugArray[slugArray.length - 1]
-    node.path = replacePath(slug, name, lang, node.pathWithoutVersion)
-    node.repo = getRepo(doc, lang)
-    node.ref = version
-    node.lang = lang
-    node.version = renameVersionByDoc(doc, version)
-    node.docVersionStable = JSON.stringify({
-      doc,
-      version: node.version,
-      stable: getStable(doc),
-    })
-
-    const filePathInDiffLang = resolve(
-      __dirname,
-      `../${topFolder}/${lang === 'en' ? 'zh' : 'en'}/${relativePath.slice(3)}`
-    )
-    node.langSwitchable = existsSync(filePathInDiffLang)
-
-    node.tocSlug = genTOCSlug(node.slug)
-    node.downloadURL = genPDFDownloadURL(slug, lang)
-
-    return node
+    const { config, name, filePath } = generateConfig(node.slug)
+    return { ...node, pathConfig: config, name, filePath }
   })
 
-  const versionsMap = nodes.reduce(
-    (acc, { lang, version, repo, pathWithoutVersion }) => {
-      const key = join(repo, pathWithoutVersion)
-      const arr = acc[lang][key]
-
-      if (arr) {
-        arr.push(version)
-      } else {
-        acc[lang][key] = [version]
+  const versionRecord = nodes.reduce(
+    (acc, { pathConfig, name }) => {
+      if (acc[pathConfig.locale][pathConfig.repo] == null) {
+        acc[pathConfig.locale][pathConfig.repo] = {}
       }
+
+      if (acc[pathConfig.locale][pathConfig.repo][name] == null) {
+        acc[pathConfig.locale][pathConfig.repo][name] = []
+      }
+
+      acc[pathConfig.locale][pathConfig.repo][name].push(pathConfig.version)
 
       return acc
     },
     {
-      en: {},
-      zh: {},
+      en: {} as Record<Repo, Record<string, string[]>>,
+      zh: {} as Record<Repo, Record<string, string[]>>,
     }
   )
 
   nodes.forEach(node => {
-    const {
-      parent,
-      id,
-      repo,
-      ref,
-      lang,
-      realPath,
-      pathWithoutVersion,
-      path,
-      docVersionStable,
-      langSwitchable,
-      tocSlug,
-      downloadURL
-    } = node
+    const { id, name, pathConfig, filePath } = node
+
+    const path = generateUrl(name, pathConfig)
+    const navUrl = generateNav(pathConfig)
+
+    const locale = [Locale.en, Locale.zh]
+      .map(l =>
+        versionRecord[l][pathConfig.repo]?.[name]?.includes(pathConfig.version)
+          ? l
+          : undefined
+      )
+      .filter(Boolean)
 
     createPage({
       path,
       component: template,
       context: {
         id,
-        layout: 'doc',
-        name: parent.name,
-        repo,
-        ref,
-        lang,
-        realPath,
-        pathWithoutVersion,
-        docVersionStable,
-        langSwitchable,
-        tocSlug,
-        downloadURL,
-        versions: versionsMap[lang][join(repo, pathWithoutVersion)],
+        name,
+        pathConfig,
+        // use for edit in github
+        filePath,
+        navUrl,
+        availIn: {
+          locale,
+          version: versionRecord[pathConfig.locale][pathConfig.repo][name],
+        },
       },
     })
 
@@ -155,13 +112,9 @@ export const createDocs = async ({
 interface PageQueryData {
   allMdx: {
     nodes: {
-      frontmatter: FrontMatter
+      id: string
+      frontmatter: { aliases: string[] }
       slug: string
-      parent: {
-        sourceInstanceName: string
-        relativePath: string
-        name: string
-      }
     }[]
   }
 }

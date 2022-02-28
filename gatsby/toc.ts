@@ -1,7 +1,7 @@
 import { ListItem, List, Link, Paragraph, Text } from 'mdast'
 
-import { RepoNav, RepoNavLink } from '../src/typing'
-import { generateUrl, PathConfig } from './path'
+import { RepoNav, RepoNavLink, PathConfig } from '../src/typing'
+import { generateUrl } from './path'
 
 export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoNav {
   return ast.map(node => {

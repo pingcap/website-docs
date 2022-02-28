@@ -1,16 +1,4 @@
 import {
-  show,
-  progress,
-  navbarBurger,
-  hasBorder,
-  logo,
-  main,
-  langSwitch,
-  langItem,
-  disabled,
-} from './navbar.module.scss'
-
-import {
   Navbar as BulmaNavbar,
   Container,
   NavbarBrand,
@@ -31,12 +19,24 @@ import { Progress } from '@seagreenio/react-bulma'
 import { SearchInput } from './Input'
 import clsx from 'clsx'
 import { setSearchValue } from 'state'
+import { Locale } from 'typing'
+import {
+  show,
+  progress,
+  navbarBurger,
+  hasBorder,
+  logo,
+  main,
+  langSwitch,
+  langItem,
+  disabled,
+} from './navbar.module.scss'
 
 interface Props {
-  langSwitchable: boolean
+  locale: Locale[]
 }
 
-export function Navbar({ langSwitchable }: Props) {
+export function Navbar({ locale }: Props) {
   const { BrandSVG } = useStaticQuery(graphql`
     query {
       BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
@@ -50,8 +50,8 @@ export function Navbar({ langSwitchable }: Props) {
   const dispatch = useDispatch()
   const { docInfo, searchValue } = useSelector(state => state) as any
 
-  const enDisabled = !langSwitchable && language === 'zh'
-  const zhDisabled = !langSwitchable && language === 'en'
+  const enDisabled = !locale.includes(Locale.en)
+  const zhDisabled = !locale.includes(Locale.zh)
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)

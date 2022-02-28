@@ -1,5 +1,3 @@
-import * as styles from './version-switcher.module.scss'
-
 import {
   Button,
   Dropdown,
@@ -8,100 +6,74 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Icon,
 } from '@seagreenio/react-bulma'
 import { Link, useI18next } from 'gatsby-plugin-react-i18next'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useMemo } from 'react'
+import { Locale, PathConfig, Repo } from 'typing'
+import { MdArrowDropDown } from 'react-icons/md'
+
 import {
-  appdev,
-  cloud,
-  convertVersionName,
-  dm,
-  operator,
-  tidb,
-} from 'lib/version'
+  button,
+  dropdown,
+  dropdownContent,
+  dropdownMenu,
+  dropdownTrigger,
+  noExist,
+} from './version-switcher.module.scss'
+import { docs } from '../../../docs.json'
+import { AllVersion } from '../../../gatsby/path'
+
+function renderVersion(version: string, pathConfig: PathConfig) {
+  if (version !== 'stable') return version
+  return (docs[pathConfig.repo] as { stable: string }).stable.replace(
+    'release-',
+    'v'
+  )
+}
 
 interface Props {
   name: string
-  docVersionStable: Record<string, any>
-  pathWithoutVersion: string
-  versions: string[]
+  pathConfig: PathConfig
+  availIn: string[]
 }
 
-export function VersionSwitcher({
-  name,
-  docVersionStable,
-  pathWithoutVersion,
-  versions,
-}: Props) {
+export function VersionSwitcher({ name, pathConfig, availIn }: Props) {
   const { t } = useI18next()
-  const { doc, version, stable: stableVersion } = docVersionStable
-
-  const [text, setText] = useState('')
-  const [dropdownItems, setDropdownItems] = useState([])
-
-  function handleRelativeDir() {
-    setText(version === 'stable' ? convertVersionName(stableVersion) : version)
-
-    switch (doc) {
-      case 'tidb':
-        setDropdownItems(tidb)
-        break
-      case 'tidb-data-migration':
-        setDropdownItems(dm)
-        break
-      case 'tidb-in-kubernetes':
-        setDropdownItems(operator)
-        break
-      case 'tidbcloud':
-        setDropdownItems(cloud)
-        break
-      case 'appdev':
-        setDropdownItems(appdev)
-        break
-      default:
-        break
-    }
-  }
-
-  useEffect(handleRelativeDir, [doc, version, stableVersion])
-
-  const renderItem = item =>
-    item === 'stable' ? convertVersionName(stableVersion) : item
 
   return (
-    <Dropdown className={styles.dropdown} hoverable>
-      <DropdownTrigger className={styles.dropdownTrigger}>
-        <Button className={styles.button} fullwidth>
-          <span>{text}</span>
-          <Icon name="mdi mdi-menu-down" />
+    <Dropdown className={dropdown} hoverable>
+      <DropdownTrigger className={dropdownTrigger}>
+        <Button className={button} fullwidth>
+          <span>{renderVersion(pathConfig.version, pathConfig)}</span>
+          <MdArrowDropDown />
         </Button>
       </DropdownTrigger>
-      <DropdownMenu className={styles.dropdownMenu}>
-        <DropdownContent className={styles.dropdownContent}>
-          {dropdownItems.map((item, i) => (
-            <Fragment key={item}>
-              {versions.indexOf(item) === -1 ? (
-                <DropdownItem as="div">
-                  <span
-                    className={styles.noExistSpan}
-                    data-tooltip={t('doc.notExist')}
-                    data-flow="right">
-                    {renderItem(item)}
-                  </span>
-                </DropdownItem>
-              ) : (
-                <DropdownItem
-                  as={Link}
-                  to={`/${doc}/${item}/${
-                    name === '_index' ? '' : pathWithoutVersion
-                  }`}>
-                  {renderItem(item)}
-                </DropdownItem>
-              )}
-              {i < dropdownItems.length - 1 && <DropdownDivider />}
-            </Fragment>
-          ))}
+      <DropdownMenu className={dropdownMenu}>
+        <DropdownContent className={dropdownContent}>
+          {AllVersion[pathConfig.repo][pathConfig.locale].map(
+            (version, i, arr) => (
+              <Fragment key={version}>
+                {availIn.indexOf(version) === -1 ? (
+                  <DropdownItem as="div">
+                    <span
+                      className={noExist}
+                      data-tooltip={t('doc.notExist')}
+                      data-flow="right">
+                      {renderVersion(version, pathConfig)}
+                    </span>
+                  </DropdownItem>
+                ) : (
+                  <DropdownItem
+                    // @ts-ignore
+                    as={Link}
+                    to={`/${pathConfig.repo}/${version}/${name}`}>
+                    {renderVersion(version, pathConfig)}
+                  </DropdownItem>
+                )}
+                {i < arr.length - 1 && <DropdownDivider />}
+              </Fragment>
+            )
+          )}
         </DropdownContent>
       </DropdownMenu>
     </Dropdown>

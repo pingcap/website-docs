@@ -29,7 +29,7 @@
       },
       "tidb-in-kubernetes": {
         "firstContext": "You are viewing the documentation for an older major version of the TiDB Operator tool (TiDB Operator {{ curDocVersion }}).",
-        "secondContext": "TiDB Operator {{ stableVersion }}, the latest major version of TiDB Operator, is now stable and recommended for general use. To view this page for TiDB Operator { stableVersion }, click <0>here</0>."
+        "secondContext": "TiDB Operator {{ stableVersion }}, the latest major version of TiDB Operator, is now stable and recommended for general use. To view this page for TiDB Operator {{ stableVersion }}, click <0>here</0>."
       },
       "tidb-data-migration": {
         "firstContext": "You are viewing the documentation for an older major version of the TiDB Data Migration tool (TiDB Data Migration {{ curDocVersion }}).",

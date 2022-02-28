@@ -1,21 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Trans } from 'gatsby-plugin-react-i18next'
 import axios from 'axios'
-import { wrapPathWithLang } from 'lib/utils'
 import { commitInfo } from './git-commit.module.scss'
+import { PathConfig } from 'typing'
+import { getRepo } from '../../../gatsby/path'
 
 interface Props {
-  repoInfo: Record<string, any>
-  lang: string
+  pathConfig: PathConfig
   title: string
+  filePath: string
 }
 
-export function GitCommitInfo({ repoInfo, lang, title }: Props) {
-  const { repo, ref, realPath } = repoInfo
-  const path = wrapPathWithLang(repo, realPath, lang)
-
-  const [latestCommit, setLatestCommit] = useState(null)
+export function GitCommitInfo({ pathConfig, title, filePath }: Props) {
+  const [latestCommit, setLatestCommit] = useState(null as any)
+  const repo = useMemo(() => getRepo(pathConfig), [pathConfig])
 
   useEffect(() => {
     async function fetchLatestCommit() {
@@ -23,8 +22,8 @@ export function GitCommitInfo({ repoInfo, lang, title }: Props) {
         const res = (
           await axios.get(`https://api.github.com/repos/${repo}/commits`, {
             params: {
-              sha: ref,
-              path,
+              sha: pathConfig.branch,
+              path: filePath,
               per_page: 1,
             },
           })
@@ -37,14 +36,14 @@ export function GitCommitInfo({ repoInfo, lang, title }: Props) {
     }
 
     fetchLatestCommit()
-  }, [repo, ref, path])
+  }, [pathConfig, filePath])
 
   return (
     <div className={commitInfo}>
       {latestCommit && (
         <>
           <a
-            href={`https://github.com/${repo}/blob/${ref}/${path}`}
+            href={`https://github.com/${repo}/blob/${pathConfig.branch}/${filePath}`}
             target="_blank"
             rel="noreferrer">
             {title}

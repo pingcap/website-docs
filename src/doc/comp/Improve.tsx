@@ -1,19 +1,20 @@
 import { Trans } from 'gatsby-plugin-react-i18next'
-import { wrapPathWithLang } from 'lib/utils'
+import { PathConfig } from 'typing'
+
+import { getRepo } from '../../../gatsby/path'
 
 interface Props {
-  repoInfo: Record<string, any>
-  lang: string
+  pathConfig: PathConfig
+  filePath: string
 }
 
-export function Improve({ repoInfo, lang }: Props) {
-  const { repo, ref, realPath } = repoInfo
-  const path = wrapPathWithLang(repo, realPath, lang)
-
+export function Improve({ pathConfig, filePath }: Props) {
   return (
     <a
       className="doc-help-link improve"
-      href={`https://github.com/${repo}/edit/${ref}/${path}`}
+      href={`https://github.com/${getRepo(pathConfig)}/edit/${
+        pathConfig.branch
+      }/${filePath}`}
       target="_blank"
       rel="noreferrer">
       <Trans i18nKey="doc.improve" />

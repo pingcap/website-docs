@@ -1,18 +1,17 @@
 import { graphql, useStaticQuery } from 'gatsby'
-
 import { Trans } from 'gatsby-plugin-react-i18next'
 import { useLocation } from '@reach/router'
-import { wrapPathWithLang } from 'lib/utils'
+
+import { PathConfig } from 'typing'
+
+import { getRepo } from '../../../gatsby/path'
 
 interface Props {
-  repoInfo: Record<string, any>
-  lang: string
+  pathConfig: PathConfig
+  filePath: string
 }
 
-export function FeedbackDoc({ repoInfo, lang }: Props) {
-  const { repo, ref, realPath } = repoInfo
-  const path = wrapPathWithLang(repo, realPath, lang)
-
+export function FeedbackDoc({ pathConfig, filePath }: Props) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -30,7 +29,11 @@ export function FeedbackDoc({ repoInfo, lang }: Props) {
   return (
     <a
       className="doc-help-link feedback"
-      href={`https://github.com/${repo}/issues/new?body=File:%20[/${ref}/${path}](${site.siteMetadata.siteUrl}${pathname})`}
+      href={`https://github.com/${getRepo(
+        pathConfig
+      )}/issues/new?body=File:%20[/${pathConfig.branch}/${filePath}](${
+        site.siteMetadata.siteUrl
+      }${pathname})`}
       target="_blank"
       rel="noreferrer">
       <Trans i18nKey="doc.feedback" />

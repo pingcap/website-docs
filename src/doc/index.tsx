@@ -1,19 +1,14 @@
 import 'styles/templates/doc.scss'
-import 'github-markdown-css/github-markdown-light.css'
 
 import * as Shortcodes from 'components/shortcodes'
 
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
-import { useEffect, useMemo } from 'react'
-import { Trans } from 'gatsby-plugin-react-i18next'
+import { useMemo } from 'react'
+import { Link, Trans } from 'gatsby-plugin-react-i18next'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
-import { useDispatch } from 'react-redux'
-import { useLocation } from '@reach/router'
 
-import replaceInternalHref from 'lib/replaceInternalHref'
-import { setDocInfo } from 'state'
 import { Seo } from 'components/Seo'
 
 import { DeprecationNotice } from './comp/DeprecationNotice'
@@ -27,70 +22,58 @@ import {} from './doc.module.scss'
 import { Layout } from 'layout'
 import { VersionSwitcher } from './comp/VersionSwitcher'
 import { Toc } from './comp/Toc'
+import { FrontMatter, PageContext, Repo, RepoNav, TableOfContent } from 'typing'
+import { getStable } from '../../gatsby/utils'
+import { generateUrl } from '../../gatsby/path'
+
+interface Props {
+  pageContext: PageContext
+  data: {
+    site: {
+      siteMetadata: {
+        siteUrl: string
+      }
+    }
+    mdx: {
+      frontmatter: FrontMatter
+      body: string
+      tableOfContents: TableOfContent
+    }
+    navigation: {
+      navigation: RepoNav
+    }
+  }
+}
 
 export default function Doc({
-  pageContext: {
-    name,
-    repo,
-    ref,
-    lang,
-    realPath,
-    docVersionStable,
-    pathWithoutVersion,
-    langSwitchable,
-    downloadURL,
-    versions,
-  },
+  pageContext: { name, availIn, pathConfig, filePath },
   data,
-}) {
-  const { pathname } = useLocation()
-
+}: Props) {
   const {
     site,
     mdx: { frontmatter, tableOfContents, body },
     navigation: { navigation },
   } = data
-  const docVersionStableMap = JSON.parse(docVersionStable)
-  const { doc, version, stable } = docVersionStableMap
 
   const tocData = useMemo(() => {
-    if (tableOfContents.items.length === 1) {
-      return tableOfContents.items[0].items
+    if (tableOfContents.items!.length === 1) {
+      return tableOfContents.items![0].items
     }
     return tableOfContents.items
   }, [tableOfContents.items])
 
-  const repoInfo = {
-    repo,
-    ref,
-    realPath,
-  }
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    replaceInternalHref(lang, doc, version)
-
-    dispatch(
-      setDocInfo({
-        lang,
-        type: doc,
-        version,
-      })
-    )
-  }, [dispatch, lang, doc, version])
+  const stableBranch = getStable(pathConfig.repo)
 
   return (
-    <Layout langSwitchable={langSwitchable}>
+    <Layout locale={availIn.locale}>
       <article className="PingCAP-Doc">
         <Columns>
           <div className="column is-one-fifth">
             <div className="left-aside">
               <VersionSwitcher
                 name={name}
-                docVersionStable={docVersionStableMap}
-                pathWithoutVersion={pathWithoutVersion}
-                versions={versions}
+                pathConfig={pathConfig}
+                availIn={availIn.version}
               />
               <Navigation data={navigation} />
             </div>
@@ -102,26 +85,26 @@ export default function Doc({
             meta={[
               {
                 name: 'doc:lang',
-                content: lang,
+                content: pathConfig.locale,
               },
               {
                 name: 'doc:type',
-                content: doc,
+                content: pathConfig.repo,
               },
               {
                 name: 'doc:version',
-                content: version,
+                content: pathConfig.branch,
               },
             ]}
             link={[
-              ...(version !== stable
+              ...(pathConfig.branch !== stableBranch && stableBranch != null
                 ? [
                     {
                       rel: 'canonical',
-                      href: `${site.siteMetadata.siteUrl}${pathname.replace(
-                        version,
-                        'stable'
-                      )}`,
+                      href: `${site.siteMetadata.siteUrl}${generateUrl(name, {
+                        ...pathConfig,
+                        branch: stableBranch,
+                      })}`,
                     },
                   ]
                 : []),
@@ -129,23 +112,21 @@ export default function Doc({
           />
           <Column size={7}>
             <div className="markdown-body doc-content">
-              {doc !== 'tidbcloud' && doc !== 'appdev' && (
-                <DeprecationNotice
-                  name={name}
-                  docVersionStable={docVersionStableMap}
-                  versions={versions}
-                />
-              )}
+              <DeprecationNotice
+                name={name}
+                pathConfig={pathConfig}
+                availIn={availIn.version}
+              />
 
-              <MDXProvider components={Shortcodes}>
+              <MDXProvider components={{...Shortcodes, Link}}>
                 <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
 
-              {doc !== 'tidbcloud' && (
+              {pathConfig.repo !== Repo.tidbcloud && (
                 <GitCommitInfo
-                  repoInfo={repoInfo}
-                  lang={lang}
+                  pathConfig={pathConfig}
                   title={frontmatter.title}
+                  filePath={filePath}
                 />
               )}
             </div>
@@ -154,12 +135,12 @@ export default function Doc({
           <Column>
             <div className="right-aside">
               <Block>
-                <DownloadPDF downloadURL={downloadURL} />
-                {doc !== 'tidbcloud' && (
+                <DownloadPDF pathConfig={pathConfig} />
+                {pathConfig.repo !== 'tidbcloud' && (
                   <>
-                    <FeedbackDoc repoInfo={repoInfo} lang={lang} />
-                    {version === 'dev' && (
-                      <Improve repoInfo={repoInfo} lang={lang} />
+                    <FeedbackDoc pathConfig={pathConfig} filePath={filePath} />
+                    {pathConfig.version === 'dev' && (
+                      <Improve pathConfig={pathConfig} filePath={filePath} />
                     )}
                   </>
                 )}
@@ -173,7 +154,7 @@ export default function Doc({
             </div>
           </Column>
 
-          <UserFeedback title={frontmatter.title} locale={lang} />
+          <UserFeedback title={frontmatter.title} locale={pathConfig.locale} />
         </Columns>
       </article>
     </Layout>
@@ -181,7 +162,7 @@ export default function Doc({
 }
 
 export const query = graphql`
-  query ($id: String, $language: String!, $tocSlug: String!) {
+  query ($id: String, $language: String!, $navUrl: String!) {
     site {
       siteMetadata {
         siteUrl
@@ -197,6 +178,10 @@ export const query = graphql`
       tableOfContents
     }
 
+    navigation: mdx(slug: { eq: $navUrl }) {
+      navigation
+    }
+
     locales: allLocale(filter: { language: { eq: $language } }) {
       edges {
         node {
@@ -205,10 +190,6 @@ export const query = graphql`
           language
         }
       }
-    }
-
-    navigation: mdx(slug: { eq: $tocSlug }) {
-      navigation
     }
   }
 `

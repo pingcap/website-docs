@@ -18,7 +18,15 @@ export enum Locale {
   zh = 'zh',
 }
 
-export interface PageData {}
+export interface PageContext {
+  name: string
+  pathConfig: PathConfig
+  filePath: string
+  availIn: {
+    locale: Locale[]
+    version: string[]
+  }
+}
 
 export interface RepoNavLink {
   content: ({ code: boolean; value: string } | string)[]
@@ -32,4 +40,11 @@ export interface TableOfContent {
   title: string
   url: string
   items?: TableOfContent[]
+}
+
+export interface PathConfig {
+  repo: Repo
+  locale: Locale
+  branch: string
+  version: string
 }

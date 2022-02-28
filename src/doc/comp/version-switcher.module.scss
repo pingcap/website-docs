@@ -2,9 +2,10 @@
 
 .dropdown {
   width: 100%;
+  margin-bottom: 1.5rem;
 }
 
-.dropdownTrigger {
+.dropdown-trigger {
   width: 100%;
 }
 
@@ -12,15 +13,15 @@
   justify-content: space-between !important;
 }
 
-.dropdownMenu {
+.dropdown-menu {
   min-width: 100%;
 }
 
-.dropdownContent {
+.dropdown-content {
   border: 1px solid $border;
 }
 
-.noExistSpan {
+.no-exist {
   color: $grey;
   text-decoration: line-through;
 }
