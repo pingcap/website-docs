@@ -27,7 +27,7 @@ module.exports = function ({
   visit(markdownAST, (node: any) => {
     if (Array.isArray(node.children)) {
       node.children = node.children.flatMap((node: any) => {
-        if (node.type === 'link') {
+        if (node.type === 'link' && !node.url.startsWith('#')) {
           const ele = node as Link
 
           if (ele.url.startsWith('http')) {
