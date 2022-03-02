@@ -17,6 +17,7 @@ ul.tabs {
   }
 
   a {
+    $color: #8688bc;
     display: block;
     padding: 0.5em 1em;
     margin-bottom: -1px;
@@ -27,11 +28,19 @@ ul.tabs {
       background-color: #f5f5f5;
     }
 
+    &.normal {
+      color: $color;
+    }
+
     &.active {
       border-radius: 4px 4px 0 0;
       border: 1px solid #dbdbdb;
+      background-color: $color;
       border-bottom-color: transparent;
-      color: #485fc7;
+      color: white;
+      &:hover {
+        color: white;
+      }
     }
   }
 }

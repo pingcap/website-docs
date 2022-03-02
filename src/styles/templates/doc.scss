@@ -13,6 +13,7 @@ $top: $navbar-height + 1rem;
     max-height: calc(100vh - #{$top});
     padding-right: 1rem;
     overflow-y: auto;
+    scrollbar-gutter: stable;
   }
 
   // Custom markdown body

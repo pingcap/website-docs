@@ -1,4 +1,4 @@
-import { tabs, active, hidden } from './simple-tab.module.scss'
+import { tabs, active, normal, hidden } from './simple-tab.module.scss'
 
 import { ReactElement, useEffect, useState } from 'react'
 import { useLocation } from '@reach/router'
@@ -29,7 +29,7 @@ export function SimpleTab({
           <li key={child.props.label} id={child.props.label}>
             <a
               href={'#' + child.props.label}
-              className={clsx(activeTab === index && active)}>
+              className={activeTab === index ? active : normal}>
               {child.props.label}
             </a>
           </li>

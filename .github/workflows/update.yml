@@ -122,9 +122,9 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-3-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-gatsby-cache-4-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-3-
+            ${{ runner.os }}-gatsby-cache-4-
 
       - name: Build website
         env:
