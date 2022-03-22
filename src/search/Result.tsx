@@ -35,7 +35,7 @@ export const SearchResult = ({ results, searched }: Props) => (
                   <div
                     className={title}
                     dangerouslySetInnerHTML={{
-                      __html: r._highlightResult.hierarchy.lvl0.value,
+                      __html: r._highlightResult.hierarchy.lvl0?.value,
                     }}
                   />
                 </a>

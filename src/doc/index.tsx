@@ -3,11 +3,12 @@ import 'styles/templates/doc.scss'
 import * as Shortcodes from 'components/shortcodes'
 
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { Trans } from 'gatsby-plugin-react-i18next'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
+import { useDispatch } from 'react-redux'
 
 import { Seo } from 'components/Seo'
 
@@ -25,6 +26,7 @@ import { Toc } from './comp/Toc'
 import { FrontMatter, PageContext, Repo, RepoNav, TableOfContent } from 'typing'
 import { getStable } from '../../gatsby/utils'
 import { generateUrl } from '../../gatsby/path'
+import { setDocInfo } from 'state'
 
 interface Props {
   pageContext: PageContext
@@ -63,6 +65,19 @@ export default function Doc({
   }, [tableOfContents.items])
 
   const stableBranch = getStable(pathConfig.repo)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(
+      setDocInfo({
+        lang: pathConfig.locale,
+        type: pathConfig.repo,
+        version: pathConfig.version,
+      })
+    )
+  }, [dispatch, pathConfig])
+
 
   return (
     <Layout locale={availIn.locale}>
