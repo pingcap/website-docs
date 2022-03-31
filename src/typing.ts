@@ -46,5 +46,5 @@ export interface PathConfig {
   repo: Repo
   locale: Locale
   branch: string
-  version: string
+  version: string | null
 }

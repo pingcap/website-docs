@@ -60,8 +60,8 @@ export const createDocs = async ({
       return acc
     },
     {
-      en: {} as Record<Repo, Record<string, string[]>>,
-      zh: {} as Record<Repo, Record<string, string[]>>,
+      en: {} as Record<Repo, Record<string, (string | null)[]>>,
+      zh: {} as Record<Repo, Record<string, (string | null)[]>>,
     }
   )
 

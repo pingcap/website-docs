@@ -40,7 +40,7 @@ export function renameVersionByDoc(doc: Repo, version: string) {
     case 'appdev':
       return renameVersion(version, getStable(doc))
     case 'tidbcloud':
-      return 'public-preview'
+      return
   }
 }
 

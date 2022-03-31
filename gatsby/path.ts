@@ -5,14 +5,14 @@ export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? '' : '/zh'
 
   if (filename === '') {
-    return `${lang}/${config.repo}/${config.version}`
+    return `${lang}/${config.repo}/${config.version ? config.version : ''}`
   }
 
-  return `${lang}/${config.repo}/${config.version}/${filename}`
+  return `${lang}/${config.repo}/${config.version ? config.version + '/': ''}${filename}`
 }
 
 export function generatePdfUrl(config: PathConfig) {
-  return `${config.repo}-${config.version}-${config.locale}-manual.pdf`
+  return `${config.repo}-${config.version ? config.version + '-': ''}${config.locale}-manual.pdf`
 }
 
 export function generateNav(config: PathConfig) {
@@ -65,7 +65,7 @@ function branchToVersion(repo: Repo, branch: string) {
       return 'dev'
 
     case Repo.tidbcloud:
-      return 'public-preview'
+      return null
   }
 }
 
@@ -77,9 +77,9 @@ export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
       branchToVersion(repo, v)
     )
     return acc
-  }, {} as Record<Locale, string[]>)
+  }, {} as Record<Locale, (string | null)[]>)
   return acc
-}, {} as Record<Repo, Record<Locale, string[]>>)
+}, {} as Record<Repo, Record<Locale, (string | null)[]>>)
 
 export function getRepo(config: PathConfig) {
   const { languages } = CONFIG.docs[config.repo]

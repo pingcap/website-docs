@@ -123,7 +123,7 @@ export function Navbar({ locale }: Props) {
                 // @ts-ignore
                 as={Link}
                 className={main}
-                to="/tidbcloud/public-preview">
+                to="/tidbcloud/">
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
