@@ -24,6 +24,10 @@ import { docs } from '../../../docs.json'
 import { AllVersion } from '../../../gatsby/path'
 
 function renderVersion(version: string | null, pathConfig: PathConfig) {
+  const isDmr =
+    (docs[pathConfig.repo] as { dmr: string[] }).dmr?.includes(version || '') ??
+    false
+  if (isDmr) return `${version} (DMR)`
   if (version !== 'stable') return version
   return (docs[pathConfig.repo] as { stable: string }).stable.replace(
     'release-',

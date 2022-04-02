@@ -1,7 +1,7 @@
 {
   "docs": {
     "tidb": {
-      "stable": "release-6.0",
+      "stable": "release-5.4",
       "languages": {
         "en": {
           "repo": "pingcap/docs",
@@ -36,7 +36,8 @@
           ]
         }
       },
-      "deprecated": ["v2.1", "v3.0", "v3.1"]
+      "deprecated": ["v2.1", "v3.0", "v3.1"],
+      "dmr": ["v6.0"]
     },
     "tidb-data-migration": {
       "languages": {
