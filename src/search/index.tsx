@@ -72,7 +72,7 @@ export default function Search() {
   const toAlgoliaVersion = version =>
     version === 'stable'
       ? convertVersionName(replaceStableVersion(selectedType))
-      : version
+      : version !== 'null' ? version : null
   const [selectedVersion, _setSelectedVersion] = useState(
     toAlgoliaVersion(version)
   )
@@ -140,14 +140,14 @@ export default function Search() {
 
     setSelectedType(match)
     setSelectedVersionList(versionList)
-    setSelectedVersion(versionList[0])
+    setSelectedVersion(versionList ? versionList[0] : null)
   }
 
   function execSearch() {
     dispatch(setLoading(true))
 
     const index = algoliaClient.initIndex(
-      `${language}-${selectedType}-${selectedVersion}`
+      `${language}-${selectedType}${selectedVersion ? '-' + selectedVersion : ''}`
     )
 
     index
@@ -162,7 +162,7 @@ export default function Search() {
   }
 
   useEffect(() => {
-    if (selectedType && selectedVersion && query) {
+    if (selectedType && query) {
       execSearch()
     } else {
       setResults([])
@@ -193,23 +193,25 @@ export default function Search() {
             ))}
           </div>
 
-          <div className={select}>
-            <span className={optionLabel}>
-              <Trans i18nKey="search.version" />
-            </span>
+          {selectedVersionList && (
+            <div className={select}>
+              <span className={optionLabel}>
+                <Trans i18nKey="search.version" />
+              </span>
 
-            {selectedVersionList.map(version => (
-              <button
-                key={version}
-                className={clsx(
-                  optionItem,
-                  selectedVersion === toAlgoliaVersion(version) && isActive
-                )}
-                onClick={() => setSelectedVersion(toAlgoliaVersion(version))}>
-                {toAlgoliaVersion(version)}
-              </button>
-            ))}
-          </div>
+              {selectedVersionList.map(version => (
+                <button
+                  key={version}
+                  className={clsx(
+                    optionItem,
+                    selectedVersion === toAlgoliaVersion(version) && isActive
+                  )}
+                  onClick={() => setSelectedVersion(toAlgoliaVersion(version))}>
+                  {toAlgoliaVersion(version)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div style={{ position: 'relative' }}>

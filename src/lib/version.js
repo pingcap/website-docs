@@ -35,7 +35,7 @@ export const dm = docs['tidb-data-migration']['languages']['en'][
 export const operator = docs['tidb-in-kubernetes']['languages']['en'][
   'versions'
 ].map(d => convertVersionName(d, operatorStable))
-export const cloud = ['public-preview']
+export const cloud = null
 export const appdev =
   docs['appdev']['languages']['en']['versions'].map(convertVersionName)
 

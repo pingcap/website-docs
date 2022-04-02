@@ -78,18 +78,19 @@ export default function Doc({
     )
   }, [dispatch, pathConfig])
 
-
   return (
     <Layout locale={availIn.locale}>
       <article className="PingCAP-Doc">
         <Columns>
           <div className="column is-one-fifth">
             <div className="left-aside">
-              <VersionSwitcher
-                name={name}
-                pathConfig={pathConfig}
-                availIn={availIn.version}
-              />
+              {pathConfig.repo !== 'tidbcloud' && (
+                <VersionSwitcher
+                  name={name}
+                  pathConfig={pathConfig}
+                  availIn={availIn.version}
+                />
+              )}
               <Navigation data={navigation} />
             </div>
           </div>

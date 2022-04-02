@@ -23,7 +23,7 @@ import {
 import { docs } from '../../../docs.json'
 import { AllVersion } from '../../../gatsby/path'
 
-function renderVersion(version: string, pathConfig: PathConfig) {
+function renderVersion(version: string | null, pathConfig: PathConfig) {
   if (version !== 'stable') return version
   return (docs[pathConfig.repo] as { stable: string }).stable.replace(
     'release-',
@@ -53,7 +53,7 @@ export function VersionSwitcher({ name, pathConfig, availIn }: Props) {
           {AllVersion[pathConfig.repo][pathConfig.locale].map(
             (version, i, arr) => (
               <Fragment key={version}>
-                {availIn.indexOf(version) === -1 ? (
+                {version && availIn.indexOf(version) === -1 ? (
                   <DropdownItem as="div">
                     <span
                       className={noExist}
