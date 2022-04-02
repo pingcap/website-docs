@@ -1,4 +1,5 @@
 yarn download:tidb:zh
+yarn download:tidb:zh --ref release-6.0
 yarn download:tidb:zh --ref release-5.4
 yarn download:tidb:zh --ref release-5.3
 yarn download:tidb:zh --ref release-5.2
