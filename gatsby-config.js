@@ -8,7 +8,7 @@ module.exports = {
     description:
       'Browse documentation about TiDB and its ecosystem, including TiDB Operator, TiDB Data Migration, Database Tools, TiUP, etc.',
     author: '@PingCAP',
-    siteUrl: 'https://docs.pingcap.com',
+    siteUrl: 'https://tidb-doc-6-0-preview.netlify.app',
   },
   jsxRuntime: 'automatic',
   plugins: [
