@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 
 import { Seo } from 'components/Seo'
 
-import { DeprecationNotice } from './comp/DeprecationNotice'
+import { CustomNotice } from './comp/CustomNotice'
 import { DownloadPDF } from './comp/DownloadPDF'
 import { FeedbackDoc } from './comp/Feedback'
 import { Improve } from './comp/Improve'
@@ -128,7 +128,7 @@ export default function Doc({
           />
           <Column size={7}>
             <div className="markdown-body doc-content">
-              <DeprecationNotice
+              <CustomNotice
                 name={name}
                 pathConfig={pathConfig}
                 availIn={availIn.version}

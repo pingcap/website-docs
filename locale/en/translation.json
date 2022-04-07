@@ -35,6 +35,12 @@
         "firstContext": "You are viewing the documentation for an older major version of the TiDB Data Migration tool (TiDB Data Migration {{ curDocVersion }}).",
         "secondContext": "TiDB Data Migration {{ stableVersion }}, the latest major version of TiDB Data Migration, is now stable and recommended for general use. To view this page for TiDB Data Migration {{ stableVersion }}, click <0>here</0>."
       }
+    },
+    "dmr": {
+      "tidb": {
+        "firstContext": "You are viewing the documentation of TiDB {{ curDocVersion }} (DMR). TiDB does not provide bug fixes for a Development Milestone Release (DMR). DMR is only for trying out new features and is not recommended for production environments.",
+        "secondContext": "For production environments, please use <0>the latest stable version</0> of the TiDB database."
+      }
     }
   },
   "shortcodes": {

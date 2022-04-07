@@ -33,6 +33,12 @@
         "firstContext": "你正在查看 TiDB Data Migration 工具的较旧主版本 (TiDB Data Migration {{ curDocVersion }}) 的文档。",
         "secondContext": "TiDB Data Migration {{ stableVersion }} 是 TiDB Data Migration 的最新稳定主版本，如无特殊需求，建议使用该版本。点击<0>此处</0>查看 TiDB Data Migration {{ stableVersion }} 文档。"
       }
+    },
+    "dmr": {
+      "tidb": {
+        "firstContext": "你正在查看 TiDB {{ curDocVersion }} (DMR) 的文档。TiDB 不提供基于 DMR 的 Bug 修订版本，DMR 仅适用于需要试用最新功能的用户，不推荐在生产环境使用。",
+        "secondContext": "如无特殊需求，建议使用 TiDB 数据库的<0>最新稳定版本</0>。"
+      }
     }
   },
   "shortcodes": {
