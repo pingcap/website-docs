@@ -2,6 +2,8 @@ name: Incremental Build Triggered By Push Events
 
 on: repository_dispatch
 
+concurrency: prod_environment
+
 jobs:
   build:
     name: Retrieve docs and deploy the website
@@ -14,11 +16,6 @@ jobs:
       - name: Bailout
         if: ${{ !github.event.client_payload.sha }}
         run: exit 1
-
-      # make sure there is only one workflow running
-      - name: Turnstyle
-        if: ${{ !env.ACT }}
-        uses: softprops/turnstyle@v1
 
       - name: Set known_hosts
         if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
@@ -62,18 +59,19 @@ jobs:
         id: docs-cache
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-4-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-202204-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-4-
+            ${{ runner.os }}-docs-cache-202204-
 
       - name: Check file exists
+        id: check-file-exists
         if: github.event.client_payload.download_type != 'full'
         run: |
-          [ "$(ls -A ./markdown-pages)" ] || exit 1
+          [ "$(ls -A ./markdown-pages)" ] && echo "::set-output name=isEmpty::false" || echo "::set-output name=isEmpty::true"
 
       # if download_type is full, download all docs
       - name: Download all docs
-        if: github.event.client_payload.download_type == 'full'
+        if: github.event.client_payload.download_type == 'full' || ${{ steps.check-file-exists.outputs.isEmpty }} == 'true'
         env:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -122,9 +120,9 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-4-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-gatsby-cache-202204-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-4-
+            ${{ runner.os }}-gatsby-cache-202204-
 
       - name: Build website
         env:
