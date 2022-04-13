@@ -1,9 +1,10 @@
-import { getContent, http } from './http.js'
+import { getContent, http, getArchiveFile } from './http.js'
 import stream, { pipeline } from 'stream'
 
 import fs from 'fs'
 import path from 'path'
 import sig from 'signale'
+import AdmZip from 'adm-zip'
 
 const IMAGE_CDN_PREFIX = 'https://download.pingcap.com/images'
 export const imageCDNs = {
@@ -126,5 +127,64 @@ export async function writeContent(download_url, destPath, pipelines = []) {
     if (err) {
       sig.error('Pipeline failed:', err)
     }
+  })
+}
+
+/**
+ * Similar to writeContent for retrieveAllMDs, writeFile is used for retrieveAllMDsFromZip.
+ * @param {string} targetPath
+ * @param {iterable: Iterable<any> | AsyncIterable<any>} contents
+ * @param {any[]} pipelines
+ */
+function writeFile(targetPath, contents, pipelines) {
+  fs.mkdir(path.dirname(targetPath), { recursive: true }, function (err) {
+    if (err) {
+      sig.error('write file error', entryName, `${err}`)
+    }
+
+    const readableStream = stream.Readable.from(contents)
+    const writeStream = fs.createWriteStream(targetPath)
+    writeStream.on('close', () => sig.success('writeStream:', targetPath))
+
+    pipeline(readableStream, ...pipelines.map(p => p()), writeStream, err => {
+      if (err) {
+        sig.error('Pipeline failed:', err)
+      }
+    })
+  })
+}
+
+export async function retrieveAllMDsFromZip(metaInfo, destDir, options) {
+  const { repo, ref } = metaInfo
+  const { ignore = [], pipelines = [] } = options
+
+  const archiveFileName = `archive-${new Date().getTime()}.zip`
+  // Download archive
+  await getArchiveFile(repo, ref, archiveFileName)
+  sig.success('download archive file', archiveFileName)
+
+  sig.start('unzip and filter files', archiveFileName)
+  // Unzip archive
+  const zip = new AdmZip(archiveFileName)
+  const zipEntries = zip.getEntries()
+
+  zipEntries.forEach(function (zipEntry) {
+    // console.log(zipEntry.toString()) // outputs zip entries information
+    const { entryName } = zipEntry
+    sig.info('unzip file(entryName):', entryName)
+    // Ignore if not markdown file
+    if (!entryName.endsWith('.md')) {
+      return
+    }
+    const relativePath = entryName.split(`-${ref}/`).pop()
+    const relativePathNameList = relativePath.split('/')
+    const filteredArray = ignore.filter(value =>
+      relativePathNameList.includes(value)
+    )
+    // Ignore if file path contains any ignore words
+    if (filteredArray?.length > 0) {
+      return
+    }
+    writeFile(`${destDir}/${relativePath}`, zipEntry.getData(), pipelines)
   })
 }
