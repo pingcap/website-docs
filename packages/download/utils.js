@@ -154,37 +154,51 @@ function writeFile(targetPath, contents, pipelines) {
   })
 }
 
-export async function retrieveAllMDsFromZip(metaInfo, destDir, options) {
+export async function retrieveAllMDsFromZip(
+  metaInfo,
+  destDir,
+  options,
+  isRetry = false
+) {
   const { repo, ref } = metaInfo
   const { ignore = [], pipelines = [] } = options
 
-  const archiveFileName = `archive-${new Date().getTime()}.zip`
+  const archiveFileName = `archive-${ref}-${new Date().getTime()}.zip`
   // Download archive
   await getArchiveFile(repo, ref, archiveFileName)
   sig.success('download archive file', archiveFileName)
 
   sig.start('unzip and filter files', archiveFileName)
-  // Unzip archive
-  const zip = new AdmZip(archiveFileName)
-  const zipEntries = zip.getEntries()
+  try {
+    // Unzip archive
+    const zip = new AdmZip(archiveFileName)
+    const zipEntries = zip.getEntries()
 
-  zipEntries.forEach(function (zipEntry) {
-    // console.log(zipEntry.toString()) // outputs zip entries information
-    const { entryName } = zipEntry
-    sig.info('unzip file(entryName):', entryName)
-    // Ignore if not markdown file
-    if (!entryName.endsWith('.md')) {
+    zipEntries.forEach(function (zipEntry) {
+      // console.log(zipEntry.toString()) // outputs zip entries information
+      const { entryName } = zipEntry
+      sig.info('unzip file(entryName):', entryName)
+      // Ignore if not markdown file
+      if (!entryName.endsWith('.md')) {
+        return
+      }
+      const relativePath = entryName.split(`-${ref}/`).pop()
+      const relativePathNameList = relativePath.split('/')
+      const filteredArray = ignore.filter(value =>
+        relativePathNameList.includes(value)
+      )
+      // Ignore if file path contains any ignore words
+      if (filteredArray?.length > 0) {
+        return
+      }
+      writeFile(`${destDir}/${relativePath}`, zipEntry.getData(), pipelines)
+    })
+  } catch (error) {
+    sig.error(`unzip ${archiveFileName} error`, error)
+    if (isRetry) {
       return
     }
-    const relativePath = entryName.split(`-${ref}/`).pop()
-    const relativePathNameList = relativePath.split('/')
-    const filteredArray = ignore.filter(value =>
-      relativePathNameList.includes(value)
-    )
-    // Ignore if file path contains any ignore words
-    if (filteredArray?.length > 0) {
-      return
-    }
-    writeFile(`${destDir}/${relativePath}`, zipEntry.getData(), pipelines)
-  })
+    sig.info(`retry retrieve`, ref)
+    return retrieveAllMDsFromZip(metaInfo, destDir, options, true)
+  }
 }
