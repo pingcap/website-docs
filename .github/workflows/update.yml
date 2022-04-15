@@ -65,8 +65,9 @@ jobs:
 
       - name: Check file exists
         id: check-file-exists
-        if: github.event.client_payload.download_type != 'full'
         run: |
+          sudo apt install tree
+          tree -L 3 -d ./markdown-pages
           [ "$(ls -A ./markdown-pages)" ] && echo "::set-output name=isEmpty::false" || echo "::set-output name=isEmpty::true"
 
       # if download_type is full, download all docs
@@ -112,6 +113,9 @@ jobs:
           ACT=${{ env.ACT }}
           [[ "${ACT:-false}" = "true" ]] && dryRun="true" || dryRun="false"
           yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
+
+      - run: |
+          tree -L 3 -d ./markdown-pages
 
       - name: Restore gatsby cache
         uses: actions/cache@v2

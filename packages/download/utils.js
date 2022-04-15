@@ -158,7 +158,7 @@ export async function retrieveAllMDsFromZip(
   metaInfo,
   destDir,
   options,
-  isRetry = false
+  retry = 5
 ) {
   const { repo, ref } = metaInfo
   const { ignore = [], pipelines = [] } = options
@@ -182,8 +182,8 @@ export async function retrieveAllMDsFromZip(
       if (!entryName.endsWith('.md')) {
         return
       }
-      const relativePath = entryName.split(`-${ref}/`).pop()
-      const relativePathNameList = relativePath.split('/')
+      const relativePathNameList = entryName.split('/')
+      relativePathNameList.shift()
       const filteredArray = ignore.filter(value =>
         relativePathNameList.includes(value)
       )
@@ -191,14 +191,19 @@ export async function retrieveAllMDsFromZip(
       if (filteredArray?.length > 0) {
         return
       }
-      writeFile(`${destDir}/${relativePath}`, zipEntry.getData(), pipelines)
+      writeFile(
+        `${destDir}/${relativePathNameList.join('/')}`,
+        zipEntry.getData(),
+        pipelines
+      )
     })
   } catch (error) {
     sig.error(`unzip ${archiveFileName} error`, error)
-    if (isRetry) {
+    if (retry <= 0) {
       return
     }
     sig.info(`retry retrieve`, ref)
-    return retrieveAllMDsFromZip(metaInfo, destDir, options, true)
+    sig.info(`retry times left: ${retry - 1}`)
+    return retrieveAllMDsFromZip(metaInfo, destDir, options, retry - 1)
   }
 }
