@@ -200,7 +200,7 @@ export async function retrieveAllMDsFromZip(
   } catch (error) {
     sig.error(`unzip ${archiveFileName} error`, error)
     if (retry <= 0) {
-      return
+      throw error
     }
     sig.info(`retry retrieve`, ref)
     sig.info(`retry times left: ${retry - 1}`)
