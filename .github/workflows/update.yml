@@ -68,11 +68,11 @@ jobs:
         run: |
           sudo apt install tree
           tree -L 3 -d ./markdown-pages
-          [ "$(ls -A ./markdown-pages)" ] && echo "::set-output name=isEmpty::false" || echo "::set-output name=isEmpty::true"
+          [ "$(ls -A ./markdown-pages)" ] || echo "::set-output name=isEmpty::true"
 
       # if download_type is full, download all docs
       - name: Download all docs
-        if: github.event.client_payload.download_type == 'full' || ${{ steps.check-file-exists.outputs.isEmpty }} == 'true'
+        if: ${{ github.event.client_payload.download_type == 'full' || steps.check-file-exists.outputs.isEmpty }}
         env:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
