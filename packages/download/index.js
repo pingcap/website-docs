@@ -1,4 +1,9 @@
-import { genDest, imageCDNs, retrieveAllMDs } from './utils.js'
+import {
+  genDest,
+  imageCDNs,
+  retrieveAllMDs,
+  retrieveAllMDsFromZip,
+} from './utils.js'
 import {
   replaceCopyableStream,
   replaceImagePathStream,
@@ -54,7 +59,7 @@ export function download(argv) {
   switch (repo) {
     case 'pingcap/docs':
     case 'pingcap/docs-cn':
-      retrieveAllMDs(
+      retrieveAllMDsFromZip(
         {
           repo,
           path,
@@ -70,7 +75,6 @@ export function download(argv) {
         ),
         options
       )
-
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
