@@ -57,3 +57,16 @@ progress.progress {
 progress.show {
   display: block;
 }
+
+a.tryTidbCloudBtn {
+  background-color: #3d3fea;
+  color: #fff;
+  border-color: transparent;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: #fff;
+    border-color: transparent;
+  }
+}
