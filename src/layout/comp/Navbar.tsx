@@ -9,6 +9,7 @@ import {
   NavbarLink,
   NavbarMenu,
   NavbarStart,
+  Button,
 } from '@seagreenio/react-bulma'
 import { Link, Trans, useI18next } from 'gatsby-plugin-react-i18next'
 import { useEffect, useState } from 'react'
@@ -30,6 +31,7 @@ import {
   langSwitch,
   langItem,
   disabled,
+  tryTidbCloudBtn,
 } from './navbar.module.scss'
 
 interface Props {
@@ -196,6 +198,14 @@ export function Navbar({ locale }: Props) {
                 setSearchValue={handleSetSearchValue}
               />
             </NavbarItem>
+
+            {language === 'en' && (
+              <NavbarItem as="div">
+                <a href="https://en.pingcap.com/tidb-cloud/" target="_blank">
+                  <Button className={tryTidbCloudBtn}>Try TiDB Cloud</Button>
+                </a>
+              </NavbarItem>
+            )}
           </NavbarEnd>
         </NavbarMenu>
       </Container>
