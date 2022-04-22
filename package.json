@@ -92,6 +92,7 @@
     "download:tidb-operator:zh:all": "./scripts/download-tidb-operator-zh.sh",
     "download:dbaas": "pingcap-docs-download dl tidbcloud/dbaas-docs",
     "download:dbaas:all": "./scripts/download-dbaas.sh",
+    "download:tidb-cloud": "pingcap-docs-download dl pingcap/docs/cloud",
     "download:appdev": "pingcap-docs-download dl pingcap/docs-appdev",
     "download:appdev:all": "./scripts/download-appdev.sh",
     "download:appdev:en:all": "./scripts/download-appdev-en.sh",

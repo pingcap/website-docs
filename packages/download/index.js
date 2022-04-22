@@ -3,6 +3,8 @@ import {
   imageCDNs,
   retrieveAllMDs,
   retrieveAllMDsFromZip,
+  retrieveAllCloudMDs,
+  retrieveMDsWithoutCloud,
 } from './utils.js'
 import {
   replaceCopyableStream,
@@ -59,7 +61,12 @@ export function download(argv) {
   switch (repo) {
     case 'pingcap/docs':
     case 'pingcap/docs-cn':
-      retrieveAllMDsFromZip(
+      let handler = retrieveAllMDsFromZip
+      // TODO: rename to master
+      if (ref === 'develop') {
+        handler = retrieveMDsWithoutCloud
+      }
+      handler(
         {
           repo,
           path,
@@ -115,6 +122,20 @@ export function download(argv) {
         options
       )
 
+      break
+    case 'pingcap/docs/cloud':
+      const migrateRepo = 'pingcap/docs'
+      // TODO: rename to master
+      const migrateRef = 'develop'
+      retrieveAllCloudMDs(
+        {
+          repo: migrateRepo,
+          path,
+          ref: migrateRef,
+        },
+        genDest(repo, path, nPath.resolve(dest, `en/tidbcloud/${ref}`)),
+        options
+      )
       break
   }
 }

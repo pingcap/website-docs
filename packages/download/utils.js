@@ -154,11 +154,12 @@ function writeFile(targetPath, contents, pipelines) {
   })
 }
 
-export async function retrieveAllMDsFromZip(
+export async function retrieveAllMDsFromZipFactory(
   metaInfo,
   destDir,
   options,
-  retry = 5
+  retry = 5,
+  customEntryFilter = undefined
 ) {
   const { repo, ref } = metaInfo
   const { ignore = [], pipelines = [] } = options
@@ -191,11 +192,17 @@ export async function retrieveAllMDsFromZip(
       if (filteredArray?.length > 0) {
         return
       }
-      writeFile(
-        `${destDir}/${relativePathNameList.join('/')}`,
-        zipEntry.getData(),
-        pipelines
-      )
+      if (customEntryFilter) {
+        const { targetPath } = customEntryFilter(zipEntry)
+        targetPath &&
+          writeFile(`${destDir}/${targetPath}`, zipEntry.getData(), pipelines)
+      } else {
+        writeFile(
+          `${destDir}/${relativePathNameList.join('/')}`,
+          zipEntry.getData(),
+          pipelines
+        )
+      }
     })
   } catch (error) {
     sig.error(`unzip ${archiveFileName} error`, error)
@@ -204,6 +211,54 @@ export async function retrieveAllMDsFromZip(
     }
     sig.info(`retry retrieve`, ref)
     sig.info(`retry times left: ${retry - 1}`)
-    return retrieveAllMDsFromZip(metaInfo, destDir, options, retry - 1)
+    return retrieveAllMDsFromZipFactory(
+      metaInfo,
+      destDir,
+      options,
+      retry - 1,
+      customEntryFilter
+    )
   }
+}
+
+export function retrieveAllMDsFromZip(metaInfo, destDir, options, retry = 5) {
+  return retrieveAllMDsFromZipFactory(metaInfo, destDir, options, retry)
+}
+
+// Cloud doc is to be merged into pingcap/docs/tree/master/cloud
+// The cloud toc file is `TOC-cloud.md`, we need to keep and rename it.
+// Both pingcap/docs and cloud docs need pingcap/docs/tree/master/common
+export function retrieveAllCloudMDs(metaInfo, destDir, options, retry = 5) {
+  const func = zipEntry => {
+    const { name, entryName } = zipEntry
+    if (name === 'TOC-cloud.md') {
+      return { targetPath: `TOC.md` }
+    }
+    const relativePathNameList = entryName.split('/')
+    relativePathNameList.shift()
+    const folderName = relativePathNameList[0]
+    if (folderName === 'cloud' || folderName === 'common') {
+      return { targetPath: `${relativePathNameList.join('/')}` }
+    }
+    return {}
+  }
+  return retrieveAllMDsFromZipFactory(metaInfo, destDir, options, retry, func)
+}
+
+// We need to remove cloud related files in pingcap/docs/tree/master
+export function retrieveMDsWithoutCloud(metaInfo, destDir, options, retry = 5) {
+  const func = zipEntry => {
+    const { name, entryName } = zipEntry
+    if (name === 'TOC-cloud.md') {
+      return {}
+    }
+    const relativePathNameList = entryName.split('/')
+    relativePathNameList.shift()
+    const folderName = relativePathNameList[0]
+    if (folderName === 'cloud') {
+      return {}
+    }
+    return { targetPath: `${relativePathNameList.join('/')}` }
+  }
+  return retrieveAllMDsFromZipFactory(metaInfo, destDir, options, retry, func)
 }

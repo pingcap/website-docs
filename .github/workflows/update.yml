@@ -80,7 +80,7 @@ jobs:
           yarn download:tidb:zh:all
           yarn download:dm:all
           yarn download:tidb-operator:all
-          yarn download:dbaas:all
+          yarn download:tidb-cloud
           yarn download:appdev:all
 
       - name: Download specific docs
