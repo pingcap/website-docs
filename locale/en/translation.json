@@ -38,7 +38,7 @@
     },
     "dmr": {
       "tidb": {
-        "firstContext": "You are viewing the documentation of TiDB {{ curDocVersion }} (DMR). PingCAP does not provide official support or bug fixes for v6.0. v6.0 is only recommended for users who want to try out new features.",
+        "firstContext": "You are viewing the documentation of TiDB {{ curDocVersion }} (DMR). PingCAP does not provide bug fixes for v6.0. Any bugs will be fixed in future releases.",
         "secondContext": "For general purposes, please use <0>the latest stable version</0> of the TiDB database."
       }
     }
