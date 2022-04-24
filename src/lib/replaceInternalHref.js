@@ -12,6 +12,7 @@ export default function replaceInternalHref(
   const aTags = document.querySelectorAll(
     `${simpletab ? '.PingCAP-simpleTab' : '.doc-content'} a`
   )
+  const docTocATags = document.querySelectorAll(`.doc-toc a`)
 
   Array.from(aTags).forEach(a => {
     let href = a.getAttribute('href')
@@ -34,6 +35,19 @@ export default function replaceInternalHref(
         .replace(reAnchor, '')
         .replace(sliceVersionMark, '')
     }
+  })
+
+  // Replace anchor str in doc toc
+  Array.from(docTocATags).forEach(a => {
+    let href = a.getAttribute('href')
+    a.href =
+      '#' +
+      decodeURIComponent(href)
+        .replace(reAnchor, '')
+        .replace(sliceVersionMark, '')
+    a.parentElement.id = a.parentElement.id
+      .replace(reAnchor, '')
+      .replace(sliceVersionMark, '')
   })
 
   if (!simpletab && window.location.hash) {
