@@ -36,7 +36,7 @@
     },
     "dmr": {
       "tidb": {
-        "firstContext": "你正在查看 TiDB {{ curDocVersion }} (DMR) 的文档。TiDB 不提供基于 DMR 的 Bug 修订版本，DMR 仅适用于需要试用最新功能的用户，不推荐在生产环境使用。",
+        "firstContext": "你正在查看 TiDB {{ curDocVersion }} (<0>DMR</0>) 的文档。PingCAP 不提供基于 v6.0 的 bug 修复版本，如有 bug，会在后续版本中修复。",
         "secondContext": "如无特殊需求，建议使用 TiDB 数据库的<0>最新稳定版本</0>。"
       }
     }

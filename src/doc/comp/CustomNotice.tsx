@@ -25,6 +25,11 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
     ? `/${pathConfig.repo}/stable/${name === '_index' ? '' : name}`
     : `/${pathConfig.repo}/stable`
 
+  const dmrDesc =
+    pathConfig.locale === 'zh'
+      ? `/tidb/v6.0/release-6.0.0-dmr#%E7%89%88%E6%9C%AC%E7%AD%96%E7%95%A5%E5%8F%98%E6%9B%B4`
+      : `/tidb/v6.0/release-6.0.0-dmr#release-strategy-changes`
+
   if (isDeprecated) {
     return (
       <>
@@ -56,6 +61,7 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
           <p>
             <Trans
               i18nKey={`doc.dmr.${pathConfig.repo}.firstContext`}
+              components={[<Link to={dmrDesc} />]}
               values={{
                 curDocVersion: pathConfig.version,
               }}
