@@ -195,6 +195,22 @@ export function sync(argv) {
       )
 
       break
+    case 'pingcap/docs/cloud':
+      // Temporarily use retrieveAllCloudMDs instead of sync
+      // TODO: We need a function to handle `TOC-cloud`
+      const migrateRepo = 'pingcap/docs'
+      // TODO: rename to master
+      const migrateRef = 'develop'
+      retrieveAllCloudMDs(
+        {
+          repo: migrateRepo,
+          path,
+          ref: migrateRef,
+        },
+        genDest(repo, path, nPath.resolve(dest, `en/tidbcloud/${ref}`)),
+        options
+      )
+      break
   }
 }
 
