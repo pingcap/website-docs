@@ -77,7 +77,13 @@ module.exports = {
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
-          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: `100`,
+              enableCustomId: true,
+            },
+          },
           {
             resolve: require.resolve('./gatsby/plugin/syntax-diagram'),
           },

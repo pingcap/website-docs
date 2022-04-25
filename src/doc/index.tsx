@@ -27,6 +27,7 @@ import { FrontMatter, PageContext, Repo, RepoNav, TableOfContent } from 'typing'
 import { getStable } from '../../gatsby/utils'
 import { generateUrl } from '../../gatsby/path'
 import { setDocInfo } from 'state'
+import replaceInternalHref from 'lib/replaceInternalHref'
 
 interface Props {
   pageContext: PageContext
@@ -69,6 +70,10 @@ export default function Doc({
   const dispatch = useDispatch()
 
   useEffect(() => {
+    // https://github.com/pingcap/website-docs/issues/221
+    // md title with html tag will cause anchor mismatch
+    replaceInternalHref(pathConfig.locale, pathConfig.repo, pathConfig.version)
+
     dispatch(
       setDocInfo({
         lang: pathConfig.locale,
