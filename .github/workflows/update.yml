@@ -2,8 +2,6 @@ name: Incremental Build Triggered By Push Events
 
 on: repository_dispatch
 
-concurrency: prod_environment
-
 jobs:
   build:
     name: Retrieve docs and deploy the website
@@ -16,6 +14,13 @@ jobs:
       - name: Bailout
         if: ${{ !github.event.client_payload.sha }}
         run: exit 1
+      
+      # make sure there is only one workflow running
+      - name: Turnstyle
+        if: ${{ !env.ACT }}
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set known_hosts
         if: ${{ !env.ACT && github.repository_owner == 'pingcap' }}
@@ -76,6 +81,7 @@ jobs:
         env:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          sudo rm -fr ./markdown-pages/*
           yarn download:tidb:en:all
           yarn download:tidb:zh:all
           yarn download:dm:all
@@ -174,6 +180,6 @@ jobs:
 
       # if does full building, store latest commit sha of all docs repo
       - name: Update all commit hashes
-        if: github.event.client_payload.download_type == 'full'
+        if: ${{ github.event.client_payload.download_type == 'full' || steps.check-file-exists.outputs.isEmpty }}
         run: |
           bash ./scripts/get-latest-commits.sh ${{ secrets.GH_TOKEN }}
