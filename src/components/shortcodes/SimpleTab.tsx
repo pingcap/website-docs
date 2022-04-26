@@ -7,7 +7,7 @@ import clsx from 'clsx'
 export function SimpleTab({
   children,
 }: {
-  children: ReactElement<{ label: string; href: string|null|undefined; children: ReactElement[] }>[]
+  children: ReactElement<{ label: string; href?: string; children: ReactElement[] }>[]
 }) {
   const location = useLocation()
   const [activeTab, setActiveTab] = useState(0)
@@ -15,10 +15,7 @@ export function SimpleTab({
   useEffect(() => {
     let active = children.findIndex(
       child => {
-        let activeJudge: string = child.props.label;
-        if (typeof child.props.href === 'string' && child.props.href != '') {
-          activeJudge = child.props.href;
-        }
+        const activeJudge: string = child.props?.href || child.props.label;
         return activeJudge === decodeURIComponent(location.hash.slice(1))
       }
     )
@@ -32,14 +29,11 @@ export function SimpleTab({
     <>
       <ul className={tabs}>
         {children.map((child, index) => {
-          let id: string = child.props.label;
-          if (typeof child.props.href === 'string' && child.props.href != '') {
-            id = child.props.href;
-          }
+          const id: string = child.props?.href || child.props.label;
           return (
             <li key={id} id={id}>
               <a
-                href={'#' + id}
+                href={`#${id}`}
                 className={activeTab === index ? active : normal}>
                 {child.props.label}
               </a>
@@ -48,11 +42,7 @@ export function SimpleTab({
         })}
       </ul>
       {children.map((child, index) => {
-        let id: string = child.props.label;
-        if (typeof child.props.href === 'string' && child.props.href != '') {
-          id = child.props.href;
-        }
-
+        const id: string = child.props?.href || child.props.label;
         return (
           <div
             key={id}
