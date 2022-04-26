@@ -13,6 +13,15 @@ module.exports = {
   jsxRuntime: 'automatic',
   plugins: [
     {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-WQG8Z75',
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: 'gatsby' },
+        enableWebVitalsTracking: true,
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: 'UA-99991864-7',

@@ -5828,13 +5828,21 @@ gatsby-page-utils@^2.8.0:
     lodash "^4.17.21"
     micromatch "^4.0.4"
 
-gatsby-plugin-google-analytics@^4.4.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-4.8.0.tgz#f8f400dd6cbb156897980ca80b1da4559fd10e5a"
-  integrity sha512-2ioV7iyM5EYgrkanc4gdfEfHGUZ3oAnNQlIRKdZnw3w+4bKBRbrBFhRq2Mn2WSCffGYuXWj7YlLNOIEVEtBsJA==
+gatsby-plugin-google-analytics@^4.12.1:
+  version "4.12.1"
+  resolved "https://registry.npmmirror.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-4.12.1.tgz#38f0d17b802efc3b1ac1767f1760e1ad3b9aa531"
+  integrity sha512-DcJ0CFLdLuWLnaMKtGHgJPTfIalYRAlNnLzDDN6gjCS+2ZcrV7WlttvHqBVS3Y3jd1x+nZMWBGbyd6nH/NFItw==
   dependencies:
     "@babel/runtime" "^7.15.4"
     minimatch "3.0.4"
+    web-vitals "^1.1.2"
+
+gatsby-plugin-google-tagmanager@^4.12.1:
+  version "4.12.1"
+  resolved "https://registry.npmmirror.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-4.12.1.tgz#6834da4228b9f4f813907d2cfb809607148f3ef3"
+  integrity sha512-sk6RF2eCbyuJwABk2CIFOOU/rJfBPzXK9MrEi6p39U/P/1z0Qm2w9DaPprSrHrfcSQijfnHEGIWqO14UxZ+AKg==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
     web-vitals "^1.1.2"
 
 gatsby-plugin-mdx@^3.4.0:
@@ -12960,7 +12968,7 @@ web-namespaces@^1.0.0:
 
 web-vitals@^1.1.2:
   version "1.1.2"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-1.1.2.tgz#06535308168986096239aa84716e68b4c6ae6d1c"
+  resolved "https://registry.npmmirror.com/web-vitals/-/web-vitals-1.1.2.tgz#06535308168986096239aa84716e68b4c6ae6d1c"
   integrity sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==
 
 webidl-conversions@^3.0.0:
