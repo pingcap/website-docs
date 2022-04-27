@@ -173,11 +173,11 @@ Everything you needed is just to write a JSX tag, put the text into it. Then we 
 
 ### Tab Panels
 
-**Each label in a single doc have to be unique.**
+**Each href in a single doc have to be unique.If you don't specify an `href`, we will treat the label to href.**
 
 ```jsx
 <SimpleTab>
-  <div label="LABEL_SHOW_ON_FIRST_TAB">
+  <div label="LABEL_SHOW_ON_FIRST_TAB" href="HREF_URL">
     This is the first content, which is markdown format. The content will show
     on the corresponding panel when users switch the tabs.
   </div>
