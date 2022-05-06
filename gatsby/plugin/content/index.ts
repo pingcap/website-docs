@@ -12,6 +12,9 @@ function textToJsx(text: string) {
     case 'Tip:':
     case '建议：':
       return 'Tip'
+    case 'Important:':
+    case '重要：':
+      return 'Important'
     default:
       throw new Error('unreachable')
   }
@@ -71,7 +74,9 @@ module.exports = function ({
               case 'Warning:':
               case '警告：':
               case 'Tip:':
-              case '建议：': {
+              case '建议：':
+              case 'Important:':
+              case '重要：': {
                 const children = node.children.slice(1)
                 const jsx = textToJsx(text)
                 return [
