@@ -202,7 +202,7 @@ export function Navbar({ locale }: Props) {
             {language === 'en' && (
               <NavbarItem as="div">
                 <a
-                  href="https://en.pingcap.com/tidb-cloud/"
+                  href="https://tidbcloud.com/signup?_ga=2.92391197.1421016400.1651713063-598142147.1627626898"
                   className={clsx('button', tryTidbCloudBtn)}
                   target="_blank">
                   Try TiDB Cloud
