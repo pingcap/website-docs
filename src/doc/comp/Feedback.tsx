@@ -40,3 +40,15 @@ export function FeedbackDoc({ pathConfig, filePath }: Props) {
     </a>
   )
 }
+
+export function TechFeedback() {
+  return (
+    <a
+      className="doc-help-link feedback-tech"
+      href={`https://asktug.com/?utm_source=doc`}
+      target="_blank"
+      rel="noreferrer">
+      反馈技术问题
+    </a>
+  )
+}

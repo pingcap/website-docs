@@ -14,7 +14,7 @@ import { Seo } from 'components/Seo'
 
 import { CustomNotice } from './comp/CustomNotice'
 import { DownloadPDF } from './comp/DownloadPDF'
-import { FeedbackDoc } from './comp/Feedback'
+import { FeedbackDoc, TechFeedback } from './comp/Feedback'
 import { Improve } from './comp/Improve'
 import { GitCommitInfo } from './comp/GitCommitInfo'
 import { UserFeedback } from './comp/UserFeedback'
@@ -165,6 +165,7 @@ export default function Doc({
                     )}
                   </>
                 )}
+                {pathConfig.locale === 'zh' && <TechFeedback />}
               </Block>
               <div className="doc-toc">
                 <Title size={6} style={{ marginBottom: 0 }}>

@@ -173,7 +173,7 @@ $top: $navbar-height + 1rem;
       color: $highlight;
     }
 
-    $icons: download-pdf improve feedback;
+    $icons: download-pdf improve feedback feedback-tech;
     @each $icon in $icons {
       &.#{$icon} {
         &:before {
