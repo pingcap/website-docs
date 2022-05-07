@@ -34,6 +34,10 @@
             "release-3.0",
             "release-2.1"
           ]
+        },
+        "ja": {
+          "repo": "pingcap/docs",
+          "versions": ["master"]
         }
       },
       "deprecated": ["v2.1", "v3.0", "v3.1"],

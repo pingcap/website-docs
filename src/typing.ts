@@ -16,6 +16,7 @@ export interface FrontMatter {
 export enum Locale {
   en = 'en',
   zh = 'zh',
+  ja = 'ja',
 }
 
 export interface PageContext {

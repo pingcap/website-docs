@@ -188,6 +188,15 @@ export function Navbar({ locale }: Props) {
                     <Trans i18nKey="lang.zh" />
                   )}
                 </NavbarItem>
+                <NavbarItem
+                  className={clsx(langItem, enDisabled && disabled)}
+                  onClick={() => !enDisabled && changeLanguage('ja')}>
+                  {enDisabled ? (
+                    <Trans i18nKey="lang.cannotswitch" />
+                  ) : (
+                    <Trans i18nKey="lang.ja" />
+                  )}
+                </NavbarItem>
               </NavbarDropdown>
             </NavbarItem>
 

@@ -3,6 +3,7 @@
     "title": "Language",
     "en": "English",
     "zh": "简体中文",
+    "ja": "日本語",
     "cannotswitch": "This page is not available in Chinese",
     "cannotswitchtocloud": "TiDB Cloud Chinese documentation is not available at this time"
   },

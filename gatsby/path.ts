@@ -2,17 +2,21 @@ import { Locale, Repo, PathConfig } from '../src/typing'
 import CONFIG from '../docs.json'
 
 export function generateUrl(filename: string, config: PathConfig) {
-  const lang = config.locale === Locale.en ? '' : '/zh'
+  const lang = config.locale === Locale.en ? '' : `/${config.locale}`
 
   if (filename === '') {
     return `${lang}/${config.repo}/${config.version ? config.version : ''}`
   }
 
-  return `${lang}/${config.repo}/${config.version ? config.version + '/': ''}${filename}`
+  return `${lang}/${config.repo}/${
+    config.version ? config.version + '/' : ''
+  }${filename}`
 }
 
 export function generatePdfUrl(config: PathConfig) {
-  return `${config.repo}-${config.version ? config.version + '-': ''}${config.locale}-manual.pdf`
+  return `${config.repo}-${config.version ? config.version + '-' : ''}${
+    config.locale
+  }-manual.pdf`
 }
 
 export function generateNav(config: PathConfig) {

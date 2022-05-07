@@ -1,0 +1,91 @@
+{
+  "lang": {
+    "title": "言語",
+    "en": "英語",
+    "zh": "简体中文",
+    "ja": "日本語",
+    "cannotswitch": "このページは日本語では利用できません",
+    "cannotswitchtocloud": "TiDB Cloud 日本語ドキュメントは現在利用できません"
+  },
+  "navbar": {
+    "tidb": "TiDB",
+    "tools": "ツール",
+    "cloud": "TiDB Cloud",
+    "appdev": "アプリ開発",
+    "download": "TiDB を取得",
+    "contactUs": "お問い合わせ",
+    "searchDocs": "ドキュメントを検索"
+  },
+  "doc": {
+    "notExist": "このドキュメントは存在しません",
+    "toc": "このページの内容",
+    "download-pdf": "PDFをダウンロード",
+    "improve": "このページを編集",
+    "feedback": "ドキュメントの変更をリクエストする",
+    "latestCommit": "最終更新日",
+    "deprecation": {
+      "tidb": {
+        "firstContext": "古いバージョンの TiDB データベース (TiDB {{ curdocVersion }}) のドキュメントを表示しています。",
+        "secondContext": "TiDBデータベースの<0>最新の安定バージョン</0>を使用することをお勧めします。"
+      },
+      "tidb-in-kubernetes": {
+        "firstContext": "古いメジャーバージョンの TiDB Operator ツール (TiDB Operator {{ curdocVersion }}) のドキュメントを表示しています。",
+        "secondContext": "TiDB Operator {{ stableVersion }} は TiDB Operator の最新のメジャーバージョンであり、安定しており、一般的な使用に推奨されています。TiDB Operator {{ stableVersion }} のこのページを表示するには、<0>ここをクリックしてください</0>"
+      },
+      "tidb-data-migration": {
+        "firstContext": "古いメジャーバージョンの TiDB Data Migration ツール (TiDB Data Migration {{ curdocVersion }}) のドキュメントを表示しています。",
+        "secondContext": "TiDB Data Migration {{ stableVersion }} は、TiDB Data Migration の最新メジャーバージョンであり、現在安定しており、一般的な使用に推奨されています。TiDB Data Migration {{ stableVersion }} のこのページを表示するには、<0>ここをクリックしてください</0>。"
+      }
+    },
+    "dmr": {
+      "tidb": {
+        "firstContext": "TiDB {{curdocVersion}} (<0>DMR</0>) のドキュメントを表示しています。PingCap は v6.0 のバグ修正を提供していません。バグは将来のリリースで修正される予定です。",
+        "secondContext": "一般的な目的では、TiDBデータベースの<0>最新の安定バージョン</0>を使用してください。"
+      }
+    }
+  },
+  "shortcodes": {
+    "note": "ノート",
+    "warning": "警告",
+    "tip": "ヒント",
+    "error": "エラー",
+    "important": "重要"
+  },
+  "syntaxDiagram": {
+    "syntaxDiagram": "ダイアグラム",
+    "ebnf": "ソース"
+  },
+  "search": {
+    "type": "タイプ:",
+    "version": "バージョン:",
+    "resultTips": {
+      "counts": "{{counts}} 件の結果が見つかりました...",
+      "title": "ごめんなさい。お探しのものが見つかりませんでした。",
+      "content1": "予期しない言語のページに来たら、中国語のドキュメントに行ってもう一度試してください。",
+      "content2": "英語のコンテンツが欲しいなら、PingCap ホームページがお勧めです。"
+    }
+  },
+  "tools": {
+    "tidbOperator": {
+      "type": "TiDB Operator",
+      "desc": "TiDB Operator は、Kubernetes の TiDB クラスターの自動化された運用および保守システムです。TiDB の完全なライフサイクル管理を提供します。TiDB Operator を使用すると、パブリッククラウドまたはプライベートクラウドにデプロイされた Kubernetes クラスタで TiDB をシームレスに実行できます。"
+    },
+    "tidbDataMigration": {
+      "type": "TiDB Data Migration",
+      "desc": "TiDB Data Migration (DM) は、MySQL または MariaDB から TiDB への完全なデータ移行と増分データ移行をサポートする統合データレプリケーションタスク管理プラットフォームです。運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。"
+    },
+    "databaseTools": {
+      "type": "Database Tools",
+      "desc": "TiDB データベースツールは、Dumpling、TiDB Lightning、バックアップと復元 (BR)、TiCDC、同期差分インスペクターなど、TiDB との間で移行するための便利なツールキットのコレクションです。"
+    },
+    "tiup": {
+      "type": "TiUP",
+      "desc": "TiUP は、TiDB、PD、TiKV などの TiDB エコシステム内のコンポーネントを管理するパッケージマネージャーです。一行の TiUP コマンドだけでどのコンポーネントも実行でき、管理がはるかに簡単です。"
+    }
+  },
+  "docHelpful": {
+    "header": "このページは役に立ちましたか？",
+    "thumbUp": "はい",
+    "thumbDown": "いいえ"
+  }
+}

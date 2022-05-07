@@ -20,7 +20,7 @@ interface Props {
 
 export function Layout({
   children,
-  locale = [Locale.en, Locale.zh],
+  locale = [Locale.en, Locale.zh, Locale.ja],
 }: PropsWithChildren<Props>) {
   useEffect(() => {
     if (!window.DOCS_PINGCAP) {

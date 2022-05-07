@@ -62,6 +62,7 @@ export const createDocs = async ({
     {
       en: {} as Record<Repo, Record<string, (string | null)[]>>,
       zh: {} as Record<Repo, Record<string, (string | null)[]>>,
+      ja: {} as Record<Repo, Record<string, (string | null)[]>>,
     }
   )
 
@@ -71,7 +72,7 @@ export const createDocs = async ({
     const path = generateUrl(name, pathConfig)
     const navUrl = generateNav(pathConfig)
 
-    const locale = [Locale.en, Locale.zh]
+    const locale = [Locale.en, Locale.zh, Locale.ja]
       .map(l =>
         versionRecord[l][pathConfig.repo]?.[name]?.includes(pathConfig.version)
           ? l
