@@ -21,6 +21,7 @@
     "download-pdf": "Download PDF",
     "improve": "Edit this page",
     "feedback": "Request docs changes",
+    "feedbackAskTug": "社区论坛交流",
     "latestCommit": "was last updated",
     "deprecation": {
       "tidb": {
