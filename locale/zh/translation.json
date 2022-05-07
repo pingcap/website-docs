@@ -19,6 +19,7 @@
     "download-pdf": "下载 PDF",
     "improve": "修改本文",
     "feedback": "反馈文档问题",
+    "feedbackAskTug": "社区论坛交流",
     "latestCommit": "更新于",
     "deprecation": {
       "tidb": {

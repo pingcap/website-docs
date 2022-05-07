@@ -48,7 +48,7 @@ export function TechFeedback() {
       href={`https://asktug.com/?utm_source=doc`}
       target="_blank"
       rel="noreferrer">
-      反馈技术问题
+      <Trans i18nKey="doc.feedbackAskTug" />
     </a>
   )
 }
