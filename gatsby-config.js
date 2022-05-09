@@ -97,12 +97,6 @@ module.exports = {
             resolve: require.resolve('./gatsby/plugin/syntax-diagram'),
           },
           {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              showLineNumbers: false,
-            },
-          },
-          {
             resolve: require.resolve('./gatsby/plugin/content'),
           },
         ],
