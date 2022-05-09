@@ -71,7 +71,7 @@ export function download(argv) {
           path,
           nPath.resolve(
             dest,
-            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
           )
         ),
         options
@@ -114,7 +114,17 @@ export function download(argv) {
           options
         )
       }
-
+      break
+    case 'shczhen/docs':
+      retrieveAllMDsFromZip(
+        {
+          repo,
+          path,
+          ref,
+        },
+        genDest(repo, path, nPath.resolve(dest, `ja/tidb/${ref}`)),
+        options
+      )
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
