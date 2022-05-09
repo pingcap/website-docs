@@ -200,14 +200,22 @@ export function Navbar({ locale }: Props) {
             </NavbarItem>
 
             {language === 'en' && (
-              <NavbarItem as="div">
-                <a
-                  href="https://tidbcloud.com/signup?_ga=2.92391197.1421016400.1651713063-598142147.1627626898"
-                  className={clsx('button', tryTidbCloudBtn)}
+              <>
+                <NavbarItem
+                  className={main}
+                  href={`https://tidbcloud.com/signin`}
                   target="_blank">
-                  Try TiDB Cloud
-                </a>
-              </NavbarItem>
+                  Sign In
+                </NavbarItem>
+                <NavbarItem as="div">
+                  <a
+                    href="https://tidbcloud.com/signup?_ga=2.92391197.1421016400.1651713063-598142147.1627626898"
+                    className={clsx('button', tryTidbCloudBtn)}
+                    target="_blank">
+                    Try TiDB Cloud
+                  </a>
+                </NavbarItem>
+              </>
             )}
           </NavbarEnd>
         </NavbarMenu>
