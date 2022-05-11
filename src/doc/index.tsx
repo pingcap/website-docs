@@ -94,6 +94,10 @@ export default function Doc({
     const codeBlocks = document.querySelectorAll('pre > code')
     codeBlocks.forEach((codeBlock: any) => {
       if (typeof codeBlock === 'object') {
+        const eleClassName: string = codeBlock.className
+        if (eleClassName.includes('language-shell')) {
+          codeBlock.className = `language-sh`
+        }
         hljs.highlightBlock(codeBlock)
       }
     })
