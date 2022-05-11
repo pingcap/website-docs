@@ -1,6 +1,6 @@
 @import '../common';
 
-@import 'prismjs/themes/prism-solarizedlight.css';
+@import 'highlight.js/styles/github.css';
 
 $top: $navbar-height + 1rem;
 
@@ -86,6 +86,11 @@ $top: $navbar-height + 1rem;
     :not(pre) > code[class*='language-text'] {
       white-space: normal;
       word-break: break-word;
+      color: #657b83;
+    }
+
+    :not(pre) > code {
+      color: unset;
     }
 
     a code {

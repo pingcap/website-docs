@@ -10,6 +10,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
 import { useDispatch } from 'react-redux'
 
+import hljs from 'highlight.js'
+
 import { Seo } from 'components/Seo'
 
 import { CustomNotice } from './comp/CustomNotice'
@@ -82,6 +84,24 @@ export default function Doc({
       })
     )
   }, [dispatch, pathConfig])
+
+  useEffect(() => {
+    const preEles = document.querySelectorAll('pre')
+    preEles.forEach((preEle: HTMLElement) => {
+      const htmlStr = preEle.outerHTML
+      preEle.outerHTML = `<div class="gatsby-highlight">${htmlStr}</div>`
+    })
+    const codeBlocks = document.querySelectorAll('pre > code')
+    codeBlocks.forEach((codeBlock: any) => {
+      if (typeof codeBlock === 'object') {
+        const eleClassName: string = codeBlock.className
+        if (eleClassName.includes('language-shell')) {
+          codeBlock.className = `language-sh`
+        }
+        hljs.highlightBlock(codeBlock)
+      }
+    })
+  }, [])
 
   return (
     <Layout locale={availIn.locale}>
