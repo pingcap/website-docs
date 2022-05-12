@@ -114,5 +114,8 @@
     "resources",
     "scripts",
     "templates"
-  ]
+  ],
+  "docVariables": {
+    "TIDB_STABLE_VERSION": "v5.4"
+  }
 }

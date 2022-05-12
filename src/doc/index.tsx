@@ -26,7 +26,7 @@ import { Layout } from 'layout'
 import { VersionSwitcher } from './comp/VersionSwitcher'
 import { Toc } from './comp/Toc'
 import { FrontMatter, PageContext, Repo, RepoNav, TableOfContent } from 'typing'
-import { getStable } from '../../gatsby/utils'
+import { getStable, replaceGlobalVar } from '../../gatsby/utils'
 import { generateUrl } from '../../gatsby/path'
 import { setDocInfo } from 'state'
 import replaceInternalHref from 'lib/replaceInternalHref'
@@ -84,6 +84,11 @@ export default function Doc({
       })
     )
   }, [dispatch, pathConfig])
+
+  // Replace all variables(such as {{TIDB_STABLE_VERSION}} ) in md content
+  const bodyMemo = useMemo(() => {
+    return replaceGlobalVar(body)
+  }, [body])
 
   useEffect(() => {
     const preEles = document.querySelectorAll('pre')
@@ -160,7 +165,7 @@ export default function Doc({
               />
 
               <MDXProvider components={{ ...Shortcodes, Link }}>
-                <MDXRenderer>{body}</MDXRenderer>
+                <MDXRenderer>{bodyMemo}</MDXRenderer>
               </MDXProvider>
 
               {pathConfig.repo !== Repo.tidbcloud && (

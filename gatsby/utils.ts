@@ -82,3 +82,18 @@ export function replacePath(
 
   return `${language}/${docPath}/${pathWithoutVersion}`
 }
+
+export function replaceGlobalVar(mdString: string): string {
+  const { docVariables } = config
+  const regex = /{{([A-Z_]+)}}/g
+  const result = mdString.replaceAll(
+    regex,
+    (match: string, p1: keyof typeof docVariables) => {
+      if (match && p1 && docVariables[p1]) {
+        return docVariables[p1]
+      }
+      return match
+    }
+  )
+  return result
+}
