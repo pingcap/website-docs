@@ -14,10 +14,16 @@
     "adm-zip": "^0.5.9",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",
-    "mdast-util-from-markdown": "^1.2.0",
     "rimraf": "^3.0.2",
     "signale": "^1.4.0",
-    "yargs": "^17.3.0"
+    "yargs": "^17.3.0",
+    "mdast-util-from-markdown": "^1.2.0",
+    "mdast-util-frontmatter": "^1.0.0",
+    "mdast-util-gfm": "^2.0.1",
+    "mdast-util-mdx": "^2.0.0",
+    "micromark-extension-frontmatter": "^1.0.0",
+    "micromark-extension-gfm": "^2.0.1",
+    "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
     "@types/signale": "^1.4.3"

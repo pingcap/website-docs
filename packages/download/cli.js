@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { clean, download, gen, sync } from './index.js'
+import { clean, download, gen, sync, filterCloud } from './index.js'
 
 import { hideBin } from 'yargs/helpers'
 import sig from 'signale'
@@ -58,6 +58,22 @@ const argv = yargs(hideBin(process.argv))
         })
     }
   )
+  .command(
+    'cloud <repo> [path] [ref]',
+    'filter cloud files by toc-cloud.md',
+    yargs => {
+      yargs
+        .positional('path', {
+          desc: 'Specify the subpath of the repo',
+          type: 'string',
+        })
+        .positional('ref', {
+          desc: 'Specify the branch of the repo',
+          type: 'string',
+          default: 'master',
+        })
+    }
+  )
   .options({
     destination: {
       alias: 'dest',
@@ -111,5 +127,8 @@ switch (argv._[0]) {
   case 'gen':
     gen(argv)
 
+    break
+  case 'cloud':
+    filterCloud(argv)
     break
 }

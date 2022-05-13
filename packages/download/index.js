@@ -3,8 +3,7 @@ import {
   imageCDNs,
   retrieveAllMDs,
   retrieveAllMDsFromZip,
-  retrieveAllCloudMDs,
-  retrieveMDsWithoutCloud,
+  copyFilesFromToc,
 } from './utils.js'
 import {
   replaceCopyableStream,
@@ -61,12 +60,7 @@ export function download(argv) {
   switch (repo) {
     case 'pingcap/docs':
     case 'pingcap/docs-cn':
-      let handler = retrieveAllMDsFromZip
-      // TODO: rename to master
-      if (ref === 'develop') {
-        handler = retrieveMDsWithoutCloud
-      }
-      handler(
+      retrieveAllMDsFromZip(
         {
           repo,
           path,
@@ -122,20 +116,6 @@ export function download(argv) {
         options
       )
 
-      break
-    case 'pingcap/docs/cloud':
-      const migrateRepo = 'pingcap/docs'
-      // TODO: rename to master
-      const migrateRef = 'develop'
-      retrieveAllCloudMDs(
-        {
-          repo: migrateRepo,
-          path,
-          ref: migrateRef,
-        },
-        genDest(repo, path, nPath.resolve(dest, `en/tidbcloud/${ref}`)),
-        options
-      )
       break
   }
 }
@@ -195,22 +175,6 @@ export function sync(argv) {
       )
 
       break
-    case 'pingcap/docs/cloud':
-      // Temporarily use retrieveAllCloudMDs instead of sync
-      // TODO: We need a function to handle `TOC-cloud`
-      const migrateRepo = 'pingcap/docs'
-      // TODO: rename to master
-      const migrateRef = 'develop'
-      retrieveAllCloudMDs(
-        {
-          repo: migrateRepo,
-          path,
-          ref: migrateRef,
-        },
-        genDest(repo, path, nPath.resolve(dest, `en/tidbcloud/${ref}`)),
-        options
-      )
-      break
   }
 }
 
@@ -228,4 +192,16 @@ export function gen(argv) {
   }
 
   genContentFromOutline(repo, from, output)
+}
+
+export function filterCloud(argv) {
+  const { repo, path, ref, destination, config, dryRun } = argv
+  const dest = nPath.resolve(destination)
+  const srcPath = genDest(
+    repo,
+    path,
+    nPath.resolve(dest, `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`)
+  )
+  const destPath = nPath.resolve(dest, `en/tidbcloud/${ref}`)
+  copyFilesFromToc(`${srcPath}/TOC-cloud.md`, `${destPath}`)
 }
