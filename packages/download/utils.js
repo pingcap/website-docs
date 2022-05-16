@@ -216,7 +216,7 @@ export async function retrieveAllMDsFromZip(
   }
 }
 
-const copySingleFileSync = (srcPath, destPath) => {
+export const copySingleFileSync = (srcPath, destPath) => {
   const dir = path.dirname(destPath)
 
   if (!fs.existsSync(dir)) {

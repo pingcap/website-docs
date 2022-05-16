@@ -4,6 +4,7 @@ import {
   retrieveAllMDs,
   retrieveAllMDsFromZip,
   copyFilesFromToc,
+  copySingleFileSync,
 } from './utils.js'
 import {
   replaceCopyableStream,
@@ -204,4 +205,8 @@ export function filterCloud(argv) {
   )
   const destPath = nPath.resolve(dest, `en/tidbcloud/${ref}`)
   copyFilesFromToc(`${srcPath}/TOC-cloud.md`, `${destPath}`)
+  copySingleFileSync(
+    `${srcPath}/cloud/_index.md`,
+    `${destPath}/cloud/_index.md`
+  )
 }
