@@ -195,7 +195,7 @@ export function gen(argv) {
 }
 
 export function filterCloud(argv) {
-  const { repo, path, ref, destination, config, dryRun } = argv
+  const { repo, path, ref, destination } = argv
   const dest = nPath.resolve(destination)
   const srcPath = genDest(
     repo,
