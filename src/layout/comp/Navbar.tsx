@@ -92,6 +92,30 @@ export function Navbar({ locale }: Props) {
     return () => window.removeEventListener('scroll', scrollListener)
   }, [])
 
+  const generateDownloadURL = (lang: string): string => {
+    switch (lang) {
+      case 'zh':
+        return 'https://pingcap.com/zh/product#SelectProduct'
+      case 'ja':
+        return 'https://pingcap.co.jp/tidb-download/'
+      case 'en':
+      default:
+        return 'https://en.pingcap.com/download'
+    }
+  }
+
+  const generateContactURL = (lang: string): string => {
+    switch (lang) {
+      case 'zh':
+        return 'https://pingcap.com/zh/contact/'
+      case 'ja':
+        return 'https://pingcap.co.jp/contact-us/'
+      case 'en':
+      default:
+        return 'https://en.pingcap.com/contact-us/'
+    }
+  }
+
   return (
     <BulmaNavbar
       as="nav"
@@ -137,22 +161,10 @@ export function Navbar({ locale }: Props) {
               to="/appdev/dev">
               <Trans i18nKey="navbar.appdev" />
             </NavbarItem>
-            <NavbarItem
-              className={main}
-              href={
-                language === 'en'
-                  ? 'https://en.pingcap.com/download'
-                  : 'https://pingcap.com/zh/product#SelectProduct'
-              }>
+            <NavbarItem className={main} href={generateDownloadURL(language)}>
               <Trans i18nKey="navbar.download" />
             </NavbarItem>
-            <NavbarItem
-              className={main}
-              href={
-                language === 'en'
-                  ? 'https://en.pingcap.com/contact-us/'
-                  : 'https://pingcap.com/zh/contact/'
-              }>
+            <NavbarItem className={main} href={generateContactURL(language)}>
               <Trans i18nKey="navbar.contactUs" />
             </NavbarItem>
           </NavbarStart>
