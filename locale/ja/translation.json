@@ -4,8 +4,11 @@
     "en": "英語",
     "zh": "简体中文",
     "ja": "日本語",
-    "cannotswitch": "このページは日本語では利用できません",
-    "cannotswitchtocloud": "TiDB Cloud 日本語ドキュメントは現在利用できません"
+    "cannotswitchEn": "このページは英語ではご利用いただけません",
+    "cannotswitchZh": "このページは中国語ではご利用いただけません",
+    "cannotswitchJa": "このページは日本語ではご利用いただけません",
+    "cannotswitchtocloud": "TiDB Cloud 日本語ドキュメントは現在利用できません",
+    "machineTransNotice": "<TODO>"
   },
   "navbar": {
     "tidb": "TiDB",

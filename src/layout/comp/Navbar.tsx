@@ -54,6 +54,7 @@ export function Navbar({ locale }: Props) {
 
   const enDisabled = !locale.includes(Locale.en)
   const zhDisabled = !locale.includes(Locale.zh)
+  const jaDisabled = !locale.includes(Locale.ja)
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
@@ -162,12 +163,12 @@ export function Navbar({ locale }: Props) {
                 <Trans i18nKey="lang.title" />
               </NavbarLink>
 
-              <NavbarDropdown boxed>
+              <NavbarDropdown boxed className="is-right">
                 <NavbarItem
                   className={clsx(langItem, enDisabled && disabled)}
                   onClick={() => !enDisabled && changeLanguage('en')}>
                   {enDisabled ? (
-                    <Trans i18nKey="lang.cannotswitch" />
+                    <Trans i18nKey="lang.cannotswitchEn" />
                   ) : (
                     <Trans i18nKey="lang.en" />
                   )}
@@ -181,7 +182,7 @@ export function Navbar({ locale }: Props) {
                       i18nKey={
                         docInfo.type === 'tidbcloud'
                           ? 'lang.cannotswitchtocloud'
-                          : 'lang.cannotswitch'
+                          : 'lang.cannotswitchZh'
                       }
                     />
                   ) : (
@@ -189,10 +190,16 @@ export function Navbar({ locale }: Props) {
                   )}
                 </NavbarItem>
                 <NavbarItem
-                  className={clsx(langItem, enDisabled && disabled)}
-                  onClick={() => !enDisabled && changeLanguage('ja')}>
-                  {enDisabled ? (
-                    <Trans i18nKey="lang.cannotswitch" />
+                  className={clsx(langItem, jaDisabled && disabled)}
+                  onClick={() => !jaDisabled && changeLanguage('ja')}>
+                  {jaDisabled ? (
+                    <Trans
+                      i18nKey={
+                        docInfo.type === 'tidbcloud'
+                          ? 'lang.cannotswitchtocloud'
+                          : 'lang.cannotswitchJa'
+                      }
+                    />
                   ) : (
                     <Trans i18nKey="lang.ja" />
                   )}
@@ -200,13 +207,15 @@ export function Navbar({ locale }: Props) {
               </NavbarDropdown>
             </NavbarItem>
 
-            <NavbarItem as="div" className="search-input">
-              <SearchInput
-                docInfo={docInfo}
-                searchValue={searchValue}
-                setSearchValue={handleSetSearchValue}
-              />
-            </NavbarItem>
+            {language !== 'ja' && (
+              <NavbarItem as="div" className="search-input">
+                <SearchInput
+                  docInfo={docInfo}
+                  searchValue={searchValue}
+                  setSearchValue={handleSetSearchValue}
+                />
+              </NavbarItem>
+            )}
 
             {language === 'en' && (
               <>

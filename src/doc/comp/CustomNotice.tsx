@@ -83,3 +83,11 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
 
   return null
 }
+
+export const MachineTranslationNotice = () => {
+  return (
+    <Important>
+      <Trans i18nKey={`lang.machineTransNotice`} />
+    </Important>
+  )
+}

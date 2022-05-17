@@ -4,7 +4,9 @@
     "en": "English",
     "zh": "简体中文",
     "ja": "日本語",
-    "cannotswitch": "本页面暂无英文版"
+    "cannotswitchEn": "本页面暂无英文版",
+    "cannotswitchZh": "本页面暂无中文版",
+    "cannotswitchJa": "本页面暂无日文版"
   },
   "navbar": {
     "tidb": "TiDB",
