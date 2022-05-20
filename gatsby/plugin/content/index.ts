@@ -37,7 +37,7 @@ module.exports = function ({
             return [
               {
                 type: 'jsx',
-                value: `<a href="${ele.url}" target="_blank" rel="noreferrer">`,
+                value: `<a href="${ele.url}" target="_blank" referrerPolicy="no-referrer-when-downgrade">`,
               },
               ...node.children,
               { type: 'jsx', value: '</a>' },
