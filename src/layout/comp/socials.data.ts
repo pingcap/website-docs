@@ -76,11 +76,11 @@ export const ja = [
 
   {
     name: 'twitter',
-    href: 'https://twitter.com/PingCAP',
+    href: 'https://twitter.com/PingCAP_Japan',
   },
   {
     name: 'linkedin',
-    href: 'https://linkedin.com/company/pingcap',
+    href: 'https://www.linkedin.com/company/74771520/',
   },
   {
     name: 'slack',
@@ -88,6 +88,6 @@ export const ja = [
   },
   {
     name: 'youtube',
-    href: 'https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA',
+    href: 'https://www.youtube.com/channel/UCatxrGZANSnii2fe7FeEwvg',
   },
 ]

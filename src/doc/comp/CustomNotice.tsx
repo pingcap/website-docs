@@ -84,10 +84,16 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
   return null
 }
 
-export const MachineTranslationNotice = () => {
+export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
+  const targetEnUrl = `/${pathConfig.repo}/${pathConfig.branch}/${
+    name === '_index' ? '' : name
+  }`
   return (
     <Important>
-      <Trans i18nKey={`lang.machineTransNotice`} />
+      <Trans
+        i18nKey={`lang.machineTransNotice`}
+        components={[<Link language="en" to={targetEnUrl} />]}
+      />
     </Important>
   )
 }

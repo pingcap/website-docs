@@ -144,7 +144,13 @@ export default function Doc({
                 pathConfig={pathConfig}
                 availIn={availIn.version}
               />
-              {language === 'ja' && <MachineTranslationNotice />}
+              {language === 'ja' && (
+                <MachineTranslationNotice
+                  name={name}
+                  pathConfig={pathConfig}
+                  availIn={availIn.version}
+                />
+              )}
 
               <MDXProvider components={{ ...Shortcodes, Link }}>
                 <MDXRenderer>{body}</MDXRenderer>

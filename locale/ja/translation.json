@@ -8,7 +8,7 @@
     "cannotswitchZh": "このページは中国語ではご利用いただけません",
     "cannotswitchJa": "このページは日本語ではご利用いただけません",
     "cannotswitchtocloud": "TiDB Cloud 日本語ドキュメントは現在利用できません",
-    "machineTransNotice": "<TODO>"
+    "machineTransNotice": "このページは翻訳ツールで作成しています。<br />正しい内容は<0>英語版</0>をご参考にください。"
   },
   "navbar": {
     "tidb": "TiDB",
