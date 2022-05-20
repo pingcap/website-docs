@@ -164,3 +164,65 @@ export const zh = [
     ],
   },
 ]
+
+export const ja = [
+  {
+    name: 'エコシステム',
+    items: [
+      {
+        name: 'TiDB',
+        url: 'https://pingcap.co.jp/tidb-overview',
+      },
+      {
+        name: 'TiKV',
+        url: 'https://github.com/tikv/tikv',
+      },
+      {
+        name: 'TiSpark',
+        url: 'https://github.com/pingcap/tispark',
+      },
+      {
+        name: 'Chaos Mesh',
+        url: 'https://github.com/pingcap/chaos-mesh',
+      },
+    ],
+  },
+  {
+    name: 'リソース',
+    items: [
+      {
+        name: 'Quick Start',
+        url: '/ja/tidb/stable/quick-start-with-tidb',
+      },
+      {
+        name: 'イベント',
+        url: 'https://pingcap.co.jp/event/',
+      },
+      {
+        name: 'ニュース&ブログ',
+        url: 'https://pingcap.co.jp/news-and-blogs/',
+      },
+      {
+        name: '導入実績',
+        url: 'https://pingcap.co.jp/usecase/',
+      },
+    ],
+  },
+  {
+    name: '会社関連',
+    items: [
+      {
+        name: '会社概要',
+        url: 'https://pingcap.co.jp/company/',
+      },
+      {
+        name: '規約類',
+        url: 'https://pingcap.com/legal',
+      },
+      {
+        name: 'お問い合わせ',
+        url: 'https://pingcap.co.jp/contact-us/',
+      },
+    ],
+  },
+]

@@ -162,18 +162,23 @@ export default function Doc({
 
           <Column>
             <div className="right-aside">
-              <Block>
-                <DownloadPDF pathConfig={pathConfig} />
-                {pathConfig.repo !== 'tidbcloud' && (
-                  <>
-                    <FeedbackDoc pathConfig={pathConfig} filePath={filePath} />
-                    {pathConfig.version === 'dev' && (
-                      <Improve pathConfig={pathConfig} filePath={filePath} />
-                    )}
-                  </>
-                )}
-                {pathConfig.locale === 'zh' && <TechFeedback />}
-              </Block>
+              {language !== 'ja' && (
+                <Block>
+                  <DownloadPDF pathConfig={pathConfig} />
+                  {pathConfig.repo !== 'tidbcloud' && (
+                    <>
+                      <FeedbackDoc
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                      />
+                      {pathConfig.version === 'dev' && (
+                        <Improve pathConfig={pathConfig} filePath={filePath} />
+                      )}
+                    </>
+                  )}
+                  {pathConfig.locale === 'zh' && <TechFeedback />}
+                </Block>
+              )}
               <div className="doc-toc">
                 <Title size={6} style={{ marginBottom: 0 }}>
                   <Trans i18nKey="doc.toc" />

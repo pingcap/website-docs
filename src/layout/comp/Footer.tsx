@@ -24,7 +24,7 @@ import { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MdAdd } from 'react-icons/md'
 
-import { en, zh } from './footer.data'
+import { en, zh, ja } from './footer.data'
 import { Socials } from './Socials'
 import clsx from 'clsx'
 import { Locale } from 'typing'
@@ -40,7 +40,21 @@ export function Footer() {
       }
     }
   `)
-  const footerColumns = language === 'zh' ? zh : en
+  const getFooterData = (lang: string) => {
+    let result = en
+    switch (lang) {
+      case 'zh':
+        result = zh
+        break
+      case 'ja':
+        result = ja
+        break
+      default:
+        break
+    }
+    return result
+  }
+  const footerColumns = getFooterData(language)
 
   const handleSpreadItems = (index: number) => () => {
     const screenWidth = window.screen.width
@@ -84,12 +98,18 @@ export function Footer() {
           ))}
 
           <Column>
-            <Columns className={socials} multiline>
+            {/* <Columns className={socials} multiline>
               <Socials
                 className={clsx('column is-4', column)}
                 locale={language as Locale}
               />
-            </Columns>
+            </Columns> */}
+            <div className={socials}>
+              <Socials
+                // className={clsx('column is-4', column)}
+                locale={language as Locale}
+              />
+            </div>
           </Column>
         </Columns>
 

@@ -97,7 +97,7 @@ export function Navbar({ locale }: Props) {
       case 'zh':
         return 'https://pingcap.com/zh/product#SelectProduct'
       case 'ja':
-        return 'https://pingcap.co.jp/tidb-download/'
+        return 'https://pingcap.co.jp/event/'
       case 'en':
       default:
         return 'https://en.pingcap.com/download'
