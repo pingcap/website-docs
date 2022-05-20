@@ -204,6 +204,7 @@ export function Navbar({ locale }: Props) {
                 <NavbarItem
                   className={main}
                   href={`https://tidbcloud.com/signin`}
+                  referrerPolicy="no-referrer-when-downgrade"
                   target="_blank">
                   Sign In
                 </NavbarItem>
@@ -211,6 +212,8 @@ export function Navbar({ locale }: Props) {
                   <a
                     href="https://tidbcloud.com/signup?_ga=2.92391197.1421016400.1651713063-598142147.1627626898"
                     className={clsx('button', tryTidbCloudBtn)}
+                    // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+                    referrerPolicy="no-referrer-when-downgrade"
                     target="_blank">
                     Try TiDB Cloud
                   </a>
