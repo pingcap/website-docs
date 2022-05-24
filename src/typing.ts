@@ -10,6 +10,8 @@ export interface FrontMatter {
   summary?: string
   aliases?: string[]
   keywords?: string[]
+  hide_sidebar?: boolean
+  hide_commit?: boolean
 }
 
 export enum Locale {

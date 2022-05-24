@@ -1,0 +1,58 @@
+@import '../../styles/common';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid $divider-color;
+
+    > p {
+      margin-bottom: 0;
+    }
+
+    p:first-child {
+      height: 2rem;
+      width: 2rem;
+    }
+
+    h4 {
+      margin: 0;
+      width: 6.25rem;
+      padding: 0.5rem 0;
+    }
+
+    p:last-child {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 2rem;
+      row-gap: 1rem;
+      width: calc(100% - 12.5rem);
+
+      a {
+        font-size: 1em;
+        line-height: 1.25;
+        color: unset;
+        background-color: $M2;
+        border: 1px solid $divider-color;
+        padding: 0.5rem 1.5rem;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+:global(.markdown-body) {
+  h1.containerTitle {
+    border-bottom: 0;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}

@@ -9,6 +9,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
 import { useDispatch } from 'react-redux'
+import clsx from 'clsx'
 
 import { Seo } from 'components/Seo'
 
@@ -19,7 +20,7 @@ import { Improve } from './comp/Improve'
 import { GitCommitInfo } from './comp/GitCommitInfo'
 import { UserFeedback } from './comp/UserFeedback'
 import { Navigation } from './comp/Navigation'
-import {} from './doc.module.scss'
+import * as styles from './doc.module.scss'
 import { Layout } from 'layout'
 import { VersionSwitcher } from './comp/VersionSwitcher'
 import { Toc } from './comp/Toc'
@@ -63,10 +64,10 @@ export default function Doc({
   const { language } = useI18next()
 
   const tocData = useMemo(() => {
-    if (tableOfContents.items!.length === 1) {
+    if (tableOfContents.items?.length === 1) {
       return tableOfContents.items![0].items
     }
-    return tableOfContents.items
+    return tableOfContents.items || []
   }, [tableOfContents.items])
 
   const stableBranch = getStable(pathConfig.repo)
@@ -137,7 +138,9 @@ export default function Doc({
                 : []),
             ]}
           />
-          <Column size={7}>
+          <Column
+            size={7}
+            className={clsx({ [styles.noSideBar]: frontmatter?.hide_sidebar })}>
             <div className="markdown-body doc-content">
               <CustomNotice
                 name={name}
@@ -156,43 +159,49 @@ export default function Doc({
                 <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
 
-              {pathConfig.repo !== Repo.tidbcloud && (
-                <GitCommitInfo
-                  pathConfig={pathConfig}
-                  title={frontmatter.title}
-                  filePath={filePath}
-                />
-              )}
+              {pathConfig.repo !== Repo.tidbcloud &&
+                !frontmatter.hide_commit && (
+                  <GitCommitInfo
+                    pathConfig={pathConfig}
+                    title={frontmatter.title}
+                    filePath={filePath}
+                  />
+                )}
             </div>
           </Column>
 
-          <Column>
-            <div className="right-aside">
-              {language !== 'ja' && (
-                <Block>
-                  <DownloadPDF pathConfig={pathConfig} />
-                  {pathConfig.repo !== 'tidbcloud' && (
-                    <>
-                      <FeedbackDoc
-                        pathConfig={pathConfig}
-                        filePath={filePath}
-                      />
-                      {pathConfig.version === 'dev' && (
-                        <Improve pathConfig={pathConfig} filePath={filePath} />
-                      )}
-                    </>
-                  )}
-                  {pathConfig.locale === 'zh' && <TechFeedback />}
-                </Block>
-              )}
-              <div className="doc-toc">
-                <Title size={6} style={{ marginBottom: 0 }}>
-                  <Trans i18nKey="doc.toc" />
-                </Title>
-                {tocData && <Toc data={tocData} />}
+          {!frontmatter?.hide_sidebar && (
+            <Column>
+              <div className="right-aside">
+                {language !== 'ja' && (
+                  <Block>
+                    <DownloadPDF pathConfig={pathConfig} />
+                    {pathConfig.repo !== 'tidbcloud' && (
+                      <>
+                        <FeedbackDoc
+                          pathConfig={pathConfig}
+                          filePath={filePath}
+                        />
+                        {pathConfig.version === 'dev' && (
+                          <Improve
+                            pathConfig={pathConfig}
+                            filePath={filePath}
+                          />
+                        )}
+                      </>
+                    )}
+                    {pathConfig.locale === 'zh' && <TechFeedback />}
+                  </Block>
+                )}
+                <div className="doc-toc">
+                  <Title size={6} style={{ marginBottom: 0 }}>
+                    <Trans i18nKey="doc.toc" />
+                  </Title>
+                  {tocData && <Toc data={tocData} />}
+                </div>
               </div>
-            </div>
-          </Column>
+            </Column>
+          )}
 
           {language !== 'ja' && (
             <UserFeedback
@@ -218,6 +227,8 @@ export const query = graphql`
       frontmatter {
         title
         summary
+        hide_sidebar
+        hide_commit
       }
       body
       tableOfContents
