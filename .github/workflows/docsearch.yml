@@ -32,6 +32,7 @@ jobs:
 
       - name: Git push latest_commit
         run: |
+          cd docsearch
           cat algolia_configs/latest_commit.json
           git status
           git config user.name github-actions
