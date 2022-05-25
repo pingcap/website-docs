@@ -22,18 +22,12 @@ jobs:
       - name: Run scripts
         run: |
           cd docsearch
-          echo "APPLICATION_ID=${{ secrets.GATSBY_ALGOLIA_APPLICATION_ID }}\nAPI_KEY=${{ secrets.GATSBY_ALGOLIA_API_KEY }}\nGITHUB_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }}" > .env
-          export DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
-          ./run-algolia-crawler-incrementally.sh .
-      - name: Run scripts
-        run: |
-          cd docsearch
           touch .env
-          echo "APPLICATION_ID=${{ secrets.GATSBY_ALGOLIA_APPLICATION_ID }}" >> .env
-          echo "API_KEY=${{ secrets.GATSBY_ALGOLIA_API_KEY }}" >> .env
-          echo "GITHUB_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }}" >> .env
+          echo "APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
+          echo "API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
+          echo "GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}" >> .env
           export DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
-          export GITHUB_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }}
+          export GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
           ./run-algolia-crawler-incrementally.sh `pwd`
           git status
           git config user.name github-actions
