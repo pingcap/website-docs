@@ -29,6 +29,7 @@ jobs:
           export DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
           export GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
           ./run-algolia-crawler-incrementally.sh `pwd`
+          cat algolia_configs/latest_commit.json
           git status
           git config user.name github-actions
           git config user.email github-actions@github.com
