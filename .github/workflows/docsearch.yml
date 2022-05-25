@@ -28,7 +28,7 @@ jobs:
           echo "GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}" >> .env
           export DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
           export GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
-          ./run-algolia-crawler-incrementally.sh `pwd`
+          ./run-algolia-crawler-incrementally.sh `pwd` 2>&1
 
       - name: Git push latest_commit
         run: |
