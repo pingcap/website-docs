@@ -27,8 +27,8 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
 
   const dmrDesc =
     pathConfig.locale === 'zh'
-      ? `/tidb/v6.0/release-6.0.0-dmr#%E7%89%88%E6%9C%AC%E7%AD%96%E7%95%A5%E5%8F%98%E6%9B%B4`
-      : `/tidb/v6.0/release-6.0.0-dmr#release-strategy-changes`
+      ? `/tidb/v6.0/versioning`
+      : `/tidb/v6.0/versioning`
 
   if (isDeprecated) {
     return (

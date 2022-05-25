@@ -26,7 +26,7 @@
     "deprecation": {
       "tidb": {
         "firstContext": "You are viewing the documentation of an older version of the TiDB database (TiDB {{ curDocVersion }}).",
-        "secondContext": "It is recommended that you use <0>the latest stable version</0> of the TiDB database."
+        "secondContext": "It is recommended that you use <0>the latest LTS version</0> of the TiDB database."
       },
       "tidb-in-kubernetes": {
         "firstContext": "You are viewing the documentation for an older major version of the TiDB Operator tool (TiDB Operator {{ curDocVersion }}).",
@@ -40,7 +40,7 @@
     "dmr": {
       "tidb": {
         "firstContext": "You are viewing the documentation of TiDB {{ curDocVersion }} (<0>DMR</0>). PingCAP does not provide bug fixes for v6.0. Any bugs will be fixed in future releases.",
-        "secondContext": "For general purposes, please use <0>the latest stable version</0> of the TiDB database."
+        "secondContext": "For general purposes, please use <0>the latest LTS version</0> of the TiDB database."
       }
     }
   },
