@@ -58,3 +58,4 @@ docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-appdev-de
 # crawl en tidbcloud
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidbcloud.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 
+echo "Incrementally crawl finished at: $now"
