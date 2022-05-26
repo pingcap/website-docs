@@ -57,7 +57,6 @@ export function download(argv) {
   const options = genOptions(repo, config, dryRun)
 
   switch (repo) {
-    case 'pingcap/docs':
     case 'pingcap/docs-cn':
       retrieveAllMDsFromZip(
         {
@@ -75,6 +74,45 @@ export function download(argv) {
         ),
         options
       )
+      break
+    case 'pingcap/docs':
+      if (ref === 'master') {
+        const tmpRef = 'dev-20220525'
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref: tmpRef,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
+            )
+          ),
+          options
+        )
+      } else {
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+            )
+          ),
+          options
+        )
+      }
+
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
