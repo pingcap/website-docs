@@ -22,6 +22,8 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
       summary: String
       aliases: [String!]
       draft: Boolean
+      hide_sidebar: Boolean
+      hide_commit: Boolean
     }
   `
 
