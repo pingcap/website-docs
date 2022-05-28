@@ -215,7 +215,7 @@ export function Navbar({ locale }: Props) {
                     // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
                     referrerPolicy="no-referrer-when-downgrade"
                     target="_blank">
-                    Try TiDB Cloud
+                    Try Free
                   </a>
                 </NavbarItem>
               </>
