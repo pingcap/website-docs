@@ -4,7 +4,7 @@ import {
   retrieveAllMDs,
   retrieveAllMDsFromZip,
   copyFilesFromToc,
-  copySingleFileSync,
+  copyDirectorySync,
 } from './utils.js'
 import {
   replaceCopyableStream,
@@ -106,18 +106,6 @@ export function download(argv) {
       )
 
       break
-    case 'tidbcloud/dbaas-docs':
-      retrieveAllMDs(
-        {
-          repo,
-          path,
-          ref,
-        },
-        genDest(repo, path, nPath.resolve(dest, `en/tidbcloud/${ref}`)),
-        options
-      )
-
-      break
   }
 }
 
@@ -163,19 +151,6 @@ export function sync(argv) {
       )
 
       break
-    case 'tidbcloud/dbaas-docs':
-      handleSync(
-        {
-          repo,
-          ref,
-          base,
-          head,
-        },
-        nPath.resolve(dest, `en/tidbcloud/${ref}`),
-        options
-      )
-
-      break
   }
 }
 
@@ -203,10 +178,7 @@ export function filterCloud(argv) {
     path,
     nPath.resolve(dest, `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`)
   )
-  const destPath = nPath.resolve(dest, `en/tidbcloud/${ref}`)
-  copyFilesFromToc(`${srcPath}/TOC-cloud.md`, `${destPath}`)
-  copySingleFileSync(
-    `${srcPath}/cloud/_index.md`,
-    `${destPath}/cloud/_index.md`
-  )
+  const destPath = nPath.resolve(dest, `en/tidbcloud/master`)
+  copyFilesFromToc(`${srcPath}/TOC-tidb-cloud.md`, `${destPath}`)
+  copyDirectorySync(`${srcPath}/tidb-cloud`, `${destPath}/tidb-cloud/`)
 }

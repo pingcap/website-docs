@@ -227,6 +227,30 @@ export const copySingleFileSync = (srcPath, destPath) => {
   fs.copyFileSync(srcPath, destPath)
 }
 
+const getAllFiles = (dirPath, arrayOfFiles) => {
+  const files = fs.readdirSync(dirPath)
+
+  arrayOfFiles = arrayOfFiles || []
+
+  files.forEach(file => {
+    if (fs.statSync(dirPath + '/' + file).isDirectory()) {
+      arrayOfFiles = getAllFiles(dirPath + '/' + file, arrayOfFiles)
+    } else {
+      arrayOfFiles.push(path.join(dirPath, '/', file))
+    }
+  })
+
+  return arrayOfFiles
+}
+
+export const copyDirectorySync = (srcPath, destPath) => {
+  const allFiles = getAllFiles(srcPath)
+  allFiles.forEach(filePath => {
+    const relativePath = path.relative(srcPath, filePath)
+    copySingleFileSync(filePath, destPath + relativePath)
+  })
+}
+
 const generateMdAstFromFile = fileContent => {
   const mdAst = fromMarkdown(fileContent, {
     extensions: [frontmatter(['yaml', 'toml']), gfm()],
