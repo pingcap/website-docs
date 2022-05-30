@@ -80,7 +80,7 @@ jobs:
           yarn download:tidb:zh:all
           yarn download:dm:all
           yarn download:tidb-operator:all
-          yarn download:tidb-cloud
+          yarn filter:tidb-cloud:en --ref release-5.4
           yarn download:appdev:all
 
       - name: Download specific docs
@@ -113,6 +113,14 @@ jobs:
           ACT=${{ env.ACT }}
           [[ "${ACT:-false}" = "true" ]] && dryRun="true" || dryRun="false"
           yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
+          yarn filter:tidb-cloud:en --ref release-5.4
+
+      - name: Sync docs - tidb-cloud
+        if: steps.cache-commit.outputs.base != '' && github.event.client_payload.download_type != 'full' && github.event.client_payload.repo == 'pingcap/docs'
+        env:
+          GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          yarn filter:tidb-cloud:en --ref release-5.4
 
       - run: |
           tree -L 3 -d ./markdown-pages
