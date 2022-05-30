@@ -85,6 +85,7 @@
     "download:tidb:en:all": "./scripts/download-tidb-en.sh",
     "download:tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
     "download:tidb:zh:all": "./scripts/download-tidb-zh.sh",
+    "filter:tidb-cloud:en": "pingcap-docs-download cloud pingcap/docs",
     "download:dm": "pingcap-docs-download dl pingcap/docs-dm",
     "download:dm:all": "./scripts/download-dm.sh",
     "download:dm:en:all": "./scripts/download-dm-en.sh",
