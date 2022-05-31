@@ -65,6 +65,8 @@ $top: $navbar-height + 1rem;
 
     pre {
       background-color: $M2;
+      position: relative;
+      overflow-x: hidden;
 
       code {
         .number {
@@ -116,28 +118,6 @@ $top: $navbar-height + 1rem;
       transform: translateY(-50%);
       background-image: url(../../../images/version-mark.png);
       background-size: 20px;
-    }
-  }
-
-  .gatsby-highlight {
-    background: $M2;
-
-    pre {
-      &::before {
-        padding-right: 0.5rem;
-      }
-
-      &.shell-root::before {
-        content: '#';
-      }
-
-      &.shell-regular::before {
-        content: '$';
-      }
-
-      &.sql::before {
-        content: '>';
-      }
     }
   }
 
