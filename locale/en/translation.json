@@ -87,5 +87,11 @@
     "header": "Was this page helpful?",
     "thumbUp": "Yes",
     "thumbDown": "No"
+  },
+  "doc404": {
+    "title": "Sorry, we can't find the page you were looking for.",
+    "youMayWish": "You may wish to:",
+    "goToDocHome": "Go to <0>Docs Home</0>",
+    "searchDoc": "Search our current documentation"
   }
 }

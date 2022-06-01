@@ -1,4 +1,4 @@
-import { box, title } from './404.module.scss'
+import * as styles from './404.module.scss'
 
 import { I18nextContext, Link, Trans } from 'gatsby-plugin-react-i18next'
 import { Seo } from 'components/Seo'
@@ -8,14 +8,33 @@ import { useContext, useMemo } from 'react'
 import i18next from 'i18next'
 import { Locale } from 'typing'
 import { Layout } from 'layout'
+import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { SearchInput } from '../layout/comp/Input'
+import { setSearchValue } from 'state'
 
 export default function NotFoundPage({ data }: { data: AllLocales }) {
+  const { docInfo, searchValue } = useSelector(state => state) as any
+  const dispatch = useDispatch()
+
+  const handleSetSearchValue = (value: string) =>
+    dispatch(setSearchValue(value))
+
   const pathname = typeof window === 'undefined' ? '' : window.location.pathname
   const context = useContext(I18nextContext)
-  const language = useMemo(
-    () => (pathname.slice(1).startsWith('zh') ? 'zh' : 'en'),
-    [pathname]
-  )
+  const language = useMemo(() => {
+    const lang = pathname.slice(1)?.split('/')?.pop() || ''
+    switch (lang) {
+      case 'zh':
+        return 'zh'
+      case 'ja':
+        return 'ja'
+      default:
+        break
+    }
+    return 'en'
+  }, [pathname])
   const i18n = useMemo(() => {
     const i18n = i18next.createInstance()
 
@@ -40,13 +59,32 @@ export default function NotFoundPage({ data }: { data: AllLocales }) {
       <I18nextContext.Provider value={{ ...context, language }}>
         <Layout>
           <Seo title="404 Not Found" noindex />
-          <div className={box}>
-            <h1 className={title}>Sorry...404!</h1>
-            <main>
-              The page you were looking for appears to have been moved, deleted
-              or does not exist. You could go back to where you were or head
-              straight to our <Link to="/">home page</Link>.
-            </main>
+          <div className={styles.container}>
+            <div className={clsx('markdown-body', styles.left)}>
+              <h1 className={clsx(styles.title)}>
+                {<Trans i18nKey="doc404.title" />}
+              </h1>
+              <div>{<Trans i18nKey="doc404.youMayWish" />}</div>
+              <ul className={clsx(styles.optionsContainer)}>
+                <li>
+                  {
+                    <Trans
+                      i18nKey="doc404.goToDocHome"
+                      components={[<Link to="/" />]}
+                    />
+                  }
+                </li>
+                <li>{<Trans i18nKey="doc404.searchDoc" />}</li>
+              </ul>
+              <div className={styles.searchInput}>
+                <SearchInput
+                  docInfo={docInfo}
+                  searchValue={searchValue}
+                  setSearchValue={handleSetSearchValue}
+                />
+              </div>
+            </div>
+            <div className={clsx(styles.right)}></div>
           </div>
         </Layout>
       </I18nextContext.Provider>

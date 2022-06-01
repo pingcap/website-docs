@@ -85,5 +85,11 @@
     "header": "文档内容是否有帮助？",
     "thumbUp": "是",
     "thumbDown": "否"
+  },
+  "doc404": {
+    "title": "抱歉，您要找的页面走丢了…",
+    "youMayWish": "您可以：",
+    "goToDocHome": "去 <0>文档中心</0>",
+    "searchDoc": "搜索文档"
   }
 }
