@@ -4,10 +4,12 @@ import * as styles from './LearningPath.module.scss'
 export const LearningPathContainer = (props: any) => {
   const { children = [], title } = props
 
-  const childProps = children.map((child: any) => ({
-    id: child?.props?.id || '',
-    label: child?.props?.label || '',
-  }))
+  const childProps = children?.length
+    ? children.map((child: any) => ({
+        id: child?.props?.id || '',
+        label: child?.props?.label || '',
+      }))
+    : []
 
   const [selectedId, setSelectedId] = useState('')
 
@@ -21,23 +23,26 @@ export const LearningPathContainer = (props: any) => {
 
   return (
     <>
-      {childProps.map((childProp: { id: string; label: string }) => {
-        const { label: childLabel, id: childId } = childProp
-        return (
-          <div>
-            <button
-              onClick={() => {
-                setSelectedId(childId)
-              }}>
-              {childLabel}
-            </button>
-          </div>
-        )
-      })}
+      {!!childProps?.length &&
+        childProps.map((childProp: { id: string; label: string }) => {
+          const { label: childLabel, id: childId } = childProp
+          return (
+            <div>
+              <button
+                onClick={() => {
+                  setSelectedId(childId)
+                }}>
+                {childLabel}
+              </button>
+            </div>
+          )
+        })}
       {title && <h1 className={styles.containerTitle}>{title}</h1>}
       <div className={styles.container}>
         {/* {children.filter((child: any) => child?.props?.id === selectedId)} */}
-        {filterTargetContentChild(children, selectedId)}
+        {childProps?.length
+          ? filterTargetContentChild(children, selectedId)
+          : children}
       </div>
     </>
   )
