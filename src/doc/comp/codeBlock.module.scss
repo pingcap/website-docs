@@ -4,6 +4,10 @@
   right: 0.625rem;
   background: transparent;
   border: unset;
+
+  &:focus:not(:active) {
+    box-shadow: none;
+  }
 }
 
 .codeContent {
