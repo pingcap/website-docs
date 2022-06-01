@@ -136,6 +136,21 @@ export function download(argv) {
       )
 
       break
+    default:
+      retrieveAllMDsFromZip(
+        {
+          repo,
+          path,
+          ref,
+        },
+        genDest(
+          repo,
+          path,
+          nPath.resolve(dest, `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/test`)
+        ),
+        options
+      )
+      break
   }
 }
 

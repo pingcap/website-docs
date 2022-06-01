@@ -94,6 +94,7 @@
     "download:tidb:ja": "pingcap-docs-download dl pingcap/docs",
     "download:tidb:ja:all": "./scripts/download-tidb-ja.sh",
     "filter:tidb-cloud:ja": "pingcap-docs-download cloud pingcap/docs --lang ja",
+    "download:tidb:test": "pingcap-docs-download dl",
     "download:dm": "pingcap-docs-download dl pingcap/docs-dm",
     "download:dm:all": "./scripts/download-dm.sh",
     "download:dm:en:all": "./scripts/download-dm-en.sh",
