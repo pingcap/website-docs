@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import * as styles from './LearningPath.module.scss'
 
+// TODO: hide element instead of update whole node
 export const LearningPathContainer = (props: any) => {
   const { children = [], title } = props
 
