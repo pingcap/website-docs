@@ -7,14 +7,14 @@ jobs:
     name: Retrieve docs and deploy the website
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # if there's a action without sha1, it will write a cache
       # in linux-gatsby-cache-2- and will be used everytime latter action being dispatched
       - name: Bailout
         if: ${{ !github.event.client_payload.sha }}
         run: exit 1
-      
+
       # make sure there is only one workflow running
       - name: Turnstyle
         if: ${{ !env.ACT }}
@@ -40,7 +40,7 @@ jobs:
             ${{ steps.known-hosts.outputs.LA1 }}
             ${{ steps.known-hosts.outputs.LA2 }}
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         if: ${{ !env.ACT }}
         with:
           node-version: '16'
@@ -60,7 +60,7 @@ jobs:
         run: yarn
 
       - name: Restore docs
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: docs-cache
         with:
           path: markdown-pages
@@ -132,7 +132,7 @@ jobs:
           tree -L 3 -d ./markdown-pages
 
       - name: Restore gatsby cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: gatsby-cache
         with:
           path: |
