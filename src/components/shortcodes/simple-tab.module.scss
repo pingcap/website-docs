@@ -48,3 +48,9 @@ ul.tabs {
 .hidden {
   display: none;
 }
+
+.newTabs {
+  & > ul > li:first-child {
+    margin-top: 0.25rem;
+  }
+}
