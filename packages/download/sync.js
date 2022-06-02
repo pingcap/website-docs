@@ -42,7 +42,8 @@ export async function handleSync(metaInfo, destDir, options) {
 
       if (
         ignore.includes(filename) ||
-        ignore.some(i => filename.startsWith(i))
+        ignore.some(i => filename.startsWith(i)) ||
+        !filename.endsWith('.md')
       ) {
         return
       }
