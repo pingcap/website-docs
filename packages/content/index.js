@@ -30,7 +30,9 @@ function replaceImagePathStream(replaced) {
 
 function replaceCopyableStream() {
   return replaceStream(copyable, function (_, p1) {
-    return `<WithCopy tag=${p1} />\n`
+    // return `<WithCopy tag=${p1} />\n`
+    // ! WithCopy is deprecated!
+    return ``
   })
 }
 

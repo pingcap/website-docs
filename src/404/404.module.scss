@@ -1,17 +1,43 @@
-@import 'styles/common';
+@import '../styles/common';
 
-.box {
-  @include VHCenter;
+.container {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-around;
+  align-items: center;
 
-  flex-direction: column;
-  align-items: flex-start;
-  height: 50vh;
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
-.title {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: $title-color;
-  font-weight: 600;
-  line-height: $title-lh;
+.left {
+  flex: 1 1;
+
+  .title {
+    border-bottom: 0;
+  }
+
+  .optionsContainer {
+    list-style: inherit;
+  }
+}
+
+.right {
+  flex: 1 1;
+
+  background-image: url(../styles/images/404.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+
+  width: 33.5rem;
+  height: 17.5rem;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.searchInput {
+  max-width: 20rem;
 }
