@@ -217,14 +217,18 @@ export async function retrieveAllMDsFromZip(
 }
 
 export const copySingleFileSync = (srcPath, destPath) => {
-  const dir = path.dirname(destPath)
+  try {
+    const dir = path.dirname(destPath)
 
-  if (!fs.existsSync(dir)) {
-    // console.info(`Create empty dir: ${dir}`);
-    fs.mkdirSync(dir, { recursive: true })
+    if (!fs.existsSync(dir)) {
+      // console.info(`Create empty dir: ${dir}`);
+      fs.mkdirSync(dir, { recursive: true })
+    }
+
+    fs.copyFileSync(srcPath, destPath)
+  } catch (error) {
+    console.log(error)
   }
-
-  fs.copyFileSync(srcPath, destPath)
 }
 
 const getAllFiles = (dirPath, arrayOfFiles) => {
@@ -244,11 +248,15 @@ const getAllFiles = (dirPath, arrayOfFiles) => {
 }
 
 export const copyDirectorySync = (srcPath, destPath) => {
-  const allFiles = getAllFiles(srcPath)
-  allFiles.forEach(filePath => {
-    const relativePath = path.relative(srcPath, filePath)
-    copySingleFileSync(filePath, destPath + relativePath)
-  })
+  try {
+    const allFiles = getAllFiles(srcPath)
+    allFiles.forEach(filePath => {
+      const relativePath = path.relative(srcPath, filePath)
+      copySingleFileSync(filePath, destPath + relativePath)
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const generateMdAstFromFile = fileContent => {
