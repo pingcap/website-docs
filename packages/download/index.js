@@ -219,4 +219,6 @@ export function filterCloud(argv) {
   const destPath = nPath.resolve(dest, `en/tidbcloud/master`)
   copyFilesFromToc(`${srcPath}/TOC-tidb-cloud.md`, `${destPath}`)
   copyDirectorySync(`${srcPath}/tidb-cloud`, `${destPath}/tidb-cloud/`)
+  fs.existsSync(`${srcPath}/tidb-cloud`) &&
+    fs.rmSync(`${srcPath}/tidb-cloud`, { recursive: true })
 }
