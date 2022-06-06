@@ -24,7 +24,7 @@ export default function NotFoundPage({ data }: { data: AllLocales }) {
   const pathname = typeof window === 'undefined' ? '' : window.location.pathname
   const context = useContext(I18nextContext)
   const language = useMemo(() => {
-    const lang = pathname.slice(1)?.split('/')?.pop() || ''
+    const lang = pathname.slice(1)?.split('/')?.shift() || ''
     switch (lang) {
       case 'zh':
         return 'zh'
