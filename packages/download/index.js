@@ -96,6 +96,20 @@ export function download(argv) {
           ),
           options
         )
+      } else if (ref.startsWith('i18n-')) {
+        const refDataList = ref.split('-')
+        refDataList.shift()
+        const refLang = refDataList.shift()
+        const refVer = refDataList.join('-')
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref,
+          },
+          genDest(repo, path, nPath.resolve(dest, `${refLang}/tidb/${refVer}`)),
+          options
+        )
       } else {
         retrieveAllMDsFromZip(
           {

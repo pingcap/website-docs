@@ -154,13 +154,15 @@ export function Navbar({ locale }: Props) {
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
-            <NavbarItem
-              // @ts-ignore
-              as={Link}
-              className={main}
-              to="/appdev/dev">
-              <Trans i18nKey="navbar.appdev" />
-            </NavbarItem>
+            {language in ['en', 'zh'] && (
+              <NavbarItem
+                // @ts-ignore
+                as={Link}
+                className={main}
+                to="/appdev/dev">
+                <Trans i18nKey="navbar.appdev" />
+              </NavbarItem>
+            )}
             <NavbarItem className={main} href={generateDownloadURL(language)}>
               <Trans i18nKey="navbar.download" />
             </NavbarItem>
