@@ -67,3 +67,27 @@ export const zh = [
     href: 'https://reddit.com/r/TiDB/',
   },
 ]
+
+export const ja = [
+  {
+    name: 'github',
+    href: 'https://github.com/pingcap',
+  },
+
+  {
+    name: 'twitter',
+    href: 'https://twitter.com/PingCAP_Japan',
+  },
+  {
+    name: 'linkedin',
+    href: 'https://www.linkedin.com/company/74771520/',
+  },
+  {
+    name: 'slack',
+    href: 'https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs',
+  },
+  {
+    name: 'youtube',
+    href: 'https://www.youtube.com/channel/UCatxrGZANSnii2fe7FeEwvg',
+  },
+]

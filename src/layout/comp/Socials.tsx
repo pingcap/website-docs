@@ -1,4 +1,4 @@
-import { en, zh } from './socials.data'
+import { en, zh, ja } from './socials.data'
 
 import clsx from 'clsx'
 import { Locale } from 'typing'
@@ -9,7 +9,21 @@ interface Props {
 }
 
 export const Socials = ({ locale, className }: Props) => {
-  const data = locale === 'en' ? en : zh
+  const getSocialsData = (lang: string) => {
+    let result = en
+    switch (lang) {
+      case 'zh':
+        result = zh
+        break
+      case 'ja':
+        result = ja
+        break
+      default:
+        break
+    }
+    return result
+  }
+  const data = getSocialsData(locale)
 
   return (
     <>

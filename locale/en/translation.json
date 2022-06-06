@@ -3,7 +3,10 @@
     "title": "Language",
     "en": "English",
     "zh": "简体中文",
-    "cannotswitch": "This page is not available in Chinese",
+    "ja": "日本語",
+    "cannotswitchEn": "This page is not available in English",
+    "cannotswitchZh": "This page is not available in Chinese",
+    "cannotswitchJa": "This page is not available in Japanese",
     "cannotswitchtocloud": "TiDB Cloud Chinese documentation is not available at this time"
   },
   "navbar": {

@@ -4,7 +4,7 @@ import * as Shortcodes from 'components/shortcodes'
 
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
 import { useMemo, useEffect } from 'react'
-import { Trans } from 'gatsby-plugin-react-i18next'
+import { Trans, useI18next } from 'gatsby-plugin-react-i18next'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql, Link } from 'gatsby'
@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 
 import { Seo } from 'components/Seo'
 
-import { CustomNotice } from './comp/CustomNotice'
+import { CustomNotice, MachineTranslationNotice } from './comp/CustomNotice'
 import { DownloadPDF } from './comp/DownloadPDF'
 import { FeedbackDoc, TechFeedback } from './comp/Feedback'
 import { Improve } from './comp/Improve'
@@ -59,6 +59,8 @@ export default function Doc({
     mdx: { frontmatter, tableOfContents, body },
     navigation: { navigation },
   } = data
+
+  const { language } = useI18next()
 
   const tocData = useMemo(() => {
     if (tableOfContents.items!.length === 1) {
@@ -142,6 +144,13 @@ export default function Doc({
                 pathConfig={pathConfig}
                 availIn={availIn.version}
               />
+              {language === 'ja' && (
+                <MachineTranslationNotice
+                  name={name}
+                  pathConfig={pathConfig}
+                  availIn={availIn.version}
+                />
+              )}
 
               <MDXProvider components={{ ...Shortcodes, Link }}>
                 <MDXRenderer>{body}</MDXRenderer>
@@ -159,18 +168,23 @@ export default function Doc({
 
           <Column>
             <div className="right-aside">
-              <Block>
-                <DownloadPDF pathConfig={pathConfig} />
-                {pathConfig.repo !== 'tidbcloud' && (
-                  <>
-                    <FeedbackDoc pathConfig={pathConfig} filePath={filePath} />
-                    {pathConfig.version === 'dev' && (
-                      <Improve pathConfig={pathConfig} filePath={filePath} />
-                    )}
-                  </>
-                )}
-                {pathConfig.locale === 'zh' && <TechFeedback />}
-              </Block>
+              {language !== 'ja' && (
+                <Block>
+                  <DownloadPDF pathConfig={pathConfig} />
+                  {pathConfig.repo !== 'tidbcloud' && (
+                    <>
+                      <FeedbackDoc
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                      />
+                      {pathConfig.version === 'dev' && (
+                        <Improve pathConfig={pathConfig} filePath={filePath} />
+                      )}
+                    </>
+                  )}
+                  {pathConfig.locale === 'zh' && <TechFeedback />}
+                </Block>
+              )}
               <div className="doc-toc">
                 <Title size={6} style={{ marginBottom: 0 }}>
                   <Trans i18nKey="doc.toc" />
@@ -180,7 +194,12 @@ export default function Doc({
             </div>
           </Column>
 
-          <UserFeedback title={frontmatter.title} locale={pathConfig.locale} />
+          {language !== 'ja' && (
+            <UserFeedback
+              title={frontmatter.title}
+              locale={pathConfig.locale}
+            />
+          )}
         </Columns>
       </article>
     </Layout>

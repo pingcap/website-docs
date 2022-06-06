@@ -53,19 +53,15 @@
 }
 
 .socials {
-  @include mobile {
-    margin-top: 1rem;
-  }
-}
+  display: grid;
+  justify-content: end;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: end;
+  grid-row-gap: 16px;
 
-.column {
   @include mobile {
-    display: inline-block;
-    margin-left: 1rem;
+    justify-items: start;
   }
-
-  margin-bottom: 1rem;
-  background-position: right;
 }
 
 .annotations {

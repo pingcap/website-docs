@@ -54,6 +54,7 @@ export function Navbar({ locale }: Props) {
 
   const enDisabled = !locale.includes(Locale.en)
   const zhDisabled = !locale.includes(Locale.zh)
+  const jaDisabled = !locale.includes(Locale.ja)
 
   const [showBorder, setShowBorder] = useState(false)
   const [burgerActive, setBurgerActive] = useState(false)
@@ -91,6 +92,30 @@ export function Navbar({ locale }: Props) {
     return () => window.removeEventListener('scroll', scrollListener)
   }, [])
 
+  const generateDownloadURL = (lang: string): string => {
+    switch (lang) {
+      case 'zh':
+        return 'https://pingcap.com/zh/product#SelectProduct'
+      case 'ja':
+        return 'https://pingcap.co.jp/event/'
+      case 'en':
+      default:
+        return 'https://en.pingcap.com/download'
+    }
+  }
+
+  const generateContactURL = (lang: string): string => {
+    switch (lang) {
+      case 'zh':
+        return 'https://pingcap.com/zh/contact/'
+      case 'ja':
+        return 'https://pingcap.co.jp/contact-us/'
+      case 'en':
+      default:
+        return 'https://en.pingcap.com/contact-us/'
+    }
+  }
+
   return (
     <BulmaNavbar
       as="nav"
@@ -120,7 +145,7 @@ export function Navbar({ locale }: Props) {
               to="/tidb/stable">
               <Trans i18nKey="navbar.tidb" />
             </NavbarItem>
-            {language === 'en' && (
+            {['en', 'ja'].includes(language) && (
               <NavbarItem
                 // @ts-ignore
                 as={Link}
@@ -129,29 +154,19 @@ export function Navbar({ locale }: Props) {
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
-            <NavbarItem
-              // @ts-ignore
-              as={Link}
-              className={main}
-              to="/appdev/dev">
-              <Trans i18nKey="navbar.appdev" />
-            </NavbarItem>
-            <NavbarItem
-              className={main}
-              href={
-                language === 'en'
-                  ? 'https://en.pingcap.com/download'
-                  : 'https://pingcap.com/zh/product#SelectProduct'
-              }>
+            {['en', 'zh'].includes(language) && (
+              <NavbarItem
+                // @ts-ignore
+                as={Link}
+                className={main}
+                to="/appdev/dev">
+                <Trans i18nKey="navbar.appdev" />
+              </NavbarItem>
+            )}
+            <NavbarItem className={main} href={generateDownloadURL(language)}>
               <Trans i18nKey="navbar.download" />
             </NavbarItem>
-            <NavbarItem
-              className={main}
-              href={
-                language === 'en'
-                  ? 'https://en.pingcap.com/contact-us/'
-                  : 'https://pingcap.com/zh/contact/'
-              }>
+            <NavbarItem className={main} href={generateContactURL(language)}>
               <Trans i18nKey="navbar.contactUs" />
             </NavbarItem>
           </NavbarStart>
@@ -162,12 +177,12 @@ export function Navbar({ locale }: Props) {
                 <Trans i18nKey="lang.title" />
               </NavbarLink>
 
-              <NavbarDropdown boxed>
+              <NavbarDropdown boxed className="is-right">
                 <NavbarItem
                   className={clsx(langItem, enDisabled && disabled)}
                   onClick={() => !enDisabled && changeLanguage('en')}>
                   {enDisabled ? (
-                    <Trans i18nKey="lang.cannotswitch" />
+                    <Trans i18nKey="lang.cannotswitchEn" />
                   ) : (
                     <Trans i18nKey="lang.en" />
                   )}
@@ -181,23 +196,40 @@ export function Navbar({ locale }: Props) {
                       i18nKey={
                         docInfo.type === 'tidbcloud'
                           ? 'lang.cannotswitchtocloud'
-                          : 'lang.cannotswitch'
+                          : 'lang.cannotswitchZh'
                       }
                     />
                   ) : (
                     <Trans i18nKey="lang.zh" />
                   )}
                 </NavbarItem>
+                <NavbarItem
+                  className={clsx(langItem, jaDisabled && disabled)}
+                  onClick={() => !jaDisabled && changeLanguage('ja')}>
+                  {jaDisabled ? (
+                    <Trans
+                      i18nKey={
+                        docInfo.type === 'tidbcloud'
+                          ? 'lang.cannotswitchtocloud'
+                          : 'lang.cannotswitchJa'
+                      }
+                    />
+                  ) : (
+                    <Trans i18nKey="lang.ja" />
+                  )}
+                </NavbarItem>
               </NavbarDropdown>
             </NavbarItem>
 
-            <NavbarItem as="div" className="search-input">
-              <SearchInput
-                docInfo={docInfo}
-                searchValue={searchValue}
-                setSearchValue={handleSetSearchValue}
-              />
-            </NavbarItem>
+            {language !== 'ja' && (
+              <NavbarItem as="div" className="search-input">
+                <SearchInput
+                  docInfo={docInfo}
+                  searchValue={searchValue}
+                  setSearchValue={handleSetSearchValue}
+                />
+              </NavbarItem>
+            )}
 
             {language === 'en' && (
               <>

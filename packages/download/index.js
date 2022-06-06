@@ -96,6 +96,20 @@ export function download(argv) {
           ),
           options
         )
+      } else if (ref.startsWith('i18n-')) {
+        const refDataList = ref.split('-')
+        refDataList.shift()
+        const refLang = refDataList.shift()
+        const refVer = refDataList.join('-')
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref,
+          },
+          genDest(repo, path, nPath.resolve(dest, `${refLang}/tidb/${refVer}`)),
+          options
+        )
       } else {
         retrieveAllMDsFromZip(
           {
@@ -114,7 +128,17 @@ export function download(argv) {
           options
         )
       }
-
+      break
+    case 'shczhen/docs':
+      retrieveAllMDsFromZip(
+        {
+          repo,
+          path,
+          ref,
+        },
+        genDest(repo, path, nPath.resolve(dest, `ja/tidb/${ref}`)),
+        options
+      )
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
@@ -209,14 +233,14 @@ export function gen(argv) {
 }
 
 export function filterCloud(argv) {
-  const { repo, path, ref, destination } = argv
+  const { repo, path, ref, destination, lang } = argv
   const dest = nPath.resolve(destination)
   const srcPath = genDest(
     repo,
     path,
-    nPath.resolve(dest, `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`)
+    nPath.resolve(dest, `${lang}/tidb/${ref}`)
   )
-  const destPath = nPath.resolve(dest, `en/tidbcloud/master`)
+  const destPath = nPath.resolve(dest, `${lang}/tidbcloud/master`)
   copyFilesFromToc(`${srcPath}/TOC-tidb-cloud.md`, `${destPath}`)
   copyDirectorySync(`${srcPath}/tidb-cloud`, `${destPath}/tidb-cloud/`)
   fs.existsSync(`${srcPath}/tidb-cloud`) &&
