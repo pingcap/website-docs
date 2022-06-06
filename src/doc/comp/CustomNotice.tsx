@@ -85,9 +85,10 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
 }
 
 export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
-  const targetEnUrl = `/${pathConfig.repo}/${pathConfig.branch}/${
-    name === '_index' ? '' : name
-  }`
+  const targetEnUrl =
+    pathConfig.repo === 'tidbcloud'
+      ? `/tidbcloud`
+      : `/${pathConfig.repo}/stable/${name === '_index' ? '' : name}`
   return (
     <Important>
       <Trans

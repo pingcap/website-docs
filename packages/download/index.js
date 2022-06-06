@@ -233,14 +233,14 @@ export function gen(argv) {
 }
 
 export function filterCloud(argv) {
-  const { repo, path, ref, destination } = argv
+  const { repo, path, ref, destination, lang } = argv
   const dest = nPath.resolve(destination)
   const srcPath = genDest(
     repo,
     path,
-    nPath.resolve(dest, `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`)
+    nPath.resolve(dest, `${lang}/tidb/${ref}`)
   )
-  const destPath = nPath.resolve(dest, `en/tidbcloud/master`)
+  const destPath = nPath.resolve(dest, `${lang}/tidbcloud/master`)
   copyFilesFromToc(`${srcPath}/TOC-tidb-cloud.md`, `${destPath}`)
   copyDirectorySync(`${srcPath}/tidb-cloud`, `${destPath}/tidb-cloud/`)
   fs.existsSync(`${srcPath}/tidb-cloud`) &&

@@ -72,6 +72,11 @@ const argv = yargs(hideBin(process.argv))
           type: 'string',
           default: 'master',
         })
+        .positional('lang', {
+          desc: 'Specify the lang of the repo',
+          type: 'string',
+          default: 'en',
+        })
     }
   )
   .options({

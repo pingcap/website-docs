@@ -145,7 +145,7 @@ export function Navbar({ locale }: Props) {
               to="/tidb/stable">
               <Trans i18nKey="navbar.tidb" />
             </NavbarItem>
-            {language === 'en' && (
+            {['en', 'ja'].includes(language) && (
               <NavbarItem
                 // @ts-ignore
                 as={Link}
@@ -154,7 +154,7 @@ export function Navbar({ locale }: Props) {
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
-            {language in ['en', 'zh'] && (
+            {['en', 'ja'].includes(language) && (
               <NavbarItem
                 // @ts-ignore
                 as={Link}
