@@ -154,7 +154,7 @@ export function Navbar({ locale }: Props) {
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
-            {['en'].includes(language) && (
+            {['en', 'zh'].includes(language) && (
               <NavbarItem
                 // @ts-ignore
                 as={Link}
