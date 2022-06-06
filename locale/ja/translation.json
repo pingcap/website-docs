@@ -90,5 +90,11 @@
     "header": "このページは役に立ちましたか？",
     "thumbUp": "はい",
     "thumbDown": "いいえ"
+  },
+  "doc404": {
+    "title": "お探しのページが見つかりません。",
+    "youMayWish": "You may wish to:",
+    "goToDocHome": "Go to <0>Docs Home</0>",
+    "searchDoc": "Search our current documentation"
   }
 }

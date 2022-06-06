@@ -64,25 +64,29 @@ export default function NotFoundPage({ data }: { data: AllLocales }) {
               <h1 className={clsx(styles.title)}>
                 {<Trans i18nKey="doc404.title" />}
               </h1>
-              <div>{<Trans i18nKey="doc404.youMayWish" />}</div>
-              <ul className={clsx(styles.optionsContainer)}>
-                <li>
-                  {
-                    <Trans
-                      i18nKey="doc404.goToDocHome"
-                      components={[<Link to="/" />]}
+              {['en', 'zh'].includes(language) && (
+                <>
+                  <div>{<Trans i18nKey="doc404.youMayWish" />}</div>
+                  <ul className={clsx(styles.optionsContainer)}>
+                    <li>
+                      {
+                        <Trans
+                          i18nKey="doc404.goToDocHome"
+                          components={[<Link to="/" />]}
+                        />
+                      }
+                    </li>
+                    <li>{<Trans i18nKey="doc404.searchDoc" />}</li>
+                  </ul>
+                  <div className={styles.searchInput}>
+                    <SearchInput
+                      docInfo={docInfo}
+                      searchValue={searchValue}
+                      setSearchValue={handleSetSearchValue}
                     />
-                  }
-                </li>
-                <li>{<Trans i18nKey="doc404.searchDoc" />}</li>
-              </ul>
-              <div className={styles.searchInput}>
-                <SearchInput
-                  docInfo={docInfo}
-                  searchValue={searchValue}
-                  setSearchValue={handleSetSearchValue}
-                />
-              </div>
+                  </div>
+                </>
+              )}
             </div>
             <div className={clsx(styles.right)}></div>
           </div>
