@@ -195,7 +195,7 @@ export function Navbar({ locale }: Props) {
                     <Trans
                       i18nKey={
                         docInfo.type === 'tidbcloud'
-                          ? 'lang.cannotswitchtocloud'
+                          ? 'lang.cannotswitchtocloudZh'
                           : 'lang.cannotswitchZh'
                       }
                     />
@@ -210,7 +210,7 @@ export function Navbar({ locale }: Props) {
                     <Trans
                       i18nKey={
                         docInfo.type === 'tidbcloud'
-                          ? 'lang.cannotswitchtocloud'
+                          ? 'lang.cannotswitchtocloudJa'
                           : 'lang.cannotswitchJa'
                       }
                     />
