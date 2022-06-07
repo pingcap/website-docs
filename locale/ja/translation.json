@@ -7,7 +7,8 @@
     "cannotswitchEn": "このページは英語ではご利用いただけません",
     "cannotswitchZh": "このページは中国語ではご利用いただけません",
     "cannotswitchJa": "このページは日本語ではご利用いただけません",
-    "cannotswitchtocloud": "TiDB Cloud 日本語ドキュメントは現在利用できません",
+    "cannotswitchtocloudJa": "TiDB Cloud 日本語ドキュメントは現在利用できません",
+    "cannotswitchtocloudZh": "TiDB Cloud 中国語ドキュメントは現在利用できません",
     "machineTransNotice": "このページは英語版のページを機械翻訳しています。原文は<0>こちら</0>からご覧ください。"
   },
   "navbar": {

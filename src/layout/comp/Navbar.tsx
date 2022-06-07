@@ -116,6 +116,15 @@ export function Navbar({ locale }: Props) {
     }
   }
 
+  const generateOfficialWebsiteUrl = (lang: string) => {
+    switch (lang) {
+      case 'ja':
+        return 'https://pingcap.co.jp/'
+      default:
+        return 'https://pingcap.com'
+    }
+  }
+
   return (
     <BulmaNavbar
       as="nav"
@@ -124,7 +133,10 @@ export function Navbar({ locale }: Props) {
       transparent>
       <Container>
         <NavbarBrand>
-          <NavbarItem as="a" href="https://pingcap.com" target="_blank">
+          <NavbarItem
+            as="a"
+            href={`${generateOfficialWebsiteUrl(language)}`}
+            target="_blank">
             <img className={logo} src={BrandSVG.publicURL} alt="PingCAP" />
           </NavbarItem>
 
@@ -195,7 +207,7 @@ export function Navbar({ locale }: Props) {
                     <Trans
                       i18nKey={
                         docInfo.type === 'tidbcloud'
-                          ? 'lang.cannotswitchtocloud'
+                          ? 'lang.cannotswitchtocloudZh'
                           : 'lang.cannotswitchZh'
                       }
                     />
@@ -210,7 +222,7 @@ export function Navbar({ locale }: Props) {
                     <Trans
                       i18nKey={
                         docInfo.type === 'tidbcloud'
-                          ? 'lang.cannotswitchtocloud'
+                          ? 'lang.cannotswitchtocloudJa'
                           : 'lang.cannotswitchJa'
                       }
                     />
@@ -242,7 +254,7 @@ export function Navbar({ locale }: Props) {
                 </NavbarItem>
                 <NavbarItem as="div">
                   <a
-                    href="https://tidbcloud.com/signup?_ga=2.92391197.1421016400.1651713063-598142147.1627626898"
+                    href="https://tidbcloud.com/free-trial"
                     className={clsx('button', tryTidbCloudBtn)}
                     // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
                     referrerPolicy="no-referrer-when-downgrade"

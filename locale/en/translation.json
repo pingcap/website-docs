@@ -7,7 +7,8 @@
     "cannotswitchEn": "This page is not available in English",
     "cannotswitchZh": "This page is not available in Chinese",
     "cannotswitchJa": "This page is not available in Japanese",
-    "cannotswitchtocloud": "TiDB Cloud Chinese documentation is not available at this time"
+    "cannotswitchtocloudZh": "TiDB Cloud Chinese documentation is not available at this time",
+    "cannotswitchtocloudJa": "TiDB Cloud Japanese documentation is not available at this time"
   },
   "navbar": {
     "tidb": "TiDB",
