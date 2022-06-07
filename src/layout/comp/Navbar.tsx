@@ -242,7 +242,7 @@ export function Navbar({ locale }: Props) {
                 </NavbarItem>
                 <NavbarItem as="div">
                   <a
-                    href="https://tidbcloud.com/signup?_ga=2.92391197.1421016400.1651713063-598142147.1627626898"
+                    href="https://tidbcloud.com/free-trial"
                     className={clsx('button', tryTidbCloudBtn)}
                     // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
                     referrerPolicy="no-referrer-when-downgrade"
