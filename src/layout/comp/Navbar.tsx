@@ -116,6 +116,15 @@ export function Navbar({ locale }: Props) {
     }
   }
 
+  const generateOfficialWebsiteUrl = (lang: string) => {
+    switch (lang) {
+      case 'ja':
+        return 'https://pingcap.co.jp/'
+      default:
+        return 'https://pingcap.com'
+    }
+  }
+
   return (
     <BulmaNavbar
       as="nav"
@@ -124,7 +133,10 @@ export function Navbar({ locale }: Props) {
       transparent>
       <Container>
         <NavbarBrand>
-          <NavbarItem as="a" href="https://pingcap.com" target="_blank">
+          <NavbarItem
+            as="a"
+            href={`${generateOfficialWebsiteUrl(language)}`}
+            target="_blank">
             <img className={logo} src={BrandSVG.publicURL} alt="PingCAP" />
           </NavbarItem>
 
