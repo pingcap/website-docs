@@ -64,9 +64,9 @@ jobs:
         id: docs-cache
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-20220607-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-20220609-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-20220607-
+            ${{ runner.os }}-docs-cache-20220609-
 
       - name: Check file exists
         id: check-file-exists
@@ -121,7 +121,6 @@ jobs:
           ACT=${{ env.ACT }}
           [[ "${ACT:-false}" = "true" ]] && dryRun="true" || dryRun="false"
           yarn sync ${{ github.event.client_payload.repo }} --ref ${{ github.event.client_payload.ref }} ${{ steps.cache-commit.outputs.base }} ${{ github.event.client_payload.sha }} --dry-run $dryRun
-          yarn filter:tidb-cloud:en --ref release-5.4
 
       - name: Sync docs - tidb-cloud
         if: steps.cache-commit.outputs.base != '' && github.event.client_payload.download_type != 'full' && github.event.client_payload.repo == 'pingcap/docs'
@@ -129,6 +128,7 @@ jobs:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           yarn filter:tidb-cloud:en --ref release-5.4
+          yarn filter:tidb-cloud:ja --ref release-5.4
 
       - run: |
           tree -L 3 -d ./markdown-pages

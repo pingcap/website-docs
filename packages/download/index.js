@@ -129,17 +129,6 @@ export function download(argv) {
         )
       }
       break
-    case 'shczhen/docs':
-      retrieveAllMDsFromZip(
-        {
-          repo,
-          path,
-          ref,
-        },
-        genDest(repo, path, nPath.resolve(dest, `ja/tidb/${ref}`)),
-        options
-      )
-      break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
     case 'pingcap/docs-appdev':
@@ -180,6 +169,37 @@ export function sync(argv) {
 
   switch (repo) {
     case 'pingcap/docs':
+      if (ref.startsWith('i18n-')) {
+        const refDataList = ref.split('-')
+        refDataList.shift()
+        const refLang = refDataList.shift()
+        const refVer = refDataList.join('-')
+        handleSync(
+          {
+            repo,
+            ref,
+            base,
+            head,
+          },
+          nPath.resolve(dest, `${refLang}/tidb/${refVer}`),
+          options
+        )
+      } else {
+        handleSync(
+          {
+            repo,
+            ref,
+            base,
+            head,
+          },
+          nPath.resolve(
+            dest,
+            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+          ),
+          options
+        )
+      }
+      break
     case 'pingcap/docs-cn':
       handleSync(
         {
@@ -194,7 +214,6 @@ export function sync(argv) {
         ),
         options
       )
-
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
