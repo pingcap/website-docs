@@ -32,13 +32,16 @@ import {
   langItem,
   disabled,
   tryTidbCloudBtn,
+  hidden,
+  NavContainer,
 } from './navbar.module.scss'
 
 interface Props {
   locale: Locale[]
+  is404?: Boolean
 }
 
-export function Navbar({ locale }: Props) {
+export function Navbar({ locale, is404 }: Props) {
   const { BrandSVG } = useStaticQuery(graphql`
     query {
       BrandSVG: file(relativePath: { eq: "pingcap-logo.svg" }) {
@@ -128,7 +131,7 @@ export function Navbar({ locale }: Props) {
   return (
     <BulmaNavbar
       as="nav"
-      className={showBorder && hasBorder}
+      className={clsx({ [hasBorder]: showBorder }, NavContainer)}
       fixed="top"
       transparent>
       <Container>
@@ -184,7 +187,11 @@ export function Navbar({ locale }: Props) {
           </NavbarStart>
 
           <NavbarEnd>
-            <NavbarItem as="div" dropdown hoverable>
+            <NavbarItem
+              as="div"
+              dropdown
+              hoverable
+              className={clsx({ [hidden]: !!is404 })}>
               <NavbarLink className={langSwitch}>
                 <Trans i18nKey="lang.title" />
               </NavbarLink>

@@ -16,11 +16,13 @@ declare global {
 
 interface Props {
   locale?: Locale[]
+  is404?: Boolean
 }
 
 export function Layout({
   children,
   locale = [Locale.en, Locale.zh, Locale.ja],
+  is404 = false,
 }: PropsWithChildren<Props>) {
   useEffect(() => {
     if (!window.DOCS_PINGCAP) {
@@ -33,7 +35,7 @@ export function Layout({
 
   return (
     <>
-      <Navbar locale={locale} />
+      <Navbar locale={locale} is404={is404} />
       <Section as="main">
         <Container>{children}</Container>
       </Section>

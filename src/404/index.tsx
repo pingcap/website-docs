@@ -24,7 +24,7 @@ export default function NotFoundPage({ data }: { data: AllLocales }) {
   const pathname = typeof window === 'undefined' ? '' : window.location.pathname
   const context = useContext(I18nextContext)
   const language = useMemo(() => {
-    const lang = pathname.slice(1)?.split('/')?.shift() || ''
+    const lang = pathname.split('/')[1] || ''
     switch (lang) {
       case 'zh':
         return 'zh'
@@ -57,7 +57,7 @@ export default function NotFoundPage({ data }: { data: AllLocales }) {
   return (
     <I18nextProvider i18n={i18n}>
       <I18nextContext.Provider value={{ ...context, language }}>
-        <Layout>
+        <Layout is404={true}>
           <Seo title="404 Not Found" noindex />
           <div className={styles.container}>
             <div className={clsx('markdown-body', styles.left)}>
