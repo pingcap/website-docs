@@ -60,22 +60,42 @@ export function download(argv) {
 
   switch (repo) {
     case 'pingcap/docs-cn':
-      retrieveAllMDsFromZip(
-        {
-          repo,
-          path,
-          ref,
-        },
-        genDest(
-          repo,
-          path,
-          nPath.resolve(
-            dest,
-            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
-          )
-        ),
-        options
-      )
+      if (ref === 'master') {
+        const tmpRef = 'mock-dev'
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref: tmpRef,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
+            )
+          ),
+          options
+        )
+      } else {
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+            )
+          ),
+          options
+        )
+      }
       break
     case 'pingcap/docs':
       if (ref === 'master') {
