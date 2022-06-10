@@ -48,8 +48,9 @@ export function GitCommitInfo({ pathConfig, title, filePath }: Props) {
             rel="noreferrer">
             {title}
           </a>
-          <Trans>doc.latestCommit</Trans>
-          {latestCommit.commit.author.date}:
+          {` `}
+          <Trans i18nKey="doc.latestCommit" />
+          {` ${new Date(latestCommit.commit.author.date).toLocaleString()}: `}
           <a href={latestCommit.html_url} target="_blank" rel="noreferrer">
             {latestCommit.commit.message.split('\n')[0]}
           </a>
