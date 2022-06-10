@@ -18,7 +18,10 @@
 }
 
 .dropdown-content {
+  max-height: 45vh;
+  overflow-y: auto;
   border: 1px solid $border;
+  border-radius: 4px;
 }
 
 .no-exist {
