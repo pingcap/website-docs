@@ -138,7 +138,7 @@ export const zh = [
       },
       {
         name: '联系我们',
-        url: 'mailto:info@pingcap.com',
+        url: 'https://pingcap.com/zh/contact/',
       },
     ],
   },
