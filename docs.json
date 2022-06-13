@@ -95,18 +95,6 @@
           "versions": ["master"]
         }
       }
-    },
-    "appdev": {
-      "languages": {
-        "en": {
-          "repo": "pingcap/docs-appdev",
-          "versions": ["master"]
-        },
-        "zh": {
-          "repo": "pingcap/docs-appdev",
-          "versions": ["master"]
-        }
-      }
     }
   },
   "ignore": [

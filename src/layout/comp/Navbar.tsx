@@ -169,15 +169,6 @@ export function Navbar({ locale, is404 }: Props) {
                 <Trans i18nKey="navbar.cloud" />
               </NavbarItem>
             )}
-            {['en', 'zh'].includes(language) && (
-              <NavbarItem
-                // @ts-ignore
-                as={Link}
-                className={main}
-                to="/appdev/dev">
-                <Trans i18nKey="navbar.appdev" />
-              </NavbarItem>
-            )}
             <NavbarItem className={main} href={generateDownloadURL(language)}>
               <Trans i18nKey="navbar.download" />
             </NavbarItem>

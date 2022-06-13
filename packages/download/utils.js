@@ -21,7 +21,6 @@ export const imageCDNs = {
   'docs-dm': IMAGE_CDN_PREFIX + '/tidb-data-migration',
   'docs-tidb-operator': IMAGE_CDN_PREFIX + '/tidb-in-kubernetes',
   'dbaas-docs': IMAGE_CDN_PREFIX + '/tidbcloud',
-  'docs-appdev': IMAGE_CDN_PREFIX + '/appdev',
 }
 
 /**
@@ -88,13 +87,7 @@ export async function retrieveAllMDs(metaInfo, destDir, options) {
  * @param {string} destDir
  */
 export function genDest(repo, path, destDir, sync) {
-  if (
-    [
-      'pingcap/docs-dm',
-      'pingcap/docs-tidb-operator',
-      'pingcap/docs-appdev',
-    ].includes(repo)
-  ) {
+  if (['pingcap/docs-dm', 'pingcap/docs-tidb-operator'].includes(repo)) {
     const pathArr = path.split('/')
     const lang = pathArr[0]
     const pathWithoutLang = pathArr.slice(1).join('/')

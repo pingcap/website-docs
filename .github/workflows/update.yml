@@ -89,7 +89,6 @@ jobs:
           yarn download:tidb-operator:all
           yarn filter:tidb-cloud:en --ref release-5.4
           yarn filter:tidb-cloud:ja --ref release-5.4
-          yarn download:appdev:all
 
       - name: Download specific docs
         if: github.event.client_payload.download_type == 'partial'
