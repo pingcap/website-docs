@@ -40,11 +40,15 @@ jobs:
             ${{ steps.known-hosts.outputs.LA1 }}
             ${{ steps.known-hosts.outputs.LA2 }}
 
+      # - uses: actions/setup-node@v3
+      #   if: ${{ !env.ACT }}
+      #   with:
+      #     node-version: '16'
+      #     cache: 'yarn'
       - uses: actions/setup-node@v3
         if: ${{ !env.ACT }}
         with:
           node-version: '16'
-          cache: 'yarn'
 
       - name: Install yarn (ACT)
         # Since actions/setup-node currently errors out when run locally, here is a manual installation
