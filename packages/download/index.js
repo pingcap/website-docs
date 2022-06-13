@@ -111,6 +111,31 @@ export function download(argv) {
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
+      if (!path) {
+        sig.warn(
+          'For docs-dm/docs-tidb-operator/docs-appdev, you must provide en or zh path.'
+        )
+
+        return
+      }
+
+      const name = renameDoc(repo)
+
+      retrieveAllMDs(
+        {
+          repo,
+          path,
+          ref,
+        },
+        genDest(
+          repo,
+          path,
+          nPath.resolve(dest, `${path.split('/')[0]}/${name}/${ref}`)
+        ),
+        options
+      )
+
+      break
   }
 }
 
@@ -171,6 +196,20 @@ export function sync(argv) {
       break
     case 'pingcap/docs-dm':
     case 'pingcap/docs-tidb-operator':
+      const name = renameDoc(repo)
+
+      handleSync(
+        {
+          repo,
+          ref,
+          base,
+          head,
+        },
+        nPath.resolve(dest, `en/${name}/${ref}`), // use en as a placeholder
+        options
+      )
+
+      break
   }
 }
 
