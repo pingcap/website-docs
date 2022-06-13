@@ -1,17 +1,20 @@
 {
-  "index_name": "en-tidb-v5.4",
+  "index_name": "en-tidb-v6.1",
   "docs_info": {
     "owner": "pingcap",
     "docs_repo": "docs",
-    "ref": "release-5.4",
+    "ref": "release-6.1",
     "docs_prefix": "tidb",
     "lang": "en",
-    "version": "v5.4"
+    "version": "v6.1",
+    "isStable": true
   },
   "start_urls": [],
   "crawl_local_url": "",
   "delete_urls": [],
-  "sitemap_urls": ["https://docs.pingcap.com/sitemap/sitemap-index.xml"],
+  "sitemap_urls": [
+    "https://docs-ja-preview.netlify.app/sitemap/sitemap-index.xml"
+  ],
   "selectors": {
     "default": {
       "lvl0": ".doc-content h1",
