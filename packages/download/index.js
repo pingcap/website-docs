@@ -76,25 +76,7 @@ export function download(argv) {
       )
       break
     case 'pingcap/docs':
-      if (ref === 'master') {
-        const tmpRef = 'dev-20220525'
-        retrieveAllMDsFromZip(
-          {
-            repo,
-            path,
-            ref: tmpRef,
-          },
-          genDest(
-            repo,
-            path,
-            nPath.resolve(
-              dest,
-              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
-            )
-          ),
-          options
-        )
-      } else if (ref.startsWith('i18n-')) {
+      if (ref.startsWith('i18n-')) {
         const refDataList = ref.split('-')
         refDataList.shift()
         const refLang = refDataList.shift()
