@@ -38,7 +38,7 @@ export function generateConfig(slug: string): {
   const name = rest[rest.length - 1]
 
   let filePath = rest.join('/') + '.md'
-  if (repo === Repo.dm || repo === Repo.operator || repo === Repo.appdev) {
+  if (repo === Repo.dm || repo === Repo.operator) {
     filePath = `${locale}/${filePath}`
   }
 
@@ -65,8 +65,6 @@ function branchToVersion(repo: Repo, branch: string) {
     }
     case Repo.dm:
       return branch.replace('release-', 'v')
-    case Repo.appdev:
-      return 'dev'
 
     case Repo.tidbcloud:
       return null

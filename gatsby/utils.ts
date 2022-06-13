@@ -37,7 +37,6 @@ export function renameVersionByDoc(doc: Repo, version: string) {
     case 'tidb':
     case 'tidb-data-migration':
     case 'tidb-in-kubernetes':
-    case 'appdev':
       return renameVersion(version, getStable(doc))
     case 'tidbcloud':
       return

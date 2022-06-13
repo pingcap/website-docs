@@ -3,7 +3,6 @@ export enum Repo {
   dm = 'tidb-data-migration',
   operator = 'tidb-in-kubernetes',
   tidbcloud = 'tidbcloud',
-  appdev = 'appdev',
 }
 
 export interface FrontMatter {

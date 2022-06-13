@@ -1,7 +1,6 @@
 import { Trans, useI18next } from 'gatsby-plugin-react-i18next'
 import { useEffect, useState } from 'react'
 import {
-  appdev,
   cloud,
   convertVersionName,
   dm,
@@ -35,8 +34,6 @@ const matchToVersionList = match => {
       return operator
     case 'tidbcloud':
       return cloud
-    case 'appdev':
-      return appdev
     default:
       return tidb
   }
@@ -72,7 +69,9 @@ export default function Search() {
   const toAlgoliaVersion = version =>
     version === 'stable'
       ? convertVersionName(replaceStableVersion(selectedType))
-      : version !== 'null' ? version : null
+      : version !== 'null'
+      ? version
+      : null
   const [selectedVersion, _setSelectedVersion] = useState(
     toAlgoliaVersion(version)
   )
@@ -107,24 +106,11 @@ export default function Search() {
 
     const getDocsTypesByLang = () => {
       switch (language) {
-        case 'zh':
-          types.push({
-            name: '开发指南',
-            match: 'appdev',
-          })
-
-          break
         default:
-          types.push(
-            {
-              name: 'Cloud',
-              match: 'tidbcloud',
-            },
-            {
-              name: 'App Dev',
-              match: 'appdev',
-            }
-          )
+          types.push({
+            name: 'Cloud',
+            match: 'tidbcloud',
+          })
 
           break
       }
@@ -147,7 +133,9 @@ export default function Search() {
     dispatch(setLoading(true))
 
     const index = algoliaClient.initIndex(
-      `${language}-${selectedType}${selectedVersion ? '-' + selectedVersion : ''}`
+      `${language}-${selectedType}${
+        selectedVersion ? '-' + selectedVersion : ''
+      }`
     )
 
     index
