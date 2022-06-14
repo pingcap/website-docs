@@ -198,21 +198,18 @@ export function Navbar({ locale, is404 }: Props) {
                   )}
                 </NavbarItem>
 
-                <NavbarItem
-                  className={clsx(langItem, zhDisabled && disabled)}
-                  onClick={() => !zhDisabled && changeLanguage('zh')}>
-                  {zhDisabled ? (
-                    <Trans
-                      i18nKey={
-                        docInfo.type === 'tidbcloud'
-                          ? 'lang.cannotswitchtocloudZh'
-                          : 'lang.cannotswitchZh'
-                      }
-                    />
-                  ) : (
-                    <Trans i18nKey="lang.zh" />
-                  )}
-                </NavbarItem>
+                {docInfo.type !== 'tidbcloud' && (
+                  <NavbarItem
+                    className={clsx(langItem, zhDisabled && disabled)}
+                    onClick={() => !zhDisabled && changeLanguage('zh')}>
+                    {zhDisabled ? (
+                      <Trans i18nKey={'lang.cannotswitchZh'} />
+                    ) : (
+                      <Trans i18nKey="lang.zh" />
+                    )}
+                  </NavbarItem>
+                )}
+
                 <NavbarItem
                   className={clsx(langItem, jaDisabled && disabled)}
                   onClick={() => !jaDisabled && changeLanguage('ja')}>
