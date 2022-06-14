@@ -4,7 +4,7 @@ export const en = [
     items: [
       {
         name: 'TiDB',
-        url: 'https://pingcap.com/products/tidb',
+        url: 'https://en.pingcap.com/products/tidb',
       },
       {
         name: 'TiKV',
@@ -29,7 +29,7 @@ export const en = [
       },
       {
         name: 'Community',
-        url: 'https://pingcap.com/community',
+        url: 'https://en.pingcap.com/community',
       },
     ],
   },
@@ -38,15 +38,15 @@ export const en = [
     items: [
       {
         name: 'Internet',
-        url: 'https://pingcap.com/case-studies/Internet',
+        url: 'https://en.pingcap.com/customers/?industry=internet',
       },
       {
         name: 'Financial services',
-        url: 'https://pingcap.com/case-studies/Financial-Services',
+        url: 'https://en.pingcap.com/customers/?industry=financial-services',
       },
       {
         name: 'Gaming',
-        url: 'https://pingcap.com/case-studies/Gaming',
+        url: 'https://en.pingcap.com/customers/?industry=gaming',
       },
     ],
   },
@@ -55,23 +55,23 @@ export const en = [
     items: [
       {
         name: 'About',
-        url: 'https://pingcap.com/about',
+        url: 'https://en.pingcap.com/about-us/',
       },
       {
         name: 'Careers',
-        url: 'https://pingcap.com/careers',
+        url: 'https://en.pingcap.com/careers',
       },
       {
         name: 'Legal',
-        url: 'https://pingcap.com/legal',
+        url: 'https://en.pingcap.com/legal',
       },
       {
         name: 'Blog',
-        url: 'https://pingcap.com/blog',
+        url: 'https://en.pingcap.com/blog',
       },
       {
         name: 'Contact Us',
-        url: 'https://pingcap.com/contact-us',
+        url: 'https://en.pingcap.com/contact-us/',
       },
     ],
   },
