@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import * as styles from './LearningPath.module.scss'
 
 // TODO: hide element instead of update whole node
@@ -62,17 +62,46 @@ export const LearningPath = (props: any) => {
 export const DocHomeContainer = (props: {
   title: string
   subTitle?: string
-  children?: JSX.Element | Array<JSX.Element>
+  children?: any
 }) => {
   const { title, subTitle = '', children = [] } = props
-  const renderChildren = (items: JSX.Element[]) => {
-    return <></>
+  const getHeadings = (items: any): { label: string; anchor: string }[] => {
+    if (items?.length) {
+      return items.map((item: any) => ({
+        label: item?.label || '',
+        anchor: item?.anchor || '',
+      }))
+    }
+    return [
+      {
+        label: items?.label || '',
+        anchor: items?.anchor || '',
+      },
+    ]
   }
+  const headingsMemo = useMemo(() => {
+    return getHeadings(children)
+  }, [children])
   return (
     <>
       <div className={styles.titleGroup}>
         <h1 className={styles.title}>{title}</h1>
         {subTitle && <div className={styles.subTitle}>{subTitle}</div>}
+      </div>
+      <div>
+        <aside className="menu">
+          <ul className="menu-list">
+            <li>
+              <a>Members</a>
+            </li>
+            <li>
+              <a>Plugins</a>
+            </li>
+            <li>
+              <a>Add a member</a>
+            </li>
+          </ul>
+        </aside>
       </div>
     </>
   )
