@@ -12,6 +12,7 @@ export interface FrontMatter {
   keywords?: string[]
   hide_sidebar?: boolean
   hide_commit?: boolean
+  hide_leftNav?: boolean
 }
 
 export enum Locale {

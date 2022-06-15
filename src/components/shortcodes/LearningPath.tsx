@@ -58,3 +58,35 @@ export const LearningPath = (props: any) => {
   const { children } = props
   return <div className={styles.item}>{children}</div>
 }
+
+export const DocHomeContainer = (props: {
+  title: string
+  subTitle?: string
+  children?: JSX.Element | Array<JSX.Element>
+}) => {
+  const { title, subTitle = '', children = [] } = props
+  const renderChildren = (items: JSX.Element[]) => {
+    return <></>
+  }
+  return (
+    <>
+      <div className={styles.titleGroup}>
+        <h1 className={styles.title}>{title}</h1>
+        {subTitle && <div className={styles.subTitle}>{subTitle}</div>}
+      </div>
+    </>
+  )
+}
+
+export const DocHomeItem = (props: any) => {
+  const { children } = props
+  return <>{children}</>
+}
+
+export const DocHomeCards = (props: any) => {
+  return <></>
+}
+
+export const DocHomeCardItem = (props: any) => {
+  return <></>
+}

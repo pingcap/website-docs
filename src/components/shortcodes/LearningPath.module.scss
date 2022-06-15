@@ -64,3 +64,40 @@
     margin: 0 auto;
   }
 }
+
+.titleGroup {
+  background: linear-gradient(
+    180deg,
+    #172d72 45.08%,
+    rgba(65, 47, 229, 0) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  margin-bottom: 16px;
+
+  h1.title,
+  .subTitle {
+    color: #fff;
+    border-bottom: 0;
+    width: fit-content;
+    // margin: 0 auto;
+    margin: unset;
+  }
+
+  h1.title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 41px;
+  }
+
+  .subTitle {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    max-width: 637px;
+  }
+}

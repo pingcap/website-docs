@@ -94,18 +94,20 @@ export default function Doc({
     <Layout locale={availIn.locale}>
       <article className="PingCAP-Doc">
         <Columns>
-          <div className="column is-one-fifth">
-            <div className="left-aside">
-              {pathConfig.repo !== 'tidbcloud' && (
-                <VersionSwitcher
-                  name={name}
-                  pathConfig={pathConfig}
-                  availIn={availIn.version}
-                />
-              )}
-              <Navigation data={navigation} />
+          {!frontmatter?.hide_leftNav && (
+            <div className="column is-one-fifth">
+              <div className="left-aside">
+                {pathConfig.repo !== 'tidbcloud' && (
+                  <VersionSwitcher
+                    name={name}
+                    pathConfig={pathConfig}
+                    availIn={availIn.version}
+                  />
+                )}
+                <Navigation data={navigation} />
+              </div>
             </div>
-          </div>
+          )}
 
           <Seo
             title={frontmatter.title}
@@ -140,7 +142,10 @@ export default function Doc({
           />
           <Column
             size={7}
-            className={clsx({ [styles.noSideBar]: frontmatter?.hide_sidebar })}>
+            className={clsx({
+              [styles.noSideBar]:
+                frontmatter?.hide_sidebar || frontmatter?.hide_leftNav,
+            })}>
             <div className="markdown-body doc-content">
               <CustomNotice
                 name={name}
@@ -229,6 +234,7 @@ export const query = graphql`
         summary
         hide_sidebar
         hide_commit
+        hide_leftNav
       }
       body
       tableOfContents
