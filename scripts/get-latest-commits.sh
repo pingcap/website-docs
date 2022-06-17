@@ -6,7 +6,7 @@ GITHUB_AUTHORIZATION_TOKEN=$1
 # repos in pingcap
 repos=(docs docs-cn docs-dm docs-tidb-operator)
 
-docs=(master release-6.1 release-6.0 release-5.4 release-5.3 release-5.2 release-5.1 release-5.0 release-4.0 release-3.1 release-3.0 release-2.1 i18n-ja-release-5.4)
+docs=(master release-6.1 release-6.0 release-5.4 release-5.3 release-5.2 release-5.1 release-5.0 release-4.0 release-3.1 release-3.0 release-2.1 i18n-ja-release-5.4 i18n-ja-release-6.1)
 docs_cn=(master release-6.1 release-6.0 release-5.4 release-5.3 release-5.2 release-5.1 release-5.0 release-4.0 release-3.1 release-3.0 release-2.1)
 docs_dm=(release-5.3 release-2.0 release-1.0)
 docs_tidb_operator=(master release-1.3 release-1.2 release-1.1 release-1.0)

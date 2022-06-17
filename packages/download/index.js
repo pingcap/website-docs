@@ -171,10 +171,7 @@ export function sync(argv) {
             base,
             head,
           },
-          nPath.resolve(
-            dest,
-            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
-          ),
+          nPath.resolve(dest, `en/tidb/${ref}`),
           options
         )
       }
