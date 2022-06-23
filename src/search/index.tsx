@@ -52,6 +52,64 @@ function replaceStableVersion(match) {
   }
 }
 
+const EN_DOC_TYPE_LIST = [
+  {
+    name: 'TiDB',
+    match: 'tidb',
+  },
+  {
+    name: 'TiDB in Kubernetes',
+    match: 'tidb-in-kubernetes',
+  },
+  {
+    name: 'TiDB Data Migration (DM)',
+    match: 'tidb-data-migration',
+  },
+  {
+    name: 'Cloud',
+    match: 'tidbcloud',
+  },
+]
+
+const ZH_DOC_TYPE_LIST = [
+  {
+    name: 'TiDB',
+    match: 'tidb',
+  },
+  {
+    name: 'TiDB in Kubernetes',
+    match: 'tidb-in-kubernetes',
+  },
+  {
+    name: 'TiDB Data Migration (DM)',
+    match: 'tidb-data-migration',
+  },
+]
+
+const SearchPage = () => {
+  const [docType, setDocType] = useState('')
+  const [docVersion, setDocVersion] = useState('')
+  const [docQuery, setDocQuery] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [results, setResults] = useState([])
+  const [searched, setSearched] = useState(false)
+
+  const { language } = useI18next()
+  const location = useLocation()
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    const type = searchParams.get('type') || ''
+    const version = searchParams.get('version') || ''
+    const query = searchParams.get('q') || ''
+    setDocType(type)
+    setDocVersion(version)
+    setDocQuery(query)
+  }, [location.search])
+
+  return <></>
+}
+
 export default function Search() {
   const { language } = useI18next()
 
@@ -171,10 +229,9 @@ export default function Search() {
             {docsTypesByLang.map(type => (
               <button
                 key={type.name}
-                className={clsx(
-                  optionItem,
-                  selectedType === type.match && isActive
-                )}
+                className={clsx(optionItem, {
+                  [isActive]: selectedType === type.match,
+                })}
                 onClick={handleSetVersionList(type.match)}>
                 {type.name}
               </button>
@@ -187,17 +244,26 @@ export default function Search() {
                 <Trans i18nKey="search.version" />
               </span>
 
-              {selectedVersionList.map(version => (
-                <button
-                  key={version}
-                  className={clsx(
-                    optionItem,
-                    selectedVersion === toAlgoliaVersion(version) && isActive
-                  )}
-                  onClick={() => setSelectedVersion(toAlgoliaVersion(version))}>
-                  {toAlgoliaVersion(version)}
-                </button>
-              ))}
+              {selectedVersionList.map(version => {
+                console.log('version', version)
+                console.log('selectedVersion', selectedVersion)
+                console.log(
+                  `toAlgoliaVersion(version)`,
+                  toAlgoliaVersion(version)
+                )
+                return (
+                  <button
+                    key={version}
+                    className={clsx(optionItem, {
+                      [isActive]: selectedVersion === toAlgoliaVersion(version),
+                    })}
+                    onClick={() =>
+                      setSelectedVersion(toAlgoliaVersion(version))
+                    }>
+                    {toAlgoliaVersion(version)}
+                  </button>
+                )
+              })}
             </div>
           )}
         </div>
