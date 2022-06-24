@@ -226,7 +226,9 @@ const SearchPage = () => {
                       onClick={() => {
                         setDocVersion(version)
                       }}>
-                      {version}
+                      {version === 'stable'
+                        ? convertStableToRealVersion(docType, version)
+                        : version}
                     </button>
                   )
                 })}
