@@ -11,4 +11,7 @@ export {
   LearningPathContainer,
   LearningPath,
   DocHomeContainer,
+  DocHomeSection,
+  DocHomeCardContainer,
+  DocHomeCard,
 } from './LearningPath'
