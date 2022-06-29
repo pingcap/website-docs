@@ -110,6 +110,18 @@ export const createDocs = async ({
   })
 }
 
+export const createCloudAPIReference = async ({
+  actions: { createPage, createRedirect },
+  graphql,
+}: CreatePagesArgs) => {
+  const template = resolve(__dirname, '../src/apiReference/index.tsx')
+  createPage({
+    path: `/test/api`,
+    component: template,
+    context: {},
+  })
+}
+
 interface PageQueryData {
   allMdx: {
     nodes: {
