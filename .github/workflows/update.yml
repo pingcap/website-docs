@@ -68,9 +68,9 @@ jobs:
         id: docs-cache
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-20220617-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-20220630-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-20220617-
+            ${{ runner.os }}-docs-cache-20220630-
 
       - name: Check file exists
         id: check-file-exists
@@ -91,8 +91,8 @@ jobs:
           yarn download:tidb:ja:all
           yarn download:dm:all
           yarn download:tidb-operator:all
-          yarn filter:tidb-cloud:en --ref release-5.4
-          yarn filter:tidb-cloud:ja --ref release-5.4
+          yarn filter:tidb-cloud:en --ref release-6.1
+          yarn filter:tidb-cloud:ja --ref release-6.1
 
       - name: Download specific docs
         if: github.event.client_payload.download_type == 'partial'
@@ -130,8 +130,8 @@ jobs:
         env:
           GITHUB_AUTHORIZATION_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          yarn filter:tidb-cloud:en --ref release-5.4
-          yarn filter:tidb-cloud:ja --ref release-5.4
+          yarn filter:tidb-cloud:en --ref release-6.1
+          yarn filter:tidb-cloud:ja --ref release-6.1
 
       - run: |
           tree -L 3 -d ./markdown-pages
