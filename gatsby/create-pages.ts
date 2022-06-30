@@ -116,7 +116,7 @@ export const createCloudAPIReference = async ({
 }: CreatePagesArgs) => {
   const template = resolve(__dirname, '../src/apiReference/index.tsx')
   createPage({
-    path: `/test/api`,
+    path: `/api-reference/tidb-cloud`,
     component: template,
     context: {},
   })

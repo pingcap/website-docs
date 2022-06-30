@@ -27,17 +27,8 @@ const script = `if (Promise == null || Promise.allSettled == null) {
   document.body.appendChild(div)
 }`
 
-export const onRenderBody = ({ setPostBodyComponents, pathname }) => {
-  const comps = [
+export const onRenderBody = ({ setPostBodyComponents }) => {
+  setPostBodyComponents([
     <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
-  ]
-  pathname.includes('test/api') &&
-    comps.push(
-      <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-    )
-  setPostBodyComponents(comps)
-  // setPostBodyComponents([
-  //   <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
-  //   <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>,
-  // ])
+  ])
 }
