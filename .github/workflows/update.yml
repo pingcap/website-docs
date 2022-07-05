@@ -68,9 +68,9 @@ jobs:
         id: docs-cache
         with:
           path: markdown-pages
-          key: ${{ runner.os }}-docs-cache-20220630-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
+          key: ${{ runner.os }}-docs-cache-20220705-${{ github.event.client_payload.sha }} # You can inc the version number to force cache rebuild
           restore-keys: |
-            ${{ runner.os }}-docs-cache-20220630-
+            ${{ runner.os }}-docs-cache-20220705-
 
       - name: Check file exists
         id: check-file-exists
@@ -132,6 +132,12 @@ jobs:
         run: |
           yarn filter:tidb-cloud:en --ref release-6.1
           yarn filter:tidb-cloud:ja --ref release-6.1
+
+      - name: (TO REMOVE) Temporarily remove cloud folder under specified version
+        run: |
+          sudo rm -fr ./markdown-pages/en/tidb/master/tidb-cloud
+          sudo rm -fr ./markdown-pages/en/tidb/release-5.4/tidb-cloud
+          sudo rm -fr ./markdown-pages/ja/tidb/release-5.4/tidb-cloud
 
       - run: |
           tree -L 3 -d ./markdown-pages
