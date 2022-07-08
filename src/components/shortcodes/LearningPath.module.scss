@@ -94,7 +94,7 @@
     max-width: 512px;
     // max-height: 281px;
     margin: 0 auto;
-    background-image: url('../../../images/docHome.svg');
+    background-image: url('../../../images/docHome/docHome.svg');
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -175,6 +175,16 @@ main.mainContainer {
 
   .card {
     background-color: #f6f6f6;
+    box-shadow: none;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%);
+
+      .cardContentH3 {
+        color: #3d3fea;
+      }
+    }
   }
 }
 

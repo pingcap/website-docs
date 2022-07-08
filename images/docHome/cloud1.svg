@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="组_750" data-name="组 750" transform="translate(-722.606 -131.868)">
+    <g id="组_748" data-name="组 748" transform="translate(722.606 131.868)">
+      <rect id="矩形_62" data-name="矩形 62" width="60" height="60" fill="none"/>
+    </g>
+    <g id="组_749" data-name="组 749" transform="translate(733.325 140.433)">
+      <rect id="矩形_63" data-name="矩形 63" width="3.511" height="11.132" transform="translate(35.06 13.874)" fill="#172d72"/>
+      <path id="路径_3923" data-name="路径 3923" d="M746.894,135.865l-19.285,13.874,19.285,13.874,19.286-13.874Z" transform="translate(-727.608 -135.865)" fill="#2c2c2c"/>
+      <ellipse id="椭圆_10" data-name="椭圆 10" cx="14.291" cy="14.275" rx="14.291" ry="14.275" transform="translate(4.994 14.306)" fill="#484dd3"/>
+      <path id="路径_3924" data-name="路径 3924" d="M731.383,147.943l11.2,8.04,11.19-8.049a14.3,14.3,0,0,0-22.386.009Z" transform="translate(-723.294 -128.235)" fill="#00aeef"/>
+    </g>
+  </g>
+</svg>

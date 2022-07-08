@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="组_1105" data-name="组 1105" transform="translate(-323.287 -132.124)">
+    <g id="组_1104" data-name="组 1104" transform="translate(323.287 132.124)">
+      <rect id="矩形_76" data-name="矩形 76" width="60" height="60" fill="none"/>
+    </g>
+    <g id="组_3154" data-name="组 3154" transform="translate(331.858 140.695)">
+      <rect id="矩形_2887" data-name="矩形 2887" width="14.292" height="14.269" transform="translate(0 14.218)" fill="#484dd3"/>
+      <rect id="矩形_2889" data-name="矩形 2889" width="14.273" height="14.25" transform="translate(14.292)" fill="#2c2c2c"/>
+      <path id="路径_4251" data-name="路径 4251" d="M339.847,137.232l-4.8,8.3h9.6Z" transform="translate(-318.417 -134.857)" fill="#00aeef"/>
+      <rect id="矩形_2890" data-name="矩形 2890" width="14.292" height="14.269" transform="translate(28.565 14.25)" fill="#484dd3"/>
+      <circle id="椭圆_229" data-name="椭圆 229" cx="4.763" cy="4.763" r="4.763" transform="translate(30.948 16.621)" fill="#f7f8f9"/>
+      <path id="路径_4252" data-name="路径 4252" d="M333.929,149.465h14.293v14.269H333.929Z" transform="translate(-319.695 -120.876)" fill="#2c2c2c"/>
+      <g id="组_3153" data-name="组 3153" transform="translate(2.449 16.658)">
+        <g id="组_3149" data-name="组 3149" transform="translate(0 0)">
+          <line id="直线_168" data-name="直线 168" x2="6.951" y2="6.948" transform="translate(1.261 1.262)" fill="#5b62e8"/>
+          <rect id="矩形_2892" data-name="矩形 2892" width="3.569" height="9.827" transform="translate(0 2.524) rotate(-45.009)" fill="#f7f8f9"/>
+        </g>
+        <g id="组_3150" data-name="组 3150" transform="translate(0)">
+          <line id="直线_169" data-name="直线 169" x1="6.951" y2="6.948" transform="translate(1.261 1.262)" fill="#5b62e8"/>
+          <rect id="矩形_2893" data-name="矩形 2893" width="9.827" height="3.569" transform="translate(0 6.949) rotate(-45)" fill="#f7f8f9"/>
+        </g>
+      </g>
+      <rect id="矩形_2894" data-name="矩形 2894" width="8.082" height="8.068" transform="translate(17.296 31.646)" fill="#00aeef"/>
+    </g>
+  </g>
+</svg>

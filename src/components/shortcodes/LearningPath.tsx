@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { I18nextContext, Link, Trans } from 'gatsby-plugin-react-i18next'
 
 import * as styles from './LearningPath.module.scss'
-import docHome from '../../../images/docHome.svg'
+// import docHome from '../../../images/docHome.svg'
 import { SearchInput } from '../../../src/layout/comp/Input'
 import pingcapLogo from '../../../images/pingcap-icon.svg'
 
@@ -151,10 +151,10 @@ interface DocHomeSectionProps {
 }
 
 export const DocHomeSection = (props: DocHomeSectionProps) => {
-  const { children, label, anchor } = props
+  const { children, label, id } = props
   return (
     <div className={styles.docHomeSection}>
-      <h2 className={styles.docHomeSectionTitle}>{label}</h2>
+      <h2 className={styles.docHomeSectionTitle} id={id}>{label}</h2>
 
       {children}
     </div>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="组_1106" data-name="组 1106" transform="translate(-83.562 -132.128)">
+    <g id="组_1092" data-name="组 1092" transform="translate(83.562 132.128)">
+      <rect id="矩形_72" data-name="矩形 72" width="60" height="60" fill="none"/>
+    </g>
+    <g id="组_1095" data-name="组 1095" transform="translate(96.419 140.678)">
+      <g id="组_1094" data-name="组 1094">
+        <g id="组_1093" data-name="组 1093">
+          <path id="路径_4746" data-name="路径 4746" d="M115.253,136.118H89.562v42.857h34.286V144.723Z" transform="translate(-89.562 -136.118)" fill="#2c2c2c"/>
+        </g>
+        <rect id="矩形_73" data-name="矩形 73" width="10.82" height="4.299" transform="translate(4.26 8.464)" fill="#484dd3"/>
+        <rect id="矩形_74" data-name="矩形 74" width="21.454" height="4.299" transform="translate(4.26 17.062)" fill="#484dd3"/>
+        <rect id="矩形_75" data-name="矩形 75" width="10.82" height="4.299" transform="translate(4.26 25.661)" fill="#00aeef"/>
+        <path id="路径_4747" data-name="路径 4747" d="M101.551,136.118l8.6,8.6h-8.571Z" transform="translate(-76.907 -134.618)" fill="#f7f8f9"/>
+        <path id="路径_4751" data-name="路径 4751" d="M3.054-6.127,1.264-7.966,3.054-9.8H4.5L2.709-7.966,4.5-6.127Zm5.626-4.755L7.161-4.988H6.036l1.518-5.893ZM10.13-9.8h1.453l1.79,1.839-1.79,1.839H10.13l1.8-1.839Z" transform="translate(19.594 46.039)" fill="#f7f8f9"/>
+      </g>
+      <line id="直线_3" data-name="直线 3" x2="8.595" y2="8.605" transform="translate(25.69)" fill="#172d72"/>
+    </g>
+  </g>
+</svg>

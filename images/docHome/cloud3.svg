@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="组_1125" data-name="组 1125" transform="translate(-403.185 -132.128)">
+    <g id="组_751" data-name="组 751" transform="translate(403.185 132.128)">
+      <rect id="矩形_64" data-name="矩形 64" width="60" height="60" fill="none"/>
+    </g>
+    <g id="组_760" data-name="组 760" transform="translate(409.329 144.992)">
+      <g id="组_752" data-name="组 752" transform="translate(1.876 1.27)">
+        <path id="路径_3925" data-name="路径 3925" d="M442.392,158.284a2.128,2.128,0,0,1-1.629-.756c-.523-.613-1.086-1.236-1.725-1.879-6.84-6.851-18.281-12.639-24.981-12.639-1.633,0-2.781.358-3.152.981a2.141,2.141,0,1,1-3.675-2.2c.834-1.4,2.7-3.071,6.827-3.071,7.926,0,20.229,6.105,28.009,13.9.729.729,1.367,1.436,1.956,2.132a2.143,2.143,0,0,1-1.631,3.531Z" transform="translate(-406.928 -138.724)" fill="#00aeef"/>
+      </g>
+      <g id="组_757" data-name="组 757">
+        <g id="组_753" data-name="组 753" transform="translate(2.654 15.818)">
+          <path id="路径_3926" data-name="路径 3926" d="M407.291,145.513" transform="translate(-407.291 -145.513)" fill="none" stroke="#172d72" stroke-miterlimit="10" stroke-width="1"/>
+        </g>
+        <g id="组_754" data-name="组 754" transform="translate(9.725 4.279)">
+          <rect id="矩形_65" data-name="矩形 65" width="25.535" height="25.575" rx="12.768" fill="#2c2c2c"/>
+        </g>
+        <g id="组_755" data-name="组 755">
+          <circle id="椭圆_11" data-name="椭圆 11" cx="4.279" cy="4.279" r="4.279" fill="#484dd3"/>
+        </g>
+        <g id="组_756" data-name="组 756" transform="translate(34.289 21.405)">
+          <ellipse id="椭圆_12" data-name="椭圆 12" cx="6.427" cy="6.437" rx="6.427" ry="6.437" fill="#484dd3"/>
+        </g>
+      </g>
+      <g id="组_758" data-name="组 758" transform="translate(4.916 12.103)">
+        <path id="路径_3927" data-name="路径 3927" d="M439.166,163.774c-7.929,0-20.233-6.107-28.011-13.9a33.459,33.459,0,0,1-2.329-2.6,2.142,2.142,0,1,1,3.321-2.7,28.813,28.813,0,0,0,2.034,2.274c6.84,6.855,18.285,12.645,24.986,12.645,1.581,0,2.719-.341,3.124-.936a2.14,2.14,0,1,1,3.536,2.411C444.954,162.246,443.094,163.774,439.166,163.774Z" transform="translate(-408.347 -143.779)" fill="#00aeef"/>
+      </g>
+      <g id="组_759" data-name="组 759" transform="translate(37.634 26.363)">
+        <path id="路径_3928" data-name="路径 3928" d="M423.615,150.434" transform="translate(-423.615 -150.434)" fill="none" stroke="#172d72" stroke-miterlimit="10" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>
