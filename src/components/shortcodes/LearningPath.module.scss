@@ -196,7 +196,8 @@ main.mainContainer {
 
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    // gap: 2rem;
+    gap: 1rem;
 
     p {
       margin: 0;
@@ -204,9 +205,13 @@ main.mainContainer {
   }
 
   img.cardContentImg {
-    height: 2rem;
-    width: 2rem;
+    // height: 3.75rem;
+    // width: 3.75rem;
+    height: 3rem;
+    width: 3rem;
     margin: 0;
+
+    background: transparent;
   }
 
   h3.cardContentH3 {

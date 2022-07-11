@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
 import clsx from 'clsx'
 import { I18nextContext, Link, Trans } from 'gatsby-plugin-react-i18next'
@@ -167,12 +167,15 @@ export const DocHomeCardContainer = (props: any) => {
 }
 
 export const DocHomeCard = (props: any) => {
-  const { children, href, icon = 'tidb', label } = props
+  const { children, href, icon = 'cloud1', label } = props
+
+
   return (
     <Link to={href} className={styles.cardLink}>
       <div className={clsx('card', styles.card)}>
         <div className={clsx('card-content', styles.cardContent)}>
-          <img className={styles.cardContentImg} src={pingcapLogo} />
+          {/* <img className={styles.cardContentImg} src={pingcapLogo} /> */}
+          <img className={styles.cardContentImg} src={require(`../../../images/docHome/${icon}.svg`)?.default} />
           <h3 className={styles.cardContentH3}>{label}</h3>
           {children}
         </div>
