@@ -9,69 +9,64 @@ import { SearchInput } from '../../../src/layout/comp/Input'
 import pingcapLogo from '../../../images/pingcap-icon.svg'
 
 // TODO: hide element instead of update whole node
-export const LearningPathContainer = (props: any) => {
-  const { children = [], title } = props
-
-  const childProps = children?.length
-    ? children.map((child: any) => ({
-        id: child?.props?.id || '',
-        label: child?.props?.label || '',
-      }))
-    : []
-
-  const [selectedId, setSelectedId] = useState('')
-
-  const filterTargetContentChild = (
-    contentChildren: any[],
-    targetId: string
-  ) => {
-    if (!selectedId) return contentChildren[0]
-    return contentChildren.filter((child: any) => child?.props?.id === targetId)
-  }
+export const LearningPathContainer = (props: {
+  title: string
+  subTitle?: string
+  children?: any
+  platform: 'home' | 'tidb' | 'tidb-cloud'
+}) => {
+  const { children, title, subTitle, platform = 'tidb' } = props
 
   return (
     <>
-      {!!childProps?.length &&
-        childProps.map((childProp: { id: string; label: string }) => {
-          const { label: childLabel, id: childId } = childProp
-          return (
-            <div>
-              <button
-                onClick={() => {
-                  setSelectedId(childId)
-                }}>
-                {childLabel}
-              </button>
-            </div>
-          )
-        })}
-      {title && <h1 className={styles.containerTitle}>{title}</h1>}
-      <div className={styles.container}>
-        {/* {children.filter((child: any) => child?.props?.id === selectedId)} */}
-        {childProps?.length
-          ? filterTargetContentChild(children, selectedId)
-          : children}
+      <div className={styles.titleGroup}>
+        <div className={styles.titleLeft}>
+          <h1 className={styles.title}>{title}</h1>
+          {subTitle && <div className={styles.subTitle}>{subTitle}</div>}
+        </div>
+        <div className={styles.titleRight}>
+          {/* <img src={docHome} /> */}
+          <div
+            className={clsx(styles.titleImg, {
+              [styles.titleImgHome]: platform === 'home',
+              [styles.titleImgTidb]: platform === 'tidb',
+              [styles.titleImgCloud]: platform === 'tidb-cloud',
+            })}
+          />
+        </div>
       </div>
+      <div className={styles.learningPathContainer}>{children}</div>
     </>
   )
 }
 
-export const LearningPathContent = (props: any) => {
-  const { children, id: contentId } = props
-  return <div id={contentId}>{children}</div>
-}
-
-export const LearningPath = (props: any) => {
-  const { children } = props
-  return <div className={styles.item}>{children}</div>
+export const LearningPath = (props: {
+  children?: any
+  label: string
+  icon: string
+}) => {
+  const { children, label, icon } = props
+  return (
+    <div className={clsx('card', styles.learningPath)}>
+      <div className={styles.LearningPathLeft}>
+        <img
+          className={styles.LearningPathImg}
+          src={require(`../../../images/docHome/${icon}.svg`)?.default}
+        />
+        <p className={styles.LearningPathLabel}>{label}</p>
+      </div>
+      <div className={styles.LearningPathRight}>{children}</div>
+    </div>
+  )
 }
 
 export const DocHomeContainer = (props: {
   title: string
   subTitle?: string
   children?: any
+  platform: 'home' | 'tidb' | 'tidb-cloud'
 }) => {
-  const { title, subTitle = '', children = [] } = props
+  const { title, subTitle = '', children = [], platform = 'home' } = props
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -114,7 +109,13 @@ export const DocHomeContainer = (props: {
         </div>
         <div className={styles.titleRight}>
           {/* <img src={docHome} /> */}
-          <div className={styles.titleImg} />
+          <div
+            className={clsx(styles.titleImg, {
+              [styles.titleImgHome]: platform === 'home',
+              [styles.titleImgTidb]: platform === 'tidb',
+              [styles.titleImgCloud]: platform === 'tidb-cloud',
+            })}
+          />
         </div>
       </div>
       <div className={clsx('columns', 'is-3', styles.body)}>
@@ -154,7 +155,9 @@ export const DocHomeSection = (props: DocHomeSectionProps) => {
   const { children, label, id } = props
   return (
     <div className={styles.docHomeSection}>
-      <h2 className={styles.docHomeSectionTitle} id={id}>{label}</h2>
+      <h2 className={styles.docHomeSectionTitle} id={id}>
+        {label}
+      </h2>
 
       {children}
     </div>
@@ -169,13 +172,15 @@ export const DocHomeCardContainer = (props: any) => {
 export const DocHomeCard = (props: any) => {
   const { children, href, icon = 'cloud1', label } = props
 
-
   return (
     <Link to={href} className={styles.cardLink}>
       <div className={clsx('card', styles.card)}>
         <div className={clsx('card-content', styles.cardContent)}>
           {/* <img className={styles.cardContentImg} src={pingcapLogo} /> */}
-          <img className={styles.cardContentImg} src={require(`../../../images/docHome/${icon}.svg`)?.default} />
+          <img
+            className={styles.cardContentImg}
+            src={require(`../../../images/docHome/${icon}.svg`)?.default}
+          />
           <h3 className={styles.cardContentH3}>{label}</h3>
           {children}
         </div>

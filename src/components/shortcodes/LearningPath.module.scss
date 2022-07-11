@@ -1,67 +1,77 @@
 @import '../../styles/common';
 
-.container {
+.learningPathContainer {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 0;
 
-  .item {
+  .learningPath {
+    height: 10rem;
+    padding: 2rem 0;
+
     display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 1.5rem;
-    border-bottom: 1px solid $divider-color;
+    align-items: center;
 
-    > p {
-      margin-bottom: 0;
+    background-color: #f6f6f6;
+    box-shadow: none;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0px 0 1px rgb(10 10 10 / 2%);
+
+      // .cardContentH3 {
+      //   color: #3d3fea;
+      // }
     }
+  }
 
-    p:first-child {
-      height: 2rem;
-      width: 2rem;
-    }
+  .LearningPathRight > p {
+    margin: 0;
 
-    h4 {
-      margin: 0;
-      width: 6.25rem;
-      padding: 0.5rem 0;
-    }
-
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 2rem;
-      row-gap: 1rem;
-      width: calc(100% - 12.5rem);
-      list-style-type: none;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li + li {
-        margin-top: 0;
-      }
-
-      a {
-        font-size: 1em;
-        line-height: 1.25;
-        color: unset;
-        background-color: $M2;
-        border: 1px solid $divider-color;
-        padding: 0.5rem 1.5rem;
-      }
-
-      a:hover {
-        text-decoration: none;
-      }
+    a {
+      color: #24292f;
     }
   }
 }
 
-:global(.markdown-body) {
-  h1.containerTitle {
-    border-bottom: 0;
-    width: fit-content;
-    margin: 0 auto;
+.LearningPathLeft {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+  height: 100%;
+  border-right: 1px solid $divider-color;
+
+  .LearningPathLabel {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .LearningPathImg {
+    // height: 3.75rem;
+    // width: 3.75rem;
+    height: 3rem;
+    width: 3rem;
+    margin: 0;
+    background: transparent;
+  }
+}
+
+.LearningPathRight {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 1rem;
+
+  padding: 0 2rem;
+
+  > p {
+    margin: 0;
+    flex: 0 0 33.333333%;
   }
 }
 
@@ -94,9 +104,21 @@
     max-width: 512px;
     // max-height: 281px;
     margin: 0 auto;
-    background-image: url('../../../images/docHome/docHome.svg');
+    // background-image: url('../../../images/docHome/docHome.svg');
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  .titleImgHome {
+    background-image: url('../../../images/docHome/docHome.svg');
+  }
+
+  .titleImgTidb {
+    background-image: url('../../../images/docHome/tidb-banner.svg');
+  }
+
+  .titleImgCloud {
+    background-image: url('../../../images/docHome/tidb-cloud-banner.svg');
   }
 
   .search {
@@ -179,7 +201,8 @@ main.mainContainer {
     transition: 0.5s;
 
     &:hover {
-      box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%);
+      box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+        0 0px 0 1px rgb(10 10 10 / 2%);
 
       .cardContentH3 {
         color: #3d3fea;
