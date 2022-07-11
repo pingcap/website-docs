@@ -149,7 +149,7 @@ export function download(argv) {
           path,
           nPath.resolve(
             dest,
-            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
+            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/release-6.1`
           )
         ),
         options
