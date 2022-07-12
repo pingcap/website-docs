@@ -82,6 +82,11 @@
   display: flex;
   justify-content: space-between;
 
+  @include mobile {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
   .titleLeft {
     padding: 2.5rem 0 2.5rem 2.5rem;
     width: auto;
@@ -91,11 +96,22 @@
     flex-direction: column;
     gap: 2.5rem;
     justify-content: center;
+
+    @include mobile {
+      max-width: unset;
+      padding: 0 1rem 2rem 1rem;
+    }
   }
 
   .titleRight {
     padding: 1rem;
     width: 50%;
+
+    @include mobile {
+      padding: 2rem 1rem;
+      width: unset;
+      height: 200px;
+    }
   }
 
   .titleImg {
@@ -107,6 +123,10 @@
     // background-image: url('../../../images/docHome/docHome.svg');
     background-repeat: no-repeat;
     background-position: center;
+
+    @include mobile {
+      background-size: contain;
+    }
   }
 
   .titleImgHome {
@@ -185,9 +205,13 @@ main.mainContainer {
 .cardsContainer {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 30%));
+  grid-template-columns: repeat(auto-fit, minmax(224px, 30%));
   gap: 1.5rem;
   justify-content: space-between;
+
+  @include mobile {
+    justify-content: normal;
+  }
 
   a.cardLink {
     &:hover {
@@ -222,6 +246,14 @@ main.mainContainer {
     // gap: 2rem;
     gap: 1rem;
 
+    @include tablet {
+      padding: 1.5rem;
+    }
+
+    @include mobile {
+      padding: 1.5rem;
+    }
+
     p {
       margin: 0;
     }
@@ -242,7 +274,11 @@ main.mainContainer {
   }
 }
 
-.toc {
+aside.toc {
+  @include tablet {
+    display: none;
+  }
+
   ul.menu {
     padding: 0;
   }
