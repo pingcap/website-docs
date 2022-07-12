@@ -25,6 +25,14 @@
       //   color: #3d3fea;
       // }
     }
+
+    @include mobile {
+      flex-direction: column;
+      padding: 1.5rem;
+      height: auto;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
   }
 
   .LearningPathRight > p {
@@ -43,6 +51,11 @@
   padding: 0 2rem;
   height: 100%;
   border-right: 1px solid $divider-color;
+
+  @include mobile {
+    padding: 0;
+    border-right: unset;
+  }
 
   .LearningPathLabel {
     margin: 0;
@@ -72,6 +85,14 @@
   > p {
     margin: 0;
     flex: 0 0 33.333333%;
+  }
+
+  @include mobile {
+    width: 100%;
+
+    > p {
+      flex: 50%;
+    }
   }
 }
 
