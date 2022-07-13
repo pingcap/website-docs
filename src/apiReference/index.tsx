@@ -16,9 +16,7 @@ async function loadScript(scriptSrc: string) {
 }
 
 export default function APIReferenceTemplate() {
-  // const redocHtml = `<redoc spec-url="http://petstore.swagger.io/v2/swagger.json"></redoc>`
-  // const specUrl = `http://petstore.swagger.io/v2/swagger.json`
-  const specUrl = `https://raw.githubusercontent.com/pingcap/docs/tmp-redoc/tidb-cloud/openapi-spec.swagger.json`
+  const specUrl = `https://download.pingcap.org/tidbcloud-oas.json`
 
   useEffect(() => {
     async function setupRedoc() {
