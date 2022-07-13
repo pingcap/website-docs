@@ -1,5 +1,5 @@
-import { Layout } from 'layout'
 import { useEffect } from 'react'
+import { Seo } from 'components/Seo'
 
 declare const Redoc: any
 
@@ -39,6 +39,7 @@ export default function APIReferenceTemplate() {
 
   return (
     <>
+      <Seo title="TiDB Cloud Open API" noindex />
       <div id="redoc-container" data-testid="redoc-container" />
     </>
   )
