@@ -48,3 +48,10 @@ export interface PathConfig {
   branch: string
   version: string | null
 }
+
+export interface Heading {
+  id: string
+  url: string
+  title: string
+  level: 'h2' | 'h3'
+}

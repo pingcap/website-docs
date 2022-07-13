@@ -30,6 +30,7 @@ import { getStable } from '../../gatsby/utils'
 import { generateUrl } from '../../gatsby/path'
 import { setDocInfo } from 'state'
 import replaceInternalHref from 'lib/replaceInternalHref'
+import { getHeadings } from 'lib/headings'
 
 interface Props {
   pageContext: PageContext
@@ -64,9 +65,9 @@ export default function Doc({
 
   const tocData = useMemo(() => {
     if (tableOfContents.items!.length === 1) {
-      return tableOfContents.items![0].items
+      return getHeadings(tableOfContents.items![0].items)
     }
-    return tableOfContents.items
+    return getHeadings(tableOfContents.items)
   }, [tableOfContents.items])
 
   const stableBranch = getStable(pathConfig.repo)
@@ -189,7 +190,7 @@ export default function Doc({
                 <Title size={6} style={{ marginBottom: 0 }}>
                   <Trans i18nKey="doc.toc" />
                 </Title>
-                {tocData && <Toc data={tocData} />}
+                {tocData && <Toc headings={tocData} />}
               </div>
             </div>
           </Column>

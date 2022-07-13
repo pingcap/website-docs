@@ -141,8 +141,11 @@ $top: $navbar-height + 1rem;
       li {
         padding-top: 0.5rem;
 
-        ul {
+        &.sub {
           padding-left: 1rem;
+        }
+        a.active {
+          color: #3d3fea;
         }
       }
     }

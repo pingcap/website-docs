@@ -1,42 +1,82 @@
-import { TableOfContent } from 'typing'
+import clsx from 'clsx'
+import { Heading } from 'typing'
+import { useState, useRef, useEffect } from 'react'
 
 interface Props {
-  data: TableOfContent[]
+  headings: Heading[]
 }
 
-const versionMark = /<span class="version-mark">.*<\/span>/
-
-export const Toc = ({ data }: Props) => {
-  // Support {#custom-id}
-  // Now `#origin-id {#custom-id}` will be transformed to `#custom-id`
-  const transformCustomId = (
-    label: string,
-    anchor: string
-  ): { label: string; anchor: string } => {
-    const customIdMatches = label.match(/(.+) *\{(#.+)\}$/)
-    if (customIdMatches?.length) {
-      const [, newLabel, newAnchor] = customIdMatches
-      return { label: newLabel, anchor: newAnchor }
-    }
-    return { label, anchor }
+function getActiveElement(rects: DOMRect[]) {
+  if (rects.length === 0) {
+    return -1
   }
 
-  const renderTocItem = (item: TableOfContent): JSX.Element => {
-    const { url, title, items } = item
-    if (url) {
-      const { label: newLabel, anchor: newAnchor } = transformCustomId(
-        title,
-        url
-      )
-      return (
-        <li key={url}>
-          <a href={newAnchor}>{newLabel.replace(versionMark, '')}</a>
-          {items && <Toc data={items} />}
+  const closest = rects.reduce(
+    (acc, item, index) => {
+      if (Math.abs(acc.position) < Math.abs(item.y) - 100) {
+        return acc
+      }
+
+      return {
+        index,
+        position: item.y,
+      }
+    },
+    { index: 0, position: rects[0].y }
+  )
+
+  return closest.index
+}
+
+export const Toc = ({ headings }: Props) => {
+  const [active, setActive] = useState(0)
+
+  const slugs = useRef<HTMLDivElement[]>([])
+
+  useEffect(() => {
+    slugs.current = headings.map(
+      ({ id }) => document.querySelector(`[id="${id}"]`) as HTMLDivElement
+    )
+  }, [headings])
+
+  const handleScroll = () => {
+    setActive(
+      getActiveElement(slugs.current.map(d => d.getBoundingClientRect()))
+    )
+  }
+
+  useEffect(() => {
+    setActive(
+      getActiveElement(slugs.current.map(d => d.getBoundingClientRect()))
+    )
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <ul>
+      {headings.map(({ id, level, title, url }, index) => (
+        <li key={id} className={clsx(level === 'h3' && 'sub')}>
+          <a
+            className={clsx(index === active && 'active')}
+            href={url}
+            onClick={event => {
+              event.preventDefault()
+              const element = document.querySelector(
+                `[id="${id}"]`
+              ) as HTMLDivElement
+              window.scrollTo({
+                top:
+                  element.getBoundingClientRect().top +
+                  window.pageYOffset -
+                  100,
+                behavior: 'smooth',
+              })
+            }}>
+            {title}
+          </a>
         </li>
-      )
-    }
-    return <li key={`item-${title}-${url}`}>{items && <Toc data={items} />}</li>
-  }
-
-  return <ul>{data.map((item, i) => renderTocItem(item))}</ul>
+      ))}
+    </ul>
+  )
 }
