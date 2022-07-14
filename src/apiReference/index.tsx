@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Seo } from 'components/Seo'
+import './index.module.scss'
 
 declare const Redoc: any
 
