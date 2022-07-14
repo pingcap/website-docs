@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Seo } from 'components/Seo'
-import './index.module.scss'
+// ! Do Not import any css file here.
 
 declare const Redoc: any
 
@@ -16,6 +16,14 @@ async function loadScript(scriptSrc: string) {
   })
 }
 
+function loadLink(href: string) {
+  const link = document.createElement('link')
+  link.type = 'text/css'
+  link.href = href
+  link.rel = 'stylesheet'
+  document.head.appendChild(link)
+}
+
 export default function APIReferenceTemplate() {
   const specUrl = `https://download.pingcap.org/tidbcloud-oas.json`
 
@@ -25,6 +33,10 @@ export default function APIReferenceTemplate() {
         await loadScript(
           'https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js'
         )
+
+      loadLink(
+        `https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700`
+      )
 
       Redoc.init(
         specUrl,
