@@ -38,13 +38,8 @@ export default function APIReferenceTemplate() {
         `https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700`
       )
 
-      Redoc.init(
-        specUrl,
-        {
-          scrollYOffset: 50,
-        },
-        document.getElementById('redoc-container')
-      )
+      // https://redocly.com/docs/api-reference-docs/configuration/functionality/
+      Redoc.init(specUrl, {}, document.getElementById('redoc-container'))
     }
 
     setupRedoc()
