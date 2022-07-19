@@ -47,16 +47,24 @@ export const LearningPath = (props: {
 }) => {
   const { children, label, icon } = props
   return (
-    <div className={clsx('card', styles.learningPath)}>
-      <div className={styles.LearningPathLeft}>
-        <img
-          className={styles.LearningPathImg}
-          src={require(`../../../images/docHome/${icon}.svg`)?.default}
-        />
-        <p className={styles.LearningPathLabel}>{label}</p>
+    <>
+      <div className={clsx('card', styles.learningPath)}>
+        <div className={styles.LearningPathLeft}>
+          <img
+            className={styles.LearningPathImg}
+            src={require(`../../../images/docHome/${icon}.svg`)?.default}
+          />
+          <p className={styles.LearningPathLabel}>{label}</p>
+        </div>
+        <div className={styles.LearningPathRight}>{children}</div>
       </div>
-      <div className={styles.LearningPathRight}>{children}</div>
-    </div>
+      <div className={styles.LearningPathDivider}>
+        <img
+          className={styles.LearningPathDividerImg}
+          src={require(`../../../images/docHome/arrowDown.svg`)?.default}
+        />
+      </div>
+    </>
   )
 }
 

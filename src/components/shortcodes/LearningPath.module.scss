@@ -3,7 +3,7 @@
 .learningPathContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem 0;
 
   .learningPath {
@@ -41,6 +41,19 @@
 
     a {
       color: #24292f;
+    }
+  }
+
+  .LearningPathDivider {
+    padding: 0 2rem;
+
+    &:last-child {
+      display: none;
+    }
+
+    .LearningPathDividerImg {
+      margin: 0;
+      padding: 0 4rem;
     }
   }
 }
