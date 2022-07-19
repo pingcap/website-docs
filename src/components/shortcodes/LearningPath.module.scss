@@ -8,7 +8,7 @@
 
   .learningPath {
     height: auto;
-    min-height: 10rem;
+    min-height: 5rem;
     padding: 2rem 0;
 
     display: flex;
@@ -104,7 +104,7 @@
 
 .titleGroup {
   background: #252525;
-  height: 350px;
+  // height: 350px;
 
   display: flex;
   justify-content: space-between;
@@ -197,6 +197,10 @@ main.mainContainer {
   > div:last-child {
     border-bottom: 0;
   }
+
+  .docHomeSection > p {
+    margin: 0;
+  }
 }
 
 .docHomeSection {
@@ -205,7 +209,7 @@ main.mainContainer {
   flex-direction: column;
   gap: 2.5rem;
   padding-top: 2.5rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 2.5rem;
 
   h2.docHomeSectionTitle {
     font-size: 2rem;
@@ -290,7 +294,7 @@ main.mainContainer {
     // height: 3.75rem;
     // width: 3.75rem;
     height: 3rem;
-    width: 3rem;
+    width: fit-content;
     margin: 0;
 
     background: transparent;
