@@ -48,7 +48,7 @@ export const LearningPath = (props: {
   const { children, label, icon } = props
   return (
     <>
-      <div className={clsx('card', styles.learningPath)}>
+      <div className={clsx(styles.learningPath)}>
         <div className={styles.LearningPathLeft}>
           <img
             className={styles.LearningPathImg}
@@ -56,13 +56,7 @@ export const LearningPath = (props: {
           />
           <p className={styles.LearningPathLabel}>{label}</p>
         </div>
-        <div className={styles.LearningPathRight}>{children}</div>
-      </div>
-      <div className={styles.LearningPathDivider}>
-        <img
-          className={styles.LearningPathDividerImg}
-          src={require(`../../../images/docHome/arrowDown.svg`)?.default}
-        />
+        <div className={clsx('card', styles.LearningPathRight)}>{children}</div>
       </div>
     </>
   )

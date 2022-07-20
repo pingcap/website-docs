@@ -3,16 +3,41 @@
 .learningPathContainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   padding: 2rem 0;
 
   .learningPath {
     height: auto;
-    min-height: 5rem;
-    padding: 2rem 0;
+    position: relative;
+    padding: 0.5rem 0;
 
     display: flex;
     align-items: center;
+
+    &:not(:first-child)::before {
+      content: '';
+      width: 2px;
+      height: calc(50% - 2rem);
+      background-color: $divider-color;
+      position: absolute;
+      left: 3.5rem;
+      top: 0;
+    }
+
+    &:not(:last-child)::after {
+      content: '';
+      width: 2px;
+      height: calc(50% - 2rem);
+      background-color: $divider-color;
+      position: absolute;
+      left: 3.5rem;
+      bottom: 0;
+    }
+  }
+
+  .LearningPathRight {
+    height: auto;
+    min-height: 5rem;
+    padding: 2rem;
 
     background-color: #f6f6f6;
     box-shadow: none;
@@ -21,18 +46,6 @@
     &:hover {
       box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
         0 0px 0 1px rgb(10 10 10 / 2%);
-
-      // .cardContentH3 {
-      //   color: #3d3fea;
-      // }
-    }
-
-    @include mobile {
-      flex-direction: column;
-      padding: 1.5rem;
-      height: auto;
-      align-items: flex-start;
-      gap: 1.5rem;
     }
   }
 
@@ -43,19 +56,6 @@
       color: #24292f;
     }
   }
-
-  .LearningPathDivider {
-    padding: 0 2rem;
-
-    &:last-child {
-      display: none;
-    }
-
-    .LearningPathDividerImg {
-      margin: 0;
-      padding: 0 4rem;
-    }
-  }
 }
 
 .LearningPathLeft {
@@ -64,10 +64,10 @@
   gap: 2rem;
   padding: 0 2rem;
   height: 100%;
-  border-right: 1px solid $divider-color;
 
   @include mobile {
     padding: 0;
+    gap: 0;
     border-right: unset;
   }
 
@@ -75,10 +75,6 @@
     margin: 0;
     font-weight: bold;
     width: 5rem;
-
-    @include mobile {
-      width: auto;
-    }
   }
 
   .LearningPathImg {
@@ -98,8 +94,6 @@
   align-items: center;
   justify-content: space-between;
   row-gap: 1rem;
-
-  padding: 0 2rem;
 
   > p {
     margin: 0;
