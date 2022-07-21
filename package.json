@@ -86,6 +86,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest --coverage --roots src",
+    "download": "pingcap-docs-download dl",
     "download:tidb:en": "pingcap-docs-download dl pingcap/docs",
     "download:tidb:en:all": "./scripts/download-tidb-en.sh",
     "download:tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
