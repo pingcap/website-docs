@@ -15,7 +15,7 @@
 
     &:not(:first-child)::before {
       content: '';
-      width: 2px;
+      width: 1px;
       height: calc(50% - 2rem);
       background-color: $divider-color;
       position: absolute;
@@ -25,7 +25,7 @@
 
     &:not(:last-child)::after {
       content: '';
-      width: 2px;
+      width: 1px;
       height: calc(50% - 2rem);
       background-color: $divider-color;
       position: absolute;
