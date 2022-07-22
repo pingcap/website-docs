@@ -123,6 +123,10 @@ export function Navbar({ locale, is404 }: Props) {
     switch (lang) {
       case 'ja':
         return 'https://pingcap.co.jp/'
+      case 'zh':
+        return 'https://pingcap.com/zh/'
+      case 'en':
+        return 'https://en.pingcap.com/'
       default:
         return 'https://pingcap.com'
     }
