@@ -25,7 +25,6 @@ function loadLink(href: string) {
 }
 
 export default function APIReferenceTemplate() {
-  const redocCorsProxy = `https://cors.redoc.ly`
   const specUrl = `https://download.pingcap.org/tidbcloud-oas.json`
 
   useEffect(() => {
@@ -40,11 +39,7 @@ export default function APIReferenceTemplate() {
       )
 
       // https://redocly.com/docs/api-reference-docs/configuration/functionality/
-      Redoc.init(
-        `${redocCorsProxy}/${specUrl}`,
-        {},
-        document.getElementById('redoc-container')
-      )
+      Redoc.init(specUrl, {}, document.getElementById('redoc-container'))
     }
 
     setupRedoc()
