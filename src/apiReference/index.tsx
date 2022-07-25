@@ -47,7 +47,7 @@ export default function APIReferenceTemplate() {
 
   return (
     <>
-      <Seo title="TiDB Cloud Open API" noindex />
+      <Seo title="TiDB Cloud API" noindex />
       <div id="redoc-container" data-testid="redoc-container" />
     </>
   )
