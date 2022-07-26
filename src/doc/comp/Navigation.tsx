@@ -105,6 +105,7 @@ export function Navigation({ data }: Props) {
   const { path } = useI18next()
   const active = useMemo(() => findActiveItem(path, data) ?? [], [path, data])
 
+  // ! Add "auto scroll" to left nav is not recommended.
   useEffect(() => {
     const targetActiveItem: NewHTMLElement | null =
       document?.querySelector('#toc-item-active')
@@ -148,14 +149,10 @@ function findActiveItem(
   }
 }
 
-// TODO: refine
 function isInViewport(element: HTMLElement) {
   const rect = element.getBoundingClientRect()
   return (
     rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
   )
 }
