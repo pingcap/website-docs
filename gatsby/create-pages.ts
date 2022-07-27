@@ -120,6 +120,15 @@ export const createCloudAPIReference = async ({
     component: template,
     context: {},
   })
+  const templateStoplight = resolve(
+    __dirname,
+    '../src/apiReference/stoplight.tsx'
+  )
+  createPage({
+    path: `/tidbcloud/api/stoplight`,
+    component: templateStoplight,
+    context: {},
+  })
 }
 
 interface PageQueryData {
