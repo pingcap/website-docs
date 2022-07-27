@@ -39,7 +39,11 @@ export default function APIReferenceTemplate() {
       )
 
       // https://redocly.com/docs/api-reference-docs/configuration/functionality/
-      Redoc.init(specUrl, {}, document.getElementById('redoc-container'))
+      Redoc.init(
+        specUrl,
+        { schemaExpansionLevel: 3 },
+        document.getElementById('redoc-container')
+      )
     }
 
     setupRedoc()
