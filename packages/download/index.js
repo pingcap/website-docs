@@ -81,7 +81,7 @@ export function download(argv) {
           {
             repo,
             path,
-            ref: 'master-0727',
+            ref,
           },
           genDest(
             repo,
