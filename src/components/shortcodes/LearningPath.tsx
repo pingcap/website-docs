@@ -131,7 +131,7 @@ export const DocHomeContainer = (props: {
             styles.toc
           )}>
           <Title size={6} style={{ marginBottom: 0, paddingTop: '40px' }}>
-            {`What's on this page`}
+            <Trans i18nKey="doc.toc" />
           </Title>
           <ul className={styles.menu}>
             {headingsMemo.map(i => (

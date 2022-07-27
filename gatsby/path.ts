@@ -16,11 +16,7 @@ export function generateUrl(filename: string, config: PathConfig) {
 export const generateDocHomeUrl = (filename: string, config: PathConfig) => {
   const lang = config.locale === Locale.en ? '' : `/${config.locale}`
 
-  if (lang) {
-    return `/${lang}`
-  }
-
-  return `/`
+  return `${lang}/`
 }
 
 export function generatePdfUrl(config: PathConfig) {

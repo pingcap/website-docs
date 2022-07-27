@@ -169,11 +169,7 @@ export const createDocHome = async ({
     const path = generateDocHomeUrl(name, pathConfig)
     const navUrl = generateNav(pathConfig)
 
-    const locale = [Locale.en, Locale.zh, Locale.ja]
-      .map(l => {
-        slug.startsWith(l) ? l : undefined
-      })
-      .filter(Boolean)
+    const locale = [Locale.en, Locale.zh]
 
     createPage({
       path,
