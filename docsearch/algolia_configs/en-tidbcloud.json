@@ -1,9 +1,9 @@
 {
   "index_name": "en-tidbcloud",
   "docs_info": {
-    "owner": "tidbcloud",
-    "docs_repo": "dbaas-docs",
-    "ref": "master",
+    "owner": "pingcap",
+    "docs_repo": "docs",
+    "ref": "release-6.1",
     "docs_prefix": "tidbcloud",
     "lang": "en",
     "version": ""
@@ -11,9 +11,7 @@
   "start_urls": [],
   "crawl_local_url": "",
   "delete_urls": [],
-  "sitemap_urls": [
-    "https://docs.pingcap.com/sitemap/sitemap-index.xml"
-  ],
+  "sitemap_urls": ["https://docs.pingcap.com/sitemap/sitemap-index.xml"],
   "selectors": {
     "default": {
       "lvl0": ".doc-content h1",
@@ -24,18 +22,10 @@
       "text": ".doc-content p, .doc-content li, .doc-content table tr, .doc-content code span"
     }
   },
-  "selectors_exclude": [
-    ".error"
-  ],
+  "selectors_exclude": [".error"],
   "custom_settings": {
-    "attributesForFaceting": [
-      "url_without_anchor"
-    ],
-    "attributesToHighlight": [
-      "content",
-      "url",
-      "hierarchy"
-    ],
+    "attributesForFaceting": ["url_without_anchor"],
+    "attributesToHighlight": ["content", "url", "hierarchy"],
     "attributeForDistinct": "url_without_anchor",
     "distinct": true,
     "disableTypoToleranceOnWords": [
@@ -46,9 +36,7 @@
       "tidb 4.0"
     ]
   },
-  "conversation_id": [
-    "428916846"
-  ],
+  "conversation_id": ["428916846"],
   "only_content_level": true,
   "nb_hits": 2153
 }
