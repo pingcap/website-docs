@@ -155,23 +155,22 @@ Currently, you can use these shortcodes into docs:
 
 <Warning>This is a warning.</Warning>
 
-<Tips>This is a tip.</Tips>
+<Tip>This is a tip.</Tip>
 
 <Error>This is an error.</Error>
 
 <Important>This is an important message.</Important>
 ```
 
-Everything you needed is just to write a JSX tag, put the text into it. Then we will use
-`mdx` to convert it to JS code.
+Everything you need is just to write a JSX tag, put the text into it. Then we will use `mdx` to convert it to JS code.
 
 ### Tab Panels
 
-**Each href in a single doc have to be unique.If you don't specify an `href`, we will treat the label to href.**
+Use `<SimpleTab>` to create a tab panel. Do not put any h1 ~ h3 headings inside the tab panel.
 
 ```jsx
 <SimpleTab>
-  <div label="LABEL_SHOW_ON_FIRST_TAB" href="HREF_URL">
+  <div label="LABEL_SHOW_ON_FIRST_TAB">
     This is the first content, which is markdown format. The content will show
     on the corresponding panel when users switch the tabs.
   </div>
