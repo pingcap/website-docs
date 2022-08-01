@@ -177,7 +177,7 @@ export const DocHomeCard = (props: any) => {
   const isInternalLink =
     href.startsWith('https://') || href.startsWith('http://')
 
-  if (isInternalLink)
+  if (!isInternalLink)
     return (
       <Link to={href} className={styles.cardLink}>
         <div className={clsx('card', styles.card)}>
