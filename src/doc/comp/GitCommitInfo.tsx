@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Trans } from 'gatsby-plugin-react-i18next'
 import axios from 'axios'
 import { commitInfo } from './git-commit.module.scss'
-import { PathConfig } from 'typing'
+import { Locale, PathConfig } from 'typing'
 import { getRepo } from '../../../gatsby/path'
 import { docs } from '../../../docs.json'
 
@@ -19,8 +19,10 @@ export function GitCommitInfo({ pathConfig, title, filePath }: Props) {
   if (pathConfig.repo === 'tidbcloud') {
     const cloudConfig = docs[pathConfig.repo]
     const targetTidbBranch = cloudConfig.target
-    console.log(targetTidbBranch, pathConfig)
     pathConfig.branch = targetTidbBranch
+  }
+  if (pathConfig.locale === 'ja') {
+    pathConfig.locale = Locale.en
   }
   const repo = useMemo(() => getRepo(pathConfig), [pathConfig])
 
