@@ -89,9 +89,10 @@
       "deprecated": ["v1.0"]
     },
     "tidbcloud": {
+      "target": "release-6.1",
       "languages": {
         "en": {
-          "repo": "tidbcloud/dbaas-docs",
+          "repo": "pingcap/docs",
           "versions": ["master"]
         }
       }

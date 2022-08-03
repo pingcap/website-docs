@@ -5,6 +5,7 @@ import axios from 'axios'
 import { commitInfo } from './git-commit.module.scss'
 import { PathConfig } from 'typing'
 import { getRepo } from '../../../gatsby/path'
+import { docs } from '../../../docs.json'
 
 interface Props {
   pathConfig: PathConfig
@@ -14,6 +15,13 @@ interface Props {
 
 export function GitCommitInfo({ pathConfig, title, filePath }: Props) {
   const [latestCommit, setLatestCommit] = useState(null as any)
+
+  if (pathConfig.repo === 'tidbcloud') {
+    const cloudConfig = docs[pathConfig.repo]
+    const targetTidbBranch = cloudConfig.target
+    console.log(targetTidbBranch, pathConfig)
+    pathConfig.branch = targetTidbBranch
+  }
   const repo = useMemo(() => getRepo(pathConfig), [pathConfig])
 
   useEffect(() => {
