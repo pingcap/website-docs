@@ -54,7 +54,8 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "rehype-katex": "5.0.0",
-    "remark-math": "3.0.1"
+    "remark-math": "3.0.1",
+    "signale": "^1.4.0"
   },
   "devDependencies": {
     "@prantlf/railroad-diagrams": "^1.0.1",
@@ -73,7 +74,8 @@
     "prettier": "2.5.1",
     "sass": "^1.45.0",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "@types/signale": "^1.4.3"
   },
   "keywords": [
     "gatsby"
