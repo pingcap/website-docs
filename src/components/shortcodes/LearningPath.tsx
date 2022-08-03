@@ -172,10 +172,30 @@ export const DocHomeCardContainer = (props: any) => {
 }
 
 export const DocHomeCard = (props: any) => {
-  const { children, href, icon = 'cloud1', label } = props
+  const { children, href = '', icon = 'cloud1', label } = props
+
+  const isInternalLink =
+    href.startsWith('https://') || href.startsWith('http://')
+
+  if (!isInternalLink)
+    return (
+      <Link to={href} className={styles.cardLink}>
+        <div className={clsx('card', styles.card)}>
+          <div className={clsx('card-content', styles.cardContent)}>
+            {/* <img className={styles.cardContentImg} src={pingcapLogo} /> */}
+            <img
+              className={styles.cardContentImg}
+              src={require(`../../../images/docHome/${icon}.svg`)?.default}
+            />
+            <h3 className={styles.cardContentH3}>{label}</h3>
+            {children}
+          </div>
+        </div>
+      </Link>
+    )
 
   return (
-    <Link to={href} className={styles.cardLink}>
+    <a href={href} className={styles.cardLink}>
       <div className={clsx('card', styles.card)}>
         <div className={clsx('card-content', styles.cardContent)}>
           {/* <img className={styles.cardContentImg} src={pingcapLogo} /> */}
@@ -187,6 +207,6 @@ export const DocHomeCard = (props: any) => {
           {children}
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
