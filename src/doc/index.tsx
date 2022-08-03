@@ -156,13 +156,11 @@ export default function Doc({
                 <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
 
-              {pathConfig.repo !== Repo.tidbcloud && (
-                <GitCommitInfo
-                  pathConfig={pathConfig}
-                  title={frontmatter.title}
-                  filePath={filePath}
-                />
-              )}
+              <GitCommitInfo
+                pathConfig={pathConfig}
+                title={frontmatter.title}
+                filePath={filePath}
+              />
             </div>
           </Column>
 
