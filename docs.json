@@ -94,6 +94,10 @@
         "en": {
           "repo": "pingcap/docs",
           "versions": ["master"]
+        },
+        "ja": {
+          "repo": "pingcap/docs",
+          "versions": ["master"]
         }
       }
     }
