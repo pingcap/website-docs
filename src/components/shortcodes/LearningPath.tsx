@@ -1,14 +1,11 @@
-import { useMemo, useState, useEffect, useRef } from 'react'
-import { Block, Column, Columns, Title } from '@seagreenio/react-bulma'
+import { useMemo, useState } from 'react'
+import { Title } from '@seagreenio/react-bulma'
 import clsx from 'clsx'
-import { I18nextContext, Link, Trans } from 'gatsby-plugin-react-i18next'
+import { Link, Trans } from 'gatsby-plugin-react-i18next'
 
 import * as styles from './LearningPath.module.scss'
-// import docHome from '../../../images/docHome.svg'
 import { SearchInput } from '../../../src/layout/comp/Input'
-import pingcapLogo from '../../../images/pingcap-icon.svg'
 
-// TODO: hide element instead of update whole node
 export const LearningPathContainer = (props: {
   title: string
   subTitle?: string
@@ -25,7 +22,6 @@ export const LearningPathContainer = (props: {
           {subTitle && <div className={styles.subTitle}>{subTitle}</div>}
         </div>
         <div className={styles.titleRight}>
-          {/* <img src={docHome} /> */}
           <div
             className={clsx(styles.titleImg, {
               [styles.titleImgHome]: platform === 'home',
@@ -110,7 +106,6 @@ export const DocHomeContainer = (props: {
           </div>
         </div>
         <div className={styles.titleRight}>
-          {/* <img src={docHome} /> */}
           <div
             className={clsx(styles.titleImg, {
               [styles.titleImgHome]: platform === 'home',
@@ -182,7 +177,6 @@ export const DocHomeCard = (props: any) => {
       <Link to={href} className={styles.cardLink}>
         <div className={clsx('card', styles.card)}>
           <div className={clsx('card-content', styles.cardContent)}>
-            {/* <img className={styles.cardContentImg} src={pingcapLogo} /> */}
             <img
               className={styles.cardContentImg}
               src={require(`../../../images/docHome/${icon}.svg`)?.default}
@@ -198,7 +192,6 @@ export const DocHomeCard = (props: any) => {
     <a href={href} className={styles.cardLink}>
       <div className={clsx('card', styles.card)}>
         <div className={clsx('card-content', styles.cardContent)}>
-          {/* <img className={styles.cardContentImg} src={pingcapLogo} /> */}
           <img
             className={styles.cardContentImg}
             src={require(`../../../images/docHome/${icon}.svg`)?.default}
