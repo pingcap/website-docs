@@ -3,6 +3,7 @@ const SET_DOC_INFO = 'GET_DOC_INFO'
 const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE'
 const SET_LANG_SWITCHABLE = 'SET_LANG_SWITCHABLE'
 const SET_DOC_DATA = 'SET_DOC_DATA'
+const SET_TAB_GROUP = 'SET_TAB_GROUP'
 
 export const setLoading = bool => ({
   type: SET_LOADING,
@@ -29,6 +30,11 @@ export const setDocData = docData => ({
   docData,
 })
 
+export const setTabGroup = tabGroup => ({
+  type: SET_TAB_GROUP,
+  tabGroup,
+})
+
 export const defaultDocInfo = {
   lang: 'en',
   type: 'tidb',
@@ -41,6 +47,7 @@ const initialState = {
   docInfo: defaultDocInfo,
   langSwitchable: true,
   docData: {},
+  tabGroup: {},
 }
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +62,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, langSwitchable: action.langSwitchable }
     case SET_DOC_DATA:
       return { ...state, docData: action.docData }
+    case SET_TAB_GROUP:
+      return { ...state, tabGroup: action.tabGroup }
     default:
       return state
   }

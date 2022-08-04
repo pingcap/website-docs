@@ -11,7 +11,7 @@ import {
 } from './navigation.module.scss'
 
 import { RepoNav, RepoNavLink } from 'typing'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
 
 const TocContent = ({ content }: { content: RepoNavLink['content'] }) => (
@@ -76,14 +76,16 @@ function TocItem({ data, level, active }: ItemProps) {
     return <TocMenu data={data} level={level} active={active} />
   }
   if (data.link == null) throw new Error('plain text node is unsupported')
+  const isItemActive = data === active[0]
+  const liProps: { id?: string } = isItemActive ? { id: 'toc-item-active' } : {}
   return (
-    <li className={navItem}>
+    <li className={navItem} {...liProps}>
       {data.link.startsWith('https://') ? (
         <a target="_blank" href={data.link}>
           <TocContent content={data.content} />
         </a>
       ) : (
-        <Link to={data.link} className={clsx(data === active[0] && activeLink)}>
+        <Link to={data.link} className={clsx({ [activeLink]: isItemActive })}>
           <TocContent content={data.content} />
         </Link>
       )}
@@ -95,9 +97,31 @@ interface Props {
   data: RepoNav
 }
 
+interface NewHTMLElement extends HTMLElement {
+  scrollIntoViewIfNeeded?: any
+}
+
 export function Navigation({ data }: Props) {
   const { path } = useI18next()
   const active = useMemo(() => findActiveItem(path, data) ?? [], [path, data])
+
+  // ! Add "auto scroll" to left nav is not recommended.
+  useEffect(() => {
+    const targetActiveItem: NewHTMLElement | null =
+      document?.querySelector('#toc-item-active')
+    if (!targetActiveItem) {
+      return
+    }
+    const isVisiable = isInViewport(targetActiveItem)
+    if (isVisiable) {
+      return
+    }
+    if (!targetActiveItem.scrollIntoViewIfNeeded) {
+      targetActiveItem.scrollIntoView({ block: 'end' })
+    } else {
+      targetActiveItem.scrollIntoViewIfNeeded()
+    }
+  })
 
   return (
     <ul className={nav}>
@@ -123,4 +147,12 @@ function findActiveItem(
       }
     }
   }
+}
+
+function isInViewport(element: HTMLElement) {
+  const rect = element.getBoundingClientRect()
+  return (
+    rect.top >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+  )
 }

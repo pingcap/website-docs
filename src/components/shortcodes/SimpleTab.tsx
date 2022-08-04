@@ -1,52 +1,65 @@
-import { tabs, active, normal, hidden } from './simple-tab.module.scss'
+import { tabs, active, hidden } from './simple-tab.module.scss'
 
-import { ReactElement, useEffect, useState } from 'react'
-import { useLocation } from '@reach/router'
+import { ReactElement, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTabGroup } from 'state'
 import clsx from 'clsx'
 
 export function SimpleTab({
+  groupId,
   children,
 }: {
-  children: ReactElement<{ label: string; href?: string; children: ReactElement[] }>[]
+  groupId: string
+  children: ReactElement<{
+    label: string
+    value?: string
+    children: ReactElement[]
+  }>[]
 }) {
-  const location = useLocation()
-  const [activeTab, setActiveTab] = useState(0)
-  
-  useEffect(() => {
-    let active = children.findIndex(
-      child => {
-        const activeJudge: string = child.props?.href || child.props.label;
-        return activeJudge === decodeURIComponent(location.hash.slice(1))
-      }
-    )
-    if (active === -1) {
-      active = 0
+  const defaultValue = children[0]!.props?.value || children[0].props.label
+  const [activeTab, setActiveTab] = useState(defaultValue)
+  const dispatch = useDispatch()
+  const { tabGroup } = useSelector(state => state) as any
+
+  if (groupId) {
+    const activeTabGroup = tabGroup[groupId]
+    if (
+      activeTabGroup &&
+      activeTabGroup !== activeTab &&
+      children.some(
+        child => child.props?.value || child.props.label === activeTabGroup
+      )
+    ) {
+      setActiveTab(activeTabGroup)
     }
-    setActiveTab(active)
-  }, [location.hash, children])
+  }
+
+  const handleActiveTabChange = (newValue: string) => {
+    setActiveTab(newValue)
+    if (groupId) {
+      dispatch(setTabGroup({ [groupId]: newValue }))
+    }
+  }
 
   return (
     <>
       <ul className={tabs}>
-        {children.map((child, index) => {
-          const id: string = child.props?.href || child.props.label;
+        {children.map(child => {
+          const id: string = child.props?.value || child.props.label
           return (
-            <li key={id} id={id}>
-              <a
-                href={`#${id}`}
-                className={activeTab === index ? active : normal}>
-                {child.props.label}
-              </a>
+            <li
+              key={id}
+              className={clsx({ [active]: activeTab === id })}
+              onClick={() => activeTab !== id && handleActiveTabChange(id)}>
+              {child.props.label}
             </li>
           )
         })}
       </ul>
-      {children.map((child, index) => {
-        const id: string = child.props?.href || child.props.label;
+      {children.map(child => {
+        const id: string = child.props?.value || child.props.label
         return (
-          <div
-            key={id}
-            className={clsx(activeTab !== index && hidden)}>
+          <div key={id} className={clsx({ [hidden]: activeTab !== id })}>
             {child.props.children}
           </div>
         )

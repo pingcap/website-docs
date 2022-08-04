@@ -58,22 +58,43 @@ export function download(argv) {
 
   switch (repo) {
     case 'pingcap/docs-cn':
-      retrieveAllMDsFromZip(
-        {
-          repo,
-          path,
-          ref,
-        },
-        genDest(
-          repo,
-          path,
-          nPath.resolve(
-            dest,
-            `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
-          )
-        ),
-        options
-      )
+      if (ref === 'master') {
+        const newRef = 'master-0727'
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref: newRef,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
+            )
+          ),
+          options
+        )
+      } else {
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/${ref}`
+            )
+          ),
+          options
+        )
+      }
+
       break
     case 'pingcap/docs':
       if (ref.startsWith('i18n-')) {
@@ -88,6 +109,24 @@ export function download(argv) {
             ref,
           },
           genDest(repo, path, nPath.resolve(dest, `${refLang}/tidb/${refVer}`)),
+          options
+        )
+      } else if (ref === 'master') {
+        const newRef = 'master-0727'
+        retrieveAllMDsFromZip(
+          {
+            repo,
+            path,
+            ref: newRef,
+          },
+          genDest(
+            repo,
+            path,
+            nPath.resolve(
+              dest,
+              `${repo.endsWith('-cn') ? 'zh' : 'en'}/tidb/master`
+            )
+          ),
           options
         )
       } else {
