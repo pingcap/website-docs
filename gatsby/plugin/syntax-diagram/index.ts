@@ -131,11 +131,11 @@ const railroadParser = pegjs.generate(`
     / s:sequence { return s }
     / ops:opSequence { return ops }
 
-  nonTerminal = 'NonTerminal(' _ '"' t:[0-9a-zA-Z_() ]+ '"' _ ')' {
+  nonTerminal = 'NonTerminal(' _ '"' t:[^"]* '"' _ ')' {
     return {type: 'NonTerminal', text: t.join('')};
   }
 
-  comment = 'Comment(' _ '"' t:[0-9a-zA-Z_() ]+ '"' _ ')' {
+  comment = 'Comment(' _ '"' t:[^"]* '"' _ ')' {
     return {type: 'Comment', text: t.join('')};
   }
 
