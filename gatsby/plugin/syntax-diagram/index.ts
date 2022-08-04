@@ -127,6 +127,10 @@ const railroadParser = pegjs.generate(`
     / c:choice { return c }
     / o:oneormore { return o }
 
+  seq = s:stack { return s }
+    / s:sequence { return s }
+    / ops:opSequence { return ops }
+
   nonTerminal = 'NonTerminal(' _ '"' t:[0-9a-zA-Z_() ]+ '"' _ ')' {
     return {type: 'NonTerminal', text: t.join('')};
   }
@@ -134,10 +138,6 @@ const railroadParser = pegjs.generate(`
   comment = 'Comment(' _ '"' t:[0-9a-zA-Z_() ]+ '"' _ ')' {
     return {type: 'Comment', text: t.join('')};
   }
-
-  seq = s:stack { return s }
-    / s:sequence { return s }
-    / ops:opSequence { return ops }
 
   stack = 'Stack(' _ its: items _ ')' {
     return {type: 'Stack', items: its};
@@ -399,7 +399,6 @@ const parsers: {
           isRTLCapable,
         },
       })
-      console.log('grammar', JSON.stringify(grammar, undefined, 2))
       const diagrams = grammar
         .map((node: any) => {
           const diagram = new rr.Diagram(toRailroad(node)).format(2)
