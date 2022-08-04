@@ -4,7 +4,12 @@ import type { CreatePagesArgs } from 'gatsby'
 import sig from 'signale'
 
 import { Locale, Repo } from '../src/typing'
-import { generateConfig, generateUrl, generateNav } from './path'
+import {
+  generateConfig,
+  generateUrl,
+  generateNav,
+  generateDocHomeUrl,
+} from './path'
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
@@ -130,4 +135,69 @@ interface PageQueryData {
       slug: string
     }[]
   }
+}
+
+export const createDocHome = async ({
+  actions: { createPage, createRedirect },
+  graphql,
+}: CreatePagesArgs) => {
+  const template = resolve(__dirname, '../src/doc/index.tsx')
+
+  const docs = await graphql<PageQueryData>(`
+    {
+      allMdx(
+        filter: {
+          fileAbsolutePath: { regex: "/tidb/master/_docHome.md$/" }
+          frontmatter: { draft: { ne: true } }
+        }
+      ) {
+        nodes {
+          id
+          frontmatter {
+            aliases
+          }
+          slug
+          parent {
+            ... on File {
+              relativePath
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  if (docs.errors) {
+    sig.error(docs.errors)
+  }
+
+  const nodes = docs.data!.allMdx.nodes.map(node => {
+    const { config, name, filePath } = generateConfig(node.slug)
+    return { ...node, pathConfig: config, name, filePath }
+  })
+
+  nodes.forEach(node => {
+    const { id, name, pathConfig, filePath, slug } = node
+    const path = generateDocHomeUrl(name, pathConfig)
+    const navUrl = generateNav(pathConfig)
+
+    const locale = [Locale.en, Locale.zh]
+
+    createPage({
+      path,
+      component: template,
+      context: {
+        id,
+        name,
+        pathConfig,
+        // use for edit in github
+        filePath,
+        navUrl,
+        availIn: {
+          locale,
+          version: [],
+        },
+      },
+    })
+  })
 }

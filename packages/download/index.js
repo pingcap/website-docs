@@ -175,6 +175,8 @@ export function download(argv) {
       )
 
       break
+    default:
+      break
   }
 }
 

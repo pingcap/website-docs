@@ -7,3 +7,11 @@ export { SyntaxDiagram } from './SyntaxDiagram'
 export { TabsPanel } from './TabsPanel'
 export { WithCopy } from './WithCopy'
 export { CustomContent } from './CustomContent'
+export {
+  LearningPathContainer,
+  LearningPath,
+  DocHomeContainer,
+  DocHomeSection,
+  DocHomeCardContainer,
+  DocHomeCard,
+} from './LearningPath'

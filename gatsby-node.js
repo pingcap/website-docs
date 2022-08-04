@@ -2,10 +2,12 @@ require('ts-node').register({ transpileOnly: true })
 
 const path = require('path')
 
+const { createDocs, createDocHome } = require('./gatsby/create-pages')
 const { createDocs, createCloudAPIReference } = require('./gatsby/create-pages')
 const { createExtraType } = require('./gatsby/create-types')
 
 exports.createPages = async ({ graphql, actions }) => {
+  await createDocHome({ graphql, actions })
   await createDocs({ graphql, actions })
   // await createCloudAPIReference({ graphql, actions })
   actions.createPage({

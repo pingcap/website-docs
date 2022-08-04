@@ -73,7 +73,7 @@ export function UserFeedback({ title, locale }: Props) {
         )}
       </div>
       {showFeedbackBody && (
-        <div>
+        <div style={{background: '#f7f8f9'}}>
           {showYesFollowUp === 'unset' && (
             <div className={thumbs}>
               <button

@@ -13,6 +13,12 @@ export function generateUrl(filename: string, config: PathConfig) {
   }${filename}`
 }
 
+export const generateDocHomeUrl = (filename: string, config: PathConfig) => {
+  const lang = config.locale === Locale.en ? '' : `/${config.locale}`
+
+  return `${lang}/`
+}
+
 export function generatePdfUrl(config: PathConfig) {
   return `${config.repo}-${config.version ? config.version + '-' : ''}${
     config.locale
