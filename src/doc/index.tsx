@@ -164,11 +164,13 @@ export default function Doc({
                 <MDXRenderer>{body}</MDXRenderer>
               </MDXProvider>
 
-              <GitCommitInfo
-                pathConfig={pathConfig}
-                title={frontmatter.title}
-                filePath={filePath}
-              />
+              {!frontmatter.hide_commit && (
+                <GitCommitInfo
+                  pathConfig={pathConfig}
+                  title={frontmatter.title}
+                  filePath={filePath}
+                />
+              )}
             </div>
           </Column>
 
