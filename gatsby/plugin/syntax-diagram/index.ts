@@ -126,6 +126,7 @@ const railroadParser = pegjs.generate(`
     / s:seq { return s }
     / c:choice { return c }
     / o:oneormore { return o }
+    / o:opt { return o }
 
   seq = s:stack { return s }
     / s:sequence { return s }
@@ -157,6 +158,10 @@ const railroadParser = pegjs.generate(`
 
   oneormore = 'OneOrMore(' _ i: item _ ',' _ r: item _ ',' _ ')' {
     return {type: 'OneOrMore', item: i, repeat: r};
+  }
+
+  opt = 'Optional(' _ '"' t:[^"]* '"' _ ')' {
+    return {type: 'Optional', item: {type: 'NonTerminal', text: t.join('')}};
   }
 
   _ = [ \\n\\r\\t]*
