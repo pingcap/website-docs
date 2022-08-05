@@ -1,0 +1,57 @@
+name: Deploy preview to netlify
+
+on:
+  push:
+    branches: ['docs-staging']
+  workflow_dispatch:
+
+concurrency: netlify-${{ github.ref }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build website
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn
+
+      - name: Update submodule
+        run: |
+          git submodule update --remote
+          cd docs
+          git checkout preview
+          git pull
+
+      - name: Restore gatsby cache
+        uses: actions/cache@v3
+        id: gatsby-cache
+        with:
+          path: |
+            .cache
+            public
+          key: ${{ runner.os }}-gatsby-cache-netlify
+
+      - name: Print cache key
+        run: |
+          echo ${{ runner.os }}-gatsby-cache-netlify
+
+      - name: Build website
+        env:
+          CI: true
+          GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        run: |
+          yarn build --verbose
+
+      - name: Deploy website to Netlify
+        run: |
+          npm install netlify-cli -g
+          netlify -d public -s ${{ secrets.NETLIFY_SITE_ID }} -a ${{ secrets.NETLIFY_ACCESS_TOKEN }} --debug
