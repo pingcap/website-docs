@@ -16,7 +16,7 @@ interface RRDiagram {
 }
 
 interface RRLeaf {
-  type: 'Terminal' | 'NonTerminal'
+  type: 'Terminal' | 'NonTerminal' | 'Comment'
   text: string
 }
 
@@ -109,6 +109,61 @@ const ebnfParser = pegjs.generate(`
   nonTerminal = [0-9a-zA-Z_]+ {
     return {type: 'NonTerminal', text: text()};
   }
+  _ = [ \\n\\r\\t]*
+`)
+
+const railroadParser = pegjs.generate(`
+  grammar = 'Diagram('_ its:items _')' {
+    return [{type: 'Sequence', items: its}];
+  }
+
+  items = its:(_ item _',')* {
+    return its.map(i => i[1]);
+  }
+
+  item = n:nonTerminal { return n }
+    / c:comment { return c }
+    / s:seq { return s }
+    / c:choice { return c }
+    / o:oneormore { return o }
+    / o:opt { return o }
+
+  seq = s:stack { return s }
+    / s:sequence { return s }
+    / ops:opSequence { return ops }
+
+  nonTerminal = 'NonTerminal(' _ '"' t:[^"]* '"' _ ')' {
+    return {type: 'NonTerminal', text: t.join('')};
+  }
+
+  comment = 'Comment(' _ '"' t:[^"]* '"' _ ')' {
+    return {type: 'Comment', text: t.join('')};
+  }
+
+  stack = 'Stack(' _ its: items _ ')' {
+    return {type: 'Stack', items: its};
+  }
+
+  sequence = 'Sequence(' _ its: items _ ')' {
+    return {type: 'Sequence', items: its};
+  }
+
+  opSequence = 'OptionalSequence(' _ its: items _ ')' {
+    return {type: 'OptionalSequence', items: its};
+  }
+
+  choice = 'Choice(' _ n: [0-9]+ _ ','_ its: items _ ')' {
+    return {type: 'Choice', normalIndex: n, options: its};
+  }
+
+  oneormore = 'OneOrMore(' _ i: item _ ',' _ r: item _ ',' _ ')' {
+    return {type: 'OneOrMore', item: i, repeat: r};
+  }
+
+  opt = 'Optional(' _ '"' t:[^"]* '"' _ ')' {
+    return {type: 'Optional', item: {type: 'NonTerminal', text: t.join('')}};
+  }
+
   _ = [ \\n\\r\\t]*
 `)
 
@@ -291,6 +346,8 @@ function toRailroad(node: RRComponent): void {
         Math.round(anafanafo(node.text) * NON_TERMINAL_WIDTH_FACTOR) + 20
       return nt
     }
+    case 'Comment':
+      return new rr.Comment(node.text)
     case 'Optional':
       return new rr.Optional(toRailroad(node.item))
     case 'OneOrMore':
@@ -306,6 +363,64 @@ function toRailroad(node: RRComponent): void {
   }
 }
 
+const parsers: {
+  [key: string]: {
+    lang: String,
+    inner: (node: any) => any,
+  }
+} = {
+  'ebnf+diagram': {
+    lang: 'ebnf',
+    inner: (node: any) => {
+      const grammar = ebnfParser.parse(node.value, {
+        context: {
+          appendNodeToChoices,
+          appendNodeToSequence,
+          isRTLCapable,
+        },
+      })
+      const diagrams = grammar
+        .map(({ name, content }: any) => {
+          const diagram = new rr.Diagram(toRailroad(content)).format(2)
+          return `<dt>${name}</dt><dd>${diagram}</dd>`
+        })
+        .join('')
+
+      return [
+        { type: 'jsx', value: '<SyntaxDiagram>' },
+        { type: 'html', value: `<dl>${diagrams}</dl>` },
+        node,
+        { type: 'jsx', value: '</SyntaxDiagram>' },
+      ]
+    }
+  },
+  'railroad+diagram' : {
+    lang: 'railroad',
+    inner: (node: any) => {
+      const grammar = railroadParser.parse(node.value, {
+        context: {
+          appendNodeToChoices,
+          appendNodeToSequence,
+          isRTLCapable,
+        },
+      })
+      const diagrams = grammar
+        .map((node: any) => {
+          const diagram = new rr.Diagram(toRailroad(node)).format(2)
+          return `<dd>${diagram}</dd>`
+        })
+        .join('')
+
+      return [
+        { type: 'jsx', value: '<SyntaxDiagram>' },
+        { type: 'html', value: `<dl>${diagrams}</dl>` },
+        node,
+        { type: 'jsx', value: '</SyntaxDiagram>' },
+      ]
+    }
+  }
+}
+
 module.exports = ({
   markdownAST,
   markdownNode,
@@ -316,31 +431,13 @@ module.exports = ({
   visit(markdownAST, (node: any) => {
     if (Array.isArray(node.children)) {
       node.children = node.children.flatMap((node: any) => {
-        if (node.type === 'code' && node.lang === 'ebnf+diagram') {
-          node.lang = 'ebnf'
+        const parser = parsers[node.lang]
+        if (node.type === 'code' && parser) {
+          node.lang = parser.lang
           try {
-            const grammar = ebnfParser.parse(node.value, {
-              context: {
-                appendNodeToChoices,
-                appendNodeToSequence,
-                isRTLCapable,
-              },
-            })
-            const diagrams = grammar
-              .map(({ name, content }: any) => {
-                const diagram = new rr.Diagram(toRailroad(content)).format(2)
-                return `<dt>${name}</dt><dd>${diagram}</dd>`
-              })
-              .join('')
-
-            return [
-              { type: 'jsx', value: '<SyntaxDiagram>' },
-              { type: 'html', value: `<dl>${diagrams}</dl>` },
-              node,
-              { type: 'jsx', value: '</SyntaxDiagram>' },
-            ]
+            return parser.inner(node)
           } catch (e) {
-            console.error('invalid EBNF', markdownNode.fileAbsolutePath)
+            console.error(`invalid ${parser.lang}`, e, markdownNode.fileAbsolutePath)
           }
         }
         return node
