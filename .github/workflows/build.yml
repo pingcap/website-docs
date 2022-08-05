@@ -3,8 +3,8 @@ name: Build
 on:
   push:
     branches: ['master', 'docs-staging']
-  paths-ignore:
-    - '.github/**'
+    paths-ignore:
+      - '.github/**'
   workflow_dispatch:
     inputs:
       hash:
