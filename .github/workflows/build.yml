@@ -2,8 +2,14 @@ name: Build
 
 on:
   push:
-    branches: ['master']
+    branches: ['master', 'docs-staging']
   workflow_dispatch:
+    inputs:
+      hash:
+        description: 'Docs Staging Hash'
+        type: string
+        default: master
+        required: true
 
 concurrency: ci-${{ github.ref }}
 
@@ -23,6 +29,25 @@ jobs:
       - name: Install deps
         run: yarn
 
+      - name: Update submodule
+        run: |
+          git submodule update --remote
+
+      - name: Restore gatsby cache
+        uses: actions/cache@v3
+        id: gatsby-cache
+        with:
+          path: |
+            .cache
+            public
+          key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ inputs.hash }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-cache-docs-staging-
+
+      - name: Print cache key
+        run: |
+          echo ${{ runner.os }}-gatsby-cache-docs-staging-${{ inputs.hash }}
+
       - name: Build website
         env:
           CI: true
@@ -31,18 +56,18 @@ jobs:
         run: |
           yarn build --verbose
 
-      - name: Deploy to LA1
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      # - name: Deploy to LA1
+      #   run: |
+      #     rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      - name: Deploy to LA2
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      # - name: Deploy to LA2
+      #   run: |
+      #     rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      - name: Deploy to BJ1
-        run: |
-          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      # - name: Deploy to BJ1
+      #   run: |
+      #     rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      - name: Deploy to BJ2
-        run: |
-          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      # - name: Deploy to BJ2
+      #   run: |
+      #     rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
