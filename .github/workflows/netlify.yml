@@ -25,8 +25,10 @@ jobs:
 
       - name: Update submodule
         run: |
+          git submodule init
           git submodule update --remote
           cd docs
+          git fetch
           git checkout preview
           git pull
 
