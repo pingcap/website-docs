@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: 'PingCAP Docs',
     description:
-      'Browse documentation about TiDB and its ecosystem, including TiDB Operator, TiDB Data Migration, Database Tools, TiUP, etc.',
+      'Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.',
     author: '@PingCAP',
     siteUrl: 'https://docs.pingcap.com',
   },
