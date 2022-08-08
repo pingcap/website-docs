@@ -1,19 +1,20 @@
-name: Build
+name: Build Preview
 
 on:
   push:
     branches: ['master', 'docs-staging']
     paths-ignore:
       - '.github/**'
+      - '.docs/**'
   workflow_dispatch:
     inputs:
       hash:
         description: 'Docs Staging Hash'
         type: string
-        default: master
+        default: main
         required: true
 
-concurrency: ci-${{ github.ref }}
+concurrency: ci-prev-${{ github.ref }}
 
 jobs:
   build:
@@ -28,12 +29,16 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
-      - name: Install deps
-        run: yarn
-
       - name: Update submodule
+        id: submodule
         run: |
           git submodule update --remote
+          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}')"
+          echo "::set-output name=git_sha::$(git rev-parse HEAD)"
+          echo "::set-output name=build_date::$(date)"
+
+      - name: Install deps
+        run: yarn
 
       - name: Restore gatsby cache
         uses: actions/cache@v3
@@ -55,6 +60,9 @@ jobs:
           CI: true
           GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
           GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
+          BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
+          BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_sha }}
         run: |
           yarn build --verbose
 

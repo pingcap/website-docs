@@ -1,0 +1,79 @@
+name: Build and deploy prod
+
+on:
+  workflow_dispatch:
+    inputs:
+      hash:
+        description: 'Docs Staging Hash'
+        type: string
+        default: main
+        required: true
+
+concurrency: ci-prod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build website
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'prod'
+          submodules: true
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Update submodule
+        id: submodule
+        run: |
+          git submodule update --remote
+          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}')"
+          echo "::set-output name=git_sha::$(git rev-parse HEAD)"
+          echo "::set-output name=build_date::$(date)"
+
+      - name: Install deps
+        run: yarn
+
+      - name: Restore gatsby cache
+        uses: actions/cache@v3
+        id: gatsby-cache
+        with:
+          path: |
+            .cache
+            public
+          key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ inputs.hash }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-cache-docs-staging-
+
+      - name: Print cache key
+        run: |
+          echo ${{ runner.os }}-gatsby-cache-docs-staging-${{ inputs.hash }}
+
+      - name: Build website
+        env:
+          CI: true
+          GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
+          BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
+          BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_sha }}
+        run: |
+          yarn build --verbose
+
+      # - name: Deploy to LA1
+      #   run: |
+      #     rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+
+      # - name: Deploy to LA2
+      #   run: |
+      #     rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+
+      # - name: Deploy to BJ1
+      #   run: |
+      #     rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+
+      # - name: Deploy to BJ2
+      #   run: |
+      #     rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
