@@ -1,6 +1,6 @@
 {
-    "en-tidb-dev": "004464f43f095a2c534ab1054f7213799afdcf14",
-    "en-tidb-v6.1": "3983f47446bec70e10c87f13ed6ba0509aa56dbf",
+    "en-tidb-dev": "4f9cc52e79f360f1a0c9564e6f70a161667f6b11",
+    "en-tidb-v6.1": "f2c2320cd9aa1ff802f7ebc90db1efc0b4174b67",
     "en-tidb-v6.0": "bfb6aaa7ee0d56d1a58e00172f386e667fcd7dbb",
     "en-tidb-v5.4": "c290e818b244917251c1665fff28c9c9215bf665",
     "en-tidb-v5.3": "58716bac15c4f8500e17ac9dbc67aa3ce6485181",
@@ -11,10 +11,10 @@
     "en-tidb-v3.1": "13c4b95b6af67778966b0b84fda6c0c8188db8b8",
     "en-tidb-v3.0": "da20260c439fdafa568cf648446050e27d9e2dc4",
     "en-tidb-v2.1": "ac62ba5f52c51e97790e87abe34979785335d937",
-    "zh-tidb-dev": "feb6fcda97abfb57403e292ae8e13a46588d7d38",
-    "zh-tidb-v6.1": "40c2053144d357288eb0caa663887d455009220c",
+    "zh-tidb-dev": "0019b72b08a9f83f0920532bf1b7f3ad311007ef",
+    "zh-tidb-v6.1": "2f04073456195f4634e5aaf48f5b82457aaa201e",
     "zh-tidb-v6.0": "b6a406257eddc87368306f6aa86b3287d5a387b8",
-    "zh-tidb-v5.4": "6f2b1226b536a35ea25a8e3c46d19eb544f82bcb",
+    "zh-tidb-v5.4": "9aa1d68b1314140d4ef266784ed13790f8c12f66",
     "zh-tidb-v5.3": "5f84a13c035a31e966f6ec2d008609a2fccd9f0e",
     "zh-tidb-v5.2": "7a2b07d95af497a3b8531b9f93193afa5159eb95",
     "zh-tidb-v5.1": "b9501abc52bb0947ac1c9034c8ccc33fbb104067",
@@ -41,7 +41,7 @@
     "zh-tidb-data-migration-v5.3": "d01c483e1b60dda33761af04385ead5ec2c8bbd0",
     "zh-tidb-data-migration-v2.0": "0351707683916f5e902bccf581df4166bcdbe9d5",
     "zh-tidb-data-migration-v1.0": "d99f2ede09dce96b1d735300c2a3ca75d4d10471",
-    "en-tidbcloud": "3983f47446bec70e10c87f13ed6ba0509aa56dbf",
+    "en-tidbcloud": "f2c2320cd9aa1ff802f7ebc90db1efc0b4174b67",
     "en-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74",
     "zh-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74"
 }
