@@ -180,20 +180,15 @@ export default function Doc({
                 {language !== 'ja' && (
                   <Block>
                     <DownloadPDF pathConfig={pathConfig} />
-                    {pathConfig.repo !== 'tidbcloud' && (
-                      <>
-                        <FeedbackDoc
-                          pathConfig={pathConfig}
-                          filePath={filePath}
-                        />
-                        {pathConfig.version === 'dev' && (
-                          <Improve
-                            pathConfig={pathConfig}
-                            filePath={filePath}
-                          />
-                        )}
-                      </>
-                    )}
+                    <>
+                      <FeedbackDoc
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                      />
+                      {pathConfig.version === 'dev' && (
+                        <Improve pathConfig={pathConfig} filePath={filePath} />
+                      )}
+                    </>
                     {pathConfig.locale === 'zh' && <TechFeedback />}
                   </Block>
                 )}
