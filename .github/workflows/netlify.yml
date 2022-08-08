@@ -63,4 +63,4 @@ jobs:
         run: |
           cd website-docs
           npm install netlify-cli -g
-          netlify -d public -s ${{ secrets.NETLIFY_SITE_ID }} -a ${{ secrets.NETLIFY_ACCESS_TOKEN }} --debug
+          netlify deploy -d public -s ${{ secrets.NETLIFY_SITE_ID }} -a ${{ secrets.NETLIFY_ACCESS_TOKEN }} --debug
