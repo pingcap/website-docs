@@ -3,40 +3,20 @@
 </p>
 <h1 align="center">website-docs</h1>
 
-<p align="center">The next generation of PingCAP Docs. Powered by Gatsby ⚛️.</p>
+[Click here to view.](https://docs.pingcap.com/)
 
-[![Incremental Build Triggered By Push Events](https://github.com/PingCAP/website-docs/actions/workflows/update.yml/badge.svg?event=repository_dispatch)](https://github.com/PingCAP/website-docs/actions/workflows/update.yml)
+## Quick Start
 
-## How to develop
+1. Clone this repo;
 
-After clone this repo, run `yarn` to get all deps:
+2. Install dependent:
 
-```sh
-yarn
-```
+- Run `yarn`;
 
-Usually you have to download some docs before dev. We have pre-defined some commands to download the docs and clean docs, these commands are:
+3. Download docs:
 
-```json
-{
-  "scripts": {
-    "download:tidb:en": "pingcap-docs-download dl pingcap/docs",
-    "download:tidb:en:all": "./scripts/download-tidb-en.sh",
-    "download:tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
-    "download:tidb:zh:all": "./scripts/download-tidb-zh.sh",
-    "download:dm": "pingcap-docs-download dl pingcap/docs-dm",
-    "download:dm:all": "./scripts/download-dm.sh",
-    "download:dm:en:all": "./scripts/download-dm-en.sh",
-    "download:dm:zh:all": "./scripts/download-dm-zh.sh",
-    "download:tidb-operator": "pingcap-docs-download dl pingcap/docs-tidb-operator",
-    "download:tidb-operator:all": "./scripts/download-tidb-operator.sh",
-    "download:tidb-operator:en:all": "./scripts/download-tidb-operator-en.sh",
-    "download:tidb-operator:zh:all": "./scripts/download-tidb-operator-zh.sh",
-    "clean:docs": "pingcap-docs-download cl",
-    "sync": "pingcap-docs-download sync"
-  }
-}
-```
+- Run `git submodule init`;
+- Run `git submodule update --depth 1 --remote`;
 
 There are two types of scripts here, one starts with `pingcap-docs-download` and the other starts with `./scripts`.
 
@@ -61,7 +41,7 @@ In order to debug algolia searches, you need to provide two additional environme
 
 Put them in `.env.development` to make them take effect. (Ref: <https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/>)
 
-### GitHub Outh2 token
+## Workflow
 
 Because of most of our text data stored in GitHub. It's needed to apply a GitHub API token in development **when you are prompted for `rate-limiting`**.
 
@@ -176,23 +156,6 @@ Use `<SimpleTab>` to create a tab panel. Do not put any h1 ~ h3 headings inside 
   </div>
 
   <div label="LABEL_SHOW_ON_SECOND_TAB">This is the second content.</div>
-</SimpleTab>
-```
-
-Add `groupId` and `value` props to change multiple tab panels in one click. For example:
-
-```jsx
-<SimpleTab groupId="clinicServer">
-  <div label="Clinic Server in the US" value="clinic-us">
-
-  Data is stored in AWS in US.
-
-  </div>
-  <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
-
-  Data is stored in AWS in China (Beijing) regions.
-
-  </div>
 </SimpleTab>
 ```
 
