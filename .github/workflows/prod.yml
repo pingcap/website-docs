@@ -1,6 +1,11 @@
 name: Build and deploy prod
 
 on:
+  push:
+    branches: ['docs-staging']
+    paths-ignore:
+      - '.github/**'
+      - '.docs/**'
   workflow_dispatch:
     inputs:
       hash:
@@ -8,6 +13,11 @@ on:
         type: string
         default: main
         required: true
+      fallback:
+        description: 'Fallback by hash'
+        type: boolean
+        default: false
+        required: false
 
 concurrency: ci-prod
 
@@ -18,8 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'prod'
-          submodules: true
+          ref: 'master'
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -28,13 +37,27 @@ jobs:
       - name: Update submodule
         id: submodule
         run: |
+          git submodule init
           git submodule update --remote
-          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}')"
+          cd docs
+          git checkout main
+          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
+          echo "::set-output name=submodule_status::$(git submodule status)"
           echo "::set-output name=git_sha::$(git rev-parse HEAD)"
           echo "::set-output name=build_date::$(date)"
 
       - name: Install deps
         run: yarn
+
+      - name: Calc gatsby cache key
+        id: calc-cache-key
+        run: |
+          if ${{ inputs.fallback }}
+          then
+            echo "::set-output name=key::${{ inputs.hash }}"
+          else
+            echo "::set-output name=key::${{ steps.submodule.outputs.submodule_sha }}"
+          fi
 
       - name: Restore gatsby cache
         uses: actions/cache@v3
@@ -43,24 +66,27 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ inputs.hash }}
+          key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}
           restore-keys: |
             ${{ runner.os }}-gatsby-cache-docs-staging-
 
-      - name: Print cache key
-        run: |
-          echo ${{ runner.os }}-gatsby-cache-docs-staging-${{ inputs.hash }}
-
       - name: Build website
+        if: ${{ !inputs.fallback || (steps.gatsby-cache.outputs.cache-hit != 'true') }}
         env:
           CI: true
           GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
           GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
           BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
           BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
-          BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_sha }}
+          BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
         run: |
           yarn build --verbose
+
+      - name: Check output
+        id: check-output
+        run: |
+          sudo apt install tree
+          tree public
 
       # - name: Deploy to LA1
       #   run: |
