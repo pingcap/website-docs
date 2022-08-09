@@ -42,5 +42,10 @@ jobs:
       - name: Git commit and push submodules update
         run: |
           git add .
-          git commit -m "update submodules"
-          git push -f
+          if [[ -z $(git status -s) ]]
+          then
+            git status
+          else
+            git commit -m "update submodules"
+            git push -f
+          fi
