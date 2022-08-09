@@ -52,7 +52,7 @@ jobs:
       - name: Calc gatsby cache key
         id: calc-cache-key
         run: |
-          if ${{ inputs.fallback }}
+          if ${{ !!inputs.fallback }}
           then
             echo "::set-output name=key::${{ inputs.hash }}"
           else

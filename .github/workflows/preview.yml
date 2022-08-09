@@ -47,5 +47,5 @@ jobs:
             git status
           else
             git commit -m "update submodules"
-            git push -f
           fi
+          git push -f
