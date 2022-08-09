@@ -1,4 +1,4 @@
-name: Build and deploy prod
+name: Build and deploy to server
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'master'
+          ref: 'docs-staging'
       - uses: actions/setup-node@v3
         with:
           node-version: 16
