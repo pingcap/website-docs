@@ -2,7 +2,7 @@ name: Build Preview
 
 on:
   push:
-    branches: ['docs-staging', 'preview']
+    branches: ['docs-staging']
     paths-ignore:
       - '.github/**'
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
       - name: Git reset to master branch
         run: |
           git fetch
-          git reset --hard origin/master
+          git reset --hard origin/docs-staging
 
       - name: Update submodule
         id: submodule
