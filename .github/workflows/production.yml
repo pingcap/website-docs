@@ -41,6 +41,7 @@ jobs:
           git submodule update --remote
           cd docs
           git checkout main
+          cd ..
           echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
           echo "::set-output name=submodule_status::$(git submodule status)"
           echo "::set-output name=git_sha::$(git rev-parse HEAD)"
