@@ -179,6 +179,23 @@ Use `<SimpleTab>` to create a tab panel. Do not put any h1 ~ h3 headings inside 
 </SimpleTab>
 ```
 
+Add `groupId` and `value` props to change multiple tab panels in one click. For example:
+
+```jsx
+<SimpleTab groupId="clinicServer">
+  <div label="Clinic Server in the US" value="clinic-us">
+
+  Data is stored in AWS in US.
+
+  </div>
+  <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+
+  Data is stored in AWS in China (Beijing) regions.
+
+  </div>
+</SimpleTab>
+```
+
 ## Landing page for TiDB
 
 Edit file `_index.md` in each doc repo to custom its landing page.
