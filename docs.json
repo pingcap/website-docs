@@ -39,10 +39,20 @@
         },
         "ja": {
           "repo": "pingcap/docs",
-          "versions": ["release-6.1", "release-5.4"]
+          "versions": ["release-6.1"]
         }
       },
-      "deprecated": ["v2.1", "v3.0", "v3.1", "v4.0", "v5.0", "v5.1", "v5.2", "v5.3", "v5.4"],
+      "deprecated": [
+        "v2.1",
+        "v3.0",
+        "v3.1",
+        "v4.0",
+        "v5.0",
+        "v5.1",
+        "v5.2",
+        "v5.3",
+        "v5.4"
+      ],
       "dmr": ["v6.0"]
     },
     "tidb-data-migration": {
