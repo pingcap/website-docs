@@ -109,6 +109,17 @@
           "repo": "pingcap/docs",
           "versions": ["master"]
         }
+      },
+      "openAPI": {
+        "path": "api",
+        "data": [
+          {
+            "id": "v1beta",
+            "pathname": "v1beta",
+            "production": "https://download.pingcap.org/tidbcloud-oas.json",
+            "preview": "https://download.pingcap.org/tidbcloud-oas-preview.json"
+          }
+        ]
       }
     }
   },

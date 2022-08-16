@@ -24,8 +24,21 @@ function loadLink(href: string) {
   document.head.appendChild(link)
 }
 
-export default function APIReferenceTemplate() {
-  const specUrl = `https://download.pingcap.org/tidbcloud-oas.json`
+interface APIReferenceTemplateProps {
+  pageContext: {
+    id: string
+    pathname: string
+    production: string
+    preview: string
+  }
+  data?: { [key: string]: any }
+}
+
+export default function APIReferenceTemplate({
+  pageContext: { production, preview },
+  data,
+}: APIReferenceTemplateProps) {
+  const specUrl = process.env.NODE_ENV === 'production' ? production : preview
 
   useEffect(() => {
     async function setupRedoc() {
