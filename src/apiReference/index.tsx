@@ -30,15 +30,16 @@ interface APIReferenceTemplateProps {
     pathname: string
     production: string
     preview: string
+    isProduction: boolean
   }
   data?: { [key: string]: any }
 }
 
 export default function APIReferenceTemplate({
-  pageContext: { production, preview },
+  pageContext: { production, preview, isProduction },
   data,
 }: APIReferenceTemplateProps) {
-  const specUrl = process.env.NODE_ENV === 'production' ? production : preview
+  const specUrl = isProduction ? production : preview
 
   useEffect(() => {
     async function setupRedoc() {

@@ -125,11 +125,13 @@ export const createCloudAPIReference = async ({
   const pageList = pageCfg.data
   pageList.forEach(page => {
     const path = `/tidbcloud/${pageCfg.path}/${page.pathname}`
+    const isProduction = process.env.CI === 'true'
     createPage({
       path,
       component: template,
       context: {
         ...page,
+        isProduction,
       },
     })
   })
