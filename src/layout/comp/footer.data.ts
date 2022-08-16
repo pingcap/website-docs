@@ -31,6 +31,10 @@ export const en = [
         name: 'Community',
         url: 'https://en.pingcap.com/community',
       },
+      {
+        name: 'Pricing',
+        url: 'https://en.pingcap.com/tidb-cloud-pricing',
+      },
     ],
   },
   {
@@ -205,6 +209,10 @@ export const ja = [
       {
         name: '導入実績',
         url: 'https://pingcap.co.jp/usecase/',
+      },
+      {
+        name: '価格',
+        url: 'https://pingcap.co.jp/tidb-cloud/',
       },
     ],
   },
