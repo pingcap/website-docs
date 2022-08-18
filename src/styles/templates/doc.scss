@@ -1,205 +1,205 @@
-@import '../common';
+// @import '../common';
 
-@import 'highlight.js/styles/github.css';
-@import 'katex/dist/katex.min.css';
+// @import 'highlight.js/styles/github.css';
+// @import 'katex/dist/katex.min.css';
 
-$top: $navbar-height + 1rem;
+// $top: $navbar-height + 1rem;
 
-.PingCAP-Doc {
-  .left-aside,
-  .right-aside {
-    position: sticky;
-    top: $top;
-    height: 100%;
-    max-height: calc(100vh - #{$top});
-    padding-right: 1rem;
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-  }
+// .PingCAP-Doc {
+//   .left-aside,
+//   .right-aside {
+//     position: sticky;
+//     top: $top;
+//     height: 100%;
+//     max-height: calc(100vh - #{$top});
+//     padding-right: 1rem;
+//     overflow-y: auto;
+//     scrollbar-gutter: stable;
+//   }
 
-  // Custom markdown body
-  .doc-content {
-    line-height: 1.75;
+//   // Custom markdown body
+//   .doc-content {
+//     line-height: 1.75;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      scroll-margin-top: $navbar-height;
-    }
+//     h1,
+//     h2,
+//     h3,
+//     h4,
+//     h5,
+//     h6 {
+//       scroll-margin-top: $navbar-height;
+//     }
 
-    a {
-      color: rgba($highlight, 0.9);
+//     a {
+//       color: rgba($highlight, 0.9);
 
-      &:hover {
-        color: $highlight;
-      }
+//       &:hover {
+//         color: $highlight;
+//       }
 
-      &.anchor.before {
-        left: 1rem;
-      }
-    }
+//       &.anchor.before {
+//         left: 1rem;
+//       }
+//     }
 
-    ul {
-      list-style: initial;
-    }
+//     ul {
+//       list-style: initial;
+//     }
 
-    table {
-      th,
-      td {
-        text-align: left;
+//     table {
+//       th,
+//       td {
+//         text-align: left;
 
-        code[class*='language-text'] {
-          white-space: normal;
-          word-break: initial;
-        }
-      }
-    }
+//         code[class*='language-text'] {
+//           white-space: normal;
+//           word-break: initial;
+//         }
+//       }
+//     }
 
-    img {
-      display: block;
-      margin: auto;
-    }
+//     img {
+//       display: block;
+//       margin: auto;
+//     }
 
-    pre {
-      background-color: $M2;
-      position: relative;
-      overflow-x: hidden;
+//     pre {
+//       background-color: $M2;
+//       position: relative;
+//       overflow-x: hidden;
 
-      code {
-        .number {
-          align-items: normal;
-          background-color: transparent;
-          border-radius: 290486px;
-          display: inline-flex;
-          font-size: 14px;
-          height: 0;
-          justify-content: center;
-          margin-right: 0;
-          min-width: 0;
-          padding: 0;
-          text-align: center;
-          vertical-align: top;
-        }
-      }
-    }
+//       code {
+//         .number {
+//           align-items: normal;
+//           background-color: transparent;
+//           border-radius: 290486px;
+//           display: inline-flex;
+//           font-size: 14px;
+//           height: 0;
+//           justify-content: center;
+//           margin-right: 0;
+//           min-width: 0;
+//           padding: 0;
+//           text-align: center;
+//           vertical-align: top;
+//         }
+//       }
+//     }
 
-    :not(pre) > code[class*='language-text'] {
-      white-space: normal;
-      word-break: break-word;
-      color: #657b83;
-    }
+//     :not(pre) > code[class*='language-text'] {
+//       white-space: normal;
+//       word-break: break-word;
+//       color: #657b83;
+//     }
 
-    :not(pre) > code {
-      color: unset;
-    }
+//     :not(pre) > code {
+//       color: unset;
+//     }
 
-    a code {
-      color: $highlight;
-    }
+//     a code {
+//       color: $highlight;
+//     }
 
-    .version-mark {
-      position: relative;
-      padding: 0 7px 0 25px;
-      font-style: italic;
-      font-size: 16px;
-      color: $B4;
-    }
+//     .version-mark {
+//       position: relative;
+//       padding: 0 7px 0 25px;
+//       font-style: italic;
+//       font-size: 16px;
+//       color: $B4;
+//     }
 
-    .version-mark::before {
-      content: '';
-      position: absolute;
-      left: 2px;
-      top: 50%;
-      width: 20px;
-      height: 20px;
-      transform: translateY(-50%);
-      background-image: url(../../../images/version-mark.png);
-      background-size: 20px;
-    }
-  }
+//     .version-mark::before {
+//       content: '';
+//       position: absolute;
+//       left: 2px;
+//       top: 50%;
+//       width: 20px;
+//       height: 20px;
+//       transform: translateY(-50%);
+//       background-image: url(../../../images/version-mark.png);
+//       background-size: 20px;
+//     }
+//   }
 
-  .right-aside {
-    font-size: $size-7;
-    margin-left: 0.75rem;
+//   .right-aside {
+//     font-size: $size-7;
+//     margin-left: 0.75rem;
 
-    @include mobile {
-      display: none;
-    }
-  }
+//     @include mobile {
+//       display: none;
+//     }
+//   }
 
-  .doc-toc {
-    word-break: break-word;
+//   .doc-toc {
+//     word-break: break-word;
 
-    .title {
-      color: $primary;
-    }
+//     .title {
+//       color: $primary;
+//     }
 
-    ul {
-      li {
-        padding-top: 0.5rem;
+//     ul {
+//       li {
+//         padding-top: 0.5rem;
 
-        ul {
-          padding-left: 1rem;
-        }
-      }
-    }
-  }
+//         ul {
+//           padding-left: 1rem;
+//         }
+//       }
+//     }
+//   }
 
-  .doc-help-link {
-    position: relative;
-    display: block;
-    margin-left: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: $primary;
+//   .doc-help-link {
+//     position: relative;
+//     display: block;
+//     margin-left: 1.5rem;
+//     margin-bottom: 0.5rem;
+//     color: $primary;
 
-    &:hover {
-      color: $highlight;
-    }
+//     &:hover {
+//       color: $highlight;
+//     }
 
-    $icons: download-pdf improve feedback feedback-tech;
-    @each $icon in $icons {
-      &.#{$icon} {
-        &:before {
-          content: '';
-          position: absolute;
-          top: 3px;
-          left: -24px;
-          width: 16px;
-          height: 16px;
-          background-image: url(images/doc/#{$icon}.svg);
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
+//     $icons: download-pdf improve feedback feedback-tech;
+//     @each $icon in $icons {
+//       &.#{$icon} {
+//         &:before {
+//           content: '';
+//           position: absolute;
+//           top: 3px;
+//           left: -24px;
+//           width: 16px;
+//           height: 16px;
+//           background-image: url(images/doc/#{$icon}.svg);
+//           background-size: contain;
+//           background-repeat: no-repeat;
+//         }
 
-        &:hover {
-          &:before {
-            background-image: url(images/doc/#{$icon}-hl.svg);
-          }
-        }
-      }
-    }
-  }
+//         &:hover {
+//           &:before {
+//             background-image: url(images/doc/#{$icon}-hl.svg);
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  .doc-blockquote {
-    $border-width: 5;
-    position: relative;
+//   .doc-blockquote {
+//     $border-width: 5;
+//     position: relative;
 
-    margin: 1rem 0;
-    padding: 1rem;
+//     margin: 1rem 0;
+//     padding: 1rem;
 
-    p:first-child > strong:first-child {
-      padding-left: 2rem;
-    }
+//     p:first-child > strong:first-child {
+//       padding-left: 2rem;
+//     }
 
-    &:before {
-      content: '';
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      left: 1rem;
-    }
-  }
-}
+//     &:before {
+//       content: '';
+//       position: absolute;
+//       width: 30px;
+//       height: 30px;
+//       left: 1rem;
+//     }
+//   }
+// }

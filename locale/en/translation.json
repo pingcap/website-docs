@@ -11,6 +11,7 @@
     "cannotswitchtocloudJa": "TiDB Cloud Japanese documentation is not available at this time"
   },
   "navbar": {
+    "home": "Home",
     "tidb": "TiDB",
     "tools": "Tools",
     "cloud": "TiDB Cloud",

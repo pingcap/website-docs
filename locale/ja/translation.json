@@ -12,6 +12,7 @@
     "machineTransNotice": "このページは英語版のページを機械翻訳しています。原文は<0>こちら</0>からご覧ください。"
   },
   "navbar": {
+    "home": "Home",
     "tidb": "TiDB",
     "tools": "ツール",
     "cloud": "TiDB Cloud",

@@ -1,74 +1,74 @@
-@import 'styles/common';
+// @import 'styles/common';
 
-.footer {
-  background: $M2;
-}
+// .footer {
+//   background: $M2;
+// }
 
-.title {
-  @include mobile {
-    margin-bottom: 0;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid $divider-color;
-  }
-}
+// .title {
+//   @include mobile {
+//     margin-bottom: 0;
+//     padding-bottom: 1rem;
+//     border-bottom: 1px solid $divider-color;
+//   }
+// }
 
-.spread {
-  @include mobile {
-    @include VHCenter;
-  }
+// .spread {
+//   @include mobile {
+//     @include VHCenter;
+//   }
 
-  display: none;
-  width: 16px;
-  height: 16px;
-  color: $primary;
-  float: right;
-  transform-origin: center;
-  transition: transform 0.25s;
+//   display: none;
+//   width: 16px;
+//   height: 16px;
+//   color: $primary;
+//   float: right;
+//   transform-origin: center;
+//   transition: transform 0.25s;
 
-  &.clicked {
-    transform: rotate(45deg);
-  }
-}
+//   &.clicked {
+//     transform: rotate(45deg);
+//   }
+// }
 
-.items {
-  transition: 0.25s;
-  overflow: hidden;
+// .items {
+//   transition: 0.25s;
+//   overflow: hidden;
 
-  @include mobile {
-    max-height: 0;
+//   @include mobile {
+//     max-height: 0;
 
-    &.displayed {
-      max-height: 500px;
-    }
-  }
+//     &.displayed {
+//       max-height: 500px;
+//     }
+//   }
 
-  li {
-    margin: 1rem 0;
-  }
-}
+//   li {
+//     margin: 1rem 0;
+//   }
+// }
 
-.socials {
-  display: grid;
-  justify-content: end;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: end;
-  grid-row-gap: 16px;
+// .socials {
+//   display: grid;
+//   justify-content: end;
+//   grid-template-columns: repeat(3, 1fr);
+//   justify-items: end;
+//   grid-row-gap: 16px;
 
-  @include mobile {
-    justify-items: start;
-  }
-}
+//   @include mobile {
+//     justify-items: start;
+//   }
+// }
 
-.annotations {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+// .annotations {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
 
-.copyright {
-  @include VHCenter;
-}
+// .copyright {
+//   @include VHCenter;
+// }
 
-.logo {
-  width: 150px;
-}
+// .logo {
+//   width: 150px;
+// }

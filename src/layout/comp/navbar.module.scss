@@ -1,78 +1,78 @@
-@import 'styles/common';
+// @import 'styles/common';
 
-.has-border {
-  border-bottom: 1px solid $divider-color;
-}
+// .has-border {
+//   border-bottom: 1px solid $divider-color;
+// }
 
-.logo {
-  height: 30px;
-}
+// .logo {
+//   height: 30px;
+// }
 
-.main {
-  @include has-item-active(1.5rem);
-  @include mobile {
-    border-bottom: 1px solid $divider-color;
-  }
-}
+// .main {
+//   @include has-item-active(1.5rem);
+//   @include mobile {
+//     border-bottom: 1px solid $divider-color;
+//   }
+// }
 
-.lang-switch {
-  &:after {
-    border-color: $primary;
-  }
+// .lang-switch {
+//   &:after {
+//     border-color: $primary;
+//   }
 
-  &:hover {
-    &:after {
-      border-color: $highlight;
-    }
-  }
-}
+//   &:hover {
+//     &:after {
+//       border-color: $highlight;
+//     }
+//   }
+// }
 
-.lang-item:hover {
-  color: $highlight !important;
-}
+// .lang-item:hover {
+//   color: $highlight !important;
+// }
 
-.disabled {
-  color: $grey-light;
-  pointer-events: none;
-}
+// .disabled {
+//   color: $grey-light;
+//   pointer-events: none;
+// }
 
-.navbar-burger {
-  color: $primary;
-}
+// .navbar-burger {
+//   color: $primary;
+// }
 
-// TODO: remove this after we remove bulma
-progress.progress {
-  display: none;
-  position: fixed;
-  top: $navbar-height;
-  height: 1px;
-  background: transparent;
-  border-radius: 0;
+// // TODO: remove this after we remove bulma
+// progress.progress {
+//   display: none;
+//   position: fixed;
+//   top: $navbar-height;
+//   height: 1px;
+//   background: transparent;
+//   border-radius: 0;
 
-  &:-webkit-progress-bar {
-    background: transparent;
-  }
-}
+//   &:-webkit-progress-bar {
+//     background: transparent;
+//   }
+// }
 
-progress.show {
-  display: block;
-}
+// progress.show {
+//   display: block;
+// }
 
-a.tryTidbCloudBtn {
-  background-color: #3d3fea;
-  color: #fff;
-  border-color: transparent;
+// a.tryTidbCloudBtn {
+//   background-color: #3d3fea;
+//   color: #fff;
+//   border-color: transparent;
 
-  &:hover,
-  &:active,
-  &:focus {
-    color: #fff;
-    border-color: transparent;
-  }
-}
+//   &:hover,
+//   &:active,
+//   &:focus {
+//     color: #fff;
+//     border-color: transparent;
+//   }
+// }
 
-.NavContainer {
-  .hidden {
-    display: none;
-  }
-}
+// .NavContainer {
+//   .hidden {
+//     display: none;
+//   }
+// }

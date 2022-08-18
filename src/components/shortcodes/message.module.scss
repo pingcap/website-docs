@@ -1,59 +1,59 @@
-@import '../../styles/common';
+// @import '../../styles/common';
 
-$border-width: 5;
+// $border-width: 5;
 
-.message {
-  margin: 1rem 0;
-  padding: 1rem;
-  color: $text-color;
-}
+// .message {
+//   margin: 1rem 0;
+//   padding: 1rem;
+//   color: $text-color;
+// }
 
-.note {
-  background: rgba($color: $B2, $alpha: 0.1);
-  border-left: #{$border-width}px solid $B2;
-  svg {
-    color: #10a6fa;
-  }
-}
+// .note {
+//   background: rgba($color: $B2, $alpha: 0.1);
+//   border-left: #{$border-width}px solid $B2;
+//   svg {
+//     color: #10a6fa;
+//   }
+// }
 
-.tip {
-  background: rgba($color: $T1, $alpha: 0.1);
-  border-left: #{$border-width}px solid $success;
-  svg {
-    color: #a9d359;
-  }
-}
+// .tip {
+//   background: rgba($color: $T1, $alpha: 0.1);
+//   border-left: #{$border-width}px solid $success;
+//   svg {
+//     color: #a9d359;
+//   }
+// }
 
-.warning {
-  background: rgba($color: $T6, $alpha: 0.1);
-  border-left: #{$border-width}px solid $danger;
-  svg {
-    color: #ff4f5e;
-  }
-}
+// .warning {
+//   background: rgba($color: $T6, $alpha: 0.1);
+//   border-left: #{$border-width}px solid $danger;
+//   svg {
+//     color: #ff4f5e;
+//   }
+// }
 
-.important {
-  background: rgba($color: $highlight, $alpha: 0.1);
-  border-left: #{$border-width}px solid $highlight;
-}
+// .important {
+//   background: rgba($color: $highlight, $alpha: 0.1);
+//   border-left: #{$border-width}px solid $highlight;
+// }
 
-.message-title {
-  line-height: 1.75rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
+// .message-title {
+//   line-height: 1.75rem;
+//   margin-bottom: 0.5rem;
+//   font-weight: bold;
+// }
 
-.message-body :last-child{
-  margin-bottom: 0;
-}
+// .message-body :last-child{
+//   margin-bottom: 0;
+// }
 
-.message-icon {
-  margin-right: 0.5rem;
-  line-height: 100%;
-  vertical-align: middle;
-  svg {
-    height: 1.25rem;
-    width: 1.25rem;
-    vertical-align: -0.125rem;
-  }
-}
+// .message-icon {
+//   margin-right: 0.5rem;
+//   line-height: 100%;
+//   vertical-align: middle;
+//   svg {
+//     height: 1.25rem;
+//     width: 1.25rem;
+//     vertical-align: -0.125rem;
+//   }
+// }

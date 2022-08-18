@@ -1,43 +1,43 @@
-@import '../styles/common';
+// @import '../styles/common';
 
-.container {
-  display: flex;
-  gap: 2rem;
-  justify-content: space-around;
-  align-items: center;
+// .container {
+//   display: flex;
+//   gap: 2rem;
+//   justify-content: space-around;
+//   align-items: center;
 
-  @include mobile {
-    flex-direction: column;
-  }
-}
+//   @include mobile {
+//     flex-direction: column;
+//   }
+// }
 
-.left {
-  flex: 1 1;
+// .left {
+//   flex: 1 1;
 
-  .title {
-    border-bottom: 0;
-  }
+//   .title {
+//     border-bottom: 0;
+//   }
 
-  .optionsContainer {
-    list-style: inherit;
-  }
-}
+//   .optionsContainer {
+//     list-style: inherit;
+//   }
+// }
 
-.right {
-  flex: 1 1;
+// .right {
+//   flex: 1 1;
 
-  background-image: url(../styles/images/404.svg);
-  background-repeat: no-repeat;
-  background-position: right;
+//   background-image: url(../styles/images/404.svg);
+//   background-repeat: no-repeat;
+//   background-position: right;
 
-  width: 33.5rem;
-  height: 17.5rem;
+//   width: 33.5rem;
+//   height: 17.5rem;
 
-  @include mobile {
-    display: none;
-  }
-}
+//   @include mobile {
+//     display: none;
+//   }
+// }
 
-.searchInput {
-  max-width: 20rem;
-}
+// .searchInput {
+//   max-width: 20rem;
+// }

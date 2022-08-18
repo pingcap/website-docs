@@ -1,22 +1,22 @@
-import { Container, Section } from '@seagreenio/react-bulma'
-import { PropsWithChildren, useEffect } from 'react'
+import { Container, Section } from "@seagreenio/react-bulma";
+import { PropsWithChildren, useEffect } from "react";
 
-import { Footer } from './comp/Footer'
-import { Navbar } from 'layout/comp/Navbar'
-import { globalHistory } from '@reach/router'
-import { navigate } from 'gatsby'
-import 'styles/global.scss'
-import { Locale } from 'typing'
+import { Footer } from "./comp/Footer";
+import { Navbar } from "layout/comp/Navbar";
+import { globalHistory } from "@reach/router";
+import { navigate } from "gatsby";
+// import 'styles/global.scss'
+import { Locale } from "typing";
 
 declare global {
   interface Window {
-    DOCS_PINGCAP: any
+    DOCS_PINGCAP: any;
   }
 }
 
 interface Props {
-  locale?: Locale[]
-  is404?: Boolean
+  locale?: Locale[];
+  is404?: Boolean;
 }
 
 export function Layout({
@@ -29,9 +29,9 @@ export function Layout({
       window.DOCS_PINGCAP = {
         globalHistory,
         navigate,
-      }
+      };
     }
-  }, [])
+  }, []);
 
   return (
     <>
@@ -41,5 +41,5 @@ export function Layout({
       </Section>
       <Footer />
     </>
-  )
+  );
 }
