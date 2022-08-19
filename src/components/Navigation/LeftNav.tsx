@@ -227,7 +227,7 @@ export default function ControlledTreeView(props: {
           position: "sticky",
           top: "6rem",
           height: "100%",
-          maxHeight: "calc(100vh - 6rem)",
+          maxHeight: "calc(100vh - 8rem)",
           overflowY: "auto",
           padding: "1rem",
         }}
