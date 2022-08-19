@@ -4,7 +4,8 @@ import { graphql, Link } from "gatsby";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import "styles/global.css";
+// import "styles/global.css";
+import "styles/docTemplate.css";
 
 import Layout from "components/Layout";
 import LeftNav from "components/Navigation/LeftNav";
@@ -30,7 +31,7 @@ export default function DocTemplate({
               component="main"
               sx={{ width: "100%", maxWidth: "calc(100% - 18.75rem)" }}
             >
-              <MDXContent />
+              <MDXContent data={body} />
             </Box>
           </Box>
         </Box>

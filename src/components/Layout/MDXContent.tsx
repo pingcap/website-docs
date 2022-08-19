@@ -8,105 +8,14 @@ import Box from "@mui/material/Box";
 
 import * as Shortcodes from "components/shortcodes";
 
-export default function MDXContent(props: any) {
+export default function MDXContent(props: { data: any }) {
+  const { data } = props;
   return (
     <>
-      <Box>
-        {/* <MDXProvider components={{ ...Shortcodes, Link }}>
-                  <MDXRenderer>{body}</MDXRenderer>
-                </MDXProvider> */}
-        {`About TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDBAbout TiDB`}
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
-        <div>{`About TiDB`}</div>
+      <Box className="markdown-body">
+        <MDXProvider components={{ ...Shortcodes, Link }}>
+          <MDXRenderer>{data}</MDXRenderer>
+        </MDXProvider>
       </Box>
     </>
   );
