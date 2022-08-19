@@ -35,6 +35,7 @@ export interface RepoNavLink {
   content: ({ code: boolean; value: string } | string)[]
   link?: string
   children?: RepoNavLink[]
+  id: string
 }
 
 export type RepoNav = RepoNavLink[]

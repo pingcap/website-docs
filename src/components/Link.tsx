@@ -5,9 +5,10 @@ import Typography from "@mui/material/Typography";
 
 export default function LinkComponent(props: {
   to: string;
+  style?: { [key: string]: any };
   [key: string]: any;
 }) {
-  const { to, ...rest } = props;
+  const { to, style, ...rest } = props;
   const isExternal = props.to.startsWith("http");
   if (isExternal) {
     return (
@@ -15,10 +16,16 @@ export default function LinkComponent(props: {
         component="a"
         target="_blank"
         href={to}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", ...style }}
         {...rest}
       />
     );
   }
-  return <Link to={props.to} style={{ textDecoration: "none" }} {...rest} />;
+  return (
+    <Link
+      to={props.to}
+      style={{ textDecoration: "none", ...style }}
+      {...rest}
+    />
+  );
 }

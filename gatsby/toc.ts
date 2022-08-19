@@ -3,8 +3,8 @@ import { ListItem, List, Link, Paragraph, Text } from 'mdast'
 import { RepoNav, RepoNavLink, PathConfig } from '../src/typing'
 import { generateUrl } from './path'
 
-export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoNav {
-  return ast.map(node => {
+export function mdxAstToToc(ast: ListItem[], config: PathConfig, prefixId = `0`): RepoNav {
+  return ast.map((node, idx) => {
     const content = node.children as [Paragraph, List | undefined]
     if (content.length > 0 && content.length <= 2) {
       const ret = getContentFromLink(content[0], config)
@@ -15,8 +15,10 @@ export function mdxAstToToc(ast: ListItem[], config: PathConfig): RepoNav {
           throw new Error(`incorrect listitem in TOC.md`)
         }
 
-        ret.children = mdxAstToToc(list.children, config)
+        ret.children = mdxAstToToc(list.children, config, `${prefixId}-${idx}`)
       }
+
+      ret.id = `${prefixId}-${idx}`
 
       return ret
     }

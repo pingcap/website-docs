@@ -28,6 +28,10 @@ declare module "@mui/material/styles" {
       k1: string;
       k2: string;
       k3: string;
+      f1: string;
+      f2: string;
+      f3: string;
+      f4: string;
     };
   }
   interface PaletteOptions {
@@ -40,6 +44,10 @@ declare module "@mui/material/styles" {
       k1?: string;
       k2?: string;
       k3?: string;
+      f1?: string;
+      f2?: string;
+      f3?: string;
+      f4?: string;
     };
   }
 }
@@ -61,6 +69,10 @@ const theme = createTheme({
       k1: "#0ca6f2",
       k2: "#172d72",
       k3: "#3a40e1",
+      f1: "#282a36",
+      f2: "#666666",
+      f3: "#999999",
+      f4: "#cccccc",
     },
   },
   typography: {
@@ -78,7 +90,7 @@ const theme = createTheme({
       fontStyle: "normal",
       fontFamily: '"Poppins"',
       lineHeight: "3.75rem",
-      color: "#282a36",
+      color: "#666666",
     },
     h2: {
       fontSize: "2rem",
@@ -86,7 +98,7 @@ const theme = createTheme({
       fontStyle: "normal",
       fontFamily: '"Poppins"',
       lineHeight: "3rem",
-      color: "#282a36",
+      color: "#666666",
     },
     h3: {
       fontSize: "1.75rem",
@@ -94,7 +106,7 @@ const theme = createTheme({
       fontStyle: "normal",
       fontFamily: '"Poppins"',
       lineHeight: "2.625rem",
-      color: "#282a36",
+      color: "#666666",
     },
     h4: {
       fontSize: "1.25rem",
@@ -102,7 +114,7 @@ const theme = createTheme({
       fontStyle: "normal",
       fontFamily: '"Poppins"',
       lineHeight: "1.875rem",
-      color: "#282a36",
+      color: "#666666",
     },
     h5: {
       fontSize: "1.125rem",
@@ -110,7 +122,7 @@ const theme = createTheme({
       fontStyle: "normal",
       fontFamily: '"Poppins"',
       lineHeight: "1.6875rem",
-      color: "#282a36",
+      color: "#666666",
     },
     h6: {
       fontSize: "0.875rem",
@@ -118,7 +130,7 @@ const theme = createTheme({
       fontStyle: "normal",
       fontFamily: '"Poppins"',
       lineHeight: "1.5rem",
-      color: "#282a36",
+      color: "#666666",
     },
     body1: {
       fontSize: "1rem",
@@ -126,7 +138,7 @@ const theme = createTheme({
       fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
-      color: "#282a36",
+      color: "#666666",
     },
     body2: {
       fontSize: "0.875rem",
@@ -134,7 +146,7 @@ const theme = createTheme({
       fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
-      color: "#282a36",
+      color: "#666666",
     },
   },
 });

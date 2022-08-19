@@ -19,7 +19,7 @@ import {
 export default function Footer() {
   return (
     <>
-      <Box sx={{ bgcolor: "#20222B", padding: "3.5rem 0" }}>
+      <Box sx={{ bgcolor: "#20222B", padding: "3.5rem 0" }} component="footer">
         <Container maxWidth="lg">
           <FooterBlock />
           <Typography

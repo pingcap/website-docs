@@ -166,3 +166,15 @@ export function AskTugIcon(props: SvgIconProps) {
     </SvgIcon>
   );
 }
+
+// export function ChevronRightIcon(props: SvgIconProps) {
+//   return (
+//     <SvgIcon viewBox="0 0 5 7" style={{ fill: "none" }} {...props}>
+//       <path
+//         d="M0.5 6.5L3.5 3.5L0.5 0.5"
+//         stroke="#0CA6F2"
+//         stroke-linecap="round"
+//       />
+//     </SvgIcon>
+//   );
+// }
