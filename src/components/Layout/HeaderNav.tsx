@@ -18,10 +18,13 @@ export default function HeaderNavStack() {
       setSelectedItem("home");
     } else if (pathname.includes("/tidb/")) {
       setSelectedItem("tidb");
-    } else if (pathname.includes("/tidbcloud/")) {
+    } else if (
+      pathname.includes("/tidbcloud/") ||
+      pathname.endsWith("/tidbcloud")
+    ) {
       setSelectedItem("tidbcloud");
     }
-  }, [window.location.pathname, language]);
+  }, [language]);
 
   return (
     <Stack
