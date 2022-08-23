@@ -75,6 +75,10 @@ export const createDocs = async ({
   nodes.forEach(node => {
     const { id, name, pathConfig, filePath } = node
 
+    if (name.startsWith('_')) {
+      return
+    }
+
     const path = generateUrl(name, pathConfig)
     const navUrl = generateNav(pathConfig)
 
