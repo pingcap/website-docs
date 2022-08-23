@@ -25,10 +25,7 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
     ? `/${pathConfig.repo}/stable/${name === '_index' ? '' : name}`
     : `/${pathConfig.repo}/stable`
 
-  const dmrDesc =
-    pathConfig.locale === 'zh'
-      ? `/tidb/v6.0/versioning`
-      : `/tidb/v6.0/versioning`
+  const dmrDesc = `/tidb/${pathConfig.version}/versioning`
 
   if (isDeprecated) {
     return (
