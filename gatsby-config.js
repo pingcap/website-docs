@@ -8,8 +8,7 @@ module.exports = {
     description:
       'Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.',
     author: '@PingCAP',
-    siteUrl:
-      'https://website-docs-legacy-git-doc-release-62-pingcap.vercel.app',
+    siteUrl: 'https://docs.pingcap.com',
   },
   jsxRuntime: 'automatic',
   plugins: [
