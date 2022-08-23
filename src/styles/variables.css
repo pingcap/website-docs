@@ -13,6 +13,11 @@ $--color--t2: "#e65c5c";
 $--color--t3: "#f2b600";
 $--color--t4: "e6742e";
 
+$--color--f1: "#282a36";
+$--color--f2: "#666666";
+$--color--f3: "#999999";
+$--color--f4: "cccccc";
+
 $--color--success: $--color--t1;
 $--color--error: $--color--t2;
 $--color--warning: $--color--t3;

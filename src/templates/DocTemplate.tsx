@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 
 // import "styles/global.css";
 import "styles/docTemplate.css";
@@ -10,6 +11,8 @@ import "styles/docTemplate.css";
 import Layout from "components/Layout";
 import LeftNav from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
+import RightNav from "components/Navigation/RightNav";
+import { TableOfContent } from "static/Type";
 
 export default function DocTemplate({
   pageContext: { name, availIn, pathConfig, filePath, pageUrl },
@@ -21,6 +24,13 @@ export default function DocTemplate({
     navigation: { navigation },
   } = data;
 
+  const tocData: TableOfContent | undefined = React.useMemo(() => {
+    if (tableOfContents.items?.length === 1) {
+      return tableOfContents.items![0].items;
+    }
+    return tableOfContents.items || [];
+  }, [tableOfContents.items]);
+
   return (
     <>
       <Layout>
@@ -31,7 +41,16 @@ export default function DocTemplate({
               component="main"
               sx={{ width: "100%", maxWidth: "calc(100% - 18.75rem)" }}
             >
-              <MDXContent data={body} />
+              <Container>
+                <Grid2 container>
+                  <Grid2 sm={12} md={9}>
+                    <MDXContent data={body} />
+                  </Grid2>
+                  <Grid2 sm={0} md={3}>
+                    <RightNav toc={tocData} />
+                  </Grid2>
+                </Grid2>
+              </Container>
             </Box>
           </Box>
         </Box>

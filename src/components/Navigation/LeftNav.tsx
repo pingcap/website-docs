@@ -98,37 +98,39 @@ function StyledTreeItem(props: StyledTreeItemProps) {
   );
 }
 
+const calcExpandedIds = (data: DocLeftNavItem[], targetLink: string) => {
+  const ids: string[] = [];
+  const treeForeach = (
+    data: DocLeftNavItem[],
+    parents: string[] = []
+  ): void => {
+    data.forEach((item) => {
+      if (item.link === targetLink) {
+        ids.push(...parents);
+        ids.push(item.id);
+        return;
+      }
+      if (item.children) {
+        treeForeach(item.children, [...parents, item.id]);
+      }
+    });
+  };
+  treeForeach(data, []);
+  return ids;
+};
+
 export default function ControlledTreeView(props: {
   data: DocLeftNav;
   current: string;
 }) {
   const { data, current: currentUrl } = props;
 
-  const [expanded, setExpanded] = React.useState<string[]>([]);
+  const [expanded, setExpanded] = React.useState<string[]>(() => {
+    return calcExpandedIds(data, currentUrl);
+  });
   const [selected, setSelected] = React.useState<string[]>([]);
 
   const theme = useTheme();
-
-  const calcExpandedIds = (data: DocLeftNavItem[], targetLink: string) => {
-    const ids: string[] = [];
-    const treeForeach = (
-      data: DocLeftNavItem[],
-      parents: string[] = []
-    ): void => {
-      data.forEach((item) => {
-        if (item.link === targetLink) {
-          ids.push(...parents);
-          ids.push(item.id);
-          return;
-        }
-        if (item.children) {
-          treeForeach(item.children, [...parents, item.id]);
-        }
-      });
-    };
-    treeForeach(data, []);
-    return ids;
-  };
 
   React.useEffect(() => {
     console.log("currentUrl", currentUrl);

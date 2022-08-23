@@ -11,3 +11,9 @@ export interface DocLeftNavItem {
 }
 
 export type DocLeftNav = DocLeftNavItem[];
+
+export interface TableOfContent {
+  title: string;
+  url: string;
+  items?: TableOfContent[];
+}
