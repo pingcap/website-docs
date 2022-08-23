@@ -10,6 +10,7 @@ import {
   generateNav,
   generateDocHomeUrl,
 } from './path'
+import { docs as DOCS_CONFIG } from '../docs.json'
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
@@ -120,10 +121,19 @@ export const createCloudAPIReference = async ({
   graphql,
 }: CreatePagesArgs) => {
   const template = resolve(__dirname, '../src/apiReference/index.tsx')
-  createPage({
-    path: `/tidbcloud/api/v1beta`,
-    component: template,
-    context: {},
+  const pageCfg = DOCS_CONFIG.tidbcloud.openAPI
+  const pageList = pageCfg.data
+  pageList.forEach(page => {
+    const path = `/tidbcloud/${pageCfg.path}/${page.pathname}`
+    const isProduction = process.env.CI === 'true'
+    createPage({
+      path,
+      component: template,
+      context: {
+        ...page,
+        isProduction,
+      },
+    })
   })
 }
 

@@ -240,7 +240,7 @@ main.mainContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(224px, 30%));
   gap: 1.5rem;
-  justify-content: space-between;
+  justify-content: start;
 
   @include mobile {
     justify-content: normal;
