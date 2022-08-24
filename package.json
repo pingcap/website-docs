@@ -54,7 +54,8 @@
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "rehype-katex": "5.0.0",
-    "remark-math": "3.0.1"
+    "remark-math": "3.0.1",
+    "signale": "^1.4.0"
   },
   "devDependencies": {
     "@prantlf/railroad-diagrams": "^1.0.1",
@@ -73,7 +74,8 @@
     "prettier": "2.5.1",
     "sass": "^1.45.0",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "@types/signale": "^1.4.3"
   },
   "keywords": [
     "gatsby"
@@ -86,24 +88,6 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest --coverage --roots src",
-    "download:tidb:en": "pingcap-docs-download dl pingcap/docs",
-    "download:tidb:en:all": "./scripts/download-tidb-en.sh",
-    "download:tidb:zh": "pingcap-docs-download dl pingcap/docs-cn",
-    "download:tidb:zh:all": "./scripts/download-tidb-zh.sh",
-    "filter:tidb-cloud:en": "pingcap-docs-download cloud pingcap/docs",
-    "download:tidb:ja": "pingcap-docs-download dl pingcap/docs",
-    "download:tidb:ja:all": "./scripts/download-tidb-ja.sh",
-    "filter:tidb-cloud:ja": "pingcap-docs-download cloud pingcap/docs --lang ja",
-    "download:dm": "pingcap-docs-download dl pingcap/docs-dm",
-    "download:dm:all": "./scripts/download-dm.sh",
-    "download:dm:en:all": "./scripts/download-dm-en.sh",
-    "download:dm:zh:all": "./scripts/download-dm-zh.sh",
-    "download:tidb-operator": "pingcap-docs-download dl pingcap/docs-tidb-operator",
-    "download:tidb-operator:all": "./scripts/download-tidb-operator.sh",
-    "download:tidb-operator:en:all": "./scripts/download-tidb-operator-en.sh",
-    "download:tidb-operator:zh:all": "./scripts/download-tidb-operator-zh.sh",
-    "clean:docs": "pingcap-docs-download cl",
-    "sync": "pingcap-docs-download sync",
     "prepare": "is-ci || husky install"
   },
   "lint-staged": {

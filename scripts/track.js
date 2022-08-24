@@ -35,7 +35,7 @@ function _reportLog(logType, params) {
   params.v = 1
 
   var paramsArr = []
-  Object.keys(params).forEach((item) => {
+  Object.keys(params).forEach(item => {
     if (typeof params[item] !== 'undefined') {
       paramsArr.push(item + '=' + encodeURIComponent(params[item]))
     }

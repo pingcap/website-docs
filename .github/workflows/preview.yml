@@ -1,0 +1,51 @@
+name: Build Preview
+
+on:
+  push:
+    branches: ['master']
+    paths-ignore:
+      - '.github/**'
+  workflow_dispatch:
+
+concurrency: ci-prev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Automatically update submodule
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'preview'
+
+      - name: Init git info
+        run: |
+          git status
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Git reset to master branch
+        run: |
+          git fetch
+          git reset --hard origin/master
+
+      - name: Update submodule
+        id: submodule
+        run: |
+          git submodule init
+          echo "::set-output name=submodule_sha_origin::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
+          git submodule update --remote
+          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
+          echo "::set-output name=git_sha::$(git rev-parse HEAD)"
+          echo "::set-output name=build_date::$(date)"
+
+      - name: Git commit and push submodules update
+        run: |
+          git add .
+          if [[ -z $(git status -s) ]]
+          then
+            git status
+          else
+            git commit -m "update submodules"
+          fi
+          git push -f
