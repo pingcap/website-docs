@@ -2,19 +2,19 @@ name: Build and deploy to server
 
 on:
   push:
-    branches: ['master']
+    branches: ["master"]
     paths-ignore:
-      - '.github/**'
-      - '.docs/**'
+      - ".github/**"
+      - ".docs/**"
   workflow_dispatch:
     inputs:
       hash:
-        description: 'Docs Staging Hash'
+        description: "Docs Staging Hash"
         type: string
         default: main
         required: true
       fallback:
-        description: 'Fallback by hash'
+        description: "Fallback by hash"
         type: boolean
         default: false
         required: false
@@ -28,11 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'master'
+          ref: "master"
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Update submodule
         id: submodule
@@ -88,6 +88,22 @@ jobs:
         run: |
           sudo apt install tree
           tree public
+
+      - name: Set known_hosts
+        id: known-hosts
+        run: |
+          echo "::set-output name=BJ_PROXY::$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})"
+          echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
+          echo "::set-output name=LA2::$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})"
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: |
+            ${{ steps.known-hosts.outputs.BJ_PROXY }}
+            ${{ steps.known-hosts.outputs.LA1 }}
+            ${{ steps.known-hosts.outputs.LA2 }}
 
       - name: Deploy to LA1
         run: |
