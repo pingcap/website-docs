@@ -2,7 +2,7 @@ name: Build and deploy to server
 
 on:
   push:
-    branches: ['docs-staging']
+    branches: ['master']
     paths-ignore:
       - '.github/**'
       - '.docs/**'
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'docs-staging'
+          ref: 'master'
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -89,18 +89,18 @@ jobs:
           sudo apt install tree
           tree public
 
-      # - name: Deploy to LA1
-      #   run: |
-      #     rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Deploy to LA1
+        run: |
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      # - name: Deploy to LA2
-      #   run: |
-      #     rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Deploy to LA2
+        run: |
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      # - name: Deploy to BJ1
-      #   run: |
-      #     rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Deploy to BJ1
+        run: |
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
-      # - name: Deploy to BJ2
-      #   run: |
-      #     rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Deploy to BJ2
+        run: |
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
