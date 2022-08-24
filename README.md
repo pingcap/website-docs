@@ -18,14 +18,6 @@
 - Run `git submodule init`;
 - Run `git submodule update --depth 1 --remote`;
 
-There are two types of scripts here, one starts with `pingcap-docs-download` and the other starts with `./scripts`.
-
-For `pingcap-docs-download`, it's an package binary which you can find the definition in [packages/download/package.json](packages/download/package.json). You must add some parameters to exec it.
-
-Please refer to [packages/download/README.md](packages/download/README.md) for more details.
-
-And all scripts in `./scripts` are already predefined commands, they use `pingcap-docs-download` to download the docs.
-
 ### After download
 
 Run `yarn start` to develop:
@@ -52,18 +44,6 @@ You must set the token as an env when you start some commands, defined as:
 ```sh
 GITHUB_AUTHORIZATION_TOKEN=token
 ```
-
-### CI
-
-We use GitHub actions to serve the build and deploy.
-
-The core of the CI is using `repository_dispatch` event which described at <https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#repository_dispatch>.
-
-Once outside repo post this event, the master branch workflow will start to update the website.
-
-For more details, view: <https://github.com/pingcap/website-docs/blob/master/.github/workflows/update.yml>.
-
-For how to test CI, view: [.github/workflows/tests/README.md](.github/workflows/tests/README.md).
 
 ## The rules we followed
 
