@@ -51,11 +51,12 @@ export default function RightNav(props: {
       <Box
         sx={{
           position: "sticky",
-          top: "6rem",
+          top: "5rem",
           height: "100%",
-          maxHeight: "calc(100vh - 8rem)",
+          maxHeight: "calc(100vh - 5rem)",
           overflowY: "auto",
-          padding: "1rem",
+          paddingLeft: "1rem",
+          paddingRight: "1rem",
         }}
       >
         <Stack spacing={1} sx={{ padding: "2rem" }}>

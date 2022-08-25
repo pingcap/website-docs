@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import "styles/docTemplate.css";
 
 import Layout from "components/Layout";
-import LeftNav from "components/Navigation/LeftNav";
+import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
 import RightNav from "components/Navigation/RightNav";
 import { TableOfContent } from "static/Type";
@@ -37,17 +37,32 @@ export default function DocTemplate({
       <Layout>
         <Box sx={{ marginTop: "5rem", display: "flex" }}>
           <Box sx={{ display: "flex", width: "100%" }}>
-            <LeftNav data={navigation} current={pageUrl} />
+            {/* <LeftNavMobile data={navigation} current={pageUrl} /> */}
+            <LeftNavDesktop data={navigation} current={pageUrl} />
             <Box
               component="main"
-              sx={{ width: "100%", maxWidth: "calc(100% - 18.75rem)" }}
+              sx={{ width: "100%", maxWidth: { lg: "calc(100% - 18.75rem)" } }}
             >
-              <Container sx={{ padding: 0 }}>
+              <Container
+                sx={{
+                  padding: {
+                    xs: "0",
+                  },
+                }}
+              >
                 <Stack direction="row">
-                  <Box sx={{ width: "calc(100% - 17.5rem)" }}>
+                  <Box sx={{ width: { sm: "calc(100% - 17.5rem)" } }}>
                     <MDXContent data={body} />
                   </Box>
-                  <Box sx={{ width: "17.5rem" }}>
+                  <Box
+                    sx={{
+                      width: "17.5rem",
+                      display: {
+                        xs: "none",
+                        sm: "block",
+                      },
+                    }}
+                  >
                     <RightNav
                       toc={tocData}
                       pathConfig={pathConfig}
