@@ -26,7 +26,13 @@ export default function Footer() {
             variant="body2"
             component="div"
             color="rgba(255, 255, 255, 0.5)"
-            sx={{ paddingTop: "3rem" }}
+            sx={{
+              paddingTop: "3rem",
+              textAlign: {
+                xs: "center",
+                md: "left",
+              },
+            }}
           >
             © {new Date().getFullYear()} PingCAP. All Rights Reserved.
           </Typography>
@@ -38,13 +44,48 @@ export default function Footer() {
 
 const FooterBlock = () => {
   return (
-    <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-      <Stack sx={{ gap: "2rem" }}>
-        <PingcapLogoFooterIcon sx={{ width: "6.125rem", height: "1.625rem" }} />
-        <IconGroup />
+    <>
+      <Stack
+        direction="row"
+        sx={{
+          justifyContent: "space-between",
+          flexWrap: {
+            xs: "wrap",
+            md: "nowrap",
+          },
+          rowGap: "4rem",
+        }}
+      >
+        <Stack
+          sx={{
+            gap: "2rem",
+            display: {
+              xs: "none",
+              md: "flex",
+            },
+          }}
+        >
+          <PingcapLogoFooterIcon
+            sx={{ width: "6.125rem", height: "1.625rem" }}
+          />
+          <IconGroup />
+        </Stack>
+        <FooterItems />
       </Stack>
-      <FooterItems />
-    </Stack>
+      <Stack
+        alignItems="center"
+        sx={{
+          paddingTop: "4.5rem",
+          gap: "2.5rem",
+          display: {
+            md: "none",
+          },
+        }}
+      >
+        <IconGroup />
+        <PingcapLogoFooterIcon sx={{ width: "6.125rem", height: "1.625rem" }} />
+      </Stack>
+    </>
   );
 };
 
@@ -54,7 +95,20 @@ const IconGroup = () => {
   const icons = generateIconGroup(language);
   const rows = splitArrayIntoChunks(icons);
   return (
-    <Box>
+    <Stack
+      sx={{
+        flexDirection: {
+          xs: "row",
+          md: "column",
+        },
+        gap: {
+          xs: "1rem",
+          md: "0",
+        },
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
       {rows.map((row, index) => (
         <Stack
           key={`${language}-${index}`}
@@ -76,7 +130,7 @@ const IconGroup = () => {
           ))}
         </Stack>
       ))}
-    </Box>
+    </Stack>
   );
 };
 
@@ -87,7 +141,7 @@ const FooterItems = () => {
   return (
     <>
       {rows.map((row) => (
-        <Stack key={row.name} sx={{ gap: "0.75rem" }}>
+        <Stack key={row.name} sx={{ gap: "0.75rem", minWidth: "6.75rem" }}>
           <Typography color="#7E7F86" component="div">
             {row.name}
           </Typography>
