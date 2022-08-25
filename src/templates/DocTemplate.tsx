@@ -34,7 +34,10 @@ export default function DocTemplate({
 
   return (
     <>
-      <Layout menu={<LeftNavMobile data={navigation} current={pageUrl} />}>
+      <Layout
+        locales={availIn.locale}
+        menu={<LeftNavMobile data={navigation} current={pageUrl} />}
+      >
         <Box sx={{ marginTop: "5rem", display: "flex" }}>
           <Box sx={{ display: "flex", width: "100%" }}>
             {/* <LeftNavMobile data={navigation} current={pageUrl} /> */}

@@ -18,8 +18,12 @@ import HeaderNavStack, {
 import HeaderAction from "components/Layout/HeaderAction";
 
 import { generatePingcapUrl } from "utils";
+import { Locale } from "static/Type";
 
-export default function Header(props: { menu?: React.ReactNode }) {
+export default function Header(props: {
+  menu?: React.ReactNode;
+  locales: Locale[];
+}) {
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
   return (
@@ -58,12 +62,7 @@ export default function Header(props: { menu?: React.ReactNode }) {
         <HeaderNavStack />
         <HeaderNavStackMobile />
 
-        <HeaderAction />
-
-        {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
-        </Typography> */}
-        {/* <Button color="inherit">Login</Button> */}
+        <HeaderAction supportedLocales={props.locales} />
       </Toolbar>
     </AppBar>
   );

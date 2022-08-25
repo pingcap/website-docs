@@ -20,7 +20,9 @@ import ClearIcon from "@mui/icons-material/Clear";
 import LinkComponent from "components/Link";
 import { generateDownloadURL, generateContactURL } from "utils";
 
-export default function HeaderNavStack() {
+import { Locale } from "static/Type";
+
+export default function HeaderAction(props: { supportedLocales: Locale[] }) {
   const { language, t } = useI18next();
 
   return (
@@ -29,7 +31,7 @@ export default function HeaderNavStack() {
       spacing={3}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
-      <LangSwitch />
+      <LangSwitch supportedLocales={props.supportedLocales} />
       <Search placeholder={t("navbar.searchDocs")} />
     </Stack>
   );
@@ -38,10 +40,14 @@ export default function HeaderNavStack() {
 const LangSwitch = (props: {
   language?: string;
   changeLanguage?: () => void;
+  supportedLocales: Locale[];
 }) => {
+  const { supportedLocales } = props;
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const theme = useTheme();
+  const { language, changeLanguage } = useI18next();
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -49,6 +55,11 @@ const LangSwitch = (props: {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const toggleLanguage = (locale: Locale) => () => {
+    changeLanguage(locale);
+    handleClose();
   };
 
   return (
@@ -99,13 +110,28 @@ const LangSwitch = (props: {
           horizontal: "center",
         }}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={toggleLanguage(Locale.en)}
+          disableRipple
+          selected={language === Locale.en}
+          disabled={!supportedLocales.includes(Locale.en)}
+        >
           <Trans i18nKey="lang.en" />
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={toggleLanguage(Locale.zh)}
+          disableRipple
+          selected={language === Locale.zh}
+          disabled={!supportedLocales.includes(Locale.zh)}
+        >
           <Trans i18nKey="lang.zh" />
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={toggleLanguage(Locale.ja)}
+          disableRipple
+          selected={language === Locale.ja}
+          disabled={!supportedLocales.includes(Locale.ja)}
+        >
           <Trans i18nKey="lang.ja" />
         </MenuItem>
       </Menu>
