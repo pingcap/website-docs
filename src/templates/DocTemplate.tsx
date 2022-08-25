@@ -51,7 +51,9 @@ export default function DocTemplate({
                 }}
               >
                 <Stack direction="row">
-                  <Box sx={{ width: { sm: "calc(100% - 17.5rem)" } }}>
+                  <Box
+                    sx={{ width: { xs: "100%", sm: "calc(100% - 17.5rem)" } }}
+                  >
                     <MDXContent data={body} />
                   </Box>
                   <Box
