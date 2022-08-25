@@ -4,6 +4,7 @@ import { graphql, Link } from "gatsby";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
+import Stack from "@mui/material/Stack";
 
 // import "styles/global.css";
 import "styles/docTemplate.css";
@@ -24,7 +25,7 @@ export default function DocTemplate({
     navigation: { navigation },
   } = data;
 
-  const tocData: TableOfContent | undefined = React.useMemo(() => {
+  const tocData: TableOfContent[] | undefined = React.useMemo(() => {
     if (tableOfContents.items?.length === 1) {
       return tableOfContents.items![0].items;
     }
@@ -41,15 +42,19 @@ export default function DocTemplate({
               component="main"
               sx={{ width: "100%", maxWidth: "calc(100% - 18.75rem)" }}
             >
-              <Container>
-                <Grid2 container>
-                  <Grid2 sm={12} md={9}>
+              <Container sx={{ padding: 0 }}>
+                <Stack direction="row">
+                  <Box sx={{ width: "calc(100% - 17.5rem)" }}>
                     <MDXContent data={body} />
-                  </Grid2>
-                  <Grid2 sm={0} md={3}>
-                    <RightNav toc={tocData} />
-                  </Grid2>
-                </Grid2>
+                  </Box>
+                  <Box sx={{ width: "17.5rem" }}>
+                    <RightNav
+                      toc={tocData}
+                      pathConfig={pathConfig}
+                      filePath={filePath}
+                    />
+                  </Box>
+                </Stack>
               </Container>
             </Box>
           </Box>

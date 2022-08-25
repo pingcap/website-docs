@@ -17,6 +17,8 @@ import {
   ZH_FOOTER_ITEMS,
   JA_FOOTER_ITEMS,
 } from "static";
+import { PathConfig, Locale } from "static/Type";
+import CONFIG from "../../docs.json";
 
 export function generatePingcapUrl(lang?: string) {
   switch (lang) {
@@ -89,4 +91,20 @@ export function generateFooterItems(lang?: string) {
     default:
       return EN_FOOTER_ITEMS;
   }
+}
+
+export function calcPDFUrl(config: PathConfig) {
+  return `${config.repo}-${config.version ? config.version + "-" : ""}${
+    config.locale
+  }-manual.pdf`;
+}
+
+export function getRepoFromPathCfg(config: PathConfig) {
+  const { languages } = CONFIG.docs[config.repo];
+
+  if (config.locale in languages) {
+    return languages[config.locale as Locale.en].repo;
+  }
+
+  throw new Error(`no ${config.locale} in repo ${config.repo}`);
 }
