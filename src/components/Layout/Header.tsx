@@ -12,7 +12,9 @@ import { graphql, useStaticQuery } from "gatsby";
 
 import { PingcapLogoIcon } from "components/Icons";
 import LinkComponent from "components/Link";
-import HeaderNavStack from "components/Layout/HeaderNav";
+import HeaderNavStack, {
+  HeaderNavStackMobile,
+} from "components/Layout/HeaderNav";
 import HeaderAction from "components/Layout/HeaderAction";
 
 import { generatePingcapUrl } from "utils";
@@ -37,13 +39,23 @@ export default function Header(props: any) {
           paddingRight: { md: "2rem" },
         }}
       >
-        <LinkComponent to={generatePingcapUrl(language)}>
-          <PingcapLogoIcon
-            sx={{ width: "6.75rem", display: { xs: "none", sm: "block" } }}
-          />
-        </LinkComponent>
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              md: "block",
+            },
+          }}
+        >
+          <LinkComponent to={generatePingcapUrl(language)}>
+            <PingcapLogoIcon
+              sx={{ width: "6.75rem", display: { xs: "none", sm: "block" } }}
+            />
+          </LinkComponent>
+        </Box>
 
         <HeaderNavStack />
+        <HeaderNavStackMobile />
 
         <HeaderAction />
 

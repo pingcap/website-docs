@@ -10,6 +10,7 @@ import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 
 import LanguageIcon from "@mui/icons-material/Language";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -52,6 +53,16 @@ const LangSwitch = (props: {
 
   return (
     <Box color={theme.palette.website.m5}>
+      <IconButton
+        onClick={handleClick}
+        sx={{
+          display: {
+            lg: "none",
+          },
+        }}
+      >
+        <LanguageIcon />
+      </IconButton>
       <Button
         id="header-lang-switch"
         aria-controls={open ? "languages-menu" : undefined}
@@ -60,10 +71,18 @@ const LangSwitch = (props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<LanguageIcon />}
+        startIcon={<LanguageIcon sx={{ fill: theme.palette.website.f3 }} />}
         endIcon={<KeyboardArrowDownIcon />}
+        sx={{
+          display: {
+            xs: "none",
+            lg: "inline-flex",
+          },
+        }}
       >
-        <Trans i18nKey="lang.title" />
+        <Typography component="span">
+          <Trans i18nKey="lang.title" />
+        </Typography>
       </Button>
       <Menu
         id="header-lang-menu"
@@ -97,11 +116,26 @@ const LangSwitch = (props: {
 const Search = (props: { placeholder: string }) => {
   return (
     <>
+      <IconButton
+        sx={{
+          display: {
+            lg: "none",
+          },
+        }}
+      >
+        <SearchIcon />
+      </IconButton>
       <Box
         component="form"
         noValidate
         autoComplete="off"
-        sx={{ maxWidth: "13rem" }}
+        sx={{
+          maxWidth: "13rem",
+          display: {
+            xs: "none",
+            lg: "block",
+          },
+        }}
       >
         <TextField
           size="small"
