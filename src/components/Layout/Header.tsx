@@ -19,7 +19,7 @@ import HeaderAction from "components/Layout/HeaderAction";
 
 import { generatePingcapUrl } from "utils";
 
-export default function Header(props: any) {
+export default function Header(props: { menu?: React.ReactNode }) {
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
   return (
@@ -39,6 +39,7 @@ export default function Header(props: any) {
           paddingRight: { md: "2rem" },
         }}
       >
+        {props.menu}
         <Box
           sx={{
             display: {

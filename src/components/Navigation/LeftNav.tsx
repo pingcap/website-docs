@@ -66,7 +66,15 @@ export function LeftNavMobile(props: { data: DocLeftNav; current: string }) {
 
   return (
     <>
-      <IconButton aria-label="menu" onClick={toggleDrawer(true)}>
+      <IconButton
+        aria-label="menu"
+        onClick={toggleDrawer(true)}
+        sx={{
+          display: {
+            lg: "none",
+          },
+        }}
+      >
         <MenuIcon />
       </IconButton>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
