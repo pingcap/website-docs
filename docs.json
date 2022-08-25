@@ -41,7 +41,7 @@
         },
         "ja": {
           "repo": "pingcap/docs",
-          "versions": ["release-6.1"]
+          "versions": ["release-6.2", "release-6.1", "release-5.4"]
         }
       },
       "deprecated": [
