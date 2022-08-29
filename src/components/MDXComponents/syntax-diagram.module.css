@@ -1,0 +1,62 @@
+.root {
+  background: #f7f8f9;
+}
+
+.toolbar {
+  button {
+    height: 2rem;
+  }
+}
+
+.container {
+  $stroke: #0e2336;
+
+  padding: 0 1rem;
+
+  dt {
+    &:first-child {
+      margin-top: 0;
+    }
+    &::after {
+      font-weight: normal;
+      content: " ::=";
+    }
+  }
+
+  dd {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  path {
+    fill: none;
+    stroke-width: 1;
+    stroke: $stroke;
+  }
+
+  text {
+    font: 12px Verdana, sans-serif;
+    text-anchor: middle;
+  }
+
+  rect {
+    fill: #e5eff8;
+    stroke-width: 1;
+    stroke: $stroke;
+  }
+
+  :global {
+    .start-end {
+      fill: $stroke;
+    }
+
+    .terminal {
+      rect {
+        fill: #d0e2f3;
+      }
+      text {
+        font-weight: bold;
+      }
+    }
+  }
+}

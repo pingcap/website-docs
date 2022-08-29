@@ -19,6 +19,11 @@ import {
 } from "static";
 import { PathConfig, Locale } from "static/Type";
 import CONFIG from "../../docs.json";
+import {
+  PabloBookLoverSVG,
+  TiDBBanner,
+  TiDBCloudBanner,
+} from "components/Icons/LearingPathIcon";
 
 export function generatePingcapUrl(lang?: string) {
   switch (lang) {
@@ -107,4 +112,16 @@ export function getRepoFromPathCfg(config: PathConfig) {
   }
 
   throw new Error(`no ${config.locale} in repo ${config.repo}`);
+}
+
+export function getBannerByType(type: "home" | "tidb" | "tidb-cloud") {
+  switch (type) {
+    case "tidb":
+      return TiDBBanner;
+    case "tidb-cloud":
+      return TiDBCloudBanner;
+    case "home":
+    default:
+      return PabloBookLoverSVG;
+  }
 }

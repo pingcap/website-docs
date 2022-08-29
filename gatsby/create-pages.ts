@@ -157,7 +157,8 @@ export const createDocHome = async ({
   actions: { createPage, createRedirect },
   graphql,
 }: CreatePagesArgs) => {
-  const template = resolve(__dirname, "../src/doc/index.tsx");
+  // const template = resolve(__dirname, "../src/doc/index.tsx");
+  const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
 
   const docs = await graphql<PageQueryData>(`
     {

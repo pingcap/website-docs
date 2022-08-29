@@ -1,0 +1,30 @@
+.tabs-panel {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-end;
+
+  a {
+    top: -50px;
+    text-decoration: none !important;
+  }
+
+  .letter-btn {
+    padding: 1px 11px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background 0.2s ease-in-out;
+    color: white;
+    background: #94a3ea;
+    border: 1px solid #94a3ea;
+    border-radius: 10px;
+
+    &:hover {
+      background: white;
+      color: #94a3ea;
+    }
+  }
+}
+
+.letter {
+  padding-top: 5.25rem;
+}

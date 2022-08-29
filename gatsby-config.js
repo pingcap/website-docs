@@ -125,6 +125,7 @@ module.exports = {
         ],
       },
     },
+    "gatsby-plugin-dts-css-modules",
     // {
     //   resolve: `gatsby-plugin-sass`,
     //   options: {

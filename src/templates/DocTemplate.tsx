@@ -36,15 +36,27 @@ export default function DocTemplate({
     <>
       <Layout
         locales={availIn.locale}
-        menu={<LeftNavMobile data={navigation} current={pageUrl} />}
+        menu={
+          frontmatter?.hide_leftNav ? null : (
+            <LeftNavMobile data={navigation} current={pageUrl} />
+          )
+        }
       >
         <Box sx={{ marginTop: "5rem", display: "flex" }}>
           <Box sx={{ display: "flex", width: "100%" }}>
-            {/* <LeftNavMobile data={navigation} current={pageUrl} /> */}
-            <LeftNavDesktop data={navigation} current={pageUrl} />
+            {!frontmatter?.hide_leftNav && (
+              <LeftNavDesktop data={navigation} current={pageUrl} />
+            )}
             <Box
               component="main"
-              sx={{ width: "100%", maxWidth: { lg: "calc(100% - 18.75rem)" } }}
+              sx={{
+                width: "100%",
+                maxWidth: {
+                  lg: frontmatter?.hide_leftNav
+                    ? "100%"
+                    : "calc(100% - 18.75rem)",
+                },
+              }}
             >
               <Container
                 sx={{
@@ -55,25 +67,34 @@ export default function DocTemplate({
               >
                 <Stack direction="row">
                   <Box
-                    sx={{ width: { xs: "100%", sm: "calc(100% - 17.5rem)" } }}
-                  >
-                    <MDXContent data={body} />
-                  </Box>
-                  <Box
                     sx={{
-                      width: "17.5rem",
-                      display: {
-                        xs: "none",
-                        sm: "block",
+                      width: {
+                        xs: "100%",
+                        sm: frontmatter?.hide_sidebar
+                          ? "100%"
+                          : "calc(100% - 17.5rem)",
                       },
                     }}
                   >
-                    <RightNav
-                      toc={tocData}
-                      pathConfig={pathConfig}
-                      filePath={filePath}
-                    />
+                    <MDXContent data={body} />
                   </Box>
+                  {!frontmatter?.hide_sidebar && (
+                    <Box
+                      sx={{
+                        width: "17.5rem",
+                        display: {
+                          xs: "none",
+                          sm: "block",
+                        },
+                      }}
+                    >
+                      <RightNav
+                        toc={tocData}
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                      />
+                    </Box>
+                  )}
                 </Stack>
               </Container>
             </Box>

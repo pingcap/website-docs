@@ -5993,6 +5993,11 @@ dotenv@^8.6.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
   integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
+dts-css-modules-loader@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/dts-css-modules-loader/-/dts-css-modules-loader-2.0.0.tgz#2c18d9bfc8d4de2f2fd6f0d5819299ee1c6a66ac"
+  integrity sha512-eheqA1F2uVKs8A5BQTpPyg5wwLE2mictYjN0atJX/VLVpXDr9Xx1bqM9W5piQi9zp/CUkMBCBw+a2zr1TxFtQw==
+
 duplexer3@^0.1.4:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.5.tgz#0b5e4d7bad5de8901ea4440624c8e1d20099217e"
@@ -7163,6 +7168,13 @@ gatsby-parcel-config@^0.12.0:
     "@parcel/transformer-json" "2.6.2"
     "@parcel/transformer-raw" "2.6.2"
     "@parcel/transformer-react-refresh-wrap" "2.6.2"
+
+gatsby-plugin-dts-css-modules@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-dts-css-modules/-/gatsby-plugin-dts-css-modules-3.0.0.tgz#5d363736dc9812d6b9e9c40a600f73590903d876"
+  integrity sha512-ZDTNPvJOXbuKf1my1AhEqqMFetuH5IYxz73k5GK8VYFNAsy8rraIm0OxMHsYjaR/8J5dpm4mrYAJf9++5bjzHg==
+  dependencies:
+    dts-css-modules-loader "2.0.0"
 
 gatsby-plugin-google-analytics@^4.12.1:
   version "4.21.0"
