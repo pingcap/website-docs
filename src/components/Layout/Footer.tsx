@@ -149,6 +149,7 @@ const FooterItems = () => {
             <LinkComponent
               key={`${row.name}-${item.name}`}
               to={item.url}
+              isI18n
               sx={{ width: "fit-content" }}
             >
               <Typography color={theme.palette.website.m4} component="div">

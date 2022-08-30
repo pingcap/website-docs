@@ -105,7 +105,7 @@ const NavItem = (props: {
             : ``,
         }}
       >
-        <LinkComponent to={props.to}>
+        <LinkComponent isI18n to={props.to}>
           <Typography variant="body1" component="div">
             {props.label}
           </Typography>
@@ -173,7 +173,7 @@ export function HeaderNavStackMobile() {
             disableRipple
             selected={selectedItem === "home"}
           >
-            <LinkComponent to="/" style={{ width: "100%" }}>
+            <LinkComponent isI18n to="/" style={{ width: "100%" }}>
               <Typography variant="body1" component="div">
                 <Trans i18nKey="navbar.home" />
               </Typography>
@@ -185,7 +185,7 @@ export function HeaderNavStackMobile() {
           disableRipple
           selected={selectedItem === "tidb"}
         >
-          <LinkComponent to="/tidb/stable" style={{ width: "100%" }}>
+          <LinkComponent isI18n to="/tidb/stable" style={{ width: "100%" }}>
             <Typography variant="body1" component="div">
               <Trans i18nKey="navbar.tidb" />
             </Typography>
@@ -197,7 +197,7 @@ export function HeaderNavStackMobile() {
             disableRipple
             selected={selectedItem === "tidbcloud"}
           >
-            <LinkComponent to="/tidbcloud" style={{ width: "100%" }}>
+            <LinkComponent isI18n to="/tidbcloud" style={{ width: "100%" }}>
               <Typography variant="body1" component="div">
                 <Trans i18nKey="navbar.cloud" />
               </Typography>
