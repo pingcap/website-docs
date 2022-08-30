@@ -38,14 +38,26 @@ export default function DocTemplate({
         locales={availIn.locale}
         menu={
           frontmatter?.hide_leftNav ? null : (
-            <LeftNavMobile data={navigation} current={pageUrl} />
+            <LeftNavMobile
+              data={navigation}
+              current={pageUrl}
+              name={name}
+              pathConfig={pathConfig}
+              availIn={availIn.version}
+            />
           )
         }
       >
         <Box sx={{ marginTop: "5rem", display: "flex" }}>
           <Box sx={{ display: "flex", width: "100%" }}>
             {!frontmatter?.hide_leftNav && (
-              <LeftNavDesktop data={navigation} current={pageUrl} />
+              <LeftNavDesktop
+                data={navigation}
+                current={pageUrl}
+                name={name}
+                pathConfig={pathConfig}
+                availIn={availIn.version}
+              />
             )}
             <Box
               component="main"

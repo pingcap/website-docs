@@ -17,7 +17,7 @@ import {
   ZH_FOOTER_ITEMS,
   JA_FOOTER_ITEMS,
 } from "static";
-import { PathConfig, Locale } from "static/Type";
+import { PathConfig, Locale, Repo } from "static/Type";
 import CONFIG from "../../docs.json";
 import {
   PabloBookLoverSVG,
@@ -125,3 +125,37 @@ export function getBannerByType(type: "home" | "tidb" | "tidb-cloud") {
       return PabloBookLoverSVG;
   }
 }
+
+function branchToVersion(repo: Repo, branch: string) {
+  switch (repo) {
+    case Repo.tidb:
+    case Repo.operator: {
+      const stable = CONFIG.docs[repo].stable;
+      switch (branch) {
+        case "master":
+          return "dev";
+        case stable:
+          return "stable";
+        default:
+          return branch.replace("release-", "v");
+      }
+    }
+    case Repo.dm:
+      return branch.replace("release-", "v");
+
+    case Repo.tidbcloud:
+      return null;
+  }
+}
+
+export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
+  const repo = val as Repo;
+  acc[repo] = Object.keys(CONFIG.docs[repo].languages).reduce((acc, val) => {
+    const locale = val as Locale.en;
+    acc[locale] = CONFIG.docs[repo].languages[locale].versions.map((v) =>
+      branchToVersion(repo, v)
+    );
+    return acc;
+  }, {} as Record<Locale, (string | null)[]>);
+  return acc;
+}, {} as Record<Repo, Record<Locale, (string | null)[]>>);
