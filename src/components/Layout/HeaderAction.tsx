@@ -31,7 +31,9 @@ export default function HeaderAction(props: { supportedLocales: Locale[] }) {
       spacing={3}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
-      <LangSwitch supportedLocales={props.supportedLocales} />
+      {props.supportedLocales.length > 0 && (
+        <LangSwitch supportedLocales={props.supportedLocales} />
+      )}
       <Search placeholder={t("navbar.searchDocs")} />
     </Stack>
   );
