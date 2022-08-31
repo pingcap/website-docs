@@ -8,6 +8,7 @@ import { useTheme } from "@mui/material/styles";
 
 import { getBannerByType } from "utils";
 import LinkComponent from "components/Link";
+import SearchInput from "components/Search";
 
 export function DocHomeContainer(props: {
   title: string;
@@ -95,6 +96,10 @@ export function DocHomeContainer(props: {
           <Typography component="div" variant="body1" id="banner-subtitle">
             {subTitle}
           </Typography>
+          <SearchInput
+            disableResponsive
+            docInfo={{ type: "tidb", version: "stable" }}
+          />
         </Stack>
         <Box
           id="title-right"

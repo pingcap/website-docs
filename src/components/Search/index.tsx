@@ -28,13 +28,13 @@ export default function Search(props: {
   const [queryStr, setQueryStr] = React.useState("");
 
   const { t, navigate } = useI18next();
+  const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryStr(event.target.value);
   };
 
   const handleSearchSubmitCallback = React.useCallback(() => {
-    console.log("====test===");
     navigate(
       `/search?type=${docInfo.type}&version=${docInfo.version}&q=${queryStr}`,
       {
@@ -93,6 +93,9 @@ export default function Search(props: {
                 <SearchIcon />
               </InputAdornment>
             ),
+            sx: {
+              background: theme.palette.website.m1,
+            },
           }}
         />
       </Box>
