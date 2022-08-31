@@ -39,6 +39,7 @@ interface LeftNavProps {
 
 export function LeftNavDesktop(props: LeftNavProps) {
   const { data, current, name, pathConfig, availIn } = props;
+
   return (
     <Box
       component="aside"
@@ -62,7 +63,13 @@ export function LeftNavDesktop(props: LeftNavProps) {
           paddingRight: "1rem",
         }}
       >
-        <VersionSelect name={name} pathConfig={pathConfig} availIn={availIn} />
+        {pathConfig.repo !== "tidbcloud" && (
+          <VersionSelect
+            name={name}
+            pathConfig={pathConfig}
+            availIn={availIn}
+          />
+        )}
         <LeftNavTree data={data} current={current} />
       </Box>
     </Box>
