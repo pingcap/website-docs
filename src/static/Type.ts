@@ -37,3 +37,32 @@ export interface PathConfig {
   branch: string;
   version: string | null;
 }
+
+export interface PageContext {
+  name: string;
+  pathConfig: PathConfig;
+  filePath: string;
+  availIn: {
+    locale: Locale[];
+    version: string[];
+  };
+}
+
+export interface FrontMatter {
+  title: string;
+  summary?: string;
+  aliases?: string[];
+  keywords?: string[];
+  hide_sidebar?: boolean;
+  hide_commit?: boolean;
+  hide_leftNav?: boolean;
+}
+
+export interface RepoNavLink {
+  content: ({ code: boolean; value: string } | string)[];
+  link?: string;
+  children?: RepoNavLink[];
+  id: string;
+}
+
+export type RepoNav = RepoNavLink[];

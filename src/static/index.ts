@@ -7,6 +7,9 @@ import RedditIcon from "@mui/icons-material/Reddit";
 
 import { StackOverflowIcon, SlackIcon, AskTugIcon } from "components/Icons";
 
+import { convertVersionName } from "utils";
+import CONFIG from "../../docs.json";
+
 export const DEFAULT_PINGCAP_URL = `https://pingcap.com`;
 export const EN_PINGCAP_URL = `https://en.pingcap.com/`;
 export const ZH_PINGCAP_URL = `https://pingcap.com/zh/`;
@@ -367,5 +370,59 @@ export const JA_FOOTER_ITEMS = [
         url: "https://pingcap.co.jp/contact-us/",
       },
     ],
+  },
+];
+
+export const TIDB_EN_STABLE_VERSION = CONFIG["docs"]["tidb"]["stable"];
+// export const DM_EN_STABLE_VERSION = CONFIG["docs"]["tidb-data-migration"]["stable"];
+export const DM_EN_STABLE_VERSION = "";
+export const OP_EN_STABLE_VERSION =
+  CONFIG["docs"]["tidb-in-kubernetes"]["stable"];
+
+export const TIDB_EN_VERSIONS = CONFIG["docs"]["tidb"]["languages"]["en"][
+  "versions"
+].map((d) => convertVersionName(d, TIDB_EN_STABLE_VERSION));
+
+export const DM_EN_VERSIONS = CONFIG["docs"]["tidb-data-migration"][
+  "languages"
+]["en"]["versions"].map((d) => convertVersionName(d, DM_EN_STABLE_VERSION));
+
+export const OP_EN_VERSIONS = CONFIG["docs"]["tidb-in-kubernetes"]["languages"][
+  "en"
+]["versions"].map((d) => convertVersionName(d, OP_EN_STABLE_VERSION));
+
+export const CLOUD_EN_VERSIONS = [];
+
+export const EN_DOC_TYPE_LIST = [
+  {
+    name: "TiDB",
+    match: "tidb",
+  },
+  {
+    name: "TiDB in Kubernetes",
+    match: "tidb-in-kubernetes",
+  },
+  {
+    name: "TiDB Data Migration (DM)",
+    match: "tidb-data-migration",
+  },
+  {
+    name: "Cloud",
+    match: "tidbcloud",
+  },
+] as const;
+
+export const ZH_DOC_TYPE_LIST = [
+  {
+    name: "TiDB",
+    match: "tidb",
+  },
+  {
+    name: "TiDB in Kubernetes",
+    match: "tidb-in-kubernetes",
+  },
+  {
+    name: "TiDB Data Migration (DM)",
+    match: "tidb-data-migration",
   },
 ];

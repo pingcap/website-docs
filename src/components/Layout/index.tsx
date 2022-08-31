@@ -9,11 +9,16 @@ export default function Layout(props: {
   children?: React.ReactNode;
   menu?: React.ReactNode;
   locales?: Locale[];
+  docInfo?: { type: string; version: string };
 }) {
   return (
     <ThemeProvider theme={theme}>
       {/* <CustomCheckbox defaultChecked /> */}
-      <Header menu={props.menu} locales={props.locales || []} />
+      <Header
+        menu={props.menu}
+        locales={props.locales || []}
+        docInfo={props.docInfo}
+      />
       {props.children}
       <Footer />
     </ThemeProvider>

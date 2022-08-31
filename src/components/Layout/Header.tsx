@@ -23,6 +23,7 @@ import { Locale } from "static/Type";
 export default function Header(props: {
   menu?: React.ReactNode;
   locales: Locale[];
+  docInfo?: { type: string; version: string };
 }) {
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
@@ -62,7 +63,10 @@ export default function Header(props: {
         <HeaderNavStack />
         <HeaderNavStackMobile />
 
-        <HeaderAction supportedLocales={props.locales} />
+        <HeaderAction
+          supportedLocales={props.locales}
+          docInfo={props.docInfo}
+        />
       </Toolbar>
     </AppBar>
   );

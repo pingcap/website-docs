@@ -159,3 +159,14 @@ export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
   }, {} as Record<Locale, (string | null)[]>);
   return acc;
 }, {} as Record<Repo, Record<Locale, (string | null)[]>>);
+
+export function convertVersionName(version: string, stable: string) {
+  switch (version) {
+    case "master":
+      return "dev";
+    case stable:
+      return "stable";
+    default:
+      return version.replace("release-", "v");
+  }
+}

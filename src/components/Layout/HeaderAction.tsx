@@ -18,11 +18,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 
 import LinkComponent from "components/Link";
+import Search from "components/Search";
 import { generateDownloadURL, generateContactURL } from "utils";
 
 import { Locale } from "static/Type";
 
-export default function HeaderAction(props: { supportedLocales: Locale[] }) {
+export default function HeaderAction(props: {
+  supportedLocales: Locale[];
+  docInfo?: { type: string; version: string };
+}) {
+  const { supportedLocales, docInfo } = props;
   const { language, t } = useI18next();
 
   return (
@@ -31,10 +36,12 @@ export default function HeaderAction(props: { supportedLocales: Locale[] }) {
       spacing={3}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
-      {props.supportedLocales.length > 0 && (
-        <LangSwitch supportedLocales={props.supportedLocales} />
+      {supportedLocales.length > 0 && (
+        <LangSwitch supportedLocales={supportedLocales} />
       )}
-      <Search placeholder={t("navbar.searchDocs")} />
+      {docInfo && (
+        <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+      )}
     </Stack>
   );
 }
@@ -138,58 +145,5 @@ const LangSwitch = (props: {
         </MenuItem>
       </Menu>
     </Box>
-  );
-};
-
-const Search = (props: { placeholder: string }) => {
-  return (
-    <>
-      <IconButton
-        sx={{
-          display: {
-            lg: "none",
-          },
-        }}
-      >
-        <SearchIcon />
-      </IconButton>
-      <Box
-        component="form"
-        noValidate
-        autoComplete="off"
-        sx={{
-          maxWidth: "13rem",
-          display: {
-            xs: "none",
-            lg: "block",
-          },
-        }}
-      >
-        <TextField
-          size="small"
-          id="doc-search"
-          fullWidth
-          placeholder={props.placeholder}
-          type="search"
-          variant="outlined"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment
-                position="end"
-                // style={{ display: showClearIcon }}
-                // onClick={handleClick}
-              >
-                <ClearIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
-    </>
   );
 };

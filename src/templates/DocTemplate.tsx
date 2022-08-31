@@ -13,12 +13,31 @@ import Layout from "components/Layout";
 import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
 import RightNav from "components/Navigation/RightNav";
-import { TableOfContent } from "static/Type";
+import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
+
+interface DocTemplateProps {
+  pageContext: PageContext;
+  data: {
+    site: {
+      siteMetadata: {
+        siteUrl: string;
+      };
+    };
+    mdx: {
+      frontmatter: FrontMatter;
+      body: string;
+      tableOfContents: TableOfContent;
+    };
+    navigation: {
+      navigation: RepoNav;
+    };
+  };
+}
 
 export default function DocTemplate({
   pageContext: { name, availIn, pathConfig, filePath, pageUrl },
   data,
-}: any) {
+}: DocTemplateProps) {
   const {
     site,
     mdx: { frontmatter, tableOfContents, body },
@@ -47,6 +66,10 @@ export default function DocTemplate({
             />
           )
         }
+        docInfo={{
+          version: pathConfig.version || "stable",
+          type: pathConfig.repo,
+        }}
       >
         <Box sx={{ marginTop: "5rem", display: "flex" }}>
           <Box sx={{ display: "flex", width: "100%" }}>
