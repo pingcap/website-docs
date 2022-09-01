@@ -15,6 +15,7 @@ import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
+import { useHighlightCode } from "utils/CustomHook";
 
 interface DocTemplateProps {
   pageContext: PageContext & { pageUrl: string };
@@ -51,6 +52,8 @@ export default function DocTemplate({
     }
     return tableOfContents.items || [];
   }, [tableOfContents.items]);
+
+  useHighlightCode();
 
   return (
     <>
