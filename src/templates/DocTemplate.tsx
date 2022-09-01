@@ -13,10 +13,11 @@ import Layout from "components/Layout";
 import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
+import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
 
 interface DocTemplateProps {
-  pageContext: PageContext;
+  pageContext: PageContext & { pageUrl: string };
   data: {
     site: {
       siteMetadata: {
@@ -119,6 +120,16 @@ export default function DocTemplate({
                     }}
                   >
                     <MDXContent data={body} />
+                    <Box
+                      sx={{
+                        width: "fit-content",
+                        position: "fixed",
+                        bottom: "1rem",
+                        right: "1rem",
+                      }}
+                    >
+                      <ScrollToTopBtn />
+                    </Box>
                   </Box>
                   {!frontmatter?.hide_sidebar && (
                     <>
