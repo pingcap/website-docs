@@ -170,3 +170,17 @@ export function convertVersionName(version: string, stable: string) {
       return version.replace("release-", "v");
   }
 }
+
+// Support {#custom-id}
+// Now `#origin-id {#custom-id}` will be transformed to `#custom-id`
+export const transformCustomId = (
+  label: string,
+  anchor: string
+): { label: string; anchor: string } => {
+  const customIdMatches = label.match(/(.+) *\{(#.+)\}$/);
+  if (customIdMatches?.length) {
+    const [, newLabel, newAnchor] = customIdMatches;
+    return { label: newLabel, anchor: newAnchor };
+  }
+  return { label, anchor };
+};

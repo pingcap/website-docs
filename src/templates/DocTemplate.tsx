@@ -12,7 +12,7 @@ import "styles/docTemplate.css";
 import Layout from "components/Layout";
 import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
-import RightNav from "components/Navigation/RightNav";
+import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
 
 interface DocTemplateProps {
@@ -100,7 +100,14 @@ export default function DocTemplate({
                   },
                 }}
               >
-                <Stack direction="row">
+                <Stack
+                  sx={{
+                    flexDirection: {
+                      xs: "column-reverse",
+                      sm: "row",
+                    },
+                  }}
+                >
                   <Box
                     sx={{
                       width: {
@@ -114,21 +121,37 @@ export default function DocTemplate({
                     <MDXContent data={body} />
                   </Box>
                   {!frontmatter?.hide_sidebar && (
-                    <Box
-                      sx={{
-                        width: "17.5rem",
-                        display: {
-                          xs: "none",
-                          sm: "block",
-                        },
-                      }}
-                    >
-                      <RightNav
-                        toc={tocData}
-                        pathConfig={pathConfig}
-                        filePath={filePath}
-                      />
-                    </Box>
+                    <>
+                      <Box
+                        sx={{
+                          width: "17.5rem",
+                          display: {
+                            xs: "none",
+                            sm: "block",
+                          },
+                        }}
+                      >
+                        <RightNav
+                          toc={tocData}
+                          pathConfig={pathConfig}
+                          filePath={filePath}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          padding: "1rem",
+                          display: {
+                            sm: "none",
+                          },
+                        }}
+                      >
+                        <RightNavMobile
+                          toc={tocData}
+                          pathConfig={pathConfig}
+                          filePath={filePath}
+                        />
+                      </Box>
+                    </>
                   )}
                 </Stack>
               </Container>

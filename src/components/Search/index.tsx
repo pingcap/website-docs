@@ -56,6 +56,7 @@ export default function Search(props: {
               lg: "none",
             },
           }}
+          onClick={handleSearchSubmitCallback}
         >
           <SearchIcon />
         </IconButton>

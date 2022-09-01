@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import { graphql, useStaticQuery } from "gatsby";
+import { useLocation } from "@reach/router";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -13,17 +14,22 @@ import DraftsIcon from "@mui/icons-material/Drafts";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
-import { useLocation } from "@reach/router";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { TableOfContent, PathConfig } from "static/Type";
-import { calcPDFUrl, getRepoFromPathCfg } from "utils";
+import { calcPDFUrl, getRepoFromPathCfg, transformCustomId } from "utils";
 import LinkComponent from "components/Link";
 
-export default function RightNav(props: {
+interface RightNavProps {
   toc?: TableOfContent[];
   pathConfig: PathConfig;
   filePath: string;
-}) {
+}
+
+export default function RightNav(props: RightNavProps) {
   const { toc = [], pathConfig, filePath } = props;
 
   const theme = useTheme();
@@ -59,37 +65,49 @@ export default function RightNav(props: {
           paddingRight: "1rem",
         }}
       >
-        <Stack spacing={1} sx={{ padding: "2rem" }}>
-          <ActionItem
-            url={`https://download.pingcap.org/${pdfUrlMemo}`}
-            label={t("doc.download-pdf")}
-            rel="noreferrer"
-            download
-          />
-          <ActionItem
-            url={`https://github.com/${getRepoFromPathCfg(
-              pathConfig
-            )}/issues/new?body=File:%20[/${pathConfig.branch}/${filePath}](${
-              site.siteMetadata.siteUrl
-            }${pathname})`}
-            label={t("doc.feedback")}
-            rel="noreferrer"
-          />
-          <ActionItem
-            url={`https://asktug.com/?utm_source=doc`}
-            label={t("doc.feedbackAskTug")}
-            rel="noreferrer"
-          />
-          <ActionItem
-            url={`https://github.com/${getRepoFromPathCfg(pathConfig)}/edit/${
-              pathConfig.branch
-            }/${filePath}`}
-            label={t("doc.improve")}
-            rel="noreferrer"
-          />
-        </Stack>
+        {language !== "ja" && (
+          <Stack spacing={1} sx={{ padding: "2rem 2rem 1rem 2rem" }}>
+            <ActionItem
+              url={`https://download.pingcap.org/${pdfUrlMemo}`}
+              label={t("doc.download-pdf")}
+              rel="noreferrer"
+              download
+            />
+            <ActionItem
+              url={`https://github.com/${getRepoFromPathCfg(
+                pathConfig
+              )}/issues/new?body=File:%20[/${pathConfig.branch}/${filePath}](${
+                site.siteMetadata.siteUrl
+              }${pathname})`}
+              label={t("doc.feedback")}
+              rel="noreferrer"
+            />
+            {pathConfig.locale === "zh" && (
+              <ActionItem
+                url={`https://asktug.com/?utm_source=doc`}
+                label={t("doc.feedbackAskTug")}
+                rel="noreferrer"
+              />
+            )}
+            {pathConfig.version === "dev" && (
+              <ActionItem
+                url={`https://github.com/${getRepoFromPathCfg(
+                  pathConfig
+                )}/edit/${pathConfig.branch}/${filePath}`}
+                label={t("doc.improve")}
+                rel="noreferrer"
+              />
+            )}
+          </Stack>
+        )}
 
-        <Box component="nav" aria-label="toc">
+        <Box
+          component="nav"
+          aria-label="toc"
+          sx={{
+            paddingTop: "1rem",
+          }}
+        >
           <Typography
             component="div"
             sx={{
@@ -120,11 +138,16 @@ const generateToc = (items: TableOfContent[], level = 0) => {
       }}
     >
       {items.map((item) => {
+        const { url, title, items } = item;
+        const { label: newLabel, anchor: newAnchor } = transformCustomId(
+          title,
+          url
+        );
         return (
           <Typography key={`${level}-${item.title}`} component="li">
             <Typography
               component="a"
-              href={item.url}
+              href={newAnchor}
               sx={{
                 display: "flex",
                 textDecoration: "none",
@@ -140,9 +163,9 @@ const generateToc = (items: TableOfContent[], level = 0) => {
                 },
               }}
             >
-              {item.title}
+              {newLabel}
             </Typography>
-            {item.items && generateToc(item.items, level + 1)}
+            {items && generateToc(items, level + 1)}
           </Typography>
         );
       })}
@@ -174,3 +197,90 @@ const ActionItem = (props: {
     </Typography>
   );
 };
+
+export function RightNavMobile(props: RightNavProps) {
+  const { toc = [], pathConfig, filePath } = props;
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const generateMobileTocList = (items: TableOfContent[], level = 0) => {
+    const result: { label: string; anchor: string; depth: number }[] = [];
+    items.forEach((item) => {
+      const { url, title, items: children } = item;
+      const { label: newLabel, anchor: newAnchor } = transformCustomId(
+        title,
+        url
+      );
+      result.push({
+        label: newLabel,
+        anchor: newAnchor,
+        depth: level,
+      });
+      if (children) {
+        const childrenresult = generateMobileTocList(children, level + 1);
+        result.push(...childrenresult);
+      }
+    });
+    return result;
+  };
+
+  return (
+    <Box>
+      <Button
+        id="toc-mobile-button"
+        variant="outlined"
+        aria-controls={open ? "toc-mobile-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        endIcon={<KeyboardArrowDownIcon />}
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Trans i18nKey="doc.toc" />
+      </Button>
+      <Menu
+        id="toc-mobile-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "toc-mobile-button",
+        }}
+      >
+        {generateMobileTocList(toc).map((item) => {
+          return (
+            <MenuItem
+              key={`${item.depth}-${item.label}`}
+              onClick={handleClose}
+              dense
+              sx={{
+                width: "calc(100vw - 2rem)",
+              }}
+            >
+              <Typography
+                component="a"
+                href={item.anchor}
+                sx={{
+                  width: "100%",
+                  textDecoration: "none",
+                  paddingLeft: `${0.5 + 1 * item.depth}rem`,
+                }}
+              >
+                {item.label}
+              </Typography>
+            </MenuItem>
+          );
+        })}
+      </Menu>
+    </Box>
+  );
+}
