@@ -177,6 +177,9 @@ export const transformCustomId = (
   label: string,
   anchor: string
 ): { label: string; anchor: string } => {
+  if (!label || !anchor) {
+    return { label, anchor };
+  }
   const customIdMatches = label.match(/(.+) *\{(#.+)\}$/);
   if (customIdMatches?.length) {
     const [, newLabel, newAnchor] = customIdMatches;
