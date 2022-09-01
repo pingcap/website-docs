@@ -10,10 +10,10 @@ import Box from "@mui/material/Box";
 import * as Shortcodes from "components/shortcodes";
 import * as MDXConponents from "components/MDXComponents";
 
-export default function MDXContent(props: { data: any }) {
-  const { data } = props;
+export default function MDXContent(props: { data: any; className?: string }) {
+  const { data, className } = props;
   return (
-    <Container>
+    <Container className={className}>
       <Box className="markdown-body">
         <MDXProvider components={{ ...Shortcodes, ...MDXConponents, Link }}>
           <MDXRenderer>{data}</MDXRenderer>

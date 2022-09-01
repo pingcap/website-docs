@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link } from "gatsby";
-
+import clsx from "clsx";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
@@ -72,7 +72,10 @@ export default function DocTemplate({
           type: pathConfig.repo,
         }}
       >
-        <Box sx={{ marginTop: "5rem", display: "flex" }}>
+        <Box
+          sx={{ marginTop: "5rem", display: "flex" }}
+          className={clsx("PingCAP-Doc")}
+        >
           <Box sx={{ display: "flex", width: "100%" }}>
             {!frontmatter?.hide_leftNav && (
               <LeftNavDesktop
@@ -117,9 +120,10 @@ export default function DocTemplate({
                           ? "100%"
                           : "calc(100% - 17.5rem)",
                       },
+                      padding: "1.5rem 0",
                     }}
                   >
-                    <MDXContent data={body} />
+                    <MDXContent data={body} className={clsx("doc-content")} />
                     <Box
                       sx={{
                         width: "fit-content",
