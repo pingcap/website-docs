@@ -2,9 +2,9 @@ name: Build Preview
 
 on:
   push:
-    branches: ['docs-staging']
+    branches: ["master"]
     paths-ignore:
-      - '.github/**'
+      - ".github/**"
   workflow_dispatch:
 
 concurrency: ci-prev
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'preview'
+          ref: "preview"
 
       - name: Init git info
         run: |
@@ -27,7 +27,7 @@ jobs:
       - name: Git reset to master branch
         run: |
           git fetch
-          git reset --hard origin/docs-staging
+          git reset --hard origin/master
 
       - name: Update submodule
         id: submodule
