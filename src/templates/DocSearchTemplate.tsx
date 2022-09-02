@@ -15,6 +15,7 @@ import "../styles/algolia.css";
 import Layout from "components/Layout";
 import SearchResults from "components/Search/Results";
 import SearchInput from "components/Search";
+import Seo from "components/Layout/Seo";
 import { algoliaClient } from "utils/algolia";
 import {
   TIDB_EN_STABLE_VERSION,
@@ -142,6 +143,7 @@ export default function DocSearchTemplate() {
             minHeight: "calc(100vh - 30rem)",
           }}
         >
+          <Seo title="Search" noindex />
           <Stack
             spacing={2}
             sx={{

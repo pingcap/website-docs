@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Layout from "components/Layout";
 import { Locale } from "static/Type";
 import { Page404Icon } from "components/Icons";
+import Seo from "components/Layout/Seo";
 
 interface AllLocales {
   locales: {
@@ -66,6 +67,7 @@ export default function PageNotFoundTemplate(props: { data: AllLocales }) {
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
           <Layout>
+            <Seo title="404 Not Found" noindex />
             <Container
               sx={{
                 marginTop: "5rem",

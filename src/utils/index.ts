@@ -187,3 +187,25 @@ export const transformCustomId = (
   }
   return { label, anchor };
 };
+
+export function getStable(doc: Repo) {
+  const docInfo = CONFIG.docs[doc];
+
+  if ("stable" in docInfo) {
+    return docInfo.stable;
+  }
+
+  return undefined;
+}
+
+export function generateUrl(filename: string, config: PathConfig) {
+  const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
+
+  if (filename === "") {
+    return `${lang}/${config.repo}/${config.version ? config.version : ""}`;
+  }
+
+  return `${lang}/${config.repo}/${
+    config.version ? config.version + "/" : ""
+  }${filename}`;
+}

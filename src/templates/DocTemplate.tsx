@@ -16,6 +16,8 @@ import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
+import Seo from "components/Layout/Seo";
+import { getStable, generateUrl } from "utils";
 
 interface DocTemplateProps {
   pageContext: PageContext & { pageUrl: string };
@@ -53,6 +55,8 @@ export default function DocTemplate({
     return tableOfContents.items || [];
   }, [tableOfContents.items]);
 
+  const stableBranch = getStable(pathConfig.repo);
+
   useHighlightCode();
 
   return (
@@ -75,6 +79,37 @@ export default function DocTemplate({
           type: pathConfig.repo,
         }}
       >
+        <Seo
+          title={frontmatter.title}
+          description={frontmatter.summary}
+          meta={[
+            {
+              name: "doc:lang",
+              content: pathConfig.locale,
+            },
+            {
+              name: "doc:type",
+              content: pathConfig.repo,
+            },
+            {
+              name: "doc:version",
+              content: pathConfig.branch,
+            },
+          ]}
+          link={[
+            ...(pathConfig.branch !== stableBranch && stableBranch != null
+              ? [
+                  {
+                    rel: "canonical",
+                    href: `${site.siteMetadata.siteUrl}${generateUrl(name, {
+                      ...pathConfig,
+                      branch: stableBranch,
+                    })}`,
+                  },
+                ]
+              : []),
+          ]}
+        />
         <Box
           sx={{ marginTop: "5rem", display: "flex" }}
           className={clsx("PingCAP-Doc")}
