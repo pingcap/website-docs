@@ -3,7 +3,7 @@ import { resolve } from "path";
 import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
-import { Locale, Repo } from "../src/typing";
+import { Locale, Repo } from "../src/static/Type";
 import {
   generateConfig,
   generateUrl,
