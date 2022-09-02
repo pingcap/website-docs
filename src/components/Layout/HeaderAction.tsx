@@ -39,7 +39,7 @@ export default function HeaderAction(props: {
       {supportedLocales.length > 0 && (
         <LangSwitch supportedLocales={supportedLocales} />
       )}
-      {docInfo && (
+      {docInfo && language !== "ja" && (
         <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
       )}
     </Stack>

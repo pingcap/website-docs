@@ -133,7 +133,6 @@ export default function ControlledTreeView(props: {
   const theme = useTheme();
 
   React.useEffect(() => {
-    console.log("currentUrl", currentUrl);
     const expandedIds = calcExpandedIds(data, currentUrl);
     setExpanded(expandedIds);
     expandedIds.length && setSelected([expandedIds[expandedIds.length - 1]]);
