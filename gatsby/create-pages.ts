@@ -126,7 +126,10 @@ export const createCloudAPIReference = async ({
   actions: { createPage, createRedirect },
   graphql,
 }: CreatePagesArgs) => {
-  const template = resolve(__dirname, "../src/apiReference/index.tsx");
+  const template = resolve(
+    __dirname,
+    "../src/templates/CloudAPIReferenceTemplate.tsx"
+  );
   const pageCfg = DOCS_CONFIG.tidbcloud.openAPI;
   const pageList = pageCfg.data;
   pageList.forEach((page) => {
