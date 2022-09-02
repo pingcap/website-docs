@@ -111,7 +111,7 @@ export function LearningPath(props: {
             margin: "0",
           },
 
-          "&:not(:first-child):before": {
+          "&:not(:first-of-type):before": {
             backgroundColor: "#e9eaee",
             top: 0,
             content: "''",

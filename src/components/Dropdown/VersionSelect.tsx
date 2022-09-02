@@ -134,6 +134,7 @@ export default function VersionSelect(props: VersionSelectProps) {
       >
         {AllVersion[pathConfig.repo][pathConfig.locale].map((version) => (
           <MenuItem
+            key={`menu-${version}`}
             value={`menu-${version}`}
             disabled={!availIn.includes(version || "")}
           >
@@ -249,6 +250,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
         >
           {AllVersion[pathConfig.repo][pathConfig.locale].map((version) => (
             <option
+              key={`${version}`}
               value={`${version}`}
               disabled={!availIn.includes(version || "")}
             >
