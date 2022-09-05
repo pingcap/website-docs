@@ -76,6 +76,9 @@ const theme = createTheme({
     },
   },
   typography: {
+    button: {
+      textTransform: "none",
+    },
     fontFamily: [
       "-apple-system",
       '"Poppins"',

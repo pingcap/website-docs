@@ -39,7 +39,6 @@ export default function FeedbackBtn() {
           color: "website.f2",
           backgroundColor: "#eff4f7",
           borderRadius: "0.5rem",
-          height: "2rem",
           width: "100%",
           boxShadow: "none",
           "&:hover": {
