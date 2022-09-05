@@ -21,7 +21,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { TableOfContent, PathConfig } from "static/Type";
 import { calcPDFUrl, getRepoFromPathCfg, transformCustomId } from "utils";
-import LinkComponent from "components/Link";
+import FeedbackBtn from "components/Button/FeedbackBtn";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -63,6 +63,8 @@ export default function RightNav(props: RightNavProps) {
           overflowY: "auto",
           paddingLeft: "1rem",
           paddingRight: "1rem",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {language !== "ja" && (
@@ -120,6 +122,15 @@ export default function RightNav(props: RightNavProps) {
             <Trans i18nKey="doc.toc" />
           </Typography>
           {generateToc(toc)}
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            marginTop: "auto",
+            padding: "1rem 0",
+          }}
+        >
+          <FeedbackBtn />
         </Box>
       </Box>
     </>
