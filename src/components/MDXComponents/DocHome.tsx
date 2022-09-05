@@ -287,7 +287,11 @@ export function DocHomeCardContainer(props: any) {
     <Box
       sx={{
         width: "100%",
-        display: "grid",
+        display: {
+          xs: "flex",
+          sm: "grid",
+        },
+        flexDirection: "column",
         gridTemplateColumns: "repeat(auto-fit, minmax(224px, 30%))",
         gap: "1.5rem",
         justifyContent: "start",
