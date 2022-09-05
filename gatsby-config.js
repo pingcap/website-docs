@@ -65,10 +65,6 @@ module.exports = {
             matchPath: "/:lang?/",
             getLanguageFromPath: true,
           },
-          {
-            matchPath: "/:lang?/test",
-            getLanguageFromPath: true,
-          },
         ],
       },
     },
