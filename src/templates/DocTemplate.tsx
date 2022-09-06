@@ -18,6 +18,7 @@ import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
 import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
+import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 
 interface DocTemplateProps {
   pageContext: PageContext & { pageUrl: string };
@@ -162,6 +163,11 @@ export default function DocTemplate({
                     }}
                   >
                     <MDXContent data={body} className={clsx("doc-content")} />
+                    <GitCommitInfoCard
+                      pathConfig={pathConfig}
+                      filePath={filePath}
+                      title={frontmatter.title}
+                    />
                     <Box
                       sx={{
                         width: "fit-content",
