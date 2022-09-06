@@ -116,6 +116,7 @@ export function DocHomeContainer(props: {
             sx={{
               width: "100%",
               height: "100%",
+              maxHeight: "276px",
             }}
           />
         </Box>
@@ -144,6 +145,7 @@ export function DocHomeContainer(props: {
             "& ul#toc-ul": {
               padding: 0,
               margin: 0,
+              listStyle: "none",
             },
           }}
         >
@@ -339,6 +341,7 @@ export function DocHomeCard(props: any) {
 
             "& img#card-content-img": {
               backgroundColor: "transparent",
+              margin: 0,
             },
           }}
         >
