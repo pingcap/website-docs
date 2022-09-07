@@ -36,7 +36,7 @@ interface APIReferenceTemplateProps {
 }
 
 export default function APIReferenceTemplate({
-  pageContext: { production, preview, isProduction },
+  pageContext: { production, preview, isProduction, pathname },
   data,
 }: APIReferenceTemplateProps) {
   const specUrl = isProduction ? production : preview;
@@ -65,7 +65,20 @@ export default function APIReferenceTemplate({
 
   return (
     <>
-      <Seo title="TiDB Cloud API" noindex />
+      <Seo
+        title="TiDB Cloud API"
+        description="The TiDB Cloud API is a REST interface that provides you with programmatic access to manage administrative objects within TiDB Cloud."
+        meta={[
+          {
+            name: "doc:lang",
+            content: 'en',
+          },
+          {
+            name: "doc:version",
+            content: pathname,
+          },
+        ]}
+      />
       <div id="redoc-container" data-testid="redoc-container" />
     </>
   );
