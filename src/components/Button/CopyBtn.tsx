@@ -11,17 +11,18 @@ export default function CopyBtn(props: { content: string }) {
 
   const handleButtonsContent = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (isCopied) {
-      return;
+      return false;
     }
     setIscopied(true);
     setTimeout(() => {
       setIscopied(false);
     }, 2000);
+    return true;
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    handleButtonsContent(event);
-    copy(props.content);
+    const shouldCopy = handleButtonsContent(event);
+    shouldCopy && copy(props.content);
   };
 
   return (
@@ -31,7 +32,6 @@ export default function CopyBtn(props: { content: string }) {
           size="small"
           aria-label="copy"
           onClick={handleClick}
-          disabled={isCopied}
           sx={{
             position: "absolute",
             top: " 0.625rem",
