@@ -57,10 +57,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
           position: "sticky",
           top: "5rem",
           height: "100%",
-          maxHeight: "calc(100vh - 5rem)",
+          maxHeight: "calc(100vh - 7rem)",
           overflowY: "auto",
-          paddingLeft: "1rem",
-          paddingRight: "1rem",
+          padding: "1rem",
         }}
       >
         {pathConfig.repo !== "tidbcloud" && (

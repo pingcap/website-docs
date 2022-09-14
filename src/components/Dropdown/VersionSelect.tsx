@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -95,6 +96,8 @@ export default function VersionSelect(props: VersionSelectProps) {
     setAnchorEl(null);
   };
 
+  const theme = useTheme();
+
   return (
     <>
       <Button
@@ -109,17 +112,29 @@ export default function VersionSelect(props: VersionSelectProps) {
               transform: open ? "rotate(90deg)" : "rotate(0deg)",
               height: "1.5rem",
               width: "1.5rem",
-              fill: "#0ca6f2",
+              fill: theme.palette.website.f3,
               marginRight: "0.25rem",
             }}
           />
         }
         sx={{
           width: "100%",
+          height: "2rem",
           justifyContent: "space-between",
+          borderStyle: "solid",
+          borderWidth: "1px",
+          borderColor: "website.m4",
+          marginBottom: "1rem",
         }}
       >
-        <Typography component="div" sx={{ padding: "0 0.25rem" }}>
+        <Typography
+          component="div"
+          sx={{
+            padding: "0 0.25rem",
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
+          }}
+        >
           {renderVersion(pathConfig.version, pathConfig)}
         </Typography>
       </Button>
@@ -146,52 +161,19 @@ export default function VersionSelect(props: VersionSelectProps) {
                 color: "#666666",
               }}
             >
-              {renderVersion(version, pathConfig)}
+              <Typography
+                component="div"
+                sx={{
+                  fontSize: "0.875rem",
+                  lineHeight: "1.25rem",
+                }}
+              >
+                {renderVersion(version, pathConfig)}
+              </Typography>
             </LinkComponent>
           </MenuItem>
         ))}
       </StyledMenu>
-      {/* <FormControl margin="dense" hiddenLabel variant="standard" size="small">
-        <Select
-          labelId="demo-customized-select-label"
-          id="demo-customized-select"
-          value={`menu-${pathConfig.version}`}
-          sx={{ width: "100%" }}
-        >
-          {AllVersion[pathConfig.repo][pathConfig.locale].map((version) => (
-            <MenuItem
-              value={`menu-${version}`}
-              disabled={!availIn.includes(version || "")}
-            >
-              <LinkComponent
-                isI18n
-                to={`/${pathConfig.repo}/${version}/${name}`}
-                style={{
-                  width: "100%",
-                  color: "#666666",
-                }}
-              >
-                {renderVersion(version, pathConfig)}
-              </LinkComponent>
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl> */}
-      {/* <FormControl sx={{ m: 1 }} variant="standard">
-        <InputLabel htmlFor="demo-customized-select-native">Age</InputLabel>
-        <NativeSelect
-          id="demo-customized-select-native"
-          value={age}
-          onChange={handleChange}
-          input={<BootstrapInput />}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-      </FormControl> */}
-      <Divider />
     </>
   );
 }

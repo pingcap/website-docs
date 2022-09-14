@@ -46,6 +46,9 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     "&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused": {
       backgroundColor: `var(--tree-view-bg-color, #EAF6FB)`,
       color: "var(--tree-view-color, #0A85C2)",
+      [`& svg.MuiTreeItem-ChevronRightIcon`]: {
+        fill: "var(--tree-view-color, #0A85C2)",
+      }
     },
     [`& .${treeItemClasses.label}`]: {
       fontWeight: "inherit",
@@ -56,7 +59,7 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     },
   },
   [`& .${treeItemClasses.group}`]: {
-    // marginLeft: 0,
+    marginLeft: 0,
     [`& .${treeItemClasses.content}`]: {
       paddingLeft: theme.spacing(2),
     },
@@ -92,6 +95,8 @@ function StyledTreeItem(props: StyledTreeItemProps) {
       style={{
         "--tree-view-color": color,
         "--tree-view-bg-color": bgColor,
+        marginTop: "0.1875rem",
+        marginBottom: "0.1875rem",
       }}
       {...other}
     />
@@ -138,7 +143,7 @@ export default function ControlledTreeView(props: {
     expandedIds.length && setSelected([expandedIds[expandedIds.length - 1]]);
   }, [data, currentUrl]);
 
-  const renderTreeItems = (items: DocLeftNavItem[]) => {
+  const renderTreeItems = (items: DocLeftNavItem[], deepth = 0) => {
     return items.map((item: DocLeftNavItem) => {
       const hasChildren = item.children && item.children.length > 0;
       const isItemExpanded = expanded.includes(item.id);
@@ -149,6 +154,7 @@ export default function ControlledTreeView(props: {
             sx={{
               minHeight: "1.75rem",
               alignItems: "center",
+              paddingLeft: `${deepth * 0.5}rem`,
             }}
           >
             {item.link ? (
@@ -163,8 +169,9 @@ export default function ControlledTreeView(props: {
             )}
             {hasChildren ? (
               <ChevronRightIcon
+                className="MuiTreeItem-ChevronRightIcon"
                 sx={{
-                  fill: theme.palette.website.k1,
+                  fill: theme.palette.website.f3,
                   marginLeft: "auto",
                   transform: isItemExpanded ? "rotate(90deg)" : "none",
                 }}
@@ -186,7 +193,7 @@ export default function ControlledTreeView(props: {
           }}
         >
           {hasChildren
-            ? renderTreeItems(item.children as DocLeftNavItem[])
+            ? renderTreeItems(item.children as DocLeftNavItem[], deepth + 1)
             : null}
         </StyledTreeItem>
       );
@@ -217,7 +224,11 @@ const generateItemLabel = (content: DocLeftNavItemContent) => {
           <Typography
             key={`${content}-${index}`}
             component="div"
-            sx={{ color: "inherit" }}
+            sx={{
+              color: "inherit",
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
+            }}
           >
             {content}
           </Typography>
@@ -225,7 +236,11 @@ const generateItemLabel = (content: DocLeftNavItemContent) => {
           <Typography
             key={`${content.value}-${index}`}
             component="code"
-            sx={{ color: "inherit" }}
+            sx={{
+              color: "inherit",
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
+            }}
           >
             {content.value}
           </Typography>
