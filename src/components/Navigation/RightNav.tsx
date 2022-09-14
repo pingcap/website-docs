@@ -18,6 +18,11 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
+import HelpCenterIcon from "@mui/icons-material/HelpCenter";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import EditIcon from "@mui/icons-material/Edit";
+import SvgIcon from "@mui/material/SvgIcon";
 
 import { TableOfContent, PathConfig } from "static/Type";
 import { calcPDFUrl, getRepoFromPathCfg, transformCustomId } from "utils";
@@ -68,14 +73,16 @@ export default function RightNav(props: RightNavProps) {
         }}
       >
         {language !== "ja" && (
-          <Stack spacing={1} sx={{ padding: "2rem 2rem 1rem 2rem" }}>
+          <Stack spacing={1} sx={{ padding: "2rem 0.5rem 1rem 0.5rem" }}>
             <ActionItem
+              icon={SimCardDownloadIcon}
               url={`https://download.pingcap.org/${pdfUrlMemo}`}
               label={t("doc.download-pdf")}
               rel="noreferrer"
               download
             />
             <ActionItem
+              icon={HelpCenterIcon}
               url={`https://github.com/${getRepoFromPathCfg(
                 pathConfig
               )}/issues/new?body=File:%20[/${pathConfig.branch}/${filePath}](${
@@ -86,6 +93,7 @@ export default function RightNav(props: RightNavProps) {
             />
             {pathConfig.locale === "zh" && (
               <ActionItem
+                icon={QuestionAnswerIcon}
                 url={`https://asktug.com/?utm_source=doc`}
                 label={t("doc.feedbackAskTug")}
                 rel="noreferrer"
@@ -93,6 +101,7 @@ export default function RightNav(props: RightNavProps) {
             )}
             {pathConfig.version === "dev" && (
               <ActionItem
+                icon={EditIcon}
                 url={`https://github.com/${getRepoFromPathCfg(
                   pathConfig
                 )}/edit/${pathConfig.branch}/${filePath}`}
@@ -187,6 +196,7 @@ const generateToc = (items: TableOfContent[], level = 0) => {
 const ActionItem = (props: {
   url: string;
   label: string;
+  icon?: typeof SvgIcon;
   [key: string]: any;
 }) => {
   const { url, label, sx, ...rest } = props;
@@ -200,10 +210,21 @@ const ActionItem = (props: {
         textDecoration: "none",
         fontSize: "13px",
         lineHeight: "1.25rem",
+        display: "flex",
+        alignItems: "center",
+        gap: "0.25rem",
         ...sx,
       }}
       {...rest}
     >
+      {props.icon && (
+        <props.icon
+          sx={{
+            width: "1.25rem",
+            height: "1.25rem",
+          }}
+        />
+      )}
       {label}
     </Typography>
   );
