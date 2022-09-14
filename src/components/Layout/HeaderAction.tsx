@@ -12,10 +12,12 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 
+import LoginIcon from "@mui/icons-material/Login";
 import LanguageIcon from "@mui/icons-material/Language";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
+import CloudIcon from "@mui/icons-material/Cloud";
 
 import LinkComponent from "components/Link";
 import Search from "components/Search";
@@ -33,7 +35,10 @@ export default function HeaderAction(props: {
   return (
     <Stack
       direction="row"
-      spacing={3}
+      spacing={{
+        xs: 1,
+        lg: 3,
+      }}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
       {supportedLocales.length > 0 && (
@@ -42,6 +47,7 @@ export default function HeaderAction(props: {
       {docInfo && language !== "ja" && (
         <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
       )}
+      {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
   );
 }
@@ -145,5 +151,102 @@ const LangSwitch = (props: {
         </MenuItem>
       </Menu>
     </Box>
+  );
+};
+
+const TiDBCloudBtnGroup = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Stack
+        direction="row"
+        spacing={3}
+        display={{
+          xs: "none",
+          lg: "flex",
+        }}
+      >
+        <Button
+          variant="text"
+          href={`https://tidbcloud.com/signin`}
+          // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+          referrerPolicy="no-referrer-when-downgrade"
+          target="_blank"
+        >
+          Sign In
+        </Button>
+        <Button
+          variant="contained"
+          target="_blank"
+          href="https://tidbcloud.com/free-trial"
+          // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+          referrerPolicy="no-referrer-when-downgrade"
+        >
+          Try Free
+        </Button>
+      </Stack>
+
+      <IconButton
+        id="tidb-cloud-menu-button"
+        aria-controls={open ? "tidb-cloud-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        sx={{
+          display: {
+            xs: "inline-flex",
+            lg: "none",
+          },
+        }}
+      >
+        <CloudIcon />
+      </IconButton>
+      <Menu
+        id="tidb-cloud-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "idb-cloud-menu-button",
+        }}
+      >
+        <MenuItem onClick={handleClose}>
+          <Typography
+            component="a"
+            href={`https://tidbcloud.com/signin`}
+            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+            referrerPolicy="no-referrer-when-downgrade"
+            target="_blank"
+            sx={{
+              textDecoration: "none",
+            }}
+          >
+            Sign In
+          </Typography>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Typography
+            component="a"
+            target="_blank"
+            href="https://tidbcloud.com/free-trial"
+            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+            referrerPolicy="no-referrer-when-downgrade"
+            sx={{
+              textDecoration: "none",
+            }}
+          >
+            Try Free
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </>
   );
 };
