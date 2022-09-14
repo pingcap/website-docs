@@ -163,11 +163,13 @@ export default function DocTemplate({
                     }}
                   >
                     <MDXContent data={body} className={clsx("doc-content")} />
-                    <GitCommitInfoCard
-                      pathConfig={pathConfig}
-                      filePath={filePath}
-                      title={frontmatter.title}
-                    />
+                    {!frontmatter?.hide_commit && (
+                      <GitCommitInfoCard
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                        title={frontmatter.title}
+                      />
+                    )}
                     <Box
                       sx={{
                         width: "fit-content",
