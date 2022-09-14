@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Trans } from "gatsby-plugin-react-i18next";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Popover, { PopoverProps } from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -9,6 +9,8 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function FeedbackBtn() {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -28,123 +30,37 @@ export default function FeedbackBtn() {
 
   return (
     <>
-      <Button
-        aria-describedby={id}
-        size="small"
-        aria-label="feedback"
-        disableRipple
-        // variant="extended"
-        sx={{
-          display: "flex",
-          color: "website.f2",
-          backgroundColor: "#eff4f7",
-          borderRadius: "0.5rem",
-          width: "100%",
-          boxShadow: "none",
-          "&:hover": {
-            color: "website.m1",
-            backgroundColor: "website.k1",
-          },
-        }}
-        onClick={handleClick}
-      >
-        <Trans i18nKey="docHelpful.header" />
-      </Button>
+      <Tooltip placement="left" title={<Trans i18nKey="fab.goToFeedback" />}>
+        <Fab
+          aria-describedby={id}
+          size="small"
+          aria-label="feedback"
+          disableRipple
+          variant="extended"
+          sx={{
+            display: "flex",
+            color: "website.f2",
+            backgroundColor: "#eff4f7",
+            borderRadius: "0.5rem",
+            height: "2rem",
+            width: "2rem",
+            boxShadow: "none",
+            "&:hover": {
+              color: "website.m1",
+              backgroundColor: "website.k1",
+            },
+          }}
+          onClick={handleClick}
+        >
+          <RateReviewIcon />
+        </Fab>
+      </Tooltip>
       <FeedbackPopover
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
       />
-      {/* <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-        marginThreshold={56}
-      >
-        <Box
-          sx={{
-            width: "13.5rem",
-          }}
-        >
-          <Box
-            sx={{
-              height: "2.625rem",
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "website.m5",
-            }}
-          >
-            <Typography
-              variant="body1"
-              sx={{
-                padding: "0 1rem",
-                color: "website.m1",
-              }}
-            >
-              <Trans i18nKey="docHelpful.header" />
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              backgroundColor: "#F7F8F9",
-              padding: "1rem",
-            }}
-          >
-            <Typography variant="body2">
-              您在使用文档时是否遇到以下问题?
-            </Typography>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox size="small" />}
-                label={<Typography variant="body2">文档内容错误</Typography>}
-              />
-              <FormControlLabel
-                control={<Checkbox size="small" />}
-                label={
-                  <Typography variant="body2">描述不清，内容有歧义</Typography>
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox size="small" />}
-                label={<Typography variant="body2">文档中有错别字</Typography>}
-              />
-              <FormControlLabel
-                control={<Checkbox size="small" />}
-                label={<Typography variant="body2">链接无法打开</Typography>}
-              />
-              <FormControlLabel
-                control={<Checkbox size="small" />}
-                label={
-                  <Typography variant="body2">这篇文档不是我需要的</Typography>
-                }
-              />
-            </FormGroup>
-            <Typography variant="body2">我们应该如何改进这篇文档?</Typography>
-            <TextField
-              size="small"
-              id="outlined-multiline-static"
-              multiline
-              rows={4}
-            />
-            <Typography variant="body2">可以联系你为您解决问题吗?</Typography>
-            <TextField size="small" placeholder="邮箱地址" />
-            <Button size="small" disableRipple variant="contained">
-              提交
-            </Button>
-          </Box>
-        </Box>
-      </Popover> */}
     </>
   );
 }
@@ -156,6 +72,7 @@ function FeedbackPopover(props: {
   onClose?: PopoverProps["onClose"];
 }) {
   const { id, open, anchorEl, onClose } = props;
+  const { t } = useI18next();
   return (
     <Popover
       id={id}
@@ -205,36 +122,52 @@ function FeedbackPopover(props: {
           }}
         >
           <Typography variant="body2">
-            您在使用文档时是否遇到以下问题?
+            <Trans i18nKey="docHelpful.issueTitle" />
           </Typography>
           <FormGroup>
             <FormControlLabel
               control={<Checkbox size="small" />}
-              label={<Typography variant="body2">文档内容错误</Typography>}
-            />
-            <FormControlLabel
-              control={<Checkbox size="small" />}
               label={
-                <Typography variant="body2">描述不清，内容有歧义</Typography>
+                <Typography variant="body2">
+                  <Trans i18nKey="docHelpful.contentError" />
+                </Typography>
               }
             />
             <FormControlLabel
               control={<Checkbox size="small" />}
-              label={<Typography variant="body2">文档中有错别字</Typography>}
-            />
-            <FormControlLabel
-              control={<Checkbox size="small" />}
-              label={<Typography variant="body2">链接无法打开</Typography>}
+              label={
+                <Typography variant="body2">
+                  <Trans i18nKey="docHelpful.contentAmbiguity" />
+                </Typography>
+              }
             />
             <FormControlLabel
               control={<Checkbox size="small" />}
               label={
-                <Typography variant="body2">这篇文档不是我需要的</Typography>
+                <Typography variant="body2">
+                  <Trans i18nKey="docHelpful.contentTypo" />
+                </Typography>
+              }
+            />
+            <FormControlLabel
+              control={<Checkbox size="small" />}
+              label={
+                <Typography variant="body2">
+                  <Trans i18nKey="docHelpful.brokenLink" />
+                </Typography>
+              }
+            />
+            <FormControlLabel
+              control={<Checkbox size="small" />}
+              label={
+                <Typography variant="body2">
+                  <Trans i18nKey="docHelpful.wrongDoc" />
+                </Typography>
               }
             />
           </FormGroup>
           <Typography variant="body2" sx={{ marginTop: "1rem" }}>
-            我们应该如何改进这篇文档?
+            <Trans i18nKey="docHelpful.improveTitle" />
           </Typography>
           <TextField
             size="small"
@@ -246,10 +179,12 @@ function FeedbackPopover(props: {
               marginBottom: "1rem",
             }}
           />
-          <Typography variant="body2">可以联系你为您解决问题吗?</Typography>
+          <Typography variant="body2">
+            <Trans i18nKey="docHelpful.contactTitle" />
+          </Typography>
           <TextField
             size="small"
-            placeholder="邮箱地址"
+            placeholder={t("docHelpful.emailAddr")}
             sx={{
               marginTop: "0.5rem",
               marginBottom: "1rem",
@@ -263,7 +198,7 @@ function FeedbackPopover(props: {
               with: "11.5rem",
             }}
           >
-            提交
+            <Trans i18nKey="docHelpful.submit" />
           </Button>
         </Box>
       </Box>

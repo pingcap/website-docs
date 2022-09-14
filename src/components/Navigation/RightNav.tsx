@@ -26,7 +26,6 @@ import SvgIcon from "@mui/material/SvgIcon";
 
 import { TableOfContent, PathConfig } from "static/Type";
 import { calcPDFUrl, getRepoFromPathCfg, transformCustomId } from "utils";
-import FeedbackBtn from "components/Button/FeedbackBtn";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -131,15 +130,6 @@ export default function RightNav(props: RightNavProps) {
             <Trans i18nKey="doc.toc" />
           </Typography>
           {generateToc(toc)}
-        </Box>
-        <Box
-          sx={{
-            width: "100%",
-            marginTop: "auto",
-            padding: "1rem 0",
-          }}
-        >
-          <FeedbackBtn />
         </Box>
       </Box>
     </>

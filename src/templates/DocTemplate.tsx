@@ -14,6 +14,7 @@ import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
+import FeedbackBtn from "components/Button/FeedbackBtn";
 import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
 import Seo from "components/Layout/Seo";
@@ -170,6 +171,16 @@ export default function DocTemplate({
                         title={frontmatter.title}
                       />
                     )}
+                    <Box
+                      sx={{
+                        width: "fit-content",
+                        position: "fixed",
+                        bottom: "4rem",
+                        right: "1rem",
+                      }}
+                    >
+                      <FeedbackBtn />
+                    </Box>
                     <Box
                       sx={{
                         width: "fit-content",
