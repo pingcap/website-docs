@@ -1,0 +1,99 @@
+.feedbackForm {
+  padding: 1rem;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+  iframe {
+    width: 100% !important;
+  }
+
+  :global {
+    .input,
+    .textarea {
+      border: none;
+      box-shadow: none;
+      height: 100%;
+      background: transparent;
+      padding: 5px 0 0;
+
+      label {
+        font-size: 13px;
+        color: #172d72;
+
+        &.hs-form-checkbox-display {
+          display: flex;
+          flex-flow: row wrap;
+          align-items: center;
+
+          input {
+            margin: 5px 8px 5px 0;
+          }
+        }
+      }
+    }
+
+    textarea.hs-input,
+    .hs_email .hs-input {
+      padding: 5px;
+      width: 100%;
+      color: #172d72;
+      border-color: #172d72;
+    }
+
+    ::placeholder,
+    ::-ms-input-placeholder,
+    ::-ms-input-placeholder {
+      color: #000431;
+      opacity: 50%;
+    }
+
+    textarea.hs-input {
+      min-height: 80px;
+    }
+
+    .hs_email .hs-input {
+      border-width: 1px;
+    }
+
+    .hs-error-msgs,
+    .hs-form-required {
+      color: #e30c34;
+    }
+
+    .hs_error_rollup {
+      display: none;
+    }
+
+    .hs_submit {
+      .actions {
+        margin: 0 auto;
+        width: 50%;
+
+        input {
+          padding: 7px;
+          width: 100%;
+          border: none;
+          background: #3d3fea;
+          color: #fff;
+        }
+      }
+    }
+
+    .field:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    .inputs-list {
+      padding: 0;
+      list-style: none;
+    }
+
+    textarea,
+    .input > input {
+      &.hs-input {
+        width: calc(100% - 2rem);
+      }
+    }
+  }
+}

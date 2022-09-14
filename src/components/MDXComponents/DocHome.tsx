@@ -242,7 +242,7 @@ export function DocHomeSection(props: {
           padding: 0,
         },
 
-        "> a": {
+        "> a.button": {
           backgroundColor: "#3d3fea",
           borderColor: "transparent",
           color: "#fff",

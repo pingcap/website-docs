@@ -98,5 +98,9 @@
     "youMayWish": "You may wish to:",
     "goToDocHome": "Go to <0>Docs Home</0>",
     "searchDoc": "Search our current documentation"
+  },
+  "fab": {
+    "scrollToTop": "トップへ戻る",
+    "goToFeedback": "このページは役に立ちましたか？"
   }
 }

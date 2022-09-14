@@ -88,17 +88,7 @@
   "docHelpful": {
     "header": "文档内容是否有帮助？",
     "thumbUp": "是",
-    "thumbDown": "否",
-    "issueTitle": "您在使用文档时是否遇到以下问题?",
-    "contentError": "文档内容错误",
-    "contentAmbiguity": "描述不清，内容有歧义",
-    "contentTypo": "文档中有错别字",
-    "brokenLink": "链接无法打开",
-    "wrongDoc": "这篇文档不是我需要的",
-    "improveTitle": "我们应该如何改进这篇文档?",
-    "contactTitle": "可以联系你为您解决问题吗?",
-    "emailAddr": "您的邮箱地址",
-    "submit": "提交"
+    "thumbDown": "否"
   },
   "doc404": {
     "title": "抱歉，您要找的页面走丢了…",
