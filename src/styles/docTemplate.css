@@ -85,4 +85,14 @@
       background-size: 20px;
     }
   }
+
+  .markdown-body {
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.75;
+
+    a {
+      color: #0a85c2;
+    }
+  }
 }

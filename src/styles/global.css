@@ -1,5 +1,5 @@
-@import url("./font.css");
-@import url("./variables.css");
+@import "./font.css";
+@import "./variables.css";
 
 html {
   font-family: "Poppins", "Helvetica Neue", "Noto Sans", "Fira Code",
