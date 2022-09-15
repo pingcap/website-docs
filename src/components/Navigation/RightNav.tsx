@@ -203,6 +203,9 @@ const ActionItem = (props: {
         display: "flex",
         alignItems: "center",
         gap: "0.25rem",
+        "&:hover, &:focus, &:active": {
+          color: "#0A85C2",
+        },
         ...sx,
       }}
       {...rest}
