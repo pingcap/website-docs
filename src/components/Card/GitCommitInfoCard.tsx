@@ -69,7 +69,9 @@ export default function GitCommitInfoCard(props: GitCommitInfoCardProps) {
             rel="noreferrer"
             sx={{
               textDecoration: "none",
-              color: "website.k1",
+              color: "#0A85C2",
+              fontSize: "0.875rem",
+              lineHeight: "1.75",
             }}
           >
             {title}
@@ -80,6 +82,8 @@ export default function GitCommitInfoCard(props: GitCommitInfoCardProps) {
             sx={{
               paddingLeft: "0.5rem",
               paddingRight: "0.5rem",
+              fontSize: "0.875rem",
+              lineHeight: "1.75",
             }}
           >
             <Trans i18nKey="doc.latestCommit" />
@@ -93,7 +97,9 @@ export default function GitCommitInfoCard(props: GitCommitInfoCardProps) {
             rel="noreferrer"
             sx={{
               textDecoration: "none",
-              color: "website.k1",
+              color: "#0A85C2",
+              fontSize: "0.875rem",
+              lineHeight: "1.75",
             }}
           >
             {latestCommit.commit.message.split("\n")[0]}

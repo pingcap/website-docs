@@ -175,6 +175,8 @@ export default function ControlledTreeView(props: {
               minHeight: "1.75rem",
               alignItems: "center",
               paddingLeft: `${deepth * 0.5}rem`,
+              paddingTop: "0.25rem",
+              paddingBottom: "0.25rem",
             }}
           >
             {item.link ? (

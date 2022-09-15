@@ -7,9 +7,11 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
+import clsx from "clsx";
 
 export default function SearchResults(props: {
   loading: boolean;
+  className?: string;
   data: any[];
 }) {
   const { data, loading } = props;
@@ -42,7 +44,7 @@ export default function SearchResults(props: {
       sx={{
         padding: "2rem 0",
       }}
-      className="algolia-autocomplete"
+      className={clsx("algolia-autocomplete", props.className)}
     >
       <Typography
         variant="body2"

@@ -10,7 +10,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import "../styles/algolia.css";
+import "styles/algolia.css";
+import "styles/docTemplate.css";
 
 import Layout from "components/Layout";
 import SearchResults from "components/Search/Results";
@@ -177,7 +178,7 @@ export default function DocSearchTemplate() {
               >
                 <Trans i18nKey="search.type" />
               </Typography>
-              <Stack direction="row" spacing={4} sx={{ flexWrap: "wrap" }}>
+              <Stack direction="row" sx={{ flexWrap: "wrap", gap: "1rem" }}>
                 {docTypeListByLang(language).map((type) => (
                   <Button
                     key={type.name}
@@ -218,7 +219,7 @@ export default function DocSearchTemplate() {
                 >
                   <Trans i18nKey="search.version" />
                 </Typography>
-                <Stack direction="row" spacing={4} sx={{ flexWrap: "wrap" }}>
+                <Stack direction="row" sx={{ flexWrap: "wrap", gap: "1rem" }}>
                   {fetchVersionListByDocType(docType).map((version) => {
                     return (
                       <Button

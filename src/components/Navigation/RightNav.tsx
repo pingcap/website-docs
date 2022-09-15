@@ -22,10 +22,16 @@ import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
 
 import { TableOfContent, PathConfig } from "static/Type";
-import { calcPDFUrl, getRepoFromPathCfg, transformCustomId } from "utils";
+import {
+  calcPDFUrl,
+  getRepoFromPathCfg,
+  transformCustomId,
+  removeHtmlTag,
+} from "utils";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -81,7 +87,7 @@ export default function RightNav(props: RightNavProps) {
               download
             />
             <ActionItem
-              icon={HelpCenterIcon}
+              icon={GitHubIcon}
               url={`https://github.com/${getRepoFromPathCfg(
                 pathConfig
               )}/issues/new?body=File:%20[/${pathConfig.branch}/${filePath}](${
@@ -122,8 +128,10 @@ export default function RightNav(props: RightNavProps) {
             component="div"
             sx={{
               paddingLeft: "0.5rem",
-              color: theme.palette.website.m5,
-              fontSize: "13px",
+              fontFamily: "Helvetica Neue",
+              color: theme.palette.website.f1,
+              fontSize: "0.875rem",
+              fontWeight: "700",
               lineHeight: "1.25rem",
             }}
           >
@@ -173,7 +181,7 @@ const generateToc = (items: TableOfContent[], level = 0) => {
                 },
               }}
             >
-              {newLabel}
+              {removeHtmlTag(newLabel)}
             </Typography>
             {items && generateToc(items, level + 1)}
           </Typography>

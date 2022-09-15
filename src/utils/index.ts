@@ -188,6 +188,17 @@ export const transformCustomId = (
   return { label, anchor };
 };
 
+export function removeHtmlTag(str: string) {
+  const result = str
+    .replaceAll(/<[^>]*>/g, " ")
+    .replaceAll(/\\s+/g, " ")
+    .trim();
+  if (!result) {
+    return str;
+  }
+  return result;
+}
+
 export function getStable(doc: Repo) {
   const docInfo = CONFIG.docs[doc];
 
