@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link } from "gatsby";
-import { Trans, useI18next } from 'gatsby-plugin-react-i18next'
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import clsx from "clsx";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -62,7 +62,7 @@ export default function DocTemplate({
 
   useHighlightCode();
 
-  const { language } = useI18next()
+  const { language } = useI18next();
 
   return (
     <>
@@ -174,32 +174,6 @@ export default function DocTemplate({
                         title={frontmatter.title}
                       />
                     )}
-
-                    {language !== "ja" && (
-                      <Box
-                        sx={{
-                          width: "fit-content",
-                          position: "fixed",
-                          bottom: "4rem",
-                          right: "1rem",
-                        }}
-                      >
-                        <FeedbackBtn
-                          title={frontmatter.title}
-                          locale={pathConfig.locale}
-                        />
-                      </Box>
-                    )}
-                    <Box
-                      sx={{
-                        width: "fit-content",
-                        position: "fixed",
-                        bottom: "1rem",
-                        right: "1rem",
-                      }}
-                    >
-                      <ScrollToTopBtn />
-                    </Box>
                   </Box>
                   {!frontmatter?.hide_sidebar && (
                     <>
@@ -235,6 +209,31 @@ export default function DocTemplate({
                     </>
                   )}
                 </Stack>
+                {language !== "ja" && (
+                  <Box
+                    sx={{
+                      width: "fit-content",
+                      position: "fixed",
+                      bottom: "4rem",
+                      right: "1rem",
+                    }}
+                  >
+                    <FeedbackBtn
+                      title={frontmatter.title}
+                      locale={pathConfig.locale}
+                    />
+                  </Box>
+                )}
+                <Box
+                  sx={{
+                    width: "fit-content",
+                    position: "fixed",
+                    bottom: "1rem",
+                    right: "1rem",
+                  }}
+                >
+                  <ScrollToTopBtn />
+                </Box>
               </Container>
             </Box>
           </Box>
