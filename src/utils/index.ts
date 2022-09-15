@@ -209,3 +209,11 @@ export function generateUrl(filename: string, config: PathConfig) {
     config.version ? config.version + "/" : ""
   }${filename}`;
 }
+
+export function isInViewport(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+  );
+}

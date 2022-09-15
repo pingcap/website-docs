@@ -12,6 +12,7 @@ import { SvgIconProps } from "@mui/material/SvgIcon";
 
 import { DocLeftNavItem, DocLeftNav, DocLeftNavItemContent } from "static/Type";
 import LinkComponent from "components/Link";
+import { isInViewport } from "utils";
 
 declare module "react" {
   interface CSSProperties {
@@ -48,7 +49,7 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
       color: "var(--tree-view-color, #0A85C2)",
       [`& svg.MuiTreeItem-ChevronRightIcon`]: {
         fill: "var(--tree-view-color, #0A85C2)",
-      }
+      },
     },
     [`& .${treeItemClasses.label}`]: {
       fontWeight: "inherit",
@@ -142,6 +143,25 @@ export default function ControlledTreeView(props: {
     setExpanded(expandedIds);
     expandedIds.length && setSelected([expandedIds[expandedIds.length - 1]]);
   }, [data, currentUrl]);
+
+  // ! Add "auto scroll" to left nav is not recommended.
+  React.useEffect(() => {
+    const targetActiveItem:
+      | (HTMLElement & { scrollIntoViewIfNeeded: () => void })
+      | null = document?.querySelector(".MuiTreeView-root .Mui-selected");
+    if (!targetActiveItem) {
+      return;
+    }
+    const isVisiable = isInViewport(targetActiveItem);
+    if (isVisiable) {
+      return;
+    }
+    if (!targetActiveItem.scrollIntoViewIfNeeded) {
+      targetActiveItem.scrollIntoView({ block: "end" });
+    } else {
+      targetActiveItem.scrollIntoViewIfNeeded();
+    }
+  });
 
   const renderTreeItems = (items: DocLeftNavItem[], deepth = 0) => {
     return items.map((item: DocLeftNavItem) => {
