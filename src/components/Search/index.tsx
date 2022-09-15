@@ -7,9 +7,10 @@ import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
+import TextField, { TextFieldProps } from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import { alpha, styled } from "@mui/material/styles";
 
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -17,6 +18,21 @@ import LinkComponent from "components/Link";
 import { generateDownloadURL, generateContactURL } from "utils";
 
 import { Locale } from "static/Type";
+
+const StyledTextField = styled((props: TextFieldProps) => (
+  <TextField {...props} />
+))(({ theme }) => ({
+  "& .MuiOutlinedInput-root": {
+    "&:hover fieldset": {
+      borderColor: theme.palette.website.k1,
+      borderWidth: "1px",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: theme.palette.website.k1,
+      borderWidth: "1px",
+    },
+  },
+}));
 
 export default function Search(props: {
   placeholder?: string;
@@ -73,7 +89,7 @@ export default function Search(props: {
           },
         }}
       >
-        <TextField
+        <StyledTextField
           size="small"
           id="doc-search"
           fullWidth

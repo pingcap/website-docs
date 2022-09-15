@@ -42,7 +42,7 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     //   fontWeight: theme.typography.fontWeightRegular,
     // },
     "&:hover": {
-      backgroundColor: "#EFF4F7",
+      backgroundColor: theme.palette.website.m2,
     },
     "&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused": {
       backgroundColor: `var(--tree-view-bg-color, #EAF6FB)`,
@@ -194,6 +194,8 @@ export default function ControlledTreeView(props: {
                 className="MuiTreeItem-ChevronRightIcon"
                 sx={{
                   fill: theme.palette.website.f3,
+                  height: "1rem",
+                  width: "1rem",
                   marginLeft: "auto",
                   transform: isItemExpanded ? "rotate(90deg)" : "none",
                 }}

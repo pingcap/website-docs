@@ -124,6 +124,12 @@ const LangSwitch = (props: {
           vertical: "top",
           horizontal: "center",
         }}
+        PaperProps={{
+          sx: {
+            border: "1px solid #F4F4F4",
+            filter: "drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.08))",
+          },
+        }}
       >
         <MenuItem
           onClick={toggleLanguage(Locale.en)}
@@ -180,6 +186,9 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
+          sx={{
+            color: "#0A85C2",
+          }}
         >
           Sign In
         </Button>
@@ -189,6 +198,10 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
+          sx={{
+            backgroundColor: "#0A85C2",
+            boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
+          }}
         >
           Try Free
         </Button>
