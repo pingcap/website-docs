@@ -166,7 +166,14 @@ export default function DocTemplate({
                       padding: "1.5rem 0",
                     }}
                   >
-                    <MDXContent data={body} className={clsx("doc-content")} />
+                    <MDXContent
+                      data={body}
+                      className={clsx("doc-content")}
+                      name={name}
+                      pathConfig={pathConfig}
+                      availIn={availIn.version}
+                      language={language}
+                    />
                     {!frontmatter?.hide_commit && (
                       <GitCommitInfoCard
                         pathConfig={pathConfig}
