@@ -69,6 +69,7 @@ export default function FeedbackBtn(props: { title: string; locale: Locale }) {
         </Fab>
       </Tooltip>
       <FeedbackPopover
+        key={`${props.title}-${props.locale}`}
         title={props.title}
         locale={props.locale}
         id={id}
@@ -143,9 +144,12 @@ function FeedbackPopover(props: {
             <Trans i18nKey="docHelpful.header" />
           </Typography>
           <IconButton aria-label="close" onClick={onClose} size="small">
-            <CloseIcon fontSize="inherit" sx={{
-              color: "website.m1",
-            }} />
+            <CloseIcon
+              fontSize="inherit"
+              sx={{
+                color: "website.m1",
+              }}
+            />
           </IconButton>
         </Box>
         <Box
@@ -154,6 +158,8 @@ function FeedbackPopover(props: {
             padding: "1rem",
             display: "flex",
             flexDirection: "column",
+            maxHeight: "calc(100vh - 20rem)",
+            overflowY: "auto",
           }}
           className={clsx(feedbackForm)}
         >

@@ -133,6 +133,7 @@ export default function RightNav(props: RightNavProps) {
               fontSize: "0.875rem",
               fontWeight: "700",
               lineHeight: "1.25rem",
+              paddingBottom: "0.5rem",
             }}
           >
             <Trans i18nKey="doc.toc" />

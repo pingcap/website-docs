@@ -94,5 +94,9 @@
     a {
       color: #0a85c2;
     }
+
+    pre {
+      margin-top: 1rem;
+    }
   }
 }

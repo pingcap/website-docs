@@ -122,6 +122,7 @@ function SearchItem(props: { data: any }) {
           "& >div": {
             width: "fit-content",
           },
+          fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
         }}
       >
         <div
@@ -141,6 +142,7 @@ function SearchItem(props: { data: any }) {
             "& >div": {
               width: "fit-content",
             },
+            fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
           }}
         >
           <div
@@ -154,12 +156,18 @@ function SearchItem(props: { data: any }) {
           sx={{
             textDecoration: "none",
             width: "fit-content",
+            fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
           }}
         >
           {data.url}
         </Typography>
       )}
-      <Typography component="div">
+      <Typography
+        component="div"
+        sx={{
+          fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
+        }}
+      >
         <div
           dangerouslySetInnerHTML={{
             __html:

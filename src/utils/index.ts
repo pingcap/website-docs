@@ -231,3 +231,17 @@ export function isInViewport(element: HTMLElement) {
     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
   );
 }
+
+export function scrollToElementIfInView(
+  element: HTMLElement & { scrollIntoViewIfNeeded: () => void }
+) {
+  const isVisiable = isInViewport(element);
+  if (isVisiable) {
+    return;
+  }
+  if (element.scrollIntoViewIfNeeded) {
+    element.scrollIntoViewIfNeeded();
+  } else {
+    element.scrollIntoView({ block: "end" });
+  }
+}

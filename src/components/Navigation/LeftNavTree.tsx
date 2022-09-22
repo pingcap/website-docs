@@ -12,7 +12,7 @@ import { SvgIconProps } from "@mui/material/SvgIcon";
 
 import { DocLeftNavItem, DocLeftNav, DocLeftNavItemContent } from "static/Type";
 import LinkComponent from "components/Link";
-import { isInViewport } from "utils";
+import { isInViewport, scrollToElementIfInView } from "utils";
 
 declare module "react" {
   interface CSSProperties {
@@ -44,12 +44,15 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     "&:hover": {
       backgroundColor: theme.palette.website.m2,
     },
-    "&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused": {
+    "&.Mui-selected, &.Mui-selected.Mui-focused": {
       backgroundColor: `var(--tree-view-bg-color, #EAF6FB)`,
       color: "var(--tree-view-color, #0A85C2)",
       [`& svg.MuiTreeItem-ChevronRightIcon`]: {
         fill: "var(--tree-view-color, #0A85C2)",
       },
+    },
+    "&.Mui-focused": {
+      backgroundColor: `#f9f9f9`,
     },
     [`& .${treeItemClasses.label}`]: {
       fontWeight: "inherit",
@@ -149,19 +152,10 @@ export default function ControlledTreeView(props: {
     const targetActiveItem:
       | (HTMLElement & { scrollIntoViewIfNeeded: () => void })
       | null = document?.querySelector(".MuiTreeView-root .Mui-selected");
-    if (!targetActiveItem) {
-      return;
+    if (targetActiveItem) {
+      scrollToElementIfInView(targetActiveItem);
     }
-    const isVisiable = isInViewport(targetActiveItem);
-    if (isVisiable) {
-      return;
-    }
-    if (!targetActiveItem.scrollIntoViewIfNeeded) {
-      targetActiveItem.scrollIntoView({ block: "end" });
-    } else {
-      targetActiveItem.scrollIntoViewIfNeeded();
-    }
-  });
+  }, [selected]);
 
   const renderTreeItems = (items: DocLeftNavItem[], deepth = 0) => {
     return items.map((item: DocLeftNavItem) => {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -28,6 +29,7 @@ import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "components/Dropdown/VersionSelect";
+import { generatePingcapUrl } from "utils";
 
 interface LeftNavProps {
   data: DocLeftNav;
@@ -80,6 +82,8 @@ export function LeftNavMobile(props: LeftNavProps) {
 
   const [open, setOpen] = React.useState(false);
 
+  const { language } = useI18next();
+
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -114,7 +118,9 @@ export function LeftNavMobile(props: LeftNavProps) {
               padding: "0 0.5rem",
             }}
           >
-            <PingcapLogoWithoutTextIcon />
+            <LinkComponent to={generatePingcapUrl(language)}>
+              <PingcapLogoWithoutTextIcon />
+            </LinkComponent>
             <Divider
               orientation="vertical"
               sx={{

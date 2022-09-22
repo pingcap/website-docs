@@ -59,12 +59,6 @@ export default function HeaderNavStack() {
         />
       )}
 
-      <NavItem
-        selected={selectedItem === "tidb"}
-        label={<Trans i18nKey="navbar.tidb" />}
-        to={`/tidb/stable`}
-      />
-
       {["en", "ja"].includes(language) && (
         <NavItem
           selected={selectedItem === "tidbcloud"}
@@ -72,6 +66,12 @@ export default function HeaderNavStack() {
           to={`/tidbcloud`}
         />
       )}
+
+      <NavItem
+        selected={selectedItem === "tidb"}
+        label={<Trans i18nKey="navbar.tidb" />}
+        to={`/tidb/stable`}
+      />
 
       <NavItem
         label={<Trans i18nKey="navbar.download" />}
@@ -180,17 +180,7 @@ export function HeaderNavStackMobile() {
             </LinkComponent>
           </MenuItem>
         )}
-        <MenuItem
-          onClick={handleClose}
-          disableRipple
-          selected={selectedItem === "tidb"}
-        >
-          <LinkComponent isI18n to="/tidb/stable" style={{ width: "100%" }}>
-            <Typography variant="body1" component="div">
-              <Trans i18nKey="navbar.tidb" />
-            </Typography>
-          </LinkComponent>
-        </MenuItem>
+
         {["en", "ja"].includes(language) && (
           <MenuItem
             onClick={handleClose}
@@ -204,6 +194,18 @@ export function HeaderNavStackMobile() {
             </LinkComponent>
           </MenuItem>
         )}
+
+        <MenuItem
+          onClick={handleClose}
+          disableRipple
+          selected={selectedItem === "tidb"}
+        >
+          <LinkComponent isI18n to="/tidb/stable" style={{ width: "100%" }}>
+            <Typography variant="body1" component="div">
+              <Trans i18nKey="navbar.tidb" />
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
 
         <MenuItem onClick={handleClose} disableRipple>
           <LinkComponent

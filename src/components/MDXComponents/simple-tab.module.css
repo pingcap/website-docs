@@ -6,7 +6,7 @@ ul.tabs {
   white-space: nowrap;
 
   li {
-    $color: #172d72;
+    $color: #0A85C2;
     display: block;
     padding: 0.5em 1em;
     background-color: white;
