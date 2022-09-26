@@ -64,7 +64,7 @@ export function Important(props: { children: React.ReactNode }) {
 export function Warning(props: { children: React.ReactNode }) {
   return (
     <AlertContainer>
-      <Alert severity="warning">
+      <Alert severity="error">
         <AlertTitle>
           <Trans i18nKey="shortcodes.warning" />
         </AlertTitle>
