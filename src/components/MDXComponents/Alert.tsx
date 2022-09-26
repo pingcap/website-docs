@@ -14,6 +14,7 @@ function AlertContainer(props: { children: React.ReactNode }) {
         paddingBottom: "0.5rem",
         "& .MuiAlert-message p": {
           marginBottom: 0,
+          marginTop: 0,
         },
       }}
     >
