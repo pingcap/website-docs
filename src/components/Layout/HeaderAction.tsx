@@ -201,6 +201,9 @@ const TiDBCloudBtnGroup = () => {
           sx={{
             backgroundColor: "#0A85C2",
             boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
+            "&:hover": {
+              backgroundColor: "website.k1",
+            },
           }}
         >
           Try Free

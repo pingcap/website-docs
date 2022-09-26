@@ -32,7 +32,7 @@ type StyledTreeItemProps = TreeItemProps & {
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   // color: theme.palette.text.secondary,
   [`& .${treeItemClasses.content}`]: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.website.f1,
     // borderTopRightRadius: theme.spacing(2),
     // borderBottomRightRadius: theme.spacing(2),
     borderRadius: theme.spacing(0.5),

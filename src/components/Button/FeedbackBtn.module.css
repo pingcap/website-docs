@@ -35,6 +35,7 @@
 
     textarea.hs-input,
     .hs_email .hs-input {
+      font-family: "inherit";
       padding: 5px;
       width: 100%;
       color: #172d72;
@@ -74,7 +75,7 @@
           padding: 7px;
           width: 100%;
           border: none;
-          background: #0A85C2;
+          background: #0a85c2;
           color: #fff;
         }
       }

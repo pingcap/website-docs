@@ -264,6 +264,7 @@ export function DocHomeSection(props: {
           verticalAlign: "top",
           "&:hover": {
             textDecoration: "none",
+            backgroundColor: "website.k1",
           },
         },
       }}
