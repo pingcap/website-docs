@@ -13,16 +13,21 @@ import {
   MachineTranslationNotice,
 } from "components/Card/CustomNotice";
 import { Locale, PathConfig } from "static/Type";
+import { useTotalContributors } from "components/Avatar/Contributors";
 
 export default function MDXContent(props: {
   data: any;
   className?: string;
   name: string;
   pathConfig: PathConfig;
+  filePath: string;
   availIn: string[];
   language: string;
 }) {
-  const { data, className, name, pathConfig, availIn, language } = props;
+  const { data, className, name, pathConfig, filePath, availIn, language } =
+    props;
+
+  useTotalContributors(pathConfig, filePath);
 
   return (
     <Container className={className} maxWidth="xl">

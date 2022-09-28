@@ -172,6 +172,7 @@ export default function DocTemplate({
                       className={clsx("doc-content")}
                       name={name}
                       pathConfig={pathConfig}
+                      filePath={filePath}
                       availIn={availIn.version}
                       language={language}
                     />
