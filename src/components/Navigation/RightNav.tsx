@@ -170,7 +170,7 @@ const generateToc = (items: TableOfContent[], level = 0) => {
               sx={{
                 display: "flex",
                 textDecoration: "none",
-                fontSize: "13px",
+                fontSize: "14px",
                 lineHeight: "1.25rem",
                 borderLeft: `1px solid transparent`,
                 paddingLeft: `${0.5 + 1 * level}rem`,
@@ -207,7 +207,7 @@ const ActionItem = (props: {
       sx={{
         width: "fit-content",
         textDecoration: "none",
-        fontSize: "13px",
+        fontSize: "14px",
         lineHeight: "1.25rem",
         display: "flex",
         alignItems: "center",

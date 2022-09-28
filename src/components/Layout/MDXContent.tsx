@@ -25,7 +25,7 @@ export default function MDXContent(props: {
   const { data, className, name, pathConfig, availIn, language } = props;
 
   return (
-    <Container className={className}>
+    <Container className={className} maxWidth="xl">
       <Box className="markdown-body">
         <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         {language === "ja" && (

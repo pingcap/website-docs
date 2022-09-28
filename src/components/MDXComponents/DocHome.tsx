@@ -83,10 +83,12 @@ export function DocHomeContainer(props: {
               fontWeight: "700",
               margin: "0",
               padding: "0",
+              lineHeight: "1.8",
             },
 
             "& div#banner-subtitle": {
               color: "#fff",
+              lineHeight: "1.8",
             },
           }}
         >
@@ -138,7 +140,7 @@ export function DocHomeContainer(props: {
             height: "100%",
             maxHeight: "calc(100vh - 6.25rem)",
             overflowY: "auto",
-            padding: "1rem",
+            padding: "2.5rem 1rem 1rem 1rem",
             position: "sticky",
             top: "6.25rem",
 
@@ -153,10 +155,12 @@ export function DocHomeContainer(props: {
             component="div"
             sx={{
               paddingLeft: "0.5rem",
-              color: theme.palette.website.m5,
-              fontSize: "13px",
-              lineHeight: "1.25rem",
               paddingBottom: "1rem",
+              fontFamily: "Helvetica Neue",
+              color: theme.palette.website.f1,
+              fontSize: "0.875rem",
+              fontWeight: "700",
+              lineHeight: "1.25rem",
             }}
           >
             <Trans i18nKey="doc.toc" />

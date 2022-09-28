@@ -141,6 +141,7 @@ export default function DocTemplate({
               }}
             >
               <Container
+                maxWidth="xl"
                 sx={{
                   padding: {
                     xs: "0",
