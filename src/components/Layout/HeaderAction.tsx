@@ -78,10 +78,11 @@ const LangSwitch = (props: {
   };
 
   return (
-    <Box color={theme.palette.website.m5}>
+    <Box color={theme.palette.website.f1}>
       <IconButton
         onClick={handleClick}
         sx={{
+          color: "inherit",
           display: {
             lg: "none",
           },
@@ -97,8 +98,10 @@ const LangSwitch = (props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<LanguageIcon sx={{ fill: theme.palette.website.f3 }} />}
-        endIcon={<KeyboardArrowDownIcon />}
+        startIcon={<LanguageIcon sx={{ fill: theme.palette.website.f1 }} />}
+        endIcon={
+          <KeyboardArrowDownIcon sx={{ fill: theme.palette.website.f1 }} />
+        }
         sx={{
           display: {
             xs: "none",
@@ -106,7 +109,7 @@ const LangSwitch = (props: {
           },
         }}
       >
-        <Typography component="span">
+        <Typography component="span" color="inherit">
           <Trans i18nKey="lang.title" />
         </Typography>
       </Button>
@@ -137,7 +140,9 @@ const LangSwitch = (props: {
           selected={language === Locale.en}
           disabled={!supportedLocales.includes(Locale.en)}
         >
-          <Trans i18nKey="lang.en" />
+          <Typography component="span" color={theme.palette.website.f1}>
+            <Trans i18nKey="lang.en" />
+          </Typography>
         </MenuItem>
         <MenuItem
           onClick={toggleLanguage(Locale.zh)}
@@ -145,7 +150,9 @@ const LangSwitch = (props: {
           selected={language === Locale.zh}
           disabled={!supportedLocales.includes(Locale.zh)}
         >
-          <Trans i18nKey="lang.zh" />
+          <Typography component="span" color={theme.palette.website.f1}>
+            <Trans i18nKey="lang.zh" />
+          </Typography>
         </MenuItem>
         <MenuItem
           onClick={toggleLanguage(Locale.ja)}
@@ -153,7 +160,9 @@ const LangSwitch = (props: {
           selected={language === Locale.ja}
           disabled={!supportedLocales.includes(Locale.ja)}
         >
-          <Trans i18nKey="lang.ja" />
+          <Typography component="span" color={theme.palette.website.f1}>
+            <Trans i18nKey="lang.ja" />
+          </Typography>
         </MenuItem>
       </Menu>
     </Box>

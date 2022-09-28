@@ -106,7 +106,7 @@ const NavItem = (props: {
         }}
       >
         <LinkComponent isI18n to={props.to}>
-          <Typography variant="body1" component="div">
+          <Typography variant="body1" component="div" color="website.f1">
             {props.label}
           </Typography>
         </LinkComponent>
@@ -174,7 +174,7 @@ export function HeaderNavStackMobile() {
             selected={selectedItem === "home"}
           >
             <LinkComponent isI18n to="/" style={{ width: "100%" }}>
-              <Typography variant="body1" component="div">
+              <Typography variant="body1" component="div" color="website.f1">
                 <Trans i18nKey="navbar.home" />
               </Typography>
             </LinkComponent>
@@ -188,7 +188,7 @@ export function HeaderNavStackMobile() {
             selected={selectedItem === "tidbcloud"}
           >
             <LinkComponent isI18n to="/tidbcloud" style={{ width: "100%" }}>
-              <Typography variant="body1" component="div">
+              <Typography variant="body1" component="div" color="website.f1">
                 <Trans i18nKey="navbar.cloud" />
               </Typography>
             </LinkComponent>
@@ -201,7 +201,7 @@ export function HeaderNavStackMobile() {
           selected={selectedItem === "tidb"}
         >
           <LinkComponent isI18n to="/tidb/stable" style={{ width: "100%" }}>
-            <Typography variant="body1" component="div">
+            <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.tidb" />
             </Typography>
           </LinkComponent>
@@ -212,7 +212,7 @@ export function HeaderNavStackMobile() {
             to={generateDownloadURL(language)}
             style={{ width: "100%" }}
           >
-            <Typography variant="body1" component="div">
+            <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.download" />
             </Typography>
           </LinkComponent>
@@ -223,7 +223,7 @@ export function HeaderNavStackMobile() {
             to={generateContactURL(language)}
             style={{ width: "100%" }}
           >
-            <Typography variant="body1" component="div">
+            <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.contactUs" />
             </Typography>
           </LinkComponent>
