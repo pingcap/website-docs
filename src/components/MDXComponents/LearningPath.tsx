@@ -110,6 +110,12 @@ export function LearningPath(props: {
 
           "& div#learning-path-right p": {
             margin: "0",
+            "& a": {
+              color: "#24292f",
+            },
+            "& a:hover": {
+              color: "#0a85c2",
+            },
           },
 
           "&:not(:first-of-type):before": {
@@ -191,10 +197,6 @@ export function LearningPath(props: {
 
             "& > p": {
               flex: { xs: "50% 1", md: "0 0 33%" },
-            },
-
-            "& > p a": {
-              color: "#24292f",
             },
           }}
         >
