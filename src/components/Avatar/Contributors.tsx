@@ -14,7 +14,6 @@ import { getRepo } from "../../../gatsby/path";
 
 export interface TotalAvatarsProps {
   avatars: AvatarItem[];
-  max?: number;
 }
 
 export type AvatarItem = {
@@ -25,7 +24,7 @@ export type AvatarItem = {
 };
 
 export default function TotalAvatars(props: TotalAvatarsProps) {
-  const { avatars, max = 5 } = props;
+  const { avatars } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -46,7 +45,16 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
           paddingBottom: "1rem",
         }}
       >
-        <AvatarGroup max={max}>
+        <AvatarGroup
+          total={avatars.length}
+          sx={{
+            "& .MuiAvatar-root": {
+              width: "1.5rem",
+              height: "1.5rem",
+              fontSize: "0.75rem",
+            },
+          }}
+        >
           {avatars.map((avatar, index) => (
             <Avatar
               key={avatar.alt}
@@ -116,7 +124,19 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
               src={avatar.src}
               alt={avatar.alt}
             />
-            {avatar.name}
+            <Typography
+              variant="body1"
+              component="a"
+              color="#0A85C2"
+              href={avatar.pageUrl}
+              target="_blank"
+              sx={{
+                textDecoration: "none",
+                width: "100%",
+              }}
+            >
+              {avatar.name}
+            </Typography>
           </MenuItem>
         ))}
       </Menu>
