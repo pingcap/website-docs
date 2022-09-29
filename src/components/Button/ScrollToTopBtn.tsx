@@ -38,29 +38,27 @@ export default function ScrollToTopBtn() {
   };
 
   return (
-    <Tooltip placement="left" title={<Trans i18nKey="fab.scrollToTop" />}>
-      <Fab
-        size="small"
-        aria-label="scroll-to-top"
-        disableRipple
-        variant="extended"
-        sx={{
-          display: show ? "flex" : "none",
-          color: "website.f2",
-          backgroundColor: "#eff4f7",
-          borderRadius: "0.5rem",
-          height: "2rem",
-          width: "2rem",
-          boxShadow: "none",
-          "&:hover": {
-            color: "website.m1",
-            backgroundColor: "website.k1",
-          },
-        }}
-        onClick={handleClick}
-      >
-        <VerticalAlignTopIcon />
-      </Fab>
-    </Tooltip>
+    <Fab
+      size="small"
+      aria-label="scroll-to-top"
+      disableRipple
+      variant="extended"
+      sx={{
+        display: show ? "flex" : "none",
+        color: "website.f2",
+        backgroundColor: "#eff4f7",
+        borderRadius: "0.5rem",
+        height: "2rem",
+        width: "2rem",
+        boxShadow: "none",
+        "&:hover": {
+          color: "website.m1",
+          backgroundColor: "website.k1",
+        },
+      }}
+      onClick={handleClick}
+    >
+      <VerticalAlignTopIcon />
+    </Fab>
   );
 }

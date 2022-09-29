@@ -16,6 +16,7 @@ import "styles/docTemplate.css";
 import Layout from "components/Layout";
 import SearchResults from "components/Search/Results";
 import SearchInput from "components/Search";
+import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import Seo from "components/Layout/Seo";
 import { algoliaClient } from "utils/algolia";
 import {
@@ -142,6 +143,7 @@ export default function DocSearchTemplate() {
           sx={{
             marginTop: "5rem",
             minHeight: "calc(100vh - 30rem)",
+            position: "relative",
           }}
         >
           <Seo title="Search" noindex />
@@ -245,6 +247,16 @@ export default function DocSearchTemplate() {
             )}
           </Stack>
           <SearchResults loading={isLoading} data={results} />
+          <Box
+            sx={{
+              width: "fit-content",
+              position: "fixed",
+              bottom: "1rem",
+              right: "1rem",
+            }}
+          >
+            <ScrollToTopBtn />
+          </Box>
         </Container>
       </Layout>
     </>
