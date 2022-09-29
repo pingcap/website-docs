@@ -89,7 +89,7 @@ export function generateIconGroup(lang?: string) {
 export function generateFooterItems(lang?: string) {
   switch (lang) {
     case "zh":
-      return EN_FOOTER_ITEMS;
+      return ZH_FOOTER_ITEMS;
     case "ja":
       return JA_FOOTER_ITEMS;
     case "en":
