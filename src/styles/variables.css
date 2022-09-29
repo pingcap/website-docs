@@ -1,0 +1,24 @@
+$--color--m1: "#fff";
+$--color--m2: "#f9f9f9";
+$--color--m3: "#f4f4f4";
+$--color--m4: "#e5e5e5";
+$--color--m5: "#282a36";
+
+$--color--k1: "#0ca6f2";
+$--color--k2: "#172d72";
+$--color--k3: "#3a40e1";
+
+$--color--t1: "#52cc7a";
+$--color--t2: "#e65c5c";
+$--color--t3: "#f2b600";
+$--color--t4: "#e6742e";
+
+$--color--f1: "#282a36";
+$--color--f2: "#666666";
+$--color--f3: "#999999";
+$--color--f4: "#cccccc";
+
+$--color--success: $--color--t1;
+$--color--error: $--color--t2;
+$--color--warning: $--color--t3;
+$--color--minor: $--color--t4;

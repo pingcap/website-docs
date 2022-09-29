@@ -1,60 +1,60 @@
-import { Repo, Locale } from '../src/typing'
-import config from '../docs.json'
+import { Repo, Locale } from "../src/static/Type";
+import config from "../docs.json";
 
 export function getRepo(doc: Repo, lang: Locale) {
-  const { languages } = config.docs[doc]
+  const { languages } = config.docs[doc];
 
   if (lang in languages) {
-    return languages[lang as Locale.en].repo
+    return languages[lang as Locale.en].repo;
   }
 
-  throw new Error(`no ${lang} in repo ${doc}`)
+  throw new Error(`no ${lang} in repo ${doc}`);
 }
 
 export function getStable(doc: Repo) {
-  const docInfo = config.docs[doc]
+  const docInfo = config.docs[doc];
 
-  if ('stable' in docInfo) {
-    return docInfo.stable
+  if ("stable" in docInfo) {
+    return docInfo.stable;
   }
 
-  return undefined
+  return undefined;
 }
 
 function renameVersion(version: string, stable: string | undefined) {
   switch (version) {
-    case 'master':
-      return 'dev'
+    case "master":
+      return "dev";
     case stable:
-      return 'stable'
+      return "stable";
     default:
-      return version.replace('release-', 'v')
+      return version.replace("release-", "v");
   }
 }
 
 export function renameVersionByDoc(doc: Repo, version: string) {
   switch (doc) {
-    case 'tidb':
-    case 'tidb-data-migration':
-    case 'tidb-in-kubernetes':
-      return renameVersion(version, getStable(doc))
-    case 'tidbcloud':
-      return
+    case "tidb":
+    case "tidb-data-migration":
+    case "tidb-in-kubernetes":
+      return renameVersion(version, getStable(doc));
+    case "tidbcloud":
+      return;
   }
 }
 
-function genDocCategory(slug: string, separator = '/') {
-  const [name, branch] = slug.split('/')
+function genDocCategory(slug: string, separator = "/") {
+  const [name, branch] = slug.split("/");
 
-  return `${name}${separator}${renameVersionByDoc(name as Repo, branch)}`
+  return `${name}${separator}${renameVersionByDoc(name as Repo, branch)}`;
 }
 
 export function genTOCSlug(slug: string) {
-  return `${slug.split('/').slice(0, 3).join('/')}/TOC`
+  return `${slug.split("/").slice(0, 3).join("/")}/TOC`;
 }
 
 export function genPDFDownloadURL(slug: string, lang: Locale) {
-  return `${genDocCategory(slug, '-')}-${lang}-manual.pdf`
+  return `${genDocCategory(slug, "-")}-${lang}-manual.pdf`;
 }
 
 /**
@@ -72,12 +72,12 @@ export function replacePath(
   lang: Locale,
   pathWithoutVersion: string
 ) {
-  const docPath = genDocCategory(slug)
-  const language = lang === 'en' ? '' : '/' + lang
+  const docPath = genDocCategory(slug);
+  const language = lang === "en" ? "" : "/" + lang;
 
-  if (name === '_index') {
-    return `${language}/${docPath}`
+  if (name === "_index") {
+    return `${language}/${docPath}`;
   }
 
-  return `${language}/${docPath}/${pathWithoutVersion}`
+  return `${language}/${docPath}/${pathWithoutVersion}`;
 }

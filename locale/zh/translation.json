@@ -9,6 +9,7 @@
     "cannotswitchJa": "本页面暂无日文版"
   },
   "navbar": {
+    "home": "文档中心",
     "tidb": "TiDB",
     "tools": "生态工具",
     "appdev": "开发指南",
@@ -21,8 +22,8 @@
     "toc": "本页导航",
     "download-pdf": "下载 PDF",
     "improve": "修改本文",
-    "feedback": "反馈文档问题",
-    "feedbackAskTug": "社区论坛交流",
+    "feedback": "文档反馈",
+    "feedbackAskTug": "社区交流",
     "latestCommit": "更新于",
     "deprecation": {
       "tidb": {
@@ -94,5 +95,9 @@
     "youMayWish": "您可以：",
     "goToDocHome": "去 <0>文档中心</0>",
     "searchDoc": "搜索文档"
+  },
+  "fab": {
+    "scrollToTop": "回到顶部",
+    "goToFeedback": "文档内容是否有帮助？"
   }
 }

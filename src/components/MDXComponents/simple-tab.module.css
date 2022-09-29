@@ -1,0 +1,33 @@
+ul.tabs {
+  display: flex;
+  padding-left: 0 !important;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid #dbdbdb;
+  white-space: nowrap;
+
+  li {
+    $color: #0ca6f2;
+    display: block;
+    padding: 0.5em 1em;
+    background-color: white;
+    border-radius: 4px 4px 0 0;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &.active {
+      background-color: $color;
+      color: white;
+    }
+    & + li {
+      margin-top: 0;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}

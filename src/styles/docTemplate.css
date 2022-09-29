@@ -1,0 +1,102 @@
+@import "./global.css";
+
+@import "highlight.js/styles/github.css";
+@import "katex/dist/katex.min.css";
+
+@import "github-markdown-css/github-markdown-light.css";
+
+.PingCAP-Doc {
+  .doc-content {
+    a {
+      &.anchor.before {
+        left: 1rem;
+      }
+    }
+
+    ul {
+      list-style: initial;
+    }
+
+    table {
+      th,
+      td {
+        text-align: left;
+
+        code[class*="language-text"] {
+          white-space: normal;
+          word-break: initial;
+        }
+      }
+    }
+
+    img {
+      display: block;
+      margin: auto;
+    }
+
+    pre {
+      position: relative;
+      overflow-x: hidden;
+
+      code {
+        .number {
+          align-items: normal;
+          background-color: transparent;
+          border-radius: 290486px;
+          display: inline-flex;
+          font-size: 14px;
+          height: 0;
+          justify-content: center;
+          margin-right: 0;
+          min-width: 0;
+          padding: 0;
+          text-align: center;
+          vertical-align: top;
+        }
+      }
+    }
+
+    :not(pre) > code[class*="language-text"] {
+      white-space: normal;
+      word-break: break-word;
+      color: #657b83;
+    }
+
+    :not(pre) > code {
+      color: unset;
+    }
+
+    .version-mark {
+      position: relative;
+      padding: 0 7px 0 25px;
+      font-style: italic;
+      font-size: 16px;
+    }
+
+    .version-mark::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      transform: translateY(-50%);
+      background-image: url(../../images/version-mark.png);
+      background-size: 20px;
+    }
+  }
+
+  .markdown-body {
+    color: #282a36;
+    font-size: 16px;
+    line-height: 1.75;
+
+    a {
+      color: #0a85c2;
+    }
+
+    pre {
+      margin-top: 1rem;
+    }
+  }
+}

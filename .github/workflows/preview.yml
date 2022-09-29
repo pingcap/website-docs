@@ -2,9 +2,9 @@ name: Build Preview
 
 on:
   push:
-    branches: ['master']
+    branches: ["master"]
     paths-ignore:
-      - '.github/**'
+      - ".github/**"
   workflow_dispatch:
 
 concurrency: ci-prev
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: 'preview'
+          ref: "preview"
 
       - name: Init git info
         run: |

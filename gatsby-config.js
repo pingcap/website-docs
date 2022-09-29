@@ -1,30 +1,30 @@
-require('ts-node').register({ transpileOnly: true })
+require("ts-node").register({ transpileOnly: true });
 
-const docs = require('./docs.json')
+const docs = require("./docs.json");
 
 module.exports = {
   siteMetadata: {
-    title: 'PingCAP Docs',
+    title: "PingCAP Docs",
     description:
-      'Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.',
-    author: '@PingCAP',
-    siteUrl: 'https://docs.pingcap.com',
+      "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.",
+    author: "@PingCAP",
+    siteUrl: "https://docs.pingcap.com",
   },
-  jsxRuntime: 'automatic',
+  jsxRuntime: "automatic",
   plugins: [
     {
-      resolve: 'gatsby-plugin-google-tagmanager',
+      resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        id: 'GTM-WQG8Z75',
+        id: "GTM-WQG8Z75",
         includeInDevelopment: false,
-        defaultDataLayer: { platform: 'gatsby' },
+        defaultDataLayer: { platform: "gatsby" },
         enableWebVitalsTracking: true,
       },
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-99991864-7',
+        trackingId: "UA-99991864-7",
         head: true,
       },
     },
@@ -40,11 +40,11 @@ module.exports = {
       resolve: `gatsby-plugin-react-i18next`,
       options: {
         localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
-        languages: [`en`, `zh`, 'ja'],
+        languages: [`en`, `zh`, "ja"],
         defaultLanguage: `en`,
         redirect: false,
         // if you are using Helmet, you must include siteUrl, and make sure you add http:https
-        siteUrl: 'https://docs.pingcap.com',
+        siteUrl: "https://docs.pingcap.com",
         // you can pass any i18next options
         i18nextOptions: {
           interpolation: {
@@ -54,15 +54,15 @@ module.exports = {
         },
         pages: [
           {
-            matchPath: '/:lang?/404',
+            matchPath: "/:lang?/404",
             getLanguageFromPath: true,
           },
           {
-            matchPath: `/:lang?/(${Object.keys(docs.docs).join('|')})/(.*)`,
+            matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)`,
             getLanguageFromPath: true,
           },
           {
-            matchPath: '/:lang?/',
+            matchPath: "/:lang?/",
             getLanguageFromPath: true,
           },
         ],
@@ -91,8 +91,8 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         // https://github.com/gatsbyjs/gatsby/issues/21866#issuecomment-1063668178
         // Add katex support
-        remarkPlugins: [require('remark-math')],
-        rehypePlugins: [[require('rehype-katex'), { strict: 'ignore' }]],
+        remarkPlugins: [require("remark-math")],
+        rehypePlugins: [[require("rehype-katex"), { strict: "ignore" }]],
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-autolink-headers`,
@@ -102,70 +102,82 @@ module.exports = {
             },
           },
           {
-            resolve: require.resolve('./gatsby/plugin/syntax-diagram'),
+            resolve: require.resolve("./gatsby/plugin/syntax-diagram"),
           },
           {
-            resolve: require.resolve('./gatsby/plugin/content'),
+            resolve: require.resolve("./gatsby/plugin/content"),
           },
         ],
       },
     },
     {
-      resolve: `gatsby-plugin-sass`,
+      resolve: `gatsby-plugin-postcss`,
       options: {
-        useResolveUrlLoader: true,
-        cssLoaderOptions: {
-          modules: {
-            localIdentName:
-              process.env.NODE_ENV === 'production'
-                ? '[hash:base64:8]'
-                : '[path][name]__[local]--[hash:base64:5]',
-          },
-        },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-purgecss`,
-      options: {
-        printRejected: true,
-        ignore: [
-          '/doc.scss',
-          '/userFeedback.scss',
-          'github-markdown-css',
-          `.module.scss`,
+        postCssPlugins: [
+          require(`postcss-preset-env`)({ stage: 0 }),
+          require(`postcss-simple-vars`),
+          require(`postcss-nested`),
+          require(`postcss-mixins`),
         ],
-        purgeCSSOptions: {
-          content: [
-            `${__dirname}/gatsby/**/*.js`,
-            `${__dirname}/gatsby/**/*.ts`,
-            `${__dirname}/src/**/*.js`,
-            `${__dirname}/src/**/*.ts`,
-            `${__dirname}/src/**/*.tsx`,
-            `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
-          ],
-          safelist: [
-            // @seagreenio/react-bulma
-            /^is-|has-/,
-            'algolia-docsearch-suggestion--highlight',
-          ], // https://github.com/FullHuman/purgecss/releases/v3.0.0
-        },
       },
     },
+    "gatsby-plugin-dts-css-modules",
+    // {
+    //   resolve: `gatsby-plugin-sass`,
+    //   options: {
+    //     useResolveUrlLoader: true,
+    //     cssLoaderOptions: {
+    //       modules: {
+    //         localIdentName:
+    //           process.env.NODE_ENV === "production"
+    //             ? "[hash:base64:8]"
+    //             : "[path][name]__[local]--[hash:base64:5]",
+    //       },
+    //     },
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-plugin-purgecss`,
+    //   options: {
+    //     printRejected: true,
+    //     ignore: [
+    //       "/doc.scss",
+    //       "/userFeedback.scss",
+    //       "github-markdown-css",
+    //       `.module.scss`,
+    //     ],
+    //     purgeCSSOptions: {
+    //       content: [
+    //         `${__dirname}/gatsby/**/*.js`,
+    //         `${__dirname}/gatsby/**/*.ts`,
+    //         `${__dirname}/src/**/*.js`,
+    //         `${__dirname}/src/**/*.ts`,
+    //         `${__dirname}/src/**/*.tsx`,
+    //         `${__dirname}/node_modules/@seagreenio/react-bulma/dist/index.es.js`,
+    //       ],
+    //       safelist: [
+    //         // @seagreenio/react-bulma
+    //         /^is-|has-/,
+    //         "algolia-docsearch-suggestion--highlight",
+    //       ], // https://github.com/FullHuman/purgecss/releases/v3.0.0
+    //     },
+    //   },
+    // },
     `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-meta-redirect`,
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        excludes: ['/404', '/zh/404', '/search', '/zh/search'],
+        excludes: ["/404", "/zh/404", "/search", "/zh/search"],
       },
     },
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: 'https://docs.pingcap.com',
-        sitemap: 'https://docs.pingcap.com/sitemap/sitemap-index.xml',
-        policy: [{ userAgent: '*', allow: '/' }],
+        host: "https://docs.pingcap.com",
+        sitemap: "https://docs.pingcap.com/sitemap/sitemap-index.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
   ],
-}
+};
