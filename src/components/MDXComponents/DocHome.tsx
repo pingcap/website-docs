@@ -247,7 +247,7 @@ export function DocHomeSection(props: {
         },
 
         "> a.button": {
-          backgroundColor: "#0A85C2",
+          backgroundColor: "website.k1",
           borderColor: "transparent",
           color: "#fff",
           textDecoration: "none",
@@ -268,8 +268,9 @@ export function DocHomeSection(props: {
           verticalAlign: "top",
           "&:hover": {
             textDecoration: "none",
-            backgroundColor: "website.k1",
+            backgroundColor: "#0A85C2",
           },
+          transition: "all 0.2s ease-in-out",
         },
       }}
     >

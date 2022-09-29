@@ -12,7 +12,7 @@ import {
   CustomNotice,
   MachineTranslationNotice,
 } from "components/Card/CustomNotice";
-import { Locale, PathConfig } from "static/Type";
+import { Locale, PathConfig, FrontMatter } from "static/Type";
 import { useTotalContributors } from "components/Avatar/Contributors";
 
 export default function MDXContent(props: {
@@ -21,13 +21,22 @@ export default function MDXContent(props: {
   name: string;
   pathConfig: PathConfig;
   filePath: string;
+  frontmatter: FrontMatter;
   availIn: string[];
   language: string;
 }) {
-  const { data, className, name, pathConfig, filePath, availIn, language } =
-    props;
+  const {
+    data,
+    className,
+    name,
+    pathConfig,
+    filePath,
+    frontmatter,
+    availIn,
+    language,
+  } = props;
 
-  useTotalContributors(pathConfig, filePath);
+  !frontmatter?.hide_commit && useTotalContributors(pathConfig, filePath);
 
   return (
     <Container className={className} maxWidth="xl">

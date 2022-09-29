@@ -175,6 +175,7 @@ export default function DocTemplate({
                       name={name}
                       pathConfig={pathConfig}
                       filePath={filePath}
+                      frontmatter={frontmatter}
                       availIn={availIn.version}
                       language={language}
                     />

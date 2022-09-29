@@ -196,7 +196,7 @@ const TiDBCloudBtnGroup = () => {
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
           sx={{
-            color: "#0A85C2",
+            color: "website.k1",
           }}
         >
           Sign In
@@ -208,10 +208,10 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
-            backgroundColor: "#0A85C2",
+            backgroundColor: "website.k1",
             boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
             "&:hover": {
-              backgroundColor: "website.k1",
+              backgroundColor: "#0A85C2",
             },
           }}
         >
