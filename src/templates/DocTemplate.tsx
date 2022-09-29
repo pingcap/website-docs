@@ -140,12 +140,14 @@ export default function DocTemplate({
                 },
               }}
             >
-              <Container
-                maxWidth="xl"
+              <Box
                 sx={{
-                  padding: {
-                    xs: "0",
-                  },
+                  maxWidth: "1340px",
+                  width: "100%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  display: "block",
+                  boxSizing: "border-box",
                 }}
               >
                 <Stack
@@ -243,7 +245,7 @@ export default function DocTemplate({
                 >
                   <ScrollToTopBtn />
                 </Box>
-              </Container>
+              </Box>
             </Box>
           </Box>
         </Box>
