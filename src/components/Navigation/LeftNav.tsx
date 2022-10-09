@@ -1,15 +1,7 @@
 import * as React from "react";
 import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import TreeView from "@mui/lab/TreeView";
-import TreeItem, { TreeItemProps, treeItemClasses } from "@mui/lab/TreeItem";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import { styled, useTheme } from "@mui/material/styles";
-import { SvgIconProps } from "@mui/material/SvgIcon";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 
@@ -18,12 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { PingcapLogoWithoutTextIcon } from "components/Icons";
 
-import {
-  DocLeftNavItem,
-  DocLeftNav,
-  DocLeftNavItemContent,
-  PathConfig,
-} from "static/Type";
+import { DocLeftNav, PathConfig } from "static/Type";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
@@ -128,11 +115,13 @@ export function LeftNavMobile(props: LeftNavProps) {
                 paddingLeft: "1.25rem",
               }}
             />
-            <NativeVersionSelect
-              name={name}
-              pathConfig={pathConfig}
-              availIn={availIn}
-            />
+            {pathConfig.repo !== "tidbcloud" && (
+              <NativeVersionSelect
+                name={name}
+                pathConfig={pathConfig}
+                availIn={availIn}
+              />
+            )}
           </Stack>
         </Box>
 

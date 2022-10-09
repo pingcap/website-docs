@@ -1,7 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeView from "@mui/lab/TreeView";
 import TreeItem, { TreeItemProps, treeItemClasses } from "@mui/lab/TreeItem";
@@ -12,7 +10,7 @@ import { SvgIconProps } from "@mui/material/SvgIcon";
 
 import { DocLeftNavItem, DocLeftNav, DocLeftNavItemContent } from "static/Type";
 import LinkComponent from "components/Link";
-import { isInViewport, scrollToElementIfInView } from "utils";
+import { scrollToElementIfInView } from "utils";
 
 declare module "react" {
   interface CSSProperties {

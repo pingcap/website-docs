@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Link, Trans } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 
 import { Locale, PathConfig } from "static/Type";
 import { docs } from "../../../docs.json";
