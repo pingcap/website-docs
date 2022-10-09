@@ -128,11 +128,13 @@ export function LeftNavMobile(props: LeftNavProps) {
                 paddingLeft: "1.25rem",
               }}
             />
-            <NativeVersionSelect
-              name={name}
-              pathConfig={pathConfig}
-              availIn={availIn}
-            />
+            {pathConfig.repo !== "tidbcloud" && (
+              <NativeVersionSelect
+                name={name}
+                pathConfig={pathConfig}
+                availIn={availIn}
+              />
+            )}
           </Stack>
         </Box>
 
