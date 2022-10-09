@@ -2,9 +2,7 @@ import * as React from "react";
 import { graphql, Link } from "gatsby";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import clsx from "clsx";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Stack from "@mui/material/Stack";
 
 // import "styles/global.css";

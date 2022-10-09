@@ -2,16 +2,12 @@ import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
 import { styled, alpha } from "@mui/material/styles";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import NativeSelect from "@mui/material/NativeSelect";
 import InputBase from "@mui/material/InputBase";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
-import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";

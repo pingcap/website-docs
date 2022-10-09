@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
-import { graphql, useStaticQuery } from "gatsby";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";

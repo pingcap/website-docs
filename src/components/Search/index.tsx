@@ -1,23 +1,13 @@
 import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
-import Button from "@mui/material/Button";
-import Menu, { MenuProps } from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 import SearchIcon from "@mui/icons-material/Search";
-
-import LinkComponent from "components/Link";
-import { generateDownloadURL, generateContactURL } from "utils";
-
-import { Locale } from "static/Type";
 
 const StyledTextField = styled((props: TextFieldProps) => (
   <TextField {...props} />

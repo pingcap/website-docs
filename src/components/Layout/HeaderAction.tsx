@@ -6,22 +6,15 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import Menu, { MenuProps } from "@mui/material/Menu";
+import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 
-import LoginIcon from "@mui/icons-material/Login";
 import LanguageIcon from "@mui/icons-material/Language";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
 import CloudIcon from "@mui/icons-material/Cloud";
 
-import LinkComponent from "components/Link";
 import Search from "components/Search";
-import { generateDownloadURL, generateContactURL } from "utils";
 
 import { Locale } from "static/Type";
 

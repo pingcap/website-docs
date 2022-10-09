@@ -1,11 +1,8 @@
 import * as React from "react";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
 import clsx from "clsx";
 

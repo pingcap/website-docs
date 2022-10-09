@@ -2,7 +2,6 @@ import * as React from "react";
 import { Trans } from "gatsby-plugin-react-i18next";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";

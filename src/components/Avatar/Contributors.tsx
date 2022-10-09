@@ -9,7 +9,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
-import { Locale, PathConfig } from "static/Type";
+import { PathConfig } from "static/Type";
 import { getRepo } from "../../../gatsby/path";
 
 export interface TotalAvatarsProps {

@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
-import Menu, { MenuProps } from "@mui/material/Menu";
+import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
