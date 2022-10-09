@@ -122,11 +122,13 @@ function SearchItem(props: { data: any }) {
           fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
         }}
       >
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data._highlightResult.hierarchy.lvl0?.value,
-          }}
-        />
+        {!!data._highlightResult?.hierarchy?.lvl0 && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data._highlightResult.hierarchy.lvl0?.value,
+            }}
+          />
+        )}
       </Typography>
       {data?._highlightResult?.url ? (
         <Typography
