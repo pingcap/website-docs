@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import clsx from "clsx";
 
+import LinkComponent from "components/Link";
+
 export default function SearchResults(props: {
   loading: boolean;
   className?: string;
@@ -66,7 +68,17 @@ export default function SearchResults(props: {
           </Typography>
           <Typography component="ul">
             <Typography component="li">
-              <Trans i18nKey="search.resultTips.content1" />
+              <Trans
+                i18nKey="search.resultTips.content1"
+                components={[
+                  <Typography
+                    component="a"
+                    href="https://asktug.com/?utm_source=doc"
+                    color="website.k1"
+                    target="_blank"
+                  />,
+                ]}
+              />
             </Typography>
             <Typography component="li">
               <Trans i18nKey="search.resultTips.content2" />
@@ -122,11 +134,13 @@ function SearchItem(props: { data: any }) {
           fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
         }}
       >
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data._highlightResult.hierarchy.lvl0?.value,
-          }}
-        />
+        {!!data._highlightResult?.hierarchy?.lvl0 && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data._highlightResult.hierarchy.lvl0?.value,
+            }}
+          />
+        )}
       </Typography>
       {data?._highlightResult?.url ? (
         <Typography
