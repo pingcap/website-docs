@@ -14,6 +14,7 @@ import {
 } from "components/Card/CustomNotice";
 import { Locale, PathConfig, FrontMatter } from "static/Type";
 import { useTotalContributors } from "components/Avatar/Contributors";
+import replaceInternalHref from "utils/anchor";
 
 export default function MDXContent(props: {
   data: any;
@@ -35,6 +36,16 @@ export default function MDXContent(props: {
     availIn,
     language,
   } = props;
+
+  React.useEffect(() => {
+    // https://github.com/pingcap/website-docs/issues/221
+    // md title with html tag will cause anchor mismatch
+    replaceInternalHref(
+      pathConfig.locale,
+      pathConfig.repo,
+      pathConfig.version || ""
+    );
+  }, [pathConfig]);
 
   !frontmatter?.hide_commit && useTotalContributors(pathConfig, filePath);
 
