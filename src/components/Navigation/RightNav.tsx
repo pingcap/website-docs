@@ -158,7 +158,7 @@ const generateToc = (items: TableOfContent[], level = 0) => {
           <Typography key={`${level}-${item.title}`} component="li">
             <Typography
               component="a"
-              href={newAnchor.replace(sliceVersionMark, "")}
+              href={newAnchor?.replace(sliceVersionMark, "")}
               sx={{
                 display: "flex",
                 textDecoration: "none",
