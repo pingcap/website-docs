@@ -39,9 +39,7 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
               values={{
                 curDocVersion: pathConfig.version,
               }}
-            />
-          </Typography>
-          <Typography>
+            />{" "}
             <Trans
               i18nKey={`doc.deprecation.${pathConfig.repo}.secondContext`}
               components={[<Link to={stableDocLink} />]}
@@ -64,9 +62,7 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
               values={{
                 curDocVersion: pathConfig.version,
               }}
-            />
-          </Typography>
-          <Typography>
+            />{" "}
             <Trans
               i18nKey={`doc.dmr.${pathConfig.repo}.secondContext`}
               components={[<Link to={stableDocLink} />]}
