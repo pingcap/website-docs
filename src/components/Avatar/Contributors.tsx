@@ -175,6 +175,11 @@ export const useTotalContributors = (
           html_url,
         }: { login: string; avatar_url: string; html_url: string } =
           commit.author;
+
+        if (login === "ti-chi-bot") {
+          return prev;
+        }
+
         const name = (commit?.commit?.author?.name as string) || login;
         if (!authorNameList.includes(name)) {
           authorNameList.push(name);
