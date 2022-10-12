@@ -23,6 +23,7 @@ import {
   transformCustomId,
   removeHtmlTag,
 } from "utils";
+import { sliceVersionMark } from "utils/anchor";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -157,7 +158,7 @@ const generateToc = (items: TableOfContent[], level = 0) => {
           <Typography key={`${level}-${item.title}`} component="li">
             <Typography
               component="a"
-              href={newAnchor}
+              href={newAnchor.replace(sliceVersionMark, "")}
               sx={{
                 display: "flex",
                 textDecoration: "none",

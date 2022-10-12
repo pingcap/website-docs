@@ -56,7 +56,7 @@ export function navigateInsideEventListener(e: any) {
 }
 
 const reAnchor = /[^-\w\u4E00-\u9FFF]*/g; // with CJKLanguage
-const sliceVersionMark = /span-classversion-mark|span$/g;
+export const sliceVersionMark = /span-classversion-mark|span$/g;
 
 export default function replaceInternalHref(
   lang: string,
