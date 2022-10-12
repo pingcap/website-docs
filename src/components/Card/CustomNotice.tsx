@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, Trans } from "gatsby-plugin-react-i18next";
+import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";
@@ -18,6 +18,8 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
     stable: string;
     dmr?: string[];
   };
+
+  const { language } = useI18next();
 
   const isDeprecated =
     docConfig.deprecated?.includes(pathConfig.version || "") ?? false;
@@ -39,7 +41,8 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
               values={{
                 curDocVersion: pathConfig.version,
               }}
-            />{" "}
+            />
+            {(language === "en" && ` `) || null}
             <Trans
               i18nKey={`doc.deprecation.${pathConfig.repo}.secondContext`}
               components={[<Link to={stableDocLink} />]}
@@ -62,7 +65,8 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
               values={{
                 curDocVersion: pathConfig.version,
               }}
-            />{" "}
+            />
+            {(language === "en" && ` `) || null}
             <Trans
               i18nKey={`doc.dmr.${pathConfig.repo}.secondContext`}
               components={[<Link to={stableDocLink} />]}
