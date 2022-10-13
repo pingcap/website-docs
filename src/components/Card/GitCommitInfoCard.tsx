@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";
 import { getRepo } from "../../../gatsby/path";
-import { docs } from "../../../docs.json";
+import { docs } from "../../../docs/docs.json";
 
 interface GitCommitInfoCardProps {
   pathConfig: PathConfig;

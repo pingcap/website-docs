@@ -14,7 +14,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { PathConfig } from "static/Type";
 import { AllVersion } from "utils";
-import CONFIG from "../../../docs.json";
+import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
 import { Typography } from "@mui/material";
 

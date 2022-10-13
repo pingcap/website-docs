@@ -3,7 +3,7 @@ import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";
-import { docs } from "../../../docs.json";
+import { docs } from "../../../docs/docs.json";
 import { Important } from "components/MDXComponents";
 
 interface Props {

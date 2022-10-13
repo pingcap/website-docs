@@ -1,5 +1,5 @@
 import { Locale, Repo, PathConfig } from "../src/static/Type";
-import CONFIG from "../docs.json";
+import CONFIG from "../docs/docs.json";
 
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;

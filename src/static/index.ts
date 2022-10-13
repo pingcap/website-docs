@@ -8,7 +8,7 @@ import RedditIcon from "@mui/icons-material/Reddit";
 import { StackOverflowIcon, SlackIcon, AskTugIcon } from "components/Icons";
 
 import { convertVersionName } from "utils";
-import CONFIG from "../../docs.json";
+import CONFIG from "../../docs/docs.json";
 
 export const DEFAULT_PINGCAP_URL = `https://pingcap.com`;
 export const EN_PINGCAP_URL = `https://en.pingcap.com/`;

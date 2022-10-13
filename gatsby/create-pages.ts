@@ -10,7 +10,7 @@ import {
   generateNav,
   generateDocHomeUrl,
 } from "./path";
-import { docs as DOCS_CONFIG } from "../docs.json";
+import { docs as DOCS_CONFIG } from "../docs/docs.json";
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },
