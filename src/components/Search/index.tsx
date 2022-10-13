@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import { useLocation } from "@reach/router";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
@@ -35,6 +36,7 @@ export default function Search(props: {
 
   const { t, navigate } = useI18next();
   const theme = useTheme();
+  const location = useLocation();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryStr(event.target.value);
