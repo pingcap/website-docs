@@ -1,5 +1,5 @@
 import { Repo, Locale } from "../src/static/Type";
-import config from "../docs.json";
+import config from "../docs/docs.json";
 
 export function getRepo(doc: Repo, lang: Locale) {
   const { languages } = config.docs[doc];

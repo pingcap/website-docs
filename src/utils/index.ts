@@ -18,7 +18,7 @@ import {
   JA_FOOTER_ITEMS,
 } from "static";
 import { PathConfig, Locale, Repo } from "static/Type";
-import CONFIG from "../../docs.json";
+import CONFIG from "../../docs/docs.json";
 import {
   PabloBookLoverSVG,
   TiDBBanner,

@@ -1,6 +1,6 @@
 require("ts-node").register({ transpileOnly: true });
 
-const docs = require("./docs.json");
+const docs = require("./docs/docs.json");
 
 module.exports = {
   siteMetadata: {
