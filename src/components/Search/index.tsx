@@ -42,7 +42,9 @@ export default function Search(props: {
 
   const handleSearchSubmitCallback = React.useCallback(() => {
     navigate(
-      `/search?type=${docInfo.type}&version=${docInfo.version}&q=${queryStr}`,
+      `/search?type=${docInfo.type}&version=${
+        docInfo.version
+      }&q=${encodeURIComponent(queryStr)}`,
       {
         state: {
           type: docInfo.type,
@@ -52,6 +54,12 @@ export default function Search(props: {
       }
     );
   }, [docInfo, queryStr]);
+
+  React.useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const query = searchParams.get("q") || "";
+    setQueryStr(query);
+  }, [location.search]);
 
   return (
     <>
@@ -86,6 +94,7 @@ export default function Search(props: {
           placeholder={t("navbar.searchDocs") || placeholder}
           type="search"
           variant="outlined"
+          value={queryStr}
           onChange={handleChange}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
