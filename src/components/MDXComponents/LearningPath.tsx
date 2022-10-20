@@ -165,7 +165,7 @@ export function LearningPath(props: {
           />
           <Typography
             id="learning-path-label"
-            sx={{ color: "#000", width: "5rem" }}
+            sx={{ color: "#000", width: "6rem" }}
           >
             {label}
           </Typography>
