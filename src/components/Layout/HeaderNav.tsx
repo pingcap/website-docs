@@ -106,7 +106,14 @@ const NavItem = (props: {
         }}
       >
         <LinkComponent isI18n to={props.to}>
-          <Typography variant="body1" component="div" color="website.f1">
+          <Typography
+            variant="body1"
+            component="div"
+            color="website.f1"
+            sx={{
+              fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`,
+            }}
+          >
             {props.label}
           </Typography>
         </LinkComponent>
