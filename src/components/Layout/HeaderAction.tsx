@@ -16,13 +16,14 @@ import CloudIcon from "@mui/icons-material/Cloud";
 
 import Search from "components/Search";
 
-import { Locale } from "static/Type";
+import { Locale, BuildType } from "static/Type";
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
   docInfo?: { type: string; version: string };
+  buildType?: BuildType;
 }) {
-  const { supportedLocales, docInfo } = props;
+  const { supportedLocales, docInfo, buildType } = props;
   const { language, t } = useI18next();
 
   return (
@@ -37,7 +38,7 @@ export default function HeaderAction(props: {
       {supportedLocales.length > 0 && (
         <LangSwitch supportedLocales={supportedLocales} />
       )}
-      {docInfo && language !== "ja" && (
+      {docInfo && language !== "ja" && buildType !== "archive" && (
         <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
       )}
       {language === "en" && <TiDBCloudBtnGroup />}

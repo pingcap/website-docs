@@ -87,6 +87,7 @@ export default function DocTemplate({
           version: pathConfig.version || "stable",
           type: pathConfig.repo,
         }}
+        buildType={buildType}
       >
         <Seo
           title={frontmatter.title}

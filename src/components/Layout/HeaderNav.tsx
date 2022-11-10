@@ -12,6 +12,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LinkComponent from "components/Link";
 import { generateDownloadURL, generateContactURL } from "utils";
 import { PingcapLogoIcon } from "components/Icons";
+import { BuildType } from "static/Type";
 
 const useSelectedNavItem = (language?: string) => {
   const [selectedItem, setSelectedItem] = React.useState<string>("");
@@ -33,7 +34,7 @@ const useSelectedNavItem = (language?: string) => {
   return selectedItem;
 };
 
-export default function HeaderNavStack() {
+export default function HeaderNavStack(props: { buildType?: BuildType }) {
   const { language } = useI18next();
 
   const selectedItem = useSelectedNavItem(language);
@@ -59,7 +60,7 @@ export default function HeaderNavStack() {
         />
       )}
 
-      {["en", "ja"].includes(language) && (
+      {["en", "ja"].includes(language) && props.buildType !== "archive" && (
         <NavItem
           selected={selectedItem === "tidbcloud"}
           label={<Trans i18nKey="navbar.cloud" />}
@@ -115,7 +116,7 @@ const NavItem = (props: {
   );
 };
 
-export function HeaderNavStackMobile() {
+export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const theme = useTheme();
@@ -181,7 +182,7 @@ export function HeaderNavStackMobile() {
           </MenuItem>
         )}
 
-        {["en", "ja"].includes(language) && (
+        {["en", "ja"].includes(language) && props.buildType !== "archive" && (
           <MenuItem
             onClick={handleClose}
             disableRipple

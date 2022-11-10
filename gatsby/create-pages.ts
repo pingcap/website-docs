@@ -106,7 +106,7 @@ export const createDocs = async ({
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
         },
-        build: (process.env.BUILD_TYPE || "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
+        buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
       },
     });
 

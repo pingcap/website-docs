@@ -13,10 +13,14 @@ exports.createPages = async ({ graphql, actions }) => {
   await createDocHome({ graphql, actions });
   await createDocs({ graphql, actions });
   await createCloudAPIReference({ graphql, actions });
-  actions.createPage({
-    path: "/search",
-    component: path.resolve(__dirname, "./src/templates/DocSearchTemplate.tsx"),
-  });
+  process.env.WEBSITE_BUILD_TYPE !== "archive" &&
+    actions.createPage({
+      path: "/search",
+      component: path.resolve(
+        __dirname,
+        "./src/templates/DocSearchTemplate.tsx"
+      ),
+    });
   actions.createPage({
     path: "/404",
     component: path.resolve(__dirname, "./src/templates/404Template.tsx"),
