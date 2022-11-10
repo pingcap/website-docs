@@ -14,14 +14,20 @@ import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import FeedbackBtn from "components/Button/FeedbackBtn";
-import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
+import {
+  TableOfContent,
+  PageContext,
+  FrontMatter,
+  RepoNav,
+  BuildType,
+} from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
 import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 
 interface DocTemplateProps {
-  pageContext: PageContext & { pageUrl: string };
+  pageContext: PageContext & { pageUrl: string; buildType: BuildType };
   data: {
     site: {
       siteMetadata: {
@@ -40,7 +46,7 @@ interface DocTemplateProps {
 }
 
 export default function DocTemplate({
-  pageContext: { name, availIn, pathConfig, filePath, pageUrl },
+  pageContext: { name, availIn, pathConfig, filePath, pageUrl, buildType },
   data,
 }: DocTemplateProps) {
   const {
@@ -125,6 +131,7 @@ export default function DocTemplate({
                 name={name}
                 pathConfig={pathConfig}
                 availIn={availIn.version}
+                buildType={buildType}
               />
             )}
             <Box

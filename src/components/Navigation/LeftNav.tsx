@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { PingcapLogoWithoutTextIcon } from "components/Icons";
 
-import { DocLeftNav, PathConfig } from "static/Type";
+import { DocLeftNav, PathConfig, BuildType } from "static/Type";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
@@ -24,10 +24,11 @@ interface LeftNavProps {
   name: string;
   pathConfig: PathConfig;
   availIn: string[];
+  buildType?: BuildType;
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
-  const { data, current, name, pathConfig, availIn } = props;
+  const { data, current, name, pathConfig, availIn, buildType } = props;
 
   return (
     <Box
@@ -56,6 +57,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
             name={name}
             pathConfig={pathConfig}
             availIn={availIn}
+            buildType={buildType}
           />
         )}
         <LeftNavTree data={data} current={current} />
@@ -65,7 +67,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
 }
 
 export function LeftNavMobile(props: LeftNavProps) {
-  const { data, current, name, pathConfig, availIn } = props;
+  const { data, current, name, pathConfig, availIn, buildType } = props;
 
   const [open, setOpen] = React.useState(false);
 

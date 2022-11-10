@@ -3,7 +3,7 @@ import { resolve } from "path";
 import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
-import { Locale, Repo } from "../src/static/Type";
+import { Locale, Repo, BuildType } from "../src/static/Type";
 import {
   generateConfig,
   generateUrl,
@@ -106,6 +106,7 @@ export const createDocs = async ({
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
         },
+        build: (process.env.BUILD_TYPE || "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
       },
     });
 

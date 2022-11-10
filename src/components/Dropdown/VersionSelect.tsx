@@ -8,11 +8,12 @@ import NativeSelect from "@mui/material/NativeSelect";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
+import FormLabel from "@mui/material/FormLabel";
 import { useTheme } from "@mui/material/styles";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import { PathConfig } from "static/Type";
+import { PathConfig, BuildType } from "static/Type";
 import { AllVersion } from "utils";
 import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
@@ -25,9 +26,11 @@ function renderVersion(version: string | null, pathConfig: PathConfig) {
     false;
   if (isDmr) return `${version} (DMR)`;
   if (version !== "stable") return version;
-  return (docs[pathConfig.repo] as { stable: string }).stable.replace(
-    "release-",
-    "v"
+  return (
+    (docs[pathConfig.repo] as { stable: string }).stable.replace(
+      "release-",
+      "v"
+    ) + ` (Stable)`
   );
 }
 
@@ -78,10 +81,191 @@ interface VersionSelectProps {
   name: string;
   pathConfig: PathConfig;
   availIn: string[];
+  buildType?: BuildType;
 }
 
+const VersionItems = (props: {
+  versions: (string | null)[];
+  availIn: string[];
+  pathConfig: PathConfig;
+  name: string;
+}) => {
+  const { versions, availIn, pathConfig, name } = props;
+
+  const repoCfg = CONFIG.docs[pathConfig.repo] as {
+    [key: string]: any;
+  };
+  const dmrList = (repoCfg && (repoCfg?.dmr as string[])) || [];
+  const archiveList = (repoCfg?.archived as string[]) || [];
+
+  const LTSVersions = versions.filter((v) => {
+    return (
+      !dmrList.includes(v || "") &&
+      !archiveList.includes(v || "") &&
+      v !== "dev"
+    );
+  });
+  const DMRVersions = versions.filter((v) => dmrList.includes(v || ""));
+
+  return (
+    <>
+      <MenuItem
+        key={`menu-dev`}
+        value={`menu-dev`}
+        disabled={!availIn.includes(`dev` || "")}
+      >
+        <LinkComponent
+          isI18n
+          to={`/${pathConfig.repo}/dev/${name}`}
+          style={{
+            width: "100%",
+            color: "#666666",
+          }}
+        >
+          <Typography
+            component="div"
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
+            }}
+          >
+            {renderVersion(`dev`, pathConfig)}
+          </Typography>
+        </LinkComponent>
+      </MenuItem>
+      <FormLabel
+        sx={{
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+          fontWeight: "bold",
+          pl: "0.5rem",
+        }}
+      >
+        LTS
+      </FormLabel>
+      {LTSVersions.map((version) => (
+        <MenuItem
+          key={`menu-${version}`}
+          value={`menu-${version}`}
+          disabled={!availIn.includes(version || "")}
+        >
+          <LinkComponent
+            isI18n
+            to={`/${pathConfig.repo}/${version}/${name}`}
+            style={{
+              width: "100%",
+              color: "#666666",
+            }}
+          >
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {renderVersion(version, pathConfig)}
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
+      ))}
+      <FormLabel
+        sx={{
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+          fontWeight: "bold",
+          pl: "0.5rem",
+        }}
+      >
+        DMR
+      </FormLabel>
+      {DMRVersions.map((version) => (
+        <MenuItem
+          key={`menu-${version}`}
+          value={`menu-${version}`}
+          disabled={!availIn.includes(version || "")}
+        >
+          <LinkComponent
+            isI18n
+            to={`/${pathConfig.repo}/${version}/${name}`}
+            style={{
+              width: "100%",
+              color: "#666666",
+            }}
+          >
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {renderVersion(version, pathConfig)}
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
+      ))}
+    </>
+  );
+};
+
+const VersionItemsArchived = (props: {
+  versions: (string | null)[];
+  availIn: string[];
+  pathConfig: PathConfig;
+  name: string;
+}) => {
+  const { versions, availIn, pathConfig, name } = props;
+
+  const repoCfg = CONFIG.docs[pathConfig.repo] as {
+    [key: string]: any;
+  };
+  const archiveList = (repoCfg?.archived as string[]) || [];
+
+  return (
+    <>
+      <FormLabel
+        sx={{
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem",
+          fontWeight: "bold",
+          pl: "0.5rem",
+        }}
+      >
+        Archive
+      </FormLabel>
+      {archiveList.map((version) => (
+        <MenuItem
+          key={`menu-${version}`}
+          value={`menu-${version}`}
+          disabled={!availIn.includes(version || "")}
+        >
+          <LinkComponent
+            isI18n
+            to={`/${pathConfig.repo}/${version}/${name}`}
+            style={{
+              width: "100%",
+              color: "#666666",
+            }}
+          >
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {renderVersion(version, pathConfig)}
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
+      ))}
+    </>
+  );
+};
+
 export default function VersionSelect(props: VersionSelectProps) {
-  const { name, pathConfig, availIn } = props;
+  const { name, pathConfig, availIn, buildType } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -143,32 +327,21 @@ export default function VersionSelect(props: VersionSelectProps) {
           "aria-labelledby": "version-select-button",
         }}
       >
-        {AllVersion[pathConfig.repo][pathConfig.locale].map((version) => (
-          <MenuItem
-            key={`menu-${version}`}
-            value={`menu-${version}`}
-            disabled={!availIn.includes(version || "")}
-          >
-            <LinkComponent
-              isI18n
-              to={`/${pathConfig.repo}/${version}/${name}`}
-              style={{
-                width: "100%",
-                color: "#666666",
-              }}
-            >
-              <Typography
-                component="div"
-                sx={{
-                  fontSize: "0.875rem",
-                  lineHeight: "1.25rem",
-                }}
-              >
-                {renderVersion(version, pathConfig)}
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        ))}
+        {buildType === "archive" ? (
+          <VersionItemsArchived
+            versions={AllVersion[pathConfig.repo][pathConfig.locale]}
+            availIn={availIn}
+            pathConfig={pathConfig}
+            name={name}
+          />
+        ) : (
+          <VersionItems
+            versions={AllVersion[pathConfig.repo][pathConfig.locale]}
+            availIn={availIn}
+            pathConfig={pathConfig}
+            name={name}
+          />
+        )}
       </StyledMenu>
     </>
   );
