@@ -33,11 +33,11 @@ jobs:
         id: submodule
         run: |
           git submodule init
-          echo "::set-output name=submodule_sha_origin::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
+          echo "submodule_sha_origin=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
           git submodule update --remote
-          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
-          echo "::set-output name=git_sha::$(git rev-parse HEAD)"
-          echo "::set-output name=build_date::$(date)"
+          echo "submodule_sha=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
+          echo "git_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "build_date=$(date)" >> $GITHUB_OUTPUT
 
       - name: Git commit and push submodules update
         run: |
