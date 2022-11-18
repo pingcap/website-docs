@@ -23,7 +23,7 @@ concurrency: ci-prod
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     name: Build website
     steps:
       - uses: actions/checkout@v3
