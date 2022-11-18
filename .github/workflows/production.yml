@@ -42,10 +42,10 @@ jobs:
           cd docs
           git checkout main
           cd ..
-          echo "::set-output name=submodule_sha::$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')"
-          echo "::set-output name=submodule_status::$(git submodule status)"
-          echo "::set-output name=git_sha::$(git rev-parse HEAD)"
-          echo "::set-output name=build_date::$(date)"
+          echo "submodule_sha=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
+          echo "submodule_status=$(git submodule status)" >> $GITHUB_OUTPUT
+          echo "git_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "build_date=$(date)" >> $GITHUB_OUTPUT
 
       - name: Install deps
         run: yarn
@@ -55,9 +55,9 @@ jobs:
         run: |
           if ${{ !!inputs.fallback }}
           then
-            echo "::set-output name=key::${{ inputs.hash }}"
+            echo "key=${{ inputs.hash }}" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=key::${{ steps.submodule.outputs.submodule_sha }}"
+            echo "key=${{ steps.submodule.outputs.submodule_sha }}" >> $GITHUB_OUTPUT
           fi
 
       - name: Restore gatsby cache
@@ -92,9 +92,9 @@ jobs:
       - name: Set known_hosts
         id: known-hosts
         run: |
-          echo "::set-output name=BJ_PROXY::$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})"
-          echo "::set-output name=LA1::$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})"
-          echo "::set-output name=LA2::$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})"
+          echo "BJ_PROXY=$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})" >> $GITHUB_OUTPUT
+          echo "LA1=$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})" >> $GITHUB_OUTPUT
+          echo "LA2=$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})" >> $GITHUB_OUTPUT
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
