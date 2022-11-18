@@ -2,8 +2,7 @@
 @import "./variables.css";
 
 html {
-  font-family: "Poppins", "Helvetica Neue", "Noto Sans", "Fira Code",
-    "sans-serif";
+  font-family: '"Poppins", "Helvetica Neue", "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif"';
 }
 
 body {
