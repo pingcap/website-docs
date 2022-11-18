@@ -40,12 +40,13 @@ export default function MDXContent(props: {
   React.useEffect(() => {
     // https://github.com/pingcap/website-docs/issues/221
     // md title with html tag will cause anchor mismatch
-    replaceInternalHref(
-      pathConfig.locale,
-      pathConfig.repo,
-      pathConfig.version || ""
-    );
-  }, [pathConfig]);
+    pathConfig &&
+      replaceInternalHref(
+        pathConfig.locale,
+        pathConfig.repo,
+        pathConfig.version || ""
+      );
+  });
 
   !frontmatter?.hide_commit && useTotalContributors(pathConfig, filePath);
 
