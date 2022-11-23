@@ -39,7 +39,7 @@ interface DocTemplateProps {
       body: string;
       tableOfContents: TableOfContent;
     };
-    navigation: {
+    navigation?: {
       navigation: RepoNav;
     };
   };
@@ -52,8 +52,10 @@ export default function DocTemplate({
   const {
     site,
     mdx: { frontmatter, tableOfContents, body },
-    navigation: { navigation },
+    navigation: originNav,
   } = data;
+
+  const navigation = originNav ? originNav.navigation : [];
 
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
     if (tableOfContents.items?.length === 1) {
@@ -184,6 +186,7 @@ export default function DocTemplate({
                       frontmatter={frontmatter}
                       availIn={availIn.version}
                       language={language}
+                      buildType={buildType}
                     />
                     {!frontmatter?.hide_commit && (
                       <GitCommitInfoCard

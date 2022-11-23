@@ -11,8 +11,9 @@ import * as MDXConponents from "components/MDXComponents";
 import {
   CustomNotice,
   MachineTranslationNotice,
+  ArchiveTiDBNotice,
 } from "components/Card/CustomNotice";
-import { Locale, PathConfig, FrontMatter } from "static/Type";
+import { Locale, PathConfig, FrontMatter, BuildType } from "static/Type";
 import { useTotalContributors } from "components/Avatar/Contributors";
 import replaceInternalHref from "utils/anchor";
 
@@ -25,6 +26,7 @@ export default function MDXContent(props: {
   frontmatter: FrontMatter;
   availIn: string[];
   language: string;
+  buildType: BuildType;
 }) {
   const {
     data,
@@ -35,6 +37,7 @@ export default function MDXContent(props: {
     frontmatter,
     availIn,
     language,
+    buildType,
   } = props;
 
   React.useEffect(() => {
@@ -52,6 +55,13 @@ export default function MDXContent(props: {
   return (
     <Container className={className} maxWidth="xl">
       <Box className="markdown-body">
+        {buildType === "archive" && (
+          <ArchiveTiDBNotice
+            name={name}
+            pathConfig={pathConfig}
+            availIn={availIn}
+          />
+        )}
         <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         {language === "ja" && (
           <MachineTranslationNotice

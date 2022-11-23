@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";
 import { docs } from "../../../docs/docs.json";
-import { Important } from "components/MDXComponents";
+import { Important, Warning } from "components/MDXComponents";
 
 interface Props {
   name: string;
@@ -95,5 +95,19 @@ export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
         components={[<Link language="en" to={targetEnUrl} />]}
       />
     </Important>
+  );
+};
+
+export const ArchiveTiDBNotice = ({ name, pathConfig }: Props) => {
+  const targetUrl = `/${pathConfig.repo}/stable/${
+    name === "_index" ? "" : name
+  }`;
+  return (
+    <Warning>
+      <Trans
+        i18nKey={`doc.archive.tidb`}
+        components={[<Link to={targetUrl} />]}
+      />
+    </Warning>
   );
 };
