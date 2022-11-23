@@ -15,8 +15,15 @@ export function DocHomeContainer(props: {
   subTitle?: string;
   children?: any;
   platform: "home" | "tidb" | "tidb-cloud";
+  archive?: boolean;
 }) {
-  const { title, subTitle = "", children = [], platform = "home" } = props;
+  const {
+    title,
+    subTitle = "",
+    children = [],
+    platform = "home",
+    archive = false,
+  } = props;
 
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -98,10 +105,12 @@ export function DocHomeContainer(props: {
           <Typography component="div" variant="body1" id="banner-subtitle">
             {subTitle}
           </Typography>
-          <SearchInput
-            disableResponsive
-            docInfo={{ type: "tidb", version: "stable" }}
-          />
+          {!archive && (
+            <SearchInput
+              disableResponsive
+              docInfo={{ type: "tidb", version: "stable" }}
+            />
+          )}
         </Stack>
         <Box
           id="title-right"

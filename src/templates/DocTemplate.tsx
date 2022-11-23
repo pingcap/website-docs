@@ -230,7 +230,7 @@ export default function DocTemplate({
                     </>
                   )}
                 </Stack>
-                {language !== "ja" && (
+                {language !== "ja" && buildType !== "archive" && (
                   <Box
                     sx={{
                       width: "fit-content",

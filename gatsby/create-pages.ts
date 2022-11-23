@@ -24,6 +24,7 @@ export const createDocs = async ({
       allMdx(
         filter: {
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
+          slug: { nin: ["en/tidb/_docHome", "zh/tidb/_docHome"] }
           frontmatter: { draft: { ne: true } }
         }
       ) {
@@ -164,29 +165,59 @@ export const createDocHome = async ({
   // const template = resolve(__dirname, "../src/doc/index.tsx");
   const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
 
-  const docs = await graphql<PageQueryData>(`
-    {
-      allMdx(
-        filter: {
-          fileAbsolutePath: { regex: "/tidb/master/_docHome.md$/" }
-          frontmatter: { draft: { ne: true } }
+  const prodQueryStr = `
+  {
+    allMdx(
+      filter: {
+        fileAbsolutePath: { regex: "/tidb/master/_docHome.md$/" }
+        frontmatter: { draft: { ne: true } }
+      }
+    ) {
+      nodes {
+        id
+        frontmatter {
+          aliases
         }
-      ) {
-        nodes {
-          id
-          frontmatter {
-            aliases
-          }
-          slug
-          parent {
-            ... on File {
-              relativePath
-            }
+        slug
+        parent {
+          ... on File {
+            relativePath
           }
         }
       }
     }
-  `);
+  }
+`;
+
+  const archiveQueryStr = `
+  {
+    allMdx(
+      filter: {
+        fileAbsolutePath: { regex: "/tidb/_docHome.md$/" }
+        frontmatter: { draft: { ne: true } }
+      }
+    ) {
+      nodes {
+        id
+        frontmatter {
+          aliases
+        }
+        slug
+        parent {
+          ... on File {
+            relativePath
+          }
+        }
+      }
+    }
+  }
+`;
+
+  const docs = await graphql<PageQueryData>(
+    process.env.WEBSITE_BUILD_TYPE === "archive"
+      ? archiveQueryStr
+      : prodQueryStr
+  );
 
   if (docs.errors) {
     sig.error(docs.errors);
@@ -218,6 +249,7 @@ export const createDocHome = async ({
           locale,
           version: [],
         },
+        buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
       },
     });
   });

@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import { Locale, PathConfig } from "static/Type";
 import { docs } from "../../../docs/docs.json";
 import { Important, Warning } from "components/MDXComponents";
+import { generateUrl } from "utils";
+import LinkComponent from "components/Link";
 
 interface Props {
   name: string;
@@ -99,14 +101,14 @@ export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
 };
 
 export const ArchiveTiDBNotice = ({ name, pathConfig }: Props) => {
-  const targetUrl = `/${pathConfig.repo}/stable/${
-    name === "_index" ? "" : name
-  }`;
+  const stableCfg = { ...pathConfig, version: "stable" };
+  const path = generateUrl(name, stableCfg);
+  const targetUrl = `https://docs.pingcap.com${path}`;
   return (
     <Warning>
       <Trans
         i18nKey={`doc.archive.tidb`}
-        components={[<Link to={targetUrl} />]}
+        components={[<LinkComponent to={targetUrl} fontSize="inherit" />]}
       />
     </Warning>
   );

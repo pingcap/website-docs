@@ -71,7 +71,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
       <NavItem
         selected={selectedItem === "tidb"}
         label={<Trans i18nKey="navbar.tidb" />}
-        to={`/tidb/stable`}
+        to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />
 
       <NavItem
@@ -201,7 +201,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           disableRipple
           selected={selectedItem === "tidb"}
         >
-          <LinkComponent isI18n to="/tidb/stable" style={{ width: "100%" }}>
+          <LinkComponent
+            isI18n
+            to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
+            style={{ width: "100%" }}
+          >
             <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.tidb" />
             </Typography>
