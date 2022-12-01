@@ -1,0 +1,103 @@
+name: Build and deploy [Archive] to server
+
+on:
+  workflow_dispatch:
+    inputs:
+      src:
+        description: "Docs Staging Branch"
+        type: string
+        default: archive
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build website
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+
+      - name: Update submodule
+        id: submodule
+        run: |
+          git submodule init
+          git submodule update --remote
+          cd docs
+          git checkout ${{ inputs.src }}
+          cd ..
+          echo "submodule_sha=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
+          echo "submodule_status=$(git submodule status)" >> $GITHUB_OUTPUT
+          echo "git_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "build_date=$(date)" >> $GITHUB_OUTPUT
+
+      - name: Install deps
+        run: yarn
+
+      - name: Calc gatsby cache key
+        id: calc-cache-key
+        run: |
+          echo "::set-output name=key::${{ steps.submodule.outputs.submodule_sha }}"
+
+      - name: Restore gatsby cache
+        uses: actions/cache@v3
+        id: gatsby-cache
+        with:
+          path: |
+            .cache
+            public
+          key: ${{ runner.os }}-archive-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}
+          restore-keys: |
+            ${{ runner.os }}-archive-gatsby-cache-docs-staging-
+
+      - name: Build website
+        env:
+          CI: true
+          GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          GATSBY_DOC_BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
+          GATSBY_DOC_BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
+          GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
+          WEBSITE_BUILD_TYPE: archive
+        run: |
+          yarn build --verbose
+
+      - name: Check output
+        id: check-output
+        run: |
+          sudo apt install tree
+          tree public
+
+      - name: Set known_hosts
+        id: known-hosts
+        run: |
+          echo "BJ_PROXY=$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})" >> $GITHUB_OUTPUT
+          echo "LA1=$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})" >> $GITHUB_OUTPUT
+          echo "LA2=$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})" >> $GITHUB_OUTPUT
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: |
+            ${{ steps.known-hosts.outputs.BJ_PROXY }}
+            ${{ steps.known-hosts.outputs.LA1 }}
+            ${{ steps.known-hosts.outputs.LA2 }}
+
+      - name: Deploy to LA1
+        run: |
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH_ARCHIVE }}"
+
+      - name: Deploy to LA2
+        run: |
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH_ARCHIVE }}"
+
+      - name: Deploy to BJ1
+        run: |
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH_ARCHIVE }}"
+
+      - name: Deploy to BJ2
+        run: |
+          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH_ARCHIVE }}"

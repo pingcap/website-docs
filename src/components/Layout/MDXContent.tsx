@@ -55,7 +55,7 @@ export default function MDXContent(props: {
   return (
     <Container className={className} maxWidth="xl">
       <Box className="markdown-body">
-        {buildType === "archive" && (
+        {buildType === "archive" && typeof name !== "undefined" && (
           <ArchiveTiDBNotice
             name={name}
             pathConfig={pathConfig}
