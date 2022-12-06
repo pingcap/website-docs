@@ -275,7 +275,7 @@ export const ZH_FOOTER_ITEMS = [
     name: "支持",
     items: [
       {
-        name: "AskTUG",
+        name: "TiDB 社区",
         url: "https://asktug.com",
       },
       {

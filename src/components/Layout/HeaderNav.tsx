@@ -78,6 +78,14 @@ export default function HeaderNavStack() {
         to={generateDownloadURL(language)}
       />
 
+      {/* todo: add asktug en */}
+      {["zh"].includes(language) && (
+        <NavItem
+          label={<Trans i18nKey="navbar.asktug" />}
+          to={`https://asktug.com/`}
+        />
+      )}
+
       <NavItem
         label={<Trans i18nKey="navbar.contactUs" />}
         to={generateContactURL(language)}
@@ -224,6 +232,17 @@ export function HeaderNavStackMobile() {
             </Typography>
           </LinkComponent>
         </MenuItem>
+
+        {/* todo: add asktug en */}
+        {["zh"].includes(language) && (
+          <MenuItem onClick={handleClose} disableRipple>
+            <LinkComponent to={`https://asktug.com/`} style={{ width: "100%" }}>
+              <Typography variant="body1" component="div" color="website.f1">
+                <Trans i18nKey="navbar.asktug" />
+              </Typography>
+            </LinkComponent>
+          </MenuItem>
+        )}
 
         <MenuItem onClick={handleClose} disableRipple>
           <LinkComponent
