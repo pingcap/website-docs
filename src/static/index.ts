@@ -170,10 +170,6 @@ export const EN_FOOTER_ITEMS = [
         url: "/tidb/stable/quick-start-with-tidb",
       },
       {
-        name: "Community",
-        url: "https://en.pingcap.com/community",
-      },
-      {
         name: "Forum",
         url: "https://ask.pingcap.com/",
       },
