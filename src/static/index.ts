@@ -174,6 +174,10 @@ export const EN_FOOTER_ITEMS = [
         url: "https://en.pingcap.com/community",
       },
       {
+        name: "Forum",
+        url: "https://ask.pingcap.com/",
+      },
+      {
         name: "Pricing",
         url: "https://en.pingcap.com/tidb-cloud-pricing",
       },

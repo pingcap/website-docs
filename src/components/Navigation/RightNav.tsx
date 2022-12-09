@@ -88,10 +88,14 @@ export default function RightNav(props: RightNavProps) {
               label={t("doc.feedback")}
               rel="noreferrer"
             />
-            {pathConfig.locale === "zh" && (
+            {["zh", "en"].includes(pathConfig.locale) && (
               <ActionItem
                 icon={QuestionAnswerIcon}
-                url={`https://asktug.com/?utm_source=doc`}
+                url={
+                  pathConfig.locale === "zh"
+                    ? `https://asktug.com/?utm_source=doc`
+                    : `https://ask.pingcap.com/`
+                }
                 label={t("doc.feedbackAskTug")}
                 rel="noreferrer"
               />

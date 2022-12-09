@@ -78,11 +78,10 @@ export default function HeaderNavStack() {
         to={generateDownloadURL(language)}
       />
 
-      {/* todo: add asktug en */}
-      {["zh"].includes(language) && (
+      {["zh", "en"].includes(language) && (
         <NavItem
           label={<Trans i18nKey="navbar.asktug" />}
-          to={`https://asktug.com/`}
+          to={generateAskTugUrl(language)}
         />
       )}
 
@@ -233,10 +232,12 @@ export function HeaderNavStackMobile() {
           </LinkComponent>
         </MenuItem>
 
-        {/* todo: add asktug en */}
-        {["zh"].includes(language) && (
+        {["zh", "en"].includes(language) && (
           <MenuItem onClick={handleClose} disableRipple>
-            <LinkComponent to={`https://asktug.com/`} style={{ width: "100%" }}>
+            <LinkComponent
+              to={generateAskTugUrl(language)}
+              style={{ width: "100%" }}
+            >
               <Typography variant="body1" component="div" color="website.f1">
                 <Trans i18nKey="navbar.asktug" />
               </Typography>
@@ -257,4 +258,16 @@ export function HeaderNavStackMobile() {
       </Menu>
     </Box>
   );
+}
+
+function generateAskTugUrl(language: string) {
+  switch (language) {
+    case "zh":
+      return "https://asktug.com/";
+    case "en":
+      return "https://ask.pingcap.com/";
+    default:
+      break;
+  }
+  return "https://asktug.com/";
 }
