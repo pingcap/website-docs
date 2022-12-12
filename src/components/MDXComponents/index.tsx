@@ -18,3 +18,4 @@ export {
   DocHomeCardContainer,
   DocHomeCard,
 } from "components/MDXComponents/DocHome";
+export { MDSvgIcon } from "components/MDXComponents/MDSvgIcon";
