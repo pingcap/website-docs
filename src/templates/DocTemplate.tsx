@@ -14,7 +14,13 @@ import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import FeedbackBtn from "components/Button/FeedbackBtn";
-import { TableOfContent, PageContext, FrontMatter, RepoNav } from "static/Type";
+import {
+  TableOfContent,
+  PageContext,
+  FrontMatter,
+  RepoNav,
+  Locale,
+} from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
 import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
@@ -83,6 +89,7 @@ export default function DocTemplate({
         }}
       >
         <Seo
+          lang={language as Locale}
           title={frontmatter.title}
           description={frontmatter.summary}
           meta={[

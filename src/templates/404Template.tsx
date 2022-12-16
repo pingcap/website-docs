@@ -67,7 +67,7 @@ export default function PageNotFoundTemplate(props: { data: AllLocales }) {
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
           <Layout>
-            <Seo title="404 Not Found" noindex />
+            <Seo lang={language as Locale} title="404 Not Found" noindex />
             <Container
               sx={{
                 marginTop: "5rem",
