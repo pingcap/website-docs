@@ -16,6 +16,7 @@
     "tools": "Tools",
     "cloud": "TiDB Cloud",
     "appdev": "App Dev",
+    "asktug": "Forum",
     "download": "Try TiDB",
     "contactUs": "Contact Us",
     "searchDocs": "Search Docs"
@@ -26,7 +27,7 @@
     "download-pdf": "Download PDF",
     "improve": "Edit this page",
     "feedback": "Request docs changes",
-    "feedbackAskTug": "社区论坛交流",
+    "feedbackAskTug": "Ask questions on TiDB Forum",
     "latestCommit": "was last updated",
     "deprecation": {
       "tidb": {

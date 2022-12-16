@@ -30,6 +30,7 @@ import {
   EN_DOC_TYPE_LIST,
   ZH_DOC_TYPE_LIST,
 } from "static";
+import { Locale } from "static/Type";
 
 const fetchVersionListByDocType = (docType: string) => {
   switch (docType) {
@@ -146,7 +147,7 @@ export default function DocSearchTemplate() {
             position: "relative",
           }}
         >
-          <Seo title="Search" noindex />
+          <Seo lang={language as Locale} title="Search" noindex />
           <Stack
             spacing={2}
             sx={{

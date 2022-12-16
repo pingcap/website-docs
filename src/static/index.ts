@@ -170,8 +170,8 @@ export const EN_FOOTER_ITEMS = [
         url: "/tidb/stable/quick-start-with-tidb",
       },
       {
-        name: "Community",
-        url: "https://en.pingcap.com/community",
+        name: "Forum",
+        url: "https://ask.pingcap.com/",
       },
       {
         name: "Pricing",
@@ -275,7 +275,7 @@ export const ZH_FOOTER_ITEMS = [
     name: "支持",
     items: [
       {
-        name: "AskTUG",
+        name: "TiDB 社区",
         url: "https://asktug.com",
       },
       {

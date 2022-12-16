@@ -86,6 +86,8 @@ const theme = createTheme({
       "sans-serif",
       '"Noto Sans"',
       '"Fira Code"',
+      '"IBM Plex Sans"',
+      '"sans-serif"',
     ].join(","),
     h1: {
       fontSize: "2.5rem",

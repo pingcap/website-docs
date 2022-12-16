@@ -20,6 +20,7 @@ import {
   FrontMatter,
   RepoNav,
   BuildType,
+  Locale,
 } from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
 import Seo from "components/Layout/Seo";
@@ -92,6 +93,7 @@ export default function DocTemplate({
         buildType={buildType}
       >
         <Seo
+          lang={language as Locale}
           title={frontmatter.title}
           description={frontmatter.summary}
           meta={[

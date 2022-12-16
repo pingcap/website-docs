@@ -1,5 +1,10 @@
 import { ThemeProvider, styled, useTheme } from "@mui/material/styles";
 
+import "@fontsource/poppins";
+import "@fontsource/noto-sans-sc";
+import "@fontsource/noto-sans-jp";
+import "@fontsource/ibm-plex-sans";
+
 import theme from "theme/index";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";

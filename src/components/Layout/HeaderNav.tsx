@@ -79,6 +79,13 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         to={generateDownloadURL(language)}
       />
 
+      {["zh", "en"].includes(language) && (
+        <NavItem
+          label={<Trans i18nKey="navbar.asktug" />}
+          to={generateAskTugUrl(language)}
+        />
+      )}
+
       <NavItem
         label={<Trans i18nKey="navbar.contactUs" />}
         to={generateContactURL(language)}
@@ -107,7 +114,14 @@ const NavItem = (props: {
         }}
       >
         <LinkComponent isI18n to={props.to}>
-          <Typography variant="body1" component="div" color="website.f1">
+          <Typography
+            variant="body1"
+            component="div"
+            color="website.f1"
+            sx={{
+              fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`,
+            }}
+          >
             {props.label}
           </Typography>
         </LinkComponent>
@@ -223,6 +237,19 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </LinkComponent>
         </MenuItem>
 
+        {["zh", "en"].includes(language) && (
+          <MenuItem onClick={handleClose} disableRipple>
+            <LinkComponent
+              to={generateAskTugUrl(language)}
+              style={{ width: "100%" }}
+            >
+              <Typography variant="body1" component="div" color="website.f1">
+                <Trans i18nKey="navbar.asktug" />
+              </Typography>
+            </LinkComponent>
+          </MenuItem>
+        )}
+
         <MenuItem onClick={handleClose} disableRipple>
           <LinkComponent
             to={generateContactURL(language)}
@@ -236,4 +263,16 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
       </Menu>
     </Box>
   );
+}
+
+function generateAskTugUrl(language: string) {
+  switch (language) {
+    case "zh":
+      return "https://asktug.com/";
+    case "en":
+      return "https://ask.pingcap.com/";
+    default:
+      break;
+  }
+  return "https://asktug.com/";
 }
