@@ -13,12 +13,13 @@ import HeaderNavStack, {
 import HeaderAction from "components/Layout/HeaderAction";
 
 import { generatePingcapUrl } from "utils";
-import { Locale } from "static/Type";
+import { Locale, BuildType } from "static/Type";
 
 export default function Header(props: {
   menu?: React.ReactNode;
   locales: Locale[];
   docInfo?: { type: string; version: string };
+  buildType?: BuildType;
 }) {
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
@@ -55,12 +56,13 @@ export default function Header(props: {
           </LinkComponent>
         </Box>
 
-        <HeaderNavStack />
-        <HeaderNavStackMobile />
+        <HeaderNavStack buildType={props.buildType} />
+        <HeaderNavStackMobile buildType={props.buildType} />
 
         <HeaderAction
           supportedLocales={props.locales}
           docInfo={props.docInfo}
+          buildType={props.buildType}
         />
       </Toolbar>
     </AppBar>

@@ -4,7 +4,9 @@ import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";
 import { docs } from "../../../docs/docs.json";
-import { Important } from "components/MDXComponents";
+import { Important, Warning } from "components/MDXComponents";
+import { generateUrl } from "utils";
+import LinkComponent from "components/Link";
 
 interface Props {
   name: string;
@@ -95,5 +97,19 @@ export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
         components={[<Link language="en" to={targetEnUrl} />]}
       />
     </Important>
+  );
+};
+
+export const ArchiveTiDBNotice = ({ name, pathConfig }: Props) => {
+  const stableCfg = { ...pathConfig, version: "stable" };
+  const path = generateUrl(name, stableCfg);
+  const targetUrl = `https://docs.pingcap.com${path}`;
+  return (
+    <Warning>
+      <Trans
+        i18nKey={`doc.archive.tidb`}
+        components={[<LinkComponent to={targetUrl} fontSize="inherit" />]}
+      />
+    </Warning>
   );
 };

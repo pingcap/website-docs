@@ -45,6 +45,9 @@
         "firstContext": "你正在查看 TiDB {{ curDocVersion }} (<0>DMR</0>) 的文档。PingCAP 不提供基于 {{ curDocVersion }} 的 bug 修复版本，如有 bug，会在后续版本中修复。",
         "secondContext": "如无特殊需求，建议使用 TiDB 数据库的<0>最新 LTS 版本</0>。"
       }
+    },
+    "archive": {
+      "tidb": "You are viewing the archived documentation of TiDB, which no longer receives updates. For general purposes, please use <0>the latest LTS version</0> of the TiDB database."
     }
   },
   "shortcodes": {

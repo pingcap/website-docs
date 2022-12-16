@@ -19,6 +19,7 @@ import {
   PageContext,
   FrontMatter,
   RepoNav,
+  BuildType,
   Locale,
 } from "static/Type";
 import { useHighlightCode } from "utils/CustomHook";
@@ -27,7 +28,7 @@ import { getStable, generateUrl } from "utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 
 interface DocTemplateProps {
-  pageContext: PageContext & { pageUrl: string };
+  pageContext: PageContext & { pageUrl: string; buildType: BuildType };
   data: {
     site: {
       siteMetadata: {
@@ -39,21 +40,23 @@ interface DocTemplateProps {
       body: string;
       tableOfContents: TableOfContent;
     };
-    navigation: {
+    navigation?: {
       navigation: RepoNav;
     };
   };
 }
 
 export default function DocTemplate({
-  pageContext: { name, availIn, pathConfig, filePath, pageUrl },
+  pageContext: { name, availIn, pathConfig, filePath, pageUrl, buildType },
   data,
 }: DocTemplateProps) {
   const {
     site,
     mdx: { frontmatter, tableOfContents, body },
-    navigation: { navigation },
+    navigation: originNav,
   } = data;
+
+  const navigation = originNav ? originNav.navigation : [];
 
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
     if (tableOfContents.items?.length === 1) {
@@ -87,6 +90,7 @@ export default function DocTemplate({
           version: pathConfig.version || "stable",
           type: pathConfig.repo,
         }}
+        buildType={buildType}
       >
         <Seo
           lang={language as Locale}
@@ -132,6 +136,7 @@ export default function DocTemplate({
                 name={name}
                 pathConfig={pathConfig}
                 availIn={availIn.version}
+                buildType={buildType}
               />
             )}
             <Box
@@ -183,6 +188,7 @@ export default function DocTemplate({
                       frontmatter={frontmatter}
                       availIn={availIn.version}
                       language={language}
+                      buildType={buildType}
                     />
                     {!frontmatter?.hide_commit && (
                       <GitCommitInfoCard
@@ -226,7 +232,7 @@ export default function DocTemplate({
                     </>
                   )}
                 </Stack>
-                {language !== "ja" && (
+                {language !== "ja" && buildType !== "archive" && (
                   <Box
                     sx={{
                       width: "fit-content",

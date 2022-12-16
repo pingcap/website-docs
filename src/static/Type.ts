@@ -66,3 +66,5 @@ export interface RepoNavLink {
 }
 
 export type RepoNav = RepoNavLink[];
+
+export type BuildType = "prod" | "archive";
