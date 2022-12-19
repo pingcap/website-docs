@@ -19,6 +19,7 @@ export interface TotalAvatarsProps {
 export type AvatarItem = {
   src: string;
   alt: string;
+  id: string;
   name: string;
   pageUrl: string;
 };
@@ -57,7 +58,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
         >
           {avatars.map((avatar, index) => (
             <Avatar
-              key={avatar.alt}
+              key={avatar.id}
               src={avatar.src}
               alt={avatar.alt}
               sx={{ width: 24, height: 24 }}
@@ -166,7 +167,7 @@ export const useTotalContributors = (
 
   const filterCommitAuthors = (commits: any[]) => {
     // const authors: AvatarItem[] = [];
-    const authorNameList: string[] = [];
+    const authorLoginList: string[] = [];
     const authors = commits.reduce<AvatarItem[]>(
       (prev, commit): AvatarItem[] => {
         const {
@@ -180,13 +181,13 @@ export const useTotalContributors = (
           return prev;
         }
 
-        const name = (commit?.commit?.author?.name as string) || login;
-        if (!authorNameList.includes(name)) {
-          authorNameList.push(name);
+        if (!authorLoginList.includes(login)) {
+          authorLoginList.push(login);
           prev.push({
+            id: login,
             src: avatar_url,
             alt: login,
-            name: name,
+            name: commit?.commit?.author?.name || login,
             pageUrl: html_url,
           });
         }
