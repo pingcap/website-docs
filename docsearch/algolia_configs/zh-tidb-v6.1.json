@@ -6,8 +6,7 @@
     "ref": "release-6.1",
     "docs_prefix": "tidb",
     "lang": "zh",
-    "version": "v6.1",
-    "isStable": true
+    "version": "v6.1"
   },
   "start_urls": [],
   "crawl_local_url": "",
