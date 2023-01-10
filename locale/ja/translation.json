@@ -11,6 +11,10 @@
     "cannotswitchtocloudZh": "TiDB Cloud 中国語ドキュメントは現在利用できません",
     "machineTransNotice": "このページは英語版のページを機械翻訳しています。原文は<0>こちら</0>からご覧ください。"
   },
+  "meta": {
+    "title": "PingCAP Docs",
+    "description": "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database."
+  },
   "navbar": {
     "home": "Home",
     "tidb": "TiDB",

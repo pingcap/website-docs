@@ -8,6 +8,10 @@
     "cannotswitchZh": "本页面暂无中文版",
     "cannotswitchJa": "本页面暂无日文版"
   },
+  "meta": {
+    "title": "PingCAP 文档中心",
+    "description": "欢迎来到 PingCAP 文档中心！我们为您提供了丰富的操作指南和详实的参考资料，助您轻松上手 TiDB 产品，顺利完成数据迁移和基于数据库的应用开发等操作。"
+  },
   "navbar": {
     "home": "文档中心",
     "tidb": "TiDB",

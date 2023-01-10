@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 import { Helmet, type MetaProps, type LinkProps } from "react-helmet-async";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import { Locale } from "static/Type";
 
 interface Props {
@@ -35,7 +36,10 @@ export default function Seo({
     }
   `);
 
-  const metaDescription = description || site.siteMetadata.description;
+  const { t } = useI18next();
+
+  const metaDescription =
+    description || t("meta.description") || site.siteMetadata.description;
 
   if (noindex) {
     meta.push({
@@ -50,7 +54,7 @@ export default function Seo({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${t("meta.title") || site.siteMetadata.title}`}
       meta={[
         {
           name: "description",
