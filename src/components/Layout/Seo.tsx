@@ -11,6 +11,7 @@ interface Props {
   description?: string;
   meta?: MetaProps[];
   link?: LinkProps[];
+  archived?: boolean;
 }
 
 export default function Seo({
@@ -20,6 +21,7 @@ export default function Seo({
   description = "",
   meta = [],
   link = [],
+  archived = false,
 }: Props) {
   const { site, favicon } = useStaticQuery(graphql`
     query {
@@ -38,8 +40,22 @@ export default function Seo({
 
   const { t } = useI18next();
 
+  const getI18nMetaDesc = () => {
+    if (archived) {
+      return t("meta.archive-description");
+    }
+    return t("meta.description");
+  };
+
+  const getI18nTitle = () => {
+    if (archived) {
+      return t("meta.archive-title");
+    }
+    return t("meta.title");
+  };
+
   const metaDescription =
-    description || t("meta.description") || site.siteMetadata.description;
+    description || getI18nMetaDesc() || site.siteMetadata.description;
 
   if (noindex) {
     meta.push({
@@ -54,7 +70,7 @@ export default function Seo({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${t("meta.title") || site.siteMetadata.title}`}
+      titleTemplate={`%s | ${getI18nTitle() || site.siteMetadata.title}`}
       meta={[
         {
           name: "description",

@@ -13,7 +13,9 @@
   },
   "meta": {
     "title": "PingCAP Docs",
-    "description": "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database."
+    "description": "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.",
+    "archive-title": "PingCAP ArchiveD Docs",
+    "archive-description": "Access the archived documentation of the TiDB database."
   },
   "navbar": {
     "home": "Home",
