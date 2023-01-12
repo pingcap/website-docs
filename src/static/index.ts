@@ -11,17 +11,17 @@ import { convertVersionName } from "utils";
 import CONFIG from "../../docs/docs.json";
 
 export const DEFAULT_PINGCAP_URL = `https://pingcap.com`;
-export const EN_PINGCAP_URL = `https://en.pingcap.com/`;
-export const ZH_PINGCAP_URL = `https://pingcap.com/zh/`;
+export const EN_PINGCAP_URL = `https://pingcap.com/`;
+export const ZH_PINGCAP_URL = `https://cn.pingcap.com/`;
 export const JA_PINGCAP_URL = `https://pingcap.co.jp/`;
 
-export const EN_PINGCAP_DOWNLOAD_URL = "https://en.pingcap.com/download";
+export const EN_PINGCAP_DOWNLOAD_URL = "https://pingcap.com/download/";
 export const ZH_PINGCAP_DOWNLOAD_URL =
-  "https://pingcap.com/zh/product#SelectProduct";
+  "https://cn.pingcap.com/product/#SelectProduct";
 export const JA_PINGCAP_DOWNLOAD_URL = "https://pingcap.co.jp/event/";
 
-export const EN_CONTACT_URL = "https://en.pingcap.com/contact-us/";
-export const ZH_CONTACT_URL = "https://pingcap.com/zh/contact/";
+export const EN_CONTACT_URL = "https://pingcap.com/contact-us/";
+export const ZH_CONTACT_URL = "https://cn.pingcap.com/contact/";
 export const JA_CONTACT_URL = "https://pingcap.co.jp/contact-us/";
 
 export const ICON_GROUP_CHUNK_SIZE = 3;
@@ -146,7 +146,7 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "TiDB",
-        url: "https://en.pingcap.com/products/tidb",
+        url: "https://pingcap.com/tidb/",
       },
       {
         name: "TiKV",
@@ -175,7 +175,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "Pricing",
-        url: "https://en.pingcap.com/tidb-cloud-pricing",
+        url: "https://pingcap.com/tidb-cloud-pricing",
       },
     ],
   },
@@ -184,15 +184,15 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "Internet",
-        url: "https://en.pingcap.com/customers/?industry=internet",
+        url: "https://pingcap.com/customers/?industry=internet",
       },
       {
         name: "Financial services",
-        url: "https://en.pingcap.com/customers/?industry=financial-services",
+        url: "https://pingcap.com/customers/?industry=financial-services",
       },
       {
         name: "Gaming",
-        url: "https://en.pingcap.com/customers/?industry=gaming",
+        url: "https://pingcap.com/customers/?industry=gaming",
       },
     ],
   },
@@ -201,23 +201,23 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "About",
-        url: "https://en.pingcap.com/about-us/",
+        url: "https://pingcap.com/about-us/",
       },
       {
         name: "Careers",
-        url: "https://en.pingcap.com/careers",
+        url: "https://pingcap.com/careers/",
       },
       {
         name: "Legal",
-        url: "https://en.pingcap.com/legal",
+        url: "https://pingcap.com/legal/",
       },
       {
         name: "Blog",
-        url: "https://en.pingcap.com/blog",
+        url: "https://pingcap.com/blog/",
       },
       {
         name: "Contact Us",
-        url: "https://en.pingcap.com/contact-us/",
+        url: "https://pingcap.com/contact-us/",
       },
     ],
   },
@@ -259,7 +259,7 @@ export const ZH_FOOTER_ITEMS = [
     items: [
       {
         name: "客户案例",
-        url: "https://pingcap.com/zh/case",
+        url: "https://cn.pingcap.com/case",
       },
       {
         name: "PingCAP Education",
@@ -280,7 +280,7 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "联系我们",
-        url: "https://pingcap.com/zh/contact/",
+        url: "https://cn.pingcap.com/contact/",
       },
     ],
   },
@@ -289,7 +289,7 @@ export const ZH_FOOTER_ITEMS = [
     items: [
       {
         name: "关于我们",
-        url: "https://pingcap.com/zh/about-us?tab=companyOverview",
+        url: "https://cn.pingcap.com/about-us?tab=companyOverview",
       },
       {
         name: "招贤纳士",
@@ -297,11 +297,11 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "新闻报道",
-        url: "https://pingcap.com/zh/about-us?tab=news",
+        url: "https://cn.pingcap.com/about-us?tab=news",
       },
       {
         name: "博客",
-        url: "https://pingcap.com/zh/blog",
+        url: "https://cn.pingcap.com/blog",
       },
     ],
   },

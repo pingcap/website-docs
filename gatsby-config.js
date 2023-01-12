@@ -8,7 +8,10 @@ module.exports = {
     description:
       "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.",
     author: "@PingCAP",
-    siteUrl: "https://docs.pingcap.com",
+    siteUrl:
+      process.env.WEBSITE_BUILD_TYPE === "archive"
+        ? "https://docs-archive.pingcap.com"
+        : "https://docs.pingcap.com",
   },
   jsxRuntime: "automatic",
   plugins: [
@@ -44,7 +47,10 @@ module.exports = {
         defaultLanguage: `en`,
         redirect: false,
         // if you are using Helmet, you must include siteUrl, and make sure you add http:https
-        siteUrl: "https://docs.pingcap.com",
+        siteUrl:
+          process.env.WEBSITE_BUILD_TYPE === "archive"
+            ? "https://docs-archive.pingcap.com"
+            : "https://docs.pingcap.com",
         // you can pass any i18next options
         i18nextOptions: {
           interpolation: {
@@ -174,8 +180,15 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: "https://docs.pingcap.com",
-        sitemap: "https://docs.pingcap.com/sitemap/sitemap-index.xml",
+        host:
+          process.env.WEBSITE_BUILD_TYPE === "archive"
+            ? "https://docs-archive.pingcap.com"
+            : "https://docs.pingcap.com",
+        sitemap: `${
+          process.env.WEBSITE_BUILD_TYPE === "archive"
+            ? "https://docs-archive.pingcap.com"
+            : "https://docs.pingcap.com"
+        }/sitemap/sitemap-index.xml`,
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },

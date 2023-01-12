@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 import { Helmet, type MetaProps, type LinkProps } from "react-helmet-async";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import { Locale } from "static/Type";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
   description?: string;
   meta?: MetaProps[];
   link?: LinkProps[];
+  archived?: boolean;
 }
 
 export default function Seo({
@@ -19,6 +21,7 @@ export default function Seo({
   description = "",
   meta = [],
   link = [],
+  archived = false,
 }: Props) {
   const { site, favicon } = useStaticQuery(graphql`
     query {
@@ -35,7 +38,24 @@ export default function Seo({
     }
   `);
 
-  const metaDescription = description || site.siteMetadata.description;
+  const { t } = useI18next();
+
+  const getI18nMetaDesc = () => {
+    if (archived) {
+      return t("meta.archive-description");
+    }
+    return t("meta.description");
+  };
+
+  const getI18nTitle = () => {
+    if (archived) {
+      return t("meta.archive-title");
+    }
+    return t("meta.title");
+  };
+
+  const metaDescription =
+    description || getI18nMetaDesc() || site.siteMetadata.description;
 
   if (noindex) {
     meta.push({
@@ -50,7 +70,7 @@ export default function Seo({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${getI18nTitle() || site.siteMetadata.title}`}
       meta={[
         {
           name: "description",

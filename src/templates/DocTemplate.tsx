@@ -123,6 +123,7 @@ export default function DocTemplate({
                 ]
               : []),
           ]}
+          archived={buildType === "archive"}
         />
         <Box
           sx={{ marginTop: "5rem", display: "flex" }}
