@@ -55,7 +55,13 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
       {["en", "zh"].includes(language) && (
         <NavItem
           selected={selectedItem === "home"}
-          label={<Trans i18nKey="navbar.home" />}
+          label={
+            props.buildType === "archive" ? (
+              <Trans i18nKey="navbar.archive-home" />
+            ) : (
+              <Trans i18nKey="navbar.home" />
+            )
+          }
           to="/"
         />
       )}
@@ -190,7 +196,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <LinkComponent isI18n to="/" style={{ width: "100%" }}>
               <Typography variant="body1" component="div" color="website.f1">
-                <Trans i18nKey="navbar.home" />
+                {props.buildType === "archive" ? (
+                  <Trans i18nKey="navbar.archive-home" />
+                ) : (
+                  <Trans i18nKey="navbar.home" />
+                )}
               </Typography>
             </LinkComponent>
           </MenuItem>
