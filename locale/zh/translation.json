@@ -16,6 +16,7 @@
   },
   "navbar": {
     "home": "文档中心",
+    "archive-home": "归档文档中心",
     "tidb": "TiDB",
     "tools": "生态工具",
     "appdev": "开发指南",
