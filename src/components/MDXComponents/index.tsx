@@ -1,4 +1,4 @@
-export { Tip, Note, Important, Warning } from "components/MDXComponents/Alert";
+export { Tip, Note, Important, Warning, CustomAlert } from "components/MDXComponents/Alert";
 export {
   ColumnTitle,
   NavColumn,
