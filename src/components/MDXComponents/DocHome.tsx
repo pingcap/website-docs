@@ -139,7 +139,7 @@ export function DocHomeContainer(props: {
         <Grid2 xs={12} md={10}>
           <Box>{children}</Box>
         </Grid2>
-        <Grid2
+        {!archive && (<Grid2
           xs={0}
           md={2}
           sx={{
@@ -225,7 +225,7 @@ export function DocHomeContainer(props: {
               </li>
             ))}
           </ul> */}
-        </Grid2>
+        </Grid2>)}
       </Grid2>
     </>
   );
