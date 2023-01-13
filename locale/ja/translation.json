@@ -55,6 +55,9 @@
         "firstContext": "TiDB {{ curDocVersion }} (<0>DMR</0>) のドキュメントを表示しています。PingCap は {{ curDocVersion }} のバグ修正を提供していません。バグは将来のリリースで修正される予定です。",
         "secondContext": "一般的な目的では、TiDBデータベースの<0>最新の安定バージョン</0>を使用してください。"
       }
+    },
+    "archive": {
+      "tidb": "You are viewing the archived documentation of TiDB, which no longer receives updates. It is recommended that you use <0>the latest LTS version</0>  of the TiDB database."
     }
   },
   "shortcodes": {

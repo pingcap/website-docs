@@ -54,7 +54,7 @@
       }
     },
     "archive": {
-      "tidb": "You are viewing the archived documentation of TiDB, which no longer receives updates. For general purposes, please use <0>the latest LTS version</0> of the TiDB database."
+      "tidb": "你正在查看 TiDB 数据库的归档文档，归档文档不再提供任何更新。如无特殊需求，建议使用 TiDB 数据库的<0>最新 LTS 版本</0>。"
     }
   },
   "shortcodes": {

@@ -105,11 +105,11 @@ export const ArchiveTiDBNotice = ({ name, pathConfig }: Props) => {
   const path = generateUrl(name, stableCfg);
   const targetUrl = `https://docs.pingcap.com${path}`;
   return (
-    <Warning>
+    <Important>
       <Trans
         i18nKey={`doc.archive.tidb`}
         components={[<LinkComponent to={targetUrl} fontSize="inherit" />]}
       />
-    </Warning>
+    </Important>
   );
 };
