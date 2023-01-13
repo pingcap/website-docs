@@ -10,17 +10,17 @@ import { StackOverflowIcon, SlackIcon, AskTugIcon } from "components/Icons";
 import { convertVersionName } from "utils";
 import CONFIG from "../../docs/docs.json";
 
-export const DEFAULT_PINGCAP_URL = `https://pingcap.com`;
-export const EN_PINGCAP_URL = `https://pingcap.com/`;
+export const DEFAULT_PINGCAP_URL = `https://www.pingcap.com`;
+export const EN_PINGCAP_URL = `https://www.pingcap.com/`;
 export const ZH_PINGCAP_URL = `https://cn.pingcap.com/`;
 export const JA_PINGCAP_URL = `https://pingcap.co.jp/`;
 
-export const EN_PINGCAP_DOWNLOAD_URL = "https://pingcap.com/download/";
+export const EN_PINGCAP_DOWNLOAD_URL = "https://www.pingcap.com/download/";
 export const ZH_PINGCAP_DOWNLOAD_URL =
   "https://cn.pingcap.com/product/#SelectProduct";
 export const JA_PINGCAP_DOWNLOAD_URL = "https://pingcap.co.jp/event/";
 
-export const EN_CONTACT_URL = "https://pingcap.com/contact-us/";
+export const EN_CONTACT_URL = "https://www.pingcap.com/contact-us/";
 export const ZH_CONTACT_URL = "https://cn.pingcap.com/contact/";
 export const JA_CONTACT_URL = "https://pingcap.co.jp/contact-us/";
 
@@ -146,7 +146,7 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "TiDB",
-        url: "https://pingcap.com/tidb/",
+        url: "https://www.pingcap.com/tidb/",
       },
       {
         name: "TiKV",
@@ -175,7 +175,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "Pricing",
-        url: "https://pingcap.com/tidb-cloud-pricing",
+        url: "https://www.pingcap.com/tidb-cloud-pricing",
       },
     ],
   },
@@ -184,15 +184,15 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "Internet",
-        url: "https://pingcap.com/customers/?industry=internet",
+        url: "https://www.pingcap.com/customers/?industry=internet",
       },
       {
         name: "Financial services",
-        url: "https://pingcap.com/customers/?industry=financial-services",
+        url: "https://www.pingcap.com/customers/?industry=financial-services",
       },
       {
         name: "Gaming",
-        url: "https://pingcap.com/customers/?industry=gaming",
+        url: "https://www.pingcap.com/customers/?industry=gaming",
       },
     ],
   },
@@ -201,23 +201,23 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "About",
-        url: "https://pingcap.com/about-us/",
+        url: "https://www.pingcap.com/about-us/",
       },
       {
         name: "Careers",
-        url: "https://pingcap.com/careers/",
+        url: "https://www.pingcap.com/careers/",
       },
       {
         name: "Legal",
-        url: "https://pingcap.com/legal/",
+        url: "https://www.pingcap.com/legal/",
       },
       {
         name: "Blog",
-        url: "https://pingcap.com/blog/",
+        url: "https://www.pingcap.com/blog/",
       },
       {
         name: "Contact Us",
-        url: "https://pingcap.com/contact-us/",
+        url: "https://www.pingcap.com/contact-us/",
       },
     ],
   },
@@ -363,7 +363,7 @@ export const JA_FOOTER_ITEMS = [
       },
       {
         name: "規約類",
-        url: "https://pingcap.com/legal",
+        url: "https://www.pingcap.com/legal",
       },
       {
         name: "お問い合わせ",
