@@ -222,6 +222,7 @@ export default function ControlledTreeView(props: {
 
   return (
     <TreeView
+      id="left-nav-treeview"
       aria-label="left navigation"
       expanded={expanded}
       selected={selected}

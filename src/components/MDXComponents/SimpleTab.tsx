@@ -45,7 +45,7 @@ export function SimpleTab({
 
   return (
     <>
-      <ul className={tabs}>
+      <ul className={clsx(tabs, "simple-tab-container")}>
         {children.map((child) => {
           const id: string = child.props?.value || child.props.label;
           return (

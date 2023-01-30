@@ -6,7 +6,10 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 import Tooltip from "@mui/material/Tooltip";
 
-export default function CopyBtn(props: { content: string }) {
+export default function CopyBtn(props: {
+  content: string;
+  className?: string;
+}) {
   const [isCopied, setIscopied] = React.useState(false);
 
   const handleButtonsContent = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,6 +42,7 @@ export default function CopyBtn(props: { content: string }) {
             background: "transparent",
             border: "unset",
           }}
+          className={props.className}
         >
           {isCopied ? (
             <CheckIcon fontSize="inherit" />

@@ -240,6 +240,7 @@ export function DocHomeSection(props: {
   const { children, label, id } = props;
   return (
     <Box
+      className="doc-home-section"
       sx={{
         borderBottom: "1px solid #f4f4f4",
         display: "flex",
@@ -332,7 +333,7 @@ export function DocHomeCard(props: any) {
   return (
     <>
       <Box
-        id="card"
+        // id="card"
         component="a"
         href={href}
         sx={{
@@ -348,6 +349,7 @@ export function DocHomeCard(props: any) {
               "0 0.5em 1em -0.125em hsl(0deg 0% 4% / 10%), 0 0 0 1px hsl(0deg 0% 4% / 2%)",
           },
         }}
+        className="doc-home-card"
       >
         <Box
           id="card-content"
