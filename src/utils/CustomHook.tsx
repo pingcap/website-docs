@@ -21,7 +21,7 @@ export function useHighlightCode() {
           className="code-content"
           dangerouslySetInnerHTML={{ __html: html }}
         />
-        <CopyBtn content={content} />
+        <CopyBtn content={content} className="hljs-copy-btn" />
       </Box>
     );
   };

@@ -39,6 +39,7 @@ export default function ScrollToTopBtn() {
 
   return (
     <Fab
+      id="scroll-to-top"
       size="small"
       aria-label="scroll-to-top"
       disableRipple

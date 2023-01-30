@@ -114,6 +114,7 @@ export default function RightNav(props: RightNavProps) {
         )}
 
         <Box
+          id="toc-container"
           component="nav"
           aria-label="toc"
           sx={{
