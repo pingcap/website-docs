@@ -223,7 +223,7 @@ const VersionItems = (props: {
             cursor: "pointer",
           }}
         >
-          {t("navbar.archive-home")}
+          {t("navbar.archive-label")}
         </FormLabel>
       </LinkComponent>
     </>
@@ -435,7 +435,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
           ))}
           {buildType !== "archive" && (
             <option key="archive" value="archive">
-              {t("navbar.archive-home")}
+              {t("navbar.archive-label")}
             </option>
           )}
         </NativeSelect>
