@@ -122,6 +122,7 @@ export function LeftNavMobile(props: LeftNavProps) {
                 name={name}
                 pathConfig={pathConfig}
                 availIn={availIn}
+                buildType={buildType}
               />
             )}
           </Stack>

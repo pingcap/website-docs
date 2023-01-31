@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { PathConfig, BuildType } from "static/Type";
+import { ARCHIVE_WEBSITE_URL } from "static";
 import { AllVersion } from "utils";
 import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
@@ -89,6 +90,8 @@ const VersionItems = (props: {
   name: string;
 }) => {
   const { versions, availIn, pathConfig, name } = props;
+
+  const { t } = useI18next();
 
   const repoCfg = CONFIG.docs[pathConfig.repo] as {
     [key: string]: any;
@@ -203,6 +206,26 @@ const VersionItems = (props: {
           </LinkComponent>
         </MenuItem>
       ))}
+      <LinkComponent
+        isI18n
+        to={ARCHIVE_WEBSITE_URL}
+        style={{
+          width: "100%",
+          color: "#666666",
+        }}
+      >
+        <FormLabel
+          sx={{
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
+            fontWeight: "bold",
+            pl: "0.5rem",
+            cursor: "pointer",
+          }}
+        >
+          {t("navbar.archive-home")}
+        </FormLabel>
+      </LinkComponent>
     </>
   );
 };
@@ -379,11 +402,15 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 }));
 
 export function NativeVersionSelect(props: VersionSelectProps) {
-  const { name, pathConfig, availIn } = props;
+  const { name, pathConfig, availIn, buildType } = props;
 
-  const { navigate: i18nNavigate } = useI18next();
+  const { navigate: i18nNavigate, t } = useI18next();
 
   const handleChange = (event: { target: { value: string } }) => {
+    if (event.target.value === "archive") {
+      i18nNavigate(ARCHIVE_WEBSITE_URL);
+      return;
+    }
     // setSelectedVersion(event.target.value);
     i18nNavigate(`/${pathConfig.repo}/${event.target.value}/${name}`);
   };
@@ -406,6 +433,11 @@ export function NativeVersionSelect(props: VersionSelectProps) {
               {renderVersion(version, pathConfig)}
             </option>
           ))}
+          {buildType !== "archive" && (
+            <option key="archive" value="archive">
+              {t("navbar.archive-home")}
+            </option>
+          )}
         </NativeSelect>
       </FormControl>
     </>
