@@ -91,7 +91,7 @@ const VersionItems = (props: {
 }) => {
   const { versions, availIn, pathConfig, name } = props;
 
-  const { t } = useI18next();
+  const { t, language } = useI18next();
 
   const repoCfg = CONFIG.docs[pathConfig.repo] as {
     [key: string]: any;
@@ -208,7 +208,7 @@ const VersionItems = (props: {
       ))}
       <LinkComponent
         isI18n
-        to={ARCHIVE_WEBSITE_URL}
+        to={generateArchivedWebsiteUrlByLang(language)}
         style={{
           width: "100%",
           color: "#666666",
@@ -404,11 +404,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 export function NativeVersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn, buildType } = props;
 
-  const { navigate: i18nNavigate, t } = useI18next();
+  const { navigate: i18nNavigate, t, language } = useI18next();
 
   const handleChange = (event: { target: { value: string } }) => {
     if (event.target.value === "archive") {
-      i18nNavigate(ARCHIVE_WEBSITE_URL);
+      i18nNavigate(generateArchivedWebsiteUrlByLang(language));
       return;
     }
     // setSelectedVersion(event.target.value);
@@ -442,4 +442,15 @@ export function NativeVersionSelect(props: VersionSelectProps) {
       </FormControl>
     </>
   );
+}
+
+function generateArchivedWebsiteUrlByLang(lang?: string) {
+  switch (lang) {
+    case "zh":
+      return `${ARCHIVE_WEBSITE_URL}/zh`;
+    case "jp":
+      return `${ARCHIVE_WEBSITE_URL}/jp`;
+    default:
+      return ARCHIVE_WEBSITE_URL;
+  }
 }
