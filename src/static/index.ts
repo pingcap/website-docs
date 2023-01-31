@@ -426,3 +426,5 @@ export const ZH_DOC_TYPE_LIST = [
     match: "tidb-data-migration",
   },
 ];
+
+export const ARCHIVE_WEBSITE_URL = "https://docs-archive.pingcap.com";
