@@ -16,7 +16,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
 
-import { TableOfContent, PathConfig } from "static/Type";
+import { TableOfContent, PathConfig, BuildType } from "static/Type";
 import {
   calcPDFUrl,
   getRepoFromPathCfg,
@@ -29,10 +29,11 @@ interface RightNavProps {
   toc?: TableOfContent[];
   pathConfig: PathConfig;
   filePath: string;
+  buildType?: BuildType;
 }
 
 export default function RightNav(props: RightNavProps) {
-  const { toc = [], pathConfig, filePath } = props;
+  const { toc = [], pathConfig, filePath, buildType } = props;
 
   const theme = useTheme();
   const { language, t } = useI18next();
@@ -78,29 +79,32 @@ export default function RightNav(props: RightNavProps) {
               rel="noreferrer"
               download
             />
-            <ActionItem
-              icon={GitHubIcon}
-              url={`https://github.com/${getRepoFromPathCfg(
-                pathConfig
-              )}/issues/new?body=File:%20[/${pathConfig.branch}/${filePath}](${
-                site.siteMetadata.siteUrl
-              }${pathname})`}
-              label={t("doc.feedback")}
-              rel="noreferrer"
-            />
-            {["zh", "en"].includes(pathConfig.locale) && (
+            {buildType !== "archive" && (
               <ActionItem
-                icon={QuestionAnswerIcon}
-                url={
-                  pathConfig.locale === "zh"
-                    ? `https://asktug.com/?utm_source=doc`
-                    : `https://ask.pingcap.com/`
-                }
-                label={t("doc.feedbackAskTug")}
+                icon={GitHubIcon}
+                url={`https://github.com/${getRepoFromPathCfg(
+                  pathConfig
+                )}/issues/new?body=File:%20[/${
+                  pathConfig.branch
+                }/${filePath}](${site.siteMetadata.siteUrl}${pathname})`}
+                label={t("doc.feedback")}
                 rel="noreferrer"
               />
             )}
-            {pathConfig.version === "dev" && (
+            {buildType !== "archive" &&
+              ["zh", "en"].includes(pathConfig.locale) && (
+                <ActionItem
+                  icon={QuestionAnswerIcon}
+                  url={
+                    pathConfig.locale === "zh"
+                      ? `https://asktug.com/?utm_source=doc`
+                      : `https://ask.pingcap.com/`
+                  }
+                  label={t("doc.feedbackAskTug")}
+                  rel="noreferrer"
+                />
+              )}
+            {buildType !== "archive" && pathConfig.version === "dev" && (
               <ActionItem
                 icon={EditIcon}
                 url={`https://github.com/${getRepoFromPathCfg(
@@ -230,7 +234,7 @@ const ActionItem = (props: {
 };
 
 export function RightNavMobile(props: RightNavProps) {
-  const { toc = [], pathConfig, filePath } = props;
+  const { toc = [], pathConfig, filePath, buildType } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

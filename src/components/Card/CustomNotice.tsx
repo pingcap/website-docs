@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 
 import { Locale, PathConfig } from "static/Type";
 import { docs } from "../../../docs/docs.json";
-import { Important, Warning } from "components/MDXComponents";
+import { Important, CustomAlert } from "components/MDXComponents";
 import { generateUrl } from "utils";
 import LinkComponent from "components/Link";
 
@@ -105,11 +105,14 @@ export const ArchiveTiDBNotice = ({ name, pathConfig }: Props) => {
   const path = generateUrl(name, stableCfg);
   const targetUrl = `https://docs.pingcap.com${path}`;
   return (
-    <Warning>
+    <CustomAlert
+      severity="error"
+      title={<Trans i18nKey="shortcodes.important" />}
+    >
       <Trans
         i18nKey={`doc.archive.tidb`}
         components={[<LinkComponent to={targetUrl} fontSize="inherit" />]}
       />
-    </Warning>
+    </CustomAlert>
   );
 };

@@ -214,6 +214,7 @@ export default function DocTemplate({
                           toc={tocData}
                           pathConfig={pathConfig}
                           filePath={filePath}
+                          buildType={buildType}
                         />
                       </Box>
                       <Box
@@ -228,6 +229,7 @@ export default function DocTemplate({
                           toc={tocData}
                           pathConfig={pathConfig}
                           filePath={filePath}
+                          buildType={buildType}
                         />
                       </Box>
                     </>

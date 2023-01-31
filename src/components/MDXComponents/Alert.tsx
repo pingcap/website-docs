@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Trans } from "gatsby-plugin-react-i18next";
-import Alert from "@mui/material/Alert";
+import Alert, { AlertColor } from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Box from "@mui/material/Box";
 
@@ -69,6 +69,21 @@ export function Warning(props: { children: React.ReactNode }) {
         <AlertTitle>
           <Trans i18nKey="shortcodes.warning" />
         </AlertTitle>
+        {props.children}
+      </Alert>
+    </AlertContainer>
+  );
+}
+
+export function CustomAlert(props: {
+  severity: AlertColor;
+  title: string | React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <AlertContainer>
+      <Alert severity={props.severity}>
+        <AlertTitle>{props.title}</AlertTitle>
         {props.children}
       </Alert>
     </AlertContainer>

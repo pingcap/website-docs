@@ -14,11 +14,12 @@
   "meta": {
     "title": "PingCAP Docs",
     "description": "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.",
-    "archive-title": "PingCAP ArchiveD Docs",
+    "archive-title": "PingCAP Archived Docs",
     "archive-description": "Access the archived documentation of the TiDB database."
   },
   "navbar": {
     "home": "Home",
+    "archive-home": "Archived Docs Home",
     "tidb": "TiDB",
     "tools": "ツール",
     "cloud": "TiDB Cloud",
@@ -54,6 +55,9 @@
         "firstContext": "TiDB {{ curDocVersion }} (<0>DMR</0>) のドキュメントを表示しています。PingCap は {{ curDocVersion }} のバグ修正を提供していません。バグは将来のリリースで修正される予定です。",
         "secondContext": "一般的な目的では、TiDBデータベースの<0>最新の安定バージョン</0>を使用してください。"
       }
+    },
+    "archive": {
+      "tidb": "You are viewing the archived documentation of TiDB, which no longer receives updates. It is recommended that you use <0>the latest LTS version</0>  of the TiDB database."
     }
   },
   "shortcodes": {
