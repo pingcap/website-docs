@@ -160,64 +160,68 @@ export function DocHomeContainer(props: {
             },
           }}
         >
-          <Typography
-            component="div"
-            sx={{
-              paddingLeft: "0.5rem",
-              paddingBottom: "1rem",
-              fontFamily: "Helvetica Neue",
-              color: theme.palette.website.f1,
-              fontSize: "0.875rem",
-              fontWeight: "700",
-              lineHeight: "1.25rem",
-            }}
-          >
-            <Trans i18nKey="doc.toc" />
-          </Typography>
-          <Box
-            component="ul"
-            id="toc-ul"
-            sx={{
-              listStyle: "none",
-            }}
-          >
-            {headingsMemo.map((i) => (
-              <Box
-                key={i.id}
-                component="li"
+          {!archive && (
+            <>
+              <Typography
+                component="div"
                 sx={{
-                  "& a#toc-link": {
-                    color: theme.palette.website.m5,
-                    "&:hover": {
-                      textDecoration: "none",
-                    },
-                  },
+                  paddingLeft: "0.5rem",
+                  paddingBottom: "1rem",
+                  fontFamily: "Helvetica Neue",
+                  color: theme.palette.website.f1,
+                  fontSize: "0.875rem",
+                  fontWeight: "700",
+                  lineHeight: "1.25rem",
                 }}
               >
-                <Typography
-                  component="a"
-                  id="toc-link"
-                  href={`#${i.anchor}`}
-                  sx={{
-                    display: "flex",
-                    textDecoration: "none",
-                    fontSize: "13px",
-                    lineHeight: "1.25rem",
-                    borderLeft: `1px solid transparent`,
-                    paddingLeft: `0.5rem`,
-                    paddingTop: "0.25rem",
-                    paddingBottom: "0.25rem",
-                    "&:hover": {
-                      color: theme.palette.website.f3,
-                      borderLeft: `1px solid ${theme.palette.website.f3}`,
-                    },
-                  }}
-                >
-                  {i.label}
-                </Typography>
+                <Trans i18nKey="doc.toc" />
+              </Typography>
+              <Box
+                component="ul"
+                id="toc-ul"
+                sx={{
+                  listStyle: "none",
+                }}
+              >
+                {headingsMemo.map((i) => (
+                  <Box
+                    key={i.id}
+                    component="li"
+                    sx={{
+                      "& a#toc-link": {
+                        color: theme.palette.website.m5,
+                        "&:hover": {
+                          textDecoration: "none",
+                        },
+                      },
+                    }}
+                  >
+                    <Typography
+                      component="a"
+                      id="toc-link"
+                      href={`#${i.anchor}`}
+                      sx={{
+                        display: "flex",
+                        textDecoration: "none",
+                        fontSize: "13px",
+                        lineHeight: "1.25rem",
+                        borderLeft: `1px solid transparent`,
+                        paddingLeft: `0.5rem`,
+                        paddingTop: "0.25rem",
+                        paddingBottom: "0.25rem",
+                        "&:hover": {
+                          color: theme.palette.website.f3,
+                          borderLeft: `1px solid ${theme.palette.website.f3}`,
+                        },
+                      }}
+                    >
+                      {i.label}
+                    </Typography>
+                  </Box>
+                ))}
               </Box>
-            ))}
-          </Box>
+            </>
+          )}
           {/* <ul>
             {headingsMemo.map((i) => (
               <li key={i.id}>

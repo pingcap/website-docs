@@ -77,7 +77,7 @@ export const createDocs = async ({
   nodes.forEach((node) => {
     const { id, name, pathConfig, filePath } = node;
 
-    if (name.startsWith("_")) {
+    if (name?.startsWith("_")) {
       return;
     }
 

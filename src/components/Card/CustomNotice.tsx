@@ -89,7 +89,9 @@ export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
   const targetEnUrl =
     pathConfig.repo === "tidbcloud"
       ? `/tidbcloud`
-      : `/${pathConfig.repo}/stable/${name === "_index" ? "" : name}`;
+      : `/${pathConfig.repo}/${pathConfig?.version || "stable"}/${
+          name === "_index" ? "" : name
+        }`;
   return (
     <Important>
       <Trans
