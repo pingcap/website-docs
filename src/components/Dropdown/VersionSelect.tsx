@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import { navigate as gatsbyNavigate } from "gatsby";
 
 import { styled, alpha } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
@@ -408,7 +409,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
 
   const handleChange = (event: { target: { value: string } }) => {
     if (event.target.value === "archive") {
-      i18nNavigate(generateArchivedWebsiteUrlByLang(language));
+      gatsbyNavigate(generateArchivedWebsiteUrlByLang(language));
       return;
     }
     // setSelectedVersion(event.target.value);
