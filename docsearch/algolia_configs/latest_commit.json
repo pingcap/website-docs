@@ -1,6 +1,6 @@
 {
     "en-tidb-dev": "bd3d979646055000e15b001e7024287ee23797f3",
-    "en-tidb-v6.6": "",
+    "en-tidb-v6.6": "fbf777e6888169ae5f6e634322ded4d8412ac899",
     "en-tidb-v6.5": "160fd2b9961fd9adc4a276b7674c2b911a4ceb93",
     "en-tidb-v6.4": "1d2f4637a235e1e1fbdcf83496ff6b4e2f61a531",
     "en-tidb-v6.3": "6fc1c8152582bbdf531ab17f575ecd05bd6b325e",
@@ -17,7 +17,7 @@
     "en-tidb-v3.0": "232baa79a0a078a8a823a41f27a1711f0d2bc93b",
     "en-tidb-v2.1": "2755565832044b9a1fdc4be01057dc398098e6f3",
     "zh-tidb-dev": "855b34f8a8fd75c5aea49c005490fa4adcbf1033",
-    "zh-tidb-v6.6": "",
+    "zh-tidb-v6.6": "9a9ae576c35960f9e26082c4358652df5d3f82b4",
     "zh-tidb-v6.5": "e4b39292e91252695efe9159bdf13cdf2c3717dc",
     "zh-tidb-v6.4": "b19183164575abbde7b653edb1ec391f6528a86b",
     "zh-tidb-v6.3": "d84ff67590846fa57e0fd0726ded40303e8e37c0",
