@@ -153,6 +153,10 @@ export const EN_FOOTER_ITEMS = [
         url: "https://github.com/tikv/tikv",
       },
       {
+        name: "TiFlash",
+        url: "https://github.com/pingcap/tiflash",
+      },
+      {
         name: "TiSpark",
         url: "https://github.com/pingcap/tispark",
       },
@@ -230,6 +234,22 @@ export const ZH_FOOTER_ITEMS = [
       {
         name: "TiDB",
         url: "/tidb/stable",
+      },
+      {
+        name: "TiKV",
+        url: "https://github.com/tikv/tikv",
+      },
+      {
+        name: "TiFlash",
+        url: "https://github.com/pingcap/tiflash",
+      },
+      {
+        name: "TiSpark",
+        url: "https://github.com/pingcap/tispark",
+      },
+      {
+        name: "Chaos Mesh",
+        url: "https://github.com/pingcap/chaos-mesh",
       },
     ],
   },
@@ -318,6 +338,10 @@ export const JA_FOOTER_ITEMS = [
       {
         name: "TiKV",
         url: "https://github.com/tikv/tikv",
+      },
+      {
+        name: "TiFlash",
+        url: "https://github.com/pingcap/tiflash",
       },
       {
         name: "TiSpark",
