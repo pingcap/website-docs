@@ -58,7 +58,7 @@
       }
     },
     "archive": {
-      "tidb": "You are viewing the archived documentation of TiDB, which no longer receives updates. It is recommended that you use <0>the latest LTS version</0> of the TiDB database."
+      "tidb": "現在表示されているページは、TiDBのアーカイブされたドキュメント (非更新) です。TiDBをご利用の場合、<0>最新のLTS (Long Term Support) バージョン</0>の使用を推奨します。"
     }
   },
   "shortcodes": {
