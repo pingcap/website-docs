@@ -142,11 +142,32 @@ export const JA_ICON_GROUP = [
 
 export const EN_FOOTER_ITEMS = [
   {
-    name: "Open Source Ecosystem",
+    name: "Products",
     items: [
+      {
+        name: "TiDB Cloud",
+        url: "https://www.pingcap.com/tidb-cloud/",
+      },
       {
         name: "TiDB",
         url: "https://www.pingcap.com/tidb/",
+      },
+      {
+        name: "Pricing",
+        url: "https://www.pingcap.com/tidb-cloud-pricing/",
+      },
+      {
+        name: "Get Demo",
+        url: "https://www.pingcap.com/demo/",
+      },
+    ],
+  },
+  {
+    name: "Ecosystem",
+    items: [
+      {
+        name: "Integrations",
+        url: "https://www.pingcap.com/integrations/",
       },
       {
         name: "TiKV",
@@ -157,12 +178,8 @@ export const EN_FOOTER_ITEMS = [
         url: "https://github.com/pingcap/tiflash",
       },
       {
-        name: "TiSpark",
-        url: "https://github.com/pingcap/tispark",
-      },
-      {
-        name: "Chaos Mesh",
-        url: "https://github.com/pingcap/chaos-mesh",
+        name: "OSS Insight",
+        url: "https://ossinsight.io/",
       },
     ],
   },
@@ -170,33 +187,41 @@ export const EN_FOOTER_ITEMS = [
     name: "Resources",
     items: [
       {
-        name: "Quick Start",
-        url: "/tidb/stable/quick-start-with-tidb",
+        name: "FAQs",
+        url: "/tidb/stable/faq-overview",
       },
+      {
+        name: "Developer Guide",
+        url: "/tidb/stable/dev-guide-overview",
+      },
+      {
+        name: "Blog",
+        url: "https://www.pingcap.com/blog/",
+      },
+      {
+        name: "Education",
+        url: "https://www.pingcap.com/education/",
+      },
+      {
+        name: "Customer Stories",
+        url: "https://www.pingcap.com/customers/",
+      },
+    ],
+  },
+  {
+    name: "Support",
+    items: [
       {
         name: "Forum",
         url: "https://ask.pingcap.com/",
       },
       {
-        name: "Pricing",
-        url: "https://www.pingcap.com/tidb-cloud-pricing",
-      },
-    ],
-  },
-  {
-    name: "Use Cases",
-    items: [
-      {
-        name: "Internet",
-        url: "https://www.pingcap.com/customers/?industry=internet",
+        name: "Slack",
+        url: "https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs",
       },
       {
-        name: "Financial services",
-        url: "https://www.pingcap.com/customers/?industry=financial-services",
-      },
-      {
-        name: "Gaming",
-        url: "https://www.pingcap.com/customers/?industry=gaming",
+        name: "Support Portal",
+        url: "https://support.pingcap.com/hc/en-us",
       },
     ],
   },
@@ -204,7 +229,7 @@ export const EN_FOOTER_ITEMS = [
     name: "Company",
     items: [
       {
-        name: "About",
+        name: "About Us",
         url: "https://www.pingcap.com/about-us/",
       },
       {
@@ -214,10 +239,6 @@ export const EN_FOOTER_ITEMS = [
       {
         name: "Legal",
         url: "https://www.pingcap.com/legal/",
-      },
-      {
-        name: "Blog",
-        url: "https://www.pingcap.com/blog/",
       },
       {
         name: "Contact Us",
@@ -233,8 +254,17 @@ export const ZH_FOOTER_ITEMS = [
     items: [
       {
         name: "TiDB",
-        url: "/tidb/stable",
+        url: "https://cn.pingcap.com/product/#SelectProduct",
       },
+      {
+        name: "TiDB Cloud",
+        url: "https://www.pingcap.com/tidb-cloud",
+      },
+    ],
+  },
+  {
+    name: "生态",
+    items: [
       {
         name: "TiKV",
         url: "https://github.com/tikv/tikv",
@@ -244,12 +274,8 @@ export const ZH_FOOTER_ITEMS = [
         url: "https://github.com/pingcap/tiflash",
       },
       {
-        name: "TiSpark",
-        url: "https://github.com/pingcap/tispark",
-      },
-      {
-        name: "Chaos Mesh",
-        url: "https://github.com/pingcap/chaos-mesh",
+        name: "OSS Insight",
+        url: "https://ossinsight.io/",
       },
     ],
   },
@@ -257,37 +283,20 @@ export const ZH_FOOTER_ITEMS = [
     name: "资源",
     items: [
       {
-        name: "快速上手",
-        url: "/tidb/stable/quick-start-with-tidb",
-      },
-      {
-        name: "最佳实践",
-        url: "/tidb/stable/tidb-best-practices",
-      },
-      {
         name: "常见问题解答",
-        url: "/tidb/stable/tidb-faq",
+        url: "/tidb/stable/faq-overview",
       },
       {
-        name: "版本发布",
-        url: "/tidb/dev/release-notes",
-      },
-    ],
-  },
-  {
-    name: "学习",
-    items: [
-      {
-        name: "客户案例",
-        url: "https://cn.pingcap.com/case",
+        name: "开发者手册",
+        url: "/tidb/stable/dev-guide-overview",
       },
       {
-        name: "PingCAP Education",
-        url: "https://learn.pingcap.com",
+        name: "博客",
+        url: "https://cn.pingcap.com/blog/",
       },
       {
-        name: "TiDB in Action",
-        url: "https://book.tidb.io",
+        name: "Education",
+        url: "https://cn.pingcap.com/education/",
       },
     ],
   },
@@ -295,7 +304,7 @@ export const ZH_FOOTER_ITEMS = [
     name: "支持",
     items: [
       {
-        name: "TiDB 社区",
+        name: "社区",
         url: "https://asktug.com",
       },
       {
@@ -319,22 +328,35 @@ export const ZH_FOOTER_ITEMS = [
         name: "新闻报道",
         url: "https://cn.pingcap.com/about-us?tab=news",
       },
-      {
-        name: "博客",
-        url: "https://cn.pingcap.com/blog",
-      },
     ],
   },
 ];
 
 export const JA_FOOTER_ITEMS = [
   {
-    name: "エコシステム",
+    name: "製品",
     items: [
+      {
+        name: "TiDB Cloud",
+        url: "https://pingcap.co.jp/tidb-cloud/",
+      },
       {
         name: "TiDB",
         url: "https://pingcap.co.jp/tidb-overview",
       },
+      {
+        name: "価格",
+        url: "https://pingcap.co.jp/tidb-cloud-pricing/",
+      },
+      {
+        name: "PoC お問い合わせ",
+        url: "https://pingcap.co.jp/apply-for-poc/",
+      }
+    ],
+  },
+  {
+    name: "エコシステム",
+    items: [
       {
         name: "TiKV",
         url: "https://github.com/tikv/tikv",
@@ -344,12 +366,8 @@ export const JA_FOOTER_ITEMS = [
         url: "https://github.com/pingcap/tiflash",
       },
       {
-        name: "TiSpark",
-        url: "https://github.com/pingcap/tispark",
-      },
-      {
-        name: "Chaos Mesh",
-        url: "https://github.com/pingcap/chaos-mesh",
+        name: "OSS Insight",
+        url: "https://ossinsight.io/",
       },
     ],
   },
@@ -357,24 +375,42 @@ export const JA_FOOTER_ITEMS = [
     name: "リソース",
     items: [
       {
-        name: "Quick Start",
-        url: "/ja/tidb/stable/quick-start-with-tidb",
+        name: "よくあるご質問",
+        url: "/tidb/stable/faq-overview",
       },
       {
-        name: "イベント",
-        url: "https://pingcap.co.jp/event/",
+        name: "開発者ガイド",
+        url: "/tidb/stable/dev-guide-overview",
       },
       {
         name: "ニュース&ブログ",
         url: "https://pingcap.co.jp/news-and-blogs/",
       },
       {
+        name: "Education",
+        url: "https://www.pingcap.com/education/",
+      },
+      {
         name: "導入実績",
         url: "https://pingcap.co.jp/usecase/",
       },
+
+    ],
+  },
+  {
+    name: "サポート",
+    items: [
       {
-        name: "価格",
-        url: "https://pingcap.co.jp/tidb-cloud/",
+        name: "Forum",
+        url: "https://ask.pingcap.com/",
+      },
+      {
+        name: "Slack",
+        url: "https://tidbcommunity.slack.com/join/shared_invite/zt-9vpzdqh2-8LsybcK0US_nqwvfAjSU5A#/shared-invite/email",
+      },
+      {
+        name: "Support Portal",
+        url: "https://support.pingcap.com/hc/en-us",
       },
     ],
   },
@@ -386,8 +422,12 @@ export const JA_FOOTER_ITEMS = [
         url: "https://pingcap.co.jp/company/",
       },
       {
+        name: "キャリア",
+        url: "https://pingcap.co.jp/キャリア/"
+      },
+      {
         name: "規約類",
-        url: "https://www.pingcap.com/legal",
+        url: "https://pingcap.co.jp/legal/",
       },
       {
         name: "お問い合わせ",
