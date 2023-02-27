@@ -284,7 +284,7 @@ export const ZH_FOOTER_ITEMS = [
     items: [
       {
         name: "常见问题解答",
-        url: "/tidb/stable/tidb-faq",
+        url: "/tidb/stable/faq-overview",
       },
       {
         name: "开发者手册",
