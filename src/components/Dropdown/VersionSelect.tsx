@@ -111,40 +111,44 @@ const VersionItems = (props: {
 
   return (
     <>
-      <MenuItem
-        key={`menu-dev`}
-        value={`menu-dev`}
-        disabled={!availIn.includes(`dev` || "")}
-      >
-        <LinkComponent
-          isI18n
-          to={`/${pathConfig.repo}/dev/${name}`}
-          style={{
-            width: "100%",
-            color: "#666666",
-          }}
+      {pathConfig.repo === "tidb" && (
+        <MenuItem
+          key={`menu-dev`}
+          value={`menu-dev`}
+          disabled={!availIn.includes(`dev` || "")}
         >
-          <Typography
-            component="div"
-            sx={{
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
+          <LinkComponent
+            isI18n
+            to={`/${pathConfig.repo}/dev/${name}`}
+            style={{
+              width: "100%",
+              color: "#666666",
             }}
           >
-            {renderVersion(`dev`, pathConfig)}
-          </Typography>
-        </LinkComponent>
-      </MenuItem>
-      <FormLabel
-        sx={{
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-          fontWeight: "bold",
-          pl: "0.5rem",
-        }}
-      >
-        LTS
-      </FormLabel>
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {renderVersion(`dev`, pathConfig)}
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
+      )}
+      {pathConfig.repo === "tidb" && (
+        <FormLabel
+          sx={{
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
+            fontWeight: "bold",
+            pl: "0.5rem",
+          }}
+        >
+          LTS
+        </FormLabel>
+      )}
       {LTSVersions.map((version) => (
         <MenuItem
           key={`menu-${version}`}
@@ -171,16 +175,18 @@ const VersionItems = (props: {
           </LinkComponent>
         </MenuItem>
       ))}
-      <FormLabel
-        sx={{
-          fontSize: "0.875rem",
-          lineHeight: "1.25rem",
-          fontWeight: "bold",
-          pl: "0.5rem",
-        }}
-      >
-        DMR
-      </FormLabel>
+      {pathConfig.repo === "tidb" && (
+        <FormLabel
+          sx={{
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
+            fontWeight: "bold",
+            pl: "0.5rem",
+          }}
+        >
+          DMR
+        </FormLabel>
+      )}
       {DMRVersions.map((version) => (
         <MenuItem
           key={`menu-${version}`}
