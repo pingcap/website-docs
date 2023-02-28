@@ -40,18 +40,26 @@ export default function Seo({
 
   const { t } = useI18next();
 
+  const getI18nTranslation = (key: string) => {
+    const translation = t(key);
+    if (translation === key) {
+      return undefined;
+    }
+    return translation;
+  };
+
   const getI18nMetaDesc = () => {
     if (archived) {
-      return t("meta.archive-description");
+      return getI18nTranslation("meta.archive-description");
     }
-    return t("meta.description");
+    return getI18nTranslation("meta.description");
   };
 
   const getI18nTitle = () => {
     if (archived) {
-      return t("meta.archive-title");
+      return getI18nTranslation("meta.archive-title");
     }
-    return t("meta.title");
+    return getI18nTranslation("meta.title");
   };
 
   const metaDescription =
