@@ -111,32 +111,31 @@ const VersionItems = (props: {
 
   return (
     <>
-      {pathConfig.repo === "tidb" && (
-        <MenuItem
-          key={`menu-dev`}
-          value={`menu-dev`}
-          disabled={!availIn.includes(`dev` || "")}
+      <MenuItem
+        key={`menu-dev`}
+        value={`menu-dev`}
+        disabled={!availIn.includes(`dev` || "")}
+      >
+        <LinkComponent
+          isI18n
+          to={`/${pathConfig.repo}/dev/${name}`}
+          style={{
+            width: "100%",
+            color: "#666666",
+          }}
         >
-          <LinkComponent
-            isI18n
-            to={`/${pathConfig.repo}/dev/${name}`}
-            style={{
-              width: "100%",
-              color: "#666666",
+          <Typography
+            component="div"
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
             }}
           >
-            <Typography
-              component="div"
-              sx={{
-                fontSize: "0.875rem",
-                lineHeight: "1.25rem",
-              }}
-            >
-              {renderVersion(`dev`, pathConfig)}
-            </Typography>
-          </LinkComponent>
-        </MenuItem>
-      )}
+            {renderVersion(`dev`, pathConfig)}
+          </Typography>
+        </LinkComponent>
+      </MenuItem>
+
       {pathConfig.repo === "tidb" && (
         <FormLabel
           sx={{
