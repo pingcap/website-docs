@@ -87,7 +87,8 @@ export default function DocTemplate({
           )
         }
         docInfo={{
-          version: pathConfig.version || "stable",
+          // version: pathConfig.version || "stable",
+          version: "stable",
           type: pathConfig.repo,
         }}
         buildType={buildType}
