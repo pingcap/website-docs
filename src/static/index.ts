@@ -351,7 +351,7 @@ export const JA_FOOTER_ITEMS = [
       {
         name: "PoC お問い合わせ",
         url: "https://pingcap.co.jp/apply-for-poc/",
-      }
+      },
     ],
   },
   {
@@ -394,7 +394,6 @@ export const JA_FOOTER_ITEMS = [
         name: "導入実績",
         url: "https://pingcap.co.jp/usecase/",
       },
-
     ],
   },
   {
@@ -423,7 +422,7 @@ export const JA_FOOTER_ITEMS = [
       },
       {
         name: "キャリア",
-        url: "https://pingcap.co.jp/キャリア/"
+        url: "https://pingcap.co.jp/キャリア/",
       },
       {
         name: "規約類",
@@ -438,8 +437,9 @@ export const JA_FOOTER_ITEMS = [
 ];
 
 export const TIDB_EN_STABLE_VERSION = CONFIG["docs"]["tidb"]["stable"];
-// export const DM_EN_STABLE_VERSION = CONFIG["docs"]["tidb-data-migration"]["stable"];
-export const DM_EN_STABLE_VERSION = "";
+export const DM_EN_STABLE_VERSION =
+  CONFIG["docs"]["tidb-data-migration"]["stable"];
+// export const DM_EN_STABLE_VERSION = "";
 export const OP_EN_STABLE_VERSION =
   CONFIG["docs"]["tidb-in-kubernetes"]["stable"];
 

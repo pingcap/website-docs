@@ -32,19 +32,19 @@ import {
 } from "static";
 import { Locale } from "static/Type";
 
-const fetchVersionListByDocType = (docType: string) => {
-  switch (docType) {
-    case "tidb-data-migration":
-      return DM_EN_VERSIONS;
-    case "tidb-in-kubernetes":
-      return OP_EN_VERSIONS;
-    case "tidbcloud":
-      return CLOUD_EN_VERSIONS;
-    case "tidb":
-    default:
-      return TIDB_EN_VERSIONS;
-  }
-};
+// const fetchVersionListByDocType = (docType: string) => {
+//   switch (docType) {
+//     case "tidb-data-migration":
+//       return DM_EN_VERSIONS;
+//     case "tidb-in-kubernetes":
+//       return OP_EN_VERSIONS;
+//     case "tidbcloud":
+//       return CLOUD_EN_VERSIONS;
+//     case "tidb":
+//     default:
+//       return TIDB_EN_VERSIONS;
+//   }
+// };
 
 function replaceStableVersion(match: string) {
   switch (match) {
@@ -68,21 +68,34 @@ const docTypeListByLang = (lang: string) => {
   }
 };
 
-const convertStableToRealVersion = (
-  docType: string,
-  docVersion: string
-): string | undefined => {
-  if (docType === "tidbcloud") return undefined;
-  const realVersion =
-    docVersion === "stable"
-      ? replaceStableVersion(docType)?.replace("release-", "v")
-      : docVersion;
-  return realVersion;
+// const convertStableToRealVersion = (
+//   docType: string,
+//   docVersion: string
+// ): string | undefined => {
+//   if (docType === "tidbcloud") return undefined;
+//   const realVersion =
+//     docVersion === "stable"
+//       ? replaceStableVersion(docType)?.replace("release-", "v")
+//       : docVersion;
+//   return realVersion;
+// };
+
+const getStableVersion = (docType: string) => {
+  switch (docType) {
+    case "tidb":
+      return TIDB_EN_STABLE_VERSION?.replace("release-", "v");
+    case "tidb-data-migration":
+      return DM_EN_STABLE_VERSION?.replace("release-", "v");
+    case "tidb-in-kubernetes":
+      return OP_EN_STABLE_VERSION?.replace("release-", "v");
+    default:
+      return undefined;
+  }
 };
 
 export default function DocSearchTemplate() {
   const [docType, setDocType] = React.useState("");
-  const [docVersion, setDocVersion] = React.useState("");
+  // const [docVersion, setDocVersion] = React.useState("");
   const [docQuery, setDocQuery] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [results, setResults] = React.useState<any[]>([]);
@@ -94,10 +107,10 @@ export default function DocSearchTemplate() {
   React.useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const type = searchParams.get("type") || "";
-    const version = searchParams.get("version") || "";
+    // const version = searchParams.get("version") || "";
     const query = searchParams.get("q") || "";
     setDocType(type);
-    setDocVersion(version);
+    // setDocVersion(version);
     setDocQuery(query);
   }, [location.search]);
 
@@ -105,10 +118,13 @@ export default function DocSearchTemplate() {
     if (docType && docQuery) {
       execSearch();
     }
-  }, [docType, docVersion, docQuery]);
+  }, [docType, docQuery]);
 
   const execSearch = () => {
-    const realVersion = convertStableToRealVersion(docType, docVersion);
+    // const realVersion = convertStableToRealVersion(docType, docVersion);
+    const realVersion = getStableVersion(docType);
+    console.log("docType", docType);
+    console.log("realVersion", realVersion);
     const index = algoliaClient.initIndex(
       `${language}-${docType}${realVersion ? `-${realVersion}` : ""}`
     );
@@ -158,7 +174,8 @@ export default function DocSearchTemplate() {
               disableResponsive
               docInfo={{
                 type: docType,
-                version: docVersion,
+                // version: docVersion,
+                version: "stable",
               }}
             />
             <Box
@@ -201,7 +218,7 @@ export default function DocSearchTemplate() {
                 ))}
               </Stack>
             </Box>
-            {!!fetchVersionListByDocType(docType).length && (
+            {/* {!!fetchVersionListByDocType(docType).length && (
               <Box
                 sx={{
                   display: "flex",
@@ -245,7 +262,7 @@ export default function DocSearchTemplate() {
                   })}
                 </Stack>
               </Box>
-            )}
+            )} */}
           </Stack>
           <SearchResults loading={isLoading} data={results} />
           <Box
