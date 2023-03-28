@@ -109,11 +109,17 @@ const VersionItems = (props: {
   });
   const DMRVersions = versions.filter((v) => dmrList.includes(v || ""));
 
+  const shouldHideDevMemo = React.useMemo(() => {
+    const targetRepo = CONFIG.docs[pathConfig.repo];
+    return !targetRepo.languages.en.versions.includes(`master`);
+  }, [pathConfig.repo]);
+
   return (
     <>
       <MenuItem
         key={`menu-dev`}
         value={`menu-dev`}
+        hidden={shouldHideDevMemo}
         disabled={!availIn.includes(`dev` || "")}
       >
         <LinkComponent
