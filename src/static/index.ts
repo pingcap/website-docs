@@ -437,6 +437,7 @@ export const JA_FOOTER_ITEMS = [
 ];
 
 export const TIDB_EN_STABLE_VERSION = CONFIG["docs"]["tidb"]["stable"];
+export const TIDB_EN_DMR_PRETTY_VERSION = CONFIG["docs"]["tidb"]["dmr"];
 export const DM_EN_STABLE_VERSION =
   CONFIG["docs"]["tidb-data-migration"]["stable"];
 // export const DM_EN_STABLE_VERSION = "";
