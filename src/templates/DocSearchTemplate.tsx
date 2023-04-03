@@ -22,6 +22,7 @@ import { algoliaClient } from "utils/algolia";
 import {
   TIDB_EN_STABLE_VERSION,
   TIDB_EN_DMR_PRETTY_VERSION,
+  TIDB_EN_SEARCH_INDEX_VERSION,
   DM_EN_STABLE_VERSION,
   OP_EN_STABLE_VERSION,
   TIDB_EN_VERSIONS,
@@ -47,7 +48,7 @@ import { Locale } from "static/Type";
 //   }
 // };
 const fetchTidbSearchIndcies = (lts = 2, dmr = 1) => {
-  const tidbSearchIndices: string[] = [];
+  const tidbSearchIndices: string[] = [...TIDB_EN_SEARCH_INDEX_VERSION];
   const tidbVersions = TIDB_EN_VERSIONS.filter((version) => version !== "dev");
   const tidbDmrVersions = TIDB_EN_DMR_PRETTY_VERSION;
   const tidbLtsVersions = [];
@@ -55,13 +56,13 @@ const fetchTidbSearchIndcies = (lts = 2, dmr = 1) => {
     !tidbDmrVersions.includes(tidbVersions[i]) &&
       tidbLtsVersions.push(tidbVersions[i]);
   }
-  tidbLtsVersions.slice(0, lts).forEach((version) => {
-    tidbSearchIndices.push(version);
-  });
+  // tidbLtsVersions.slice(0, lts).forEach((version) => {
+  //   tidbSearchIndices.push(version);
+  // });
   tidbDmrVersions.slice(0, dmr).forEach((version) => {
     tidbSearchIndices.push(version);
   });
-  return tidbSearchIndices;
+  return tidbSearchIndices.sort().reverse();
 };
 
 function replaceStableVersion(match: string) {
@@ -146,7 +147,7 @@ export default function DocSearchTemplate() {
     if (docType && docQuery) {
       execSearch();
     }
-  }, [docType, docQuery]);
+  }, [docType, docQuery, docVersion]);
 
   const realVersionMemo = React.useMemo(() => {
     return getSearchIndexVersion(docType, docVersion);
