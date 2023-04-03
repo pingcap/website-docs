@@ -24,6 +24,7 @@ import {
   TIDB_EN_DMR_PRETTY_VERSION,
   TIDB_EN_SEARCH_INDEX_VERSION,
   DM_EN_STABLE_VERSION,
+  DM_EN_LATEST_VERSION,
   OP_EN_STABLE_VERSION,
   TIDB_EN_VERSIONS,
   DM_EN_VERSIONS,
@@ -34,19 +35,25 @@ import {
 } from "static";
 import { Locale } from "static/Type";
 
-// const fetchVersionListByDocType = (docType: string) => {
-//   switch (docType) {
-//     case "tidb-data-migration":
-//       return DM_EN_VERSIONS;
-//     case "tidb-in-kubernetes":
-//       return OP_EN_VERSIONS;
-//     case "tidbcloud":
-//       return CLOUD_EN_VERSIONS;
-//     case "tidb":
-//     default:
-//       return TIDB_EN_VERSIONS;
-//   }
-// };
+// TiDB: get latest two LTS versions + latest DMR version
+// TiDB Cloud: only has one version
+// TiDB Operator: get stable version
+// TiDB Data Migration: get latest version
+const fetchVersionListByDocType = (docType: string) => {
+  switch (docType) {
+    case "tidb-data-migration":
+      return [DM_EN_LATEST_VERSION];
+    case "tidb-in-kubernetes":
+      return [OP_EN_STABLE_VERSION];
+    case "tidbcloud":
+      return CLOUD_EN_VERSIONS;
+    case "tidb":
+      return fetchTidbSearchIndcies();
+    default:
+      return [];
+  }
+};
+
 const fetchTidbSearchIndcies = (lts = 2, dmr = 1) => {
   const tidbSearchIndices: string[] = [...TIDB_EN_SEARCH_INDEX_VERSION];
   const tidbVersions = TIDB_EN_VERSIONS.filter((version) => version !== "dev");
@@ -95,7 +102,7 @@ const convertStableToRealVersion = (
   const realVersion =
     docVersion === "stable"
       ? replaceStableVersion(docType)?.replace("release-", "v")
-      : docVersion;
+      : docVersion?.replace("release-", "v");
   return realVersion;
 };
 
@@ -106,15 +113,15 @@ const convertStableToRealVersion = (
 const getSearchIndexVersion = (docType: string, docVersion: string) => {
   switch (docType) {
     case "tidb":
-      const tidbSearchIndcies = fetchTidbSearchIndcies();
+      const versions = fetchVersionListByDocType(docType);
       const realVersion =
         docVersion === "stable" ? replaceStableVersion(docType) : docVersion;
-      if (tidbSearchIndcies.includes(realVersion || "")) {
+      if (versions.includes(realVersion || "")) {
         return realVersion?.replace("release-", "v");
       }
       return TIDB_EN_STABLE_VERSION?.replace("release-", "v");
     case "tidb-data-migration":
-      return DM_EN_STABLE_VERSION?.replace("release-", "v");
+      return DM_EN_LATEST_VERSION?.replace("release-", "v");
     case "tidb-in-kubernetes":
       return OP_EN_STABLE_VERSION?.replace("release-", "v");
     default:
@@ -159,9 +166,6 @@ export default function DocSearchTemplate() {
   const execSearch = () => {
     // const realVersion = convertStableToRealVersion(docType, docVersion);
     // const realVersion = getSearchIndexVersion(docType, docVersion);
-    console.log("docType", docType);
-    console.log("inputVersion", docVersion);
-    console.log("realVersion", realVersionMemo);
     const index = algoliaClient.initIndex(
       `${language}-${docType}${realVersionMemo ? `-${realVersionMemo}` : ""}`
     );
@@ -254,7 +258,7 @@ export default function DocSearchTemplate() {
                 ))}
               </Stack>
             </Box>
-            {/* {!!fetchVersionListByDocType(docType).length && (
+            {!!fetchVersionListByDocType(docType).length && (
               <Box
                 sx={{
                   display: "flex",
@@ -287,51 +291,6 @@ export default function DocSearchTemplate() {
                         }}
                         sx={{
                           backgroundColor:
-                            docVersion === version ? "#EAF6FB" : "",
-                        }}
-                      >
-                        {version === "stable"
-                          ? convertStableToRealVersion(docType, version)
-                          : version}
-                      </Button>
-                    );
-                  })}
-                </Stack>
-              </Box>
-            )} */}
-            {docType === "tidb" && (
-              <Box
-                sx={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "flex-start",
-                  gap: "1rem",
-                }}
-              >
-                <Typography
-                  component="div"
-                  variant="h6"
-                  sx={{
-                    width: "5rem",
-                    minWidth: "5rem",
-                    wordBreak: "keep-all",
-                    paddingTop: "0.25rem",
-                  }}
-                >
-                  <Trans i18nKey="search.version" />
-                </Typography>
-                <Stack direction="row" sx={{ flexWrap: "wrap", gap: "1rem" }}>
-                  {tidbSearchIndciesMemo.map((version) => {
-                    return (
-                      <Button
-                        key={version}
-                        size="small"
-                        variant="text"
-                        onClick={() => {
-                          setDocVersion(version);
-                        }}
-                        sx={{
-                          backgroundColor:
                             realVersionMemo ===
                             convertStableToRealVersion(docType, version)
                               ? "#EAF6FB"
@@ -340,7 +299,7 @@ export default function DocSearchTemplate() {
                       >
                         {version === "stable"
                           ? convertStableToRealVersion(docType, version)
-                          : version}
+                          : version?.replace("release-", "v")}
                       </Button>
                     );
                   })}

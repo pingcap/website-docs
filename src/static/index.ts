@@ -438,10 +438,11 @@ export const JA_FOOTER_ITEMS = [
 
 export const TIDB_EN_STABLE_VERSION = CONFIG["docs"]["tidb"]["stable"];
 export const TIDB_EN_DMR_PRETTY_VERSION = CONFIG["docs"]["tidb"]["dmr"];
-export const TIDB_EN_SEARCH_INDEX_VERSION = CONFIG["docs"]["tidb"]["searchIndex"] || [];
-export const DM_EN_STABLE_VERSION =
-  CONFIG["docs"]["tidb-data-migration"]["stable"];
-// export const DM_EN_STABLE_VERSION = "";
+export const TIDB_EN_SEARCH_INDEX_VERSION =
+  CONFIG["docs"]["tidb"]["searchIndex"] || [];
+export const DM_EN_LATEST_VERSION =
+  CONFIG["docs"]["tidb-data-migration"]["languages"]["en"]["versions"][0];
+export const DM_EN_STABLE_VERSION = "";
 export const OP_EN_STABLE_VERSION =
   CONFIG["docs"]["tidb-in-kubernetes"]["stable"];
 
@@ -461,6 +462,10 @@ export const CLOUD_EN_VERSIONS = [];
 
 export const EN_DOC_TYPE_LIST = [
   {
+    name: "TiDB Cloud",
+    match: "tidbcloud",
+  },
+  {
     name: "TiDB",
     match: "tidb",
   },
@@ -471,10 +476,6 @@ export const EN_DOC_TYPE_LIST = [
   {
     name: "TiDB Data Migration (DM)",
     match: "tidb-data-migration",
-  },
-  {
-    name: "Cloud",
-    match: "tidbcloud",
   },
 ] as const;
 
