@@ -31,8 +31,6 @@ docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-v3.1
 
 # crawl zh/en tidb-in-kubernetes
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-in-kubernetes-dev.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
-docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-in-kubernetes-v1.0.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
-docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-in-kubernetes-v1.1.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-in-kubernetes-v1.2.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-in-kubernetes-v1.3.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-in-kubernetes-v1.4.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
@@ -43,8 +41,6 @@ docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-in-k
 
 # crawl zh/en tidb-data-migration
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-dev.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
-docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-v1.0.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
-docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-v2.0.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-v5.3.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-data-migration-dev.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-data-migration-v5.3.json | jq -r tostring)" -e  "ISINCREMENTAL=True" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
