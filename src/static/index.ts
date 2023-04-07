@@ -192,7 +192,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "TiDB Roadmap",
-        url: "https://docs.pingcap.com/dev/tidb/tidb-roadmap",
+        url: "https://docs.pingcap.com/tidb/dev/tidb-roadmap",
       },
       {
         name: "FAQs",
