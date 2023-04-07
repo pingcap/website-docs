@@ -187,12 +187,16 @@ export const EN_FOOTER_ITEMS = [
     name: "Resources",
     items: [
       {
-        name: "FAQs",
-        url: "/tidb/stable/faq-overview",
+        name: "TiDB Cloud Roadmap",
+        url: "https://docs.pingcap.com/tidbcloud/tidb-cloud-roadmap",
       },
       {
-        name: "Developer Guide",
-        url: "/tidb/stable/dev-guide-overview",
+        name: "TiDB Roadmap",
+        url: "https://docs.pingcap.com/tidb/dev/tidb-roadmap",
+      },
+      {
+        name: "FAQs",
+        url: "/tidb/stable/faq-overview",
       },
       {
         name: "Blog",
@@ -202,11 +206,6 @@ export const EN_FOOTER_ITEMS = [
         name: "Education",
         url: "https://www.pingcap.com/education/",
       },
-      {
-        name: "Customer Stories",
-        url: "https://www.pingcap.com/customers/",
-      },
-    ],
   },
   {
     name: "Support",
