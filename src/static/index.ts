@@ -206,6 +206,7 @@ export const EN_FOOTER_ITEMS = [
         name: "Education",
         url: "https://www.pingcap.com/education/",
       },
+    ],
   },
   {
     name: "Support",
