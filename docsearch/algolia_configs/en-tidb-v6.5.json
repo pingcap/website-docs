@@ -6,8 +6,7 @@
       "ref": "release-6.5",
       "docs_prefix": "tidb",
       "lang": "en",
-      "version": "v6.5",
-      "isStable": true
+      "version": "v6.5"
     },
     "start_urls": [],
     "crawl_local_url": "",
@@ -41,4 +40,3 @@
     "only_content_level": true,
     "nb_hits": 159018
   }
-  
