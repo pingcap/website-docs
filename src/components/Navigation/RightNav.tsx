@@ -123,6 +123,7 @@ export default function RightNav(props: RightNavProps) {
           <Box
             sx={{
               paddingTop: "1rem",
+              pb: "1rem",
             }}
           >
             <Typography

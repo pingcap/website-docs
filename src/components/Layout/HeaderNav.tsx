@@ -85,7 +85,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
       {language === "en" && (
         <NavItem
           label={<Trans i18nKey="navbar.playground" />}
-          to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu `}
+          to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
           startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
         />
       )}
@@ -256,6 +256,17 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.tidb" />
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} disableRipple>
+          <LinkComponent
+            to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
+            style={{ width: "100%" }}
+          >
+            <Typography variant="body1" component="div" color="website.f1">
+              <Trans i18nKey="navbar.playground" />
             </Typography>
           </LinkComponent>
         </MenuItem>
