@@ -15,6 +15,8 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
+import CodeIcon from "@mui/icons-material/Code";
+import Chip from "@mui/material/Chip";
 
 import { TableOfContent, PathConfig, BuildType } from "static/Type";
 import {
@@ -115,6 +117,62 @@ export default function RightNav(props: RightNavProps) {
               />
             )}
           </Stack>
+        )}
+
+        {language === "en" && (
+          <Box
+            sx={{
+              paddingTop: "1rem",
+            }}
+          >
+            <Typography
+              component="div"
+              sx={{
+                paddingLeft: "0.5rem",
+                fontFamily: "Helvetica Neue",
+                color: theme.palette.website.f1,
+                fontSize: "0.875rem",
+                fontWeight: "700",
+                lineHeight: "1.25rem",
+                paddingBottom: "0.5rem",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 0.5,
+              }}
+            >
+              <CodeIcon />
+              <Trans i18nKey="navbar.playground" />
+              <Chip
+                label="New"
+                size="small"
+                sx={{
+                  color: "#FC5B00",
+                  backgroundColor: "rgba(252, 91, 0, 0.1)",
+                }}
+              />
+            </Typography>
+            <Typography
+              component="a"
+              href={`https://play.tidbcloud.com/??utm_source=docs&utm_medium=right_sidebar`}
+              target="_blank"
+              sx={{
+                display: "flex",
+                textDecoration: "none",
+                fontSize: "14px",
+                lineHeight: "1.25rem",
+                borderLeft: `1px solid transparent`,
+                paddingLeft: `0.5rem`,
+                paddingTop: "0.25rem",
+                paddingBottom: "0.25rem",
+                "&:hover": {
+                  color: theme.palette.website.f3,
+                  // borderLeft: `1px solid ${theme.palette.website.f3}`,
+                },
+              }}
+            >
+              {`One-stop & interactive experience of TiDB's capabilities WITHOUT registration.`}
+            </Typography>
+          </Box>
         )}
 
         <Box
