@@ -86,7 +86,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         <NavItem
           label={<Trans i18nKey="navbar.playground" />}
           to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
-          startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
+          // startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
         />
       )}
 

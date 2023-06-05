@@ -15,8 +15,9 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
-import CodeIcon from "@mui/icons-material/Code";
 import Chip from "@mui/material/Chip";
+import TerminalIcon from "@mui/icons-material/Terminal";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import { TableOfContent, PathConfig, BuildType } from "static/Type";
 import {
@@ -141,7 +142,7 @@ export default function RightNav(props: RightNavProps) {
                 gap: 0.5,
               }}
             >
-              <CodeIcon />
+              <TerminalIcon />
               <Trans i18nKey="navbar.playground" />
               <Chip
                 label="New"
@@ -171,7 +172,10 @@ export default function RightNav(props: RightNavProps) {
                 },
               }}
             >
-              {`One-stop & interactive experience of TiDB's capabilities WITHOUT registration.`}
+              <Box>
+                {`One-stop & interactive experience of TiDB's capabilities WITHOUT registration.`}
+                <ArrowRightAltIcon fontSize="inherit" />
+              </Box>
             </Typography>
           </Box>
         )}
