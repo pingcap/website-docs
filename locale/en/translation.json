@@ -27,7 +27,8 @@
     "asktug": "Forum",
     "download": "Try TiDB",
     "contactUs": "Contact Us",
-    "searchDocs": "Search Docs"
+    "searchDocs": "Search Docs",
+    "playground": "Playground"
   },
   "doc": {
     "notExist": "This doc does not exist",

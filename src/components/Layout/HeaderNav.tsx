@@ -8,6 +8,8 @@ import { useTheme } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import CodeIcon from "@mui/icons-material/Code";
+import DownloadIcon from "@mui/icons-material/Download";
 
 import LinkComponent from "components/Link";
 import { generateDownloadURL, generateContactURL } from "utils";
@@ -80,10 +82,13 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />
 
-      <NavItem
-        label={<Trans i18nKey="navbar.download" />}
-        to={generateDownloadURL(language)}
-      />
+      {language === "en" && (
+        <NavItem
+          label={<Trans i18nKey="navbar.playground" />}
+          to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
+          // startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
+        />
+      )}
 
       {["zh", "en"].includes(language) && (
         <NavItem
@@ -96,14 +101,29 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         label={<Trans i18nKey="navbar.contactUs" />}
         to={generateContactURL(language)}
       />
+
+      <NavItem
+        // label={<Trans i18nKey="navbar.download" />}
+        to={generateDownloadURL(language)}
+        startIcon={
+          <DownloadIcon
+            fontSize="inherit"
+            color="inherit"
+            sx={{
+              paddingTop: "0.5rem",
+            }}
+          />
+        }
+      />
     </Stack>
   );
 }
 
 const NavItem = (props: {
   selected?: boolean;
-  label: string | React.ReactElement;
+  label?: string | React.ReactElement;
   to: string;
+  startIcon?: React.ReactNode;
 }) => {
   const theme = useTheme();
   return (
@@ -126,8 +146,12 @@ const NavItem = (props: {
             color="website.f1"
             sx={{
               fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 0.5,
             }}
           >
+            {props.startIcon}
             {props.label}
           </Typography>
         </LinkComponent>
@@ -232,6 +256,17 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.tidb" />
+            </Typography>
+          </LinkComponent>
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} disableRipple>
+          <LinkComponent
+            to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
+            style={{ width: "100%" }}
+          >
+            <Typography variant="body1" component="div" color="website.f1">
+              <Trans i18nKey="navbar.playground" />
             </Typography>
           </LinkComponent>
         </MenuItem>
