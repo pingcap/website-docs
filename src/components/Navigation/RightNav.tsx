@@ -154,7 +154,7 @@ export default function RightNav(props: RightNavProps) {
             </Typography>
             <Typography
               component="a"
-              href={`https://play.tidbcloud.com/??utm_source=docs&utm_medium=right_sidebar`}
+              href={`https://play.tidbcloud.com/?utm_source=docs&utm_medium=right_sidebar`}
               target="_blank"
               sx={{
                 display: "flex",
