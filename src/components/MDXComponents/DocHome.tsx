@@ -372,7 +372,8 @@ export function DocHomeCard(props: any) {
             src={require(`../../../images/docHome/${icon}.svg`)?.default}
             sx={{
               height: "3rem",
-              width: "fit-content",
+              width: "3rem",
+              // width: "fit-content",
               margin: 0,
               backgroundColor: "transparent",
             }}
