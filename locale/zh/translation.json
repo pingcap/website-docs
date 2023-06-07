@@ -24,7 +24,8 @@
     "asktug": "社区",
     "download": "免费试用",
     "contactUs": "联系我们",
-    "searchDocs": "搜索文档"
+    "searchDocs": "搜索文档",
+    "playground": "Playground"
   },
   "doc": {
     "notExist": "此文档不存在",
@@ -56,7 +57,9 @@
     },
     "archive": {
       "tidb": "你正在查看 TiDB 数据库的归档文档，归档文档不再提供任何更新。如无特殊需求，建议使用 TiDB 数据库的<0>最新 LTS 版本</0>。"
-    }
+    },
+    "playgroundDesc": "One-stop & interactive experience of TiDB's capabilities WITHOUT registration.",
+    "new": "New"
   },
   "shortcodes": {
     "note": "注意",

@@ -120,7 +120,7 @@ export default function RightNav(props: RightNavProps) {
           </Stack>
         )}
 
-        {language === "en" && (
+        {["en", "ja"].includes(language) && (
           <Box
             sx={{
               paddingTop: "1rem",
@@ -145,7 +145,7 @@ export default function RightNav(props: RightNavProps) {
               <TerminalIcon />
               <Trans i18nKey="navbar.playground" />
               <Chip
-                label="New"
+                label={t("doc.new")}
                 size="small"
                 sx={{
                   color: "#FC5B00",
@@ -173,7 +173,7 @@ export default function RightNav(props: RightNavProps) {
               }}
             >
               <Box>
-                {`One-stop & interactive experience of TiDB's capabilities WITHOUT registration.`}
+                <Trans i18nKey="doc.playgroundDesc" />
                 <ArrowRightAltIcon fontSize="inherit" />
               </Box>
             </Typography>

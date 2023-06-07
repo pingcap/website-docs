@@ -60,7 +60,9 @@
     },
     "archive": {
       "tidb": "You are viewing the archived documentation of TiDB, which no longer receives updates. It is recommended that you use <0>the latest LTS version</0> of the TiDB database."
-    }
+    },
+    "playgroundDesc": "One-stop & interactive experience of TiDB's capabilities WITHOUT registration.",
+    "new": "New"
   },
   "shortcodes": {
     "note": "Note",
