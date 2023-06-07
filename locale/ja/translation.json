@@ -28,7 +28,8 @@
     "asktug": "Forum",
     "download": "無料ウェビナー",
     "contactUs": "お問い合わせ",
-    "searchDocs": "ドキュメントを検索"
+    "searchDocs": "ドキュメントを検索",
+    "playground": "プレイグラウンド"
   },
   "doc": {
     "notExist": "このドキュメントは存在しません",
@@ -59,7 +60,9 @@
     },
     "archive": {
       "tidb": "現在表示されているページは、TiDBのアーカイブされたドキュメント (非更新) です。TiDBをご利用の場合、<0>最新のLTS (Long Term Support) バージョン</0>の使用を推奨します。"
-    }
+    },
+    "playgroundDesc": "登録なしで TiDB の機能をワンストップでインタラクティブに体験できます。",
+    "new": "新規"
   },
   "shortcodes": {
     "note": "ノート",
