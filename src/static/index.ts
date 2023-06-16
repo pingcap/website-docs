@@ -283,6 +283,10 @@ export const ZH_FOOTER_ITEMS = [
     name: "资源",
     items: [
       {
+        name: "TiDB 路线图",
+        url: "https://docs.pingcap.com/zh/tidb/dev/tidb-roadmap",
+      },
+      {
         name: "常见问题解答",
         url: "/tidb/stable/faq-overview",
       },
