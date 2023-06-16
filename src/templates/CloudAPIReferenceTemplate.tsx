@@ -1,6 +1,10 @@
 import * as React from "react";
+import { graphql, Link } from "gatsby";
+import Box from "@mui/material/Box";
 
 import Seo from "components/Layout/Seo";
+import Layout from "components/Layout";
+import type { Locale, Repo, BuildType } from "../static/Type";
 
 declare const Redoc: any;
 
@@ -31,12 +35,21 @@ interface APIReferenceTemplateProps {
     production: string;
     preview: string;
     isProduction: boolean;
+    availIn: { locale: Locale[]; version: string[] };
+    buildType: BuildType;
   };
   data?: { [key: string]: any };
 }
 
 export default function APIReferenceTemplate({
-  pageContext: { production, preview, isProduction, pathname },
+  pageContext: {
+    production,
+    preview,
+    isProduction,
+    pathname,
+    availIn,
+    buildType,
+  },
   data,
 }: APIReferenceTemplateProps) {
   const specUrl = isProduction ? production : preview;
@@ -65,21 +78,47 @@ export default function APIReferenceTemplate({
 
   return (
     <>
-      <Seo
-        title="TiDB Cloud API"
-        description="The TiDB Cloud API is a REST interface that provides you with programmatic access to manage administrative objects within TiDB Cloud."
-        meta={[
-          {
-            name: "doc:lang",
-            content: 'en',
-          },
-          {
-            name: "doc:version",
-            content: pathname,
-          },
-        ]}
-      />
-      <div id="redoc-container" data-testid="redoc-container" />
+      <Layout
+        locales={availIn.locale}
+        // menu={null}
+        // docInfo={{
+        //   version: pathConfig.version || "stable",
+        //   type: pathConfig.repo,
+        // }}
+        buildType={buildType}
+      >
+        <Seo
+          title="TiDB Cloud API"
+          description="The TiDB Cloud API is a REST interface that provides you with programmatic access to manage administrative objects within TiDB Cloud."
+          meta={[
+            {
+              name: "doc:lang",
+              content: "en",
+            },
+            {
+              name: "doc:version",
+              content: pathname,
+            },
+          ]}
+        />
+        <Box sx={{ marginTop: "5rem", width: "100%" }}>
+          <Box id="redoc-container" data-testid="redoc-container" />
+        </Box>
+      </Layout>
     </>
   );
 }
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;

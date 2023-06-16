@@ -134,6 +134,8 @@ export const createCloudAPIReference = async ({
   );
   const pageCfg = DOCS_CONFIG.tidbcloud.openAPI;
   const pageList = pageCfg.data;
+  const locale = [Locale.en];
+
   pageList.forEach((page) => {
     const path = `/tidbcloud/${pageCfg.path}/${page.pathname}`;
     const isProduction = process.env.CI === "true";
@@ -143,6 +145,11 @@ export const createCloudAPIReference = async ({
       context: {
         ...page,
         isProduction,
+        availIn: {
+          locale,
+          version: [],
+        },
+        buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
       },
     });
   });
