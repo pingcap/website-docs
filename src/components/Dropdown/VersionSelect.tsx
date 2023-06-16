@@ -220,7 +220,7 @@ const VersionItems = (props: {
       ))}
       <LinkComponent
         isI18n
-        to={generateArchivedWebsiteUrlByLang(language)}
+        to={generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo)}
         style={{
           width: "100%",
           color: "#666666",
@@ -420,7 +420,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
 
   const handleChange = (event: { target: { value: string } }) => {
     if (event.target.value === "archive") {
-      gatsbyNavigate(generateArchivedWebsiteUrlByLang(language));
+      gatsbyNavigate(generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo));
       return;
     }
     // setSelectedVersion(event.target.value);
@@ -456,13 +456,29 @@ export function NativeVersionSelect(props: VersionSelectProps) {
   );
 }
 
-function generateArchivedWebsiteUrlByLang(lang?: string) {
+function generateArchivedWebsiteUrlByLangAndType(lang?: string, type?: string) {
+  let url = ARCHIVE_WEBSITE_URL;
+
   switch (lang) {
     case "zh":
-      return `${ARCHIVE_WEBSITE_URL}/zh`;
+      url = `${ARCHIVE_WEBSITE_URL}/zh`;
+      break;
     case "jp":
-      return `${ARCHIVE_WEBSITE_URL}/jp`;
+      url = `${ARCHIVE_WEBSITE_URL}/jp`;
+      break;
     default:
-      return ARCHIVE_WEBSITE_URL;
+      break;
   }
+  switch (type) {
+    case "tidb-in-kubernetes":
+      url = `${url}/tidb-in-kubernetes/v1.0`;
+      break;
+    case "tidb-data-migration":
+      url = `${url}/tidb-data-migration/v1.0`;
+      break;
+    default:
+      break;
+  }
+
+  return url;
 }
