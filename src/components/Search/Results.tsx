@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import clsx from "clsx";
+import TablePagination from "@mui/material/TablePagination";
 
 import LinkComponent from "components/Link";
 
@@ -14,6 +15,28 @@ export default function SearchResults(props: {
   data: any[];
 }) {
   const { data, loading } = props;
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const filteredDataMemo = React.useMemo(() => {
+    return data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [data, page, rowsPerPage]);
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   if (loading) {
     return (
       <Box
@@ -38,6 +61,7 @@ export default function SearchResults(props: {
       </Box>
     );
   }
+
   return (
     <Box
       sx={{
@@ -45,7 +69,7 @@ export default function SearchResults(props: {
       }}
       className={clsx("algolia-autocomplete", props.className)}
     >
-      <Typography
+      {/* <Typography
         variant="body2"
         sx={{
           paddingBottom: "2rem",
@@ -53,11 +77,24 @@ export default function SearchResults(props: {
       >
         <Trans
           i18nKey="search.resultTips.counts"
-          values={{ counts: data.length }}
+          values={{ counts: totalHits || data.length }}
         />
-      </Typography>
+      </Typography> */}
+      {data?.length > 0 && (
+        <>
+          <TablePagination
+            component="div"
+            count={data.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </>
+      )}
+
       <Stack spacing={4}>
-        {data.map((item) => (
+        {filteredDataMemo.map((item) => (
           <SearchItem key={item.objectID} data={item} />
         ))}
       </Stack>
