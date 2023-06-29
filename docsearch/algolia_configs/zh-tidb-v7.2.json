@@ -1,0 +1,42 @@
+{
+  "index_name": "zh-tidb-v7.2",
+  "docs_info": {
+    "owner": "pingcap",
+    "docs_repo": "docs-cn",
+    "ref": "release-7.2",
+    "docs_prefix": "tidb",
+    "lang": "zh",
+    "version": "v7.2"
+  },
+  "start_urls": [],
+  "crawl_local_url": "",
+  "delete_urls": [],
+  "sitemap_urls": ["https://docs.pingcap.com/sitemap/sitemap-index.xml"],
+  "selectors": {
+    "default": {
+      "lvl0": ".doc-content h1",
+      "lvl1": ".doc-content h2",
+      "lvl2": ".doc-content h3",
+      "lvl3": ".doc-content h4",
+      "lvl4": ".doc-content h5",
+      "text": ".doc-content p, .doc-content li, .doc-content table tr, .doc-content code span"
+    }
+  },
+  "selectors_exclude": [".error"],
+  "custom_settings": {
+    "attributesForFaceting": ["url_without_anchor"],
+    "attributesToHighlight": ["content", "url", "hierarchy"],
+    "attributeForDistinct": "url_without_anchor",
+    "distinct": true,
+    "disableTypoToleranceOnWords": [
+      "mva",
+      "tiup",
+      "tiops",
+      "tidb4.0",
+      "tidb 4.0"
+    ]
+  },
+  "conversation_id": ["428916846"],
+  "only_content_level": true,
+  "nb_hits": 159018
+}
