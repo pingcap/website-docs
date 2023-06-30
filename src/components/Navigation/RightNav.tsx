@@ -186,6 +186,7 @@ export default function RightNav(props: RightNavProps) {
           aria-label="toc"
           sx={{
             paddingTop: "1rem",
+            pb: "2rem",
           }}
         >
           <Typography

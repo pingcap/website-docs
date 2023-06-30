@@ -191,7 +191,7 @@ export default function DocTemplate({
                       language={language}
                       buildType={buildType}
                     />
-                    {!frontmatter?.hide_commit && (
+                    {!frontmatter?.hide_commit && buildType !== "archive" && (
                       <GitCommitInfoCard
                         pathConfig={pathConfig}
                         filePath={filePath}
