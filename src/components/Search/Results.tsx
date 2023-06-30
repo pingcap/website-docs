@@ -77,22 +77,9 @@ export default function SearchResults(props: {
       >
         <Trans
           i18nKey="search.resultTips.counts"
-          values={{ counts: totalHits || data.length }}
+          values={{ data.length }}
         />
       </Typography> */}
-      {data?.length > 0 && (
-        <>
-          <TablePagination
-            component="div"
-            count={data.length}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </>
-      )}
-
       <Stack spacing={4}>
         {filteredDataMemo.map((item) => (
           <SearchItem key={item.objectID} data={item} />
@@ -122,6 +109,18 @@ export default function SearchResults(props: {
             </Typography>
           </Typography>
         </>
+      )}
+      {data?.length > 0 && (
+        <Box mt={1}>
+          <TablePagination
+            component="div"
+            count={data.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Box>
       )}
     </Box>
   );
