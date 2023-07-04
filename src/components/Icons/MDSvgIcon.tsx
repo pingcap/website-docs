@@ -104,8 +104,8 @@ export function IconTopOrganization(props: SvgIconProps) {
       viewBox="0 0 24 24"
       {...others}
       sx={{
-        width: "24px",
-        height: "24px",
+        width: "20px",
+        height: "20px",
         fill: "none",
         ...sx,
       }}
@@ -113,7 +113,7 @@ export function IconTopOrganization(props: SvgIconProps) {
       <path
         d="M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       ></path>
@@ -128,8 +128,8 @@ export function IconTopAccountSettings(props: SvgIconProps) {
       viewBox="0 0 24 24"
       {...others}
       sx={{
-        width: "24px",
-        height: "24px",
+        width: "20px",
+        height: "20px",
         fill: "none",
         ...sx,
       }}
@@ -137,7 +137,7 @@ export function IconTopAccountSettings(props: SvgIconProps) {
       <path
         d="M5.3163 19.4384C5.92462 18.0052 7.34492 17 9 17H15C16.6551 17 18.0754 18.0052 18.6837 19.4384M16 9.5C16 11.7091 14.2091 13.5 12 13.5C9.79086 13.5 8 11.7091 8 9.5C8 7.29086 9.79086 5.5 12 5.5C14.2091 5.5 16 7.29086 16 9.5ZM22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       ></path>
