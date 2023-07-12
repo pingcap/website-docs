@@ -145,8 +145,12 @@ export const EN_FOOTER_ITEMS = [
     name: "Products",
     items: [
       {
-        name: "TiDB Cloud",
-        url: "https://www.pingcap.com/tidb-cloud/",
+        name: "TiDB Dedicated",
+        url: "https://www.pingcap.com/tidb-dedicated/",
+      },
+      {
+        name: "TiDB Serverless",
+        url: "https://www.pingcap.com/tidb-serverless/",
       },
       {
         name: "TiDB",
@@ -154,11 +158,15 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "Pricing",
-        url: "https://www.pingcap.com/tidb-cloud-pricing/",
+        url: "https://www.pingcap.com/pricing/",
       },
       {
         name: "Get Demo",
         url: "https://www.pingcap.com/demo/",
+      },
+      {
+        name: "Get Started",
+        url: "https://www.pingcap.com/get-started/",
       },
     ],
   },
