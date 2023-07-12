@@ -145,16 +145,16 @@ export const EN_FOOTER_ITEMS = [
     name: "Products",
     items: [
       {
+        name: "TiDB",
+        url: "https://www.pingcap.com/tidb/",
+      },      
+      {
         name: "TiDB Dedicated",
         url: "https://www.pingcap.com/tidb-dedicated/",
       },
       {
         name: "TiDB Serverless",
         url: "https://www.pingcap.com/tidb-serverless/",
-      },
-      {
-        name: "TiDB",
-        url: "https://www.pingcap.com/tidb/",
       },
       {
         name: "Pricing",
