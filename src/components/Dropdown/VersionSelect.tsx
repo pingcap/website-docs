@@ -21,12 +21,14 @@ import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
 import { Typography } from "@mui/material";
 
-function renderVersion(version: string | null, pathConfig: PathConfig) {
+function renderVersion(version: string | null, pathConfig: PathConfig, isArchive: boolean = false) {
   const { docs } = CONFIG;
   const isDmr =
     (docs[pathConfig.repo] as { dmr: string[] }).dmr?.includes(version || "") ??
     false;
-  if (isDmr) return `${version}`;
+  if (isDmr) {
+    return isArchive ? `${version} (DMR)` : version;
+  }
   if (version !== "stable") return version;
   return (docs[pathConfig.repo] as { stable: string }).stable.replace(
     "release-",
@@ -288,7 +290,7 @@ const VersionItemsArchived = (props: {
                 lineHeight: "1.25rem",
               }}
             >
-              {renderVersion(version, pathConfig)}
+              {renderVersion(version, pathConfig, true)}
             </Typography>
           </LinkComponent>
         </MenuItem>
