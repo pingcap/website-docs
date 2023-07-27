@@ -3,7 +3,7 @@
   "docs_info": {
     "owner": "pingcap",
     "docs_repo": "docs",
-    "ref": "release-6.5",
+    "ref": "release-7.1",
     "docs_prefix": "tidbcloud",
     "lang": "en",
     "version": ""
