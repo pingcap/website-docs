@@ -117,7 +117,7 @@ export default function DocTemplate({
                     rel: "canonical",
                     href: `${site.siteMetadata.siteUrl}${generateUrl(name, {
                       ...pathConfig,
-                      branch: stableBranch,
+                      version: "stable",
                     })}`,
                   },
                 ]
