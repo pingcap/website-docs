@@ -158,12 +158,17 @@ function FeedbackPopover(props: {
         >
           {showThumb && (
             <Stack direction="row" justifyContent="space-evenly">
-              <IconButton aria-label="Thumb Up" onClick={setDocHelpful(true)}>
+              <IconButton
+                aria-label="Thumb Up"
+                onClick={setDocHelpful(true)}
+                className="FeedbackBtn-thumbUp"
+              >
                 <ThumbUpIcon />
               </IconButton>
               <IconButton
                 aria-label="Thumb Down"
                 onClick={setDocHelpful(false)}
+                className="FeedbackBtn-thumbDown"
               >
                 <ThumbDownIcon />
               </IconButton>
