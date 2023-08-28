@@ -6,18 +6,22 @@ function textToJsx(text: string) {
     case 'Note:':
     case '注意：':
     case 'Note':
+    case '注意':
       return 'Note'
     case 'Warning:':
     case '警告：':
     case 'Warning':
+    case '警告':
       return 'Warning'
     case 'Tip:':
     case '建议：':
     case 'Tip':
+    case '建议':
       return 'Tip'
     case 'Important:':
     case '重要：':
     case 'Important':
+    case '重要':
       return 'Important'
     default:
       throw new Error('unreachable')
@@ -77,15 +81,19 @@ module.exports = function ({
               // https://github.com/orgs/community/discussions/16925
               case 'Note':
               case '注意：':
+              case '注意':
               case 'Warning:':
               case 'Warning':
               case '警告：':
+              case '警告':
               case 'Tip:':
               case 'Tip':
               case '建议：':
+              case '建议':
               case 'Important:':
               case 'Important':
-              case '重要：': {
+              case '重要：':
+              case '重要': {
                 const children = node.children.slice(1)
                 const jsx = textToJsx(text)
                 return [
