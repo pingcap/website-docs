@@ -5,15 +5,19 @@ function textToJsx(text: string) {
   switch (text) {
     case 'Note:':
     case '注意：':
+    case 'Note':
       return 'Note'
     case 'Warning:':
     case '警告：':
+    case 'Warning':
       return 'Warning'
     case 'Tip:':
     case '建议：':
+    case 'Tip':
       return 'Tip'
     case 'Important:':
     case '重要：':
+    case 'Important':
       return 'Important'
     default:
       throw new Error('unreachable')
@@ -70,12 +74,17 @@ module.exports = function ({
             const text = first.children[0].children[0].value
             switch (text) {
               case 'Note:':
+              // https://github.com/orgs/community/discussions/16925
+              case 'Note':
               case '注意：':
               case 'Warning:':
+              case 'Warning':
               case '警告：':
               case 'Tip:':
+              case 'Tip':
               case '建议：':
               case 'Important:':
+              case 'Important':
               case '重要：': {
                 const children = node.children.slice(1)
                 const jsx = textToJsx(text)
