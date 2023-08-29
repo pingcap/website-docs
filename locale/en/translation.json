@@ -36,7 +36,7 @@
     "download-pdf": "Download PDF",
     "improve": "Edit this page",
     "feedback": "Request docs changes",
-    "feedbackAskTug": "Ask questions on TiDB Forum",
+    "feedbackAskTug": "Ask questions on Discord",
     "latestCommit": "was last updated",
     "deprecation": {
       "tidb": {

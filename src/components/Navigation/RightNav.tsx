@@ -101,7 +101,7 @@ export default function RightNav(props: RightNavProps) {
                   url={
                     pathConfig.locale === "zh"
                       ? `https://asktug.com/?utm_source=doc`
-                      : `https://ask.pingcap.com/`
+                      : `https://discord.gg/DQZ2dy3cuc?utm_source=doc`
                   }
                   label={t("doc.feedbackAskTug")}
                   rel="noreferrer"
