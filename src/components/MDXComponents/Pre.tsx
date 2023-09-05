@@ -25,7 +25,7 @@ export const Pre: React.FC<PropsWithChildren> = ({ children }) => {
       string | JSXElementConstructor<any>
     >
   ).props;
-  if (childrenProps.mdxType !== "code") {
+  if (childrenProps?.mdxType !== "code") {
     return <pre>{children}</pre>;
   }
 
