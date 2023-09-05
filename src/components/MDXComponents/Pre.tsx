@@ -48,7 +48,7 @@ export const CodeBlock: React.FC<MdxCodeChildrenProps> = ({
   const hlResult = useMemo(
     () =>
       language
-        ? hljs.highlight(children, { language })
+        ? hljs.highlight(children, { language, ignoreIllegals: true })
         : hljs.highlightAuto(children),
     [children, language]
   );
