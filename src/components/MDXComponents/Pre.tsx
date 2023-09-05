@@ -1,7 +1,7 @@
 import { WrapText } from "@mui/icons-material";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import CopyBtn from "components/Button/CopyBtn";
-import hljs from "highlight.js";
+import hljs, { HighlightResult } from "highlight.js";
 import {
   JSXElementConstructor,
   PropsWithChildren,
@@ -45,13 +45,17 @@ export const CodeBlock: React.FC<MdxCodeChildrenProps> = ({
   if (language === "shell") {
     language = "sh";
   }
-  const hlResult = useMemo(
-    () =>
-      language
-        ? hljs.highlight(children, { language, ignoreIllegals: true })
-        : hljs.highlightAuto(children),
-    [children, language]
-  );
+  const hlResult = useMemo<HighlightResult>(() => {
+    if (!hljs.getLanguage(language)) {
+      return {
+        language,
+        value: children,
+      } as HighlightResult;
+    }
+    return language
+      ? hljs.highlight(children, { language, ignoreIllegals: true })
+      : hljs.highlightAuto(children);
+  }, [children, language]);
   const [isWrapped, setIsWrapped] = useState(false);
   const CodeWrapButton = () => {
     return (
