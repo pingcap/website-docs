@@ -22,7 +22,6 @@ import {
   BuildType,
   Locale,
 } from "static/Type";
-import { useHighlightCode } from "utils/CustomHook";
 import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
@@ -66,8 +65,6 @@ export default function DocTemplate({
   }, [tableOfContents.items]);
 
   const stableBranch = getStable(pathConfig.repo);
-
-  useHighlightCode();
 
   const { language } = useI18next();
 

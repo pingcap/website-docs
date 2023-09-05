@@ -16,6 +16,7 @@ import {
 import { Locale, PathConfig, FrontMatter, BuildType } from "static/Type";
 import { useTotalContributors } from "components/Avatar/Contributors";
 import replaceInternalHref from "utils/anchor";
+import { Pre } from "components/MDXComponents/Pre";
 
 export default function MDXContent(props: {
   data: any;
@@ -73,7 +74,13 @@ export default function MDXContent(props: {
             availIn={availIn}
           />
         )}
-        <MDXProvider components={{ ...MDXConponents, Link }}>
+        <MDXProvider
+          components={{
+            ...MDXConponents,
+            Link,
+            pre: Pre,
+          }}
+        >
           <MDXRenderer>{data}</MDXRenderer>
         </MDXProvider>
       </Box>
