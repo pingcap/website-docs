@@ -350,7 +350,11 @@ export default function VersionSelect(props: VersionSelectProps) {
             lineHeight: "1.25rem",
           }}
         >
-          {renderVersion(pathConfig.version, pathConfig)}
+          {
+            buildType === "archive"
+              ? renderVersion(pathConfig.version, pathConfig, true)
+              : renderVersion(pathConfig.version, pathConfig)
+          }
         </Typography>
       </Button>
       <StyledMenu
