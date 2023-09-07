@@ -82,7 +82,7 @@
       "counts": "{{ counts }} results found...",
       "title": "Sorry. We couldn't find what you're looking for.",
       "content1": "Try changing your keywords and search again.",
-      "content2": "If you can't find what you're looking for, seek help from the <0>Ask PingCAP</0> forum."
+      "content2": "If you can't find what you're looking for, seek help from our <0>Discord channels</0>."
     }
   },
   "tools": {

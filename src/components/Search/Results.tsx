@@ -45,7 +45,7 @@ export default function SearchResults(props: {
       case 'en':
       case 'ja':
       default:
-        return 'https://ask.pingcap.com/?utm_source=doc';
+        return 'https://discord.gg/DQZ2dy3cuc?utm_source=doc';
     }
   };
 
