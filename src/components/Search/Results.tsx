@@ -18,6 +18,7 @@ export default function SearchResults(props: {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { t, language } = useI18next();
 
   const filteredDataMemo = React.useMemo(() => {
     return data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
@@ -35,6 +36,17 @@ export default function SearchResults(props: {
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const getHref = () => {
+    switch (language) {
+      case 'zh':
+        return 'https://asktug.com/?utm_source=doc';
+      case 'en':
+      case 'ja':
+      default:
+        return 'https://discord.gg/DQZ2dy3cuc?utm_source=doc';
+    }
   };
 
   if (loading) {
@@ -90,22 +102,26 @@ export default function SearchResults(props: {
           <Typography>
             <Trans i18nKey="search.resultTips.title" />
           </Typography>
-          <Typography component="ul">
+          <Typography component="ul"
+            sx={{
+              paddingTop: "1rem",
+            }}
+          >
+            <Typography component="li">
+              <Trans i18nKey="search.resultTips.content1" />
+            </Typography>
             <Typography component="li">
               <Trans
-                i18nKey="search.resultTips.content1"
+                i18nKey="search.resultTips.content2"
                 components={[
                   <Typography
                     component="a"
-                    href="https://asktug.com/?utm_source=doc"
+                    href={getHref()}
                     color="website.k1"
                     target="_blank"
                   />,
                 ]}
               />
-            </Typography>
-            <Typography component="li">
-              <Trans i18nKey="search.resultTips.content2" />
             </Typography>
           </Typography>
         </>
