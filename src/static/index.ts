@@ -5,7 +5,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import RedditIcon from "@mui/icons-material/Reddit";
 
-import { StackOverflowIcon, SlackIcon, AskTugIcon } from "components/Icons";
+import { StackOverflowIcon, SlackIcon, AskTugIcon, DiscordIcon } from "components/Icons";
 
 import { convertVersionName } from "utils";
 import CONFIG from "../../docs/docs.json";
@@ -33,24 +33,19 @@ export const EN_ICON_GROUP = [
     icon: GitHubIcon,
   },
   {
-    name: "stackOverflow",
-    href: "https://stackoverflow.com/questions/tagged/tidb",
-    icon: StackOverflowIcon,
-  },
-  {
     name: "twitter",
     href: "https://twitter.com/PingCAP",
     icon: TwitterIcon,
   },
   {
-    name: "linkedin",
-    href: "https://linkedin.com/company/pingcap",
-    icon: LinkedInIcon,
-  },
-  {
     name: "facebook",
     href: "https://facebook.com/pingcap2015",
     icon: FacebookIcon,
+  },
+  {
+    name: "linkedin",
+    href: "https://linkedin.com/company/pingcap",
+    icon: LinkedInIcon,
   },
   {
     name: "slack",
@@ -63,10 +58,20 @@ export const EN_ICON_GROUP = [
     icon: YouTubeIcon,
   },
   {
+    name: "stackOverflow",
+    href: "https://stackoverflow.com/questions/tagged/tidb",
+    icon: StackOverflowIcon,
+  },
+  {
+    name: "discord",
+    href: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+    icon: DiscordIcon,
+  },
+  {
     name: "reddit",
     href: "https://reddit.com/r/TiDB/",
     icon: RedditIcon,
-  },
+  }
 ];
 
 export const ZH_ICON_GROUP = [
@@ -86,14 +91,14 @@ export const ZH_ICON_GROUP = [
     icon: TwitterIcon,
   },
   {
-    name: "linkedin",
-    href: "https://linkedin.com/company/pingcap",
-    icon: LinkedInIcon,
-  },
-  {
     name: "facebook",
     href: "https://facebook.com/pingcap2015",
     icon: FacebookIcon,
+  },
+  {
+    name: "linkedin",
+    href: "https://linkedin.com/company/pingcap",
+    icon: LinkedInIcon,
   },
   {
     name: "slack",
@@ -104,6 +109,16 @@ export const ZH_ICON_GROUP = [
     name: "youtube",
     href: "https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA",
     icon: YouTubeIcon,
+  },
+  {
+    name: "stackOverflow",
+    href: "https://stackoverflow.com/questions/tagged/tidb",
+    icon: StackOverflowIcon,
+  },
+  {
+    name: "discord",
+    href: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+    icon: DiscordIcon,
   },
   {
     name: "reddit",
@@ -138,6 +153,11 @@ export const JA_ICON_GROUP = [
     href: "https://www.youtube.com/channel/UCatxrGZANSnii2fe7FeEwvg",
     icon: YouTubeIcon,
   },
+  {
+    name: "discord",
+    href: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+    icon: DiscordIcon,
+  },
 ];
 
 export const EN_FOOTER_ITEMS = [
@@ -147,7 +167,7 @@ export const EN_FOOTER_ITEMS = [
       {
         name: "TiDB",
         url: "https://www.pingcap.com/tidb/",
-      },      
+      },
       {
         name: "TiDB Dedicated",
         url: "https://www.pingcap.com/tidb-dedicated/",
@@ -219,6 +239,10 @@ export const EN_FOOTER_ITEMS = [
   {
     name: "Support",
     items: [
+      {
+        name: "Discord",
+        url: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+      },
       {
         name: "Forum",
         url: "https://ask.pingcap.com/",
@@ -411,6 +435,10 @@ export const JA_FOOTER_ITEMS = [
   {
     name: "サポート",
     items: [
+      {
+        name: "Discord",
+        url: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+      },
       {
         name: "Forum",
         url: "https://ask.pingcap.com/",
