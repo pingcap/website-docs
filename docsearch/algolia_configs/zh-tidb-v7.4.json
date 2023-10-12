@@ -1,12 +1,11 @@
-
 {
-    "index_name": "en-tidb-v7.4",
+    "index_name": "zh-tidb-v7.4",
     "docs_info": {
       "owner": "pingcap",
-      "docs_repo": "docs",
+      "docs_repo": "docs-cn",
       "ref": "release-7.4",
       "docs_prefix": "tidb",
-      "lang": "en",
+      "lang": "zh",
       "version": "v7.4"
     },
     "start_urls": [],
