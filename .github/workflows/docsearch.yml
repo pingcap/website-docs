@@ -2,7 +2,7 @@ name: Doc Search Scripts
 
 on:
   schedule:
-    - cron: '30 23 * * *'
+    - cron: '00 06 * * *'
   workflow_dispatch:
 
 jobs:
