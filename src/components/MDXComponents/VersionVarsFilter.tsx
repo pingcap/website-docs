@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import { Container, Autocomplete, TextField, ToggleButtonGroup, ToggleButton, Card, CardContent, Chip, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 
+import { MdxContext } from "context/MdxContext";
+
 type FilterType = "version" | "diff";
 type ScopeType = "SESSION" | "GLOBAL" | "BOTH";
 
@@ -16,6 +18,9 @@ export function VersionVarsFilter(props: {
   const [version, setVersion] = React.useState<string>("");
   const [startVersion, setStartVersion] = React.useState<string>("");
   const [endVersion, setEndVersion] = React.useState<string>("");
+
+  const mdxContextData = React.useContext(MdxContext);
+  const { version: ctxVersion, language: ctxLang } = mdxContextData;
 
   const {
     versions = "",
