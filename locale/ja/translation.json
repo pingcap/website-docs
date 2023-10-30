@@ -117,5 +117,22 @@
   "fab": {
     "scrollToTop": "トップへ戻る",
     "goToFeedback": "このページは役に立ちましたか？"
+  },
+  "versionFilter": {
+    "yes": "はい",
+    "no": "いいえ",
+    "filterModeVersion": "バージョン",
+    "filterModeDiff": "差異",
+    "diffModeOlderVersion": "古いバージョン",
+    "diffModeNewerVersion": "新しいバージョン",
+    "involvedInitVersion": "最初から",
+    "involvedVersion": "{{version}} から新しい",
+    "type": "タイプ：",
+    "persists": "クラスターに保持：",
+    "hintSetVar": "ヒント SET_VAR に適用：",
+    "default": "デフォルト値：",
+    "range": "範囲：",
+    "possibleValues": "可能な値：",
+    "unit": "単位："
   }
 }
