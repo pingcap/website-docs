@@ -3,8 +3,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import { Container, Autocomplete, TextField, ToggleButtonGroup, ToggleButton, Card, CardContent, Chip, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { MDLink } from "./MDLink";
 
-import { MdxContext } from "context/MdxContext";
 
 type FilterType = "version" | "diff";
 type ScopeType = "SESSION" | "GLOBAL" | "BOTH";
@@ -18,9 +18,6 @@ export function VersionVarsFilter(props: {
   const [version, setVersion] = React.useState<string>("");
   const [startVersion, setStartVersion] = React.useState<string>("");
   const [endVersion, setEndVersion] = React.useState<string>("");
-
-  const mdxContextData = React.useContext(MdxContext);
-  const { version: ctxVersion, language: ctxLang } = mdxContextData;
 
   const {
     versions = "",
@@ -266,7 +263,7 @@ export function VersionVars(props: {
           </Typography>
           {type === "" ? "" : <Typography> <Trans i18nKey={`versionFilter.type`}/> {type} </Typography>}
           {props.persists === undefined ? "" : <Typography> <Trans i18nKey={`versionFilter.persists`}/> {yesOrNoI18n(props.persists)}</Typography>}
-          <Typography> <Trans i18nKey={`versionFilter.hintSetVar`}/> {yesOrNoI18n(applyHint)} </Typography>
+          <Typography> <Trans i18nKey={`versionFilter.hintSetVar`} components={[<MDLink url="/optimizer-hints#set_varvar_namevar_value"/>]}/> {yesOrNoI18n(applyHint)} </Typography>
           <Typography> <Trans i18nKey={`versionFilter.default`}/> {defaultValue} </Typography>
           {range === "" ? "" : <Typography> <Trans i18nKey={`versionFilter.range`}/> {range} </Typography>}
           {possibleValues === "" ? "" : <Typography> <Trans i18nKey={`versionFilter.possibleValues`}/> {possibleValues} </Typography>}

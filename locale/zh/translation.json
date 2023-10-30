@@ -126,7 +126,7 @@
     "involvedVersion": "从 {{version}} 版本开始引入",
     "type": "类型：",
     "persists": "是否持久化到集群：",
-    "hintSetVar": "是否受 Hint SET_VAR 控制：",
+    "hintSetVar": "是否受 Hint <0>SET_VAR</0> 控制：",
     "default": "默认值：",
     "range": "范围：",
     "possibleValues": "可选值：",

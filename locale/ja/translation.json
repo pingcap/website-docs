@@ -129,7 +129,7 @@
     "involvedVersion": "{{version}} から新しい",
     "type": "タイプ：",
     "persists": "クラスターに保持：",
-    "hintSetVar": "ヒント SET_VAR に適用：",
+    "hintSetVar": "ヒント <0>SET_VAR</0> に適用：",
     "default": "デフォルト値：",
     "range": "範囲：",
     "possibleValues": "可能な値：",

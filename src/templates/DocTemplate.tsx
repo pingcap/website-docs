@@ -67,7 +67,7 @@ export default function DocTemplate({
   const stableBranch = getStable(pathConfig.repo);
 
   const { language } = useI18next();
-
+  console.log(pathConfig);
   return (
     <>
       <Layout

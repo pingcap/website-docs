@@ -129,7 +129,7 @@
     "involvedVersion": "New in {{version}}",
     "type": "Type: ",
     "persists": "Persists to cluster: ",
-    "hintSetVar": "Applies to hint SET_VAR: ",
+    "hintSetVar": "Applies to hint <0>SET_VAR</0>: ",
     "default": "Default value: ",
     "range": "Range: ",
     "possibleValues": "Possible values: ",
