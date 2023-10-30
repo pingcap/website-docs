@@ -76,7 +76,7 @@ export default function MDXContent(props: {
           />
         )}
         <MdxContext.Provider
-          value={{ version: pathConfig.version || "", language }}
+          value={{pathConfig}}
         >
           <MDXProvider
             components={{
