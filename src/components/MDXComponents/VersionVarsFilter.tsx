@@ -5,8 +5,6 @@ import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import { Container, Autocomplete, TextField, ToggleButtonGroup, ToggleButton, Card, CardContent, Chip, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { MDLink } from "./MDLink";
 
-
-type FilterType = "version" | "diff";
 type ScopeType = "SESSION" | "GLOBAL" | "BOTH";
 
 export function VersionVarsFilter(props: {
@@ -14,8 +12,6 @@ export function VersionVarsFilter(props: {
     children?: React.FC[];
   }) {
 
-  const [filterType, setFilterType] = React.useState<FilterType>("version");
-  const [version, setVersion] = React.useState<string>("");
   const [startVersion, setStartVersion] = React.useState<string>("");
   const [endVersion, setEndVersion] = React.useState<string>("");
 
@@ -86,30 +82,18 @@ export function VersionVarsFilter(props: {
         return child;
       }
 
-      if (filterType === "version" && version === "") {
+      if (startVersion === "" || endVersion === "") {
         // No version is selected, skip it.
         return <VersionVars {...child.props} />;
       }
 
-      if (filterType === "diff" && (startVersion === "" || endVersion === "")) {
-        // No version is selected, skip it.
-        return <VersionVars {...child.props} />;
+      let introducedVersion = child.props.introducedVersion;
+      if (!introducedVersion) {
+        introducedVersion = "v0.0.1";
       }
 
-      let involveVersion = child.props.involveVersion;
-      if (!involveVersion) {
-        involveVersion = "v0.0.1";
-      }
-
-      if (filterType === "version" && compareVersions(version!, involveVersion) >= 0) {
-        return (
-          <VersionVars {...child.props} />
-        )
-      }
-
-      if (filterType === "diff" &&
-        compareVersions(startVersion!, involveVersion) <= 0 &&
-        compareVersions(involveVersion, endVersion!) <= 0) {
+      if (compareVersions(startVersion!, introducedVersion) <= 0 &&
+        compareVersions(introducedVersion, endVersion!) <= 0) {
         return (
           <VersionVars {...child.props} />
         )
@@ -119,13 +103,12 @@ export function VersionVarsFilter(props: {
     });
   }
 
-  const { language } = useI18next();
-
   return (
     <div>
       <Stack
         id="search-area"
         direction="row"
+        alignItems="center"
         sx={{
           width: "100%",
           justifyContent: "space-between",
@@ -135,64 +118,34 @@ export function VersionVarsFilter(props: {
           },
         }}
         >
-          <ToggleButtonGroup
-            value={filterType}
-            exclusive
-            sx={{margin: 1}}
-            onChange={( _, newMode: FilterType) => {
-              setFilterType(newMode);
-            }}
-            aria-label="filter type"
+          <Stack
+            id="compare-filter"
+            direction="row"
+            alignItems="center"
             >
-            <ToggleButton value="version" aria-label="version mode">
-              <Trans i18nKey={`versionFilter.filterModeVersion`}/>
-            </ToggleButton>
-            <ToggleButton value="diff" aria-label="diff mode">
-              <Trans i18nKey={`versionFilter.filterModeDiff`}/>
-            </ToggleButton>
-          </ToggleButtonGroup>
-
-          {filterType === "version" && (
+            <div>Diff filter: </div>
             <Autocomplete
-              value={version}
               disablePortal
-              id="version"
-              options={versionArray}
-              onChange={(_, newVersion) => {setVersion(newVersion == null ? "" : newVersion)}}
+              id="start-version"
+              value={startVersion}
+              options={filterVersion(versionArray, false, MIN_VERSION, endVersion)}
               sx={{ width: 200, margin: 1 }}
-              renderInput={(params) => <TextField {...params} label={<Trans i18nKey={`versionFilter.filterModeVersion`}/>} />}
+              onChange={(_, newVersion) => {
+                setStartVersion(newVersion ? newVersion : "")
+              }}
+              renderInput={(params) => <TextField {...params} label={<Trans i18nKey={`versionFilter.diffModeOlderVersion`}/>} />}
             />
-          )}
 
-          {filterType === "diff" && (
-            <Stack
-              id="compare-filter"
-              visibility={filterType === "diff" ? "visible" : "hidden"}
-              direction="row"
-              >
-              <Autocomplete
-                disablePortal
-                id="start-version"
-                value={startVersion}
-                options={filterVersion(versionArray, false, MIN_VERSION, endVersion)}
-                sx={{ width: 200, margin: 1 }}
-                onChange={(_, newVersion) => {
-                  setStartVersion(newVersion ? newVersion : "")
-                }}
-                renderInput={(params) => <TextField {...params} label={<Trans i18nKey={`versionFilter.diffModeOlderVersion`}/>} />}
-              />
-
-              <Autocomplete
-                disablePortal
-                id="end-version"
-                value={endVersion}
-                options={filterVersion(versionArray, false, startVersion, MAX_VERSION)}
-                sx={{ width: 200, margin: 1 }}
-                onChange={(_, newVersion) => {setEndVersion(newVersion ? newVersion : "")}}
-                renderInput={(params) => <TextField {...params} label={<Trans i18nKey={`versionFilter.diffModeNewerVersion`}/>} />}
-              />
-            </Stack>
-          )}
+            <Autocomplete
+              disablePortal
+              id="end-version"
+              value={endVersion}
+              options={filterVersion(versionArray, false, startVersion, MAX_VERSION)}
+              sx={{ width: 200, margin: 1 }}
+              onChange={(_, newVersion) => {setEndVersion(newVersion ? newVersion : "")}}
+              renderInput={(params) => <TextField {...params} label={<Trans i18nKey={`versionFilter.diffModeNewerVersion`}/>} />}
+            />
+          </Stack>
       </Stack>
 
       <Stack
@@ -221,7 +174,7 @@ export function VersionVars(props: {
     applyHint: string;
     defaultValue: string;
     persists?: string;
-    involveVersion?: string;
+    introducedVersion?: string;
     possibleValues?: string;
     range?: string;
     unit?: string;
@@ -231,7 +184,7 @@ export function VersionVars(props: {
   const INIT_VERSION = "v0.0.1"
   const {
     name = "",
-    involveVersion = INIT_VERSION,
+    introducedVersion = INIT_VERSION,
     scope = "GLOBAL",
     type = "",
     applyHint = "false",
@@ -257,9 +210,9 @@ export function VersionVars(props: {
             </Stack>
           </Stack>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            { involveVersion === INIT_VERSION ?
-              <Trans i18nKey={`versionFilter.involvedInitVersion`}/> :
-              <Trans i18nKey={`versionFilter.involvedVersion`} values={{version: involveVersion}}/> }
+            { introducedVersion === INIT_VERSION ?
+              <Trans i18nKey={`versionFilter.introducedInitVersion`}/> :
+              <Trans i18nKey={`versionFilter.introducedVersion`} values={{version: introducedVersion}}/> }
           </Typography>
           {type === "" ? "" : <Typography> <Trans i18nKey={`versionFilter.type`}/> {type} </Typography>}
           {props.persists === undefined ? "" : <Typography> <Trans i18nKey={`versionFilter.persists`}/> {yesOrNoI18n(props.persists)}</Typography>}
