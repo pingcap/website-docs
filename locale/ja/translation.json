@@ -121,7 +121,7 @@
   "versionFilter": {
     "yes": "はい",
     "no": "いいえ",
-    "filterModeDiff": "差異",
+    "diffLabel": "差分フィルタ：",
     "diffModeOlderVersion": "古いバージョン",
     "diffModeNewerVersion": "新しいバージョン",
     "introducedInitVersion": "最初から",

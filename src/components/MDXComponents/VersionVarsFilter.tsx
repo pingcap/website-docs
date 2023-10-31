@@ -123,7 +123,7 @@ export function VersionVarsFilter(props: {
             direction="row"
             alignItems="center"
             >
-            <div>Diff filter: </div>
+            <div><Trans i18nKey={`versionFilter.diffLabel`}/></div>
             <Autocomplete
               disablePortal
               id="start-version"

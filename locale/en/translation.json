@@ -121,7 +121,7 @@
   "versionFilter": {
     "yes": "Yes",
     "no": "No",
-    "filterModeDiff": "Diff",
+    "diffLabel": "Diff filter:",
     "diffModeOlderVersion": "Older Version",
     "diffModeNewerVersion": "Newer Version",
     "introducedInitVersion": "From the beginning",

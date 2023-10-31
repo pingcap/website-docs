@@ -118,7 +118,7 @@
   "versionFilter": {
     "yes": "是",
     "no": "否",
-    "filterModeDiff": "差异比较",
+    "diffLabel": "差异过滤：",
     "diffModeOlderVersion": "较旧版本",
     "diffModeNewerVersion": "较新版本",
     "introducedInitVersion": "初始版本引入",
