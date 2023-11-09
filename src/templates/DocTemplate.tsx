@@ -25,9 +25,14 @@ import {
 import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
+import { FeedbackSection } from "components/Card/FeedbackSection";
 
 interface DocTemplateProps {
-  pageContext: PageContext & { pageUrl: string; buildType: BuildType };
+  pageContext: PageContext & {
+    pageUrl: string;
+    buildType: BuildType;
+    feature?: { feedback?: boolean };
+  };
   data: {
     site: {
       siteMetadata: {
@@ -46,7 +51,7 @@ interface DocTemplateProps {
 }
 
 export default function DocTemplate({
-  pageContext: { name, availIn, pathConfig, filePath, pageUrl, buildType },
+  pageContext: { name, availIn, pathConfig, filePath, pageUrl, buildType, feature },
   data,
 }: DocTemplateProps) {
   const {
@@ -195,6 +200,14 @@ export default function DocTemplate({
                         title={frontmatter.title}
                       />
                     )}
+                    {!!feature?.feedback &&
+                      language !== "ja" &&
+                      buildType !== "archive" && (
+                        <FeedbackSection
+                          title={frontmatter.title}
+                          locale={pathConfig.locale}
+                        />
+                      )}
                   </Box>
                   {!frontmatter?.hide_sidebar && (
                     <>
