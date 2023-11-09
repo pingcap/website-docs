@@ -105,6 +105,30 @@
     "thumbUp": "是",
     "thumbDown": "否"
   },
+  "docFeedbackSurvey": {
+    "action": {
+      "submit": "提交",
+      "skip": "跳过"
+    },
+    "message": {
+      "thank": "感谢您的宝贵意见！"
+    },
+    "positive": {
+      "title": "谢谢！您喜欢文档的原因是？",
+      "easy": "容易理解",
+      "solvedProblem": "解决了我的问题",
+      "helpToDecide": "帮助我决定使用该产品",
+      "other": "其他原因"
+    },
+    "negative": {
+      "title": "您不喜欢文档的原因是？",
+      "hard": "难以理解",
+      "nothingFound": "找不到我想要的信息",
+      "inaccurate": "内容不准确或过时",
+      "sampleError": "代码示例错误",
+      "other": "其他原因"
+    }
+  },
   "doc404": {
     "title": "抱歉，您要找的页面走丢了…",
     "youMayWish": "您可以：",
