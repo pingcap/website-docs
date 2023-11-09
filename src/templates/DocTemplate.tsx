@@ -245,21 +245,6 @@ export default function DocTemplate({
                     </>
                   )}
                 </Stack>
-                {language !== "ja" && buildType !== "archive" && (
-                  <Box
-                    sx={{
-                      width: "fit-content",
-                      position: "fixed",
-                      bottom: "4rem",
-                      right: "1rem",
-                    }}
-                  >
-                    <FeedbackBtn
-                      title={frontmatter.title}
-                      locale={pathConfig.locale}
-                    />
-                  </Box>
-                )}
                 <Box
                   sx={{
                     width: "fit-content",
