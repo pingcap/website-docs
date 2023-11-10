@@ -194,7 +194,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && !helpful && (
         <Box>
           <FormControl>
-            <Typography variant="body2" color="website.f1" fontWeight={600}>
+            <Typography variant="body1" color="website.f1" fontWeight={500}>
               <Trans i18nKey="docFeedbackSurvey.negative.title" />
             </Typography>
             <RadioGroup
