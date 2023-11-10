@@ -13,7 +13,6 @@ import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
-import FeedbackBtn from "components/Button/FeedbackBtn";
 import {
   TableOfContent,
   PageContext,
@@ -51,7 +50,15 @@ interface DocTemplateProps {
 }
 
 export default function DocTemplate({
-  pageContext: { name, availIn, pathConfig, filePath, pageUrl, buildType, feature },
+  pageContext: {
+    name,
+    availIn,
+    pathConfig,
+    filePath,
+    pageUrl,
+    buildType,
+    feature,
+  },
   data,
 }: DocTemplateProps) {
   const {
@@ -200,14 +207,12 @@ export default function DocTemplate({
                         title={frontmatter.title}
                       />
                     )}
-                    {!!feature?.feedback &&
-                      language !== "ja" &&
-                      buildType !== "archive" && (
-                        <FeedbackSection
-                          title={frontmatter.title}
-                          locale={pathConfig.locale}
-                        />
-                      )}
+                    {!!feature?.feedback && buildType !== "archive" && (
+                      <FeedbackSection
+                        title={frontmatter.title}
+                        locale={pathConfig.locale}
+                      />
+                    )}
                   </Box>
                   {!frontmatter?.hide_sidebar && (
                     <>
