@@ -1,12 +1,7 @@
 import { Button, styled } from "@mui/material";
 
 export const ThumbButton = styled(Button)(({ theme }) => ({
-  fontSize: 12,
-  fontWeight: 600,
-  lineHeight: "20px",
   backgroundColor: theme.palette.website.k1,
-  paddingLeft: 8,
-  paddingRight: 8,
   boxShadow: "none",
   "&:hover": {
     backgroundColor: "#0A85C2",
@@ -18,9 +13,6 @@ export const ThumbButton = styled(Button)(({ theme }) => ({
 }));
 
 export const ActionButton = styled(Button)(({ theme }) => ({
-  fontSize: 12,
-  fontWeight: 600,
-  lineHeight: 1.5,
   color: theme.palette.website.f1,
   backgroundColor: "#F9F9F9",
   border: "1px solid #E6E6E6",
@@ -46,7 +38,6 @@ export const radioSx = {
 };
 export const labelProps = {
   typography: {
-    fontSize: 14,
     color: "website.f1",
   },
 };

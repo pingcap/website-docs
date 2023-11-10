@@ -132,7 +132,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && helpful && (
         <Box>
           <FormControl>
-            <Typography variant="body2" color="website.f1" fontWeight={600}>
+            <Typography variant="body1" color="website.f1" fontWeight={500}>
               <Trans i18nKey="docFeedbackSurvey.positive.title" />
             </Typography>
             <RadioGroup
@@ -263,7 +263,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
         </Box>
       )}
       {submitted && (
-        <Typography fontWeight={600} mb="48px">
+        <Typography variant="body1" color="website.f1" fontWeight={500} mb="48px">
           <Trans i18nKey="docFeedbackSurvey.message.thank" />
         </Typography>
       )}
