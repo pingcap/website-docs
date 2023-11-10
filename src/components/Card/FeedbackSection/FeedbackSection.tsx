@@ -20,6 +20,7 @@ import {
   labelProps,
   radioSx,
   ThumbButton,
+  typoFontFamily,
 } from "./components";
 
 interface FeedbackSectionProps {
@@ -95,7 +96,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
           color: "website.f1",
           fontSize: "1.5rem",
           fontWeight: 600,
-          fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
+          fontFamily: typoFontFamily,
           lineHeight: 1.25,
           marginTop: "24px",
           marginBottom: "16px",
@@ -132,7 +133,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && helpful && (
         <Box>
           <FormControl>
-            <Typography variant="body1" color="website.f1" fontWeight={500}>
+            <Typography variant="body1" color="website.f1" fontWeight={500} fontFamily={typoFontFamily}>
               <Trans i18nKey="docFeedbackSurvey.positive.title" />
             </Typography>
             <RadioGroup
@@ -194,7 +195,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && !helpful && (
         <Box>
           <FormControl>
-            <Typography variant="body1" color="website.f1" fontWeight={500}>
+            <Typography variant="body1" color="website.f1" fontWeight={500} fontFamily={typoFontFamily}>
               <Trans i18nKey="docFeedbackSurvey.negative.title" />
             </Typography>
             <RadioGroup
@@ -263,7 +264,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
         </Box>
       )}
       {submitted && (
-        <Typography variant="body1" color="website.f1" fontWeight={500} mb="48px">
+        <Typography variant="body1" color="website.f1" fontWeight={500} fontFamily={typoFontFamily} mb="48px">
           <Trans i18nKey="docFeedbackSurvey.message.thank" />
         </Typography>
       )}
