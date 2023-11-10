@@ -81,11 +81,10 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
   };
 
   const onSkip = () => {
-    setHelpful(undefined);
     setSurverVisible(false);
-    setThumbVisible(true);
     setPositiveVal("");
     setNegativeVal("");
+    setSubmitted(true);
   };
 
   return (
