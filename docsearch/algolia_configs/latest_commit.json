@@ -1,6 +1,6 @@
 {
     "en-tidb-dev": "9680a4b7e1e708f90341dcbb0795247e64ba441a",
-    "en-tidb-v7.4": "8380e027ed286a49737d6100c522d55241536e41",
+    "en-tidb-v7.4": "f0ce4a5be8a1620ced77ac825852cefa70b4a8f4",
     "en-tidb-v7.3": "54ac5b721f22c4ad0d643fd39c1f5782108692f5",
     "en-tidb-v7.2": "b6e8e971edd8a34c5c8d6e820ac1922daa289284",
     "en-tidb-v7.1": "8face9076749fb162e67de3c4c099f9579ec2fda",
@@ -25,7 +25,7 @@
     "zh-tidb-v7.4": "b627c9014ae5dc522ecb348f3e9394e4019bc509",
     "zh-tidb-v7.3": "e143ad83468423c6a40baea01e6dff1196ea2d6c",
     "zh-tidb-v7.2": "1908ee328096ddc52cd79e916ec7e82cdc219ccd",
-    "zh-tidb-v7.1": "341ba367096b6b091eb6f0189e84501d8e95b34f",
+    "zh-tidb-v7.1": "552e8e130c068747ef74a4b36be0c0c79b901ada",
     "zh-tidb-v7.0": "b3171617422e0c7cd1def320b47622ddc773922f",
     "zh-tidb-v6.6": "a1e1a366262f777cf30722eacd55fed74d5162f2",
     "zh-tidb-v6.5": "f0ef2481b9f255388ad07357b8b4014e775145e7",
