@@ -117,14 +117,14 @@
       "thank": "Thank you for your valuable feedback!"
     },
     "positive": {
-      "title": "Thanks! Can you tell us more about your like?",
+      "title": "Thanks! What did you like?",
       "easy": "Easy to understand",
       "solvedProblem": "Solved my problem",
       "helpToDecide": "Helped me decide to use the product",
       "other": "Others"
     },
     "negative": {
-      "title": "Can you tell us what you do not like?",
+      "title": "What went wrong?",
       "hard": "Hard to understand",
       "nothingFound": "Couldn't find what I need",
       "inaccurate": "Inaccurate or out of date",
