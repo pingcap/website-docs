@@ -108,6 +108,30 @@
     "thumbUp": "Yes",
     "thumbDown": "No"
   },
+  "docFeedbackSurvey": {
+    "action": {
+      "submit": "Submit",
+      "skip": "Skip"
+    },
+    "message": {
+      "thank": "Thank you for your valuable feedback!"
+    },
+    "positive": {
+      "title": "Thanks! What did you like?",
+      "easy": "Easy to understand",
+      "solvedProblem": "Solved my problem",
+      "helpToDecide": "Helped me decide to use the product",
+      "other": "Others"
+    },
+    "negative": {
+      "title": "What went wrong?",
+      "hard": "Hard to understand",
+      "nothingFound": "Couldn't find what I need",
+      "inaccurate": "Inaccurate or out of date",
+      "sampleError": "Code sample errors",
+      "other": "Others"
+    }
+  },
   "doc404": {
     "title": "Sorry, we can't find the page you were looking for.",
     "youMayWish": "You may wish to:",

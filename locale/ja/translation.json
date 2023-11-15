@@ -108,6 +108,30 @@
     "thumbUp": "はい",
     "thumbDown": "いいえ"
   },
+  "docFeedbackSurvey": {
+    "action": {
+      "submit": "送信",
+      "skip": "スキップ"
+    },
+    "message": {
+      "thank": "貴重なご意見をありがとうございます！"
+    },
+    "positive": {
+      "title": "ありがとうございます！ドキュメントサイト改善のため、フィードバックをお願いします。",
+      "easy": "理解しやすい",
+      "solvedProblem": "問題を解決できた",
+      "helpToDecide": "製品使用を決断するのに役立った",
+      "other": "その他"
+    },
+    "negative": {
+      "title": "ドキュメントサイト改善のため、フィードバックをお願いします。",
+      "hard": "分かりづらい",
+      "nothingFound": "必要なものが見つからなかった",
+      "inaccurate": "不正確または古い情報だった",
+      "sampleError": "コードサンプルがエラーだった",
+      "other": "その他"
+    }
+  },
   "doc404": {
     "title": "お探しのページが見つかりません。",
     "youMayWish": "You may wish to:",

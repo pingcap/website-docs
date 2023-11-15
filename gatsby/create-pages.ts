@@ -108,6 +108,9 @@ export const createDocs = async ({
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
+        feature: {
+          feedback: true
+        }
       },
     });
 
@@ -257,6 +260,9 @@ export const createDocHome = async ({
           version: [],
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
+        feature: {
+          feedback: false
+        }
       },
     });
   });
