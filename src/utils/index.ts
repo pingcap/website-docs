@@ -16,6 +16,9 @@ import {
   EN_FOOTER_ITEMS,
   ZH_FOOTER_ITEMS,
   JA_FOOTER_ITEMS,
+  EN_PRIVACY_POLICY_URL,
+  ZH_PRIVACY_POLICY_URL,
+  JA_PRIVACY_POLICY_URL,
 } from "static";
 import { PathConfig, Locale, Repo } from "static/Type";
 import CONFIG from "../../docs/docs.json";
@@ -95,6 +98,18 @@ export function generateFooterItems(lang?: string) {
     case "en":
     default:
       return EN_FOOTER_ITEMS;
+  }
+}
+
+export function generatePrivacyPolicy(lang?: string) {
+  switch (lang) {
+    case "zh":
+      return ZH_PRIVACY_POLICY_URL;
+    case "ja":
+      return JA_PRIVACY_POLICY_URL;
+    case "en":
+    default:
+      return EN_PRIVACY_POLICY_URL;
   }
 }
 

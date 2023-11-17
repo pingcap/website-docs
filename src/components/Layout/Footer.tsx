@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
+import { Link } from "@mui/material";
 
 import { PingcapLogoFooterIcon } from "components/Icons";
 import LinkComponent from "components/Link";
@@ -13,7 +14,9 @@ import {
   splitArrayIntoChunks,
   generateIconGroup,
   generateFooterItems,
+  generatePrivacyPolicy,
 } from "utils";
+
 
 export default function Footer() {
   return (
@@ -21,20 +24,24 @@ export default function Footer() {
       <Box sx={{ bgcolor: "#20222B", padding: "3.5rem 0" }} component="footer">
         <Container maxWidth="lg">
           <FooterBlock />
-          <Typography
-            variant="body2"
-            component="div"
-            color="rgba(255, 255, 255, 0.5)"
-            sx={{
-              paddingTop: "3rem",
-              textAlign: {
-                xs: "center",
-                md: "left",
-              },
-            }}
-          >
-            © {new Date().getFullYear()} PingCAP. All Rights Reserved.
-          </Typography>
+          <Stack direction="row" >
+            <Typography
+              variant="body2"
+              component="div"
+              color="rgba(255, 255, 255, 0.5)"
+              sx={{
+                paddingTop: "3rem",
+                textAlign: {
+                  xs: "center",
+                  md: "left",
+                },
+              }}
+            >
+              © {new Date().getFullYear()} PingCAP. All Rights Reserved.
+            </Typography>
+
+            <PrivacyPolicy />
+          </Stack>
         </Container>
       </Box>
     </>
@@ -132,6 +139,32 @@ const IconGroup = () => {
     </Stack>
   );
 };
+
+const PrivacyPolicy = () => {
+  const { language } = useI18next();
+  const url = generatePrivacyPolicy(language);
+  return (
+    <>
+        <Link
+          href={url}
+          variant="body2"
+          color="rgba(255, 255, 255, 0.5)"
+          sx={{
+            marginLeft: ".2rem",
+            paddingTop: "3rem",
+            textAlign: {
+              xs: "center",
+              md: "left",
+            },
+            textDecoration: "none",
+          }}
+          target="_blank"
+        >
+          Privacy Policy.
+        </Link>
+    </>
+  )
+}
 
 const FooterItems = () => {
   const theme = useTheme();
