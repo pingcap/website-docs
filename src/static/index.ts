@@ -24,6 +24,10 @@ export const EN_CONTACT_URL = "https://www.pingcap.com/contact-us/";
 export const ZH_CONTACT_URL = "https://cn.pingcap.com/contact/";
 export const JA_CONTACT_URL = "https://pingcap.co.jp/contact-us/";
 
+export const EN_PRIVACY_POLICY_URL = "https://www.pingcap.com/privacy-policy";
+export const ZH_PRIVACY_POLICY_URL = "https://cn.pingcap.com/privacy-policy";
+export const JA_PRIVACY_POLICY_URL = "https://pingcap.co.jp/privacy-policy";
+
 export const ICON_GROUP_CHUNK_SIZE = 3;
 
 export const EN_ICON_GROUP = [
