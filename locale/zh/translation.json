@@ -80,7 +80,8 @@
       "title": "很抱歉，我们没有找到您期望的内容。",
       "content1": "请尝试使用其他关键词再次搜索。",
       "content2": "如果您无法找到需要的内容，请尝试前往 <0>AskTUG (TiDB User Group)</0> 进行提问。"
-    }
+    },
+    "searchTip": "使用半角双引号进行精确搜索。例如，“time_zone”。"
   },
   "tools": {
     "tidbOperator": {

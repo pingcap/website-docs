@@ -17,6 +17,7 @@ import Layout from "components/Layout";
 import SearchResults from "components/Search/Results";
 import SearchInput from "components/Search";
 import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
+import { Tip } from "components/MDXComponents";
 import Seo from "components/Layout/Seo";
 import { algoliaClient } from "utils/algolia";
 import {
@@ -307,6 +308,9 @@ export default function DocSearchTemplate() {
               </Box>
             )}
           </Stack>
+          <Tip>
+            <Trans i18nKey="search.searchTip" />
+          </Tip>
           <SearchResults loading={isLoading} data={results} />
           <Box
             sx={{
