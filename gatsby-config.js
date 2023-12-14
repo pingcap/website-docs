@@ -24,13 +24,6 @@ module.exports = {
         enableWebVitalsTracking: true,
       },
     },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: "UA-99991864-7",
-        head: true,
-      },
-    },
     `gatsby-plugin-root-import`,
     {
       resolve: `gatsby-source-filesystem`,
