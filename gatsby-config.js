@@ -24,6 +24,13 @@ module.exports = {
         enableWebVitalsTracking: true,
       },
     },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-TPX49SBK",
+        includeInDevelopment: false,
+      },
+    },
     `gatsby-plugin-root-import`,
     {
       resolve: `gatsby-source-filesystem`,
