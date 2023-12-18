@@ -15,6 +15,7 @@ import LinkComponent from "components/Link";
 import { generateDownloadURL, generateContactURL } from "utils";
 import { PingcapLogoIcon } from "components/Icons";
 import { BuildType } from "static/Type";
+import { GTMEvent, gtmTrack } from "utils/gtm";
 
 const useSelectedNavItem = (language?: string) => {
   const [selectedItem, setSelectedItem] = React.useState<string>("");
@@ -37,7 +38,7 @@ const useSelectedNavItem = (language?: string) => {
 };
 
 export default function HeaderNavStack(props: { buildType?: BuildType }) {
-  const { language } = useI18next();
+  const { language, t } = useI18next();
 
   const selectedItem = useSelectedNavItem(language);
 
@@ -58,11 +59,9 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         <NavItem
           selected={selectedItem === "home"}
           label={
-            props.buildType === "archive" ? (
-              <Trans i18nKey="navbar.archive-home" />
-            ) : (
-              <Trans i18nKey="navbar.home" />
-            )
+            props.buildType === "archive"
+              ? t("navbar.archive-home")
+              : t("navbar.home")
           }
           to="/"
         />
@@ -71,40 +70,47 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
       {["en", "ja"].includes(language) && props.buildType !== "archive" && (
         <NavItem
           selected={selectedItem === "tidbcloud"}
-          label={<Trans i18nKey="navbar.cloud" />}
+          label={t("navbar.cloud")}
           to={`/tidbcloud`}
         />
       )}
 
       <NavItem
         selected={selectedItem === "tidb"}
-        label={<Trans i18nKey="navbar.tidb" />}
+        label={t("navbar.tidb")}
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />
 
       {["en", "ja"].includes(language) && (
         <NavItem
-          label={<Trans i18nKey="navbar.playground" />}
+          label={t("navbar.playground")}
           to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
           // startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
+          onClick={() =>
+            gtmTrack(GTMEvent.GotoPlayground, {
+              button_name: t("navbar.playground"),
+              position: "header",
+            })
+          }
         />
       )}
 
       {["zh", "en"].includes(language) && (
         <NavItem
-          label={<Trans i18nKey="navbar.asktug" />}
+          label={t("navbar.asktug")}
           to={generateAskTugUrl(language)}
         />
       )}
 
       <NavItem
-        label={<Trans i18nKey="navbar.contactUs" />}
+        label={t("navbar.contactUs")}
         to={generateContactURL(language)}
       />
 
       <NavItem
         // label={<Trans i18nKey="navbar.download" />}
         to={generateDownloadURL(language)}
+        alt="download"
         startIcon={
           <DownloadIcon
             fontSize="inherit"
@@ -124,6 +130,8 @@ const NavItem = (props: {
   label?: string | React.ReactElement;
   to: string;
   startIcon?: React.ReactNode;
+  alt?: string;
+  onClick?: () => void;
 }) => {
   const theme = useTheme();
   return (
@@ -139,7 +147,17 @@ const NavItem = (props: {
             : ``,
         }}
       >
-        <LinkComponent isI18n to={props.to}>
+        <LinkComponent
+          isI18n
+          to={props.to}
+          onClick={() => {
+            gtmTrack(GTMEvent.ClickHeadNav, {
+              item_name: props.label || props.alt,
+            });
+
+            props.onClick?.();
+          }}
+        >
           <Typography
             variant="body1"
             component="div"
@@ -164,7 +182,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const theme = useTheme();
-  const { language } = useI18next();
+  const { language, t } = useI18next();
   const selectedItem = useSelectedNavItem(language);
 
   const open = Boolean(anchorEl);
@@ -218,7 +236,16 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
             disableRipple
             selected={selectedItem === "home"}
           >
-            <LinkComponent isI18n to="/" style={{ width: "100%" }}>
+            <LinkComponent
+              isI18n
+              to="/"
+              style={{ width: "100%" }}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: "home",
+                })
+              }
+            >
               <Typography variant="body1" component="div" color="website.f1">
                 {props.buildType === "archive" ? (
                   <Trans i18nKey="navbar.archive-home" />
@@ -236,7 +263,16 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
             disableRipple
             selected={selectedItem === "tidbcloud"}
           >
-            <LinkComponent isI18n to="/tidbcloud" style={{ width: "100%" }}>
+            <LinkComponent
+              isI18n
+              to="/tidbcloud"
+              style={{ width: "100%" }}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: t("navbar.cloud"),
+                })
+              }
+            >
               <Typography variant="body1" component="div" color="website.f1">
                 <Trans i18nKey="navbar.cloud" />
               </Typography>
@@ -253,6 +289,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
             isI18n
             to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
             style={{ width: "100%" }}
+            onClick={() =>
+              gtmTrack(GTMEvent.ClickHeadNav, {
+                item_name: t("navbar.tidb"),
+              })
+            }
           >
             <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.tidb" />
@@ -265,6 +306,15 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
             <LinkComponent
               to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
               style={{ width: "100%" }}
+              onClick={() => {
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: t("navbar.playground"),
+                });
+                gtmTrack(GTMEvent.GotoPlayground, {
+                  button_name: t("navbar.playground"),
+                  position: "header",
+                });
+              }}
             >
               <Typography variant="body1" component="div" color="website.f1">
                 <Trans i18nKey="navbar.playground" />
@@ -277,6 +327,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           <LinkComponent
             to={generateDownloadURL(language)}
             style={{ width: "100%" }}
+            onClick={() =>
+              gtmTrack(GTMEvent.ClickHeadNav, {
+                item_name: t("navbar.download"),
+              })
+            }
           >
             <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.download" />
@@ -289,6 +344,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
             <LinkComponent
               to={generateAskTugUrl(language)}
               style={{ width: "100%" }}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: t("navbar.asktug"),
+                })
+              }
             >
               <Typography variant="body1" component="div" color="website.f1">
                 <Trans i18nKey="navbar.asktug" />
@@ -301,6 +361,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           <LinkComponent
             to={generateContactURL(language)}
             style={{ width: "100%" }}
+            onClick={() =>
+              gtmTrack(GTMEvent.ClickHeadNav, {
+                item_name: t("navbar.contactUs"),
+              })
+            }
           >
             <Typography variant="body1" component="div" color="website.f1">
               <Trans i18nKey="navbar.contactUs" />
