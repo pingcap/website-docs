@@ -16,7 +16,7 @@ import {
   generateFooterItems,
   generatePrivacyPolicy,
 } from "utils";
-
+import { GTMEvent, gtmTrack } from "utils/gtm";
 
 export default function Footer() {
   return (
@@ -24,7 +24,7 @@ export default function Footer() {
       <Box sx={{ bgcolor: "#20222B", padding: "3.5rem 0" }} component="footer">
         <Container maxWidth="lg">
           <FooterBlock />
-          <Stack direction="row" >
+          <Stack direction="row">
             <Typography
               variant="body2"
               component="div"
@@ -130,6 +130,11 @@ const IconGroup = () => {
               href={icon.href}
               target="_blank"
               color="inherit"
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickFooter, {
+                  item_name: icon.name,
+                })
+              }
             >
               <icon.icon />
             </IconButton>
@@ -145,26 +150,26 @@ const PrivacyPolicy = () => {
   const url = generatePrivacyPolicy(language);
   return (
     <>
-        <Link
-          href={url}
-          variant="body2"
-          color="rgba(255, 255, 255, 0.5)"
-          sx={{
-            marginLeft: ".2rem",
-            paddingTop: "3rem",
-            textAlign: {
-              xs: "center",
-              md: "left",
-            },
-            textDecoration: "none",
-          }}
-          target="_blank"
-        >
-          Privacy Policy.
-        </Link>
+      <Link
+        href={url}
+        variant="body2"
+        color="rgba(255, 255, 255, 0.5)"
+        sx={{
+          marginLeft: ".2rem",
+          paddingTop: "3rem",
+          textAlign: {
+            xs: "center",
+            md: "left",
+          },
+          textDecoration: "none",
+        }}
+        target="_blank"
+      >
+        Privacy Policy.
+      </Link>
     </>
-  )
-}
+  );
+};
 
 const FooterItems = () => {
   const theme = useTheme();
@@ -183,6 +188,11 @@ const FooterItems = () => {
               to={item.url}
               isI18n
               sx={{ width: "fit-content" }}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickFooter, {
+                  item_name: item.name,
+                })
+              }
             >
               <Typography color={theme.palette.website.m4} component="div">
                 {item.name}
