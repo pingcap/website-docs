@@ -27,6 +27,7 @@ import {
   removeHtmlTag,
 } from "utils";
 import { sliceVersionMark } from "utils/anchor";
+import { GTMEvent, gtmTrack } from "utils/gtm";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -81,6 +82,11 @@ export default function RightNav(props: RightNavProps) {
               label={t("doc.download-pdf")}
               rel="noreferrer"
               download
+              onClick={() => {
+                gtmTrack(GTMEvent.DownloadPDF, {
+                  position: "right_nav",
+                });
+              }}
             />
             {buildType !== "archive" && (
               <ActionItem
@@ -170,6 +176,12 @@ export default function RightNav(props: RightNavProps) {
                   color: theme.palette.website.f3,
                   // borderLeft: `1px solid ${theme.palette.website.f3}`,
                 },
+              }}
+              onClick={() => {
+                gtmTrack(GTMEvent.GotoPlayground, {
+                  button_name: t("doc.playgroundDesc"),
+                  position: "right_nav",
+                });
               }}
             >
               <Box>
