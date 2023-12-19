@@ -14,6 +14,7 @@ import HeaderAction from "components/Layout/HeaderAction";
 
 import { generatePingcapUrl } from "utils";
 import { Locale, BuildType } from "static/Type";
+import { GTMEvent, gtmTrack } from "utils/gtm";
 
 export default function Header(props: {
   menu?: React.ReactNode;
@@ -49,7 +50,14 @@ export default function Header(props: {
             },
           }}
         >
-          <LinkComponent to={generatePingcapUrl(language)}>
+          <LinkComponent
+            to={generatePingcapUrl(language)}
+            onClick={() =>
+              gtmTrack(GTMEvent.ClickHeadNav, {
+                item_name: "logo",
+              })
+            }
+          >
             <PingcapLogoIcon
               sx={{ width: "6.75rem", display: { xs: "none", sm: "block" } }}
             />

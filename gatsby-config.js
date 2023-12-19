@@ -25,10 +25,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        trackingId: "UA-99991864-7",
-        head: true,
+        id: "GTM-TPX49SBK",
+        includeInDevelopment: false,
       },
     },
     `gatsby-plugin-root-import`,
