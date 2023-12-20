@@ -12,6 +12,7 @@ import { Locale, BuildType } from "static/Type";
 
 export default function Layout(props: {
   children?: React.ReactNode;
+  bannerEnabled?: boolean;
   menu?: React.ReactNode;
   locales?: Locale[];
   docInfo?: { type: string; version: string };
@@ -21,6 +22,7 @@ export default function Layout(props: {
     <ThemeProvider theme={theme}>
       {/* <CustomCheckbox defaultChecked /> */}
       <Header
+        bannerEnabled={props.bannerEnabled}
         menu={props.menu}
         locales={props.locales || []}
         docInfo={props.docInfo}
