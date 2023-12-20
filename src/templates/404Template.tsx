@@ -25,9 +25,21 @@ interface AllLocales {
   };
 }
 
-export default function PageNotFoundTemplate(props: { data: AllLocales }) {
-  const { data } = props;
+interface PageNotFoundTemplateProps {
+  pageContext: {
+    feature?: {
+      banner?: boolean;
+    };
+  };
+  data: AllLocales;
+}
 
+export default function PageNotFoundTemplate({
+  pageContext: {
+    feature
+  },
+  data
+}: PageNotFoundTemplateProps) {
   const pathname =
     typeof window === "undefined" ? "" : window.location.pathname;
   const context = React.useContext(I18nextContext);
@@ -62,15 +74,17 @@ export default function PageNotFoundTemplate(props: { data: AllLocales }) {
     return i18n;
   }, [language, data]);
 
+  const bannerVisible = feature?.banner && language !== Locale.ja
+
   return (
     <>
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
-          <Layout>
+          <Layout bannerEnabled={bannerVisible}>
             <Seo lang={language as Locale} title="404 Not Found" noindex />
             <Container
               sx={{
-                marginTop: "5rem",
+                marginTop: bannerVisible ? "7rem" : "5rem",
                 minHeight: "calc(100vh - 30rem)",
                 display: "flex",
                 alignItems: "center",

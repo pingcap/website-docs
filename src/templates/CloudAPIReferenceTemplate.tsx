@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 
 import Seo from "components/Layout/Seo";
 import Layout from "components/Layout";
-import type { Locale, Repo, BuildType } from "../static/Type";
+import { type BuildType, Locale } from "../static/Type";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 declare const Redoc: any;
 
@@ -37,6 +38,9 @@ interface APIReferenceTemplateProps {
     isProduction: boolean;
     availIn: { locale: Locale[]; version: string[] };
     buildType: BuildType;
+    feature?: {
+      banner?: boolean;
+    };
   };
   data?: { [key: string]: any };
 }
@@ -49,9 +53,13 @@ export default function APIReferenceTemplate({
     pathname,
     availIn,
     buildType,
+    feature,
   },
   data,
 }: APIReferenceTemplateProps) {
+  const { language } = useI18next();
+  const bannerVisible = feature?.banner && language !== Locale.ja
+
   const specUrl = isProduction ? production : preview;
 
   React.useEffect(() => {
@@ -80,6 +88,7 @@ export default function APIReferenceTemplate({
     <>
       <Layout
         locales={availIn.locale}
+        bannerEnabled={bannerVisible}
         // menu={null}
         // docInfo={{
         //   version: pathConfig.version || "stable",
@@ -101,7 +110,9 @@ export default function APIReferenceTemplate({
             },
           ]}
         />
-        <Box sx={{ marginTop: "5rem", width: "100%" }}>
+        <Box
+          sx={{ marginTop: bannerVisible ? "7rem" : "5rem", width: "100%" }}
+        >
           <Box id="redoc-container" data-testid="redoc-container" />
         </Box>
       </Layout>
