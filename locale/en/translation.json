@@ -142,5 +142,13 @@
   "fab": {
     "scrollToTop": "Scroll to top",
     "goToFeedback": "Was this page helpful?"
+  },
+  "banner": {
+    "docDash2024": {
+      "link": "https://www.pingcap.com/event/tidb-docs-dash/",
+      "title": "TiDB Docs Dash 2024",
+      "date": "Jan 9 - Jan 12 (UTC)",
+      "intro": "Join us to improve docs and win a prize!"
+    }
   }
 }
