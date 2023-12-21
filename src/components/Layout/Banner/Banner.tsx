@@ -1,4 +1,4 @@
-import { Box, Divider, Stack } from "@mui/material";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { Fragment } from "react";
 
@@ -22,17 +22,18 @@ const useBannerEvents = (
       src={require("styles/images/tidb/tidb-logo.svg")?.default}
       sx={{
         width: "1.25rem",
-        height: "1.25rem"
+        height: "1.25rem",
       }}
     />
   );
-  const bgImgSrc = 'https://static.pingcap.com/files/2023/11/15190759/20231116-105219.png'
+  const bgImgSrc =
+    "https://static.pingcap.com/files/2023/11/15190759/20231116-105219.png";
 
   return {
     bgImgSrc,
     url,
     logo,
-    textList
+    textList,
   };
 };
 
@@ -50,10 +51,10 @@ export function Banner() {
         height: "2rem",
         backgroundColor: "#15005B",
         backgroundImage: `url(${bgImgSrc})`,
-        backgroundPosition: 'bottom left',
-        backgroundSize: '30% auto',
-        backgroundRepeat: 'no-repeat',
-        fontSize: "0.875rem"
+        backgroundPosition: "bottom left",
+        backgroundSize: "400px auto",
+        backgroundRepeat: "no-repeat",
+        fontSize: "0.875rem",
       }}
     >
       <Stack
@@ -71,7 +72,11 @@ export function Banner() {
             variant="middle"
             flexItem
             sx={{
-              borderColor: "#fff",
+              display: {
+                md: 'initial',
+                sm: 'none'
+              },
+              borderColor: "website.m1",
               borderRightWidth: 1.5,
               height: "0.875rem",
               alignSelf: "auto",
@@ -80,7 +85,7 @@ export function Banner() {
         }
         sx={{
           textDecoration: "none",
-          color: "#fff",
+          color: "website.m1",
           height: "100%",
           px: 1,
           paddingLeft: {
@@ -96,10 +101,24 @@ export function Banner() {
             {!index ? (
               <Stack direction="row" alignItems="center" spacing={2}>
                 {logo}
-                <Box component="span">{text}</Box>
+                <Typography component="span" variant="body2" color="inherit">
+                  {text}
+                </Typography>
               </Stack>
             ) : (
-              <Box component="span">{text}</Box>
+              <Typography
+                component="span"
+                variant="body2"
+                color="inherit"
+                sx={{
+                  display: {
+                    md: 'initial',
+                    sm: "none",
+                  },
+                }}
+              >
+                {text}
+              </Typography>
             )}
           </Fragment>
         ))}
