@@ -25,3 +25,6 @@ export {
   DocHomeCard,
 } from "components/MDXComponents/DocHome";
 export { MDSvgIcon } from "components/MDXComponents/MDSvgIcon";
+export {
+  VersionVarsFilter,
+} from "components/MDXComponents/VersionVarsFilter";

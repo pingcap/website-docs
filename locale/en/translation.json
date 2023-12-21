@@ -142,5 +142,21 @@
   "fab": {
     "scrollToTop": "Scroll to top",
     "goToFeedback": "Was this page helpful?"
+  },
+  "versionFilter": {
+    "yes": "Yes",
+    "no": "No",
+    "diffLabel": "Diff filter:",
+    "diffModeOlderVersion": "Older Version",
+    "diffModeNewerVersion": "Newer Version",
+    "introducedInitVersion": "From the beginning",
+    "introducedVersion": "New in {{version}}",
+    "type": "Type: ",
+    "persists": "Persists to cluster: ",
+    "hintSetVar": "Applies to hint <0>SET_VAR</0>: ",
+    "default": "Default value: ",
+    "range": "Range: ",
+    "possibleValues": "Possible values: ",
+    "unit": "Unit: "
   }
 }

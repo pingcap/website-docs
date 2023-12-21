@@ -77,7 +77,6 @@ export default function DocTemplate({
   }, [tableOfContents.items]);
 
   const stableBranch = getStable(pathConfig.repo);
-
   const { language } = useI18next();
 
   return (
