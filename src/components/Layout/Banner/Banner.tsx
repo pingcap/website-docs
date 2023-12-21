@@ -53,8 +53,7 @@ export function Banner() {
         backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
-        backgroundRepeat: "no-repeat",
-        fontSize: "0.875rem",
+        backgroundRepeat: "no-repeat"
       }}
     >
       <Stack
@@ -71,30 +70,27 @@ export function Banner() {
             orientation="vertical"
             variant="middle"
             flexItem
-            sx={{
-              display: {
-                md: 'initial',
-                sm: 'none'
+            sx={(theme) => ({
+              display: 'initial',
+              [theme.breakpoints.down('md')]: {
+                display: 'none'
               },
               borderColor: "website.m1",
               borderRightWidth: 1.5,
               height: "0.875rem",
               alignSelf: "auto",
-            }}
+            })}
           />
         }
-        sx={{
+        sx={(theme) => ({
           textDecoration: "none",
           color: "website.m1",
           height: "100%",
-          px: 1,
-          paddingLeft: {
-            md: "2rem",
-          },
-          paddingRight: {
-            md: "2rem",
-          },
-        }}
+          px: 2,
+          [theme.breakpoints.down('md')]: {
+            px: 1
+          }
+        })}
       >
         {textList.map((text, index) => (
           <Fragment key={index}>
@@ -110,12 +106,12 @@ export function Banner() {
                 component="span"
                 variant="body2"
                 color="inherit"
-                sx={{
-                  display: {
-                    md: 'initial',
-                    sm: "none",
-                  },
-                }}
+                sx={(theme) => ({
+                  display: 'initial',
+                  [theme.breakpoints.down('md')]: {
+                    display: 'none'
+                  }
+                })}
               >
                 {text}
               </Typography>
