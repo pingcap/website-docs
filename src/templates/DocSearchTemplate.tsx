@@ -130,7 +130,20 @@ const getSearchIndexVersion = (docType: string, docVersion: string) => {
   }
 };
 
-export default function DocSearchTemplate() {
+interface DocSearchTemplateProps {
+  pageContext: {
+    feature?: {
+      banner?: boolean;
+    };
+  };
+  data?: Record<string, any>;
+}
+
+export default function DocSearchTemplate({
+  pageContext: {
+    feature
+  }
+}: DocSearchTemplateProps) {
   const [docType, setDocType] = React.useState("");
   const [docVersion, setDocVersion] = React.useState("");
   const [docQuery, setDocQuery] = React.useState("");
@@ -195,12 +208,14 @@ export default function DocSearchTemplate() {
     setDocType(selected);
   };
 
+  const bannerVisible = feature?.banner && language !== Locale.ja
+
   return (
     <>
-      <Layout>
+      <Layout bannerEnabled={bannerVisible}>
         <Container
           sx={{
-            marginTop: "5rem",
+            marginTop: bannerVisible ? "7rem" : "5rem",
             minHeight: "calc(100vh - 30rem)",
             position: "relative",
           }}

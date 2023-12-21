@@ -30,7 +30,10 @@ interface DocTemplateProps {
   pageContext: PageContext & {
     pageUrl: string;
     buildType: BuildType;
-    feature?: { feedback?: boolean };
+    feature?: {
+      banner?: boolean;
+      feedback?: boolean;
+    };
   };
   data: {
     site: {
@@ -79,11 +82,13 @@ export default function DocTemplate({
   const stableBranch = getStable(pathConfig.repo);
 
   const { language } = useI18next();
+  const bannerVisible = feature?.banner && language !== Locale.ja
 
   return (
     <>
       <Layout
         locales={availIn.locale}
+        bannerEnabled={bannerVisible}
         menu={
           frontmatter?.hide_leftNav ? null : (
             <LeftNavMobile
@@ -135,7 +140,7 @@ export default function DocTemplate({
           archived={buildType === "archive"}
         />
         <Box
-          sx={{ marginTop: "5rem", display: "flex" }}
+          sx={{ marginTop: bannerVisible ? "7rem" : "5rem", display: "flex" }}
           className={clsx("PingCAP-Doc")}
         >
           <Box sx={{ display: "flex", width: "100%" }}>

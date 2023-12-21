@@ -15,15 +15,17 @@ import HeaderAction from "components/Layout/HeaderAction";
 import { generatePingcapUrl } from "utils";
 import { Locale, BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
+import { Banner } from "./Banner";
 
 export default function Header(props: {
+  bannerEnabled?: boolean;
   menu?: React.ReactNode;
   locales: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
 }) {
   const theme = useTheme();
-  const { language, changeLanguage } = useI18next();
+  const { language } = useI18next();
   return (
     <AppBar
       position="fixed"
@@ -31,9 +33,10 @@ export default function Header(props: {
         backgroundColor: theme.palette.website.m2,
         borderBottom: `1px solid ${theme.palette.website.m4}`,
         boxShadow: `0px 1px 6px rgba(0, 0, 0, 0.08)`,
-        height: "5rem",
+        height: props.bannerEnabled ? '7rem' : "5rem",
       }}
     >
+      {props.bannerEnabled && <Banner />}
       <Toolbar
         sx={{
           height: "100%",

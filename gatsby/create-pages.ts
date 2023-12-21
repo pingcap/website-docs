@@ -12,6 +12,16 @@ import {
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
 
+interface PageQueryData {
+  allMdx: {
+    nodes: {
+      id: string;
+      frontmatter: { aliases: string[] };
+      slug: string;
+    }[];
+  };
+}
+
 export const createDocs = async ({
   actions: { createPage, createRedirect },
   graphql,
@@ -109,8 +119,9 @@ export const createDocs = async ({
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
         feature: {
-          feedback: true
-        }
+          banner: true,
+          feedback: true,
+        },
       },
     });
 
@@ -153,20 +164,13 @@ export const createCloudAPIReference = async ({
           version: [],
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
+        feature: {
+          banner: true,
+        },
       },
     });
   });
 };
-
-interface PageQueryData {
-  allMdx: {
-    nodes: {
-      id: string;
-      frontmatter: { aliases: string[] };
-      slug: string;
-    }[];
-  };
-}
 
 export const createDocHome = async ({
   actions: { createPage, createRedirect },
@@ -261,9 +265,42 @@ export const createDocHome = async ({
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
         feature: {
-          feedback: false
-        }
+          banner: true,
+          feedback: false,
+        },
       },
     });
+  });
+};
+
+export const createDocSearch = async ({
+  actions: { createPage },
+}: CreatePagesArgs) => {
+  const template = resolve(__dirname, "../src/templates/DocSearchTemplate.tsx");
+
+  createPage({
+    path: "/search",
+    component: template,
+    context: {
+      feature: {
+        banner: true,
+      },
+    },
+  });
+};
+
+export const create404 = async ({
+  actions: { createPage },
+}: CreatePagesArgs) => {
+  const template = resolve(__dirname, "../src/templates/404Template.tsx");
+
+  createPage({
+    path: "/404",
+    component: template,
+    context: {
+      feature: {
+        banner: true,
+      },
+    },
   });
 };
