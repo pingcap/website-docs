@@ -35,6 +35,7 @@ import {
   ZH_DOC_TYPE_LIST,
 } from "static";
 import { Locale } from "static/Type";
+import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 
 // TiDB: get latest two LTS versions + latest DMR version
 // TiDB Cloud: only has one version
@@ -335,7 +336,8 @@ export default function DocSearchTemplate({
               right: "1rem",
             }}
           >
-            <ScrollToTopBtn />
+            <FeedbackSurveyCampaign />
+            {/* <ScrollToTopBtn /> */}
           </Box>
         </Container>
       </Layout>

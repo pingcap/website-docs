@@ -25,6 +25,7 @@ import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
+import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -263,7 +264,8 @@ export default function DocTemplate({
                     right: "1rem",
                   }}
                 >
-                  <ScrollToTopBtn />
+                  <FeedbackSurveyCampaign />
+                  {/* <ScrollToTopBtn /> */}
                 </Box>
               </Box>
             </Box>
