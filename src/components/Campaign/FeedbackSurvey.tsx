@@ -15,24 +15,18 @@ import {
 } from "@mui/icons-material";
 import { useLocation } from "@reach/router";
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type SurveyStorage = {
+  disabled?: boolean;
+  updatedTime?: number;
+  path?: string;
+};
 
 function useDisclosure(cacheDuration: number = 0) {
   const location = useLocation();
+  const [visible, setVisible] = useState(false);
   const storageKey = "docs.campaign.survey.v1";
-  const [visible, setVisible] = useState(() => {
-    const strValue = localStorage.getItem(storageKey);
-    const data:
-      | { disabled: boolean; updatedTime: number; path: string }
-      | undefined = strValue ? JSON.parse(strValue) : undefined;
-    const cachedVisible =
-      (data?.updatedTime || 0) < Date.now() - cacheDuration
-        ? true
-        : !data?.disabled;
-
-    return cachedVisible;
-  });
-
   const close = () => {
     localStorage.setItem(
       storageKey,
@@ -45,6 +39,17 @@ function useDisclosure(cacheDuration: number = 0) {
 
     setVisible(false);
   };
+
+  useEffect(() => {
+    const strValue = localStorage.getItem(storageKey);
+    const data: SurveyStorage = JSON.parse(strValue || "{}");
+    const cachedVisible =
+      (data.updatedTime || 0) < Date.now() - cacheDuration
+        ? true
+        : !data.disabled;
+
+    setVisible(cachedVisible);
+  }, []);
 
   return [visible, close] as const;
 }
