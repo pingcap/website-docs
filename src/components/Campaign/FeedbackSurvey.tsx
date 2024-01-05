@@ -4,14 +4,58 @@ import {
   Card,
   CardContent,
   CardHeader,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
+import {
+  CampaignOutlined,
+  CloseOutlined,
+  EastOutlined,
+} from "@mui/icons-material";
+import { useLocation } from "@reach/router";
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { CampaignOutlined } from "@mui/icons-material";
+import { useState } from "react";
+
+function useDisclosure(cacheDuration: number = 0) {
+  const location = useLocation();
+  const storageKey = "docs.campaign.survey.v1";
+  const [visible, setVisible] = useState(() => {
+    const strValue = localStorage.getItem(storageKey);
+    const data:
+      | { disabled: boolean; updatedTime: number; path: string }
+      | undefined = strValue ? JSON.parse(strValue) : undefined;
+    const cachedVisible =
+      (data?.updatedTime || 0) < Date.now() - cacheDuration
+        ? true
+        : !data?.disabled;
+
+    return cachedVisible;
+  });
+
+  const close = () => {
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify({
+        disabled: true,
+        updatedTime: Date.now(),
+        path: location.pathname,
+      })
+    );
+
+    setVisible(false);
+  };
+
+  return [visible, close] as const;
+}
 
 export function FeedbackSurveyCampaign() {
   const { t } = useI18next();
+  const [visible, close] = useDisclosure(120 * 60 * 1000);
+
+  if (!visible) {
+    return null;
+  }
 
   return (
     <Box
@@ -43,20 +87,32 @@ export function FeedbackSurveyCampaign() {
                 width: "18px",
                 height: "18px",
                 background:
-                  "linear-gradient(149deg, #0FC7C7 7.88%, #00AEEF 51.72%, #CA5AF0 92.89%)",
+                  "linear-gradient(135deg, #0FC7C7, #00AEEF, #CA5AF0)",
               }}
               aria-label="Docs Survey Campaign"
             >
               <CampaignOutlined sx={{ width: 14, height: 14 }} />
             </Avatar>
           }
+          action={
+            <IconButton
+              aria-label="close"
+              size="small"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                close();
+              }}
+            >
+              <CloseOutlined fontSize="inherit" />
+            </IconButton>
+          }
           title={t("campaign.docSurvey.title")}
           titleTypographyProps={{
             sx: {
               fontSize: 14,
               fontWeight: 600,
-              background:
-                "linear-gradient(90deg, #9A3CBB 0%, #284DAB 50.31%, #2D9BB7 100%)",
+              background: "linear-gradient(90deg, #9A3CBB, #284DAB, #2D9BB7)",
               backgroundClip: "text",
               "-webkit-text-fill-color": "transparent",
             },
@@ -72,8 +128,20 @@ export function FeedbackSurveyCampaign() {
             <Typography variant="body2">
               {t("campaign.docSurvey.content")}
             </Typography>
-            <Typography variant="body2" color="website.k1" fontWeight={700}>
-              {t("campaign.docSurvey.action")} -{">"}
+            <Typography
+              variant="body2"
+              color="website.k1"
+              fontWeight={700}
+              display="flex"
+              alignItems="center"
+            >
+              {t("campaign.docSurvey.action")}
+              <EastOutlined
+                fontSize="inherit"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                sx={{ ml: "4px" }}
+              />
             </Typography>
           </Stack>
         </CardContent>
