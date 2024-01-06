@@ -142,5 +142,13 @@
   "fab": {
     "scrollToTop": "トップへ戻る",
     "goToFeedback": "このページは役に立ちましたか？"
+  },
+  "campaign": {
+    "docSurvey": {
+      "link": "https://forms.gle/LbWEygumJkc4jAPD7",
+      "title": "フィードバック募集中！",
+      "content": "ご意見は、TiDBドキュメントの発展に大いに役立ちます。",
+      "action": "アンケートへ"
+    }
   }
 }

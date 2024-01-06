@@ -150,5 +150,13 @@
       "date": "Jan 9 - Jan 12 (UTC)",
       "intro": "Join us to improve docs and win a prize!"
     }
+  },
+  "campaign": {
+    "docSurvey": {
+      "link": "https://forms.gle/Swhb3jHcgd2Tjq2s9",
+      "title": "We love your feedback!",
+      "content": "Your insights are invaluable in shaping the future of TiDB docs.",
+      "action": "Take the survey"
+    }
   }
 }

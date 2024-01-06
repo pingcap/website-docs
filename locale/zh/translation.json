@@ -147,5 +147,13 @@
       "date": "1/9 - 1/12",
       "intro": "提 PR 或 Issue 来赢取 Bose 耳机、机械键盘等奖品吧！"
     }
+  },
+  "campaign": {
+    "docSurvey": {
+      "link": "https://pingcap.feishu.cn/share/base/form/shrcnHSzhZvFgUHMeW8J0rFMmJC",
+      "title": "文档满意度调查",
+      "content": "我们一起让 TiDB 文档变得更好！",
+      "action": "立即参与"
+    }
   }
 }
