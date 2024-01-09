@@ -1,15 +1,17 @@
 import React, {
     JSXElementConstructor,
+    ReactNode,
     PropsWithChildren,
     ReactElement,
   } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-type ImageZoomableWrapperProps = {
-  children?: React.ReactNode;
-}
+type ImageZoomableWrapperProps = PropsWithChildren<{
+  src: string;
+  alt: string;
+}>
 
-export const ImageZoomable: React.FC<PropsWithChildren> = ({ children } : ImageZoomableWrapperProps) => {
+export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt }) => {
   
   return (
     <TransformWrapper
@@ -25,9 +27,7 @@ export const ImageZoomable: React.FC<PropsWithChildren> = ({ children } : ImageZ
             <button onClick={() => resetTransform()}>x</button>
           </div>
           <TransformComponent>
-            <img src="image.jpg" alt="test" />
-            <div>Example text</div>
-            <div>{children}</div>
+            <img src={src} alt={alt} />
           </TransformComponent>
         </React.Fragment>
       )}
