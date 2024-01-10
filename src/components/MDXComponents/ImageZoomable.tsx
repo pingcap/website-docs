@@ -4,6 +4,8 @@ import React, {
     ReactNode,
     PropsWithChildren,
     ReactElement,
+    useRef,
+    useState,
   } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
@@ -14,11 +16,21 @@ type ImageZoomableWrapperProps = PropsWithChildren<{
 
 export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt }) => {
   
+  const [isFullscreen, toogleFullScreen] = useState(false);
+  const ImageZoomableRef = useRef(null);
+
+  function fullscreen () {
+    toogleFullScreen(!isFullscreen) // invert state
+
+    console.log("hit: " + isFullscreen);
+  }
+  
   return (
     <TransformWrapper
       initialScale={1}
       initialPositionX={0}
       initialPositionY={0}
+      ref={ImageZoomableRef}
     >
       {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
         <React.Fragment>
@@ -31,6 +43,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
             <button onClick={() => zoomIn()}>+</button>
             <button onClick={() => zoomOut()}>-</button>
             <button onClick={() => resetTransform()}>x</button>
+            <button onClick={() => fullscreen()}>o</button>
           </Box>
           <TransformComponent>
             <img src={src} alt={alt} />
@@ -40,4 +53,3 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
     </TransformWrapper>
   );
 };
-  
