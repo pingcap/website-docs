@@ -16,8 +16,8 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   return (
     <TransformWrapper
       initialScale={1}
-      initialPositionX={200}
-      initialPositionY={100}
+      initialPositionX={0}
+      initialPositionY={0}
     >
       {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
         <React.Fragment>
