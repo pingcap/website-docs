@@ -1,3 +1,4 @@
+import { Box, IconButton, Tooltip } from "@mui/material";
 import React, {
     JSXElementConstructor,
     ReactNode,
@@ -21,11 +22,16 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
     >
       {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
         <React.Fragment>
-          <div className="tools">
+          <Box
+            sx={{
+              position: "absolute",
+              float: "left",
+              zIndex: 99,
+            }}>
             <button onClick={() => zoomIn()}>+</button>
             <button onClick={() => zoomOut()}>-</button>
             <button onClick={() => resetTransform()}>x</button>
-          </div>
+          </Box>
           <TransformComponent>
             <img src={src} alt={alt} />
           </TransformComponent>
