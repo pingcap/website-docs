@@ -1,4 +1,4 @@
-import { Box, IconButton, Tooltip } from "@mui/material";
+import { Box, Fade, IconButton, Tooltip } from "@mui/material";
 
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
@@ -25,6 +25,7 @@ type ImageZoomableWrapperProps = PropsWithChildren<{
 export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt }) => {
   
   const [isFullscreen, toggleFullScreen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const ImageZoomableRef = useRef<HTMLDivElement>(null);
   const contextIconSize = isFullscreen ? ("large") : ("small");
 
@@ -44,7 +45,12 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   }
   
   return (
-    <Box className="ImageZoomableContainer" ref={ImageZoomableRef}>
+    <Box
+      className="ImageZoomableContainer"
+      ref={ImageZoomableRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      >
       <TransformWrapper
       initialScale={1}
       initialPositionX={0}
@@ -52,42 +58,44 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
       >
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <React.Fragment>
-            <Box
-              sx={{
-                position: 'absolute',
-                float: 'left',
-                zIndex: 99,
-                backgroundColor: 'white',
-                borderRadius: 18,
-              }}>
-              <IconButton
-                aria-label='btn-zoomin'
-                onClick={() => zoomIn()}
-              >
-                <ZoomInIcon fontSize={contextIconSize}/>
-              </IconButton>
-              <IconButton
-                aria-label='btn-zoomout'
-                onClick={() => zoomOut()}
-              >
-                <ZoomOutIcon fontSize={contextIconSize}/>
-              </IconButton>
-              <IconButton
-                aria-label='btn-zoomreset'
-                onClick={() => resetTransform()}
-              >
-                <AutorenewIcon fontSize={contextIconSize}/>
-              </IconButton>
-              <IconButton
-                aria-label= { isFullscreen ? ('btn-fullscreen-exit') : ('btn-fullscreen') } 
-                onClick={() => fullscreen()}
-              >
-                { isFullscreen ? (
-                  <FullscreenExitIcon fontSize={contextIconSize}/>) : (
-                  <FullscreenIcon fontSize={contextIconSize}/>
-                  ) }
-              </IconButton>
-            </Box>
+            <Fade in={isHovered}>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  float: 'left',
+                  zIndex: 99,
+                  backgroundColor: 'white',
+                  borderRadius: 18,
+                }}>
+                <IconButton
+                  aria-label='btn-zoomin'
+                  onClick={() => zoomIn()}
+                >
+                  <ZoomInIcon fontSize={contextIconSize}/>
+                </IconButton>
+                <IconButton
+                  aria-label='btn-zoomout'
+                  onClick={() => zoomOut()}
+                >
+                  <ZoomOutIcon fontSize={contextIconSize}/>
+                </IconButton>
+                <IconButton
+                  aria-label='btn-zoomreset'
+                  onClick={() => resetTransform()}
+                >
+                  <AutorenewIcon fontSize={contextIconSize}/>
+                </IconButton>
+                <IconButton
+                  aria-label= { isFullscreen ? ('btn-fullscreen-exit') : ('btn-fullscreen') } 
+                  onClick={() => fullscreen()}
+                >
+                  { isFullscreen ? (
+                    <FullscreenExitIcon fontSize={contextIconSize}/>) : (
+                    <FullscreenIcon fontSize={contextIconSize}/>
+                    ) }
+                </IconButton>
+              </Box>
+            </Fade>
             <TransformComponent>
               <img src={src} alt={alt}/>
             </TransformComponent>
