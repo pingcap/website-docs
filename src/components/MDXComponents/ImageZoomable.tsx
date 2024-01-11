@@ -1,4 +1,11 @@
 import { Box, IconButton, Tooltip } from "@mui/material";
+
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import ZoomOutIcon from "@mui/icons-material/ZoomOut";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import FullscreenIcon  from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+
 import React, {
     JSXElementConstructor,
     ReactNode,
@@ -19,6 +26,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   
   const [isFullscreen, toggleFullScreen] = useState(false);
   const ImageZoomableRef = useRef<HTMLDivElement>(null);
+  const contextIconSize = isFullscreen ? ("large") : ("small");
 
   const fullscreen = () => {
     if (ImageZoomableRef.current) {
@@ -46,14 +54,39 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
           <React.Fragment>
             <Box
               sx={{
-                position: "absolute",
-                float: "left",
+                position: 'absolute',
+                float: 'left',
                 zIndex: 99,
+                backgroundColor: 'white',
+                borderRadius: 18,
               }}>
-              <button onClick={() => zoomIn()}>+</button>
-              <button onClick={() => zoomOut()}>-</button>
-              <button onClick={() => resetTransform()}>x</button>
-              <button onClick={() => fullscreen()}>o</button>
+              <IconButton
+                aria-label='btn-zoomin'
+                onClick={() => zoomIn()}
+              >
+                <ZoomInIcon fontSize={contextIconSize}/>
+              </IconButton>
+              <IconButton
+                aria-label='btn-zoomout'
+                onClick={() => zoomOut()}
+              >
+                <ZoomOutIcon fontSize={contextIconSize}/>
+              </IconButton>
+              <IconButton
+                aria-label='btn-zoomreset'
+                onClick={() => resetTransform()}
+              >
+                <AutorenewIcon fontSize={contextIconSize}/>
+              </IconButton>
+              <IconButton
+                aria-label= { isFullscreen ? ('btn-fullscreen-exit') : ('btn-fullscreen') } 
+                onClick={() => fullscreen()}
+              >
+                { isFullscreen ? (
+                  <FullscreenExitIcon fontSize={contextIconSize}/>) : (
+                  <FullscreenIcon fontSize={contextIconSize}/>
+                  ) }
+              </IconButton>
             </Box>
             <TransformComponent>
               <img src={src} alt={alt}/>
