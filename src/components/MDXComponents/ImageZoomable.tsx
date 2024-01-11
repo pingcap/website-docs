@@ -7,16 +7,12 @@ import FullscreenIcon  from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 
 import React, {
-    JSXElementConstructor,
-    ReactNode,
     PropsWithChildren,
-    ReactElement,
     useRef,
     useState,
     useEffect,
   } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 type ImageZoomableWrapperProps = PropsWithChildren<{
   src: string;
@@ -25,12 +21,12 @@ type ImageZoomableWrapperProps = PropsWithChildren<{
 
 export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt }) => {
   
-  const [isFullscreen, toggleFullScreen] = useState(false);
+  const [isFullscreen, setIsFullScreen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isTouchMoving, setTouchMoving] = useState(false);
   const ImageZoomableRef = useRef<HTMLDivElement>(null);
-  const contextIconSize = isFullscreen ? ("large") : ("small");
+  const contextIconSize = isFullscreen ? ("medium") : ("small");
   var contextCursor = isDragging ? ("grabbing") : ("grab");
 
   const fullscreen = () => {
@@ -48,10 +44,13 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   
   useEffect(() => {
     window.onresize = () => {
-        toggleFullScreen((document.fullscreenElement != null) ? true: false)
-      //}
+        setIsFullScreen((document.fullscreenElement != null) ? true: false);
     }
     
+    // fix image position to vertical-centered under phone's fullscreen mode
+    // it's better to modify this style at rendering time
+    const ele = document.querySelector(".react-transform-wrapper") as HTMLElement;
+    ele.style.height = '100%'; 
   })
 
   return (
@@ -96,8 +95,10 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
                   position: 'absolute',
                   float: 'left',
                   zIndex: 99,
-                  backgroundColor: 'white',
+                  backgroundColor: 'rgb(229,229,229)',
                   borderRadius: 18,
+                  marginTop: '.5rem',
+                  marginLeft: '.5rem',
                 }}>
                 <IconButton
                   aria-label='btn-zoomin'
