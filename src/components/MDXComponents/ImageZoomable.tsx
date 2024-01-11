@@ -52,6 +52,10 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
       ref={ImageZoomableRef}
       onMouseEnter={() => {
         contextCursor = "grab";
+        setIsHovered(true);
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
       }}
       onMouseDown={() => {
         setIsDragging(true);
