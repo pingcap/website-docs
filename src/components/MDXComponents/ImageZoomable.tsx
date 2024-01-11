@@ -16,6 +16,7 @@ import React, {
     useEffect,
   } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 type ImageZoomableWrapperProps = PropsWithChildren<{
   src: string;
@@ -27,6 +28,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   const [isFullscreen, toggleFullScreen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isTouchMoving, setTouchMoving] = useState(false);
   const ImageZoomableRef = useRef<HTMLDivElement>(null);
   const contextIconSize = isFullscreen ? ("large") : ("small");
   var contextCursor = isDragging ? ("grabbing") : ("grab");
@@ -71,6 +73,15 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         setIsDragging(false);
         contextCursor = "grab";
       }}
+      onTouchMove={() => {
+        setTouchMoving(true);
+      }}
+      onTouchStart={()=>{
+        setTouchMoving(true);
+        setTimeout(() => {
+          setTouchMoving(false);
+        }, 4000);
+      }}
       >
       <TransformWrapper
         initialScale={1}
@@ -79,7 +90,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
       >
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <React.Fragment>
-            <Fade in={isHovered}>
+            <Fade in={isHovered || isTouchMoving}>
               <Box
                 sx={{
                   position: 'absolute',
