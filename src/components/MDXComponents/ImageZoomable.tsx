@@ -45,12 +45,15 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   useEffect(() => {
     window.onresize = () => {
         setIsFullScreen((document.fullscreenElement != null) ? true: false);
+        if (document.fullscreenElement) {
+          console.log(document.fullscreenElement)
+
+          const ele = document.fullscreenElement as HTMLElement
+          ele.style.display = 'flex';
+          ele.style.alignItems = 'center';
+          ele.style.justifyContent = 'center';
+        }
     }
-    
-    // fix image position to vertical-centered under phone's fullscreen mode
-    // it's better to modify this style at rendering time
-    const ele = document.querySelector(".react-transform-wrapper") as HTMLElement;
-    ele.style.height = '100%'; 
   })
 
   return (
@@ -91,6 +94,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
           <React.Fragment>
             <Fade in={isHovered || isTouchMoving}>
               <Box
+                className="ZoomButtonGroup"
                 sx={{
                   position: 'absolute',
                   float: 'left',
