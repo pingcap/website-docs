@@ -42,10 +42,16 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
           });
       }
     }
-
-    toggleFullScreen(!isFullscreen)
   }
   
+  useEffect(() => {
+    window.onresize = () => {
+        toggleFullScreen((document.fullscreenElement != null) ? true: false)
+      //}
+    }
+    
+  })
+
   return (
     <Box
       className="ImageZoomableContainer"
