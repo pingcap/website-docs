@@ -6,6 +6,7 @@ import React, {
     ReactElement,
     useRef,
     useState,
+    useEffect,
   } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
@@ -16,40 +17,50 @@ type ImageZoomableWrapperProps = PropsWithChildren<{
 
 export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt }) => {
   
-  const [isFullscreen, toogleFullScreen] = useState(false);
-  const ImageZoomableRef = useRef(null);
+  const [isFullscreen, toggleFullScreen] = useState(false);
+  const ImageZoomableRef = useRef<HTMLDivElement>(null);
 
-  function fullscreen () {
-    toogleFullScreen(!isFullscreen) // invert state
+  const fullscreen = () => {
+    if (ImageZoomableRef.current) {
+      if (isFullscreen) {
+        document.exitFullscreen();
+      } else {
+        ImageZoomableRef.current.requestFullscreen()
+          .catch((err) => {
+            console.error(`Error in enabling fullscreen mode: ${err.message}`);
+          });
+      }
+    }
 
-    console.log("hit: " + isFullscreen);
+    toggleFullScreen(!isFullscreen)
   }
   
   return (
-    <TransformWrapper
+    <Box className="ImageZoomableContainer" ref={ImageZoomableRef}>
+      <TransformWrapper
       initialScale={1}
       initialPositionX={0}
       initialPositionY={0}
-      ref={ImageZoomableRef}
-    >
-      {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-        <React.Fragment>
-          <Box
-            sx={{
-              position: "absolute",
-              float: "left",
-              zIndex: 99,
-            }}>
-            <button onClick={() => zoomIn()}>+</button>
-            <button onClick={() => zoomOut()}>-</button>
-            <button onClick={() => resetTransform()}>x</button>
-            <button onClick={() => fullscreen()}>o</button>
-          </Box>
-          <TransformComponent>
-            <img src={src} alt={alt} />
-          </TransformComponent>
-        </React.Fragment>
-      )}
-    </TransformWrapper>
+      >
+        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+          <React.Fragment>
+            <Box
+              sx={{
+                position: "absolute",
+                float: "left",
+                zIndex: 99,
+              }}>
+              <button onClick={() => zoomIn()}>+</button>
+              <button onClick={() => zoomOut()}>-</button>
+              <button onClick={() => resetTransform()}>x</button>
+              <button onClick={() => fullscreen()}>o</button>
+            </Box>
+            <TransformComponent>
+              <img src={src} alt={alt}/>
+            </TransformComponent>
+          </React.Fragment>
+        )}
+      </TransformWrapper>
+    </Box>
   );
 };
