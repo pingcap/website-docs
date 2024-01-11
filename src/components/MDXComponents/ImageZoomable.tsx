@@ -26,8 +26,10 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   
   const [isFullscreen, toggleFullScreen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const ImageZoomableRef = useRef<HTMLDivElement>(null);
   const contextIconSize = isFullscreen ? ("large") : ("small");
+  var contextCursor = isDragging ? ("grabbing") : ("grab");
 
   const fullscreen = () => {
     if (ImageZoomableRef.current) {
@@ -48,13 +50,22 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
     <Box
       className="ImageZoomableContainer"
       ref={ImageZoomableRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => {
+        contextCursor = "grab";
+      }}
+      onMouseDown={() => {
+        setIsDragging(true);
+        contextCursor = "grabbing";
+      }}
+      onMouseUp={() => {
+        setIsDragging(false);
+        contextCursor = "grab";
+      }}
       >
       <TransformWrapper
-      initialScale={1}
-      initialPositionX={0}
-      initialPositionY={0}
+        initialScale={1}
+        initialPositionX={0}
+        initialPositionY={0}
       >
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <React.Fragment>
@@ -96,7 +107,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
                 </IconButton>
               </Box>
             </Fade>
-            <TransformComponent>
+            <TransformComponent contentStyle={{ cursor: contextCursor }}>
               <img src={src} alt={alt}/>
             </TransformComponent>
           </React.Fragment>
