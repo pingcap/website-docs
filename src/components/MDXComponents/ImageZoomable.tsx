@@ -44,15 +44,30 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   
   useEffect(() => {
     window.onresize = () => {
-        setIsFullScreen((document.fullscreenElement != null) ? true: false);
-        if (document.fullscreenElement) {
-          console.log(document.fullscreenElement)
+      setIsFullScreen((document.fullscreenElement != null) ? true: false);
+      if (document.fullscreenElement) {
 
-          const ele = document.fullscreenElement as HTMLElement
-          ele.style.display = 'flex';
-          ele.style.alignItems = 'center';
-          ele.style.justifyContent = 'center';
+        // when entered fullscreen, set image position to flex-centered for better display
+        const ele = document.fullscreenElement as HTMLElement
+        ele.style.display = 'flex';
+        ele.style.alignItems = 'center';
+        ele.style.justifyContent = 'center';
+        ele.style.flexFlow = 'column-reverse';
+
+        // when entered fullscreen, unset 'position:absolute' zoom button group for better display
+        const ele2 = ele.querySelector(".ZoomButtonGroup") as HTMLElement;
+        ele2.style.position = 'unset';
+
+      } else {
+        if (ImageZoomableRef.current) {
+          // exited fullscreen and back to normal position
+          ImageZoomableRef.current.style.display = 'block';
+
+          // exited fullscreen and restore 'position:absolute' of zoom button group
+          const ele2 = ImageZoomableRef.current.querySelector(".ZoomButtonGroup") as HTMLElement;
+          ele2.style.position = 'absolute';
         }
+      }
     }
   })
 
