@@ -60,6 +60,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
 
       } else {
         if (ImageZoomableRef.current) {
+          
           // exited fullscreen and back to normal position
           ImageZoomableRef.current.style.display = 'block';
 
