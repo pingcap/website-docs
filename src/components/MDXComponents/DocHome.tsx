@@ -139,97 +139,99 @@ export function DocHomeContainer(props: {
         <Grid2 xs={12} md={10}>
           <Box>{children}</Box>
         </Grid2>
-        {!archive && (<Grid2
-          xs={0}
-          md={2}
-          sx={{
-            display: { xs: "none", md: "block" },
+        {!archive && (
+          <Grid2
+            xs={0}
+            md={2}
+            sx={{
+              display: { xs: "none", md: "block" },
 
-            scrollbarGutter: "stable",
-            height: "100%",
-            maxHeight: "calc(100vh - 6.25rem)",
-            overflowY: "auto",
-            padding: "2.5rem 1rem 1rem 1rem",
-            position: "sticky",
-            top: "6.25rem",
+              scrollbarGutter: "stable",
+              height: "100%",
+              maxHeight: "calc(100vh - 6.25rem)",
+              overflowY: "auto",
+              padding: "2.5rem 1rem 1rem 1rem",
+              position: "sticky",
+              top: "6.25rem",
 
-            "& ul#toc-ul": {
-              padding: 0,
-              margin: 0,
-              listStyle: "none",
-            },
-          }}
-        >
-          {!archive && (
-            <>
-              <Typography
-                component="div"
-                sx={{
-                  paddingLeft: "0.5rem",
-                  paddingBottom: "1rem",
-                  fontFamily: "Helvetica Neue",
-                  color: theme.palette.website.f1,
-                  fontSize: "0.875rem",
-                  fontWeight: "700",
-                  lineHeight: "1.25rem",
-                }}
-              >
-                <Trans i18nKey="doc.toc" />
-              </Typography>
-              <Box
-                component="ul"
-                id="toc-ul"
-                sx={{
-                  listStyle: "none",
-                }}
-              >
-                {headingsMemo.map((i) => (
-                  <Box
-                    key={i.id}
-                    component="li"
-                    sx={{
-                      "& a#toc-link": {
-                        color: theme.palette.website.m5,
-                        "&:hover": {
-                          textDecoration: "none",
-                        },
-                      },
-                    }}
-                  >
-                    <Typography
-                      component="a"
-                      id="toc-link"
-                      href={`#${i.anchor}`}
+              "& ul#toc-ul": {
+                padding: 0,
+                margin: 0,
+                listStyle: "none",
+              },
+            }}
+          >
+            {!archive && (
+              <>
+                <Typography
+                  component="div"
+                  sx={{
+                    paddingLeft: "0.5rem",
+                    paddingBottom: "1rem",
+                    fontFamily: "Helvetica Neue",
+                    color: theme.palette.website.f1,
+                    fontSize: "0.875rem",
+                    fontWeight: "700",
+                    lineHeight: "1.25rem",
+                  }}
+                >
+                  <Trans i18nKey="doc.toc" />
+                </Typography>
+                <Box
+                  component="ul"
+                  id="toc-ul"
+                  sx={{
+                    listStyle: "none",
+                  }}
+                >
+                  {headingsMemo.map((i) => (
+                    <Box
+                      key={i.id}
+                      component="li"
                       sx={{
-                        display: "flex",
-                        textDecoration: "none",
-                        fontSize: "13px",
-                        lineHeight: "1.25rem",
-                        borderLeft: `1px solid transparent`,
-                        paddingLeft: `0.5rem`,
-                        paddingTop: "0.25rem",
-                        paddingBottom: "0.25rem",
-                        "&:hover": {
-                          color: theme.palette.website.f3,
-                          borderLeft: `1px solid ${theme.palette.website.f3}`,
+                        "& a#toc-link": {
+                          color: theme.palette.website.m5,
+                          "&:hover": {
+                            textDecoration: "none",
+                          },
                         },
                       }}
                     >
-                      {i.label}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-            </>
-          )}
-          {/* <ul>
+                      <Typography
+                        component="a"
+                        id="toc-link"
+                        href={`#${i.anchor}`}
+                        sx={{
+                          display: "flex",
+                          textDecoration: "none",
+                          fontSize: "13px",
+                          lineHeight: "1.25rem",
+                          borderLeft: `1px solid transparent`,
+                          paddingLeft: `0.5rem`,
+                          paddingTop: "0.25rem",
+                          paddingBottom: "0.25rem",
+                          "&:hover": {
+                            color: theme.palette.website.f3,
+                            borderLeft: `1px solid ${theme.palette.website.f3}`,
+                          },
+                        }}
+                      >
+                        {i.label}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </>
+            )}
+            {/* <ul>
             {headingsMemo.map((i) => (
               <li key={i.id}>
                 <a href={`#${i.anchor}`}>{i.label}</a>
               </li>
             ))}
           </ul> */}
-        </Grid2>)}
+          </Grid2>
+        )}
       </Grid2>
     </>
   );
@@ -370,6 +372,7 @@ export function DocHomeCard(props: any) {
             component="img"
             id="card-content-img"
             src={require(`../../../images/docHome/${icon}.svg`)?.default}
+            alt={label}
             sx={{
               height: "3rem",
               width: "3rem",
