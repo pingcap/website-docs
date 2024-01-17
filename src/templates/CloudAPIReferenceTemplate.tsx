@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import Box from "@mui/material/Box";
 
 import Seo from "components/Layout/Seo";
@@ -58,7 +58,7 @@ export default function APIReferenceTemplate({
   data,
 }: APIReferenceTemplateProps) {
   const { language } = useI18next();
-  const bannerVisible = feature?.banner && language !== Locale.ja
+  const bannerVisible = feature?.banner && language !== Locale.ja;
 
   const specUrl = isProduction ? production : preview;
 
@@ -76,8 +76,20 @@ export default function APIReferenceTemplate({
       // https://redocly.com/docs/api-reference-docs/configuration/functionality/
       Redoc.init(
         specUrl,
-        { schemaExpansionLevel: 3 },
-        document.getElementById("redoc-container")
+        {
+          schemaExpansionLevel: 3,
+          scrollYOffset: ".doc-site-header",
+        },
+        document.getElementById("redoc-container"),
+        () => {
+          const logo = document.querySelector(
+            'a[href="https://redocly.com/redoc/"]'
+          );
+
+          if (logo instanceof HTMLAnchorElement) {
+            logo.style.display = "none";
+          }
+        }
       );
     }
 
@@ -110,9 +122,7 @@ export default function APIReferenceTemplate({
             },
           ]}
         />
-        <Box
-          sx={{ marginTop: bannerVisible ? "7rem" : "5rem", width: "100%" }}
-        >
+        <Box sx={{ marginTop: bannerVisible ? "7rem" : "5rem", width: "100%" }}>
           <Box id="redoc-container" data-testid="redoc-container" />
         </Box>
       </Layout>
