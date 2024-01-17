@@ -82,12 +82,19 @@ export default function APIReferenceTemplate({
         },
         document.getElementById("redoc-container"),
         () => {
-          const logo = document.querySelector(
+          const attributionLink = document.querySelector(
             'a[href="https://redocly.com/redoc/"]'
           );
 
-          if (logo instanceof HTMLAnchorElement) {
-            logo.style.display = "none";
+          if (!(attributionLink instanceof HTMLAnchorElement)) {
+            return;
+          }
+
+          const attribution = attributionLink.parentElement;
+
+          if (attribution?.childElementCount === 1) {
+            attribution.parentElement?.after(attribution);
+            attribution.style.position = "absolute";
           }
         }
       );
