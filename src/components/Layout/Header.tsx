@@ -28,6 +28,7 @@ export default function Header(props: {
   const { language } = useI18next();
   return (
     <AppBar
+      className="doc-site-header"
       position="fixed"
       sx={{
         backgroundColor: theme.palette.website.m2,
