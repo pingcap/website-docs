@@ -119,7 +119,7 @@ export const createDocs = async ({
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
         feature: {
-          banner: true,
+          banner: false,
           feedback: true,
         },
       },
@@ -165,7 +165,7 @@ export const createCloudAPIReference = async ({
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
         feature: {
-          banner: true,
+          banner: false,
         },
       },
     });
@@ -265,7 +265,7 @@ export const createDocHome = async ({
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
         feature: {
-          banner: true,
+          banner: false,
           feedback: false,
         },
       },
@@ -283,7 +283,7 @@ export const createDocSearch = async ({
     component: template,
     context: {
       feature: {
-        banner: true,
+        banner: false,
       },
     },
   });
@@ -299,7 +299,7 @@ export const create404 = async ({
     component: template,
     context: {
       feature: {
-        banner: true,
+        banner: false,
       },
     },
   });
