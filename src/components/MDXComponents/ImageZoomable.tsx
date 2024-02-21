@@ -45,7 +45,8 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         <Box className="zoom-overlay" style={{backgroundColor:"rgba(0,0,0,0.7)",zIndex:10000,position:"fixed",top:0,bottom:0,left:0,right:0}} />
         
         );
-        ReactDOM.render(overlay, document.getElementsByClassName("zoom-overlay")[0]);
+        ReactDOM.render(overlay, ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0]);
+        console.log(ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0]);
         //append large image
       }
     }
