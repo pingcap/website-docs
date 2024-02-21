@@ -12,6 +12,7 @@ import React, {
     useState,
     useEffect,
   } from "react";
+import ReactDOM from "react-dom";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 type ImageZoomableWrapperProps = PropsWithChildren<{
@@ -34,10 +35,18 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
       if (isFullscreen) {
         document.exitFullscreen();
       } else {
-        ImageZoomableRef.current.requestFullscreen()
+        /*ImageZoomableRef.current.requestFullscreen()
           .catch((err) => {
             console.error(`Error in enabling fullscreen mode: ${err.message}`);
-          });
+          });*/
+
+        //append overlay(grey background)
+        const overlay = (
+        <Box className="zoom-overlay" style={{backgroundColor:"rgba(0,0,0,0.7)",zIndex:10000,position:"fixed",top:0,bottom:0,left:0,right:0}} />
+        
+        );
+        ReactDOM.render(overlay, document.getElementsByClassName("zoom-overlay")[0]);
+        //append large image
       }
     }
   }
@@ -101,6 +110,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         }, 4000);
       }}
       >
+      <Box className="zoom-overlay"/>
       <TransformWrapper
         initialScale={1}
         initialPositionX={0}
