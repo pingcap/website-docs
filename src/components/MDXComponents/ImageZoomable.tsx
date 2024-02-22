@@ -42,12 +42,36 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
 
         //append overlay(grey background)
         const overlay = (
-        <Box className="zoom-overlay" style={{backgroundColor:"rgba(0,0,0,0.7)",zIndex:10000,position:"fixed",top:0,bottom:0,left:0,right:0}} />
-        
+          //<Box style={{position:"fixed",zIndex:"9999"}}>
+        <Box className="zoom-overlay" style={{backgroundColor:"rgba(0,0,0,0.7)",zIndex:99998,position:"fixed",top:0,bottom:0,left:0,right:0}} />
+        //</Box>
         );
+
+        
         ReactDOM.render(overlay, ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0]);
-        console.log(ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0]);
+        
+        const imagebox = ImageZoomableRef.current.getElementsByClassName("react-transform-wrapper")[0] as HTMLElement;
+        
+        imagebox.style.position = "fixed";
+        imagebox.style.zIndex = "99999";
+        imagebox.style.top = "50px";
+        imagebox.style.left = "50px";
+        imagebox.style.bottom = "50px";
+        imagebox.style.right = "50px";
+        
+
+        ImageZoomableRef.current.style.position = "fixed";
+        ImageZoomableRef.current.style.zIndex = "10001";/*
+        ImageZoomableRef.current.style.top = "50px";
+        ImageZoomableRef.current.style.left = "50px";
+        ImageZoomableRef.current.style.bottom = "50px";
+        ImageZoomableRef.current.style.right = "50px";*/
+
+        console.log(ImageZoomableRef.current);
+        console.log(imagebox)
         //append large image
+
+
       }
     }
   }
@@ -111,7 +135,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         }, 4000);
       }}
       >
-      <Box className="zoom-overlay"/>
+      
       <TransformWrapper
         initialScale={1}
         initialPositionX={0}
@@ -166,6 +190,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
           </React.Fragment>
         )}
       </TransformWrapper>
+      <Box className="zoom-overlay"/>
     </Box>
   );
 };
