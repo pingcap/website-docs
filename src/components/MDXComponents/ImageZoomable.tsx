@@ -54,11 +54,9 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         
         imagebox.style.position = "fixed";
         imagebox.style.zIndex = "99999";
-        imagebox.style.top = "50px";
-        imagebox.style.left = "50px";
-        imagebox.style.bottom = "50px";
-        imagebox.style.right = "50px";
-        
+        imagebox.style.left = "50%";
+        imagebox.style.top = "50%";
+        imagebox.style.transform = "translate(-50%,-50%) scale(1.8)";
 
         ImageZoomableRef.current.style.position = "fixed";
         ImageZoomableRef.current.style.zIndex = "10001";/*
