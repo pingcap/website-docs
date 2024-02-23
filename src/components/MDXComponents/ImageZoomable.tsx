@@ -134,11 +134,12 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
             <TransformComponent
               contentStyle={{ cursor: contextCursor }}
               wrapperStyle={{
-                position: ( isFullscreen ? "fixed" : "inherit" ),
-                zIndex: ( isFullscreen ? "99999" : "inherit" ),
-                left: ( isFullscreen ? "50%" : "inherit" ),
-                top: ( isFullscreen ? "50%" : "inherit" ),
-                transform: ( isFullscreen ? "translate(-50%,-50%) scale(1.6)" : "inherit" )
+                position: (isFullscreen ? "fixed" : "inherit"),
+                zIndex: (isFullscreen ? "99999" : "inherit"),
+                left: (isFullscreen ? "50%" : "inherit"),
+                top: (isFullscreen ? "50%" : "inherit"),
+                transform: (isFullscreen ? "translate(-50%,-50%) scale(1.6)" : "inherit"),
+                transition: "transform .3s cubic-bezier(.2,0,.2,1)"
               }}>
               <img src={src} alt={alt}/>
             </TransformComponent>
@@ -148,10 +149,12 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
       <Box
         className="zoom-overlay"
         sx={{
-          backgroundColor: (isFullscreen ? "rgba(0,0,0,0.7)" : "none"),
+          backgroundColor: "rgba(0,0,0,0.7)",
+          opacity: (isFullscreen ? 1 : 0),
           position: (isFullscreen ? "fixed" : "inherit"),
           zIndex: (isFullscreen ? 99998 : "inherit"),
-          inset: (isFullscreen ? 0 : "inherit")
+          inset: (isFullscreen ? 0 : "inherit"),
+          transition: "opacity .3s",
         }}
       />
     </Box>
