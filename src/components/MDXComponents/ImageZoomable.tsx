@@ -31,26 +31,20 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   const fullscreen = () => {
     if (ImageZoomableRef.current) {
       if (isFullscreen) {
-        console.log("gonna exit fullscreen mode")
         setIsFullScreen(false);
-        let ele = ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0] as HTMLElement;
-        ele.style.opacity = "0";
-        ele.style.transition = "opacity .15s ease-in-out";
+        let ele_overlay = ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0] as HTMLElement;
+        ele_overlay.style.opacity = "0";
+        ele_overlay.style.transition = "opacity .15s ease-in-out";
 
-        ImageZoomableRef.current.parentElement!.style.height = "unset"
+        ImageZoomableRef.current.parentElement!.style.height = "unset";
         ImageZoomableRef.current.parentElement!.style.border = "none";
 
-        console.log("取消全屏")
-
-        console.log(ele)
       } else {
 
         setIsFullScreen(true);
-        let ele = ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0] as HTMLElement;
-        console.log("设置全屏")
-        ele.style.opacity = "1";
-        ele.style.transition = "opacity .3s ease-in-out";
-        console.log(ele)
+        let ele_overlay = ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0] as HTMLElement;
+        ele_overlay.style.opacity = "1";
+        ele_overlay.style.transition = "opacity .3s ease-in-out";
 
         ImageZoomableRef.current.parentElement!.style.height = "50px";
         ImageZoomableRef.current.parentElement!.style.border = "1px grey dashed";
