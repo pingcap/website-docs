@@ -1,4 +1,4 @@
-import { Box, Fade, IconButton, Tooltip } from "@mui/material";
+import { Box, Fade, IconButton} from "@mui/material";
 
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
@@ -10,9 +10,7 @@ import React, {
     PropsWithChildren,
     useRef,
     useState,
-    useEffect,
   } from "react";
-import ReactDOM from "react-dom";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 type ImageZoomableWrapperProps = PropsWithChildren<{
@@ -33,7 +31,8 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
   const fullscreen = () => {
     if (ImageZoomableRef.current) {
       if (isFullscreen) {
-        document.exitFullscreen();
+        console.log("gonna exit fullscreen mode")
+        setIsFullScreen(false);
       } else {
         /*ImageZoomableRef.current.requestFullscreen()
           .catch((err) => {
@@ -41,83 +40,18 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
           });*/
         setIsFullScreen(true);
 
-        //append overlay(grey background)
-        const overlay = (
-          //<Box style={{position:"fixed",zIndex:"9999"}}>
-        <Box className="zoom-overlay" style={{backgroundColor:"rgba(0,0,0,0.7)",zIndex:99998,position:"fixed",top:0,bottom:0,left:0,right:0}} />
-        //</Box>
-        );
-
-        
-        ReactDOM.render(overlay, ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0]);
-        
-        const imagebox = ImageZoomableRef.current.getElementsByClassName("react-transform-wrapper")[0] as HTMLElement;
-        const buttongroupbox = ImageZoomableRef.current.getElementsByClassName("ZoomButtonGroup")[0] as HTMLElement;
-
-        imagebox.style.position = "fixed";
-        imagebox.style.zIndex = "99999";
-        imagebox.style.left = "50%";
-        imagebox.style.top = "50%";
-        imagebox.style.transform = "translate(-50%,-50%) scale(1.6)";
-
-        buttongroupbox.style.position = "fixed";
-        buttongroupbox.style.zIndex = "99999";
-        buttongroupbox.style.left = "50%";
-        buttongroupbox.style.top = "95%";
-        buttongroupbox.style.transform = "translate(-50%,-50%)";
-        //buttongroupbox.style.visibility = "visible";
-
-        ImageZoomableRef.current.style.position = "fixed";
-        ImageZoomableRef.current.style.zIndex = "10001";/*
-        ImageZoomableRef.current.style.top = "50px";
-        ImageZoomableRef.current.style.left = "50px";
-        ImageZoomableRef.current.style.bottom = "50px";
-        ImageZoomableRef.current.style.right = "50px";*/
-
-
-        console.log(ImageZoomableRef.current);
-        console.log(buttongroupbox)
-        //append large image
-
-
       }
     }
   }
-  /*
-  useEffect(() => {
-    window.onresize = () => {
-      setIsFullScreen((document.fullscreenElement != null) ? true: false);
-      if (document.fullscreenElement) {
 
-        // when entered fullscreen, set image position to flex-centered for better display
-        const ele = document.fullscreenElement as HTMLElement
-        ele.style.display = 'flex';
-        ele.style.alignItems = 'center';
-        ele.style.justifyContent = 'center';
-        ele.style.flexFlow = 'column-reverse';
-
-        // when entered fullscreen, unset 'position:absolute' zoom button group for better display
-        const ele2 = ele.querySelector(".ZoomButtonGroup") as HTMLElement;
-        ele2.style.position = 'unset';
-
-      } else {
-        if (ImageZoomableRef.current) {
-          
-          // exited fullscreen and back to normal position
-          ImageZoomableRef.current.style.display = 'block';
-
-          // exited fullscreen and restore 'position:absolute' of zoom button group
-          const ele2 = ImageZoomableRef.current.querySelector(".ZoomButtonGroup") as HTMLElement;
-          ele2.style.position = 'absolute';
-        }
-      }
-    }
-  })
-*/
   return (
     <Box
       className="ImageZoomableContainer"
       ref={ImageZoomableRef}
+      sx={{
+        position: (isFullscreen ? "fixed" : "inherit"),
+        zIndex: (isFullscreen ? "10001" : "inherit")
+      }}
       onMouseEnter={() => {
         contextCursor = "grab";
         setIsHovered(true);
@@ -157,34 +91,37 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
               <Box
                 className="ZoomButtonGroup"
                 sx={{
-                  position: 'absolute',
-                  float: 'left',
-                  zIndex: 99,
-                  backgroundColor: 'rgb(229,229,229)',
+                  position: (isFullscreen ? "fixed" : "absolute"),
+                  float: "left",
+                  zIndex: (isFullscreen ? 99999 : 99),
+                  backgroundColor: "rgb(229,229,229)",
                   borderRadius: 18,
-                  marginTop: '.5rem',
-                  marginLeft: '.5rem',
+                  marginTop: ".5rem",
+                  marginLeft: ".5rem",
+                  transform: (isFullscreen ? "translate(-50%,-50%)" : "inherit"),
+                  left: (isFullscreen ? "50%" : "inherit"),
+                  top: (isFullscreen ? "95%" : "inherit")
                 }}>
                 <IconButton
-                  aria-label='btn-zoomin'
+                  aria-label="btn-zoomin"
                   onClick={() => zoomIn()}
                 >
                   <ZoomInIcon fontSize={contextIconSize}/>
                 </IconButton>
                 <IconButton
-                  aria-label='btn-zoomout'
+                  aria-label="btn-zoomout"
                   onClick={() => zoomOut()}
                 >
                   <ZoomOutIcon fontSize={contextIconSize}/>
                 </IconButton>
                 <IconButton
-                  aria-label='btn-zoomreset'
+                  aria-label="btn-zoomreset"
                   onClick={() => resetTransform()}
                 >
                   <AutorenewIcon fontSize={contextIconSize}/>
                 </IconButton>
                 <IconButton
-                  aria-label= { isFullscreen ? ('btn-fullscreen-exit') : ('btn-fullscreen') } 
+                  aria-label= { isFullscreen ? "btn-fullscreen-exit" : "btn-fullscreen" } 
                   onClick={() => fullscreen()}
                 >
                   { isFullscreen ? (
@@ -194,13 +131,29 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
                 </IconButton>
               </Box>
             </Fade>
-            <TransformComponent contentStyle={{ cursor: contextCursor }}>
+            <TransformComponent
+              contentStyle={{ cursor: contextCursor }}
+              wrapperStyle={{
+                position: ( isFullscreen ? "fixed" : "inherit" ),
+                zIndex: ( isFullscreen ? "99999" : "inherit" ),
+                left: ( isFullscreen ? "50%" : "inherit" ),
+                top: ( isFullscreen ? "50%" : "inherit" ),
+                transform: ( isFullscreen ? "translate(-50%,-50%) scale(1.6)" : "inherit" )
+              }}>
               <img src={src} alt={alt}/>
             </TransformComponent>
           </React.Fragment>
         )}
       </TransformWrapper>
-      <Box className="zoom-overlay"/>
+      <Box
+        className="zoom-overlay"
+        sx={{
+          backgroundColor: (isFullscreen ? "rgba(0,0,0,0.7)" : "none"),
+          position: (isFullscreen ? "fixed" : "inherit"),
+          zIndex: (isFullscreen ? 99998 : "inherit"),
+          inset: (isFullscreen ? 0 : "inherit")
+        }}
+      />
     </Box>
   );
 };
