@@ -37,6 +37,9 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         ele.style.opacity = "0";
         ele.style.transition = "opacity .15s ease-in-out";
 
+        ImageZoomableRef.current.parentElement!.style.height = "unset"
+        ImageZoomableRef.current.parentElement!.style.border = "none";
+
         console.log("取消全屏")
 
         console.log(ele)
@@ -49,6 +52,8 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         ele.style.transition = "opacity .3s ease-in-out";
         console.log(ele)
 
+        ImageZoomableRef.current.parentElement!.style.height = "50px";
+        ImageZoomableRef.current.parentElement!.style.border = "1px grey dashed";
 
       }
     }
