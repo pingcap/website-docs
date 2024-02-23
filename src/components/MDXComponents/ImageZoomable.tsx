@@ -39,6 +39,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
           .catch((err) => {
             console.error(`Error in enabling fullscreen mode: ${err.message}`);
           });*/
+        setIsFullScreen(true);
 
         //append overlay(grey background)
         const overlay = (
@@ -51,12 +52,20 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         ReactDOM.render(overlay, ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0]);
         
         const imagebox = ImageZoomableRef.current.getElementsByClassName("react-transform-wrapper")[0] as HTMLElement;
-        
+        const buttongroupbox = ImageZoomableRef.current.getElementsByClassName("ZoomButtonGroup")[0] as HTMLElement;
+
         imagebox.style.position = "fixed";
         imagebox.style.zIndex = "99999";
         imagebox.style.left = "50%";
         imagebox.style.top = "50%";
-        imagebox.style.transform = "translate(-50%,-50%) scale(1.8)";
+        imagebox.style.transform = "translate(-50%,-50%) scale(1.6)";
+
+        buttongroupbox.style.position = "fixed";
+        buttongroupbox.style.zIndex = "99999";
+        buttongroupbox.style.left = "50%";
+        buttongroupbox.style.top = "95%";
+        buttongroupbox.style.transform = "translate(-50%,-50%)";
+        //buttongroupbox.style.visibility = "visible";
 
         ImageZoomableRef.current.style.position = "fixed";
         ImageZoomableRef.current.style.zIndex = "10001";/*
@@ -65,15 +74,16 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         ImageZoomableRef.current.style.bottom = "50px";
         ImageZoomableRef.current.style.right = "50px";*/
 
+
         console.log(ImageZoomableRef.current);
-        console.log(imagebox)
+        console.log(buttongroupbox)
         //append large image
 
 
       }
     }
   }
-  
+  /*
   useEffect(() => {
     window.onresize = () => {
       setIsFullScreen((document.fullscreenElement != null) ? true: false);
@@ -103,7 +113,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
       }
     }
   })
-
+*/
   return (
     <Box
       className="ImageZoomableContainer"
@@ -113,7 +123,9 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         setIsHovered(true);
       }}
       onMouseLeave={() => {
-        setIsHovered(false);
+        if (!isFullscreen) {
+          setIsHovered(false);
+        }
       }}
       onMouseDown={() => {
         setIsDragging(true);
