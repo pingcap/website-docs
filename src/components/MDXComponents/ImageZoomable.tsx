@@ -34,26 +34,19 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         console.log("gonna exit fullscreen mode")
         setIsFullScreen(false);
         let ele = ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0] as HTMLElement;
-        ele.style.backgroundColor = "rgba(0,0,0,0.7)";
         ele.style.opacity = "0";
-        ele.style.position = "fixed";
-        ele.style.zIndex = "99998";
-        ele.style.inset = "0";
-        ele.style.transition = "opacity 3s ease-in-out";
-        ele.style.pointerEvents = "none";
+        ele.style.transition = "opacity .15s ease-in-out";
+
         console.log("取消全屏")
 
         console.log(ele)
       } else {
-        /*ImageZoomableRef.current.requestFullscreen()
-          .catch((err) => {
-            console.error(`Error in enabling fullscreen mode: ${err.message}`);
-          });*/
+
         setIsFullScreen(true);
         let ele = ImageZoomableRef.current.getElementsByClassName("zoom-overlay")[0] as HTMLElement;
         console.log("设置全屏")
         ele.style.opacity = "1";
-
+        ele.style.transition = "opacity .3s ease-in-out";
         console.log(ele)
 
 
@@ -156,7 +149,7 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
                 left: (isFullscreen ? "50%" : "inherit"),
                 top: (isFullscreen ? "50%" : "inherit"),
                 transform: (isFullscreen ? "translate(-50%,-50%) scale(1.6)" : "inherit"),
-                //transition: "transform .3s cubic-bezier(.2,0,.2,1)"
+                transition: "transform .3s cubic-bezier(.2,0,.2,1)",
               }}>
               <img src={src} alt={alt}/>
             </TransformComponent>
@@ -167,11 +160,11 @@ export const ImageZoomable: React.FC<ImageZoomableWrapperProps> = ({ src, alt })
         className="zoom-overlay"
         sx={{
           backgroundColor: "rgba(0,0,0,0.7)",
-          opacity: (isFullscreen ? "1" : "0"),
-          position: (isFullscreen ? "fixed" : "inherit"),
-          zIndex: (isFullscreen ? "99998" : "inherit"),
-          inset: (isFullscreen ? "0" : "inherit"),
-          transition: "opacity 3s ease-in-out",
+          opacity: "0",
+          position: "fixed",
+          zIndex: "99998",
+          inset: "0",
+          pointerEvents: "none"
         }}
       />
     </Box>
