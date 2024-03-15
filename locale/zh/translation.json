@@ -140,6 +140,19 @@
     "scrollToTop": "回到顶部",
     "goToFeedback": "文档内容是否有帮助？"
   },
+  "releaseSubscription": {
+    "title": "订阅 LTS 版本更新",
+    "placeholder": "邮箱地址",
+    "button": {
+      "subscribe": "订阅",
+      "subscribing": "订阅中..."
+    },
+    "error": {
+      "invalidEmail": "无效邮箱地址。",
+      "networkError": "网络错误，请稍后重试。"
+    },
+    "success": "感谢订阅！当新的 LTS 版本发布时，我们会通过邮件通知您。"
+  },
   "banner": {
     "docDash2024": {
       "link": "https://asktug.com/t/topic/1019364",

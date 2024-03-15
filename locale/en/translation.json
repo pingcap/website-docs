@@ -143,6 +143,19 @@
     "scrollToTop": "Scroll to top",
     "goToFeedback": "Was this page helpful?"
   },
+  "releaseSubscription": {
+    "title": "Get future LTS release notice via email",
+    "placeholder": "Your email",
+    "button": {
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing..."
+    },
+    "error": {
+      "invalidEmail": "Invalid email address.",
+      "networkError": "Network error, please try again later."
+    },
+    "success": "Thank you! You will be notified when new LTS release comes out."
+  },
   "banner": {
     "docDash2024": {
       "link": "https://www.pingcap.com/event/tidb-docs-dash/",
