@@ -295,6 +295,26 @@ const VersionItemsArchived = (props: {
           </LinkComponent>
         </MenuItem>
       ))}
+      <LinkComponent
+        isI18n
+        to={generateLTSWebsiteUrlByLangAndType(language, pathConfig.repo)}
+        style={{
+          width: "100%",
+          color: "#666666",
+        }}
+      >
+        <FormLabel
+          sx={{
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
+            fontWeight: "bold",
+            pl: "0.5rem",
+            cursor: "pointer",
+          }}
+        >
+          {t("navbar.archive-label")}
+        </FormLabel>
+      </LinkComponent>
     </>
   );
 };
@@ -483,6 +503,34 @@ function generateArchivedWebsiteUrlByLangAndType(lang?: string, type?: string) {
       url = `${url}/tidb-data-migration/v1.0`;
       break;
     default:
+      break;
+  }
+
+  return url;
+}
+
+function generateLTSWebsiteUrlByLangAndType(lang?: string, type?: string) {
+  let url = LTS_WEBSITE_URL;
+
+  switch (lang) {
+    case "zh":
+      url = `${LTS_WEBSITE_URL}/zh`;
+      break;
+    case "jp":
+      url = `${LTS__WEBSITE_URL}/jp`;
+      break;
+    default:
+      break;
+  }
+  switch (type) {
+    case "tidb-in-kubernetes":
+      url = `${url}/tidb-in-kubernetes/stable`;
+      break;
+    case "tidb-data-migration":
+      url = `${url}/tidb/stable/dm-overview`;
+      break;
+    default:
+      url = `${url}/tidb/stable`;
       break;
   }
 

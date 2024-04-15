@@ -18,6 +18,7 @@
     "home": "文档中心",
     "archive-home": "归档文档中心",
     "archive-label": "归档文档",
+    "lts-label": "最新 LTS 文档",
     "tidb": "TiDB",
     "tools": "生态工具",
     "appdev": "开发指南",

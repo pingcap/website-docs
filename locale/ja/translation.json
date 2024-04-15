@@ -21,6 +21,7 @@
     "home": "Home",
     "archive-home": "Archived Docs Home",
     "archive-label": "Archived Docs",
+    "lts-label": "Latest LTS Docs",
     "tidb": "TiDB",
     "tools": "ツール",
     "cloud": "TiDB Cloud",
