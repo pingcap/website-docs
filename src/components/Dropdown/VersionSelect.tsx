@@ -16,6 +16,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { PathConfig, BuildType } from "static/Type";
 import { ARCHIVE_WEBSITE_URL } from "static";
+import { LTS_WEBSITE_URL } from "static";
 import { AllVersion } from "utils";
 import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
