@@ -312,7 +312,7 @@ const VersionItemsArchived = (props: {
             cursor: "pointer",
           }}
         >
-          {t("navbar.lts-label")}
+          {t("navbar.ltsLabel")}
         </FormLabel>
       </LinkComponent>
     </>
