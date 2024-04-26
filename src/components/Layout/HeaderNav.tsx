@@ -96,10 +96,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
       )}
 
       {["zh", "en"].includes(language) && (
-        <NavItem
-          label={t("navbar.asktug")}
-          to={generateAskTugUrl(language)}
-        />
+        <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
       )}
 
       <NavItem
@@ -107,20 +104,22 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         to={generateContactURL(language)}
       />
 
-      <NavItem
-        // label={<Trans i18nKey="navbar.download" />}
-        to={generateDownloadURL(language)}
-        alt="download"
-        startIcon={
-          <DownloadIcon
-            fontSize="inherit"
-            color="inherit"
-            sx={{
-              paddingTop: "0.5rem",
-            }}
-          />
-        }
-      />
+      {language === "zh" && (
+        <NavItem
+          // label={<Trans i18nKey="navbar.download" />}
+          to={generateDownloadURL(language)}
+          alt="download"
+          startIcon={
+            <DownloadIcon
+              fontSize="inherit"
+              color="inherit"
+              sx={{
+                paddingTop: "0.5rem",
+              }}
+            />
+          }
+        />
+      )}
     </Stack>
   );
 }
@@ -323,21 +322,23 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </MenuItem>
         )}
 
-        <MenuItem onClick={handleClose} disableRipple>
-          <LinkComponent
-            to={generateDownloadURL(language)}
-            style={{ width: "100%" }}
-            onClick={() =>
-              gtmTrack(GTMEvent.ClickHeadNav, {
-                item_name: t("navbar.download"),
-              })
-            }
-          >
-            <Typography variant="body1" component="div" color="website.f1">
-              <Trans i18nKey="navbar.download" />
-            </Typography>
-          </LinkComponent>
-        </MenuItem>
+        {language === "zh" && (
+          <MenuItem onClick={handleClose} disableRipple>
+            <LinkComponent
+              to={generateDownloadURL(language)}
+              style={{ width: "100%" }}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: t("navbar.download"),
+                })
+              }
+            >
+              <Typography variant="body1" component="div" color="website.f1">
+                <Trans i18nKey="navbar.download" />
+              </Typography>
+            </LinkComponent>
+          </MenuItem>
+        )}
 
         {["zh", "en"].includes(language) && (
           <MenuItem onClick={handleClose} disableRipple>
