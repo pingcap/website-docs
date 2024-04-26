@@ -7,7 +7,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import * as MDXConponents from "components/MDXComponents";
+import * as MDXComponents from "components/MDXComponents";
 import {
   CustomNotice,
   MachineTranslationNotice,
@@ -76,7 +76,7 @@ export default function MDXContent(props: {
         )}
         <MDXProvider
           components={{
-            ...MDXConponents,
+            ...MDXComponents,
             Link,
             pre: Pre,
           }}
