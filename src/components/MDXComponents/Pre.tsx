@@ -46,15 +46,10 @@ export const CodeBlock: React.FC<MdxCodeChildrenProps> = ({
     language = "sh";
   }
   const hlResult = useMemo<HighlightResult>(() => {
-    if (!hljs.getLanguage(language)) {
-      return {
-        language,
-        value: children,
-      } as HighlightResult;
-    }
-    return language
-      ? hljs.highlight(children, { language, ignoreIllegals: true })
-      : hljs.highlightAuto(children);
+    return hljs.highlight(children, {
+      language: hljs.getLanguage(language) ? language : "plaintext",
+      ignoreIllegals: true,
+    });
   }, [children, language]);
   const [isWrapped, setIsWrapped] = useState(false);
   const CodeWrapButton = () => {
