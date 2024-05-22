@@ -102,6 +102,8 @@ function EmailSubscriptionForm() {
                 placeholder={t("releaseSubscription.placeholder")}
                 value={formData.email}
                 onChange={handleChange}
+                error={!!formData.error}
+                helperText={formData.error === "invalidEmail" ? t('releaseSubscription.error.invalidEmail') : t('releaseSubscription.error.networkError')}
               />
               <Button
                 type="submit"
