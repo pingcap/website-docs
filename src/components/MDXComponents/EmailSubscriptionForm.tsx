@@ -13,9 +13,19 @@ type FormType = {
   loading: boolean;
   error: null | "invalidEmail" | "networkError";
 };
+export function EmailSubscriptionWrapper() {
+  const { language } = useI18next();
+  const disabled = language === Locale.ja;
+  
+  if (disabled) {
+  	return null;
+  }
+  
+  return <EmailSubscriptionForm />
+}
 
 // Collect email address that subscribe to TiDB release and send it to the SendGrid API
-export function EmailSubscriptionForm() {
+function EmailSubscriptionForm() {
   const { t, navigate } = useI18next();
 
   const API_URL =
