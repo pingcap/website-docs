@@ -58,9 +58,10 @@ function EmailSubscriptionForm() {
 
       try {
 
-        await axios.post(API_URL, undefined, {
+        const payload = new URLSearchParams({
           email: formData.email
-        });
+        })
+        await axios.post(API_URL, payload);
 
         setFormData({ ...formData, loading: false, error: null });
         setSuccess(true);
