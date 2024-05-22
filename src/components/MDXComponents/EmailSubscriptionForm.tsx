@@ -66,7 +66,6 @@ export function EmailSubscriptionForm() {
 
         setFormData({ ...formData, loading: false, error: null });
         setSuccess(true);
-        console.log("Email subscription form submitted");
       } catch (e) {
         setFormData({ ...formData, loading: false, error: "networkError" });
         console.error(e);
