@@ -103,19 +103,18 @@ import axios from "axios";
                 error={!!formData.error}
                 helperText={formData.error === "invalidEmail" ? t('releaseSubscription.error.invalidEmail') : t('releaseSubscription.error.networkError')}
               />
-              <Button
+import { LoadingButton } from "@mui/lab"
+
+              <LoadingButton
                 type="submit"
-                disabled={formData.loading}
                 variant="contained"
                 color="primary"
-                sx={{ marginLeft: "1rem" }}
+                loading={formData.loading}
+                loadingIndicator={t('releaseSubscription.button.subscribing')}
+                ml="1rem"
               >
-                {formData.loading ? (
-                  <Trans i18nKey="releaseSubscription.button.subscribing" />
-                ) : (
-                  <Trans i18nKey="releaseSubscription.button.subscribe" />
-                )}
-              </Button>
+                <Trans i18nKey="releaseSubscription.button.subscribe" />
+              </LoadingButton>
             </Box>
           </form>
           {formData.error && (
