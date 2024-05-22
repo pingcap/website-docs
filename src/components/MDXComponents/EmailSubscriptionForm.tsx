@@ -34,7 +34,6 @@ export function EmailSubscriptionForm() {
 
     try {
       schema.parse(formData.email);
-      console.log("Email is valid");
       return true;
     } catch (e) {
       console.error(e);
