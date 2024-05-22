@@ -82,7 +82,7 @@ function EmailSubscriptionForm() {
       {!success ? (
         <div>
           <form onSubmit={handleSubmit}>
-            <Box display="flex" alignItems="center">
+            <Box display="flex" alignItems="baseline">
               <TextField
                 size="small"
                 variant="outlined"
@@ -92,7 +92,7 @@ function EmailSubscriptionForm() {
                 value={formData.email}
                 onChange={handleChange}
                 error={!!formData.error}
-                helperText={formData.error === "invalidEmail" ? t('releaseSubscription.error.invalidEmail') : t('releaseSubscription.error.networkError')}
+                helperText={!!formData.error ? (formData.error === "invalidEmail" ? t('releaseSubscription.error.invalidEmail') : t('releaseSubscription.error.networkError')) : ' '}
               />
 
               <LoadingButton
@@ -101,7 +101,7 @@ function EmailSubscriptionForm() {
                 color="primary"
                 loading={formData.loading}
                 loadingIndicator={t('releaseSubscription.button.subscribing')}
-                ml="1rem"
+                sx={{ ml: '1rem' }}
               >
                 <Trans i18nKey="releaseSubscription.button.subscribe" />
               </LoadingButton>
