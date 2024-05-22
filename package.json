@@ -66,7 +66,8 @@
     "redux": "^4.1.2",
     "rehype-katex": "5.0.0",
     "remark-math": "3.0.1",
-    "signale": "^1.4.0"
+    "signale": "^1.4.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@prantlf/railroad-diagrams": "^1.0.1",
