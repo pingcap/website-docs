@@ -17,7 +17,7 @@ export {
   DocHomeContainer,
   DocHomeSection,
 } from "components/MDXComponents/DocHome";
-export { EmailSubscriptionForm } from "components/MDXComponents/EmailSubscriptionForm";
+export { EmailSubscriptionWrapper } from "components/MDXComponents/EmailSubscriptionForm";
 export {
   LearningPath,
   LearningPathContainer,

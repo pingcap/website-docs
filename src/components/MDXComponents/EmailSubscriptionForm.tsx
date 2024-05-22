@@ -107,15 +107,6 @@ function EmailSubscriptionForm() {
               </LoadingButton>
             </Box>
           </form>
-          {formData.error && (
-            <p sx={{ color: "#ef5350"}}>
-              {formData.error === "invalidEmail" ? (
-                <Trans i18nKey="releaseSubscription.error.invalidEmail" />
-              ) : (
-                <Trans i18nKey="releaseSubscription.error.networkError" />
-              )}
-            </p>
-          )}
         </div>
       ) : (
         <Box>
