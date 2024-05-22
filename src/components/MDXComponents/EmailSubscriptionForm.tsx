@@ -2,6 +2,9 @@ import { Trans, useI18next } from "gatsby-plugin-react-i18next"
 import { useState } from "react"
 import { z } from "zod"
 
+import axios from "axios"
+
+import { LoadingButton } from "@mui/lab"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 
@@ -11,16 +14,7 @@ type FormType = {
   loading: boolean;
   error: null | "invalidEmail" | "networkError";
 };
-export function EmailSubscriptionWrapper() {
-  const { language } = useI18next();
-  const disabled = language === Locale.ja;
-  
-  if (disabled) {
-  	return null;
-  }
-  
-  return <EmailSubscriptionForm />
-}
+
 
 // Collect email address that subscribe to TiDB release and send it to the SendGrid API
 function EmailSubscriptionForm() {
@@ -63,7 +57,6 @@ function EmailSubscriptionForm() {
       setFormData({ ...formData, loading: true, error: null });
 
       try {
-import axios from "axios";
 
         await axios.post(API_URL, undefined, {
           email: formData.email
@@ -101,7 +94,6 @@ import axios from "axios";
                 error={!!formData.error}
                 helperText={formData.error === "invalidEmail" ? t('releaseSubscription.error.invalidEmail') : t('releaseSubscription.error.networkError')}
               />
-import { LoadingButton } from "@mui/lab"
 
               <LoadingButton
                 type="submit"
@@ -141,4 +133,15 @@ import { LoadingButton } from "@mui/lab"
       )}
     </div>
   );
+}
+
+export function EmailSubscriptionWrapper() {
+  const { language } = useI18next();
+  const disabled = language === Locale.ja;
+  
+  if (disabled) {
+  	return null;
+  }
+  
+  return <EmailSubscriptionForm />
 }
