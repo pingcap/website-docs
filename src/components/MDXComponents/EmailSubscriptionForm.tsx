@@ -8,6 +8,7 @@ import { LoadingButton } from "@mui/lab"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 
+import { Locale } from "static/Type"
 
 type FormType = {
   email: string;
@@ -18,7 +19,7 @@ type FormType = {
 
 // Collect email address that subscribe to TiDB release and send it to the SendGrid API
 function EmailSubscriptionForm() {
-  const { t, navigate } = useI18next();
+  const { t } = useI18next();
 
   const API_URL =
     "https://03tryjsrrb.execute-api.us-west-2.amazonaws.com/Prod/subscribe/";
