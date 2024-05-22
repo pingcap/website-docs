@@ -65,12 +65,10 @@ function EmailSubscriptionForm() {
       setFormData({ ...formData, loading: true, error: null });
 
       try {
-        await fetch(API_URL, {
-          method: "POST",
-          body: `email=${formData.email}`,
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
+import axios from "axios";
+
+        await axios.post(API_URL, undefined, {
+          email: formData.email
         });
 
         setFormData({ ...formData, loading: false, error: null });
