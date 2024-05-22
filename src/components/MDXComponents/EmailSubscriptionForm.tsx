@@ -1,12 +1,10 @@
-import { Trans, useI18next } from "gatsby-plugin-react-i18next";
-import { useState } from "react";
-import { z } from "zod";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next"
+import { useState } from "react"
+import { z } from "zod"
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField"
 
-import { errorMessage } from "./email-subscription-form.module.css";
 
 type FormType = {
   email: string;
@@ -118,7 +116,7 @@ import { LoadingButton } from "@mui/lab"
             </Box>
           </form>
           {formData.error && (
-            <p className={errorMessage}>
+            <p sx={{ color: "#ef5350"}}>
               {formData.error === "invalidEmail" ? (
                 <Trans i18nKey="releaseSubscription.error.invalidEmail" />
               ) : (
