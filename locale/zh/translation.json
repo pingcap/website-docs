@@ -141,7 +141,7 @@
     "goToFeedback": "文档内容是否有帮助？"
   },
   "releaseSubscription": {
-    "title": "订阅 LTS 版本更新",
+    "title": "订阅 LTS 版本更新：",
     "placeholder": "邮箱地址",
     "button": {
       "subscribe": "订阅",
