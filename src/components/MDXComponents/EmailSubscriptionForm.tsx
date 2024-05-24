@@ -114,7 +114,7 @@ function EmailSubscriptionForm() {
                     color: "rgba(0, 0, 0, 0.26)"
                   },
                   ".MuiLoadingButton-loadingIndicator": {
-                    position: 'auto',
+                    position: 'initial',
                     left: 'auto',
                     transform: 'none',
                     mr: 1
