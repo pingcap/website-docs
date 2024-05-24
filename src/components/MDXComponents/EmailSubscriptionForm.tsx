@@ -77,7 +77,7 @@ function EmailSubscriptionForm() {
     <div>
       <p>
         <strong>
-          <Trans i18nKey="releaseSubscription.title" />:
+          <Trans i18nKey="releaseSubscription.title" />
         </strong>
       </p>
 
