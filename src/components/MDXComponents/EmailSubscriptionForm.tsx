@@ -77,7 +77,7 @@ function EmailSubscriptionForm() {
     <div>
       <p>
         <strong>
-          <Trans i18nKey="releaseSubscription.title" />:
+          <Trans i18nKey="releaseSubscription.title" />
         </strong>
       </p>
 
@@ -100,10 +100,26 @@ function EmailSubscriptionForm() {
               <LoadingButton
                 type="submit"
                 variant="contained"
-                color="primary"
                 loading={formData.loading}
-                loadingIndicator={t('releaseSubscription.button.subscribing')}
-                sx={{ ml: '1rem' }}
+                aria-label="subscribe"
+                sx={{
+                  ml: 2,
+                  backgroundColor: "website.k1",
+                  boxShadow: "none",
+                  "&:hover": {
+                    backgroundColor: "#0A85C2",
+                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
+                  },
+                  "&.MuiLoadingButton-loading": {
+                    color: "rgba(0, 0, 0, 0.26)"
+                  },
+                  ".MuiLoadingButton-loadingIndicator": {
+                    position: 'auto',
+                    left: 'auto',
+                    transform: 'none',
+                    mr: 1
+                  }
+                }}
               >
                 <Trans i18nKey="releaseSubscription.button.subscribe" />
               </LoadingButton>

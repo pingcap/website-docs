@@ -144,7 +144,7 @@
     "goToFeedback": "Was this page helpful?"
   },
   "releaseSubscription": {
-    "title": "Get future LTS release notice via email",
+    "title": "Get future Long-Term Support (LTS) release notices via email:",
     "placeholder": "Your email",
     "button": {
       "subscribe": "Subscribe",
@@ -154,7 +154,7 @@
       "invalidEmail": "Invalid email address.",
       "networkError": "Network error, please try again later."
     },
-    "success": "Thank you! You will be notified when new LTS release comes out."
+    "success": "Thank you! You will be notified when a new TiDB LTS release comes out."
   },
   "banner": {
     "docDash2024": {
