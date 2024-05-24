@@ -1,12 +1,13 @@
 {
-  "index_name": "zh-tidb-v7.5",
+  "index_name": "en-tidb-v8.1",
   "docs_info": {
     "owner": "pingcap",
-    "docs_repo": "docs-cn",
-    "ref": "release-7.5",
+    "docs_repo": "docs",
+    "ref": "release-8.1",
     "docs_prefix": "tidb",
-    "lang": "zh",
-    "version": "v7.5"
+    "lang": "en",
+    "version": "v8.1",
+    "isStable": true
   },
   "start_urls": [],
   "crawl_local_url": "",
