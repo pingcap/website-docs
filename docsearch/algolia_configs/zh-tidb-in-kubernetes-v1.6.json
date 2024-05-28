@@ -1,12 +1,13 @@
 {
-    "index_name": "en-tidb-in-kubernetes-v1.5",
+    "index_name": "zh-tidb-in-kubernetes-v1.6",
     "docs_info": {
       "owner": "pingcap",
       "docs_repo": "docs-tidb-operator",
-      "ref": "release-1.5",
+      "ref": "release-1.6",
       "docs_prefix": "tidb-in-kubernetes",
-      "lang": "en",
-      "version": "v1.5"
+      "lang": "zh",
+      "version": "v1.6",
+      "isStable": true
     },
     "start_urls": [],
     "crawl_local_url": "",

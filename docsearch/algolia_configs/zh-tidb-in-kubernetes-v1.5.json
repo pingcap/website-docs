@@ -6,8 +6,7 @@
       "ref": "release-1.5",
       "docs_prefix": "tidb-in-kubernetes",
       "lang": "zh",
-      "version": "v1.5",
-      "isStable": true
+      "version": "v1.5"
     },
     "start_urls": [],
     "crawl_local_url": "",
