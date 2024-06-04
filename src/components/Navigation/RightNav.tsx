@@ -150,14 +150,6 @@ export default function RightNav(props: RightNavProps) {
             >
               <TerminalIcon />
               <Trans i18nKey="navbar.playground" />
-              <Chip
-                label={t("doc.new")}
-                size="small"
-                sx={{
-                  color: "#FC5B00",
-                  backgroundColor: "rgba(252, 91, 0, 0.1)",
-                }}
-              />
             </Typography>
             <Typography
               component="a"
