@@ -84,7 +84,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
       {["en", "ja"].includes(language) && (
         <NavItem
           label={t("navbar.playground")}
-          to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
+          to={`https://play.tidbcloud.com`}
           // startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
           onClick={() =>
             gtmTrack(GTMEvent.GotoPlayground, {
@@ -303,7 +303,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
         {["en", "ja"].includes(language) && (
           <MenuItem onClick={handleClose} disableRipple>
             <LinkComponent
-              to={`https://play.tidbcloud.com?utm_source=docs&utm_medium=menu`}
+              to={`https://play.tidbcloud.com`}
               style={{ width: "100%" }}
               onClick={() => {
                 gtmTrack(GTMEvent.ClickHeadNav, {
