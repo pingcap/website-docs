@@ -29,7 +29,6 @@ module.exports = {
       options: {
         id: "GTM-TPX49SBK",
         includeInDevelopment: false,
-        routeChangeEventName: "page_view",
       },
     },
     `gatsby-plugin-root-import`,
