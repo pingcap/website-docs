@@ -293,8 +293,12 @@ export const ZH_FOOTER_ITEMS = [
         url: "https://cn.pingcap.com/product/#SelectProduct",
       },
       {
-        name: "TiDB Cloud",
-        url: "https://www.pingcap.com/tidb-cloud",
+        name: "TiDB Dedicated",
+        url: "https://www.pingcap.com/tidb-dedicated/",
+      },
+      {
+        name: "TiDB Serverless",
+        url: "https://www.pingcap.com/tidb-serverless/",
       },
     ],
   },
@@ -377,8 +381,12 @@ export const JA_FOOTER_ITEMS = [
     name: "製品",
     items: [
       {
-        name: "TiDB Cloud",
-        url: "https://pingcap.co.jp/tidb-cloud/",
+        name: "TiDB Dedicated",
+        url: "https://pingcap.co.jp/tidb-dedicated/",
+      },
+      {
+        name: "TiDB Serverless",
+        url: "https://pingcap.co.jp/tidb-serverless/",
       },
       {
         name: "TiDB",
