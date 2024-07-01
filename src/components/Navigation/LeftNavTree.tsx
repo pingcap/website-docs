@@ -171,16 +171,7 @@ export default function ControlledTreeView(props: {
               paddingBottom: "0.25rem",
             }}
           >
-            {item.link ? (
-              <LinkComponent
-                to={item.link}
-                style={{ width: "100%", color: "inherit" }}
-              >
-                {generateItemLabel(item.content)}
-              </LinkComponent>
-            ) : (
-              generateItemLabel(item.content)
-            )}
+            {generateItemLabel(item.content)}
             {hasChildren ? (
               <ChevronRightIcon
                 className="MuiTreeItem-ChevronRightIcon"
@@ -197,21 +188,26 @@ export default function ControlledTreeView(props: {
         );
       };
       return (
-        <StyledTreeItem
-          key={item.id}
-          nodeId={item.id}
-          label={<LabelEle />}
-          // onClick={() => {
-          //   console.log(item.id);
-          // }}
-          ContentProps={{
-            style: { width: "inherit" },
-          }}
+        <LinkComponent
+          to={item.link}
+          style={{ width: "100%", color: "inherit" }}
         >
-          {hasChildren
-            ? renderTreeItems(item.children as DocLeftNavItem[], deepth + 1)
-            : null}
-        </StyledTreeItem>
+          <StyledTreeItem
+            key={item.id}
+            nodeId={item.id}
+            label={<LabelEle />}
+            // onClick={() => {
+            //   console.log(item.id);
+            // }}
+            ContentProps={{
+              style: { width: "inherit" },
+            }}
+          >
+            {hasChildren
+              ? renderTreeItems(item.children as DocLeftNavItem[], deepth + 1)
+              : null}
+          </StyledTreeItem>
+        </LinkComponent>
       );
     });
   };
