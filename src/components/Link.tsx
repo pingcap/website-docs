@@ -4,11 +4,16 @@ import { Link as I18nLink } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
 
 export default function LinkComponent(props: {
-  to: string;
+  to?: string;
   style?: { [key: string]: any };
   isI18n?: boolean;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
 }) {
+  if (!props.to) {
+    return props.children;
+  }
+
   const { to, style, isI18n, ...rest } = props;
   const isExternal = props.to.startsWith("http");
   if (isExternal) {
