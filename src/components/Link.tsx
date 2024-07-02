@@ -7,6 +7,7 @@ export default function LinkComponent(props: {
   to?: string;
   style?: { [key: string]: any };
   isI18n?: boolean;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
 }) {
   if (!props.to) {

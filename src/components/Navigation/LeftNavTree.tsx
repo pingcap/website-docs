@@ -191,6 +191,7 @@ export default function ControlledTreeView(props: {
         <LinkComponent
           to={item.link}
           style={{ width: "100%", color: "inherit" }}
+          onClick={(e) => e.stopPropagation()}
         >
           <StyledTreeItem
             key={item.id}
