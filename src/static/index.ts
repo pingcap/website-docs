@@ -228,7 +228,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "FAQs",
-        url: "/tidb/stable/faq-overview",
+        url: "https://docs.pingcap.com/tidb/stable/faq-overview",
       },
       {
         name: "Blog",
@@ -328,11 +328,11 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "常见问题解答",
-        url: "/tidb/stable/faq-overview",
+        url: "https://docs.pingcap.com/zh/tidb/stable/faq-overview",
       },
       {
         name: "开发者手册",
-        url: "/tidb/stable/dev-guide-overview",
+        url: "https://docs.pingcap.com/zh/tidb/stable/dev-guide-overview",
       },
       {
         name: "博客",
@@ -424,11 +424,11 @@ export const JA_FOOTER_ITEMS = [
     items: [
       {
         name: "よくあるご質問",
-        url: "/tidb/stable/faq-overview",
+        url: "https://docs.pingcap.com/ja/tidb/stable/faq-overview",
       },
       {
         name: "開発者ガイド",
-        url: "/tidb/stable/dev-guide-overview",
+        url: "https://docs.pingcap.com/ja/tidb/stable/dev-guide-overview",
       },
       {
         name: "ニュース&ブログ",
