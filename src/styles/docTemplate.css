@@ -98,5 +98,9 @@
     pre {
       margin-top: 1rem;
     }
+
+    .footnotes ol {
+      list-style-type: disc;
+    }
   }
 }
