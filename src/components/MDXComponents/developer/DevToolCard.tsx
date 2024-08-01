@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -12,9 +13,10 @@ import {
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Link } from "gatsby";
+import { Logo, logoSrc } from "./logo";
 
 interface DevToolCardProps {
-  logo?: string;
+  logo: Logo;
   title: string;
   docLink: string;
   githubLink?: string;
@@ -67,9 +69,17 @@ export function DevToolCard({
               sx={{
                 width: "36px",
                 height: "36px",
+                backgroundColor: 'transparent',
+                borderRadius: 0
               }}
             >
-              Logo
+              <Box
+                component="img"
+                src={logoSrc[logo]}
+                alt={title}
+                loading="lazy"
+                maxHeight={36}
+              />
             </Avatar>
           }
           title={title}
