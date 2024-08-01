@@ -11,7 +11,7 @@ export default function LinkComponent(props: {
   [key: string]: any;
 }) {
   if (!props.to) {
-    return props.children;
+    return <>{props.children}</>;
   }
 
   const { to, style, isI18n, ...rest } = props;
