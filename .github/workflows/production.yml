@@ -55,9 +55,6 @@ jobs:
       - name: Install deps
         run: yarn
 
-      - name: Clean up temporary files
-        run: sudo rm -rf /tmp/*
-
       - name: Calc gatsby cache key
         id: calc-cache-key
         run: |
@@ -78,6 +75,11 @@ jobs:
           key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}
           restore-keys: |
             ${{ runner.os }}-gatsby-cache-docs-staging-
+
+      - name: Clean up temporary files
+        run: |
+          sudo rm -rf /tmp/*
+          sudo rm -rf /home/runner/work/_temp/*
 
       - name: Build website
         if: ${{ !inputs.fallback || (steps.gatsby-cache.outputs.cache-hit != 'true') }}
