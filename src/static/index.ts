@@ -547,3 +547,5 @@ export const ZH_DOC_TYPE_LIST = [
 ];
 
 export const ARCHIVE_WEBSITE_URL = "https://docs-archive.pingcap.com";
+
+export const LTS_WEBSITE_URL = "https://docs.pingcap.com";
