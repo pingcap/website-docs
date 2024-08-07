@@ -64,21 +64,6 @@ const fetchTidbSearchIndcies = (lang: string, lts = 1, dmr = 1) => {
       ? TIDB_EN_SEARCH_INDEX_VERSION
       : TIDB_ZH_SEARCH_INDEX_VERSION),
   ];
-  const tidbVersions = (
-    lang === "en" ? TIDB_EN_VERSIONS : TIDB_ZH_VERSIONS
-  ).filter((version) => version !== "dev");
-  const tidbDmrVersions = TIDB_EN_DMR_PRETTY_VERSION;
-  const tidbLtsVersions = [];
-  for (let i = 0; i < tidbVersions.length; i++) {
-    !tidbDmrVersions.includes(tidbVersions[i]) &&
-      tidbLtsVersions.push(tidbVersions[i]);
-  }
-  tidbLtsVersions.slice(0, lts).forEach((version) => {
-    tidbSearchIndices.push(version);
-  });
-  tidbDmrVersions.slice(0, dmr).forEach((version) => {
-    tidbSearchIndices.push(version);
-  });
   return tidbSearchIndices.sort().reverse();
 };
 
