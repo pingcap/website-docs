@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xml:space="preserve"
+  stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round"
+  viewBox="0 0 2600 900">
+  <g vectornator:layerName="Layer 1">
+    <g vectornator:layerName="LOGO1">
+      <g vectornator:layerName="Gopher">
+        <g vectornator:layerName="query">
+          <g vectornator:layerName="Group 3">
+            <path vectornator:layerName="circle" fill="#8fd2f9" fill-rule="evenodd"
+              d="M1024 438c5-16 22-25 39-20 16 5 26 22 21 38s-22 26-39 21-26-23-21-39Z" />
+          </g>
+          <g vectornator:layerName="g 1">
+            <path vectornator:layerName="path" fill="#38b6ff"
+              d="m1083 486-8-15c4-4 7-9 9-15 5-16-4-33-21-38s-34 4-39 20c-5 17 4 34 21 39 6 2 12 2 18 0l8 15c2 3 6 4 9 3 3-2 4-6 3-9Zm-37-11c-16-5-25-21-20-36s21-24 36-19c16 4 25 20 20 36-5 15-21 24-36 19Zm33 18c-2 1-5 0-6-2l-8-14 8-5 8 15c1 2 0 5-2 6Z" />
+            <path vectornator:layerName="path" fill="#38b6ff" d="m1081 487-8-16-9 5 9 16 3 3 3-1c3-1 4-4 2-7Z" />
+            <path vectornator:layerName="path" fill="#fff"
+              d="M1061 423c-13-4-27 4-31 17s4 27 17 31 27-4 31-17-4-27-17-31Zm-14 46c-12-4-19-17-15-29s16-18 28-15c13 4 19 17 16 29-4 12-17 18-29 15Z" />
+            <path vectornator:layerName="path" fill="#fff"
+              d="M1057 431a1 1 0 1 0-1 2c8 2 13 11 11 19v1h2c2-10-3-19-12-22Z" />
+          </g>
+        </g>
+        <g vectornator:layerName="g">
+          <g vectornator:layerName="g" fill-rule="evenodd">
+            <path vectornator:layerName="path" fill="#46bbff" d="M1321 373c1-4 8-10 11-11 38-15 25 28 3 26" />
+            <path vectornator:layerName="path"
+              d="M1346 354h1v1h5v1h2v1h2v1h1v1h1v2h1v2h1v11h-1v3h-1v2h-1v1l-1 1v1h-1v1h-1v1l-1 1v1h-1l-1 1h-1v1h-1v1h-1v1h-2v1h-2v1h-4v1h-7v-1h-1v-1h-1v-1h-1v-3h1v-2h1l1-1h6l1-1h2v-1h2v-1h1v-1h1v-1h1v-1h1v-1h1v-2h1v-2h1v-4h1v-2h-1v-2h-1v-1h-2v-1h-4v1h-5v1h-3v1h-3v1h-1v1h-2v1h-1v1h-1v1h-1v1h-1v1h-1v2h-1v1h-1v1h-4v-1h-1v-1h-1v-6h1v-1h1v-2h1v-1h1v-1h1v-1h2v-1h1v-1h1v-1h2v-1h2v-1h2v-1h3v-1h3v-1h7v-1h1Zm-21 19Z" />
+          </g>
+          <path vectornator:layerName="path" fill="#d6c295" fill-rule="evenodd" stroke="#000" stroke-width="5"
+            d="M1074 497s30 9 41-6 0-26-12-19c-12 8-25 14-36 11s-13 14 7 14Z" />
+          <path vectornator:layerName="path" fill="none" stroke="#38b6ff" stroke-width="5"
+            d="M1186 273s15-16 21 24M1239 269s-15-15-20 26M1199 256s8-5 12 6c2 5 3 13 2 28" />
+          <g vectornator:layerName="g">
+            <path vectornator:layerName="path" fill="#38b6ff" fill-rule="evenodd"
+              d="M1119 607s-17-33-14-61c10-88-16-105-6-159 4-19 10-40 22-56 25-34 73-51 114-43 17 3 32 10 47 18 52 27 63 86 56 135-3 22-22 55-19 77 6 46 4 70-10 100-12 25-59 43-111 38-8-1-61-10-79-49Z" />
+            <g vectornator:layerName="path">
+              <clipPath id="a">
+                <path
+                  d="M1119 607s-17-33-14-61c10-88-16-105-6-159 4-19 10-40 22-56 25-34 73-51 114-43 17 3 32 10 47 18 52 27 63 86 56 135-3 22-22 55-19 77 6 46 4 70-10 100-12 25-59 43-111 38-8-1-61-10-79-49Z" />
+              </clipPath>
+              <g fill="#46bbff" fill-rule="evenodd" clip-path="url(#a)">
+                <path vectornator:layerName="path"
+                  d="M1304 327s18 42 7 76c-10 35-29 82-26 130 3 47-2 78-13 91-21 28-79 32-94 27-14-4 59 15 100-1 42-17 48-88 42-132-5-44 30-57 18-133-19-45-19-42-34-58Z" />
+                <path vectornator:layerName="path"
+                  d="M1235 393s5 25 36 24c31-2 33-33 33-33l-25 3-44 6ZM1103 379s5 26 36 25c31-2 33-33 33-33l-69 8Z" />
+              </g>
+            </g>
+            <path vectornator:layerName="path" fill-rule="evenodd"
+              d="M1215 281h9v1h8v1h6v1h4v1h4v1h3v1h3v1h3v1h3v1h2v1h3v1h2v1h2v1h2l1 1h1l1 1h1l1 1h1l1 1h1l1 1h1l1 1h1l1 1h1v1h2v1h2v1h2v1h1v1h2v1h1l1 1h1v1h1v1h2v1h1v1h1l1 1h1v1h1v1h1v1h1v1h1v1h1v1h1l1 1 1 1h1v1l1 1 1 1v1h1v1h1v1h1v1h1v1h1v2h1v1h1v1h1v2h1v1h1v2h1v1h1v2h1v1l1 1v1h1v2h1v2h1v2h1v2h1v2h1v2l1 1v2h1v3h1v2h1v3l1 1v3h1v3l1 1v4h1v4l1 1v5l1 1v7l1 1v35h-1v8h-1v6h-1v4h-1v4h-1v3h-1v3h-1v3h-1v3h-1v2l-1 1v2l-1 1v2l-1 1v2l-1 1v2l-1 1v2l-1 1v2l-1 1v3h-1v3h-1v4h-1v5h-1v7h-1v7h1v9h1v9l1 1v15h1v16h-1v12h-1v6h-1v5h-1v4l-1 1v3h-1v3h-1v3h-1v3h-1v2l-1 1v2h-1v2h-1v2l-1 1v2h-1v2h-1v1l-1 1v1h-1v2h-1v1h-1v1h-1v1h-1v1l-1 1v1h-1v1h-1v1h-2v1h-1v1h-1v1h-1v1h-1v1h-2v1h-1v1h-2v1h-1v1h-2v1h-2v1h-1v1h-2v1h-2v1h-2l-1 1h-2v1h-2v1h-2l-1 1h-2v1h-3v1h-3v1h-3l-1 1h-3v1h-4v1h-5v1h-6v1h-7l-1 1h-36v-1h-6l-1-1h-4v-1h-4l-1-1h-3v-1h-4v-1h-3v-1h-3v-1h-2v-1h-3v-1h-2v-1h-3v-1h-2v-1h-2v-1h-2v-1h-2v-1h-2v-1h-1v-1h-2v-1h-2v-1h-1v-1h-2v-1h-1v-1h-1v-1h-2v-1h-1v-1h-1v-1h-1v-1h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1l-1-1v-1h-1v-1h-1v-1h-1v-2h-1v-1h-1v-2h-1v-1h-1v-2h-1v-2h-1v-2h-1v-2h-1v-2h-1v-2l-1-1v-2h-1v-2h-1v-3h-1v-3h-1v-3h-1v-3h-1v-3h-1v-4h-1v-4l-1-1v-5h-1v-8h-1v-15h1v-9h1v-15h1v-28h-1v-13h-1v-8h-1v-7h-1v-6h-1v-6h-1v-5l-1-1v-5h-1v-6h-1v-7h-1v-10h-1v-17h1v-10h1v-6h1v-5h1v-5h1v-4h1v-3l1-1v-3h1v-3h1v-3l1-1v-2h1v-3h1v-2h1v-3h1v-2h1v-2h1v-2h1v-2h1v-2h1v-2h1v-1l1-1v-1h1v-2h1v-1h1v-2h1v-1h1v-1h1v-2h1v-1h1v-1h1v-1h1v-1h1v-1h1v-1l1-1 1-1 1-1 1-1 1-1h1v-1h1v-1h1v-1h1v-1h1v-1h1v-1h2v-1h1v-1h1v-1h2v-1h1v-1h2v-1h1v-1h2v-1h1v-1h2v-1h2v-1h2v-1h1l1-1h1l1-1h2v-1h2v-1h2v-1h2l1-1h2v-1h3v-1h3v-1h3v-1h3v-1h4v-1h5v-1h6v-1h9v-1h9Zm0 9h-10v1h-8v1h-6v1h-4v1h-4v1h-3v1h-3v1h-3v1h-3v1h-2v1h-2v1h-3v1h-2v1h-2v1h-1l-1 1h-1v1h-2v1h-2v1h-1v1h-2v1h-1v1h-2v1h-1v1h-1l-1 1h-1v1h-1v1h-1v1h-2v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-1v2h-1v1h-1v1h-1v1h-1v2h-1v1h-1v2h-1v1h-1v2h-1v2h-1v2h-1v1l-1 1v2h-1v2h-1v2h-1v2l-1 1v2h-1v3h-1v3h-1v3h-1v3h-1v4h-1v4h-1v4h-1v5h-1v6h-1v9h-1v19l1 1v8l1 1v6h1v6h1v5l1 1v5h1v5l1 1v6h1v7h1v9h1v14l1 1v22h-1v16l-1 1v10h-1v16h1v7h1v5h1v4h1v4h1v3h1v3h1v3h1v3h1v2h1v3h1v2h1v2h1v2h1v2h1v2h1v2h1v1h1v2h1v1h1v1l1 1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1l1 1h1v1h1v1h1v1h2v1h1v1h2v1h2v1h1v1h2v1h2v1h2v1h2v1h2v1h2l1 1h2v1h2l1 1h2l1 1h2v1h4v1h3v1h4v1h5v1h5v1h14v1h10v-1h14v-1h7v-1h5l1-1h4v-1h4v-1h4v-1h3v-1h3v-1h3v-1h2v-1h2l1-1h2v-1h2v-1h2v-1h2v-1h1v-1h2v-1h2v-1h1v-1h2v-1h1v-1h1v-1h2v-1h1v-1h1v-1h1v-1h1v-1h1v-1h1v-1h1v-2h1v-1h1v-1h1v-2h1v-2h1v-2h1v-2l1-1v-2h1v-2h1v-3h1v-3h1v-3h1v-3h1v-4h1v-5h1v-6h1v-10h1v-21h-1v-13h-1v-9l-1-1v-9h-1v-5h1v-8l1-1v-4h1v-4h1v-4h1v-3h1v-3l1-1v-3h1v-3h1v-2l1-1v-2h1v-3l1-1v-2h1v-3h1v-3h1v-3h1v-3h1v-4h1v-3l1-1v-4l1-1v-7l1-1v-36h-1v-8h-1v-5h-1v-5h-1v-4h-1v-3h-1v-3l-1-1v-2h-1v-3h-1v-3h-1v-2h-1v-2h-1v-2h-1v-2h-1v-2h-1v-2h-1v-2h-1v-1h-1v-2h-1v-1h-1v-2h-1v-1h-1v-2h-1v-1h-1v-1h-1v-1l-1-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-2v-1h-1v-1h-1v-1h-1v-1h-2v-1h-1v-1h-1l-1-1h-1v-1h-2v-1h-1v-1h-2v-1h-2v-1h-1l-1-1h-1l-1-1h-1l-1-1h-1l-1-1h-1v-1h-2v-1h-2l-1-1h-1l-1-1h-2v-1h-2v-1h-2v-1h-3v-1h-2v-1h-3v-1h-3v-1h-3v-1h-3v-1h-4l-1-1h-5v-1h-7v-1h-10Z" />
+          </g>
+          <g vectornator:layerName="GORM" fill="#38b6ff">
+            <path
+              d="M621 705c149 0 234-90 234-224v-8c0-37-20-58-55-58H671c-27 0-44 15-44 40 0 26 17 41 44 41h77l-1 8c-2 66-52 110-124 110-88 0-144-70-144-185 0-112 53-178 140-178 52 0 90 23 116 70 14 22 30 32 54 32 29 0 48-19 48-47 0-11-2-22-8-34-30-65-109-113-211-113-155 0-251 103-251 272 0 172 96 274 254 274ZM1159 705c149 0 243-105 243-272 0-168-94-274-243-274-150 0-244 106-244 274 0 167 94 272 244 272Zm0-60c-108 0-176-82-176-212 0-131 68-213 176-213s175 82 175 213c0 130-67 212-175 212ZM1532 704c35 0 55-21 55-57V503h95l87 160c18 32 31 41 57 41 32 0 56-21 56-50 0-13-3-22-12-38l-76-132c58-25 90-81 90-147 0-105-69-169-191-169h-161c-35 0-55 21-55 58v421c0 36 21 57 55 57Zm55-281V255h95c55 0 89 33 89 84 0 52-33 84-88 84h-96ZM2006 704c32 0 49-19 49-52V340h3l131 320c9 23 25 33 48 33s38-10 47-33l131-320h3v312c0 33 18 52 49 52s50-19 50-52V232c0-45-27-71-71-71-39 0-61 16-77 57l-131 325h-3l-131-325c-16-41-37-57-76-57-45 0-71 27-71 71v420c0 33 18 52 49 52Z" />
+          </g>
+          <path vectornator:layerName="path" fill="#d6c295" fill-rule="evenodd" stroke="#000" stroke-width="5"
+            d="M1353 531s-33-1-43-18c-10-18 2-30 14-20 12 9 24 17 36 15 12-3 13 24-7 23Z" />
+          <g vectornator:layerName="g" fill-rule="evenodd">
+            <path vectornator:layerName="path" fill="#46bbff" d="M1116 344c-3 2-7-1-9-3-33-25 11-35 21-15" />
+            <path vectornator:layerName="path"
+              d="M1109 311h4v1h5v1h2v1h2l1 1h1v1h2v1h1v1h1v1h1v1h1v2h1v1h1v6h-1v1h-2v1h-2v-1h-2v-1h-1v-2h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-2l-1-1h-3v-1h-8v1h-3v1h-1v1h-1v2h-1v1h1v2h1v2h1v1h1v1l1 1v1h1v1h2v1h1v1h1v1h1v1h2v1h7v1h1v1l1 1v3h-1v1l-1 1h-1v1h-7l-1-1h-2v-1h-2v-1h-1v-1h-1l-1-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-1h-1v-2h-1v-2h-1v-2h-1v-9l1-1v-1h1v-2h1v-1h1v-1h2v-1h1v-1h3v-1h4v-1h4Z" />
+          </g>
+          <path vectornator:layerName="path" fill="#8fd2f9" fill-rule="evenodd"
+            d="M1205 638c-53-9-65-34-68-45-6-21-9-61-4-83 2-8 5-16 11-22 13-14 69-15 90-12 8 1 16 4 23 7 27 11 36 140-14 152" />
+          <path vectornator:layerName="circle" fill="#b7f8ff" fill-rule="evenodd"
+            d="M1110 411a4 4 0 1 1 7 0 4 4 0 0 1-7 0ZM1292 417a4 4 0 1 1 7 0 4 4 0 0 1-7 0Z" />
+          <g vectornator:layerName="g" fill-rule="evenodd">
+            <g vectornator:layerName="g">
+              <path vectornator:layerName="path" fill="#ededed"
+                d="M1181 432c2 5 3 15 6 19 2 2 5 2 7 2 13-1 12-13 13-25" />
+              <path vectornator:layerName="path"
+                d="M1207 425h1l1 1h1v9l-1 1v7h-1v4h-1v2h-1v2h-1v1h-1v1h-1v1h-2v1h-2v1h-11v-1h-2v-1h-1v-1h-1v-1h-1v-2h-1v-2h-1v-4h-1v-4h-1v-4l-1-1v-6h1l1-1h2v1h1l1 1v2h1v4l1 1v4h1v3h1v3h1v2h2v1h4v-1h3v-1h2v-2h1v-2h1v-5h1v-12h1v-1h1v-1h2Z" />
+            </g>
+            <path vectornator:layerName="ellipse"
+              d="M1175 403c1-6 9-11 19-11 11 1 19 7 18 13 0 7-9 11-19 11-10-1-18-7-18-13Z" />
+            <path vectornator:layerName="path"
+              d="M1193 409h1v1h1l1 1v9h-1v9h-1v2h-1v1h-4v-1h-1v-8l1-1v-11h1v-1h1v-1h2Z" />
+            <path vectornator:layerName="path"
+              d="m1222 414 1 1 1 1v3l-1 1-1 1-1 1h-1v1h-1v1h-1v1h-1v1h-1v1h-2v1h-1v1h-2v1h-2v1h-2v1h-2v1h-3v1h-4v1h-15v-1h-4v-1h-3v-1h-3v-1h-2v-1h-2v-1h-2v-1h-2v-2h-1v-2h1v-1l1-1h4v1h2v1h2v1h2v1h3v1h3v1h7v1h3v-1h7v-1h3v-1h2v-1h2v-1h2v-1h2v-1h1v-1h1v-1h2v-1h1v-1h1v-1h1v-1h1v-1h1l1-1h2Z" />
+            <path vectornator:layerName="ellipse" fill="#b7f8ff"
+              d="M1150 312c0-2 2-4 6-6 4-1 8 0 8 2 1 2-2 5-6 6-3 1-7 0-8-2ZM1290 320c1-1 5 0 7 4 3 3 4 6 2 8-1 1-5 0-7-4-3-3-4-6-2-8Z" />
+            <path vectornator:layerName="circle" fill="#fff" stroke="#000" stroke-width="5"
+              d="M1098 363a38 38 0 1 1 75-11 38 38 0 0 1-75 11ZM1231 374a38 38 0 1 1 75-11 38 38 0 0 1-75 11Z" />
+            <path vectornator:layerName="circle"
+              d="M1138 337a13 13 0 1 1 14 23 13 13 0 0 1-14-23ZM1247 361a13 13 0 1 1 27-4 13 13 0 0 1-27 4Z" />
+            <path vectornator:layerName="circle" fill="#fff"
+              d="M1146 342a4 4 0 1 1 3 6 4 4 0 0 1-3-6ZM1254 356a4 4 0 1 1 8-1 4 4 0 0 1-8 1Z" />
+          </g>
+        </g>
+        <g vectornator:layerName="GORM" fill="#f47f39">
+          <path
+            d="M1165 533c-1 4-3 8-6 11-4 3-8 4-12 4s-7-1-9-3c-2-3-3-6-3-10l3-13c1-4 4-7 7-10 2-2 5-2 7-2l6 1c3 1 5 3 5 4l-1 3-2 1-4-2-4-1-6 4c-3 5-5 10-5 15l1 5 5 2 6-2 5-7-10 2-1 1-3-1-1-2c0-3 3-4 9-5l11-1 2 1 1 2-1 3ZM1185 548c-5 0-9-2-12-4-4-3-5-7-5-11 0-6 1-10 5-15 3-5 8-7 14-7 5 0 9 1 12 4 3 2 4 6 4 11s-1 10-4 14c-4 5-9 8-14 8Zm2-31c-4 0-7 2-9 5-3 3-4 7-4 11l3 6c2 2 5 2 8 2s6-1 8-5c2-3 3-6 3-10 0-3 0-6-2-7l-7-2ZM1231 547l-2-1c-5-5-10-8-16-10a392 392 0 0 1-1 10l-2 1a3 3 0 0 1-3-3 474 474 0 0 1 0-11v-18l1-3 3-2a495 495 0 0 1 12 2c6 4 10 8 10 13 0 2-1 4-3 5-1 2-3 3-6 4l9 7a3 3 0 0 1 0 5l-2 1Zm-15-30h-3v12h1l9-1 2-2 1-1c0-2-1-4-3-5l-7-3ZM1248 528a451 451 0 0 0-4 17c-1 2-2 3-4 3a3 3 0 0 1-3-3l2-10a316 316 0 0 0 6-23l3-1c1 0 2 0 3 2l2 8 3 13 5-15 1-5 4-4c2 0 3 2 4 4l1 6a122 122 0 0 0 6 25l-1 2-3 1c-1 0-3-1-3-3l-2-6-2-12-4 10-1 4-2 4c-1 2-2 2-3 2-2 0-3 0-4-2l-1-5-3-12Z" />
+        </g>
+      </g>
+      <g vectornator:layerName="Go">
+        <path vectornator:layerName="path 11" fill="#38b6ff" fill-rule="evenodd"
+          d="M166 387c-3 0-4-2-2-4l9-17c1-2 4-4 7-4h135c3 0 4 2 4 4l-1 17c0 2-3 4-5 4H166Z" />
+        <path vectornator:layerName="path 10" fill="#38b6ff" fill-rule="evenodd"
+          d="M6 326c-3 0-4-2-2-4l14-18c1-2 5-3 7-3h309c3 0 4 2 4 4l-6 16c0 2-3 4-6 4L6 326Z" />
+        <g vectornator:layerName="path 9">
+          <clipPath id="b">
+            <path d="M97 239h260v29H97v-29Z" />
+          </clipPath>
+          <g clip-path="url(#b)">
+            <path vectornator:layerName="path" fill="#38b6ff" fill-rule="evenodd"
+              d="M102 265c-2 0-3-1-2-3l15-18c1-2 4-4 7-4h242c3 0 3 2 2 5l-12 17c-1 2-4 4-6 4l-246-1Z" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
