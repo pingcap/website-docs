@@ -18,6 +18,8 @@ import { useTotalContributors } from "components/Avatar/Contributors";
 import replaceInternalHref from "utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 
+import { ImageZoomable } from "components/MDXComponents/ImageZoomable";
+
 export default function MDXContent(props: {
   data: any;
   className?: string;
@@ -79,6 +81,7 @@ export default function MDXContent(props: {
             ...MDXComponents,
             Link,
             pre: Pre,
+            img: ImageZoomable,
           }}
         >
           <MDXRenderer>{data}</MDXRenderer>
