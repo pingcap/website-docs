@@ -5,7 +5,12 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import RedditIcon from "@mui/icons-material/Reddit";
 
-import { StackOverflowIcon, SlackIcon, AskTugIcon, DiscordIcon } from "components/Icons";
+import {
+  StackOverflowIcon,
+  SlackIcon,
+  AskTugIcon,
+  DiscordIcon,
+} from "components/Icons";
 
 import { convertVersionName } from "utils";
 import CONFIG from "../../docs/docs.json";
@@ -75,7 +80,7 @@ export const EN_ICON_GROUP = [
     name: "reddit",
     href: "https://reddit.com/r/TiDB/",
     icon: RedditIcon,
-  }
+  },
 ];
 
 export const ZH_ICON_GROUP = [
@@ -491,7 +496,9 @@ export const JA_FOOTER_ITEMS = [
 export const TIDB_EN_STABLE_VERSION = CONFIG["docs"]["tidb"]["stable"];
 export const TIDB_EN_DMR_PRETTY_VERSION = CONFIG["docs"]["tidb"]["dmr"];
 export const TIDB_EN_SEARCH_INDEX_VERSION =
-  CONFIG["docs"]["tidb"]["searchIndex"] || [];
+  CONFIG["docs"]["tidb"]["searchIndex"]["en"] || [];
+export const TIDB_ZH_SEARCH_INDEX_VERSION =
+  CONFIG["docs"]["tidb"]["searchIndex"]["zh"] || [];
 export const DM_EN_LATEST_VERSION =
   CONFIG["docs"]["tidb-data-migration"]["languages"]["en"]["versions"][0];
 export const DM_EN_STABLE_VERSION = "";
@@ -500,7 +507,10 @@ export const OP_EN_STABLE_VERSION =
 
 export const TIDB_EN_VERSIONS = CONFIG["docs"]["tidb"]["languages"]["en"][
   "versions"
-].map((d) => convertVersionName(d, TIDB_EN_STABLE_VERSION));
+].map((d) => convertVersionName(d, ""));
+export const TIDB_ZH_VERSIONS = CONFIG["docs"]["tidb"]["languages"]["zh"][
+  "versions"
+].map((d) => convertVersionName(d, ""));
 
 export const DM_EN_VERSIONS = CONFIG["docs"]["tidb-data-migration"][
   "languages"

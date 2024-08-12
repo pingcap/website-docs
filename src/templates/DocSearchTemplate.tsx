@@ -33,6 +33,8 @@ import {
   CLOUD_EN_VERSIONS,
   EN_DOC_TYPE_LIST,
   ZH_DOC_TYPE_LIST,
+  TIDB_ZH_SEARCH_INDEX_VERSION,
+  TIDB_ZH_VERSIONS,
 } from "static";
 import { Locale } from "static/Type";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
@@ -41,7 +43,7 @@ import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 // TiDB Cloud: only has one version
 // TiDB Operator: get stable version
 // TiDB Data Migration: get latest version
-const fetchVersionListByDocType = (docType: string) => {
+const fetchVersionListByDocType = (docType: string, lang: string) => {
   switch (docType) {
     case "tidb-data-migration":
       return [DM_EN_LATEST_VERSION];
@@ -50,27 +52,18 @@ const fetchVersionListByDocType = (docType: string) => {
     case "tidbcloud":
       return CLOUD_EN_VERSIONS;
     case "tidb":
-      return fetchTidbSearchIndcies();
+      return fetchTidbSearchIndcies(lang);
     default:
       return [];
   }
 };
 
-const fetchTidbSearchIndcies = (lts = 2, dmr = 1) => {
-  const tidbSearchIndices: string[] = [...TIDB_EN_SEARCH_INDEX_VERSION];
-  const tidbVersions = TIDB_EN_VERSIONS.filter((version) => version !== "dev");
-  const tidbDmrVersions = TIDB_EN_DMR_PRETTY_VERSION;
-  const tidbLtsVersions = [];
-  for (let i = 0; i < TIDB_EN_VERSIONS.length; i++) {
-    !tidbDmrVersions.includes(tidbVersions[i]) &&
-      tidbLtsVersions.push(tidbVersions[i]);
-  }
-  // tidbLtsVersions.slice(0, lts).forEach((version) => {
-  //   tidbSearchIndices.push(version);
-  // });
-  tidbDmrVersions.slice(0, dmr).forEach((version) => {
-    tidbSearchIndices.push(version);
-  });
+const fetchTidbSearchIndcies = (lang: string, lts = 1, dmr = 1) => {
+  const tidbSearchIndices: string[] = [
+    ...(lang === "en"
+      ? TIDB_EN_SEARCH_INDEX_VERSION
+      : TIDB_ZH_SEARCH_INDEX_VERSION),
+  ];
   return tidbSearchIndices.sort().reverse();
 };
 
@@ -112,10 +105,14 @@ const convertStableToRealVersion = (
 // TiDB Cloud: only has one version
 // TiDB Operator: get stable version
 // TiDB Data Migration: get latest version
-const getSearchIndexVersion = (docType: string, docVersion: string) => {
+const getSearchIndexVersion = (
+  docType: string,
+  docVersion: string,
+  lang: string
+) => {
   switch (docType) {
     case "tidb":
-      const versions = fetchVersionListByDocType(docType);
+      const versions = fetchVersionListByDocType(docType, lang);
       const realVersion =
         docVersion === "stable" ? replaceStableVersion(docType) : docVersion;
       if (versions.includes(realVersion || "")) {
@@ -141,9 +138,7 @@ interface DocSearchTemplateProps {
 }
 
 export default function DocSearchTemplate({
-  pageContext: {
-    feature
-  }
+  pageContext: { feature },
 }: DocSearchTemplateProps) {
   const [docType, setDocType] = React.useState("");
   const [docVersion, setDocVersion] = React.useState("");
@@ -172,10 +167,10 @@ export default function DocSearchTemplate({
   }, [docType, docQuery, docVersion]);
 
   const realVersionMemo = React.useMemo(() => {
-    return getSearchIndexVersion(docType, docVersion);
+    return getSearchIndexVersion(docType, docVersion, language);
   }, [docType, docVersion]);
   const tidbSearchIndciesMemo = React.useMemo(() => {
-    return fetchTidbSearchIndcies();
+    return fetchTidbSearchIndcies(language);
   }, []);
 
   const execSearch = () => {
@@ -209,7 +204,7 @@ export default function DocSearchTemplate({
     setDocType(selected);
   };
 
-  const bannerVisible = feature?.banner && language !== Locale.ja
+  const bannerVisible = feature?.banner && language !== Locale.ja;
 
   return (
     <>
@@ -275,7 +270,7 @@ export default function DocSearchTemplate({
                 ))}
               </Stack>
             </Box>
-            {!!fetchVersionListByDocType(docType).length && (
+            {!!fetchVersionListByDocType(docType, language).length && (
               <Box
                 sx={{
                   display: "flex",
@@ -297,29 +292,31 @@ export default function DocSearchTemplate({
                   <Trans i18nKey="search.version" />
                 </Typography>
                 <Stack direction="row" sx={{ flexWrap: "wrap", gap: "1rem" }}>
-                  {fetchVersionListByDocType(docType).map((version) => {
-                    return (
-                      <Button
-                        key={version}
-                        size="small"
-                        variant="text"
-                        onClick={() => {
-                          setDocVersion(version);
-                        }}
-                        sx={{
-                          backgroundColor:
-                            realVersionMemo ===
-                            convertStableToRealVersion(docType, version)
-                              ? "#EAF6FB"
-                              : "",
-                        }}
-                      >
-                        {version === "stable"
-                          ? convertStableToRealVersion(docType, version)
-                          : version?.replace("release-", "v")}
-                      </Button>
-                    );
-                  })}
+                  {fetchVersionListByDocType(docType, language).map(
+                    (version) => {
+                      return (
+                        <Button
+                          key={version}
+                          size="small"
+                          variant="text"
+                          onClick={() => {
+                            setDocVersion(version);
+                          }}
+                          sx={{
+                            backgroundColor:
+                              realVersionMemo ===
+                              convertStableToRealVersion(docType, version)
+                                ? "#EAF6FB"
+                                : "",
+                          }}
+                        >
+                          {version === "stable"
+                            ? convertStableToRealVersion(docType, version)
+                            : version?.replace("release-", "v")}
+                        </Button>
+                      );
+                    }
+                  )}
                 </Stack>
               </Box>
             )}
