@@ -118,7 +118,10 @@ const getSearchIndexVersion = (
       if (versions.includes(realVersion || "")) {
         return realVersion?.replace("release-", "v");
       }
-      return TIDB_EN_STABLE_VERSION?.replace("release-", "v");
+
+      const latestVersion = versions[0];
+      const stableVersion = TIDB_EN_STABLE_VERSION?.replace("release-", "v");
+      return latestVersion || stableVersion;
     case "tidb-data-migration":
       return DM_EN_LATEST_VERSION?.replace("release-", "v");
     case "tidb-in-kubernetes":
