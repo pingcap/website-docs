@@ -34,7 +34,8 @@ export default function Header(props: {
         backgroundColor: theme.palette.website.m2,
         borderBottom: `1px solid ${theme.palette.website.m4}`,
         boxShadow: `0px 1px 6px rgba(0, 0, 0, 0.08)`,
-        height: props.bannerEnabled ? '7rem' : "5rem",
+        height: props.bannerEnabled ? "7rem" : "5rem",
+        zIndex: 9,
       }}
     >
       {props.bannerEnabled && <Banner />}

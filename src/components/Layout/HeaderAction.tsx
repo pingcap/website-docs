@@ -18,6 +18,7 @@ import Search from "components/Search";
 
 import { Locale, BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
+import { Script } from "gatsby";
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
@@ -40,7 +41,19 @@ export default function HeaderAction(props: {
         <LangSwitch supportedLocales={supportedLocales} />
       )}
       {docInfo && language !== "ja" && buildType !== "archive" && (
-        <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+        <>
+          <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+          <Button
+            variant="text"
+            sx={{
+              color: "website.k1",
+            }}
+            id="tidb-ai-trigger"
+          >
+            Ask TiDB.ai
+          </Button>
+          <Script async src="https://tidb.ai/widget.js" data-api-base="/ai" />
+        </>
       )}
       {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
@@ -217,7 +230,7 @@ const TiDBCloudBtnGroup = () => {
           }}
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
-              product_type: 'general cloud',
+              product_type: "general cloud",
               button_name: "Try Free",
               position: "header",
             })
@@ -282,7 +295,7 @@ const TiDBCloudBtnGroup = () => {
             }}
             onClick={() =>
               gtmTrack(GTMEvent.SignupCloud, {
-                product_type: 'general cloud',
+                product_type: "general cloud",
                 button_name: "Try Free",
                 position: "header",
               })
