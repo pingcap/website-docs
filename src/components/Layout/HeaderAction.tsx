@@ -19,6 +19,7 @@ import Search from "components/Search";
 import { Locale, BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 import { Script } from "gatsby";
+import { ActionButton } from "components/Card/FeedbackSection/components";
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
@@ -42,16 +43,12 @@ export default function HeaderAction(props: {
       )}
       {docInfo && language !== "ja" && buildType !== "archive" && (
         <>
-          <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
-          <Button
-            variant="text"
-            sx={{
-              color: "website.k1",
-            }}
-            id="tidb-ai-trigger"
-          >
-            Ask TiDB.ai
-          </Button>
+          <Stack direction="row" spacing="4px">
+            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+            <ActionButton variant="outlined" id="tidb-ai-trigger">
+              Ask TiDB.ai
+            </ActionButton>
+          </Stack>
           <Script async src="https://tidb.ai/widget.js" data-api-base="/ai" />
         </>
       )}
