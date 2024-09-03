@@ -39,6 +39,7 @@
     "gatsby-plugin-purgecss": "^6.1.0",
     "gatsby-plugin-react-helmet-async": "^1.2.1",
     "gatsby-plugin-react-i18next": "^1.2.2",
+    "gatsby-plugin-react-svg": "^3.3.0",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-robots-txt": "^1.6.14",
     "gatsby-plugin-sass": "^5.4.0",
@@ -107,5 +108,5 @@
   "lint-staged": {
     "*.js?(x)": "prettier --write"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "yarn@1.22.22"
 }

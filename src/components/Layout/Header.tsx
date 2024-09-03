@@ -12,10 +12,13 @@ import HeaderNavStack, {
 } from "components/Layout/HeaderNav";
 import HeaderAction from "components/Layout/HeaderAction";
 
+import TiDBLogo from "styles/images/tidb/new-tidb-logo.svg";
+
 import { generatePingcapUrl } from "utils";
 import { Locale, BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 import { Banner } from "./Banner";
+import { Stack, Typography } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -31,11 +34,10 @@ export default function Header(props: {
       className="doc-site-header"
       position="fixed"
       sx={{
-        backgroundColor: theme.palette.website.m2,
+        backgroundColor: "carbon.300",
         borderBottom: `1px solid ${theme.palette.website.m4}`,
-        boxShadow: `0px 1px 6px rgba(0, 0, 0, 0.08)`,
+        boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
         height: props.bannerEnabled ? "7rem" : "5rem",
-        zIndex: 9,
       }}
     >
       {props.bannerEnabled && <Banner />}
@@ -63,9 +65,17 @@ export default function Header(props: {
               })
             }
           >
-            <PingcapLogoIcon
-              sx={{ width: "6.75rem", display: { xs: "none", sm: "block" } }}
-            />
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={1}
+              sx={{ textAlign: "center" }}
+            >
+              <TiDBLogo />
+              <Typography fontSize={16} fontWeight={700} color="text.primary">
+                Docs
+              </Typography>
+            </Stack>
           </LinkComponent>
         </Box>
 

@@ -142,7 +142,7 @@ const NavItem = (props: {
           paddingTop: "0.25rem",
           paddingBottom: props.selected ? "0" : "0.25rem",
           borderBottom: props.selected
-            ? `4px solid ${theme.palette.website.k1}`
+            ? `4px solid ${theme.palette.primary.main}`
             : ``,
         }}
       >

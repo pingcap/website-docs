@@ -39,7 +39,7 @@ import {
 import { Locale } from "static/Type";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 
-// TiDB: get latest two LTS versions + latest DMR version
+// TiDB: get searchable versions from fetchTidbSearchIndcies
 // TiDB Cloud: only has one version
 // TiDB Operator: get stable version
 // TiDB Data Migration: get latest version
@@ -101,10 +101,6 @@ const convertStableToRealVersion = (
   return realVersion;
 };
 
-// TiDB: get latest two LTS versions + latest DMR version
-// TiDB Cloud: only has one version
-// TiDB Operator: get stable version
-// TiDB Data Migration: get latest version
 const getSearchIndexVersion = (
   docType: string,
   docVersion: string,
@@ -113,12 +109,16 @@ const getSearchIndexVersion = (
   switch (docType) {
     case "tidb":
       const versions = fetchVersionListByDocType(docType, lang);
-      const realVersion =
+      let realVersion =
         docVersion === "stable" ? replaceStableVersion(docType) : docVersion;
+      realVersion = realVersion?.replace("release-", "v");
       if (versions.includes(realVersion || "")) {
-        return realVersion?.replace("release-", "v");
+        return realVersion;
       }
-      return TIDB_EN_STABLE_VERSION?.replace("release-", "v");
+
+      const latestVersion = versions[0];
+      const stableVersion = TIDB_EN_STABLE_VERSION?.replace("release-", "v");
+      return latestVersion || stableVersion;
     case "tidb-data-migration":
       return DM_EN_LATEST_VERSION?.replace("release-", "v");
     case "tidb-in-kubernetes":

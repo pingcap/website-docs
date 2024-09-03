@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, PaletteColorOptions } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -19,6 +19,7 @@ declare module "@mui/material/styles" {
     };
   }
   interface Palette {
+    carbon: PaletteColorOptions;
     website: {
       m1: string;
       m2: string;
@@ -35,6 +36,7 @@ declare module "@mui/material/styles" {
     };
   }
   interface PaletteOptions {
+    carbon?: PaletteColorOptions;
     website?: {
       m1?: string;
       m2?: string;
@@ -52,7 +54,16 @@ declare module "@mui/material/styles" {
   }
 }
 
-const theme = createTheme({
+let theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1440,
+    },
+  },
   status: {
     success: "#52cc7a",
     error: "#e65c5c",
@@ -60,6 +71,16 @@ const theme = createTheme({
     minor: "#e6742e",
   },
   palette: {
+    primary: {
+      main: "#DC150B",
+    },
+    secondary: {
+      main: "#478FB4",
+    },
+    text: {
+      primary: "#262A2C",
+      secondary: "#3D4143",
+    },
     website: {
       m1: "#fff",
       m2: "#f9f9f9",
@@ -73,6 +94,21 @@ const theme = createTheme({
       f2: "#666666",
       f3: "#999999",
       f4: "#cccccc",
+    },
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        style: {
+          borderRadius: "8px",
+        },
+      },
+      styleOverrides: {
+        sizeMedium: {
+          height: "32px",
+        },
+      },
     },
   },
   typography: {
@@ -153,6 +189,25 @@ const theme = createTheme({
       fontStyle: "normal",
       color: "#666666",
     },
+  },
+});
+
+theme = createTheme(theme, {
+  palette: {
+    carbon: theme.palette.augmentColor({
+      color: {
+        100: "#FFFFFF",
+        200: "#F9FAFB",
+        300: "#F3F5F7",
+        400: "#EDF0F1",
+        500: "#E3E8EA",
+        600: "#C8CED0",
+        700: "#8D979A",
+        800: "#6C7679",
+        900: "#3D4143",
+      },
+      name: "carbon",
+    }),
   },
 });
 
