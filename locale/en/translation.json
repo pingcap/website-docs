@@ -20,7 +20,7 @@
     "home": "Home",
     "archive-home": "Archived Docs Home",
     "archive-label": "Archived Docs",
-    "tidb": "TiDB",
+    "tidb": "TiDB Self-Managed",
     "tools": "Tools",
     "cloud": "TiDB Cloud",
     "appdev": "App Dev",
@@ -28,7 +28,8 @@
     "download": "Try TiDB",
     "contactUs": "Contact Us",
     "searchDocs": "Search Docs",
-    "playground": "Playground"
+    "playground": "Playground",
+    "learningCenter": "Learning center"
   },
   "doc": {
     "notExist": "This doc does not exist",
