@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -18,13 +17,24 @@ import {
 } from "utils";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 
+const FOOTER_TITLE_COLOR = "#646F72";
+
 export default function Footer() {
   return (
     <>
       <Box sx={{ bgcolor: "#000" }} component="footer">
         <Box maxWidth="xl" sx={{ padding: "30px 64px", margin: "0 auto" }}>
           <FooterBlock />
-          <Stack direction="row" spacing="12px" sx={{ paddingTop: "66px" }}>
+          <Stack
+            direction="row"
+            spacing="12px"
+            sx={{ paddingTop: "66px" }}
+            divider={
+              <Typography variant="body2" component="div">
+                /
+              </Typography>
+            }
+          >
             <Typography
               variant="body2"
               component="div"
@@ -38,11 +48,6 @@ export default function Footer() {
             >
               © {new Date().getFullYear()} TiDB. All Rights Reserved.
             </Typography>
-
-            <Typography variant="body2" component="div">
-              /
-            </Typography>
-
             <PrivacyPolicy />
           </Stack>
         </Box>
@@ -75,7 +80,7 @@ const FooterBlock = () => {
             },
           }}
         >
-          <Typography color="#646F72" component="div">
+          <Typography color={FOOTER_TITLE_COLOR} component="div">
             STAY CONNECTED
           </Typography>
           <IconGroup />
@@ -181,7 +186,7 @@ const FooterItems = () => {
     <>
       {rows.map((row) => (
         <Stack key={row.name} sx={{ gap: "48px" }}>
-          <Typography color="#646F72" component="div">
+          <Typography color={FOOTER_TITLE_COLOR} component="div">
             {row.name.toUpperCase()}
           </Typography>
           <Stack sx={{ gap: "16px", minWidth: "6.75rem" }}>

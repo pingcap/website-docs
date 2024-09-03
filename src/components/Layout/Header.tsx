@@ -12,10 +12,13 @@ import HeaderNavStack, {
 } from "components/Layout/HeaderNav";
 import HeaderAction from "components/Layout/HeaderAction";
 
+import TiDBLogo from "styles/images/tidb/new-tidb-logo.svg";
+
 import { generatePingcapUrl } from "utils";
 import { Locale, BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 import { Banner } from "./Banner";
+import { Stack, Typography } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -62,9 +65,17 @@ export default function Header(props: {
               })
             }
           >
-            <PingcapLogoIcon
-              sx={{ width: "6.75rem", display: { xs: "none", sm: "block" } }}
-            />
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={1}
+              sx={{ textAlign: "center" }}
+            >
+              <TiDBLogo />
+              <Typography fontSize={16} fontWeight={700} color="text.primary">
+                Docs
+              </Typography>
+            </Stack>
           </LinkComponent>
         </Box>
 
