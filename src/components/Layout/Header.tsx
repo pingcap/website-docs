@@ -31,10 +31,10 @@ export default function Header(props: {
       className="doc-site-header"
       position="fixed"
       sx={{
-        backgroundColor: theme.palette.website.m2,
+        backgroundColor: "carbon.300",
         borderBottom: `1px solid ${theme.palette.website.m4}`,
-        boxShadow: `0px 1px 6px rgba(0, 0, 0, 0.08)`,
-        height: props.bannerEnabled ? '7rem' : "5rem",
+        boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
+        height: props.bannerEnabled ? "7rem" : "5rem",
       }}
     >
       {props.bannerEnabled && <Banner />}

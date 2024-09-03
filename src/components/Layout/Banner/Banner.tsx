@@ -53,7 +53,7 @@ export function Banner() {
         backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
-        backgroundRepeat: "no-repeat"
+        backgroundRepeat: "no-repeat",
       }}
     >
       <Stack
@@ -71,9 +71,9 @@ export function Banner() {
             variant="middle"
             flexItem
             sx={(theme) => ({
-              display: 'initial',
-              [theme.breakpoints.down('md')]: {
-                display: 'none'
+              display: "initial",
+              [theme.breakpoints.down("md")]: {
+                display: "none",
               },
               borderColor: "website.m1",
               borderRightWidth: 1.5,
@@ -87,9 +87,9 @@ export function Banner() {
           color: "website.m1",
           height: "100%",
           px: 2,
-          [theme.breakpoints.down('md')]: {
-            px: 1
-          }
+          [theme.breakpoints.down("md")]: {
+            px: 1,
+          },
         })}
       >
         {textList.map((text, index) => (
@@ -107,10 +107,10 @@ export function Banner() {
                 variant="body2"
                 color="inherit"
                 sx={(theme) => ({
-                  display: 'initial',
-                  [theme.breakpoints.down('md')]: {
-                    display: 'none'
-                  }
+                  display: "initial",
+                  [theme.breakpoints.down("md")]: {
+                    display: "none",
+                  },
                 })}
               >
                 {text}

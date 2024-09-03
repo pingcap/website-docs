@@ -10,7 +10,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 
-import LanguageIcon from "@mui/icons-material/Language";
+import TranslateIcon from "@mui/icons-material/Translate";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloudIcon from "@mui/icons-material/Cloud";
 
@@ -32,7 +32,7 @@ export default function HeaderAction(props: {
       direction="row"
       spacing={{
         xs: 1,
-        lg: 3,
+        lg: 2,
       }}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
@@ -83,7 +83,7 @@ const LangSwitch = (props: {
           },
         }}
       >
-        <LanguageIcon />
+        <TranslateIcon />
       </IconButton>
       <Button
         id="header-lang-switch"
@@ -93,7 +93,7 @@ const LangSwitch = (props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<LanguageIcon sx={{ fill: theme.palette.website.f1 }} />}
+        startIcon={<TranslateIcon sx={{ fill: theme.palette.website.f1 }} />}
         endIcon={
           <KeyboardArrowDownIcon sx={{ fill: theme.palette.website.f1 }} />
         }
@@ -103,11 +103,7 @@ const LangSwitch = (props: {
             lg: "inline-flex",
           },
         }}
-      >
-        <Typography component="span" color="inherit">
-          <Trans i18nKey="lang.title" />
-        </Typography>
-      </Button>
+      ></Button>
       <Menu
         id="header-lang-menu"
         anchorEl={anchorEl}
@@ -116,11 +112,11 @@ const LangSwitch = (props: {
         elevation={0}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "left",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "left",
         }}
         PaperProps={{
           sx: {
@@ -178,7 +174,7 @@ const TiDBCloudBtnGroup = () => {
     <>
       <Stack
         direction="row"
-        spacing={3}
+        spacing={2}
         display={{
           xs: "none",
           lg: "flex",
@@ -191,7 +187,7 @@ const TiDBCloudBtnGroup = () => {
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
           sx={{
-            color: "website.k1",
+            color: "text.secondary",
           }}
           onClick={() =>
             gtmTrack(GTMEvent.SigninCloud, {
@@ -208,16 +204,11 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
-            backgroundColor: "website.k1",
-            boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
-            "&:hover": {
-              backgroundColor: "#0A85C2",
-              boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
-            },
+            backgroundColor: "primary",
           }}
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
-              product_type: 'general cloud',
+              product_type: "general cloud",
               button_name: "Try Free",
               position: "header",
             })
@@ -282,7 +273,7 @@ const TiDBCloudBtnGroup = () => {
             }}
             onClick={() =>
               gtmTrack(GTMEvent.SignupCloud, {
-                product_type: 'general cloud',
+                product_type: "general cloud",
                 button_name: "Try Free",
                 position: "header",
               })

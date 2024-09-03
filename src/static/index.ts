@@ -174,15 +174,15 @@ export const EN_FOOTER_ITEMS = [
     name: "Products",
     items: [
       {
-        name: "TiDB",
+        name: "Self-managed",
         url: "https://www.pingcap.com/tidb/",
       },
       {
-        name: "TiDB Dedicated",
+        name: "Cloud Dedicated",
         url: "https://www.pingcap.com/tidb-dedicated/",
       },
       {
-        name: "TiDB Serverless",
+        name: "Cloud Serverless",
         url: "https://www.pingcap.com/tidb-serverless/",
       },
       {
@@ -224,6 +224,22 @@ export const EN_FOOTER_ITEMS = [
     name: "Resources",
     items: [
       {
+        name: "Blog",
+        url: "https://www.pingcap.com/blog/",
+      },
+      {
+        name: "Forum",
+        url: "https://ask.pingcap.com/",
+      },
+      {
+        name: "FAQs",
+        url: "https://docs.pingcap.com/tidb/stable/faq-overview",
+      },
+      {
+        name: "Support",
+        url: "https://support.pingcap.com/hc/en-us",
+      },
+      {
         name: "TiDB Cloud Roadmap",
         url: "https://docs.pingcap.com/tidbcloud/tidb-cloud-roadmap",
       },
@@ -232,37 +248,8 @@ export const EN_FOOTER_ITEMS = [
         url: "https://docs.pingcap.com/tidb/dev/tidb-roadmap",
       },
       {
-        name: "FAQs",
-        url: "https://docs.pingcap.com/tidb/stable/faq-overview",
-      },
-      {
-        name: "Blog",
-        url: "https://www.pingcap.com/blog/",
-      },
-      {
         name: "Education",
         url: "https://www.pingcap.com/education/",
-      },
-    ],
-  },
-  {
-    name: "Support",
-    items: [
-      {
-        name: "Discord",
-        url: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
-      },
-      {
-        name: "Forum",
-        url: "https://ask.pingcap.com/",
-      },
-      {
-        name: "Slack",
-        url: "https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs",
-      },
-      {
-        name: "Support Portal",
-        url: "https://support.pingcap.com/hc/en-us",
       },
     ],
   },

@@ -14,12 +14,16 @@ const StyledTextField = styled((props: TextFieldProps) => (
   <TextField {...props} />
 ))(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
+    background: theme.palette.background.paper,
+    borderRadius: "8px",
+    height: "32px",
+    fontSize: "14px",
     "&:hover fieldset": {
-      borderColor: theme.palette.website.k1,
+      borderColor: theme.palette.text.secondary,
       borderWidth: "1px",
     },
     "&.Mui-focused fieldset": {
-      borderColor: theme.palette.website.k1,
+      borderColor: theme.palette.text.primary,
       borderWidth: "1px",
     },
   },
@@ -82,7 +86,7 @@ export default function Search(props: {
         noValidate
         autoComplete="off"
         sx={{
-          maxWidth: "13rem",
+          width: "251px",
           display: {
             xs: disableResponsive ? "block" : "none",
             lg: "block",
@@ -108,12 +112,9 @@ export default function Search(props: {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                <SearchIcon fontSize="small" />
               </InputAdornment>
             ),
-            sx: {
-              background: theme.palette.website.m1,
-            },
           }}
         />
       </Box>
