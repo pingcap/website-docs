@@ -18,7 +18,6 @@ import Search from "components/Search";
 
 import { Locale, BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
-import { Script } from "gatsby";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 
 export default function HeaderAction(props: {
@@ -49,7 +48,6 @@ export default function HeaderAction(props: {
               Ask TiDB.ai
             </ActionButton>
           </Stack>
-          <Script async src="https://tidb.ai/widget.js" />
         </>
       )}
       {language === "en" && <TiDBCloudBtnGroup />}
