@@ -32,7 +32,7 @@ const getSelectedItem = (language?: string, pageUrl?: string): string => {
 
 const useSelectedNavItem = (language?: string, pageUrl?: string) => {
   const [selectedItem, setSelectedItem] = React.useState(() =>
-    getSelectedItem(language, pageUrl || window.location.pathname)
+    getSelectedItem(language, pageUrl)
   );
 
   React.useEffect(() => {
