@@ -1,6 +1,5 @@
 require("ts-node").register({ transpileOnly: true });
 
-const { createProxyMiddleware } = require("http-proxy-middleware");
 const docs = require("./docs/docs.json");
 
 module.exports = {
@@ -15,18 +14,6 @@ module.exports = {
         : "https://docs.pingcap.com",
   },
   jsxRuntime: "automatic",
-  developMiddleware: (app) => {
-    app.use(
-      "/ai/",
-      createProxyMiddleware({
-        target: "https://tidb.ai",
-        pathRewrite: {
-          "/ai/": "",
-        },
-        changeOrigin: true,
-      })
-    );
-  },
   plugins: [
     {
       resolve: "gatsby-plugin-google-tagmanager",

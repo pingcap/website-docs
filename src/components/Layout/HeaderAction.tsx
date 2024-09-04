@@ -49,7 +49,7 @@ export default function HeaderAction(props: {
               Ask TiDB.ai
             </ActionButton>
           </Stack>
-          <Script async src="https://tidb.ai/widget.js" data-api-base="/ai" />
+          <Script async src="https://tidb.ai/widget.js" />
         </>
       )}
       {language === "en" && <TiDBCloudBtnGroup />}
