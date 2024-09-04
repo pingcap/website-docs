@@ -199,6 +199,7 @@ theme = createTheme(theme, {
     MuiButton: {
       defaultProps: {
         disableElevation: true,
+        disableRipple: true,
         style: {
           borderRadius: "8px",
         },
