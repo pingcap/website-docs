@@ -17,6 +17,7 @@ export default function Layout(props: {
   locales?: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
+  pageUrl?: string;
 }) {
   return (
     <ThemeProvider theme={theme}>
@@ -27,6 +28,7 @@ export default function Layout(props: {
         locales={props.locales || []}
         docInfo={props.docInfo}
         buildType={props.buildType}
+        pageUrl={props.pageUrl}
       />
       {props.children}
       <Footer />

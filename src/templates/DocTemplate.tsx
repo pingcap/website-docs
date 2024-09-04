@@ -89,6 +89,7 @@ export default function DocTemplate({
     <Layout
       locales={availIn.locale}
       bannerEnabled={bannerVisible}
+      pageUrl={pageUrl}
       menu={
         frontmatter?.hide_leftNav ? null : (
           <LeftNavMobile

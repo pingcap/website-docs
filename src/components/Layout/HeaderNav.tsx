@@ -17,11 +17,11 @@ import { PingcapLogoIcon } from "components/Icons";
 import { BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 
-const useSelectedNavItem = (language?: string) => {
+const useSelectedNavItem = (language?: string, pageUrl?: string) => {
   const [selectedItem, setSelectedItem] = React.useState<string>("");
 
   React.useEffect(() => {
-    const pathname = window.location.pathname;
+    const pathname = pageUrl || window.location.pathname;
     if (pathname === "/" || pathname === `/${language}/`) {
       setSelectedItem("home");
     } else if (pathname.includes("/tidb/")) {
@@ -37,10 +37,13 @@ const useSelectedNavItem = (language?: string) => {
   return selectedItem;
 };
 
-export default function HeaderNavStack(props: { buildType?: BuildType }) {
+export default function HeaderNavStack(props: {
+  buildType?: BuildType;
+  pageUrl?: string;
+}) {
   const { language, t } = useI18next();
 
-  const selectedItem = useSelectedNavItem(language);
+  const selectedItem = useSelectedNavItem(language, props.pageUrl);
 
   return (
     <Stack
