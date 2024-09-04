@@ -28,6 +28,56 @@ const script = `if (Promise == null || Promise.allSettled == null) {
 }`;
 
 export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
+  setHeadComponents([
+    // <link
+    //   key="moderat-black-webfont"
+    //   rel="preload"
+    //   href="/fonts/moderat-black-webfont.woff2"
+    //   as="font"
+    //   type="font/woff2"
+    //   crossOrigin="anonymous"
+    // />,
+    // <link
+    //   key="moderat-bold-webfont"
+    //   rel="preload"
+    //   href="/fonts/moderat-bold-webfont.woff2"
+    //   as="font"
+    //   type="font/woff2"
+    //   crossOrigin="anonymous"
+    // />,
+    // <link
+    //   key="moderat-light-webfont"
+    //   rel="preload"
+    //   href="/fonts/moderat-light-webfont.woff2"
+    //   as="font"
+    //   type="font/woff2"
+    //   crossOrigin="anonymous"
+    // />,
+    // <link
+    //   key="moderat-medium-webfont"
+    //   rel="preload"
+    //   href="/fonts/moderat-medium-webfont.woff2"
+    //   as="font"
+    //   type="font/woff2"
+    //   crossOrigin="anonymous"
+    // />,
+    <link
+      key="moderat-regular-webfont"
+      rel="preload"
+      href="/fonts/moderat-regular-webfont.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />,
+    // <link
+    //   key="moderat-thin-webfont"
+    //   rel="preload"
+    //   href="/fonts/moderat-thin-webfont.woff2"
+    //   as="font"
+    //   type="font/woff2"
+    //   crossOrigin="anonymous"
+    // />,
+  ]);
   setPostBodyComponents([
     <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
   ]);
