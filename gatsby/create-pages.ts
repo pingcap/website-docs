@@ -22,6 +22,8 @@ interface PageQueryData {
   };
 }
 
+const DEFAULT_BUILD_TYPE = "prod";
+
 export const createDocs = async ({
   actions: { createPage, createRedirect },
   graphql,
@@ -117,7 +119,8 @@ export const createDocs = async ({
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
         },
-        buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType, // prod | archive, default is prod; archive is for archive site
+        buildType: (process.env.WEBSITE_BUILD_TYPE ??
+          DEFAULT_BUILD_TYPE) as BuildType, // prod | archive, default is prod; archive is for archive site
         feature: {
           banner: false,
           feedback: true,
@@ -163,7 +166,8 @@ export const createCloudAPIReference = async ({
           locale,
           version: [],
         },
-        buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
+        buildType: (process.env.WEBSITE_BUILD_TYPE ??
+          DEFAULT_BUILD_TYPE) as BuildType,
         feature: {
           banner: false,
         },
@@ -263,7 +267,8 @@ export const createDocHome = async ({
           locale,
           version: [],
         },
-        buildType: (process.env.WEBSITE_BUILD_TYPE ?? "prod") as BuildType,
+        buildType: (process.env.WEBSITE_BUILD_TYPE ??
+          DEFAULT_BUILD_TYPE) as BuildType,
         feature: {
           banner: false,
           feedback: false,
