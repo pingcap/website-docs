@@ -8,7 +8,6 @@ import { useTheme } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import CodeIcon from "@mui/icons-material/Code";
 import DownloadIcon from "@mui/icons-material/Download";
 
 import LinkComponent from "components/Link";
@@ -17,22 +16,30 @@ import { PingcapLogoIcon } from "components/Icons";
 import { BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 
+const getSelectedItem = (language?: string, pageUrl?: string): string => {
+  if (pageUrl === "/" || pageUrl === `/${language}/`) {
+    return "home";
+  } else if (pageUrl?.includes("/tidb/")) {
+    return "tidb";
+  } else if (
+    pageUrl?.includes("/tidbcloud/") ||
+    pageUrl?.endsWith("/tidbcloud")
+  ) {
+    return "tidbcloud";
+  }
+  return "";
+};
+
 const useSelectedNavItem = (language?: string, pageUrl?: string) => {
-  const [selectedItem, setSelectedItem] = React.useState<string>("");
+  const [selectedItem, setSelectedItem] = React.useState(() =>
+    getSelectedItem(language, pageUrl || window.location.pathname)
+  );
 
   React.useEffect(() => {
-    const pathname = pageUrl || window.location.pathname;
-    if (pathname === "/" || pathname === `/${language}/`) {
-      setSelectedItem("home");
-    } else if (pathname.includes("/tidb/")) {
-      setSelectedItem("tidb");
-    } else if (
-      pathname.includes("/tidbcloud/") ||
-      pathname.endsWith("/tidbcloud")
-    ) {
-      setSelectedItem("tidbcloud");
-    }
-  }, [language]);
+    setSelectedItem(
+      getSelectedItem(language, pageUrl || window.location.pathname)
+    );
+  }, [language, pageUrl]);
 
   return selectedItem;
 };

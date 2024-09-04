@@ -11,12 +11,11 @@ import Button from "@mui/material/Button";
 
 import { PathConfig } from "static/Type";
 import { getRepo } from "../../../gatsby/path";
-import { Skeleton, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import theme from "theme/index";
 
 export interface TotalAvatarsProps {
   avatars: AvatarItem[];
-  loading: boolean;
 }
 
 export type AvatarItem = {
@@ -49,48 +48,42 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
           paddingBottom: "1rem",
         }}
       >
-        {props.loading ? (
-          <Skeleton variant="rounded" width={210} height={32} />
-        ) : (
-          <>
-            <AvatarGroup
-              total={avatars.length}
-              sx={{
-                "& .MuiAvatar-root": {
-                  width: "1.5rem",
-                  height: "1.5rem",
-                  fontSize: "0.75rem",
-                },
-              }}
-            >
-              {avatars.map((avatar, index) => (
-                <Avatar
-                  key={avatar.id}
-                  src={avatar.src}
-                  alt={avatar.alt}
-                  sx={{ width: 24, height: 24 }}
-                />
-              ))}
-            </AvatarGroup>
-            <Button
-              variant="text"
-              size="small"
-              onClick={handleClick}
-              aria-controls={open ? "contributor-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              sx={{
-                textTransform: "none",
-              }}
-            >
-              <Typography variant="body1" component="div" color="secondary">
-                {`${avatars.length} ${
-                  avatars.length === 1 ? "Contributor" : "Contributors"
-                }`}
-              </Typography>
-            </Button>
-          </>
-        )}
+        <AvatarGroup
+          total={avatars.length}
+          sx={{
+            "& .MuiAvatar-root": {
+              width: "1.5rem",
+              height: "1.5rem",
+              fontSize: "0.75rem",
+            },
+          }}
+        >
+          {avatars.map((avatar, index) => (
+            <Avatar
+              key={avatar.id}
+              src={avatar.src}
+              alt={avatar.alt}
+              sx={{ width: 24, height: 24 }}
+            />
+          ))}
+        </AvatarGroup>
+        <Button
+          variant="text"
+          size="small"
+          onClick={handleClick}
+          aria-controls={open ? "contributor-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          sx={{
+            textTransform: "none",
+          }}
+        >
+          <Typography variant="body1" component="div" color="secondary">
+            {`${avatars.length} ${
+              avatars.length === 1 ? "Contributor" : "Contributors"
+            }`}
+          </Typography>
+        </Button>
       </Stack>
       <Menu
         anchorEl={anchorEl}
@@ -234,13 +227,15 @@ export const useTotalContributors = (
       mdTitleElement?.nextSibling
     );
 
-    try {
-      appendedNode &&
-        ReactDOM.render(
-          <TotalAvatars avatars={totalContributors} loading={loading} />,
-          appendedNode
-        );
-    } catch (error) {}
+    if (!!totalContributors.length) {
+      try {
+        appendedNode &&
+          ReactDOM.render(
+            <TotalAvatars avatars={totalContributors} />,
+            appendedNode
+          );
+      } catch (error) {}
+    }
 
     return () => {
       if (!appendedNode) {
@@ -249,7 +244,7 @@ export const useTotalContributors = (
       ReactDOM.unmountComponentAtNode(appendedNode);
       appendedNode?.parentNode?.removeChild(appendedNode);
     };
-  }, [totalContributors, loading]);
+  }, [totalContributors]);
 
   return { totalContributors, loading };
 };
