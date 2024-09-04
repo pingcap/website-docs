@@ -1,3 +1,5 @@
+import "./src/styles/global.css";
+
 import { pageView } from "./scripts/track";
 
 export { default as wrapRootElement } from "./src/state/wrap-with-provider";
@@ -10,7 +12,7 @@ export const onClientEntry = () => {
   ██╔═══╝ ██║██║╚██╗██║██║   ██║██║     ██╔══██║██╔═══╝     ██║  ██║██║   ██║██║     ╚════██║
   ██║     ██║██║ ╚████║╚██████╔╝╚██████╗██║  ██║██║         ██████╔╝╚██████╔╝╚██████╗███████║
   ╚═╝     ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝         ╚═════╝  ╚═════╝  ╚═════╝╚══════╝
-                                                                                             
+
   =====================================
   Project        : pingcap/website-docs
   Build Time     : ${process.env.GATSBY_DOC_BUILD_DATE}

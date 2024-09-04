@@ -168,7 +168,6 @@ export function DocHomeContainer(props: {
                   sx={{
                     paddingLeft: "0.5rem",
                     paddingBottom: "1rem",
-                    fontFamily: "Helvetica Neue",
                     color: theme.palette.website.f1,
                     fontSize: "0.875rem",
                     fontWeight: "700",

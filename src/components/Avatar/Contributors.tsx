@@ -76,14 +76,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
             textTransform: "none",
           }}
         >
-          <Typography
-            variant="body1"
-            component="div"
-            color="#0A85C2"
-            sx={{
-              fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
-            }}
-          >
+          <Typography variant="body1" component="div" color="#0A85C2">
             {`${avatars.length} ${
               avatars.length === 1 ? "Contributor" : "Contributors"
             }`}
@@ -141,7 +134,6 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
               sx={{
                 textDecoration: "none",
                 width: "100%",
-                fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
                 color: "#24292f",
               }}
             >

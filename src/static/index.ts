@@ -466,7 +466,7 @@ export const JA_FOOTER_ITEMS = [
       },
       {
         name: "キャリア",
-        url: "https://pingcap.co.jp/キャリア/",
+        url: "https://pingcap.co.jp/careers/",
       },
       {
         name: "規約類",

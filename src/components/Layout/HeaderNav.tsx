@@ -168,7 +168,6 @@ const NavItem = (props: {
             color="website.f1"
             padding="12px 0"
             sx={{
-              fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`,
               display: "inline-flex",
               alignItems: "center",
               gap: 0.5,

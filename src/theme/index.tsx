@@ -116,6 +116,7 @@ let theme = createTheme({
       textTransform: "none",
     },
     fontFamily: [
+      "moderat",
       "-apple-system",
       '"Poppins"',
       '"Helvetica Neue"',
@@ -129,7 +130,6 @@ let theme = createTheme({
       fontSize: "2.5rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "3.75rem",
       color: "#666666",
     },
@@ -137,7 +137,6 @@ let theme = createTheme({
       fontSize: "2rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "3rem",
       color: "#666666",
     },
@@ -145,7 +144,6 @@ let theme = createTheme({
       fontSize: "1.75rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "2.625rem",
       color: "#666666",
     },
@@ -153,7 +151,6 @@ let theme = createTheme({
       fontSize: "1.25rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.875rem",
       color: "#666666",
     },
@@ -161,7 +158,6 @@ let theme = createTheme({
       fontSize: "1.125rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.6875rem",
       color: "#666666",
     },
@@ -169,14 +165,12 @@ let theme = createTheme({
       fontSize: "0.875rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.5rem",
       color: "#666666",
     },
     body1: {
       fontSize: "1rem",
       lineHeight: "1.5rem",
-      fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
       color: "#666666",
@@ -184,7 +178,6 @@ let theme = createTheme({
     body2: {
       fontSize: "0.875rem",
       lineHeight: "1.25rem",
-      fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
       color: "#666666",
@@ -212,11 +205,3 @@ theme = createTheme(theme, {
 });
 
 export default theme;
-
-// export default function CustomStyles() {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <CustomCheckbox defaultChecked />
-//     </ThemeProvider>
-//   );
-// }

@@ -1,8 +1,8 @@
-@import "./font.css";
 @import "./variables.css";
 
 html {
-  font-family: '"Poppins", "Helvetica Neue", "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif"';
+  font-family: moderat, -apple-system, "Poppins", "Helvetica Neue", "Noto Sans",
+    "Fira Code", "IBM Plex Sans", "sans-serif";
 }
 
 body {
@@ -10,7 +10,6 @@ body {
 }
 
 @define-mixin headings {
-  font-family: "Poppins";
   font-weight: bold;
 }
 
@@ -46,13 +45,11 @@ body {
 
 @define-mixin paragraph1 {
   font-size: 1rem;
-  font-family: "Helvetica Neue", "sans-serif";
   font-weight: regular;
 }
 
 @define-mixin paragraph2 {
   font-size: 0.875rem;
-  font-family: "Helvetica Neue", "sans-serif";
   font-weight: regular;
 }
 

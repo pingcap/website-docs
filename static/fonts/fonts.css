@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/moderat-regular-webfont.woff2") format("woff2"),
+    url("/fonts/moderat-thin-webfont.woff") format("woff"),
+    url("/fonts/moderat-light-webfont.woff") format("woff"),
+    url("/fonts/moderat-bold-webfont.woff") format("woff"),
+    url("/fonts/moderat-medium-webfont.woff") format("woff"),
+    url("/fonts/moderat-black-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* cyrillic-ext */
 @font-face {
   font-family: "Fira Code";

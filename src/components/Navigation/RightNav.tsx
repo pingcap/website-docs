@@ -137,7 +137,6 @@ export default function RightNav(props: RightNavProps) {
               component="div"
               sx={{
                 paddingLeft: "0.5rem",
-                fontFamily: "Helvetica Neue",
                 color: theme.palette.website.f1,
                 fontSize: "0.875rem",
                 fontWeight: "700",
@@ -197,7 +196,6 @@ export default function RightNav(props: RightNavProps) {
             component="div"
             sx={{
               paddingLeft: "0.5rem",
-              fontFamily: "Helvetica Neue",
               color: theme.palette.website.f1,
               fontSize: "0.875rem",
               fontWeight: "700",

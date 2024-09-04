@@ -83,196 +83,194 @@ export default function DocTemplate({
   const stableBranch = getStable(pathConfig.repo);
 
   const { language } = useI18next();
-  const bannerVisible = feature?.banner && language !== Locale.ja
+  const bannerVisible = feature?.banner && language !== Locale.ja;
 
   return (
-    <>
-      <Layout
-        locales={availIn.locale}
-        bannerEnabled={bannerVisible}
-        menu={
-          frontmatter?.hide_leftNav ? null : (
-            <LeftNavMobile
+    <Layout
+      locales={availIn.locale}
+      bannerEnabled={bannerVisible}
+      menu={
+        frontmatter?.hide_leftNav ? null : (
+          <LeftNavMobile
+            data={navigation}
+            current={pageUrl}
+            name={name}
+            pathConfig={pathConfig}
+            availIn={availIn.version}
+          />
+        )
+      }
+      docInfo={{
+        version: pathConfig.version || "stable",
+        type: pathConfig.repo,
+      }}
+      buildType={buildType}
+    >
+      <Seo
+        lang={language as Locale}
+        title={frontmatter.title}
+        description={frontmatter.summary}
+        meta={[
+          {
+            name: "doc:lang",
+            content: pathConfig.locale,
+          },
+          {
+            name: "doc:type",
+            content: pathConfig.repo,
+          },
+          {
+            name: "doc:version",
+            content: pathConfig.branch,
+          },
+        ]}
+        link={[
+          ...(pathConfig.branch !== stableBranch && stableBranch != null
+            ? [
+                {
+                  rel: "canonical",
+                  href: `${site.siteMetadata.siteUrl}${generateUrl(name, {
+                    ...pathConfig,
+                    version: "stable",
+                  })}`,
+                },
+              ]
+            : []),
+        ]}
+        archived={buildType === "archive"}
+      />
+      <Box
+        sx={{ marginTop: bannerVisible ? "7rem" : "5rem", display: "flex" }}
+        className={clsx("PingCAP-Doc")}
+      >
+        <Box sx={{ display: "flex", width: "100%" }}>
+          {!frontmatter?.hide_leftNav && (
+            <LeftNavDesktop
               data={navigation}
               current={pageUrl}
               name={name}
               pathConfig={pathConfig}
               availIn={availIn.version}
+              buildType={buildType}
             />
-          )
-        }
-        docInfo={{
-          version: pathConfig.version || "stable",
-          type: pathConfig.repo,
-        }}
-        buildType={buildType}
-      >
-        <Seo
-          lang={language as Locale}
-          title={frontmatter.title}
-          description={frontmatter.summary}
-          meta={[
-            {
-              name: "doc:lang",
-              content: pathConfig.locale,
-            },
-            {
-              name: "doc:type",
-              content: pathConfig.repo,
-            },
-            {
-              name: "doc:version",
-              content: pathConfig.branch,
-            },
-          ]}
-          link={[
-            ...(pathConfig.branch !== stableBranch && stableBranch != null
-              ? [
-                  {
-                    rel: "canonical",
-                    href: `${site.siteMetadata.siteUrl}${generateUrl(name, {
-                      ...pathConfig,
-                      version: "stable",
-                    })}`,
-                  },
-                ]
-              : []),
-          ]}
-          archived={buildType === "archive"}
-        />
-        <Box
-          sx={{ marginTop: bannerVisible ? "7rem" : "5rem", display: "flex" }}
-          className={clsx("PingCAP-Doc")}
-        >
-          <Box sx={{ display: "flex", width: "100%" }}>
-            {!frontmatter?.hide_leftNav && (
-              <LeftNavDesktop
-                data={navigation}
-                current={pageUrl}
-                name={name}
-                pathConfig={pathConfig}
-                availIn={availIn.version}
-                buildType={buildType}
-              />
-            )}
+          )}
+          <Box
+            component="main"
+            sx={{
+              width: "100%",
+              maxWidth: {
+                lg: frontmatter?.hide_leftNav
+                  ? "100%"
+                  : "calc(100% - 18.75rem)",
+              },
+            }}
+          >
             <Box
-              component="main"
               sx={{
+                maxWidth: "1340px",
                 width: "100%",
-                maxWidth: {
-                  lg: frontmatter?.hide_leftNav
-                    ? "100%"
-                    : "calc(100% - 18.75rem)",
-                },
+                marginLeft: "auto",
+                marginRight: "auto",
+                display: "block",
+                boxSizing: "border-box",
               }}
             >
-              <Box
+              <Stack
                 sx={{
-                  maxWidth: "1340px",
-                  width: "100%",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  display: "block",
-                  boxSizing: "border-box",
+                  flexDirection: {
+                    xs: "column-reverse",
+                    sm: "row",
+                  },
                 }}
               >
-                <Stack
-                  sx={{
-                    flexDirection: {
-                      xs: "column-reverse",
-                      sm: "row",
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: {
-                        xs: "100%",
-                        sm: frontmatter?.hide_sidebar
-                          ? "100%"
-                          : "calc(100% - 17.5rem)",
-                      },
-                      padding: "1.5rem 0",
-                    }}
-                  >
-                    <MDXContent
-                      data={body}
-                      className={clsx("doc-content")}
-                      name={name}
-                      pathConfig={pathConfig}
-                      filePath={filePath}
-                      frontmatter={frontmatter}
-                      availIn={availIn.version}
-                      language={language}
-                      buildType={buildType}
-                    />
-                    {!frontmatter?.hide_commit && buildType !== "archive" && (
-                      <GitCommitInfoCard
-                        pathConfig={pathConfig}
-                        filePath={filePath}
-                        title={frontmatter.title}
-                      />
-                    )}
-                    {!!feature?.feedback && buildType !== "archive" && (
-                      <FeedbackSection
-                        title={frontmatter.title}
-                        locale={pathConfig.locale}
-                      />
-                    )}
-                  </Box>
-                  {!frontmatter?.hide_sidebar && (
-                    <>
-                      <Box
-                        sx={{
-                          width: "17.5rem",
-                          display: {
-                            xs: "none",
-                            sm: "block",
-                          },
-                        }}
-                      >
-                        <RightNav
-                          toc={tocData}
-                          pathConfig={pathConfig}
-                          filePath={filePath}
-                          buildType={buildType}
-                        />
-                      </Box>
-                      <Box
-                        sx={{
-                          padding: "1rem",
-                          display: {
-                            sm: "none",
-                          },
-                        }}
-                      >
-                        <RightNavMobile
-                          toc={tocData}
-                          pathConfig={pathConfig}
-                          filePath={filePath}
-                          buildType={buildType}
-                        />
-                      </Box>
-                    </>
-                  )}
-                </Stack>
                 <Box
                   sx={{
-                    width: "fit-content",
-                    position: "fixed",
-                    bottom: "1rem",
-                    right: "1rem",
+                    width: {
+                      xs: "100%",
+                      sm: frontmatter?.hide_sidebar
+                        ? "100%"
+                        : "calc(100% - 17.5rem)",
+                    },
+                    padding: "1.5rem 0",
                   }}
                 >
-                  <FeedbackSurveyCampaign />
-                  {/* <ScrollToTopBtn /> */}
+                  <MDXContent
+                    data={body}
+                    className={clsx("doc-content")}
+                    name={name}
+                    pathConfig={pathConfig}
+                    filePath={filePath}
+                    frontmatter={frontmatter}
+                    availIn={availIn.version}
+                    language={language}
+                    buildType={buildType}
+                  />
+                  {!frontmatter?.hide_commit && buildType !== "archive" && (
+                    <GitCommitInfoCard
+                      pathConfig={pathConfig}
+                      filePath={filePath}
+                      title={frontmatter.title}
+                    />
+                  )}
+                  {!!feature?.feedback && buildType !== "archive" && (
+                    <FeedbackSection
+                      title={frontmatter.title}
+                      locale={pathConfig.locale}
+                    />
+                  )}
                 </Box>
+                {!frontmatter?.hide_sidebar && (
+                  <>
+                    <Box
+                      sx={{
+                        width: "17.5rem",
+                        display: {
+                          xs: "none",
+                          sm: "block",
+                        },
+                      }}
+                    >
+                      <RightNav
+                        toc={tocData}
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                        buildType={buildType}
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        padding: "1rem",
+                        display: {
+                          sm: "none",
+                        },
+                      }}
+                    >
+                      <RightNavMobile
+                        toc={tocData}
+                        pathConfig={pathConfig}
+                        filePath={filePath}
+                        buildType={buildType}
+                      />
+                    </Box>
+                  </>
+                )}
+              </Stack>
+              <Box
+                sx={{
+                  width: "fit-content",
+                  position: "fixed",
+                  bottom: "1rem",
+                  right: "1rem",
+                }}
+              >
+                <FeedbackSurveyCampaign />
+                {/* <ScrollToTopBtn /> */}
               </Box>
             </Box>
           </Box>
         </Box>
-      </Layout>
-    </>
+      </Box>
+    </Layout>
   );
 }
 
