@@ -1,5 +1,9 @@
 import * as React from "react";
-import { createTheme, PaletteColorOptions } from "@mui/material/styles";
+import {
+  createTheme,
+  PaletteColorOptions,
+  ThemeOptions,
+} from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -76,6 +80,7 @@ let theme = createTheme({
     },
     secondary: {
       main: "#478FB4",
+      light: "#EAF5FA",
     },
     text: {
       primary: "#262A2C",
@@ -94,21 +99,6 @@ let theme = createTheme({
       f2: "#666666",
       f3: "#999999",
       f4: "#cccccc",
-    },
-  },
-  components: {
-    MuiButton: {
-      defaultProps: {
-        disableElevation: true,
-        style: {
-          borderRadius: "8px",
-        },
-      },
-      styleOverrides: {
-        sizeMedium: {
-          height: "32px",
-        },
-      },
     },
   },
   typography: {
@@ -202,6 +192,46 @@ theme = createTheme(theme, {
       name: "carbon",
     }),
   },
-});
+} as ThemeOptions);
+
+theme = createTheme(theme, {
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        style: {
+          borderRadius: "8px",
+        },
+      },
+      styleOverrides: {
+        sizeMedium: {
+          height: "32px",
+        },
+        root: ({ ownerState }) => ({
+          ...(ownerState.variant === "text" && {
+            "&:hover": {
+              backgroundColor: theme.palette.secondary.light,
+            },
+          }),
+        }),
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: theme.palette.secondary.light,
+            "&:hover": {
+              backgroundColor: theme.palette.secondary.light,
+            },
+          },
+          "&:hover": {
+            backgroundColor: theme.palette.secondary.light,
+          },
+        },
+      },
+    },
+  },
+} as ThemeOptions);
 
 export default theme;
