@@ -213,14 +213,6 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: "gatsby-plugin-web-font-loader",
-      options: {
-        custom: {
-          families: ["moderat"],
-          urls: ["/fonts/fonts.css"],
-        },
-      },
-    },
+    `gatsby-plugin-material-ui`,
   ],
 };
