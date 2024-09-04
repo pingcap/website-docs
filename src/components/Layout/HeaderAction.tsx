@@ -44,9 +44,11 @@ export default function HeaderAction(props: {
         <>
           <Stack direction="row" spacing="4px">
             <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
-            <ActionButton variant="outlined" id="tidb-ai-trigger">
-              Ask TiDB.ai
-            </ActionButton>
+            {language === "en" && (
+              <ActionButton variant="outlined" id="tidb-ai-trigger">
+                Ask TiDB.ai
+              </ActionButton>
+            )}
           </Stack>
         </>
       )}
