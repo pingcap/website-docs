@@ -6,7 +6,6 @@ ul.tabs {
   white-space: nowrap;
 
   li {
-    $color: #0ca6f2;
     display: block;
     padding: 0.5em 1em;
     background-color: white;
@@ -19,7 +18,7 @@ ul.tabs {
     }
 
     &.active {
-      background-color: $color;
+      background-color: var(--secondary-color);
       color: white;
     }
     & + li {
