@@ -219,15 +219,16 @@ export const useTotalContributors = (
   }, [pathConfig, filePath]);
 
   React.useEffect(() => {
-    if (totalContributors.length > 0) {
-      // Create a new node(a sibling node after h1) to render the total contributors
-      const mdTitleElement = document.querySelector(".markdown-body > h1");
-      const contributorNode = document.createElement("div");
+    // Create a new node(a sibling node after h1) to render the total contributors
+    const mdTitleElement = document.querySelector(".markdown-body > h1");
+    const contributorNode = document.createElement("div");
+    const appendedNode = mdTitleElement?.parentElement?.insertBefore(
+      contributorNode,
+      mdTitleElement?.nextSibling
+    );
+
+    if (!!totalContributors.length) {
       try {
-        const appendedNode = mdTitleElement?.parentElement?.insertBefore(
-          contributorNode,
-          mdTitleElement?.nextSibling
-        );
         appendedNode &&
           ReactDOM.render(
             <TotalAvatars avatars={totalContributors} />,
@@ -235,6 +236,14 @@ export const useTotalContributors = (
           );
       } catch (error) {}
     }
+
+    return () => {
+      if (!appendedNode) {
+        return;
+      }
+      ReactDOM.unmountComponentAtNode(appendedNode);
+      appendedNode?.parentNode?.removeChild(appendedNode);
+    };
   }, [totalContributors]);
 
   return { totalContributors, loading };

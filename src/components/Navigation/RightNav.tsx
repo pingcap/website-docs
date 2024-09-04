@@ -266,6 +266,7 @@ const ActionItem = (props: {
   [key: string]: any;
 }) => {
   const { url, label, sx, ...rest } = props;
+  const theme = useTheme();
   return (
     <Typography
       component="a"
@@ -280,7 +281,7 @@ const ActionItem = (props: {
         alignItems: "center",
         gap: "0.25rem",
         "&:hover, &:focus, &:active": {
-          color: "#0A85C2",
+          color: theme.palette.secondary.main,
         },
         ...sx,
       }}

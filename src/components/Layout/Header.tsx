@@ -26,6 +26,7 @@ export default function Header(props: {
   locales: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
+  pageUrl?: string;
 }) {
   const theme = useTheme();
   const { language } = useI18next();
@@ -34,6 +35,7 @@ export default function Header(props: {
       className="doc-site-header"
       position="fixed"
       sx={{
+        zIndex: 9,
         backgroundColor: "carbon.300",
         borderBottom: `1px solid ${theme.palette.website.m4}`,
         boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
@@ -79,7 +81,7 @@ export default function Header(props: {
           </LinkComponent>
         </Box>
 
-        <HeaderNavStack buildType={props.buildType} />
+        <HeaderNavStack buildType={props.buildType} pageUrl={props.pageUrl} />
         <HeaderNavStackMobile buildType={props.buildType} />
 
         <HeaderAction

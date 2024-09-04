@@ -14,7 +14,7 @@ import {
   ArchiveTiDBNotice,
 } from "components/Card/CustomNotice";
 import { Locale, PathConfig, FrontMatter, BuildType } from "static/Type";
-import { useTotalContributors } from "components/Avatar/Contributors";
+import { useTotalContributors } from "components/Contributors";
 import replaceInternalHref from "utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 
