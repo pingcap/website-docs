@@ -35,6 +35,7 @@ export default function Header(props: {
       className="doc-site-header"
       position="fixed"
       sx={{
+        zIndex: 9,
         backgroundColor: "carbon.300",
         borderBottom: `1px solid ${theme.palette.website.m4}`,
         boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
