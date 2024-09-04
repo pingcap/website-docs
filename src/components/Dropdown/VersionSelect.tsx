@@ -21,7 +21,11 @@ import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
 import { Typography } from "@mui/material";
 
-function renderVersion(version: string | null, pathConfig: PathConfig, isArchive: boolean = false) {
+function renderVersion(
+  version: string | null,
+  pathConfig: PathConfig,
+  isArchive: boolean = false
+) {
   const { docs } = CONFIG;
   const isDmr =
     (docs[pathConfig.repo] as { dmr: string[] }).dmr?.includes(version || "") ??
@@ -350,11 +354,9 @@ export default function VersionSelect(props: VersionSelectProps) {
             lineHeight: "1.25rem",
           }}
         >
-          {
-            buildType === "archive"
-              ? renderVersion(pathConfig.version, pathConfig, true)
-              : renderVersion(pathConfig.version, pathConfig)
-          }
+          {buildType === "archive"
+            ? renderVersion(pathConfig.version, pathConfig, true)
+            : renderVersion(pathConfig.version, pathConfig)}
         </Typography>
       </Button>
       <StyledMenu
@@ -398,19 +400,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     fontSize: 16,
     padding: "10px 26px 10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
-    // fontFamily: [
-    //   "-apple-system",
-    //   "BlinkMacSystemFont",
-    //   '"Segoe UI"',
-    //   "Roboto",
-    //   '"Helvetica Neue"',
-    //   "Arial",
-    //   "sans-serif",
-    //   '"Apple Color Emoji"',
-    //   '"Segoe UI Emoji"',
-    //   '"Segoe UI Symbol"',
-    // ].join(","),
     "&:focus": {
       borderRadius: 4,
       borderColor: "#80bdff",
@@ -426,7 +415,9 @@ export function NativeVersionSelect(props: VersionSelectProps) {
 
   const handleChange = (event: { target: { value: string } }) => {
     if (event.target.value === "archive") {
-      gatsbyNavigate(generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo));
+      gatsbyNavigate(
+        generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo)
+      );
       return;
     }
     // setSelectedVersion(event.target.value);

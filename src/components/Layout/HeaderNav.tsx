@@ -81,7 +81,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />
 
-      {["en", "ja"].includes(language) && (
+      {/* {["en", "ja"].includes(language) && (
         <NavItem
           label={t("navbar.playground")}
           to={`https://play.tidbcloud.com`}
@@ -93,11 +93,16 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
             })
           }
         />
-      )}
+      )} */}
 
-      {["zh", "en"].includes(language) && (
+      {/* {["zh", "en"].includes(language) && (
         <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
-      )}
+      )} */}
+
+      <NavItem
+        label={t("navbar.learningCenter")}
+        to="https://www.pingcap.com/education/"
+      />
 
       <NavItem
         label={t("navbar.contactUs")}
@@ -161,8 +166,8 @@ const NavItem = (props: {
             variant="body1"
             component="div"
             color="website.f1"
+            padding="12px 0"
             sx={{
-              fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`,
               display: "inline-flex",
               alignItems: "center",
               gap: 0.5,

@@ -19,7 +19,6 @@ import {
   controlLabelSx,
   labelProps,
   radioSx,
-  typoFontFamily,
 } from "./components";
 
 interface FeedbackSectionProps {
@@ -95,7 +94,6 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
           color: "website.f1",
           fontSize: "1.5rem",
           fontWeight: 600,
-          fontFamily: typoFontFamily,
           lineHeight: 1.25,
           marginTop: "24px",
           marginBottom: "16px",
@@ -132,12 +130,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && helpful && (
         <Box>
           <FormControl>
-            <Typography
-              variant="body1"
-              color="website.f1"
-              fontWeight={500}
-              fontFamily={typoFontFamily}
-            >
+            <Typography variant="body1" color="website.f1" fontWeight={500}>
               <Trans i18nKey="docFeedbackSurvey.positive.title" />
             </Typography>
             <RadioGroup
@@ -199,12 +192,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && !helpful && (
         <Box>
           <FormControl>
-            <Typography
-              variant="body1"
-              color="website.f1"
-              fontWeight={500}
-              fontFamily={typoFontFamily}
-            >
+            <Typography variant="body1" color="website.f1" fontWeight={500}>
               <Trans i18nKey="docFeedbackSurvey.negative.title" />
             </Typography>
             <RadioGroup
@@ -277,7 +265,6 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
           variant="body1"
           color="website.f1"
           fontWeight={500}
-          fontFamily={typoFontFamily}
           mb="48px"
         >
           <Trans i18nKey="docFeedbackSurvey.message.thank" />

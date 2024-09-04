@@ -1,5 +1,9 @@
 import * as React from "react";
-import { createTheme, PaletteColorOptions } from "@mui/material/styles";
+import {
+  createTheme,
+  PaletteColorOptions,
+  ThemeOptions,
+} from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -76,6 +80,7 @@ let theme = createTheme({
     },
     secondary: {
       main: "#478FB4",
+      light: "#EAF5FA",
     },
     text: {
       primary: "#262A2C",
@@ -96,26 +101,12 @@ let theme = createTheme({
       f4: "#cccccc",
     },
   },
-  components: {
-    MuiButton: {
-      defaultProps: {
-        disableElevation: true,
-        style: {
-          borderRadius: "8px",
-        },
-      },
-      styleOverrides: {
-        sizeMedium: {
-          height: "32px",
-        },
-      },
-    },
-  },
   typography: {
     button: {
       textTransform: "none",
     },
     fontFamily: [
+      "moderat",
       "-apple-system",
       '"Poppins"',
       '"Helvetica Neue"',
@@ -129,7 +120,6 @@ let theme = createTheme({
       fontSize: "2.5rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "3.75rem",
       color: "#666666",
     },
@@ -137,7 +127,6 @@ let theme = createTheme({
       fontSize: "2rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "3rem",
       color: "#666666",
     },
@@ -145,7 +134,6 @@ let theme = createTheme({
       fontSize: "1.75rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "2.625rem",
       color: "#666666",
     },
@@ -153,7 +141,6 @@ let theme = createTheme({
       fontSize: "1.25rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.875rem",
       color: "#666666",
     },
@@ -161,7 +148,6 @@ let theme = createTheme({
       fontSize: "1.125rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.6875rem",
       color: "#666666",
     },
@@ -169,14 +155,12 @@ let theme = createTheme({
       fontSize: "0.875rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.5rem",
       color: "#666666",
     },
     body1: {
       fontSize: "1rem",
       lineHeight: "1.5rem",
-      fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
       color: "#666666",
@@ -184,7 +168,6 @@ let theme = createTheme({
     body2: {
       fontSize: "0.875rem",
       lineHeight: "1.25rem",
-      fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
       color: "#666666",
@@ -209,14 +192,46 @@ theme = createTheme(theme, {
       name: "carbon",
     }),
   },
-});
+} as ThemeOptions);
+
+theme = createTheme(theme, {
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        style: {
+          borderRadius: "8px",
+        },
+      },
+      styleOverrides: {
+        sizeMedium: {
+          height: "32px",
+        },
+        root: ({ ownerState }) => ({
+          ...(ownerState.variant === "text" && {
+            "&:hover": {
+              backgroundColor: theme.palette.secondary.light,
+            },
+          }),
+        }),
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: theme.palette.secondary.light,
+            "&:hover": {
+              backgroundColor: theme.palette.secondary.light,
+            },
+          },
+          "&:hover": {
+            backgroundColor: theme.palette.secondary.light,
+          },
+        },
+      },
+    },
+  },
+} as ThemeOptions);
 
 export default theme;
-
-// export default function CustomStyles() {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <CustomCheckbox defaultChecked />
-//     </ThemeProvider>
-//   );
-// }

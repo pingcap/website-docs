@@ -13,8 +13,6 @@ export const ActionButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export const typoFontFamily = `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`;
-
 export const controlLabelSx = {
   ml: 0,
   py: "6px",
@@ -29,7 +27,6 @@ export const radioSx = {
 };
 export const labelProps = {
   typography: {
-    fontFamily: typoFontFamily,
     color: "website.f1",
   },
 };

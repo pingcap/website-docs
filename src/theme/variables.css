@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #dc150b;
+  --secondary-color: #478fb4;
+}
+
 $--color--m1: "#fff";
 $--color--m2: "#f9f9f9";
 $--color--m3: "#f4f4f4";

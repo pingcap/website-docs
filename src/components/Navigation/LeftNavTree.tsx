@@ -40,7 +40,7 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     //   fontWeight: theme.typography.fontWeightRegular,
     // },
     "&:hover": {
-      backgroundColor: theme.palette.website.m2,
+      backgroundColor: `#EAF6FB!important`,
     },
     "&.Mui-selected, &.Mui-selected.Mui-focused": {
       backgroundColor: `var(--tree-view-bg-color, #EAF6FB)`,

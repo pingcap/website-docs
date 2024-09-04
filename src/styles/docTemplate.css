@@ -1,5 +1,3 @@
-@import "./global.css";
-
 @import "highlight.js/styles/github.css";
 @import "katex/dist/katex.min.css";
 
@@ -87,12 +85,14 @@
   }
 
   .markdown-body {
+    font-family: moderat, -apple-system, "Poppins", "Helvetica Neue",
+      "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif";
     color: #282a36;
     font-size: 16px;
-    line-height: 1.75;
+    line-height: 1.5;
 
     a {
-      color: #0a85c2;
+      color: var(--secondary-color);
     }
 
     pre {
