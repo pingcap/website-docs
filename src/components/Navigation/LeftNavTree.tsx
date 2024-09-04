@@ -12,13 +12,6 @@ import { DocLeftNavItem, DocLeftNav, DocLeftNavItemContent } from "static/Type";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "utils";
 
-declare module "react" {
-  interface CSSProperties {
-    "--tree-view-color"?: string;
-    "--tree-view-bg-color"?: string;
-  }
-}
-
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;
   color?: string;
@@ -28,25 +21,17 @@ type StyledTreeItemProps = TreeItemProps & {
 };
 
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
-  // color: theme.palette.text.secondary,
   [`& .${treeItemClasses.content}`]: {
     color: theme.palette.website.f1,
-    // borderTopRightRadius: theme.spacing(2),
-    // borderBottomRightRadius: theme.spacing(2),
     borderRadius: theme.spacing(0.5),
-    // paddingRight: theme.spacing(1),
-    // fontWeight: theme.typography.fontWeightMedium,
-    // "&.Mui-expanded": {
-    //   fontWeight: theme.typography.fontWeightRegular,
-    // },
     "&:hover": {
-      backgroundColor: `#EAF6FB!important`,
+      backgroundColor: theme.palette.carbon[300],
     },
-    "&.Mui-selected, &.Mui-selected.Mui-focused": {
-      backgroundColor: `var(--tree-view-bg-color, #EAF6FB)`,
-      color: "var(--tree-view-color, #0A85C2)",
+    "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover": {
+      backgroundColor: theme.palette.carbon[400],
+      color: theme.palette.secondary.main,
       [`& svg.MuiTreeItem-ChevronRightIcon`]: {
-        fill: "var(--tree-view-color, #0A85C2)",
+        fill: theme.palette.carbon[800],
       },
     },
     "&.Mui-focused": {
@@ -95,8 +80,6 @@ function StyledTreeItem(props: StyledTreeItemProps) {
       //   </Box>
       // }
       style={{
-        "--tree-view-color": color,
-        "--tree-view-bg-color": bgColor,
         marginTop: "0.1875rem",
         marginBottom: "0.1875rem",
       }}
@@ -172,24 +155,28 @@ export default function ControlledTreeView(props: {
             sx={{
               minHeight: "1.75rem",
               alignItems: "center",
-              paddingLeft: `${deepth * 0.5}rem`,
+              paddingLeft: `${deepth * 8}px`,
               paddingTop: "0.25rem",
               paddingBottom: "0.25rem",
             }}
           >
-            {generateItemLabel(item.content)}
             {hasChildren ? (
               <ChevronRightIcon
                 className="MuiTreeItem-ChevronRightIcon"
                 sx={{
                   fill: theme.palette.website.f3,
-                  height: "1rem",
-                  width: "1rem",
+                  height: "16px",
+                  width: "16px",
                   marginLeft: "auto",
-                  transform: isItemExpanded ? "rotate(90deg)" : "none",
+                  transform: `translateX(-4px) ${
+                    isItemExpanded ? "rotate(90deg)" : ""
+                  }`,
                 }}
               />
-            ) : null}
+            ) : (
+              <Box width={16} height={16} />
+            )}
+            {generateItemLabel(item.content)}
           </Stack>
         );
       };

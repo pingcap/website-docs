@@ -4,6 +4,7 @@ import {
   PaletteColorOptions,
   ThemeOptions,
 } from "@mui/material/styles";
+import { ColorPartial } from "@mui/material/styles/createPalette";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -23,7 +24,7 @@ declare module "@mui/material/styles" {
     };
   }
   interface Palette {
-    carbon: PaletteColorOptions;
+    carbon: ColorPartial;
     website: {
       m1: string;
       m2: string;
@@ -40,7 +41,7 @@ declare module "@mui/material/styles" {
     };
   }
   interface PaletteOptions {
-    carbon?: PaletteColorOptions;
+    carbon?: ColorPartial;
     website?: {
       m1?: string;
       m2?: string;
@@ -211,7 +212,7 @@ theme = createTheme(theme, {
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "text" && {
             "&:hover": {
-              backgroundColor: theme.palette.secondary.light,
+              backgroundColor: theme.palette.carbon[400],
             },
           }),
         }),
@@ -221,13 +222,13 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           "&.Mui-selected": {
-            backgroundColor: theme.palette.secondary.light,
+            backgroundColor: theme.palette.carbon[400],
             "&:hover": {
-              backgroundColor: theme.palette.secondary.light,
+              backgroundColor: theme.palette.carbon[400],
             },
           },
           "&:hover": {
-            backgroundColor: theme.palette.secondary.light,
+            backgroundColor: theme.palette.carbon[400],
           },
         },
       },
