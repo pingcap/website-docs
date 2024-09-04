@@ -329,8 +329,8 @@ export default function VersionSelect(props: VersionSelectProps) {
           <ChevronRightIcon
             sx={{
               transform: open ? "rotate(90deg)" : "rotate(0deg)",
-              height: "1.5rem",
-              width: "1.5rem",
+              height: "16px",
+              width: "16px",
               fill: theme.palette.website.f3,
               marginRight: "0.25rem",
             }}
