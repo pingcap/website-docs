@@ -30,16 +30,18 @@ const getSelectedItem = (language?: string, pageUrl?: string): string => {
   return "";
 };
 
+// `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
+// it will be `undefined` in client side render
 const useSelectedNavItem = (language?: string, pageUrl?: string) => {
-  const [selectedItem, setSelectedItem] = React.useState(() =>
-    getSelectedItem(language, pageUrl)
+  // init in server side
+  const [selectedItem, setSelectedItem] = React.useState(
+    () => getSelectedItem(language, pageUrl) || "home"
   );
 
+  // update in client side
   React.useEffect(() => {
-    setSelectedItem(
-      getSelectedItem(language, pageUrl || window.location.pathname)
-    );
-  }, [language, pageUrl]);
+    setSelectedItem(getSelectedItem(language, window.location.pathname));
+  }, [language]);
 
   return selectedItem;
 };
