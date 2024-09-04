@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 
 import { PathConfig } from "static/Type";
 import { getRepo } from "../../../gatsby/path";
+import { ThemeProvider } from "@mui/material";
+import theme from "theme/index";
 
 export interface TotalAvatarsProps {
   avatars: AvatarItem[];
@@ -37,7 +39,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Stack
         direction="row"
         alignItems="center"
@@ -76,7 +78,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
             textTransform: "none",
           }}
         >
-          <Typography variant="body1" component="div" color="#0A85C2">
+          <Typography variant="body1" component="div" color="secondary">
             {`${avatars.length} ${
               avatars.length === 1 ? "Contributor" : "Contributors"
             }`}
@@ -142,7 +144,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </ThemeProvider>
   );
 }
 

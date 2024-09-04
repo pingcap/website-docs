@@ -1,4 +1,4 @@
-@import "./variables.css";
+@import "../theme/variables.css";
 
 html {
   font-family: moderat, -apple-system, "Poppins", "Helvetica Neue", "Noto Sans",
