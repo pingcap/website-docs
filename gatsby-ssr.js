@@ -30,49 +30,33 @@ const script = `if (Promise == null || Promise.allSettled == null) {
 export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   setHeadComponents([
     <link
-      key="moderat-black-webfont"
+      key="moderat-bold"
       rel="preload"
-      href="/fonts/moderat-black-webfont.woff2"
+      href="/fonts/Moderat-Bold.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
     />,
     <link
-      key="moderat-bold-webfont"
+      key="moderat-light"
       rel="preload"
-      href="/fonts/moderat-bold-webfont.woff2"
+      href="/fonts/Moderat-Light.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
     />,
     <link
-      key="moderat-light-webfont"
+      key="moderat-medium"
       rel="preload"
-      href="/fonts/moderat-light-webfont.woff2"
+      href="/fonts/Moderat-Medium.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
     />,
     <link
-      key="moderat-medium-webfont"
+      key="moderat-regular"
       rel="preload"
-      href="/fonts/moderat-medium-webfont.woff2"
-      as="font"
-      type="font/woff2"
-      crossOrigin="anonymous"
-    />,
-    <link
-      key="moderat-regular-webfont"
-      rel="preload"
-      href="/fonts/moderat-regular-webfont.woff2"
-      as="font"
-      type="font/woff2"
-      crossOrigin="anonymous"
-    />,
-    <link
-      key="moderat-thin-webfont"
-      rel="preload"
-      href="/fonts/moderat-thin-webfont.woff2"
+      href="/fonts/Moderat-Regular.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"

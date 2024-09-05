@@ -1,42 +1,84 @@
 @font-face {
   font-family: "moderat";
-  src: url("/fonts/moderat-thin-webfont.woff2") format("woff2");
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "moderat";
-  src: url("/fonts/moderat-light-webfont.woff2") format("woff2");
+  src: url("/fonts/Moderat-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: "moderat";
-  src: url("/fonts/moderat-regular-webfont.woff2") format("woff2");
+  src: url("/fonts/Moderat-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "moderat";
-  src: url("/fonts/moderat-medium-webfont.woff2") format("woff2");
+  src: url("/fonts/Moderat-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "moderat";
-  src: url("/fonts/moderat-bold-webfont.woff2") format("woff2");
+  src: url("/fonts/Moderat-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "moderat";
-  src: url("/fonts/moderat-black-webfont.woff2") format("woff2");
-  font-weight: 900;
+  src: url("/fonts/Moderat-Light-Italic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Regular-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Medium-Italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Bold-Italic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Bold.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
 }
 
