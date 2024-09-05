@@ -87,7 +87,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
   };
 
   return (
-    <Box px="1.5rem">
+    <Box>
       <Typography
         variant="h2"
         sx={{

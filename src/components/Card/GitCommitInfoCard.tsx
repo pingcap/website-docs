@@ -55,7 +55,7 @@ export default function GitCommitInfoCard(props: GitCommitInfoCardProps) {
       {latestCommit ? (
         <Box
           sx={{
-            margin: "1.5rem",
+            margin: "1.5rem 0",
             padding: "1rem",
             backgroundColor: "carbon.200",
           }}
