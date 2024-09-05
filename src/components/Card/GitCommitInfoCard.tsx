@@ -57,7 +57,7 @@ export default function GitCommitInfoCard(props: GitCommitInfoCardProps) {
           sx={{
             margin: "1.5rem",
             padding: "1rem",
-            backgroundColor: "#f7f8f9",
+            backgroundColor: "carbon.200",
           }}
         >
           <Typography

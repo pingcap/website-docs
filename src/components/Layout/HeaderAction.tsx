@@ -209,12 +209,12 @@ const TiDBCloudBtnGroup = () => {
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
               product_type: "general cloud",
-              button_name: "Try Free",
+              button_name: "Start for free",
               position: "header",
             })
           }
         >
-          Try Free
+          Start for free
         </Button>
       </Stack>
 

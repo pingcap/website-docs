@@ -192,7 +192,7 @@ export default function DocTemplate({
                         ? "100%"
                         : "calc(100% - 17.5rem)",
                     },
-                    padding: "1.5rem 0",
+                    padding: "36px 16px",
                   }}
                 >
                   <MDXContent

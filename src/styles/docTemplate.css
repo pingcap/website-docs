@@ -32,9 +32,14 @@
       margin: auto;
     }
 
+    code {
+      background-color: var(--carbon-200);
+    }
+
     pre {
       position: relative;
       overflow-x: hidden;
+      background-color: var(--carbon-200);
 
       code {
         .number {

@@ -25,13 +25,13 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     color: theme.palette.website.f1,
     borderRadius: theme.spacing(0.5),
     "&:hover": {
-      backgroundColor: theme.palette.carbon[300],
+      backgroundColor: theme.palette.carbon[200],
     },
     "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover": {
-      backgroundColor: theme.palette.carbon[400],
+      backgroundColor: theme.palette.carbon[300],
       color: theme.palette.secondary.main,
       [`& svg.MuiTreeItem-ChevronRightIcon`]: {
-        fill: theme.palette.carbon[800],
+        fill: theme.palette.carbon[700],
       },
     },
     "&.Mui-focused": {

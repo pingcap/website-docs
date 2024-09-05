@@ -15,7 +15,6 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
-import Chip from "@mui/material/Chip";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
@@ -75,7 +74,7 @@ export default function RightNav(props: RightNavProps) {
         }}
       >
         {language !== "ja" && (
-          <Stack spacing={1} sx={{ padding: "2rem 0.5rem 1rem 0.5rem" }}>
+          <Stack spacing={1} sx={{ padding: "36px 8px 16px 8px" }}>
             <ActionItem
               icon={SimCardDownloadIcon}
               url={`https://download.pingcap.org/${pdfUrlMemo}`}
