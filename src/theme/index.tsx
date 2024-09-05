@@ -206,6 +206,8 @@ theme = createTheme(theme, {
   palette: {
     primary: {
       main: "#DC150B",
+      light: "#DC150B",
+      dark: "#d0140b",
     },
     secondary: {
       main: theme.palette.peacock[800],

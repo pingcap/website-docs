@@ -33,6 +33,9 @@ export const EN_PRIVACY_POLICY_URL = "https://www.pingcap.com/privacy-policy";
 export const ZH_PRIVACY_POLICY_URL = "https://cn.pingcap.com/privacy-policy";
 export const JA_PRIVACY_POLICY_URL = "https://pingcap.co.jp/privacy-policy";
 
+export const EN_LEARNING_CENTER_URL = "https://www.pingcap.com/education/";
+export const ZH_LEARNING_CENTER_URL = "https://cn.pingcap.com/education/";
+
 export const ICON_GROUP_CHUNK_SIZE = 3;
 
 export const EN_ICON_GROUP = [

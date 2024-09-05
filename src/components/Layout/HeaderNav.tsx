@@ -11,10 +11,15 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DownloadIcon from "@mui/icons-material/Download";
 
 import LinkComponent from "components/Link";
-import { generateDownloadURL, generateContactURL } from "utils";
-import { PingcapLogoIcon } from "components/Icons";
+import {
+  generateDownloadURL,
+  generateContactURL,
+  generateLearningCenterURL,
+} from "utils";
 import { BuildType } from "static/Type";
 import { GTMEvent, gtmTrack } from "utils/gtm";
+
+import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
 const getSelectedItem = (language?: string, pageUrl?: string): string => {
   if (pageUrl === "/" || pageUrl === `/${language}/`) {
@@ -113,7 +118,7 @@ export default function HeaderNavStack(props: {
 
       <NavItem
         label={t("navbar.learningCenter")}
-        to="https://www.pingcap.com/education/"
+        to={generateLearningCenterURL(language)}
       />
 
       <NavItem
@@ -226,9 +231,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={
-          <PingcapLogoIcon sx={{ width: "6.75rem", height: "1.5rem" }} />
-        }
+        startIcon={<TiDBLogo />}
         endIcon={<KeyboardArrowDownIcon />}
       ></Button>
       <Menu

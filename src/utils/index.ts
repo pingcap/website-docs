@@ -19,6 +19,8 @@ import {
   EN_PRIVACY_POLICY_URL,
   ZH_PRIVACY_POLICY_URL,
   JA_PRIVACY_POLICY_URL,
+  ZH_LEARNING_CENTER_URL,
+  EN_LEARNING_CENTER_URL,
 } from "static";
 import { PathConfig, Locale, Repo } from "static/Type";
 import CONFIG from "../../docs/docs.json";
@@ -50,6 +52,16 @@ export function generateDownloadURL(lang?: string) {
     case "en":
     default:
       return EN_PINGCAP_DOWNLOAD_URL;
+  }
+}
+
+export function generateLearningCenterURL(lang?: string) {
+  switch (lang) {
+    case "zh":
+      return ZH_LEARNING_CENTER_URL;
+    case "en":
+    default:
+      return EN_LEARNING_CENTER_URL;
   }
 }
 
