@@ -196,14 +196,6 @@ export const EN_FOOTER_ITEMS = [
         name: "Pricing",
         url: "https://www.pingcap.com/pricing/",
       },
-      {
-        name: "Get Demo",
-        url: "https://www.pingcap.com/demo/",
-      },
-      {
-        name: "Get Started",
-        url: "https://www.pingcap.com/get-started/",
-      },
     ],
   },
   {
@@ -239,24 +231,28 @@ export const EN_FOOTER_ITEMS = [
         url: "https://ask.pingcap.com/",
       },
       {
+        name: "Events & Webinars",
+        url: "https://www.pingcap.com/event",
+      },
+      {
+        name: "HTAP Summit",
+        url: "https://www.pingcap.com/htap-summit/",
+      },
+      {
+        name: "Docs",
+        url: "https://docs.pingcap.com/",
+      },
+      {
+        name: "Developer Guide",
+        url: "https://docs.pingcap.com/tidb/stable/dev-guide-overview",
+      },
+      {
         name: "FAQs",
         url: "https://docs.pingcap.com/tidb/stable/faq-overview",
       },
       {
         name: "Support",
         url: "https://tidb.support.pingcap.com/",
-      },
-      {
-        name: "TiDB Cloud Roadmap",
-        url: "https://docs.pingcap.com/tidbcloud/tidb-cloud-roadmap",
-      },
-      {
-        name: "TiDB Roadmap",
-        url: "https://docs.pingcap.com/tidb/dev/tidb-roadmap",
-      },
-      {
-        name: "Education",
-        url: "https://www.pingcap.com/education/",
       },
     ],
   },
@@ -268,12 +264,32 @@ export const EN_FOOTER_ITEMS = [
         url: "https://www.pingcap.com/about-us/",
       },
       {
+        name: "News",
+        url: "https://www.pingcap.com/press-releases-news",
+      },
+      {
         name: "Careers",
         url: "https://www.pingcap.com/careers/",
       },
       {
         name: "Contact Us",
         url: "https://www.pingcap.com/contact-us/",
+      },
+      {
+        name: "Partners",
+        url: "https://www.pingcap.com/partners/",
+      },
+      {
+        name: "Trust Center",
+        url: "https://www.pingcap.com/trust-compliance-center/",
+      },
+      {
+        name: "Security",
+        url: "https://www.pingcap.com/security/",
+      },
+      {
+        name: "Release Support",
+        url: "https://www.pingcap.com/tidb-release-support-policy/",
       },
     ],
   },
