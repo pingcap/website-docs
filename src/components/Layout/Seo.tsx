@@ -32,7 +32,7 @@ export default function Seo({
           author
         }
       }
-      favicon: file(relativePath: { eq: "pingcap-logo.ico" }) {
+      favicon: file(relativePath: { eq: "tidb-logo.svg" }) {
         publicURL
       }
     }
