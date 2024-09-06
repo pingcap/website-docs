@@ -114,14 +114,16 @@ export default function HeaderNavStack(props: {
         />
       )} */}
 
-      {/* {["zh", "en"].includes(language) && (
+      {["zh"].includes(language) && (
         <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
-      )} */}
+      )}
 
-      <NavItem
-        label={t("navbar.learningCenter")}
-        to={generateLearningCenterURL(language)}
-      />
+      {["en", "ja"].includes(language) && (
+        <NavItem
+          label={t("navbar.learningCenter")}
+          to={generateLearningCenterURL(language)}
+        />
+      )}
 
       <NavItem
         label={t("navbar.contactUs")}

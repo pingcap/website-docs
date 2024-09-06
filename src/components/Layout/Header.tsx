@@ -44,8 +44,8 @@ export default function Header(props: {
       <Toolbar
         sx={{
           height: "100%",
-          paddingLeft: { md: "2rem" },
-          paddingRight: { md: "2rem" },
+          paddingLeft: "24px",
+          paddingRight: "24px",
         }}
       >
         <Stack direction="row" spacing={1}>

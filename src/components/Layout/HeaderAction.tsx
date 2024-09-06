@@ -177,7 +177,7 @@ const TiDBCloudBtnGroup = () => {
         spacing={2}
         display={{
           xs: "none",
-          lg: "flex",
+          xl: "flex",
         }}
       >
         <Button
@@ -227,7 +227,7 @@ const TiDBCloudBtnGroup = () => {
         sx={{
           display: {
             xs: "inline-flex",
-            lg: "none",
+            xl: "none",
           },
         }}
       >
