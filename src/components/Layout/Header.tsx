@@ -17,7 +17,7 @@ import { generatePingcapUrl } from "shared/utils";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -36,7 +36,6 @@ export default function Header(props: {
       sx={{
         zIndex: 9,
         backgroundColor: "carbon.200",
-        borderBottom: `1px solid ${theme.palette.website.m4}`,
         boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
         height: props.bannerEnabled ? "7rem" : "5rem",
       }}
