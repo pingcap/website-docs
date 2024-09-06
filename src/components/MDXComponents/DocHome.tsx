@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useTheme } from "@mui/material/styles";
 
-import { getBannerByType } from "utils";
+import { getBannerByType } from "shared/utils";
 import LinkComponent from "components/Link";
 import SearchInput from "components/Search";
 

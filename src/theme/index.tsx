@@ -25,6 +25,7 @@ declare module "@mui/material/styles" {
   }
   interface Palette {
     carbon: ColorPartial;
+    peacock: ColorPartial;
     website: {
       m1: string;
       m2: string;
@@ -42,6 +43,7 @@ declare module "@mui/material/styles" {
   }
   interface PaletteOptions {
     carbon?: ColorPartial;
+    peacock?: ColorPartial;
     website?: {
       m1?: string;
       m2?: string;
@@ -76,17 +78,6 @@ let theme = createTheme({
     minor: "#e6742e",
   },
   palette: {
-    primary: {
-      main: "#DC150B",
-    },
-    secondary: {
-      main: "#478FB4",
-      light: "#EAF5FA",
-    },
-    text: {
-      primary: "#262A2C",
-      secondary: "#3D4143",
-    },
     website: {
       m1: "#fff",
       m2: "#f9f9f9",
@@ -180,18 +171,54 @@ theme = createTheme(theme, {
   palette: {
     carbon: theme.palette.augmentColor({
       color: {
-        100: "#FFFFFF",
-        200: "#F9FAFB",
-        300: "#F3F5F7",
-        400: "#EDF0F1",
-        500: "#E3E8EA",
-        600: "#C8CED0",
-        700: "#8D979A",
-        800: "#6C7679",
-        900: "#3D4143",
+        50: "#FFFFFF",
+        100: "#F9FAFB",
+        200: "#F3F5F7",
+        300: "#EDF0F1",
+        400: "#E3E8EA",
+        500: "#C8CED0",
+        600: "#8D979A",
+        700: "#6C7679",
+        800: "#3D4143",
+        900: "#262A2C",
       },
       name: "carbon",
     }),
+    peacock: theme.palette.augmentColor({
+      color: {
+        50: "#FBFDFE",
+        100: "#F4FAFD",
+        200: "#EAF5FA",
+        300: "#E0F0F8",
+        400: "#C0E1F1",
+        500: "#96CDE9",
+        600: "#6CBAE0",
+        700: "#2D9CD2",
+        800: "#1480B8",
+        900: "#0B628D",
+      },
+      name: "peacock",
+    }),
+  },
+} as ThemeOptions);
+
+theme = createTheme(theme, {
+  palette: {
+    primary: {
+      main: "#DC150B",
+      light: "#DC150B",
+      dark: "#d0140b",
+    },
+    secondary: {
+      main: theme.palette.peacock[800],
+      light: theme.palette.peacock[700],
+      dark: theme.palette.peacock[900],
+    },
+    text: {
+      primary: theme.palette.carbon[900],
+      secondary: theme.palette.carbon[800],
+      disabled: theme.palette.carbon[600],
+    },
   },
 } as ThemeOptions);
 
@@ -212,7 +239,7 @@ theme = createTheme(theme, {
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "text" && {
             "&:hover": {
-              backgroundColor: theme.palette.carbon[400],
+              backgroundColor: theme.palette.carbon[300],
             },
           }),
         }),
@@ -222,13 +249,13 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           "&.Mui-selected": {
-            backgroundColor: theme.palette.carbon[400],
+            backgroundColor: theme.palette.carbon[300],
             "&:hover": {
-              backgroundColor: theme.palette.carbon[400],
+              backgroundColor: theme.palette.carbon[300],
             },
           },
           "&:hover": {
-            backgroundColor: theme.palette.carbon[400],
+            backgroundColor: theme.palette.carbon[300],
           },
         },
       },

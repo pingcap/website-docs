@@ -1,5 +1,4 @@
-import * as React from "react";
-import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -14,8 +13,9 @@ import {
   generateIconGroup,
   generateFooterItems,
   generatePrivacyPolicy,
-} from "utils";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+  generateLegalUrl,
+} from "shared/utils";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 const FOOTER_TITLE_COLOR = "#646F72";
 
@@ -49,6 +49,7 @@ export default function Footer() {
               © {new Date().getFullYear()} TiDB. All Rights Reserved.
             </Typography>
             <PrivacyPolicy />
+            <Legal />
           </Stack>
         </Box>
       </Box>
@@ -173,6 +174,30 @@ const PrivacyPolicy = () => {
         target="_blank"
       >
         Privacy Policy
+      </Link>
+    </>
+  );
+};
+const Legal = () => {
+  const { language } = useI18next();
+  const url = generateLegalUrl(language);
+  return (
+    <>
+      <Link
+        href={url}
+        variant="body2"
+        color="#646F72"
+        sx={{
+          marginLeft: ".2rem",
+          textAlign: {
+            xs: "center",
+            md: "left",
+          },
+          textDecoration: "none",
+        }}
+        target="_blank"
+      >
+        Legal
       </Link>
     </>
   );

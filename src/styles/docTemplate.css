@@ -1,3 +1,4 @@
+@import "./typographyDefine";
 @import "highlight.js/styles/github.css";
 @import "katex/dist/katex.min.css";
 
@@ -32,9 +33,14 @@
       margin: auto;
     }
 
+    code {
+      background-color: var(--carbon-200);
+    }
+
     pre {
       position: relative;
       overflow-x: hidden;
+      background-color: var(--carbon-200);
 
       code {
         .number {

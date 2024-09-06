@@ -16,9 +16,9 @@ import CloudIcon from "@mui/icons-material/Cloud";
 
 import Search from "components/Search";
 
-import { Locale, BuildType } from "static/Type";
-import { GTMEvent, gtmTrack } from "utils/gtm";
 import { ActionButton } from "components/Card/FeedbackSection/components";
+import { Locale, BuildType } from "shared/interface";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
@@ -187,7 +187,7 @@ const TiDBCloudBtnGroup = () => {
         spacing={2}
         display={{
           xs: "none",
-          lg: "flex",
+          xl: "flex",
         }}
       >
         <Button
@@ -219,12 +219,12 @@ const TiDBCloudBtnGroup = () => {
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
               product_type: "general cloud",
-              button_name: "Try Free",
+              button_name: "Start for free",
               position: "header",
             })
           }
         >
-          Try Free
+          Start for free
         </Button>
       </Stack>
 
@@ -237,7 +237,7 @@ const TiDBCloudBtnGroup = () => {
         sx={{
           display: {
             xs: "inline-flex",
-            lg: "none",
+            xl: "none",
           },
         }}
       >

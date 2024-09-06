@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Layout from "components/Layout";
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 import { Page404Icon } from "components/Icons";
 import Seo from "components/Layout/Seo";
 
@@ -35,10 +35,8 @@ interface PageNotFoundTemplateProps {
 }
 
 export default function PageNotFoundTemplate({
-  pageContext: {
-    feature
-  },
-  data
+  pageContext: { feature },
+  data,
 }: PageNotFoundTemplateProps) {
   const pathname =
     typeof window === "undefined" ? "" : window.location.pathname;
@@ -74,7 +72,7 @@ export default function PageNotFoundTemplate({
     return i18n;
   }, [language, data]);
 
-  const bannerVisible = feature?.banner && language !== Locale.ja
+  const bannerVisible = feature?.banner && language !== Locale.ja;
 
   return (
     <>

@@ -19,7 +19,7 @@ const useBannerEvents = (
     <Box
       component="img"
       alt="TiDB"
-      src={require("styles/images/tidb/tidb-logo.svg")?.default}
+      src={require("media/logo/tidb-logo.svg")?.default}
       sx={{
         width: "1.25rem",
         height: "1.25rem",

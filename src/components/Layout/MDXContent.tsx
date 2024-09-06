@@ -13,9 +13,9 @@ import {
   MachineTranslationNotice,
   ArchiveTiDBNotice,
 } from "components/Card/CustomNotice";
-import { Locale, PathConfig, FrontMatter, BuildType } from "static/Type";
+import { Locale, PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
-import replaceInternalHref from "utils/anchor";
+import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 
 export default function MDXContent(props: {
@@ -55,7 +55,7 @@ export default function MDXContent(props: {
   !frontmatter?.hide_commit && useTotalContributors(pathConfig, filePath);
 
   return (
-    <Container className={className} maxWidth="xl">
+    <Container disableGutters className={className} maxWidth="xl">
       <Box className="markdown-body">
         {buildType === "archive" && typeof name !== "undefined" && (
           <ArchiveTiDBNotice

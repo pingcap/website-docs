@@ -1,24 +1,23 @@
 import * as React from "react";
-import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
 
-import { PingcapLogoIcon } from "components/Icons";
 import LinkComponent from "components/Link";
 import HeaderNavStack, {
   HeaderNavStackMobile,
 } from "components/Layout/HeaderNav";
 import HeaderAction from "components/Layout/HeaderAction";
 
-import TiDBLogo from "styles/images/tidb/new-tidb-logo.svg";
+import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
-import { generatePingcapUrl } from "utils";
-import { Locale, BuildType } from "static/Type";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+import { generatePingcapUrl } from "shared/utils";
+import { Locale, BuildType } from "shared/interface";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -36,8 +35,7 @@ export default function Header(props: {
       position="fixed"
       sx={{
         zIndex: 9,
-        backgroundColor: "carbon.300",
-        borderBottom: `1px solid ${theme.palette.website.m4}`,
+        backgroundColor: "carbon.200",
         boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
         height: props.bannerEnabled ? "7rem" : "5rem",
       }}
@@ -46,40 +44,39 @@ export default function Header(props: {
       <Toolbar
         sx={{
           height: "100%",
-          paddingLeft: { md: "2rem" },
-          paddingRight: { md: "2rem" },
+          paddingLeft: "24px",
+          paddingRight: "24px",
         }}
       >
-        {props.menu}
-        <Box
-          sx={{
-            display: {
-              xs: "none",
-              md: "block",
-            },
-          }}
-        >
-          <LinkComponent
-            to={generatePingcapUrl(language)}
-            onClick={() =>
-              gtmTrack(GTMEvent.ClickHeadNav, {
-                item_name: "logo",
-              })
-            }
+        <Stack direction="row" spacing={1}>
+          {props.menu}
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "block",
+              },
+            }}
           >
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={1}
-              sx={{ textAlign: "center" }}
+            <LinkComponent
+              to={generatePingcapUrl(language)}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: "logo",
+                })
+              }
             >
-              <TiDBLogo />
-              <Typography fontSize={16} fontWeight={700} color="text.primary">
-                Docs
-              </Typography>
-            </Stack>
-          </LinkComponent>
-        </Box>
+              <Stack
+                direction="row"
+                alignItems="center"
+                spacing={1}
+                sx={{ textAlign: "center" }}
+              >
+                <TiDBLogo />
+              </Stack>
+            </LinkComponent>
+          </Box>
+        </Stack>
 
         <HeaderNavStack buildType={props.buildType} pageUrl={props.pageUrl} />
         <HeaderNavStackMobile buildType={props.buildType} />

@@ -10,13 +10,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { PingcapLogoWithoutTextIcon } from "components/Icons";
 
-import { DocLeftNav, PathConfig, BuildType } from "static/Type";
+import { DocLeftNav, PathConfig, BuildType } from "shared/interface";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "components/Dropdown/VersionSelect";
-import { generatePingcapUrl } from "utils";
+import { generatePingcapUrl } from "shared/utils";
 
 interface LeftNavProps {
   data: DocLeftNav;
@@ -49,7 +49,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
           height: "100%",
           maxHeight: "calc(100vh - 7rem)",
           overflowY: "auto",
-          padding: "1rem",
+          padding: "28px 1rem",
         }}
       >
         {pathConfig.repo !== "tidbcloud" && (

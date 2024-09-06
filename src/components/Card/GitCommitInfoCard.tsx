@@ -4,7 +4,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { Locale, PathConfig } from "static/Type";
+import { Locale, PathConfig } from "shared/interface";
 import { getRepo } from "../../../gatsby/path";
 import { docs } from "../../../docs/docs.json";
 
@@ -55,9 +55,9 @@ export default function GitCommitInfoCard(props: GitCommitInfoCardProps) {
       {latestCommit ? (
         <Box
           sx={{
-            margin: "1.5rem",
+            margin: "1.5rem 0",
             padding: "1rem",
-            backgroundColor: "#f7f8f9",
+            backgroundColor: "carbon.200",
           }}
         >
           <Typography

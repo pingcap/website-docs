@@ -30,9 +30,33 @@ const script = `if (Promise == null || Promise.allSettled == null) {
 export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   setHeadComponents([
     <link
-      key="moderat-regular-webfont"
+      key="moderat-bold"
       rel="preload"
-      href="/fonts/moderat-regular-webfont.woff2"
+      href="/fonts/Moderat-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />,
+    <link
+      key="moderat-light"
+      rel="preload"
+      href="/fonts/Moderat-Light.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />,
+    <link
+      key="moderat-medium"
+      rel="preload"
+      href="/fonts/Moderat-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />,
+    <link
+      key="moderat-regular"
+      rel="preload"
+      href="/fonts/Moderat-Regular.woff2"
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"

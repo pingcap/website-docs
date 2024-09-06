@@ -1,18 +1,16 @@
 import * as React from "react";
-import { graphql, Link } from "gatsby";
-import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { graphql } from "gatsby";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import clsx from "clsx";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
-// import "styles/global.css";
 import "styles/docTemplate.css";
 
 import Layout from "components/Layout";
 import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
 import MDXContent from "components/Layout/MDXContent";
 import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
-import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import {
   TableOfContent,
   PageContext,
@@ -20,9 +18,9 @@ import {
   RepoNav,
   BuildType,
   Locale,
-} from "static/Type";
+} from "shared/interface";
 import Seo from "components/Layout/Seo";
-import { getStable, generateUrl } from "utils";
+import { getStable, generateUrl } from "shared/utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
@@ -192,7 +190,7 @@ export default function DocTemplate({
                         ? "100%"
                         : "calc(100% - 17.5rem)",
                     },
-                    padding: "1.5rem 0",
+                    padding: "36px 16px",
                   }}
                 >
                   <MDXContent
@@ -236,6 +234,7 @@ export default function DocTemplate({
                         pathConfig={pathConfig}
                         filePath={filePath}
                         buildType={buildType}
+                        pageUrl={pageUrl}
                       />
                     </Box>
                     <Box

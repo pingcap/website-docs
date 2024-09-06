@@ -1,4 +1,4 @@
-import { Repo, Locale } from "../src/static/Type";
+import { Repo, Locale } from "../src/shared/interface";
 import config from "../docs/docs.json";
 
 export function getRepo(doc: Repo, lang: Locale) {
