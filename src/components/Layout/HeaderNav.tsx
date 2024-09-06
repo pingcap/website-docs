@@ -21,7 +21,9 @@ import { GTMEvent, gtmTrack } from "utils/gtm";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
-const getSelectedItem = (language?: string, pageUrl?: string): string => {
+type PageType = "home" | "tidb" | "tidbcloud" | undefined;
+
+export const getPageType = (language?: string, pageUrl?: string): PageType => {
   if (pageUrl === "/" || pageUrl === `/${language}/`) {
     return "home";
   } else if (pageUrl?.includes("/tidb/")) {
@@ -32,20 +34,20 @@ const getSelectedItem = (language?: string, pageUrl?: string): string => {
   ) {
     return "tidbcloud";
   }
-  return "";
+  return;
 };
 
 // `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
 // it will be `undefined` in client side render
 const useSelectedNavItem = (language?: string, pageUrl?: string) => {
   // init in server side
-  const [selectedItem, setSelectedItem] = React.useState(
-    () => getSelectedItem(language, pageUrl) || "home"
+  const [selectedItem, setSelectedItem] = React.useState<PageType>(
+    () => getPageType(language, pageUrl) || "home"
   );
 
   // update in client side
   React.useEffect(() => {
-    setSelectedItem(getSelectedItem(language, window.location.pathname));
+    setSelectedItem(getPageType(language, window.location.pathname));
   }, [language]);
 
   return selectedItem;

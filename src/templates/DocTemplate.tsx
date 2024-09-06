@@ -236,6 +236,7 @@ export default function DocTemplate({
                         pathConfig={pathConfig}
                         filePath={filePath}
                         buildType={buildType}
+                        pageUrl={pageUrl}
                       />
                     </Box>
                     <Box

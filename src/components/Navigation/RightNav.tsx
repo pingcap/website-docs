@@ -27,21 +27,27 @@ import {
 } from "utils";
 import { sliceVersionMark } from "utils/anchor";
 import { GTMEvent, gtmTrack } from "utils/gtm";
+import { getPageType } from "components/Layout/HeaderNav";
 
 interface RightNavProps {
   toc?: TableOfContent[];
   pathConfig: PathConfig;
   filePath: string;
   buildType?: BuildType;
+  pageUrl?: string;
 }
 
 export default function RightNav(props: RightNavProps) {
-  const { toc = [], pathConfig, filePath, buildType } = props;
+  const { toc = [], pathConfig, filePath, buildType, pageUrl } = props;
 
   const theme = useTheme();
   const { language, t } = useI18next();
 
   const pdfUrlMemo = React.useMemo(() => calcPDFUrl(pathConfig), [pathConfig]);
+  const pageType = React.useMemo(
+    () => getPageType(language, pageUrl),
+    [pageUrl]
+  );
 
   // ! TOREMOVED
   const { site } = useStaticQuery(graphql`
@@ -75,18 +81,20 @@ export default function RightNav(props: RightNavProps) {
       >
         {language !== "ja" && (
           <Stack spacing={1} sx={{ padding: "36px 8px 16px 8px" }}>
-            <ActionItem
-              icon={SimCardDownloadIcon}
-              url={`https://download.pingcap.org/${pdfUrlMemo}`}
-              label={t("doc.download-pdf")}
-              rel="noreferrer"
-              download
-              onClick={() => {
-                gtmTrack(GTMEvent.DownloadPDF, {
-                  position: "right_nav",
-                });
-              }}
-            />
+            {pageType === "tidb" && (
+              <ActionItem
+                icon={SimCardDownloadIcon}
+                url={`https://download.pingcap.org/${pdfUrlMemo}`}
+                label={t("doc.download-pdf")}
+                rel="noreferrer"
+                download
+                onClick={() => {
+                  gtmTrack(GTMEvent.DownloadPDF, {
+                    position: "right_nav",
+                  });
+                }}
+              />
+            )}
             {buildType !== "archive" && (
               <ActionItem
                 icon={GitHubIcon}
