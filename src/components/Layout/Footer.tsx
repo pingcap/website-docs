@@ -14,6 +14,7 @@ import {
   generateIconGroup,
   generateFooterItems,
   generatePrivacyPolicy,
+  generateLegalUrl,
 } from "shared/utils";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
@@ -49,6 +50,7 @@ export default function Footer() {
               © {new Date().getFullYear()} TiDB. All Rights Reserved.
             </Typography>
             <PrivacyPolicy />
+            <Legal />
           </Stack>
         </Box>
       </Box>
@@ -173,6 +175,30 @@ const PrivacyPolicy = () => {
         target="_blank"
       >
         Privacy Policy
+      </Link>
+    </>
+  );
+};
+const Legal = () => {
+  const { language } = useI18next();
+  const url = generateLegalUrl(language);
+  return (
+    <>
+      <Link
+        href={url}
+        variant="body2"
+        color="#646F72"
+        sx={{
+          marginLeft: ".2rem",
+          textAlign: {
+            xs: "center",
+            md: "left",
+          },
+          textDecoration: "none",
+        }}
+        target="_blank"
+      >
+        Legal
       </Link>
     </>
   );

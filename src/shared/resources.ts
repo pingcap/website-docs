@@ -36,6 +36,10 @@ export const JA_PRIVACY_POLICY_URL = "https://pingcap.co.jp/privacy-policy";
 export const EN_LEARNING_CENTER_URL = "https://www.pingcap.com/education/";
 export const ZH_LEARNING_CENTER_URL = "https://cn.pingcap.com/education/";
 
+export const EN_LEGAL_URL = "https://www.pingcap.com/legal/";
+export const ZH_LEGAL_URL = "https://cn.pingcap.com/law/";
+export const JA_LEGAL_URL = "https://pingcap.co.jp/legal/";
+
 export const ICON_GROUP_CHUNK_SIZE = 3;
 
 export const EN_ICON_GROUP = [
@@ -240,7 +244,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "Support",
-        url: "https://support.pingcap.com/hc/en-us",
+        url: "https://tidb.support.pingcap.com/",
       },
       {
         name: "TiDB Cloud Roadmap",
@@ -268,10 +272,6 @@ export const EN_FOOTER_ITEMS = [
         url: "https://www.pingcap.com/careers/",
       },
       {
-        name: "Legal",
-        url: "https://www.pingcap.com/legal/",
-      },
-      {
         name: "Contact Us",
         url: "https://www.pingcap.com/contact-us/",
       },
@@ -288,11 +288,11 @@ export const ZH_FOOTER_ITEMS = [
         url: "https://cn.pingcap.com/product/#SelectProduct",
       },
       {
-        name: "TiDB Dedicated",
+        name: "Cloud Dedicated",
         url: "https://www.pingcap.com/tidb-dedicated/",
       },
       {
-        name: "TiDB Serverless",
+        name: "Cloud Serverless",
         url: "https://www.pingcap.com/tidb-serverless/",
       },
     ],
@@ -365,7 +365,7 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "新闻报道",
-        url: "https://cn.pingcap.com/about-us?tab=news",
+        url: "https://cn.pingcap.com/company-activity/",
       },
     ],
   },
@@ -376,24 +376,20 @@ export const JA_FOOTER_ITEMS = [
     name: "製品",
     items: [
       {
-        name: "TiDB Dedicated",
+        name: "Self-managed",
+        url: "https://pingcap.co.jp/tidb/",
+      },
+      {
+        name: "Cloud Dedicated",
         url: "https://pingcap.co.jp/tidb-dedicated/",
       },
       {
-        name: "TiDB Serverless",
+        name: "Cloud Serverless",
         url: "https://pingcap.co.jp/tidb-serverless/",
-      },
-      {
-        name: "TiDB",
-        url: "https://pingcap.co.jp/tidb-overview",
       },
       {
         name: "価格",
         url: "https://pingcap.co.jp/tidb-cloud-pricing/",
-      },
-      {
-        name: "PoC お問い合わせ",
-        url: "https://pingcap.co.jp/apply-for-poc/",
       },
     ],
   },
@@ -455,8 +451,8 @@ export const JA_FOOTER_ITEMS = [
         url: "https://tidbcommunity.slack.com/join/shared_invite/zt-9vpzdqh2-8LsybcK0US_nqwvfAjSU5A#/shared-invite/email",
       },
       {
-        name: "Support Portal",
-        url: "https://support.pingcap.com/hc/en-us",
+        name: "Support",
+        url: "https://tidb.support.pingcap.com/",
       },
     ],
   },
@@ -470,10 +466,6 @@ export const JA_FOOTER_ITEMS = [
       {
         name: "キャリア",
         url: "https://pingcap.co.jp/careers/",
-      },
-      {
-        name: "規約類",
-        url: "https://pingcap.co.jp/legal/",
       },
       {
         name: "お問い合わせ",
