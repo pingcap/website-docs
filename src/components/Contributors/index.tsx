@@ -9,7 +9,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
-import { PathConfig } from "static/Type";
+import { PathConfig } from "shared/interface";
 import { getRepo } from "../../../gatsby/path";
 import { ThemeProvider } from "@mui/material";
 import theme from "theme/index";

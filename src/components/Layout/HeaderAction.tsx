@@ -16,7 +16,7 @@ import CloudIcon from "@mui/icons-material/Cloud";
 
 import Search from "components/Search";
 
-import { Locale, BuildType } from "static/Type";
+import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 
 export default function HeaderAction(props: {

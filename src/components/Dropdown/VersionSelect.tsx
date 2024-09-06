@@ -14,8 +14,8 @@ import { useTheme } from "@mui/material/styles";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import { PathConfig, BuildType } from "static/Type";
-import { ARCHIVE_WEBSITE_URL } from "static";
+import { PathConfig, BuildType } from "shared/interface";
+import { ARCHIVE_WEBSITE_URL } from "shared/resources";
 import { AllVersion } from "utils";
 import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";

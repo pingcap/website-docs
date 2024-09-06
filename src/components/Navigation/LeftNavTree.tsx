@@ -8,7 +8,11 @@ import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 
-import { DocLeftNavItem, DocLeftNav, DocLeftNavItemContent } from "static/Type";
+import {
+  DocLeftNavItem,
+  DocLeftNav,
+  DocLeftNavItemContent,
+} from "shared/interface";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "utils";
 

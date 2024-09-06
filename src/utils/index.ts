@@ -21,8 +21,8 @@ import {
   JA_PRIVACY_POLICY_URL,
   ZH_LEARNING_CENTER_URL,
   EN_LEARNING_CENTER_URL,
-} from "static";
-import { PathConfig, Locale, Repo } from "static/Type";
+} from "shared/resources";
+import { PathConfig, Locale, Repo } from "shared/interface";
 import CONFIG from "../../docs/docs.json";
 import {
   PabloBookLoverSVG,

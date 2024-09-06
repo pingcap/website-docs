@@ -16,7 +16,7 @@ import {
   generateContactURL,
   generateLearningCenterURL,
 } from "utils";
-import { BuildType } from "static/Type";
+import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";

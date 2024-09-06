@@ -4,7 +4,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { Locale, PathConfig } from "static/Type";
+import { Locale, PathConfig } from "shared/interface";
 import { getRepo } from "../../../gatsby/path";
 import { docs } from "../../../docs/docs.json";
 

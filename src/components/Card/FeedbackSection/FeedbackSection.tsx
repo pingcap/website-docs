@@ -9,7 +9,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { ThumbUpOutlined, ThumbDownOutlined } from "@mui/icons-material";
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 import { useState } from "react";
 import { trackCustomEvent } from "gatsby-plugin-google-analytics";
 import { submitFeedbackDetail, submitLiteFeedback } from "./tracking";

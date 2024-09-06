@@ -20,7 +20,7 @@ import {
   RepoNav,
   BuildType,
   Locale,
-} from "static/Type";
+} from "shared/interface";
 import Seo from "components/Layout/Seo";
 import { getStable, generateUrl } from "utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";

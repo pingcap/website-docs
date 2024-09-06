@@ -10,7 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { PingcapLogoWithoutTextIcon } from "components/Icons";
 
-import { DocLeftNav, PathConfig, BuildType } from "static/Type";
+import { DocLeftNav, PathConfig, BuildType } from "shared/interface";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {

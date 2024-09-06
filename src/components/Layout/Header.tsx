@@ -14,7 +14,7 @@ import HeaderAction from "components/Layout/HeaderAction";
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
 import { generatePingcapUrl } from "utils";
-import { Locale, BuildType } from "static/Type";
+import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "utils/gtm";
 import { Banner } from "./Banner";
 import { Stack, Typography } from "@mui/material";

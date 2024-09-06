@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from "gatsby";
 
 import { Helmet, type MetaProps, type LinkProps } from "react-helmet-async";
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 
 interface Props {
   noindex?: boolean;

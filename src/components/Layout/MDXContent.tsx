@@ -13,7 +13,7 @@ import {
   MachineTranslationNotice,
   ArchiveTiDBNotice,
 } from "components/Card/CustomNotice";
-import { Locale, PathConfig, FrontMatter, BuildType } from "static/Type";
+import { Locale, PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
 import replaceInternalHref from "utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";

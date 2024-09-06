@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 import Seo from "components/Layout/Seo";
 import Layout from "components/Layout";
-import { type BuildType, Locale } from "../static/Type";
+import { type BuildType, Locale } from "../shared/interface";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
 declare const Redoc: any;

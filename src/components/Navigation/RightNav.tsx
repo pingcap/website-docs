@@ -18,7 +18,7 @@ import SvgIcon from "@mui/material/SvgIcon";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-import { TableOfContent, PathConfig, BuildType } from "static/Type";
+import { TableOfContent, PathConfig, BuildType } from "shared/interface";
 import {
   calcPDFUrl,
   getRepoFromPathCfg,
