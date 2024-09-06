@@ -16,7 +16,7 @@ import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "components/Dropdown/VersionSelect";
-import { generatePingcapUrl } from "utils";
+import { generatePingcapUrl } from "shared/utils";
 
 interface LeftNavProps {
   data: DocLeftNav;

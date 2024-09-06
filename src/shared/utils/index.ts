@@ -23,7 +23,7 @@ import {
   EN_LEARNING_CENTER_URL,
 } from "shared/resources";
 import { PathConfig, Locale, Repo } from "shared/interface";
-import CONFIG from "../../docs/docs.json";
+import CONFIG from "../../../docs/docs.json";
 import {
   PabloBookLoverSVG,
   TiDBBanner,

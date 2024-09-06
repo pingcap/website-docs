@@ -12,7 +12,7 @@ import {
   DiscordIcon,
 } from "components/Icons";
 
-import { convertVersionName } from "utils";
+import { convertVersionName } from "./utils";
 import CONFIG from "../../docs/docs.json";
 
 export const DEFAULT_PINGCAP_URL = `https://www.pingcap.com`;

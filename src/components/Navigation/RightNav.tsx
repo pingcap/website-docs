@@ -24,9 +24,9 @@ import {
   getRepoFromPathCfg,
   transformCustomId,
   removeHtmlTag,
-} from "utils";
-import { sliceVersionMark } from "utils/anchor";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+} from "shared/utils";
+import { sliceVersionMark } from "shared/utils/anchor";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { getPageType } from "components/Layout/HeaderNav";
 
 interface RightNavProps {

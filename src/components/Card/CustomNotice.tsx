@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Locale, PathConfig } from "shared/interface";
 import { docs } from "../../../docs/docs.json";
 import { Important, CustomAlert } from "components/MDXComponents";
-import { generateUrl } from "utils";
+import { generateUrl } from "shared/utils";
 import LinkComponent from "components/Link";
 
 interface Props {

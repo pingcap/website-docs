@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { getBannerByType } from "utils";
+import { getBannerByType } from "shared/utils";
 import { useTheme } from "@mui/material";
 
 export function LearningPathContainer(props: {

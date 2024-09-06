@@ -17,7 +17,7 @@ import SearchResults from "components/Search/Results";
 import SearchInput from "components/Search";
 import { Tip } from "components/MDXComponents";
 import Seo from "components/Layout/Seo";
-import { algoliaClient } from "utils/algolia";
+import { algoliaClient } from "shared/utils/algolia";
 import {
   TIDB_EN_STABLE_VERSION,
   TIDB_EN_SEARCH_INDEX_VERSION,

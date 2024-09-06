@@ -14,8 +14,8 @@ import {
   generateIconGroup,
   generateFooterItems,
   generatePrivacyPolicy,
-} from "utils";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+} from "shared/utils";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 const FOOTER_TITLE_COLOR = "#646F72";
 

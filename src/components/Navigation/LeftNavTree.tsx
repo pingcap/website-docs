@@ -14,7 +14,7 @@ import {
   DocLeftNavItemContent,
 } from "shared/interface";
 import LinkComponent from "components/Link";
-import { scrollToElementIfInView } from "utils";
+import { scrollToElementIfInView } from "shared/utils";
 
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;

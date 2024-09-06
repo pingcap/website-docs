@@ -15,9 +15,9 @@ import {
   generateDownloadURL,
   generateContactURL,
   generateLearningCenterURL,
-} from "utils";
+} from "shared/utils";
 import { BuildType } from "shared/interface";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
