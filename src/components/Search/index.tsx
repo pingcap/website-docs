@@ -86,7 +86,7 @@ export default function Search(props: {
         noValidate
         autoComplete="off"
         sx={{
-          width: "251px",
+          maxWidth: "251px",
           display: {
             xs: disableResponsive ? "block" : "none",
             lg: "block",

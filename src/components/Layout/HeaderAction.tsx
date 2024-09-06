@@ -13,6 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import TranslateIcon from "@mui/icons-material/Translate";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloudIcon from "@mui/icons-material/Cloud";
+import StarIcon from "media/icons/star.svg";
 
 import Search from "components/Search";
 
@@ -47,6 +48,13 @@ export default function HeaderAction(props: {
             {language === "en" && (
               <ActionButton
                 variant="outlined"
+                startIcon={<StarIcon />}
+                sx={{
+                  display: {
+                    xs: "none",
+                    xl: "flex",
+                  },
+                }}
                 onClick={() => window.tidbai.open}
               >
                 Ask TiDB.ai
