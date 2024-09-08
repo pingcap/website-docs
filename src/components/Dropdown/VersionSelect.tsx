@@ -55,7 +55,6 @@ const StyledMenu = styled((props: MenuProps) => (
   />
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
-    borderRadius: 6,
     marginTop: theme.spacing(1),
     minWidth: 268,
     color:
@@ -393,7 +392,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     marginTop: theme.spacing(3),
   },
   "& .MuiInputBase-input": {
-    borderRadius: 4,
     position: "relative",
     backgroundColor: theme.palette.background.paper,
     // border: "1px solid #ced4da",
@@ -401,7 +399,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     padding: "10px 26px 10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     "&:focus": {
-      borderRadius: 4,
       borderColor: "#80bdff",
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     },

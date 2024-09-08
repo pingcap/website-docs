@@ -27,7 +27,6 @@ type StyledTreeItemProps = TreeItemProps & {
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   [`& .${treeItemClasses.content}`]: {
     color: theme.palette.website.f1,
-    borderRadius: theme.spacing(0.5),
     "&:hover": {
       backgroundColor: theme.palette.carbon[200],
     },
@@ -186,12 +185,12 @@ export default function ControlledTreeView(props: {
       };
       return (
         <LinkComponent
+          key={item.id}
           to={item.link}
           style={{ width: "100%", color: "inherit" }}
           onClick={(e) => e.stopPropagation()}
         >
           <StyledTreeItem
-            key={item.id}
             nodeId={item.id}
             label={<LabelEle />}
             // onClick={() => {

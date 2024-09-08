@@ -15,7 +15,6 @@ const StyledTextField = styled((props: TextFieldProps) => (
 ))(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     background: theme.palette.background.paper,
-    borderRadius: "8px",
     height: "32px",
     fontSize: "14px",
     "&:hover fieldset": {

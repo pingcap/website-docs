@@ -223,14 +223,14 @@ theme = createTheme(theme, {
 } as ThemeOptions);
 
 theme = createTheme(theme, {
+  shape: {
+    borderRadius: "0px",
+  },
   components: {
     MuiButton: {
       defaultProps: {
         disableElevation: true,
         disableRipple: true,
-        style: {
-          borderRadius: "8px",
-        },
       },
       styleOverrides: {
         sizeMedium: {
