@@ -9,7 +9,7 @@ ul.tabs {
     display: block;
     padding: 0.5em 1em;
     background-color: white;
-    border-radius: 8px 8px 0 0;
+    border-radius: var(--shape-border-radius) var(--shape-border-radius) 0 0;
     transition: background-color 0.2s ease-in-out;
     cursor: pointer;
     margin-right: 8px;
