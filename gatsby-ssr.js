@@ -64,5 +64,11 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   ]);
   setPostBodyComponents([
     <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
+    <script
+      key="ai-widget"
+      async
+      src="https://tidb.ai/widget.js"
+      data-controlled="true"
+    />,
   ]);
 };
