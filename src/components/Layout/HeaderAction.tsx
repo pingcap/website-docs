@@ -55,7 +55,7 @@ export default function HeaderAction(props: {
                     xl: "flex",
                   },
                 }}
-                onClick={() => window.tidbai.open}
+                onClick={() => (window.tidbai.open = true)}
               >
                 Ask TiDB.ai
               </ActionButton>

@@ -224,7 +224,7 @@ theme = createTheme(theme, {
 
 theme = createTheme(theme, {
   shape: {
-    borderRadius: "0px",
+    borderRadius: 0,
   },
   components: {
     MuiButton: {
