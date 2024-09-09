@@ -19,9 +19,14 @@ import {
   EN_PRIVACY_POLICY_URL,
   ZH_PRIVACY_POLICY_URL,
   JA_PRIVACY_POLICY_URL,
-} from "static";
-import { PathConfig, Locale, Repo } from "static/Type";
-import CONFIG from "../../docs/docs.json";
+  ZH_LEARNING_CENTER_URL,
+  EN_LEARNING_CENTER_URL,
+  ZH_LEGAL_URL,
+  JA_LEGAL_URL,
+  EN_LEGAL_URL,
+} from "shared/resources";
+import { PathConfig, Locale, Repo } from "shared/interface";
+import CONFIG from "../../../docs/docs.json";
 import {
   PabloBookLoverSVG,
   TiDBBanner,
@@ -50,6 +55,16 @@ export function generateDownloadURL(lang?: string) {
     case "en":
     default:
       return EN_PINGCAP_DOWNLOAD_URL;
+  }
+}
+
+export function generateLearningCenterURL(lang?: string) {
+  switch (lang) {
+    case "zh":
+      return ZH_LEARNING_CENTER_URL;
+    case "en":
+    default:
+      return EN_LEARNING_CENTER_URL;
   }
 }
 
@@ -110,6 +125,18 @@ export function generatePrivacyPolicy(lang?: string) {
     case "en":
     default:
       return EN_PRIVACY_POLICY_URL;
+  }
+}
+
+export function generateLegalUrl(lang?: string) {
+  switch (lang) {
+    case "zh":
+      return ZH_LEGAL_URL;
+    case "ja":
+      return JA_LEGAL_URL;
+    case "en":
+    default:
+      return EN_LEGAL_URL;
   }
 }
 

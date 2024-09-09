@@ -1,21 +1,20 @@
-import { Trans, useI18next } from "gatsby-plugin-react-i18next"
-import { useState } from "react"
-import { z } from "zod"
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useState } from "react";
+import { z } from "zod";
 
-import axios from "axios"
+import axios from "axios";
 
-import { LoadingButton } from "@mui/lab"
-import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField"
+import { LoadingButton } from "@mui/lab";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
-import { Locale } from "static/Type"
+import { Locale } from "shared/interface";
 
 type FormType = {
   email: string;
   loading: boolean;
   error: null | "invalidEmail" | "networkError";
 };
-
 
 // Collect email address that subscribe to TiDB release and send it to the SendGrid API
 function EmailSubscriptionForm() {
@@ -58,10 +57,9 @@ function EmailSubscriptionForm() {
       setFormData({ ...formData, loading: true, error: null });
 
       try {
-
         const payload = new URLSearchParams({
-          email: formData.email
-        })
+          email: formData.email,
+        });
         await axios.post(API_URL, payload);
 
         setFormData({ ...formData, loading: false, error: null });
@@ -94,7 +92,13 @@ function EmailSubscriptionForm() {
                 value={formData.email}
                 onChange={handleChange}
                 error={!!formData.error}
-                helperText={!!formData.error ? (formData.error === "invalidEmail" ? t('releaseSubscription.error.invalidEmail') : t('releaseSubscription.error.networkError')) : ' '}
+                helperText={
+                  !!formData.error
+                    ? formData.error === "invalidEmail"
+                      ? t("releaseSubscription.error.invalidEmail")
+                      : t("releaseSubscription.error.networkError")
+                    : " "
+                }
               />
 
               <LoadingButton
@@ -111,14 +115,14 @@ function EmailSubscriptionForm() {
                     boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
                   },
                   "&.MuiLoadingButton-loading": {
-                    color: "rgba(0, 0, 0, 0.26)"
+                    color: "rgba(0, 0, 0, 0.26)",
                   },
                   ".MuiLoadingButton-loadingIndicator": {
-                    position: 'initial',
-                    left: 'auto',
-                    transform: 'none',
-                    mr: 1
-                  }
+                    position: "initial",
+                    left: "auto",
+                    transform: "none",
+                    mr: 1,
+                  },
                 }}
               >
                 <Trans i18nKey="releaseSubscription.button.subscribe" />
@@ -147,10 +151,10 @@ function EmailSubscriptionForm() {
 export function EmailSubscriptionWrapper() {
   const { language } = useI18next();
   const disabled = language === Locale.ja;
-  
+
   if (disabled) {
-  	return null;
+    return null;
   }
-  
-  return <EmailSubscriptionForm />
+
+  return <EmailSubscriptionForm />;
 }

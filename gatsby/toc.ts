@@ -1,6 +1,6 @@
 import { ListItem, List, Link, Paragraph, Text } from "mdast";
 
-import { RepoNav, RepoNavLink, PathConfig } from "../src/static/Type";
+import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
 import { generateUrl } from "./path";
 
 export function mdxAstToToc(

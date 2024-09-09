@@ -1,3 +1,87 @@
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Light-Italic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Regular-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Medium-Italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat";
+  src: url("/fonts/Moderat-Bold-Italic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "moderat mono";
+  src: url("/fonts/Moderat-Mono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* cyrillic-ext */
 @font-face {
   font-family: "Fira Code";

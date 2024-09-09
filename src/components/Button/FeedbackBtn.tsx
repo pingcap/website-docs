@@ -15,7 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 import { feedbackForm } from "./FeedbackBtn.module.css";
 
 export default function FeedbackBtn(props: { title: string; locale: Locale }) {

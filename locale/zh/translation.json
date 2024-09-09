@@ -25,7 +25,8 @@
     "download": "免费试用",
     "contactUs": "联系我们",
     "searchDocs": "搜索文档",
-    "playground": "Playground"
+    "playground": "Playground",
+    "learningCenter": "Learning center"
   },
   "doc": {
     "notExist": "此文档不存在",

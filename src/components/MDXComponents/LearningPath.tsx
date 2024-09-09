@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { getBannerByType } from "utils";
+import { getBannerByType } from "shared/utils";
+import { useTheme } from "@mui/material";
 
 export function LearningPathContainer(props: {
   title: string;
@@ -98,6 +99,7 @@ export function LearningPath(props: {
   icon: string;
 }) {
   const { children, label, icon } = props;
+  const theme = useTheme();
   return (
     <>
       <Stack
@@ -114,7 +116,7 @@ export function LearningPath(props: {
               color: "#24292f",
             },
             "& a:hover": {
-              color: "#0a85c2",
+              color: theme.palette.secondary.main,
             },
           },
 

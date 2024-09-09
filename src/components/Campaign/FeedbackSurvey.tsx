@@ -7,6 +7,7 @@ import {
   IconButton,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import {
   CampaignOutlined,
@@ -55,6 +56,7 @@ function useDisclosure(cacheDuration: number = 0) {
 }
 
 export function FeedbackSurveyCampaign() {
+  const theme = useTheme();
   const { t } = useI18next();
   const [visible, close] = useDisclosure(120 * 60 * 1000);
 
@@ -66,7 +68,7 @@ export function FeedbackSurveyCampaign() {
     <Box
       sx={{
         bgcolor: "website.m1",
-        borderRadius: "8px",
+        borderRadius: theme.shape.borderRadius,
       }}
     >
       <Card
@@ -77,7 +79,6 @@ export function FeedbackSurveyCampaign() {
         sx={{
           display: "block",
           width: "15rem",
-          borderRadius: "8px",
           borderColor: "website.k1",
           background:
             "radial-gradient(181.14% 96.64% at 101.72% 103.13%, rgba(211, 97, 230, 0.50) 0%, rgba(16, 190, 235, 0.17) 39.41%, rgba(255, 255, 255, 0.00) 100%)",
@@ -119,7 +120,7 @@ export function FeedbackSurveyCampaign() {
               fontWeight: 600,
               background: "linear-gradient(90deg, #9A3CBB, #284DAB, #2D9BB7)",
               backgroundClip: "text",
-              "-webkit-text-fill-color": "transparent",
+              WebkitTextFillColor: "transparent",
             },
           }}
           sx={{

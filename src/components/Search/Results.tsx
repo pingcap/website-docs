@@ -40,12 +40,12 @@ export default function SearchResults(props: {
 
   const getHref = () => {
     switch (language) {
-      case 'zh':
-        return 'https://asktug.com/?utm_source=doc';
-      case 'en':
-      case 'ja':
+      case "zh":
+        return "https://asktug.com/?utm_source=doc";
+      case "en":
+      case "ja":
       default:
-        return 'https://discord.gg/DQZ2dy3cuc?utm_source=doc';
+        return "https://discord.gg/DQZ2dy3cuc?utm_source=doc";
     }
   };
 
@@ -102,7 +102,8 @@ export default function SearchResults(props: {
           <Typography>
             <Trans i18nKey="search.resultTips.title" />
           </Typography>
-          <Typography component="ul"
+          <Typography
+            component="ul"
             sx={{
               paddingTop: "1rem",
             }}
@@ -183,7 +184,6 @@ function SearchItem(props: { data: any }) {
           "& >div": {
             width: "fit-content",
           },
-          fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
         }}
       >
         {!!data._highlightResult?.hierarchy?.lvl0 && (
@@ -205,7 +205,6 @@ function SearchItem(props: { data: any }) {
             "& >div": {
               width: "fit-content",
             },
-            fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
           }}
         >
           <div
@@ -219,18 +218,12 @@ function SearchItem(props: { data: any }) {
           sx={{
             textDecoration: "none",
             width: "fit-content",
-            fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
           }}
         >
           {data.url}
         </Typography>
       )}
-      <Typography
-        component="div"
-        sx={{
-          fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
-        }}
-      >
+      <Typography component="div" sx={{}}>
         <div
           dangerouslySetInnerHTML={{
             __html:

@@ -1,7 +1,5 @@
-import * as React from "react";
-import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -15,34 +13,45 @@ import {
   generateIconGroup,
   generateFooterItems,
   generatePrivacyPolicy,
-} from "utils";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+  generateLegalUrl,
+} from "shared/utils";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
+
+const FOOTER_TITLE_COLOR = "#646F72";
 
 export default function Footer() {
   return (
     <>
-      <Box sx={{ bgcolor: "#20222B", padding: "3.5rem 0" }} component="footer">
-        <Container maxWidth="lg">
+      <Box sx={{ bgcolor: "#000" }} component="footer">
+        <Box maxWidth="xl" sx={{ padding: "30px 64px", margin: "0 auto" }}>
           <FooterBlock />
-          <Stack direction="row">
+          <Stack
+            direction="row"
+            spacing="12px"
+            sx={{ paddingTop: "66px" }}
+            divider={
+              <Typography variant="body2" component="div">
+                /
+              </Typography>
+            }
+          >
             <Typography
               variant="body2"
               component="div"
-              color="rgba(255, 255, 255, 0.5)"
+              color="#646F72"
               sx={{
-                paddingTop: "3rem",
                 textAlign: {
                   xs: "center",
                   md: "left",
                 },
               }}
             >
-              © {new Date().getFullYear()} PingCAP. All Rights Reserved.
+              © {new Date().getFullYear()} TiDB. All Rights Reserved.
             </Typography>
-
             <PrivacyPolicy />
+            <Legal />
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </>
   );
@@ -62,21 +71,21 @@ const FooterBlock = () => {
           rowGap: "4rem",
         }}
       >
+        <FooterItems />
         <Stack
           sx={{
-            gap: "2rem",
+            gap: "48px",
             display: {
               xs: "none",
               md: "flex",
             },
           }}
         >
-          <PingcapLogoFooterIcon
-            sx={{ width: "6.125rem", height: "1.625rem" }}
-          />
+          <Typography color={FOOTER_TITLE_COLOR} component="div">
+            STAY CONNECTED
+          </Typography>
           <IconGroup />
         </Stack>
-        <FooterItems />
       </Stack>
       <Stack
         alignItems="center"
@@ -153,10 +162,9 @@ const PrivacyPolicy = () => {
       <Link
         href={url}
         variant="body2"
-        color="rgba(255, 255, 255, 0.5)"
+        color="#646F72"
         sx={{
           marginLeft: ".2rem",
-          paddingTop: "3rem",
           textAlign: {
             xs: "center",
             md: "left",
@@ -165,7 +173,31 @@ const PrivacyPolicy = () => {
         }}
         target="_blank"
       >
-        Privacy Policy.
+        Privacy Policy
+      </Link>
+    </>
+  );
+};
+const Legal = () => {
+  const { language } = useI18next();
+  const url = generateLegalUrl(language);
+  return (
+    <>
+      <Link
+        href={url}
+        variant="body2"
+        color="#646F72"
+        sx={{
+          marginLeft: ".2rem",
+          textAlign: {
+            xs: "center",
+            md: "left",
+          },
+          textDecoration: "none",
+        }}
+        target="_blank"
+      >
+        Legal
       </Link>
     </>
   );
@@ -178,27 +210,29 @@ const FooterItems = () => {
   return (
     <>
       {rows.map((row) => (
-        <Stack key={row.name} sx={{ gap: "0.75rem", minWidth: "6.75rem" }}>
-          <Typography color="#7E7F86" component="div">
-            {row.name}
+        <Stack key={row.name} sx={{ gap: "48px" }}>
+          <Typography color={FOOTER_TITLE_COLOR} component="div">
+            {row.name.toUpperCase()}
           </Typography>
-          {row.items.map((item) => (
-            <LinkComponent
-              key={`${row.name}-${item.name}`}
-              to={item.url}
-              isI18n
-              sx={{ width: "fit-content" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickFooter, {
-                  item_name: item.name,
-                })
-              }
-            >
-              <Typography color={theme.palette.website.m4} component="div">
-                {item.name}
-              </Typography>
-            </LinkComponent>
-          ))}
+          <Stack sx={{ gap: "16px", minWidth: "6.75rem" }}>
+            {row.items.map((item) => (
+              <LinkComponent
+                key={`${row.name}-${item.name}`}
+                to={item.url}
+                isI18n
+                sx={{ width: "fit-content" }}
+                onClick={() =>
+                  gtmTrack(GTMEvent.ClickFooter, {
+                    item_name: item.name,
+                  })
+                }
+              >
+                <Typography color="#fff" component="div">
+                  {item.name}
+                </Typography>
+              </LinkComponent>
+            ))}
+          </Stack>
         </Stack>
       ))}
     </>

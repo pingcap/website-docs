@@ -1,5 +1,10 @@
 import * as React from "react";
-import { createTheme } from "@mui/material/styles";
+import {
+  createTheme,
+  PaletteColorOptions,
+  ThemeOptions,
+} from "@mui/material/styles";
+import { ColorPartial } from "@mui/material/styles/createPalette";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -19,6 +24,8 @@ declare module "@mui/material/styles" {
     };
   }
   interface Palette {
+    carbon: ColorPartial;
+    peacock: ColorPartial;
     website: {
       m1: string;
       m2: string;
@@ -35,6 +42,8 @@ declare module "@mui/material/styles" {
     };
   }
   interface PaletteOptions {
+    carbon?: ColorPartial;
+    peacock?: ColorPartial;
     website?: {
       m1?: string;
       m2?: string;
@@ -52,7 +61,16 @@ declare module "@mui/material/styles" {
   }
 }
 
-const theme = createTheme({
+let theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1440,
+    },
+  },
   status: {
     success: "#52cc7a",
     error: "#e65c5c",
@@ -80,6 +98,7 @@ const theme = createTheme({
       textTransform: "none",
     },
     fontFamily: [
+      "moderat",
       "-apple-system",
       '"Poppins"',
       '"Helvetica Neue"',
@@ -93,7 +112,6 @@ const theme = createTheme({
       fontSize: "2.5rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "3.75rem",
       color: "#666666",
     },
@@ -101,7 +119,6 @@ const theme = createTheme({
       fontSize: "2rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "3rem",
       color: "#666666",
     },
@@ -109,7 +126,6 @@ const theme = createTheme({
       fontSize: "1.75rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "2.625rem",
       color: "#666666",
     },
@@ -117,7 +133,6 @@ const theme = createTheme({
       fontSize: "1.25rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.875rem",
       color: "#666666",
     },
@@ -125,7 +140,6 @@ const theme = createTheme({
       fontSize: "1.125rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.6875rem",
       color: "#666666",
     },
@@ -133,14 +147,12 @@ const theme = createTheme({
       fontSize: "0.875rem",
       fontWeight: "600",
       fontStyle: "normal",
-      fontFamily: '"Poppins"',
       lineHeight: "1.5rem",
       color: "#666666",
     },
     body1: {
       fontSize: "1rem",
       lineHeight: "1.5rem",
-      fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
       color: "#666666",
@@ -148,7 +160,6 @@ const theme = createTheme({
     body2: {
       fontSize: "0.875rem",
       lineHeight: "1.25rem",
-      fontFamily: '"Helvetica Neue", "sans-serif"',
       fontWeight: "400",
       fontStyle: "normal",
       color: "#666666",
@@ -156,12 +167,100 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+theme = createTheme(theme, {
+  palette: {
+    carbon: theme.palette.augmentColor({
+      color: {
+        50: "#FFFFFF",
+        100: "#F9FAFB",
+        200: "#F3F5F7",
+        300: "#EDF0F1",
+        400: "#E3E8EA",
+        500: "#C8CED0",
+        600: "#8D979A",
+        700: "#6C7679",
+        800: "#3D4143",
+        900: "#262A2C",
+      },
+      name: "carbon",
+    }),
+    peacock: theme.palette.augmentColor({
+      color: {
+        50: "#FBFDFE",
+        100: "#F4FAFD",
+        200: "#EAF5FA",
+        300: "#E0F0F8",
+        400: "#C0E1F1",
+        500: "#96CDE9",
+        600: "#6CBAE0",
+        700: "#2D9CD2",
+        800: "#1480B8",
+        900: "#0B628D",
+      },
+      name: "peacock",
+    }),
+  },
+} as ThemeOptions);
 
-// export default function CustomStyles() {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <CustomCheckbox defaultChecked />
-//     </ThemeProvider>
-//   );
-// }
+theme = createTheme(theme, {
+  palette: {
+    primary: {
+      main: "#DC150B",
+      light: "#DC150B",
+      dark: "#d0140b",
+    },
+    secondary: {
+      main: theme.palette.peacock[800],
+      light: theme.palette.peacock[700],
+      dark: theme.palette.peacock[900],
+    },
+    text: {
+      primary: theme.palette.carbon[900],
+      secondary: theme.palette.carbon[800],
+      disabled: theme.palette.carbon[600],
+    },
+  },
+} as ThemeOptions);
+
+theme = createTheme(theme, {
+  shape: {
+    borderRadius: "0px",
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        disableRipple: true,
+      },
+      styleOverrides: {
+        sizeMedium: {
+          height: "32px",
+        },
+        root: ({ ownerState }) => ({
+          ...(ownerState.variant === "text" && {
+            "&:hover": {
+              backgroundColor: theme.palette.carbon[300],
+            },
+          }),
+        }),
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: theme.palette.carbon[300],
+            "&:hover": {
+              backgroundColor: theme.palette.carbon[300],
+            },
+          },
+          "&:hover": {
+            backgroundColor: theme.palette.carbon[300],
+          },
+        },
+      },
+    },
+  },
+} as ThemeOptions);
+
+export default theme;

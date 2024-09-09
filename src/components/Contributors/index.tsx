@@ -9,8 +9,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
-import { PathConfig } from "static/Type";
+import { PathConfig } from "shared/interface";
 import { getRepo } from "../../../gatsby/path";
+import { ThemeProvider } from "@mui/material";
+import theme from "theme/index";
 
 export interface TotalAvatarsProps {
   avatars: AvatarItem[];
@@ -37,7 +39,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Stack
         direction="row"
         alignItems="center"
@@ -76,14 +78,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
             textTransform: "none",
           }}
         >
-          <Typography
-            variant="body1"
-            component="div"
-            color="#0A85C2"
-            sx={{
-              fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
-            }}
-          >
+          <Typography variant="body1" component="div" color="secondary">
             {`${avatars.length} ${
               avatars.length === 1 ? "Contributor" : "Contributors"
             }`}
@@ -126,12 +121,8 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {avatars.map((avatar) => (
-          <MenuItem>
-            <Avatar
-              key={`menuItem-${avatar.alt}`}
-              src={avatar.src}
-              alt={avatar.alt}
-            />
+          <MenuItem key={`menuItem-${avatar.alt}`}>
+            <Avatar src={avatar.src} alt={avatar.alt} />
             <Typography
               variant="body1"
               component="a"
@@ -141,7 +132,6 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
               sx={{
                 textDecoration: "none",
                 width: "100%",
-                fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"`,
                 color: "#24292f",
               }}
             >
@@ -150,7 +140,7 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </ThemeProvider>
   );
 }
 
@@ -225,15 +215,16 @@ export const useTotalContributors = (
   }, [pathConfig, filePath]);
 
   React.useEffect(() => {
-    if (totalContributors.length > 0) {
-      // Create a new node(a sibling node after h1) to render the total contributors
-      const mdTitleElement = document.querySelector(".markdown-body > h1");
-      const contributorNode = document.createElement("div");
+    // Create a new node(a sibling node after h1) to render the total contributors
+    const mdTitleElement = document.querySelector(".markdown-body > h1");
+    const contributorNode = document.createElement("div");
+    const appendedNode = mdTitleElement?.parentElement?.insertBefore(
+      contributorNode,
+      mdTitleElement?.nextSibling
+    );
+
+    if (!!totalContributors.length) {
       try {
-        const appendedNode = mdTitleElement?.parentElement?.insertBefore(
-          contributorNode,
-          mdTitleElement?.nextSibling
-        );
         appendedNode &&
           ReactDOM.render(
             <TotalAvatars avatars={totalContributors} />,
@@ -241,6 +232,14 @@ export const useTotalContributors = (
           );
       } catch (error) {}
     }
+
+    return () => {
+      if (!appendedNode) {
+        return;
+      }
+      ReactDOM.unmountComponentAtNode(appendedNode);
+      appendedNode?.parentNode?.removeChild(appendedNode);
+    };
   }, [totalContributors]);
 
   return { totalContributors, loading };
