@@ -35,12 +35,14 @@
 
     code {
       background-color: var(--carbon-200);
+      border-radius: var(--shape-border-radius);
     }
 
     pre {
       position: relative;
       overflow-x: hidden;
       background-color: var(--carbon-200);
+      border-radius: var(--shape-border-radius);
 
       code {
         .number {

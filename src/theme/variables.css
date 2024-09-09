@@ -1,4 +1,8 @@
 :root {
+  /* --shape-- */
+  --shape-border-radius: 0px;
+
+  /* --color-- */
   --primary-color: #dc150b;
   --secondary-color: var(--peacock-800);
 

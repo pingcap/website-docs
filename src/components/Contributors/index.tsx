@@ -121,12 +121,8 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {avatars.map((avatar) => (
-          <MenuItem>
-            <Avatar
-              key={`menuItem-${avatar.alt}`}
-              src={avatar.src}
-              alt={avatar.alt}
-            />
+          <MenuItem key={`menuItem-${avatar.alt}`}>
+            <Avatar src={avatar.src} alt={avatar.alt} />
             <Typography
               variant="body1"
               component="a"
