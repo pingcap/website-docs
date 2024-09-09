@@ -1,9 +1,6 @@
 .feedbackForm {
   padding: 1rem;
 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-
   iframe {
     width: 100% !important;
   }
@@ -35,7 +32,6 @@
 
     textarea.hs-input,
     .hs_email .hs-input {
-      font-family: "inherit";
       padding: 5px;
       width: 100%;
       color: #172d72;

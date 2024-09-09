@@ -10,14 +10,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 
-import LanguageIcon from "@mui/icons-material/Language";
+import TranslateIcon from "@mui/icons-material/Translate";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloudIcon from "@mui/icons-material/Cloud";
 
 import Search from "components/Search";
 
-import { Locale, BuildType } from "static/Type";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+import { Locale, BuildType } from "shared/interface";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
@@ -32,7 +32,7 @@ export default function HeaderAction(props: {
       direction="row"
       spacing={{
         xs: 1,
-        lg: 3,
+        lg: 2,
       }}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
@@ -83,7 +83,7 @@ const LangSwitch = (props: {
           },
         }}
       >
-        <LanguageIcon />
+        <TranslateIcon />
       </IconButton>
       <Button
         id="header-lang-switch"
@@ -93,7 +93,7 @@ const LangSwitch = (props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<LanguageIcon sx={{ fill: theme.palette.website.f1 }} />}
+        startIcon={<TranslateIcon sx={{ fill: theme.palette.website.f1 }} />}
         endIcon={
           <KeyboardArrowDownIcon sx={{ fill: theme.palette.website.f1 }} />
         }
@@ -103,11 +103,7 @@ const LangSwitch = (props: {
             lg: "inline-flex",
           },
         }}
-      >
-        <Typography component="span" color="inherit">
-          <Trans i18nKey="lang.title" />
-        </Typography>
-      </Button>
+      ></Button>
       <Menu
         id="header-lang-menu"
         anchorEl={anchorEl}
@@ -116,11 +112,11 @@ const LangSwitch = (props: {
         elevation={0}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "left",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "left",
         }}
         PaperProps={{
           sx: {
@@ -178,10 +174,10 @@ const TiDBCloudBtnGroup = () => {
     <>
       <Stack
         direction="row"
-        spacing={3}
+        spacing={2}
         display={{
           xs: "none",
-          lg: "flex",
+          xl: "flex",
         }}
       >
         <Button
@@ -191,7 +187,7 @@ const TiDBCloudBtnGroup = () => {
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
           sx={{
-            color: "website.k1",
+            color: "text.secondary",
           }}
           onClick={() =>
             gtmTrack(GTMEvent.SigninCloud, {
@@ -208,22 +204,17 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
-            backgroundColor: "website.k1",
-            boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
-            "&:hover": {
-              backgroundColor: "#0A85C2",
-              boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
-            },
+            backgroundColor: "primary",
           }}
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
-              product_type: 'general cloud',
-              button_name: "Try Free",
+              product_type: "general cloud",
+              button_name: "Start for free",
               position: "header",
             })
           }
         >
-          Try Free
+          Start for free
         </Button>
       </Stack>
 
@@ -236,7 +227,7 @@ const TiDBCloudBtnGroup = () => {
         sx={{
           display: {
             xs: "inline-flex",
-            lg: "none",
+            xl: "none",
           },
         }}
       >
@@ -282,7 +273,7 @@ const TiDBCloudBtnGroup = () => {
             }}
             onClick={() =>
               gtmTrack(GTMEvent.SignupCloud, {
-                product_type: 'general cloud',
+                product_type: "general cloud",
                 button_name: "Try Free",
                 position: "header",
               })

@@ -8,39 +8,58 @@ import { useTheme } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import CodeIcon from "@mui/icons-material/Code";
 import DownloadIcon from "@mui/icons-material/Download";
 
 import LinkComponent from "components/Link";
-import { generateDownloadURL, generateContactURL } from "utils";
-import { PingcapLogoIcon } from "components/Icons";
-import { BuildType } from "static/Type";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+import {
+  generateDownloadURL,
+  generateContactURL,
+  generateLearningCenterURL,
+} from "shared/utils";
+import { BuildType } from "shared/interface";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
-const useSelectedNavItem = (language?: string) => {
-  const [selectedItem, setSelectedItem] = React.useState<string>("");
+import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
+type PageType = "home" | "tidb" | "tidbcloud" | undefined;
+
+export const getPageType = (language?: string, pageUrl?: string): PageType => {
+  if (pageUrl === "/" || pageUrl === `/${language}/`) {
+    return "home";
+  } else if (pageUrl?.includes("/tidb/")) {
+    return "tidb";
+  } else if (
+    pageUrl?.includes("/tidbcloud/") ||
+    pageUrl?.endsWith("/tidbcloud")
+  ) {
+    return "tidbcloud";
+  }
+  return;
+};
+
+// `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
+// it will be `undefined` in client side render
+const useSelectedNavItem = (language?: string, pageUrl?: string) => {
+  // init in server side
+  const [selectedItem, setSelectedItem] = React.useState<PageType>(
+    () => getPageType(language, pageUrl) || "home"
+  );
+
+  // update in client side
   React.useEffect(() => {
-    const pathname = window.location.pathname;
-    if (pathname === "/" || pathname === `/${language}/`) {
-      setSelectedItem("home");
-    } else if (pathname.includes("/tidb/")) {
-      setSelectedItem("tidb");
-    } else if (
-      pathname.includes("/tidbcloud/") ||
-      pathname.endsWith("/tidbcloud")
-    ) {
-      setSelectedItem("tidbcloud");
-    }
+    setSelectedItem(getPageType(language, window.location.pathname));
   }, [language]);
 
   return selectedItem;
 };
 
-export default function HeaderNavStack(props: { buildType?: BuildType }) {
+export default function HeaderNavStack(props: {
+  buildType?: BuildType;
+  pageUrl?: string;
+}) {
   const { language, t } = useI18next();
 
-  const selectedItem = useSelectedNavItem(language);
+  const selectedItem = useSelectedNavItem(language, props.pageUrl);
 
   return (
     <Stack
@@ -81,7 +100,7 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />
 
-      {["en", "ja"].includes(language) && (
+      {/* {["en", "ja"].includes(language) && (
         <NavItem
           label={t("navbar.playground")}
           to={`https://play.tidbcloud.com`}
@@ -93,10 +112,17 @@ export default function HeaderNavStack(props: { buildType?: BuildType }) {
             })
           }
         />
+      )} */}
+
+      {["zh"].includes(language) && (
+        <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
       )}
 
-      {["zh", "en"].includes(language) && (
-        <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
+      {["en", "ja"].includes(language) && (
+        <NavItem
+          label={t("navbar.learningCenter")}
+          to={generateLearningCenterURL(language)}
+        />
       )}
 
       <NavItem
@@ -142,7 +168,7 @@ const NavItem = (props: {
           paddingTop: "0.25rem",
           paddingBottom: props.selected ? "0" : "0.25rem",
           borderBottom: props.selected
-            ? `4px solid ${theme.palette.website.k1}`
+            ? `4px solid ${theme.palette.primary.main}`
             : ``,
         }}
       >
@@ -161,8 +187,8 @@ const NavItem = (props: {
             variant="body1"
             component="div"
             color="website.f1"
+            padding="12px 0"
             sx={{
-              fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"`,
               display: "inline-flex",
               alignItems: "center",
               gap: 0.5,
@@ -209,9 +235,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={
-          <PingcapLogoIcon sx={{ width: "6.75rem", height: "1.5rem" }} />
-        }
+        startIcon={<TiDBLogo />}
         endIcon={<KeyboardArrowDownIcon />}
       ></Button>
       <Menu

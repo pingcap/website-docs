@@ -1,5 +1,5 @@
 .root {
-  background: #f7f8f9;
+  background: var(--carbon-200);
 }
 
 .toolbar {

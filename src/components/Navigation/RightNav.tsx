@@ -15,34 +15,39 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
-import Chip from "@mui/material/Chip";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-import { TableOfContent, PathConfig, BuildType } from "static/Type";
+import { TableOfContent, PathConfig, BuildType } from "shared/interface";
 import {
   calcPDFUrl,
   getRepoFromPathCfg,
   transformCustomId,
   removeHtmlTag,
-} from "utils";
-import { sliceVersionMark } from "utils/anchor";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+} from "shared/utils";
+import { sliceVersionMark } from "shared/utils/anchor";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
+import { getPageType } from "components/Layout/HeaderNav";
 
 interface RightNavProps {
   toc?: TableOfContent[];
   pathConfig: PathConfig;
   filePath: string;
   buildType?: BuildType;
+  pageUrl?: string;
 }
 
 export default function RightNav(props: RightNavProps) {
-  const { toc = [], pathConfig, filePath, buildType } = props;
+  const { toc = [], pathConfig, filePath, buildType, pageUrl } = props;
 
   const theme = useTheme();
   const { language, t } = useI18next();
 
   const pdfUrlMemo = React.useMemo(() => calcPDFUrl(pathConfig), [pathConfig]);
+  const pageType = React.useMemo(
+    () => getPageType(language, pageUrl),
+    [pageUrl]
+  );
 
   // ! TOREMOVED
   const { site } = useStaticQuery(graphql`
@@ -75,19 +80,21 @@ export default function RightNav(props: RightNavProps) {
         }}
       >
         {language !== "ja" && (
-          <Stack spacing={1} sx={{ padding: "2rem 0.5rem 1rem 0.5rem" }}>
-            <ActionItem
-              icon={SimCardDownloadIcon}
-              url={`https://download.pingcap.org/${pdfUrlMemo}`}
-              label={t("doc.download-pdf")}
-              rel="noreferrer"
-              download
-              onClick={() => {
-                gtmTrack(GTMEvent.DownloadPDF, {
-                  position: "right_nav",
-                });
-              }}
-            />
+          <Stack spacing={1} sx={{ padding: "36px 8px 16px 8px" }}>
+            {pageType === "tidb" && (
+              <ActionItem
+                icon={SimCardDownloadIcon}
+                url={`https://download.pingcap.org/${pdfUrlMemo}`}
+                label={t("doc.download-pdf")}
+                rel="noreferrer"
+                download
+                onClick={() => {
+                  gtmTrack(GTMEvent.DownloadPDF, {
+                    position: "right_nav",
+                  });
+                }}
+              />
+            )}
             {buildType !== "archive" && (
               <ActionItem
                 icon={GitHubIcon}
@@ -137,7 +144,6 @@ export default function RightNav(props: RightNavProps) {
               component="div"
               sx={{
                 paddingLeft: "0.5rem",
-                fontFamily: "Helvetica Neue",
                 color: theme.palette.website.f1,
                 fontSize: "0.875rem",
                 fontWeight: "700",
@@ -197,7 +203,6 @@ export default function RightNav(props: RightNavProps) {
             component="div"
             sx={{
               paddingLeft: "0.5rem",
-              fontFamily: "Helvetica Neue",
               color: theme.palette.website.f1,
               fontSize: "0.875rem",
               fontWeight: "700",
@@ -268,6 +273,7 @@ const ActionItem = (props: {
   [key: string]: any;
 }) => {
   const { url, label, sx, ...rest } = props;
+  const theme = useTheme();
   return (
     <Typography
       component="a"
@@ -282,7 +288,7 @@ const ActionItem = (props: {
         alignItems: "center",
         gap: "0.25rem",
         "&:hover, &:focus, &:active": {
-          color: "#0A85C2",
+          color: theme.palette.secondary.main,
         },
         ...sx,
       }}
