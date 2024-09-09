@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import StarIcon from "media/icons/star.svg";
 
 import TranslateIcon from "@mui/icons-material/Translate";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -18,6 +19,7 @@ import Search from "components/Search";
 
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
+import { ActionButton } from "components/Card/FeedbackSection/components";
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
@@ -40,7 +42,26 @@ export default function HeaderAction(props: {
         <LangSwitch supportedLocales={supportedLocales} />
       )}
       {docInfo && language !== "ja" && buildType !== "archive" && (
-        <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+        <>
+          <Stack direction="row" spacing="4px">
+            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+            {language === "en" && (
+              <ActionButton
+                variant="outlined"
+                startIcon={<StarIcon />}
+                sx={{
+                  display: {
+                    xs: "none",
+                    xl: "flex",
+                  },
+                }}
+                onClick={() => window.tidbai.open}
+              >
+                Ask TiDB.ai
+              </ActionButton>
+            )}
+          </Stack>
+        </>
       )}
       {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
