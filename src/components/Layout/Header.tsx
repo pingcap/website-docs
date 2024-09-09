@@ -65,14 +65,7 @@ export default function Header(props: {
               })
             }
           >
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={1}
-              sx={{ textAlign: "center" }}
-            >
-              <TiDBLogo />
-            </Stack>
+            <TiDBLogo />
           </LinkComponent>
         </Box>
 
