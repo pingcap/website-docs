@@ -323,6 +323,7 @@ export default function DocSearchTemplate({
               position: "fixed",
               bottom: "1rem",
               right: "1rem",
+              zIndex: 9,
             }}
           >
             <FeedbackSurveyCampaign />
