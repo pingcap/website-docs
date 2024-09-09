@@ -68,7 +68,7 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
       key="ai-widget"
       async
       src="https://tidb.ai/widget.js"
-      data-controlled
+      data-controlled="true"
     />,
   ]);
 };
