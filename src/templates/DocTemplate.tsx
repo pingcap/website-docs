@@ -261,6 +261,7 @@ export default function DocTemplate({
                   position: "fixed",
                   bottom: "1rem",
                   right: "1rem",
+                  zIndex: 9,
                 }}
               >
                 <FeedbackSurveyCampaign />
