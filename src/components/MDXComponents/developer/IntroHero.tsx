@@ -2,20 +2,20 @@ import { PlayCircleOutlineOutlined } from "@mui/icons-material";
 import { Box, Button, Modal, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 
-interface IntroBannerProps {
+interface IntroHeroProps {
   title: string;
   content: string;
   videoTitle: string;
   thumbnail: string;
 }
 
-export function IntroBanner({
+export function IntroHero({
   title,
   content,
   videoTitle,
   thumbnail,
   children,
-}: React.PropsWithChildren<IntroBannerProps>) {
+}: React.PropsWithChildren<IntroHeroProps>) {
   const theme = useTheme();
   const [modalOpened, setModalOpened] = useState(false);
   const openModal = () => setModalOpened(true);
@@ -26,7 +26,7 @@ export function IntroBanner({
   return (
     <>
       <Stack
-        className="md-intro-banner"
+        className="md-intro-hero"
         direction="row"
         sx={{
           background: "#4D4D4D",
@@ -45,7 +45,7 @@ export function IntroBanner({
             justifyContent: "center",
             alignItems: "flex-start",
 
-            "& h1.md-intro-banner__title": {
+            "& h1.md-intro-hero__title": {
               borderBottom: "0",
               color: "#fff",
               fontSize: "24px",
@@ -54,16 +54,24 @@ export function IntroBanner({
               padding: "0",
             },
 
-            "& div.md-intro-banner__content": {
+            "& div.md-intro-hero__content": {
               color: "#fff",
               fontSize: "14px",
             },
           }}
         >
-          <Typography component="h1" variant="h1" className="md-intro-banner__title">
+          <Typography
+            component="h1"
+            variant="h1"
+            className="md-intro-hero__title"
+          >
             {title}
           </Typography>
-          <Typography component="div" variant="body1" className="md-intro-banner__content">
+          <Typography
+            component="div"
+            variant="body1"
+            className="md-intro-hero__content"
+          >
             {content}
           </Typography>
           <Button
@@ -86,7 +94,7 @@ export function IntroBanner({
         </Stack>
         <Stack
           sx={{
-            width: '400px',
+            width: "400px",
             maxWidth: "400px",
           }}
         >
@@ -116,8 +124,27 @@ export function IntroBanner({
   );
 }
 
-export function IntroBannerVideo({
-  children,
-}: React.PropsWithChildren<unknown>) {
-  return <>{children}</>;
+interface IntroHeroVideoProps {
+  title: string;
+  src: string;
+}
+
+export function IntroHeroVideo({ title, src }: IntroHeroVideoProps) {
+  return (
+    <Box
+      component="iframe"
+      width={800}
+      height={450}
+      src={src}
+      title={title}
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerPolicy="strict-origin-when-cross-origin"
+      allowFullScreen
+      tabIndex={-1}
+      sx={{
+        maxWidth: "100vw"
+      }}
+    />
+  );
 }
