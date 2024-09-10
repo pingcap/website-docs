@@ -30,6 +30,7 @@ interface DocTemplateProps {
     pageUrl: string;
     buildType: BuildType;
     feature?: {
+      globalHome?: boolean;
       banner?: boolean;
       feedback?: boolean;
     };
@@ -82,6 +83,7 @@ export default function DocTemplate({
 
   const { language } = useI18next();
   const bannerVisible = feature?.banner && language !== Locale.ja;
+  const isGlobalHome = !!feature?.globalHome;
 
   return (
     <Layout
@@ -155,6 +157,9 @@ export default function DocTemplate({
           )}
           <Box
             component="main"
+            className={clsx({
+              "doc-global-home": isGlobalHome,
+            })}
             sx={{
               width: "100%",
               maxWidth: {

@@ -272,6 +272,7 @@ export const createDocHome = async ({
         feature: {
           banner: false,
           feedback: false,
+          globalHome: true,
         },
       },
     });
