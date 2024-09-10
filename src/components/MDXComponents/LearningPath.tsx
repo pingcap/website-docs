@@ -37,7 +37,7 @@ export function LearningPathContainer(props: {
             justifyContent: "center",
             maxWidth: {
               xs: "100%",
-              md: "50%",
+              md: "60%",
             },
             width: "auto",
             padding: {
@@ -175,14 +175,12 @@ export function LearningPath(props: {
         <Box
           id="learning-path-right"
           sx={{
-            backgroundColor: "#f6f6f6",
-            boxShadow: "none",
+            backgroundColor: theme.palette.carbon[200],
             height: "auto",
             // minHeight: "5rem",
             padding: "2rem",
             transition: ".5s",
-            border: "1px solid #e9eaee",
-            borderRadius: "0.25rem",
+            border: `1px solid ${theme.palette.carbon[400]}`,
             maxWidth: "100%",
 
             display: "flex",
@@ -191,11 +189,6 @@ export function LearningPath(props: {
             flexWrap: "wrap",
             justifyContent: "flex-start",
             rowGap: "1rem",
-
-            "&:hover": {
-              boxShadow:
-                "0 0.5em 1em -0.125em hsl(0deg 0% 4% / 10%), 0 0 0 1px hsl(0deg 0% 4% / 2%)",
-            },
 
             "& > p": {
               flex: { xs: "50% 1", md: "0 0 33%" },
