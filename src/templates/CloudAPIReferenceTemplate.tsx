@@ -79,6 +79,9 @@ export default function APIReferenceTemplate({
         {
           schemaExpansionLevel: 3,
           scrollYOffset: ".doc-site-header",
+          theme: {
+            logo: { maxHeight: 0, maxWidth: 0 },
+          },
         },
         document.getElementById("redoc-container"),
         () => {
