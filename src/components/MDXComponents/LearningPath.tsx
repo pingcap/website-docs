@@ -5,19 +5,19 @@ import Typography from "@mui/material/Typography";
 
 import { useTheme } from "@mui/material";
 
-import TiDBSelfManagementLogo from "media/imgs/tidb-self-management-logo.svg";
-import TiDBSelfManagementBg from "media/imgs/tidb-self-management-bg.svg";
-import TiDBCloudLogo from "media/imgs/tidb-cloud-logo.svg";
-import TiDBCloudBg from "media/imgs/tidb-cloud-bg.svg";
+import TiDBSelfManagedHeroGraphic from "media/imgs/tidb-self-managed-hero-graphic.svg";
+import TiDBSelfManagedHeroGraphicBg from "media/imgs/tidb-self-managed-hero-graphic-bg.svg";
+import TiDBCloudHeroGraphic from "media/imgs/tidb-cloud-hero-graphic.svg";
+import TiDBCloudHeroGraphicBg from "media/imgs/tidb-cloud-hero-graphic-bg.svg";
 
 const TiDBSelfManagementImg = () => {
   return (
     <Box sx={{ position: "relative", height: "100%" }}>
       <Box sx={{ position: "absolute", bottom: -10, right: 0 }}>
-        <TiDBSelfManagementBg />
+        <TiDBSelfManagedHeroGraphicBg />
       </Box>
       <Box sx={{ position: "absolute", bottom: -36, right: 110 }}>
-        <TiDBSelfManagementLogo />
+        <TiDBSelfManagedHeroGraphic />
       </Box>
     </Box>
   );
@@ -27,10 +27,10 @@ const TiDBCloudImg = () => {
   return (
     <Box sx={{ position: "relative", height: "100%" }}>
       <Box sx={{ position: "absolute", bottom: -10, right: 0 }}>
-        <TiDBCloudBg />
+        <TiDBCloudHeroGraphicBg />
       </Box>
       <Box sx={{ position: "absolute", bottom: -34, right: 156 }}>
-        <TiDBCloudLogo />
+        <TiDBCloudHeroGraphic />
       </Box>
     </Box>
   );
