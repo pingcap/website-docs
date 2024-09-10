@@ -191,6 +191,7 @@ export default function DocTemplate({
                         : "calc(100% - 290px)",
                     },
                     padding: "36px 16px",
+                    boxSizing: "border-box",
                   }}
                 >
                   <MDXContent
