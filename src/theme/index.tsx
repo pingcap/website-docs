@@ -238,6 +238,7 @@ theme = createTheme(theme, {
         },
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "text" && {
+            color: theme.palette.text.primary,
             "&:hover": {
               backgroundColor: theme.palette.carbon[300],
             },
