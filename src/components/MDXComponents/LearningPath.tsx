@@ -155,7 +155,7 @@ export function LearningPath(props: {
       "tidb-cloud-tune": "oss-tune-blue",
       doc7: "oss-tools-blue",
       doc8: "oss-developer-blue",
-      deploy: "oss-manage-blue",
+      deploy: "oss-deploy-blue",
       maintain: "oss-manage-blue",
     },
     home: {
