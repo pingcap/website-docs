@@ -26,4 +26,4 @@ export { MDSvgIcon } from "components/MDXComponents/MDSvgIcon";
 export { SimpleTab } from "components/MDXComponents/SimpleTab";
 export { SyntaxDiagram } from "components/MDXComponents/SyntaxDiagram";
 export { TabsPanel } from "components/MDXComponents/TabsPanel";
-export { IntroBanner, IntroBannerVideo, DevLangAccordion, DevToolGroup, DevToolCard } from 'components/MDXComponents/developer'
+export { IntroHero, IntroHeroVideo, DevLangAccordion, DevToolGroup, DevToolCard } from 'components/MDXComponents/developer'
