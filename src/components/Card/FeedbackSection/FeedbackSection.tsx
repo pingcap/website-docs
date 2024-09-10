@@ -91,9 +91,9 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       <Typography
         variant="h2"
         sx={{
-          color: "website.f1",
+          color: "text.primary",
           fontSize: "1.5rem",
-          fontWeight: 600,
+          fontWeight: 500,
           lineHeight: 1.25,
           marginTop: "24px",
           marginBottom: "16px",
