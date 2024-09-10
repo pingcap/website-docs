@@ -253,9 +253,10 @@ export default function DocSearchTemplate({
                         type.match as typeof EN_DOC_TYPE_LIST[number]["match"]
                       );
                     }}
-                    sx={{
-                      backgroundColor: docType === type.match ? "#EAF6FB" : "",
-                    }}
+                    sx={(theme) => ({
+                      backgroundColor:
+                        docType === type.match ? theme.palette.carbon[300] : "",
+                    })}
                   >
                     {type.name}
                   </Button>
@@ -294,13 +295,13 @@ export default function DocSearchTemplate({
                           onClick={() => {
                             setDocVersion(version);
                           }}
-                          sx={{
+                          sx={(theme) => ({
                             backgroundColor:
                               realVersionMemo ===
                               convertStableToRealVersion(docType, version)
-                                ? "#EAF6FB"
+                                ? theme.palette.carbon[300]
                                 : "",
-                          }}
+                          })}
                         >
                           {version === "stable"
                             ? convertStableToRealVersion(docType, version)

@@ -240,9 +240,6 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
-          sx={{
-            color: "text.secondary",
-          }}
           onClick={() =>
             gtmTrack(GTMEvent.SigninCloud, {
               position: "header",
@@ -257,9 +254,6 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
-          sx={{
-            backgroundColor: "primary",
-          }}
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
               product_type: "general cloud",
