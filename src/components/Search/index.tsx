@@ -67,7 +67,7 @@ export default function Search(props: {
   }, [location.search]);
 
   return (
-    <>
+    <Box>
       {!disableResponsive && (
         <IconButton
           sx={{
@@ -117,6 +117,6 @@ export default function Search(props: {
           }}
         />
       </Box>
-    </>
+    </Box>
   );
 }

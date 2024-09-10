@@ -17,7 +17,6 @@ import { generatePingcapUrl } from "shared/utils";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
-import { Stack } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -48,35 +47,26 @@ export default function Header(props: {
           paddingRight: "24px",
         }}
       >
-        <Stack direction="row" spacing={1}>
-          {props.menu}
-          <Box
-            sx={{
-              display: {
-                xs: "none",
-                md: "block",
-              },
-            }}
+        {props.menu}
+        <Box
+          sx={{
+            display: {
+              xs: "none",
+              md: "block",
+            },
+          }}
+        >
+          <LinkComponent
+            to={generatePingcapUrl(language)}
+            onClick={() =>
+              gtmTrack(GTMEvent.ClickHeadNav, {
+                item_name: "logo",
+              })
+            }
           >
-            <LinkComponent
-              to={generatePingcapUrl(language)}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: "logo",
-                })
-              }
-            >
-              <Stack
-                direction="row"
-                alignItems="center"
-                spacing={1}
-                sx={{ textAlign: "center" }}
-              >
-                <TiDBLogo />
-              </Stack>
-            </LinkComponent>
-          </Box>
-        </Stack>
+            <TiDBLogo />
+          </LinkComponent>
+        </Box>
 
         <HeaderNavStack buildType={props.buildType} pageUrl={props.pageUrl} />
         <HeaderNavStackMobile buildType={props.buildType} />

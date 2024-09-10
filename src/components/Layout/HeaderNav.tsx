@@ -66,7 +66,7 @@ export default function HeaderNavStack(props: {
       direction="row"
       spacing={3}
       sx={{
-        paddingLeft: "2rem",
+        paddingLeft: "20px",
         height: "100%",
         display: {
           xs: "none",
