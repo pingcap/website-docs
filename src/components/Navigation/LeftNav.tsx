@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
@@ -8,8 +8,6 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { PingcapLogoWithoutTextIcon } from "components/Icons";
-
 import { DocLeftNav, PathConfig, BuildType } from "shared/interface";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
@@ -17,6 +15,8 @@ import VersionSelect, {
   NativeVersionSelect,
 } from "components/Dropdown/VersionSelect";
 import { generatePingcapUrl } from "shared/utils";
+
+import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 
 interface LeftNavProps {
   data: DocLeftNav;
@@ -108,7 +108,7 @@ export function LeftNavMobile(props: LeftNavProps) {
             }}
           >
             <LinkComponent to={generatePingcapUrl(language)}>
-              <PingcapLogoWithoutTextIcon />
+              <TiDBLogoWithoutText />
             </LinkComponent>
             <Divider
               orientation="vertical"

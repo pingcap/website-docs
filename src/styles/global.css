@@ -9,3 +9,7 @@ html {
 body {
   margin: 0;
 }
+
+iframe {
+  max-width: 100%;
+}

@@ -34,9 +34,10 @@ export default function Header(props: {
       position="fixed"
       sx={{
         zIndex: 9,
-        backgroundColor: "carbon.200",
-        boxShadow: `0px 2px 4px rgba(42, 47, 49, 0.1)`,
+        backgroundColor: "carbon.50",
+        boxShadow: "none",
         height: props.bannerEnabled ? "7rem" : "5rem",
+        borderBottom: `1px solid ${theme.palette.carbon[400]}`,
       }}
     >
       {props.bannerEnabled && <Banner />}
