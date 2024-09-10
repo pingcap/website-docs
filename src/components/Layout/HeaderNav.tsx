@@ -135,15 +135,7 @@ export default function HeaderNavStack(props: {
           // label={<Trans i18nKey="navbar.download" />}
           to={generateDownloadURL(language)}
           alt="download"
-          startIcon={
-            <DownloadIcon
-              fontSize="inherit"
-              color="inherit"
-              sx={{
-                paddingTop: "0.5rem",
-              }}
-            />
-          }
+          startIcon={<DownloadIcon fontSize="inherit" color="inherit" />}
         />
       )}
     </Stack>
