@@ -5,6 +5,16 @@
 @import "github-markdown-css/github-markdown-light.css";
 
 .PingCAP-Doc {
+  .doc-global-home {
+    background-image: url(../../images/docHome/home-hero-bg.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+
+    .markdown-body {
+      background: none;
+    }
+  }
+
   .doc-content {
     a {
       &.anchor.before {
@@ -99,7 +109,7 @@
     font-size: 16px;
     line-height: 1.5;
 
-    a {
+    a:not(.button) {
       color: var(--secondary-color);
     }
 

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createContext, useContext } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -35,6 +35,10 @@ const TiDBCloudImg = () => {
     </Box>
   );
 };
+
+const LearningPathContext = createContext<"tidb-cloud" | "tidb" | "home">(
+  "tidb-cloud"
+);
 
 export function LearningPathContainer(props: {
   title: string;
@@ -112,7 +116,9 @@ export function LearningPathContainer(props: {
         </Box>
       </Stack>
       <Stack id="learning-path-container" sx={{ padding: "2rem 0" }}>
-        {children}
+        <LearningPathContext.Provider value={platform}>
+          {children}
+        </LearningPathContext.Provider>
       </Stack>
     </>
   );
@@ -124,7 +130,52 @@ export function LearningPath(props: {
   icon: string;
 }) {
   const { children, label, icon } = props;
+  const platform = useContext(LearningPathContext);
   const theme = useTheme();
+  const iconHashmap = {
+    "tidb-cloud": {
+      cloud1: "cloud-learning-mauve",
+      cloud2: "cloud-billing-mauve",
+      cloud3: "cloud-migrate-mauve",
+      cloud4: "cloud-integrations-mauve",
+      cloud5: "cloud-getstarted-mauve",
+      cloud6: "cloud-monitor-mauve",
+      cloud7: "cloud-manage-mauve",
+      "cloud-dev": "cloud-reference-mauve",
+      "tidb-cloud-tune": "cloud-tune-mauve",
+      doc8: "cloud-developer-mauve",
+      users: "cloud-security-mauve",
+    },
+    tidb: {
+      cloud1: "oss-learning-blue",
+      cloud3: "oss-migrate-blue",
+      cloud5: "oss-getstarted-blue",
+      cloud6: "oss-monitor-blue",
+      "cloud-dev": "oss-reference-blue",
+      "tidb-cloud-tune": "oss-tune-blue",
+      doc7: "oss-tools-blue",
+      doc8: "oss-developer-blue",
+      deploy: "oss-manage-blue",
+      maintain: "oss-manage-blue",
+    },
+    home: {
+      cloud1: "cloud-learning-mauve",
+      cloud2: "cloud-billing-mauve",
+      cloud3: "cloud-migrate-mauve",
+      cloud4: "cloud-integrations-mauve",
+      cloud5: "cloud-getstarted-mauve",
+      cloud6: "cloud-monitor-mauve",
+      cloud7: "cloud-manage-mauve",
+      "cloud-dev": "cloud-reference-mauve",
+      "tidb-cloud-tune": "cloud-tune-mauve",
+      doc8: "cloud-developer-mauve",
+      users: "cloud-security-mauve",
+    },
+  };
+  const iconName =
+    iconHashmap[platform][icon as keyof typeof iconHashmap[typeof platform]] ||
+    (platform === "tidb" ? "oss-product-blue" : "cloud-product-mauve");
+
   return (
     <>
       <Stack
@@ -184,7 +235,7 @@ export function LearningPath(props: {
         >
           <Typography
             component="img"
-            src={require(`../../../images/docHome/${icon}.svg`)?.default}
+            src={require(`../../../images/docHome/${iconName}.svg`)?.default}
             sx={{
               width: "3rem",
               height: "3rem",
