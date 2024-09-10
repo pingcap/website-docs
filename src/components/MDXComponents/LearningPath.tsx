@@ -3,8 +3,38 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { getBannerByType } from "shared/utils";
 import { useTheme } from "@mui/material";
+
+import TiDBSelfManagementLogo from "media/imgs/tidb-self-management-logo.svg";
+import TiDBSelfManagementBg from "media/imgs/tidb-self-management-bg.svg";
+import TiDBCloudLogo from "media/imgs/tidb-cloud-logo.svg";
+import TiDBCloudBg from "media/imgs/tidb-cloud-bg.svg";
+
+const TiDBSelfManagementImg = () => {
+  return (
+    <Box sx={{ position: "relative", height: "100%" }}>
+      <Box sx={{ position: "absolute", bottom: -10, right: 0 }}>
+        <TiDBSelfManagementBg />
+      </Box>
+      <Box sx={{ position: "absolute", bottom: -36, right: 110 }}>
+        <TiDBSelfManagementLogo />
+      </Box>
+    </Box>
+  );
+};
+
+const TiDBCloudImg = () => {
+  return (
+    <Box sx={{ position: "relative", height: "100%" }}>
+      <Box sx={{ position: "absolute", bottom: -10, right: 0 }}>
+        <TiDBCloudBg />
+      </Box>
+      <Box sx={{ position: "absolute", bottom: -34, right: 156 }}>
+        <TiDBCloudLogo />
+      </Box>
+    </Box>
+  );
+};
 
 export function LearningPathContainer(props: {
   title: string;
@@ -14,18 +44,19 @@ export function LearningPathContainer(props: {
 }) {
   const { children, title, subTitle, platform = "tidb" } = props;
 
-  const BannerComponent = getBannerByType(platform);
+  const bannerImg =
+    platform === "tidb" ? <TiDBSelfManagementImg /> : <TiDBCloudImg />;
 
   return (
     <>
       <Stack
         id="title-group"
         direction="row"
+        bgcolor="carbon.900"
         sx={{
-          background: "#252525",
           justifyContent: "space-between",
           flexDirection: {
-            xs: "column-reverse",
+            xs: "column",
             md: "row",
           },
         }}
@@ -33,21 +64,20 @@ export function LearningPathContainer(props: {
         <Stack
           id="title-left"
           sx={{
-            gap: "2.5rem",
+            gap: "32px",
             justifyContent: "center",
+            height: "230px",
+            boxSizing: "border-box",
             maxWidth: {
               xs: "100%",
-              md: "50%",
+              md: "60%",
             },
             width: "auto",
-            padding: {
-              xs: "0rem 1rem 2rem 1rem",
-              md: "2.5rem 0 2.5rem 2.5rem",
-            },
+            padding: "36px",
 
             "& h1#banner-title": {
               borderBottom: "0",
-              color: "#fff",
+              color: "carbon.50",
               fontSize: "42px",
               fontWeight: "700",
               margin: "0",
@@ -55,7 +85,7 @@ export function LearningPathContainer(props: {
             },
 
             "& div#banner-subtitle": {
-              color: "#fff",
+              color: "carbon.50",
             },
           }}
         >
@@ -69,21 +99,16 @@ export function LearningPathContainer(props: {
         <Box
           id="title-right"
           sx={{
-            padding: "1rem",
-            width: "50%",
+            height: "230px",
+            width: "100%",
+            boxSizing: "border-box",
             margin: {
               xs: "0 auto",
               md: "0",
             },
           }}
         >
-          <BannerComponent
-            sx={{
-              width: "100%",
-              height: "100%",
-              maxHeight: "200px",
-            }}
-          />
+          {bannerImg}
         </Box>
       </Stack>
       <Stack id="learning-path-container" sx={{ padding: "2rem 0" }}>
@@ -167,7 +192,7 @@ export function LearningPath(props: {
           />
           <Typography
             id="learning-path-label"
-            sx={{ color: "#000", width: "6rem" }}
+            sx={{ color: "carbon.900", width: "6rem", fontWeight: 700 }}
           >
             {label}
           </Typography>
@@ -175,14 +200,12 @@ export function LearningPath(props: {
         <Box
           id="learning-path-right"
           sx={{
-            backgroundColor: "#f6f6f6",
-            boxShadow: "none",
+            backgroundColor: theme.palette.carbon[200],
             height: "auto",
             // minHeight: "5rem",
             padding: "2rem",
             transition: ".5s",
-            border: "1px solid #e9eaee",
-            borderRadius: "0.25rem",
+            border: `1px solid ${theme.palette.carbon[400]}`,
             maxWidth: "100%",
 
             display: "flex",
@@ -191,11 +214,6 @@ export function LearningPath(props: {
             flexWrap: "wrap",
             justifyContent: "flex-start",
             rowGap: "1rem",
-
-            "&:hover": {
-              boxShadow:
-                "0 0.5em 1em -0.125em hsl(0deg 0% 4% / 10%), 0 0 0 1px hsl(0deg 0% 4% / 2%)",
-            },
 
             "& > p": {
               flex: { xs: "50% 1", md: "0 0 33%" },
