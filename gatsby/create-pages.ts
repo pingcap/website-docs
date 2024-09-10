@@ -22,7 +22,7 @@ interface PageQueryData {
   };
 }
 
-const DEFAULT_BUILD_TYPE = "prod";
+const DEFAULT_BUILD_TYPE: BuildType = "prod";
 
 export const createDocs = async ({
   actions: { createPage, createRedirect },

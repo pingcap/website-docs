@@ -185,7 +185,7 @@ export default function DocTemplate({
                 <Box
                   sx={{
                     width: {
-                      sm: "100%",
+                      xs: "100%",
                       md: frontmatter?.hide_sidebar
                         ? "100%"
                         : "calc(100% - 290px)",
