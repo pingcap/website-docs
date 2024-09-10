@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import { useLocation } from "@reach/router";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -15,8 +15,6 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
-import TerminalIcon from "@mui/icons-material/Terminal";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import { TableOfContent, PathConfig, BuildType } from "shared/interface";
 import {
@@ -28,6 +26,8 @@ import {
 import { sliceVersionMark } from "shared/utils/anchor";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { getPageType } from "components/Layout/HeaderNav";
+
+import HTAPAdImg from "media/imgs/htap-ad.svg";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -73,14 +73,24 @@ export default function RightNav(props: RightNavProps) {
           height: "100%",
           maxHeight: "calc(100vh - 5rem)",
           overflowY: "auto",
-          paddingLeft: "1rem",
-          paddingRight: "1rem",
+          padding: "36px 16px",
           display: "flex",
           flexDirection: "column",
+          gap: "36px",
         }}
       >
+        {["en", "ja"].includes(language) && (
+          <Link
+            to="https://www.pingcap.com/htap-summit/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <HTAPAdImg />
+          </Link>
+        )}
+
         {language !== "ja" && (
-          <Stack spacing={1} sx={{ padding: "36px 8px 16px 8px" }}>
+          <Stack spacing={1}>
             {pageType === "tidb" && (
               <ActionItem
                 icon={SimCardDownloadIcon}
@@ -133,72 +143,7 @@ export default function RightNav(props: RightNavProps) {
           </Stack>
         )}
 
-        {["en", "ja"].includes(language) && (
-          <Box
-            sx={{
-              paddingTop: "1rem",
-              pb: "1rem",
-            }}
-          >
-            <Typography
-              component="div"
-              sx={{
-                paddingLeft: "0.5rem",
-                color: theme.palette.website.f1,
-                fontSize: "0.875rem",
-                fontWeight: "700",
-                lineHeight: "1.25rem",
-                paddingBottom: "0.5rem",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 0.5,
-              }}
-            >
-              <TerminalIcon />
-              <Trans i18nKey="navbar.playground" />
-            </Typography>
-            <Typography
-              component="a"
-              href={`https://play.tidbcloud.com`}
-              target="_blank"
-              sx={{
-                display: "flex",
-                textDecoration: "none",
-                fontSize: "14px",
-                lineHeight: "1.25rem",
-                borderLeft: `1px solid transparent`,
-                paddingLeft: `0.5rem`,
-                paddingTop: "0.25rem",
-                paddingBottom: "0.25rem",
-                "&:hover": {
-                  color: theme.palette.website.f3,
-                  // borderLeft: `1px solid ${theme.palette.website.f3}`,
-                },
-              }}
-              onClick={() => {
-                gtmTrack(GTMEvent.GotoPlayground, {
-                  button_name: t("doc.playgroundDesc"),
-                  position: "right_nav",
-                });
-              }}
-            >
-              <Box>
-                <Trans i18nKey="doc.playgroundDesc" />
-                <ArrowRightAltIcon fontSize="inherit" />
-              </Box>
-            </Typography>
-          </Box>
-        )}
-
-        <Box
-          id="toc-container"
-          component="nav"
-          aria-label="toc"
-          sx={{
-            paddingTop: "1rem",
-            pb: "2rem",
-          }}
-        >
+        <Box id="toc-container" component="nav" aria-label="toc">
           <Typography
             component="div"
             sx={{
