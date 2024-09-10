@@ -1,16 +1,14 @@
-import GitHubIcon from "@mui/icons-material/GitHub";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import GithubIcon from "media/icons/github.svg";
+import XIcon from "media/icons/x.svg";
+import LinkedInIcon from "media/icons/linkedin.svg";
+import FacebookIcon from "media/icons/facebook.svg";
+import YouTubeIcon from "media/icons/youtube.svg";
+import SlackIcon from "media/icons/slack.svg";
+import DiscordIcon from "media/icons/discord.svg";
+
 import RedditIcon from "@mui/icons-material/Reddit";
 
-import {
-  StackOverflowIcon,
-  SlackIcon,
-  AskTugIcon,
-  DiscordIcon,
-} from "components/Icons";
+import { StackOverflowIcon, AskTugIcon } from "components/Icons";
 
 import { convertVersionName } from "./utils";
 import CONFIG from "../../docs/docs.json";
@@ -46,12 +44,12 @@ export const EN_ICON_GROUP = [
   {
     name: "github",
     href: "https://github.com/pingcap",
-    icon: GitHubIcon,
+    icon: GithubIcon,
   },
   {
     name: "twitter",
     href: "https://twitter.com/PingCAP",
-    icon: TwitterIcon,
+    icon: XIcon,
   },
   {
     name: "facebook",
@@ -73,28 +71,28 @@ export const EN_ICON_GROUP = [
     href: "https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA",
     icon: YouTubeIcon,
   },
-  {
-    name: "stackOverflow",
-    href: "https://stackoverflow.com/questions/tagged/tidb",
-    icon: StackOverflowIcon,
-  },
+  // {
+  //   name: "stackOverflow",
+  //   href: "https://stackoverflow.com/questions/tagged/tidb",
+  //   icon: StackOverflowIcon,
+  // },
   {
     name: "discord",
     href: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
     icon: DiscordIcon,
   },
-  {
-    name: "reddit",
-    href: "https://reddit.com/r/TiDB/",
-    icon: RedditIcon,
-  },
+  // {
+  //   name: "reddit",
+  //   href: "https://reddit.com/r/TiDB/",
+  //   icon: RedditIcon,
+  // },
 ];
 
 export const ZH_ICON_GROUP = [
   {
     name: "github",
     href: "https://github.com/pingcap",
-    icon: GitHubIcon,
+    icon: GithubIcon,
   },
   {
     name: "asktug",
@@ -104,7 +102,7 @@ export const ZH_ICON_GROUP = [
   {
     name: "twitter",
     href: "https://twitter.com/PingCAP",
-    icon: TwitterIcon,
+    icon: XIcon,
   },
   {
     name: "facebook",
@@ -147,12 +145,12 @@ export const JA_ICON_GROUP = [
   {
     name: "github",
     href: "https://github.com/pingcap",
-    icon: GitHubIcon,
+    icon: GithubIcon,
   },
   {
     name: "twitter",
     href: "https://twitter.com/PingCAP_Japan",
-    icon: TwitterIcon,
+    icon: XIcon,
   },
   {
     name: "linkedin",
