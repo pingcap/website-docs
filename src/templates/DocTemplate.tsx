@@ -178,17 +178,17 @@ export default function DocTemplate({
                 sx={{
                   flexDirection: {
                     xs: "column-reverse",
-                    sm: "row",
+                    md: "row",
                   },
                 }}
               >
                 <Box
                   sx={{
                     width: {
-                      xs: "100%",
-                      sm: frontmatter?.hide_sidebar
+                      sm: "100%",
+                      md: frontmatter?.hide_sidebar
                         ? "100%"
-                        : "calc(100% - 17.5rem)",
+                        : "calc(100% - 290px)",
                     },
                     padding: "36px 16px",
                   }}
@@ -221,11 +221,11 @@ export default function DocTemplate({
                 {!frontmatter?.hide_sidebar && (
                   <>
                     <Box
+                      width={290}
                       sx={{
-                        width: "17.5rem",
                         display: {
                           xs: "none",
-                          sm: "block",
+                          md: "block",
                         },
                       }}
                     >
@@ -241,7 +241,7 @@ export default function DocTemplate({
                       sx={{
                         padding: "1rem",
                         display: {
-                          sm: "none",
+                          md: "none",
                         },
                       }}
                     >
