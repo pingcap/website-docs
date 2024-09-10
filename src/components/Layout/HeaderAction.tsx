@@ -21,6 +21,35 @@ import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 
+const useTiDBAIStatus = () => {
+  const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
+  const [initializingTiDBAI, setInitializingTiDBAI] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!!window.tidbai) {
+      setInitializingTiDBAI(false);
+    }
+
+    window.addEventListener("tidbaiinitialized", () => {
+      setInitializingTiDBAI(false);
+    });
+    window.addEventListener("tidbaierror", () => {
+      setInitializingTiDBAI(false);
+      setShowTiDBAIButton(false);
+    });
+
+    const timer = setTimeout(() => {
+      if (!window.tidbai) {
+        setInitializingTiDBAI(false);
+        setShowTiDBAIButton(false);
+      }
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return { showTiDBAIButton, initializingTiDBAI };
+};
+
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
   docInfo?: { type: string; version: string };
@@ -28,6 +57,7 @@ export default function HeaderAction(props: {
 }) {
   const { supportedLocales, docInfo, buildType } = props;
   const { language, t } = useI18next();
+  const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
 
   return (
     <Stack
@@ -45,10 +75,11 @@ export default function HeaderAction(props: {
         <>
           <Stack direction="row" spacing="4px">
             <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
-            {language === "en" && (
+            {language === "en" && showTiDBAIButton && (
               <ActionButton
                 variant="outlined"
                 startIcon={<StarIcon />}
+                disabled={initializingTiDBAI}
                 sx={{
                   display: {
                     xs: "none",

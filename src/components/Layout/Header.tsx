@@ -17,7 +17,6 @@ import { generatePingcapUrl } from "shared/utils";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
-import { Stack } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
