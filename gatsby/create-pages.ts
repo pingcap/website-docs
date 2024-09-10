@@ -271,7 +271,7 @@ export const createDocHome = async ({
           DEFAULT_BUILD_TYPE) as BuildType,
         feature: {
           banner: false,
-          feedback: false,
+          feedback: true,
           globalHome: true,
         },
       },
