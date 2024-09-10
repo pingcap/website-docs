@@ -67,7 +67,7 @@ export default function Search(props: {
   }, [location.search]);
 
   return (
-    <>
+    <Box>
       {!disableResponsive && (
         <IconButton
           sx={{
@@ -85,7 +85,7 @@ export default function Search(props: {
         noValidate
         autoComplete="off"
         sx={{
-          maxWidth: "251px",
+          width: "251px",
           display: {
             xs: disableResponsive ? "block" : "none",
             lg: "block",
@@ -117,6 +117,6 @@ export default function Search(props: {
           }}
         />
       </Box>
-    </>
+    </Box>
   );
 }

@@ -125,7 +125,7 @@ const LangSwitch = (props: {
   };
 
   return (
-    <Box color={theme.palette.website.f1}>
+    <Box color={theme.palette.carbon[900]}>
       <IconButton
         onClick={handleClick}
         sx={{
@@ -145,11 +145,13 @@ const LangSwitch = (props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<TranslateIcon sx={{ fill: theme.palette.website.f1 }} />}
+        startIcon={<TranslateIcon sx={{ fill: theme.palette.carbon[900] }} />}
         endIcon={
-          <KeyboardArrowDownIcon sx={{ fill: theme.palette.website.f1 }} />
+          <KeyboardArrowDownIcon sx={{ fill: theme.palette.carbon[900] }} />
         }
         sx={{
+          width: "52px",
+          minWidth: "52px",
           display: {
             xs: "none",
             lg: "inline-flex",
@@ -183,7 +185,7 @@ const LangSwitch = (props: {
           selected={language === Locale.en}
           disabled={!supportedLocales.includes(Locale.en)}
         >
-          <Typography component="span" color={theme.palette.website.f1}>
+          <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.en" />
           </Typography>
         </MenuItem>
@@ -193,7 +195,7 @@ const LangSwitch = (props: {
           selected={language === Locale.zh}
           disabled={!supportedLocales.includes(Locale.zh)}
         >
-          <Typography component="span" color={theme.palette.website.f1}>
+          <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.zh" />
           </Typography>
         </MenuItem>
@@ -203,7 +205,7 @@ const LangSwitch = (props: {
           selected={language === Locale.ja}
           disabled={!supportedLocales.includes(Locale.ja)}
         >
-          <Typography component="span" color={theme.palette.website.f1}>
+          <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.ja" />
           </Typography>
         </MenuItem>
