@@ -9,7 +9,6 @@ import { Link } from "@mui/material";
 import { PingcapLogoFooterIcon } from "components/Icons";
 import LinkComponent from "components/Link";
 import {
-  splitArrayIntoChunks,
   generateIconGroup,
   generateFooterItems,
   generatePrivacyPolicy,
@@ -105,50 +104,31 @@ const FooterBlock = () => {
 };
 
 const IconGroup = () => {
-  const theme = useTheme();
   const { language } = useI18next();
   const icons = generateIconGroup(language);
-  const rows = splitArrayIntoChunks(icons);
   return (
     <Stack
       sx={{
-        flexDirection: {
-          xs: "row",
-          md: "column",
-        },
-        gap: {
-          xs: "1rem",
-          md: "0",
-        },
+        flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",
       }}
     >
-      {rows.map((row, index) => (
-        <Stack
-          key={`${language}-${index}`}
-          direction="row"
-          spacing={2}
-          color={theme.palette.website.m4}
-          sx={{ paddingTop: "0.5rem", paddingBottom: "0.5rem" }}
+      {icons.map((icon) => (
+        <IconButton
+          key={icon.name}
+          aria-label={icon.name}
+          href={icon.href}
+          target="_blank"
+          color="inherit"
+          onClick={() =>
+            gtmTrack(GTMEvent.ClickFooter, {
+              item_name: icon.name,
+            })
+          }
         >
-          {row.map((icon: any) => (
-            <IconButton
-              key={icon.name}
-              aria-label={icon.name}
-              href={icon.href}
-              target="_blank"
-              color="inherit"
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickFooter, {
-                  item_name: icon.name,
-                })
-              }
-            >
-              <icon.icon />
-            </IconButton>
-          ))}
-        </Stack>
+          <icon.icon />
+        </IconButton>
       ))}
     </Stack>
   );
