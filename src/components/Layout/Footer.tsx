@@ -19,7 +19,6 @@ import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 const FOOTER_TITLE_COLOR = "#A2ADB9";
 
 export default function Footer() {
-  const { language } = useI18next();
   return (
     <>
       <Box sx={{ bgcolor: "#000" }} component="footer">
@@ -52,8 +51,7 @@ export default function Footer() {
                 },
               }}
             >
-              © {new Date().getFullYear()}{" "}
-              {language === "zh" ? "PingCAP" : "TiDB"}. All Rights Reserved.
+              © {new Date().getFullYear()} PingCAP. All Rights Reserved.
             </Typography>
             <PrivacyPolicy />
             <Legal />
