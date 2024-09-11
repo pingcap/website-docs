@@ -13,6 +13,7 @@ import { PathConfig } from "shared/interface";
 import { getRepo } from "../../../gatsby/path";
 import { ThemeProvider } from "@mui/material";
 import theme from "theme/index";
+import { Link } from "gatsby";
 
 export interface TotalAvatarsProps {
   avatars: AvatarItem[];
@@ -121,23 +122,17 @@ export default function TotalAvatars(props: TotalAvatarsProps) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {avatars.map((avatar) => (
-          <MenuItem key={`menuItem-${avatar.alt}`}>
-            <Avatar src={avatar.src} alt={avatar.alt} />
-            <Typography
-              variant="body1"
-              component="a"
-              color="#0A85C2"
-              href={avatar.pageUrl}
-              target="_blank"
-              sx={{
-                textDecoration: "none",
-                width: "100%",
-                color: "#24292f",
-              }}
-            >
-              {avatar.name}
-            </Typography>
-          </MenuItem>
+          <Link
+            to={avatar.pageUrl}
+            target="_blank"
+            key={`menuItem-${avatar.alt}`}
+            style={{ textDecoration: "none" }}
+          >
+            <MenuItem>
+              <Avatar src={avatar.src} alt={avatar.alt} />
+              <Typography variant="body1">{avatar.name}</Typography>
+            </MenuItem>
+          </Link>
         ))}
       </Menu>
     </ThemeProvider>
