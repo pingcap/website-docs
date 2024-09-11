@@ -315,6 +315,12 @@ export function DocHomeSection(props: {
             borderColor: "text.secondary",
           },
         },
+
+        "> a.button-primary": {
+          color: '#ffffff',
+          backgroundColor: "primary.main",
+          border: 'none'
+        }
       }}
     >
       <Typography component="h2" variant="h2" id={id}>
