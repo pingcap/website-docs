@@ -201,5 +201,6 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-material-ui`,
   ],
 };
