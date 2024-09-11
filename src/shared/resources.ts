@@ -179,16 +179,16 @@ export const EN_FOOTER_ITEMS = [
     name: "Products",
     items: [
       {
-        name: "Self-managed",
-        url: "https://www.pingcap.com/tidb/",
+        name: "TiDB Cloud Serverless",
+        url: "https://www.pingcap.com/tidb-serverless/",
       },
       {
-        name: "Cloud Dedicated",
+        name: "TiDB Cloud Dedicated",
         url: "https://www.pingcap.com/tidb-dedicated/",
       },
       {
-        name: "Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-serverless/",
+        name: "TiDB Self-Managed",
+        url: "https://www.pingcap.com/tidb/",
       },
       {
         name: "Pricing",
@@ -302,12 +302,12 @@ export const ZH_FOOTER_ITEMS = [
         url: "https://cn.pingcap.com/product/#SelectProduct",
       },
       {
-        name: "Cloud Dedicated",
-        url: "https://www.pingcap.com/tidb-dedicated/",
+        name: "TiDB Cloud Serverless",
+        url: "https://www.pingcap.com/tidb-serverless/",
       },
       {
-        name: "Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-serverless/",
+        name: "TiDB Cloud Dedicated",
+        url: "https://www.pingcap.com/tidb-dedicated/",
       },
     ],
   },
@@ -390,16 +390,16 @@ export const JA_FOOTER_ITEMS = [
     name: "製品",
     items: [
       {
-        name: "Self-managed",
-        url: "https://pingcap.co.jp/tidb/",
+        name: "TiDB Cloud Serverless",
+        url: "https://pingcap.co.jp/tidb-serverless/",
       },
       {
-        name: "Cloud Dedicated",
+        name: "TiDB Cloud Dedicated",
         url: "https://pingcap.co.jp/tidb-dedicated/",
       },
       {
-        name: "Cloud Serverless",
-        url: "https://pingcap.co.jp/tidb-serverless/",
+        name: "TiDB Self-Managed",
+        url: "https://pingcap.co.jp/tidb/",
       },
       {
         name: "価格",

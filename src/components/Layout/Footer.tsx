@@ -16,7 +16,7 @@ import {
 } from "shared/utils";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
-const FOOTER_TITLE_COLOR = "#646F72";
+const FOOTER_TITLE_COLOR = "#A2ADB9";
 
 export default function Footer() {
   return (
@@ -29,7 +29,12 @@ export default function Footer() {
             spacing="12px"
             sx={{ paddingTop: "66px" }}
             divider={
-              <Typography variant="body2" component="div">
+              <Typography
+                variant="body2"
+                component="div"
+                color={FOOTER_TITLE_COLOR}
+                sx={{ fontFamily: "moderat mono" }}
+              >
                 /
               </Typography>
             }
@@ -37,8 +42,9 @@ export default function Footer() {
             <Typography
               variant="body2"
               component="div"
-              color="#646F72"
+              color={FOOTER_TITLE_COLOR}
               sx={{
+                fontFamily: "moderat mono",
                 textAlign: {
                   xs: "center",
                   md: "left",
@@ -73,15 +79,19 @@ const FooterBlock = () => {
         <FooterItems />
         <Stack
           sx={{
-            gap: "48px",
+            gap: "26px",
             display: {
               xs: "none",
               md: "flex",
             },
           }}
         >
-          <Typography color={FOOTER_TITLE_COLOR} component="div">
-            STAY CONNECTED
+          <Typography
+            sx={{ fontFamily: "moderat mono", fontSize: "15px" }}
+            color={FOOTER_TITLE_COLOR}
+            component="div"
+          >
+            Stay Connected
           </Typography>
           <IconGroup />
         </Stack>
@@ -142,14 +152,17 @@ const PrivacyPolicy = () => {
       <Link
         href={url}
         variant="body2"
-        color="#646F72"
+        color={FOOTER_TITLE_COLOR}
         sx={{
+          fontFamily: "moderat mono",
           marginLeft: ".2rem",
           textAlign: {
             xs: "center",
             md: "left",
           },
           textDecoration: "none",
+          transition: "color 0.2s ease-in-out",
+          "&:hover": { color: "#fff" },
         }}
         target="_blank"
       >
@@ -158,6 +171,7 @@ const PrivacyPolicy = () => {
     </>
   );
 };
+
 const Legal = () => {
   const { language } = useI18next();
   const url = generateLegalUrl(language);
@@ -166,14 +180,17 @@ const Legal = () => {
       <Link
         href={url}
         variant="body2"
-        color="#646F72"
+        color={FOOTER_TITLE_COLOR}
         sx={{
+          fontFamily: "moderat mono",
           marginLeft: ".2rem",
           textAlign: {
             xs: "center",
             md: "left",
           },
           textDecoration: "none",
+          transition: "color 0.2s ease-in-out",
+          "&:hover": { color: "#fff" },
         }}
         target="_blank"
       >
@@ -190,11 +207,15 @@ const FooterItems = () => {
   return (
     <>
       {rows.map((row) => (
-        <Stack key={row.name} sx={{ gap: "48px" }}>
-          <Typography color={FOOTER_TITLE_COLOR} component="div">
-            {row.name.toUpperCase()}
+        <Stack key={row.name} sx={{ gap: "26px" }}>
+          <Typography
+            color={FOOTER_TITLE_COLOR}
+            component="div"
+            sx={{ fontFamily: "moderat mono", fontSize: "15px" }}
+          >
+            {row.name}
           </Typography>
-          <Stack sx={{ gap: "16px", minWidth: "6.75rem" }}>
+          <Stack sx={{ gap: "10px", minWidth: "6.75rem" }}>
             {row.items.map((item) => (
               <LinkComponent
                 key={`${row.name}-${item.name}`}
@@ -207,7 +228,14 @@ const FooterItems = () => {
                   })
                 }
               >
-                <Typography color="#fff" component="div">
+                <Typography
+                  color="#fff"
+                  sx={{
+                    transition: "color 0.2s ease-in-out",
+                    "&:hover": { color: FOOTER_TITLE_COLOR },
+                  }}
+                  component="div"
+                >
                   {item.name}
                 </Typography>
               </LinkComponent>
