@@ -150,8 +150,6 @@ const LangSwitch = (props: {
           <KeyboardArrowDownIcon sx={{ fill: theme.palette.carbon[900] }} />
         }
         sx={{
-          width: "52px",
-          minWidth: "52px",
           display: {
             xs: "none",
             lg: "inline-flex",

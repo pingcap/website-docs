@@ -14,7 +14,6 @@ import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "components/Dropdown/VersionSelect";
-import { generatePingcapUrl } from "shared/utils";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 
@@ -107,7 +106,7 @@ export function LeftNavMobile(props: LeftNavProps) {
               padding: "0 0.5rem",
             }}
           >
-            <LinkComponent to={generatePingcapUrl(language)}>
+            <LinkComponent to="/">
               <TiDBLogoWithoutText />
             </LinkComponent>
             <Divider
