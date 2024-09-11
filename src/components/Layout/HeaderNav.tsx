@@ -16,27 +16,13 @@ import {
   generateContactURL,
   generateLearningCenterURL,
   generateDocsHomeUrl,
+  getPageType,
+  PageType,
 } from "shared/utils";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
-
-type PageType = "home" | "tidb" | "tidbcloud" | undefined;
-
-export const getPageType = (language?: string, pageUrl?: string): PageType => {
-  if (pageUrl === "/" || pageUrl === `/${language}/`) {
-    return "home";
-  } else if (pageUrl?.includes("/tidb/")) {
-    return "tidb";
-  } else if (
-    pageUrl?.includes("/tidbcloud/") ||
-    pageUrl?.endsWith("/tidbcloud")
-  ) {
-    return "tidbcloud";
-  }
-  return;
-};
 
 // `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
 // it will be `undefined` in client side render

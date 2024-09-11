@@ -10,7 +10,6 @@ export {
   NavColumn,
   NavColumns,
 } from "components/MDXComponents/ColumnDeprecated";
-export { CustomContent } from "components/MDXComponents/CustomContent";
 export {
   DocHomeCard,
   DocHomeCardContainer,
@@ -26,4 +25,10 @@ export { MDSvgIcon } from "components/MDXComponents/MDSvgIcon";
 export { SimpleTab } from "components/MDXComponents/SimpleTab";
 export { SyntaxDiagram } from "components/MDXComponents/SyntaxDiagram";
 export { TabsPanel } from "components/MDXComponents/TabsPanel";
-export { IntroHero, IntroHeroVideo, DevLangAccordion, DevToolGroup, DevToolCard } from 'components/MDXComponents/developer'
+export {
+  IntroHero,
+  IntroHeroVideo,
+  DevLangAccordion,
+  DevToolGroup,
+  DevToolCard,
+} from "components/MDXComponents/developer";

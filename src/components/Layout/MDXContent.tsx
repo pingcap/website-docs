@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, Link } from "gatsby";
+import { Link } from "gatsby";
 
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
@@ -13,10 +13,15 @@ import {
   MachineTranslationNotice,
   ArchiveTiDBNotice,
 } from "components/Card/CustomNotice";
-import { Locale, PathConfig, FrontMatter, BuildType } from "shared/interface";
+import { PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
+import {
+  CustomContent,
+  useCustomContent,
+} from "components/MDXComponents/CustomContent";
+import { getPageType } from "shared/utils";
 
 export default function MDXContent(props: {
   data: any;
@@ -28,6 +33,7 @@ export default function MDXContent(props: {
   availIn: string[];
   language: string;
   buildType: BuildType;
+  pageUrl: string;
 }) {
   const {
     data,
@@ -39,7 +45,11 @@ export default function MDXContent(props: {
     availIn,
     language,
     buildType,
+    pageUrl,
   } = props;
+
+  const pageType = getPageType(language, pageUrl);
+  const CustomContentWithPageType = useCustomContent(pageType);
 
   React.useEffect(() => {
     // https://github.com/pingcap/website-docs/issues/221
@@ -79,6 +89,7 @@ export default function MDXContent(props: {
             ...MDXComponents,
             Link,
             pre: Pre,
+            CustomContent: CustomContentWithPageType,
           }}
         >
           <MDXRenderer>{data}</MDXRenderer>

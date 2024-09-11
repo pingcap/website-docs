@@ -209,6 +209,7 @@ export default function DocTemplate({
                     availIn={availIn.version}
                     language={language}
                     buildType={buildType}
+                    pageUrl={pageUrl}
                   />
                   {!frontmatter?.hide_commit && buildType !== "archive" && (
                     <GitCommitInfoCard

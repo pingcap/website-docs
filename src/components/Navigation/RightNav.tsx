@@ -25,7 +25,7 @@ import {
 } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
-import { getPageType } from "components/Layout/HeaderNav";
+import { getPageType } from "shared/utils";
 
 import HTAPAdImg from "media/imgs/htap-ad.svg";
 
