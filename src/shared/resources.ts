@@ -187,7 +187,7 @@ export const EN_FOOTER_ITEMS = [
         url: "https://www.pingcap.com/tidb-dedicated/",
       },
       {
-        name: "TiDB Self-managed",
+        name: "TiDB Self-Managed",
         url: "https://www.pingcap.com/tidb/",
       },
       {
@@ -398,7 +398,7 @@ export const JA_FOOTER_ITEMS = [
         url: "https://pingcap.co.jp/tidb-dedicated/",
       },
       {
-        name: "TiDB Self-managed",
+        name: "TiDB Self-Managed",
         url: "https://pingcap.co.jp/tidb/",
       },
       {

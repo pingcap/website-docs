@@ -161,6 +161,8 @@ const PrivacyPolicy = () => {
             md: "left",
           },
           textDecoration: "none",
+          transition: "color 0.2s ease-in-out",
+          "&:hover": { color: "#fff" },
         }}
         target="_blank"
       >
@@ -187,6 +189,8 @@ const Legal = () => {
             md: "left",
           },
           textDecoration: "none",
+          transition: "color 0.2s ease-in-out",
+          "&:hover": { color: "#fff" },
         }}
         target="_blank"
       >
@@ -224,7 +228,14 @@ const FooterItems = () => {
                   })
                 }
               >
-                <Typography color="#fff" component="div">
+                <Typography
+                  color="#fff"
+                  sx={{
+                    transition: "color 0.2s ease-in-out",
+                    "&:hover": { color: FOOTER_TITLE_COLOR },
+                  }}
+                  component="div"
+                >
                   {item.name}
                 </Typography>
               </LinkComponent>
