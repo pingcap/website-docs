@@ -159,7 +159,7 @@ export function DocHomeContainer(
             sx={{
               position: "absolute",
               top: "36px",
-              right: "64px"
+              right: "-4px"
             }}
           >
             <HomeHeroGraphic />
