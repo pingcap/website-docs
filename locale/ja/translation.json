@@ -32,6 +32,10 @@
     "playground": "Playground",
     "learningCenter": "Learning Center"
   },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "legal": "Legal"
+  },
   "doc": {
     "notExist": "このドキュメントは存在しません",
     "toc": "このページの内容",

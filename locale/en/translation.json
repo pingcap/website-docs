@@ -31,6 +31,10 @@
     "playground": "Playground",
     "learningCenter": "Learning Center"
   },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "legal": "Legal"
+  },
   "doc": {
     "notExist": "This doc does not exist",
     "toc": "What's on this page",

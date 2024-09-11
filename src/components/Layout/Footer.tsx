@@ -19,6 +19,7 @@ import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 const FOOTER_TITLE_COLOR = "#A2ADB9";
 
 export default function Footer() {
+  const { language } = useI18next();
   return (
     <>
       <Box sx={{ bgcolor: "#000" }} component="footer">
@@ -51,7 +52,8 @@ export default function Footer() {
                 },
               }}
             >
-              © {new Date().getFullYear()} TiDB. All Rights Reserved.
+              © {new Date().getFullYear()}{" "}
+              {language === "zh" ? "PingCAP" : "TiDB"}. All Rights Reserved.
             </Typography>
             <PrivacyPolicy />
             <Legal />
@@ -145,7 +147,7 @@ const IconGroup = () => {
 };
 
 const PrivacyPolicy = () => {
-  const { language } = useI18next();
+  const { language, t } = useI18next();
   const url = generatePrivacyPolicy(language);
   return (
     <>
@@ -166,14 +168,14 @@ const PrivacyPolicy = () => {
         }}
         target="_blank"
       >
-        Privacy Policy
+        {t("footer.privacy")}
       </Link>
     </>
   );
 };
 
 const Legal = () => {
-  const { language } = useI18next();
+  const { language, t } = useI18next();
   const url = generateLegalUrl(language);
   return (
     <>
@@ -194,7 +196,7 @@ const Legal = () => {
         }}
         target="_blank"
       >
-        Legal
+        {t("footer.legal")}
       </Link>
     </>
   );
