@@ -173,8 +173,9 @@ export function LearningPath(props: {
     },
   };
   const iconName =
-    iconHashmap[platform][icon as keyof typeof iconHashmap[typeof platform]] ||
-    (platform === "tidb" ? "oss-product-blue" : "cloud-product-mauve");
+    iconHashmap?.[platform]?.[
+      icon as keyof typeof iconHashmap[typeof platform]
+    ] || (platform === "tidb" ? "oss-product-blue" : "cloud-product-mauve");
 
   return (
     <>
