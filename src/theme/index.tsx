@@ -236,6 +236,10 @@ theme = createTheme(theme, {
         sizeMedium: {
           height: "32px",
         },
+        sizeLarge: {
+          height: "40px",
+          fontSize: "16px",
+        },
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "text" && {
             color: theme.palette.text.primary,

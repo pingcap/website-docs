@@ -111,6 +111,7 @@ export function DocHomeContainer(
             <Button
               variant="contained"
               color="primary"
+              size="large"
               sx={{
                 "& > a.button": {
                   color: "white",
@@ -158,7 +159,7 @@ export function DocHomeContainer(
             sx={{
               position: "absolute",
               top: "36px",
-              right: "64px"
+              right: "-4px"
             }}
           >
             <HomeHeroGraphic />
@@ -283,7 +284,7 @@ export function DocHomeSection(props: {
         display: "flex",
         flexDirection: "column",
         gap: "24px",
-        paddingBottom: "24px",
+        marginBottom: "48px",
 
         "& > h2": {
           margin: 0,
@@ -314,6 +315,12 @@ export function DocHomeSection(props: {
             borderColor: "text.secondary",
           },
         },
+
+        "> a.button-primary": {
+          color: '#ffffff',
+          backgroundColor: "primary.main",
+          border: 'none'
+        }
       }}
     >
       <Typography component="h2" variant="h2" id={id}>
@@ -376,6 +383,8 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
     <Box
       component="a"
       className="doc-home-card"
+      target={href.startsWith("http") ? "_blank" : undefined}
+      referrerPolicy="no-referrer-when-downgrade"
       href={href}
       sx={(theme) => ({
         position: "relative",

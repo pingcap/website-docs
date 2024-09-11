@@ -171,7 +171,7 @@ export default function DocTemplate({
           >
             <Box
               sx={{
-                maxWidth: "1340px",
+                maxWidth: "1200px",
                 width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",

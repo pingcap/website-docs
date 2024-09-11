@@ -55,7 +55,7 @@ export default function MDXContent(props: {
   !frontmatter?.hide_commit && useTotalContributors(pathConfig, filePath);
 
   return (
-    <Container disableGutters className={className} maxWidth="xl">
+    <Container disableGutters className={className} maxWidth="lg">
       <Box className="markdown-body">
         {buildType === "archive" && typeof name !== "undefined" && (
           <ArchiveTiDBNotice
