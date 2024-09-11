@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useI18next } from "gatsby-plugin-react-i18next";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,7 +12,6 @@ import HeaderAction from "components/Layout/HeaderAction";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
-import { generatePingcapUrl } from "shared/utils";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
@@ -27,7 +25,6 @@ export default function Header(props: {
   pageUrl?: string;
 }) {
   const theme = useTheme();
-  const { language } = useI18next();
   return (
     <AppBar
       className="doc-site-header"
@@ -58,7 +55,7 @@ export default function Header(props: {
           }}
         >
           <LinkComponent
-            to={generatePingcapUrl(language)}
+            to="/"
             onClick={() =>
               gtmTrack(GTMEvent.ClickHeadNav, {
                 item_name: "logo",

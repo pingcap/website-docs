@@ -74,7 +74,7 @@ export default function HeaderNavStack(props: {
         },
       }}
     >
-      {["en", "zh"].includes(language) && (
+      {/* {["en", "zh"].includes(language) && (
         <NavItem
           selected={selectedItem === "home"}
           label={
@@ -84,7 +84,7 @@ export default function HeaderNavStack(props: {
           }
           to="/"
         />
-      )}
+      )} */}
 
       {["en", "ja"].includes(language) && props.buildType !== "archive" && (
         <NavItem
