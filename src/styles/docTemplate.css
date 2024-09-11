@@ -17,8 +17,9 @@
 
   .doc-content {
     a {
-      &.anchor.before {
-        left: 1rem;
+      &.anchor {
+        float: none;
+        margin-left: 4px;
       }
     }
 

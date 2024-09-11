@@ -105,6 +105,7 @@ module.exports = {
             options: {
               offsetY: `100`,
               enableCustomId: true,
+              isIconAfterHeader: true,
             },
           },
           {
