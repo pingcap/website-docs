@@ -15,6 +15,8 @@ import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
+import { generateDocsHomeUrl } from "shared/utils";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -24,6 +26,7 @@ export default function Header(props: {
   buildType?: BuildType;
   pageUrl?: string;
 }) {
+  const { language } = useI18next();
   const theme = useTheme();
   return (
     <AppBar
@@ -55,7 +58,7 @@ export default function Header(props: {
           }}
         >
           <LinkComponent
-            to="/"
+            to={generateDocsHomeUrl(language)}
             onClick={() =>
               gtmTrack(GTMEvent.ClickHeadNav, {
                 item_name: "logo",

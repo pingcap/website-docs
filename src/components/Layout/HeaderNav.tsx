@@ -15,6 +15,7 @@ import {
   generateDownloadURL,
   generateContactURL,
   generateLearningCenterURL,
+  generateDocsHomeUrl,
 } from "shared/utils";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
@@ -253,7 +254,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <LinkComponent
               isI18n
-              to="/"
+              to={generateDocsHomeUrl(language)}
               style={{ width: "100%" }}
               onClick={() =>
                 gtmTrack(GTMEvent.ClickHeadNav, {

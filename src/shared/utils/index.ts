@@ -33,6 +33,18 @@ import {
   TiDBCloudBanner,
 } from "components/Icons/LearingPathIcon";
 
+export function generateDocsHomeUrl(lang?: string) {
+  switch (lang) {
+    case "ja":
+      return "/ja/tidbcloud";
+    case "zh":
+      return "/zh";
+    case "en":
+    default:
+      return "/";
+  }
+}
+
 export function generatePingcapUrl(lang?: string) {
   switch (lang) {
     case "ja":
