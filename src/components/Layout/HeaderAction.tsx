@@ -9,15 +9,46 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import StarIcon from "media/icons/star.svg";
 
-import LanguageIcon from "@mui/icons-material/Language";
+import TranslateIcon from "@mui/icons-material/Translate";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloudIcon from "@mui/icons-material/Cloud";
 
 import Search from "components/Search";
 
-import { Locale, BuildType } from "static/Type";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+import { Locale, BuildType } from "shared/interface";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
+import { ActionButton } from "components/Card/FeedbackSection/components";
+
+const useTiDBAIStatus = () => {
+  const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
+  const [initializingTiDBAI, setInitializingTiDBAI] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!!window.tidbai) {
+      setInitializingTiDBAI(false);
+    }
+
+    window.addEventListener("tidbaiinitialized", () => {
+      setInitializingTiDBAI(false);
+    });
+    window.addEventListener("tidbaierror", () => {
+      setInitializingTiDBAI(false);
+      setShowTiDBAIButton(false);
+    });
+
+    const timer = setTimeout(() => {
+      if (!window.tidbai) {
+        setInitializingTiDBAI(false);
+        setShowTiDBAIButton(false);
+      }
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return { showTiDBAIButton, initializingTiDBAI };
+};
 
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
@@ -26,13 +57,14 @@ export default function HeaderAction(props: {
 }) {
   const { supportedLocales, docInfo, buildType } = props;
   const { language, t } = useI18next();
+  const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
 
   return (
     <Stack
       direction="row"
       spacing={{
         xs: 1,
-        lg: 3,
+        lg: 2,
       }}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
@@ -40,7 +72,27 @@ export default function HeaderAction(props: {
         <LangSwitch supportedLocales={supportedLocales} />
       )}
       {docInfo && language !== "ja" && buildType !== "archive" && (
-        <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+        <>
+          <Stack direction="row" spacing="4px">
+            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+            {language === "en" && showTiDBAIButton && (
+              <ActionButton
+                variant="outlined"
+                startIcon={<StarIcon />}
+                disabled={initializingTiDBAI}
+                sx={{
+                  display: {
+                    xs: "none",
+                    xl: "flex",
+                  },
+                }}
+                onClick={() => (window.tidbai.open = true)}
+              >
+                Ask TiDB.ai
+              </ActionButton>
+            )}
+          </Stack>
+        </>
       )}
       {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
@@ -73,7 +125,7 @@ const LangSwitch = (props: {
   };
 
   return (
-    <Box color={theme.palette.website.f1}>
+    <Box color={theme.palette.carbon[900]}>
       <IconButton
         onClick={handleClick}
         sx={{
@@ -83,7 +135,7 @@ const LangSwitch = (props: {
           },
         }}
       >
-        <LanguageIcon />
+        <TranslateIcon />
       </IconButton>
       <Button
         id="header-lang-switch"
@@ -93,9 +145,9 @@ const LangSwitch = (props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<LanguageIcon sx={{ fill: theme.palette.website.f1 }} />}
+        startIcon={<TranslateIcon sx={{ fill: theme.palette.carbon[900] }} />}
         endIcon={
-          <KeyboardArrowDownIcon sx={{ fill: theme.palette.website.f1 }} />
+          <KeyboardArrowDownIcon sx={{ fill: theme.palette.carbon[900] }} />
         }
         sx={{
           display: {
@@ -103,11 +155,7 @@ const LangSwitch = (props: {
             lg: "inline-flex",
           },
         }}
-      >
-        <Typography component="span" color="inherit">
-          <Trans i18nKey="lang.title" />
-        </Typography>
-      </Button>
+      ></Button>
       <Menu
         id="header-lang-menu"
         anchorEl={anchorEl}
@@ -116,11 +164,11 @@ const LangSwitch = (props: {
         elevation={0}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "left",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "left",
         }}
         PaperProps={{
           sx: {
@@ -135,7 +183,7 @@ const LangSwitch = (props: {
           selected={language === Locale.en}
           disabled={!supportedLocales.includes(Locale.en)}
         >
-          <Typography component="span" color={theme.palette.website.f1}>
+          <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.en" />
           </Typography>
         </MenuItem>
@@ -145,7 +193,7 @@ const LangSwitch = (props: {
           selected={language === Locale.zh}
           disabled={!supportedLocales.includes(Locale.zh)}
         >
-          <Typography component="span" color={theme.palette.website.f1}>
+          <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.zh" />
           </Typography>
         </MenuItem>
@@ -155,7 +203,7 @@ const LangSwitch = (props: {
           selected={language === Locale.ja}
           disabled={!supportedLocales.includes(Locale.ja)}
         >
-          <Typography component="span" color={theme.palette.website.f1}>
+          <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.ja" />
           </Typography>
         </MenuItem>
@@ -178,10 +226,10 @@ const TiDBCloudBtnGroup = () => {
     <>
       <Stack
         direction="row"
-        spacing={3}
+        spacing={2}
         display={{
           xs: "none",
-          lg: "flex",
+          xl: "flex",
         }}
       >
         <Button
@@ -190,9 +238,6 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
-          sx={{
-            color: "website.k1",
-          }}
           onClick={() =>
             gtmTrack(GTMEvent.SigninCloud, {
               position: "header",
@@ -207,23 +252,15 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
-          sx={{
-            backgroundColor: "website.k1",
-            boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
-            "&:hover": {
-              backgroundColor: "#0A85C2",
-              boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.16)",
-            },
-          }}
           onClick={() =>
             gtmTrack(GTMEvent.SignupCloud, {
-              product_type: 'general cloud',
-              button_name: "Try Free",
+              product_type: "general cloud",
+              button_name: "Start for free",
               position: "header",
             })
           }
         >
-          Try Free
+          Start for Free
         </Button>
       </Stack>
 
@@ -236,7 +273,7 @@ const TiDBCloudBtnGroup = () => {
         sx={{
           display: {
             xs: "inline-flex",
-            lg: "none",
+            xl: "none",
           },
         }}
       >
@@ -282,7 +319,7 @@ const TiDBCloudBtnGroup = () => {
             }}
             onClick={() =>
               gtmTrack(GTMEvent.SignupCloud, {
-                product_type: 'general cloud',
+                product_type: "general cloud",
                 button_name: "Try Free",
                 position: "header",
               })

@@ -1,16 +1,32 @@
-import { useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect, useState } from "react";
+import { PageType } from "shared/utils";
 
-export const CustomContent = (props: { platform: string; children: any }) => {
-  // type platform = "tidb" | "tidb-cloud"
-  const { platform: pageType, children } = props
-  const [shouldDisplay, setShouldDisplay] = useState(true)
-  useEffect(() => {
-    const currentPath = window?.location?.pathname || ''
-    if (currentPath.includes(`/${pageType.replace('-', '')}/`)) {
-      setShouldDisplay(true)
-    } else {
-      setShouldDisplay(false)
-    }
-  }, [])
-  return <>{shouldDisplay ? children : <></>}</>
+interface CustomContentProps {
+  platform: "tidb" | "tidb-cloud";
+  pageTypeFromURL?: PageType;
 }
+
+export const useCustomContent = (pageTypeFromURL: PageType) => {
+  return (props: PropsWithChildren<CustomContentProps>) => {
+    return <CustomContent {...props} pageTypeFromURL={pageTypeFromURL} />;
+  };
+};
+
+export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
+  props
+) => {
+  const { platform: _pageType, pageTypeFromURL, children } = props;
+  const pageType = _pageType.replace("-", "");
+  const [shouldDisplay, setShouldDisplay] = useState(
+    pageTypeFromURL === pageType
+  );
+  useEffect(() => {
+    const currentPath = window?.location?.pathname || "";
+    if (currentPath.includes(`/${pageType}/`)) {
+      setShouldDisplay(true);
+    } else {
+      setShouldDisplay(false);
+    }
+  }, []);
+  return <>{shouldDisplay ? children : <></>}</>;
+};

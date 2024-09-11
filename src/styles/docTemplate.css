@@ -1,15 +1,25 @@
-@import "./global.css";
-
+@import "./typographyDefine";
 @import "highlight.js/styles/github.css";
 @import "katex/dist/katex.min.css";
 
 @import "github-markdown-css/github-markdown-light.css";
 
 .PingCAP-Doc {
+  .doc-global-home {
+    background-image: url(../../images/docHome/home-hero-bg.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+
+    .markdown-body {
+      background: none;
+    }
+  }
+
   .doc-content {
     a {
-      &.anchor.before {
-        left: 1rem;
+      &.anchor {
+        float: none;
+        margin-left: 4px;
       }
     }
 
@@ -34,9 +44,16 @@
       margin: auto;
     }
 
+    code {
+      background-color: var(--carbon-200);
+      border-radius: var(--shape-border-radius);
+    }
+
     pre {
       position: relative;
       overflow-x: hidden;
+      background-color: var(--carbon-200);
+      border-radius: var(--shape-border-radius);
 
       code {
         .number {
@@ -87,12 +104,14 @@
   }
 
   .markdown-body {
-    color: #282a36;
+    font-family: moderat, -apple-system, "Poppins", "Helvetica Neue",
+      "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif";
+    color: var(--carbon-900);
     font-size: 16px;
-    line-height: 1.75;
+    line-height: 1.5;
 
-    a {
-      color: #0a85c2;
+    a:not(.button) {
+      color: var(--secondary-color);
     }
 
     pre {
@@ -102,5 +121,19 @@
     .footnotes ol {
       list-style-type: disc;
     }
+  }
+}
+
+.markdown-body {
+  h1 {
+    font-weight: 400;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
   }
 }

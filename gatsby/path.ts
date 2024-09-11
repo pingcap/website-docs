@@ -1,4 +1,4 @@
-import { Locale, Repo, PathConfig } from "../src/static/Type";
+import { Locale, Repo, PathConfig } from "../src/shared/interface";
 import CONFIG from "../docs/docs.json";
 
 export function generateUrl(filename: string, config: PathConfig) {

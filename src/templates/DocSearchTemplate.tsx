@@ -1,11 +1,10 @@
 import * as React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import { useLocation } from "@reach/router";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -16,27 +15,20 @@ import "styles/docTemplate.css";
 import Layout from "components/Layout";
 import SearchResults from "components/Search/Results";
 import SearchInput from "components/Search";
-import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { Tip } from "components/MDXComponents";
 import Seo from "components/Layout/Seo";
-import { algoliaClient } from "utils/algolia";
+import { algoliaClient } from "shared/utils/algolia";
 import {
   TIDB_EN_STABLE_VERSION,
-  TIDB_EN_DMR_PRETTY_VERSION,
   TIDB_EN_SEARCH_INDEX_VERSION,
-  DM_EN_STABLE_VERSION,
   DM_EN_LATEST_VERSION,
   OP_EN_STABLE_VERSION,
-  TIDB_EN_VERSIONS,
-  DM_EN_VERSIONS,
-  OP_EN_VERSIONS,
   CLOUD_EN_VERSIONS,
   EN_DOC_TYPE_LIST,
   ZH_DOC_TYPE_LIST,
   TIDB_ZH_SEARCH_INDEX_VERSION,
-  TIDB_ZH_VERSIONS,
-} from "static";
-import { Locale } from "static/Type";
+} from "shared/resources";
+import { Locale } from "shared/interface";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 
 // TiDB: get searchable versions from fetchTidbSearchIndcies
@@ -261,9 +253,10 @@ export default function DocSearchTemplate({
                         type.match as typeof EN_DOC_TYPE_LIST[number]["match"]
                       );
                     }}
-                    sx={{
-                      backgroundColor: docType === type.match ? "#EAF6FB" : "",
-                    }}
+                    sx={(theme) => ({
+                      backgroundColor:
+                        docType === type.match ? theme.palette.carbon[300] : "",
+                    })}
                   >
                     {type.name}
                   </Button>
@@ -302,13 +295,13 @@ export default function DocSearchTemplate({
                           onClick={() => {
                             setDocVersion(version);
                           }}
-                          sx={{
+                          sx={(theme) => ({
                             backgroundColor:
                               realVersionMemo ===
                               convertStableToRealVersion(docType, version)
-                                ? "#EAF6FB"
+                                ? theme.palette.carbon[300]
                                 : "",
-                          }}
+                          })}
                         >
                           {version === "stable"
                             ? convertStableToRealVersion(docType, version)
@@ -331,6 +324,7 @@ export default function DocSearchTemplate({
               position: "fixed",
               bottom: "1rem",
               right: "1rem",
+              zIndex: 9,
             }}
           >
             <FeedbackSurveyCampaign />

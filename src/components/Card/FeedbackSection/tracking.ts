@@ -1,8 +1,9 @@
 import axios from "axios";
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 import { FeedbackCategory, TrackingType } from "./types";
 
-const hubspotFormURL = 'https://api.hsforms.com/submissions/v3/integration/submit/4466002/{{formId}}'
+const hubspotFormURL =
+  "https://api.hsforms.com/submissions/v3/integration/submit/4466002/{{formId}}";
 
 const hubspotForms = [
   {
@@ -13,7 +14,7 @@ const hubspotForms = [
   {
     category: FeedbackCategory.Negative,
     tracking: TrackingType.Lite,
-    formId: '2df2e54d-d82b-4262-8480-a250959503e8'
+    formId: "2df2e54d-d82b-4262-8480-a250959503e8",
   },
   {
     category: FeedbackCategory.Positive,
@@ -23,9 +24,9 @@ const hubspotForms = [
   {
     category: FeedbackCategory.Negative,
     tracking: TrackingType.Detail,
-    formId: 'bfc8bbe6-8ed9-4a4c-8e9e-a875ee3ed26d'
-  }
-]
+    formId: "bfc8bbe6-8ed9-4a4c-8e9e-a875ee3ed26d",
+  },
+];
 
 function getCookie(name: string) {
   const match = document.cookie.match(
@@ -36,16 +37,18 @@ function getCookie(name: string) {
 
 export function submitLiteFeedback(options: {
   locale: Locale;
-  category: FeedbackCategory
+  category: FeedbackCategory;
 }) {
   const { locale, category } = options;
-  const formId = hubspotForms.find((item) => item.tracking === TrackingType.Lite && item.category === category)?.formId;
+  const formId = hubspotForms.find(
+    (item) => item.tracking === TrackingType.Lite && item.category === category
+  )?.formId;
 
   if (!formId) {
     return;
   }
 
-  const url = hubspotFormURL.replace('{{formId}}', formId)
+  const url = hubspotFormURL.replace("{{formId}}", formId);
 
   return axios
     .post(url, {
@@ -57,9 +60,9 @@ export function submitLiteFeedback(options: {
         },
         {
           objectTypeId: "0-1",
-          name: 'website',
-          value: document.URL
-        }
+          name: "website",
+          value: document.URL,
+        },
       ],
       context: {
         hutk: getCookie("hubspotutk"),
@@ -84,13 +87,16 @@ export function submitFeedbackDetail(options: {
   reason: string;
 }) {
   const { locale, category, reason } = options;
-  const formId = hubspotForms.find((item) => item.tracking === TrackingType.Detail && item.category === category)?.formId;
+  const formId = hubspotForms.find(
+    (item) =>
+      item.tracking === TrackingType.Detail && item.category === category
+  )?.formId;
 
   if (!formId) {
     return;
   }
 
-  const url = hubspotFormURL.replace('{{formId}}', formId)
+  const url = hubspotFormURL.replace("{{formId}}", formId);
 
   return axios
     .post(url, {
@@ -107,9 +113,9 @@ export function submitFeedbackDetail(options: {
         },
         {
           objectTypeId: "0-1",
-          name: 'website',
-          value: document.URL
-        }
+          name: "website",
+          value: document.URL,
+        },
       ],
       context: {
         hutk: getCookie("hubspotutk"),

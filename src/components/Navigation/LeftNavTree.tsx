@@ -8,16 +8,13 @@ import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 
-import { DocLeftNavItem, DocLeftNav, DocLeftNavItemContent } from "static/Type";
+import {
+  DocLeftNavItem,
+  DocLeftNav,
+  DocLeftNavItemContent,
+} from "shared/interface";
 import LinkComponent from "components/Link";
-import { scrollToElementIfInView } from "utils";
-
-declare module "react" {
-  interface CSSProperties {
-    "--tree-view-color"?: string;
-    "--tree-view-bg-color"?: string;
-  }
-}
+import { scrollToElementIfInView } from "shared/utils";
 
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;
@@ -28,25 +25,16 @@ type StyledTreeItemProps = TreeItemProps & {
 };
 
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
-  // color: theme.palette.text.secondary,
   [`& .${treeItemClasses.content}`]: {
     color: theme.palette.website.f1,
-    // borderTopRightRadius: theme.spacing(2),
-    // borderBottomRightRadius: theme.spacing(2),
-    borderRadius: theme.spacing(0.5),
-    // paddingRight: theme.spacing(1),
-    // fontWeight: theme.typography.fontWeightMedium,
-    // "&.Mui-expanded": {
-    //   fontWeight: theme.typography.fontWeightRegular,
-    // },
     "&:hover": {
-      backgroundColor: theme.palette.website.m2,
+      backgroundColor: theme.palette.carbon[200],
     },
-    "&.Mui-selected, &.Mui-selected.Mui-focused": {
-      backgroundColor: `var(--tree-view-bg-color, #EAF6FB)`,
-      color: "var(--tree-view-color, #0A85C2)",
+    "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover": {
+      backgroundColor: theme.palette.carbon[300],
+      color: theme.palette.secondary.main,
       [`& svg.MuiTreeItem-ChevronRightIcon`]: {
-        fill: "var(--tree-view-color, #0A85C2)",
+        fill: theme.palette.carbon[700],
       },
     },
     "&.Mui-focused": {
@@ -95,8 +83,6 @@ function StyledTreeItem(props: StyledTreeItemProps) {
       //   </Box>
       // }
       style={{
-        "--tree-view-color": color,
-        "--tree-view-bg-color": bgColor,
         marginTop: "0.1875rem",
         marginBottom: "0.1875rem",
       }}
@@ -135,7 +121,13 @@ export default function ControlledTreeView(props: {
   const [expanded, setExpanded] = React.useState<string[]>(() => {
     return calcExpandedIds(data, currentUrl);
   });
-  const [selected, setSelected] = React.useState<string[]>([]);
+  const [selected, setSelected] = React.useState<string[]>(() => {
+    const expandedIds = calcExpandedIds(data, currentUrl);
+    if (expandedIds.length) {
+      return [expandedIds[expandedIds.length - 1]];
+    }
+    return [];
+  });
 
   const theme = useTheme();
 
@@ -166,24 +158,28 @@ export default function ControlledTreeView(props: {
             sx={{
               minHeight: "1.75rem",
               alignItems: "center",
-              paddingLeft: `${deepth * 0.5}rem`,
+              paddingLeft: `${deepth * 8}px`,
               paddingTop: "0.25rem",
               paddingBottom: "0.25rem",
             }}
           >
-            {generateItemLabel(item.content)}
             {hasChildren ? (
               <ChevronRightIcon
                 className="MuiTreeItem-ChevronRightIcon"
                 sx={{
                   fill: theme.palette.website.f3,
-                  height: "1rem",
-                  width: "1rem",
+                  height: "16px",
+                  width: "16px",
                   marginLeft: "auto",
-                  transform: isItemExpanded ? "rotate(90deg)" : "none",
+                  transform: `translateX(-4px) ${
+                    isItemExpanded ? "rotate(90deg)" : ""
+                  }`,
                 }}
               />
-            ) : null}
+            ) : (
+              <Box width={16} height={16} />
+            )}
+            {generateItemLabel(item.content)}
           </Stack>
         );
       };
@@ -195,7 +191,6 @@ export default function ControlledTreeView(props: {
           onClick={(e) => e.stopPropagation()}
         >
           <StyledTreeItem
-            key={item.id}
             nodeId={item.id}
             label={<LabelEle />}
             // onClick={() => {

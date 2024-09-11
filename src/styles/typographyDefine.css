@@ -1,0 +1,76 @@
+@define-mixin headings {
+  font-weight: bold;
+}
+
+@define-mixin heading1 {
+  @mixin headings;
+  font-size: 2.5em;
+}
+
+@define-mixin heading2 {
+  @mixin headings;
+  font-size: 2em;
+}
+
+@define-mixin heading3 {
+  @mixin headings;
+  font-size: 1.75rem;
+}
+
+@define-mixin heading4 {
+  @mixin headings;
+  font-size: 1.25rem;
+}
+
+@define-mixin heading5 {
+  @mixin headings;
+  font-size: 1.125rem;
+}
+
+@define-mixin heading6 {
+  @mixin headings;
+  font-size: 0.875rem;
+}
+
+@define-mixin paragraph1 {
+  font-size: 1rem;
+  font-weight: regular;
+}
+
+@define-mixin paragraph2 {
+  font-size: 0.875rem;
+  font-weight: regular;
+}
+
+h1 {
+  @mixin heading1;
+}
+
+h2 {
+  @mixin heading2;
+}
+
+h3 {
+  @mixin heading3;
+}
+
+h4 {
+  @mixin heading4;
+}
+
+h5 {
+  @mixin heading5;
+}
+
+h6 {
+  @mixin heading6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  scroll-margin-top: 5rem;
+}

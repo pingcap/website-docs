@@ -1,19 +1,19 @@
 import { PlayCircleOutlineOutlined } from "@mui/icons-material";
 import { Box, Button, Modal, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
+import TidbcloudIntroVideoThumbnail from "media/imgs/tidb-cloud-intro-video-thumbnail.svg";
 
 interface IntroHeroProps {
   title: string;
   content: string;
   videoTitle: string;
-  thumbnail: string;
+  thumbnail?: string;
 }
 
 export function IntroHero({
   title,
   content,
   videoTitle,
-  thumbnail,
   children,
 }: React.PropsWithChildren<IntroHeroProps>) {
   const theme = useTheme();
@@ -29,9 +29,8 @@ export function IntroHero({
         className="md-intro-hero"
         direction="row"
         sx={{
-          background: "#4D4D4D",
+          backgroundColor: "carbon.200",
           padding: "1.5rem",
-          borderRadius: "12px",
           gap: "1.5rem",
           flexDirection: {
             xs: "column",
@@ -41,13 +40,15 @@ export function IntroHero({
       >
         <Stack
           sx={{
+            minWidth: "304px",
             gap: "1rem",
             justifyContent: "center",
             alignItems: "flex-start",
+            flex: 1,
 
             "& h1.md-intro-hero__title": {
               borderBottom: "0",
-              color: "#fff",
+              color: "text.primary",
               fontSize: "24px",
               fontWeight: "700",
               margin: "0",
@@ -55,7 +56,7 @@ export function IntroHero({
             },
 
             "& div.md-intro-hero__content": {
-              color: "#fff",
+              color: "text.primary",
               fontSize: "14px",
             },
           }}
@@ -80,12 +81,12 @@ export function IntroHero({
             onClick={openModal}
             sx={{
               fontWeight: 600,
-              color: "#333333",
-              backgroundColor: "#f1f1f1",
-              borderColor: "transparent",
+              color: "text.primary",
+              backgroundColor: "website.m2",
+              borderColor: "text.primary",
               ":hover": {
-                backgroundColor: theme.palette.website.m4,
-                borderColor: "transparent",
+                backgroundColor: "website.m2",
+                borderColor: "text.primary",
               },
             }}
           >
@@ -93,18 +94,25 @@ export function IntroHero({
           </Button>
         </Stack>
         <Stack
+          alignItems="center"
+          justifyContent="center"
           sx={{
-            width: "400px",
-            maxWidth: "400px",
+            display: {
+              xs: "none",
+              md: 'flex',
+            },
           }}
         >
           <Box
-            component="img"
-            src={thumbnail}
-            alt={videoTitle}
-            loading="lazy"
+            component={TidbcloudIntroVideoThumbnail}
+            aria-label={videoTitle}
             onClick={openModal}
-            sx={{ borderRadius: "8px", cursor: "pointer" }}
+            sx={{
+              cursor: "pointer",
+              maxHeight: "200px",
+              width: "100%",
+              height: "auto",
+            }}
           />
         </Stack>
       </Stack>
@@ -115,6 +123,7 @@ export function IntroHero({
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
+            outlineColor: 'transparent'
           }}
         >
           {children}
@@ -143,7 +152,8 @@ export function IntroHeroVideo({ title, src }: IntroHeroVideoProps) {
       allowFullScreen
       tabIndex={-1}
       sx={{
-        maxWidth: "100vw"
+        maxWidth: "100vw",
+        maxHeight: "100vh",
       }}
     />
   );

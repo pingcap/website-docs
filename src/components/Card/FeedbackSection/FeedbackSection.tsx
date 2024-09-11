@@ -9,7 +9,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import { ThumbUpOutlined, ThumbDownOutlined } from "@mui/icons-material";
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 import { useState } from "react";
 import { trackCustomEvent } from "gatsby-plugin-google-analytics";
 import { submitFeedbackDetail, submitLiteFeedback } from "./tracking";
@@ -19,8 +19,6 @@ import {
   controlLabelSx,
   labelProps,
   radioSx,
-  ThumbButton,
-  typoFontFamily,
 } from "./components";
 
 interface FeedbackSectionProps {
@@ -42,8 +40,8 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
     });
     submitLiteFeedback({
       locale,
-      category: helpful ? FeedbackCategory.Positive : FeedbackCategory.Negative
-    })
+      category: helpful ? FeedbackCategory.Positive : FeedbackCategory.Negative,
+    });
 
     setHelpful(helpful);
     setThumbVisible(false);
@@ -89,14 +87,13 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
   };
 
   return (
-    <Box px="1.5rem">
+    <Box>
       <Typography
         variant="h2"
         sx={{
-          color: "website.f1",
+          color: "text.primary",
           fontSize: "1.5rem",
-          fontWeight: 600,
-          fontFamily: typoFontFamily,
+          fontWeight: 500,
           lineHeight: 1.25,
           marginTop: "24px",
           marginBottom: "16px",
@@ -108,8 +105,8 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       </Typography>
       {thumbVisible && (
         <Stack direction="row" spacing={2} mb="48px">
-          <ThumbButton
-            variant="contained"
+          <ActionButton
+            variant="outlined"
             size="small"
             startIcon={<ThumbUpOutlined sx={{ width: 14, height: 14 }} />}
             className="FeedbackBtn-thumbUp"
@@ -117,9 +114,9 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
             onClick={() => onThumbClick(true)}
           >
             <Trans i18nKey="docHelpful.thumbUp" />
-          </ThumbButton>
-          <ThumbButton
-            variant="contained"
+          </ActionButton>
+          <ActionButton
+            variant="outlined"
             size="small"
             startIcon={<ThumbDownOutlined sx={{ width: 14, height: 14 }} />}
             className="FeedbackBtn-thumbDown"
@@ -127,13 +124,13 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
             onClick={() => onThumbClick(false)}
           >
             <Trans i18nKey="docHelpful.thumbDown" />
-          </ThumbButton>
+          </ActionButton>
         </Stack>
       )}
       {surveyVisible && helpful && (
         <Box>
           <FormControl>
-            <Typography variant="body1" color="website.f1" fontWeight={500} fontFamily={typoFontFamily}>
+            <Typography variant="body1" color="website.f1" fontWeight={500}>
               <Trans i18nKey="docFeedbackSurvey.positive.title" />
             </Typography>
             <RadioGroup
@@ -195,7 +192,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       {surveyVisible && !helpful && (
         <Box>
           <FormControl>
-            <Typography variant="body1" color="website.f1" fontWeight={500} fontFamily={typoFontFamily}>
+            <Typography variant="body1" color="website.f1" fontWeight={500}>
               <Trans i18nKey="docFeedbackSurvey.negative.title" />
             </Typography>
             <RadioGroup
@@ -264,7 +261,12 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
         </Box>
       )}
       {submitted && (
-        <Typography variant="body1" color="website.f1" fontWeight={500} fontFamily={typoFontFamily} mb="48px">
+        <Typography
+          variant="body1"
+          color="website.f1"
+          fontWeight={500}
+          mb="48px"
+        >
           <Trans i18nKey="docFeedbackSurvey.message.thank" />
         </Typography>
       )}

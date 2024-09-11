@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from "gatsby";
 
 import { Helmet, type MetaProps, type LinkProps } from "react-helmet-async";
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { Locale } from "static/Type";
+import { Locale } from "shared/interface";
 
 interface Props {
   noindex?: boolean;
@@ -32,7 +32,7 @@ export default function Seo({
           author
         }
       }
-      favicon: file(relativePath: { eq: "pingcap-logo.ico" }) {
+      favicon: file(relativePath: { eq: "tidb-logo.svg" }) {
         publicURL
       }
     }

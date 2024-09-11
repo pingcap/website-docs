@@ -1,9 +1,44 @@
-import * as React from "react";
+import { createContext, useContext } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { getBannerByType } from "utils";
+import { useTheme } from "@mui/material";
+
+import TiDBSelfManagedHeroGraphic from "media/imgs/tidb-self-managed-hero-graphic.svg";
+import TiDBSelfManagedHeroGraphicBg from "media/imgs/tidb-self-managed-hero-graphic-bg.svg";
+import TiDBCloudHeroGraphic from "media/imgs/tidb-cloud-hero-graphic.svg";
+import TiDBCloudHeroGraphicBg from "media/imgs/tidb-cloud-hero-graphic-bg.svg";
+
+const TiDBSelfManagementImg = () => {
+  return (
+    <Box sx={{ position: "relative", height: "100%" }}>
+      <Box sx={{ position: "absolute", bottom: -10, right: 0 }}>
+        <TiDBSelfManagedHeroGraphicBg />
+      </Box>
+      <Box sx={{ position: "absolute", bottom: -36, right: 110 }}>
+        <TiDBSelfManagedHeroGraphic />
+      </Box>
+    </Box>
+  );
+};
+
+const TiDBCloudImg = () => {
+  return (
+    <Box sx={{ position: "relative", height: "100%" }}>
+      <Box sx={{ position: "absolute", bottom: -10, right: 0 }}>
+        <TiDBCloudHeroGraphicBg />
+      </Box>
+      <Box sx={{ position: "absolute", bottom: -34, right: 156 }}>
+        <TiDBCloudHeroGraphic />
+      </Box>
+    </Box>
+  );
+};
+
+const LearningPathContext = createContext<"tidb-cloud" | "tidb" | "home">(
+  "tidb-cloud"
+);
 
 export function LearningPathContainer(props: {
   title: string;
@@ -13,18 +48,19 @@ export function LearningPathContainer(props: {
 }) {
   const { children, title, subTitle, platform = "tidb" } = props;
 
-  const BannerComponent = getBannerByType(platform);
+  const bannerImg =
+    platform === "tidb" ? <TiDBSelfManagementImg /> : <TiDBCloudImg />;
 
   return (
     <>
       <Stack
         id="title-group"
         direction="row"
+        bgcolor="carbon.900"
         sx={{
-          background: "#252525",
           justifyContent: "space-between",
           flexDirection: {
-            xs: "column-reverse",
+            xs: "column",
             md: "row",
           },
         }}
@@ -32,21 +68,20 @@ export function LearningPathContainer(props: {
         <Stack
           id="title-left"
           sx={{
-            gap: "2.5rem",
+            gap: "32px",
             justifyContent: "center",
+            height: "230px",
+            boxSizing: "border-box",
             maxWidth: {
               xs: "100%",
-              md: "50%",
+              md: "60%",
             },
             width: "auto",
-            padding: {
-              xs: "0rem 1rem 2rem 1rem",
-              md: "2.5rem 0 2.5rem 2.5rem",
-            },
+            padding: "36px",
 
             "& h1#banner-title": {
               borderBottom: "0",
-              color: "#fff",
+              color: "carbon.50",
               fontSize: "42px",
               fontWeight: "700",
               margin: "0",
@@ -54,7 +89,7 @@ export function LearningPathContainer(props: {
             },
 
             "& div#banner-subtitle": {
-              color: "#fff",
+              color: "carbon.50",
             },
           }}
         >
@@ -68,25 +103,22 @@ export function LearningPathContainer(props: {
         <Box
           id="title-right"
           sx={{
-            padding: "1rem",
-            width: "50%",
+            height: "230px",
+            width: "100%",
+            boxSizing: "border-box",
             margin: {
               xs: "0 auto",
               md: "0",
             },
           }}
         >
-          <BannerComponent
-            sx={{
-              width: "100%",
-              height: "100%",
-              maxHeight: "200px",
-            }}
-          />
+          {bannerImg}
         </Box>
       </Stack>
       <Stack id="learning-path-container" sx={{ padding: "2rem 0" }}>
-        {children}
+        <LearningPathContext.Provider value={platform}>
+          {children}
+        </LearningPathContext.Provider>
       </Stack>
     </>
   );
@@ -98,6 +130,52 @@ export function LearningPath(props: {
   icon: string;
 }) {
   const { children, label, icon } = props;
+  const platform = useContext(LearningPathContext);
+  const theme = useTheme();
+  const iconHashmap = {
+    "tidb-cloud": {
+      cloud1: "cloud-learning-mauve",
+      cloud2: "cloud-billing-mauve",
+      cloud3: "cloud-migrate-mauve",
+      cloud4: "cloud-integrations-mauve",
+      cloud5: "cloud-getstarted-mauve",
+      cloud6: "cloud-monitor-mauve",
+      cloud7: "cloud-manage-mauve",
+      "cloud-dev": "cloud-reference-mauve",
+      "tidb-cloud-tune": "cloud-tune-mauve",
+      doc8: "cloud-developer-mauve",
+      users: "cloud-security-mauve",
+    },
+    tidb: {
+      cloud1: "oss-learning-blue",
+      cloud3: "oss-migrate-blue",
+      cloud5: "oss-getstarted-blue",
+      cloud6: "oss-monitor-blue",
+      "cloud-dev": "oss-reference-blue",
+      "tidb-cloud-tune": "oss-tune-blue",
+      doc7: "oss-tools-blue",
+      doc8: "oss-developer-blue",
+      deploy: "oss-deploy-blue",
+      maintain: "oss-manage-blue",
+    },
+    home: {
+      cloud1: "cloud-learning-mauve",
+      cloud2: "cloud-billing-mauve",
+      cloud3: "cloud-migrate-mauve",
+      cloud4: "cloud-integrations-mauve",
+      cloud5: "cloud-getstarted-mauve",
+      cloud6: "cloud-monitor-mauve",
+      cloud7: "cloud-manage-mauve",
+      "cloud-dev": "cloud-reference-mauve",
+      "tidb-cloud-tune": "cloud-tune-mauve",
+      doc8: "cloud-developer-mauve",
+      users: "cloud-security-mauve",
+    },
+  };
+  const iconName =
+    iconHashmap[platform][icon as keyof typeof iconHashmap[typeof platform]] ||
+    (platform === "tidb" ? "oss-product-blue" : "cloud-product-mauve");
+
   return (
     <>
       <Stack
@@ -114,7 +192,7 @@ export function LearningPath(props: {
               color: "#24292f",
             },
             "& a:hover": {
-              color: "#0a85c2",
+              color: theme.palette.secondary.main,
             },
           },
 
@@ -157,7 +235,7 @@ export function LearningPath(props: {
         >
           <Typography
             component="img"
-            src={require(`../../../images/docHome/${icon}.svg`)?.default}
+            src={require(`../../../images/docHome/${iconName}.svg`)?.default}
             sx={{
               width: "3rem",
               height: "3rem",
@@ -165,7 +243,7 @@ export function LearningPath(props: {
           />
           <Typography
             id="learning-path-label"
-            sx={{ color: "#000", width: "6rem" }}
+            sx={{ color: "carbon.900", width: "6rem", fontWeight: 700 }}
           >
             {label}
           </Typography>
@@ -173,14 +251,12 @@ export function LearningPath(props: {
         <Box
           id="learning-path-right"
           sx={{
-            backgroundColor: "#f6f6f6",
-            boxShadow: "none",
+            backgroundColor: theme.palette.carbon[200],
             height: "auto",
             // minHeight: "5rem",
             padding: "2rem",
             transition: ".5s",
-            border: "1px solid #e9eaee",
-            borderRadius: "0.25rem",
+            border: `1px solid ${theme.palette.carbon[400]}`,
             maxWidth: "100%",
 
             display: "flex",
@@ -189,11 +265,6 @@ export function LearningPath(props: {
             flexWrap: "wrap",
             justifyContent: "flex-start",
             rowGap: "1rem",
-
-            "&:hover": {
-              boxShadow:
-                "0 0.5em 1em -0.125em hsl(0deg 0% 4% / 10%), 0 0 0 1px hsl(0deg 0% 4% / 2%)",
-            },
 
             "& > p": {
               flex: { xs: "50% 1", md: "0 0 33%" },

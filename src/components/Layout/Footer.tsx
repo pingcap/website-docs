@@ -1,7 +1,5 @@
-import * as React from "react";
-import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -11,26 +9,42 @@ import { Link } from "@mui/material";
 import { PingcapLogoFooterIcon } from "components/Icons";
 import LinkComponent from "components/Link";
 import {
-  splitArrayIntoChunks,
   generateIconGroup,
   generateFooterItems,
   generatePrivacyPolicy,
-} from "utils";
-import { GTMEvent, gtmTrack } from "utils/gtm";
+  generateLegalUrl,
+} from "shared/utils";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
+
+const FOOTER_TITLE_COLOR = "#A2ADB9";
 
 export default function Footer() {
   return (
     <>
-      <Box sx={{ bgcolor: "#20222B", padding: "3.5rem 0" }} component="footer">
-        <Container maxWidth="lg">
+      <Box sx={{ bgcolor: "#000" }} component="footer">
+        <Box maxWidth="xl" sx={{ padding: "30px 64px", margin: "0 auto" }}>
           <FooterBlock />
-          <Stack direction="row">
+          <Stack
+            direction="row"
+            spacing="12px"
+            sx={{ paddingTop: "66px" }}
+            divider={
+              <Typography
+                variant="body2"
+                component="div"
+                color={FOOTER_TITLE_COLOR}
+                sx={{ fontFamily: "moderat mono" }}
+              >
+                /
+              </Typography>
+            }
+          >
             <Typography
               variant="body2"
               component="div"
-              color="rgba(255, 255, 255, 0.5)"
+              color={FOOTER_TITLE_COLOR}
               sx={{
-                paddingTop: "3rem",
+                fontFamily: "moderat mono",
                 textAlign: {
                   xs: "center",
                   md: "left",
@@ -39,10 +53,10 @@ export default function Footer() {
             >
               © {new Date().getFullYear()} PingCAP. All Rights Reserved.
             </Typography>
-
             <PrivacyPolicy />
+            <Legal />
           </Stack>
-        </Container>
+        </Box>
       </Box>
     </>
   );
@@ -62,21 +76,25 @@ const FooterBlock = () => {
           rowGap: "4rem",
         }}
       >
+        <FooterItems />
         <Stack
           sx={{
-            gap: "2rem",
+            gap: "26px",
             display: {
               xs: "none",
               md: "flex",
             },
           }}
         >
-          <PingcapLogoFooterIcon
-            sx={{ width: "6.125rem", height: "1.625rem" }}
-          />
+          <Typography
+            sx={{ fontFamily: "moderat mono", fontSize: "15px" }}
+            color={FOOTER_TITLE_COLOR}
+            component="div"
+          >
+            Stay Connected
+          </Typography>
           <IconGroup />
         </Stack>
-        <FooterItems />
       </Stack>
       <Stack
         alignItems="center"
@@ -96,76 +114,87 @@ const FooterBlock = () => {
 };
 
 const IconGroup = () => {
-  const theme = useTheme();
   const { language } = useI18next();
   const icons = generateIconGroup(language);
-  const rows = splitArrayIntoChunks(icons);
   return (
     <Stack
       sx={{
-        flexDirection: {
-          xs: "row",
-          md: "column",
-        },
-        gap: {
-          xs: "1rem",
-          md: "0",
-        },
+        flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",
       }}
     >
-      {rows.map((row, index) => (
-        <Stack
-          key={`${language}-${index}`}
-          direction="row"
-          spacing={2}
-          color={theme.palette.website.m4}
-          sx={{ paddingTop: "0.5rem", paddingBottom: "0.5rem" }}
+      {icons.map((icon) => (
+        <IconButton
+          key={icon.name}
+          aria-label={icon.name}
+          href={icon.href}
+          target="_blank"
+          color="inherit"
+          onClick={() =>
+            gtmTrack(GTMEvent.ClickFooter, {
+              item_name: icon.name,
+            })
+          }
         >
-          {row.map((icon: any) => (
-            <IconButton
-              key={icon.name}
-              aria-label={icon.name}
-              href={icon.href}
-              target="_blank"
-              color="inherit"
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickFooter, {
-                  item_name: icon.name,
-                })
-              }
-            >
-              <icon.icon />
-            </IconButton>
-          ))}
-        </Stack>
+          <icon.icon />
+        </IconButton>
       ))}
     </Stack>
   );
 };
 
 const PrivacyPolicy = () => {
-  const { language } = useI18next();
+  const { language, t } = useI18next();
   const url = generatePrivacyPolicy(language);
   return (
     <>
       <Link
         href={url}
         variant="body2"
-        color="rgba(255, 255, 255, 0.5)"
+        color={FOOTER_TITLE_COLOR}
         sx={{
+          fontFamily: "moderat mono",
           marginLeft: ".2rem",
-          paddingTop: "3rem",
           textAlign: {
             xs: "center",
             md: "left",
           },
           textDecoration: "none",
+          transition: "color 0.2s ease-in-out",
+          "&:hover": { color: "#fff" },
         }}
         target="_blank"
       >
-        Privacy Policy.
+        {t("footer.privacy")}
+      </Link>
+    </>
+  );
+};
+
+const Legal = () => {
+  const { language, t } = useI18next();
+  const url = generateLegalUrl(language);
+  return (
+    <>
+      <Link
+        href={url}
+        variant="body2"
+        color={FOOTER_TITLE_COLOR}
+        sx={{
+          fontFamily: "moderat mono",
+          marginLeft: ".2rem",
+          textAlign: {
+            xs: "center",
+            md: "left",
+          },
+          textDecoration: "none",
+          transition: "color 0.2s ease-in-out",
+          "&:hover": { color: "#fff" },
+        }}
+        target="_blank"
+      >
+        {t("footer.legal")}
       </Link>
     </>
   );
@@ -178,27 +207,40 @@ const FooterItems = () => {
   return (
     <>
       {rows.map((row) => (
-        <Stack key={row.name} sx={{ gap: "0.75rem", minWidth: "6.75rem" }}>
-          <Typography color="#7E7F86" component="div">
+        <Stack key={row.name} sx={{ gap: "26px" }}>
+          <Typography
+            color={FOOTER_TITLE_COLOR}
+            component="div"
+            sx={{ fontFamily: "moderat mono", fontSize: "15px" }}
+          >
             {row.name}
           </Typography>
-          {row.items.map((item) => (
-            <LinkComponent
-              key={`${row.name}-${item.name}`}
-              to={item.url}
-              isI18n
-              sx={{ width: "fit-content" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickFooter, {
-                  item_name: item.name,
-                })
-              }
-            >
-              <Typography color={theme.palette.website.m4} component="div">
-                {item.name}
-              </Typography>
-            </LinkComponent>
-          ))}
+          <Stack sx={{ gap: "10px", minWidth: "6.75rem" }}>
+            {row.items.map((item) => (
+              <LinkComponent
+                key={`${row.name}-${item.name}`}
+                to={item.url}
+                isI18n
+                sx={{ width: "fit-content" }}
+                onClick={() =>
+                  gtmTrack(GTMEvent.ClickFooter, {
+                    item_name: item.name,
+                  })
+                }
+              >
+                <Typography
+                  color="#fff"
+                  sx={{
+                    transition: "color 0.2s ease-in-out",
+                    "&:hover": { color: FOOTER_TITLE_COLOR },
+                  }}
+                  component="div"
+                >
+                  {item.name}
+                </Typography>
+              </LinkComponent>
+            ))}
+          </Stack>
         </Stack>
       ))}
     </>

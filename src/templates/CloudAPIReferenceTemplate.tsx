@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 import Seo from "components/Layout/Seo";
 import Layout from "components/Layout";
-import { type BuildType, Locale } from "../static/Type";
+import { type BuildType, Locale } from "../shared/interface";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
 declare const Redoc: any;
@@ -79,6 +79,9 @@ export default function APIReferenceTemplate({
         {
           schemaExpansionLevel: 3,
           scrollYOffset: ".doc-site-header",
+          theme: {
+            logo: { maxHeight: 0, maxWidth: 0 },
+          },
         },
         document.getElementById("redoc-container"),
         () => {

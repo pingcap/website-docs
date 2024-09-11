@@ -1,35 +1,37 @@
 import * as React from "react";
-import { Link, Trans } from "gatsby-plugin-react-i18next";
+import { Trans } from "gatsby-plugin-react-i18next";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useTheme } from "@mui/material/styles";
 
-import { getBannerByType } from "utils";
-import LinkComponent from "components/Link";
-import SearchInput from "components/Search";
+import HomeHeroGraphic from "media/imgs/home-hero-graphic.svg";
 
-export function DocHomeContainer(props: {
+interface DocHomeContainerProps {
   title: string;
   subTitle?: string;
-  children?: any;
   platform: "home" | "tidb" | "tidb-cloud";
   archive?: boolean;
-}) {
+  ctaLabel?: string;
+  ctaLink?: string;
+}
+
+export function DocHomeContainer(
+  props: React.PropsWithChildren<DocHomeContainerProps>
+) {
   const {
     title,
     subTitle = "",
-    children = [],
     platform = "home",
     archive = false,
+    ctaLabel = "Get Started",
+    ctaLink = "",
+    children = [],
   } = props;
 
-  const [searchValue, setSearchValue] = React.useState("");
-
   const theme = useTheme();
-
-  const BannerComponent = getBannerByType(platform);
 
   const getHeadings = (
     items: any
@@ -60,19 +62,19 @@ export function DocHomeContainer(props: {
         id="title-group"
         direction="row"
         sx={{
-          background: "#252525",
+          padding: "1.5rem 0 4rem",
           justifyContent: "space-between",
           flexDirection: {
             xs: "column-reverse",
             md: "row",
-          },
+          }
         }}
       >
         <Stack
           id="title-left"
+          alignItems="flex-start"
           sx={{
-            gap: "2.5rem",
-            justifyContent: "center",
+            gap: "2rem",
             maxWidth: {
               xs: "100%",
               md: "50%",
@@ -80,36 +82,54 @@ export function DocHomeContainer(props: {
             width: "auto",
             padding: {
               xs: "0rem 1rem 2rem 1rem",
-              md: "2.5rem 0 2.5rem 2.5rem",
+              md: "0",
             },
 
             "& h1#banner-title": {
               borderBottom: "0",
-              color: "#fff",
-              fontSize: "42px",
+              color: theme.palette.website.f1,
+              fontSize: "36px",
               fontWeight: "700",
               margin: "0",
               padding: "0",
-              lineHeight: "1.8",
             },
 
             "& div#banner-subtitle": {
-              color: "#fff",
-              lineHeight: "1.8",
+              fontSize: "20px",
+              color: theme.palette.text.primary,
+              lineHeight: "1.5",
             },
           }}
         >
-          <Typography component="h1" variant="h1" id="banner-title" sx={{}}>
+          <Typography component="h1" variant="h1" id="banner-title">
             {title}
           </Typography>
           <Typography component="div" variant="body1" id="banner-subtitle">
             {subTitle}
           </Typography>
-          {!archive && (
-            <SearchInput
-              disableResponsive
-              docInfo={{ type: "tidb", version: "stable" }}
-            />
+          {!archive && ctaLink && (
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                "& > a.button": {
+                  color: "white",
+                  "&:hover": {
+                    textDecoration: "none",
+                  },
+                },
+              }}
+            >
+              <a
+                className="button"
+                href={ctaLink}
+                target="_blank"
+                referrerPolicy="no-referrer-when-downgrade"
+              >
+                {ctaLabel}
+              </a>
+            </Button>
           )}
         </Stack>
         <Box
@@ -121,15 +141,29 @@ export function DocHomeContainer(props: {
               xs: "0 auto",
               md: "0",
             },
+            position: "relative",
+            display: {
+              xs: "none",
+              md: "block",
+            }
           }}
         >
-          <BannerComponent
+          {/* <BannerComponent
             sx={{
               width: "100%",
               height: "100%",
               maxHeight: "276px",
             }}
-          />
+          /> */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: "36px",
+              right: "-4px"
+            }}
+          >
+            <HomeHeroGraphic />
+          </Box>
         </Box>
       </Stack>
       {/* <Stack id="doc-home-container" sx={{ padding: "2rem 0" }}>
@@ -150,7 +184,7 @@ export function DocHomeContainer(props: {
               height: "100%",
               maxHeight: "calc(100vh - 6.25rem)",
               overflowY: "auto",
-              padding: "2.5rem 1rem 1rem 1rem",
+              padding: "4rem 1rem 1rem 1rem",
               position: "sticky",
               top: "6.25rem",
 
@@ -168,7 +202,6 @@ export function DocHomeContainer(props: {
                   sx={{
                     paddingLeft: "0.5rem",
                     paddingBottom: "1rem",
-                    fontFamily: "Helvetica Neue",
                     color: theme.palette.website.f1,
                     fontSize: "0.875rem",
                     fontWeight: "700",
@@ -248,56 +281,49 @@ export function DocHomeSection(props: {
     <Box
       className="doc-home-section"
       sx={{
-        borderBottom: "1px solid #f4f4f4",
         display: "flex",
         flexDirection: "column",
-        gap: "2.5rem",
-        paddingBottom: "2.5rem",
-        paddingTop: "2.5rem",
+        gap: "24px",
+        marginBottom: "48px",
 
-        "& h2": {
-          borderBottom: "unset",
-          fontSize: "2rem",
+        "& > h2": {
           margin: 0,
-          padding: 0,
+        },
+
+        "> p": {
+          marginBottom: 0,
         },
 
         "> a.button": {
-          backgroundColor: "website.k1",
-          borderColor: "transparent",
-          color: "#fff",
-          textDecoration: "none",
+          fontSize: "14px",
+          fontWeight: 500,
+          lineHeight: 1.5,
+          backgroundColor: "#F9F9F9",
+          color: "text.primary",
+          border: "1px solid #D9D9D9",
+          padding: "10px 12px",
           width: "fit-content",
-          cursor: "pointer",
-          justifyContent: "center",
-          padding: "calc(0.5em - 1px) 1em",
-          textAlign: "center",
-          whiteSpace: "nowrap",
-          alignItems: "center",
-          border: "1px solid transparent",
-          borderRadius: "4px",
-          boxShadow: "none",
           display: "inline-flex",
-          fontSize: "1rem",
-          lineHeight: "1.5",
-          position: "relative",
-          verticalAlign: "top",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+          textDecoration: "none",
+          whiteSpace: "nowrap",
+          transition: "all 0.2s ease-in-out",
           "&:hover": {
             textDecoration: "none",
-            backgroundColor: "#0A85C2",
+            borderColor: "text.secondary",
           },
-          transition: "all 0.2s ease-in-out",
         },
+
+        "> a.button-primary": {
+          color: '#ffffff',
+          backgroundColor: "primary.main",
+          border: 'none'
+        }
       }}
     >
-      <Typography
-        component="h2"
-        variant="h2"
-        id={id}
-        sx={{
-          color: "#24292f",
-        }}
-      >
+      <Typography component="h2" variant="h2" id={id}>
         {label}
       </Typography>
       {children}
@@ -309,7 +335,7 @@ export function DocHomeCardContainer(props: any) {
   const { children } = props;
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         width: "100%",
         display: {
           xs: "flex",
@@ -317,76 +343,134 @@ export function DocHomeCardContainer(props: any) {
         },
         flexDirection: "column",
         gridTemplateColumns: "repeat(auto-fit, minmax(224px, 30%))",
-        gap: "1.5rem",
+        gap: "1.25rem",
         justifyContent: "start",
 
-        "& a#card": {
-          backgroundColor: "#f6f6f6",
+        "& > a.doc-home-card": {
+          backgroundColor: theme.palette.carbon[50],
           "&:hover": {
             textDecoration: "none",
           },
         },
-      }}
+      })}
     >
       {children}
     </Box>
   );
 }
 
-export function DocHomeCard(props: any) {
-  const { children, href = "", icon = "cloud1", label } = props;
+interface DocHomeCardProps {
+  href: string;
+  icon: string;
+  label: string;
+  colSpan?: 1 | 2 | 3;
+  actionBtnLabel?: string;
+  ctaGraphic?: string;
+}
+
+export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
+  const {
+    children,
+    href = "",
+    icon = "global-tidb-product",
+    label,
+    colSpan,
+    actionBtnLabel,
+    ctaGraphic,
+  } = props;
 
   return (
-    <>
+    <Box
+      component="a"
+      className="doc-home-card"
+      target={href.startsWith("http") ? "_blank" : undefined}
+      referrerPolicy="no-referrer-when-downgrade"
+      href={href}
+      sx={(theme) => ({
+        position: "relative",
+        zIndex: 0,
+        padding: "24px",
+        transition: ".5s",
+        border: `1px solid ${theme.palette.carbon[400]}`,
+        gridColumn: colSpan ? `span ${colSpan}` : undefined,
+
+        "&:hover": {
+          background:
+            "radial-gradient(46.96% 65.78% at 100% 96.96%, #F5F8FA 0%, #FBFDFD 56.35%, #FFFFFF 100%)",
+          borderColor: "var(--peacock-800)",
+          boxShadow: "0px 1px 0px 0px rgba(200, 206, 208, 0.1)",
+        },
+
+        "& > img.card-cta-graphic.card-cta-graphic": {
+          backgroundColor: "transparent",
+        },
+      })}
+    >
       <Box
-        // id="card"
-        component="a"
-        href={href}
-        sx={{
-          backgroundColor: "#f6f6f6",
-          boxShadow: "none",
-          padding: "2rem",
-          transition: ".5s",
-          border: "1px solid #e9eaee",
-          borderRadius: "0.25rem",
-
-          "&:hover": {
-            boxShadow:
-              "0 0.5em 1em -0.125em hsl(0deg 0% 4% / 10%), 0 0 0 1px hsl(0deg 0% 4% / 2%)",
+        id="card-content"
+        sx={(theme) => ({
+          "& > h3": {
+            fontSize: "16px",
+            marginBottom: "12px",
           },
-        }}
-        className="doc-home-card"
-      >
-        <Box
-          id="card-content"
-          sx={{
-            color: "#4a4a4a",
 
-            "& img#card-content-img": {
-              backgroundColor: "transparent",
-              margin: 0,
-            },
+          "& > p": {
+            fontSize: "14px",
+            color: theme.palette.carbon[700],
+            marginBottom: 0,
+          },
+
+          "& > img.card-content-img.card-content-img": {
+            backgroundColor: "transparent",
+            margin: 0,
+          },
+        })}
+      >
+        <Typography
+          component="img"
+          className="card-content-img"
+          src={require(`../../../images/docHome/${icon}.svg`)?.default}
+          alt={label}
+          sx={{
+            maxWidth: "44px",
+            maxHeight: "44px",
           }}
-        >
-          <Typography
-            component="img"
-            id="card-content-img"
-            src={require(`../../../images/docHome/${icon}.svg`)?.default}
-            alt={label}
+        />
+        <Typography component="h3" variant="h3">
+          {label}
+        </Typography>
+        {children}
+        {actionBtnLabel && (
+          <Button
+            variant="contained"
             sx={{
-              height: "3rem",
-              width: "3rem",
-              // width: "fit-content",
-              margin: 0,
-              backgroundColor: "transparent",
+              marginTop: "12px",
+              color: "carbon.50",
+              backgroundColor: "text.primary",
+              padding: "10px 12px",
+              "&:hover": {
+                backgroundColor: "text.secondary",
+              },
             }}
-          />
-          <Typography component="h3" variant="h3" sx={{ color: "#4a4a4a" }}>
-            {label}
-          </Typography>
-          {children}
-        </Box>
+          >
+            {actionBtnLabel}
+          </Button>
+        )}
       </Box>
-    </>
+      {ctaGraphic && (
+        <Box
+          component="img"
+          className="card-cta-graphic"
+          src={require(`../../../images/docHome/${ctaGraphic}.svg`)?.default}
+          alt={label}
+          sx={{
+            right: 0,
+            bottom: 0,
+            position: "absolute",
+            zIndex: -1,
+          }}
+        />
+      )}
+    </Box>
   );
 }
