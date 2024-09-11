@@ -158,6 +158,18 @@ export function LearningPath(props: {
       deploy: "oss-deploy-blue",
       maintain: "oss-manage-blue",
     },
+    "tidb-operator": {
+      cloud1: "oss-learning-blue",
+      cloud3: "oss-migrate-blue",
+      cloud5: "oss-getstarted-blue",
+      cloud6: "oss-monitor-blue",
+      "cloud-dev": "oss-reference-blue",
+      "tidb-cloud-tune": "oss-tune-blue",
+      doc7: "oss-tools-blue",
+      doc8: "oss-developer-blue",
+      deploy: "oss-deploy-blue",
+      maintain: "oss-manage-blue",
+    },
     home: {
       cloud1: "cloud-learning-mauve",
       cloud2: "cloud-billing-mauve",
