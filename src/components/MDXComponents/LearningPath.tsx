@@ -36,20 +36,23 @@ const TiDBCloudImg = () => {
   );
 };
 
-const LearningPathContext = createContext<"tidb-cloud" | "tidb" | "home">(
-  "tidb-cloud"
-);
+const LearningPathContext = createContext<
+  "tidb-cloud" | "tidb" | "home" | "tidb-operator"
+>("tidb-cloud");
 
 export function LearningPathContainer(props: {
   title: string;
   subTitle?: string;
   children?: any;
-  platform: "home" | "tidb" | "tidb-cloud";
+  platform: "home" | "tidb" | "tidb-cloud" | "tidb-operator";
 }) {
   const { children, title, subTitle, platform = "tidb" } = props;
 
-  const bannerImg =
-    platform === "tidb" ? <TiDBSelfManagementImg /> : <TiDBCloudImg />;
+  const bannerImg = ["home", "tidb-cloud"].includes(platform) ? (
+    <TiDBCloudImg />
+  ) : (
+    <TiDBSelfManagementImg />
+  );
 
   return (
     <>
@@ -158,36 +161,15 @@ export function LearningPath(props: {
       deploy: "oss-deploy-blue",
       maintain: "oss-manage-blue",
     },
-    "tidb-operator": {
-      cloud1: "oss-learning-blue",
-      cloud3: "oss-migrate-blue",
-      cloud5: "oss-getstarted-blue",
-      cloud6: "oss-monitor-blue",
-      "cloud-dev": "oss-reference-blue",
-      "tidb-cloud-tune": "oss-tune-blue",
-      doc7: "oss-tools-blue",
-      doc8: "oss-developer-blue",
-      deploy: "oss-deploy-blue",
-      maintain: "oss-manage-blue",
-    },
-    home: {
-      cloud1: "cloud-learning-mauve",
-      cloud2: "cloud-billing-mauve",
-      cloud3: "cloud-migrate-mauve",
-      cloud4: "cloud-integrations-mauve",
-      cloud5: "cloud-getstarted-mauve",
-      cloud6: "cloud-monitor-mauve",
-      cloud7: "cloud-manage-mauve",
-      "cloud-dev": "cloud-reference-mauve",
-      "tidb-cloud-tune": "cloud-tune-mauve",
-      doc8: "cloud-developer-mauve",
-      users: "cloud-security-mauve",
-    },
   };
+  const iconGroup = ["home", "tidb-cloud"].includes(platform)
+    ? "tidb-cloud"
+    : "tidb";
   const iconName =
-    iconHashmap?.[platform]?.[
-      icon as keyof typeof iconHashmap[typeof platform]
-    ] || (platform === "tidb" ? "oss-product-blue" : "cloud-product-mauve");
+    iconHashmap[iconGroup][
+      icon as keyof typeof iconHashmap[typeof iconGroup]
+    ] ||
+    (iconGroup === "tidb-cloud" ? "cloud-product-mauve" : "oss-product-blue");
 
   return (
     <>
