@@ -21,7 +21,7 @@
     "home": "Home",
     "archive-home": "Archived Docs Home",
     "archive-label": "Archived Docs",
-    "tidb": "TiDB",
+    "tidb": "TiDB Self-Managed",
     "tools": "ツール",
     "cloud": "TiDB Cloud",
     "appdev": "アプリ開発",
@@ -30,7 +30,7 @@
     "contactUs": "お問い合わせ",
     "searchDocs": "ドキュメントを検索",
     "playground": "Playground",
-    "learningCenter": "Learning center"
+    "learningCenter": "Learning Center"
   },
   "doc": {
     "notExist": "このドキュメントは存在しません",

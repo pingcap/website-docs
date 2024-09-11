@@ -179,16 +179,16 @@ export const EN_FOOTER_ITEMS = [
     name: "Products",
     items: [
       {
-        name: "Self-managed",
-        url: "https://www.pingcap.com/tidb/",
+        name: "TiDB Cloud Serverless",
+        url: "https://www.pingcap.com/tidb-serverless/",
       },
       {
-        name: "Cloud Dedicated",
+        name: "TiDB Cloud Dedicated",
         url: "https://www.pingcap.com/tidb-dedicated/",
       },
       {
-        name: "Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-serverless/",
+        name: "TiDB Self-managed",
+        url: "https://www.pingcap.com/tidb/",
       },
       {
         name: "Pricing",

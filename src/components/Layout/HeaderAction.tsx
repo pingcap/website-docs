@@ -260,7 +260,7 @@ const TiDBCloudBtnGroup = () => {
             })
           }
         >
-          Start for free
+          Start for Free
         </Button>
       </Stack>
 
