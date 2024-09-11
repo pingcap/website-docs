@@ -32,22 +32,30 @@ export function DevToolCard({
   return (
     <Card
       variant="outlined"
-      sx={{
+      sx={(theme) => ({
         minWidth: "240px",
         maxWidth: "256px",
-        borderRadius: "8px",
-        borderColor: '#ededed',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'stretch',
+        borderRadius: 0,
+        borderColor: theme.palette.carbon[400],
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          background:
+            "linear-gradient(120.16deg, #FFFFFF 63.62%, #FBFDFD 74.22%, #F5F8FA 98.17%)",
+          borderColor: theme.palette.secondary.main,
+          boxShadow: "0px 1px 5px 0px rgba(76, 81, 83, 0.1)",
+        },
+
         "> a.MuiCardActionArea-root:hover, a.MuiButton-text:hover": {
           textDecoration: "none",
         },
         ".MuiCardActions-root > a.MuiButton-text": {
-          color: "#4a4a4a",
-          borderRadius: "8px",
+          color: "text.secondary",
+          borderRadius: 0,
         },
-      }}
+      })}
     >
       <CardActionArea
         component={Link}
@@ -69,8 +77,8 @@ export function DevToolCard({
               sx={{
                 width: "36px",
                 height: "36px",
-                backgroundColor: 'transparent',
-                borderRadius: 0
+                backgroundColor: "transparent",
+                borderRadius: 0,
               }}
             >
               <Box
@@ -87,7 +95,7 @@ export function DevToolCard({
             sx: {
               fontSize: 14,
               fontWeight: 600,
-              color: "website.f1",
+              color: "text.primary",
               userSelect: "text",
             },
           }}
@@ -101,43 +109,47 @@ export function DevToolCard({
             userSelect: "text",
           }}
         >
-          <Typography component="div" variant="body2" color="#4a4a4a">
+          <Typography component="div" variant="body2" color="text.secondary">
             {children}
           </Typography>
         </CardContent>
       </CardActionArea>
       {githubLink && (
         <>
-          <Divider component="div" aria-hidden="true" sx={{ borderColor: '#ededed', opacity: 0.8 }} />
+          <Divider
+            component="div"
+            aria-hidden="true"
+            sx={{ borderColor: "carbon.400", opacity: 0.8 }}
+          />
           <CardActions
-          sx={{
-            pl: "52px",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <Button
-            variant="text"
-            component={Link}
-            to={docLink}
-            disableRipple
-            disableTouchRipple
-            startIcon={<DescriptionOutlinedIcon />}
+            sx={{
+              pl: "52px",
+              justifyContent: "space-evenly",
+            }}
           >
-            Guide
-          </Button>
-          <Button
-            variant="text"
-            component="a"
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            disableRipple
-            disableTouchRipple
-            startIcon={<GitHubIcon />}
-          >
-            GitHub
-          </Button>
-        </CardActions>
+            <Button
+              variant="text"
+              component={Link}
+              to={docLink}
+              disableRipple
+              disableTouchRipple
+              startIcon={<DescriptionOutlinedIcon />}
+            >
+              Guide
+            </Button>
+            <Button
+              variant="text"
+              component="a"
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              disableRipple
+              disableTouchRipple
+              startIcon={<GitHubIcon />}
+            >
+              GitHub
+            </Button>
+          </CardActions>
         </>
       )}
     </Card>
