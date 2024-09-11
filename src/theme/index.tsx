@@ -172,12 +172,12 @@ theme = createTheme(theme, {
     carbon: theme.palette.augmentColor({
       color: {
         50: "#FFFFFF",
-        100: "#F9FAFB",
-        200: "#F3F5F7",
+        100: "#FBFDFD",
+        200: "#F5F8FA",
         300: "#EDF0F1",
         400: "#E3E8EA",
         500: "#C8CED0",
-        600: "#8D979A",
+        600: "#9FAAAD",
         700: "#6C7679",
         800: "#3D4143",
         900: "#262A2C",
