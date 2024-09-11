@@ -75,18 +75,6 @@ export default function HeaderNavStack(props: {
         },
       }}
     >
-      {/* {["en", "zh"].includes(language) && (
-        <NavItem
-          selected={selectedItem === "home"}
-          label={
-            props.buildType === "archive"
-              ? t("navbar.archive-home")
-              : t("navbar.home")
-          }
-          to="/"
-        />
-      )} */}
-
       {["en", "ja"].includes(language) && props.buildType !== "archive" && (
         <NavItem
           selected={selectedItem === "tidbcloud"}
@@ -100,20 +88,6 @@ export default function HeaderNavStack(props: {
         label={t("navbar.tidb")}
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />
-
-      {/* {["en", "ja"].includes(language) && (
-        <NavItem
-          label={t("navbar.playground")}
-          to={`https://play.tidbcloud.com`}
-          // startIcon={<CodeIcon fontSize="inherit" color="inherit" />}
-          onClick={() =>
-            gtmTrack(GTMEvent.GotoPlayground, {
-              button_name: t("navbar.playground"),
-              position: "header",
-            })
-          }
-        />
-      )} */}
 
       {["zh"].includes(language) && (
         <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
@@ -317,28 +291,6 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </LinkComponent>
         </MenuItem>
 
-        {["en", "ja"].includes(language) && (
-          <MenuItem onClick={handleClose} disableRipple>
-            <LinkComponent
-              to={`https://play.tidbcloud.com`}
-              style={{ width: "100%" }}
-              onClick={() => {
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: t("navbar.playground"),
-                });
-                gtmTrack(GTMEvent.GotoPlayground, {
-                  button_name: t("navbar.playground"),
-                  position: "header",
-                });
-              }}
-            >
-              <Typography variant="body1" component="div" color="website.f1">
-                <Trans i18nKey="navbar.playground" />
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        )}
-
         {language === "zh" && (
           <MenuItem onClick={handleClose} disableRipple>
             <LinkComponent
@@ -357,7 +309,25 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </MenuItem>
         )}
 
-        {["zh", "en"].includes(language) && (
+        {["ja", "en"].includes(language) && (
+          <MenuItem onClick={handleClose} disableRipple>
+            <LinkComponent
+              to={generateLearningCenterURL(language)}
+              style={{ width: "100%" }}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: t("navbar.learningCenter"),
+                })
+              }
+            >
+              <Typography variant="body1" component="div" color="website.f1">
+                <Trans i18nKey="navbar.learningCenter" />
+              </Typography>
+            </LinkComponent>
+          </MenuItem>
+        )}
+
+        {["zh"].includes(language) && (
           <MenuItem onClick={handleClose} disableRipple>
             <LinkComponent
               to={generateAskTugUrl(language)}
