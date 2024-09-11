@@ -111,6 +111,7 @@ export function DocHomeContainer(
             <Button
               variant="contained"
               color="primary"
+              size="large"
               sx={{
                 "& > a.button": {
                   color: "white",
@@ -283,7 +284,7 @@ export function DocHomeSection(props: {
         display: "flex",
         flexDirection: "column",
         gap: "24px",
-        paddingBottom: "24px",
+        marginBottom: "48px",
 
         "& > h2": {
           margin: 0,
@@ -376,6 +377,8 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
     <Box
       component="a"
       className="doc-home-card"
+      target={href.startsWith("http") ? "_blank" : undefined}
+      referrerPolicy="no-referrer-when-downgrade"
       href={href}
       sx={(theme) => ({
         position: "relative",
