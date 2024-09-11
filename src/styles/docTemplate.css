@@ -105,7 +105,7 @@
   .markdown-body {
     font-family: moderat, -apple-system, "Poppins", "Helvetica Neue",
       "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif";
-    color: #282a36;
+    color: var(--carbon-900);
     font-size: 16px;
     line-height: 1.5;
 
@@ -120,5 +120,15 @@
     .footnotes ol {
       list-style-type: disc;
     }
+  }
+}
+
+.markdown-body {
+  h1 {
+    font-weight: 400;
+  }
+
+  h2, h3, h4, h5, h6 {
+    font-weight: 500;
   }
 }
