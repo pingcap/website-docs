@@ -289,49 +289,49 @@ const TiDBCloudBtnGroup = () => {
           "aria-labelledby": "idb-cloud-menu-button",
         }}
       >
-        <Link
+        <MenuItem
+          onClick={handleClose}
+          component={Link}
           to={`https://tidbcloud.com/signin`}
           target="_blank"
           referrerPolicy="no-referrer-when-downgrade"
-          style={{
+          sx={{
             textDecoration: "none",
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <Typography
-              // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-              onClick={() =>
-                gtmTrack(GTMEvent.SigninCloud, {
-                  position: "header",
-                })
-              }
-            >
-              Sign In
-            </Typography>
-          </MenuItem>
-        </Link>
-        <Link
+          <Typography
+            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+            onClick={() =>
+              gtmTrack(GTMEvent.SigninCloud, {
+                position: "header",
+              })
+            }
+          >
+            Sign In
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={handleClose}
+          component={Link}
           to={`https://tidbcloud.com/free-trial`}
           target="_blank"
           referrerPolicy="no-referrer-when-downgrade"
-          style={{
+          sx={{
             textDecoration: "none",
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <Typography
-              onClick={() =>
-                gtmTrack(GTMEvent.SignupCloud, {
-                  product_type: "general cloud",
-                  button_name: "Try Free",
-                  position: "header",
-                })
-              }
-            >
-              Try Free
-            </Typography>
-          </MenuItem>
-        </Link>
+          <Typography
+            onClick={() =>
+              gtmTrack(GTMEvent.SignupCloud, {
+                product_type: "general cloud",
+                button_name: "Try Free",
+                position: "header",
+              })
+            }
+          >
+            Try Free
+          </Typography>
+        </MenuItem>
       </Menu>
     </>
   );
