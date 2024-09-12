@@ -214,7 +214,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <LinkComponent
               isI18n
-              to={generateDocsHomeUrl(language)}
+              to="/"
               style={{ width: "100%" }}
               onClick={() =>
                 gtmTrack(GTMEvent.ClickHeadNav, {
