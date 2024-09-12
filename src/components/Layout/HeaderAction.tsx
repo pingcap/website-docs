@@ -20,6 +20,7 @@ import Search from "components/Search";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { ActionButton } from "components/Card/FeedbackSection/components";
+import { Link } from "gatsby";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -288,46 +289,49 @@ const TiDBCloudBtnGroup = () => {
           "aria-labelledby": "idb-cloud-menu-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <Typography
-            component="a"
-            href={`https://tidbcloud.com/signin`}
-            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-            referrerPolicy="no-referrer-when-downgrade"
-            target="_blank"
-            sx={{
-              textDecoration: "none",
-            }}
-            onClick={() =>
-              gtmTrack(GTMEvent.SigninCloud, {
-                position: "header",
-              })
-            }
-          >
-            Sign In
-          </Typography>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Typography
-            component="a"
-            target="_blank"
-            href="https://tidbcloud.com/free-trial"
-            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-            referrerPolicy="no-referrer-when-downgrade"
-            sx={{
-              textDecoration: "none",
-            }}
-            onClick={() =>
-              gtmTrack(GTMEvent.SignupCloud, {
-                product_type: "general cloud",
-                button_name: "Try Free",
-                position: "header",
-              })
-            }
-          >
-            Try Free
-          </Typography>
-        </MenuItem>
+        <Link
+          to={`https://tidbcloud.com/signin`}
+          target="_blank"
+          referrerPolicy="no-referrer-when-downgrade"
+          style={{
+            textDecoration: "none",
+          }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Typography
+              // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+              onClick={() =>
+                gtmTrack(GTMEvent.SigninCloud, {
+                  position: "header",
+                })
+              }
+            >
+              Sign In
+            </Typography>
+          </MenuItem>
+        </Link>
+        <Link
+          to={`https://tidbcloud.com/free-trial`}
+          target="_blank"
+          referrerPolicy="no-referrer-when-downgrade"
+          style={{
+            textDecoration: "none",
+          }}
+        >
+          <MenuItem onClick={handleClose}>
+            <Typography
+              onClick={() =>
+                gtmTrack(GTMEvent.SignupCloud, {
+                  product_type: "general cloud",
+                  button_name: "Try Free",
+                  position: "header",
+                })
+              }
+            >
+              Try Free
+            </Typography>
+          </MenuItem>
+        </Link>
       </Menu>
     </>
   );

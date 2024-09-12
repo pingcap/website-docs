@@ -250,13 +250,23 @@ export function LearningPath(props: {
             component="img"
             src={require(`../../../images/docHome/${iconName}.svg`)?.default}
             sx={{
-              width: "3rem",
-              height: "3rem",
+              width: {
+                xs: "1.6rem",
+                md: "3rem",
+              },
+              height: {
+                xs: "1.6rem",
+                md: "3rem",
+              },
             }}
           />
           <Typography
             id="learning-path-label"
             sx={{ color: "carbon.900", width: "6rem", fontWeight: 700 }}
+            fontSize={{
+              xs: "12px",
+              md: "16px",
+            }}
           >
             {label}
           </Typography>
