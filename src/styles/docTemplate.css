@@ -27,6 +27,10 @@
       list-style: initial;
     }
 
+    li {
+      margin-top: 8px;
+    }
+
     table {
       th,
       td {
