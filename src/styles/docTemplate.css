@@ -27,7 +27,7 @@
       list-style: initial;
     }
 
-    li:not(:first-of-type) {
+    li:not(:first-of-type, .toc-li) {
       margin-top: 8px;
     }
 

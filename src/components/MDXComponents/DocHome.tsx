@@ -223,6 +223,7 @@ export function DocHomeContainer(
                     <Box
                       key={i.id}
                       component="li"
+                      className="toc-li"
                       sx={{
                         "& a#toc-link": {
                           color: theme.palette.website.m5,
@@ -243,6 +244,8 @@ export function DocHomeContainer(
                           lineHeight: "1.25rem",
                           borderLeft: `1px solid transparent`,
                           paddingLeft: `0.5rem`,
+                          paddingTop: `4px`,
+                          paddingBottom: `4px`,
                           "&:hover": {
                             color: theme.palette.website.f3,
                             borderLeft: `1px solid ${theme.palette.website.f3}`,
