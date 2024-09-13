@@ -109,24 +109,30 @@ export function DocHomeContainer(
             {subTitle}
           </Typography>
           {!archive && ctaLink && (
-            <Button
-              variant="contained"
-              href={ctaLink}
-              target="_blank"
-              referrerPolicy="no-referrer-when-downgrade"
-              size="large"
-              color="primary"
+            <Box
               sx={{
-                background: "var(--primary-color) !important",
-                textDecoration: "none !important",
-                color: "white !important",
-                "&:hover": {
-                  backgroundColor: "var(--primary-color-dark) !important",
+                "& a.button": {
+                  background: "var(--primary-color)",
+                  textDecoration: "none",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "var(--primary-color-dark)",
+                  },
                 },
               }}
             >
-              {ctaLabel}
-            </Button>
+              <Button
+                variant="contained"
+                href={ctaLink}
+                target={ctaLink.startsWith("http") ? "_blank" : undefined}
+                referrerPolicy="no-referrer-when-downgrade"
+                size="large"
+                color="primary"
+                className="button"
+              >
+                {ctaLabel}
+              </Button>
+            </Box>
           )}
         </Stack>
         <Box
