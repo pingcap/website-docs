@@ -87,7 +87,12 @@ export default function HeaderAction(props: {
                     xl: "flex",
                   },
                 }}
-                onClick={() => (window.tidbai.open = true)}
+                onClick={() => {
+                  window.tidbai.open = true;
+                  gtmTrack(GTMEvent.AskTiDBAI, {
+                    position: "header",
+                  });
+                }}
               >
                 Ask TiDB.ai
               </ActionButton>
@@ -290,7 +295,12 @@ const TiDBCloudBtnGroup = () => {
         }}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={() => {
+            handleClose();
+            gtmTrack(GTMEvent.SigninCloud, {
+              position: "header",
+            });
+          }}
           component={Link}
           to={`https://tidbcloud.com/signin`}
           target="_blank"
@@ -299,19 +309,17 @@ const TiDBCloudBtnGroup = () => {
             textDecoration: "none",
           }}
         >
-          <Typography
-            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-            onClick={() =>
-              gtmTrack(GTMEvent.SigninCloud, {
-                position: "header",
-              })
-            }
-          >
-            Sign In
-          </Typography>
+          <Typography>Sign In</Typography>
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          onClick={() => {
+            handleClose();
+            gtmTrack(GTMEvent.SignupCloud, {
+              product_type: "general cloud",
+              button_name: "Try Free",
+              position: "header",
+            });
+          }}
           component={Link}
           to={`https://tidbcloud.com/free-trial`}
           target="_blank"
@@ -320,17 +328,7 @@ const TiDBCloudBtnGroup = () => {
             textDecoration: "none",
           }}
         >
-          <Typography
-            onClick={() =>
-              gtmTrack(GTMEvent.SignupCloud, {
-                product_type: "general cloud",
-                button_name: "Try Free",
-                position: "header",
-              })
-            }
-          >
-            Try Free
-          </Typography>
+          <Typography>Try Free</Typography>
         </MenuItem>
       </Menu>
     </>
