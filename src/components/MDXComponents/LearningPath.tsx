@@ -210,6 +210,10 @@ export function LearningPath(props: {
           },
 
           "&:not(:first-of-type):before": {
+            display: {
+              xs: "none",
+              md: "block",
+            },
             backgroundColor: "#e9eaee",
             top: 0,
             content: "''",
@@ -220,6 +224,10 @@ export function LearningPath(props: {
           },
 
           "&:not(:last-child):after": {
+            display: {
+              xs: "none",
+              md: "block",
+            },
             backgroundColor: "#e9eaee",
             bottom: 0,
             content: "''",
@@ -234,12 +242,13 @@ export function LearningPath(props: {
           direction="row"
           sx={{
             alignItems: "center",
-            gap: {
-              xs: 0,
-              md: "2rem",
-            },
+            gap: "2rem",
             height: "100%",
-            padding: { xs: 0, md: "0 2rem" },
+            padding: "0 2rem",
+            display: {
+              xs: "none",
+              md: "flex",
+            },
 
             "& p#learning-path-label": {
               margin: 0,
@@ -257,6 +266,7 @@ export function LearningPath(props: {
           <Typography
             id="learning-path-label"
             sx={{ color: "carbon.900", width: "6rem", fontWeight: 700 }}
+            fontSize="16px"
           >
             {label}
           </Typography>

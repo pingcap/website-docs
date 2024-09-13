@@ -19,7 +19,7 @@ import { ARCHIVE_WEBSITE_URL } from "shared/resources";
 import { AllVersion } from "shared/utils";
 import CONFIG from "../../../docs/docs.json";
 import LinkComponent from "components/Link";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 
 function renderVersion(
   version: string | null,
@@ -126,25 +126,19 @@ const VersionItems = (props: {
         value={`menu-dev`}
         hidden={shouldHideDevMemo}
         disabled={!availIn.includes(`dev` || "")}
+        component={LinkComponent}
+        isI18n
+        to={`/${pathConfig.repo}/dev/${name}`}
       >
-        <LinkComponent
-          isI18n
-          to={`/${pathConfig.repo}/dev/${name}`}
-          style={{
-            width: "100%",
-            color: "#666666",
+        <Typography
+          component="div"
+          sx={{
+            fontSize: "0.875rem",
+            lineHeight: "1.25rem",
           }}
         >
-          <Typography
-            component="div"
-            sx={{
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-            }}
-          >
-            {renderVersion(`dev`, pathConfig)}
-          </Typography>
-        </LinkComponent>
+          {renderVersion(`dev`, pathConfig)}
+        </Typography>
       </MenuItem>
 
       {pathConfig.repo === "tidb" && (
@@ -164,25 +158,19 @@ const VersionItems = (props: {
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          component={LinkComponent}
+          isI18n
+          to={`/${pathConfig.repo}/${version}/${name}`}
         >
-          <LinkComponent
-            isI18n
-            to={`/${pathConfig.repo}/${version}/${name}`}
-            style={{
-              width: "100%",
-              color: "#666666",
+          <Typography
+            component="div"
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
             }}
           >
-            <Typography
-              component="div"
-              sx={{
-                fontSize: "0.875rem",
-                lineHeight: "1.25rem",
-              }}
-            >
-              {renderVersion(version, pathConfig)}
-            </Typography>
-          </LinkComponent>
+            {renderVersion(version, pathConfig)}
+          </Typography>
         </MenuItem>
       ))}
       {pathConfig.repo === "tidb" && (
@@ -202,47 +190,37 @@ const VersionItems = (props: {
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          component={LinkComponent}
+          isI18n
+          to={`/${pathConfig.repo}/${version}/${name}`}
         >
-          <LinkComponent
-            isI18n
-            to={`/${pathConfig.repo}/${version}/${name}`}
-            style={{
-              width: "100%",
-              color: "#666666",
+          <Typography
+            component="div"
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
             }}
           >
-            <Typography
-              component="div"
-              sx={{
-                fontSize: "0.875rem",
-                lineHeight: "1.25rem",
-              }}
-            >
-              {renderVersion(version, pathConfig)}
-            </Typography>
-          </LinkComponent>
+            {renderVersion(version, pathConfig)}
+          </Typography>
         </MenuItem>
       ))}
-      <LinkComponent
+      <Divider sx={{ margin: "4px 0" }} />
+      <MenuItem
+        component={LinkComponent}
         isI18n
         to={generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo)}
-        style={{
-          width: "100%",
-          color: "#666666",
-        }}
       >
-        <FormLabel
+        <Typography
+          component="div"
           sx={{
             fontSize: "0.875rem",
             lineHeight: "1.25rem",
-            fontWeight: "bold",
-            pl: "0.5rem",
-            cursor: "pointer",
           }}
         >
           {t("navbar.archive-label")}
-        </FormLabel>
-      </LinkComponent>
+        </Typography>
+      </MenuItem>
     </>
   );
 };
@@ -277,25 +255,19 @@ const VersionItemsArchived = (props: {
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          component={LinkComponent}
+          isI18n
+          to={`/${pathConfig.repo}/${version}/${name}`}
         >
-          <LinkComponent
-            isI18n
-            to={`/${pathConfig.repo}/${version}/${name}`}
-            style={{
-              width: "100%",
-              color: "#666666",
+          <Typography
+            component="div"
+            sx={{
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
             }}
           >
-            <Typography
-              component="div"
-              sx={{
-                fontSize: "0.875rem",
-                lineHeight: "1.25rem",
-              }}
-            >
-              {renderVersion(version, pathConfig, true)}
-            </Typography>
-          </LinkComponent>
+            {renderVersion(version, pathConfig, true)}
+          </Typography>
         </MenuItem>
       ))}
     </>

@@ -8,6 +8,7 @@ import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useTheme } from "@mui/material/styles";
 
 import HomeHeroGraphic from "media/imgs/home-hero-graphic.svg";
+import { Link } from "gatsby";
 
 interface DocHomeContainerProps {
   title: string;
@@ -67,7 +68,7 @@ export function DocHomeContainer(
           flexDirection: {
             xs: "column-reverse",
             md: "row",
-          }
+          },
         }}
       >
         <Stack
@@ -108,28 +109,29 @@ export function DocHomeContainer(
             {subTitle}
           </Typography>
           {!archive && ctaLink && (
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
+            <Box
               sx={{
                 "& > a.button": {
+                  background: "var(--primary-color)",
+                  textDecoration: "none",
                   color: "white",
                   "&:hover": {
-                    textDecoration: "none",
+                    backgroundColor: "var(--primary-color-dark)",
                   },
                 },
               }}
             >
-              <a
-                className="button"
+              <Button
+                variant="contained"
                 href={ctaLink}
-                target="_blank"
-                referrerPolicy="no-referrer-when-downgrade"
+                target={ctaLink.startsWith("http") ? "_blank" : undefined}
+                size="large"
+                color="primary"
+                className="button"
               >
                 {ctaLabel}
-              </a>
-            </Button>
+              </Button>
+            </Box>
           )}
         </Stack>
         <Box
@@ -145,7 +147,7 @@ export function DocHomeContainer(
             display: {
               xs: "none",
               md: "block",
-            }
+            },
           }}
         >
           {/* <BannerComponent
@@ -159,7 +161,7 @@ export function DocHomeContainer(
             sx={{
               position: "absolute",
               top: "36px",
-              right: "-4px"
+              right: "-4px",
             }}
           >
             <HomeHeroGraphic />
@@ -221,6 +223,7 @@ export function DocHomeContainer(
                     <Box
                       key={i.id}
                       component="li"
+                      className="toc-li"
                       sx={{
                         "& a#toc-link": {
                           color: theme.palette.website.m5,
@@ -241,8 +244,8 @@ export function DocHomeContainer(
                           lineHeight: "1.25rem",
                           borderLeft: `1px solid transparent`,
                           paddingLeft: `0.5rem`,
-                          paddingTop: "0.25rem",
-                          paddingBottom: "0.25rem",
+                          paddingTop: `4px`,
+                          paddingBottom: `4px`,
                           "&:hover": {
                             color: theme.palette.website.f3,
                             borderLeft: `1px solid ${theme.palette.website.f3}`,
@@ -317,10 +320,10 @@ export function DocHomeSection(props: {
         },
 
         "> a.button-primary": {
-          color: '#ffffff',
+          color: "#ffffff",
           backgroundColor: "primary.main",
-          border: 'none'
-        }
+          border: "none",
+        },
       }}
     >
       <Typography component="h2" variant="h2" id={id}>

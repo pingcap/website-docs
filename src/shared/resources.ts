@@ -182,15 +182,15 @@ export const EN_FOOTER_ITEMS = [
     items: [
       {
         name: "TiDB Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-serverless/",
+        url: "https://www.pingcap.com/tidb-cloud-serverless/",
       },
       {
         name: "TiDB Cloud Dedicated",
-        url: "https://www.pingcap.com/tidb-dedicated/",
+        url: "https://www.pingcap.com/tidb-cloud-dedicated/",
       },
       {
         name: "TiDB Self-Managed",
-        url: "https://www.pingcap.com/tidb/",
+        url: "https://www.pingcap.com/tidb-self-managed/",
       },
       {
         name: "Pricing",
@@ -305,11 +305,11 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "TiDB Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-serverless/",
+        url: "https://www.pingcap.com/tidb-cloud-serverless/",
       },
       {
         name: "TiDB Cloud Dedicated",
-        url: "https://www.pingcap.com/tidb-dedicated/",
+        url: "https://www.pingcap.com/tidb-cloud-dedicated/",
       },
     ],
   },

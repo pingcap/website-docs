@@ -20,6 +20,7 @@ import Search from "components/Search";
 import { Locale, BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { ActionButton } from "components/Card/FeedbackSection/components";
+import { Link } from "gatsby";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -30,13 +31,15 @@ const useTiDBAIStatus = () => {
       setInitializingTiDBAI(false);
     }
 
-    window.addEventListener("tidbaiinitialized", () => {
+    const onTiDBAIInitialized = () => {
       setInitializingTiDBAI(false);
-    });
-    window.addEventListener("tidbaierror", () => {
+    };
+    const onTiDBAIError = () => {
       setInitializingTiDBAI(false);
       setShowTiDBAIButton(false);
-    });
+    };
+    window.addEventListener("tidbaiinitialized", onTiDBAIInitialized);
+    window.addEventListener("tidbaierror", onTiDBAIError);
 
     const timer = setTimeout(() => {
       if (!window.tidbai) {
@@ -44,7 +47,11 @@ const useTiDBAIStatus = () => {
         setShowTiDBAIButton(false);
       }
     }, 10000);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("tidbaiinitialized", onTiDBAIInitialized);
+      window.removeEventListener("tidbaierror", onTiDBAIError);
+    };
   }, []);
 
   return { showTiDBAIButton, initializingTiDBAI };
@@ -86,7 +93,12 @@ export default function HeaderAction(props: {
                     xl: "flex",
                   },
                 }}
-                onClick={() => (window.tidbai.open = true)}
+                onClick={() => {
+                  window.tidbai.open = true;
+                  gtmTrack(GTMEvent.AskTiDBAI, {
+                    position: "header",
+                  });
+                }}
               >
                 Ask TiDB.ai
               </ActionButton>
@@ -288,45 +300,41 @@ const TiDBCloudBtnGroup = () => {
           "aria-labelledby": "idb-cloud-menu-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <Typography
-            component="a"
-            href={`https://tidbcloud.com/signin`}
-            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-            referrerPolicy="no-referrer-when-downgrade"
-            target="_blank"
-            sx={{
-              textDecoration: "none",
-            }}
-            onClick={() =>
-              gtmTrack(GTMEvent.SigninCloud, {
-                position: "header",
-              })
-            }
-          >
-            Sign In
-          </Typography>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            gtmTrack(GTMEvent.SigninCloud, {
+              position: "header",
+            });
+          }}
+          component={Link}
+          to={`https://tidbcloud.com/signin`}
+          target="_blank"
+          referrerPolicy="no-referrer-when-downgrade"
+          sx={{
+            textDecoration: "none",
+          }}
+        >
+          <Typography>Sign In</Typography>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Typography
-            component="a"
-            target="_blank"
-            href="https://tidbcloud.com/free-trial"
-            // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-            referrerPolicy="no-referrer-when-downgrade"
-            sx={{
-              textDecoration: "none",
-            }}
-            onClick={() =>
-              gtmTrack(GTMEvent.SignupCloud, {
-                product_type: "general cloud",
-                button_name: "Try Free",
-                position: "header",
-              })
-            }
-          >
-            Try Free
-          </Typography>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            gtmTrack(GTMEvent.SignupCloud, {
+              product_type: "general cloud",
+              button_name: "Try Free",
+              position: "header",
+            });
+          }}
+          component={Link}
+          to={`https://tidbcloud.com/free-trial`}
+          target="_blank"
+          referrerPolicy="no-referrer-when-downgrade"
+          sx={{
+            textDecoration: "none",
+          }}
+        >
+          <Typography>Try Free</Typography>
         </MenuItem>
       </Menu>
     </>
