@@ -407,7 +407,7 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
       })}
     >
       <Box
-        id="card-content"
+        className="card-content"
         sx={(theme) => ({
           "& > h3": {
             fontSize: "16px",
