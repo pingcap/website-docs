@@ -27,7 +27,7 @@
       list-style: initial;
     }
 
-    li {
+    li:not(:first-of-type) {
       margin-top: 8px;
     }
 
