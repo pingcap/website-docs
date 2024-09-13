@@ -111,7 +111,7 @@ export function DocHomeContainer(
           {!archive && ctaLink && (
             <Box
               sx={{
-                "& a.button": {
+                "& > a.button": {
                   background: "var(--primary-color)",
                   textDecoration: "none",
                   color: "white",
@@ -125,7 +125,6 @@ export function DocHomeContainer(
                 variant="contained"
                 href={ctaLink}
                 target={ctaLink.startsWith("http") ? "_blank" : undefined}
-                referrerPolicy="no-referrer-when-downgrade"
                 size="large"
                 color="primary"
                 className="button"
