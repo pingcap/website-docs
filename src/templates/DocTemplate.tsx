@@ -24,6 +24,7 @@ import { getStable, generateUrl } from "shared/utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
+import { DOC_HOME_URL } from "shared/resources";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -65,7 +66,6 @@ export default function DocTemplate({
   data,
 }: DocTemplateProps) {
   const {
-    site,
     mdx: { frontmatter, tableOfContents, body },
     navigation: originNav,
   } = data;
@@ -130,7 +130,7 @@ export default function DocTemplate({
             ? [
                 {
                   rel: "canonical",
-                  href: `${site.siteMetadata.siteUrl}${generateUrl(name, {
+                  href: `${DOC_HOME_URL}${generateUrl(name, {
                     ...pathConfig,
                     version: "stable",
                   })}`,

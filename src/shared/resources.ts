@@ -13,6 +13,8 @@ import { StackOverflowIcon, AskTugIcon } from "components/Icons";
 import { convertVersionName } from "./utils";
 import CONFIG from "../../docs/docs.json";
 
+export const DOC_HOME_URL = "https://docs.pingcap.com";
+
 export const DEFAULT_PINGCAP_URL = `https://www.pingcap.com`;
 export const EN_PINGCAP_URL = `https://www.pingcap.com/`;
 export const ZH_PINGCAP_URL = `https://cn.pingcap.com/`;
