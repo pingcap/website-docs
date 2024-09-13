@@ -31,13 +31,15 @@ const useTiDBAIStatus = () => {
       setInitializingTiDBAI(false);
     }
 
-    window.addEventListener("tidbaiinitialized", () => {
+    const onTiDBAIInitialized = () => {
       setInitializingTiDBAI(false);
-    });
-    window.addEventListener("tidbaierror", () => {
+    };
+    const onTiDBAIError = () => {
       setInitializingTiDBAI(false);
       setShowTiDBAIButton(false);
-    });
+    };
+    window.addEventListener("tidbaiinitialized", onTiDBAIInitialized);
+    window.addEventListener("tidbaierror", onTiDBAIError);
 
     const timer = setTimeout(() => {
       if (!window.tidbai) {
@@ -45,7 +47,11 @@ const useTiDBAIStatus = () => {
         setShowTiDBAIButton(false);
       }
     }, 10000);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("tidbaiinitialized", onTiDBAIInitialized);
+      window.removeEventListener("tidbaierror", onTiDBAIError);
+    };
   }, []);
 
   return { showTiDBAIButton, initializingTiDBAI };
