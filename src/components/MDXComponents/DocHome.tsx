@@ -225,6 +225,9 @@ export function DocHomeContainer(
                       component="li"
                       className="toc-li"
                       sx={{
+                        "&.toc-li": {
+                          marginTop: "0",
+                        },
                         "& a#toc-link": {
                           color: theme.palette.website.m5,
                           "&:hover": {

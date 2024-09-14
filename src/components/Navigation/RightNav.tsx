@@ -91,7 +91,7 @@ export default function RightNav(props: RightNavProps) {
 
         {language !== "ja" && (
           <Stack spacing={1}>
-            {pageType === "tidb" && (
+            {pageType !== "tidbcloud" && (
               <ActionItem
                 icon={SimCardDownloadIcon}
                 url={`https://download.pingcap.org/${pdfUrlMemo}`}
