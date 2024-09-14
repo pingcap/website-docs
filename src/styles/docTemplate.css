@@ -27,10 +27,6 @@
       list-style: initial;
     }
 
-    li:not(:first-of-type, .toc-li) {
-      margin-top: 8px;
-    }
-
     table {
       th,
       td {
@@ -139,5 +135,9 @@
   h5,
   h6 {
     font-weight: 500;
+  }
+
+  li + li {
+    margin-top: 8px;
   }
 }
