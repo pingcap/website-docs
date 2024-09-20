@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import { useLocation } from "@reach/router";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -26,8 +26,6 @@ import {
 import { sliceVersionMark } from "shared/utils/anchor";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { getPageType } from "shared/utils";
-
-import HTAPAdImg from "media/imgs/htap-ad.svg";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -79,16 +77,6 @@ export default function RightNav(props: RightNavProps) {
           gap: "36px",
         }}
       >
-        {["en", "ja"].includes(language) && (
-          <Link
-            to="https://www.pingcap.com/htap-summit/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <HTAPAdImg />
-          </Link>
-        )}
-
         {language !== "ja" && (
           <Stack spacing={1}>
             {pageType !== "tidbcloud" && (
