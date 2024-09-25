@@ -69,6 +69,8 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
       async
       src="https://tidb.ai/widget.js"
       data-controlled="true"
+      data-chat-engine="pingcap-doc"
+      data-measurement-id="G-GRPCMS37RV"
     />,
   ]);
 };
