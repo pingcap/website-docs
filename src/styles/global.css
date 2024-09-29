@@ -4,7 +4,7 @@
 html {
   font-family: moderat, -apple-system, "Poppins", "Helvetica Neue", "Noto Sans",
     "Fira Code", "IBM Plex Sans", "sans-serif";
-  font-variant-ligatures: none;
+  font-variant-ligatures: no-common-ligatures;
 }
 
 body {
