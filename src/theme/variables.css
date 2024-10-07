@@ -2,11 +2,6 @@
   /* --shape-- */
   --shape-border-radius: 0px;
 
-  /* --color-- */
-  --primary-color: #dc150b;
-  --primary-color-dark: #d0140b;
-  --secondary-color: var(--peacock-800);
-
   /* Carbon */
   --carbon-50: #ffffff;
   --carbon-100: #fbfdfd;
@@ -30,4 +25,10 @@
   --peacock-700: #2d9cd2;
   --peacock-800: #1480b8;
   --peacock-900: #0b628d;
+
+  /* --color-- */
+  --primary-color: #dc150b;
+  --primary-color-dark: #d0140b;
+  --secondary-color: var(--peacock-800);
+  --tertiary-color: var(--peacock-700);
 }
