@@ -4,7 +4,10 @@ const docs = require("./docs/docs.json");
 
 module.exports = {
   siteMetadata: {
-    title: "TiDB Docs",
+    title:
+      process.env.WEBSITE_BUILD_TYPE === "archive"
+        ? "TiDB Archived Docs"
+        : "TiDB Docs",
     description:
       "Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.",
     author: "@PingCAP",

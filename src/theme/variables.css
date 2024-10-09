@@ -1,33 +1,33 @@
 :root {
   /* --shape-- */
-  --shape-border-radius: 0px;
+  --tiui-shape-border-radius: 0px;
 
   /* --color-- */
-  --primary-color: #dc150b;
-  --primary-color-dark: #d0140b;
-  --secondary-color: var(--peacock-800);
+  --tiui-primary-color: #dc150b;
+  --tiui-primary-color-dark: #d0140b;
+  --tiui-secondary-color: var(--tiui-peacock-800);
 
   /* Carbon */
-  --carbon-50: #ffffff;
-  --carbon-100: #fbfdfd;
-  --carbon-200: #f5f8fa;
-  --carbon-300: #edf0f1;
-  --carbon-400: #e3e8ea;
-  --carbon-500: #c8ced0;
-  --carbon-600: #9faaad;
-  --carbon-700: #6c7679;
-  --carbon-800: #3d4143;
-  --carbon-900: #262a2c;
+  --tiui-carbon-50: #ffffff;
+  --tiui-carbon-100: #fbfdfd;
+  --tiui-carbon-200: #f5f8fa;
+  --tiui-carbon-300: #edf0f1;
+  --tiui-carbon-400: #e3e8ea;
+  --tiui-carbon-500: #c8ced0;
+  --tiui-carbon-600: #9faaad;
+  --tiui-carbon-700: #6c7679;
+  --tiui-carbon-800: #3d4143;
+  --tiui-carbon-900: #262a2c;
 
   /* Peacock */
-  --peacock-50: #fbfdfe;
-  --peacock-100: #f4fafd;
-  --peacock-200: #eaf5fa;
-  --peacock-300: #e0f0f8;
-  --peacock-400: #c0e1f1;
-  --peacock-500: #96cde9;
-  --peacock-600: #6cbae0;
-  --peacock-700: #2d9cd2;
-  --peacock-800: #1480b8;
-  --peacock-900: #0b628d;
+  --tiui-peacock-50: #fbfdfe;
+  --tiui-peacock-100: #f4fafd;
+  --tiui-peacock-200: #eaf5fa;
+  --tiui-peacock-300: #e0f0f8;
+  --tiui-peacock-400: #c0e1f1;
+  --tiui-peacock-500: #96cde9;
+  --tiui-peacock-600: #6cbae0;
+  --tiui-peacock-700: #2d9cd2;
+  --tiui-peacock-800: #1480b8;
+  --tiui-peacock-900: #0b628d;
 }
