@@ -153,6 +153,10 @@ function getItems(node, current) {
 }
 
 function filterItems(data, filters) {
+  if (!data || !data.items) {
+    return;
+  }
+
   data.items.forEach((it) => {
     if (!!it.items) {
       filterItems(it, filters);
