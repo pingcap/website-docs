@@ -74,11 +74,11 @@ export default function DocTemplate({
   const navigation = originNav ? originNav.navigation : [];
 
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
-    if (toc.items?.length === 1) {
+    if (toc?.items?.length === 1) {
       return toc.items![0].items;
     }
-    return toc.items || [];
-  }, [toc.items]);
+    return toc?.items || [];
+  }, [toc?.items]);
 
   const stableBranch = getStable(pathConfig.repo);
 
