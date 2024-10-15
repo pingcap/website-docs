@@ -46,6 +46,7 @@ interface DocTemplateProps {
       frontmatter: FrontMatter;
       body: string;
       tableOfContents: TableOfContent;
+      toc: any;
     };
     navigation?: {
       navigation: RepoNav;
@@ -66,18 +67,18 @@ export default function DocTemplate({
   data,
 }: DocTemplateProps) {
   const {
-    mdx: { frontmatter, tableOfContents, body },
+    mdx: { frontmatter, body, toc },
     navigation: originNav,
   } = data;
 
   const navigation = originNav ? originNav.navigation : [];
 
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
-    if (tableOfContents.items?.length === 1) {
-      return tableOfContents.items![0].items;
+    if (toc.items?.length === 1) {
+      return toc.items![0].items;
     }
-    return tableOfContents.items || [];
-  }, [tableOfContents.items]);
+    return toc.items || [];
+  }, [toc.items]);
 
   const stableBranch = getStable(pathConfig.repo);
 
@@ -300,6 +301,7 @@ export const query = graphql`
       }
       body
       tableOfContents
+      toc
     }
 
     navigation: mdx(slug: { eq: $navUrl }) {
