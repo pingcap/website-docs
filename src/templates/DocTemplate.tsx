@@ -46,7 +46,7 @@ interface DocTemplateProps {
       frontmatter: FrontMatter;
       body: string;
       tableOfContents: TableOfContent;
-      toc: any;
+      toc: TableOfContent;
     };
     navigation?: {
       navigation: RepoNav;
