@@ -6,3 +6,6 @@ export const getPageType = (filePath) => {
     return "tidbcloud";
   }
 };
+
+export const OPEN_IF_REGEX = /<IF platform="(.+?)">/;
+export const CLOSE_IF_REGEX = /<\/IF>/;

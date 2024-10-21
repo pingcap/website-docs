@@ -1,5 +1,5 @@
 import visit from "unist-util-visit";
-import { getPageType } from "./utils";
+import { CLOSE_IF_REGEX, getPageType, OPEN_IF_REGEX } from "./utils";
 const remove = require("unist-util-remove");
 
 module.exports = function () {
@@ -9,11 +9,8 @@ module.exports = function () {
     const filePath = file.path || (file.history && file.history[0]);
 
     visit(tree, (node, index, parent) => {
-      const openIfRegex = /<if platform="(.+?)">/;
-      const closeIfRegex = /<\/if>/;
-
-      const openMatch = openIfRegex.exec(node.value);
-      const closeMatch = closeIfRegex.exec(node.value);
+      const openMatch = OPEN_IF_REGEX.exec(node.value);
+      const closeMatch = CLOSE_IF_REGEX.exec(node.value);
 
       if (openMatch) {
         const platform = openMatch[1];

@@ -1,4 +1,4 @@
-import { getPageType } from "./utils";
+import { CLOSE_IF_REGEX, getPageType, OPEN_IF_REGEX } from "./utils";
 
 const visit = require(`unist-util-visit`);
 const genMDX = require("gatsby-plugin-mdx/utils/gen-mdx");
@@ -62,11 +62,8 @@ export const createConditionalToc = ({
           const shouldDeleteHeadings = [];
           const filePath = mdxNode.fileAbsolutePath;
           visit(mdast, (node) => {
-            const openIfRegex = /<if platform="(.+?)">/;
-            const closeIfRegex = /<\/if>/;
-
-            const openMatch = openIfRegex.exec(node.value);
-            const closeMatch = closeIfRegex.exec(node.value);
+            const openMatch = OPEN_IF_REGEX.exec(node.value);
+            const closeMatch = CLOSE_IF_REGEX.exec(node.value);
 
             if (openMatch) {
               const platform = openMatch[1];
