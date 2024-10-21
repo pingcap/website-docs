@@ -1,5 +1,7 @@
 require("ts-node").register({ transpileOnly: true });
 
+const ifCondition = require("./gatsby/plugin/if-condition");
+
 const docs = require("./docs/docs.json");
 
 module.exports = {
@@ -99,7 +101,7 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         // https://github.com/gatsbyjs/gatsby/issues/21866#issuecomment-1063668178
         // Add katex support
-        remarkPlugins: [require("remark-math")],
+        remarkPlugins: [require("remark-math"), ifCondition],
         rehypePlugins: [[require("rehype-katex"), { strict: "ignore" }]],
         gatsbyRemarkPlugins: [
           {
