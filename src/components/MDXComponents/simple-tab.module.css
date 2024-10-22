@@ -20,8 +20,8 @@ ul.tabs {
     }
 
     &.active {
-      background-color: var(--tiui-carbon-800);
-      color: var(--tiui-carbon-100);
+      background-color: var(--tiui-palette-carbon-800);
+      color: var(--tiui-palette-carbon-100);
     }
     & + li {
       margin-top: 0;

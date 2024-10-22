@@ -2,32 +2,35 @@
   /* --shape-- */
   --tiui-shape-border-radius: 0px;
 
-  /* --color-- */
-  --tiui-primary-color: #dc150b;
-  --tiui-primary-color-dark: #d0140b;
-  --tiui-secondary-color: var(--tiui-peacock-800);
+  /* --palette-- */
+  --tiui-palette-primary: #dc150b;
+  --tiui-palette-primary-light: #dc150b;
+  --tiui-palette-primary-dark: #d0140b;
+  --tiui-palette-secondary: var(--tiui-palette-peacock-800);
+  --tiui-palette-secondary-light: var(--tiui-palette-peacock-700);
+  --tiui-palette-secondary-dark: var(--tiui-palette-peacock-900);
 
   /* Carbon */
-  --tiui-carbon-50: #ffffff;
-  --tiui-carbon-100: #fbfdfd;
-  --tiui-carbon-200: #f5f8fa;
-  --tiui-carbon-300: #edf0f1;
-  --tiui-carbon-400: #e3e8ea;
-  --tiui-carbon-500: #c8ced0;
-  --tiui-carbon-600: #9faaad;
-  --tiui-carbon-700: #6c7679;
-  --tiui-carbon-800: #3d4143;
-  --tiui-carbon-900: #262a2c;
+  --tiui-palette-carbon-50: #ffffff;
+  --tiui-palette-carbon-100: #fbfdfd;
+  --tiui-palette-carbon-200: #f5f8fa;
+  --tiui-palette-carbon-300: #edf0f1;
+  --tiui-palette-carbon-400: #e3e8ea;
+  --tiui-palette-carbon-500: #c8ced0;
+  --tiui-palette-carbon-600: #9faaad;
+  --tiui-palette-carbon-700: #6c7679;
+  --tiui-palette-carbon-800: #3d4143;
+  --tiui-palette-carbon-900: #262a2c;
 
   /* Peacock */
-  --tiui-peacock-50: #fbfdfe;
-  --tiui-peacock-100: #f4fafd;
-  --tiui-peacock-200: #eaf5fa;
-  --tiui-peacock-300: #e0f0f8;
-  --tiui-peacock-400: #c0e1f1;
-  --tiui-peacock-500: #96cde9;
-  --tiui-peacock-600: #6cbae0;
-  --tiui-peacock-700: #2d9cd2;
-  --tiui-peacock-800: #1480b8;
-  --tiui-peacock-900: #0b628d;
+  --tiui-palette-peacock-50: #fbfdfe;
+  --tiui-palette-peacock-100: #f4fafd;
+  --tiui-palette-peacock-200: #eaf5fa;
+  --tiui-palette-peacock-300: #e0f0f8;
+  --tiui-palette-peacock-400: #c0e1f1;
+  --tiui-palette-peacock-500: #96cde9;
+  --tiui-palette-peacock-600: #6cbae0;
+  --tiui-palette-peacock-700: #2d9cd2;
+  --tiui-palette-peacock-800: #1480b8;
+  --tiui-palette-peacock-900: #0b628d;
 }

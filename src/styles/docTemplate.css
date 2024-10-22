@@ -45,14 +45,14 @@
     }
 
     code {
-      background-color: var(--tiui-carbon-200);
+      background-color: var(--tiui-palette-carbon-200);
       border-radius: var(--tiui-shape-border-radius);
     }
 
     pre {
       position: relative;
       overflow-x: hidden;
-      background-color: var(--tiui-carbon-200);
+      background-color: var(--tiui-palette-carbon-200);
       border-radius: var(--tiui-shape-border-radius);
 
       code {
@@ -106,7 +106,7 @@
   .markdown-body {
     font-family: moderat, -apple-system, "Poppins", "Helvetica Neue",
       "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif";
-    color: var(--tiui-carbon-900);
+    color: var(--tiui-palette-carbon-900);
     font-size: 16px;
     line-height: 1.5;
 
