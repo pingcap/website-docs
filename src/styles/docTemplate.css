@@ -45,15 +45,15 @@
     }
 
     code {
-      background-color: var(--carbon-200);
-      border-radius: var(--shape-border-radius);
+      background-color: var(--tiui-palette-carbon-200);
+      border-radius: var(--tiui-shape-border-radius);
     }
 
     pre {
       position: relative;
       overflow-x: hidden;
-      background-color: var(--carbon-200);
-      border-radius: var(--shape-border-radius);
+      background-color: var(--tiui-palette-carbon-200);
+      border-radius: var(--tiui-shape-border-radius);
 
       code {
         .number {
@@ -106,12 +106,12 @@
   .markdown-body {
     font-family: moderat, -apple-system, "Poppins", "Helvetica Neue",
       "Noto Sans", "Fira Code", "IBM Plex Sans", "sans-serif";
-    color: var(--carbon-900);
+    color: var(--tiui-palette-carbon-900);
     font-size: 16px;
     line-height: 1.5;
 
     a:not(.button) {
-      color: var(--secondary-color);
+      color: var(--tiui-palette-secondary);
     }
 
     pre {

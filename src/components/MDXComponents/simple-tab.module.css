@@ -9,7 +9,8 @@ ul.tabs {
     display: block;
     padding: 0.5em 1em;
     background-color: white;
-    border-radius: var(--shape-border-radius) var(--shape-border-radius) 0 0;
+    border-radius: var(--tiui-shape-border-radius)
+      var(--tiui-shape-border-radius) 0 0;
     transition: background-color 0.2s ease-in-out;
     cursor: pointer;
     margin-right: 8px;
@@ -19,8 +20,8 @@ ul.tabs {
     }
 
     &.active {
-      background-color: var(--carbon-800);
-      color: var(--carbon-100);
+      background-color: var(--tiui-palette-carbon-800);
+      color: var(--tiui-palette-carbon-100);
     }
     & + li {
       margin-top: 0;

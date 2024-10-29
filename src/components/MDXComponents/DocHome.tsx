@@ -112,11 +112,11 @@ export function DocHomeContainer(
             <Box
               sx={{
                 "& > a.button": {
-                  background: "var(--primary-color)",
+                  background: "var(--tiui-palette-primary)",
                   textDecoration: "none",
                   color: "white",
                   "&:hover": {
-                    backgroundColor: "var(--primary-color-dark)",
+                    backgroundColor: "var(--tiui-palette-primary-dark)",
                   },
                 },
               }}
@@ -403,7 +403,7 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
         "&:hover": {
           background:
             "radial-gradient(46.96% 65.78% at 100% 96.96%, #F5F8FA 0%, #FBFDFD 56.35%, #FFFFFF 100%)",
-          borderColor: "var(--peacock-800)",
+          borderColor: "var(--tiui-palette-peacock-800)",
           boxShadow: "0px 1px 0px 0px rgba(200, 206, 208, 0.1)",
         },
 
