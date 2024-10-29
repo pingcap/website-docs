@@ -138,6 +138,7 @@ export default function DocTemplate({
               ]
             : []),
         ]}
+        noindex={buildType === "archive"}
         archived={buildType === "archive"}
       />
       <Box
