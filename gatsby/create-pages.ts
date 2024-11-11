@@ -251,7 +251,7 @@ export const createDocHome = async ({
     const path = generateDocHomeUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
 
-    const locale = [Locale.en, Locale.zh];
+    const locale = [Locale.en, Locale.zh, Locale.ja];
 
     createPage({
       path,

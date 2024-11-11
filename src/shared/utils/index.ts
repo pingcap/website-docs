@@ -36,7 +36,7 @@ import {
 export function generateDocsHomeUrl(lang?: string) {
   switch (lang) {
     case "ja":
-      return "/ja/tidbcloud";
+      return "/ja";
     case "zh":
       return "/zh";
     case "en":
