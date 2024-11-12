@@ -36,7 +36,9 @@ export const createDocs = async ({
       allMdx(
         filter: {
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
-          slug: { nin: ["en/tidb/_docHome", "zh/tidb/_docHome"] }
+          slug: {
+            nin: ["en/tidb/_docHome", "zh/tidb/_docHome", "ja/tidb/_docHome"]
+          }
           frontmatter: { draft: { ne: true } }
         }
       ) {
