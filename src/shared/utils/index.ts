@@ -38,7 +38,7 @@ export function generateDocsHomeUrl(lang?: string) {
     case "ja":
       return "/ja/tidbcloud";
     case "zh":
-      return "/zh";
+      return "/zh/";
     case "en":
     default:
       return "/";
