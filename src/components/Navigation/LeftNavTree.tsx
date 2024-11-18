@@ -15,6 +15,7 @@ import {
 } from "shared/interface";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "shared/utils";
+import { Tooltip } from "@mui/material";
 
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;
@@ -154,6 +155,7 @@ export default function ControlledTreeView(props: {
       const LabelEle = () => {
         return (
           <Stack
+            key={`${deepth}_${item.id}`}
             direction="row"
             sx={{
               minHeight: "1.75rem",
@@ -228,32 +230,42 @@ export default function ControlledTreeView(props: {
 
 const generateItemLabel = (content: DocLeftNavItemContent) => {
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", overflow: "hidden", textOverflow: "ellipsis" }}>
       {content.map((content, index) =>
         typeof content === "string" ? (
-          <Typography
+          <Tooltip
             key={`${content}-${index}`}
-            component="div"
-            sx={{
-              color: "inherit",
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-            }}
+            title={content}
+            enterDelay={1000}
           >
-            {content}
-          </Typography>
+            <Typography
+              component="div"
+              sx={{
+                color: "inherit",
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {content}
+            </Typography>
+          </Tooltip>
         ) : (
-          <Typography
-            key={`${content.value}-${index}`}
-            component="code"
-            sx={{
-              color: "inherit",
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-            }}
+          <Tooltip
+            key={`${content}-${index}`}
+            title={content.value}
+            enterDelay={1000}
           >
-            {content.value}
-          </Typography>
+            <Typography
+              component="code"
+              sx={{
+                color: "inherit",
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {content.value}
+            </Typography>
+          </Tooltip>
         )
       )}
     </Box>
