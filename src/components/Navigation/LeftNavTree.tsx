@@ -155,6 +155,7 @@ export default function ControlledTreeView(props: {
       const LabelEle = () => {
         return (
           <Stack
+            key={`${deepth}_${item.id}`}
             direction="row"
             sx={{
               minHeight: "1.75rem",
@@ -232,9 +233,12 @@ const generateItemLabel = (content: DocLeftNavItemContent) => {
     <Box sx={{ width: "100%", overflow: "hidden", textOverflow: "ellipsis" }}>
       {content.map((content, index) =>
         typeof content === "string" ? (
-          <Tooltip title={content} enterDelay={1000}>
+          <Tooltip
+            key={`${content}-${index}`}
+            title={content}
+            enterDelay={1000}
+          >
             <Typography
-              key={`${content}-${index}`}
               component="div"
               sx={{
                 color: "inherit",
@@ -246,9 +250,12 @@ const generateItemLabel = (content: DocLeftNavItemContent) => {
             </Typography>
           </Tooltip>
         ) : (
-          <Tooltip title={content.value} enterDelay={1000}>
+          <Tooltip
+            key={`${content}-${index}`}
+            title={content.value}
+            enterDelay={1000}
+          >
             <Typography
-              key={`${content.value}-${index}`}
               component="code"
               sx={{
                 color: "inherit",
