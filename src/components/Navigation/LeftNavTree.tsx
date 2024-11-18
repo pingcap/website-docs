@@ -15,6 +15,7 @@ import {
 } from "shared/interface";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "shared/utils";
+import { Tooltip } from "@mui/material";
 
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;
@@ -228,32 +229,36 @@ export default function ControlledTreeView(props: {
 
 const generateItemLabel = (content: DocLeftNavItemContent) => {
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", overflow: "hidden", textOverflow: "ellipsis" }}>
       {content.map((content, index) =>
         typeof content === "string" ? (
-          <Typography
-            key={`${content}-${index}`}
-            component="div"
-            sx={{
-              color: "inherit",
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-            }}
-          >
-            {content}
-          </Typography>
+          <Tooltip title={content} enterDelay={1000}>
+            <Typography
+              key={`${content}-${index}`}
+              component="div"
+              sx={{
+                color: "inherit",
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {content}
+            </Typography>
+          </Tooltip>
         ) : (
-          <Typography
-            key={`${content.value}-${index}`}
-            component="code"
-            sx={{
-              color: "inherit",
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-            }}
-          >
-            {content.value}
-          </Typography>
+          <Tooltip title={content.value} enterDelay={1000}>
+            <Typography
+              key={`${content.value}-${index}`}
+              component="code"
+              sx={{
+                color: "inherit",
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+              }}
+            >
+              {content.value}
+            </Typography>
+          </Tooltip>
         )
       )}
     </Box>
