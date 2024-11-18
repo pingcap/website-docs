@@ -36,9 +36,9 @@ import {
 export function generateDocsHomeUrl(lang?: string) {
   switch (lang) {
     case "ja":
-      return "/ja";
+      return "/ja/";
     case "zh":
-      return "/zh";
+      return "/zh/";
     case "en":
     default:
       return "/";
