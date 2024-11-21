@@ -228,11 +228,13 @@ export default function Search(props: {
                 handleSearchSubmitCallback();
               }
               if (e.key === "ArrowUp") {
+                e.preventDefault();
                 setPopperItemIndex((i) =>
                   i - 1 < 0 ? items.length - 1 : i - 1
                 );
               }
               if (e.key === "ArrowDown") {
+                e.preventDefault();
                 setPopperItemIndex((i) => (i + 1) % items.length);
               }
             }}
