@@ -97,24 +97,22 @@ export default function Search(props: {
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("onsite")}
                 sx={{
-                  display: "flex",
-                  alignItems: "baseline",
                   textWrap: "auto",
-                  fontSize: "14px",
                   padding: "6px 10px",
                 }}
               >
-                <Typography
-                  sx={{
-                    textWrap: "nowrap",
-                    fontSize: "14px",
-                    paddingRight: "6px",
-                    color: "#807c7c",
-                  }}
-                >
-                  {t("navbar.onsiteSearch")}:
-                </Typography>
-                {query}
+                <span>
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      paddingRight: "6px",
+                      color: "#807c7c",
+                    }}
+                  >
+                    {t("navbar.onsiteSearch")}:
+                  </span>
+                  <span>{query}</span>
+                </span>
               </MenuItem>
             ),
           },
@@ -126,23 +124,21 @@ export default function Search(props: {
                 onClick={() => handleSearchSubmitCallback("google")}
                 sx={{
                   textWrap: "auto",
-                  fontSize: "14px",
                   padding: "6px 10px",
-                  display: "flex",
-                  alignItems: "baseline",
                 }}
               >
-                <Typography
-                  sx={{
-                    textWrap: "nowrap",
-                    fontSize: "14px",
-                    paddingRight: "6px",
-                    color: "#807c7c",
-                  }}
-                >
-                  Google:
-                </Typography>
-                {query}
+                <span>
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      paddingRight: "6px",
+                      color: "#807c7c",
+                    }}
+                  >
+                    Google:
+                  </span>
+                  <span>{query}</span>
+                </span>
               </MenuItem>
             ),
           },
@@ -154,23 +150,21 @@ export default function Search(props: {
                 onClick={() => handleSearchSubmitCallback("bing")}
                 sx={{
                   textWrap: "auto",
-                  fontSize: "14px",
                   padding: "6px 10px",
-                  display: "flex",
-                  alignItems: "baseline",
                 }}
               >
-                <Typography
-                  sx={{
-                    textWrap: "nowrap",
-                    fontSize: "14px",
-                    paddingRight: "6px",
-                    color: "#807c7c",
-                  }}
-                >
-                  Bing 搜索:
-                </Typography>
-                {query}
+                <span>
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      paddingRight: "6px",
+                      color: "#807c7c",
+                    }}
+                  >
+                    Bing 搜索:
+                  </span>
+                  <span>{query}</span>
+                </span>
               </MenuItem>
             ),
           },
