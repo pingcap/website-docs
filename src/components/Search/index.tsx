@@ -2,14 +2,13 @@ import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { useLocation } from "@reach/router";
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 
 import SearchIcon from "@mui/icons-material/Search";
-import { Card, Menu, MenuItem, Popper, PopperProps } from "@mui/material";
+import { Card, MenuItem, Popper, PopperProps, Typography } from "@mui/material";
 import { Locale } from "shared/interface";
 
 const StyledTextField = styled((props: TextFieldProps) => (
@@ -30,6 +29,8 @@ const StyledTextField = styled((props: TextFieldProps) => (
   },
 }));
 
+const SEARCH_WIDTH = 251;
+
 export default function Search(props: {
   placeholder?: string;
   disableResponsive?: boolean;
@@ -37,13 +38,13 @@ export default function Search(props: {
 }) {
   const { placeholder, disableResponsive, docInfo } = props;
 
-  const anchorEl = React.useRef(null);
+  const anchorEl = React.useRef<HTMLDivElement>(null);
+  const inputEl = React.useRef<HTMLInputElement>(null);
   const [queryStr, setQueryStr] = React.useState("");
   const [isFocus, setIsFocus] = React.useState(false);
   const [popperItemIndex, setPopperItemIndex] = React.useState(0);
 
   const { t, navigate, language } = useI18next();
-  const theme = useTheme();
   const location = useLocation();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +54,7 @@ export default function Search(props: {
   const handleSearchSubmitCallback = (forceKey?: string) => {
     const key = forceKey || items[popperItemIndex].key;
     const q = encodeURIComponent(queryStr);
+    inputEl.current?.blur();
     if (key === "onsite") {
       navigate(
         `/search?type=${docInfo.type}&version=${docInfo.version}&q=${q}`,
@@ -71,16 +73,18 @@ export default function Search(props: {
         `https://www.google.com/search?q=site%3Adocs.pingcap.com+${q}`,
         "_blank"
       );
+      return;
     }
     if (key === "bing") {
       window.open(
         `https://cn.bing.com/search?q=site%3Adocs.pingcap.com+${q}`,
         "_blank"
       );
+      return;
     }
   };
 
-  const items: SearchPopperItem[] = React.useMemo(
+  const items: SearchPopperItemProps[] = React.useMemo(
     () =>
       (
         [
@@ -90,9 +94,12 @@ export default function Search(props: {
               <MenuItem
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("onsite")}
-                sx={{ textWrap: "auto" }}
+                sx={{ textWrap: "auto", fontSize: "14px", padding: "6px 10px" }}
               >
-                {t("navbar.onsiteSearch")}: {query}
+                <Typography color="#807c7c" fontSize={14} paddingRight="6px">
+                  {t("navbar.onsiteSearch")}:
+                </Typography>
+                {query}
               </MenuItem>
             ),
           },
@@ -102,9 +109,12 @@ export default function Search(props: {
               <MenuItem
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("google")}
-                sx={{ textWrap: "auto" }}
+                sx={{ textWrap: "auto", fontSize: "14px", padding: "6px 10px" }}
               >
-                Google: {query}
+                <Typography color="#807c7c" fontSize={14} paddingRight="6px">
+                  Google:
+                </Typography>
+                {query}
               </MenuItem>
             ),
           },
@@ -114,13 +124,16 @@ export default function Search(props: {
               <MenuItem
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("bing")}
-                sx={{ textWrap: "auto" }}
+                sx={{ textWrap: "auto", fontSize: "14px", padding: "6px 10px" }}
               >
-                Bing 搜索: {query}
+                <Typography color="#807c7c" fontSize={14} paddingRight="6px">
+                  Bing 搜索:
+                </Typography>
+                {query}
               </MenuItem>
             ),
           },
-        ] as SearchPopperItem[]
+        ] as SearchPopperItemProps[]
       ).filter((item) =>
         language === Locale.zh ? item.key !== "google" : item.key !== "bing"
       ),
@@ -153,7 +166,7 @@ export default function Search(props: {
           noValidate
           autoComplete="off"
           sx={{
-            width: "251px",
+            width: SEARCH_WIDTH,
             display: {
               xs: disableResponsive ? "block" : "none",
               lg: "block",
@@ -161,6 +174,7 @@ export default function Search(props: {
           }}
         >
           <StyledTextField
+            ref={inputEl}
             size="small"
             id="doc-search"
             fullWidth
@@ -202,12 +216,13 @@ export default function Search(props: {
         anchorEl={anchorEl.current}
         popperItemIndex={popperItemIndex}
         items={items}
+        onHoverItem={setPopperItemIndex}
       />
     </>
   );
 }
 
-interface SearchPopperItem {
+interface SearchPopperItemProps {
   key: string;
   component: (props: {
     selected: boolean;
@@ -221,10 +236,12 @@ const SearchPopper = ({
   popperItemIndex,
   items,
   query,
+  onHoverItem,
 }: PopperProps & {
   query: string;
-  items: SearchPopperItem[];
+  items: SearchPopperItemProps[];
   popperItemIndex: number;
+  onHoverItem: (index: number) => void;
 }) => {
   const { t } = useI18next();
 
@@ -235,9 +252,21 @@ const SearchPopper = ({
       sx={{ zIndex: 99 }}
       modifiers={[{ name: "offset", options: { offset: [0, 8] } }]}
     >
-      <Card sx={{ width: 251, wordBreak: "break-all" }}>
+      <Card
+        sx={{
+          width: SEARCH_WIDTH,
+          wordBreak: "break-all",
+          padding: "8px",
+          boxSizing: "border-box",
+        }}
+      >
         {items.map((item, index) => (
-          <item.component query={query} selected={popperItemIndex === index} />
+          <Box onMouseEnter={() => onHoverItem(index)}>
+            <item.component
+              query={query}
+              selected={popperItemIndex === index}
+            />
+          </Box>
         ))}
       </Card>
     </Popper>
