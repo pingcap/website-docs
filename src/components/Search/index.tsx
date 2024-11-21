@@ -34,9 +34,11 @@ const SEARCH_WIDTH = 251;
 export default function Search(props: {
   placeholder?: string;
   disableResponsive?: boolean;
+  disableExternalSearch?: boolean;
   docInfo: { type: string; version: string };
 }) {
-  const { placeholder, disableResponsive, docInfo } = props;
+  const { placeholder, disableResponsive, docInfo, disableExternalSearch } =
+    props;
 
   const anchorEl = React.useRef<HTMLDivElement>(null);
   const inputEl = React.useRef<HTMLInputElement>(null);
@@ -252,7 +254,7 @@ export default function Search(props: {
         </Box>
       </Box>
       <SearchPopper
-        open={!!queryStr && isFocus}
+        open={!!queryStr && isFocus && !disableExternalSearch}
         query={queryStr}
         anchorEl={anchorEl.current}
         popperItemIndex={popperItemIndex}
