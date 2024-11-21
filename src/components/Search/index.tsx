@@ -53,9 +53,9 @@ export default function Search(props: {
     setQueryStr(event.target.value);
   };
 
-  const handleSearchSubmitCallback = (forceKey?: string) => {
+  const handleSearchSubmitCallback = (query: string, forceKey?: string) => {
     const key = forceKey || items[popperItemIndex].key;
-    const q = encodeURIComponent(queryStr);
+    const q = encodeURIComponent(query);
     inputEl.current?.blur();
     if (key === "onsite") {
       navigate(
@@ -64,7 +64,7 @@ export default function Search(props: {
           state: {
             type: docInfo.type,
             version: docInfo.version,
-            query: queryStr,
+            query: query,
           },
         }
       );
@@ -95,7 +95,7 @@ export default function Search(props: {
             component: ({ selected, query }) => (
               <MenuItem
                 selected={selected}
-                onClick={() => handleSearchSubmitCallback("onsite")}
+                onClick={() => handleSearchSubmitCallback(query, "onsite")}
                 sx={{
                   textWrap: "auto",
                   padding: "6px 10px",
@@ -121,7 +121,7 @@ export default function Search(props: {
             component: ({ selected, query }) => (
               <MenuItem
                 selected={selected}
-                onClick={() => handleSearchSubmitCallback("google")}
+                onClick={() => handleSearchSubmitCallback(query, "google")}
                 sx={{
                   textWrap: "auto",
                   padding: "6px 10px",
@@ -147,7 +147,7 @@ export default function Search(props: {
             component: ({ selected, query }) => (
               <MenuItem
                 selected={selected}
-                onClick={() => handleSearchSubmitCallback("bing")}
+                onClick={() => handleSearchSubmitCallback(query, "bing")}
                 sx={{
                   textWrap: "auto",
                   padding: "6px 10px",
@@ -191,7 +191,7 @@ export default function Search(props: {
                 lg: "none",
               },
             }}
-            onClick={handleSearchSubmitCallback}
+            onClick={() => handleSearchSubmitCallback(queryStr)}
           >
             <SearchIcon />
           </IconButton>
@@ -221,7 +221,7 @@ export default function Search(props: {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-                handleSearchSubmitCallback();
+                handleSearchSubmitCallback(queryStr);
               }
               if (e.key === "ArrowUp") {
                 e.preventDefault();
@@ -234,7 +234,7 @@ export default function Search(props: {
                 setPopperItemIndex((i) => (i + 1) % items.length);
               }
             }}
-            onSubmit={handleSearchSubmitCallback}
+            onSubmit={() => handleSearchSubmitCallback(queryStr)}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
