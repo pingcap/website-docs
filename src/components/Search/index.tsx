@@ -209,7 +209,7 @@ export default function Search(props: {
           }}
         >
           <StyledTextField
-            ref={inputEl}
+            inputRef={inputEl}
             size="small"
             id="doc-search"
             fullWidth
