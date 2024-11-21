@@ -94,9 +94,22 @@ export default function Search(props: {
               <MenuItem
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("onsite")}
-                sx={{ textWrap: "auto", fontSize: "14px", padding: "6px 10px" }}
+                sx={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  textWrap: "auto",
+                  fontSize: "14px",
+                  padding: "6px 10px",
+                }}
               >
-                <Typography color="#807c7c" fontSize={14} paddingRight="6px">
+                <Typography
+                  sx={{
+                    textWrap: "nowrap",
+                    fontSize: "14px",
+                    paddingRight: "6px",
+                    color: "#807c7c",
+                  }}
+                >
                   {t("navbar.onsiteSearch")}:
                 </Typography>
                 {query}
@@ -109,9 +122,22 @@ export default function Search(props: {
               <MenuItem
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("google")}
-                sx={{ textWrap: "auto", fontSize: "14px", padding: "6px 10px" }}
+                sx={{
+                  textWrap: "auto",
+                  fontSize: "14px",
+                  padding: "6px 10px",
+                  display: "flex",
+                  alignItems: "baseline",
+                }}
               >
-                <Typography color="#807c7c" fontSize={14} paddingRight="6px">
+                <Typography
+                  sx={{
+                    textWrap: "nowrap",
+                    fontSize: "14px",
+                    paddingRight: "6px",
+                    color: "#807c7c",
+                  }}
+                >
                   Google:
                 </Typography>
                 {query}
@@ -124,9 +150,22 @@ export default function Search(props: {
               <MenuItem
                 selected={selected}
                 onClick={() => handleSearchSubmitCallback("bing")}
-                sx={{ textWrap: "auto", fontSize: "14px", padding: "6px 10px" }}
+                sx={{
+                  textWrap: "auto",
+                  fontSize: "14px",
+                  padding: "6px 10px",
+                  display: "flex",
+                  alignItems: "baseline",
+                }}
               >
-                <Typography color="#807c7c" fontSize={14} paddingRight="6px">
+                <Typography
+                  sx={{
+                    textWrap: "nowrap",
+                    fontSize: "14px",
+                    paddingRight: "6px",
+                    color: "#807c7c",
+                  }}
+                >
                   Bing 搜索:
                 </Typography>
                 {query}
