@@ -253,9 +253,12 @@ const SearchPopper = ({
       ),
     []
   );
+  const currentIndex =
+    (popperItemIndex < 0 ? items.length - popperItemIndex : popperItemIndex) %
+    items.length;
 
   React.useEffect(() => {
-    onUpdateSearchType(items[popperItemIndex % items.length].type);
+    onUpdateSearchType(items[currentIndex].type);
   }, [popperItemIndex]);
 
   return (
@@ -275,10 +278,7 @@ const SearchPopper = ({
       >
         {items.map((item, index) => (
           <Box onMouseEnter={() => onUpdateIndex(index)} key={item.type}>
-            <item.component
-              query={query}
-              selected={popperItemIndex % items.length === index}
-            />
+            <item.component query={query} selected={currentIndex === index} />
           </Box>
         ))}
       </Card>
