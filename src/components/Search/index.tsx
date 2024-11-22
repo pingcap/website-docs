@@ -259,7 +259,7 @@ const SearchPopper = ({
 
   React.useEffect(() => {
     onUpdateSearchType(items[currentIndex].type);
-  }, [popperItemIndex]);
+  }, [currentIndex]);
 
   return (
     <Popper
