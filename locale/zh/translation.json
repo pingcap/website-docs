@@ -27,7 +27,9 @@
     "searchDocs": "搜索文档",
     "playground": "Playground",
     "learningCenter": "Learning center",
-    "onsiteSearch": "站内搜索"
+    "onsiteSearch": "站内搜索",
+    "googleSearch": "Google 搜索",
+    "bingSearch": "Bing 搜索"
   },
   "footer": {
     "privacy": "隐私政策",

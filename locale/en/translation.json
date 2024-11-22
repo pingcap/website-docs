@@ -30,7 +30,9 @@
     "searchDocs": "Search Docs",
     "playground": "Playground",
     "learningCenter": "Learning Center",
-    "onsiteSearch": "Onsite Search"
+    "onsiteSearch": "Onsite Search",
+    "googleSearch": "Google Search",
+    "bingSearch": "Bing Search"
   },
   "footer": {
     "privacy": "Privacy Policy",

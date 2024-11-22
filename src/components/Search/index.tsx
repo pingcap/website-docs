@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 
 import SearchIcon from "@mui/icons-material/Search";
-import { Card, MenuItem, Popper, PopperProps, Typography } from "@mui/material";
+import { Card, MenuItem, Popper, PopperProps } from "@mui/material";
 import { Locale } from "shared/interface";
 
 const StyledTextField = styled((props: TextFieldProps) => (
@@ -31,6 +31,12 @@ const StyledTextField = styled((props: TextFieldProps) => (
 
 const SEARCH_WIDTH = 251;
 
+enum SearchType {
+  Onsite = "onsite",
+  Google = "google",
+  Bing = "bing",
+}
+
 export default function Search(props: {
   placeholder?: string;
   disableResponsive?: boolean;
@@ -45,6 +51,7 @@ export default function Search(props: {
   const [queryStr, setQueryStr] = React.useState("");
   const [isFocus, setIsFocus] = React.useState(false);
   const [popperItemIndex, setPopperItemIndex] = React.useState(0);
+  const searchTypeRef = React.useRef<string>(SearchType.Onsite);
 
   const { t, navigate, language } = useI18next();
   const location = useLocation();
@@ -53,11 +60,13 @@ export default function Search(props: {
     setQueryStr(event.target.value);
   };
 
-  const handleSearchSubmitCallback = (query: string, forceKey?: string) => {
-    const key = forceKey || items[popperItemIndex].key;
+  const handleSearchSubmitCallback = (query: string, forceType?: string) => {
+    const searchType = forceType || searchTypeRef.current;
     const q = encodeURIComponent(query);
+
     inputEl.current?.blur();
-    if (key === "onsite") {
+
+    if (searchType === SearchType.Onsite) {
       navigate(
         `/search?type=${docInfo.type}&version=${docInfo.version}&q=${q}`,
         {
@@ -70,110 +79,27 @@ export default function Search(props: {
       );
       return;
     }
-    if (key === "google") {
+
+    const segmentPath = `${language === Locale.en ? "" : `${language}/`}${
+      docInfo.type
+    }`;
+
+    if (searchType === SearchType.Google) {
       window.open(
-        `https://www.google.com/search?q=site%3Adocs.pingcap.com+${q}`,
+        `https://www.google.com/search?q=site%3Adocs.pingcap.com/${segmentPath}+${q}`,
         "_blank"
       );
       return;
     }
-    if (key === "bing") {
+
+    if (searchType === SearchType.Bing) {
       window.open(
-        `https://cn.bing.com/search?q=site%3Adocs.pingcap.com+${q}`,
+        `https://cn.bing.com/search?q=site%3Adocs.pingcap.com/${segmentPath}+${q}`,
         "_blank"
       );
       return;
     }
   };
-
-  const items: SearchPopperItemProps[] = React.useMemo(
-    () =>
-      (
-        [
-          {
-            key: "onsite",
-            component: ({ selected, query }) => (
-              <MenuItem
-                selected={selected}
-                onClick={() => handleSearchSubmitCallback(query, "onsite")}
-                sx={{
-                  textWrap: "auto",
-                  padding: "6px 10px",
-                }}
-              >
-                <span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      paddingRight: "6px",
-                      color: "#807c7c",
-                    }}
-                  >
-                    {t("navbar.onsiteSearch")}:
-                  </span>
-                  <span>{query}</span>
-                </span>
-              </MenuItem>
-            ),
-          },
-          {
-            key: "google",
-            component: ({ selected, query }) => (
-              <MenuItem
-                selected={selected}
-                onClick={() => handleSearchSubmitCallback(query, "google")}
-                sx={{
-                  textWrap: "auto",
-                  padding: "6px 10px",
-                }}
-              >
-                <span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      paddingRight: "6px",
-                      color: "#807c7c",
-                    }}
-                  >
-                    Google:
-                  </span>
-                  <span>{query}</span>
-                </span>
-              </MenuItem>
-            ),
-          },
-          {
-            key: "bing",
-            component: ({ selected, query }) => (
-              <MenuItem
-                selected={selected}
-                onClick={() => handleSearchSubmitCallback(query, "bing")}
-                sx={{
-                  textWrap: "auto",
-                  padding: "6px 10px",
-                }}
-              >
-                <span>
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      paddingRight: "6px",
-                      color: "#807c7c",
-                    }}
-                  >
-                    Bing 搜索:
-                  </span>
-                  <span>{query}</span>
-                </span>
-              </MenuItem>
-            ),
-          },
-        ] as SearchPopperItemProps[]
-      ).filter((item) =>
-        language === Locale.zh ? item.key !== "google" : item.key !== "bing"
-      ),
-    []
-  );
 
   React.useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -225,13 +151,11 @@ export default function Search(props: {
               }
               if (e.key === "ArrowUp") {
                 e.preventDefault();
-                setPopperItemIndex((i) =>
-                  i - 1 < 0 ? items.length - 1 : i - 1
-                );
+                setPopperItemIndex((i) => --i);
               }
               if (e.key === "ArrowDown") {
                 e.preventDefault();
-                setPopperItemIndex((i) => (i + 1) % items.length);
+                setPopperItemIndex((i) => ++i);
               }
             }}
             onSubmit={() => handleSearchSubmitCallback(queryStr)}
@@ -252,15 +176,16 @@ export default function Search(props: {
         query={queryStr}
         anchorEl={anchorEl.current}
         popperItemIndex={popperItemIndex}
-        items={items}
-        onHoverItem={setPopperItemIndex}
+        onUpdateIndex={setPopperItemIndex}
+        onUpdateSearchType={(type) => (searchTypeRef.current = type)}
+        onClickItem={handleSearchSubmitCallback}
       />
     </>
   );
 }
 
 interface SearchPopperItemProps {
-  key: string;
+  type: SearchType;
   component: (props: {
     selected: boolean;
     query: string;
@@ -271,16 +196,67 @@ const SearchPopper = ({
   open,
   anchorEl,
   popperItemIndex,
-  items,
   query,
-  onHoverItem,
+  onUpdateIndex,
+  onUpdateSearchType,
+  onClickItem,
 }: PopperProps & {
   query: string;
-  items: SearchPopperItemProps[];
   popperItemIndex: number;
-  onHoverItem: (index: number) => void;
+  onUpdateIndex: (index: number) => void;
+  onUpdateSearchType: (type: SearchType) => void;
+  onClickItem: (query: string, type: SearchType) => void;
 }) => {
-  const { t } = useI18next();
+  const { t, language } = useI18next();
+  const items: SearchPopperItemProps[] = React.useMemo(
+    () =>
+      (
+        [
+          {
+            type: SearchType.Onsite,
+            component: ({ selected, query }) => (
+              <SearchPopperMenuItem
+                name={t("navbar.onsiteSearch")}
+                selected={selected}
+                query={query}
+                onClick={() => onClickItem(query, SearchType.Onsite)}
+              />
+            ),
+          },
+          {
+            type: SearchType.Google,
+            component: ({ selected, query }) => (
+              <SearchPopperMenuItem
+                name={t("navbar.googleSearch")}
+                selected={selected}
+                query={query}
+                onClick={() => onClickItem(query, SearchType.Google)}
+              />
+            ),
+          },
+          {
+            type: SearchType.Bing,
+            component: ({ selected, query }) => (
+              <SearchPopperMenuItem
+                name={t("navbar.bingSearch")}
+                selected={selected}
+                query={query}
+                onClick={() => onClickItem(query, SearchType.Bing)}
+              />
+            ),
+          },
+        ] as SearchPopperItemProps[]
+      ).filter((item) =>
+        language === Locale.zh
+          ? item.type !== SearchType.Google
+          : item.type !== SearchType.Bing
+      ),
+    []
+  );
+
+  React.useEffect(() => {
+    onUpdateSearchType(items[popperItemIndex % items.length].type);
+  }, [popperItemIndex]);
 
   return (
     <Popper
@@ -298,14 +274,50 @@ const SearchPopper = ({
         }}
       >
         {items.map((item, index) => (
-          <Box onMouseEnter={() => onHoverItem(index)}>
+          <Box onMouseEnter={() => onUpdateIndex(index)} key={item.type}>
             <item.component
               query={query}
-              selected={popperItemIndex === index}
+              selected={popperItemIndex % items.length === index}
             />
           </Box>
         ))}
       </Card>
     </Popper>
+  );
+};
+
+const SearchPopperMenuItem = ({
+  name,
+  selected,
+  query,
+  onClick,
+}: {
+  name: string;
+  selected: boolean;
+  query: string;
+  onClick: () => void;
+}) => {
+  return (
+    <MenuItem
+      selected={selected}
+      onClick={onClick}
+      sx={{
+        textWrap: "auto",
+        padding: "6px 10px",
+      }}
+    >
+      <span>
+        <span
+          style={{
+            fontSize: "14px",
+            paddingRight: "6px",
+            color: "#807c7c",
+          }}
+        >
+          {name}:
+        </span>
+        <span>{query}</span>
+      </span>
+    </MenuItem>
   );
 };
