@@ -29,7 +29,10 @@
     "contactUs": "Contact Us",
     "searchDocs": "Search Docs",
     "playground": "Playground",
-    "learningCenter": "Learning Center"
+    "learningCenter": "Learning Center",
+    "onsiteSearch": "Onsite Search",
+    "googleSearch": "Google Search",
+    "bingSearch": "Bing Search"
   },
   "footer": {
     "privacy": "Privacy Policy",
