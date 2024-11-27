@@ -7,7 +7,6 @@ export const GTMEvent = {
   DownloadPDF: "docs_download",
 
   // workable in GTM of docs.pingcap.com
-  AskTiDBAI: "ask_tidb_ai",
   UseOnsiteSearch: "use_onsite_search",
   UseExternalSearch: "use_external_search",
 } as const;
