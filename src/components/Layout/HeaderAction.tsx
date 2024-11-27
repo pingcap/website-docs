@@ -18,7 +18,6 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import Search from "components/Search";
 
 import { Locale, BuildType } from "shared/interface";
-import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 
@@ -95,9 +94,6 @@ export default function HeaderAction(props: {
                 }}
                 onClick={() => {
                   window.tidbai.open = true;
-                  gtmTrack(GTMEvent.AskTiDBAI, {
-                    position: "header",
-                  });
                 }}
               >
                 Ask TiDB.ai
@@ -250,11 +246,6 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
-          onClick={() =>
-            gtmTrack(GTMEvent.SigninCloud, {
-              position: "header",
-            })
-          }
         >
           Sign In
         </Button>
@@ -264,13 +255,6 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
-          onClick={() =>
-            gtmTrack(GTMEvent.SignupCloud, {
-              product_type: "general cloud",
-              button_name: "Start for free",
-              position: "header",
-            })
-          }
         >
           Start for Free
         </Button>
@@ -301,12 +285,6 @@ const TiDBCloudBtnGroup = () => {
         }}
       >
         <MenuItem
-          onClick={() => {
-            handleClose();
-            gtmTrack(GTMEvent.SigninCloud, {
-              position: "header",
-            });
-          }}
           component={Link}
           to={`https://tidbcloud.com/signin`}
           target="_blank"
@@ -320,11 +298,6 @@ const TiDBCloudBtnGroup = () => {
         <MenuItem
           onClick={() => {
             handleClose();
-            gtmTrack(GTMEvent.SignupCloud, {
-              product_type: "general cloud",
-              button_name: "Try Free",
-              position: "header",
-            });
           }}
           component={Link}
           to={`https://tidbcloud.com/free-trial`}
