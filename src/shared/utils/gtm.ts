@@ -5,7 +5,11 @@ export const GTMEvent = {
   SigninCloud: "signin_click",
   GotoPlayground: "go_to_playground",
   DownloadPDF: "docs_download",
+
+  // workable in GTM of docs.pingcap.com
   AskTiDBAI: "ask_tidb_ai",
+  UseOnsiteSearch: "use_onsite_search",
+  UseExternalSearch: "use_external_search",
 } as const;
 
 export function gtmTrack(
