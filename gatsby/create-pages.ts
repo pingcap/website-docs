@@ -36,7 +36,9 @@ export const createDocs = async ({
       allMdx(
         filter: {
           fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
-          slug: { nin: ["en/tidb/_docHome", "zh/tidb/_docHome"] }
+          slug: {
+            nin: ["en/tidb/_docHome", "zh/tidb/_docHome", "ja/tidb/_docHome"]
+          }
           frontmatter: { draft: { ne: true } }
         }
       ) {
@@ -251,7 +253,7 @@ export const createDocHome = async ({
     const path = generateDocHomeUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
 
-    const locale = [Locale.en, Locale.zh];
+    const locale = [Locale.en, Locale.zh, Locale.ja];
 
     createPage({
       path,
@@ -263,6 +265,7 @@ export const createDocHome = async ({
         // use for edit in github
         filePath,
         navUrl,
+        pageUrl: path,
         availIn: {
           locale,
           version: [],
