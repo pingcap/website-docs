@@ -216,6 +216,7 @@ export default function DocSearchTemplate({
             }}
           >
             <SearchInput
+              disableExternalSearch
               disableResponsive
               docInfo={{
                 type: docType,
