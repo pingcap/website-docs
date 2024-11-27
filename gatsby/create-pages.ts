@@ -265,6 +265,7 @@ export const createDocHome = async ({
         // use for edit in github
         filePath,
         navUrl,
+        pageUrl: path,
         availIn: {
           locale,
           version: [],

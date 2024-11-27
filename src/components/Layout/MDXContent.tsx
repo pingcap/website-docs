@@ -77,7 +77,7 @@ export default function MDXContent(props: {
         {buildType !== "archive" && (
           <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         )}
-        {language === "ja" && (
+        {language === "ja" && pageType !== "home" && (
           <MachineTranslationNotice
             name={name}
             pathConfig={pathConfig}
