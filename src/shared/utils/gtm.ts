@@ -3,8 +3,6 @@ export const GTMEvent = {
   ClickFooter: "docs_footer_click",
   SignupCloud: "go_to_cloud_signup",
   SigninCloud: "signin_click",
-  GotoPlayground: "go_to_playground",
-  DownloadPDF: "docs_download",
 
   // workable in GTM of docs.pingcap.com
   UseOnsiteSearch: "use_onsite_search",
