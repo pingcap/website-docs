@@ -84,6 +84,7 @@ export default function HeaderAction(props: {
             <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
             {language === "en" && showTiDBAIButton && (
               <ActionButton
+                id="header-ask-ai"
                 variant="outlined"
                 startIcon={<StarIcon />}
                 disabled={initializingTiDBAI}
@@ -100,7 +101,7 @@ export default function HeaderAction(props: {
                   });
                 }}
               >
-                Ask TiDB.ai
+                Ask AI
               </ActionButton>
             )}
           </Stack>
