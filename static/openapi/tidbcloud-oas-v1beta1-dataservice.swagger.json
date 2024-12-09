@@ -1,0 +1,2310 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TiDB Cloud Data Service OPENAPI",
+    "description": "# Overview\n\nThe TiDB Cloud Data Service API provides a [RESTful interface](https://en.wikipedia.org/wiki/Representational_state_transfer) for programmatically managing administrative objects within the [TiDB Cloud Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview). Through this API, you can manage the following resources automatically and efficiently:\n\n* **Data App**: a collection of endpoints that you can use to access data for a specific application.\n* **Data Source**: clusters linked to Data Apps for data manipulation and retrieval.\n* **Endpoint**: a web API that you can customize to execute SQL statements. You can specify parameters for the SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the SQL statement with the provided parameters and returns the results as part of the HTTP response.\n* **Deployment**: the process of deploying Data Apps.\n* **Data API Key**: used for secure endpoint access. This key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud organization API key is used to manage resources such as projects, clusters, Data Apps, and endpoints.\n* **OpenAPI Specification**: Data Service supports generating the OpenAPI Specification 3.0 for each Data App, which enables you to interact with your endpoints in a standardized format. You can use this specification to generate standardized OpenAPI documentation, client SDKs, and server stubs.\n\n# Get Started\n\nThis guide helps you make your first API call to TiDB Cloud Data Service API. You'll learn how to authenticate a request, build a request, and interpret the response. The [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps) endpoint is used in this guide as an example.\n\n## Prerequisites\n\nTo complete this guide, you need to perform the following tasks:\n\n- Create a [TiDB Cloud account](https://tidbcloud.com/free-trial)\n- Install [curl](https://curl.se/)\n\n## Step 1. Create an organization API key\n\nTo create an organization API key, log in to your TiDB Cloud console. Navigate to the **Organization Settings** page, and create an API key.\n\nAn organization API key contains a public key and a private key. Copy and save them in a secure location. You will need to use the API key later in this guide.\n\nFor more details about creating an organization API key, refer to [API Key Management](#section/Authentication/API-Key-Management).\n\n## Step 2. Make your first API call\n\n### Build an API call\n\nTiDB Cloud Data Service API call have the following components:\n\n- **A host.** The host for TiDB Cloud Data Service API is <https://dataservice.tidbapi.com>.\n- **An organization API Key**. The public key and the private key are required for authentication.\n- **A request.** When submitting data to a resource via `POST`, `PATCH`, or `PUT`, you must submit your payload in JSON.\n\nIn this guide, you call the [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps) endpoint. For a detailed description of the endpoint, see the [API reference](#tag/Data-App/operation/DataApp_ListDataApps).\n\n### Call an API endpoint\n\nTo get all Data Apps in your project, run the following command in your terminal. Replace `YOUR_PUBLIC_KEY`, `YOUR_PRIVATE_KEY`, and `YOUR_PROJECT_ID` with your actual values. To get the project ID, you can call the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/ListProjects) endpoint.\n\n```bash\ncurl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps?projectId=YOUR_PROJECT_ID'\n```\n\n## Step 3. Check the response\n\nAfter making the API call, if the status code in response is `200` and you see details about all the Data Apps in your project, your request is successful. Here is an example of a successful response.\n\n```log\n{\n  \"dataApps\": [\n    {\n      \"dataAppId\": \"{data_app_id}\",\n      \"name\": \"dataApps/{data_app_id}\",\n      \"version\": \"\",\n      \"projectId\": \"{project_id}\",\n      \"clusterIds\": [],\n      \"appType\": \"DATAAPP\",\n      \"displayName\": \"New Data App\",\n      \"description\": \"\",\n      \"createdAt\": \"2023-06-03T06:52:08Z\",\n      \"updatedAt\": \"2023-06-03T06:52:08Z\"\n    },\n    {\n      \"dataAppId\": \"{data_app_id}\",\n      \"name\": \"dataApps/{data_app_id}\",\n      \"version\": \"\",\n      \"projectId\": \"{project_id}\",\n      \"clusterIds\": [],\n      \"appType\": \"CHAT2QUERY\",\n      \"displayName\": \"New App\",\n      \"description\": \"\",\n      \"createdAt\": \"2023-06-03T06:52:08Z\",\n      \"updatedAt\": \"2023-06-03T06:52:08Z\"\n    }\n  ],\n  \"nextPageToken\": \"\"\n}\n```\n\nIf your API call is not successful, you will receive a status code other than `200` and the response looks similar to the following example. To troubleshoot the failed call, you can check the `message` in the response.\n\n```log\n{\n  \"code\": 403,\n  \"message\": \"Request error, projectId not exist\",\n  \"details\": []\n}\n```\n\n# Call a Deployed Data Service Endpoint\n\nIf you have deployed a Data Service endpoint, you can call it using the Data API key. To begin, follow these steps:\n\n1. Generate a Data API key by calling the [Create an API key for a Data App](#tag/Data-API-Key/operation/APIKey_CreateApiKey) endpoint. You can run the following `curl` command and replace `YOUR_PUBLIC_KEY`, `YOUR_PRIVATE_KEY`, and `YOUR_DATAAPP_ID` with your actual values. Note that `YOUR_PUBLIC_KEY` and `YOUR_PRIVATE_KEY` are [organization API keys](#section/Authentication/Organization-API-key-overview).\n\n    ```bash\n    curl --digest \\\n      --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n      --request POST \\\n      --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/YOUR_DATAAPP_ID/apiKeys'\\\n      --header 'Content-Type: application/json' \\\n      --data '{\n        \"description\": \"A new API Key\",\n        \"role\": \"READ_AND_WRITE\",\n        \"rateLimitRpm\": 100\n      }'\n    ```\n\n2. Call the deployed endpoint. Suppose that you have created a `GET` endpoint named `/hello`, with the request URL as `https://data.tidbcloud.com/api/v1beta/app/DATAAPP_ID/endpoint/hello`. To call this endpoint, replace `YOUR_DATAAPP_PUBLIC_KEY` and `YOUR_DATAAPP_PRIVATE_KEY` with the values obtained from the response in step 1, and replace `YOUR_DATAAPP_ID` with the actual Data App ID in the following command:\n\n    ```bash\n    curl --location-trusted --digest \\\n      --user 'YOUR_DATAAPP_PUBLIC_KEY:YOUR_DATAAPP_PRIVATE_KEY' \\\n      --request GET \\\n      --url 'https://data.tidbcloud.com/api/v1beta/app/YOUR_DATAAPP_ID/endpoint/hello'\n    ```\n    \n    For improved performance, you can call the endpoint using the regional domain name. Replace `REGION` with the specific region name to which the cluster belongs, such as `us-west-2`.\n    \n    ```bash\n    curl --digest \\\n      --user 'YOUR_DATAAPP_PUBLIC_KEY:YOUR_DATAAPP_PRIVATE_KEY' \\\n      --request GET \\\n      --url 'https://REGION.data.tidbcloud.com/api/v1beta/app/DATAAPP_ID/endpoint/hello'\n    ```\n\n# Authentication\n\nThe TiDB Cloud Data Service API uses [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication). It protects your private key from being sent over the network. For more details about HTTP Digest Authentication, refer to the [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616).\n\n## Organization API key overview\n\n- The organization API key contains a public key and a private key, which act as the username and password required in the HTTP Digest Authentication. The private key only displays upon the key creation.\n- The organization API key belongs to your organization and acts as the `Owner` role. You can check [permissions of owner](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles).\n- You must provide the correct organization API key in every request. Otherwise, the TiDB Cloud responds with a `401` error.\n\n## Organization API key management\n\n### Create an organization API key\n\nOnly the **owner** of an organization can create an organization API key.\n\nTo create an organization API key in an organization, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the lower-left corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab and then click **Create API Key**.\n4. Enter a description for your API key. The role of the API key is always `Owner` currently.\n5. Click **Next**. Copy and save the public key and the private key.\n6. Make sure that you have copied and saved the private key in a secure location. The private key only displays upon the creation. After leaving this page, you will not be able to get the full private key again.\n7. Click **Done**.\n\n### View details of an organization API key\n\nTo view details of an organization API key, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the upper-right corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab.\n4. You can view the details of the API keys in the menu.\n\n### Edit an organization API key\n\nOnly the **owner** of an organization can modify an organization API key.\n\nTo edit an organization API key in an organization, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the upper-right corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab.\n4. Click **Edit** in the API key row that you want to change.\n4. You can update the API key description.\n5. Click **Done**.\n\n### Delete an organization API key\n\nOnly the **owner** of an organization can delete an organization API key.\n\nTo delete an organization API key in an organization, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the upper-right corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab.\n4. Click **Delete** in the API key row that you want to delete.\n5. Click **I understand the consequences, delete this API Key.**\n\n# Rate Limiting\n\nThe TiDB Cloud Data Service API allows up to 100 requests per minute per API key. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to contact our support team.\n\nEach API request returns the following headers about the limit.\n\n- `X-Ratelimit-Limit-Minute`: The number of requests allowed per minute. It is 100 currently.\n- `X-Ratelimit-Remaining-Minute`: The number of remaining requests in the current minute. When it reaches `0`, the API returns a `429` error and indicates that you exceed the rate limit.\n- `X-Ratelimit-Reset`: The time in seconds at which the current rate limit resets.\n\nIf you exceed the rate limit, an error response returns like this.\n\n```\n> HTTP/2 429\n> date: Fri, 22 Jul 2022 05:28:37 GMT\n> content-type: application/json\n> content-length: 66\n> x-ratelimit-reset: 23\n> x-ratelimit-remaining-minute: 0\n> x-ratelimit-limit-minute: 100\n> x-kong-response-latency: 2\n> server: kong/2.8.1\n\n> {\"details\":[],\"code\":49900007,\"message\":\"The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519\"}\n```\n\n# API Changelog\n\nThis changelog lists all changes to the TiDB Cloud Data Service API.\n\n<!-- In reverse chronological order -->\n\n## 20240910\n\n- The [Update Chat2Query Data App settings by ID](#tag/Data-App/operation/DataApp_UpdateChat2QuerySettings) endpoint removes the support for the `gpt-3.5-turbo` model and adds support for `gpt-4o` and `gpt-4o-mini` models.\n\n- \"TiDB Serverless\" is renamed to \"TiDB Cloud Serverless\".\n- \"TiDB Dedicated\" is renamed to \"TiDB Cloud Dedicated\".\n\n## 20240806\n\n- Add the [List all system endpoints in a Data App](#tag/Data-App/operation/DataAppsService_GetSystemEndpointConfig) endpoint.\n\n- Add the [Update the configuration of system endpoints](#tag/Data-App/operation/DataAppsService_UpdateSystemEndpointConfig) endpoint.\n\n## 20240716\n\n- The [Update Chat2Query Data App settings by ID](#tag/Data-App/operation/DataApp_UpdateChat2QuerySettings) endpoint removes the support for Claude models.\n\n## 20240528\n\n- Initial release of the TiDB Cloud Data Service API, including the following resources and endpoints:\n\n    - Data App:\n      - [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps)\n      - [Create a Data App](#tag/Data-App/operation/DataApp_CreateDataApp)\n      - [Get Chat2Query Data App settings by ID](#tag/Data-App/operation/DataApp_GetChat2QuerySettings)\n      - [Update Chat2Query Data App settings by ID](#tag/Data-App/operation/DataApp_UpdateChat2QuerySettings)\n      - [Update a Data App](#tag/Data-App/operation/DataApp_UpdateDataApp)\n      - [Get a Data App by ID](#tag/Data-App/operation/DataApp_GetDataApp)\n      - [Delete a Data App](#tag/Data-App/operation/DataApp_DeleteDataApp)\n    - Data Source:\n      - [List all data sources in a Data App](#tag/Data-Source/operation/DataSource_ListDataSources)\n      - [Create a data source for a Data App](#tag/Data-Source/operation/DataSource_CreateDataSource)\n      - [Get a data source by ID](#tag/Data-Source/operation/DataSource_GetDataSource)\n      - [Delete a data source for a Data App](#tag/Data-Source/operation/DataSource_DeleteDataSource)\n    - Endpoint:\n      - [List all endpoints in a Data App](#tag/Deployment/operation/Deployment_ListDeployments)\n      - [Create an endpoint for a Data App](#tag/Endpoint/operation/Endpoint_CreateEndpoint)\n      - [Update an endpoint for a Data App](#tag/Endpoint/operation/Endpoint_UpdateEndpoint)\n      - [Get an endpoint for a Data App](#tag/Endpoint/operation/Endpoint_GetEndpoint)\n      - [Delete an endpoint for a Data App](#tag/Endpoint/operation/Endpoint_DeleteEndpoint)\n      - [Test an endpoint for a Data App](#tag/Endpoint/operation/Endpoint_TestEndpoint)\n    - Deployment:\n      - [List all deployments for a Data App](#tag/Deployment/operation/Deployment_ListDeployments)\n      - [Create a deployment for a Data App](#tag/Deployment/operation/Deployment_CreateDeployment)\n      - [Get a deployment by ID](#tag/Deployment/operation/Deployment_GetDeployment)\n    - Data API Key:\n      - [List all API keys for a Data App](#tag/Data-API-Key/operation/APIKey_ListApiKeys)\n      - [Create an API key for a Data App](#tag/Data-API-Key/operation/APIKey_CreateApiKey)\n      - [Update an API key for a Data App](#tag/Data-API-Key/operation/APIKey_UpdateApiKey)\n      - [Get an API key by ID](#tag/Data-API-Key/operation/APIKey_GetApiKey)\n      - [Delete an API key for a Data App](#tag/Data-API-Key/operation/APIKey_DeleteApiKey)\n    - OpenAPI Specification:\n      - [Get the OpenAPI Specification of a Data App](#tag/OpenAPI-Specification/operation/APISpecification_GetApiSpec)\n",
+    "version": "v1beta1"
+  },
+  "tags": [
+    {
+      "name": "Data App",
+      "description": "Create, get, update, delete, and list Data Apps."
+    },
+    {
+      "name": "Data Source",
+      "description": "Create, get, delete, and list data sources of a Data App."
+    },
+    {
+      "name": "Endpoint",
+      "description": "Create, get, delete, list, and test endpoints of a Data App."
+    },
+    {
+      "name": "Deployment",
+      "description": "Create, get, and list deployments of a Data App."
+    },
+    {
+      "name": "Data API Key",
+      "description": "Create, get, update, delete, and list Data API keys of a Data App. The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, Data Apps, and endpoints."
+    },
+    {
+      "name": "OpenAPI Specification",
+      "description": "Get the OpenAPI specification of a Data App."
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Endpoints",
+      "tags": [
+        "Data App",
+        "Data Source",
+        "Endpoint",
+        "Deployment",
+        "Data API Key",
+        "OpenAPI Specification"
+      ]
+    }
+  ],
+  "host": "dataservice.tidbapi.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1beta1/dataApps": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps?projectId={projectId}&pageSize=5'"
+          }
+        ],
+        "summary": "List all Data Apps in a project.",
+        "operationId": "DataApp_ListDataApps",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ListDataAppsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "description": "The ID of the project that the Data App belongs to. You can get the project ID from the response of [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/ListProjects).",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "The maximum number of items to return. If it is not set or set to `0`, the default value `100` will be used.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "description": "The identifier of the current page, used to retrieve the next page of results. You can get this value from the `nextPageToken` field in the previous response. To access the first page of data, omit this field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data App"]
+      },
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request POST \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"version\": \"1.0.0\", \n    \"projectId\": \"{projectId}\", \n    \"clusterIds\": [\n         \"{clusterIds}\"\n     ], \n     \"appType\": \"DATAAPP\", \n     \"displayName\": \"app-01\", \n     \"description\": \"A new data app\" \n  }'"
+          }
+        ],
+        "summary": "Create a Data App.",
+        "operationId": "DataApp_CreateDataApp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1DataAppRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataApp",
+            "description": "DataApp",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1beta1DataApp"
+            }
+          }
+        ],
+        "tags": ["Data App"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/systemEndpointConfig": {
+      "get": {
+        "summary": "List all system endpoints in a Data App.",
+        "description": "TiDB Cloud Data Service provides an endpoint library with predefined system endpoints that you can directly add to your Data App, reducing the effort in your endpoint development.\n\nFor example, the `POST:/system/query` system endpoint enables you to execute any SQL statement by simply passing the statement in the predefined `sql` parameter. This endpoint facilitates the immediate execution of SQL queries, enhancing flexibility and efficiency.",
+        "operationId": "DataAppsService_GetSystemEndpointConfig",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1SystemEndpointConfigRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/systemEndpointConfig'"
+          }
+        ],
+        "tags": ["Data App"]
+      },
+      "patch": {
+        "summary": "Update the configuration of system endpoints.",
+        "description": "With this endpoint, you can enable or disable the system endpoints in a Data App.",
+        "operationId": "DataAppsService_UpdateSystemEndpointConfig",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1SystemEndpointConfigRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request PATCH \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/systemEndpointConfig' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"items\": {\n      \"type\": \"system-data\", \n      \"key\": \"POST:/system/query\", \n      \"enabled\": true \n    }\n  }'"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemEndpointConfig",
+            "description": "To update the configuration of system endpoints in a Data App, specify the following fields as needed:",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/v1beta1SystemEndpointConfigItem"
+                  },
+                  "description": "The configuration items of system endpoints in a Data App.",
+                  "required": ["items"]
+                }
+              },
+              "title": "System Endpoint Config",
+              "required": ["items"]
+            }
+          }
+        ],
+        "tags": ["Data App"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/chat2querySettings": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/chat2querySettings'"
+          }
+        ],
+        "summary": "Get Chat2Query Data App settings by ID.",
+        "description": "With this endpoint, you can get the settings of a Chat2Query Data App, such as `name`, `llmApiKey`, `languageCode`, and `llmModel`. To get basic information, such as `version`, `projectId`, and `clusterIds`, use the [Get a Data App by ID](#tag/Data-App/operation/DataApp_GetDataApp) endpoint instead.",
+        "operationId": "DataApp_GetChat2QuerySettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1Chat2QuerySettingsRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data App", "Chat2Query"]
+      },
+      "patch": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request PATCH \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/chat2querySettings' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"llmModel\": \"gpt-4\", \n    \"llmApiKey\": \"sk-projxxxx\", \n    \"languageCode\": \"English\" \n  }'"
+          }
+        ],
+        "summary": "Update Chat2Query Data App settings by ID.",
+        "description": "With this endpoint, you can update the `llmApiKey`, `languageCode`, or `llmModel` settings of a Chat2Query Data App. To update the version, name, or description, use the [Update a Data App](#tag/Data-App/operation/DataApp_UpdateDataApp) endpoint instead.",
+        "operationId": "DataApp_UpdateChat2QuerySettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1Chat2QuerySettingsRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chat2querySettings",
+            "description": "To update the settings of a Chat2Query App, specify the following fields as needed:",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "llmApiKey": {
+                  "type": "string",
+                  "description": "The access key required to use your large language model (LLM) service. Leaving this blank limits you to 100 queries per day. To bypass the query limit, specify your access key of [OpenAI models](https://platform.openai.com/docs/models) in the `sk-xxxx` format.",
+                  "required": ["llmApiKey"]
+                },
+                "languageCode": {
+                  "type": "string",
+                  "description": "The language to use for this Chat2Query Data App. Value options: `\"English\"` or `\"Chinese\"`.",
+                  "required": ["languageCode"]
+                },
+                "llmModel": {
+                  "type": "string",
+                  "description": "The LLM model to use for this Chat2Query Data App.\n**Note:** You cannot use the `gpt-4` or `gpt-4o` model without a valid `llmApiKey`. Value options: `gpt-4`, `gpt-4o`, `gpt-4o-mini`.",
+                  "required": ["llmModel"]
+                }
+              },
+              "title": "Define your fields as needed for updating a Chat2Query App Settings"
+            }
+          }
+        ],
+        "tags": ["Data App", "Chat2Query"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}": {
+      "patch": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request PATCH \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"version\": \"1.0.1\", \n    \"displayName\": \"app-02\", \n    \"description\": \"Update a data app\" \n  }'"
+          }
+        ],
+        "summary": "Update a Data App.",
+        "description": "With this endpoint, you can update the `version`, `name`, or `description` of a Data App. To update the `llmApiKey`, `languageCode`, or `llmModel` settings of a Chat2Query App, use the [Update Chat2Query App settings by Data App ID](#tag/Data-App/operation/DataApp_GetChat2QuerySettings) endpoint instead.",
+        "operationId": "DataApp_UpdateDataApp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1DataAppRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataApp",
+            "description": "To update a Data App, specify the following fields as needed:",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "description": "The user-defined version number of the Data App, in the format of `x.x.x`.",
+                  "pattern": "^[1-9]\\.[0-9]\\.[0-9]$",
+                  "example": "1.0.0",
+                  "default": "1.0.0"
+                },
+                "displayName": {
+                  "type": "string",
+                  "description": "The user-defined name of the Data App.",
+                  "maxLength": 32,
+                  "minLength": 1
+                },
+                "description": {
+                  "type": "string",
+                  "description": "The user-defined description of the Data App.",
+                  "maxLength": 0,
+                  "minLength": 1000
+                }
+              },
+              "title": "Define your fields as needed for updating a Data App"
+            }
+          }
+        ],
+        "tags": ["Data App"]
+      },
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}'"
+          }
+        ],
+        "summary": "Get a Data App by ID.",
+        "description": "With this endpoint, you can get the basic information of a Data App, such as `name`, `version`, `projectId`, and `clusterIds`. To get the `llmApiKey`, `languageCode`, and `llmModel` of a Chat2Query Data App, use the [Get Chat2Query Data App settings by ID](#tag/Data-App/operation/DataApp_UpdateChat2QuerySettings) endpoint instead.",
+        "operationId": "DataApp_GetDataApp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1DataAppRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data App"]
+      },
+      "delete": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request DELETE \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}'"
+          }
+        ],
+        "summary": "Delete a Data App.",
+        "operationId": "DataApp_DeleteDataApp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data App"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/dataSources": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/dataSources?pageSize=5'"
+          }
+        ],
+        "summary": "List all data sources in a Data App.",
+        "operationId": "DataSource_ListDataSources",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ListDataSourcesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "The maximum number of items to return. If it is not set or set to `0`, the default value `100` will be used.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "description": "The identifier of the current page, used to retrieve the next page of results. You can get this value from the `nextPageToken` field in the previous response. To access the first page of data, omit this field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data Source"]
+      },
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request POST \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/dataSources' \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n    \"clusterId\": \"{clusterId}\"\n  }'"
+          }
+        ],
+        "summary": "Create a data source for a Data App.",
+        "description": "With this endpoint, you can link a cluster to a Data App. Then, the Data App can access and manipulate data in the cluster.",
+        "operationId": "DataSource_CreateDataSource",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1DataSource"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clusterId": {
+                  "type": "string",
+                  "description": "The ID of the cluster that needs to be linked to the Data App."
+                }
+              },
+              "required": ["clusterId"]
+            }
+          }
+        ],
+        "tags": ["Data Source"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/dataSources/{clusterId}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/dataSources/{clusterId}'"
+          }
+        ],
+        "summary": "Get a data source by ID.",
+        "operationId": "DataSource_GetDataSource",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1DataSource"
+            }
+          },
+          "default": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clusterId",
+            "description": "The ID of the cluster that is linked to the Data App.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data Source"]
+      },
+      "delete": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request DELETE \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/dataSources/{clusterId}'"
+          }
+        ],
+        "summary": "Delete a data source for a Data App.",
+        "description": "With this endpoint, you can unlink a cluster from a Data App. Then, the existing endpoints in the Data App cannot access the cluster anymore.",
+        "operationId": "DataSource_DeleteDataSource",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clusterId",
+            "description": "The ID of the cluster that is linked to the Data App.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data Source"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/endpoints": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/endpoints?pageSize=5'"
+          }
+        ],
+        "summary": "List all endpoints in a Data App.",
+        "operationId": "Endpoint_ListEndpoints",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ListEndpointsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "The maximum number of items to return. If it is not set or set to `0`, the default value `100` will be used.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "description": "The identifier of the current page, used to retrieve the next page of results. You can get this value from the `nextPageToken` field in the previous response. To access the first page of data, omit this field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["Endpoint"]
+      },
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request POST \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/endpoints' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"displayName\": \"/v1/hello\", \n    \"description\": \"/v1/hello endpoint\", \n    \"path\": \"/v1/hello\", \n    \"method\": \"GET\", \n    \"clusterId\": \"{clusterId}\", \n    \"settings\": {\n      \"timeout\": 30000, \n      \"rowLimit\": 2000, \n      \"paginationEnabled\": false, \n      \"cacheEnabled\": false\n    }, \n    \"tag\": \"Default\", \n    \"sqlTemplate\": \"select 'Hello World';\" \n  }'"
+          }
+        ],
+        "summary": "Create an endpoint for a Data App.",
+        "operationId": "Endpoint_CreateEndpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1EndpointRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpoint",
+            "description": "Endpoint",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1beta1Endpoint"
+            }
+          }
+        ],
+        "tags": ["Endpoint"]
+      }
+    },
+    "/v1beta1/dataApps/{endpoint.name}": {
+      "patch": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request PATCH \\\n --url 'https://dataservice.tidbapi.com/v1beta1/{endpoint.name}' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"displayName\": \"/v2/hello\", \n    \"description\": \"/v2/hello endpoint\", \n    \"path\": \"/v2/hello\", \n    \"method\": \"GET\", \n    \"clusterId\": \"{clusterId}\", \n    \"settings\": {\n      \"timeout\": 30000, \n      \"rowLimit\": 2000, \n      \"paginationEnabled\": false, \n      \"cacheEnabled\": false\n    }, \n    \"tag\": \"V2\", \n    \"sqlTemplate\": \"select 'Hello World New';\" \n  }'"
+          }
+        ],
+        "summary": "Update an endpoint for a Data App.",
+        "operationId": "Endpoint_UpdateEndpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1EndpointRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "endpoint.name",
+            "description": "The unique identifier for the endpoint. For example: `dataApps/dataapp-yxNzAuFP/endpoints/1874778`. You can get the value from the response of [List all endpoints in a Data App](#tag/Endpoint/operation/Endpoint_ListEndpoints).",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "dataApps/[^/]+/endpoints/[^/]+"
+          },
+          {
+            "name": "endpoint",
+            "description": "To update an endpoint, specify the following fields as needed:",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1beta1Endpoint"
+            }
+          }
+        ],
+        "tags": ["Endpoint"]
+      },
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/{endpoint.name}'"
+          }
+        ],
+        "summary": "Get an endpoint for a Data App.",
+        "operationId": "Endpoint_GetEndpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1EndpointRes"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "endpoint.name",
+            "description": "The unique identifier for the endpoint. For example: `dataApps/dataapp-yxNzAuFP/endpoints/1874778`. You can get the value from the response of [List all endpoints in a Data App](#tag/Endpoint/operation/Endpoint_ListEndpoints).",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "dataApps/[^/]+/endpoints/[^/]+"
+          }
+        ],
+        "tags": ["Endpoint"]
+      },
+      "delete": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request DELETE \\\n --url 'https://dataservice.tidbapi.com/v1beta1/{endpoint.name}'"
+          }
+        ],
+        "summary": "Delete an endpoint for a Data App.",
+        "description": "Before you delete an endpoint, make sure that the endpoint is not online. Otherwise, the endpoint cannot be deleted.",
+        "operationId": "Endpoint_DeleteEndpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "endpoint.name",
+            "description": "The unique identifier for the endpoint. For example: `dataApps/dataapp-yxNzAuFP/endpoints/1874778`. You can get the value from the response of [List all endpoints in a Data App](#tag/Endpoint/operation/Endpoint_ListEndpoints).",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "dataApps/[^/]+/endpoints/[^/]+"
+          }
+        ],
+        "tags": ["Endpoint"]
+      }
+    },
+    "/v1beta1/{endpoint.name}/test": {
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request POST \\\n --url 'https://dataservice.tidbapi.com/v1beta1/{endpoint.name}/test' \\\n --header 'Content-Type: application/json' \\\n --data-raw '{\n    \"args\": [\n      {\n       \"items\": {}\n      }\n    ] \n  }'"
+          }
+        ],
+        "summary": "Test an endpoint for a Data App.",
+        "operationId": "Endpoint_TestEndpoint",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1TestEndpointResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "endpoint.name",
+            "description": "The unique identifier for the endpoint. For example: `dataApps/dataapp-yxNzAuFP/endpoints/1874778`. You can get the value from the response of [List all endpoints in a Data App](#tag/Endpoint/operation/Endpoint_ListEndpoints).",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "dataApps/[^/]+/endpoints/[^/]+"
+          },
+          {
+            "name": "endpoint.param",
+            "description": "The parameter values used for testing the endpoint.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "args": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/v1beta1EndpointArgs"
+                  }
+                }
+              },
+              "required": ["args"]
+            }
+          }
+        ],
+        "tags": ["Endpoint"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/apiKeys": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/apiKeys?pageSize=5'"
+          }
+        ],
+        "summary": "List all API keys for a Data App.",
+        "operationId": "APIKey_ListApiKeys",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ListApiKeysResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "The maximum number of items to return. If it is not set or set to `0`, the default value `100` will be used.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "description": "The identifier of the current page, used to retrieve the next page of results. You can get this value from the `nextPageToken` field in the previous response. To access the first page of data, omit this field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data API Key"]
+      },
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request POST \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/apiKeys' \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n    \"description\": \"A new API Key.\",\n    \"role\": \"READ_AND_WRITE\",\n    \"rateLimitRpm\": 100\n  }'"
+          }
+        ],
+        "summary": "Create an API key for a Data App.",
+        "description": "For each Data App, you can create up to **100** API keys.",
+        "operationId": "APIKey_CreateApiKey",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ApiKey"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKey",
+            "description": "Data API Key",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1beta1ApiKey"
+            }
+          }
+        ],
+        "tags": ["Data API Key"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/apiKeys/{apiKeyId}": {
+      "patch": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request PATCH \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/apiKeys/{apiKeyId}' \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n    \"description\": \"Update a API Key.\",\n    \"role\": \"READ_AND_WRITE\",\n    \"rateLimitRpm\": 50\n  }'"
+          }
+        ],
+        "summary": "Update an API key for a Data App.",
+        "description": "With this endpoint, you can update the description, role, rate limit, or expiration time of an API key.\n\n**Note:** You cannot update an expired key.",
+        "operationId": "APIKey_UpdateApiKey",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ApiKey"
+            }
+          },
+          "default": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "description": "The ID of the API key, which is returned when you [create an API key](#tag/Data-API-Key/operation/APIKey_CreateApiKey).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKey",
+            "description": "Data API Key",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1beta1ApiKey"
+            }
+          }
+        ],
+        "tags": ["Data API Key"]
+      },
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/apiKeys/{apiKeyId}'"
+          }
+        ],
+        "summary": "Get an API key by ID.",
+        "operationId": "APIKey_GetApiKey",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ApiKey"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "description": "The ID of the API key, which is returned when you [Create an API key](#tag/Data-API-Key/operation/APIKey_CreateApiKey).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data API Key"]
+      },
+      "delete": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request DELETE \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/apiKeys/{apiKeyId}'"
+          }
+        ],
+        "summary": "Delete an API key for a Data App.",
+        "description": "Before you delete an API key, make sure that the API key is not used by any Data App.",
+        "operationId": "APIKey_DeleteApiKey",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKeyId",
+            "description": "The ID of the API key, which is returned when you [Create an API key](#tag/Data-API-Key/operation/APIKey_CreateApiKey).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Data API Key"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/deployments": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/deployments?pageSize=5'"
+          }
+        ],
+        "summary": "List all deployments for a Data App.",
+        "operationId": "Deployment_ListDeployments",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ListDeploymentsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "description": "The maximum number of items to return. If it is not set or set to `0`, the default value `100` will be used.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "description": "The identifier of the current page, used to retrieve the next page of results. You can get this value from the `nextPageToken` field in the previous response. To access the first page of data, omit this field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["Deployment"]
+      },
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request POST \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/deployments' \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n    \"description\": \"Deploy a data app.\"\n  }'"
+          }
+        ],
+        "summary": "Create a deployment for a Data App.",
+        "operationId": "Deployment_CreateDeployment",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1Deployment"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deployment",
+            "description": "Deployment",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "The description of the deployment."
+                }
+              }
+            }
+          }
+        ],
+        "tags": ["Deployment"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/deployments/{deploymentId}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/deployments/{deploymentId}'"
+          }
+        ],
+        "summary": "Get a deployment by ID.",
+        "operationId": "Deployment_GetDeployment",
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/v1beta1Deployment"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "description": "The ID of the deployment, which is returned when you [Create a deployment](#tag/Deployment/operation/Deployment_CreateDeployment).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["Deployment"]
+      }
+    },
+    "/v1beta1/dataApps/{dataAppId}/apiSpec": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "Curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://dataservice.tidbapi.com/v1beta1/dataApps/{dataAppId}/apiSpec'"
+          }
+        ],
+        "summary": "Get the OpenAPI Specification of a Data App.",
+        "description": "TiDB Cloud Data Service supports generating the OpenAPI Specification 3.0 for each Data App, which enables you to interact with your endpoints in a standardized format. You can use this specification to generate standardized OpenAPI documentation, client SDKs, and server stubs.",
+        "operationId": "APISpecification_GetApiSpec",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/v1beta1ApiSpec"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataAppId",
+            "description": "The ID of the Data App. You can get the ID from the response of [List all Data Apps in a project](#tag/Data-App/operation/DataApp_ListDataApps).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "format",
+            "description": "The format of the generated OpenAPI Specification.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": ["JSON", "YAML"],
+            "default": "JSON"
+          }
+        ],
+        "tags": ["OpenAPI Specification"]
+      }
+    }
+  },
+  "definitions": {
+    "ApiKeyApiKeyExpireSetting": {
+      "type": "object",
+      "properties": {
+        "expireOption": {
+          "$ref": "#/definitions/ApiKeyExpireOption",
+          "default": "EXPIRE_OPTION_NEVER_EXPIRE"
+        },
+        "apiKeyTtl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The expiration time for the key, in minutes.\nThe filed is only available when `expireOption` is set to `EXPIRE_OPTION_SET_TTL`.",
+          "minimum": 1,
+          "maximum": 525600
+        }
+      },
+      "description": "The expiration settings for the API key."
+    },
+    "ApiKeyExpireOption": {
+      "type": "string",
+      "enum": ["EXPIRE_OPTION_NEVER_EXPIRE", "EXPIRE_OPTION_SET_TTL"],
+      "default": "EXPIRE_OPTION_NEVER_EXPIRE",
+      "description": "The method used to determine the API key's expiration:\n- `EXPIRE_OPTION_NEVER_EXPIRE`: this key will never expire\n - `EXPIRE_OPTION_SET_TTL`: this key will expire after the time specified by `apikeyTtl`"
+    },
+    "ApiKeyExpireState": {
+      "type": "string",
+      "enum": [
+        "EXPIRE_STATE_NEVER_EXPIRE",
+        "EXPIRE_STATE_EXPIRED",
+        "EXPIRE_STATE_NOT_EXPIRE"
+      ],
+      "default": "EXPIRE_STATE_NEVER_EXPIRE",
+      "description": "The expiration state of the API key:\n- `EXPIRE_STATE_NEVER_EXPIRE`: this API key never expires\n - `EXPIRE_STATE_EXPIRED`: this API key has expired\n - `EXPIRE_STATE_NOT_EXPIRE`: this API key is currently active"
+    },
+    "ApiKeyRole": {
+      "type": "string",
+      "enum": ["READ_AND_WRITE", "READ_ONLY"],
+      "default": "READ_ONLY",
+      "description": "Controls whether the API key can read or write data to the clusters linked to the Data App.\n- `READ_AND_WRITE`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.\n - `READ_ONLY`:  only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements."
+    },
+    "DeploymentOriginInfo": {
+      "type": "object",
+      "properties": {
+        "commit": {
+          "type": "string",
+          "description": "The commit ID associated with the deployment.",
+          "readOnly": true
+        },
+        "diffUrl": {
+          "type": "string",
+          "description": "The URL to view the diff of the changes in the commit.",
+          "readOnly": true
+        }
+      },
+      "description": "If the `origin` is `\"GitHub\"`, this filed displays the corresponding commit information."
+    },
+    "GetApiSpecRequestFormat": {
+      "type": "string",
+      "enum": ["FORMAT_UNSPECIFIED", "JSON", "YAML"],
+      "default": "FORMAT_UNSPECIFIED",
+      "description": "- FORMAT_UNSPECIFIED: Unspecified. Do not use\n - JSON: Json format\n - YAML: Yaml format",
+      "title": "Api specification content format"
+    },
+    "TestEndpointResponseColumn": {
+      "type": "object",
+      "properties": {
+        "col": {
+          "type": "string",
+          "description": "The column name of the requested data table."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The column type of the requested data table."
+        },
+        "nullable": {
+          "type": "boolean",
+          "description": "Whether the column of the requested data table supports null values."
+        }
+      }
+    },
+    "TestEndpointResponseData": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestEndpointResponseColumn"
+          },
+          "description": "Returns the columns and columns' details of the requested data table of the endpoint."
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestEndpointResponseRow"
+          },
+          "description": "Return the columns and data results of the requested data table of the endpoint."
+        },
+        "result": {
+          "$ref": "#/definitions/TestEndpointResponseResult"
+        }
+      },
+      "title": "Endpoint request data"
+    },
+    "TestEndpointResponseResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "HTTPS status code of the request."
+        },
+        "message": {
+          "type": "string",
+          "description": "HTTPS result message of the request. If the status code returned by the request is 200, OK is returned here. If there is an error in the request, the specific reason for the error is returned."
+        },
+        "startMs": {
+          "type": "string",
+          "format": "int64",
+          "description": "The request's start timestamp. For example: 1704871891280"
+        },
+        "endMs": {
+          "type": "string",
+          "format": "int64",
+          "description": "The request's end timestamp. For example: 1704871891474"
+        },
+        "latency": {
+          "type": "string",
+          "description": "The request latency. For example: 194ms"
+        },
+        "rowCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of rows that the request should return. Sometimes the maximum number of returned rows set by the user is exceeded. But in the end, only the number of rows returned is the minimum of these two values."
+        },
+        "rowAffect": {
+          "type": "integer",
+          "format": "int32",
+          "description": "When executing non-query SQL statements, the number of rows affected."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of returned rows set by the request."
+        }
+      },
+      "description": "Return basic information about request execution. For example: whether the execution is successful, execution time, number of items returned, etc."
+    },
+    "TestEndpointResponseRow": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The columns and data results of the requested data table of the endpoint."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1beta1ApiKeyRes": {
+      "type": "object",
+      "properties": {
+        "apiKeyId": {
+          "type": "string",
+          "format": "uint64",
+          "description": "The ID of the API key."
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the API key, which is generated by the API and follows the format `dataApps/{dataAppId}/apiKeys/{apiKey}`."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "The public key for the API key."
+        },
+        "privateKey": {
+          "type": "string",
+          "description": "The private key for the API key. This is only fully displayed when the key is initially created. For security reasons, subsequent requests will obscure most of the key, revealing only the last four characters."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the API key."
+        },
+        "role": {
+          "$ref": "#/definitions/ApiKeyRole",
+          "description": "The role of the API key."
+        },
+        "rateLimitRpm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of API requests allowed per minute using this key."
+        },
+        "expireState": {
+          "$ref": "#/definitions/ApiKeyExpireState",
+          "description": "Expire state of the API Key"
+        },
+        "expireTime": {
+          "type": "string",
+          "description": "The time at which the API key will expire. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`."
+        },
+        "apiKeyExpireSetting": {
+          "$ref": "#/definitions/ApiKeyApiKeyExpireSetting",
+          "description": "The expiration settings for the API key."
+        }
+      },
+      "description": "An API key of a Data App"
+    },
+    "v1beta1ApiKey": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the API key."
+        },
+        "role": {
+          "$ref": "#/definitions/ApiKeyRole",
+          "description": "Role of the API Key"
+        },
+        "rateLimitRpm": {
+          "type": "integer",
+          "format": "int32",
+          "default": 100,
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "The maximum number of API requests allowed per minute using this key. For Chat2Query Data Apps, you cannot modify this field."
+        },
+        "apiKeyExpireSetting": {
+          "$ref": "#/definitions/ApiKeyApiKeyExpireSetting",
+          "description": "The API Key expire setting"
+        }
+      },
+      "description": "An API key of a Data App. ",
+      "required": ["description", "role", "rateLimitRpm"]
+    },
+    "v1beta1ApiSpec": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the OpenAPI Specification, which is generated by the API and follows the format `dataApps/{dataAppId}/apiSpec`."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the OpenAPI Specification for the Data App."
+        }
+      },
+      "title": "ApiSpec resource"
+    },
+    "v1beta1DataApp": {
+      "type": "object",
+      "properties": {
+        "dataAppId": {
+          "type": "string",
+          "description": "The ID of the Data App.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the Data App, which is generated by the API and follows the format `dataApps/{dataAppId}`",
+          "readOnly": true
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project that the Data App belongs to. You can get the project ID from the response of [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/ListProjects).",
+          "required": ["projectId"]
+        },
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The IDs of the clusters that the Data App's data source is linked to."
+        },
+        "appType": {
+          "$ref": "#/definitions/v1beta1DataAppType",
+          "description": "The type of the Data App.\n - `DATAAPP`: standard Data APP\n - `CHAT2QUERY`: Chat2Query Data App"
+        },
+        "version": {
+          "type": "string",
+          "description": "The user-defined version number of the Data App, in the format of `x.x.x`.",
+          "pattern": "^[1-9]\\.[0-9]\\.[0-9]$",
+          "example": "1.0.0",
+          "default": "1.0.0",
+          "required": ["version"]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name of the Data App.",
+          "minLength": 1,
+          "maxLength": 32,
+          "required": ["displayName"]
+        },
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the Data App.",
+          "minLength": 0,
+          "maxLength": 1000,
+          "required": ["description"]
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "The timestamp when the Data App was created. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "The timestamp when the Data App was last updated. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`.",
+          "readOnly": true
+        }
+      }
+    },
+    "v1beta1DataAppType": {
+      "type": "string",
+      "enum": ["DATAAPP", "CHAT2QUERY"],
+      "description": "The type of the Data App.\n - `DATAAPP`: standard Data APP\n - `CHAT2QUERY`: Chat2Query Data App"
+    },
+    "v1beta1SystemEndpointConfigRes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the system endpoint configurations in a Data App, which is generated by the API and follows the format `dataApps/{data_app}/systemEndpointConfig`."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1SystemEndpointConfigItem"
+          },
+          "description": "The configuration items of system endpoints in a Data App.",
+          "required": ["items"]
+        }
+      },
+      "title": "Response for UpdateSystemEndpointConfig",
+      "required": ["items"]
+    },
+    "v1beta1SystemEndpointConfigItem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the system endpoint.",
+          "example": "system-data",
+          "required": ["type"]
+        },
+        "key": {
+          "type": "string",
+          "description": "The key of the system endpoint, combining the HTTP method and endpoint path. For example: `\"POST:/system/query\"`.",
+          "example": "POST:/system/query",
+          "required": ["key"]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Controls whether to enable the system endpoint in a Data App.",
+          "required": ["enabled"]
+        }
+      },
+      "required": ["type", "key", "enabled"]
+    },
+    "v1beta1Chat2QuerySettingsRes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the Chat2Query Data App settings, which is generated by the API and follows the format `dataApps/{data_app}/chat2querySettings`."
+        },
+        "llmApiKey": {
+          "type": "string",
+          "description": "The access key required to use your large language model (LLM) service.",
+          "required": ["llmApiKey"]
+        },
+        "languageCode": {
+          "type": "string",
+          "description": "The language to use for this Chat2Query Data App.",
+          "required": ["languageCode"]
+        },
+        "llmModel": {
+          "type": "string",
+          "description": "The LLM model to use for this Chat2Query Data App.",
+          "required": ["llmModel"]
+        }
+      },
+      "required": ["llmApiKey", "languageCode", "llmModel"]
+    },
+    "v1beta1DataAppRes": {
+      "type": "object",
+      "properties": {
+        "dataAppId": {
+          "type": "string",
+          "description": "The ID of the Data App.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the Data App, which is generated by the API and follows the format `dataApps/{data_app_id}`."
+        },
+        "version": {
+          "type": "string",
+          "description": "The user-defined version number of the Data App.",
+          "default": "1.0.0"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "The ID of the project that the Data App belongs to."
+        },
+        "clusterIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The IDs of the clusters that the Data App's data source is linked to."
+        },
+        "appType": {
+          "$ref": "#/definitions/v1beta1DataAppType",
+          "description": "The type of the Data App.\n - `DATAAPP`: standard Data APP\n - `CHAT2QUERY`: Chat2Query Data App"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name of the Data App."
+        },
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the Data App."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The timestamp when the Data App was created. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "The timestamp when the Data App was last updated. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`."
+        }
+      }
+    },
+    "v1beta1DataSource": {
+      "type": "object",
+      "properties": {
+        "clusterId": {
+          "type": "string",
+          "description": "The IDs of the clusters that the Data App's data source is linked to."
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the data source, which is generated by the API and follows the format `dataApps/{dataAppId}/dataSources/{clusterId}`."
+        },
+        "clusterDisplay": {
+          "type": "string",
+          "description": "The name of the cluster."
+        },
+        "clusterType": {
+          "type": "string",
+          "description": "The cluster type:\n- `\"Serverless\"`: a [TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) cluster\n- `\"Dedicated\"`: a [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) cluster"
+        },
+        "clusterProvider": {
+          "type": "string",
+          "description": "The cloud provider on which your TiDB cluster is hosted.\n- `\"aws\"`: the Amazon Web Services cloud provider\n- `\"gcp\"`: the Google Cloud cloud provider",
+          "example": "AWS"
+        },
+        "clusterRegion": {
+          "type": "string",
+          "description": "The region code of the cluster.",
+          "example": "us-east-1"
+        },
+        "clusterRegionDisplay": {
+          "type": "string",
+          "description": "The name of the cluster region as shown in the TiDB Cloud console.",
+          "example": "N. Virginia (us-east-1)"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The timestamp when the Data App was created. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`."
+        }
+      }
+    },
+    "v1beta1Deployment": {
+      "type": "object",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "The ID of the deployment.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the deployment, which is generated by the API and follows the format `dataApps/{dataAppId}/deployments/{deploymentId}`."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the deployment."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The source of the deployment:\n- `\"UI\"`: the deployment is submitted through this API or [TiDB Cloud console](https://tidbcloud.com)\n- `\"GitHub\"`: the deployment is [submitted through GitHub](https://docs.pingcap.com/tidbcloud/data-service-manage-github-connection)",
+          "readOnly": true
+        },
+        "originInfo": {
+          "$ref": "#/definitions/DeploymentOriginInfo",
+          "description": "If the `origin` is `\"GitHub\"`, this filed displays the corresponding commit information."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the deployment.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the deployment: `\"success\"` or `\"failed\"`.",
+          "readOnly": true
+        },
+        "statusErrorMessage": {
+          "type": "string",
+          "description": "If the deployment failed, this filed displays the error message.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The timestamp when the deployment was created. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`.",
+          "readOnly": true
+        },
+        "deployedAt": {
+          "type": "string",
+          "description": "The timestamp when the deployment was deployed. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`.",
+          "readOnly": true
+        },
+        "finishedAt": {
+          "type": "string",
+          "description": "The timestamp when the deployment was finished. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`.",
+          "readOnly": true
+        }
+      }
+    },
+    "v1beta1EndpointRes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier for the endpoint, which is generated by the API and follows the format `dataApps/{dataAppId}/endpoints/{endpointId}`."
+        },
+        "status": {
+          "type": "string",
+          "description": "The deployment status of the endpoint:\n- `\"deployed\"`: the endpoint has been successfully deployed\n- `\"draft\"`: the endpoint is currently a draft and has not been deployed yet"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of the endpoint. By default, it is the same as the `path` value. You can update the name using [Update an endpoint for a Data App](#tag/Endpoint/operation/Endpoint_UpdateEndpoint)."
+        },
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the endpoint."
+        },
+        "path": {
+          "type": "string",
+          "description": "The user-defined HTTP path of the endpoint in the Data App. A path must start with a slash (`/`). For example: `/v1/hello`."
+        },
+        "method": {
+          "type": "string",
+          "description": "The user-defined HTTP method of the endpoint. The supported HTTP methods are: `GET`, `POST`, `PUT`, and `DELETE`."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The ID of the TiDB cluster that is linked to the endpoint."
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1EndpointParamsRes"
+          },
+          "description": "The parameters used in the endpoint."
+        },
+        "settings": {
+          "$ref": "#/definitions/v1beta1EndpointSettingsRes",
+          "description": "The settings used in the endpoint."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag used for identifying a group of endpoints.",
+          "default": "Default"
+        },
+        "batchOperation": {
+          "type": "boolean",
+          "description": "Controls whether to enable the endpoint to operate in batch mode. When it is set to `true`, you can operate on multiple rows in a single request."
+        },
+        "sqlTemplate": {
+          "type": "string",
+          "description": "Specifies the SQL statements to query data through the endpoint."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the endpoint, which cannot be set by the user.",
+          "default": "sql_endpoint"
+        },
+        "returnType": {
+          "type": "string",
+          "description": "The response format of the endpoint. Currently, only JSON is supported, represented by the value \"json\". There is no need for user configuration."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The timestamp when the endpoint was created. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "The timestamp when the endpoint was last updated. The time format follows the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. For example: `\"2023-06-03T06:52:08Z\"`."
+        }
+      }
+    },
+    "v1beta1Endpoint": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the endpoint. By default, it is the same as the `path` value.",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9_\\-\\/\\[\\]]+$"
+        },
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the endpoint.",
+          "minLength": 0,
+          "maxLength": 2000
+        },
+        "path": {
+          "type": "string",
+          "description": "The user-defined HTTP path of the endpoint in the Data App. A path must start with a slash (`/`). For example: `\"/v1/hello\"`.",
+          "pattern": "^\\/([a-zA-Z0-9_]+\\/)*[a-zA-Z0-9_]+$",
+          "minLength": 2,
+          "maxLength": 64
+        },
+        "method": {
+          "type": "string",
+          "description": "The user-defined HTTP method of the endpoint. The supported HTTP methods are: `GET`, `POST`, `PUT`, and `DELETE`."
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The ID of the TiDB cluster that is linked to the endpoint."
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1EndpointParams"
+          },
+          "description": "The parameters used in the endpoint."
+        },
+        "settings": {
+          "$ref": "#/definitions/v1beta1EndpointSettings",
+          "description": "The settings used in the endpoint."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag used for identifying a group of endpoints.",
+          "default": "Default"
+        },
+        "batchOperation": {
+          "type": "boolean",
+          "description": "Controls whether to enable the endpoint to operate in batch mode. When it is set to `true`, you can operate on multiple rows in a single request."
+        },
+        "sqlTemplate": {
+          "type": "string",
+          "description": "Specifies the SQL statements to query data through the endpoint."
+        }
+      },
+      "required": [
+        "displayName",
+        "path",
+        "method",
+        "clusterId",
+        "settings",
+        "tag",
+        "sqlTemplate"
+      ]
+    },
+    "v1beta1EndpointArgs": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The key-value pairs used as parameters for endpoint testing, in the format of `key:value`. All values are of the string type. For example: `\"limit\":\"2\"`"
+        }
+      },
+      "required": ["items"]
+    },
+    "v1beta1EndpointParamsRes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user-defined name of the parameter."
+        },
+        "type": {
+          "$ref": "#/definitions/v1beta1EndpointParamsType",
+          "description": "The user-defined data type of the parameter. \n - `string`\n - `number`\n - `integer`\n - `bool`\n - `array`"
+        },
+        "itemType": {
+          "type": "#/definitions/v1beta1EndpointParamsItemType",
+          "description": "The item type of an array type parameter. \n - `string`\n - `number`\n - `integer`"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Specifies whether the parameter is required in the request."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter."
+        },
+        "enum": {
+          "type": "string",
+          "description": "Specifies the value options of the parameter. To specify multiple values, you can separate them with a comma (`,`). For example: `\"1,2\"`."
+        }
+      }
+    },
+    "v1beta1EndpointParamsType": {
+      "type": "string",
+      "enum": ["string", "number", "integer", "bool", "array"],
+      "description": "The user-defined data type of the parameter. \n - `string`\n - `number`\n - `integer`\n - `bool`\n - `array`"
+    },
+    "v1beta1EndpointParamsItemType": {
+      "type": "string",
+      "enum": ["string", "number", "integer"],
+      "description": "The item type of an array type parameter. \n - `string`\n - `number`\n - `integer`"
+    },
+    "v1beta1EndpointParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user-defined name of the parameter."
+        },
+        "type": {
+          "$ref": "#/definitions/v1beta1EndpointParamsType",
+          "description": "The user-defined data type of the parameter. \n - `string`\n - `number`\n - `integer`\n - `bool`\n - `array`"
+        },
+        "itemType": {
+          "type": "#/definitions/v1beta1EndpointParamsItemType",
+          "description": "The item type of an array type parameter. \n - `string`\n - `number`\n - `integer`"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Specifies whether the parameter is required in the request."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter."
+        },
+        "enum": {
+          "type": "string",
+          "description": "Specifies the value options of the parameter. To specify multiple values, you can separate them with a comma (`,`). For example: `\"1,2\"`."
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "v1beta1EndpointSettingsRes": {
+      "type": "object",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The user-defined timeout for the endpoint in milliseconds.",
+          "minimum": 1,
+          "maximum": 60000
+        },
+        "rowLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of rows that the endpoint can operate or return.",
+          "minimum": 1,
+          "maximum": 2000
+        },
+        "paginationEnabled": {
+          "type": "boolean",
+          "description": "Controls whether to enable the pagination for the results returned by the `GET` request. When pagination is enabled, you can paginate the results by specifying `page` and `page_size` as query parameters when calling the endpoint."
+        },
+        "cacheEnabled": {
+          "type": "boolean",
+          "description": "Controls whether to cache the response returned by your `GET` requests within a specified time-to-live (TTL) period."
+        },
+        "cacheTtl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time-to-live (TTL) period in seconds for cached response when `cacheEnabled` is set to `true`.",
+          "minimum": 30,
+          "maximum": 600
+        }
+      },
+      "description": "The settings used in the endpoint."
+    },
+    "v1beta1EndpointSettings": {
+      "type": "object",
+      "properties": {
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The user-defined timeout for the endpoint in milliseconds.",
+          "minimum": 1,
+          "maximum": 60000
+        },
+        "rowLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of rows that the endpoint can operate or return.",
+          "minimum": 1,
+          "maximum": 2000
+        },
+        "paginationEnabled": {
+          "type": "boolean",
+          "description": "Controls whether to enable the pagination for the results returned by the `GET` request. When pagination is enabled, you can paginate the results by specifying `page` and `page_size` as query parameters when calling the endpoint."
+        },
+        "cacheEnabled": {
+          "type": "boolean",
+          "description": "Controls whether to cache the response returned by your `GET` requests within a specified time-to-live (TTL) period."
+        },
+        "cacheTtl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time-to-live (TTL) period in seconds for cached response when `cacheEnabled` is set to `true`.",
+          "minimum": 30,
+          "maximum": 600
+        }
+      },
+      "required": [
+        "timeout",
+        "rowLimit",
+        "paginationEnabled",
+        "cacheEnabled",
+        "cacheTtl"
+      ],
+      "description": "The settings used in the endpoint."
+    },
+    "v1beta1ListApiKeysResponse": {
+      "type": "object",
+      "properties": {
+        "apiKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1ApiKeyRes"
+          },
+          "description": "The items of API keys in the Data App."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The token to retrieve the next page of results."
+        }
+      },
+      "title": "Response for ListApiKeys"
+    },
+    "v1beta1ListDataAppsResponse": {
+      "type": "object",
+      "properties": {
+        "dataApps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1DataAppRes"
+          },
+          "description": "The items of Data Apps in the project."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The token to retrieve the next page of results."
+        }
+      },
+      "title": "Response for ListDataApps"
+    },
+    "v1beta1ListDataSourcesResponse": {
+      "type": "object",
+      "properties": {
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1DataSource"
+          },
+          "description": "The items of data sources in the Data App."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The token to retrieve the next page of results."
+        }
+      },
+      "title": "Response for ListDataSources"
+    },
+    "v1beta1ListDeploymentsResponse": {
+      "type": "object",
+      "properties": {
+        "deployments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1Deployment"
+          },
+          "description": "The items of deployments in the Data App."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The token to retrieve the next page of results."
+        }
+      },
+      "title": "Response for ListDeployments"
+    },
+    "v1beta1ListEndpointsResponse": {
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1beta1EndpointRes"
+          },
+          "description": "The items of endpoints in the Data App."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The token to retrieve the next page of results."
+        }
+      },
+      "title": "Response for ListEndpoint"
+    },
+    "v1beta1TestEndpointResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Endpoint's type."
+        },
+        "data": {
+          "$ref": "#/definitions/TestEndpointResponseData",
+          "description": "The response of testing the endpoint."
+        }
+      },
+      "title": "Response for TestEndpoint"
+    }
+  }
+}
