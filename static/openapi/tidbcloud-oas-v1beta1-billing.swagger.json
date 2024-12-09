@@ -1,0 +1,727 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "*TiDB Cloud API is in beta.*\n\n# Overview\n\nThe TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud.\n\nThe API has the following features:\n\n- **JSON entities.** All entities are expressed in JSON.\n- **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.\n- **Key-based access and digest authentication.** Before you access TiDB Cloud API, you must generate an API key. All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.\n\n# Get Started\n\nThis guide helps you make your first API call to TiDB Cloud API. You'll learn how to authenticate a request, build a request, and interpret the response.\n\n## Prerequisites\n\nTo complete this guide, you need to perform the following tasks:\n\n- Create a [TiDB Cloud account](https://tidbcloud.com/free-trial)\n- Install [curl](https://curl.se/)\n\n## Step 1. Create an API key\n\nTo create an API key, log in to your TiDB Cloud console. Navigate to the **Organization Settings** page, and create an API key.\n\nAn API key contains a public key and a private key. Copy and save them in a secure location. You will need to use the API key later in this guide.\n\nFor more details about creating API key, refer to [API Key Management](#section/Authentication/API-Key-Management).\n\n## Step 2. Make your first API call\n\n### Build an API call\n\nTiDB Cloud API call have the following components:\n\n- **A host.** The host for TiDB Cloud API is <https://billing.tidbapi.com>.\n- **An API Key**. The public key and the private key are required for authentication.\n- **A request.** When submitting data to a resource via `POST`, `PATCH`, or `PUT`, you must submit your payload in JSON.\n\nIn this guide, you call the [List all accessible projects](#tag/Project/operation/ListProjects) endpoint. For the detailed description of the endpoint, see the [API reference](#tag/Project/operation/ListProjects).\n\n### Call an API endpoint\n\nTo get all projects in your organization, run the following command in your terminal. Remember to change `YOUR_PUBLIC_KEY` to your public key and `YOUR_PRIVATE_KEY` to your private key.\n\n```shell\ncurl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url https://billing.tidbapi.com/v1beta1/bills/2023-09\n```\n\n## Step 3. Check the response\n\nAfter making the API call, if the status code in response is `200` and you see details about all the projects in your organization, your request is successful. Here is an example of a successful response.\n\n```log\n{\n  \"overview\": {\n    \"billedMonth\": \"2023-09\",\n    \"credits\": \"0.00\",\n    \"discounts\": \"0.00\",\n    \"runningTotal\": \"0.00\",\n    \"totalCost\": \"0.00\"\n  },\n  \"summaryByProject\": {\n    \"otherCharges\": [\n      {\n        \"credits\": \"0.00\",\n        \"discounts\": \"0.00\",\n        \"otherName\": \"Support Plan\",\n        \"runningTotal\": \"0.00\",\n        \"totalCost\": \"0.00\"\n      }\n    ],\n    \"projects\": [\n      {\n        \"credits\": \"0.00\",\n        \"discounts\": \"0.00\",\n        \"projectName\": \"prod-project\",\n        \"runningTotal\": \"0.00\",\n        \"totalCost\": \"0.00\"\n      }\n    ]\n  },\n  \"summaryByService\": [\n    {\n      \"credits\": \"0.00\",\n      \"discounts\": \"0.00\",\n      \"runningTotal\": \"0.00\",\n      \"serviceCosts\": [\n        {}\n      ],\n      \"serviceName\": \"TiDB Dedicated\",\n      \"totalCost\": \"0.00\"\n    }\n  ]\n}\n``` \n# Authentication\n\nThe TiDB Cloud API uses [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication). It protects your private key from being sent over the network. For more details about HTTP Digest Authentication, refer to the [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616).\n\n## API key overview\n\n- The API key contains a public key and a private key, which act as the username and password required in the HTTP Digest Authentication. The private key only displays upon the key creation.\n- The API key belongs to your organization and acts as the `Owner` role. You can check [permissions of owner](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles).\n- You must provide the correct API key in every request. Otherwise, the TiDB Cloud responds with a `401` error.\n\n## API key management\n\n### Create an API key\n\nOnly the **owner** of an organization can create an API key.\n\nTo create an API key in an organization, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the lower-left corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab and then click **Create API Key**.\n4. Enter a description for your API key. The role of the API key is always `Owner` currently.\n5. Click **Next**. Copy and save the public key and the private key.\n6. Make sure that you have copied and saved the private key in a secure location. The private key only displays upon the creation. After leaving this page, you will not be able to get the full private key again.\n7. Click **Done**.\n\n### View details of an API key\n\nTo view details of an API key, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the upper-right corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab.\n4. You can view the details of the API keys in the menu.\n\n### Edit an API key\n\nOnly the **owner** of an organization can modify an API key.\n\nTo edit an API key in an organization, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the upper-right corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab.\n4. Click **Edit** in the API key row that you want to change.\n4. You can update the API key description.\n5. Click **Done**.\n\n### Delete an API key\n\nOnly the **owner** of an organization can delete an API key.\n\nTo delete an API key in an organization, perform the following steps:\n\n1. Click <svg width=\"16\" height=\"16\" viewBox=\"0 -2 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 11H17.8C18.9201 11 19.4802 11 19.908 11.218C20.2843 11.4097 20.5903 11.7157 20.782 12.092C21 12.5198 21 13.0799 21 14.2V21M13 21V6.2C13 5.0799 13 4.51984 12.782 4.09202C12.5903 3.71569 12.2843 3.40973 11.908 3.21799C11.4802 3 10.9201 3 9.8 3H6.2C5.0799 3 4.51984 3 4.09202 3.21799C3.71569 3.40973 3.40973 3.71569 3.21799 4.09202C3 4.51984 3 5.0799 3 6.2V21M22 21H2M6.5 7H9.5M6.5 11H9.5M6.5 15H9.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> **Organization** in the upper-right corner of the TiDB Cloud console.\n2. Click **Organization Settings**. The organization settings page is displayed.\n3. Click the **API Keys** tab.\n4. Click **Delete** in the API key row that you want to delete.\n5. Click **I understand the consequences, delete this API Key.**\n\n# Rate Limiting\n\nThe TiDB Cloud API allows up to 100 requests per minute per API key. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to contact our support team.\n\nEach API request returns the following headers about the limit.\n\n- `X-Ratelimit-Limit-Minute`: The number of requests allowed per minute. It is 100 currently.\n- `X-Ratelimit-Remaining-Minute`: The number of remaining requests in the current minute. When it reaches `0`, the API returns a `429` error and indicates that you exceed the rate limit.\n- `X-Ratelimit-Reset`: The time in seconds at which the current rate limit resets.\n\nIf you exceed the rate limit, an error response returns like this.\n\n```\n> HTTP/2 429\n> date: Fri, 22 Jul 2022 05:28:37 GMT\n> content-type: application/json\n> content-length: 66\n> x-ratelimit-reset: 23\n> x-ratelimit-remaining-minute: 0\n> x-ratelimit-limit-minute: 100\n> x-kong-response-latency: 2\n> server: kong/2.8.1\n\n> {\"details\":[],\"code\":49900007,\"message\":\"The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519\"}\n```\n\n# API Changelog\n\nThis changelog lists all changes to the TiDB Cloud API.\n\n<!-- In reverse chronological order -->\n\n## 2024-05-23\n\n- Add the [Return the monthly bill with daily usage details](#tag/Billing/paths/~1billsDetails~1%7BbilledMonth%7D/get) endpoint.\n- Add the [Return the usage details according to a cost explorer query](#tag/Billing/paths/~1billsCostExplorer/post) endpoint.\n- Add the [Return basic info of a specific organization](#tag/Billing/paths/~1billsCostExplorer~1args/get) endpoint.\n## 2023-09-28\n\n- Add the [Return monthly bill](#tag/bills/paths/~1bills~1%7BYYYY-MM%7D/get) endpoint.\n",
+    "title": "Billing System  OPENAPI",
+    "contact": {},
+    "version": "v1beta1"
+  },
+  "x-tagGroups": [
+    {
+      "name": "Endpoints",
+      "tags": ["Billing"]
+    }
+  ],
+  "host": "billing.tidbapi.com",
+  "basePath": "/v1beta1",
+  "paths": {
+    "/bills/{billedMonth}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://billing.tidbapi.com/v1beta1/bills/{billedMonth}'"
+          }
+        ],
+        "description": "This endpoint retrieves the bill for the given month of a specific organization. You can query a bill up to 6 months prior to the current month. The bill is returned in JSON format.To use this resource, the requesting API Key must have the Organization Billing Admin or Organization Owner role.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return organization monthly bills",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The month of this bill happens for the specified organization, format is YYYY-MM, for example '2023-08'.",
+            "name": "billedMonth",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/forms.BillsExplorer"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    },
+    "/billsCostExplorer": {
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request POST \\\n  --url 'https://billing.tidbapi.com/v1beta1/billsCostExplorer'"
+          }
+        ],
+        "description": "This endpoint executes a cost explorer query and returns the usage details. Cost Explorer query:",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return the usage details according to a cost explorer query",
+        "parameters": [
+          {
+            "description": "args",
+            "name": "args",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/forms.TrendsInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/forms.BillsCostExplorer"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    },
+    "/billsCostExplorer/args": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://billing.tidbapi.com/v1beta1/billsCostExplorer/args'"
+          }
+        ],
+        "description": "This endpoint retrieves the basic info for a specific organization, including service info, cloud provider info, project info, and cluster info.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return basic info of a specific organization, which contains the key info to execute a cost explorer query",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/forms.TrendsArgs"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    },
+    "/billsDetails/{billedMonth}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://billing.tidbapi.com/v1beta1/billsDetails/{billedMonth}'"
+          }
+        ],
+        "description": "This endpoint retrieves the bill for the given month of a specific organization with daily usage details. You can query a bill up to 6 months prior to the current month. The bill is returned in JSON format. To use this resource, the requesting API Key must have the Organization Billing Admin or Organization Owner role.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return the monthly bill of the organization with daily usage details",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The month of this bill happens for the specified organization. The format is `YYYY-MM`, for example '2024-05'.",
+            "name": "billedMonth",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/forms.BillsDetails"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "billing_errors.BaseError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "error": {},
+        "msgPrefix": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        }
+      }
+    },
+    "forms.BillsCostExplorer": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsCostExplorerElements"
+          }
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsCostExplorerBreakdown": {
+      "type": "object",
+      "properties": {
+        "billedDate": {
+          "type": "string"
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "detailKey": {
+          "type": "string"
+        },
+        "detailName": {
+          "type": "string"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsCostExplorerElements": {
+      "type": "object",
+      "properties": {
+        "billedDate": {
+          "type": "string"
+        },
+        "breakdown": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsCostExplorerBreakdown"
+          }
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsDetail": {
+      "type": "object",
+      "properties": {
+        "billedDate": {
+          "description": "The date when this bill happens.",
+          "type": "string"
+        },
+        "clusterName": {
+          "description": "Name of the cluster.",
+          "type": "string"
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "projectName": {
+          "description": "Name of the project.",
+          "type": "string"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "servicePathName": {
+          "description": "Name of the service.",
+          "type": "string"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsDetails": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsDetail"
+          }
+        }
+      }
+    },
+    "forms.BillsExplorer": {
+      "type": "object",
+      "properties": {
+        "overview": {
+          "description": "The overall information for a bill in the specified organization.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.BillsOverview"
+            }
+          ]
+        },
+        "summaryByProject": {
+          "description": "A breakdown of the bill by project.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.SummaryByProject"
+            }
+          ]
+        },
+        "summaryByService": {
+          "description": "A breakdown of the bill by service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsServiceCosts"
+          }
+        }
+      }
+    },
+    "forms.BillsOtherName": {
+      "type": "object",
+      "properties": {
+        "chargeName": {
+          "type": "string",
+          "example": "Support Plan"
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsOverview": {
+      "type": "object",
+      "properties": {
+        "billedMonth": {
+          "description": "The month in which this bill is generated for the specified organization.",
+          "type": "string",
+          "example": "2023-09"
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsProjects": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "projectName": {
+          "description": "The name of a project in the specified organization.",
+          "type": "string",
+          "example": "prod-project"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.BillsServiceCosts": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "discounts": {
+          "description": "The total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization has consumed during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "string",
+          "example": "0.00"
+        },
+        "serviceCosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsServiceCosts"
+          }
+        },
+        "serviceName": {
+          "description": "The name of services provided by TiDB Cloud.",
+          "type": "string",
+          "example": "TiDB Dedicated"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay for this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "string",
+          "example": "0.00"
+        }
+      }
+    },
+    "forms.ClusterOpenAPI": {
+      "type": "object",
+      "properties": {
+        "ProjectID": {
+          "type": "string",
+          "example": "0"
+        },
+        "id": {
+          "type": "string",
+          "example": "0"
+        },
+        "name": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "forms.CostExplorerProvider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of Cloud provider.",
+          "type": "string"
+        },
+        "regions": {
+          "description": "Name of region.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "forms.CostExplorerService": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "2nd level of service.",
+          "type": "string"
+        },
+        "component": {
+          "description": "3rd level of service.",
+          "type": "string"
+        },
+        "product": {
+          "description": "1st level of service.",
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "forms.CostExplorerTrendsBreakdownKey": {
+      "type": "string",
+      "enum": [
+        "service",
+        "product",
+        "project",
+        "cluster",
+        "provider",
+        "region"
+      ],
+      "x-enum-varnames": [
+        "CostExploreTrendsBreakdownKeyService",
+        "CostExploreTrendsBreakdownKeyProduct",
+        "CostExploreTrendsBreakdownKeyProject",
+        "CostExploreTrendsBreakdownKeyCluster",
+        "CostExploreTrendsBreakdownKeyProvider",
+        "CostExploreTrendsBreakdownKeyRegion"
+      ]
+    },
+    "forms.CostExplorerTrendsTimeGroup": {
+      "type": "string",
+      "enum": ["day", "month", "total"],
+      "x-enum-varnames": [
+        "CostExploreTrendsTimeGroupDay",
+        "CostExploreTrendsTimeGroupMonth",
+        "CostExploreTrendsTimeGroupTotal"
+      ]
+    },
+    "forms.Groups": {
+      "type": "object",
+      "properties": {
+        "groupBy": {
+          "description": "Group cost explorer query results by category. The category includes:\n 1. \"service\": Group query results by service type\n 2. \"product\": Group query results by product type (TiDB Dedicated, TiDB Serverless, or Support Plan)\n 3. \"project\": Group query results by Project IDs\n 4. \"cluster\": Group query results by Cluster IDs\n 5. \"provider\": Group query results by Cloud Provider\n 6. \"region\": Group query results by cloud provider region",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.CostExplorerTrendsBreakdownKey"
+          }
+        },
+        "timeGranularity": {
+          "description": "Time Granularity determines how the cost explorer query results are organized daily, monthly, or in total.\n 1. \"day\": Query results are organized daily\n 2. \"month\": Query results are organized monthly\n 3. \"total\": Query results are organized in total",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.CostExplorerTrendsTimeGroup"
+            }
+          ]
+        }
+      }
+    },
+    "forms.ProjectOpenAPI": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "0"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "forms.Provider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the cloud provider",
+          "type": "string"
+        },
+        "regions": {
+          "description": "Name of the region",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "forms.SummaryByProject": {
+      "type": "object",
+      "properties": {
+        "otherCharges": {
+          "description": "These charges occur not only within a project but also across the entire organization.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsOtherName"
+          }
+        },
+        "projects": {
+          "description": "The projects in the specified organization.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsProjects"
+          }
+        }
+      }
+    },
+    "forms.TimeRange": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "description": "End date of the time range.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Start date of the time range.",
+          "type": "string"
+        }
+      }
+    },
+    "forms.TrendsArgs": {
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.ClusterOpenAPI"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.ProjectOpenAPI"
+          }
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.Provider"
+          }
+        },
+        "services": {
+          "description": "The Identifier of TiDB Cloud services consists of 3 levels. For example, \"service\": \"TiDB Dedicated - Node Compute - TiFlash\" consists of the following 3 levels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.CostExplorerService"
+          }
+        }
+      }
+    },
+    "forms.TrendsFilter": {
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.CostExplorerProvider"
+          }
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.CostExplorerService"
+          }
+        },
+        "timeRange": {
+          "$ref": "#/definitions/forms.TimeRange"
+        }
+      }
+    },
+    "forms.TrendsInput": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/forms.TrendsFilter"
+        },
+        "groups": {
+          "$ref": "#/definitions/forms.Groups"
+        }
+      }
+    }
+  }
+}

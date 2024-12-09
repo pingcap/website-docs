@@ -1,0 +1,685 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a billing system server for managed service provider (MSP).\n\n**Note:** The MSP API is deprecated as of October 15, 2024, and will be removed in the future. If you are currently using the MSP API, migrate to the Partner Management API in [TiDB Cloud Partner](https://partner-console.tidbcloud.com/signin).",
+    "title": "MSP (Managed Service Provider) OPENAPI",
+    "contact": {},
+    "version": "v1beta1"
+  },
+  "host": "msp.tidbapi.com",
+  "basePath": "/v1beta1/msp",
+  "paths": {
+    "/bills/{billedMonth}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://msp.tidbapi.com/v1beta1/msp/bills/{YYYY-MM}'"
+          }
+        ],
+        "description": "This endpoint retrieves the bill for the given month of a specific MSP. You can query a bill up to 6 months prior to the current month. The bill is returned in JSON format.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return MSP monthly bills",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The month of this bill happens for the specified organization. The format is YYYY-MM, for example, '2023-08'.",
+            "name": "billedMonth",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/forms.MspBills"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    },
+    "/credits": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://msp.tidbapi.com/v1beta1/msp/credits'"
+          }
+        ],
+        "description": "This endpoint retrieves the credits applied to a specific MSP.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return credits applied to a specific MSP",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/forms.MspCredit"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    },
+    "/customerSignupUrl": {
+      "post": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request POST \\\n --url 'https://msp.tidbapi.com/v1beta1/msp/customerSignupUrl'"
+          }
+        ],
+        "description": "This endpoint creates a new signup URL for an MSP customer.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Account"],
+        "summary": "Create a new signup URL for an MSP customer",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.OpenApiMspCustomerSignupUrl"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/api.OpenApiError"
+            }
+          }
+        }
+      }
+    },
+    "/discounts/": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://msp.tidbapi.com/v1beta1/msp/discounts'"
+          }
+        ],
+        "description": "This endpoint retrieves the discount applied to a specific MSP.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return discounts applied to a specific MSP",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/forms.MspDiscount"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    },
+    "/mspCustomers": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://msp.tidbapi.com/v1beta1/msp/mspCustomers'"
+          }
+        ],
+        "description": "This endpoint returns a list of MSP customers.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Account"],
+        "summary": "Get a list of MSP customers",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The page token of the next page.",
+            "name": "pageToken",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "description": "The page size of the next page. If `pageSize` is set to 0, it returns all MSP customers in one page.",
+            "name": "pageSize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.OpenApiListMspCustomerRsp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/api.OpenApiError"
+            }
+          }
+        }
+      }
+    },
+    "/mspCustomers/{customerOrgId}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n  --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n  --request GET \\\n  --url 'https://msp.tidbapi.com/v1beta1/msp/mspCustomers/{customerOrgID}'"
+          }
+        ],
+        "description": "This endpoint retrieves a single MSP customer by their customer org ID.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Account"],
+        "summary": "Retrieve a single MSP customer",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The MSP customer org ID.",
+            "name": "customerOrgId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.OpenApiMspCustomer"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/api.OpenApiError"
+            }
+          }
+        }
+      }
+    },
+    "/mspCustomerBills/{billedMonth}/mspCustomers/{mspCustomerId}": {
+      "get": {
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl --digest \\\n --user 'YOUR_PUBLIC_KEY:YOUR_PRIVATE_KEY' \\\n --request GET \\\n --url 'https://msp.tidbapi.com/v1beta1/msp/mspCustomerBills/{YYYY-MM}/mspCustomers/{mspCustomerId}'"
+          }
+        ],
+        "description": "This endpoint retrieves the bill for the given month of a specific end customer of MSP. You can query a bill up to 6 months prior to the current month. The bill is returned in JSON format.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Billing"],
+        "summary": "Return monthly bills for a specific end customer of MSP",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The month of this bill happens for the specified organization. The format is YYYY-MM, for example, '2023-08'.",
+            "name": "billedMonth",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "ID of the end customer of MSP.",
+            "name": "mspCustomerId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/forms.BillsExplorer"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/billing_errors.BaseError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "api.OpenApiCreateMspCustomerSignupUrlReq": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "description": "The ID of the MSP.",
+          "type": "string",
+          "example": "123456"
+        }
+      }
+    },
+    "api.OpenApiError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "error": {},
+        "msgPrefix": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        }
+      }
+    },
+    "api.OpenApiListMspCustomerRsp": {
+      "type": "object",
+      "properties": {
+        "mspCustomers": {
+          "description": "The list of matching MSP Customers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/api.OpenApiMspCustomer"
+          }
+        },
+        "nextPageToken": {
+          "description": "`next_page_token` can be sent in a subsequent call to fetch more results",
+          "type": "string",
+          "example": "498c7f44-656f-4944-b455-0695faa5d4f9"
+        }
+      }
+    },
+    "api.OpenApiMspCustomer": {
+      "type": "object",
+      "properties": {
+        "effectedTime": {
+          "description": "The effected time of the MSP customer.",
+          "type": "string",
+          "example": "2023-12-06 15:18:13"
+        },
+        "email": {
+          "description": "The email of the MSP customer.",
+          "type": "string",
+          "example": "123@my.com"
+        },
+        "expiredTime": {
+          "description": "The expired time of the MSP customer.",
+          "type": "string",
+          "example": "2023-12-06 15:18:13"
+        },
+        "id": {
+          "description": "The ID of the MSP customer.",
+          "type": "string",
+          "example": "123456"
+        },
+        "orgId": {
+          "description": "The ID of the MSP customer.",
+          "type": "string",
+          "example": "123456"
+        },
+        "orgName": {
+          "description": "The org name of the MSP customer.",
+          "type": "string",
+          "example": "New Org"
+        },
+        "state": {
+          "description": "The state of the MSP customer.",
+          "type": "string",
+          "example": "active"
+        }
+      }
+    },
+    "api.OpenApiMspCustomerSignupUrl": {
+      "type": "object",
+      "properties": {
+        "customerSignupUrl": {
+          "description": "The signup URL of the MSP customer.",
+          "type": "string",
+          "example": "https://test.com/signup?msp=test\u0026third_party_account_provider=test\u0026third_party_account_token=test"
+        },
+        "expiredAt": {
+          "description": "The expired time of the MSP customer signup url.",
+          "type": "string",
+          "example": "2024-12-06 15:18:13"
+        }
+      }
+    },
+    "billing_errors.BaseError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "error": {},
+        "msgPrefix": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        }
+      }
+    },
+    "forms.BillsExplorer": {
+      "type": "object",
+      "properties": {
+        "overview": {
+          "description": "The overall information for a bill in the specified organization.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.BillsOverview"
+            }
+          ]
+        },
+        "summaryByProject": {
+          "description": "A breakdown of the bill by project.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.SummaryByProject"
+            }
+          ]
+        },
+        "summaryByService": {
+          "description": "A breakdown of the bill by service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsServiceCosts"
+          }
+        }
+      }
+    },
+    "forms.BillsOtherName": {
+      "type": "object",
+      "properties": {
+        "chargeName": {
+          "type": "string",
+          "example": "Support Plan"
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "discounts": {
+          "description": "Total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization consumed in the period during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay toward this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "forms.BillsOverview": {
+      "type": "object",
+      "properties": {
+        "billedMonth": {
+          "description": "The month in which this bill is generated for the specified organization.",
+          "type": "string",
+          "example": "2023-09"
+        },
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "discounts": {
+          "description": "Total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization consumed in the period during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay toward this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "forms.BillsProjects": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "discounts": {
+          "description": "Total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "projectName": {
+          "description": "The name of a project in the specified organization.",
+          "type": "string",
+          "example": "prod-project"
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization consumed in the period during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay toward this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "forms.BillsServiceCosts": {
+      "type": "object",
+      "properties": {
+        "credits": {
+          "description": "The total credits held by the organization in this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "discounts": {
+          "description": "Total amount of discounts applied to this bill. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "runningTotal": {
+          "description": "The sum of services that the specified organization consumed in the period during this bill period. The value of this field is expressed in cents (100ths of one US Dollar).",
+          "type": "number",
+          "example": 0
+        },
+        "serviceCosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsServiceCosts"
+          }
+        },
+        "serviceName": {
+          "description": "The name of services provided by TiDB Cloud.",
+          "type": "string",
+          "example": "TiDB Dedicated"
+        },
+        "totalCost": {
+          "description": "The total amount that the specified organization should pay toward this bill. The value of this field is expressed in cents (100ths of one US Dollar).\n`total_cost` = `running_total` - `discounts` - `credits`.",
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "forms.MspBills": {
+      "type": "object",
+      "properties": {
+        "overview": {
+          "description": "The overall information for a bill in the specified organization.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.BillsOverview"
+            }
+          ]
+        },
+        "summaryByCustomer": {
+          "description": "Month of bills happens to a specific MSP.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.SummaryByCustomer"
+          }
+        },
+        "summaryByService": {
+          "description": "A breakdown of the bill by service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsServiceCosts"
+          }
+        }
+      }
+    },
+    "forms.MspCredit": {
+      "type": "object",
+      "properties": {
+        "credit": {
+          "description": "The total amount of credit.",
+          "type": "number",
+          "example": 1000
+        },
+        "creditCode": {
+          "description": "The code of a credit.",
+          "type": "string",
+          "example": "498c7f44-656f-4944-b455-0695faa5d4f9"
+        },
+        "expiryDate": {
+          "description": "Expired date of a credit.",
+          "type": "string",
+          "example": "2023-12-01T00:00:00Z"
+        },
+        "remainingCredit": {
+          "description": "The remaining amount of a credit.",
+          "type": "number",
+          "example": 1000
+        },
+        "services": {
+          "description": "The service to which a credit is applicable.",
+          "type": "string",
+          "example": "General Product"
+        },
+        "startDate": {
+          "description": "Effective start date of a credit.",
+          "type": "string",
+          "example": "2023-11-01T00:00:00Z"
+        },
+        "status": {
+          "description": "The status of a credit.",
+          "type": "string",
+          "example": "active"
+        }
+      }
+    },
+    "forms.MspDiscount": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of a discount.",
+          "type": "string"
+        },
+        "discountCode": {
+          "description": "The code of a discount.",
+          "type": "string",
+          "example": "498c7f44-656f-4944-b455-0695faa5d4f9"
+        },
+        "expiryDate": {
+          "description": "Expired date of a credit.",
+          "type": "string",
+          "example": "2023-12-01T00:00:00Z"
+        },
+        "percentageDiscount": {
+          "description": "The percentage is deducted from the original price. For example, a 20% discount on a $100 item would result in a discounted price of $80.",
+          "type": "string",
+          "example": "20%"
+        },
+        "services": {
+          "description": "The service to which a discount is applicable.",
+          "type": "string",
+          "example": "Node Compute, Changefeed,"
+        },
+        "startDate": {
+          "description": "Effective start date of a credit.",
+          "type": "string",
+          "example": "2023-11-01T00:00:00Z"
+        },
+        "status": {
+          "description": "The status of a discount.",
+          "type": "string",
+          "example": "valid"
+        }
+      }
+    },
+    "forms.SummaryByCustomer": {
+      "type": "object",
+      "properties": {
+        "customerID": {
+          "description": "The Organization ID of MSP",
+          "type": "integer"
+        },
+        "mspCustomerBills": {
+          "description": "The bill generated for a specific MSP customer in the specified month.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/forms.BillsExplorer"
+            }
+          ]
+        }
+      }
+    },
+    "forms.SummaryByProject": {
+      "type": "object",
+      "properties": {
+        "otherCharges": {
+          "description": "These charges occur not only within a project but also across the entire organization.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsOtherName"
+          }
+        },
+        "projects": {
+          "description": "The projects in the specified organization.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/forms.BillsProjects"
+          }
+        }
+      }
+    }
+  }
+}
