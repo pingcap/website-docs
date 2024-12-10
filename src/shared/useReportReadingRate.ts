@@ -2,6 +2,7 @@ import throttle from "lodash/throttle";
 import React from "react";
 import { GTMEvent, gtmTrack } from "./utils/gtm";
 
+// timeToRead: minutes of reading
 export const useReportReadingRate = (timeToRead: number) => {
   const lastPercentage = React.useRef(0);
 

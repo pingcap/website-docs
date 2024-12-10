@@ -287,7 +287,6 @@ export default function DocTemplate({
   );
 }
 
-// timeToRead: minutes of reading
 export const query = graphql`
   query ($id: String, $language: String!, $navUrl: String!) {
     site {
