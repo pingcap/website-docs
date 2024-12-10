@@ -1,7 +1,5 @@
 require("ts-node").register({ transpileOnly: true });
 
-const path = require("path");
-
 const {
   createDocs,
   createDocHome,

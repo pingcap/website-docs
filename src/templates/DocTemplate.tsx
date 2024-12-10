@@ -25,6 +25,7 @@ import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { DOC_HOME_URL } from "shared/resources";
+import { useReportReadingRate } from "shared/useReportReadingRate";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -46,6 +47,7 @@ interface DocTemplateProps {
       frontmatter: FrontMatter;
       body: string;
       tableOfContents: TableOfContent;
+      timeToRead: number;
     };
     navigation?: {
       navigation: RepoNav;
@@ -66,9 +68,11 @@ export default function DocTemplate({
   data,
 }: DocTemplateProps) {
   const {
-    mdx: { frontmatter, tableOfContents, body },
+    mdx: { frontmatter, tableOfContents, body, timeToRead },
     navigation: originNav,
   } = data;
+
+  useReportReadingRate(timeToRead);
 
   const navigation = originNav ? originNav.navigation : [];
 
@@ -283,6 +287,7 @@ export default function DocTemplate({
   );
 }
 
+// timeToRead: minutes of reading
 export const query = graphql`
   query ($id: String, $language: String!, $navUrl: String!) {
     site {
@@ -301,6 +306,7 @@ export const query = graphql`
       }
       body
       tableOfContents
+      timeToRead
     }
 
     navigation: mdx(slug: { eq: $navUrl }) {

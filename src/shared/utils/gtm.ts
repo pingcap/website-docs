@@ -3,6 +3,7 @@ export const GTMEvent = {
   ClickFooter: "docs_footer_click",
   UseOnsiteSearch: "use_onsite_search",
   UseExternalSearch: "use_external_search",
+  ReadingRate: "reading_rate",
 } as const;
 
 export function gtmTrack(
