@@ -90,6 +90,7 @@ jobs:
           GATSBY_DOC_BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
           GATSBY_DOC_BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
+          GATSBY_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
           yarn build --verbose
 
