@@ -19,8 +19,6 @@ export const useReportReadingRate = (timeToRead: number) => {
       Math.floor(scrollPercentage / 10) >
       Math.floor(lastPercentage.current / 10)
     ) {
-      console.log(`Reached ${Math.floor(scrollPercentage / 10) * 10}%`);
-
       lastPercentage.current = Math.floor(scrollPercentage / 10) * 10;
     }
   }, 1000);
@@ -45,7 +43,6 @@ export const useReportReadingRate = (timeToRead: number) => {
         scrollPercentage: lastPercentage.current,
       });
     } else {
-      console.log(document.visibilityState);
       startTime.current = Date.now();
     }
   };
