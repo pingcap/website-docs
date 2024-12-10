@@ -19,6 +19,9 @@ module.exports = {
   jsxRuntime: "automatic",
   plugins: [
     {
+      resolve: "@sentry/gatsby",
+    },
+    {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
         id: "GTM-WQG8Z75",
