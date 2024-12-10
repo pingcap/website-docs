@@ -1,4 +1,5 @@
 require("ts-node").register({ transpileOnly: true });
+require("dotenv").config();
 
 const path = require("path");
 
