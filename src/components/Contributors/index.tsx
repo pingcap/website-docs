@@ -155,6 +155,10 @@ export const useTotalContributors = (
     const authorLoginList: string[] = [];
     const authors = commits.reduce<AvatarItem[]>(
       (prev, commit): AvatarItem[] => {
+        if (!commit.author) {
+          return prev;
+        }
+
         const {
           login,
           avatar_url,
