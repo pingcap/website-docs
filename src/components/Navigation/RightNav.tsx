@@ -86,11 +86,6 @@ export default function RightNav(props: RightNavProps) {
                 label={t("doc.download-pdf")}
                 rel="noreferrer"
                 download
-                onClick={() => {
-                  gtmTrack(GTMEvent.DownloadPDF, {
-                    position: "right_nav",
-                  });
-                }}
               />
             )}
             {buildType !== "archive" && (

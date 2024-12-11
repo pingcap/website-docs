@@ -1,11 +1,9 @@
 export const GTMEvent = {
   ClickHeadNav: "docs_navi_click",
   ClickFooter: "docs_footer_click",
-  SignupCloud: "go_to_cloud_signup",
-  SigninCloud: "signin_click",
-  GotoPlayground: "go_to_playground",
-  DownloadPDF: "docs_download",
-  AskTiDBAI: "ask_tidb_ai",
+  UseOnsiteSearch: "use_onsite_search",
+  UseExternalSearch: "use_external_search",
+  ReadingRate: "reading_rate",
 } as const;
 
 export function gtmTrack(

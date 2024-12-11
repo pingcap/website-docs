@@ -10,6 +10,7 @@ import { styled } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Card, MenuItem, Popper, PopperProps } from "@mui/material";
 import { Locale } from "shared/interface";
+import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 const StyledTextField = styled((props: TextFieldProps) => (
   <TextField {...props} />
@@ -67,6 +68,7 @@ export default function Search(props: {
     inputEl.current?.blur();
 
     if (searchType === SearchType.Onsite) {
+      gtmTrack(GTMEvent.UseOnsiteSearch);
       navigate(
         `/search?type=${docInfo.type}&version=${docInfo.version}&q=${q}`,
         {
@@ -85,6 +87,9 @@ export default function Search(props: {
     }`;
 
     if (searchType === SearchType.Google) {
+      gtmTrack(GTMEvent.UseExternalSearch, {
+        search_type: searchType,
+      });
       window.open(
         `https://www.google.com/search?q=site%3Adocs.pingcap.com/${segmentPath}+${q}`,
         "_blank"
@@ -93,6 +98,9 @@ export default function Search(props: {
     }
 
     if (searchType === SearchType.Bing) {
+      gtmTrack(GTMEvent.UseExternalSearch, {
+        search_type: searchType,
+      });
       window.open(
         `https://cn.bing.com/search?q=site%3Adocs.pingcap.com/${segmentPath}+${q}`,
         "_blank"
