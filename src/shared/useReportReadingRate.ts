@@ -38,7 +38,7 @@ export const useReportReadingRate = (timeToRead: number) => {
       gtmTrack(GTMEvent.ReadingRate, {
         readingRate:
           Math.min(Math.floor((timeSpent / timeToReadSecond) * 100) / 100, 1) *
-          lastPercentage.current,
+          Math.min(lastPercentage.current / 100, 1),
         timeToRead: timeToReadSecond,
         timeSpent,
         scrollPercentage: lastPercentage.current,
