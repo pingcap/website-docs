@@ -243,7 +243,7 @@ export const transformCustomId = (
 };
 
 export function removeHtmlTag(str: string) {
-  if (!str) {
+  if (!str || typeof str !== "string") {
     return str;
   }
   const result = str
