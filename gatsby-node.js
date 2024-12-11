@@ -1,8 +1,6 @@
 require("ts-node").register({ transpileOnly: true });
 require("dotenv").config();
 
-const path = require("path");
-
 const {
   createDocs,
   createDocHome,
@@ -11,6 +9,9 @@ const {
   create404,
 } = require("./gatsby/create-pages");
 const { createExtraType } = require("./gatsby/create-types");
+const {
+  createConditionalToc,
+} = require("./gatsby/plugin/if-condition/create-conditional-toc");
 
 exports.createPages = async ({ graphql, actions }) => {
   await createDocHome({ graphql, actions });
@@ -24,4 +25,7 @@ exports.createPages = async ({ graphql, actions }) => {
   create404({ actions });
 };
 
-exports.createSchemaCustomization = createExtraType;
+exports.createSchemaCustomization = (options) => {
+  createExtraType(options);
+  createConditionalToc(options);
+};
