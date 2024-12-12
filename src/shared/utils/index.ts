@@ -243,12 +243,12 @@ export const transformCustomId = (
 };
 
 export function removeHtmlTag(str: string) {
-  if (!str || typeof str !== "string") {
+  if (!str) {
     return str;
   }
   const result = str
-    .replaceAll(/<[^>]*>/g, " ")
-    .replaceAll(/\\s+/g, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\\s+/g, " ")
     .trim();
   if (!result) {
     return str;
