@@ -17,11 +17,9 @@ import { PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
-import {
-  CustomContent,
-  useCustomContent,
-} from "components/MDXComponents/CustomContent";
+import { useCustomContent } from "components/MDXComponents/CustomContent";
 import { getPageType } from "shared/utils";
+import { ExternalLink } from "components/ExternalLink";
 
 export default function MDXContent(props: {
   data: any;
@@ -88,6 +86,7 @@ export default function MDXContent(props: {
           components={{
             ...MDXComponents,
             Link,
+            ExternalLink,
             pre: Pre,
             CustomContent: CustomContentWithPageType,
           }}
