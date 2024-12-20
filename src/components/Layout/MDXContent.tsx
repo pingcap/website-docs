@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link } from "gatsby";
 
 import { MDXProvider } from "@mdx-js/react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
@@ -19,7 +18,6 @@ import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
 import { getPageType } from "shared/utils";
-import { ExternalLink } from "components/ExternalLink";
 
 export default function MDXContent(props: {
   data: any;
@@ -85,8 +83,6 @@ export default function MDXContent(props: {
         <MDXProvider
           components={{
             ...MDXComponents,
-            Link,
-            ExternalLink,
             pre: Pre,
             CustomContent: CustomContentWithPageType,
           }}
