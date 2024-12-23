@@ -32,3 +32,5 @@ export {
   DevToolGroup,
   DevToolCard,
 } from "components/MDXComponents/developer";
+
+export { TargetLink as Link } from "./Link";
