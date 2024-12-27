@@ -168,15 +168,13 @@ export default function DocTemplate({
             sx={{
               width: "100%",
               maxWidth: {
-                lg: frontmatter?.hide_leftNav
-                  ? "100%"
-                  : "calc(100% - 18.75rem)",
+                lg: frontmatter?.hide_leftNav ? "100%" : "calc(100% - 240px)",
               },
             }}
           >
             <Box
               sx={{
-                maxWidth: "1200px",
+                maxWidth: "1280px",
                 width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",

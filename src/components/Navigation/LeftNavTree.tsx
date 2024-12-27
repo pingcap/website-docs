@@ -8,14 +8,10 @@ import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 
-import {
-  DocLeftNavItem,
-  DocLeftNav,
-  DocLeftNavItemContent,
-} from "shared/interface";
+import { RepoNavLink, RepoNav, RepoNavLinkContent } from "shared/interface";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "shared/utils";
-import { Tooltip } from "@mui/material";
+import { alpha, Chip, Tooltip } from "@mui/material";
 
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;
@@ -44,6 +40,7 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     [`& .${treeItemClasses.label}`]: {
       fontWeight: "inherit",
       color: "inherit",
+      paddingLeft: 0,
     },
     [`& .${treeItemClasses.iconContainer}`]: {
       display: "none",
@@ -51,9 +48,6 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   },
   [`& .${treeItemClasses.group}`]: {
     marginLeft: 0,
-    [`& .${treeItemClasses.content}`]: {
-      paddingLeft: theme.spacing(2),
-    },
   },
 }));
 
@@ -69,35 +63,18 @@ function StyledTreeItem(props: StyledTreeItemProps) {
 
   return (
     <StyledTreeItemRoot
-      // label={
-      //   <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
-      //     <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
-      //     <Typography
-      //       variant="body2"
-      //       sx={{ fontWeight: "inherit", flexGrow: 1 }}
-      //     >
-      //       {labelText}
-      //     </Typography>
-      //     <Typography variant="caption" color="inherit">
-      //       {labelInfo}
-      //     </Typography>
-      //   </Box>
-      // }
       style={{
-        marginTop: "0.1875rem",
-        marginBottom: "0.1875rem",
+        marginTop: "4px",
+        marginBottom: "4px",
       }}
       {...other}
     />
   );
 }
 
-const calcExpandedIds = (data: DocLeftNavItem[], targetLink: string) => {
+const calcExpandedIds = (data: RepoNavLink[], targetLink: string) => {
   const ids: string[] = [];
-  const treeForeach = (
-    data: DocLeftNavItem[],
-    parents: string[] = []
-  ): void => {
+  const treeForeach = (data: RepoNavLink[], parents: string[] = []): void => {
     data.forEach((item) => {
       if (item.link === targetLink) {
         ids.push(...parents);
@@ -114,7 +91,7 @@ const calcExpandedIds = (data: DocLeftNavItem[], targetLink: string) => {
 };
 
 export default function ControlledTreeView(props: {
-  data: DocLeftNav;
+  data: RepoNav;
   current: string;
 }) {
   const { data, current: currentUrl } = props;
@@ -148,8 +125,30 @@ export default function ControlledTreeView(props: {
     }
   }, [selected]);
 
-  const renderTreeItems = (items: DocLeftNavItem[], deepth = 0) => {
-    return items.map((item: DocLeftNavItem) => {
+  const renderNavs = (items: RepoNavLink[]) => {
+    return items.map((item) => {
+      if (item.type === "heading") {
+        return (
+          <Typography
+            pl="22px"
+            mb="8px"
+            mt="16px"
+            fontWeight={700}
+            fontSize="14px"
+            color="#c4cdd0"
+            sx={{ textTransform: "uppercase" }}
+          >
+            {item.content[0] as string}
+          </Typography>
+        );
+      } else {
+        return renderTreeItems([item]);
+      }
+    });
+  };
+
+  const renderTreeItems = (items: RepoNavLink[], deepth = 0) => {
+    return items.map((item: RepoNavLink) => {
       const hasChildren = item.children && item.children.length > 0;
       const isItemExpanded = expanded.includes(item.id);
       const LabelEle = () => {
@@ -181,7 +180,7 @@ export default function ControlledTreeView(props: {
             ) : (
               <Box width={16} height={16} />
             )}
-            {generateItemLabel(item.content)}
+            {generateItemLabel(item)}
           </Stack>
         );
       };
@@ -195,15 +194,12 @@ export default function ControlledTreeView(props: {
           <StyledTreeItem
             nodeId={item.id}
             label={<LabelEle />}
-            // onClick={() => {
-            //   console.log(item.id);
-            // }}
             ContentProps={{
               style: { width: "inherit" },
             }}
           >
             {hasChildren
-              ? renderTreeItems(item.children as DocLeftNavItem[], deepth + 1)
+              ? renderTreeItems(item.children as RepoNavLink[], deepth + 1)
               : null}
           </StyledTreeItem>
         </LinkComponent>
@@ -223,51 +219,61 @@ export default function ControlledTreeView(props: {
       selected={selected}
       onNodeToggle={handleToggle}
     >
-      {renderTreeItems(data)}
+      {renderNavs(data)}
     </TreeView>
   );
 }
 
-const generateItemLabel = (content: DocLeftNavItemContent) => {
+const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
+  const tagQuery = new URLSearchParams(tag?.query);
+  const tagColor = tagQuery.get("color");
+  const tagColor06 = tagColor && alpha(tagColor, 0.2);
   return (
-    <Box sx={{ width: "100%", overflow: "hidden", textOverflow: "ellipsis" }}>
-      {content.map((content, index) =>
-        typeof content === "string" ? (
-          <Tooltip
-            key={`${content}-${index}`}
-            title={content}
-            enterDelay={1000}
-          >
-            <Typography
-              component="div"
-              sx={{
-                color: "inherit",
-                fontSize: "0.875rem",
-                lineHeight: "1.25rem",
-              }}
-            >
-              {content}
-            </Typography>
-          </Tooltip>
-        ) : (
-          <Tooltip
-            key={`${content}-${index}`}
-            title={content.value}
-            enterDelay={1000}
-          >
-            <Typography
-              component="code"
-              sx={{
-                color: "inherit",
-                fontSize: "0.875rem",
-                lineHeight: "1.25rem",
-              }}
-            >
-              {content.value}
-            </Typography>
-          </Tooltip>
-        )
+    <Stack sx={{ width: "100%" }} direction="row" gap="4px">
+      <Box
+        sx={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          flexShrink: 1,
+          flexGrow: 0,
+        }}
+      >
+        {contents.map((content, index) => {
+          const isContentString = typeof content === "string";
+          const c = isContentString ? content : content.value;
+          return (
+            <Tooltip key={`${content}-${index}`} title={c} enterDelay={1000}>
+              <Typography
+                component={typeof content === "string" ? "div" : "code"}
+                sx={{
+                  color: "inherit",
+                  fontSize: "0.875rem",
+                  lineHeight: "1.25rem",
+                }}
+              >
+                {c}
+              </Typography>
+            </Tooltip>
+          );
+        })}
+      </Box>
+      {tag && (
+        <Chip
+          label={tag.value}
+          variant="outlined"
+          size="small"
+          sx={{
+            flexShrink: 0,
+            textTransform: "uppercase",
+            pointerEvents: "none",
+            fontSize: "11px",
+            height: "20px",
+            borderColor: tagColor ? tagColor06 : "#ececec",
+            color: tagColor || "#8c8c8c",
+            fontWeight: 500,
+          }}
+        />
       )}
-    </Box>
+    </Stack>
   );
 };

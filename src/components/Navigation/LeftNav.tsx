@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { DocLeftNav, PathConfig, BuildType } from "shared/interface";
+import { RepoNav, PathConfig, BuildType } from "shared/interface";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
 import VersionSelect, {
@@ -18,7 +18,7 @@ import VersionSelect, {
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 
 interface LeftNavProps {
-  data: DocLeftNav;
+  data: RepoNav;
   current: string;
   name: string;
   pathConfig: PathConfig;
@@ -33,7 +33,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
     <Box
       component="aside"
       sx={{
-        width: "18.75rem",
+        width: "240px",
         borderRight: "1px solid #E5E4E4",
         display: {
           xs: "none",
@@ -44,11 +44,12 @@ export function LeftNavDesktop(props: LeftNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: "5rem",
+          top: "80px",
           height: "100%",
-          maxHeight: "calc(100vh - 7rem)",
+          maxHeight: "calc(100vh - 80px)",
+          boxSizing: "border-box",
           overflowY: "auto",
-          padding: "28px 1rem",
+          padding: "20px 14px",
         }}
       >
         {pathConfig.repo !== "tidbcloud" && (
