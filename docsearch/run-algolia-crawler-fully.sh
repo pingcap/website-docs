@@ -60,9 +60,9 @@ docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-in-k
 
 # crawl zh/en tidb-data-migration
 # docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-dev.json | jq -r tostring)" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
-docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-v5.3.json | jq -r tostring)" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
+# docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/en-tidb-data-migration-v5.3.json | jq -r tostring)" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 # docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-data-migration-dev.json | jq -r tostring)" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
-docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-data-migration-v5.3.json | jq -r tostring)" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
+# docker run --rm --env-file=.env -e "CONFIG=$(cat $1/algolia_configs/zh-tidb-data-migration-v5.3.json | jq -r tostring)" -v $1/algolia_configs:/data $DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2
 
 
 # crawl zh/en appdev
