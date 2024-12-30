@@ -497,9 +497,6 @@ export const TIDB_EN_SEARCH_INDEX_VERSION =
   CONFIG["docs"]["tidb"]["searchIndex"]["en"] || [];
 export const TIDB_ZH_SEARCH_INDEX_VERSION =
   CONFIG["docs"]["tidb"]["searchIndex"]["zh"] || [];
-export const DM_EN_LATEST_VERSION =
-  CONFIG["docs"]["tidb-data-migration"]["languages"]["en"]["versions"][0];
-export const DM_EN_STABLE_VERSION = "";
 export const OP_EN_STABLE_VERSION =
   CONFIG["docs"]["tidb-in-kubernetes"]["stable"];
 
@@ -509,10 +506,6 @@ export const TIDB_EN_VERSIONS = CONFIG["docs"]["tidb"]["languages"]["en"][
 export const TIDB_ZH_VERSIONS = CONFIG["docs"]["tidb"]["languages"]["zh"][
   "versions"
 ].map((d) => convertVersionName(d, ""));
-
-export const DM_EN_VERSIONS = CONFIG["docs"]["tidb-data-migration"][
-  "languages"
-]["en"]["versions"].map((d) => convertVersionName(d, DM_EN_STABLE_VERSION));
 
 export const OP_EN_VERSIONS = CONFIG["docs"]["tidb-in-kubernetes"]["languages"][
   "en"
@@ -533,10 +526,6 @@ export const EN_DOC_TYPE_LIST = [
     name: "TiDB in Kubernetes",
     match: "tidb-in-kubernetes",
   },
-  {
-    name: "TiDB Data Migration (DM)",
-    match: "tidb-data-migration",
-  },
 ] as const;
 
 export const ZH_DOC_TYPE_LIST = [
@@ -547,10 +536,6 @@ export const ZH_DOC_TYPE_LIST = [
   {
     name: "TiDB in Kubernetes",
     match: "tidb-in-kubernetes",
-  },
-  {
-    name: "TiDB Data Migration (DM)",
-    match: "tidb-data-migration",
   },
 ];
 

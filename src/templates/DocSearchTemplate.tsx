@@ -21,7 +21,6 @@ import { algoliaClient } from "shared/utils/algolia";
 import {
   TIDB_EN_STABLE_VERSION,
   TIDB_EN_SEARCH_INDEX_VERSION,
-  DM_EN_LATEST_VERSION,
   OP_EN_STABLE_VERSION,
   CLOUD_EN_VERSIONS,
   EN_DOC_TYPE_LIST,
@@ -34,11 +33,8 @@ import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 // TiDB: get searchable versions from fetchTidbSearchIndcies
 // TiDB Cloud: only has one version
 // TiDB Operator: get stable version
-// TiDB Data Migration: get latest version
 const fetchVersionListByDocType = (docType: string, lang: string) => {
   switch (docType) {
-    case "tidb-data-migration":
-      return [DM_EN_LATEST_VERSION];
     case "tidb-in-kubernetes":
       return [OP_EN_STABLE_VERSION];
     case "tidbcloud":
@@ -63,8 +59,6 @@ function replaceStableVersion(match: string) {
   switch (match) {
     case "tidb":
       return TIDB_EN_STABLE_VERSION;
-    // case "tidb-data-migration":
-    //   return DM_EN_STABLE_VERSION;
     case "tidb-in-kubernetes":
       return OP_EN_STABLE_VERSION;
     default:
@@ -111,8 +105,6 @@ const getSearchIndexVersion = (
       const latestVersion = versions[0];
       const stableVersion = TIDB_EN_STABLE_VERSION?.replace("release-", "v");
       return latestVersion || stableVersion;
-    case "tidb-data-migration":
-      return DM_EN_LATEST_VERSION?.replace("release-", "v");
     case "tidb-in-kubernetes":
       return OP_EN_STABLE_VERSION?.replace("release-", "v");
     default:
