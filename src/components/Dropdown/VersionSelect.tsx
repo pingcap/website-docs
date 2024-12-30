@@ -439,9 +439,6 @@ function generateArchivedWebsiteUrlByLangAndType(lang?: string, type?: string) {
     case "tidb-in-kubernetes":
       url = `${url}/tidb-in-kubernetes/v1.0`;
       break;
-    case "tidb-data-migration":
-      url = `${url}/tidb-data-migration/v1.0`;
-      break;
     default:
       break;
   }
