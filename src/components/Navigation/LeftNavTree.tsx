@@ -228,7 +228,7 @@ export default function ControlledTreeView(props: {
 const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
   const tagQuery = new URLSearchParams(tag?.query);
   const tagColor = tagQuery.get("color");
-  const tagColor06 = tagColor && alpha(tagColor, 0.2);
+  const tagColor02 = tagColor && alpha(tagColor, 0.2);
   return (
     <Stack sx={{ width: "100%" }} direction="row" gap="4px">
       <Box
@@ -268,7 +268,7 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
             pointerEvents: "none",
             fontSize: "10px",
             height: "20px",
-            borderColor: tagColor ? tagColor06 : "#ececec",
+            borderColor: tagColor ? tagColor02 : "#ececec",
             color: tagColor || "#8c8c8c",
             fontWeight: 500,
           }}

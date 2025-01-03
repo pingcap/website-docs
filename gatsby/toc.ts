@@ -79,7 +79,7 @@ function getContentFromLink(
   const image = content.children.find((n) => n.type === "image");
   const tag = image && {
     value: image.alt!,
-    query: image.url,
+    query: `?${image.url.split("?")[1]}`,
   };
 
   if (child.type === "link") {
