@@ -1,17 +1,3 @@
-export type DocLeftNavItemContent = (
-  | { code: boolean; value: string }
-  | string
-)[];
-
-export interface DocLeftNavItem {
-  content: DocLeftNavItemContent;
-  link?: string;
-  children?: DocLeftNavItem[];
-  id: string;
-}
-
-export type DocLeftNav = DocLeftNavItem[];
-
 export interface TableOfContent {
   title: string;
   url: string;
@@ -58,9 +44,16 @@ export interface FrontMatter {
   hide_leftNav?: boolean;
 }
 
+export type RepoNavLinkContent = { code: boolean; value: string } | string;
+
 export interface RepoNavLink {
-  content: ({ code: boolean; value: string } | string)[];
+  type: "nav" | "heading";
+  content: RepoNavLinkContent[];
   link?: string;
+  tag?: {
+    value: string;
+    query?: string;
+  };
   children?: RepoNavLink[];
   id: string;
 }
