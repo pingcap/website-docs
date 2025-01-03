@@ -130,7 +130,7 @@ export default function ControlledTreeView(props: {
       if (item.type === "heading") {
         return (
           <Typography
-            pl="22px"
+            pl="24px"
             mb="8px"
             mt="16px"
             fontWeight={700}
