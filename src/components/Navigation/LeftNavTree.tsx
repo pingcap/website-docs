@@ -8,10 +8,10 @@ import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 
-import { RepoNavLink, RepoNav, RepoNavLinkContent } from "shared/interface";
+import { RepoNavLink, RepoNav } from "shared/interface";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "shared/utils";
-import { alpha, Chip, Tooltip } from "@mui/material";
+import { alpha, Chip } from "@mui/material";
 
 type StyledTreeItemProps = TreeItemProps & {
   bgColor?: string;
@@ -134,7 +134,8 @@ export default function ControlledTreeView(props: {
             mb="8px"
             mt="16px"
             fontWeight={700}
-            fontSize="14px"
+            fontSize="12px"
+            lineHeight="1.15rem"
             color="#c4cdd0"
             sx={{ textTransform: "uppercase" }}
           >
@@ -242,18 +243,17 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
           const isContentString = typeof content === "string";
           const c = isContentString ? content : content.value;
           return (
-            <Tooltip key={`${content}-${index}`} title={c} enterDelay={1000}>
-              <Typography
-                component={typeof content === "string" ? "div" : "code"}
-                sx={{
-                  color: "inherit",
-                  fontSize: "0.875rem",
-                  lineHeight: "1.25rem",
-                }}
-              >
-                {c}
-              </Typography>
-            </Tooltip>
+            <Typography
+              component={typeof content === "string" ? "div" : "code"}
+              sx={{
+                color: "inherit",
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+                wordBreak: "break-word",
+              }}
+            >
+              {c}
+            </Typography>
           );
         })}
       </Box>
@@ -266,7 +266,7 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
             flexShrink: 0,
             textTransform: "uppercase",
             pointerEvents: "none",
-            fontSize: "11px",
+            fontSize: "10px",
             height: "20px",
             borderColor: tagColor ? tagColor06 : "#ececec",
             color: tagColor || "#8c8c8c",

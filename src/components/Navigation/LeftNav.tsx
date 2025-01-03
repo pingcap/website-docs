@@ -33,7 +33,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
     <Box
       component="aside"
       sx={{
-        width: "240px",
+        width: "18.75rem",
         borderRight: "1px solid #E5E4E4",
         display: {
           xs: "none",
