@@ -269,8 +269,8 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
             pointerEvents: "none",
             fontSize: "10px",
             height: "20px",
-            borderColor: tagColor ? tagColor02 : "#ececec",
-            color: tagColor || "#8c8c8c",
+            borderColor: tagColor ? tagColor02 : "#c0e1f1",
+            color: tagColor || "#2d9cd2",
             fontWeight: 500,
           }}
         />
