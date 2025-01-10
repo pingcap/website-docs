@@ -130,13 +130,13 @@ export default function ControlledTreeView(props: {
       if (item.type === "heading") {
         return (
           <Typography
-            pl="24px"
+            pl="6px"
             mb="8px"
             mt="16px"
             fontWeight={700}
             fontSize="12px"
             lineHeight="1.15rem"
-            color="#c4cdd0"
+            color="#999"
             sx={{ textTransform: "uppercase" }}
           >
             {item.content[0] as string}

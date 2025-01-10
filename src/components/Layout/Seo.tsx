@@ -124,9 +124,12 @@ export default function Seo({
       ]}
       link={[
         {
+          rel: "icon",
+          href: favicon.publicURL,
+        },
+        {
           rel: "shortcut icon",
           href: favicon.publicURL,
-          type: "image/x-icon",
         },
         ...link,
       ]}
