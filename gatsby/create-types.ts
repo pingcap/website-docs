@@ -1,10 +1,10 @@
-import { CreatePagesArgs } from 'gatsby'
-import { generateConfig } from './path'
-import { mdxAstToToc } from './toc'
-import { Root, List } from 'mdast'
+import { CreatePagesArgs } from "gatsby";
+import { generateConfig } from "./path";
+import { mdxAstToToc } from "./toc";
+import { Root, List } from "mdast";
 
 export const createExtraType = ({ actions }: CreatePagesArgs) => {
-  const { createTypes, createFieldExtension } = actions
+  const { createTypes, createFieldExtension } = actions;
 
   const typeDefs = `
     """
@@ -26,12 +26,12 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
       hide_commit: Boolean
       hide_leftNav: Boolean
     }
-  `
+  `;
 
-  createTypes(typeDefs)
+  createTypes(typeDefs);
 
   createFieldExtension({
-    name: 'navigation',
+    name: "navigation",
     extend() {
       return {
         async resolve(
@@ -40,38 +40,34 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
           context: unknown,
           info: any
         ) {
-          if (mdxNode.nav) return mdxNode.nav
-          const types = info.schema.getType('Mdx').getFields()
-          const slug = await types['slug'].resolve(mdxNode, args, context, {
-            fieldName: 'slug',
-          })
+          if (mdxNode.nav) return mdxNode.nav;
+          const types = info.schema.getType("Mdx").getFields();
+          const slug = await types["slug"].resolve(mdxNode, args, context, {
+            fieldName: "slug",
+          });
 
-          const mdxAST: Root = await types['mdxAST'].resolve(
+          const mdxAST: Root = await types["mdxAST"].resolve(
             mdxNode,
             args,
             context,
             {
-              fieldName: 'mdxAST',
+              fieldName: "mdxAST",
             }
-          )
+          );
 
-          if (!slug.endsWith('TOC'))
-            throw new Error(`unsupported query in ${slug}`)
-          const { config } = generateConfig(slug)
-          const res = mdxAstToToc(
-            (mdxAST.children.find(node => node.type === 'list') as List)
-              .children,
-            config
-          )
-          mdxNode.nav = res
-          return res
+          if (!slug.endsWith("TOC"))
+            throw new Error(`unsupported query in ${slug}`);
+          const { config } = generateConfig(slug);
+          const res = mdxAstToToc(mdxAST.children, config);
+          mdxNode.nav = res;
+          return res;
         },
-      }
+      };
     },
-  })
+  });
   createTypes(`
     type Mdx implements Node {
       navigation: JSON! @navigation
     }
-  `)
-}
+  `);
+};
