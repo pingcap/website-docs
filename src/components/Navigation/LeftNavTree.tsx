@@ -169,6 +169,7 @@ export default function ControlledTreeView(props: {
               <ChevronRightIcon
                 className="MuiTreeItem-ChevronRightIcon"
                 sx={{
+                  flexShrink: 0,
                   fill: theme.palette.website.f3,
                   height: "16px",
                   width: "16px",
@@ -179,7 +180,7 @@ export default function ControlledTreeView(props: {
                 }}
               />
             ) : (
-              <Box width={16} height={16} />
+              <Box sx={{ flexShrink: 0 }} width={16} height={16} />
             )}
             {generateItemLabel(item)}
           </Stack>
