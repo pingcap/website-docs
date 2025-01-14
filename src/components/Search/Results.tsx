@@ -74,6 +74,10 @@ export default function SearchResults(props: {
     );
   }
 
+  React.useEffect(() => {
+    setPage(0);
+  }, [data]);
+
   return (
     <Box
       sx={{
