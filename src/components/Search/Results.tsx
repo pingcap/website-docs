@@ -49,6 +49,10 @@ export default function SearchResults(props: {
     }
   };
 
+  React.useEffect(() => {
+    setPage(0);
+  }, [data]);
+
   if (loading) {
     return (
       <Box
