@@ -43,9 +43,15 @@ export default function Search(props: {
   disableResponsive?: boolean;
   disableExternalSearch?: boolean;
   docInfo: { type: string; version: string };
+  onSubmit?: (query: string) => void;
 }) {
-  const { placeholder, disableResponsive, docInfo, disableExternalSearch } =
-    props;
+  const {
+    placeholder,
+    disableResponsive,
+    docInfo,
+    disableExternalSearch,
+    onSubmit,
+  } = props;
 
   const anchorEl = React.useRef<HTMLDivElement>(null);
   const inputEl = React.useRef<HTMLInputElement>(null);
@@ -79,6 +85,7 @@ export default function Search(props: {
           },
         }
       );
+      onSubmit?.(query);
       return;
     }
 

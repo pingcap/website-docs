@@ -129,9 +129,8 @@ export default function DocSearchTemplate({
   const [docQuery, setDocQuery] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [results, setResults] = React.useState<any[]>([]);
-  const [searched, setSearched] = React.useState(false);
 
-  const { language } = useI18next();
+  const { language, navigate } = useI18next();
   const location = useLocation();
 
   React.useEffect(() => {
@@ -142,50 +141,63 @@ export default function DocSearchTemplate({
     setDocType(type);
     setDocVersion(version);
     setDocQuery(query);
-  }, [location.search]);
 
-  React.useEffect(() => {
-    if (docType && docQuery) {
-      execSearch();
-    }
-  }, [docType, docQuery, docVersion]);
+    execSearch(query, type, version);
+  }, []);
 
   const realVersionMemo = React.useMemo(() => {
     return getSearchIndexVersion(docType, docVersion, language);
   }, [docType, docVersion]);
-  const tidbSearchIndciesMemo = React.useMemo(() => {
-    return fetchTidbSearchIndcies(language);
-  }, []);
 
-  const execSearch = () => {
-    // const realVersion = convertStableToRealVersion(docType, docVersion);
-    // const realVersion = getSearchIndexVersion(docType, docVersion);
+  const execSearch = (search: string, type: string, version: string) => {
+    if (!search || !type) {
+      return;
+    }
+
+    const realVersion = getSearchIndexVersion(type, version, language);
     const index = algoliaClient.initIndex(
-      `${language}-${docType}${realVersionMemo ? `-${realVersionMemo}` : ""}`
+      `${language}-${type}${realVersion ? `-${realVersion}` : ""}`
     );
     setIsLoading(true);
 
     index
-      .search(docQuery, {
+      .search(search, {
         hitsPerPage: 150,
       })
       .then(({ hits }) => {
         setResults(hits);
-        setSearched(true);
         setIsLoading(false);
       })
       .catch((reason: any) => {
         console.error(reason);
         setResults([]);
-        setSearched(true);
         setIsLoading(false);
       });
   };
 
-  const handleSelectDocType = (
-    selected: typeof EN_DOC_TYPE_LIST[number]["match"]
-  ) => {
-    setDocType(selected);
+  const handleSelectDocType = (type: string) => {
+    setDocType(type);
+    setDocVersion("");
+    navigate(`/search?type=${type}&q=${docQuery}`, {
+      state: {
+        type,
+        version: "",
+        query: docQuery,
+      },
+    });
+    execSearch(docQuery, type, "");
+  };
+
+  const handleSelectDocVersion = (version: string) => {
+    setDocVersion(version);
+    navigate(`/search?type=${docType}&version=${version}&q=${docQuery}`, {
+      state: {
+        type: docType,
+        version,
+        query: docQuery,
+      },
+    });
+    execSearch(docQuery, docType, version);
   };
 
   const bannerVisible = feature?.banner && language !== Locale.ja;
@@ -214,6 +226,7 @@ export default function DocSearchTemplate({
                 type: docType,
                 version: realVersionMemo || "stable",
               }}
+              onSubmit={(query) => execSearch(query, docType, docVersion)}
             />
             <Box
               sx={{
@@ -286,7 +299,7 @@ export default function DocSearchTemplate({
                           size="small"
                           variant="text"
                           onClick={() => {
-                            setDocVersion(version);
+                            handleSelectDocVersion(version);
                           }}
                           sx={(theme) => ({
                             backgroundColor:
