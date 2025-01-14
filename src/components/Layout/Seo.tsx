@@ -23,7 +23,7 @@ export default function Seo({
   link = [],
   archived = false,
 }: Props) {
-  const { site, favicon, favicon48 } = useStaticQuery(graphql`
+  const { site, favicon } = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
@@ -35,9 +35,6 @@ export default function Seo({
       favicon: file(relativePath: { eq: "favicon.ico" }) {
         publicURL
       }
-      # favicon48: file(relativePath: { eq: "favicon-48x48.ico" }) {
-      #   publicURL
-      # }
     }
   `);
 
