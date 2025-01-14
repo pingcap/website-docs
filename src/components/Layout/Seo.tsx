@@ -35,9 +35,9 @@ export default function Seo({
       favicon: file(relativePath: { eq: "favicon.ico" }) {
         publicURL
       }
-      favicon48: file(relativePath: { eq: "favicon-48x48.ico" }) {
-        publicURL
-      }
+      # favicon48: file(relativePath: { eq: "favicon-48x48.ico" }) {
+      #   publicURL
+      # }
     }
   `);
 
@@ -126,11 +126,11 @@ export default function Seo({
         ...meta,
       ]}
       link={[
-        {
-          rel: "icon",
-          sizes: "48x48",
-          href: favicon48.publicURL,
-        },
+        // {
+        //   rel: "icon",
+        //   sizes: "48x48",
+        //   href: favicon48.publicURL,
+        // },
         {
           rel: "icon",
           sizes: "256x256",
