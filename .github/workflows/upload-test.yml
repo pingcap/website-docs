@@ -1,0 +1,30 @@
+name: Upload test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build website
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: "master"
+
+      - name: Set known_hosts
+        id: known-hosts
+        run: |
+          echo "BJ1=$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})" >> $GITHUB_OUTPUT
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: |
+            ${{ steps.known-hosts.outputs.BJ1 }}
+
+      - name: Deploy to BJ1
+        run: |
+          rsync -avz --delete README.md "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}/test"
+
