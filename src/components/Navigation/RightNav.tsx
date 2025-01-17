@@ -82,7 +82,7 @@ export default function RightNav(props: RightNavProps) {
             {pageType !== "tidbcloud" && (
               <ActionItem
                 icon={SimCardDownloadIcon}
-                url={`https://download.pingcap.org/${pdfUrlMemo}`}
+                url={`https://docs-download.pingcap.com/pdf/${pdfUrlMemo}`}
                 label={t("doc.download-pdf")}
                 rel="noreferrer"
                 download
