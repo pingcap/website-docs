@@ -26,5 +26,5 @@ jobs:
 
       - name: Deploy to BJ1
         run: |
-          rsync -avz --delete README.md "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}/test"
+          rsync -avz --delete README.md "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
