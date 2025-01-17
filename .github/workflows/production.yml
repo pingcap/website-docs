@@ -103,7 +103,8 @@ jobs:
       - name: Set known_hosts
         id: known-hosts
         run: |
-          echo "BJ_PROXY=$(ssh-keyscan -H ${{ secrets.BJ_PROXY_HOST }})" >> $GITHUB_OUTPUT
+          echo "BJ1=$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})" >> $GITHUB_OUTPUT
+          echo "BJ2=$(ssh-keyscan -H ${{ secrets.BJ_2_HOST }})" >> $GITHUB_OUTPUT
           echo "LA1=$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})" >> $GITHUB_OUTPUT
           echo "LA2=$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})" >> $GITHUB_OUTPUT
 
@@ -112,7 +113,8 @@ jobs:
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: |
-            ${{ steps.known-hosts.outputs.BJ_PROXY }}
+            ${{ steps.known-hosts.outputs.BJ1 }}
+            ${{ steps.known-hosts.outputs.BJ2 }}
             ${{ steps.known-hosts.outputs.LA1 }}
             ${{ steps.known-hosts.outputs.LA2 }}
 
@@ -126,8 +128,8 @@ jobs:
 
       - name: Deploy to BJ1
         run: |
-          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_1_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
 
       - name: Deploy to BJ2
         run: |
-          rsync -avz --delete -e 'ssh -p ${{ secrets.BJ_2_PROXY_PORT }} -o StrictHostKeyChecking=no' public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_PROXY_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
