@@ -118,14 +118,6 @@ jobs:
             ${{ steps.known-hosts.outputs.LA1 }}
             ${{ steps.known-hosts.outputs.LA2 }}
 
-      - name: Deploy to LA1
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
-      - name: Deploy to LA2
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
       - name: Deploy to BJ1
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
@@ -133,3 +125,11 @@ jobs:
       - name: Deploy to BJ2
         run: |
           rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+
+      - name: Deploy to LA1
+        run: |
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+
+      - name: Deploy to LA2
+        run: |
+          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
