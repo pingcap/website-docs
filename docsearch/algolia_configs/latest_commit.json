@@ -1,9 +1,9 @@
 {
     "en-tidb-dev": "9680a4b7e1e708f90341dcbb0795247e64ba441a",
-    "en-tidb-v8.5": "5bacf79109cb84f721d88cffe5baa91e32fc52ef",
+    "en-tidb-v8.5": "dac6c01b6b765ee0e2a793a349e81739619c3e99",
     "en-tidb-v8.4": "e59e47ff62553c55a7a89410db58348712139f5d",
     "en-tidb-v8.2": "d57145a581d900b6af036184fe27be7b8cedcb10",
-    "en-tidb-v8.1": "fc3086591cfae2d4a7d99b3b7b6d8fd4a0a71348",
+    "en-tidb-v8.1": "4834abed8d484099b75b0dbc3795ddccf8d23c1a",
     "en-tidb-v8.0": "71dd7b0f4026e3ddd3ae44c6a51455f4f6e77f62",
     "en-tidb-v7.6": "85c5e77bcb643167a4e9c6e6ae96f35d15868eb1",
     "en-tidb-v7.5": "0c520e10ad2cb1a11c6e87c108105350b85af328",
@@ -58,7 +58,7 @@
     "zh-tidb-v3.0": "315c806ddf6b94801fb5df553095328dbd7c1478",
     "zh-tidb-v2.1": "b5c2c5843308d300f1cbc7cb61b33d46020a1b68",
     "en-tidb-in-kubernetes-dev": "f5da8f02700a0bdfcc6509320925e250ea2b1d5f",
-    "en-tidb-in-kubernetes-v1.6": "eb064bf5238f7cd3d57cdd7256449d2ac923a617",
+    "en-tidb-in-kubernetes-v1.6": "c0142839d05bb32699d4376f3691f787fbbe4c85",
     "en-tidb-in-kubernetes-v1.5": "a033a1b3e4c8a18b1475bcb6b5529e9c4c97a9fb",
     "en-tidb-in-kubernetes-v1.4": "40d583216f73d02411b06981c03788cea7912a1f",
     "en-tidb-in-kubernetes-v1.3": "1fc555e2b3a715b5e549660611c424d84b5e82e5",
@@ -66,7 +66,7 @@
     "en-tidb-in-kubernetes-v1.1": "46bc5b0315855e2e82f7613574a67f4c8df71e79",
     "en-tidb-in-kubernetes-v1.0": "fa07c73b368bfb816953f37c05df07d78c64b631",
     "zh-tidb-in-kubernetes-dev": "f5da8f02700a0bdfcc6509320925e250ea2b1d5f",
-    "zh-tidb-in-kubernetes-v1.6": "eb064bf5238f7cd3d57cdd7256449d2ac923a617",
+    "zh-tidb-in-kubernetes-v1.6": "c0142839d05bb32699d4376f3691f787fbbe4c85",
     "zh-tidb-in-kubernetes-v1.5": "a033a1b3e4c8a18b1475bcb6b5529e9c4c97a9fb",
     "zh-tidb-in-kubernetes-v1.4": "40d583216f73d02411b06981c03788cea7912a1f",
     "zh-tidb-in-kubernetes-v1.3": "1fc555e2b3a715b5e549660611c424d84b5e82e5",
@@ -81,7 +81,7 @@
     "zh-tidb-data-migration-v5.3": "9074bb1e9e44385c4d97bf8dee5eb81bdf94ab53",
     "zh-tidb-data-migration-v2.0": "a454c743be222c86463c67b352d3c70596f67534",
     "zh-tidb-data-migration-v1.0": "f1d3ae7bf33922bab66ec9c333499fa2e0de6a02",
-    "en-tidbcloud": "3b6d4991159dddcd2aecfd32c5f26aadfedad74f",
+    "en-tidbcloud": "868b6eda0cffbca2fcc917f0f2d043e4e48d9a3c",
     "en-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74",
     "zh-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74"
 }
