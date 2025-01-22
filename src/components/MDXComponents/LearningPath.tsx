@@ -288,9 +288,10 @@ export function LearningPath(props: {
             flexWrap: "wrap",
             justifyContent: "flex-start",
             rowGap: "1rem",
+            columnGap: "8px",
 
             "& > p": {
-              flex: { xs: "50% 1", md: "0 0 33%" },
+              flex: { xs: "50% 1", md: "0 0 32%" },
             },
           }}
         >
