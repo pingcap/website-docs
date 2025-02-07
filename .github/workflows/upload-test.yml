@@ -6,25 +6,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build website
+    name: Upload to COS
+    env:
+      RCLONE_CONN_STRING: ":s3,endpoint=cos.ap-beijing.myqcloud.com,access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }},secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }},force_path_style=false"
+      TENCENTCLOUD_BUCKET_ID: ${{ secrets.TENCENTCLOUD_BUCKET_ID }}
     steps:
       - uses: actions/checkout@v3
         with:
           ref: "master"
 
-      - name: Set known_hosts
-        id: known-hosts
+      - name: Install rclone
         run: |
-          echo "BJ1=$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})" >> $GITHUB_OUTPUT
+          curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+          unzip rclone-current-linux-amd64.zip
+          mv rclone-*-linux-amd64/rclone ./
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: |
-            ${{ steps.known-hosts.outputs.BJ1 }}
-
-      - name: Deploy to BJ1
-        run: |
-          rsync -avz --delete README.md "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
+      - name: Upload test file
+        run: ./rclone copyto README.md "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/README.md"
