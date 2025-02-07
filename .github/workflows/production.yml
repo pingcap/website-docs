@@ -111,5 +111,4 @@ jobs:
           RCLONE_CONN_STRING: ":s3,endpoint=cos.ap-beijing.myqcloud.com,access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }},secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }},force_path_style=false"
           TENCENTCLOUD_BUCKET_ID: ${{ secrets.TENCENTCLOUD_BUCKET_ID }}
         run: |
-          ./rclone sync "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/prod" "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/archive" --delete-before --progress
-          ./rclone sync public/ "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/prod" --delete-before --progress
+          ./rclone sync public/ "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/prod" --delete-before
