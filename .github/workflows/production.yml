@@ -100,15 +100,19 @@ jobs:
           sudo apt install tree
           tree public
 
-      - name: Install rclone
-        run: |
-          curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
-          unzip rclone-current-linux-amd64.zip
-          mv rclone-*-linux-amd64/rclone ./
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+          aws-secret-access-key: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
 
       - name: Upload test file
         env:
-          RCLONE_CONN_STRING: ":s3,endpoint=cos.ap-beijing.myqcloud.com,access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }},secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }},force_path_style=false"
           TENCENTCLOUD_BUCKET_ID: ${{ secrets.TENCENTCLOUD_BUCKET_ID }}
         run: |
-          ./rclone sync public/ "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/prod" --delete-before
+          aws s3 sync public/ s3://${TENCENTCLOUD_BUCKET_ID} \
+            --no-progress \
+            --follow-symlinks \
+            --size-only \
+            --delete \
+            --endpoint-url https://cos.na-ashburn.myqcloud.com
