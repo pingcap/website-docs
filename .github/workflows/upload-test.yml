@@ -17,7 +17,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           aws-secret-access-key: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
-          aws-region: na-ashburn
+          aws-region: us-west-1
 
       - name: Upload test file
         env:
