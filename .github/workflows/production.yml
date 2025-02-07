@@ -100,36 +100,16 @@ jobs:
           sudo apt install tree
           tree public
 
-      - name: Set known_hosts
-        id: known-hosts
+      - name: Install rclone
         run: |
-          echo "BJ1=$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})" >> $GITHUB_OUTPUT
-          echo "BJ2=$(ssh-keyscan -H ${{ secrets.BJ_2_HOST }})" >> $GITHUB_OUTPUT
-          echo "LA1=$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})" >> $GITHUB_OUTPUT
-          echo "LA2=$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})" >> $GITHUB_OUTPUT
+          curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+          unzip rclone-current-linux-amd64.zip
+          mv rclone-*-linux-amd64/rclone ./
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: |
-            ${{ steps.known-hosts.outputs.BJ1 }}
-            ${{ steps.known-hosts.outputs.BJ2 }}
-            ${{ steps.known-hosts.outputs.LA1 }}
-            ${{ steps.known-hosts.outputs.LA2 }}
-
-      - name: Deploy to BJ1
+      - name: Upload test file
+        env:
+          RCLONE_CONN_STRING: ":s3,endpoint=cos.ap-beijing.myqcloud.com,access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }},secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }},force_path_style=false"
+          TENCENTCLOUD_BUCKET_ID: ${{ secrets.TENCENTCLOUD_BUCKET_ID }}
         run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
-      - name: Deploy to BJ2
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
-      - name: Deploy to LA1
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
-      - name: Deploy to LA2
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+          ./rclone sync "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/prod" "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/archive" --delete-before --progress
+          ./rclone sync public/ "${RCLONE_CONN_STRING}:${TENCENTCLOUD_BUCKET_ID}/prod" --delete-before --progress
