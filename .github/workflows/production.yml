@@ -103,6 +103,10 @@ jobs:
       - name: AWS CLI Config Init
         run: |
           mkdir -p ~/.aws
+          touch ~/.aws/config
+          echo "[default]
+          s3 =
+              addressing_style = virtual " > ~/.aws/config
           touch ~/.aws/credentials
           echo "[default]
           aws_access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }}
