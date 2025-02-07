@@ -112,7 +112,7 @@ jobs:
           aws_access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }}
           aws_secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }}" > ~/.aws/credentials
 
-      - name: Upload test file
+      - name: Deploy to COS
         run: |
           aws s3 sync public/ s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
             --no-progress \
