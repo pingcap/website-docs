@@ -7,9 +7,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Upload to COS
-    env:
-      RCLONE_CONN_STRING: ":s3,endpoint=cos.ap-beijing.myqcloud.com,access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }},secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }},force_path_style=false"
-      TENCENTCLOUD_BUCKET_ID: ${{ secrets.TENCENTCLOUD_BUCKET_ID }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -20,6 +17,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           aws-secret-access-key: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+          aws-region: na-ashburn
 
       - name: Upload test file
         env:
