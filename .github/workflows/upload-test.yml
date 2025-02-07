@@ -26,12 +26,9 @@ jobs:
 
       - name: Upload test file
         run: |
-          ls
           aws s3 cp README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
             --no-progress \
             --follow-symlinks \
-            --size-only \
-            --delete \
             --endpoint-url https://cos.na-ashburn.myqcloud.com
 
       - name: AWS CLI Config Clear
