@@ -20,7 +20,7 @@ jobs:
 
       - name: Upload test file
         run: |
-          ./coscli cp README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
+          coscli cp README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
             --init-skip \
             --recursive \
             --secret-id=${{ secrets.TENCENTCLOUD_SECRET_ID }} \
