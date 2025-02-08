@@ -119,6 +119,7 @@ jobs:
             --follow-symlinks \
             --size-only \
             --delete \
+            --no-checksum-algorithm \
             --endpoint-url https://cos.na-ashburn.myqcloud.com
 
       - name: AWS CLI Config Clear

@@ -29,6 +29,7 @@ jobs:
           aws s3 cp README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
             --no-progress \
             --follow-symlinks \
+            --no-checksum-algorithm \
             --endpoint-url https://cos.na-ashburn.myqcloud.com
 
       - name: AWS CLI Config Clear
