@@ -20,10 +20,9 @@ jobs:
 
       - name: Upload test file
         run: |
-          ./coscli --version
           ./coscli cp README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
             --init-skip \
             --recursive \
-            --secret-id=${{ secrets.TENCENTCLOUD_SECRET_ID }} \
-            --secret-key=${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint-url https://cos.na-ashburn.myqcloud.com
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint https://cos.na-ashburn.myqcloud.com
