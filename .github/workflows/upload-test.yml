@@ -16,6 +16,7 @@ jobs:
         run: |
           curl -O https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
           mv coscli-linux-amd64 coscli
+          chmod 755 coscli
 
       - name: Upload test file
         run: |
