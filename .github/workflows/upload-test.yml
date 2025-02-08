@@ -14,7 +14,7 @@ jobs:
 
       - name: Install coscli
         run: |
-          wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
+          curl -O https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
           mv coscli-linux-amd64 coscli
           chmod 755 coscli
 
@@ -26,4 +26,3 @@ jobs:
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com
-          cat ./coscli_output/*/*

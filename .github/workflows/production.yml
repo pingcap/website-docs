@@ -100,26 +100,20 @@ jobs:
           sudo apt install tree
           tree public
 
-      - name: AWS CLI Config Init
+      - name: Install coscli
         run: |
-          mkdir -p ~/.aws
-          touch ~/.aws/config
-          echo "[default]
-          s3 =
-              addressing_style = virtual " > ~/.aws/config
-          touch ~/.aws/credentials
-          echo "[default]
-          aws_access_key_id=${{ secrets.TENCENTCLOUD_SECRET_ID }}
-          aws_secret_access_key=${{ secrets.TENCENTCLOUD_SECRET_KEY }}" > ~/.aws/credentials
+          curl -O https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
+          mv coscli-linux-amd64 coscli
+          chmod 755 coscli
 
       - name: Deploy to COS
         run: |
-          aws s3 sync public/ s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
-            --no-progress \
-            --follow-symlinks \
-            --size-only \
-            --delete \
-            --endpoint-url https://cos.na-ashburn.myqcloud.com
+          ./coscli cp public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+            --init-skip \
+            --recursive \
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint cos.na-ashburn.myqcloud.com
 
       - name: AWS CLI Config Clear
         run: cat /dev/null > ~/.aws/credentials
