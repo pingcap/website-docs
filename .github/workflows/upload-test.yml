@@ -17,12 +17,11 @@ jobs:
           wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
           mv coscli-linux-amd64 coscli
           chmod 755 coscli
-          ls | grep coscli
 
       - name: Upload test file
         run: |
-          ls | grep coscli
-          coscli cp README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
+          coscli --version
+          coscli sync README.md s3://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
             --init-skip \
             --recursive \
             --secret-id=${{ secrets.TENCENTCLOUD_SECRET_ID }} \
