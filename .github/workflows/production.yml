@@ -114,6 +114,3 @@ jobs:
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com
-
-      - name: AWS CLI Config Clear
-        run: cat /dev/null > ~/.aws/credentials
