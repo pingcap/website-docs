@@ -15,10 +15,7 @@ export const onClientEntry = () => {
 
   =====================================
   Project        : pingcap/website-docs
-  Build Time     : ${process.env.GATSBY_DOC_BUILD_DATE}
   Env            : ${process.env.NODE_ENV}
-  GIT Tag        : ${process.env.GATSBY_DOC_BUILD_GIT_SHA}
-  Docs Staging   : ${process.env.GATSBY_DOC_BUILD_SUBMODULE_SHA}
   =====================================
   `);
 };
