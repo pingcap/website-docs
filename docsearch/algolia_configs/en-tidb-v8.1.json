@@ -6,8 +6,7 @@
     "ref": "release-8.1",
     "docs_prefix": "tidb",
     "lang": "en",
-    "version": "v8.1",
-    "isStable": true
+    "version": "v8.1"
   },
   "start_urls": [],
   "crawl_local_url": "",
