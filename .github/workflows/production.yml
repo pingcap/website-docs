@@ -92,7 +92,7 @@ jobs:
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
           GATSBY_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
-          yarn build --verbose
+          yarn build --verbose --log-pages
 
       - name: Check output
         id: check-output
