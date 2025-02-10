@@ -106,5 +106,5 @@ jobs:
         run: pipx install tccli
 
       - name: Purge production CDN cache
-        run: tccli cdn PurgeUrlsCache --Urls '["https://docs-archive.pingcap.com/"]'
+        run: tccli cdn PurgePathCache --Paths '["https://docs-archive.pingcap.com/"]' --FlushType delete
 
