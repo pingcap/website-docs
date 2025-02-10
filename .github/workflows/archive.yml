@@ -84,3 +84,26 @@ jobs:
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com
+
+  cdn-refresh:
+    needs: build
+    name: Refresh CDN Cache
+    env:
+      TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+      TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+
+      - name: Install Tencent Cloud CLI
+        run: pipx install tccli
+
+      - name: Purge production CDN cache
+        run: tccli cdn PurgeUrlsCache --Urls '["https://docs-archive.pingcap.com/"]'
+
