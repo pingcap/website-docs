@@ -87,6 +87,7 @@ jobs:
 
   cdn-refresh:
     needs: build
+    runs-on: ubuntu-latest
     name: Refresh CDN Cache
     env:
       TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
