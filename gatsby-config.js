@@ -3,6 +3,7 @@ require("ts-node").register({ transpileOnly: true });
 const docs = require("./docs/docs.json");
 
 module.exports = {
+  trailingSlash: "always",
   siteMetadata: {
     title:
       process.env.WEBSITE_BUILD_TYPE === "archive"
