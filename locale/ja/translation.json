@@ -148,6 +148,12 @@
     "scrollToTop": "トップへ戻る",
     "goToFeedback": "このページは役に立ちましたか？"
   },
+  "banner": {
+    "link": "https://labs.tidb.io/ja",
+    "title": "新しい TiDB Labs を探索し、ブラウザから直接分散型 SQL データベースを学び、RAG アプリを構築しましょう。",
+    "date": "",
+    "intro": ""
+  },
   "campaign": {
     "docSurvey": {
       "link": "https://forms.gle/LbWEygumJkc4jAPD7",

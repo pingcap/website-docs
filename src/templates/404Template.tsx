@@ -82,7 +82,7 @@ export default function PageNotFoundTemplate({
             <Seo lang={language as Locale} title="404 Not Found" noindex />
             <Container
               sx={{
-                marginTop: bannerVisible ? "7rem" : "5rem",
+                marginTop: bannerVisible ? "7.5rem" : "5rem",
                 minHeight: "calc(100vh - 30rem)",
                 display: "flex",
                 alignItems: "center",

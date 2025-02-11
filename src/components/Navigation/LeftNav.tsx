@@ -24,6 +24,7 @@ interface LeftNavProps {
   pathConfig: PathConfig;
   availIn: string[];
   buildType?: BuildType;
+  bannerEnabled?: boolean;
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
@@ -44,9 +45,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: "80px",
+          top: props.bannerEnabled ? "7.5rem" : "5rem",
           height: "100%",
-          maxHeight: "calc(100vh - 80px)",
+          maxHeight: `calc(100vh - ${props.bannerEnabled ? "7.5rem" : "5rem"})`,
           boxSizing: "border-box",
           overflowY: "auto",
           padding: "20px 14px",

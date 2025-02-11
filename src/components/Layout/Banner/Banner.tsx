@@ -15,17 +15,18 @@ const useBannerEvents = (
   const urlKey = prefix ? `${prefix}.${linkKey}` : linkKey;
   const url = t(urlKey);
   const textList = validTextKeys.map((k) => t(k));
-  const logo = (
-    <Box
-      component="img"
-      alt="TiDB"
-      src={require("media/logo/tidb-logo.svg")?.default}
-      sx={{
-        width: "1.25rem",
-        height: "1.25rem",
-      }}
-    />
-  );
+  const logo = "🚀";
+  // const logo = (
+  //   <Box
+  //     component="img"
+  //     alt="TiDB"
+  //     src={require("media/logo/tidb-logo.svg")?.default}
+  //     sx={{
+  //       width: "1.25rem",
+  //       height: "1.25rem",
+  //     }}
+  //   />
+  // );
   const bgImgSrc =
     "https://static.pingcap.com/files/2023/11/15190759/20231116-105219.png";
 
@@ -38,22 +39,25 @@ const useBannerEvents = (
 };
 
 export function Banner() {
-  const { bgImgSrc, url, logo, textList } = useBannerEvents(
-    ["title", "date", "intro"],
+  const { url, logo, textList } = useBannerEvents(
+    // ["title", "date", "intro"],
+    ["title"],
     "link",
-    "banner.docDash2024"
+    "banner"
   );
 
   return (
     <Box
       sx={{
         flexShrink: 0,
-        height: "2rem",
-        backgroundColor: "#15005B",
-        backgroundImage: `url(${bgImgSrc})`,
+        minHeight: "1.5rem",
+        backgroundColor: "var(--tiui-palette-peacock-100)",
+        // backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
         backgroundRepeat: "no-repeat",
+        paddingTop: "0.5rem",
+        paddingBottom: "0.5rem",
       }}
     >
       <Stack
@@ -84,19 +88,22 @@ export function Banner() {
         }
         sx={(theme) => ({
           textDecoration: "none",
-          color: "website.m1",
+          color: "text.primary",
           height: "100%",
           px: 2,
           [theme.breakpoints.down("md")]: {
             px: 1,
+          },
+          ":hover span": {
+            textDecoration: "underline",
           },
         })}
       >
         {textList.map((text, index) => (
           <Fragment key={index}>
             {!index ? (
-              <Stack direction="row" alignItems="center" spacing={2}>
-                {logo}
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Box>{logo}</Box>
                 <Typography component="span" variant="body2" color="inherit">
                   {text}
                 </Typography>

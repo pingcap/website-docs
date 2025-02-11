@@ -165,12 +165,10 @@
     "success": "Thank you! You will be notified when a new TiDB LTS release comes out."
   },
   "banner": {
-    "docDash2024": {
-      "link": "https://www.pingcap.com/event/tidb-docs-dash/",
-      "title": "TiDB Docs Dash 2024",
-      "date": "Jan 9 - Jan 12 (UTC)",
-      "intro": "Join us to improve docs and win a prize!"
-    }
+    "link": "https://labs.tidb.io/",
+    "title": "Explore the new TiDB Labs, learn distributed SQL database and build RAG apps directly from your browser.",
+    "date": "",
+    "intro": ""
   },
   "campaign": {
     "docSurvey": {
