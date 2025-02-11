@@ -86,7 +86,7 @@ export default function DocTemplate({
   const stableBranch = getStable(pathConfig.repo);
 
   const { language } = useI18next();
-  const bannerVisible = feature?.banner && language !== Locale.ja;
+  const bannerVisible = feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
   return (
