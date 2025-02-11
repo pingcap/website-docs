@@ -146,7 +146,7 @@ export default function DocTemplate({
         archived={buildType === "archive"}
       />
       <Box
-        sx={{ marginTop: bannerVisible ? "7rem" : "5rem", display: "flex" }}
+        sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", display: "flex" }}
         className={clsx("PingCAP-Doc")}
       >
         <Box sx={{ display: "flex", width: "100%" }}>

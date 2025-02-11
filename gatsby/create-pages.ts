@@ -124,7 +124,7 @@ export const createDocs = async ({
         buildType: (process.env.WEBSITE_BUILD_TYPE ??
           DEFAULT_BUILD_TYPE) as BuildType, // prod | archive, default is prod; archive is for archive site
         feature: {
-          banner: false,
+          banner: true,
           feedback: true,
         },
       },
@@ -273,7 +273,7 @@ export const createDocHome = async ({
         buildType: (process.env.WEBSITE_BUILD_TYPE ??
           DEFAULT_BUILD_TYPE) as BuildType,
         feature: {
-          banner: false,
+          banner: true,
           feedback: true,
           globalHome: true,
         },
