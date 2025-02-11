@@ -111,7 +111,7 @@ jobs:
           ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
             --init-skip \
             --recursive \
-            --routines 10 \
+            --routines 16 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com
