@@ -150,7 +150,7 @@
   },
   "banner": {
     "link": "https://labs.tidb.io/ja",
-    "title": "新しい TiDB Labs を探求し、ブラウザから直接分散型 SQL データベースと RAG アプリの構築を学びましょう。",
+    "title": "新しい TiDB Labs を探索し、ブラウザから直接分散型 SQL データベースを学び、RAG アプリを構築しましょう。",
     "date": "",
     "intro": ""
   },
