@@ -149,7 +149,7 @@
     "goToFeedback": "このページは役に立ちましたか？"
   },
   "banner": {
-    "link": "https://labs.tidb.io/",
+    "link": "https://labs.tidb.io/ja",
     "title": "新しい TiDB Labs を探求し、ブラウザから直接分散型 SQL データベースと RAG アプリの構築を学びましょう。",
     "date": "",
     "intro": ""
