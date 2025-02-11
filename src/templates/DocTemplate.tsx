@@ -158,6 +158,7 @@ export default function DocTemplate({
               pathConfig={pathConfig}
               availIn={availIn.version}
               buildType={buildType}
+              bannerEnabled={bannerVisible}
             />
           )}
           <Box
