@@ -108,9 +108,10 @@ jobs:
 
       - name: Deploy to COS
         run: |
-          ./coscli cp public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
             --init-skip \
             --recursive \
+            --routines 10 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com
