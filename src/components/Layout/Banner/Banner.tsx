@@ -50,12 +50,14 @@ export function Banner() {
     <Box
       sx={{
         flexShrink: 0,
-        height: "2.5rem",
+        minHeight: "1.5rem",
         backgroundColor: "var(--tiui-palette-peacock-100)",
         // backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
         backgroundRepeat: "no-repeat",
+        paddingTop: "0.5rem",
+        paddingBottom: "0.5rem",
       }}
     >
       <Stack
