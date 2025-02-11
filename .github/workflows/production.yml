@@ -18,6 +18,11 @@ on:
         type: boolean
         default: false
         required: false
+      nocache:
+        description: "Build without cache"
+        type: boolean
+        default: false
+        required: false
 
 concurrency: ci-prod
 
@@ -75,6 +80,7 @@ jobs:
           key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}
           restore-keys: |
             ${{ runner.os }}-gatsby-cache-docs-staging-
+          lookup-only: ${{ inputs.nocache }}
 
       - name: Clean up temporary files
         run: |
