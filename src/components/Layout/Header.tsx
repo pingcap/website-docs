@@ -36,16 +36,15 @@ export default function Header(props: {
         zIndex: 9,
         backgroundColor: "carbon.50",
         boxShadow: "none",
-        height: props.bannerEnabled ? "7rem" : "5rem",
-        borderBottom: `1px solid ${theme.palette.carbon[400]}`,
+        height: props.bannerEnabled ? "7.5rem" : "5rem",
       }}
     >
-      {props.bannerEnabled && <Banner />}
       <Toolbar
         sx={{
           height: "100%",
           paddingLeft: "24px",
           paddingRight: "24px",
+          borderBottom: `1px solid ${theme.palette.carbon[400]}`,
         }}
       >
         {props.menu}
@@ -78,6 +77,7 @@ export default function Header(props: {
           buildType={props.buildType}
         />
       </Toolbar>
+      {props.bannerEnabled && <Banner />}
     </AppBar>
   );
 }
