@@ -1,4 +1,4 @@
-<p align="center">
+ <p align="center">
   <img src="images/pingcap-icon.png" width="128" alt="PingCAP Logo" />
 </p>
 <h1 align="center">website-docs</h1>
