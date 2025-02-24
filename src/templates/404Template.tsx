@@ -9,11 +9,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Layout from "components/Layout";
-import { BuildType, Locale, PageContext, PathConfig } from "shared/interface";
+import { BuildType, Locale } from "shared/interface";
 import { Page404Icon } from "components/Icons";
 import Seo from "components/Layout/Seo";
-
-import { docs } from "../../docs/docs.json";
 
 interface AllLocales {
   locales: {
@@ -75,7 +73,8 @@ export default function PageNotFoundTemplate({
     return i18n;
   }, [language, data]);
 
-  const bannerVisible = feature?.banner && language !== Locale.ja;
+  const bannerVisible =
+    (feature?.banner && language !== Locale.ja) || buildType === "archive";
 
   return (
     <>
@@ -154,18 +153,6 @@ export default function PageNotFoundTemplate({
     </>
   );
 }
-
-const useIsArchived = (pathConfig: PathConfig) => {
-  const docConfig = docs[pathConfig.repo] as {
-    deprecated?: string[];
-    stable: string;
-    dmr?: string[];
-  };
-  const isArchived =
-    docConfig.deprecated?.includes(pathConfig.version || "") ?? false;
-
-  return { isArchived };
-};
 
 export const query = graphql`
   query {
