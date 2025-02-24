@@ -91,6 +91,8 @@ export default function DocTemplate({
 
   return (
     <Layout
+      name={name}
+      pathConfig={pathConfig}
       locales={availIn.locale}
       bannerEnabled={bannerVisible}
       pageUrl={pageUrl}

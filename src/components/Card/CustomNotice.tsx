@@ -1,12 +1,9 @@
-import * as React from "react";
 import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
 
-import { Locale, PathConfig } from "shared/interface";
+import { PathConfig } from "shared/interface";
 import { docs } from "../../../docs/docs.json";
-import { Important, CustomAlert } from "components/MDXComponents";
-import { generateUrl } from "shared/utils";
-import LinkComponent from "components/Link";
+import { Important } from "components/MDXComponents";
 
 interface Props {
   name: string;
@@ -99,22 +96,5 @@ export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
         components={[<Link language="en" to={targetEnUrl} />]}
       />
     </Important>
-  );
-};
-
-export const ArchiveTiDBNotice = ({ name, pathConfig }: Props) => {
-  const stableCfg = { ...pathConfig, version: "stable" };
-  const path = generateUrl(name, stableCfg);
-  const targetUrl = `https://docs.pingcap.com${path}`;
-  return (
-    <CustomAlert
-      severity="error"
-      title={<Trans i18nKey="shortcodes.important" />}
-    >
-      <Trans
-        i18nKey={`doc.archive.tidb`}
-        components={[<LinkComponent to={targetUrl} fontSize="inherit" />]}
-      />
-    </CustomAlert>
   );
 };
