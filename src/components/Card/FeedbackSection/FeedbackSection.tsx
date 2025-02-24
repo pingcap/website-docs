@@ -1,4 +1,4 @@
-import { Trans } from "gatsby-plugin-react-i18next";
+import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 import {
   Box,
   Stack,
@@ -7,6 +7,7 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
+  TextField,
 } from "@mui/material";
 import { ThumbUpOutlined, ThumbDownOutlined } from "@mui/icons-material";
 import { Locale } from "shared/interface";
@@ -26,10 +27,18 @@ interface FeedbackSectionProps {
   locale: Locale;
 }
 
+const contactOtherVal = (val: string, otherVal: string) => {
+  if (val === "other") {
+    return `${val}: ${otherVal}`;
+  }
+  return val;
+};
+
 export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
   const [thumbVisible, setThumbVisible] = useState(true);
   const [helpful, setHelpful] = useState<boolean>();
   const [surveyVisible, setSurverVisible] = useState(false);
+  const { t } = useTranslation();
 
   const onThumbClick = (helpful: boolean) => {
     trackCustomEvent({
@@ -49,13 +58,17 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
   };
 
   const [positiveVal, setPositiveVal] = useState<string>("");
+  const [positiveOtherVal, setPositiveOtherVal] = useState<string>("");
   const onPositiveChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPositiveVal((event.target as HTMLInputElement).value);
+    setPositiveOtherVal("");
   };
 
   const [negativeVal, setNegativeVal] = useState<string>("");
+  const [negativeOtherVal, setNegativeOtherVal] = useState<string>("");
   const onNegativeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNegativeVal((event.target as HTMLInputElement).value);
+    setNegativeOtherVal("");
   };
 
   const [submitted, setSubmitted] = useState(false);
@@ -64,7 +77,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
     submitFeedbackDetail({
       locale,
       category: FeedbackCategory.Positive,
-      reason: positiveVal,
+      reason: contactOtherVal(positiveVal, positiveOtherVal),
     });
     setSurverVisible(false);
     setSubmitted(true);
@@ -73,7 +86,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
     submitFeedbackDetail({
       locale,
       category: FeedbackCategory.Negative,
-      reason: negativeVal,
+      reason: contactOtherVal(negativeVal, negativeOtherVal),
     });
     setSurverVisible(false);
     setSubmitted(true);
@@ -82,7 +95,9 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
   const onSkip = () => {
     setSurverVisible(false);
     setPositiveVal("");
+    setPositiveOtherVal("");
     setNegativeVal("");
+    setNegativeOtherVal("");
     setSubmitted(true);
   };
 
@@ -129,51 +144,65 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       )}
       {surveyVisible && helpful && (
         <Box>
-          <FormControl>
-            <Typography variant="body1" color="website.f1" fontWeight={500}>
-              <Trans i18nKey="docFeedbackSurvey.positive.title" />
-            </Typography>
-            <RadioGroup
-              aria-labelledby="doc-positive-feedback-survey"
-              name="doc-positive-feedback-survey-radio-group"
-              value={positiveVal}
-              onChange={onPositiveChange}
-              sx={{ my: "6px" }}
-            >
-              <FormControlLabel
-                value="easy"
-                label={<Trans i18nKey="docFeedbackSurvey.positive.easy" />}
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
+          <Stack>
+            <FormControl>
+              <Typography variant="body1" color="website.f1" fontWeight={500}>
+                <Trans i18nKey="docFeedbackSurvey.positive.title" />
+              </Typography>
+              <RadioGroup
+                aria-labelledby="doc-positive-feedback-survey"
+                name="doc-positive-feedback-survey-radio-group"
+                value={positiveVal}
+                onChange={onPositiveChange}
+                sx={{ my: "6px" }}
+              >
+                <FormControlLabel
+                  value="easy"
+                  label={<Trans i18nKey="docFeedbackSurvey.positive.easy" />}
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="solvedProblem"
+                  label={
+                    <Trans i18nKey="docFeedbackSurvey.positive.solvedProblem" />
+                  }
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="helpToDecide"
+                  label={
+                    <Trans i18nKey="docFeedbackSurvey.positive.helpToDecide" />
+                  }
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="other"
+                  label={<Trans i18nKey="docFeedbackSurvey.positive.other" />}
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+              </RadioGroup>
+            </FormControl>
+
+            {positiveVal === "other" && (
+              <TextField
+                multiline
+                rows={2}
+                sx={{ paddingLeft: "32px", maxWidth: "500px" }}
+                value={positiveOtherVal}
+                onChange={(event) => setPositiveOtherVal(event.target.value)}
+                placeholder={t("docFeedbackSurvey.positive.otherPlaceholder")}
               />
-              <FormControlLabel
-                value="solvedProblem"
-                label={
-                  <Trans i18nKey="docFeedbackSurvey.positive.solvedProblem" />
-                }
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-              <FormControlLabel
-                value="helpToDecide"
-                label={
-                  <Trans i18nKey="docFeedbackSurvey.positive.helpToDecide" />
-                }
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-              <FormControlLabel
-                value="other"
-                label={<Trans i18nKey="docFeedbackSurvey.positive.other" />}
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-            </RadioGroup>
-          </FormControl>
+            )}
+          </Stack>
+
           <Stack direction="row" spacing={2} mt="12px" mb="24px">
             <ActionButton
               variant="outlined"
@@ -191,60 +220,74 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       )}
       {surveyVisible && !helpful && (
         <Box>
-          <FormControl>
-            <Typography variant="body1" color="website.f1" fontWeight={500}>
-              <Trans i18nKey="docFeedbackSurvey.negative.title" />
-            </Typography>
-            <RadioGroup
-              aria-labelledby="doc-negative-feedback-survey"
-              name="doc-negative-feedback-survey-radio-group"
-              value={negativeVal}
-              onChange={onNegativeChange}
-              sx={{ my: "6px" }}
-            >
-              <FormControlLabel
-                value="hard"
-                label={<Trans i18nKey="docFeedbackSurvey.negative.hard" />}
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
+          <Stack>
+            <FormControl>
+              <Typography variant="body1" color="website.f1" fontWeight={500}>
+                <Trans i18nKey="docFeedbackSurvey.negative.title" />
+              </Typography>
+              <RadioGroup
+                aria-labelledby="doc-negative-feedback-survey"
+                name="doc-negative-feedback-survey-radio-group"
+                value={negativeVal}
+                onChange={onNegativeChange}
+                sx={{ my: "6px" }}
+              >
+                <FormControlLabel
+                  value="hard"
+                  label={<Trans i18nKey="docFeedbackSurvey.negative.hard" />}
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="nothingFound"
+                  label={
+                    <Trans i18nKey="docFeedbackSurvey.negative.nothingFound" />
+                  }
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="inaccurate"
+                  label={
+                    <Trans i18nKey="docFeedbackSurvey.negative.inaccurate" />
+                  }
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="sampleError"
+                  label={
+                    <Trans i18nKey="docFeedbackSurvey.negative.sampleError" />
+                  }
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+                <FormControlLabel
+                  value="other"
+                  label={<Trans i18nKey="docFeedbackSurvey.negative.other" />}
+                  control={<Radio size="small" sx={radioSx} />}
+                  componentsProps={labelProps}
+                  sx={controlLabelSx}
+                />
+              </RadioGroup>
+            </FormControl>
+
+            {negativeVal === "other" && (
+              <TextField
+                multiline
+                rows={2}
+                sx={{ paddingLeft: "32px", maxWidth: "500px" }}
+                value={negativeOtherVal}
+                onChange={(event) => setNegativeOtherVal(event.target.value)}
+                placeholder={t("docFeedbackSurvey.negative.otherPlaceholder")}
               />
-              <FormControlLabel
-                value="nothingFound"
-                label={
-                  <Trans i18nKey="docFeedbackSurvey.negative.nothingFound" />
-                }
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-              <FormControlLabel
-                value="inaccurate"
-                label={
-                  <Trans i18nKey="docFeedbackSurvey.negative.inaccurate" />
-                }
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-              <FormControlLabel
-                value="sampleError"
-                label={
-                  <Trans i18nKey="docFeedbackSurvey.negative.sampleError" />
-                }
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-              <FormControlLabel
-                value="other"
-                label={<Trans i18nKey="docFeedbackSurvey.negative.other" />}
-                control={<Radio size="small" sx={radioSx} />}
-                componentsProps={labelProps}
-                sx={controlLabelSx}
-              />
-            </RadioGroup>
-          </FormControl>
+            )}
+          </Stack>
+
           <Stack direction="row" spacing={2} mt="12px" mb="24px">
             <ActionButton
               variant="outlined"

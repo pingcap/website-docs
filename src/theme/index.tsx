@@ -265,6 +265,16 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.text.primary,
+            borderWidth: "1px",
+          },
+        },
+      },
+    },
   },
 } as ThemeOptions);
 
