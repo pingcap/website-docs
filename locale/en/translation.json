@@ -130,7 +130,8 @@
       "easy": "Easy to understand",
       "solvedProblem": "Solved my problem",
       "helpToDecide": "Helped me decide to use the product",
-      "other": "Others"
+      "other": "Others",
+      "otherPlaceholder": "Tell us more about your experience."
     },
     "negative": {
       "title": "What went wrong?",
@@ -138,7 +139,8 @@
       "nothingFound": "Couldn't find what I need",
       "inaccurate": "Inaccurate or out of date",
       "sampleError": "Code sample errors",
-      "other": "Others"
+      "other": "Others",
+      "otherPlaceholder": "Tell us more about your experience."
     }
   },
   "doc404": {
