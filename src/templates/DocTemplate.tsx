@@ -86,11 +86,13 @@ export default function DocTemplate({
   const stableBranch = getStable(pathConfig.repo);
 
   const { language } = useI18next();
-  const bannerVisible = feature?.banner && language !== Locale.ja;
+  const bannerVisible = feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
   return (
     <Layout
+      name={name}
+      pathConfig={pathConfig}
       locales={availIn.locale}
       bannerEnabled={bannerVisible}
       pageUrl={pageUrl}
@@ -146,7 +148,7 @@ export default function DocTemplate({
         archived={buildType === "archive"}
       />
       <Box
-        sx={{ marginTop: bannerVisible ? "7rem" : "5rem", display: "flex" }}
+        sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", display: "flex" }}
         className={clsx("PingCAP-Doc")}
       >
         <Box sx={{ display: "flex", width: "100%" }}>
@@ -158,6 +160,7 @@ export default function DocTemplate({
               pathConfig={pathConfig}
               availIn={availIn.version}
               buildType={buildType}
+              bannerEnabled={bannerVisible}
             />
           )}
           <Box

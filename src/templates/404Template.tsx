@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Layout from "components/Layout";
-import { BuildType, Locale, PageContext, PathConfig } from "shared/interface";
+import { BuildType, Locale, PathConfig } from "shared/interface";
 import { Page404Icon } from "components/Icons";
 import Seo from "components/Layout/Seo";
 
@@ -75,7 +75,8 @@ export default function PageNotFoundTemplate({
     return i18n;
   }, [language, data]);
 
-  const bannerVisible = feature?.banner && language !== Locale.ja;
+  const bannerVisible =
+    (feature?.banner && language !== Locale.ja) || buildType === "archive";
 
   return (
     <>
@@ -85,7 +86,7 @@ export default function PageNotFoundTemplate({
             <Seo lang={language as Locale} title="404 Not Found" noindex />
             <Container
               sx={{
-                marginTop: bannerVisible ? "7rem" : "5rem",
+                marginTop: bannerVisible ? "7.5rem" : "5rem",
                 minHeight: "calc(100vh - 30rem)",
                 display: "flex",
                 alignItems: "center",

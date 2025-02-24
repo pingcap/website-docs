@@ -12,12 +12,12 @@ import HeaderAction from "components/Layout/HeaderAction";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
-import { Locale, BuildType } from "shared/interface";
+import { Locale, BuildType, PathConfig } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
 import { generateDocsHomeUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
-
+import { ArchiveBanner } from "./Banner/ArchiveBanner";
 export default function Header(props: {
   bannerEnabled?: boolean;
   menu?: React.ReactNode;
@@ -25,6 +25,8 @@ export default function Header(props: {
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
   pageUrl?: string;
+  name?: string;
+  pathConfig?: PathConfig;
 }) {
   const { language } = useI18next();
   const theme = useTheme();
@@ -36,16 +38,15 @@ export default function Header(props: {
         zIndex: 9,
         backgroundColor: "carbon.50",
         boxShadow: "none",
-        height: props.bannerEnabled ? "7rem" : "5rem",
-        borderBottom: `1px solid ${theme.palette.carbon[400]}`,
+        height: props.bannerEnabled ? "7.5rem" : "5rem",
       }}
     >
-      {props.bannerEnabled && <Banner />}
       <Toolbar
         sx={{
           height: "100%",
           paddingLeft: "24px",
           paddingRight: "24px",
+          borderBottom: `1px solid ${theme.palette.carbon[400]}`,
         }}
       >
         {props.menu}
@@ -78,6 +79,10 @@ export default function Header(props: {
           buildType={props.buildType}
         />
       </Toolbar>
+      {props.bannerEnabled && props.buildType !== "archive" && <Banner />}
+      {props.buildType === "archive" && (
+        <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />
+      )}
     </AppBar>
   );
 }

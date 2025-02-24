@@ -10,7 +10,6 @@ import * as MDXComponents from "components/MDXComponents";
 import {
   CustomNotice,
   MachineTranslationNotice,
-  ArchiveTiDBNotice,
 } from "components/Card/CustomNotice";
 import { PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
@@ -63,13 +62,6 @@ export default function MDXContent(props: {
   return (
     <Container disableGutters className={className} maxWidth="lg">
       <Box className="markdown-body">
-        {buildType === "archive" && typeof name !== "undefined" && (
-          <ArchiveTiDBNotice
-            name={name}
-            pathConfig={pathConfig}
-            availIn={availIn}
-          />
-        )}
         {buildType !== "archive" && (
           <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         )}

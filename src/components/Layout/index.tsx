@@ -8,7 +8,7 @@ import "@fontsource/ibm-plex-sans";
 import theme from "theme/index";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";
-import { Locale, BuildType } from "shared/interface";
+import { Locale, BuildType, PathConfig } from "shared/interface";
 
 export default function Layout(props: {
   children?: React.ReactNode;
@@ -18,6 +18,8 @@ export default function Layout(props: {
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
   pageUrl?: string;
+  name?: string;
+  pathConfig?: PathConfig;
 }) {
   return (
     <ThemeProvider theme={theme}>
@@ -29,6 +31,8 @@ export default function Layout(props: {
         docInfo={props.docInfo}
         buildType={props.buildType}
         pageUrl={props.pageUrl}
+        name={props.name}
+        pathConfig={props.pathConfig}
       />
       {props.children}
       <Footer />

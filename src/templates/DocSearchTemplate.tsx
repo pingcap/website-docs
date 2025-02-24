@@ -207,7 +207,7 @@ export default function DocSearchTemplate({
       <Layout bannerEnabled={bannerVisible}>
         <Container
           sx={{
-            marginTop: bannerVisible ? "7rem" : "5rem",
+            marginTop: bannerVisible ? "7.5rem" : "5rem",
             minHeight: "calc(100vh - 30rem)",
             position: "relative",
           }}
