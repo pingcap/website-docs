@@ -9,9 +9,11 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Layout from "components/Layout";
-import { Locale } from "shared/interface";
+import { BuildType, Locale, PageContext, PathConfig } from "shared/interface";
 import { Page404Icon } from "components/Icons";
 import Seo from "components/Layout/Seo";
+
+import { docs } from "../../docs/docs.json";
 
 interface AllLocales {
   locales: {
@@ -27,6 +29,7 @@ interface AllLocales {
 
 interface PageNotFoundTemplateProps {
   pageContext: {
+    buildType: BuildType;
     feature?: {
       banner?: boolean;
     };
@@ -35,7 +38,7 @@ interface PageNotFoundTemplateProps {
 }
 
 export default function PageNotFoundTemplate({
-  pageContext: { feature },
+  pageContext: { feature, buildType },
   data,
 }: PageNotFoundTemplateProps) {
   const pathname =
@@ -78,7 +81,7 @@ export default function PageNotFoundTemplate({
     <>
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
-          <Layout bannerEnabled={bannerVisible}>
+          <Layout bannerEnabled={bannerVisible} buildType={buildType}>
             <Seo lang={language as Locale} title="404 Not Found" noindex />
             <Container
               sx={{
@@ -123,13 +126,6 @@ export default function PageNotFoundTemplate({
                           <Trans i18nKey="doc404.searchDoc" />
                         </Typography>
                       </Typography>
-                      {/* <div className={styles.searchInput}>
-                    <SearchInput
-                      docInfo={docInfo}
-                      searchValue={searchValue}
-                      setSearchValue={handleSetSearchValue}
-                    />
-                  </div> */}
                     </>
                   )}
                 </Stack>
@@ -153,45 +149,23 @@ export default function PageNotFoundTemplate({
               </Stack>
             </Container>
           </Layout>
-          {/* <Layout is404={true}>
-          <Seo title="404 Not Found" noindex />
-          <div className={styles.container}>
-            <div className={clsx('markdown-body', styles.left)}>
-              <h1 className={clsx(styles.title)}>
-                {<Trans i18nKey="doc404.title" />}
-              </h1>
-              {['en', 'zh'].includes(language) && (
-                <>
-                  <div>{<Trans i18nKey="doc404.youMayWish" />}</div>
-                  <ul className={clsx(styles.optionsContainer)}>
-                    <li>
-                      {
-                        <Trans
-                          i18nKey="doc404.goToDocHome"
-                          components={[<Link to="/" />]}
-                        />
-                      }
-                    </li>
-                    <li>{<Trans i18nKey="doc404.searchDoc" />}</li>
-                  </ul>
-                  <div className={styles.searchInput}>
-                    <SearchInput
-                      docInfo={docInfo}
-                      searchValue={searchValue}
-                      setSearchValue={handleSetSearchValue}
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-            <div className={clsx(styles.right)}></div>
-          </div>
-        </Layout> */}
         </I18nextContext.Provider>
       </I18nextProvider>
     </>
   );
 }
+
+const useIsArchived = (pathConfig: PathConfig) => {
+  const docConfig = docs[pathConfig.repo] as {
+    deprecated?: string[];
+    stable: string;
+    dmr?: string[];
+  };
+  const isArchived =
+    docConfig.deprecated?.includes(pathConfig.version || "") ?? false;
+
+  return { isArchived };
+};
 
 export const query = graphql`
   query {

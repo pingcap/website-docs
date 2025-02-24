@@ -307,6 +307,8 @@ export const create404 = async ({
     path: "/404",
     component: template,
     context: {
+      buildType: (process.env.WEBSITE_BUILD_TYPE ??
+        DEFAULT_BUILD_TYPE) as BuildType,
       feature: {
         banner: false,
       },
