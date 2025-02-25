@@ -147,7 +147,9 @@ export default function DocTemplate({
       />
       <Box
         sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", display: "flex" }}
-        className={clsx("PingCAP-Doc")}
+        className={clsx("PingCAP-Doc", {
+          "doc-feature-banner": bannerVisible,
+        })}
       >
         <Box sx={{ display: "flex", width: "100%" }}>
           {!frontmatter?.hide_leftNav && (
@@ -248,6 +250,7 @@ export default function DocTemplate({
                         filePath={filePath}
                         buildType={buildType}
                         pageUrl={pageUrl}
+                        bannerVisible={bannerVisible}
                       />
                     </Box>
                     <Box
