@@ -4,6 +4,8 @@ ul.tabs {
   margin-bottom: 16px !important;
   border-bottom: 1px solid #dbdbdb;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: auto;
 
   li {
     display: block;
