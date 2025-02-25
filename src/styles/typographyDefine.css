@@ -74,3 +74,12 @@ h5,
 h6 {
   scroll-margin-top: 5rem;
 }
+
+.doc-feature-banner h1,
+.doc-feature-banner h2,
+.doc-feature-banner h3,
+.doc-feature-banner h4,
+.doc-feature-banner h5,
+.doc-feature-banner h6 {
+  scroll-margin-top: 7.5rem;
+}
