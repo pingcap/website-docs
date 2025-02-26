@@ -162,7 +162,7 @@
     "success": "感谢订阅！当新的 LTS 版本发布时，我们会通过邮件通知您。"
   },
   "banner": {
-    "link": "https://labs.pingcap.com/",
+    "link": "https://labs.pingcap.com/?utm_source=docs&utm_medium=direct&utm_campaign=labs_zh_lp_04",
     "title": "探索全新的 TiDB Labs，直接在浏览器中学习分布式 SQL 数据库并构建 RAG 应用。",
     "date": "",
     "intro": ""

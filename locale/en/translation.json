@@ -165,7 +165,7 @@
     "success": "Thank you! You will be notified when a new TiDB LTS release comes out."
   },
   "banner": {
-    "link": "https://labs.tidb.io/",
+    "link": "https://labs.tidb.io/?utm_source=docs&utm_medium=direct&utm_campaign=labs_lp_05",
     "title": "Explore the new TiDB Labs, learn distributed SQL database and build RAG apps directly from your browser.",
     "date": "",
     "intro": ""
