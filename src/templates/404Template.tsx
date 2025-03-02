@@ -37,6 +37,8 @@ interface PageNotFoundTemplateProps {
   data: AllLocales;
 }
 
+const REDIRECT_SECONDS = 3;
+
 export default function PageNotFoundTemplate({
   pageContext: { feature, buildType },
   data,
@@ -74,15 +76,16 @@ export default function PageNotFoundTemplate({
     return i18n;
   }, [language, data]);
 
+  const isArchived = buildType === "archive";
   const bannerVisible =
-    (feature?.banner && language !== Locale.ja) || buildType === "archive";
+    (feature?.banner && language !== Locale.ja) || isArchived;
 
-  const secondsRef = useRef(3);
-  const [seconds, setSeconds] = useState(3);
-  const { isArchived, redirectUrl } = useArchiveDoc(pathname, language);
+  const secondsRef = useRef(REDIRECT_SECONDS);
+  const [seconds, setSeconds] = useState(REDIRECT_SECONDS);
+  const { isArchivedDoc, redirectUrl } = useArchiveDoc(pathname, language);
 
   useEffect(() => {
-    if (!isArchived) {
+    if (isArchived || !isArchivedDoc) {
       return;
     }
 
@@ -102,8 +105,10 @@ export default function PageNotFoundTemplate({
 
     return () => {
       clearTimeout(timeout);
+      secondsRef.current = REDIRECT_SECONDS;
+      setSeconds(REDIRECT_SECONDS);
     };
-  }, [isArchived, redirectUrl]);
+  }, []);
 
   return (
     <>
@@ -206,17 +211,17 @@ const useArchiveDoc = (pathname: string, lang: Locale) => {
   const version = lang === Locale.en ? pathArr[2] : pathArr[3];
   const isJA = lang === Locale.ja;
   const key = `/${lang}/${repo}/${version}`;
-  const isRedirect = !!CONFIG.redirect[key as keyof typeof CONFIG.redirect];
+  const isRedirect = !!CONFIG.redirect?.[key as keyof typeof CONFIG.redirect];
   const docConfig = CONFIG.docs[repo as keyof typeof CONFIG.docs] as {
     archived?: string[];
   };
-  const isArchived =
+  const isArchivedDoc =
     isRedirect ||
     // for ja, because not all docs are archived, so don't check archived
     (!isJA && docConfig.archived?.includes(version || ""));
   const redirectUrl = `https://docs-archive.pingcap.com${pathname}`;
 
-  return { isArchived, redirectUrl };
+  return { isArchivedDoc, redirectUrl };
 };
 
 export const query = graphql`
