@@ -127,7 +127,8 @@
       "easy": "容易理解",
       "solvedProblem": "解决了我的问题",
       "helpToDecide": "帮助我决定使用该产品",
-      "other": "其他原因"
+      "other": "其他原因",
+      "otherPlaceholder": "请告诉我们更多您对文档体验的反馈。"
     },
     "negative": {
       "title": "您不喜欢文档的原因是？",
@@ -135,7 +136,8 @@
       "nothingFound": "找不到我想要的信息",
       "inaccurate": "内容不准确或过时",
       "sampleError": "代码示例错误",
-      "other": "其他原因"
+      "other": "其他原因",
+      "otherPlaceholder": "请告诉我们更多您对文档体验的反馈。"
     }
   },
   "doc404": {
@@ -162,10 +164,16 @@
     "success": "感谢订阅！当新的 LTS 版本发布时，我们会通过邮件通知您。"
   },
   "banner": {
-    "link": "https://labs.pingcap.com/",
-    "title": "探索全新的 TiDB Labs，直接在浏览器中学习分布式 SQL 数据库并构建 RAG 应用。",
-    "date": "",
-    "intro": ""
+    "archive": {
+      "title": "你正在查看已归档的 TiDB 文档，该文档不再更新。",
+      "viewLatestLTSVersion": "查看最新 LTS 版本文档"
+    },
+    "campaign": {
+      "link": "https://labs.pingcap.com/?utm_source=docs&utm_medium=direct&utm_campaign=labs_zh_lp_04",
+      "title": "探索全新的 TiDB Labs，直接在浏览器中学习分布式 SQL 数据库并构建 RAG 应用。",
+      "date": "",
+      "intro": ""
+    }
   },
   "campaign": {
     "docSurvey": {

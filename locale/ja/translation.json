@@ -127,7 +127,8 @@
       "easy": "理解しやすい",
       "solvedProblem": "問題を解決できた",
       "helpToDecide": "製品使用を決断するのに役立った",
-      "other": "その他"
+      "other": "その他",
+      "otherPlaceholder": "ドキュメントの体験に関するフィードバックをもっとお聞かせください。"
     },
     "negative": {
       "title": "ドキュメントサイト改善のため、フィードバックをお願いします。",
@@ -135,7 +136,8 @@
       "nothingFound": "必要なものが見つからなかった",
       "inaccurate": "不正確または古い情報だった",
       "sampleError": "コードサンプルがエラーだった",
-      "other": "その他"
+      "other": "その他",
+      "otherPlaceholder": "ドキュメントの体験に関するフィードバックをもっとお聞かせください。"
     }
   },
   "doc404": {
@@ -149,10 +151,16 @@
     "goToFeedback": "このページは役に立ちましたか？"
   },
   "banner": {
-    "link": "https://labs.tidb.io/ja",
-    "title": "新しい TiDB Labs を探索し、ブラウザから直接分散型 SQL データベースを学び、RAG アプリを構築しましょう。",
-    "date": "",
-    "intro": ""
+    "archive": {
+      "title": "これはアーカイブされた TiDB のドキュメントであり、更新は行われていません。",
+      "viewLatestLTSVersion": "最新の LTS バージョンのドキュメントを表示する"
+    },
+    "campaign": {
+      "link": "https://labs.tidb.io/ja?utm_source=docs&utm_medium=direct&utm_campaign=labs_lp_05",
+      "title": "新しい TiDB Labs を探索し、ブラウザから直接分散型 SQL データベースを学び、RAG アプリを構築しましょう。",
+      "date": "",
+      "intro": ""
+    }
   },
   "campaign": {
     "docSurvey": {

@@ -1,20 +1,25 @@
 import { ErrorOutlineOutlined, OpenInNewOutlined } from "@mui/icons-material";
-import { Box, Icon, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import LinkComponent from "components/Link";
-import { PathConfig } from "shared/interface";
+import { Locale, PathConfig } from "shared/interface";
 import { generateUrl } from "shared/utils";
-
+import { useTranslation } from "react-i18next";
 interface ArchiveBannerProps {
   name?: string;
   pathConfig?: PathConfig;
 }
 
 export function ArchiveBanner({ name, pathConfig }: ArchiveBannerProps) {
-  let targetUrl = `https://docs.pingcap.com`;
+  const { t } = useTranslation();
+  let targetUrl = "";
   if (name && pathConfig) {
     const stableCfg = { ...pathConfig, version: "stable" };
     const path = generateUrl(name, stableCfg);
     targetUrl = `https://docs.pingcap.com${path}`;
+  } else {
+    const lang =
+      pathConfig?.locale === Locale.en ? "" : `/${pathConfig?.locale}`;
+    targetUrl = `https://docs.pingcap.com${lang}/tidb/stable`;
   }
 
   return (
@@ -48,8 +53,7 @@ export function ArchiveBanner({ name, pathConfig }: ArchiveBannerProps) {
         <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
 
         <Typography component="span" variant="body2" color="inherit">
-          You are viewing the archived documentation of TiDB, which no longer
-          receives updates.
+          {t("banner.archive.title")}
         </Typography>
 
         <LinkComponent
@@ -62,7 +66,7 @@ export function ArchiveBanner({ name, pathConfig }: ArchiveBannerProps) {
         >
           <Stack direction="row" alignItems="center" spacing="4px">
             <Typography variant="body2" color="secondary">
-              View latest LTS version docs
+              {t("banner.archive.viewLatestLTSVersion")}
             </Typography>
             <OpenInNewOutlined
               sx={{

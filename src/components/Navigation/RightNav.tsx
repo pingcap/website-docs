@@ -33,10 +33,18 @@ interface RightNavProps {
   filePath: string;
   buildType?: BuildType;
   pageUrl?: string;
+  bannerVisible?: boolean;
 }
 
 export default function RightNav(props: RightNavProps) {
-  const { toc = [], pathConfig, filePath, buildType, pageUrl } = props;
+  const {
+    toc = [],
+    pathConfig,
+    filePath,
+    buildType,
+    pageUrl,
+    bannerVisible,
+  } = props;
 
   const theme = useTheme();
   const { language, t } = useI18next();
@@ -67,9 +75,11 @@ export default function RightNav(props: RightNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: "5rem",
+          top: bannerVisible ? "7.5rem" : "5rem",
           height: "100%",
-          maxHeight: "calc(100vh - 5rem)",
+          maxHeight: bannerVisible
+            ? "calc(100vh - 7.5rem)"
+            : "calc(100vh - 5rem)",
           overflowY: "auto",
           padding: "36px 16px",
           display: "flex",
