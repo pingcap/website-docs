@@ -43,7 +43,7 @@ export function Banner() {
     // ["title", "date", "intro"],
     ["title"],
     "link",
-    "banner"
+    "banner.campaign"
   );
 
   return (

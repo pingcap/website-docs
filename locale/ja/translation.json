@@ -151,10 +151,16 @@
     "goToFeedback": "このページは役に立ちましたか？"
   },
   "banner": {
-    "link": "https://labs.tidb.io/ja?utm_source=docs&utm_medium=direct&utm_campaign=labs_lp_05",
-    "title": "新しい TiDB Labs を探索し、ブラウザから直接分散型 SQL データベースを学び、RAG アプリを構築しましょう。",
-    "date": "",
-    "intro": ""
+    "archive": {
+      "title": "これはアーカイブされた TiDB のドキュメントであり、更新は行われていません。",
+      "viewLatestLTSVersion": "最新の LTS バージョンのドキュメントを表示する"
+    },
+    "campaign": {
+      "link": "https://labs.tidb.io/ja?utm_source=docs&utm_medium=direct&utm_campaign=labs_lp_05",
+      "title": "新しい TiDB Labs を探索し、ブラウザから直接分散型 SQL データベースを学び、RAG アプリを構築しましょう。",
+      "date": "",
+      "intro": ""
+    }
   },
   "campaign": {
     "docSurvey": {
