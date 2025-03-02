@@ -9,12 +9,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Layout from "components/Layout";
-import { BuildType, Locale, PathConfig } from "shared/interface";
+import { BuildType, Locale, Repo } from "shared/interface";
 import { Page404Icon } from "components/Icons";
 import Seo from "components/Layout/Seo";
 
-import { docs } from "../../docs/docs.json";
-
+import CONFIG from "../../docs/docs.json";
+import { useEffect, useRef, useState } from "react";
 interface AllLocales {
   locales: {
     edges: {
@@ -44,17 +44,16 @@ export default function PageNotFoundTemplate({
   const pathname =
     typeof window === "undefined" ? "" : window.location.pathname;
   const context = React.useContext(I18nextContext);
-  const language = React.useMemo(() => {
+  const language = React.useMemo<Locale>(() => {
     const lang = pathname.split("/")[1] || "";
     switch (lang) {
       case "zh":
-        return "zh";
+        return Locale.zh;
       case "ja":
-        return "ja";
+        return Locale.ja;
       default:
-        break;
+        return Locale.en;
     }
-    return "en";
   }, [pathname]);
   const i18n = React.useMemo(() => {
     const i18n = i18next.createInstance();
@@ -78,12 +77,40 @@ export default function PageNotFoundTemplate({
   const bannerVisible =
     (feature?.banner && language !== Locale.ja) || buildType === "archive";
 
+  const secondsRef = useRef(3);
+  const [seconds, setSeconds] = useState(3);
+  const { isArchived, redirectUrl } = useArchiveDoc(pathname, language);
+
+  useEffect(() => {
+    if (!isArchived) {
+      return;
+    }
+
+    let timeout: NodeJS.Timeout;
+    const redirectTimout = () => {
+      timeout = setTimeout(() => {
+        setSeconds((prev) => prev - 1);
+        secondsRef.current = secondsRef.current - 1;
+        if (secondsRef.current === 0) {
+          window.location.href = redirectUrl;
+        } else {
+          redirectTimout();
+        }
+      }, 1000);
+    };
+    redirectTimout();
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isArchived, redirectUrl]);
+
   return (
     <>
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
           <Layout bannerEnabled={bannerVisible} buildType={buildType}>
-            <Seo lang={language as Locale} title="404 Not Found" noindex />
+            <Seo lang={language} title="404 Not Found" noindex />
             <Container
               sx={{
                 marginTop: bannerVisible ? "7.5rem" : "5rem",
@@ -108,25 +135,42 @@ export default function PageNotFoundTemplate({
                     },
                   }}
                 >
-                  <Typography component="h1" variant="h1">
-                    <Trans i18nKey="doc404.title" />
-                  </Typography>
-                  {["en", "zh"].includes(language) && (
+                  {isArchived ? (
                     <>
+                      <Typography component="h1" variant="h1">
+                        <Trans i18nKey="doc404.archive.title" />
+                      </Typography>
+                      <Link to={redirectUrl}>{redirectUrl}</Link>
                       <Typography>
-                        <Trans i18nKey="doc404.youMayWish" />
+                        <Trans
+                          i18nKey="doc404.archive.redirect"
+                          values={{ seconds }}
+                        />
                       </Typography>
-                      <Typography component="ul">
-                        <Typography component="li">
-                          <Trans
-                            i18nKey="doc404.goToDocHome"
-                            components={[<Link to="/" />]}
-                          />
-                        </Typography>
-                        <Typography component="li">
-                          <Trans i18nKey="doc404.searchDoc" />
-                        </Typography>
+                    </>
+                  ) : (
+                    <>
+                      <Typography component="h1" variant="h1">
+                        <Trans i18nKey="doc404.title" />
                       </Typography>
+                      {["en", "zh"].includes(language) && (
+                        <>
+                          <Typography>
+                            <Trans i18nKey="doc404.youMayWish" />
+                          </Typography>
+                          <Typography component="ul">
+                            <Typography component="li">
+                              <Trans
+                                i18nKey="doc404.goToDocHome"
+                                components={[<Link to="/" />]}
+                              />
+                            </Typography>
+                            <Typography component="li">
+                              <Trans i18nKey="doc404.searchDoc" />
+                            </Typography>
+                          </Typography>
+                        </>
+                      )}
                     </>
                   )}
                 </Stack>
@@ -156,16 +200,23 @@ export default function PageNotFoundTemplate({
   );
 }
 
-const useIsArchived = (pathConfig: PathConfig) => {
-  const docConfig = docs[pathConfig.repo] as {
-    deprecated?: string[];
-    stable: string;
-    dmr?: string[];
+const useArchiveDoc = (pathname: string, lang: Locale) => {
+  const pathArr = pathname.split("/");
+  const repo = lang === Locale.en ? (pathArr[1] as Repo) : pathArr[2];
+  const version = lang === Locale.en ? pathArr[2] : pathArr[3];
+  const isJA = lang === Locale.ja;
+  const key = `/${lang}/${repo}/${version}`;
+  const isRedirect = !!CONFIG.redirect[key as keyof typeof CONFIG.redirect];
+  const docConfig = CONFIG.docs[repo as keyof typeof CONFIG.docs] as {
+    archived?: string[];
   };
   const isArchived =
-    docConfig.deprecated?.includes(pathConfig.version || "") ?? false;
+    isRedirect ||
+    // for ja, because not all docs are archived, so don't check archived
+    (!isJA && docConfig.archived?.includes(version || ""));
+  const redirectUrl = `https://docs-archive.pingcap.com${pathname}`;
 
-  return { isArchived };
+  return { isArchived, redirectUrl };
 };
 
 export const query = graphql`
