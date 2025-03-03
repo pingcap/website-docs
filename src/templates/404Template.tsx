@@ -140,7 +140,7 @@ export default function PageNotFoundTemplate({
                     },
                   }}
                 >
-                  {isArchivedDoc ? (
+                  {isArchived && isArchivedDoc ? (
                     <>
                       <Typography component="h1" variant="h1">
                         <Trans i18nKey="doc404.archive.title" />
