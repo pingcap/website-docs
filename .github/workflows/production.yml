@@ -38,7 +38,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          ref: "test/deploy-arch"
+          ref: "master"
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -147,4 +147,4 @@ jobs:
         run: pipx install tccli
 
       - name: Purge production CDN cache
-        run: tccli cdn PurgePathCache --Paths '["https://docs-preview.pingcap.com/"]' --FlushType delete
+        run: tccli cdn PurgePathCache --Paths '["https://docs.pingcap.com/"]' --FlushType delete
