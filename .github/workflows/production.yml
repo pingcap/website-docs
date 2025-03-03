@@ -50,7 +50,7 @@ jobs:
           git submodule init
           git submodule update --remote
           cd docs
-          git checkout new-deploy-arch
+          git checkout main
           cd ..
           echo "submodule_sha=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
           echo "submodule_status=$(git submodule status)" >> $GITHUB_OUTPUT
@@ -140,8 +140,8 @@ jobs:
       - name: Set up Python environment
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          architecture: 'x64'
+          python-version: "3.12"
+          architecture: "x64"
 
       - name: Install Tencent Cloud CLI
         run: pipx install tccli
