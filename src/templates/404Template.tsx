@@ -218,7 +218,7 @@ const useArchiveDoc = (pathname: string, lang: Locale) => {
   const isArchivedDoc =
     isRedirect ||
     // for ja, because not all docs are archived, so don't check archived
-    (!isJA && docConfig.archived?.includes(version || ""));
+    (!isJA && docConfig?.archived?.includes(version || ""));
   const redirectUrl = `https://docs-archive.pingcap.com${pathname}`;
 
   return { isArchivedDoc, redirectUrl };
