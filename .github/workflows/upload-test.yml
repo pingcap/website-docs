@@ -6,25 +6,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build website
+    name: Upload to COS
     steps:
       - uses: actions/checkout@v3
         with:
           ref: "master"
 
-      - name: Set known_hosts
-        id: known-hosts
+      - name: Install coscli
         run: |
-          echo "BJ1=$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})" >> $GITHUB_OUTPUT
+          wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
+          mv coscli-linux-amd64 coscli
+          chmod 755 coscli
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: |
-            ${{ steps.known-hosts.outputs.BJ1 }}
-
-      - name: Deploy to BJ1
+      - name: Upload test file
         run: |
-          rsync -avz --delete README.md "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
+          ./coscli cp README.md cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }}/README.md \
+            --init-skip \
+            --recursive \
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint cos.na-ashburn.myqcloud.com

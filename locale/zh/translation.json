@@ -144,7 +144,11 @@
     "title": "抱歉，您要找的页面走丢了…",
     "youMayWish": "您可以：",
     "goToDocHome": "去 <0>文档中心</0>",
-    "searchDoc": "搜索文档"
+    "searchDoc": "搜索文档",
+    "archive": {
+      "title": "您可能正在寻找归档文档：",
+      "redirect": "将在 {{ seconds }} 秒后重定向..."
+    }
   },
   "fab": {
     "scrollToTop": "回到顶部",

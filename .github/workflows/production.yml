@@ -18,6 +18,11 @@ on:
         type: boolean
         default: false
         required: false
+      nocache:
+        description: "Build without cache"
+        type: boolean
+        default: false
+        required: false
 
 concurrency: ci-prod
 
@@ -81,6 +86,11 @@ jobs:
           sudo rm -rf /tmp/*
           sudo rm -rf /home/runner/work/_temp/*
 
+      - name: Clean cache
+        if: ${{ inputs.nocache }}
+        run: |
+          yarn clean
+
       - name: Build website
         if: ${{ !inputs.fallback || (steps.gatsby-cache.outputs.cache-hit != 'true') }}
         env:
@@ -92,7 +102,7 @@ jobs:
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
           GATSBY_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
-          yarn build --verbose
+          yarn build
 
       - name: Check output
         id: check-output
@@ -100,36 +110,41 @@ jobs:
           sudo apt install tree
           tree public
 
-      - name: Set known_hosts
-        id: known-hosts
+      - name: Install coscli
         run: |
-          echo "BJ1=$(ssh-keyscan -H ${{ secrets.BJ_1_HOST }})" >> $GITHUB_OUTPUT
-          echo "BJ2=$(ssh-keyscan -H ${{ secrets.BJ_2_HOST }})" >> $GITHUB_OUTPUT
-          echo "LA1=$(ssh-keyscan -H ${{ secrets.LA_1_HOST }})" >> $GITHUB_OUTPUT
-          echo "LA2=$(ssh-keyscan -H ${{ secrets.LA_2_HOST }})" >> $GITHUB_OUTPUT
+          wget https://cosbrowser.cloud.tencent.com/software/coscli/coscli-linux-amd64
+          mv coscli-linux-amd64 coscli
+          chmod 755 coscli
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - name: Deploy to COS
+        run: |
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+            --init-skip \
+            --recursive \
+            --routines 16 \
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint cos.na-ashburn.myqcloud.com
+
+  cdn-refresh:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Refresh CDN Cache
+    env:
+      TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+      TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
         with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: |
-            ${{ steps.known-hosts.outputs.BJ1 }}
-            ${{ steps.known-hosts.outputs.BJ2 }}
-            ${{ steps.known-hosts.outputs.LA1 }}
-            ${{ steps.known-hosts.outputs.LA2 }}
+          python-version: "3.12"
+          architecture: "x64"
 
-      - name: Deploy to BJ1
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Install Tencent Cloud CLI
+        run: pipx install tccli
 
-      - name: Deploy to BJ2
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.BJ_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
-      - name: Deploy to LA1
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_1_HOST }}:${{ secrets.DEPLOY_PATH }}"
-
-      - name: Deploy to LA2
-        run: |
-          rsync -avz --delete public/ "${{ secrets.SSH_USER }}@${{ secrets.LA_2_HOST }}:${{ secrets.DEPLOY_PATH }}"
+      - name: Purge production CDN cache
+        run: tccli cdn PurgePathCache --Paths '["https://docs.pingcap.com/"]' --FlushType delete
