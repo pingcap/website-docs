@@ -64,13 +64,13 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   ]);
   setPostBodyComponents([
     <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
-    <script
-      key="ai-widget"
-      async
-      src="https://tidb.ai/widget.js"
-      data-controlled="true"
-      data-chat-engine="pingcap-doc"
-      data-measurement-id="G-GRPCMS37RV"
-    />,
+    // <script
+    //   key="ai-widget"
+    //   async
+    //   src="https://tidb.ai/widget.js"
+    //   data-controlled="true"
+    //   data-chat-engine="pingcap-doc"
+    //   data-measurement-id="G-GRPCMS37RV"
+    // />,
   ]);
 };
