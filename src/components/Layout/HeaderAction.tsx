@@ -74,7 +74,7 @@ export default function HeaderAction(props: {
       }}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
-      {supportedLocales.length > 0 && (
+      {/* {supportedLocales.length > 0 && (
         <LangSwitch supportedLocales={supportedLocales} />
       )}
       {docInfo && language !== "ja" && buildType !== "archive" && (
@@ -102,7 +102,7 @@ export default function HeaderAction(props: {
             )}
           </Stack>
         </>
-      )}
+      )} */}
       {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
   );

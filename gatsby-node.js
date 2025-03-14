@@ -14,10 +14,10 @@ exports.createPages = async ({ graphql, actions }) => {
   await createDocHome({ graphql, actions });
   await createDocs({ graphql, actions });
 
-  if (process.env.WEBSITE_BUILD_TYPE !== "archive") {
-    await createCloudAPIReference({ graphql, actions });
-    await createDocSearch({ actions });
-  }
+  // if (process.env.WEBSITE_BUILD_TYPE !== "archive") {
+  //   await createCloudAPIReference({ graphql, actions });
+  //   await createDocSearch({ actions });
+  // }
 
   create404({ actions });
 };

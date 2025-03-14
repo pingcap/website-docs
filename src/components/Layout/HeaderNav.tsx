@@ -69,7 +69,7 @@ export default function HeaderNavStack(props: {
         />
       )}
 
-      <NavItem
+      {/* <NavItem
         selected={selectedItem === "tidb"}
         label={t("navbar.tidb")}
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
@@ -77,7 +77,7 @@ export default function HeaderNavStack(props: {
 
       {["zh"].includes(language) && (
         <NavItem label={t("navbar.asktug")} to={generateAskTugUrl(language)} />
-      )}
+      )} */}
 
       {["en", "ja"].includes(language) && (
         <NavItem
@@ -91,14 +91,14 @@ export default function HeaderNavStack(props: {
         to={generateContactURL(language)}
       />
 
-      {language === "zh" && (
+      {/* {language === "zh" && (
         <NavItem
           // label={<Trans i18nKey="navbar.download" />}
           to={generateDownloadURL(language)}
           alt="download"
           startIcon={<DownloadIcon fontSize="inherit" color="inherit" />}
         />
-      )}
+      )} */}
     </Stack>
   );
 }

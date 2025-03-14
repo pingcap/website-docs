@@ -13,7 +13,7 @@ import { StackOverflowIcon, AskTugIcon } from "components/Icons";
 import { convertVersionName } from "./utils";
 import CONFIG from "../../docs/docs.json";
 
-export const DOC_HOME_URL = "https://docs.pingcap.com";
+export const DOC_HOME_URL = "https://docs.tidb.io";
 
 export const DEFAULT_PINGCAP_URL = `https://www.pingcap.com`;
 export const EN_PINGCAP_URL = `https://www.pingcap.com/`;
@@ -240,16 +240,16 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "Docs",
-        url: "https://docs.pingcap.com/",
+        url: "https://docs.tidb.io/",
       },
-      {
-        name: "Developer Guide",
-        url: "https://docs.pingcap.com/tidb/stable/dev-guide-overview",
-      },
-      {
-        name: "FAQs",
-        url: "https://docs.pingcap.com/tidb/stable/faq-overview",
-      },
+      // {
+      //   name: "Developer Guide",
+      //   url: "https://docs.pingcap.com/tidb/stable/dev-guide-overview",
+      // },
+      // {
+      //   name: "FAQs",
+      //   url: "https://docs.pingcap.com/tidb/stable/faq-overview",
+      // },
       {
         name: "Support",
         url: "https://tidb.support.pingcap.com/",
