@@ -139,7 +139,7 @@ export default function DocTemplate({
                   href: `${DOC_HOME_URL}${generateUrl(name, {
                     ...pathConfig,
                     version: "stable",
-                  })}`,
+                  })}/`,
                 },
               ]
             : []),
