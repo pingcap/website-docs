@@ -77,9 +77,9 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}
+          key: ${{ runner.os }}-gatsby-cache-tidbio-${{ steps.calc-cache-key.outputs.key }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-docs-staging-
+            ${{ runner.os }}-gatsby-cache-tidbio-
 
       - name: Clean up temporary files
         run: |
