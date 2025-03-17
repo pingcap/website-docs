@@ -178,7 +178,7 @@ export default function DocSearchTemplate({
   const handleSelectDocType = (type: string) => {
     setDocType(type);
     setDocVersion("");
-    navigate(`/search?type=${type}&q=${docQuery}`, {
+    navigate(`/search/?type=${type}&q=${docQuery}`, {
       state: {
         type,
         version: "",
@@ -190,7 +190,7 @@ export default function DocSearchTemplate({
 
   const handleSelectDocVersion = (version: string) => {
     setDocVersion(version);
-    navigate(`/search?type=${docType}&version=${version}&q=${docQuery}`, {
+    navigate(`/search/?type=${docType}&version=${version}&q=${docQuery}`, {
       state: {
         type: docType,
         version,
