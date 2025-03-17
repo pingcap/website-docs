@@ -226,7 +226,10 @@ export default function DocSearchTemplate({
                 type: docType,
                 version: realVersionMemo || "stable",
               }}
-              onSubmit={(query) => execSearch(query, docType, docVersion)}
+              onSubmit={(query) => {
+                execSearch(query, docType, docVersion);
+                setDocQuery(query);
+              }}
             />
             <Box
               sx={{
