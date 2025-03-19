@@ -83,6 +83,7 @@ export default function Seo({
       title={title}
       titleTemplate={`%s | ${getI18nTitle() || site.siteMetadata.title}`}
       meta={[
+        { name: "robots", content: "noindex" },
         {
           name: "description",
           content: metaDescription,

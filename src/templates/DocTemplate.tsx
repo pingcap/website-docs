@@ -131,19 +131,19 @@ export default function DocTemplate({
             content: pathConfig.branch,
           },
         ]}
-        link={[
-          ...(pathConfig.branch !== stableBranch && stableBranch != null
-            ? [
-                {
-                  rel: "canonical",
-                  href: `${DOC_HOME_URL}${generateUrl(name, {
-                    ...pathConfig,
-                    version: "stable",
-                  })}/`,
-                },
-              ]
-            : []),
-        ]}
+        // link={[
+        //   ...(pathConfig.branch !== stableBranch && stableBranch != null
+        //     ? [
+        //         {
+        //           rel: "canonical",
+        //           href: `${DOC_HOME_URL}${generateUrl(name, {
+        //             ...pathConfig,
+        //             version: "stable",
+        //           })}/`,
+        //         },
+        //       ]
+        //     : []),
+        // ]}
         noindex={buildType === "archive"}
         archived={buildType === "archive"}
       />
