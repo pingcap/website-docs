@@ -196,7 +196,7 @@ TiDB is an open-source distributed SQL database that supports Hybrid Transaction
 - [Deploy Data Migration Using DM Binary](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-binary/): Learn how to deploy a Data Migration cluster using DM binary.
 - [Deploy Monitoring Services for the TiDB Cluster](https://docs.pingcap.com/tidb/stable/deploy-monitoring-services/): Learn how to deploy monitoring services for the TiDB cluster.
 - [Deploy TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-ops-deploy/): TiDB Dashboard is built into PD for v4.0 or higher. No additional deployment is needed. It can also be deployed independently on Kubernetes. When multiple PD instances are deployed, only one serves the Dashboard. Use `tiup cluster display` to check the serving instance. You can disable and re-enable the Dashboard using `tiup ctl`.
-- [Deploy Tidb Dm](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm): External documentation: https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm
+- [Deploy DM on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/dev/deploy-tidb-dm)
 - [Deploy TiDB Lightning](https://docs.pingcap.com/tidb/stable/deploy-tidb-lightning/): Deploy TiDB Lightning to quickly import large amounts of new data.
 - [Derive TopN or Limit from Window Functions](https://docs.pingcap.com/tidb/stable/derive-topn-from-window/): Introduce the optimization rule of deriving TopN or Limit from window functions and how to enable this rule.
 - [DESC | TiDB SQL Statement Reference](https://docs.pingcap.com/tidb/stable/sql-statement-desc/): An overview of the usage of `DESC` for the TiDB database.
@@ -490,7 +490,7 @@ TiDB is an open-source distributed SQL database that supports Hybrid Transaction
 - [RUNAWAY_WATCHES](https://docs.pingcap.com/tidb/stable/information-schema-runaway-watches/): Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
 - [Runtime Filter](https://docs.pingcap.com/tidb/stable/runtime-filter/): Learn the working principles of Runtime Filter and how to use it.
 - [SAVEPOINT | TiDB SQL Statement Reference](https://docs.pingcap.com/tidb/stable/sql-statement-savepoint/): An overview of the usage of SAVEPOINT for the TiDB database.
-- [Scale A Tidb Cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster): External documentation: https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster
+- [Scale a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
 - [Scale a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/scale-tidb-using-tiup/): Learn how to scale the TiDB cluster using TiUP.
 - [Scale PD Microservice Nodes Using TiUP](https://docs.pingcap.com/tidb/stable/scale-microservices-using-tiup/): Learn how to scale PD microservice nodes in a cluster using TiUP and how to switch the PD working mode.
 - [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/): Learn how to schedule replicas by topology labels.
@@ -907,7 +907,7 @@ TiDB is an open-source distributed SQL database that supports Hybrid Transaction
 - [TiDB RC3 Release Notes](https://docs.pingcap.com/tidb/stable/release-rc.3/): TiDB RC3, released on June 16, 2017, focuses on MySQL compatibility, SQL optimization, stability, and performance. Highlights include refined privilege management, accelerated DDL, optimized load balancing, and open-sourced TiDB Ansible for easy cluster management. Detailed updates for TiDB, Placement Driver (PD), and TiKV include improved SQL query optimization, complete privilege management, support for HTTP API, system variables for query concurrency control, and more efficient data balance. PD supports gRPC, disaster recovery toolkit, and hot Region scheduling. TiKV supports gRPC, SST format snapshot, memory leak detection, and improved data importing speed. Overall, the release enhances performance, stability, and management capabilities.
 - [TiDB RC4 Release Notes](https://docs.pingcap.com/tidb/stable/release-rc.4/): TiDB RC4 is released with a focus on MySQL compatibility, SQL optimization, stability, and performance. Highlights include improved write performance, better query cost estimating, and support for TiSpark to access data in TiKV. Detailed updates include refactoring of the SQL query optimizer, support for JSON type and operations, and optimization of the scheduler in Placement Driver. TiKV now supports RC isolation level, Document Store, and more pushdown functions in Coprocessor. TiSpark beta release includes prediction pushdown, aggregation pushdown, and range pruning, capable of running a full set of TPC-H queries.
 - [TiDB Release Timeline](https://docs.pingcap.com/tidb/stable/release-timeline/): Learn about the TiDB release timeline.
-- [Tidb Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap): External documentation: https://docs.pingcap.com/tidb/dev/tidb-roadmap
+- [TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 - [TiDB Scheduling](https://docs.pingcap.com/tidb/stable/tidb-scheduling/): Introduces the PD scheduling component in a TiDB cluster.
 - [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb/): This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
 - [TiDB Snapshot Backup and Restore Architecture](https://docs.pingcap.com/tidb/stable/br-snapshot-architecture/): TiDB Snapshot Backup and Restore Architecture introduces the process using a Backup & Restore (BR) tool. The architecture includes backup and restore processes, types of backup files, naming format, storage format, and structure of backup files. The backup process involves scheduling, data backup, and metadata backup. The restore process includes scheduling, schema restore, Region allocation, data restore, and reporting. The types of backup files include SST, backupmeta, and backup.lock files. The naming format and storage format of SST files are explained in detail. For more information, refer to the TiDB snapshot backup and restore guide.
@@ -1082,7 +1082,7 @@ TiDB is an open-source distributed SQL database that supports Hybrid Transaction
 - [Unstable Result Set](https://docs.pingcap.com/tidb/stable/dev-guide-unstable-result-set/): Learn how to handle the error of an unstable result set.
 - [Update Data](https://docs.pingcap.com/tidb/stable/dev-guide-update-data/): Learn about how to update data and batch update data.
 - [UPDATE | TiDB SQL Statement Reference](https://docs.pingcap.com/tidb/stable/sql-statement-update/): An overview of the usage of UPDATE for the TiDB database.
-- [Upgrade A Tidb Cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster): External documentation: https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster
+- [Upgrade a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
 - [Upgrade and After Upgrade FAQs](https://docs.pingcap.com/tidb/stable/upgrade-faq/): Learn about some FAQs and the solutions during and after upgrading TiDB.
 - [Upgrade Cluster Monitoring Services](https://docs.pingcap.com/tidb/stable/upgrade-monitoring-services/): Learn how to upgrade the Prometheus, Grafana, and Alertmanager monitoring services for your TiDB cluster.
 - [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/stable/upgrade-tidb-using-tiup/): Learn how to upgrade TiDB using TiUP.
@@ -1166,8 +1166,8 @@ Using TiDB Operator provided by PingCAP, you can run and maintain TiDB seamlessl
 - [Deploy TiDB Operator on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator/): Learn how to deploy TiDB Operator on Kubernetes.
 - [Deploy TiProxy Load Balancer for an Existing TiDB Cluster](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy/): Learn how to deploy TiProxy for an existing TiDB cluster on Kubernetes.
 - [Destroy TiDB Clusters on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/destroy-a-tidb-cluster/): Learn how to delete TiDB Cluster on Kubernetes.
-- [Dev](https://docs.pingcap.com/tidb-in-kubernetes/dev): External documentation: https://docs.pingcap.com/tidb-in-kubernetes/dev
-- [Docs](https://github.com/pingcap/tidb-operator/blob/v1.6.1/docs/api-references/docs.md): External documentation: https://github.com/pingcap/tidb-operator/blob/v1.6.1/docs/api-references/docs.md
+- [TiDB on Kubernetes Documentation](https://docs.pingcap.com/tidb-in-kubernetes/dev)
+- [TiDB Operator API Documentation](https://github.com/pingcap/tidb-operator/blob/v1.6.1/docs/api-references/docs.md)
 - [Enable Admission Controller in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-admission-webhook/): Learn how to enable the admission controller in TiDB Operator and the functionality of the admission controller.
 - [Enable Dynamic Configuration for TidbMonitor](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-monitor-dynamic-configuration/): This document describes how to enable dynamic configuration for TidbMonitor.
 - [Enable Shards for TidbMonitor](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-monitor-shards/): Learn how to use shards for TidbMonitor.
@@ -1365,7 +1365,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 - [BATCH](https://docs.pingcap.com/tidbcloud/sql-statement-batch/): An overview of the usage of BATCH for the TiDB database.
 - [BEGIN | TiDB SQL Statement Reference](https://docs.pingcap.com/tidbcloud/sql-statement-begin/): An overview of the usage of BEGIN for the TiDB database.
 - [Best Practices for Indexing](https://docs.pingcap.com/tidbcloud/dev-guide-index-best-practice/): Learn some best practices for creating and using indexes in TiDB.
-- [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing): External documentation: https://docs.pingcap.com/tidbcloud/api/v1beta1/billing
+- [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
 - [Bit Functions and Operators](https://docs.pingcap.com/tidbcloud/bit-functions-and-operators/): Learn about the bit functions and operators.
 - [Bookshop Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-bookshop-schema-design/): Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from Amazon S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
 - [Build a TiDB Cloud Serverless Cluster](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud/): Learn how to build a TiDB Cloud Serverless cluster in TiDB Cloud and connect to it.
@@ -1475,7 +1475,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 - [DATA_LOCK_WAITS](https://docs.pingcap.com/tidbcloud/information-schema-data-lock-waits/): Learn the `DATA_LOCK_WAITS` information_schema table.
 - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing/): Learn about how to audit a cluster in TiDB Cloud.
 - [Database Schema](https://docs.pingcap.com/tidbcloud/database-schema-concepts/): Learn about database schema concepts for TiDB Cloud.
-- [Dataservice](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice): External documentation: https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice
+- [Dataservice](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
 - [Date and Time Functions](https://docs.pingcap.com/tidbcloud/date-and-time-functions/): Learn how to use the data and time functions.
 - [Date and Time Types](https://docs.pingcap.com/tidbcloud/data-type-date-and-time/): Learn about the supported date and time types.
 - [DDL_JOBS](https://docs.pingcap.com/tidbcloud/information-schema-ddl-jobs/): Learn the `DDL_JOBS` information_schema table.
@@ -1556,7 +1556,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 - [High Availability in TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/high-availability-with-multi-az/): TiDB Cloud Dedicated supports high availability with Multi-AZ deployments.
 - [High Availability in TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/serverless-high-availability/): Learn about the high availability architecture of TiDB Cloud Serverless. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
 - [HTAP Queries](https://docs.pingcap.com/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries/): Introduce the HTAP queries in TiDB.
-- [Iam](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam): External documentation: https://docs.pingcap.com/tidbcloud/api/v1beta1/iam
+- [Iam](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
 - [Identity Access Management](https://docs.pingcap.com/tidbcloud/manage-user-access/): Learn how to manage identity access in TiDB Cloud.
 - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/import-parquet-files/): Learn how to import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud Dedicated.
 - [Import Apache Parquet Files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless](https://docs.pingcap.com/tidbcloud/import-parquet-files-serverless/): Learn how to import Apache Parquet files from Amazon S3, GCS, or Azure Blob Storage into TiDB Cloud Serverless.
@@ -1641,7 +1641,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 - [MODIFY COLUMN | TiDB SQL Statement Reference](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/): An overview of the usage of MODIFY COLUMN for the TiDB database.
 - [Monitor a TiDB Cluster](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster/): Learn how to monitor your TiDB cluster.
 - [Monitoring](https://docs.pingcap.com/tidbcloud/monitoring-concepts/): Learn about monitoring concepts for TiDB Cloud.
-- [Msp](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp): External documentation: https://docs.pingcap.com/tidbcloud/api/v1beta1/msp
+- [MSP (Managed Service Provider) OPENAPI (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
 - [Multi-table Join Queries](https://docs.pingcap.com/tidbcloud/dev-guide-join-tables/): This document describes how to use multi-table join queries.
 - [MySQL Compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility/): Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 - [mysql Schema](https://docs.pingcap.com/tidbcloud/mysql-schema/): Learn about the TiDB system tables.
@@ -1979,7 +1979,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 - [USER_ATTRIBUTES](https://docs.pingcap.com/tidbcloud/information-schema-user-attributes/): Learn the `USER_ATTRIBUTES` INFORMATION_SCHEMA table.
 - [USER_PRIVILEGES](https://docs.pingcap.com/tidbcloud/information-schema-user-privileges/): Learn the `USER_PRIVILEGES` information_schema table.
 - [UUID Best Practices](https://docs.pingcap.com/tidbcloud/uuid/): UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
-- [V1Beta](https://docs.pingcap.com/tidbcloud/api/v1beta): External documentation: https://docs.pingcap.com/tidbcloud/api/v1beta
+- [V1Beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - [VARIABLES_INFO](https://docs.pingcap.com/tidbcloud/information-schema-variables-info/): Learn the `VARIABLES_INFO` information_schema table.
 - [Vector Data Types](https://docs.pingcap.com/tidbcloud/vector-search-data-types/): Learn about the Vector data types in TiDB.
 - [Vector Functions and Operators](https://docs.pingcap.com/tidbcloud/vector-search-functions-and-operators/): Learn about functions and operators available for Vector data types.
