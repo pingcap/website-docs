@@ -2,7 +2,7 @@ name: Build and deploy to server
 
 on:
   push:
-    branches: ["master"]
+    branches: ["tidb-cloud"]
     paths-ignore:
       - ".github/**"
       - ".docs/**"
