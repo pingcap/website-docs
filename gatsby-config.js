@@ -67,11 +67,15 @@ module.exports = {
         },
         pages: [
           {
-            matchPath: "/:lang?/404",
+            matchPath: "/:lang?/404/",
             getLanguageFromPath: true,
           },
           {
-            matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)`,
+            matchPath: "/:lang?/search/",
+            getLanguageFromPath: true,
+          },
+          {
+            matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)/`,
             getLanguageFromPath: true,
           },
           {

@@ -291,6 +291,15 @@ export const createDocSearch = async ({
   const template = resolve(__dirname, "../src/templates/DocSearchTemplate.tsx");
 
   createPage({
+    path: "/zh/search/",
+    component: template,
+    context: {
+      feature: {
+        banner: false,
+      },
+    },
+  });
+  createPage({
     path: "/search/",
     component: template,
     context: {
