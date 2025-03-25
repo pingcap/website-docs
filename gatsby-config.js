@@ -72,7 +72,7 @@ module.exports = {
           },
           {
             matchPath: "/:lang?/search/",
-            getLanguageFromPath: true,
+            getLanguageFromPath: false,
           },
           {
             matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)/`,
