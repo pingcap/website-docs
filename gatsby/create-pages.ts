@@ -35,7 +35,7 @@ export const createDocs = async ({
     {
       allMdx(
         filter: {
-          fileAbsolutePath: { regex: "/tidbcloud/((?!TOC).)*$/" }
+          fileAbsolutePath: { regex: "/^(?!.*TOC).*$/" }
           slug: {
             nin: ["en/tidb/_docHome", "zh/tidb/_docHome", "ja/tidb/_docHome"]
           }
@@ -98,8 +98,7 @@ export const createDocs = async ({
     const path = generateUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
 
-    // const locale = [Locale.en, Locale.zh, Locale.ja]
-    const locale = [Locale.en]
+    const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
         versionRecord[l][pathConfig.repo]?.[name]?.includes(pathConfig.version)
           ? l
