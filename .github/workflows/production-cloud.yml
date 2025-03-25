@@ -11,7 +11,7 @@ on:
       hash:
         description: "Docs Staging Hash"
         type: string
-        default: main
+        default: tidb-cloud
         required: true
       fallback:
         description: "Fallback by hash"
