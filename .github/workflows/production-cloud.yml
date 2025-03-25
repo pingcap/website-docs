@@ -1,4 +1,4 @@
-name: Build and deploy to server
+name: Build and deploy to docs.tidb.io
 
 on:
   push:
