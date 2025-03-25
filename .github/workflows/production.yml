@@ -24,7 +24,7 @@ on:
         default: false
         required: false
 
-concurrency: ci-prod
+concurrency: ci-cloud-prod
 
 jobs:
   build:
