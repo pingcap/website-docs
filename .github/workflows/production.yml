@@ -124,7 +124,7 @@ jobs:
             --routines 16 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint cos.na-ashburn.myqcloud.com
+            --endpoint cos.na-ashburn.myqcloud.com \
             --delete \
             --force
 

@@ -84,7 +84,9 @@ jobs:
             --routines 16 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint cos.na-ashburn.myqcloud.com
+            --endpoint cos.na-ashburn.myqcloud.com \
+            --delete \
+            --force
 
   cdn-refresh:
     needs: build
@@ -100,12 +102,11 @@ jobs:
       - name: Set up Python environment
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          architecture: 'x64'
+          python-version: "3.12"
+          architecture: "x64"
 
       - name: Install Tencent Cloud CLI
         run: pipx install tccli
 
       - name: Purge production CDN cache
         run: tccli cdn PurgePathCache --Paths '["https://docs-archive.pingcap.com/"]' --FlushType flush
-
