@@ -287,7 +287,7 @@ const TiDBCloudBtnGroup = () => {
       >
         <MenuItem
           component={Link}
-          to={`https://tidbcloud.com/signin`}
+          to={`https://console.tidb.io/signup?provider_source=alicloud`}
           target="_blank"
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
@@ -301,7 +301,7 @@ const TiDBCloudBtnGroup = () => {
             handleClose();
           }}
           component={Link}
-          to={`https://tidbcloud.com/free-trial`}
+          to={`https://console.tidb.io/free-trial?provider_source=alicloud`}
           target="_blank"
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
