@@ -243,7 +243,7 @@ const TiDBCloudBtnGroup = () => {
       >
         <Button
           variant="text"
-          href={`https://tidbcloud.com/signin`}
+          href={`https://console.tidb.io/signup?provider_source=alicloud`}
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
@@ -253,7 +253,7 @@ const TiDBCloudBtnGroup = () => {
         <Button
           variant="contained"
           target="_blank"
-          href="https://tidbcloud.com/free-trial"
+          href="https://console.tidb.io/free-trial?provider_source=alicloud"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
         >
@@ -287,7 +287,7 @@ const TiDBCloudBtnGroup = () => {
       >
         <MenuItem
           component={Link}
-          to={`https://tidbcloud.com/signin`}
+          to={`https://console.tidb.io/signup?provider_source=alicloud`}
           target="_blank"
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
@@ -301,7 +301,7 @@ const TiDBCloudBtnGroup = () => {
             handleClose();
           }}
           component={Link}
-          to={`https://tidbcloud.com/free-trial`}
+          to={`https://console.tidb.io/free-trial?provider_source=alicloud`}
           target="_blank"
           referrerPolicy="no-referrer-when-downgrade"
           sx={{
