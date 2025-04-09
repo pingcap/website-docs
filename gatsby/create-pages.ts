@@ -11,6 +11,7 @@ import {
   generateDocHomeUrl,
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
+import { cpMarkdown } from "./cp-markdown";
 
 interface PageQueryData {
   allMdx: {
@@ -107,6 +108,7 @@ export const createDocs = async ({
       )
       .filter(Boolean);
 
+    cpMarkdown(`${node.slug}.md`, path, name);
     createPage({
       path,
       component: template,

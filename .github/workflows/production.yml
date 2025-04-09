@@ -126,6 +126,20 @@ jobs:
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
             --delete \
+            --exclude ".*\.md$" \
+            --force
+
+      - name: Deploy md to COS
+        run: |
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_TIDBIO_BUCKET_ID }} \
+            --init-skip \
+            --recursive \
+            --routines 16 \
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint cos.na-ashburn.myqcloud.com \
+            --include ".*\.md$" \
+            --meta "Content-Type:text/plain" \
             --force
 
   cdn-refresh:
