@@ -6,16 +6,20 @@ export const cpMarkdown = (
   destpath: string,
   filename: string
 ) => {
-  if (!filename) {
-    return;
-  }
   const sourceDir = path.resolve(
     __dirname,
     `../docs/markdown-pages/${filepath}`
   );
-  const destDir = path.resolve(
-    __dirname,
-    `../public/${destpath}/${filename}.md`
-  );
+
+  let _destpath = destpath;
+
+  if (!filename) {
+    _destpath = destpath.endsWith("/")
+      ? destpath.slice(0, destpath.length - 1)
+      : destpath;
+  }
+
+  const destDir = path.resolve(__dirname, `../public/${_destpath}.md`);
+
   fs.copy(sourceDir, destDir).catch((e) => console.warn(e.toString()));
 };
