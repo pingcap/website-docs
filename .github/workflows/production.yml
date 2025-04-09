@@ -139,8 +139,7 @@ jobs:
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
             --include ".*\.md$" \
-            --meta=ContentType:text \
-            --force
+            --meta "ContentType:text/plain"
 
   cdn-refresh:
     needs: build
