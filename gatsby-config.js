@@ -65,6 +65,10 @@ module.exports = {
           },
           nsSeparator: false,
         },
+        /**
+         * `getLanguageFromPath` being true means you manually add the /:lang/ prefix, and the i18n plugin will not automatically create the corresponding page.
+         * If it is false, the opposite is true, and the default is false
+         */
         pages: [
           {
             matchPath: "/:lang?/404/",
@@ -75,7 +79,7 @@ module.exports = {
             getLanguageFromPath: false,
           },
           {
-            matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)/`,
+            matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)`,
             getLanguageFromPath: true,
           },
           {
