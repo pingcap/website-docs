@@ -131,7 +131,7 @@ jobs:
 
       - name: Deploy md to COS
         run: |
-          ./coscli cp public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
             --init-skip \
             --recursive \
             --routines 16 \
@@ -139,7 +139,8 @@ jobs:
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
             --include ".*\.md$" \
-            --meta "Content-Type:text/plain; charset=utf-8"
+            --meta "Content-Type:text/plain; charset=utf-8" \
+            --force
 
   cdn-refresh:
     needs: build
