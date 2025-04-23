@@ -126,7 +126,7 @@ jobs:
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
             --delete \
-            --exclude ".*\.(md|txt)$" \
+            --exclude ".*\.(md|txt|doc)$" \
             --force
 
       - name: Deploy md to COS
@@ -138,7 +138,7 @@ jobs:
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
-            --include ".*\.(md|txt)$" \
+            --include ".*\.(md|txt|doc)$" \
             --meta "Content-Type:text/plain; charset=utf-8" \
             --force
 
