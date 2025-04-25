@@ -58,7 +58,7 @@
     "zh-tidb-v3.0": "315c806ddf6b94801fb5df553095328dbd7c1478",
     "zh-tidb-v2.1": "b5c2c5843308d300f1cbc7cb61b33d46020a1b68",
     "en-tidb-in-kubernetes-dev": "f5da8f02700a0bdfcc6509320925e250ea2b1d5f",
-    "en-tidb-in-kubernetes-v1.6": "432cc641eea4b4d2fe5c22c179dfbe64ee31686c",
+    "en-tidb-in-kubernetes-v1.6": "4e72494ded0f31ff43e9401c8e5a090154e33946",
     "en-tidb-in-kubernetes-v1.5": "a033a1b3e4c8a18b1475bcb6b5529e9c4c97a9fb",
     "en-tidb-in-kubernetes-v1.4": "40d583216f73d02411b06981c03788cea7912a1f",
     "en-tidb-in-kubernetes-v1.3": "1fc555e2b3a715b5e549660611c424d84b5e82e5",
@@ -66,7 +66,7 @@
     "en-tidb-in-kubernetes-v1.1": "46bc5b0315855e2e82f7613574a67f4c8df71e79",
     "en-tidb-in-kubernetes-v1.0": "fa07c73b368bfb816953f37c05df07d78c64b631",
     "zh-tidb-in-kubernetes-dev": "f5da8f02700a0bdfcc6509320925e250ea2b1d5f",
-    "zh-tidb-in-kubernetes-v1.6": "432cc641eea4b4d2fe5c22c179dfbe64ee31686c",
+    "zh-tidb-in-kubernetes-v1.6": "4e72494ded0f31ff43e9401c8e5a090154e33946",
     "zh-tidb-in-kubernetes-v1.5": "a033a1b3e4c8a18b1475bcb6b5529e9c4c97a9fb",
     "zh-tidb-in-kubernetes-v1.4": "40d583216f73d02411b06981c03788cea7912a1f",
     "zh-tidb-in-kubernetes-v1.3": "1fc555e2b3a715b5e549660611c424d84b5e82e5",
@@ -81,7 +81,7 @@
     "zh-tidb-data-migration-v5.3": "9074bb1e9e44385c4d97bf8dee5eb81bdf94ab53",
     "zh-tidb-data-migration-v2.0": "a454c743be222c86463c67b352d3c70596f67534",
     "zh-tidb-data-migration-v1.0": "f1d3ae7bf33922bab66ec9c333499fa2e0de6a02",
-    "en-tidbcloud": "e648f926db5b20b4a7a177d37bdc90fa38c94a25",
+    "en-tidbcloud": "cfd847305f33eeace4ea243cd8161fe473a0823c",
     "en-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74",
     "zh-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74"
 }
