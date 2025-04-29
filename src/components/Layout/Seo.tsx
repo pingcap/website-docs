@@ -88,10 +88,6 @@ export default function Seo({
           content: metaDescription,
         },
         {
-          property: "og:site_name",
-          content: "TiDB Docs",
-        },
-        {
           property: "og:title",
           content: title,
         },
