@@ -61,7 +61,7 @@ export default function HeaderNavStack(props: {
         },
       }}
     >
-      {["en", "ja"].includes(language) && props.buildType !== "archive" && (
+      {props.buildType !== "archive" && (
         <NavItem
           selected={selectedItem === "tidbcloud"}
           label={t("navbar.cloud")}
