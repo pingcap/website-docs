@@ -77,6 +77,7 @@ export default function Header(props: {
           supportedLocales={props.locales}
           docInfo={props.docInfo}
           buildType={props.buildType}
+          pageUrl={props.pageUrl}
         />
       </Toolbar>
       {props.bannerEnabled && props.buildType !== "archive" && <Banner />}
