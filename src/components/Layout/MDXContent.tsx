@@ -45,6 +45,8 @@ export default function MDXContent(props: {
 
   const pageType = getPageType(language, pageUrl);
   const CustomContentWithPageType = useCustomContent(pageType);
+  const isAutoTranslation =
+    language === "ja" || (language === "zh" && pageType === "tidbcloud");
 
   React.useEffect(() => {
     // https://github.com/pingcap/website-docs/issues/221
@@ -65,7 +67,7 @@ export default function MDXContent(props: {
         {buildType !== "archive" && (
           <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         )}
-        {language === "ja" && pageType !== "home" && (
+        {isAutoTranslation && pageType !== "home" && (
           <MachineTranslationNotice
             name={name}
             pathConfig={pathConfig}
