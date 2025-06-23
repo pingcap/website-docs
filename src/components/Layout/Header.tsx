@@ -15,9 +15,11 @@ import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 import { Locale, BuildType, PathConfig } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
-import { generateDocsHomeUrl, getPageType } from "shared/utils";
+import { generateDocsHomeUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { ArchiveBanner } from "./Banner/ArchiveBanner";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
+
 export default function Header(props: {
   bannerEnabled?: boolean;
   menu?: React.ReactNode;
@@ -30,9 +32,7 @@ export default function Header(props: {
 }) {
   const { language, t } = useI18next();
   const theme = useTheme();
-  const pageType = getPageType(language, props.pageUrl);
-  const isAutoTranslation =
-    language === "ja" || (language === "zh" && pageType === "tidbcloud");
+  const isAutoTranslation = useIsAutoTranslation(props.pageUrl || "");
   const { url, logo, textList } = useBannerEvents(
     ["title"],
     "link",

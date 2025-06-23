@@ -20,7 +20,7 @@ import Search from "components/Search";
 import { Locale, BuildType } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
-import { getPageType } from "shared/utils";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -66,9 +66,7 @@ export default function HeaderAction(props: {
   const { supportedLocales, docInfo, buildType, pageUrl } = props;
   const { language, t } = useI18next();
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
-  const pageType = getPageType(language, pageUrl);
-  const isAutoTranslation =
-    language === "ja" || (language === "zh" && pageType === "tidbcloud");
+  const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
   return (
     <Stack

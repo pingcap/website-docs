@@ -3,19 +3,21 @@ import { Fragment } from "react";
 
 export function Banner({
   url,
-  logo,
   textList,
+  logo,
+  bgColor,
 }: {
   url: string;
-  logo?: string;
   textList: string[];
+  logo?: string;
+  bgColor?: string;
 }) {
   return (
     <Box
       sx={{
         flexShrink: 0,
         minHeight: "1.5rem",
-        backgroundColor: "var(--tiui-palette-peacock-100)",
+        backgroundColor: bgColor || "var(--tiui-palette-peacock-100)",
         // backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
