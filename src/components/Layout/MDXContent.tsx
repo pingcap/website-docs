@@ -7,10 +7,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
 import * as MDXComponents from "components/MDXComponents";
-import {
-  CustomNotice,
-  // MachineTranslationNotice,
-} from "components/Card/CustomNotice";
+import { CustomNotice } from "components/Card/CustomNotice";
 import { PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
 import replaceInternalHref from "shared/utils/anchor";
@@ -66,13 +63,6 @@ export default function MDXContent(props: {
         {buildType !== "archive" && (
           <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         )}
-        {/* {isAutoTranslation && (
-          <MachineTranslationNotice
-            name={name}
-            pathConfig={pathConfig}
-            availIn={availIn}
-          />
-        )} */}
         <MDXProvider
           components={{
             ...MDXComponents,

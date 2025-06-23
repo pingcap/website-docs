@@ -41,7 +41,7 @@ export default function Header(props: {
   const textListAutoTranslation = t("lang.machineTransNotice");
   const urlAutoTranslation =
     props.pathConfig?.repo === "tidbcloud"
-      ? `/tidbcloud`
+      ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`
       : `/${props.pathConfig?.repo}/${props.pathConfig?.version || "stable"}/${
           props.name === "_index" ? "" : props.name
         }`;
