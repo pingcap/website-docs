@@ -102,7 +102,11 @@ export default function Header(props: {
           <Banner url={url} logo={logo} textList={textList} />
         )}
       {isAutoTranslation && props.buildType !== "archive" && (
-        <Banner url={urlAutoTranslation} textList={[textListAutoTranslation]} />
+        <Banner
+          url={urlAutoTranslation}
+          textList={[textListAutoTranslation]}
+          bgColor="#FEFBF3"
+        />
       )}
       {props.buildType === "archive" && (
         <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />
