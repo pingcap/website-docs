@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import * as MDXComponents from "components/MDXComponents";
 import {
   CustomNotice,
-  MachineTranslationNotice,
+  // MachineTranslationNotice,
 } from "components/Card/CustomNotice";
 import { PathConfig, FrontMatter, BuildType } from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
@@ -67,13 +67,13 @@ export default function MDXContent(props: {
         {buildType !== "archive" && (
           <CustomNotice name={name} pathConfig={pathConfig} availIn={availIn} />
         )}
-        {isAutoTranslation && pageType !== "home" && (
+        {/* {isAutoTranslation && pageType !== "home" && (
           <MachineTranslationNotice
             name={name}
             pathConfig={pathConfig}
             availIn={availIn}
           />
-        )}
+        )} */}
         <MDXProvider
           components={{
             ...MDXComponents,
