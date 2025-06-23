@@ -45,7 +45,6 @@ export default function HeaderNavStack(props: {
   pageUrl?: string;
 }) {
   const { language, t } = useI18next();
-
   const selectedItem = useSelectedNavItem(language, props.pageUrl);
 
   return (

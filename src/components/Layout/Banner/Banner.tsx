@@ -6,11 +6,13 @@ export function Banner({
   textList,
   logo,
   bgColor,
+  textColor,
 }: {
-  url: string;
-  textList: string[];
-  logo?: string;
+  url?: string;
+  textList: (string | React.ReactNode)[];
+  logo?: React.ReactNode;
   bgColor?: string;
+  textColor?: string;
 }) {
   return (
     <Box
@@ -27,14 +29,14 @@ export function Banner({
       }}
     >
       <Stack
-        component="a"
-        href={url}
-        target="_blank"
+        component={url ? "a" : "div"}
+        href={url || undefined}
+        target={url ? "_blank" : undefined}
         direction="row"
         justifyContent="center"
         alignItems="center"
         flexWrap="nowrap"
-        spacing={2}
+        spacing={0.5}
         divider={
           <Divider
             orientation="vertical"
@@ -54,42 +56,29 @@ export function Banner({
         }
         sx={(theme) => ({
           textDecoration: "none",
-          color: "text.primary",
+          color: textColor || "text.primary",
           height: "100%",
           px: 2,
           [theme.breakpoints.down("md")]: {
             px: 1,
           },
           ":hover span": {
-            textDecoration: "underline",
+            textDecoration: url ? "underline" : "none",
           },
         })}
       >
+        {logo && (
+          <Box sx={{ display: "flex", alignItems: "center" }}>{logo}</Box>
+        )}
         {textList.map((text, index) => (
-          <Fragment key={index}>
-            {!index ? (
-              <Stack direction="row" alignItems="center" spacing={1}>
-                {logo && <Box>{logo}</Box>}
-                <Typography component="span" variant="body2" color="inherit">
-                  {text}
-                </Typography>
-              </Stack>
-            ) : (
-              <Typography
-                component="span"
-                variant="body2"
-                color="inherit"
-                sx={(theme) => ({
-                  display: "initial",
-                  [theme.breakpoints.down("md")]: {
-                    display: "none",
-                  },
-                })}
-              >
-                {text}
-              </Typography>
-            )}
-          </Fragment>
+          <Typography
+            key={index}
+            component="span"
+            variant="body2"
+            color="inherit"
+          >
+            {text}
+          </Typography>
         ))}
       </Stack>
     </Box>

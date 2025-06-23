@@ -7,7 +7,9 @@
     "cannotswitchEn": "本页面暂无英文版",
     "cannotswitchZh": "本页面暂无中文版",
     "cannotswitchJa": "本页面暂无日文版",
-    "machineTransNotice": "此页面由 AI 自动翻译，英文原文请见此处。"
+    "machineTransNotice1": "此页面由 AI 自动翻译，英文原文请见",
+    "machineTransNotice2": "此处",
+    "machineTransNotice3": "。"
   },
   "meta": {
     "title": "TiDB 文档中心",

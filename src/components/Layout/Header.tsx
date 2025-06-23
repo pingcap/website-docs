@@ -19,6 +19,8 @@ import { generateDocsHomeUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { ArchiveBanner } from "./Banner/ArchiveBanner";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
+import { ErrorOutlineOutlined } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 
 export default function Header(props: {
   bannerEnabled?: boolean;
@@ -38,7 +40,6 @@ export default function Header(props: {
     "link",
     "banner.campaign"
   );
-  const textListAutoTranslation = t("lang.machineTransNotice");
   const urlAutoTranslation =
     props.pathConfig?.repo === "tidbcloud"
       ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`
@@ -103,9 +104,32 @@ export default function Header(props: {
         )}
       {isAutoTranslation && props.buildType !== "archive" && (
         <Banner
-          url={urlAutoTranslation}
-          textList={[textListAutoTranslation]}
+          textList={[
+            <Typography component="span" variant="body2" color="inherit">
+              {t("lang.machineTransNotice1")}
+              <Typography
+                component="a"
+                href={urlAutoTranslation}
+                target="_blank"
+                sx={{
+                  textDecoration: "none",
+                  "&:hover": {
+                    textDecoration: "underline!important",
+                  },
+                }}
+              >
+                <Typography component="span" variant="body2" color="secondary">
+                  {t("lang.machineTransNotice2")}
+                </Typography>
+              </Typography>
+              {t("lang.machineTransNotice3")}
+            </Typography>,
+          ]}
           bgColor="#FEFBF3"
+          textColor="#AE6D0C"
+          logo={
+            <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+          }
         />
       )}
       {props.buildType === "archive" && (
@@ -129,17 +153,6 @@ const useBannerEvents = (
   const url = t(urlKey);
   const textList = validTextKeys.map((k) => t(k));
   const logo = "🚀";
-  // const logo = (
-  //   <Box
-  //     component="img"
-  //     alt="TiDB"
-  //     src={require("media/logo/tidb-logo.svg")?.default}
-  //     sx={{
-  //       width: "1.25rem",
-  //       height: "1.25rem",
-  //     }}
-  //   />
-  // );
   const bgImgSrc =
     "https://static.pingcap.com/files/2023/11/15190759/20231116-105219.png";
 
