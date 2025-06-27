@@ -232,7 +232,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </MenuItem>
         )}
 
-        {["en", "ja"].includes(language) && props.buildType !== "archive" && (
+        {props.buildType !== "archive" && (
           <MenuItem
             onClick={handleClose}
             disableRipple
