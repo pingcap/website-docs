@@ -173,38 +173,41 @@ const VersionItems = (props: {
           </Typography>
         </MenuItem>
       ))}
-      {pathConfig.repo === "tidb" && (
-        <FormLabel
-          sx={{
-            fontSize: "0.875rem",
-            lineHeight: "1.25rem",
-            fontWeight: "bold",
-            pl: "0.5rem",
-          }}
-        >
-          DMR
-        </FormLabel>
-      )}
-      {DMRVersions.map((version) => (
-        <MenuItem
-          key={`menu-${version}`}
-          value={`menu-${version}`}
-          disabled={!availIn.includes(version || "")}
-          component={LinkComponent}
-          isI18n
-          to={`/${pathConfig.repo}/${version}/${name}`}
-        >
-          <Typography
-            component="div"
+      {pathConfig.repo === "tidb" && DMRVersions.length > 0 && (
+        <>
+          <FormLabel
             sx={{
               fontSize: "0.875rem",
               lineHeight: "1.25rem",
+              fontWeight: "bold",
+              pl: "0.5rem",
             }}
           >
-            {renderVersion(version, pathConfig)}
-          </Typography>
-        </MenuItem>
-      ))}
+            DMR
+          </FormLabel>
+          {DMRVersions.map((version) => (
+            <MenuItem
+              key={`menu-${version}`}
+              value={`menu-${version}`}
+              disabled={!availIn.includes(version || "")}
+              component={LinkComponent}
+              isI18n
+              to={`/${pathConfig.repo}/${version}/${name}`}
+            >
+              <Typography
+                component="div"
+                sx={{
+                  fontSize: "0.875rem",
+                  lineHeight: "1.25rem",
+                }}
+              >
+                {renderVersion(version, pathConfig)}
+              </Typography>
+            </MenuItem>
+          ))}
+        </>
+      )}
+
       <Divider sx={{ margin: "4px 0" }} />
       <MenuItem
         component={LinkComponent}
