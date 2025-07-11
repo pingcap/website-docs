@@ -219,5 +219,14 @@ module.exports = {
       },
     },
     `gatsby-plugin-material-ui`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: `#c0e1f1`,
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
   ],
 };
