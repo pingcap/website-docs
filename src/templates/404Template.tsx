@@ -37,7 +37,7 @@ interface PageNotFoundTemplateProps {
   data: AllLocales;
 }
 
-const REDIRECT_SECONDS = 3;
+const REDIRECT_SECONDS = 1;
 
 export default function PageNotFoundTemplate({
   pageContext: { feature, buildType },
@@ -82,10 +82,19 @@ export default function PageNotFoundTemplate({
 
   const secondsRef = useRef(REDIRECT_SECONDS);
   const [seconds, setSeconds] = useState(REDIRECT_SECONDS);
-  const { isArchivedDoc, redirectUrl } = useArchiveDoc(pathname, language);
+  const { isArchivedDoc, redirectUrl: archivedRedirectUrl } = useArchiveDoc(
+    pathname,
+    language
+  );
+  const { hasCustomRedirect, redirectUrl: customRedirectUrl } =
+    useCustomRedirect(pathname);
+  const shouldRedirect = hasCustomRedirect || isArchivedDoc;
+  const redirectUrl = hasCustomRedirect
+    ? customRedirectUrl!
+    : archivedRedirectUrl;
 
   useEffect(() => {
-    if (isArchived || !isArchivedDoc) {
+    if (isArchived || !shouldRedirect) {
       return;
     }
 
@@ -210,15 +219,11 @@ const useArchiveDoc = (pathname: string, lang: Locale) => {
   const repo = lang === Locale.en ? (pathArr[1] as Repo) : pathArr[2];
   const version = lang === Locale.en ? pathArr[2] : pathArr[3];
   const isJA = lang === Locale.ja;
-  const key = `/${lang}/${repo}/${version}`;
-  const isRedirect = !!CONFIG.redirect?.[key as keyof typeof CONFIG.redirect];
   const docConfig = CONFIG.docs[repo as keyof typeof CONFIG.docs] as {
     archived?: string[];
   };
-  const isArchivedDoc =
-    isRedirect ||
-    // for ja, because not all docs are archived, so don't check archived
-    (!isJA && docConfig?.archived?.includes(version || ""));
+  // for ja, because not all docs are archived, so don't check archived
+  const isArchivedDoc = !isJA && docConfig?.archived?.includes(version || "");
   const redirectUrl = `https://docs-archive.pingcap.com${pathname}`;
 
   return { isArchivedDoc, redirectUrl };
@@ -237,3 +242,37 @@ export const query = graphql`
     }
   }
 `;
+
+const useCustomRedirect = (pathname: string) => {
+  // First check for exact match
+  const exactRedirectUrl =
+    CONFIG.redirect?.[pathname as keyof typeof CONFIG.redirect];
+  if (exactRedirectUrl) {
+    return { hasCustomRedirect: true, redirectUrl: exactRedirectUrl };
+  }
+
+  // Check for wildcard patterns
+  const redirectConfig = CONFIG.redirect || {};
+  for (const [pattern, target] of Object.entries(redirectConfig)) {
+    if (pattern.includes("*")) {
+      // Convert wildcard pattern to regex
+      const regexPattern = pattern.replace(/\*/g, ".*");
+      const regex = new RegExp(`^${regexPattern}$`);
+
+      if (regex.test(pathname)) {
+        // Replace * in target with the actual pathname parts
+        const pathParts = pathname.split("/");
+        const patternParts = pattern.split("/");
+        const wildcardIndex = patternParts.findIndex((part) => part === "*");
+
+        if (wildcardIndex !== -1) {
+          const wildcardValue = pathParts[wildcardIndex] || "";
+          const redirectUrl = target.replace(/\*/g, wildcardValue);
+          return { hasCustomRedirect: true, redirectUrl };
+        }
+      }
+    }
+  }
+
+  return { hasCustomRedirect: false, redirectUrl: undefined };
+};
