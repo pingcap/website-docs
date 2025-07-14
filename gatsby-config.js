@@ -219,6 +219,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-material-ui`,
+    `gatsby-plugin-no-sourcemaps`,
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {

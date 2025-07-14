@@ -8264,6 +8264,13 @@ gatsby-plugin-meta-redirect@^1.1.1:
   dependencies:
     fs-extra "^7.0.0"
 
+gatsby-plugin-no-sourcemaps@^5.14.0:
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-sourcemaps/-/gatsby-plugin-no-sourcemaps-5.14.0.tgz#9aecc0c6530a358412fcb97bf3495ad4dec063d1"
+  integrity sha512-p/Cxn/OOUdrPsOBxQ1TuuwhiHwCVARhLIvHAruc2Zt9xwaK+Zibuq/F6FMoNbaOUwDlVlSiAdkD7OJBQZjL6dA==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+
 gatsby-plugin-nprogress@^5.14.0:
   version "5.14.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-nprogress/-/gatsby-plugin-nprogress-5.14.0.tgz#3a518dd7633418c27fc8a7f23b53e5dd6ca86f7d"
