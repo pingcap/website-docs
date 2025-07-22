@@ -181,7 +181,7 @@ const HeaderBanner = (props: HeaderProps) => {
   return props.bannerEnabled ? (
     <Banner
       url={t("banner.campaign.link")}
-      logo={"🚀"}
+      logo={"📣"}
       textList={[t("banner.campaign.title")]}
     />
   ) : null;
