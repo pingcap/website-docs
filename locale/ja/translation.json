@@ -162,7 +162,7 @@
       "viewLatestLTSVersion": "最新の LTS バージョンのドキュメントを表示する"
     },
     "campaign": {
-      "link": "https://docs.tidb.io/tidbcloud/tidb-cloud-quickstart/",
+      "link": "https://console.tidb.io/",
       "title": "TiDB Cloud Serverless が TiDB Cloud Starter に変わりました！使いやすさそのまま、新しい名前で今すぐ体験 →",
       "date": "",
       "intro": ""
