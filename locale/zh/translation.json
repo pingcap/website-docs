@@ -177,7 +177,7 @@
       "viewLatestLTSVersion": "查看最新 LTS 版本文档"
     },
     "campaign": {
-      "link": "https://console.tidb.io/",
+      "link": "https://tidbcloud.com/",
       "title": "TiDB Cloud Serverless 现已更名为 TiDB Cloud Starter！体验不变，名字焕新。立即试用 →",
       "date": "",
       "intro": ""
