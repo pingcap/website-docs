@@ -176,7 +176,7 @@
       "viewLatestLTSVersion": "View latest LTS version docs"
     },
     "campaign": {
-      "link": "https://console.tidb.io/",
+      "link": "https://tidbcloud.com/",
       "title": "TiDB Cloud Serverless is now TiDB Cloud Starter! Same experience, new name. Try it out →",
       "date": "",
       "intro": ""
