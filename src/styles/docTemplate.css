@@ -83,23 +83,39 @@
       color: unset;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      .version-mark {
+        font-size: 16px;
+        padding: 3px 8px 3px 24px;
+      }
+    }
+
     .version-mark {
       position: relative;
-      padding: 0 7px 0 25px;
-      font-style: italic;
-      font-size: 16px;
+      font-size: 14px;
+      padding: 2px 8px 2px 24px;
+      border: 1px solid var(--tiui-palette-aqua-500);
+      border-radius: 20px;
+      background-color: var(--tiui-palette-aqua-100);
+      color: var(--tiui-palette-aqua-900);
+      font-weight: 400;
     }
 
     .version-mark::before {
       content: "";
       position: absolute;
-      left: 2px;
+      left: 6px;
       top: 50%;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       transform: translateY(-50%);
       background-image: url(../../images/version-mark.png);
-      background-size: 20px;
+      background-size: 15px;
     }
   }
 
