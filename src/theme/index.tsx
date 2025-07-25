@@ -199,6 +199,21 @@ theme = createTheme(theme, {
       },
       name: "peacock",
     }),
+    aqua: theme.palette.augmentColor({
+      color: {
+        50: "#FBFEFE",
+        100: "#F5FCFC",
+        200: "#ECF9F9",
+        300: "#E2F5F5",
+        400: "#C6ECEC",
+        500: "#9FDFDF",
+        600: "#79D2D2",
+        700: "#40BFBF",
+        800: "#29A3A3",
+        900: "#24868F",
+      },
+      name: "aqua",
+    }),
   },
 } as ThemeOptions);
 
