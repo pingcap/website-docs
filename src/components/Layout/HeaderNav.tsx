@@ -316,7 +316,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
         {["zh"].includes(language) && (
           <MenuItem onClick={handleClose} disableRipple>
             <LinkComponent
-              to={generateAskTugUrl(language)}
+              to="https://asktug.com/"
               style={{ width: "100%" }}
               onClick={() =>
                 gtmTrack(GTMEvent.ClickHeadNav, {
@@ -349,16 +349,4 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
       </Menu>
     </Box>
   );
-}
-
-function generateAskTugUrl(language: string) {
-  switch (language) {
-    case "zh":
-      return "https://asktug.com/";
-    case "en":
-      return "https://ask.pingcap.com/";
-    default:
-      break;
-  }
-  return "https://asktug.com/";
 }
