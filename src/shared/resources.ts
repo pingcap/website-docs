@@ -227,10 +227,6 @@ export const EN_FOOTER_ITEMS = [
         url: "https://www.pingcap.com/blog/",
       },
       {
-        name: "Forum",
-        url: "https://ask.pingcap.com/",
-      },
-      {
         name: "Events & Webinars",
         url: "https://www.pingcap.com/event",
       },
@@ -457,10 +453,6 @@ export const JA_FOOTER_ITEMS = [
       {
         name: "Discord",
         url: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
-      },
-      {
-        name: "Forum",
-        url: "https://ask.pingcap.com/",
       },
       {
         name: "Slack",
