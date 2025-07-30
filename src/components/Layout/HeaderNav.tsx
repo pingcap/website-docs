@@ -316,8 +316,6 @@ function generateAskTugUrl(language: string) {
   switch (language) {
     case "zh":
       return "https://asktug.com/";
-    case "en":
-      return "https://ask.pingcap.com/";
     default:
       break;
   }

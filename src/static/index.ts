@@ -244,10 +244,6 @@ export const EN_FOOTER_ITEMS = [
         url: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
       },
       {
-        name: "Forum",
-        url: "https://ask.pingcap.com/",
-      },
-      {
         name: "Slack",
         url: "https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs",
       },
@@ -438,10 +434,6 @@ export const JA_FOOTER_ITEMS = [
       {
         name: "Discord",
         url: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
-      },
-      {
-        name: "Forum",
-        url: "https://ask.pingcap.com/",
       },
       {
         name: "Slack",
