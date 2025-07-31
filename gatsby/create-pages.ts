@@ -294,7 +294,7 @@ export const createDocSearch = async ({
   const template = resolve(__dirname, "../src/templates/DocSearchTemplate.tsx");
 
   createPage({
-    path: "/search",
+    path: "/search/",
     component: template,
     context: {
       feature: {
@@ -310,7 +310,7 @@ export const create404 = async ({
   const template = resolve(__dirname, "../src/templates/404Template.tsx");
 
   createPage({
-    path: "/404",
+    path: "/404/",
     component: template,
     context: {
       buildType: (process.env.WEBSITE_BUILD_TYPE ??

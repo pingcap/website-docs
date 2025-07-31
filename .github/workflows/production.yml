@@ -41,7 +41,7 @@ jobs:
           ref: "tidb-cloud"
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 22
           cache: "yarn"
 
       - name: Update submodule
@@ -126,7 +126,7 @@ jobs:
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
             --delete \
-            --exclude ".*\.md$" \
+            --exclude ".*\.(md|txt)$" \
             --force
 
       - name: Deploy md to COS
@@ -138,7 +138,7 @@ jobs:
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
-            --include ".*\.md$" \
+            --include ".*\.(md|txt)$" \
             --meta "Content-Type:text/plain; charset=utf-8" \
             --force
 

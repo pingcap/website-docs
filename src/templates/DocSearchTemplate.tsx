@@ -29,6 +29,7 @@ import {
 } from "shared/resources";
 import { Locale } from "shared/interface";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
+import { useEffect } from "react";
 
 // TiDB: get searchable versions from fetchTidbSearchIndcies
 // TiDB Cloud: only has one version
@@ -131,10 +132,10 @@ export default function DocSearchTemplate({
   const [results, setResults] = React.useState<any[]>([]);
 
   const { language, navigate } = useI18next();
-  const location = useLocation();
+  const { search } = useLocation();
 
-  React.useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(search);
     const type = searchParams.get("type") || "";
     const version = searchParams.get("version") || "";
     const query = searchParams.get("q") || "";
@@ -143,7 +144,7 @@ export default function DocSearchTemplate({
     setDocQuery(query);
 
     execSearch(query, type, version);
-  }, []);
+  }, [search]);
 
   const realVersionMemo = React.useMemo(() => {
     return getSearchIndexVersion(docType, docVersion, language);
@@ -176,28 +177,23 @@ export default function DocSearchTemplate({
   };
 
   const handleSelectDocType = (type: string) => {
-    setDocType(type);
-    setDocVersion("");
-    navigate(`/search?type=${type}&q=${docQuery}`, {
+    navigate(`/search/?type=${type}&q=${docQuery}`, {
       state: {
         type,
         version: "",
         query: docQuery,
       },
     });
-    execSearch(docQuery, type, "");
   };
 
   const handleSelectDocVersion = (version: string) => {
-    setDocVersion(version);
-    navigate(`/search?type=${docType}&version=${version}&q=${docQuery}`, {
+    navigate(`/search/?type=${docType}&version=${version}&q=${docQuery}`, {
       state: {
         type: docType,
         version,
         query: docQuery,
       },
     });
-    execSearch(docQuery, docType, version);
   };
 
   const bannerVisible = feature?.banner && language !== Locale.ja;
@@ -226,7 +222,6 @@ export default function DocSearchTemplate({
                 type: docType,
                 version: realVersionMemo || "stable",
               }}
-              onSubmit={(query) => execSearch(query, docType, docVersion)}
             />
             <Box
               sx={{

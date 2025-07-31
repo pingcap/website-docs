@@ -6,7 +6,10 @@
     "ja": "日本語",
     "cannotswitchEn": "本页面暂无英文版",
     "cannotswitchZh": "本页面暂无中文版",
-    "cannotswitchJa": "本页面暂无日文版"
+    "cannotswitchJa": "本页面暂无日文版",
+    "machineTransNotice1": "此页面由 AI 自动翻译，英文原文请见",
+    "machineTransNotice2": "此处",
+    "machineTransNotice3": "。"
   },
   "meta": {
     "title": "TiDB 文档中心",
@@ -20,6 +23,7 @@
     "archive-label": "归档文档",
     "tidb": "TiDB",
     "tools": "生态工具",
+    "cloud": "TiDB Cloud",
     "appdev": "开发指南",
     "asktug": "社区",
     "download": "免费试用",

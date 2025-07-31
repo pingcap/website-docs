@@ -20,6 +20,7 @@ import Search from "components/Search";
 import { Locale, BuildType } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -60,10 +61,12 @@ export default function HeaderAction(props: {
   supportedLocales: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
+  pageUrl?: string;
 }) {
-  const { supportedLocales, docInfo, buildType } = props;
+  const { supportedLocales, docInfo, buildType, pageUrl } = props;
   const { language, t } = useI18next();
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
+  const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
   return (
     <Stack
@@ -77,7 +80,7 @@ export default function HeaderAction(props: {
       {/* {supportedLocales.length > 0 && (
         <LangSwitch supportedLocales={supportedLocales} />
       )}
-      {docInfo && language !== "ja" && buildType !== "archive" && (
+      {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
           <Stack direction="row" spacing="4px">
             <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />

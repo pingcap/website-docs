@@ -9,7 +9,9 @@
     "cannotswitchJa": "このページは日本語ではご利用いただけません",
     "cannotswitchtocloudJa": "TiDB Cloud 日本語ドキュメントは現在利用できません",
     "cannotswitchtocloudZh": "TiDB Cloud 中国語ドキュメントは現在利用できません",
-    "machineTransNotice": "このページは英語版のページを機械翻訳しています。原文は<0>こちら</0>からご覧ください。"
+    "machineTransNotice1": "このページは英語版のページを機械翻訳しています。",
+    "machineTransNotice2": "原文はこちらからご覧ください",
+    "machineTransNotice3": "。"
   },
   "meta": {
     "title": "TiDB Docs",

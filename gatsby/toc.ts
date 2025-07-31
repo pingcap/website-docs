@@ -41,7 +41,9 @@ function handleList(ast: ListItem[], config: PathConfig, prefixId = `0`) {
       if (content[1]) {
         const list = content[1];
         if (list.type !== "list") {
-          throw new Error(`incorrect listitem in TOC.md`);
+          throw new Error(
+            `incorrect listitem in TOC.md: ${JSON.stringify(list)}`
+          );
         }
 
         ret.children = handleList(list.children, config, `${prefixId}-${idx}`);
@@ -50,7 +52,11 @@ function handleList(ast: ListItem[], config: PathConfig, prefixId = `0`) {
       return ret;
     }
 
-    throw new Error(`incorrect format in TOC.md`);
+    throw new Error(
+      `incorrect format list in TOC.md: ${content
+        .flatMap((n) => JSON.stringify(n))
+        .join(", ")}`
+    );
   });
 }
 
@@ -71,7 +77,9 @@ function getContentFromLink(
   id: string
 ): RepoNavLink {
   if (content.type !== "paragraph" || content.children.length === 0) {
-    throw new Error(`incorrect format in TOC.md`);
+    throw new Error(
+      `incorrect format paragraph in TOC.md: ${JSON.stringify(content)}`
+    );
   }
 
   const child = content.children[0] as Link | Text;
@@ -84,7 +92,7 @@ function getContentFromLink(
 
   if (child.type === "link") {
     if (child.children.length === 0) {
-      throw new Error(`incorrect link in TOC.md`);
+      throw new Error(`incorrect link in TOC.md: ${JSON.stringify(child)}`);
     }
 
     const content = child.children.map((node) => {

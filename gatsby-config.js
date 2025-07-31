@@ -65,10 +65,18 @@ module.exports = {
           },
           nsSeparator: false,
         },
+        /**
+         * `getLanguageFromPath` being true means you manually add the /:lang/ prefix, and the i18n plugin will not automatically create the corresponding page.
+         * If it is false, the opposite is true, and the default is false
+         */
         pages: [
           {
-            matchPath: "/:lang?/404",
+            matchPath: "/:lang?/404/",
             getLanguageFromPath: true,
+          },
+          {
+            matchPath: "/:lang?/search/",
+            getLanguageFromPath: false,
           },
           {
             matchPath: `/:lang?/(${Object.keys(docs.docs).join("|")})/(.*)`,
@@ -206,5 +214,15 @@ module.exports = {
       },
     },
     `gatsby-plugin-material-ui`,
+    `gatsby-plugin-no-sourcemaps`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: `#c0e1f1`,
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
   ],
 };

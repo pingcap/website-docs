@@ -98,15 +98,8 @@ export default function Seo({
         },
         {
           property: "og:image",
-          content: "https://download.pingcap.com/images/pingcap-opengraph.jpg",
-        },
-        {
-          property: "og:image:width",
-          content: "400",
-        },
-        {
-          property: "og:image:height",
-          content: "400",
+          content:
+            "https://docs-download.pingcap.com/media/images/opengraph.jpg",
         },
         {
           name: "twitter:card",

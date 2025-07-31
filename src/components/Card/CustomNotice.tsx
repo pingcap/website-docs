@@ -81,20 +81,3 @@ export function CustomNotice({ name, pathConfig, availIn }: Props) {
 
   return null;
 }
-
-export const MachineTranslationNotice = ({ name, pathConfig }: Props) => {
-  const targetEnUrl =
-    pathConfig.repo === "tidbcloud"
-      ? `/tidbcloud`
-      : `/${pathConfig.repo}/${pathConfig?.version || "stable"}/${
-          name === "_index" ? "" : name
-        }`;
-  return (
-    <Important>
-      <Trans
-        i18nKey={`lang.machineTransNotice`}
-        components={[<Link language="en" to={targetEnUrl} />]}
-      />
-    </Important>
-  );
-};

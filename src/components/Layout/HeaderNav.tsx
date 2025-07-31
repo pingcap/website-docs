@@ -45,7 +45,6 @@ export default function HeaderNavStack(props: {
   pageUrl?: string;
 }) {
   const { language, t } = useI18next();
-
   const selectedItem = useSelectedNavItem(language, props.pageUrl);
 
   return (
@@ -61,7 +60,7 @@ export default function HeaderNavStack(props: {
         },
       }}
     >
-      {["en", "ja"].includes(language) && props.buildType !== "archive" && (
+      {props.buildType !== "archive" && (
         <NavItem
           selected={selectedItem === "tidbcloud"}
           label={t("navbar.cloud")}
@@ -233,7 +232,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </MenuItem>
         )}
 
-        {["en", "ja"].includes(language) && props.buildType !== "archive" && (
+        {props.buildType !== "archive" && (
           <MenuItem
             onClick={handleClose}
             disableRipple
