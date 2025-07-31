@@ -36,9 +36,9 @@ export default function Header(props: {
   const theme = useTheme();
   const isAutoTranslation = useIsAutoTranslation(props.pageUrl || "");
   const { url, logo, textList } = useBannerEvents(
+    "banner.campaign",
     ["title"],
-    "link",
-    "banner.campaign"
+    "link"
   );
   const urlAutoTranslation =
     props.pathConfig?.repo === "tidbcloud"
@@ -140,9 +140,9 @@ export default function Header(props: {
 }
 
 const useBannerEvents = (
+  prefix: string = "",
   textKeys: string[],
-  linkKey: string,
-  prefix: string = ""
+  linkKey: string
 ) => {
   const { t } = useI18next();
   const validTextKeys = prefix
@@ -150,7 +150,7 @@ const useBannerEvents = (
     : textKeys;
 
   const urlKey = prefix ? `${prefix}.${linkKey}` : linkKey;
-  const url = t(urlKey);
+  const url = !!t(urlKey!) ? t(urlKey!) : undefined;
   const textList = validTextKeys.map((k) => t(k));
   const logo = "🚀";
   const bgImgSrc =
