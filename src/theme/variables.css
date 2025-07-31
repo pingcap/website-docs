@@ -33,4 +33,16 @@
   --tiui-palette-peacock-700: #2d9cd2;
   --tiui-palette-peacock-800: #1480b8;
   --tiui-palette-peacock-900: #0b628d;
+
+  /* Aqua */
+  --tiui-palette-aqua-50: #fbfffe;
+  --tiui-palette-aqua-100: #f5fcfc;
+  --tiui-palette-aqua-200: #ecf9f9;
+  --tiui-palette-aqua-300: #e2f5f5;
+  --tiui-palette-aqua-400: #c6ecec;
+  --tiui-palette-aqua-500: #9fdfdf;
+  --tiui-palette-aqua-600: #79d2d2;
+  --tiui-palette-aqua-700: #40bfbf;
+  --tiui-palette-aqua-800: #29a3a3;
+  --tiui-palette-aqua-900: #24868f;
 }
