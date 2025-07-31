@@ -11,9 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { RepoNav, PathConfig, BuildType } from "shared/interface";
 import LinkComponent from "components/Link";
 import LeftNavTree from "components/Navigation/LeftNavTree";
-import VersionSelect, {
-  NativeVersionSelect,
-} from "components/Dropdown/VersionSelect";
+import VersionSelect, { NativeVersionSelect } from "./VersionSelect";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 
