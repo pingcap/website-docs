@@ -15,9 +15,8 @@ import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 import { Locale, BuildType, PathConfig } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "./Banner";
-import { generateDocsHomeUrl } from "shared/utils";
+import { generateDocsHomeUrl, generateUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { ArchiveBanner } from "./Banner/ArchiveBanner";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
 import { Typography } from "@mui/material";
@@ -103,50 +102,87 @@ const HeaderBanner = (props: HeaderProps) => {
           props.name === "_index" ? "" : props.name
         }`;
 
-  return (
-    <>
-      {!isAutoTranslation &&
-        props.bannerEnabled &&
-        props.buildType !== "archive" && (
-          <Banner
-            url={t("banner.campaign.link")}
-            logo={"🚀"}
-            textList={[t("banner.campaign.title")]}
-          />
-        )}
-      {isAutoTranslation && props.buildType !== "archive" && (
-        <Banner
-          textList={[
+  let archivedTargetUrl = "";
+  if (props.name && props.pathConfig) {
+    const stableCfg = { ...props.pathConfig, version: "stable" };
+    const path = generateUrl(props.name, stableCfg);
+    archivedTargetUrl = `https://docs.pingcap.com${path}`;
+  } else {
+    const lang =
+      props.pathConfig?.locale === Locale.en
+        ? ""
+        : `/${props.pathConfig?.locale}`;
+    archivedTargetUrl = `https://docs.pingcap.com${lang}/tidb/stable/`;
+  }
+
+  if (props.buildType === "archive") {
+    return (
+      <Banner
+        bgColor="#FEFBF3"
+        textColor="#AE6D0C"
+        logo={
+          <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+        }
+        textList={[
+          t("banner.archive.title"),
+          <LinkComponent
+            to={archivedTargetUrl}
+            target="_blank"
+            sx={{
+              color: "secondary.main",
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline!important",
+              },
+            }}
+          >
             <Typography component="span" variant="body2" color="inherit">
-              {t("lang.machineTransNotice1")}
-              <Typography
-                component="a"
-                href={urlAutoTranslation}
-                target="_blank"
-                sx={{
-                  textDecoration: "none",
-                  "&:hover": {
-                    textDecoration: "underline!important",
-                  },
-                }}
-              >
-                <Typography component="span" variant="body2" color="secondary">
-                  {t("lang.machineTransNotice2")}
-                </Typography>
+              {t("banner.archive.viewLatestLTSVersion")} ↗
+            </Typography>
+          </LinkComponent>,
+        ]}
+      />
+    );
+  }
+
+  if (isAutoTranslation) {
+    return (
+      <Banner
+        textList={[
+          <Typography component="span" variant="body2" color="inherit">
+            {t("lang.machineTransNotice1")}
+            <Typography
+              component="a"
+              href={urlAutoTranslation}
+              target="_blank"
+              sx={{
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline!important",
+                },
+              }}
+            >
+              <Typography component="span" variant="body2" color="secondary">
+                {t("lang.machineTransNotice2")}
               </Typography>
-              {t("lang.machineTransNotice3")}
-            </Typography>,
-          ]}
-          bgColor="#FEFBF3"
-          textColor="#AE6D0C"
-          logo={
-            <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
-          }
-        />
-      )}
-      {props.buildType === "archive" && (
-        <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />
-      )}
-    </>
-  );
+            </Typography>
+            {t("lang.machineTransNotice3")}
+          </Typography>,
+        ]}
+        bgColor="#FEFBF3"
+        textColor="#AE6D0C"
+        logo={
+          <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+        }
+      />
+    );
+  }
+
+  return props.bannerEnabled ? (
+    <Banner
+      url={t("banner.campaign.link")}
+      logo={"🚀"}
+      textList={[t("banner.campaign.title")]}
+    />
+  ) : null;
 };

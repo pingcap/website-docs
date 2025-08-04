@@ -1,5 +1,4 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import { Fragment } from "react";
 
 export function Banner({
   url,
@@ -30,7 +29,7 @@ export function Banner({
     >
       <Stack
         component={url ? "a" : "div"}
-        href={url || undefined}
+        href={url}
         target={url ? "_blank" : undefined}
         direction="row"
         justifyContent="center"
@@ -70,16 +69,20 @@ export function Banner({
         {logo && (
           <Box sx={{ display: "flex", alignItems: "center" }}>{logo}</Box>
         )}
-        {textList.map((text, index) => (
-          <Typography
-            key={index}
-            component="span"
-            variant="body2"
-            color="inherit"
-          >
-            {text}
-          </Typography>
-        ))}
+        {textList.map((text, index) =>
+          typeof text === "string" ? (
+            <Typography
+              key={index}
+              component="span"
+              variant="body2"
+              color="inherit"
+            >
+              {text}
+            </Typography>
+          ) : (
+            text
+          )
+        )}
       </Stack>
     </Box>
   );
