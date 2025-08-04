@@ -11,9 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import StarIcon from "media/icons/star.svg";
 
-import TranslateIcon from "@mui/icons-material/Translate";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloudIcon from "@mui/icons-material/Cloud";
+import TranslateIcon from "media/icons/globe-02.svg";
 
 import Search from "components/Search";
 
@@ -82,8 +82,7 @@ export default function HeaderAction(props: {
       )}
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
-          <Stack direction="row" spacing="4px">
-            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+          <Stack direction="row" spacing={1}>
             {language === "en" && showTiDBAIButton && (
               <ActionButton
                 id="header-ask-ai"
@@ -103,6 +102,7 @@ export default function HeaderAction(props: {
                 Ask AI
               </ActionButton>
             )}
+            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
           </Stack>
         </>
       )}
@@ -110,6 +110,12 @@ export default function HeaderAction(props: {
     </Stack>
   );
 }
+
+const LANG_MAP = {
+  [Locale.en]: "EN",
+  [Locale.zh]: "中文",
+  [Locale.ja]: "日本語",
+};
 
 const LangSwitch = (props: {
   language?: string;
@@ -159,7 +165,9 @@ const LangSwitch = (props: {
         color="inherit"
         startIcon={<TranslateIcon sx={{ fill: theme.palette.carbon[900] }} />}
         endIcon={
-          <KeyboardArrowDownIcon sx={{ fill: theme.palette.carbon[900] }} />
+          <KeyboardArrowDownIcon
+            sx={{ fill: theme.palette.carbon[900], marginLeft: "-4px" }}
+          />
         }
         sx={{
           display: {
@@ -167,7 +175,9 @@ const LangSwitch = (props: {
             lg: "inline-flex",
           },
         }}
-      ></Button>
+      >
+        {LANG_MAP[language as Locale]}
+      </Button>
       <Menu
         id="header-lang-menu"
         anchorEl={anchorEl}
@@ -238,21 +248,12 @@ const TiDBCloudBtnGroup = () => {
     <>
       <Stack
         direction="row"
-        spacing={2}
+        spacing={1}
         display={{
           xs: "none",
           xl: "flex",
         }}
       >
-        <Button
-          variant="text"
-          href={`https://tidbcloud.com/signin`}
-          // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-          referrerPolicy="no-referrer-when-downgrade"
-          target="_blank"
-        >
-          Sign In
-        </Button>
         <Button
           variant="contained"
           target="_blank"
@@ -261,6 +262,15 @@ const TiDBCloudBtnGroup = () => {
           referrerPolicy="no-referrer-when-downgrade"
         >
           Start for Free
+        </Button>
+        <Button
+          variant="outlined"
+          href={`https://tidbcloud.com/signin`}
+          // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+          referrerPolicy="no-referrer-when-downgrade"
+          target="_blank"
+        >
+          Sign In
         </Button>
       </Stack>
 
