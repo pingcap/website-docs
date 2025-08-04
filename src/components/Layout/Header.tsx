@@ -22,7 +22,7 @@ import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 
-export default function Header(props: {
+interface HeaderProps {
   bannerEnabled?: boolean;
   menu?: React.ReactNode;
   locales: Locale[];
@@ -31,21 +31,11 @@ export default function Header(props: {
   pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
-}) {
-  const { language, t } = useI18next();
+}
+
+export default function Header(props: HeaderProps) {
+  const { language } = useI18next();
   const theme = useTheme();
-  const isAutoTranslation = useIsAutoTranslation(props.pageUrl || "");
-  const { url, logo, textList } = useBannerEvents(
-    "banner.campaign",
-    ["title"],
-    "link"
-  );
-  const urlAutoTranslation =
-    props.pathConfig?.repo === "tidbcloud"
-      ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`
-      : `/${props.pathConfig?.repo}/${props.pathConfig?.version || "stable"}/${
-          props.name === "_index" ? "" : props.name
-        }`;
 
   return (
     <AppBar
@@ -58,44 +48,7 @@ export default function Header(props: {
         height: props.bannerEnabled ? "7.5rem" : "5rem",
       }}
     >
-      {!isAutoTranslation &&
-        props.bannerEnabled &&
-        props.buildType !== "archive" && (
-          <Banner url={url} logo={logo} textList={textList} />
-        )}
-      {isAutoTranslation && props.buildType !== "archive" && (
-        <Banner
-          textList={[
-            <Typography component="span" variant="body2" color="inherit">
-              {t("lang.machineTransNotice1")}
-              <Typography
-                component="a"
-                href={urlAutoTranslation}
-                target="_blank"
-                sx={{
-                  textDecoration: "none",
-                  "&:hover": {
-                    textDecoration: "underline!important",
-                  },
-                }}
-              >
-                <Typography component="span" variant="body2" color="secondary">
-                  {t("lang.machineTransNotice2")}
-                </Typography>
-              </Typography>
-              {t("lang.machineTransNotice3")}
-            </Typography>,
-          ]}
-          bgColor="#FEFBF3"
-          textColor="#AE6D0C"
-          logo={
-            <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
-          }
-        />
-      )}
-      {props.buildType === "archive" && (
-        <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />
-      )}
+      <HeaderBanner {...props} />
 
       <Toolbar
         sx={{
@@ -140,27 +93,77 @@ export default function Header(props: {
   );
 }
 
-const useBannerEvents = (
-  prefix: string = "",
-  textKeys: string[],
-  linkKey: string
-) => {
+const HeaderBanner = (props: HeaderProps) => {
   const { t } = useI18next();
-  const validTextKeys = prefix
-    ? textKeys.map((k) => `${prefix}.${k}`)
-    : textKeys;
+  const isAutoTranslation = useIsAutoTranslation(props.pageUrl || "");
+  const urlAutoTranslation =
+    props.pathConfig?.repo === "tidbcloud"
+      ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`
+      : `/${props.pathConfig?.repo}/${props.pathConfig?.version || "stable"}/${
+          props.name === "_index" ? "" : props.name
+        }`;
 
-  const urlKey = prefix ? `${prefix}.${linkKey}` : linkKey;
-  const url = !!t(urlKey!) ? t(urlKey!) : undefined;
-  const textList = validTextKeys.map((k) => t(k));
-  const logo = "🚧";
-  const bgImgSrc =
-    "https://static.pingcap.com/files/2023/11/15190759/20231116-105219.png";
+  if (props.buildType === "archive") {
+    return <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />;
+  }
+  if (isAutoTranslation) {
+    return (
+      <Banner
+        textList={[
+          <Typography component="span" variant="body2" color="inherit">
+            {t("lang.machineTransNotice1")}
+            <Typography
+              component="a"
+              href={urlAutoTranslation}
+              target="_blank"
+              sx={{
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline!important",
+                },
+              }}
+            >
+              <Typography component="span" variant="body2" color="secondary">
+                {t("lang.machineTransNotice2")}
+              </Typography>
+            </Typography>
+            {t("lang.machineTransNotice3")}
+          </Typography>,
+        ]}
+        bgColor="#FEFBF3"
+        textColor="#AE6D0C"
+        logo={
+          <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+        }
+      />
+    );
+  }
 
-  return {
-    bgImgSrc,
-    url,
-    logo,
-    textList,
-  };
+  return props.bannerEnabled ? (
+    <Banner
+      bgColor="#FEFBF3"
+      textColor="#AE6D0C"
+      logo={
+        <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+      }
+      textList={[
+        "This site is for internal preview only.",
+        <LinkComponent
+          to="https://docs.pingcap.com/"
+          target="_blank"
+          sx={{
+            color: "secondary.main",
+            textDecoration: "none",
+            "&:hover": {
+              textDecoration: "underline!important",
+            },
+          }}
+        >
+          <Typography component="span" variant="body2" color="inherit">
+            View the official TiDB documentation ↗
+          </Typography>
+        </LinkComponent>,
+      ]}
+    />
+  ) : null;
 };

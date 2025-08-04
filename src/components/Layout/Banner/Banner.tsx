@@ -69,16 +69,20 @@ export function Banner({
         {logo && (
           <Box sx={{ display: "flex", alignItems: "center" }}>{logo}</Box>
         )}
-        {textList.map((text, index) => (
-          <Typography
-            key={index}
-            component="span"
-            variant="body2"
-            color="inherit"
-          >
-            {text}
-          </Typography>
-        ))}
+        {textList.map((text, index) =>
+          typeof text === "string" ? (
+            <Typography
+              key={index}
+              component="span"
+              variant="body2"
+              color="inherit"
+            >
+              {text}
+            </Typography>
+          ) : (
+            text
+          )
+        )}
       </Stack>
     </Box>
   );
