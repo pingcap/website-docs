@@ -58,6 +58,45 @@ export default function Header(props: {
         height: props.bannerEnabled ? "7.5rem" : "5rem",
       }}
     >
+      {!isAutoTranslation &&
+        props.bannerEnabled &&
+        props.buildType !== "archive" && (
+          <Banner url={url} logo={logo} textList={textList} />
+        )}
+      {isAutoTranslation && props.buildType !== "archive" && (
+        <Banner
+          textList={[
+            <Typography component="span" variant="body2" color="inherit">
+              {t("lang.machineTransNotice1")}
+              <Typography
+                component="a"
+                href={urlAutoTranslation}
+                target="_blank"
+                sx={{
+                  textDecoration: "none",
+                  "&:hover": {
+                    textDecoration: "underline!important",
+                  },
+                }}
+              >
+                <Typography component="span" variant="body2" color="secondary">
+                  {t("lang.machineTransNotice2")}
+                </Typography>
+              </Typography>
+              {t("lang.machineTransNotice3")}
+            </Typography>,
+          ]}
+          bgColor="#FEFBF3"
+          textColor="#AE6D0C"
+          logo={
+            <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+          }
+        />
+      )}
+      {props.buildType === "archive" && (
+        <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />
+      )}
+
       <Toolbar
         sx={{
           height: "100%",
@@ -97,44 +136,6 @@ export default function Header(props: {
           pageUrl={props.pageUrl}
         />
       </Toolbar>
-      {!isAutoTranslation &&
-        props.bannerEnabled &&
-        props.buildType !== "archive" && (
-          <Banner url={url} logo={logo} textList={textList} />
-        )}
-      {isAutoTranslation && props.buildType !== "archive" && (
-        <Banner
-          textList={[
-            <Typography component="span" variant="body2" color="inherit">
-              {t("lang.machineTransNotice1")}
-              <Typography
-                component="a"
-                href={urlAutoTranslation}
-                target="_blank"
-                sx={{
-                  textDecoration: "none",
-                  "&:hover": {
-                    textDecoration: "underline!important",
-                  },
-                }}
-              >
-                <Typography component="span" variant="body2" color="secondary">
-                  {t("lang.machineTransNotice2")}
-                </Typography>
-              </Typography>
-              {t("lang.machineTransNotice3")}
-            </Typography>,
-          ]}
-          bgColor="#FEFBF3"
-          textColor="#AE6D0C"
-          logo={
-            <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
-          }
-        />
-      )}
-      {props.buildType === "archive" && (
-        <ArchiveBanner name={props.name} pathConfig={props.pathConfig} />
-      )}
     </AppBar>
   );
 }
