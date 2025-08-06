@@ -14,6 +14,7 @@ import LinkComponent from "components/Link";
 import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { CLOUD_MODE_KEY, useCloudMode } from "shared/useCloudMode";
+import { VersionSelectMenu } from "./VersionSelect";
 
 const CLOUD_VERSIONS = [
   {
@@ -47,49 +48,6 @@ const CLOUD_VERSIONS = [
     ),
   },
 ];
-
-const StyledMenu = styled((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  "& .MuiPaper-root": {
-    marginTop: theme.spacing(1),
-    minWidth: 268,
-    color:
-      theme.palette.mode === "light"
-        ? "rgb(55, 65, 81)"
-        : theme.palette.grey[300],
-    boxShadow:
-      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-    "& .MuiMenu-list": {
-      padding: "8px",
-    },
-    "& .MuiMenuItem-root": {
-      height: "40px",
-      "& .MuiSvgIcon-root": {
-        fontSize: 18,
-        color: theme.palette.text.secondary,
-        marginRight: theme.spacing(1.5),
-      },
-      "&:active": {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity
-        ),
-      },
-    },
-  },
-}));
 
 interface VersionSelectProps {
   name: string;
@@ -188,8 +146,12 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
           justifyContent: "space-between",
           borderStyle: "solid",
           borderWidth: "2px",
-          borderColor: "website.m4",
           marginBottom: "1rem",
+          borderColor: open ? "#1E2426" : "#DCE3E5",
+          "&:hover": {
+            borderColor: "#9FA9AD",
+            backgroundColor: "#fff",
+          },
         }}
         id="version-select-button"
         aria-controls={open ? "verison-menu" : undefined}
@@ -219,7 +181,7 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
           {currentCloudVersion?.label}
         </Typography>
       </Button>
-      <StyledMenu
+      <VersionSelectMenu
         id="verison-menu"
         anchorEl={anchorEl}
         open={open}
@@ -235,7 +197,7 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
           name={name}
           onClick={handleClose}
         />
-      </StyledMenu>
+      </VersionSelectMenu>
     </Box>
   );
 }

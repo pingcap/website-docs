@@ -267,6 +267,7 @@ export const createDocHome = async ({
     const path = generateDocHomeUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
     const starterNavUrl = generateStarterNav(pathConfig);
+    const essentialNavUrl = generateEssentialNav(pathConfig);
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -283,6 +284,7 @@ export const createDocHome = async ({
         filePath,
         navUrl,
         starterNavUrl,
+        essentialNavUrl,
         pageUrl: path,
         availIn: {
           locale,

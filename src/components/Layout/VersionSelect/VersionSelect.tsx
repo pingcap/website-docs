@@ -40,7 +40,7 @@ function renderVersion(
   );
 }
 
-const StyledMenu = styled((props: MenuProps) => (
+export const VersionSelectMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
     anchorOrigin={{
@@ -68,6 +68,7 @@ const StyledMenu = styled((props: MenuProps) => (
     },
     "& .MuiMenuItem-root": {
       height: "40px",
+      padding: "10px 12px",
       "& .MuiSvgIcon-root": {
         fontSize: 18,
         color: theme.palette.text.secondary,
@@ -314,8 +315,12 @@ export default function VersionSelect(props: VersionSelectProps) {
           justifyContent: "space-between",
           borderStyle: "solid",
           borderWidth: "2px",
-          borderColor: "website.m4",
           marginBottom: "1rem",
+          borderColor: open ? "#1E2426" : "#DCE3E5",
+          "&:hover": {
+            borderColor: "#9FA9AD",
+            backgroundColor: "#fff",
+          },
         }}
         id="version-select-button"
         aria-controls={open ? "verison-menu" : undefined}
@@ -347,7 +352,7 @@ export default function VersionSelect(props: VersionSelectProps) {
             : renderVersion(pathConfig.version, pathConfig)}
         </Typography>
       </Button>
-      <StyledMenu
+      <VersionSelectMenu
         id="verison-menu"
         anchorEl={anchorEl}
         open={open}
@@ -371,7 +376,7 @@ export default function VersionSelect(props: VersionSelectProps) {
             name={name}
           />
         )}
-      </StyledMenu>
+      </VersionSelectMenu>
     </Box>
   );
 }
