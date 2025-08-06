@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import { styled, alpha } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import Menu, { MenuProps } from "@mui/material/Menu";
 import { useTheme } from "@mui/material/styles";
+import CheckIcon from "@mui/icons-material/Check";
 
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -15,6 +14,7 @@ import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { CLOUD_MODE_KEY, useCloudMode } from "shared/useCloudMode";
 import { VersionSelectMenu } from "./VersionSelect";
+import { Group } from "@mui/icons-material";
 
 const CLOUD_VERSIONS = [
   {
@@ -64,6 +64,10 @@ const VersionItems = (props: {
   onClick: () => void;
 }) => {
   const { pathConfig } = props;
+  const { cloudMode } = useCloudMode();
+  const currentCloudVersion =
+    CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
+    CLOUD_VERSIONS[0];
 
   const getToUrl = (version: string) => {
     const searchParams = new URLSearchParams();
@@ -89,17 +93,26 @@ const VersionItems = (props: {
           clearCloudMode={version.value === "dedicated"}
           onClick={() => onClick(version.value)}
         >
-          <Typography
-            component="div"
-            sx={{
-              fontSize: "0.875rem",
-              lineHeight: "1.25rem",
-              marginRight: "0.2rem",
-            }}
-          >
-            {version.label}
-          </Typography>
-          {version.icon}
+          <Box sx={{ display: "flex" }}>
+            <Typography
+              component="div"
+              sx={{
+                fontSize: "0.875rem",
+                lineHeight: "1.25rem",
+                marginRight: "0.2rem",
+              }}
+            >
+              {version.label}
+            </Typography>
+            {version.icon}
+          </Box>
+          <Box>
+            {version.value === currentCloudVersion?.value && (
+              <CheckIcon
+                sx={(theme) => ({ color: theme.palette.primary.main })}
+              />
+            )}
+          </Box>
         </MenuItem>
       ))}
     </>

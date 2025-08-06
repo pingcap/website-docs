@@ -69,10 +69,9 @@ export const VersionSelectMenu = styled((props: MenuProps) => (
     "& .MuiMenuItem-root": {
       height: "40px",
       padding: "10px 12px",
+      justifyContent: "space-between",
       "& .MuiSvgIcon-root": {
         fontSize: 18,
-        color: theme.palette.text.secondary,
-        marginRight: theme.spacing(1.5),
       },
       "&:active": {
         backgroundColor: alpha(
@@ -139,20 +138,24 @@ const VersionItems = (props: {
             lineHeight: "1.25rem",
           }}
         >
-          {renderVersion(`dev`, pathConfig)}
+          {renderVersion(`Dev`, pathConfig)}
         </Typography>
       </MenuItem>
+
+      <Divider sx={{ margin: "4px 0" }} />
 
       {pathConfig.repo === "tidb" && (
         <FormLabel
           sx={{
-            fontSize: "0.875rem",
+            display: "inline-block",
+            fontSize: "12px",
             lineHeight: "1.25rem",
-            fontWeight: "bold",
-            pl: "0.5rem",
+            color: "#6F787B",
+            pl: "12px",
+            mb: "8px",
           }}
         >
-          LTS
+          Long-Term Support
         </FormLabel>
       )}
       {LTSVersions.map((version) => (
@@ -175,14 +178,19 @@ const VersionItems = (props: {
           </Typography>
         </MenuItem>
       ))}
+
+      <Divider sx={{ margin: "4px 0" }} />
+
       {pathConfig.repo === "tidb" && DMRVersions.length > 0 && (
         <>
           <FormLabel
             sx={{
-              fontSize: "0.875rem",
+              display: "inline-block",
+              fontSize: "12px",
               lineHeight: "1.25rem",
-              fontWeight: "bold",
-              pl: "0.5rem",
+              color: "#6F787B",
+              pl: "12px",
+              mb: "8px",
             }}
           >
             DMR
