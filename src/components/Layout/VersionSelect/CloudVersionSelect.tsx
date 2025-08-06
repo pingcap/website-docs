@@ -105,7 +105,7 @@ const VersionItems = (props: {
             </Typography>
             {version.icon}
           </Box>
-          <Box>
+          <Box display="flex" justifyContent="center">
             {version.value === currentCloudVersion?.value && (
               <CheckIcon
                 sx={(theme) => ({ color: theme.palette.primary.main })}
