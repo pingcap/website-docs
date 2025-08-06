@@ -11,7 +11,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { PathConfig, BuildType } from "shared/interface";
 import { AllVersion } from "shared/utils";
 import LinkComponent from "components/Link";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { CLOUD_MODE_KEY, useCloudMode } from "shared/useCloudMode";
 
@@ -21,7 +21,11 @@ const CLOUD_VERSIONS = [
     value: "dedicated",
   },
   {
-    label: "Starter",
+    label: (
+      <span>
+        Starter<span style={{ color: "#9FA9AD" }}> (formerly Serverless)</span>
+      </span>
+    ),
     value: "starter",
   },
   {
@@ -68,9 +72,10 @@ const StyledMenu = styled((props: MenuProps) => (
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
     "& .MuiMenu-list": {
-      padding: "4px 0",
+      padding: "8px",
     },
     "& .MuiMenuItem-root": {
+      height: "40px",
       "& .MuiSvgIcon-root": {
         fontSize: 18,
         color: theme.palette.text.secondary,
@@ -162,8 +167,30 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
   const theme = useTheme();
 
   return (
-    <>
+    <Box
+      sx={{
+        position: "sticky",
+        top: "-20px",
+        backgroundColor: "#fff",
+        marginTop: "-20px",
+        marginLeft: "-16px",
+        marginRight: "-16px",
+        paddingTop: "20px",
+        paddingLeft: "16px",
+        paddingRight: "16px",
+        zIndex: 1000,
+      }}
+    >
       <Button
+        sx={{
+          width: "100%",
+          height: "40px",
+          justifyContent: "space-between",
+          borderStyle: "solid",
+          borderWidth: "2px",
+          borderColor: "website.m4",
+          marginBottom: "1rem",
+        }}
         id="version-select-button"
         aria-controls={open ? "verison-menu" : undefined}
         aria-haspopup="true"
@@ -180,15 +207,6 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
             }}
           />
         }
-        sx={{
-          width: "100%",
-          height: "2rem",
-          justifyContent: "space-between",
-          borderStyle: "solid",
-          borderWidth: "1px",
-          borderColor: "website.m4",
-          marginBottom: "1rem",
-        }}
       >
         <Typography
           component="div"
@@ -218,6 +236,6 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
           onClick={handleClose}
         />
       </StyledMenu>
-    </>
+    </Box>
   );
 }
