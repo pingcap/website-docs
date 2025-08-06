@@ -33,6 +33,7 @@ function renderVersion(
   if (isDmr) {
     return isArchive ? `${version} (DMR)` : version;
   }
+  if (version === "dev") return "Dev";
   if (version !== "stable") return version;
   return (docs[pathConfig.repo] as { stable: string }).stable.replace(
     "release-",
@@ -138,7 +139,7 @@ const VersionItems = (props: {
             lineHeight: "1.25rem",
           }}
         >
-          {renderVersion(`Dev`, pathConfig)}
+          {renderVersion(`dev`, pathConfig)}
         </Typography>
       </MenuItem>
 
