@@ -14,7 +14,6 @@ import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { CLOUD_MODE_KEY, useCloudMode } from "shared/useCloudMode";
 import { VersionSelectMenu } from "./VersionSelect";
-import { Group } from "@mui/icons-material";
 
 const CLOUD_VERSIONS = [
   {
@@ -64,7 +63,7 @@ const VersionItems = (props: {
   onClick: () => void;
 }) => {
   const { pathConfig } = props;
-  const { cloudMode } = useCloudMode();
+  const { cloudMode } = useCloudMode(pathConfig.repo);
   const currentCloudVersion =
     CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
     CLOUD_VERSIONS[0];
@@ -121,7 +120,7 @@ const VersionItems = (props: {
 
 export default function CloudVersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn } = props;
-  const { cloudMode } = useCloudMode();
+  const { cloudMode } = useCloudMode(pathConfig.repo);
   const currentCloudVersion =
     CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
     CLOUD_VERSIONS[0];

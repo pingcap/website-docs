@@ -86,7 +86,7 @@ export default function DocTemplate({
     essentialNavigation: essentialNav,
   } = data;
 
-  const { isStarter, isEssential } = useCloudMode();
+  const { isStarter, isEssential } = useCloudMode(pathConfig.repo);
 
   useReportReadingRate(timeToRead);
 

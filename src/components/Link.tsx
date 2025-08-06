@@ -2,12 +2,6 @@ import * as React from "react";
 import { Link as GatsbyLink } from "gatsby";
 import { Link as I18nLink } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
-import {
-  CLOUD_MODE_KEY,
-  CLOUD_MODE_VALUE_ESSENTIAL,
-  CLOUD_MODE_VALUE_STARTER,
-  useCloudMode,
-} from "../shared/useCloudMode";
 
 export default function LinkComponent(props: {
   to?: string;

@@ -1,19 +1,7 @@
 import { Link } from "gatsby";
-import {
-  CLOUD_MODE_KEY,
-  CLOUD_MODE_VALUE_ESSENTIAL,
-  CLOUD_MODE_VALUE_STARTER,
-  useCloudMode,
-} from "../../shared/useCloudMode";
 
 export const TargetLink = (props: { to: string; [key: string]: any }) => {
-  const { isStarter, isEssential } = useCloudMode();
-  const { to: _to } = props;
-  const to = isStarter
-    ? `${_to}?${CLOUD_MODE_KEY}=${CLOUD_MODE_VALUE_STARTER}`
-    : isEssential
-    ? `${_to}?${CLOUD_MODE_KEY}=${CLOUD_MODE_VALUE_ESSENTIAL}`
-    : _to;
+  const { to } = props;
   const { pathWithHash, query } = parsePathWithQuery(to);
   const newProps = { ...props };
   const isTargetBlank = query["target"] === "_blank";
