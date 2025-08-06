@@ -100,7 +100,11 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       return;
     }
 
-    const path = generateUrl(name, pathConfig);
+    const path = filePath.includes("starter")
+      ? generateUrl(`starter/${name}`, pathConfig)
+      : filePath.includes("essential")
+      ? generateUrl(`essential/${name}`, pathConfig)
+      : generateUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
     const starterNavUrl = generateStarterNav(pathConfig);
     const essentialNavUrl = generateEssentialNav(pathConfig);

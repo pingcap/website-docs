@@ -107,7 +107,7 @@ const VersionItems = (props: {
     searchParams.set(CLOUD_MODE_KEY, version);
     return version === "dedicated"
       ? `/${pathConfig.repo}/`
-      : `/${pathConfig.repo}/?${searchParams.toString()}`;
+      : `/${pathConfig.repo}/${version}/?${searchParams.toString()}`;
   };
   const onClick = (version: string) => {
     sessionStorage.setItem(CLOUD_MODE_KEY, version);
