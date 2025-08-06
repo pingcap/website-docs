@@ -17,7 +17,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { PathConfig, BuildType } from "shared/interface";
 import { ARCHIVE_WEBSITE_URL } from "shared/resources";
 import { AllVersion } from "shared/utils";
-import CONFIG from "../../../docs/docs.json";
+import CONFIG from "../../../../docs/docs.json";
 import LinkComponent from "components/Link";
 import { Divider, Typography } from "@mui/material";
 

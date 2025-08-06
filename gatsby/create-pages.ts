@@ -9,9 +9,12 @@ import {
   generateUrl,
   generateNav,
   generateDocHomeUrl,
+  generateStarterNav,
+  generateEssentialNav,
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
 import { cpMarkdown } from "./cp-markdown";
+import { queryTOCs } from "./toc";
 
 interface PageQueryData {
   allMdx: {
@@ -25,10 +28,11 @@ interface PageQueryData {
 
 const DEFAULT_BUILD_TYPE: BuildType = "prod";
 
-export const createDocs = async ({
-  actions: { createPage, createRedirect },
-  graphql,
-}: CreatePagesArgs) => {
+export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
+  const {
+    actions: { createPage, createRedirect },
+    graphql,
+  } = createPagesArgs;
   // const template = resolve(__dirname, '../src/doc/index.tsx')
   const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
 
@@ -98,6 +102,8 @@ export const createDocs = async ({
 
     const path = generateUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
+    const starterNavUrl = generateStarterNav(pathConfig);
+    const essentialNavUrl = generateEssentialNav(pathConfig);
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
@@ -119,6 +125,8 @@ export const createDocs = async ({
         filePath,
         pageUrl: path,
         navUrl,
+        starterNavUrl,
+        essentialNavUrl,
         availIn: {
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
@@ -254,7 +262,7 @@ export const createDocHome = async ({
     const { id, name, pathConfig, filePath, slug } = node;
     const path = generateDocHomeUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
-
+    const starterNavUrl = generateStarterNav(pathConfig);
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -270,6 +278,7 @@ export const createDocHome = async ({
         // use for edit in github
         filePath,
         navUrl,
+        starterNavUrl,
         pageUrl: path,
         availIn: {
           locale,

@@ -10,10 +10,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { RepoNav, PathConfig, BuildType } from "shared/interface";
 import LinkComponent from "components/Link";
-import LeftNavTree from "components/Navigation/LeftNavTree";
-import VersionSelect, { NativeVersionSelect } from "./VersionSelect";
+import LeftNavTree from "./LeftNavTree";
+import VersionSelect, {
+  NativeVersionSelect,
+} from "../VersionSelect/VersionSelect";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
+import CloudVersionSelect from "../VersionSelect/CloudVersionSelect";
 
 interface LeftNavProps {
   data: RepoNav;
@@ -53,6 +56,14 @@ export function LeftNavDesktop(props: LeftNavProps) {
       >
         {pathConfig.repo !== "tidbcloud" && (
           <VersionSelect
+            name={name}
+            pathConfig={pathConfig}
+            availIn={availIn}
+            buildType={buildType}
+          />
+        )}
+        {pathConfig.repo === "tidbcloud" && (
+          <CloudVersionSelect
             name={name}
             pathConfig={pathConfig}
             availIn={availIn}

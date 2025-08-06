@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Layout from "components/Layout";
 import { BuildType, Locale, Repo } from "shared/interface";
 import { Page404Icon } from "components/Icons";
-import Seo from "components/Layout/Seo";
+import Seo from "components/Seo";
 
 import CONFIG from "../../docs/docs.json";
 import { useEffect, useRef, useState } from "react";
