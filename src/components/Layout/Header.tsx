@@ -19,7 +19,6 @@ import { generateDocsHomeUrl, generateUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
-import { Typography } from "@mui/material";
 
 interface HeaderProps {
   bannerEnabled?: boolean;
@@ -126,9 +125,7 @@ const HeaderBanner = (props: HeaderProps) => {
         textList={[
           t("banner.archive.title"),
           <BlueAnchorLink to={archivedTargetUrl} target="_blank">
-            <Typography component="span" variant="body2" color="inherit">
-              {t("banner.archive.viewLatestLTSVersion")} ↗
-            </Typography>
+            {t("banner.archive.viewLatestLTSVersion")} ↗
           </BlueAnchorLink>,
         ]}
       />
@@ -138,26 +135,25 @@ const HeaderBanner = (props: HeaderProps) => {
   if (isAutoTranslation) {
     return (
       <Banner
+        // bgColor="#FEFBF3"
+        // textColor="#AE6D0C"
+        // logo={
+        //   <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+        // }
+        logo={"📣"}
         textList={[
-          <Typography component="span" variant="body2" color="inherit">
-            {t("lang.machineTransNotice1")}
-            <BlueAnchorLink
-              component="a"
-              href={urlAutoTranslation}
-              target="_blank"
-            >
-              <Typography component="span" variant="body2" color="secondary">
-                {t("lang.machineTransNotice2")}
-              </Typography>
-            </BlueAnchorLink>
-            {t("lang.machineTransNotice3")}
-          </Typography>,
+          t("banner.autoTrans.titleBeforeStarter"),
+          <BlueAnchorLink
+            to="https://www.pingcap.com/blog/introducing-tidb-cloud-starter-auto-scaling-plan-renamed/ "
+            target="_blank"
+          >
+            Starter
+          </BlueAnchorLink>,
+          t("banner.autoTrans.titleAfterStarter"),
+          <BlueAnchorLink to={urlAutoTranslation} target="_blank">
+            {t("banner.autoTrans.end")}
+          </BlueAnchorLink>,
         ]}
-        bgColor="#FEFBF3"
-        textColor="#AE6D0C"
-        logo={
-          <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
-        }
       />
     );
   }
@@ -171,15 +167,11 @@ const HeaderBanner = (props: HeaderProps) => {
           to="https://www.pingcap.com/blog/introducing-tidb-cloud-starter-auto-scaling-plan-renamed/ "
           target="_blank"
         >
-          <Typography component="span" variant="body2" color="inherit">
-            TiDB Cloud Starter
-          </Typography>
+          TiDB Cloud Starter
         </BlueAnchorLink>,
         t("banner.campaign.titleAfterStarter"),
         <BlueAnchorLink to={t("banner.campaign.link")} target="_blank">
-          <Typography component="span" variant="body2" color="inherit" ml="4px">
-            {t("banner.campaign.tryItOut")}
-          </Typography>
+          {t("banner.campaign.end")}
         </BlueAnchorLink>,
       ]}
     />

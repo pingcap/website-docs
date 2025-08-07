@@ -8,10 +8,7 @@
     "cannotswitchZh": "このページは中国語ではご利用いただけません",
     "cannotswitchJa": "このページは日本語ではご利用いただけません",
     "cannotswitchtocloudJa": "TiDB Cloud 日本語ドキュメントは現在利用できません",
-    "cannotswitchtocloudZh": "TiDB Cloud 中国語ドキュメントは現在利用できません",
-    "machineTransNotice1": "このページは英語版のページを機械翻訳しています。",
-    "machineTransNotice2": "原文はこちらからご覧ください",
-    "machineTransNotice3": "。"
+    "cannotswitchtocloudZh": "TiDB Cloud 中国語ドキュメントは現在利用できません"
   },
   "meta": {
     "title": "TiDB Docs",
@@ -165,7 +162,12 @@
       "link": "https://tidbcloud.com/",
       "titleBeforeStarter": "TiDB Cloud Serverless が ",
       "titleAfterStarter": " に変わりました！使いやすさはそのままに、名前が新しくなりました。",
-      "tryItOut": "ぜひお試しください →"
+      "end": "ぜひお試しください →"
+    },
+    "autoTrans": {
+      "titleBeforeStarter": "TiDB Cloud Serverless が ",
+      "titleAfterStarter": " に変わりました！このページは自動翻訳されたものです。",
+      "end": "原文はこちらからご覧ください。"
     }
   },
   "campaign": {

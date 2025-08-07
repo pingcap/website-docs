@@ -1,0 +1,7 @@
+.blue-anchor-link {
+  text-decoration: none;
+}
+
+.blue-anchor-link:hover {
+  text-decoration: underline;
+}
