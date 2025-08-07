@@ -1,11 +1,7 @@
 import * as React from "react";
 
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
-import { useTheme } from "@mui/material/styles";
 import CheckIcon from "@mui/icons-material/Check";
-
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { PathConfig, BuildType } from "shared/interface";
 import { AllVersion } from "shared/utils";
@@ -13,7 +9,8 @@ import LinkComponent from "components/Link";
 import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { CLOUD_MODE_KEY, useCloudMode } from "shared/useCloudMode";
-import { VersionSelectMenu } from "./VersionSelect";
+import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
+import { useRef } from "react";
 
 const CLOUD_VERSIONS = [
   {
@@ -47,13 +44,6 @@ const CLOUD_VERSIONS = [
     ),
   },
 ];
-
-interface VersionSelectProps {
-  name: string;
-  pathConfig: PathConfig;
-  availIn: string[];
-  buildType?: BuildType;
-}
 
 const VersionItems = (props: {
   versions: (string | null)[];
@@ -118,70 +108,27 @@ const VersionItems = (props: {
   );
 };
 
+interface VersionSelectProps {
+  name: string;
+  pathConfig: PathConfig;
+  availIn: string[];
+  buildType?: BuildType;
+}
+
 export default function CloudVersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn } = props;
   const { cloudMode } = useCloudMode(pathConfig.repo);
   const currentCloudVersion =
     CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
     CLOUD_VERSIONS[0];
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const anchorEl = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState<boolean>(false);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpen(true);
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const theme = useTheme();
+  const handleClick = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Box
-      sx={{
-        position: "sticky",
-        top: "-20px",
-        backgroundColor: "#fff",
-        marginTop: "-20px",
-        marginLeft: "-16px",
-        marginRight: "-16px",
-        paddingTop: "20px",
-        paddingLeft: "16px",
-        paddingRight: "16px",
-        zIndex: 1000,
-      }}
-    >
-      <Button
-        sx={{
-          width: "100%",
-          height: "40px",
-          justifyContent: "space-between",
-          borderStyle: "solid",
-          borderWidth: "2px",
-          marginBottom: "1rem",
-          borderColor: open ? "#1E2426" : "#DCE3E5",
-          "&:hover": {
-            borderColor: "#9FA9AD",
-            backgroundColor: "#fff",
-          },
-        }}
-        id="version-select-button"
-        aria-controls={open ? "verison-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        endIcon={
-          <ChevronRightIcon
-            sx={{
-              transform: open ? "rotate(90deg)" : "rotate(0deg)",
-              height: "16px",
-              width: "16px",
-              fill: theme.palette.website.f3,
-              marginRight: "0.25rem",
-            }}
-          />
-        }
-      >
+    <>
+      <VersionSelectButton open={open} handleClick={handleClick} ref={anchorEl}>
         <Typography
           component="div"
           sx={{
@@ -192,10 +139,10 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
         >
           {currentCloudVersion?.label}
         </Typography>
-      </Button>
+      </VersionSelectButton>
       <VersionSelectMenu
         id="verison-menu"
-        anchorEl={anchorEl}
+        anchorEl={anchorEl.current}
         open={open}
         onClose={handleClose}
         MenuListProps={{
@@ -210,6 +157,6 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
           onClick={handleClose}
         />
       </VersionSelectMenu>
-    </Box>
+    </>
   );
 }
