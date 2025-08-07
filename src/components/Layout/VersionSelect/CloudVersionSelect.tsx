@@ -129,16 +129,19 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
   return (
     <>
       <VersionSelectButton open={open} handleClick={handleClick} ref={anchorEl}>
-        <Typography
-          component="div"
-          sx={{
-            padding: "0 0.25rem",
-            fontSize: "0.875rem",
-            lineHeight: "1.25rem",
-          }}
-        >
-          {currentCloudVersion?.label}
-        </Typography>
+        <Box display="flex">
+          <Typography
+            component="div"
+            sx={{
+              padding: "0 0.25rem",
+              fontSize: "0.875rem",
+              lineHeight: "1.25rem",
+            }}
+          >
+            {currentCloudVersion?.label}
+          </Typography>
+          {currentCloudVersion?.icon}
+        </Box>
       </VersionSelectButton>
       <VersionSelectMenu
         id="verison-menu"
