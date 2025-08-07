@@ -177,9 +177,9 @@
     },
     "campaign": {
       "link": "https://tidbcloud.com/",
-      "title": "TiDB Cloud Serverless is now TiDB Cloud Starter! Same experience, new name. Try it out →",
-      "date": "",
-      "intro": ""
+      "titleBeforeStarter": "TiDB Cloud Serverless is now ",
+      "titleAfterStarter": "! Same experience, new name.",
+      "tryItOut": "Try it out →"
     }
   },
   "campaign": {

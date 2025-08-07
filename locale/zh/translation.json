@@ -178,9 +178,9 @@
     },
     "campaign": {
       "link": "https://tidbcloud.com/",
-      "title": "TiDB Cloud Serverless 现已更名为 TiDB Cloud Starter！体验不变，名字焕新。立即试用 →",
-      "date": "",
-      "intro": ""
+      "titleBeforeStarter": "TiDB Cloud Serverless 现已更名为 ",
+      "titleAfterStarter": "！体验不变，名字焕新。",
+      "tryItOut": "立即试用 →"
     }
   },
   "campaign": {

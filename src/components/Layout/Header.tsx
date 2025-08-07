@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
 
-import LinkComponent from "components/Link";
+import LinkComponent, { BlueAnchorLink } from "components/Link";
 import HeaderNavStack, {
   HeaderNavStackMobile,
 } from "components/Layout/HeaderNav";
@@ -125,21 +125,11 @@ const HeaderBanner = (props: HeaderProps) => {
         }
         textList={[
           t("banner.archive.title"),
-          <LinkComponent
-            to={archivedTargetUrl}
-            target="_blank"
-            sx={{
-              color: "secondary.main",
-              textDecoration: "none",
-              "&:hover": {
-                textDecoration: "underline!important",
-              },
-            }}
-          >
+          <BlueAnchorLink to={archivedTargetUrl} target="_blank">
             <Typography component="span" variant="body2" color="inherit">
               {t("banner.archive.viewLatestLTSVersion")} ↗
             </Typography>
-          </LinkComponent>,
+          </BlueAnchorLink>,
         ]}
       />
     );
@@ -151,21 +141,15 @@ const HeaderBanner = (props: HeaderProps) => {
         textList={[
           <Typography component="span" variant="body2" color="inherit">
             {t("lang.machineTransNotice1")}
-            <Typography
+            <BlueAnchorLink
               component="a"
               href={urlAutoTranslation}
               target="_blank"
-              sx={{
-                textDecoration: "none",
-                "&:hover": {
-                  textDecoration: "underline!important",
-                },
-              }}
             >
               <Typography component="span" variant="body2" color="secondary">
                 {t("lang.machineTransNotice2")}
               </Typography>
-            </Typography>
+            </BlueAnchorLink>
             {t("lang.machineTransNotice3")}
           </Typography>,
         ]}
@@ -180,9 +164,24 @@ const HeaderBanner = (props: HeaderProps) => {
 
   return props.bannerEnabled ? (
     <Banner
-      url={t("banner.campaign.link")}
       logo={"📣"}
-      textList={[t("banner.campaign.title")]}
+      textList={[
+        t("banner.campaign.titleBeforeStarter"),
+        <BlueAnchorLink
+          to="https://www.pingcap.com/blog/introducing-tidb-cloud-starter-auto-scaling-plan-renamed/ "
+          target="_blank"
+        >
+          <Typography component="span" variant="body2" color="inherit">
+            TiDB Cloud Starter
+          </Typography>
+        </BlueAnchorLink>,
+        t("banner.campaign.titleAfterStarter"),
+        <BlueAnchorLink to={t("banner.campaign.link")} target="_blank">
+          <Typography component="span" variant="body2" color="inherit" ml="4px">
+            {t("banner.campaign.tryItOut")}
+          </Typography>
+        </BlueAnchorLink>,
+      ]}
     />
   ) : null;
 };

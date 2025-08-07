@@ -163,9 +163,9 @@
     },
     "campaign": {
       "link": "https://tidbcloud.com/",
-      "title": "TiDB Cloud Serverless が TiDB Cloud Starter に変わりました！使いやすさはそのままに、名前が新しくなりました。ぜひお試しください →",
-      "date": "",
-      "intro": ""
+      "titleBeforeStarter": "TiDB Cloud Serverless が ",
+      "titleAfterStarter": " に変わりました！使いやすさはそのままに、名前が新しくなりました。",
+      "tryItOut": "ぜひお試しください →"
     }
   },
   "campaign": {

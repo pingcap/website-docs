@@ -3,14 +3,18 @@ import { Link as GatsbyLink } from "gatsby";
 import { Link as I18nLink } from "gatsby-plugin-react-i18next";
 import Typography from "@mui/material/Typography";
 
-export default function LinkComponent(props: {
+interface LinkComponentProps {
   to?: string;
   clearCloudMode?: boolean;
   style?: { [key: string]: any };
   isI18n?: boolean;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
-}) {
+}
+
+export default function LinkComponent(
+  props: React.PropsWithChildren<LinkComponentProps>
+) {
   if (!props.to) {
     return <>{props.children}</>;
   }
@@ -45,3 +49,21 @@ export default function LinkComponent(props: {
     />
   );
 }
+
+export const BlueAnchorLink = (
+  props: React.PropsWithChildren<LinkComponentProps>
+) => {
+  return (
+    <LinkComponent
+      {...props}
+      sx={{
+        color: "secondary.main",
+        textDecoration: "none",
+        "&:hover": {
+          textDecoration: "underline!important",
+        },
+        ...props.sx,
+      }}
+    />
+  );
+};

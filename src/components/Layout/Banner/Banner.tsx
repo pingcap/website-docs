@@ -34,8 +34,7 @@ export function Banner({
         direction="row"
         justifyContent="center"
         alignItems="center"
-        flexWrap="nowrap"
-        spacing={0.5}
+        flexWrap="wrap"
         divider={
           <Divider
             orientation="vertical"
@@ -67,7 +66,9 @@ export function Banner({
         })}
       >
         {logo && (
-          <Box sx={{ display: "flex", alignItems: "center" }}>{logo}</Box>
+          <Box sx={{ display: "flex", alignItems: "center", pr: "8px" }}>
+            {logo}
+          </Box>
         )}
         {textList.map((text, index) =>
           typeof text === "string" ? (
