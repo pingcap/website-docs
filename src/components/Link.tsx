@@ -30,14 +30,26 @@ export default function LinkComponent(
         target="_blank"
         href={to}
         {...rest}
-        style={{ ...style }}
+        style={{ ...style, textDecoration: "none" }}
       />
     );
   }
   if (isI18n) {
-    return <I18nLink to={to} {...rest} style={{ ...style }} />;
+    return (
+      <I18nLink
+        to={to}
+        {...rest}
+        style={{ ...style, textDecoration: "none" }}
+      />
+    );
   }
-  return <GatsbyLink to={to} {...rest} style={{ ...style }} />;
+  return (
+    <GatsbyLink
+      to={to}
+      {...rest}
+      style={{ ...style, textDecoration: "none" }}
+    />
+  );
 }
 
 export const BlueAnchorLink = (
