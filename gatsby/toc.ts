@@ -8,9 +8,58 @@ import {
   PhrasingContent,
   Heading,
 } from "mdast";
+import sig from "signale";
 
 import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
-import { generateUrl } from "./path";
+import { generateConfig, generateUrl } from "./path";
+import { CreatePagesArgs } from "gatsby";
+
+interface TocQueryData {
+  allMdx: {
+    nodes: {
+      id: string;
+      slug: string;
+      mdxAST: any;
+      parent: {
+        relativePath: string;
+      };
+    }[];
+  };
+}
+
+export const queryTOCs = async ({ graphql }: CreatePagesArgs) => {
+  const tocQuery = await graphql<TocQueryData>(`
+    {
+      allMdx(filter: { fileAbsolutePath: { regex: "/TOC.*md$/" } }) {
+        nodes {
+          id
+          slug
+          mdxAST
+          parent {
+            ... on File {
+              relativePath
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (tocQuery.errors) {
+    sig.error(tocQuery.errors);
+  }
+
+  const tocNodes = tocQuery.data!.allMdx.nodes;
+  const tocMap = new Map<string, RepoNav>();
+
+  tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
+    const { config } = generateConfig(node.slug);
+    const toc = mdxAstToToc(node.mdxAST.children, config);
+    tocMap.set(node.slug, toc);
+  });
+
+  return Object.fromEntries(tocMap);
+};
 
 export function mdxAstToToc(
   ast: Content[],

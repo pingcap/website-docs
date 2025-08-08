@@ -2,24 +2,21 @@ import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { navigate as gatsbyNavigate } from "gatsby";
 
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import InputBase from "@mui/material/InputBase";
-import Button from "@mui/material/Button";
-import Menu, { MenuProps } from "@mui/material/Menu";
 import FormLabel from "@mui/material/FormLabel";
-import { useTheme } from "@mui/material/styles";
-
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { PathConfig, BuildType } from "shared/interface";
 import { ARCHIVE_WEBSITE_URL } from "shared/resources";
 import { AllVersion } from "shared/utils";
-import CONFIG from "../../../docs/docs.json";
+import CONFIG from "../../../../docs/docs.json";
 import LinkComponent from "components/Link";
 import { Divider, Typography } from "@mui/material";
+import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
+import { useRef } from "react";
 
 function renderVersion(
   version: string | null,
@@ -33,60 +30,12 @@ function renderVersion(
   if (isDmr) {
     return isArchive ? `${version} (DMR)` : version;
   }
+  if (version === "dev") return "Dev";
   if (version !== "stable") return version;
   return (docs[pathConfig.repo] as { stable: string }).stable.replace(
     "release-",
     "v"
   );
-}
-
-const StyledMenu = styled((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  "& .MuiPaper-root": {
-    marginTop: theme.spacing(1),
-    minWidth: 268,
-    color:
-      theme.palette.mode === "light"
-        ? "rgb(55, 65, 81)"
-        : theme.palette.grey[300],
-    boxShadow:
-      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-    "& .MuiMenu-list": {
-      padding: "4px 0",
-    },
-    "& .MuiMenuItem-root": {
-      "& .MuiSvgIcon-root": {
-        fontSize: 18,
-        color: theme.palette.text.secondary,
-        marginRight: theme.spacing(1.5),
-      },
-      "&:active": {
-        backgroundColor: alpha(
-          theme.palette.primary.main,
-          theme.palette.action.selectedOpacity
-        ),
-      },
-    },
-  },
-}));
-
-interface VersionSelectProps {
-  name: string;
-  pathConfig: PathConfig;
-  availIn: string[];
-  buildType?: BuildType;
 }
 
 const VersionItems = (props: {
@@ -116,7 +65,7 @@ const VersionItems = (props: {
 
   const shouldHideDevMemo = React.useMemo(() => {
     const targetRepo = CONFIG.docs[pathConfig.repo];
-    return !targetRepo.languages.en.versions.includes(`master`);
+    return !(targetRepo.languages.en.versions as string[]).includes(`master`);
   }, [pathConfig.repo]);
 
   return (
@@ -125,7 +74,7 @@ const VersionItems = (props: {
         key={`menu-dev`}
         value={`menu-dev`}
         hidden={shouldHideDevMemo}
-        disabled={!availIn.includes(`dev` || "")}
+        disabled={!availIn.includes(`dev`)}
         component={LinkComponent}
         isI18n
         to={`/${pathConfig.repo}/dev/${name}`}
@@ -141,16 +90,20 @@ const VersionItems = (props: {
         </Typography>
       </MenuItem>
 
+      <Divider sx={{ margin: "4px 0" }} />
+
       {pathConfig.repo === "tidb" && (
         <FormLabel
           sx={{
-            fontSize: "0.875rem",
+            display: "inline-block",
+            fontSize: "12px",
             lineHeight: "1.25rem",
-            fontWeight: "bold",
-            pl: "0.5rem",
+            color: "#6F787B",
+            pl: "12px",
+            mb: "8px",
           }}
         >
-          LTS
+          Long-Term Support
         </FormLabel>
       )}
       {LTSVersions.map((version) => (
@@ -173,14 +126,19 @@ const VersionItems = (props: {
           </Typography>
         </MenuItem>
       ))}
+
+      <Divider sx={{ margin: "4px 0" }} />
+
       {pathConfig.repo === "tidb" && DMRVersions.length > 0 && (
         <>
           <FormLabel
             sx={{
-              fontSize: "0.875rem",
+              display: "inline-block",
+              fontSize: "12px",
               lineHeight: "1.25rem",
-              fontWeight: "bold",
-              pl: "0.5rem",
+              color: "#6F787B",
+              pl: "12px",
+              mb: "8px",
             }}
           >
             DMR
@@ -205,10 +163,10 @@ const VersionItems = (props: {
               </Typography>
             </MenuItem>
           ))}
+          <Divider sx={{ margin: "4px 0" }} />
         </>
       )}
 
-      <Divider sx={{ margin: "4px 0" }} />
       <MenuItem
         component={LinkComponent}
         isI18n
@@ -277,49 +235,23 @@ const VersionItemsArchived = (props: {
   );
 };
 
+interface VersionSelectProps {
+  name: string;
+  pathConfig: PathConfig;
+  availIn: string[];
+  buildType?: BuildType;
+}
+
 export default function VersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn, buildType } = props;
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const theme = useTheme();
+  const anchorEl = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const handleClick = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
-      <Button
-        id="version-select-button"
-        aria-controls={open ? "verison-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        endIcon={
-          <ChevronRightIcon
-            sx={{
-              transform: open ? "rotate(90deg)" : "rotate(0deg)",
-              height: "16px",
-              width: "16px",
-              fill: theme.palette.website.f3,
-              marginRight: "0.25rem",
-            }}
-          />
-        }
-        sx={{
-          width: "100%",
-          height: "2rem",
-          justifyContent: "space-between",
-          borderStyle: "solid",
-          borderWidth: "1px",
-          borderColor: "website.m4",
-          marginBottom: "1rem",
-        }}
-      >
+      <VersionSelectButton open={open} handleClick={handleClick} ref={anchorEl}>
         <Typography
           component="div"
           sx={{
@@ -332,10 +264,11 @@ export default function VersionSelect(props: VersionSelectProps) {
             ? renderVersion(pathConfig.version, pathConfig, true)
             : renderVersion(pathConfig.version, pathConfig)}
         </Typography>
-      </Button>
-      <StyledMenu
+      </VersionSelectButton>
+
+      <VersionSelectMenu
         id="verison-menu"
-        anchorEl={anchorEl}
+        anchorEl={anchorEl.current}
         open={open}
         onClose={handleClose}
         MenuListProps={{
@@ -357,7 +290,7 @@ export default function VersionSelect(props: VersionSelectProps) {
             name={name}
           />
         )}
-      </StyledMenu>
+      </VersionSelectMenu>
     </>
   );
 }

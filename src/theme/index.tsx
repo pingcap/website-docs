@@ -262,6 +262,15 @@ theme = createTheme(theme, {
               backgroundColor: theme.palette.carbon[300],
             },
           }),
+          ...(ownerState.variant === "outlined" && {
+            color: theme.palette.text.primary,
+            borderColor: "#D9D9D9",
+            backgroundColor: "#F9F9F9",
+            "&:hover": {
+              borderColor: "#262A2C",
+              backgroundColor: "#F9F9F9",
+            },
+          }),
         }),
       },
     },
