@@ -83,6 +83,7 @@ export default function HeaderAction(props: {
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
           <Stack direction="row" spacing={1}>
+            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
             {language === "en" && showTiDBAIButton && (
               <ActionButton
                 id="header-ask-ai"
@@ -102,7 +103,6 @@ export default function HeaderAction(props: {
                 Ask AI
               </ActionButton>
             )}
-            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
           </Stack>
         </>
       )}
@@ -255,6 +255,15 @@ const TiDBCloudBtnGroup = () => {
         }}
       >
         <Button
+          variant="text"
+          href={`https://tidbcloud.com/signin`}
+          // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
+          referrerPolicy="no-referrer-when-downgrade"
+          target="_blank"
+        >
+          Sign In
+        </Button>
+        <Button
           variant="contained"
           target="_blank"
           href="https://tidbcloud.com/free-trial"
@@ -262,15 +271,6 @@ const TiDBCloudBtnGroup = () => {
           referrerPolicy="no-referrer-when-downgrade"
         >
           Start for Free
-        </Button>
-        <Button
-          variant="outlined"
-          href={`https://tidbcloud.com/signin`}
-          // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
-          referrerPolicy="no-referrer-when-downgrade"
-          target="_blank"
-        >
-          Sign In
         </Button>
       </Stack>
 

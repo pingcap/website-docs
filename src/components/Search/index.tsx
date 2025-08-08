@@ -31,7 +31,7 @@ const StyledTextField = styled((props: TextFieldProps) => (
   },
 }));
 
-const SEARCH_WIDTH = 164;
+const SEARCH_WIDTH = 250;
 
 enum SearchType {
   Onsite = "onsite",
@@ -287,8 +287,7 @@ const SearchPopper = ({
     >
       <Card
         sx={{
-          minWidth: SEARCH_WIDTH,
-          maxWidth: 260,
+          width: SEARCH_WIDTH,
           wordBreak: "break-all",
           padding: "8px",
           boxSizing: "border-box",
