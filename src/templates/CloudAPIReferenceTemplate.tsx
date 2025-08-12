@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import Box from "@mui/material/Box";
 
-import Seo from "components/Layout/Seo";
+import Seo from "components/Seo";
 import Layout from "components/Layout";
 import { type BuildType, Locale } from "../shared/interface";
 import { useI18next } from "gatsby-plugin-react-i18next";

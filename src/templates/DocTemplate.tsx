@@ -8,9 +8,14 @@ import Stack from "@mui/material/Stack";
 import "styles/docTemplate.css";
 
 import Layout from "components/Layout";
-import { LeftNavDesktop, LeftNavMobile } from "components/Navigation/LeftNav";
-import MDXContent from "components/Layout/MDXContent";
-import RightNav, { RightNavMobile } from "components/Navigation/RightNav";
+import {
+  LeftNavDesktop,
+  LeftNavMobile,
+} from "components/Layout/Navigation/LeftNav";
+import MDXContent from "components/MDXContent";
+import RightNav, {
+  RightNavMobile,
+} from "components/Layout/Navigation/RightNav";
 import {
   TableOfContent,
   PageContext,
@@ -19,13 +24,14 @@ import {
   BuildType,
   Locale,
 } from "shared/interface";
-import Seo from "components/Layout/Seo";
+import Seo from "components/Seo";
 import { getStable, generateUrl } from "shared/utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { DOC_HOME_URL } from "shared/resources";
 import { useReportReadingRate } from "shared/useReportReadingRate";
+import { useCloudMode } from "shared/useCloudMode";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -52,6 +58,12 @@ interface DocTemplateProps {
     navigation?: {
       navigation: RepoNav;
     };
+    starterNavigation?: {
+      starterNavigation: RepoNav;
+    };
+    essentialNavigation?: {
+      essentialNavigation: RepoNav;
+    };
   };
 }
 
@@ -70,11 +82,24 @@ export default function DocTemplate({
   const {
     mdx: { frontmatter, tableOfContents, body, timeToRead },
     navigation: originNav,
+    starterNavigation: starterNav,
+    essentialNavigation: essentialNav,
   } = data;
+
+  const { isStarter, isEssential } = useCloudMode(pathConfig.repo);
 
   useReportReadingRate(timeToRead);
 
-  const navigation = originNav ? originNav.navigation : [];
+  const classicNavigation = originNav ? originNav.navigation : [];
+  const starterNavigation = starterNav ? starterNav.starterNavigation : [];
+  const essentialNavigation = essentialNav
+    ? essentialNav.essentialNavigation
+    : [];
+  const navigation = isStarter
+    ? starterNavigation
+    : isEssential
+    ? essentialNavigation
+    : classicNavigation;
 
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
     if (tableOfContents.items?.length === 1) {
@@ -294,7 +319,13 @@ export default function DocTemplate({
 }
 
 export const query = graphql`
-  query ($id: String, $language: String!, $navUrl: String!) {
+  query (
+    $id: String
+    $language: String!
+    $navUrl: String!
+    $starterNavUrl: String!
+    $essentialNavUrl: String!
+  ) {
     site {
       siteMetadata {
         siteUrl
@@ -316,6 +347,14 @@ export const query = graphql`
 
     navigation: mdx(slug: { eq: $navUrl }) {
       navigation
+    }
+
+    starterNavigation: mdx(slug: { eq: $starterNavUrl }) {
+      starterNavigation
+    }
+
+    essentialNavigation: mdx(slug: { eq: $essentialNavUrl }) {
+      essentialNavigation
     }
 
     locales: allLocale(filter: { language: { eq: $language } }) {
