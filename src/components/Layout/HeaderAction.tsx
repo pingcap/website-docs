@@ -17,10 +17,11 @@ import TranslateIcon from "media/icons/globe-02.svg";
 
 import Search from "components/Search";
 
-import { Locale, BuildType } from "shared/interface";
+import { Locale, BuildType, PathConfig } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
+import { useCloudMode } from "shared/useCloudMode";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -62,8 +63,9 @@ export default function HeaderAction(props: {
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
   pageUrl?: string;
+  pathConfig?: PathConfig;
 }) {
-  const { supportedLocales, docInfo, buildType, pageUrl } = props;
+  const { supportedLocales, docInfo, buildType, pageUrl, pathConfig } = props;
   const { language, t } = useI18next();
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
   const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
@@ -78,7 +80,10 @@ export default function HeaderAction(props: {
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
       {supportedLocales.length > 0 && (
-        <LangSwitch supportedLocales={supportedLocales} />
+        <LangSwitch
+          supportedLocales={supportedLocales}
+          pathConfig={pathConfig}
+        />
       )}
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
@@ -121,13 +126,15 @@ const LangSwitch = (props: {
   language?: string;
   changeLanguage?: () => void;
   supportedLocales: Locale[];
+  pathConfig?: PathConfig;
 }) => {
-  const { supportedLocales } = props;
+  const { supportedLocales, pathConfig } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
+  const { isClassic } = useCloudMode(pathConfig!.repo);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -213,7 +220,7 @@ const LangSwitch = (props: {
           onClick={toggleLanguage(Locale.zh)}
           disableRipple
           selected={language === Locale.zh}
-          disabled={!supportedLocales.includes(Locale.zh)}
+          disabled={!supportedLocales.includes(Locale.zh) || !isClassic}
         >
           <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.zh" />
@@ -223,7 +230,7 @@ const LangSwitch = (props: {
           onClick={toggleLanguage(Locale.ja)}
           disableRipple
           selected={language === Locale.ja}
-          disabled={!supportedLocales.includes(Locale.ja)}
+          disabled={!supportedLocales.includes(Locale.ja) || !isClassic}
         >
           <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.ja" />

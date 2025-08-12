@@ -85,6 +85,7 @@ export default function Header(props: HeaderProps) {
           docInfo={props.docInfo}
           buildType={props.buildType}
           pageUrl={props.pageUrl}
+          pathConfig={props.pathConfig}
         />
       </Toolbar>
     </AppBar>
