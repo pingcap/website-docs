@@ -7,7 +7,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 
-import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "media/icons/search.svg";
 import { Card, MenuItem, Popper, PopperProps } from "@mui/material";
 import { Locale } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
@@ -16,6 +16,7 @@ const StyledTextField = styled((props: TextFieldProps) => (
   <TextField {...props} />
 ))(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
+    paddingLeft: "12px",
     background: theme.palette.background.paper,
     height: "32px",
     fontSize: "14px",
@@ -30,7 +31,7 @@ const StyledTextField = styled((props: TextFieldProps) => (
   },
 }));
 
-const SEARCH_WIDTH = 251;
+const SEARCH_WIDTH = 164;
 
 enum SearchType {
   Onsite = "onsite",
@@ -282,10 +283,12 @@ const SearchPopper = ({
       anchorEl={anchorEl}
       sx={{ zIndex: 99 }}
       modifiers={[{ name: "offset", options: { offset: [0, 8] } }]}
+      placement="bottom-start"
     >
       <Card
         sx={{
-          width: SEARCH_WIDTH,
+          minWidth: SEARCH_WIDTH,
+          maxWidth: 260,
           wordBreak: "break-all",
           padding: "8px",
           boxSizing: "border-box",
