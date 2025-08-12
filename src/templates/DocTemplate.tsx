@@ -101,6 +101,16 @@ export default function DocTemplate({
     ? essentialNavigation
     : classicNavigation;
 
+  const haveStarter = starterNavigation.length > 0;
+  const haveEssential = essentialNavigation.length > 0;
+  const availablePlans = ["dedicated"];
+  if (haveStarter) {
+    availablePlans.push("starter");
+  }
+  if (haveEssential) {
+    availablePlans.push("essential");
+  }
+
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
     if (tableOfContents.items?.length === 1) {
       return tableOfContents.items![0].items;
@@ -129,6 +139,7 @@ export default function DocTemplate({
             name={name}
             pathConfig={pathConfig}
             availIn={availIn.version}
+            availablePlans={availablePlans}
           />
         )
       }
@@ -188,6 +199,7 @@ export default function DocTemplate({
               availIn={availIn.version}
               buildType={buildType}
               bannerEnabled={bannerVisible}
+              availablePlans={availablePlans}
             />
           )}
           <Box

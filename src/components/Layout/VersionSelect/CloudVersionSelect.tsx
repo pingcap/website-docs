@@ -51,6 +51,7 @@ const VersionItems = (props: {
   pathConfig: PathConfig;
   name: string;
   onClick: () => void;
+  availablePlans: string[];
 }) => {
   const { pathConfig } = props;
   const { cloudMode } = useCloudMode(pathConfig.repo);
@@ -72,7 +73,9 @@ const VersionItems = (props: {
 
   return (
     <>
-      {CLOUD_VERSIONS.map((version) => (
+      {CLOUD_VERSIONS.filter((version) =>
+        props.availablePlans.includes(version.value)
+      ).map((version) => (
         <MenuItem
           key={`menu-${version.value}`}
           value={`menu-${version.value}`}
@@ -113,10 +116,11 @@ interface VersionSelectProps {
   pathConfig: PathConfig;
   availIn: string[];
   buildType?: BuildType;
+  availablePlans: string[];
 }
 
 export default function CloudVersionSelect(props: VersionSelectProps) {
-  const { name, pathConfig, availIn } = props;
+  const { name, pathConfig, availIn, availablePlans } = props;
   const { cloudMode } = useCloudMode(pathConfig.repo);
   const currentCloudVersion =
     CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
@@ -158,6 +162,7 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
           pathConfig={pathConfig}
           name={name}
           onClick={handleClose}
+          availablePlans={availablePlans}
         />
       </VersionSelectMenu>
     </>

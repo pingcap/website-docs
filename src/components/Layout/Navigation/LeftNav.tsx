@@ -26,10 +26,19 @@ interface LeftNavProps {
   availIn: string[];
   buildType?: BuildType;
   bannerEnabled?: boolean;
+  availablePlans: string[];
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
-  const { data, current, name, pathConfig, availIn, buildType } = props;
+  const {
+    data,
+    current,
+    name,
+    pathConfig,
+    availIn,
+    buildType,
+    availablePlans,
+  } = props;
 
   return (
     <Box
@@ -68,6 +77,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
             pathConfig={pathConfig}
             availIn={availIn}
             buildType={buildType}
+            availablePlans={availablePlans}
           />
         )}
         <LeftNavTree data={data} current={current} />
