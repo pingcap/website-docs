@@ -17,7 +17,7 @@ import TranslateIcon from "media/icons/globe-02.svg";
 
 import Search from "components/Search";
 
-import { Locale, BuildType, PathConfig } from "shared/interface";
+import { Locale, BuildType, PathConfig, Repo } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
@@ -134,7 +134,7 @@ const LangSwitch = (props: {
 
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
-  const { isClassic } = useCloudMode(pathConfig!.repo);
+  const { isClassic } = useCloudMode(pathConfig?.repo || Repo.tidb);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
