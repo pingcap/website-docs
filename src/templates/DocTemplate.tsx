@@ -108,7 +108,7 @@ function DocTemplate({
   } = data;
 
   const { isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate();
+  useCloudPlanNavigate(pathConfig.repo);
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];

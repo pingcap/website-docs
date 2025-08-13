@@ -64,8 +64,11 @@ export const useCloudPlan = () => {
   };
 };
 
-export const useCloudPlanNavigate = () => {
+export const useCloudPlanNavigate = (repo: Repo) => {
   useEffect(() => {
+    if (repo !== Repo.tidbcloud) {
+      return;
+    }
     const searchParams = new URLSearchParams(location.search);
     const cloudModeFromSession = sessionStorage.getItem(CLOUD_MODE_KEY);
     const cloudMode = searchParams.get(CLOUD_MODE_KEY) || cloudModeFromSession;
