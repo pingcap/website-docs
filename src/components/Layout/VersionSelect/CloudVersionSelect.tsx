@@ -14,6 +14,12 @@ import { useEffect, useRef, useState } from "react";
 
 export const CLOUD_PLAN_LABEL_ELEMENT_ID = "cloud-plan-label";
 
+export const CLOUD_PLAN_LABEL_STRINGS = {
+  dedicated: "Dedicated",
+  starter: "Starter (formerly Serverless)",
+  essential: "Essential",
+};
+
 const CLOUD_VERSIONS = [
   {
     label: "Dedicated",

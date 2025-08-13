@@ -1,5 +1,8 @@
 export { default as wrapRootElement } from "./src/state/wrap-with-provider";
-import { CLOUD_PLAN_LABEL_ELEMENT_ID } from "components/Layout/VersionSelect/CloudVersionSelect";
+import {
+  CLOUD_PLAN_LABEL_ELEMENT_ID,
+  CLOUD_PLAN_LABEL_STRINGS,
+} from "components/Layout/VersionSelect/CloudVersionSelect";
 import docsJson from "./docs/docs.json";
 
 // https://github.com/gatsbyjs/gatsby/issues/1526
@@ -82,11 +85,12 @@ const redirectScript = `
 
 const fulfillCloudPlanScript = `
 (function() {
+  const cloudPlans = ${JSON.stringify(CLOUD_PLAN_LABEL_STRINGS)};
   const searchParams = new URLSearchParams(location.search);
   const cloudMode = searchParams.get("plan");
   const cloudPlanLabel = document.getElementById("${CLOUD_PLAN_LABEL_ELEMENT_ID}");
   if (cloudPlanLabel) {
-    cloudPlanLabel.textContent = cloudMode;
+    cloudPlanLabel.textContent = cloudPlans[cloudMode] || cloudPlans.dedicated;
   }
 })();
 `;
