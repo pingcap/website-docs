@@ -215,7 +215,7 @@ const LangSwitch = (props: {
           onClick={toggleLanguage(Locale.zh)}
           disableRipple
           selected={language === Locale.zh}
-          disabled={!supportedLocales.includes(Locale.zh) || !isClassic}
+          disabled={!supportedLocales.includes(Locale.zh)}
         >
           <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.zh" />

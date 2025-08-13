@@ -10,7 +10,7 @@ import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
 import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
 import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const CLOUD_PLAN_LABEL_ELEMENT_ID = "cloud-plan-label";
 
@@ -131,13 +131,10 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // const labelRef = useRef<HTMLSpanElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const [isClient, setIsClient] = useState(false);
 
-  // useEffect(() => {
-  //   if (labelRef.current && currentCloudVersion.label) {
-  //     labelRef.current.textContent = currentCloudVersion.label as string;
-  //   }
-  // }, [currentCloudVersion]);
+  useEffect(() => setIsClient(true), []);
 
   return (
     <>
@@ -151,7 +148,11 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
               lineHeight: "1.25rem",
             }}
           >
-            {currentCloudVersion.label}
+            {isClient ? (
+              currentCloudVersion.label
+            ) : (
+              <span id={CLOUD_PLAN_LABEL_ELEMENT_ID} ref={labelRef} />
+            )}
           </Typography>
           {currentCloudVersion?.icon}
         </Box>
