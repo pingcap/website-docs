@@ -70,11 +70,16 @@ export const useCloudPlanNavigate = () => {
     const cloudModeFromSession = sessionStorage.getItem(CLOUD_MODE_KEY);
     const cloudMode = searchParams.get(CLOUD_MODE_KEY) || cloudModeFromSession;
 
-    if (!!cloudMode && cloudMode !== "dedicated") {
+    if (
+      !!cloudMode &&
+      cloudMode !== "dedicated" &&
+      !searchParams.get(CLOUD_MODE_KEY)
+    ) {
       navigate(
         `${location.pathname}?${CLOUD_MODE_KEY}=${cloudMode}${
           location.hash ? location.hash : ""
-        }`
+        }`,
+        { replace: true }
       );
     }
   }, []);
