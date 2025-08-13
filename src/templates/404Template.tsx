@@ -86,12 +86,8 @@ export default function PageNotFoundTemplate({
     pathname,
     language
   );
-  const { hasCustomRedirect, redirectUrl: customRedirectUrl } =
-    useCustomRedirect(pathname);
-  const shouldRedirect = hasCustomRedirect || isArchivedDoc;
-  const redirectUrl = hasCustomRedirect
-    ? customRedirectUrl!
-    : archivedRedirectUrl;
+  const shouldRedirect = isArchivedDoc;
+  const redirectUrl = archivedRedirectUrl;
 
   useEffect(() => {
     if (isArchived || !shouldRedirect) {
@@ -242,37 +238,3 @@ export const query = graphql`
     }
   }
 `;
-
-const useCustomRedirect = (pathname: string) => {
-  // First check for exact match
-  const exactRedirectUrl =
-    CONFIG.redirect?.[pathname as keyof typeof CONFIG.redirect];
-  if (exactRedirectUrl) {
-    return { hasCustomRedirect: true, redirectUrl: exactRedirectUrl };
-  }
-
-  // Check for wildcard patterns
-  const redirectConfig = CONFIG.redirect || {};
-  for (const [pattern, target] of Object.entries(redirectConfig)) {
-    if (pattern.includes("*")) {
-      // Convert wildcard pattern to regex
-      const regexPattern = pattern.replace(/\*/g, ".*");
-      const regex = new RegExp(`^${regexPattern}$`);
-
-      if (regex.test(pathname)) {
-        // Replace * in target with the actual pathname parts
-        const pathParts = pathname.split("/");
-        const patternParts = pattern.split("/");
-        const wildcardIndex = patternParts.findIndex((part) => part === "*");
-
-        if (wildcardIndex !== -1) {
-          const wildcardValue = pathParts[wildcardIndex] || "";
-          const redirectUrl = target.replace(/\*/g, wildcardValue);
-          return { hasCustomRedirect: true, redirectUrl };
-        }
-      }
-    }
-  }
-
-  return { hasCustomRedirect: false, redirectUrl: undefined };
-};
