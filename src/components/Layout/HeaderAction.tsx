@@ -17,11 +17,10 @@ import TranslateIcon from "media/icons/globe-02.svg";
 
 import Search from "components/Search";
 
-import { Locale, BuildType, PathConfig, Repo } from "shared/interface";
+import { Locale, BuildType } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
-import { useCloudPlan } from "shared/useCloudPlan";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -129,7 +128,6 @@ const LangSwitch = (props: {
 
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
-  const { isClassic } = useCloudPlan();
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -225,7 +223,7 @@ const LangSwitch = (props: {
           onClick={toggleLanguage(Locale.ja)}
           disableRipple
           selected={language === Locale.ja}
-          disabled={!supportedLocales.includes(Locale.ja) || !isClassic}
+          disabled={!supportedLocales.includes(Locale.ja)}
         >
           <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.ja" />
