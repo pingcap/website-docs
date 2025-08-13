@@ -14,7 +14,6 @@ import {
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
 import { cpMarkdown } from "./cp-markdown";
-import { queryTOCs } from "./toc";
 
 interface PageQueryData {
   allMdx: {
@@ -100,11 +99,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       return;
     }
 
-    const path = filePath.includes("starter")
-      ? generateUrl(`starter/${name}`, pathConfig)
-      : filePath.includes("essential")
-      ? generateUrl(`essential/${name}`, pathConfig)
-      : generateUrl(name, pathConfig);
+    const path = generateUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
     const starterNavUrl = generateStarterNav(pathConfig);
     const essentialNavUrl = generateEssentialNav(pathConfig);

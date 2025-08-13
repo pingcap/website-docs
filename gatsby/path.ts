@@ -47,17 +47,30 @@ export function generateConfig(slug: string): {
     ...string[]
   ];
 
-  const name = rest[rest.length - 1];
-
   let filePath = rest.join("/") + ".md";
   if (repo === Repo.dm || repo === Repo.operator) {
     filePath = `${locale}/${filePath}`;
   }
 
+  let name = rest[rest.length - 1];
+  name = name === "_index" ? "" : name;
+
+  if (repo === Repo.tidbcloud) {
+    if (filePath.includes("starter/")) {
+      name = `starter/${name}`;
+    } else if (filePath.includes("essential/")) {
+      name = `essential/${name}`;
+    } else if (filePath.includes("dedicated/")) {
+      if (!!name) {
+        name = `dedicated/${name}`;
+      }
+    }
+  }
+
   return {
     config: { locale, repo, branch, version: branchToVersion(repo, branch) },
     filePath,
-    name: name === "_index" ? "" : name,
+    name,
   };
 }
 
