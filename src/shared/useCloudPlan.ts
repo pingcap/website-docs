@@ -12,8 +12,6 @@ import { Repo } from "./interface";
 export const CLOUD_MODE_KEY = "plan";
 export const CLOUD_MODE_VALUE_STARTER = "starter";
 export const CLOUD_MODE_VALUE_ESSENTIAL = "essential";
-export const GLOBAL_STATE_CLOUD_PLAN_KEY =
-  "__TIDB_DOCS_GLOBAL_STATE_CLOUD_PLAN__";
 
 const CloudPlanContext = createContext<{
   repo: Repo;
