@@ -131,13 +131,13 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const labelRef = useRef<HTMLSpanElement>(null);
+  // const labelRef = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    if (labelRef.current && currentCloudVersion.label) {
-      labelRef.current.textContent = currentCloudVersion.label as string;
-    }
-  }, [currentCloudVersion]);
+  // useEffect(() => {
+  //   if (labelRef.current && currentCloudVersion.label) {
+  //     labelRef.current.textContent = currentCloudVersion.label as string;
+  //   }
+  // }, [currentCloudVersion]);
 
   return (
     <>
@@ -151,7 +151,7 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
               lineHeight: "1.25rem",
             }}
           >
-            <span id={CLOUD_PLAN_LABEL_ELEMENT_ID} ref={labelRef}></span>
+            {currentCloudVersion.label}
           </Typography>
           {currentCloudVersion?.icon}
         </Box>
