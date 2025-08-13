@@ -93,6 +93,8 @@ const cloudPlanScript = `
 
 const fulfillCloudPlanScript = `
 (function() {
+  const searchParams = new URLSearchParams(location.search);
+  const cloudMode = searchParams.get("plan");
   const cloudPlanLabel = document.getElementById("${CLOUD_PLAN_LABEL_ELEMENT_ID}");
   if (cloudPlanLabel) {
     cloudPlanLabel.textContent = cloudMode;
