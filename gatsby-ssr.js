@@ -1,4 +1,5 @@
 export { default as wrapRootElement } from "./src/state/wrap-with-provider";
+import docsJson from "./docs/docs.json";
 
 // https://github.com/gatsbyjs/gatsby/issues/1526
 export const onPreRenderHTML = ({ getHeadComponents }) => {
@@ -26,6 +27,57 @@ const script = `if (Promise == null || Promise.allSettled == null) {
   div.innerText = /^\\/?zh/.exec(location.pathname) ? '当前浏览器不受支持，请使用最新版本的 Chrome、Firefox 或 Edge。' : 'Your current browser is not supported. Please use the latest version of Chrome, Firefox, or Edge.'
   document.body.appendChild(div)
 }`;
+
+// Custom redirect logic script
+const redirectScript = `
+(function() {
+  // Redirect configuration from docs.json
+  const CONFIG_REDIRECT = ${JSON.stringify(docsJson.redirect || {})};
+
+  function checkCustomRedirect(pathname) {
+    // First check for exact match
+    const exactRedirectUrl = CONFIG_REDIRECT[pathname];
+    if (exactRedirectUrl) {
+      return { hasCustomRedirect: true, redirectUrl: exactRedirectUrl };
+    }
+
+    // Check for wildcard patterns
+    for (const [pattern, target] of Object.entries(CONFIG_REDIRECT)) {
+      if (pattern.includes('*')) {
+        // Convert wildcard pattern to regex
+        const regexPattern = pattern.replace(/\\*/g, '.*');
+        const regex = new RegExp('^' + regexPattern + '$');
+
+        if (regex.test(pathname)) {
+          // Replace * in target with the actual pathname parts
+          const pathParts = pathname.split('/');
+          const patternParts = pattern.split('/');
+          const wildcardIndex = patternParts.findIndex((part) => part === '*');
+
+          if (wildcardIndex !== -1) {
+            const wildcardValue = pathParts[wildcardIndex] || '';
+            const redirectUrl = target.replace(/\\*/g, wildcardValue);
+            return { hasCustomRedirect: true, redirectUrl };
+          } else {
+            return { hasCustomRedirect: true, redirectUrl: target };
+          }
+        }
+      }
+    }
+
+    return { hasCustomRedirect: false, redirectUrl: undefined };
+  }
+
+  // Check if current page should redirect
+  const pathname = window.location.pathname;
+  const { hasCustomRedirect, redirectUrl } = checkCustomRedirect(pathname);
+
+  if (hasCustomRedirect && redirectUrl) {
+    // Redirect immediately
+    window.location.href = redirectUrl;
+  }
+})();
+`;
 
 export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   setHeadComponents([
@@ -64,6 +116,10 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   ]);
   setPostBodyComponents([
     <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
+    <script
+      key="custom-redirect"
+      dangerouslySetInnerHTML={{ __html: redirectScript }}
+    />,
     // <script
     //   key="ai-widget"
     //   async
