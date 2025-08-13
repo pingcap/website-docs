@@ -87,7 +87,7 @@ export const VersionSelectMenu = styled((props: MenuProps) => (
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
     marginTop: theme.spacing(1),
-    minWidth: 268,
+    width: 270,
     color:
       theme.palette.mode === "light"
         ? "rgb(55, 65, 81)"
