@@ -31,7 +31,11 @@ import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { DOC_HOME_URL } from "shared/resources";
 import { useReportReadingRate } from "shared/useReportReadingRate";
-import { useCloudMode } from "shared/useCloudMode";
+import {
+  CloudPlanProvider,
+  useCloudPlan,
+  useCloudPlanNavigate,
+} from "shared/useCloudPlan";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -67,7 +71,24 @@ interface DocTemplateProps {
   };
 }
 
-export default function DocTemplate({
+const DocTemplateWithProvider = (props: DocTemplateProps) => {
+  const [cloudPlan, setCloudPlan] = React.useState<string | null>(null);
+  return (
+    <CloudPlanProvider
+      value={{
+        cloudPlan,
+        setCloudPlan,
+        repo: props.pageContext.pathConfig.repo,
+      }}
+    >
+      <DocTemplate {...props} />
+    </CloudPlanProvider>
+  );
+};
+
+export default DocTemplateWithProvider;
+
+function DocTemplate({
   pageContext: {
     name,
     availIn,
@@ -86,8 +107,8 @@ export default function DocTemplate({
     essentialNavigation: essentialNav,
   } = data;
 
-  const { isStarter, isEssential } = useCloudMode(pathConfig.repo);
-
+  const { isStarter, isEssential } = useCloudPlan();
+  useCloudPlanNavigate();
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];

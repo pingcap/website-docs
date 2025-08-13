@@ -8,9 +8,11 @@ import { AllVersion } from "shared/utils";
 import LinkComponent from "components/Link";
 import { Box, Typography } from "@mui/material";
 import { Chip } from "@mui/material";
-import { CLOUD_MODE_KEY, useCloudMode } from "shared/useCloudMode";
+import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
 import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+
+export const CLOUD_PLAN_LABEL_ELEMENT_ID = "cloud-plan-label";
 
 const CLOUD_VERSIONS = [
   {
@@ -54,9 +56,9 @@ const VersionItems = (props: {
   availablePlans: string[];
 }) => {
   const { pathConfig } = props;
-  const { cloudMode } = useCloudMode(pathConfig.repo);
+  const { cloudPlan, setCloudPlan } = useCloudPlan();
   const currentCloudVersion =
-    CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
+    CLOUD_VERSIONS.find((version) => version.value === cloudPlan) ||
     CLOUD_VERSIONS[0];
 
   const getToUrl = (version: string) => {
@@ -67,7 +69,7 @@ const VersionItems = (props: {
       : `/${pathConfig.repo}/${version}/?${searchParams.toString()}`;
   };
   const onClick = (version: string) => {
-    sessionStorage.setItem(CLOUD_MODE_KEY, version);
+    setCloudPlan(version);
     props.onClick();
   };
 
@@ -121,14 +123,21 @@ interface VersionSelectProps {
 
 export default function CloudVersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn, availablePlans } = props;
-  const { cloudMode } = useCloudMode(pathConfig.repo);
+  const { cloudPlan } = useCloudPlan();
   const currentCloudVersion =
-    CLOUD_VERSIONS.find((version) => version.value === cloudMode) ||
+    CLOUD_VERSIONS.find((version) => version.value === cloudPlan) ||
     CLOUD_VERSIONS[0];
   const anchorEl = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const labelRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (labelRef.current && currentCloudVersion.label) {
+      labelRef.current.textContent = currentCloudVersion.label as string;
+    }
+  }, [currentCloudVersion]);
 
   return (
     <>
@@ -142,7 +151,7 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
               lineHeight: "1.25rem",
             }}
           >
-            {currentCloudVersion?.label}
+            <span id={CLOUD_PLAN_LABEL_ELEMENT_ID} ref={labelRef}></span>
           </Typography>
           {currentCloudVersion?.icon}
         </Box>

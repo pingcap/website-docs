@@ -1,5 +1,7 @@
 export { default as wrapRootElement } from "./src/state/wrap-with-provider";
+import { CLOUD_PLAN_LABEL_ELEMENT_ID } from "components/Layout/VersionSelect/CloudVersionSelect";
 import docsJson from "./docs/docs.json";
+import { GLOBAL_STATE_CLOUD_PLAN_KEY } from "./src/shared/useCloudPlan";
 
 // https://github.com/gatsbyjs/gatsby/issues/1526
 export const onPreRenderHTML = ({ getHeadComponents }) => {
@@ -79,6 +81,25 @@ const redirectScript = `
 })();
 `;
 
+const cloudPlanScript = `
+(function() {
+  const searchParams = new URLSearchParams(location.search);
+  const cloudMode = searchParams.get("plan");
+  if (cloudMode) {
+    window["${GLOBAL_STATE_CLOUD_PLAN_KEY}"] = cloudMode;
+  }
+})();
+`;
+
+const fulfillCloudPlanScript = `
+(function() {
+  const cloudPlanLabel = document.getElementById("${CLOUD_PLAN_LABEL_ELEMENT_ID}");
+  if (cloudPlanLabel) {
+    cloudPlanLabel.textContent = cloudMode;
+  }
+})();
+`;
+
 export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
   setHeadComponents([
     <link
@@ -113,6 +134,10 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
       type="font/woff2"
       crossOrigin="anonymous"
     />,
+    <script
+      key="cloud-plan"
+      dangerouslySetInnerHTML={{ __html: cloudPlanScript }}
+    />,
   ]);
   setPostBodyComponents([
     <script key="deprecated" dangerouslySetInnerHTML={{ __html: script }} />,
@@ -127,6 +152,10 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
       data-controlled="true"
       data-chat-engine="pingcap-doc"
       data-measurement-id="G-GRPCMS37RV"
+    />,
+    <script
+      key="fulfill-cloud-plan"
+      dangerouslySetInnerHTML={{ __html: fulfillCloudPlanScript }}
     />,
   ]);
 };

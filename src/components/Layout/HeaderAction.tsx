@@ -21,7 +21,7 @@ import { Locale, BuildType, PathConfig, Repo } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
-import { useCloudMode } from "shared/useCloudMode";
+import { useCloudPlan } from "shared/useCloudPlan";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -63,9 +63,8 @@ export default function HeaderAction(props: {
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
   pageUrl?: string;
-  pathConfig?: PathConfig;
 }) {
-  const { supportedLocales, docInfo, buildType, pageUrl, pathConfig } = props;
+  const { supportedLocales, docInfo, buildType, pageUrl } = props;
   const { language, t } = useI18next();
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
   const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
@@ -80,10 +79,7 @@ export default function HeaderAction(props: {
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
       {supportedLocales.length > 0 && (
-        <LangSwitch
-          supportedLocales={supportedLocales}
-          pathConfig={pathConfig}
-        />
+        <LangSwitch supportedLocales={supportedLocales} />
       )}
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
@@ -126,15 +122,14 @@ const LangSwitch = (props: {
   language?: string;
   changeLanguage?: () => void;
   supportedLocales: Locale[];
-  pathConfig?: PathConfig;
 }) => {
-  const { supportedLocales, pathConfig } = props;
+  const { supportedLocales } = props;
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const theme = useTheme();
   const { language, changeLanguage } = useI18next();
-  const { isClassic } = useCloudMode(pathConfig?.repo || Repo.tidb);
+  const { isClassic } = useCloudPlan();
 
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
