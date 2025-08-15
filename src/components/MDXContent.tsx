@@ -41,7 +41,7 @@ export default function MDXContent(props: {
   } = props;
 
   const pageType = getPageType(language, pageUrl);
-  const CustomContentWithPageType = useCustomContent(pageType);
+  const CustomContent = useCustomContent(pageType, language);
   // const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
   React.useEffect(() => {
@@ -67,7 +67,7 @@ export default function MDXContent(props: {
           components={{
             ...MDXComponents,
             pre: Pre,
-            CustomContent: CustomContentWithPageType,
+            CustomContent,
           }}
         >
           <MDXRenderer>{data}</MDXRenderer>
