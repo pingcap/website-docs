@@ -35,7 +35,12 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
   } = props;
   const pageType = _pageType?.replace("-", "") || "";
   const shouldDisplayByPageType = pageTypeFromURL === pageType;
-  const shouldDisplayByLanguage = languageFromURL === language;
+
+  const languageArray = language
+    ? language.split(",").map((lang) => lang.trim())
+    : [];
+  const shouldDisplayByLanguage = languageArray.includes(languageFromURL || "");
+
   const onlyPageType = !!pageType && !language;
   const onlyLanguage = !pageType && !!language;
   const showOnlyPageType = onlyPageType && shouldDisplayByPageType;
@@ -46,8 +51,6 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     shouldDisplayByPageType &&
     shouldDisplayByLanguage;
   const shouldDisplay = showOnlyPageType || showOnlyLanguage || showAll;
-
-  console.log("shouldDisplay", shouldDisplay, showOnlyPageType);
 
   return <>{shouldDisplay ? children : <></>}</>;
 };
