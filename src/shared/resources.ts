@@ -181,8 +181,8 @@ export const EN_FOOTER_ITEMS = [
     name: "Products",
     items: [
       {
-        name: "TiDB Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-cloud-serverless/",
+        name: "TiDB Cloud Starter",
+        url: "https://www.pingcap.com/tidb-cloud-starter/",
       },
       {
         name: "TiDB Cloud Dedicated",
@@ -300,8 +300,8 @@ export const ZH_FOOTER_ITEMS = [
         url: "https://cn.pingcap.com/product/#SelectProduct",
       },
       {
-        name: "TiDB Cloud Serverless",
-        url: "https://www.pingcap.com/tidb-cloud-serverless/",
+        name: "TiDB Cloud Starter",
+        url: "https://www.pingcap.com/tidb-cloud-starter/",
       },
       {
         name: "TiDB Cloud Dedicated",
@@ -388,8 +388,8 @@ export const JA_FOOTER_ITEMS = [
     name: "製品",
     items: [
       {
-        name: "TiDB Cloud Serverless",
-        url: "https://pingcap.co.jp/tidb-serverless/",
+        name: "TiDB Cloud Starter",
+        url: "https://pingcap.co.jp/tidb-cloud-starter/",
       },
       {
         name: "TiDB Cloud Dedicated",
