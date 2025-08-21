@@ -1,11 +1,9 @@
 import { tabs, active, hidden } from "./simple-tab.module.css";
 
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTabGroup } from "state";
 import clsx from "clsx";
-
-// TODO: refactor with MUI and Recoil
 
 export function SimpleTab({
   groupId,
@@ -18,7 +16,32 @@ export function SimpleTab({
     children: ReactElement[];
   }>[];
 }) {
-  const defaultValue = children[0]!.props?.value || children[0].props.label;
+  const [renderedTabs, setRenderedTabs] = useState<string[]>([]);
+  const actualTabs = useMemo(() => {
+    const tabs: ReactElement[] = [];
+
+    const extractTabs = (elements: ReactElement[]) => {
+      elements.forEach((element) => {
+        if (element.props.mdxType === "CustomContent") {
+          if (element.props.children) {
+            const childrenArray = Array.isArray(element.props.children)
+              ? element.props.children
+              : [element.props.children];
+            extractTabs(childrenArray);
+          }
+        } else {
+          tabs.push(element);
+        }
+      });
+    };
+
+    extractTabs(children);
+
+    return tabs;
+  }, [children]);
+
+  const defaultValue =
+    actualTabs[0]?.props?.value || actualTabs[0]?.props.label;
   const [activeTab, setActiveTab] = useState(defaultValue);
   const dispatch = useDispatch();
   const { tabGroup } = useSelector((state) => state) as any;
@@ -28,7 +51,7 @@ export function SimpleTab({
     if (
       activeTabGroup &&
       activeTabGroup !== activeTab &&
-      children.some(
+      actualTabs.some(
         (child) => child.props?.value || child.props.label === activeTabGroup
       )
     ) {
@@ -43,11 +66,25 @@ export function SimpleTab({
     }
   };
 
+  if (!actualTabs.length) {
+    return null;
+  }
+
+  useEffect(() => {
+    if (!renderedTabs.length) {
+      return;
+    }
+    setActiveTab(renderedTabs[0]);
+  }, [renderedTabs]);
+
   return (
     <>
       <ul className={clsx(tabs, "simple-tab-container")}>
-        {children.map((child) => {
+        {actualTabs.map((child) => {
           const id: string = child.props?.value || child.props.label;
+          if (!renderedTabs.includes(id)) {
+            return null;
+          }
           return (
             <li
               key={id}
@@ -59,14 +96,61 @@ export function SimpleTab({
           );
         })}
       </ul>
-      {children.map((child) => {
-        const id: string = child.props?.value || child.props.label;
+      {children.map((child, index) => {
+        const actualChild = actualTabs[index];
+        const id: string = actualChild.props?.value || actualChild.props.label;
         return (
-          <div key={id} className={clsx({ [hidden]: activeTab !== id })}>
-            {child.props.children}
-          </div>
+          <TabContentDetector
+            key={id}
+            id={id}
+            activeTab={activeTab}
+            onRendered={() => {
+              setRenderedTabs((prev) => {
+                if (prev.includes(id)) {
+                  return prev;
+                }
+                // Add the new tab and then sort based on actualTabs order
+                const newTabs = [...prev, id];
+                return newTabs.sort((a, b) => {
+                  const aIndex = actualTabs.findIndex(
+                    (tab) => (tab.props?.value || tab.props.label) === a
+                  );
+                  const bIndex = actualTabs.findIndex(
+                    (tab) => (tab.props?.value || tab.props.label) === b
+                  );
+                  return aIndex - bIndex;
+                });
+              });
+            }}
+          >
+            {child}
+          </TabContentDetector>
         );
       })}
     </>
   );
 }
+
+export const TabContentDetector = ({
+  children,
+  id,
+  activeTab,
+  onRendered,
+}: {
+  children: ReactElement;
+  id: string;
+  activeTab: string;
+  onRendered: (id: string) => void;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (ref.current && ref.current.children.length > 0) {
+      onRendered(id);
+    }
+  }, []);
+  return (
+    <div ref={ref} key={id} className={clsx({ [hidden]: activeTab !== id })}>
+      {children}
+    </div>
+  );
+};
