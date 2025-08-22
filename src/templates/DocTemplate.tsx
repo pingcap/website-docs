@@ -122,13 +122,14 @@ function DocTemplate({
     ? essentialNavigation
     : classicNavigation;
 
+  const { language } = useI18next();
   const haveStarter = starterNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
   const availablePlans = ["dedicated"];
   if (haveStarter) {
     availablePlans.push("starter");
   }
-  if (haveEssential) {
+  if (haveEssential && language !== "ja") {
     availablePlans.push("essential");
   }
 
@@ -141,7 +142,6 @@ function DocTemplate({
 
   const stableBranch = getStable(pathConfig.repo);
 
-  const { language } = useI18next();
   const bannerVisible = feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
