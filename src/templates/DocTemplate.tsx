@@ -36,6 +36,7 @@ import {
   useCloudPlan,
   useCloudPlanNavigate,
 } from "shared/useCloudPlan";
+import { filterTOC } from "shared/filterTOC";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -116,11 +117,13 @@ function DocTemplate({
   const essentialNavigation = essentialNav
     ? essentialNav.essentialNavigation
     : [];
-  const navigation = isStarter
-    ? starterNavigation
-    : isEssential
-    ? essentialNavigation
-    : classicNavigation;
+  const navigation = filterTOC(
+    isStarter
+      ? starterNavigation
+      : isEssential
+      ? essentialNavigation
+      : classicNavigation
+  );
 
   const { language } = useI18next();
   const haveStarter = starterNavigation.length > 0;
