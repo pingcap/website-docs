@@ -258,6 +258,7 @@ export default function VersionSelect(props: VersionSelectProps) {
             padding: "0 0.25rem",
             fontSize: "0.875rem",
             lineHeight: "1.25rem",
+            fontWeight: 700,
           }}
         >
           {buildType === "archive"
