@@ -14,7 +14,11 @@ import {
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
 import { cpMarkdown } from "./cp-markdown";
-import { mdxAstToToc } from "./toc";
+import {
+  getTidbCloudFilesFromTocs,
+  determineInDefaultPlan,
+} from "./cloud-plan";
+import { getFilesFromTocs, filterNodesByToc } from "./toc-filter";
 
 interface PageQueryData {
   allMdx: {
@@ -41,86 +45,6 @@ interface TocQueryData {
 
 const DEFAULT_BUILD_TYPE: BuildType = "prod";
 
-/**
- * Extract file paths from TOC navigation structure
- */
-function extractFilesFromToc(nav: any[]): string[] {
-  const files: string[] = [];
-
-  function traverse(navItems: any[]) {
-    for (const item of navItems) {
-      if (
-        item.type === "nav" &&
-        item.link &&
-        !item.link.startsWith("https://")
-      ) {
-        // Extract filename from link path
-        const pathSegments = item.link.split("/");
-        const filenameWithExt = pathSegments[pathSegments.length - 1];
-        if (filenameWithExt && filenameWithExt !== "") {
-          // Remove .md extension to match the actual file name
-          const filename = filenameWithExt.replace(/\.md$/, "");
-          files.push(filename);
-        }
-      }
-      if (item.children) {
-        traverse(item.children);
-      }
-    }
-  }
-
-  traverse(nav);
-  return files;
-}
-
-/**
- * Get files that should be built based on TOC content
- * Returns a Map where key is "locale/repo/version" and value is Set of file names
- */
-async function getFilesFromTocs(
-  graphql: any
-): Promise<Map<string, Set<string>>> {
-  const tocQuery = await graphql(`
-    {
-      allMdx(filter: { fileAbsolutePath: { regex: "/TOC.*md$/" } }) {
-        nodes {
-          id
-          slug
-          mdxAST
-          parent {
-            ... on File {
-              relativePath
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  if (tocQuery.errors) {
-    sig.error(tocQuery.errors);
-  }
-
-  const tocNodes = tocQuery.data!.allMdx.nodes;
-  const tocFilesMap = new Map<string, Set<string>>();
-
-  tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
-    const { config } = generateConfig(node.slug);
-    const toc = mdxAstToToc(node.mdxAST.children, config);
-    const files = extractFilesFromToc(toc);
-
-    // Create a key for this specific locale/repo/version combination
-    const key = `${config.locale}/${config.repo}/${
-      config.version || config.branch
-    }`;
-    tocFilesMap.set(key, new Set(files));
-
-    sig.info(`TOC ${key}: found ${files.length} files`);
-  });
-
-  return tocFilesMap;
-}
-
 export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   const {
     actions: { createPage, createRedirect },
@@ -133,6 +57,12 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   const tocFilesMap = await getFilesFromTocs(graphql);
   sig.info(
     `Found TOC files for ${tocFilesMap.size} locale/repo/version combinations`
+  );
+
+  // Get tidbcloud specific TOC files for plan determination
+  const tidbCloudTocFilesMap = await getTidbCloudFilesFromTocs(graphql);
+  sig.info(
+    `Found TiDB Cloud TOC files for ${tidbCloudTocFilesMap.size} locale/repo/version combinations`
   );
 
   const docs = await graphql<PageQueryData>(`
@@ -166,32 +96,13 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     sig.error(docs.errors);
   }
 
-  const nodes = docs
-    .data!.allMdx.nodes.map((node) => {
+  const nodes = filterNodesByToc(
+    docs.data!.allMdx.nodes.map((node) => {
       const { config, name, filePath } = generateConfig(node.slug);
       return { ...node, pathConfig: config, name, filePath };
-    })
-    .filter((node) => {
-      // Filter nodes based on TOC content
-      if (tocFilesMap.size === 0) {
-        // If no TOC files found, build all files (fallback)
-        return true;
-      }
-
-      // Create the key for this specific locale/repo/version combination
-      const key = `${node.pathConfig.locale}/${node.pathConfig.repo}/${
-        node.pathConfig.version || node.pathConfig.branch
-      }`;
-      const filesForThisToc = tocFilesMap.get(key);
-
-      if (!filesForThisToc) {
-        // If no TOC found for this specific combination, don't build the file
-        return false;
-      }
-
-      // Only build files that are referenced in the corresponding TOC
-      return filesForThisToc.has(node.name);
-    });
+    }),
+    tocFilesMap
+  );
 
   sig.info(
     `Building ${nodes.length} files after TOC filtering (from ${
@@ -246,6 +157,13 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       )
       .filter(Boolean);
 
+    // Determine inDefaultPlan for tidbcloud articles
+    const inDefaultPlan = determineInDefaultPlan(
+      name,
+      pathConfig,
+      tidbCloudTocFilesMap
+    );
+
     cpMarkdown(`${node.slug}.md`, path, name);
     createPage({
       path,
@@ -270,12 +188,13 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
           banner: true,
           feedback: true,
         },
+        inDefaultPlan,
       },
     });
 
     // create redirects
     if (node.frontmatter.aliases) {
-      node.frontmatter.aliases.forEach((fromPath) => {
+      node.frontmatter.aliases.forEach((fromPath: string) => {
         createRedirect({
           fromPath,
           toPath: path,
