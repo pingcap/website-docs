@@ -55,15 +55,9 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
 
   // First, get the list of files that should be built based on TOC content
   const tocFilesMap = await getFilesFromTocs(graphql);
-  sig.info(
-    `Found TOC files for ${tocFilesMap.size} locale/repo/version combinations`
-  );
 
   // Get tidbcloud specific TOC files for plan determination
   const tidbCloudTocFilesMap = await getTidbCloudFilesFromTocs(graphql);
-  sig.info(
-    `Found TiDB Cloud TOC files for ${tidbCloudTocFilesMap.size} locale/repo/version combinations`
-  );
 
   const docs = await graphql<PageQueryData>(`
     {

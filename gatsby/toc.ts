@@ -14,7 +14,9 @@ import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
 import { generateConfig, generateUrl } from "./path";
 import { CreatePagesArgs } from "gatsby";
 
-interface TocQueryData {
+export const EXTENDS_FOLDERS = ["starter", "essential", "dedicated"];
+
+export interface TocQueryData {
   allMdx: {
     nodes: {
       id: string;
@@ -63,7 +65,7 @@ export const queryTOCs = async ({ graphql }: CreatePagesArgs) => {
 
 export function mdxAstToToc(
   ast: Content[],
-  config: PathConfig,
+  tocConfig: PathConfig,
   prefixId = `0`
 ): RepoNav {
   return ast
@@ -73,7 +75,7 @@ export function mdxAstToToc(
     )
     .map((node, idx) => {
       if (node.type === "list") {
-        return handleList(node.children, config, `${prefixId}-${idx}`);
+        return handleList(node.children, tocConfig, `${prefixId}-${idx}`);
       } else {
         return handleHeading((node as Heading).children, `${prefixId}-${idx}`);
       }
@@ -81,11 +83,15 @@ export function mdxAstToToc(
     .flat();
 }
 
-function handleList(ast: ListItem[], config: PathConfig, prefixId = `0`) {
+function handleList(ast: ListItem[], tocConfig: PathConfig, prefixId = `0`) {
   return ast.map((node, idx) => {
     const content = node.children as [Paragraph, List | undefined];
     if (content.length > 0 && content.length <= 2) {
-      const ret = getContentFromLink(content[0], config, `${prefixId}-${idx}`);
+      const ret = getContentFromLink(
+        content[0],
+        tocConfig,
+        `${prefixId}-${idx}`
+      );
 
       if (content[1]) {
         const list = content[1];
@@ -95,7 +101,11 @@ function handleList(ast: ListItem[], config: PathConfig, prefixId = `0`) {
           );
         }
 
-        ret.children = handleList(list.children, config, `${prefixId}-${idx}`);
+        ret.children = handleList(
+          list.children,
+          tocConfig,
+          `${prefixId}-${idx}`
+        );
       }
 
       return ret;
@@ -122,7 +132,7 @@ function handleHeading(ast: PhrasingContent[], id = `0`): RepoNavLink[] {
 
 function getContentFromLink(
   content: Paragraph,
-  config: PathConfig,
+  tocConfig: PathConfig,
   id: string
 ): RepoNavLink {
   if (content.type !== "paragraph" || content.children.length === 0) {
@@ -166,11 +176,18 @@ function getContentFromLink(
     }
 
     const urlSegs = child.url.split("/");
-    const filename = urlSegs[urlSegs.length - 1].replace(".md", "");
+    let filename = urlSegs[urlSegs.length - 1].replace(".md", "");
+
+    for (const extendsFolder of EXTENDS_FOLDERS) {
+      if (urlSegs.includes(extendsFolder)) {
+        filename = `${extendsFolder}/${filename}`;
+        break;
+      }
+    }
 
     return {
       type: "nav",
-      link: generateUrl(filename, config),
+      link: generateUrl(filename, tocConfig),
       content,
       tag,
       id,

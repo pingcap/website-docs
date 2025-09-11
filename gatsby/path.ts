@@ -5,12 +5,14 @@ export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
 
   if (filename === "") {
-    return `${lang}/${config.repo}/${config.version ? config.version : ""}`;
+    return `${lang}/${config.repo}${
+      config.version ? `/${config.version}` : ""
+    }${config.prefix ? `/${config.prefix}` : ""}`;
   }
 
-  return `${lang}/${config.repo}/${
-    config.version ? config.version + "/" : ""
-  }${filename}`;
+  return `${lang}/${config.repo}${config.version ? `/${config.version}` : ""}${
+    config.prefix ? `/${config.prefix}` : ""
+  }/${filename}`;
 }
 
 export const generateDocHomeUrl = (filename: string, config: PathConfig) => {
@@ -54,21 +56,28 @@ export function generateConfig(slug: string): {
 
   let name = rest[rest.length - 1];
   name = name === "_index" ? "" : name;
+  let prefix = undefined;
 
   if (repo === Repo.tidbcloud) {
-    if (filePath.includes("starter/")) {
-      name = `starter/${name}`;
-    } else if (filePath.includes("essential/")) {
-      name = `essential/${name}`;
-    } else if (filePath.includes("dedicated/")) {
+    if (slug.includes("starter/")) {
+      prefix = "starter";
+    } else if (slug.includes("essential/")) {
+      prefix = "essential";
+    } else if (slug.includes("dedicated/")) {
       if (!!name) {
-        name = `dedicated/${name}`;
+        prefix = "dedicated";
       }
     }
   }
 
   return {
-    config: { locale, repo, branch, version: branchToVersion(repo, branch) },
+    config: {
+      locale,
+      repo,
+      branch,
+      version: branchToVersion(repo, branch),
+      prefix,
+    },
     filePath,
     name,
   };

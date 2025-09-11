@@ -1,6 +1,6 @@
-import { mdxAstToToc } from "./toc";
+import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
-import { extractFilesFromToc, TocQueryData } from "./toc-filter";
+import { extractFilesFromToc } from "./toc-filter";
 
 /**
  * Get files from different TOC types for tidbcloud

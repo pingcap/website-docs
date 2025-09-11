@@ -1,23 +1,16 @@
-import { mdxAstToToc } from "./toc";
+import { EXTENDS_FOLDERS, mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 
-export interface TocQueryData {
-  allMdx: {
-    nodes: {
-      id: string;
-      slug: string;
-      mdxAST: any;
-      parent: {
-        relativePath: string;
-      };
-    }[];
-  };
-}
+// Whitelist of files that should always be built regardless of TOC content
+const WHITE_LIST = [""];
 
 /**
  * Extract file paths from TOC navigation structure
  */
-export function extractFilesFromToc(nav: any[]): string[] {
+export function extractFilesFromToc(
+  nav: any[],
+  extendsFolders?: string[]
+): string[] {
   const files: string[] = [];
 
   function traverse(navItems: any[]) {
@@ -33,7 +26,31 @@ export function extractFilesFromToc(nav: any[]): string[] {
         if (filenameWithExt && filenameWithExt !== "") {
           // Remove .md extension to match the actual file name
           const filename = filenameWithExt.replace(/\.md$/, "");
-          files.push(filename);
+
+          // Check if extends folders are specified and found in path segments
+          if (extendsFolders && extendsFolders.length > 0) {
+            let foundExtendsFolder = false;
+            for (const extendsFolder of extendsFolders) {
+              const extendsIndex = pathSegments.indexOf(extendsFolder);
+              if (
+                extendsIndex !== -1 &&
+                extendsIndex < pathSegments.length - 1
+              ) {
+                // Keep the extends folder and everything after it (excluding the .md extension)
+                const pathFromExtends = pathSegments
+                  .slice(extendsIndex, -1)
+                  .join("/");
+                files.push(`${pathFromExtends}/${filename}`);
+                foundExtendsFolder = true;
+                break;
+              }
+            }
+            if (!foundExtendsFolder) {
+              files.push(filename);
+            }
+          } else {
+            files.push(filename);
+          }
         }
       }
       if (item.children) {
@@ -81,7 +98,7 @@ export async function getFilesFromTocs(
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
     const toc = mdxAstToToc(node.mdxAST.children, config);
-    const files = extractFilesFromToc(toc);
+    const files = extractFilesFromToc(toc, EXTENDS_FOLDERS);
 
     // Create a key for this specific locale/repo/version combination
     const key = `${config.locale}/${config.repo}/${
@@ -94,19 +111,13 @@ export async function getFilesFromTocs(
       const union = new Set([...existingFiles, ...files]);
       tocFilesMap.set(key, union);
       console.info(
-        `TOC ${key}: found ${files.length} files (${
-          new Set(files).size
-        } unique), union with existing: ${union.size} files (was ${
-          existingFiles.size
-        } files)`
+        `TOC ${key}: found ${new Set(files).size} files, union with existing: ${
+          union.size
+        } files (was ${existingFiles.size} files)`
       );
     } else {
       tocFilesMap.set(key, new Set(files));
-      console.info(
-        `TOC ${key}: found ${files.length} files (${
-          new Set(files).size
-        } unique)`
-      );
+      console.info(`TOC ${key}: found ${new Set(files).size} files`);
     }
   });
 
@@ -121,7 +132,13 @@ export function filterNodesByToc(
   nodes: any[],
   tocFilesMap: Map<string, Set<string>>
 ): any[] {
-  return nodes.filter((node) => {
+  const skippedNodes: Map<string, string[]> = new Map();
+  const filteredNodes = nodes.filter((node) => {
+    // Check if file is in whitelist - if so, always build it
+    if (WHITE_LIST.includes(node.name)) {
+      return true;
+    }
+
     // Filter nodes based on TOC content
     if (tocFilesMap.size === 0) {
       // If no TOC files found, build all files (fallback)
@@ -140,6 +157,23 @@ export function filterNodesByToc(
     }
 
     // Only build files that are referenced in the corresponding TOC
-    return filesForThisToc.has(node.name);
+    const isIncluded = filesForThisToc.has(
+      `${node.pathConfig.prefix ? node.pathConfig.prefix + "/" : ""}${
+        node.name
+      }`
+    );
+    if (!isIncluded) {
+      if (!skippedNodes.has(key)) {
+        skippedNodes.set(key, []);
+      }
+      skippedNodes.get(key)!.push(node.name);
+    }
+    return isIncluded;
   });
+
+  skippedNodes.forEach((nodes, key) => {
+    console.info(`Skipped: ${key}: ${nodes.join(", ")}`);
+  });
+
+  return filteredNodes;
 }
