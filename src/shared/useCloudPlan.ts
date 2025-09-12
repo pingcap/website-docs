@@ -78,6 +78,10 @@ export const useCloudPlanNavigate = (
     const cloudMode =
       searchParams.get(CLOUD_MODE_KEY) || cloudModeFromSession || inDefaultPlan;
 
+    if (!cloudModeFromSession && !!cloudMode) {
+      sessionStorage.setItem(CLOUD_MODE_KEY, cloudMode);
+    }
+
     if (
       !!cloudMode &&
       cloudMode !== "dedicated" &&

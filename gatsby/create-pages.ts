@@ -30,19 +30,6 @@ interface PageQueryData {
   };
 }
 
-interface TocQueryData {
-  allMdx: {
-    nodes: {
-      id: string;
-      slug: string;
-      mdxAST: any;
-      parent: {
-        relativePath: string;
-      };
-    }[];
-  };
-}
-
 const DEFAULT_BUILD_TYPE: BuildType = "prod";
 
 export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
