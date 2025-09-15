@@ -14,7 +14,7 @@ import { generateUrl } from "./path";
 
 export const EXTENDS_FOLDERS = ["starter", "essential", "dedicated"];
 
-const SKIP_MODE_HEADING = "_BUILD_WHITELIST";
+const SKIP_MODE_HEADING = "_BUILD_ALLOWLIST";
 
 function filterWhitelistContent(ast: Content[]): Content[] {
   const result: Content[] = [];
