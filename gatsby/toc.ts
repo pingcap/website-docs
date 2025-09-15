@@ -8,13 +8,63 @@ import {
   PhrasingContent,
   Heading,
 } from "mdast";
-import sig from "signale";
 
 import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
-import { generateConfig, generateUrl } from "./path";
-import { CreatePagesArgs } from "gatsby";
+import { generateUrl } from "./path";
 
 export const EXTENDS_FOLDERS = ["starter", "essential", "dedicated"];
+
+const SKIP_MODE_HEADING = "_BUILD_WHITELIST";
+
+function filterWhitelistContent(ast: Content[]): Content[] {
+  const result: Content[] = [];
+  let skipMode = false;
+
+  for (let i = 0; i < ast.length; i++) {
+    const node = ast[i];
+
+    // Check if this is a heading with _WHITELIST_ content
+    if (node.type === "heading") {
+      if ((node.children[0] as Text).value === SKIP_MODE_HEADING) {
+        skipMode = true;
+        continue; // Skip this heading
+      } else {
+        skipMode = false; // Reset skip mode when encountering a different heading
+      }
+    }
+
+    // If we're in skip mode, only stop skipping when we encounter another heading
+    if (skipMode && node.type === "heading") {
+      skipMode = false; // Reset skip mode for the new heading
+    }
+
+    // Only add the node if we're not in skip mode
+    if (!skipMode) {
+      // Recursively process children if the node has them
+      const processedNode = processNodeChildren(node);
+      result.push(processedNode);
+    }
+  }
+
+  return result;
+}
+
+function processNodeChildren(node: Content): Content {
+  // Create a copy of the node to avoid mutating the original
+  const processedNode = { ...node };
+
+  // Check if the node has children and recursively process them
+  if ("children" in processedNode && Array.isArray(processedNode.children)) {
+    // Only process children if they are Content[] type (like in List, Heading, etc.)
+
+    const processedChildren = filterWhitelistContent(
+      processedNode.children as Content[]
+    );
+    (processedNode as any).children = processedChildren;
+  }
+
+  return processedNode;
+}
 
 export interface TocQueryData {
   allMdx: {
@@ -29,46 +79,15 @@ export interface TocQueryData {
   };
 }
 
-export const queryTOCs = async ({ graphql }: CreatePagesArgs) => {
-  const tocQuery = await graphql<TocQueryData>(`
-    {
-      allMdx(filter: { fileAbsolutePath: { regex: "/TOC.*md$/" } }) {
-        nodes {
-          id
-          slug
-          mdxAST
-          parent {
-            ... on File {
-              relativePath
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  if (tocQuery.errors) {
-    sig.error(tocQuery.errors);
-  }
-
-  const tocNodes = tocQuery.data!.allMdx.nodes;
-  const tocMap = new Map<string, RepoNav>();
-
-  tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
-    const { config } = generateConfig(node.slug);
-    const toc = mdxAstToToc(node.mdxAST.children, config);
-    tocMap.set(node.slug, toc);
-  });
-
-  return Object.fromEntries(tocMap);
-};
-
 export function mdxAstToToc(
   ast: Content[],
   tocConfig: PathConfig,
-  prefixId = `0`
+  prefixId = `0`,
+  filterWhitelist = false
 ): RepoNav {
-  return ast
+  const filteredAst = filterWhitelist ? filterWhitelistContent(ast) : ast;
+
+  return filteredAst
     .filter(
       (node) =>
         node.type === "list" || (node.type === "heading" && node.depth > 1)

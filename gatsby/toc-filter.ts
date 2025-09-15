@@ -2,7 +2,7 @@ import { EXTENDS_FOLDERS, mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 
 // Whitelist of files that should always be built regardless of TOC content
-const WHITE_LIST = [""];
+const WHITELIST = [""];
 
 /**
  * Extract file paths from TOC navigation structure
@@ -135,7 +135,7 @@ export function filterNodesByToc(
   const skippedNodes: Map<string, string[]> = new Map();
   const filteredNodes = nodes.filter((node) => {
     // Check if file is in whitelist - if so, always build it
-    if (WHITE_LIST.includes(node.name)) {
+    if (WHITELIST.includes(node.name)) {
       return true;
     }
 
