@@ -157,11 +157,22 @@ export function filterNodesByToc(
     }
 
     // Only build files that are referenced in the corresponding TOC
-    const isIncluded = filesForThisToc.has(
-      `${node.pathConfig.prefix ? node.pathConfig.prefix + "/" : ""}${
-        node.name
-      }`
-    );
+    const fullPath = `${
+      node.pathConfig.prefix ? node.pathConfig.prefix + "/" : ""
+    }${node.name}`;
+
+    // Check for exact match first
+    let isIncluded = filesForThisToc.has(fullPath);
+
+    // If no exact match, check for prefix match (e.g., /aaa/bbb matches /aaa/bbb#ccc)
+    if (!isIncluded) {
+      for (const tocPath of filesForThisToc) {
+        if (fullPath.startsWith(tocPath)) {
+          isIncluded = true;
+          break;
+        }
+      }
+    }
     if (!isIncluded) {
       if (!skippedNodes.has(key)) {
         skippedNodes.set(key, []);
