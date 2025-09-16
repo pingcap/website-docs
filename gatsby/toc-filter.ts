@@ -161,13 +161,15 @@ export function filterNodesByToc(
       node.pathConfig.prefix ? node.pathConfig.prefix + "/" : ""
     }${node.name}`;
 
-    // Check for exact match first
+    // Check if the file is directly referenced in TOC
     let isIncluded = filesForThisToc.has(fullPath);
 
-    // If no exact match, check for prefix match (e.g., /aaa/bbb matches /aaa/bbb#ccc)
+    // If not found, check if any TOC entry with anchor (#) matches this file
     if (!isIncluded) {
-      for (const tocPath of filesForThisToc) {
-        if (fullPath.startsWith(tocPath)) {
+      for (const tocFile of filesForThisToc) {
+        // Remove anchor part (#xxx) from TOC file path and check if it matches
+        const tocFileWithoutAnchor = tocFile.split("#")[0];
+        if (tocFileWithoutAnchor === fullPath) {
           isIncluded = true;
           break;
         }
