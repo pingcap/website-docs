@@ -9,8 +9,6 @@ import {
   generateUrl,
   generateNav,
   generateDocHomeUrl,
-  generateStarterNav,
-  generateEssentialNav,
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
 import { cpMarkdown } from "./cp-markdown";
@@ -101,8 +99,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
 
     const path = generateUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
@@ -124,8 +120,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         filePath,
         pageUrl: path,
         navUrl,
-        starterNavUrl,
-        essentialNavUrl,
         availIn: {
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
@@ -261,8 +255,6 @@ export const createDocHome = async ({
     const { id, name, pathConfig, filePath, slug } = node;
     const path = generateDocHomeUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -278,8 +270,6 @@ export const createDocHome = async ({
         // use for edit in github
         filePath,
         navUrl,
-        starterNavUrl,
-        essentialNavUrl,
         pageUrl: path,
         availIn: {
           locale,

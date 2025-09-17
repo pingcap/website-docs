@@ -104,8 +104,6 @@ function DocTemplate({
   const {
     mdx: { frontmatter, tableOfContents, body, timeToRead },
     navigation: originNav,
-    starterNavigation: starterNav,
-    essentialNavigation: essentialNav,
   } = data;
 
   // const { isStarter, isEssential } = useCloudPlan();
@@ -337,13 +335,7 @@ function DocTemplate({
 }
 
 export const query = graphql`
-  query (
-    $id: String
-    $language: String!
-    $navUrl: String!
-    $starterNavUrl: String!
-    $essentialNavUrl: String!
-  ) {
+  query ($id: String, $language: String!, $navUrl: String!) {
     site {
       siteMetadata {
         siteUrl
@@ -365,14 +357,6 @@ export const query = graphql`
 
     navigation: mdx(slug: { eq: $navUrl }) {
       navigation
-    }
-
-    starterNavigation: mdx(slug: { eq: $starterNavUrl }) {
-      starterNavigation
-    }
-
-    essentialNavigation: mdx(slug: { eq: $essentialNavUrl }) {
-      essentialNavigation
     }
 
     locales: allLocale(filter: { language: { eq: $language } }) {

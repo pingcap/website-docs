@@ -68,11 +68,11 @@ export default function HeaderNavStack(props: {
         />
       )}
 
-      <NavItem
+      {/* <NavItem
         selected={selectedItem === "tidb"}
         label={t("navbar.tidb")}
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
-      />
+      /> */}
 
       {["zh"].includes(language) && (
         <NavItem label={t("navbar.asktug")} to="https://asktug.com/" />
@@ -255,7 +255,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           </MenuItem>
         )}
 
-        <MenuItem
+        {/* <MenuItem
           onClick={handleClose}
           disableRipple
           selected={selectedItem === "tidb"}
@@ -274,7 +274,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
               <Trans i18nKey="navbar.tidb" />
             </Typography>
           </LinkComponent>
-        </MenuItem>
+        </MenuItem> */}
 
         {language === "zh" && (
           <MenuItem onClick={handleClose} disableRipple>

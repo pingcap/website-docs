@@ -26,15 +26,6 @@ export function generatePdfUrl(config: PathConfig) {
 }
 
 export function generateNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC`;
-}
-export function generateStarterNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-starter`;
-}
-export function generateEssentialNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-essential`;
-}
-export function generatePremiumNav(config: PathConfig) {
   return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-premium`;
 }
 
