@@ -55,7 +55,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
             }
           );
 
-          if (!slug.endsWith("TOC"))
+          if (!slug.endsWith("TOC-tidb-cloud-premium"))
             throw new Error(`unsupported query in ${slug}`);
           const { config } = generateConfig(slug);
           const res = mdxAstToToc(mdxAST.children, config);
@@ -66,83 +66,9 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
     },
   });
 
-  createFieldExtension({
-    name: "starterNavigation",
-    extend() {
-      return {
-        async resolve(
-          mdxNode: any,
-          args: unknown,
-          context: unknown,
-          info: any
-        ) {
-          if (mdxNode.starterNav) return mdxNode.starterNav;
-          const types = info.schema.getType("Mdx").getFields();
-          const slug = await types["slug"].resolve(mdxNode, args, context, {
-            fieldName: "slug",
-          });
-
-          const mdxAST: Root = await types["mdxAST"].resolve(
-            mdxNode,
-            args,
-            context,
-            {
-              fieldName: "mdxAST",
-            }
-          );
-
-          if (!slug.endsWith("TOC-tidb-cloud-starter"))
-            throw new Error(`unsupported query in ${slug}`);
-          const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config);
-          mdxNode.starterNav = res;
-          return res;
-        },
-      };
-    },
-  });
-
-  createFieldExtension({
-    name: "essentialNavigation",
-    extend() {
-      return {
-        async resolve(
-          mdxNode: any,
-          args: unknown,
-          context: unknown,
-          info: any
-        ) {
-          if (mdxNode.essentialNav) return mdxNode.essentialNav;
-          const types = info.schema.getType("Mdx").getFields();
-          const slug = await types["slug"].resolve(mdxNode, args, context, {
-            fieldName: "slug",
-          });
-
-          const mdxAST: Root = await types["mdxAST"].resolve(
-            mdxNode,
-            args,
-            context,
-            {
-              fieldName: "mdxAST",
-            }
-          );
-
-          if (!slug.endsWith("TOC-tidb-cloud-essential"))
-            throw new Error(`unsupported query in ${slug}`);
-          const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config);
-          mdxNode.essentialNav = res;
-          return res;
-        },
-      };
-    },
-  });
-
   createTypes(`
     type Mdx implements Node {
       navigation: JSON! @navigation
-      starterNavigation: JSON! @starterNavigation
-      essentialNavigation: JSON! @essentialNavigation
     }
   `);
 };

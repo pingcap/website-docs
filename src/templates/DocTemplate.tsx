@@ -108,33 +108,15 @@ function DocTemplate({
     essentialNavigation: essentialNav,
   } = data;
 
-  const { isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(pathConfig.repo);
+  // const { isStarter, isEssential } = useCloudPlan();
+  // useCloudPlanNavigate(pathConfig.repo);
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
-  const starterNavigation = starterNav ? starterNav.starterNavigation : [];
-  const essentialNavigation = essentialNav
-    ? essentialNav.essentialNavigation
-    : [];
-  const navigation = filterTOC(
-    isStarter
-      ? starterNavigation
-      : isEssential
-      ? essentialNavigation
-      : classicNavigation
-  );
+  const navigation = filterTOC(classicNavigation);
 
   const { language } = useI18next();
-  const haveStarter = starterNavigation.length > 0;
-  const haveEssential = essentialNavigation.length > 0;
-  const availablePlans = ["dedicated"];
-  if (haveStarter) {
-    availablePlans.push("starter");
-  }
-  if (haveEssential && language !== "ja") {
-    availablePlans.push("essential");
-  }
+  const availablePlans = ["premium"];
 
   const tocData: TableOfContent[] | undefined = React.useMemo(() => {
     if (tableOfContents.items?.length === 1) {

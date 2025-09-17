@@ -20,36 +20,14 @@ export const CLOUD_PLAN_LABEL_STRINGS = {
   essential: "Essential",
 };
 
-const CLOUD_VERSIONS = [
+const CLOUD_VERSIONS: {
+  label: string;
+  value: string;
+  icon?: React.ReactNode;
+}[] = [
   {
-    label: "Dedicated",
-    value: "dedicated",
-  },
-  {
-    label: (
-      <span>
-        Starter<span style={{ color: "#9FA9AD" }}> (formerly Serverless)</span>
-      </span>
-    ),
-    value: "starter",
-  },
-  {
-    label: "Essential",
-    value: "essential",
-    icon: (
-      <Chip
-        label="Preview"
-        variant="outlined"
-        size="small"
-        sx={{
-          fontSize: "12px",
-          height: "20px",
-          pointerEvents: "none",
-          borderColor: "#DCE3E5",
-          color: "#6F787B",
-        }}
-      />
-    ),
+    label: "Premium",
+    value: "premium",
   },
 ];
 
@@ -62,20 +40,20 @@ const VersionItems = (props: {
   availablePlans: string[];
 }) => {
   const { pathConfig } = props;
-  const { cloudPlan, setCloudPlan } = useCloudPlan();
-  const currentCloudVersion =
-    CLOUD_VERSIONS.find((version) => version.value === cloudPlan) ||
-    CLOUD_VERSIONS[0];
+  // const { cloudPlan, setCloudPlan } = useCloudPlan();
+  // const currentCloudVersion =
+  //   CLOUD_VERSIONS.find((version) => version.value === cloudPlan) ||
+  //   CLOUD_VERSIONS[0];
 
   const getToUrl = (version: string) => {
     const searchParams = new URLSearchParams();
     searchParams.set(CLOUD_MODE_KEY, version);
-    return version === "dedicated"
+    return version === "premium"
       ? `/${pathConfig.repo}/`
       : `/${pathConfig.repo}/${version}/?${searchParams.toString()}`;
   };
   const onClick = (version: string) => {
-    setCloudPlan(version);
+    // setCloudPlan(version);
     props.onClick();
   };
 
@@ -90,7 +68,7 @@ const VersionItems = (props: {
           component={LinkComponent}
           isI18n
           to={getToUrl(version.value)}
-          clearCloudMode={version.value === "dedicated"}
+          clearCloudMode={version.value === "premium"}
           onClick={() => onClick(version.value)}
         >
           <Box sx={{ display: "flex" }}>
@@ -107,11 +85,11 @@ const VersionItems = (props: {
             {version.icon}
           </Box>
           <Box display="flex" justifyContent="center">
-            {version.value === currentCloudVersion?.value && (
-              <CheckIcon
-                sx={(theme) => ({ color: theme.palette.primary.main })}
-              />
-            )}
+            {/* {version.value === currentCloudVersion?.value && ( */}
+            <CheckIcon
+              sx={(theme) => ({ color: theme.palette.primary.main })}
+            />
+            {/* )} */}
           </Box>
         </MenuItem>
       ))}
@@ -129,10 +107,7 @@ interface VersionSelectProps {
 
 export default function CloudVersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn, availablePlans } = props;
-  const { cloudPlan } = useCloudPlan();
-  const currentCloudVersion =
-    CLOUD_VERSIONS.find((version) => version.value === cloudPlan) ||
-    CLOUD_VERSIONS[0];
+  const currentCloudVersion = CLOUD_VERSIONS[0];
   const anchorEl = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);

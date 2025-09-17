@@ -34,6 +34,9 @@ export function generateStarterNav(config: PathConfig) {
 export function generateEssentialNav(config: PathConfig) {
   return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-essential`;
 }
+export function generatePremiumNav(config: PathConfig) {
+  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-premium`;
+}
 
 export function generateConfig(slug: string): {
   config: PathConfig;
