@@ -2,7 +2,7 @@ name: Build and deploy to server
 
 on:
   push:
-    branches: ["master"]
+    branches: ["premium-preview"]
     paths-ignore:
       - ".github/**"
       - ".docs/**"
@@ -38,7 +38,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          ref: "master"
+          ref: "premium-preview"
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -118,7 +118,7 @@ jobs:
 
       - name: Deploy to COS
         run: |
-          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_PREMIUM_BUCKET_ID }} \
             --init-skip \
             --recursive \
             --routines 16 \
@@ -131,7 +131,7 @@ jobs:
 
       - name: Deploy md to COS
         run: |
-          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_PREMIUM_BUCKET_ID }} \
             --init-skip \
             --recursive \
             --routines 16 \
@@ -163,4 +163,4 @@ jobs:
         run: pipx install tccli
 
       - name: Purge production CDN cache
-        run: tccli cdn PurgePathCache --Paths '["https://docs.pingcap.com/"]' --FlushType flush
+        run: tccli cdn PurgePathCache --Paths '["https://docs-preview.pingcap.com/"]' --FlushType flush
