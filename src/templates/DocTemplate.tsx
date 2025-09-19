@@ -47,6 +47,7 @@ interface DocTemplateProps {
       banner?: boolean;
       feedback?: boolean;
     };
+    inDefaultPlan: string | null;
   };
   data: {
     site: {
@@ -73,7 +74,9 @@ interface DocTemplateProps {
 }
 
 const DocTemplateWithProvider = (props: DocTemplateProps) => {
-  const [cloudPlan, setCloudPlan] = React.useState<string | null>(null);
+  const [cloudPlan, setCloudPlan] = React.useState<string | null>(
+    props.pageContext.inDefaultPlan
+  );
   return (
     <CloudPlanProvider
       value={{
@@ -98,6 +101,7 @@ function DocTemplate({
     pageUrl,
     buildType,
     feature,
+    inDefaultPlan,
   },
   data,
 }: DocTemplateProps) {
@@ -109,7 +113,7 @@ function DocTemplate({
   } = data;
 
   const { isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(pathConfig.repo);
+  useCloudPlanNavigate(pathConfig.repo, inDefaultPlan);
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
