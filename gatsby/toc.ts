@@ -25,7 +25,10 @@ function filterWhitelistContent(ast: Content[]): Content[] {
 
     // Check if this is a heading with _WHITELIST_ content
     if (node.type === "heading") {
-      if ((node.children[0] as Text).value === SKIP_MODE_HEADING) {
+      if (
+        (node.children[0] as Text).value === SKIP_MODE_HEADING ||
+        (node.children[0] as Text).value.startsWith("_")
+      ) {
         skipMode = true;
         continue; // Skip this heading
       } else {
