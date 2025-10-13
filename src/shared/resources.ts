@@ -210,8 +210,8 @@ export const EN_FOOTER_ITEMS = [
         url: "https://github.com/tikv/tikv",
       },
       {
-        name: "TiSpark",
-        url: "https://github.com/pingcap/tispark",
+        name: "TiFlash",
+        url: "https://github.com/pingcap/tiflash",
       },
       {
         name: "OSS Insight",
@@ -325,8 +325,8 @@ export const ZH_FOOTER_ITEMS = [
         url: "https://github.com/tikv/tikv",
       },
       {
-        name: "TiSpark",
-        url: "https://github.com/pingcap/tispark",
+        name: "TiFlash",
+        url: "https://github.com/pingcap/tiflash",
       },
       {
         name: "OSS Insight",
