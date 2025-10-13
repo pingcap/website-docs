@@ -70,12 +70,12 @@ export const EN_ICON_GROUP = [
   },
   {
     name: "discord",
-    href: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+    href: "https://discord.com/invite/vYU9h56kAX?utm_source=doc",
     icon: DiscordIcon,
   },
   {
     name: "youtube",
-    href: "https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA",
+    href: "https://www.youtube.com/PingCAP",
     icon: YouTubeIcon,
   },
   // {
@@ -123,12 +123,12 @@ export const ZH_ICON_GROUP = [
   },
   {
     name: "discord",
-    href: "https://discord.gg/DQZ2dy3cuc?utm_source=doc",
+    href: "https://discord.com/invite/vYU9h56kAX?utm_source=doc",
     icon: DiscordIcon,
   },
   {
     name: "youtube",
-    href: "https://youtube.com/channel/UCuq4puT32DzHKT5rU1IZpIA",
+    href: "https://www.youtube.com/PingCAP",
     icon: YouTubeIcon,
   },
   // {
@@ -178,19 +178,19 @@ export const JA_ICON_GROUP = [
 
 export const EN_FOOTER_ITEMS = [
   {
-    name: "Products",
+    name: "Product",
     items: [
       {
-        name: "TiDB Cloud Starter",
-        url: "https://www.pingcap.com/tidb-cloud-starter/",
+        name: "Product Overview",
+        url: "https://www.pingcap.com/tidb/",
       },
       {
-        name: "TiDB Cloud Dedicated",
-        url: "https://www.pingcap.com/tidb-cloud-dedicated/",
+        name: "TiDB Cloud",
+        url: "https://www.pingcap.com/tidb/cloud/",
       },
       {
         name: "TiDB Self-Managed",
-        url: "https://www.pingcap.com/tidb-self-managed/",
+        url: "https://www.pingcap.com/tidb/self-managed/",
       },
       {
         name: "Pricing",
@@ -210,8 +210,8 @@ export const EN_FOOTER_ITEMS = [
         url: "https://github.com/tikv/tikv",
       },
       {
-        name: "TiFlash",
-        url: "https://github.com/pingcap/tiflash",
+        name: "TiSpark",
+        url: "https://github.com/pingcap/tispark",
       },
       {
         name: "OSS Insight",
@@ -227,12 +227,12 @@ export const EN_FOOTER_ITEMS = [
         url: "https://www.pingcap.com/blog/",
       },
       {
-        name: "Events & Webinars",
-        url: "https://www.pingcap.com/event",
+        name: "Articles",
+        url: "https://www.pingcap.com/article/",
       },
       {
-        name: "HTAP Summit",
-        url: "https://www.pingcap.com/htap-summit/",
+        name: "Events & Webinars",
+        url: "https://www.pingcap.com/event",
       },
       {
         name: "Docs",
@@ -244,7 +244,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "FAQs",
-        url: "https://docs.pingcap.com/tidb/stable/faq-overview",
+        url: "https://www.pingcap.com/faqs/",
       },
       {
         name: "Support",
@@ -276,8 +276,8 @@ export const EN_FOOTER_ITEMS = [
         url: "https://www.pingcap.com/partners/",
       },
       {
-        name: "Trust Center",
-        url: "https://www.pingcap.com/trust-compliance-center/",
+        name: "Trust Hub",
+        url: "https://www.pingcap.com/trust-hub/",
       },
       {
         name: "Security",
@@ -286,6 +286,10 @@ export const EN_FOOTER_ITEMS = [
       {
         name: "Release Support",
         url: "https://www.pingcap.com/tidb-release-support-policy/",
+      },
+      {
+        name: "Brand Guidelines",
+        url: "https://www.pingcap.com/tidb-brand-guidelines/",
       },
     ],
   },
@@ -296,16 +300,16 @@ export const ZH_FOOTER_ITEMS = [
     name: "产品",
     items: [
       {
+        name: "产品简介",
+        url: "https://www.pingcap.com/tidb/",
+      },
+      {
         name: "TiDB",
         url: "https://cn.pingcap.com/product/#SelectProduct",
       },
       {
-        name: "TiDB Cloud Starter",
-        url: "https://www.pingcap.com/tidb-cloud-starter/",
-      },
-      {
-        name: "TiDB Cloud Dedicated",
-        url: "https://www.pingcap.com/tidb-cloud-dedicated/",
+        name: "TiDB Cloud",
+        url: "https://www.pingcap.com/tidb/cloud/",
       },
     ],
   },
@@ -313,12 +317,16 @@ export const ZH_FOOTER_ITEMS = [
     name: "生态",
     items: [
       {
+        name: "集成",
+        url: "https://www.pingcap.com/integrations/",
+      },
+      {
         name: "TiKV",
         url: "https://github.com/tikv/tikv",
       },
       {
-        name: "TiFlash",
-        url: "https://github.com/pingcap/tiflash",
+        name: "TiSpark",
+        url: "https://github.com/pingcap/tispark",
       },
       {
         name: "OSS Insight",
