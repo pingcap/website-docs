@@ -300,7 +300,7 @@ export const ZH_FOOTER_ITEMS = [
     name: "产品",
     items: [
       {
-        name: "产品简介",
+        name: "产品概览",
         url: "https://www.pingcap.com/tidb/",
       },
       {
