@@ -158,7 +158,7 @@ jobs:
             --routines 16 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint cos.na-ashburn.myqcloud.com \
+            --endpoint cos.ap-tokyo.myqcloud.com \
             --delete \
             --exclude ".*\.(md|txt)$" \
             --force
@@ -172,7 +172,7 @@ jobs:
             --routines 16 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint cos.na-ashburn.myqcloud.com \
+            --endpoint cos.ap-tokyo.myqcloud.com \
             --include ".*\.(md|txt)$" \
             --meta "Content-Type:text/plain; charset=utf-8" \
             --force
