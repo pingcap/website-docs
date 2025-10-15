@@ -136,7 +136,7 @@ function DocTemplate({
   if (haveStarter) {
     availablePlans.push("starter");
   }
-  if (haveEssential && language !== "ja") {
+  if (haveEssential) {
     availablePlans.push("essential");
   }
 
