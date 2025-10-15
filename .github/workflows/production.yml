@@ -23,6 +23,11 @@ on:
         type: boolean
         default: false
         required: false
+      cos_backup:
+        description: "Backup to COS"
+        type: boolean
+        default: false
+        required: false
 
 concurrency: ci-prod
 
@@ -117,6 +122,7 @@ jobs:
           chmod 755 coscli
 
       - name: Deploy to COS
+        if: ${{ !inputs.cos_backup }}
         run: |
           ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
             --init-skip \
@@ -130,8 +136,37 @@ jobs:
             --force
 
       - name: Deploy md to COS
+        if: ${{ !inputs.cos_backup }}
         run: |
           ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+            --init-skip \
+            --recursive \
+            --routines 16 \
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint cos.na-ashburn.myqcloud.com \
+            --include ".*\.(md|txt)$" \
+            --meta "Content-Type:text/plain; charset=utf-8" \
+            --force
+
+      - name: Deploy to COS backup
+        if: ${{ inputs.cos_backup }}
+        run: |
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BACKUP_BUCKET_ID }} \
+            --init-skip \
+            --recursive \
+            --routines 16 \
+            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
+            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
+            --endpoint cos.na-ashburn.myqcloud.com \
+            --delete \
+            --exclude ".*\.(md|txt)$" \
+            --force
+
+      - name: Deploy md to COS backup
+        if: ${{ inputs.cos_backup }}
+        run: |
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BACKUP_BUCKET_ID }} \
             --init-skip \
             --recursive \
             --routines 16 \
