@@ -24,7 +24,7 @@ on:
         default: false
         required: false
       cos_backup:
-        description: "Backup to COS"
+        description: "To backup COS"
         type: boolean
         default: false
         required: false
