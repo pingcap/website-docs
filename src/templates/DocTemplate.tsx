@@ -189,7 +189,7 @@ function DocTemplate({
               ]
             : []),
         ]}
-        noindex={buildType === "archive"}
+        noindex
         archived={buildType === "archive"}
       />
       <Box
