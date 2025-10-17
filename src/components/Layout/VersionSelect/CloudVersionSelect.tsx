@@ -18,6 +18,7 @@ export const CLOUD_PLAN_LABEL_STRINGS = {
   dedicated: "Dedicated",
   starter: "Starter (formerly Serverless)",
   essential: "Essential",
+  premium: "Premium",
 };
 
 const CLOUD_VERSIONS: {

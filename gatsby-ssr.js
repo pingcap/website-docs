@@ -90,7 +90,7 @@ const fulfillCloudPlanScript = `
   const cloudMode = searchParams.get("plan");
   const cloudPlanLabel = document.getElementById("${CLOUD_PLAN_LABEL_ELEMENT_ID}");
   if (cloudPlanLabel) {
-    cloudPlanLabel.textContent = cloudPlans[cloudMode] || cloudPlans.dedicated;
+    cloudPlanLabel.textContent = cloudPlans[cloudMode] || cloudPlans.premium;
   }
 })();
 `;
