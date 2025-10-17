@@ -226,7 +226,7 @@ export const createDocHome = async ({
   {
     allMdx(
       filter: {
-        fileAbsolutePath: { regex: "/tidb/master/_docHome.md$/" }
+        fileAbsolutePath: { regex: "/tidbcloud/master/_docHome.md$/" }
         frontmatter: { draft: { ne: true } }
       }
     ) {
