@@ -111,7 +111,7 @@ function DocTemplate({
     navigation: originNav,
   } = data;
 
-  const { cloudPlan } = useCloudPlan();
+  // const { cloudPlan } = useCloudPlan();
   // useCloudPlanNavigate(pathConfig.repo);
   useReportReadingRate(timeToRead);
 
@@ -266,7 +266,7 @@ function DocTemplate({
                     language={language}
                     buildType={buildType}
                     pageUrl={pageUrl}
-                    cloudPlan={cloudPlan}
+                    cloudPlan={"premium"}
                   />
                   {!frontmatter?.hide_commit && buildType !== "archive" && (
                     <GitCommitInfoCard

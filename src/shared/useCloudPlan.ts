@@ -13,7 +13,7 @@ export const CLOUD_MODE_KEY = "plan";
 export const CLOUD_MODE_VALUE_STARTER = "starter";
 export const CLOUD_MODE_VALUE_ESSENTIAL = "essential";
 
-export type CloudPlan = "dedicated" | "starter" | "essential";
+export type CloudPlan = "dedicated" | "starter" | "essential" | "premium";
 
 const CloudPlanContext = createContext<{
   repo: Repo;
