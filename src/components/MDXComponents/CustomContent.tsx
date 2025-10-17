@@ -1,15 +1,19 @@
 import { PropsWithChildren } from "react";
 import { PageType } from "shared/utils";
+import { CloudPlan } from "shared/useCloudPlan";
 
 interface CustomContentProps {
   platform?: "tidb" | "tidb-cloud";
   language?: string;
+  cloudPlan?: CloudPlan;
   pageTypeFromURL?: PageType;
   languageFromURL?: string;
+  cloudPlanFromURL?: CloudPlan | null;
 }
 
 export const useCustomContent = (
   pageTypeFromURL: PageType,
+  cloudPlanFromURL?: CloudPlan | null,
   languageFromURL?: string
 ) => {
   return (props: PropsWithChildren<CustomContentProps>) => {
@@ -18,6 +22,7 @@ export const useCustomContent = (
         {...props}
         pageTypeFromURL={pageTypeFromURL}
         languageFromURL={languageFromURL}
+        cloudPlanFromURL={cloudPlanFromURL}
       />
     );
   };
@@ -32,25 +37,24 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     children,
     languageFromURL,
     language,
+    cloudPlanFromURL,
+    cloudPlan,
   } = props;
   const pageType = _pageType?.replace("-", "") || "";
   const shouldDisplayByPageType = pageTypeFromURL === pageType;
+  const shouldDisplayByCloudPlan = cloudPlan === cloudPlanFromURL;
 
   const languageArray = language
     ? language.split(",").map((lang) => lang.trim())
     : [];
   const shouldDisplayByLanguage = languageArray.includes(languageFromURL || "");
 
-  const onlyPageType = !!pageType && !language;
-  const onlyLanguage = !pageType && !!language;
-  const showOnlyPageType = onlyPageType && shouldDisplayByPageType;
-  const showOnlyLanguage = onlyLanguage && shouldDisplayByLanguage;
-  const showAll =
-    !!pageType &&
-    !!languageFromURL &&
-    shouldDisplayByPageType &&
-    shouldDisplayByLanguage;
-  const shouldDisplay = showOnlyPageType || showOnlyLanguage || showAll;
+  const isPageTypeMatch = !pageType || (!!pageType && shouldDisplayByPageType);
+  const isLanguageMatch = !language || (!!language && shouldDisplayByLanguage);
+  const isCloudPlanMatch =
+    !cloudPlan || (!!cloudPlan && shouldDisplayByCloudPlan);
+
+  const shouldDisplay = isPageTypeMatch && isLanguageMatch && isCloudPlanMatch;
 
   return <>{shouldDisplay ? children : <></>}</>;
 };
