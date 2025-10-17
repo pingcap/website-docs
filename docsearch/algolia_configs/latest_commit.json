@@ -1,6 +1,6 @@
 {
     "en-tidb-dev": "9680a4b7e1e708f90341dcbb0795247e64ba441a",
-    "en-tidb-v8.5": "811c6140bb8d4e57c7651dbe9ccdf66806aaec12",
+    "en-tidb-v8.5": "4d38b9623a024fa34934c19071475282f79fd9a8",
     "en-tidb-v8.4": "e59e47ff62553c55a7a89410db58348712139f5d",
     "en-tidb-v8.2": "d57145a581d900b6af036184fe27be7b8cedcb10",
     "en-tidb-v8.1": "fac652b49ddf313731ec3c73430bed28bbe2fa70",
@@ -58,7 +58,7 @@
     "zh-tidb-v3.0": "315c806ddf6b94801fb5df553095328dbd7c1478",
     "zh-tidb-v2.1": "b5c2c5843308d300f1cbc7cb61b33d46020a1b68",
     "en-tidb-in-kubernetes-dev": "f5da8f02700a0bdfcc6509320925e250ea2b1d5f",
-    "en-tidb-in-kubernetes-v1.6": "d845990f1bec1e43820c7113d12e2a4b36cfee16",
+    "en-tidb-in-kubernetes-v1.6": "d8c07d03be97184d7a5389476a37b42c309c1f67",
     "en-tidb-in-kubernetes-v1.5": "a033a1b3e4c8a18b1475bcb6b5529e9c4c97a9fb",
     "en-tidb-in-kubernetes-v1.4": "40d583216f73d02411b06981c03788cea7912a1f",
     "en-tidb-in-kubernetes-v1.3": "1fc555e2b3a715b5e549660611c424d84b5e82e5",
@@ -66,7 +66,7 @@
     "en-tidb-in-kubernetes-v1.1": "46bc5b0315855e2e82f7613574a67f4c8df71e79",
     "en-tidb-in-kubernetes-v1.0": "fa07c73b368bfb816953f37c05df07d78c64b631",
     "zh-tidb-in-kubernetes-dev": "f5da8f02700a0bdfcc6509320925e250ea2b1d5f",
-    "zh-tidb-in-kubernetes-v1.6": "d845990f1bec1e43820c7113d12e2a4b36cfee16",
+    "zh-tidb-in-kubernetes-v1.6": "d8c07d03be97184d7a5389476a37b42c309c1f67",
     "zh-tidb-in-kubernetes-v1.5": "a033a1b3e4c8a18b1475bcb6b5529e9c4c97a9fb",
     "zh-tidb-in-kubernetes-v1.4": "40d583216f73d02411b06981c03788cea7912a1f",
     "zh-tidb-in-kubernetes-v1.3": "1fc555e2b3a715b5e549660611c424d84b5e82e5",
@@ -81,7 +81,7 @@
     "zh-tidb-data-migration-v5.3": "9074bb1e9e44385c4d97bf8dee5eb81bdf94ab53",
     "zh-tidb-data-migration-v2.0": "a454c743be222c86463c67b352d3c70596f67534",
     "zh-tidb-data-migration-v1.0": "f1d3ae7bf33922bab66ec9c333499fa2e0de6a02",
-    "en-tidbcloud": "811c6140bb8d4e57c7651dbe9ccdf66806aaec12",
+    "en-tidbcloud": "4d38b9623a024fa34934c19071475282f79fd9a8",
     "en-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74",
     "zh-appdev-dev": "3e9bb15151a80d2adac6ebc611c73790a4666a74"
 }
