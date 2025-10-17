@@ -12,6 +12,11 @@ import {
 } from "./path";
 import { docs as DOCS_CONFIG } from "../docs/docs.json";
 import { cpMarkdown } from "./cp-markdown";
+import {
+  getTidbCloudFilesFromTocs,
+  determineInDefaultPlan,
+} from "./cloud-plan";
+import { getFilesFromTocs, filterNodesByToc } from "./toc-filter";
 
 interface PageQueryData {
   allMdx: {
@@ -32,6 +37,12 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   } = createPagesArgs;
   // const template = resolve(__dirname, '../src/doc/index.tsx')
   const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
+
+  // First, get the list of files that should be built based on TOC content
+  const tocFilesMap = await getFilesFromTocs(graphql);
+
+  // Get tidbcloud specific TOC files for plan determination
+  const tidbCloudTocFilesMap = await getTidbCloudFilesFromTocs(graphql);
 
   const docs = await graphql<PageQueryData>(`
     {
@@ -64,10 +75,25 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     sig.error(docs.errors);
   }
 
-  const nodes = docs.data!.allMdx.nodes.map((node) => {
-    const { config, name, filePath } = generateConfig(node.slug);
-    return { ...node, pathConfig: config, name, filePath };
-  });
+  const nodes = filterNodesByToc(
+    docs.data!.allMdx.nodes.map((node) => {
+      const { config, name, filePath } = generateConfig(node.slug);
+      return { ...node, pathConfig: config, name, filePath };
+    }),
+    tocFilesMap
+  );
+
+  sig.info(
+    `Building ${nodes.length} files after TOC filtering (from ${
+      docs.data!.allMdx.nodes.length
+    } total files)`
+  );
+
+  // Log some statistics about the filtering
+  const filteredByToc = docs.data!.allMdx.nodes.length - nodes.length;
+  if (filteredByToc > 0) {
+    sig.info(`Filtered out ${filteredByToc} files not referenced in TOCs`);
+  }
 
   const versionRecord = nodes.reduce(
     (acc, { pathConfig, name }) => {
@@ -108,6 +134,13 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       )
       .filter(Boolean);
 
+    // Determine inDefaultPlan for tidbcloud articles
+    const inDefaultPlan = determineInDefaultPlan(
+      name,
+      pathConfig,
+      tidbCloudTocFilesMap
+    );
+
     cpMarkdown(`${node.slug}.md`, path, name);
     createPage({
       path,
@@ -130,12 +163,13 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
           banner: true,
           feedback: true,
         },
+        inDefaultPlan,
       },
     });
 
     // create redirects
     if (node.frontmatter.aliases) {
-      node.frontmatter.aliases.forEach((fromPath) => {
+      node.frontmatter.aliases.forEach((fromPath: string) => {
         createRedirect({
           fromPath,
           toPath: path,

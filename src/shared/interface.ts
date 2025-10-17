@@ -22,6 +22,7 @@ export interface PathConfig {
   locale: Locale;
   branch: string;
   version: string | null;
+  prefix?: string;
 }
 
 export interface PageContext {

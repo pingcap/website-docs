@@ -81,6 +81,8 @@ export const CodeBlock: React.FC<MdxCodeChildrenProps> = ({
           marginRight: "3rem",
           overflow: "auto",
           whiteSpace: isWrapped ? "pre-wrap" : undefined,
+          paddingBottom: "10px",
+          marginBottom: "-10px",
         }}
         dangerouslySetInnerHTML={{ __html: hlResult.value }}
       />

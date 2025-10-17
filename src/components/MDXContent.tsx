@@ -14,6 +14,7 @@ import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
 import { getPageType } from "shared/utils";
+import { CloudPlan } from "shared/useCloudPlan";
 
 export default function MDXContent(props: {
   data: any;
@@ -26,6 +27,7 @@ export default function MDXContent(props: {
   language: string;
   buildType: BuildType;
   pageUrl: string;
+  cloudPlan: CloudPlan | null;
 }) {
   const {
     data,
@@ -38,10 +40,11 @@ export default function MDXContent(props: {
     language,
     buildType,
     pageUrl,
+    cloudPlan,
   } = props;
 
   const pageType = getPageType(language, pageUrl);
-  const CustomContent = useCustomContent(pageType, language);
+  const CustomContent = useCustomContent(pageType, cloudPlan, language);
   // const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
   React.useEffect(() => {

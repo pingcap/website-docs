@@ -13,10 +13,12 @@ export const CLOUD_MODE_KEY = "plan";
 export const CLOUD_MODE_VALUE_STARTER = "starter";
 export const CLOUD_MODE_VALUE_ESSENTIAL = "essential";
 
+export type CloudPlan = "dedicated" | "starter" | "essential";
+
 const CloudPlanContext = createContext<{
   repo: Repo;
-  cloudPlan: string | null;
-  setCloudPlan: Dispatch<SetStateAction<string | null>>;
+  cloudPlan: CloudPlan | null;
+  setCloudPlan: Dispatch<SetStateAction<CloudPlan | null>>;
 }>({
   repo: Repo.tidb,
   cloudPlan: null,
@@ -26,7 +28,7 @@ export const CloudPlanProvider = CloudPlanContext.Provider;
 
 export const useCloudPlan = () => {
   const {
-    cloudPlan,
+    cloudPlan: _cloudPlan,
     setCloudPlan: _setCloudPlan,
     repo,
   } = useContext(CloudPlanContext);
@@ -35,7 +37,7 @@ export const useCloudPlan = () => {
   const [isEssential, setIsEssential] = useState<boolean>(false);
   const [isClassic, setIsClassic] = useState<boolean>(true);
 
-  const setCloudPlan = (cloudPlan: string) => {
+  const setCloudPlan = (cloudPlan: CloudPlan) => {
     _setCloudPlan(cloudPlan);
     sessionStorage.setItem(CLOUD_MODE_KEY, cloudPlan);
   };
@@ -43,7 +45,9 @@ export const useCloudPlan = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const cloudPlanFromSession = sessionStorage.getItem(CLOUD_MODE_KEY);
-    const cloudPlan = searchParams.get(CLOUD_MODE_KEY) || cloudPlanFromSession;
+    const cloudPlan = (searchParams.get(CLOUD_MODE_KEY) ||
+      cloudPlanFromSession ||
+      _cloudPlan) as CloudPlan;
     const isStarter = isTidbcloud && cloudPlan === CLOUD_MODE_VALUE_STARTER;
     const isEssential = isTidbcloud && cloudPlan === CLOUD_MODE_VALUE_ESSENTIAL;
     const isClassic =
@@ -56,7 +60,7 @@ export const useCloudPlan = () => {
   }, []);
 
   return {
-    cloudPlan,
+    cloudPlan: _cloudPlan,
     setCloudPlan,
     isStarter,
     isEssential,
@@ -64,14 +68,22 @@ export const useCloudPlan = () => {
   };
 };
 
-export const useCloudPlanNavigate = (repo: Repo) => {
+export const useCloudPlanNavigate = (
+  repo: Repo,
+  inDefaultPlan: string | null
+) => {
   useEffect(() => {
     if (repo !== Repo.tidbcloud) {
       return;
     }
     const searchParams = new URLSearchParams(location.search);
     const cloudModeFromSession = sessionStorage.getItem(CLOUD_MODE_KEY);
-    const cloudMode = searchParams.get(CLOUD_MODE_KEY) || cloudModeFromSession;
+    const cloudMode =
+      searchParams.get(CLOUD_MODE_KEY) || cloudModeFromSession || inDefaultPlan;
+
+    if (!cloudModeFromSession && !!cloudMode) {
+      sessionStorage.setItem(CLOUD_MODE_KEY, cloudMode);
+    }
 
     if (
       !!cloudMode &&

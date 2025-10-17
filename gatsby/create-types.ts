@@ -58,7 +58,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
           if (!slug.endsWith("TOC-tidb-cloud-premium"))
             throw new Error(`unsupported query in ${slug}`);
           const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config);
+          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
           mdxNode.nav = res;
           return res;
         },

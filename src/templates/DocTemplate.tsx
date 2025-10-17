@@ -32,6 +32,7 @@ import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { DOC_HOME_URL } from "shared/resources";
 import { useReportReadingRate } from "shared/useReportReadingRate";
 import {
+  CloudPlan,
   CloudPlanProvider,
   useCloudPlan,
   useCloudPlanNavigate,
@@ -47,6 +48,7 @@ interface DocTemplateProps {
       banner?: boolean;
       feedback?: boolean;
     };
+    inDefaultPlan: string | null;
   };
   data: {
     site: {
@@ -73,7 +75,9 @@ interface DocTemplateProps {
 }
 
 const DocTemplateWithProvider = (props: DocTemplateProps) => {
-  const [cloudPlan, setCloudPlan] = React.useState<string | null>(null);
+  const [cloudPlan, setCloudPlan] = React.useState<CloudPlan | null>(
+    props.pageContext.inDefaultPlan as CloudPlan | null
+  );
   return (
     <CloudPlanProvider
       value={{
@@ -98,6 +102,7 @@ function DocTemplate({
     pageUrl,
     buildType,
     feature,
+    inDefaultPlan,
   },
   data,
 }: DocTemplateProps) {
@@ -106,7 +111,7 @@ function DocTemplate({
     navigation: originNav,
   } = data;
 
-  // const { isStarter, isEssential } = useCloudPlan();
+  const { cloudPlan } = useCloudPlan();
   // useCloudPlanNavigate(pathConfig.repo);
   useReportReadingRate(timeToRead);
 
@@ -261,6 +266,7 @@ function DocTemplate({
                     language={language}
                     buildType={buildType}
                     pageUrl={pageUrl}
+                    cloudPlan={cloudPlan}
                   />
                   {!frontmatter?.hide_commit && buildType !== "archive" && (
                     <GitCommitInfoCard
