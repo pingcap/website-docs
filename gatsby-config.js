@@ -198,16 +198,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host:
-          process.env.WEBSITE_BUILD_TYPE === "archive"
-            ? "https://docs-archive.pingcap.com"
-            : "https://docs.pingcap.com",
-        sitemap: `${
-          process.env.WEBSITE_BUILD_TYPE === "archive"
-            ? "https://docs-archive.pingcap.com"
-            : "https://docs.pingcap.com"
-        }/sitemap/sitemap-index.xml`,
-        policy: [{ userAgent: "*", allow: "/" }],
+        host: "https://docs-preview.pingcap.com",
+        policy: [{ userAgent: "*", disallow: "/" }],
       },
     },
     {
