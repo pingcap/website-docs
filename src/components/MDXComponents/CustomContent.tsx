@@ -42,7 +42,11 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
   } = props;
   const pageType = _pageType?.replace("-", "") || "";
   const shouldDisplayByPageType = pageTypeFromURL === pageType;
-  const shouldDisplayByCloudPlan = cloudPlan === cloudPlanFromURL;
+
+  const cloudPlanArray = cloudPlan?.split(",").map((plan) => plan.trim()) || [];
+  const shouldDisplayByCloudPlan = cloudPlanArray.includes(
+    cloudPlanFromURL || ""
+  );
 
   const languageArray = language
     ? language.split(",").map((lang) => lang.trim())
