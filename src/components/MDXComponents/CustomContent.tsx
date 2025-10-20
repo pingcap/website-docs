@@ -53,10 +53,9 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     : [];
   const shouldDisplayByLanguage = languageArray.includes(languageFromURL || "");
 
-  const isPageTypeMatch = !pageType || (!!pageType && shouldDisplayByPageType);
-  const isLanguageMatch = !language || (!!language && shouldDisplayByLanguage);
-  const isCloudPlanMatch =
-    !cloudPlan || (!!cloudPlan && shouldDisplayByCloudPlan);
+  const isPageTypeMatch = !pageType || shouldDisplayByPageType;
+  const isLanguageMatch = !language || shouldDisplayByLanguage;
+  const isCloudPlanMatch = !cloudPlan || shouldDisplayByCloudPlan;
 
   const shouldDisplay = isPageTypeMatch && isLanguageMatch && isCloudPlanMatch;
 
