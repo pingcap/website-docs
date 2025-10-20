@@ -1,6 +1,7 @@
 import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 import { extractFilesFromToc } from "./toc-filter";
+import { CloudPlan } from "shared/useCloudPlan";
 
 /**
  * Get files from different TOC types for tidbcloud
@@ -40,7 +41,12 @@ export async function getTidbCloudFilesFromTocs(
   const tocNodes = tocQuery.data!.allMdx.nodes;
   const tidbCloudTocFilesMap = new Map<
     string,
-    { dedicated: Set<string>; starter: Set<string>; essential: Set<string> }
+    {
+      dedicated: Set<string>;
+      starter: Set<string>;
+      essential: Set<string>;
+      premium: Set<string>;
+    }
   >();
 
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
@@ -55,12 +61,14 @@ export async function getTidbCloudFilesFromTocs(
 
     // Determine TOC type based on filename
     const relativePath = node.parent.relativePath;
-    let tocType: "dedicated" | "starter" | "essential" = "dedicated";
+    let tocType: CloudPlan = "dedicated";
 
     if (relativePath.includes("TOC-tidb-cloud-starter")) {
       tocType = "starter";
     } else if (relativePath.includes("TOC-tidb-cloud-essential")) {
       tocType = "essential";
+    } else if (relativePath.includes("TOC-tidb-cloud-premium")) {
+      tocType = "premium";
     }
 
     // Initialize the entry if it doesn't exist
@@ -69,6 +77,7 @@ export async function getTidbCloudFilesFromTocs(
         dedicated: new Set(),
         starter: new Set(),
         essential: new Set(),
+        premium: new Set(),
       });
     }
 
