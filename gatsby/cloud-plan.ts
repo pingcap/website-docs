@@ -56,9 +56,11 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
 
     // Determine TOC type based on filename
     const relativePath = node.parent.relativePath;
-    let tocType: CloudPlan = "dedicated";
+    let tocType: CloudPlan | null = null;
 
-    if (relativePath.includes("TOC-tidb-cloud-starter")) {
+    if (relativePath.includes("TOC.md")) {
+      tocType = "dedicated";
+    } else if (relativePath.includes("TOC-tidb-cloud-starter")) {
       tocType = "starter";
     } else if (relativePath.includes("TOC-tidb-cloud-essential")) {
       tocType = "essential";
@@ -78,6 +80,10 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
 
     // Add files to the appropriate TOC type
     const entry = tidbCloudTocFilesMap.get(key)!;
+    if (!tocType) {
+      console.error(`TOC ${key} has no type`);
+      return;
+    }
     entry[tocType] = new Set(files);
 
     console.info(`TOC ${key} (${tocType}): found ${files.length} files`);
