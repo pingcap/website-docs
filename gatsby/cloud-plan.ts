@@ -3,18 +3,21 @@ import { generateConfig } from "./path";
 import { extractFilesFromToc } from "./toc-filter";
 import { CloudPlan } from "shared/useCloudPlan";
 
+type TocMap = Map<
+  string,
+  {
+    dedicated: Set<string>;
+    starter: Set<string>;
+    essential: Set<string>;
+    premium: Set<string>;
+  }
+>;
+
 /**
  * Get files from different TOC types for tidbcloud
  * Returns a Map where key is "locale/repo/version" and value is object with dedicated, starter, essential file sets
  */
-export async function getTidbCloudFilesFromTocs(
-  graphql: any
-): Promise<
-  Map<
-    string,
-    { dedicated: Set<string>; starter: Set<string>; essential: Set<string> }
-  >
-> {
+export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
   const tocQuery = await graphql(`
     {
       allMdx(
@@ -39,15 +42,7 @@ export async function getTidbCloudFilesFromTocs(
   }
 
   const tocNodes = tocQuery.data!.allMdx.nodes;
-  const tidbCloudTocFilesMap = new Map<
-    string,
-    {
-      dedicated: Set<string>;
-      starter: Set<string>;
-      essential: Set<string>;
-      premium: Set<string>;
-    }
-  >();
+  const tidbCloudTocFilesMap: TocMap = new Map();
 
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
@@ -97,11 +92,8 @@ export async function getTidbCloudFilesFromTocs(
 export function determineInDefaultPlan(
   fileName: string,
   pathConfig: any,
-  tidbCloudTocFilesMap: Map<
-    string,
-    { dedicated: Set<string>; starter: Set<string>; essential: Set<string> }
-  >
-): string | null {
+  tidbCloudTocFilesMap: TocMap
+): CloudPlan | null {
   // Only apply this logic for tidbcloud articles
   if (pathConfig.repo !== "tidbcloud") {
     return null;
@@ -116,7 +108,7 @@ export function determineInDefaultPlan(
     return null;
   }
 
-  const { dedicated, starter, essential } = tocData;
+  const { dedicated, starter, essential, premium } = tocData;
 
   // Check if article is in TOC.md (dedicated)
   if (dedicated.has(fileName)) {
@@ -135,6 +127,15 @@ export function determineInDefaultPlan(
     !starter.has(fileName)
   ) {
     return "essential";
+  }
+
+  if (
+    premium.has(fileName) &&
+    !essential.has(fileName) &&
+    !dedicated.has(fileName) &&
+    !starter.has(fileName)
+  ) {
+    return "premium";
   }
 
   return null;
