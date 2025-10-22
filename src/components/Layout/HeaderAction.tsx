@@ -21,7 +21,6 @@ import { Locale, BuildType } from "shared/interface";
 import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
-import { useCloudPlan } from "shared/useCloudPlan";
 
 const useTiDBAIStatus = () => {
   const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
@@ -124,7 +123,6 @@ const LangSwitch = (props: {
   supportedLocales: Locale[];
 }) => {
   const { supportedLocales } = props;
-  const { isEssential } = useCloudPlan();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -225,7 +223,7 @@ const LangSwitch = (props: {
           onClick={toggleLanguage(Locale.ja)}
           disableRipple
           selected={language === Locale.ja}
-          disabled={!supportedLocales.includes(Locale.ja) || isEssential}
+          disabled={!supportedLocales.includes(Locale.ja)}
         >
           <Typography component="span" color={theme.palette.carbon[900]}>
             <Trans i18nKey="lang.ja" />
