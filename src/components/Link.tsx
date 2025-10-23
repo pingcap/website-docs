@@ -62,6 +62,7 @@ export const BlueAnchorLink = (
       style={{
         color: "var(--tiui-palette-secondary)",
         fontSize: "14px",
+        padding: "0 3px",
         ...props.style,
       }}
     />

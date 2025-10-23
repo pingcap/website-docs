@@ -142,14 +142,13 @@ const HeaderBanner = (props: HeaderProps) => {
         // }
         logo={"📣"}
         textList={[
-          t("banner.autoTrans.titleBeforeStarter"),
           <BlueAnchorLink
-            to="https://www.pingcap.com/blog/introducing-tidb-cloud-starter-auto-scaling-plan-renamed/ "
+            to="https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/"
             target="_blank"
           >
-            Starter
+            {t("banner.autoTrans.title1")}
           </BlueAnchorLink>,
-          t("banner.autoTrans.titleAfterStarter"),
+          t("banner.autoTrans.title2"),
           <BlueAnchorLink to={urlAutoTranslation} target="_blank">
             {t("banner.autoTrans.end")}
           </BlueAnchorLink>,
@@ -162,14 +161,13 @@ const HeaderBanner = (props: HeaderProps) => {
     <Banner
       logo={"📣"}
       textList={[
-        t("banner.campaign.titleBeforeStarter"),
         <BlueAnchorLink
-          to="https://www.pingcap.com/blog/introducing-tidb-cloud-starter-auto-scaling-plan-renamed/ "
+          to="https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/"
           target="_blank"
         >
-          TiDB Cloud Starter
+          {t("banner.campaign.title1")}
         </BlueAnchorLink>,
-        t("banner.campaign.titleAfterStarter"),
+        t("banner.campaign.title2"),
         <BlueAnchorLink to={t("banner.campaign.link")} target="_blank">
           {t("banner.campaign.end")}
         </BlueAnchorLink>,

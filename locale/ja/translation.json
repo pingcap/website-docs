@@ -159,14 +159,14 @@
       "viewLatestLTSVersion": "最新の LTS バージョンのドキュメントを表示する"
     },
     "campaign": {
-      "link": "https://tidbcloud.com/",
-      "titleBeforeStarter": "TiDB Cloud Serverless が ",
-      "titleAfterStarter": " に変わりました！使いやすさはそのままに、名前が新しくなりました。",
-      "end": "ぜひお試しください →"
+      "title1": "TiDB Cloud Essential",
+      "title2": "はパブリックプレビュー中です。",
+      "end": "ぜひお試しください →",
+      "link": "https://tidbcloud.com/"
     },
     "autoTrans": {
-      "titleBeforeStarter": "TiDB Cloud Serverless が ",
-      "titleAfterStarter": " に変わりました！このページは自動翻訳されたものです。",
+      "title1": "TiDB Cloud Essential",
+      "title2": "はパブリックプレビュー中です。このページは自動翻訳されたものです。",
       "end": "原文はこちらからご覧ください。"
     }
   },
