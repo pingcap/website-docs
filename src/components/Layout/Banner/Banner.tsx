@@ -35,23 +35,6 @@ export function Banner({
         justifyContent="center"
         alignItems="center"
         flexWrap="wrap"
-        divider={
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-            sx={(theme) => ({
-              display: "initial",
-              [theme.breakpoints.down("md")]: {
-                display: "none",
-              },
-              borderColor: "website.m1",
-              borderRightWidth: 1.5,
-              height: "0.875rem",
-              alignSelf: "auto",
-            })}
-          />
-        }
         sx={(theme) => ({
           textDecoration: "none",
           color: textColor || "text.primary",
@@ -77,6 +60,7 @@ export function Banner({
               component="span"
               variant="body2"
               color="inherit"
+              sx={{ whiteSpace: "pre" }}
             >
               {text}
             </Typography>
