@@ -5,7 +5,7 @@ import { CloudPlan } from "shared/useCloudPlan";
 interface CustomContentProps {
   platform?: "tidb" | "tidb-cloud";
   language?: string;
-  cloudPlan?: CloudPlan;
+  plan?: CloudPlan;
   pageTypeFromURL?: PageType;
   languageFromURL?: string;
   cloudPlanFromURL?: CloudPlan | null;
@@ -38,12 +38,12 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     languageFromURL,
     language,
     cloudPlanFromURL,
-    cloudPlan,
+    plan,
   } = props;
   const pageType = _pageType?.replace("-", "") || "";
   const shouldDisplayByPageType = pageTypeFromURL === pageType;
 
-  const cloudPlanArray = cloudPlan?.split(",").map((plan) => plan.trim()) || [];
+  const cloudPlanArray = plan?.split(",").map((p) => p.trim()) || [];
   const shouldDisplayByCloudPlan = cloudPlanArray.includes(
     cloudPlanFromURL || ""
   );
@@ -55,7 +55,7 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
 
   const isPageTypeMatch = !pageType || shouldDisplayByPageType;
   const isLanguageMatch = !language || shouldDisplayByLanguage;
-  const isCloudPlanMatch = !cloudPlan || shouldDisplayByCloudPlan;
+  const isCloudPlanMatch = !plan || shouldDisplayByCloudPlan;
 
   const shouldDisplay = isPageTypeMatch && isLanguageMatch && isCloudPlanMatch;
 
