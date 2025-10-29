@@ -25,7 +25,7 @@ import {
   Locale,
 } from "shared/interface";
 import Seo from "components/Seo";
-import { getStable, generateUrl } from "shared/utils";
+import { getStable, generateUrl, getPageType } from "shared/utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
@@ -38,6 +38,7 @@ import {
   useCloudPlanNavigate,
 } from "shared/useCloudPlan";
 import { filterTOC } from "shared/filterTOC";
+import { filterRightToc } from "shared/filterRightToc";
 
 interface DocTemplateProps {
   pageContext: PageContext & {
@@ -59,7 +60,7 @@ interface DocTemplateProps {
     mdx: {
       frontmatter: FrontMatter;
       body: string;
-      tableOfContents: TableOfContent;
+      toc: TableOfContent;
       timeToRead: number;
     };
     navigation?: {
@@ -107,7 +108,7 @@ function DocTemplate({
   data,
 }: DocTemplateProps) {
   const {
-    mdx: { frontmatter, tableOfContents, body, timeToRead },
+    mdx: { frontmatter, body, toc, timeToRead },
     navigation: originNav,
     starterNavigation: starterNav,
     essentialNavigation: essentialNav,
@@ -141,12 +142,18 @@ function DocTemplate({
     availablePlans.push("essential");
   }
 
-  const tocData: TableOfContent[] | undefined = React.useMemo(() => {
-    if (tableOfContents.items?.length === 1) {
-      return tableOfContents.items![0].items;
+  const pageType = getPageType(language, pageUrl);
+  const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
+    let tocItems: TableOfContent[] = [];
+    if (toc.items?.length === 1) {
+      tocItems = toc.items![0].items || [];
+    } else {
+      tocItems = toc.items || [];
     }
-    return tableOfContents.items || [];
-  }, [tableOfContents.items]);
+
+    // Filter TOC based on CustomContent conditions
+    return filterRightToc(tocItems, pageType, cloudPlan, language);
+  }, [toc.items, pageType, cloudPlan, language]);
 
   const stableBranch = getStable(pathConfig.repo);
 
@@ -314,7 +321,7 @@ function DocTemplate({
                       }}
                     >
                       <RightNav
-                        toc={tocData}
+                        toc={rightTocData}
                         pathConfig={pathConfig}
                         filePath={filePath}
                         buildType={buildType}
@@ -331,7 +338,7 @@ function DocTemplate({
                       }}
                     >
                       <RightNavMobile
-                        toc={tocData}
+                        toc={rightTocData}
                         pathConfig={pathConfig}
                         filePath={filePath}
                         buildType={buildType}
@@ -383,7 +390,7 @@ export const query = graphql`
         hide_leftNav
       }
       body
-      tableOfContents
+      toc
       timeToRead
     }
 

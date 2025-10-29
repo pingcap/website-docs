@@ -24,7 +24,6 @@ import {
   removeHtmlTag,
 } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
-import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { getPageType } from "shared/utils";
 
 interface RightNavProps {
@@ -108,13 +107,15 @@ export default function RightNav(props: RightNavProps) {
       }
     );
 
-    // Observe all heading elements
-    headingIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+    setTimeout(() => {
+      // Observe all heading elements
+      headingIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.observe(element);
+        }
+      });
+    }, 1000);
 
     // Cleanup
     return () => {
