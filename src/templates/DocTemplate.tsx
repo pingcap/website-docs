@@ -145,7 +145,7 @@ function DocTemplate({
   const pageType = getPageType(language, pageUrl);
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
     let tocItems: TableOfContent[] = [];
-    if (toc.items?.length === 1) {
+    if (toc?.items?.length === 1) {
       tocItems = toc.items![0].items || [];
     } else {
       tocItems = toc.items || [];
@@ -153,7 +153,7 @@ function DocTemplate({
 
     // Filter TOC based on CustomContent conditions
     return filterRightToc(tocItems, pageType, cloudPlan, language);
-  }, [toc.items, pageType, cloudPlan, language]);
+  }, [toc, pageType, cloudPlan, language]);
 
   const stableBranch = getStable(pathConfig.repo);
 
