@@ -112,7 +112,7 @@ function DocTemplate({
     navigation: originNav,
   } = data;
 
-  // const { cloudPlan } = useCloudPlan();
+  const { cloudPlan } = useCloudPlan();
   // useCloudPlanNavigate(pathConfig.repo);
   useReportReadingRate(timeToRead);
 
