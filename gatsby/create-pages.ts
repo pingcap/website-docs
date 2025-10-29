@@ -135,11 +135,11 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       .filter(Boolean);
 
     // Determine inDefaultPlan for tidbcloud articles
-    const inDefaultPlan = determineInDefaultPlan(
-      name,
-      pathConfig,
-      tidbCloudTocFilesMap
-    );
+    // const inDefaultPlan = determineInDefaultPlan(
+    //   name,
+    //   pathConfig,
+    //   tidbCloudTocFilesMap
+    // );
 
     cpMarkdown(`${node.slug}.md`, path, name);
     createPage({
@@ -163,7 +163,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
           banner: true,
           feedback: true,
         },
-        inDefaultPlan,
+        inDefaultPlan: "premium",
       },
     });
 
