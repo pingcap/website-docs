@@ -24,7 +24,6 @@ import {
   removeHtmlTag,
 } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
-import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { getPageType } from "shared/utils";
 
 interface RightNavProps {
@@ -69,6 +68,65 @@ export default function RightNav(props: RightNavProps) {
   if (pathname.endsWith("/")) {
     pathname = pathname.slice(0, -1); // unify client and ssr
   }
+
+  // Track active heading for scroll highlighting
+  const [activeId, setActiveId] = React.useState<string>("");
+
+  React.useEffect(() => {
+    // Collect all heading IDs from the TOC
+    const headingIds: string[] = [];
+    const collectIds = (items: TableOfContent[]) => {
+      items.forEach((item) => {
+        if (item.url) {
+          const id = item.url.replace(/^#/, "");
+          if (id) {
+            headingIds.push(id);
+          }
+        }
+        if (item.items) {
+          collectIds(item.items);
+        }
+      });
+    };
+    collectIds(toc);
+
+    if (headingIds.length === 0) return;
+
+    // Create an intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-80px 0px -80% 0px",
+        threshold: 0,
+      }
+    );
+
+    setTimeout(() => {
+      // Observe all heading elements
+      headingIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.observe(element);
+        }
+      });
+    }, 1000);
+
+    // Cleanup
+    return () => {
+      headingIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, [toc]);
 
   return (
     <>
@@ -150,14 +208,14 @@ export default function RightNav(props: RightNavProps) {
           >
             <Trans i18nKey="doc.toc" />
           </Typography>
-          {generateToc(toc)}
+          {generateToc(toc, 0, activeId)}
         </Box>
       </Box>
     </>
   );
 }
 
-const generateToc = (items: TableOfContent[], level = 0) => {
+const generateToc = (items: TableOfContent[], level = 0, activeId = "") => {
   const theme = useTheme();
 
   return (
@@ -174,6 +232,9 @@ const generateToc = (items: TableOfContent[], level = 0) => {
           title,
           url
         );
+        const itemId = url?.replace(/^#/, "") || "";
+        const isActive = itemId && itemId === activeId;
+
         return (
           <Typography key={`${level}-${item.title}`} component="li">
             <Typography
@@ -188,6 +249,8 @@ const generateToc = (items: TableOfContent[], level = 0) => {
                 paddingLeft: `${0.5 + 1 * level}rem`,
                 paddingTop: "0.25rem",
                 paddingBottom: "0.25rem",
+                fontWeight: isActive ? "700" : "400",
+                color: isActive ? theme.palette.website.f1 : "inherit",
                 "&:hover": {
                   color: theme.palette.website.f3,
                   borderLeft: `1px solid ${theme.palette.website.f3}`,
@@ -196,7 +259,7 @@ const generateToc = (items: TableOfContent[], level = 0) => {
             >
               {removeHtmlTag(newLabel)}
             </Typography>
-            {items && generateToc(items, level + 1)}
+            {items && generateToc(items, level + 1, activeId)}
           </Typography>
         );
       })}

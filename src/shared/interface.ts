@@ -2,6 +2,11 @@ export interface TableOfContent {
   title: string;
   url: string;
   items?: TableOfContent[];
+  condition?: {
+    platform?: string;
+    plan?: string;
+    language?: string;
+  };
 }
 
 export enum Repo {
