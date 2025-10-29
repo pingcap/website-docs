@@ -176,10 +176,10 @@
       "viewLatestLTSVersion": "View latest LTS version docs"
     },
     "campaign": {
-      "link": "https://tidbcloud.com/",
-      "titleBeforeStarter": "TiDB Cloud Serverless is now ",
-      "titleAfterStarter": "! Same experience, new name.",
-      "end": "Try it out →"
+      "title1": "TiDB Cloud Essential",
+      "title2": " is now in public preview. ",
+      "end": "Try it out →",
+      "link": "https://tidbcloud.com/"
     }
   },
   "campaign": {

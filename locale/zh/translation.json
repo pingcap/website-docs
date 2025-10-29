@@ -174,14 +174,14 @@
       "viewLatestLTSVersion": "查看最新 LTS 版本文档"
     },
     "campaign": {
-      "link": "https://tidbcloud.com/",
-      "titleBeforeStarter": "TiDB Cloud Serverless 现已更名为 ",
-      "titleAfterStarter": "！体验不变，名字焕新。",
-      "end": "立即试用 →"
+      "title1": "TiDB Cloud Essential",
+      "title2": " 开放公测中。",
+      "end": "立即试用 →",
+      "link": "https://tidbcloud.com/"
     },
     "autoTrans": {
-      "titleBeforeStarter": "TiDB Cloud Serverless 现已更名为 ",
-      "titleAfterStarter": "！此页面由 AI 自动翻译，英文原文请见",
+      "title1": "TiDB Cloud Essential",
+      "title2": " 开放公测中。此页面由 AI 自动翻译，英文原文请见",
       "end": "此处。"
     }
   },

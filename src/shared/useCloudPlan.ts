@@ -12,6 +12,7 @@ import { Repo } from "./interface";
 export const CLOUD_MODE_KEY = "plan";
 export const CLOUD_MODE_VALUE_STARTER = "starter";
 export const CLOUD_MODE_VALUE_ESSENTIAL = "essential";
+export const CLOUD_MODE_VALUE_PREMIUM = "premium";
 
 export type CloudPlan = "dedicated" | "starter" | "essential" | "premium";
 
@@ -35,6 +36,7 @@ export const useCloudPlan = () => {
   const isTidbcloud = repo === Repo.tidbcloud;
   const [isStarter, setIsStarter] = useState<boolean>(false);
   const [isEssential, setIsEssential] = useState<boolean>(false);
+  const [isPremium, setIsPremium] = useState<boolean>(false);
   const [isClassic, setIsClassic] = useState<boolean>(true);
 
   const setCloudPlan = (cloudPlan: CloudPlan) => {
@@ -50,12 +52,14 @@ export const useCloudPlan = () => {
       _cloudPlan) as CloudPlan;
     const isStarter = isTidbcloud && cloudPlan === CLOUD_MODE_VALUE_STARTER;
     const isEssential = isTidbcloud && cloudPlan === CLOUD_MODE_VALUE_ESSENTIAL;
+    const isPremium = isTidbcloud && cloudPlan === CLOUD_MODE_VALUE_PREMIUM;
     const isClassic =
       !isTidbcloud || !cloudPlan || (!isStarter && !isEssential);
 
     _setCloudPlan(cloudPlan);
     setIsStarter(isStarter);
     setIsEssential(isEssential);
+    setIsPremium(isPremium);
     setIsClassic(isClassic);
   }, []);
 
@@ -64,6 +68,7 @@ export const useCloudPlan = () => {
     setCloudPlan,
     isStarter,
     isEssential,
+    isPremium,
     isClassic,
   };
 };
