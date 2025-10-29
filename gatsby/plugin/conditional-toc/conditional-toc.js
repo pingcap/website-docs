@@ -101,46 +101,56 @@ export const createConditionalToc = ({
           };
 
           // Traverse the mdast tree to track CustomContent blocks
-          let insideCustomContent = false;
-          let currentConditionAttrs = null;
+          // We need to identify start position and end position of CustomContent blocks
+          const customContentRanges = [];
+          let tempStack = [];
 
+          // First pass: identify all CustomContent block ranges
           visit(mdast, (node, index, parent) => {
-            // Check for opening CustomContent tag
-            if (
-              node.type === "jsx" &&
-              node.value &&
-              node.value.includes("<CustomContent")
-            ) {
-              const attributes = parseCustomContentAttributes(node.value);
-              conditionStack.push(attributes);
-              insideCustomContent = true;
-              currentConditionAttrs = attributes;
-            }
-            // Check for closing CustomContent tag
-            else if (
-              node.type === "jsx" &&
-              node.value &&
-              node.value.includes("</CustomContent>")
-            ) {
-              if (conditionStack.length > 0) {
-                conditionStack.pop();
+            if (node.type === "jsx" && node.value) {
+              const trimmedValue = node.value.trim();
+
+              // Check for opening tag (not self-closing)
+              if (
+                trimmedValue.includes("<CustomContent") &&
+                !trimmedValue.includes("/>")
+              ) {
+                const attributes = parseCustomContentAttributes(node.value);
+                tempStack.push({
+                  startPosition: node.position,
+                  attributes,
+                });
               }
-              if (conditionStack.length === 0) {
-                insideCustomContent = false;
-                currentConditionAttrs = null;
-              } else {
-                currentConditionAttrs =
-                  conditionStack[conditionStack.length - 1];
+              // Check for closing tag
+              else if (trimmedValue.includes("</CustomContent>")) {
+                if (tempStack.length > 0) {
+                  const blockInfo = tempStack.pop();
+                  customContentRanges.push({
+                    start: blockInfo.startPosition,
+                    end: node.position,
+                    attributes: blockInfo.attributes,
+                  });
+                }
               }
             }
-            // Track headings inside CustomContent blocks
-            else if (node.type === "heading" && conditionStack.length > 0) {
+          });
+
+          // Second pass: match headings with CustomContent blocks
+          visit(mdast, (node) => {
+            if (node.type === "heading" && node.position) {
               const headingText = getHeadingText(node);
               const headingId = slugger.slug(headingText);
 
-              headingConditions[headingId] = {
-                ...conditionStack[conditionStack.length - 1],
-              };
+              // Check if this heading is inside any CustomContent block
+              for (const range of customContentRanges) {
+                if (
+                  node.position.start.line > range.start.end.line &&
+                  node.position.end.line < range.end.start.line
+                ) {
+                  headingConditions[headingId] = { ...range.attributes };
+                  break; // Only use the first matching range (innermost)
+                }
+              }
             }
           });
 
