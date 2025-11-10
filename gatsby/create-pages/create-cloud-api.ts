@@ -11,7 +11,7 @@ export const createCloudAPIReference = async ({
 }: CreatePagesArgs) => {
   const template = resolve(
     __dirname,
-    "../src/templates/CloudAPIReferenceTemplate.tsx"
+    "../../src/templates/CloudAPIReferenceTemplate.tsx"
   );
   const pageCfg = DOCS_CONFIG.tidbcloud.openAPI;
   const pageList = pageCfg.data;

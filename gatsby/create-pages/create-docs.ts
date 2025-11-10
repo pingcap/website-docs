@@ -25,7 +25,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     graphql,
   } = createPagesArgs;
   // const template = resolve(__dirname, '../src/doc/index.tsx')
-  const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
+  const template = resolve(__dirname, "../../src/templates/DocTemplate.tsx");
 
   // First, get the list of files that should be built based on TOC content
   const tocFilesMap = await getFilesFromTocs(graphql);

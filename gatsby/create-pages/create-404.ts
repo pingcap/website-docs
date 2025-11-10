@@ -6,7 +6,7 @@ import { BuildType } from "../../src/shared/interface";
 export const create404 = async ({
   actions: { createPage },
 }: CreatePagesArgs) => {
-  const template = resolve(__dirname, "../src/templates/404Template.tsx");
+  const template = resolve(__dirname, "../../src/templates/404Template.tsx");
 
   createPage({
     path: "/404/",

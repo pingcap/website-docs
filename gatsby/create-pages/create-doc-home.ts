@@ -18,7 +18,7 @@ export const createDocHome = async ({
   graphql,
 }: CreatePagesArgs) => {
   // const template = resolve(__dirname, "../src/doc/index.tsx");
-  const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
+  const template = resolve(__dirname, "../../src/templates/DocTemplate.tsx");
 
   const prodQueryStr = `
   {
