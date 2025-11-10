@@ -1,6 +1,5 @@
-import { TableOfContent } from "./interface";
+import { TableOfContent, CloudPlan } from "./interface";
 import { PageType } from "./utils";
-import { CloudPlan } from "./useCloudPlan";
 
 /**
  * Filter right TOC based on CustomContent conditions

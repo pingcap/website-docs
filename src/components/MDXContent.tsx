@@ -8,13 +8,17 @@ import Box from "@mui/material/Box";
 
 import * as MDXComponents from "components/MDXComponents";
 import { CustomNotice } from "components/Card/CustomNotice";
-import { PathConfig, FrontMatter, BuildType } from "shared/interface";
+import {
+  PathConfig,
+  FrontMatter,
+  BuildType,
+  CloudPlan,
+} from "shared/interface";
 import { useTotalContributors } from "components/Contributors";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
 import { getPageType } from "shared/utils";
-import { CloudPlan } from "shared/useCloudPlan";
 
 export default function MDXContent(props: {
   data: any;
