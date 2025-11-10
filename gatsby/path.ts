@@ -63,6 +63,8 @@ export function generateConfig(slug: string): {
       prefix = "starter";
     } else if (slug.includes("essential/")) {
       prefix = "essential";
+    } else if (slug.includes("premium/")) {
+      prefix = "premium";
     } else if (slug.includes("dedicated/")) {
       if (!!name) {
         prefix = "dedicated";
