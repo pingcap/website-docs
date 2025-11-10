@@ -1,4 +1,4 @@
-import { Locale, Repo, PathConfig } from "../src/shared/interface";
+import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
 import CONFIG from "../docs/docs.json";
 
 export function generateUrl(filename: string, config: PathConfig) {
@@ -56,7 +56,7 @@ export function generateConfig(slug: string): {
 
   let name = rest[rest.length - 1];
   name = name === "_index" ? "" : name;
-  let prefix = undefined;
+  let prefix: CloudPlan | undefined = undefined;
 
   if (repo === Repo.tidbcloud) {
     if (slug.includes("starter/")) {
