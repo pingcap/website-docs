@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { PageType } from "shared/utils";
-import { CloudPlan } from "shared/useCloudPlan";
+import { CloudPlan } from "shared/interface";
 
 interface CustomContentProps {
   platform?: "tidb" | "tidb-cloud";

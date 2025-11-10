@@ -1,7 +1,7 @@
 import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 import { extractFilesFromToc } from "./toc-filter";
-import { CloudPlan } from "shared/useCloudPlan";
+import { CloudPlan } from "shared/interface";
 
 type TocMap = Map<
   string,

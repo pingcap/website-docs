@@ -1,4 +1,4 @@
-import { Locale, Repo, PathConfig } from "../src/shared/interface";
+import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
 import CONFIG from "../docs/docs.json";
 
 export function generateUrl(filename: string, config: PathConfig) {
@@ -56,17 +56,17 @@ export function generateConfig(slug: string): {
 
   let name = rest[rest.length - 1];
   name = name === "_index" ? "" : name;
-  let prefix = undefined;
+  let prefix: CloudPlan | undefined = undefined;
 
   if (repo === Repo.tidbcloud) {
-    if (slug.includes("starter/")) {
-      prefix = "starter";
-    } else if (slug.includes("essential/")) {
-      prefix = "essential";
-    } else if (slug.includes("dedicated/")) {
-      if (!!name) {
-        prefix = "dedicated";
-      }
+    const simplePrefixes = ["starter", "essential", "premium"];
+    prefix = simplePrefixes.find((p) => slug.includes(`${p}/`)) as
+      | CloudPlan
+      | undefined;
+
+    // dedicated prefix is only used when the name is not empty
+    if (!prefix && slug.includes("dedicated/") && name) {
+      prefix = "dedicated";
     }
   }
 
