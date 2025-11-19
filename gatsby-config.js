@@ -104,8 +104,9 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `markdown-pages`,
+        name: `markdown-pages1`,
         path: `${__dirname}/docs/markdown-pages`,
+        ignore: ["**/ja/**", "**/zh/**"],
       },
     },
     {
