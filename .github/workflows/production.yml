@@ -38,8 +38,16 @@ jobs:
     steps:
       - name: Check disk usage
         run: df -h
-      - name: Remove unused Docker images
-        run: docker system prune -af
+
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+
+      - name: Check disk usage
+        run: df -h
 
       - uses: actions/checkout@v3
         with:
@@ -64,6 +72,9 @@ jobs:
 
       - name: Install deps
         run: yarn
+
+      - name: Check disk usage
+        run: df -h
 
       - name: Calc gatsby cache key
         id: calc-cache-key
