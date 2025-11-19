@@ -71,10 +71,9 @@ jobs:
           echo "build_date=$(date)" >> $GITHUB_OUTPUT
 
       - name: Install deps
-        run: yarn
-
-      - name: Check disk usage
-        run: df -h
+        run: |
+          yarn
+          df -h
 
       - name: Calc gatsby cache key
         id: calc-cache-key
@@ -206,7 +205,9 @@ jobs:
           architecture: "x64"
 
       - name: Install Tencent Cloud CLI
-        run: pipx install tccli
+        run: |
+          pipx install tccli
 
       - name: Purge production CDN cache
-        run: tccli cdn PurgePathCache --Paths '["https://docs.pingcap.com/"]' --FlushType flush
+        run: |
+          tccli cdn PurgePathCache --Paths '["https://docs.pingcap.com/"]' --FlushType flush
