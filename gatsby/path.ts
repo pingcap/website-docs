@@ -85,21 +85,12 @@ export function generateConfig(slug: string): {
 
 function branchToVersion(repo: Repo, branch: string) {
   switch (repo) {
-    case Repo.tidb: {
-      const stable = CONFIG.docs[repo].stable;
-      switch (branch) {
-        case "master":
-          return "dev";
-        case stable:
-          return "stable";
-        default:
-          return branch.replace("release-", "v");
-      }
-    }
+    case Repo.tidb:
     case Repo.operator: {
+      const devBranch = repo === Repo.operator ? "main" : "master";
       const stable = CONFIG.docs[repo].stable;
       switch (branch) {
-        case "main":
+        case devBranch:
           return "dev";
         case stable:
           return "stable";

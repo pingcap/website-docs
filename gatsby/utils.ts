@@ -21,24 +21,22 @@ export function getStable(doc: Repo) {
   return undefined;
 }
 
-function renameVersion(version: string, stable: string | undefined) {
-  switch (version) {
-    case "master":
-    case "main":
-      return "dev";
-    case stable:
-      return "stable";
-    default:
-      return version.replace("release-", "v");
-  }
-}
-
 export function renameVersionByDoc(doc: Repo, version: string) {
   switch (doc) {
     case "tidb":
     case "tidb-data-migration":
-    case "tidb-in-kubernetes":
-      return renameVersion(version, getStable(doc));
+    case "tidb-in-kubernetes": {
+      const devBranch = doc === "tidb-in-kubernetes" ? "main" : "master";
+      const stable = getStable(doc);
+      switch (version) {
+        case devBranch:
+          return "dev";
+        case stable:
+          return "stable";
+        default:
+          return version.replace("release-", "v");
+      }
+    }
     case "tidbcloud":
       return;
   }

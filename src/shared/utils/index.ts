@@ -182,21 +182,12 @@ export function getBannerByType(type: "home" | "tidb" | "tidb-cloud") {
 
 function branchToVersion(repo: Repo, branch: string) {
   switch (repo) {
-    case Repo.tidb: {
-      const stable = CONFIG.docs[repo].stable;
-      switch (branch) {
-        case "master":
-          return "dev";
-        case stable:
-          return "stable";
-        default:
-          return branch.replace("release-", "v");
-      }
-    }
+    case Repo.tidb:
     case Repo.operator: {
+      const devBranch = repo === Repo.operator ? "main" : "master";
       const stable = CONFIG.docs[repo].stable;
       switch (branch) {
-        case "main":
+        case devBranch:
           return "dev";
         case stable:
           return "stable";
@@ -224,10 +215,10 @@ export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
   return acc;
 }, {} as Record<Repo, Record<Locale, (string | null)[]>>);
 
-export function convertVersionName(version: string, stable: string) {
+export function convertVersionName(version: string, stable: string, repo?: string) {
+  const devBranch = repo === "tidb-in-kubernetes" ? "main" : "master";
   switch (version) {
-    case "master":
-    case "main":
+    case devBranch:
       return "dev";
     case stable:
       return "stable";
