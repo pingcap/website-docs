@@ -182,11 +182,20 @@ export function getBannerByType(type: "home" | "tidb" | "tidb-cloud") {
 
 function branchToVersion(repo: Repo, branch: string) {
   switch (repo) {
-    case Repo.tidb:
-    case Repo.operator: {
+    case Repo.tidb: {
       const stable = CONFIG.docs[repo].stable;
       switch (branch) {
         case "master":
+          return "dev";
+        case stable:
+          return "stable";
+        default:
+          return branch.replace("release-", "v");
+      }
+    }
+    case Repo.operator: {
+      const stable = CONFIG.docs[repo].stable;
+      switch (branch) {
         case "main":
           return "dev";
         case stable:
