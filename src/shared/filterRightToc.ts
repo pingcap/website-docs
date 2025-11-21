@@ -45,7 +45,7 @@ export function filterRightToc(
       }
 
       // Recursively filter nested items
-      if (item?.items && item.items.length > 0) {
+      if (item.items && item.items.length > 0) {
         const filteredItems = filterRightToc(
           item.items,
           pageType,
