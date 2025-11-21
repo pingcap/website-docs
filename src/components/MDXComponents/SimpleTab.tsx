@@ -104,6 +104,7 @@ export function SimpleTab({
             key={id}
             id={id}
             activeTab={activeTab}
+            renderedTabs={renderedTabs}
             onRendered={() => {
               setRenderedTabs((prev) => {
                 if (prev.includes(id)) {
@@ -135,16 +136,22 @@ export const TabContentDetector = ({
   children,
   id,
   activeTab,
+  renderedTabs,
   onRendered,
 }: {
   children: ReactElement;
   id: string;
   activeTab: string;
+  renderedTabs: string[];
   onRendered: (id: string) => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (ref.current && ref.current.children.length > 0) {
+    if (
+      ref.current &&
+      ref.current.children.length > 0 &&
+      !renderedTabs.includes(id)
+    ) {
       onRendered(id);
     }
   });
