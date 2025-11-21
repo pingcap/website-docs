@@ -5,5 +5,5 @@ Sentry.init({
   dsn: process.env.GATSBY_SENTRY_DSN,
   integrations: [Sentry.browserTracingIntegration()],
 
-  tracesSampleRate: 0.1,
+  tracesSampleRate: 0.01,
 });
