@@ -147,7 +147,7 @@ export const TabContentDetector = ({
     if (ref.current && ref.current.children.length > 0) {
       onRendered(id);
     }
-  }, []);
+  });
   return (
     <div ref={ref} key={id} className={clsx({ [hidden]: activeTab !== id })}>
       {children}
