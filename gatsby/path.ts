@@ -90,6 +90,7 @@ function branchToVersion(repo: Repo, branch: string) {
       const stable = CONFIG.docs[repo].stable;
       switch (branch) {
         case "master":
+        case "main":
           return "dev";
         case stable:
           return "stable";

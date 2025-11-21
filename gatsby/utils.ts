@@ -24,6 +24,7 @@ export function getStable(doc: Repo) {
 function renameVersion(version: string, stable: string | undefined) {
   switch (version) {
     case "master":
+    case "main":
       return "dev";
     case stable:
       return "stable";

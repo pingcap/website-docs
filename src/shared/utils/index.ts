@@ -187,6 +187,7 @@ function branchToVersion(repo: Repo, branch: string) {
       const stable = CONFIG.docs[repo].stable;
       switch (branch) {
         case "master":
+        case "main":
           return "dev";
         case stable:
           return "stable";
@@ -217,6 +218,7 @@ export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
 export function convertVersionName(version: string, stable: string) {
   switch (version) {
     case "master":
+    case "main":
       return "dev";
     case stable:
       return "stable";
