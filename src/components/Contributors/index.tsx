@@ -237,7 +237,13 @@ export const useTotalContributors = (
         return;
       }
       ReactDOM.unmountComponentAtNode(appendedNode);
-      appendedNode?.parentNode?.removeChild(appendedNode);
+      // Check if the node is still a child of its parent before removing
+      if (
+        appendedNode.parentNode &&
+        appendedNode.parentNode.contains(appendedNode)
+      ) {
+        appendedNode.parentNode.removeChild(appendedNode);
+      }
     };
   }, [totalContributors]);
 

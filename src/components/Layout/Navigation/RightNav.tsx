@@ -83,7 +83,7 @@ export default function RightNav(props: RightNavProps) {
             headingIds.push(id);
           }
         }
-        if (item.items) {
+        if (item?.items) {
           collectIds(item.items);
         }
       });
