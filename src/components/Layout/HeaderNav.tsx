@@ -67,7 +67,7 @@ export default function HeaderNavStack(props: {
           selected={selectedItem === "tidbcloud"}
           label={t("navbar.cloud")}
           to={
-            cloudPlan === "dedicated"
+            cloudPlan === "dedicated" || !cloudPlan
               ? `/tidbcloud`
               : `/tidbcloud/${cloudPlan}?${CLOUD_MODE_KEY}=${cloudPlan}`
           }
@@ -247,7 +247,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
             <LinkComponent
               isI18n
               to={
-                cloudPlan === "dedicated"
+                cloudPlan === "dedicated" || !cloudPlan
                   ? `/tidbcloud`
                   : `/tidbcloud/${cloudPlan}?${CLOUD_MODE_KEY}=${cloudPlan}`
               }
