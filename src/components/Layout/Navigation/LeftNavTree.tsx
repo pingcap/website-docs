@@ -127,16 +127,10 @@ export default function ControlledTreeView(props: {
   const { data, current: currentUrl } = props;
 
   const [expanded, setExpanded] = React.useState<string[]>(() => {
-    const storedId = getNavItemIdFromStorage(currentUrl);
-    return calcExpandedIds(data, currentUrl, storedId || undefined);
+    return calcExpandedIds(data, currentUrl);
   });
   const [selected, setSelected] = React.useState<string[]>(() => {
-    const storedId = getNavItemIdFromStorage(currentUrl);
-    const expandedIds = calcExpandedIds(
-      data,
-      currentUrl,
-      storedId || undefined
-    );
+    const expandedIds = calcExpandedIds(data, currentUrl);
     if (expandedIds.length) {
       return [expandedIds[expandedIds.length - 1]];
     }
