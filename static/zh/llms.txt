@@ -5,7 +5,7 @@
 ## TiDB Self-Managed 文档（使用 TiUP 部署）
 
 - [TiDB Self-Managed 文档](https://docs.pingcap.com/zh/tidb/stable.md): TiDB 是 PingCAP 公司自主设计、研发的开源分布式关系型数据库。产品文档包括了 TiDB 简介、功能概览、TiFlash、快速上手 TiDB、HTAP、开发者手册概览、软硬件环境需求、使用 TiUP 部署 TiDB、数据迁移概览、运维、监控、调优、工具、TiDB 路线图、配置文件参数、命令行参数、TiDB Control、系统变量、发布历史、常见问题。
-- [TiDB 版本周期支持策略](https://cn.pingcap.com/tidb-release-support-policy/): 阐述了 PingCAP 就 TiDB 版本提供支持服务的标准和规则。
+- [TiDB 版本周期支持策略](https://pingkai.cn/tidb-release-support-policy): 阐述了 PingCAP 就 TiDB 版本提供支持服务的标准和规则。
 - [50 TiB 数据导入最佳实践](https://docs.pingcap.com/zh/tidb/stable/data-import-best-practices.md): 了解将大规模数据导入 TiDB 的最佳实践。
 - [ADD COLUMN](https://docs.pingcap.com/zh/tidb/stable/sql-statement-add-column.md): TiDB 数据库中 ADD COLUMN 的使用概况。
 - [ADD INDEX](https://docs.pingcap.com/zh/tidb/stable/sql-statement-add-index.md): TiDB 数据库中 ADD INDEX 的使用概况。
