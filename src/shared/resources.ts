@@ -17,27 +17,27 @@ export const DOC_HOME_URL = "https://docs.pingcap.com";
 
 export const DEFAULT_PINGCAP_URL = `https://www.pingcap.com`;
 export const EN_PINGCAP_URL = `https://www.pingcap.com/`;
-export const ZH_PINGCAP_URL = `https://cn.pingcap.com/`;
+export const ZH_PINGCAP_URL = `https://pingkai.cn/`;
 export const JA_PINGCAP_URL = `https://pingcap.co.jp/`;
 
 export const EN_PINGCAP_DOWNLOAD_URL = "https://www.pingcap.com/download/";
 export const ZH_PINGCAP_DOWNLOAD_URL =
-  "https://cn.pingcap.com/product/#SelectProduct";
+  "https://pingkai.cn/opensource/tidb";
 export const JA_PINGCAP_DOWNLOAD_URL = "https://pingcap.co.jp/event/";
 
 export const EN_CONTACT_URL = "https://www.pingcap.com/contact-us/";
-export const ZH_CONTACT_URL = "https://cn.pingcap.com/contact/";
+export const ZH_CONTACT_URL = "https://pingkai.cn/contact";
 export const JA_CONTACT_URL = "https://pingcap.co.jp/contact-us/";
 
 export const EN_PRIVACY_POLICY_URL = "https://www.pingcap.com/privacy-policy";
-export const ZH_PRIVACY_POLICY_URL = "https://cn.pingcap.com/privacy-policy";
+export const ZH_PRIVACY_POLICY_URL = "https://pingkai.cn/legal/privacy-policy";
 export const JA_PRIVACY_POLICY_URL = "https://pingcap.co.jp/privacy-policy";
 
 export const EN_LEARNING_CENTER_URL = "https://www.pingcap.com/education/";
-export const ZH_LEARNING_CENTER_URL = "https://cn.pingcap.com/education/";
+export const ZH_LEARNING_CENTER_URL = "https://learn.pingcap.cn/learner/course";
 
 export const EN_LEGAL_URL = "https://www.pingcap.com/legal/";
-export const ZH_LEGAL_URL = "https://cn.pingcap.com/law/";
+export const ZH_LEGAL_URL = "https://pingkai.cn/legal/compliance";
 export const JA_LEGAL_URL = "https://pingcap.co.jp/legal/";
 
 export const ICON_GROUP_CHUNK_SIZE = 3;
@@ -305,7 +305,7 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "TiDB",
-        url: "https://cn.pingcap.com/product/#SelectProduct",
+        url: "https://pingkai.cn/opensource/tidb",
       },
       {
         name: "TiDB Cloud",
@@ -347,11 +347,11 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "博客",
-        url: "https://cn.pingcap.com/blog/",
+        url: "https://tidb.net/blog",
       },
       {
         name: "Education",
-        url: "https://cn.pingcap.com/education/",
+        url: "https://learn.pingcap.cn/learner/course",
       },
     ],
   },
@@ -364,7 +364,7 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "联系我们",
-        url: "https://cn.pingcap.com/contact/",
+        url: "https://pingkai.cn/contact",
       },
     ],
   },
@@ -373,7 +373,7 @@ export const ZH_FOOTER_ITEMS = [
     items: [
       {
         name: "关于我们",
-        url: "https://cn.pingcap.com/about-us?tab=companyOverview",
+        url: "https://pingkai.cn/about",
       },
       {
         name: "招贤纳士",
@@ -381,7 +381,7 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "新闻报道",
-        url: "https://cn.pingcap.com/company-activity/",
+        url: "https://pingkai.cn/news",
       },
     ],
   },
