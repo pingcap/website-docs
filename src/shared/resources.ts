@@ -22,7 +22,7 @@ export const JA_PINGCAP_URL = `https://pingcap.co.jp/`;
 
 export const EN_PINGCAP_DOWNLOAD_URL = "https://www.pingcap.com/download/";
 export const ZH_PINGCAP_DOWNLOAD_URL =
-  "https://pingkai.cn/opensource/tidb";
+  "https://pingkai.cn/download";
 export const JA_PINGCAP_DOWNLOAD_URL = "https://pingcap.co.jp/event/";
 
 export const EN_CONTACT_URL = "https://www.pingcap.com/contact-us/";
