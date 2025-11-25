@@ -15,7 +15,6 @@ import {
   generateDownloadURL,
   generateContactURL,
   generateLearningCenterURL,
-  generateDocsHomeUrl,
   getPageType,
   PageType,
 } from "shared/utils";
@@ -23,7 +22,6 @@ import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
-import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
 
 // `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
 // it will be `undefined` in client side render
@@ -47,7 +45,6 @@ export default function HeaderNavStack(props: {
 }) {
   const { language, t } = useI18next();
   const selectedItem = useSelectedNavItem(language, props.pageUrl);
-  const { cloudPlan } = useCloudPlan();
 
   return (
     <Stack
@@ -66,11 +63,7 @@ export default function HeaderNavStack(props: {
         <NavItem
           selected={selectedItem === "tidbcloud"}
           label={t("navbar.cloud")}
-          to={
-            cloudPlan === "dedicated" || !cloudPlan
-              ? `/tidbcloud`
-              : `/tidbcloud/${cloudPlan}?${CLOUD_MODE_KEY}=${cloudPlan}`
-          }
+          to={`/tidbcloud`}
         />
       )}
 
@@ -167,7 +160,6 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
   const theme = useTheme();
   const { language, t } = useI18next();
   const selectedItem = useSelectedNavItem(language);
-  const { cloudPlan } = useCloudPlan();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -246,11 +238,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <LinkComponent
               isI18n
-              to={
-                cloudPlan === "dedicated" || !cloudPlan
-                  ? `/tidbcloud`
-                  : `/tidbcloud/${cloudPlan}?${CLOUD_MODE_KEY}=${cloudPlan}`
-              }
+              to={`/tidbcloud`}
               style={{ width: "100%" }}
               onClick={() =>
                 gtmTrack(GTMEvent.ClickHeadNav, {
