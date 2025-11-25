@@ -72,11 +72,18 @@ function StyledTreeItem(props: StyledTreeItemProps) {
   );
 }
 
-const calcExpandedIds = (data: RepoNavLink[], targetLink: string) => {
+const calcExpandedIds = (
+  data: RepoNavLink[],
+  targetLink: string,
+  targetId?: string
+) => {
   const ids: string[] = [];
   const treeForeach = (data: RepoNavLink[], parents: string[] = []): void => {
     data.forEach((item) => {
-      if (item.link === targetLink) {
+      const isMatch = targetId
+        ? item.link === targetLink && item.id === targetId
+        : item.link === targetLink;
+      if (isMatch) {
         ids.push(...parents);
         ids.push(item.id);
         return;
@@ -88,6 +95,29 @@ const calcExpandedIds = (data: RepoNavLink[], targetLink: string) => {
   };
   treeForeach(data, []);
   return ids;
+};
+
+// Session storage key prefix for nav item id
+const NAV_ITEM_ID_STORAGE_KEY = "nav_item_id_";
+
+// Get nav item id from session storage for a given path
+const getNavItemIdFromStorage = (path: string): string | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    return sessionStorage.getItem(`${NAV_ITEM_ID_STORAGE_KEY}${path}`);
+  } catch {
+    return null;
+  }
+};
+
+// Save nav item id to session storage for a given path
+const saveNavItemIdToStorage = (path: string, id: string): void => {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(`${NAV_ITEM_ID_STORAGE_KEY}${path}`, id);
+  } catch {
+    // Ignore storage errors
+  }
 };
 
 export default function ControlledTreeView(props: {
@@ -110,7 +140,12 @@ export default function ControlledTreeView(props: {
   const theme = useTheme();
 
   React.useEffect(() => {
-    const expandedIds = calcExpandedIds(data, currentUrl);
+    const storedId = getNavItemIdFromStorage(currentUrl);
+    const expandedIds = calcExpandedIds(
+      data,
+      currentUrl,
+      storedId || undefined
+    );
     setExpanded(expandedIds);
     expandedIds.length && setSelected([expandedIds[expandedIds.length - 1]]);
   }, [data, currentUrl]);
@@ -191,7 +226,13 @@ export default function ControlledTreeView(props: {
           key={item.id}
           to={item.link}
           style={{ width: "100%", color: "inherit" }}
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            // Save nav item id to session storage when clicked
+            if (item.link) {
+              saveNavItemIdToStorage(item.link, item.id);
+            }
+          }}
         >
           <StyledTreeItem
             nodeId={item.id}
