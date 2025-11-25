@@ -8,8 +8,6 @@ import {
   generateConfig,
   generateNav,
   generateDocHomeUrl,
-  generateStarterNav,
-  generateEssentialNav,
 } from "../../gatsby/path";
 import { DEFAULT_BUILD_TYPE, PageQueryData } from "./interface";
 
@@ -24,7 +22,7 @@ export const createDocHome = async ({
   {
     allMdx(
       filter: {
-        fileAbsolutePath: { regex: "/tidb/master/_docHome.md$/" }
+        fileAbsolutePath: { regex: "/tidbcloud/master/_docHome.md$/" }
         frontmatter: { draft: { ne: true } }
       }
     ) {
@@ -87,8 +85,6 @@ export const createDocHome = async ({
     const { id, name, pathConfig, filePath, slug } = node;
     const path = generateDocHomeUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -104,8 +100,6 @@ export const createDocHome = async ({
         // use for edit in github
         filePath,
         navUrl,
-        starterNavUrl,
-        essentialNavUrl,
         pageUrl: path,
         availIn: {
           locale,
