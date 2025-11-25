@@ -4,20 +4,22 @@ import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
 import { Locale, Repo, BuildType } from "../../src/shared/interface";
-import {
-  generateConfig,
-  generateUrl,
-  generateNav,
-  generateStarterNav,
-  generateEssentialNav,
-} from "../../gatsby/path";
-import { cpMarkdown } from "../../gatsby/cp-markdown";
-import {
-  getTidbCloudFilesFromTocs,
-  determineInDefaultPlan,
-} from "../cloud-plan";
+import { generateConfig, generateUrl, generateNav } from "../path";
+import { cpMarkdown } from "../cp-markdown";
+import { getTidbCloudFilesFromTocs } from "../cloud-plan";
 import { getFilesFromTocs, filterNodesByToc } from "../toc-filter";
-import { PageQueryData, DEFAULT_BUILD_TYPE } from "./interface";
+
+interface PageQueryData {
+  allMdx: {
+    nodes: {
+      id: string;
+      frontmatter: { aliases: string[] };
+      slug: string;
+    }[];
+  };
+}
+
+const DEFAULT_BUILD_TYPE: BuildType = "prod";
 
 export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   const {
@@ -25,7 +27,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     graphql,
   } = createPagesArgs;
   // const template = resolve(__dirname, '../src/doc/index.tsx')
-  const template = resolve(__dirname, "../../src/templates/DocTemplate.tsx");
+  const template = resolve(__dirname, "../src/templates/DocTemplate.tsx");
 
   // First, get the list of files that should be built based on TOC content
   const tocFilesMap = await getFilesFromTocs(graphql);
@@ -114,8 +116,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
 
     const path = generateUrl(name, pathConfig);
     const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
@@ -126,11 +126,11 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       .filter(Boolean);
 
     // Determine inDefaultPlan for tidbcloud articles
-    const inDefaultPlan = determineInDefaultPlan(
-      name,
-      pathConfig,
-      tidbCloudTocFilesMap
-    );
+    // const inDefaultPlan = determineInDefaultPlan(
+    //   name,
+    //   pathConfig,
+    //   tidbCloudTocFilesMap
+    // );
 
     cpMarkdown(`${node.slug}.md`, path, name);
     createPage({
@@ -144,8 +144,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         filePath,
         pageUrl: path,
         navUrl,
-        starterNavUrl,
-        essentialNavUrl,
         availIn: {
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],
@@ -156,7 +154,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
           banner: true,
           feedback: true,
         },
-        inDefaultPlan,
+        inDefaultPlan: "premium",
       },
     });
 
