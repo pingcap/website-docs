@@ -7,14 +7,12 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Repo } from "./interface";
+import { CloudPlan, Repo } from "./interface";
 
 export const CLOUD_MODE_KEY = "plan";
 export const CLOUD_MODE_VALUE_STARTER = "starter";
 export const CLOUD_MODE_VALUE_ESSENTIAL = "essential";
 export const CLOUD_MODE_VALUE_PREMIUM = "premium";
-
-export type CloudPlan = "dedicated" | "starter" | "essential" | "premium";
 
 const CloudPlanContext = createContext<{
   repo: Repo;

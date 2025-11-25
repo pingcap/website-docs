@@ -15,7 +15,6 @@ import {
   generateDownloadURL,
   generateContactURL,
   generateLearningCenterURL,
-  generateDocsHomeUrl,
   getPageType,
   PageType,
 } from "shared/utils";
@@ -161,7 +160,6 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
   const theme = useTheme();
   const { language, t } = useI18next();
   const selectedItem = useSelectedNavItem(language);
-
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -240,7 +238,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           >
             <LinkComponent
               isI18n
-              to="/tidbcloud"
+              to={`/tidbcloud`}
               style={{ width: "100%" }}
               onClick={() =>
                 gtmTrack(GTMEvent.ClickHeadNav, {
