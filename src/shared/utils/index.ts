@@ -289,7 +289,7 @@ export function isInViewport(element: HTMLElement) {
 export function scrollToElementIfInView(
   element: HTMLElement & { scrollIntoViewIfNeeded: () => void }
 ) {
-  element.scrollIntoView({ block: "center" });
+  element.scrollIntoView({ block: "end" });
 }
 
 export type PageType = "home" | "tidb" | "tidbcloud" | undefined;
