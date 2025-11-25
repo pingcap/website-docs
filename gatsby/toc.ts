@@ -9,10 +9,20 @@ import {
   Heading,
 } from "mdast";
 
-import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
+import {
+  RepoNav,
+  RepoNavLink,
+  PathConfig,
+  CloudPlan,
+} from "../src/shared/interface";
 import { generateUrl } from "./path";
 
-export const EXTENDS_FOLDERS = ["starter", "essential", "dedicated"];
+export const EXTENDS_FOLDERS: CloudPlan[] = [
+  "starter",
+  "essential",
+  "dedicated",
+  "premium",
+];
 
 const SKIP_MODE_HEADING = "_BUILD_ALLOWLIST";
 

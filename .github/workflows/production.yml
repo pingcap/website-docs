@@ -36,10 +36,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Build website
     steps:
-      - name: Check disk usage
-        run: df -h
-      - name: Remove unused Docker images
-        run: docker system prune -af
+      - name: Maximize build space
+        run: |
+            df -h
+            sudo rm -rf /usr/share/dotnet
+            sudo rm -rf /usr/local/lib/android
+            sudo rm -rf /opt/ghc
+            sudo rm -rf /opt/hostedtoolcache/CodeQL
+            sudo docker image prune --all --force
+            sudo docker builder prune -a
+            df -h
 
       - uses: actions/checkout@v3
         with:
@@ -63,7 +69,9 @@ jobs:
           echo "build_date=$(date)" >> $GITHUB_OUTPUT
 
       - name: Install deps
-        run: yarn
+        run: |
+          yarn
+          df -h
 
       - name: Calc gatsby cache key
         id: calc-cache-key
@@ -195,7 +203,8 @@ jobs:
           architecture: "x64"
 
       - name: Install Tencent Cloud CLI
-        run: pipx install tccli
+        run: |
+          pipx install tccli
 
       - name: Purge production CDN cache
         run: tccli cdn PurgePathCache --Paths '["https://docs-preview.pingcap.com/"]' --FlushType flush

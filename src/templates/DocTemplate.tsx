@@ -23,6 +23,7 @@ import {
   RepoNav,
   BuildType,
   Locale,
+  CloudPlan,
 } from "shared/interface";
 import Seo from "components/Seo";
 import { getStable, generateUrl, getPageType } from "shared/utils";
@@ -32,7 +33,6 @@ import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { DOC_HOME_URL } from "shared/resources";
 import { useReportReadingRate } from "shared/useReportReadingRate";
 import {
-  CloudPlan,
   CloudPlanProvider,
   useCloudPlan,
   useCloudPlanNavigate,
