@@ -58,16 +58,12 @@ export function generateConfig(slug: string): {
   name = name === "_index" ? "" : name;
   let prefix: CloudPlan | undefined = undefined;
 
-  if (repo === Repo.tidbcloud) {
+  // only index page should have a prefix, e.g. /tidbcloud/starter/
+  if (repo === Repo.tidbcloud && !name && !slug.includes("dedicated/")) {
     const simplePrefixes = ["starter", "essential", "premium"];
     prefix = simplePrefixes.find((p) => slug.includes(`${p}/`)) as
       | CloudPlan
       | undefined;
-
-    // dedicated prefix is only used when the name is not empty
-    if (!prefix && slug.includes("dedicated/") && name) {
-      prefix = "dedicated";
-    }
   }
 
   return {
