@@ -1,4 +1,4 @@
-import { EXTENDS_FOLDERS, mdxAstToToc, TocQueryData } from "./toc";
+import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 
 // Whitelist of files that should always be built regardless of TOC content
@@ -7,10 +7,7 @@ const WHITELIST = [""];
 /**
  * Extract file paths from TOC navigation structure
  */
-export function extractFilesFromToc(
-  nav: any[],
-  extendsFolders?: string[]
-): string[] {
+export function extractFilesFromToc(nav: any[]): string[] {
   const files: string[] = [];
 
   function traverse(navItems: any[]) {
@@ -26,31 +23,7 @@ export function extractFilesFromToc(
         if (filenameWithExt && filenameWithExt !== "") {
           // Remove .md extension to match the actual file name
           const filename = filenameWithExt.replace(/\.md$/, "");
-
-          // Check if extends folders are specified and found in path segments
-          if (extendsFolders && extendsFolders.length > 0) {
-            let foundExtendsFolder = false;
-            for (const extendsFolder of extendsFolders) {
-              const extendsIndex = pathSegments.indexOf(extendsFolder);
-              if (
-                extendsIndex !== -1 &&
-                extendsIndex < pathSegments.length - 1
-              ) {
-                // Keep the extends folder and everything after it (excluding the .md extension)
-                const pathFromExtends = pathSegments
-                  .slice(extendsIndex, -1)
-                  .join("/");
-                files.push(`${pathFromExtends}/${filename}`);
-                foundExtendsFolder = true;
-                break;
-              }
-            }
-            if (!foundExtendsFolder) {
-              files.push(filename);
-            }
-          } else {
-            files.push(filename);
-          }
+          files.push(filename);
         }
       }
       if (item.children) {
@@ -98,7 +71,7 @@ export async function getFilesFromTocs(
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
     const toc = mdxAstToToc(node.mdxAST.children, config);
-    const files = extractFilesFromToc(toc, EXTENDS_FOLDERS);
+    const files = extractFilesFromToc(toc);
 
     // Create a key for this specific locale/repo/version combination
     const key = `${config.locale}/${config.repo}/${
@@ -157,9 +130,7 @@ export function filterNodesByToc(
     }
 
     // Only build files that are referenced in the corresponding TOC
-    const fullPath = `${
-      node.pathConfig.prefix ? node.pathConfig.prefix + "/" : ""
-    }${node.name}`;
+    const fullPath = node.name;
 
     // Check if the file is directly referenced in TOC
     let isIncluded = filesForThisToc.has(fullPath);
