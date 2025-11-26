@@ -9,20 +9,8 @@ import {
   Heading,
 } from "mdast";
 
-import {
-  RepoNav,
-  RepoNavLink,
-  PathConfig,
-  CloudPlan,
-} from "../src/shared/interface";
+import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
 import { generateUrl } from "./path";
-
-export const EXTENDS_FOLDERS: CloudPlan[] = [
-  "starter",
-  "essential",
-  "dedicated",
-  "premium",
-];
 
 const SKIP_MODE_HEADING = "_BUILD_ALLOWLIST";
 
@@ -209,13 +197,6 @@ function getContentFromLink(
 
     const urlSegs = child.url.split("/");
     let filename = urlSegs[urlSegs.length - 1].replace(".md", "");
-
-    for (const extendsFolder of EXTENDS_FOLDERS) {
-      if (urlSegs.includes(extendsFolder)) {
-        filename = `${extendsFolder}/${filename}`;
-        break;
-      }
-    }
 
     return {
       type: "nav",
