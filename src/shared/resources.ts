@@ -505,7 +505,7 @@ export const TIDB_ZH_VERSIONS = CONFIG["docs"]["tidb"]["languages"]["zh"][
 
 export const OP_EN_VERSIONS = CONFIG["docs"]["tidb-in-kubernetes"]["languages"][
   "en"
-]["versions"].map((d) => convertVersionName(d, OP_EN_STABLE_VERSION));
+]["versions"].map((d) => convertVersionName(d, OP_EN_STABLE_VERSION, "tidb-in-kubernetes"));
 
 export const CLOUD_EN_VERSIONS = [];
 
