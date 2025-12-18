@@ -11,11 +11,9 @@ import Layout from "components/Layout";
 import {
   LeftNavDesktop,
   LeftNavMobile,
-} from "components/Layout/Navigation/LeftNav";
+} from "components/Layout/LeftNav/LeftNav";
 import MDXContent from "components/MDXContent";
-import RightNav, {
-  RightNavMobile,
-} from "components/Layout/Navigation/RightNav";
+import RightNav, { RightNavMobile } from "components/Layout/RightNav/RightNav";
 import {
   TableOfContent,
   PageContext,
@@ -288,7 +286,6 @@ function DocTemplate({
                     name={name}
                     pathConfig={pathConfig}
                     filePath={filePath}
-                    frontmatter={frontmatter}
                     availIn={availIn.version}
                     language={language}
                     buildType={buildType}
