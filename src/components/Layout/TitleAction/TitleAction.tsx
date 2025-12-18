@@ -108,6 +108,13 @@ export const TitleAction = (props: TitleActionProps) => {
     }
   }, [pathConfig, filePath, pageUrl, site.siteMetadata.siteUrl]);
 
+  const improveUrl = React.useMemo(() => {
+    if (!pathConfig || !filePath) return null;
+    return `https://github.com/${getRepoFromPathCfg(pathConfig)}/edit/${
+      pathConfig.branch
+    }/${filePath}`;
+  }, [pathConfig.branch, filePath]);
+
   return (
     <Stack
       direction="row"
@@ -184,6 +191,23 @@ export const TitleAction = (props: TitleActionProps) => {
               >
                 <Typography component="span" color={theme.palette.carbon[900]}>
                   {t("doc.feedback")}
+                </Typography>
+              </MenuItem>
+            )}
+            {improveUrl && (
+              <MenuItem
+                component="a"
+                href={improveUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={handleContributeClose}
+                disableRipple
+                sx={{
+                  textDecoration: "none",
+                }}
+              >
+                <Typography component="span" color={theme.palette.carbon[900]}>
+                  {t("doc.improve")}
                 </Typography>
               </MenuItem>
             )}
