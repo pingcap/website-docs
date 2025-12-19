@@ -208,4 +208,4 @@ jobs:
 
       - name: Purge production CDN cache
         run: |
-          tccli cdn PurgePathCache --Paths '["https://docs.pingcap.com/"]' --FlushType flush
+          tccli teo CreatePurgeTask --cli-unfold-argument --ZoneId ${{ secrets.TENCENTCLOUD_EO_DOCS_ZONEID }} --Type purge_prefix --Method invalidate --Targets 'https://docs.pingcap.com'
