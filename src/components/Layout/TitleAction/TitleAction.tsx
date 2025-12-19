@@ -121,6 +121,7 @@ export const TitleAction = (props: TitleActionProps) => {
       spacing={3}
       alignItems="center"
       justifyItems="center"
+      flexWrap="wrap"
       divider={
         <Divider
           orientation="vertical"
@@ -227,7 +228,7 @@ export const TitleAction = (props: TitleActionProps) => {
               color: theme.palette.carbon[700],
             }}
           >
-            Copy Markdown for LLM
+            Copy for LLM
           </Button>
         </Tooltip>
       )}
