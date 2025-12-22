@@ -113,7 +113,7 @@ export default function RightNav(props: RightNavProps) {
             component="div"
             sx={{
               paddingLeft: "0.5rem",
-              color: theme.palette.carbon[600],
+              color: theme.palette.carbon[700],
               fontSize: "0.875rem",
               fontWeight: "500",
               lineHeight: "1.25rem",
