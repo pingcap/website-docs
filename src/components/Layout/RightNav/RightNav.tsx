@@ -108,22 +108,24 @@ export default function RightNav(props: RightNavProps) {
           gap: "36px",
         }}
       >
-        <Box id="toc-container" component="nav" aria-label="toc">
-          <Typography
-            component="div"
-            sx={{
-              paddingLeft: "0.5rem",
-              color: theme.palette.carbon[700],
-              fontSize: "0.875rem",
-              fontWeight: "500",
-              lineHeight: "1.25rem",
-              paddingBottom: "0.5rem",
-            }}
-          >
-            <Trans i18nKey="doc.toc" />
-          </Typography>
-          {generateToc(toc, 0, activeId)}
-        </Box>
+        {toc.length > 0 && (
+          <Box id="toc-container" component="nav" aria-label="toc">
+            <Typography
+              component="div"
+              sx={{
+                paddingLeft: "0.5rem",
+                color: theme.palette.carbon[700],
+                fontSize: "0.875rem",
+                fontWeight: "500",
+                lineHeight: "1.25rem",
+                paddingBottom: "0.5rem",
+              }}
+            >
+              <Trans i18nKey="doc.toc" />
+            </Typography>
+            {generateToc(toc, 0, activeId)}
+          </Box>
+        )}
       </Box>
     </>
   );
