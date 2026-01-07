@@ -155,7 +155,7 @@ export const TitleAction = (props: TitleActionProps) => {
               color: theme.palette.carbon[700],
             }}
           >
-            Contribute
+            {t("doc.contribute")}
           </Button>
           <Menu
             id="contribute-menu"
@@ -228,7 +228,7 @@ export const TitleAction = (props: TitleActionProps) => {
               color: theme.palette.carbon[700],
             }}
           >
-            Copy for LLM
+            {t("doc.copy-for-llm")}
           </Button>
         </Tooltip>
       )}
@@ -244,7 +244,7 @@ export const TitleAction = (props: TitleActionProps) => {
             color: theme.palette.carbon[700],
           }}
         >
-          View as Markdown
+          {t("doc.view-as-markdown")}
         </Button>
       )}
 
@@ -259,7 +259,7 @@ export const TitleAction = (props: TitleActionProps) => {
             color: theme.palette.carbon[700],
           }}
         >
-          Download PDF
+          {t("doc.download-pdf")}
         </Button>
       )}
     </Stack>
