@@ -144,6 +144,7 @@
 .markdown-body {
   h1 {
     font-weight: 400;
+    border-bottom: 0;
   }
 
   h2,

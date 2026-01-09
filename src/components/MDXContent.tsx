@@ -8,17 +8,12 @@ import Box from "@mui/material/Box";
 
 import * as MDXComponents from "components/MDXComponents";
 import { CustomNotice } from "components/Card/CustomNotice";
-import {
-  PathConfig,
-  FrontMatter,
-  BuildType,
-  CloudPlan,
-} from "shared/interface";
-import { useTotalContributors } from "components/Contributors";
+import { PathConfig, BuildType, CloudPlan } from "shared/interface";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
 import { getPageType } from "shared/utils";
+import { H1 } from "./MDXComponents/H1";
 
 export default function MDXContent(props: {
   data: any;
@@ -26,7 +21,6 @@ export default function MDXContent(props: {
   name: string;
   pathConfig: PathConfig;
   filePath: string;
-  frontmatter: FrontMatter;
   availIn: string[];
   language: string;
   buildType: BuildType;
@@ -39,7 +33,6 @@ export default function MDXContent(props: {
     name,
     pathConfig,
     filePath,
-    frontmatter,
     availIn,
     language,
     buildType,
@@ -62,7 +55,20 @@ export default function MDXContent(props: {
       );
   });
 
-  !frontmatter?.hide_commit && useTotalContributors(pathConfig, filePath);
+  // Create H1 wrapper with props
+  const H1WithProps = React.useCallback(
+    (props: { children: React.ReactNode }) => (
+      <H1
+        pathConfig={pathConfig}
+        filePath={filePath}
+        pageUrl={pageUrl}
+        buildType={buildType}
+        language={language}
+        {...props}
+      />
+    ),
+    [pathConfig, filePath, pageUrl]
+  );
 
   return (
     <Container disableGutters className={className} maxWidth="lg">
@@ -74,6 +80,7 @@ export default function MDXContent(props: {
           components={{
             ...MDXComponents,
             pre: Pre,
+            h1: H1WithProps,
             CustomContent,
           }}
         >
