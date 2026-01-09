@@ -68,7 +68,15 @@ export async function getFilesFromTocs(
   const tocNodes = tocQuery.data!.allMdx.nodes;
   const tocFilesMap = new Map<string, Set<string>>();
 
-  tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
+  // TODO: Remove this filter once premium is public. Currently filtering out TOC-tidb-cloud-premium.md
+  const filteredTocNodes = tocNodes.filter(
+    (node: TocQueryData["allMdx"]["nodes"][0]) => {
+      const relativePath = node.parent?.relativePath || "";
+      return !relativePath.includes("TOC-tidb-cloud-premium.md");
+    }
+  );
+
+  filteredTocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
     const toc = mdxAstToToc(node.mdxAST.children, config);
     const files = extractFilesFromToc(toc);
