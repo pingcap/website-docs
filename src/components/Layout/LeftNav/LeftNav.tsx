@@ -14,6 +14,7 @@ import LeftNavTree from "./LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "../VersionSelect/VersionSelect";
+import { getHeaderHeight } from "shared/headerHeight";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 import CloudVersionSelect from "../VersionSelect/CloudVersionSelect";
@@ -55,9 +56,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: props.bannerEnabled ? "7.5rem" : "5rem",
+          top: getHeaderHeight(props.bannerEnabled || false),
           height: "100%",
-          maxHeight: `calc(100vh - ${props.bannerEnabled ? "7.5rem" : "5rem"})`,
+          maxHeight: `calc(100vh - ${getHeaderHeight(props.bannerEnabled || false)})`,
           boxSizing: "border-box",
           overflowY: "auto",
           padding: "20px 14px",

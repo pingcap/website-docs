@@ -8,7 +8,7 @@ import LinkComponent, { BlueAnchorLink } from "components/Link";
 import HeaderNavStack, {
   HeaderNavStackMobile,
 } from "components/Layout/HeaderNav";
-import HeaderAction from "components/Layout/HeaderAction";
+import HeaderAction, { LangSwitch } from "components/Layout/HeaderAction";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
@@ -19,6 +19,7 @@ import { generateDocsHomeUrl, generateUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
+import { getHeaderHeight, HEADER_HEIGHT } from "shared/headerHeight";
 
 interface HeaderProps {
   bannerEnabled?: boolean;
@@ -43,7 +44,7 @@ export default function Header(props: HeaderProps) {
         zIndex: 9,
         backgroundColor: "carbon.50",
         boxShadow: "none",
-        height: props.bannerEnabled ? "7.5rem" : "5rem",
+        height: getHeaderHeight(props.bannerEnabled || false),
       }}
     >
       <HeaderBanner {...props} />
@@ -53,39 +54,68 @@ export default function Header(props: HeaderProps) {
           height: "100%",
           paddingLeft: "24px",
           paddingRight: "24px",
+          flexDirection: "column",
+          alignItems: "stretch",
           borderBottom: `1px solid ${theme.palette.carbon[400]}`,
         }}
       >
-        {props.menu}
+        {/* First row: Logo and HeaderAction */}
         <Box
           sx={{
-            display: {
-              xs: "none",
-              md: "block",
-            },
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            height: HEADER_HEIGHT.FIRST_ROW,
           }}
         >
-          <LinkComponent
-            to={generateDocsHomeUrl(language)}
-            onClick={() =>
-              gtmTrack(GTMEvent.ClickHeadNav, {
-                item_name: "logo",
-              })
-            }
+          {props.menu}
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "block",
+              },
+            }}
           >
-            <TiDBLogo />
-          </LinkComponent>
+            <LinkComponent
+              to={generateDocsHomeUrl(language)}
+              onClick={() =>
+                gtmTrack(GTMEvent.ClickHeadNav, {
+                  item_name: "logo",
+                })
+              }
+            >
+              <TiDBLogo />
+            </LinkComponent>
+          </Box>
+
+          <HeaderAction
+            supportedLocales={props.locales}
+            docInfo={props.docInfo}
+            buildType={props.buildType}
+            pageUrl={props.pageUrl}
+            showLangSwitch={false}
+          />
         </Box>
 
-        <HeaderNavStack buildType={props.buildType} pageUrl={props.pageUrl} />
-        <HeaderNavStackMobile buildType={props.buildType} />
+        {/* Second row: HeaderNavStack, HeaderNavStackMobile, and LangSwitch */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            height: HEADER_HEIGHT.SECOND_ROW,
+          }}
+        >
+          <HeaderNavStack buildType={props.buildType} pageUrl={props.pageUrl} />
+          <HeaderNavStackMobile buildType={props.buildType} />
 
-        <HeaderAction
-          supportedLocales={props.locales}
-          docInfo={props.docInfo}
-          buildType={props.buildType}
-          pageUrl={props.pageUrl}
-        />
+          {props.locales.length > 0 && (
+            <Box sx={{ marginLeft: "auto" }}>
+              <LangSwitch supportedLocales={props.locales} />
+            </Box>
+          )}
+        </Box>
       </Toolbar>
     </AppBar>
   );

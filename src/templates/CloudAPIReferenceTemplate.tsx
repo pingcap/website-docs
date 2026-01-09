@@ -6,6 +6,7 @@ import Seo from "components/Seo";
 import Layout from "components/Layout";
 import { type BuildType, Locale } from "../shared/interface";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import { getHeaderHeight } from "shared/headerHeight";
 
 declare const Redoc: any;
 
@@ -133,7 +134,7 @@ export default function APIReferenceTemplate({
           ]}
         />
         <Box
-          sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", width: "100%" }}
+          sx={{ marginTop: getHeaderHeight(bannerVisible || false), width: "100%" }}
         >
           <Box id="redoc-container" data-testid="redoc-container" />
         </Box>

@@ -1,4 +1,5 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
+import { HEADER_HEIGHT } from "shared/headerHeight";
 
 export function Banner({
   url,
@@ -17,14 +18,12 @@ export function Banner({
     <Box
       sx={{
         flexShrink: 0,
-        minHeight: "1.5rem",
+        height: HEADER_HEIGHT.BANNER,
         backgroundColor: bgColor || "var(--tiui-palette-peacock-100)",
         // backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
         backgroundRepeat: "no-repeat",
-        paddingTop: "0.5rem",
-        paddingBottom: "0.5rem",
       }}
     >
       <Stack

@@ -12,6 +12,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { TableOfContent, PathConfig, BuildType } from "shared/interface";
 import { transformCustomId, removeHtmlTag } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
+import { getHeaderHeight } from "shared/headerHeight";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -96,11 +97,9 @@ export default function RightNav(props: RightNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: bannerVisible ? "7.5rem" : "5rem",
+          top: getHeaderHeight(bannerVisible || false),
           height: "100%",
-          maxHeight: bannerVisible
-            ? "calc(100vh - 7.5rem)"
-            : "calc(100vh - 5rem)",
+          maxHeight: `calc(100vh - ${getHeaderHeight(bannerVisible || false)})`,
           overflowY: "auto",
           padding: "36px 16px",
           display: "flex",
