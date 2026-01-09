@@ -62,8 +62,15 @@ export default function HeaderAction(props: {
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
   pageUrl?: string;
+  showLangSwitch?: boolean;
 }) {
-  const { supportedLocales, docInfo, buildType, pageUrl } = props;
+  const {
+    supportedLocales,
+    docInfo,
+    buildType,
+    pageUrl,
+    showLangSwitch = true,
+  } = props;
   const { language, t } = useI18next();
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
   const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
@@ -77,7 +84,7 @@ export default function HeaderAction(props: {
       }}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
-      {supportedLocales.length > 0 && (
+      {showLangSwitch && supportedLocales.length > 0 && (
         <LangSwitch supportedLocales={supportedLocales} />
       )}
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
@@ -117,7 +124,7 @@ const LANG_MAP = {
   [Locale.ja]: "日本語",
 };
 
-const LangSwitch = (props: {
+export const LangSwitch = (props: {
   language?: string;
   changeLanguage?: () => void;
   supportedLocales: Locale[];

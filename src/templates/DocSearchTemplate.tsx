@@ -28,6 +28,7 @@ import {
   TIDB_ZH_SEARCH_INDEX_VERSION,
 } from "shared/resources";
 import { Locale } from "shared/interface";
+import { getHeaderHeight } from "shared/headerHeight";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { useEffect } from "react";
 
@@ -203,7 +204,7 @@ export default function DocSearchTemplate({
       <Layout bannerEnabled={bannerVisible}>
         <Container
           sx={{
-            marginTop: bannerVisible ? "7.5rem" : "5rem",
+            marginTop: getHeaderHeight(bannerVisible || false),
             minHeight: "calc(100vh - 30rem)",
             position: "relative",
           }}

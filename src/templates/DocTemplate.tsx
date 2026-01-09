@@ -28,6 +28,7 @@ import { getStable, generateUrl, getPageType } from "shared/utils";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
+import { getHeaderHeight } from "shared/headerHeight";
 import { DOC_HOME_URL } from "shared/resources";
 import { useReportReadingRate } from "shared/useReportReadingRate";
 import {
@@ -218,7 +219,10 @@ function DocTemplate({
         archived={buildType === "archive"}
       />
       <Box
-        sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", display: "flex" }}
+        sx={{
+          marginTop: getHeaderHeight(bannerVisible || false),
+          display: "flex",
+        }}
         className={clsx("PingCAP-Doc", {
           "doc-feature-banner": bannerVisible,
         })}
