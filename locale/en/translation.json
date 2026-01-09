@@ -41,6 +41,9 @@
   "doc": {
     "notExist": "This doc does not exist",
     "toc": "ON THIS PAGE",
+    "contribute": "Contribute",
+    "copy-for-llm": "Copy for LLM",
+    "view-as-markdown": "View as Markdown",
     "download-pdf": "Download PDF",
     "improve": "Edit this page",
     "feedback": "Report a doc issue",

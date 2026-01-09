@@ -38,9 +38,12 @@
   "doc": {
     "notExist": "このドキュメントは存在しません",
     "toc": "このページの内容",
+    "contribute": "貢献",
+    "copy-for-llm": "Markdownをコピー",
+    "view-as-markdown": "Markdownで表示",
     "download-pdf": "PDFをダウンロード",
     "improve": "このページを編集",
-    "feedback": "ドキュメントの問題を報告する",
+    "feedback": "ドキュメントの問題を報告",
     "latestCommit": "最終更新日",
     "deprecation": {
       "tidb": {
