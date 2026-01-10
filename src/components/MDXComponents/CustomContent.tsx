@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { PageType } from "shared/utils";
+import { PageType } from "shared/getPageType";
 import { CloudPlan } from "shared/interface";
 
 interface CustomContentProps {

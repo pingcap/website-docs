@@ -18,7 +18,8 @@ import MarkdownIcon from "media/icons/markdown.svg";
 import FileIcon from "media/icons/file.svg";
 
 import { BuildType, PathConfig } from "shared/interface";
-import { calcPDFUrl, getPageType, getRepoFromPathCfg } from "shared/utils";
+import { calcPDFUrl, getRepoFromPathCfg } from "shared/utils";
+import { getPageType } from "shared/getPageType";
 import { Tooltip, Divider } from "@mui/material";
 
 interface TitleActionProps {

@@ -12,7 +12,7 @@ import { PathConfig, BuildType, CloudPlan } from "shared/interface";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
-import { getPageType } from "shared/utils";
+import { getPageType } from "shared/getPageType";
 import { H1 } from "./MDXComponents/H1";
 
 export default function MDXContent(props: {

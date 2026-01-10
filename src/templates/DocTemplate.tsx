@@ -24,7 +24,8 @@ import {
   CloudPlan,
 } from "shared/interface";
 import Seo from "components/Seo";
-import { getStable, generateUrl, getPageType } from "shared/utils";
+import { getStable, generateUrl } from "shared/utils";
+import { getPageType } from "shared/getPageType";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";

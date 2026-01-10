@@ -1,5 +1,5 @@
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { getPageType } from "./utils";
+import { getPageType } from "./getPageType";
 
 export const useIsAutoTranslation = (pageUrl: string) => {
   const { language } = useI18next();

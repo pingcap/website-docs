@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 
 import LinkComponent from "components/Link";
-import { getPageType, PageType } from "shared/utils";
+import { getPageType, PageType } from "shared/getPageType";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";

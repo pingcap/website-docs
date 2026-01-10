@@ -215,7 +215,11 @@ export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
   return acc;
 }, {} as Record<Repo, Record<Locale, (string | null)[]>>);
 
-export function convertVersionName(version: string, stable: string, repo?: string) {
+export function convertVersionName(
+  version: string,
+  stable: string,
+  repo?: string
+) {
   const devBranch = repo === "tidb-in-kubernetes" ? "main" : "master";
   switch (version) {
     case devBranch:
@@ -293,19 +297,3 @@ export function scrollToElementIfInView(
 ) {
   element.scrollIntoView({ block: "end" });
 }
-
-export type PageType = "home" | "tidb" | "tidbcloud" | undefined;
-
-export const getPageType = (language?: string, pageUrl?: string): PageType => {
-  if (pageUrl === "/" || pageUrl === `/${language}/`) {
-    return "home";
-  } else if (pageUrl?.includes("/tidb/")) {
-    return "tidb";
-  } else if (
-    pageUrl?.includes("/tidbcloud/") ||
-    pageUrl?.endsWith("/tidbcloud")
-  ) {
-    return "tidbcloud";
-  }
-  return;
-};

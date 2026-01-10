@@ -24,7 +24,7 @@ import {
   removeHtmlTag,
 } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
-import { getPageType } from "shared/utils";
+import { getPageType } from "shared/getPageType";
 
 interface RightNavProps {
   toc?: TableOfContent[];

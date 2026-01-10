@@ -9,12 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import LinkComponent from "components/Link";
-import {
-  // generateDownloadURL,
-  // generateLearningCenterURL,
-  getPageType,
-  PageType,
-} from "shared/utils";
+import { getPageType, PageType } from "shared/getPageType";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
