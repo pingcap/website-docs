@@ -21,6 +21,8 @@ import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
 import { getHeaderHeight, HEADER_HEIGHT } from "shared/headerHeight";
 
+import { NavItemConfig } from "./HeaderNavConfig";
+
 interface HeaderProps {
   bannerEnabled?: boolean;
   menu?: React.ReactNode;
@@ -30,6 +32,7 @@ interface HeaderProps {
   pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
+  onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }
 
 export default function Header(props: HeaderProps) {
@@ -106,7 +109,11 @@ export default function Header(props: HeaderProps) {
             height: HEADER_HEIGHT.SECOND_ROW,
           }}
         >
-          <HeaderNavStack buildType={props.buildType} pageUrl={props.pageUrl} />
+          <HeaderNavStack
+            buildType={props.buildType}
+            pageUrl={props.pageUrl}
+            onSelectedNavItemChange={props.onSelectedNavItemChange}
+          />
           <HeaderNavStackMobile buildType={props.buildType} />
 
           {props.locales.length > 0 && (

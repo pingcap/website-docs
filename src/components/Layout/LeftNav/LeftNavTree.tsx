@@ -5,6 +5,7 @@ import TreeView from "@mui/lab/TreeView";
 import TreeItem, { TreeItemProps, treeItemClasses } from "@mui/lab/TreeItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import { styled, useTheme } from "@mui/material/styles";
 import { SvgIconProps } from "@mui/material/SvgIcon";
 
@@ -164,18 +165,25 @@ export default function ControlledTreeView(props: {
     return items.map((item) => {
       if (item.type === "heading") {
         return (
-          <Typography
-            pl="8px"
-            mb="8px"
-            mt="16px"
-            fontWeight={700}
-            fontSize="12px"
-            lineHeight="1.15rem"
-            color="#666"
-            sx={{ textTransform: "uppercase" }}
+          <Box
+            key={item.id || `heading-${item.content[0]}`}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              my: "16px",
+            }}
           >
-            {item.content[0] as string}
-          </Typography>
+            <Typography
+              pl="8px"
+              fontWeight={300}
+              fontSize="14px"
+              color="carbon.700"
+              sx={{ textTransform: "uppercase", flexShrink: 0 }}
+            >
+              {item.content[0] as string}
+            </Typography>
+            <Divider sx={{ flexGrow: 1, ml: "10px" }} />
+          </Box>
         );
       } else {
         return renderTreeItems([item]);

@@ -4,11 +4,14 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { RepoNav, PathConfig, BuildType } from "shared/interface";
+import { NavItemConfig } from "../Header/HeaderNavConfig";
 import LinkComponent from "components/Link";
 import LeftNavTree from "./LeftNavTree";
 import VersionSelect, {
@@ -28,6 +31,7 @@ interface LeftNavProps {
   buildType?: BuildType;
   bannerEnabled?: boolean;
   availablePlans: string[];
+  selectedNavItem?: NavItemConfig | null;
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
@@ -39,7 +43,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
     availIn,
     buildType,
     availablePlans,
+    selectedNavItem,
   } = props;
+  const theme = useTheme();
 
   return (
     <Box
@@ -58,13 +64,45 @@ export function LeftNavDesktop(props: LeftNavProps) {
           position: "sticky",
           top: getHeaderHeight(props.bannerEnabled || false),
           height: "100%",
-          maxHeight: `calc(100vh - ${getHeaderHeight(props.bannerEnabled || false)})`,
+          maxHeight: `calc(100vh - ${getHeaderHeight(
+            props.bannerEnabled || false
+          )})`,
           boxSizing: "border-box",
           overflowY: "auto",
-          padding: "20px 14px",
+          padding: "20px 16px",
         }}
       >
-        {pathConfig.repo !== "tidbcloud" && (
+        {selectedNavItem && (
+          <Box
+            sx={{
+              borderRadius: "4px",
+              "&:hover": {
+                backgroundColor: theme.palette.carbon[200],
+              },
+            }}
+          >
+            <LinkComponent
+              isI18n={selectedNavItem.isI18n ?? true}
+              to={selectedNavItem.to}
+              style={{ textDecoration: "none", display: "block" }}
+            >
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  color: theme.palette.carbon[900],
+                  padding: "8px",
+                }}
+              >
+                {selectedNavItem.label}
+              </Typography>
+            </LinkComponent>
+          </Box>
+        )}
+
+        {pathConfig.repo === "tidb" && (
           <VersionSelect
             name={name}
             pathConfig={pathConfig}
@@ -72,7 +110,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
             buildType={buildType}
           />
         )}
-        {pathConfig.repo === "tidbcloud" && (
+        {/* {pathConfig.repo === "tidbcloud" && (
           <CloudVersionSelect
             name={name}
             pathConfig={pathConfig}
@@ -80,7 +118,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
             buildType={buildType}
             availablePlans={availablePlans}
           />
-        )}
+        )} */}
         <LeftNavTree data={data} current={current} />
       </Box>
     </Box>

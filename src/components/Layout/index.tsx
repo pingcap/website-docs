@@ -9,6 +9,7 @@ import theme from "theme/index";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";
 import { Locale, BuildType, PathConfig } from "shared/interface";
+import { NavItemConfig } from "components/Layout/Header/HeaderNavConfig";
 
 export default function Layout(props: {
   children?: React.ReactNode;
@@ -20,6 +21,7 @@ export default function Layout(props: {
   pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
+  onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   return (
     <ThemeProvider theme={theme}>
@@ -33,6 +35,7 @@ export default function Layout(props: {
         pageUrl={props.pageUrl}
         name={props.name}
         pathConfig={props.pathConfig}
+        onSelectedNavItemChange={props.onSelectedNavItemChange}
       />
       {props.children}
       <Footer />

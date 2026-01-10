@@ -33,10 +33,35 @@ const useSelectedNavItem = (language?: string, pageUrl?: string) => {
   return selectedItem;
 };
 
+// Helper function to find selected item recursively
+const findSelectedItem = (
+  configs: NavConfig[],
+  selectedItem: PageType
+): NavItemConfig | null => {
+  for (const config of configs) {
+    if (config.type === "item") {
+      const isSelected =
+        typeof config.selected === "function"
+          ? config.selected(selectedItem)
+          : config.selected ?? false;
+      if (isSelected) {
+        return config;
+      }
+    } else if (config.type === "group" && config.children) {
+      const item = findSelectedItem(config.children, selectedItem);
+      if (item) {
+        return item;
+      }
+    }
+  }
+  return null;
+};
+
 export default function HeaderNavStack(props: {
   buildType?: BuildType;
   pageUrl?: string;
   config?: NavConfig[];
+  onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   const { language, t } = useI18next();
   const selectedItem = useSelectedNavItem(language, props.pageUrl);
@@ -50,6 +75,14 @@ export default function HeaderNavStack(props: {
     // Use new config generator
     return generateNavConfig(t, cloudPlan, props.buildType);
   }, [props.config, props.buildType, cloudPlan, t]);
+
+  // Find and notify selected item
+  React.useEffect(() => {
+    if (props.onSelectedNavItemChange) {
+      const selectedNavItem = findSelectedItem(defaultConfig, selectedItem);
+      props.onSelectedNavItemChange(selectedNavItem);
+    }
+  }, [defaultConfig, selectedItem, props.onSelectedNavItemChange]);
 
   return (
     <Stack

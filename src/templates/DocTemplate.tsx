@@ -26,6 +26,7 @@ import {
 import Seo from "components/Seo";
 import { getStable, generateUrl } from "shared/utils";
 import { usePageType } from "shared/usePageType";
+import { NavItemConfig } from "components/Layout/Header/HeaderNavConfig";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
@@ -160,6 +161,10 @@ function DocTemplate({
   const bannerVisible = feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
+  const [selectedNavItem, setSelectedNavItem] = React.useState<
+    NavItemConfig | null
+  >(null);
+
   return (
     <Layout
       name={name}
@@ -184,6 +189,7 @@ function DocTemplate({
         type: pathConfig.repo,
       }}
       buildType={buildType}
+      onSelectedNavItemChange={setSelectedNavItem}
     >
       <Seo
         lang={language as Locale}
@@ -239,6 +245,7 @@ function DocTemplate({
               buildType={buildType}
               bannerEnabled={bannerVisible}
               availablePlans={availablePlans}
+              selectedNavItem={selectedNavItem}
             />
           )}
           <Box
