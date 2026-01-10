@@ -25,7 +25,7 @@ import {
 } from "shared/interface";
 import Seo from "components/Seo";
 import { getStable, generateUrl } from "shared/utils";
-import { getPageType } from "shared/getPageType";
+import { usePageType } from "shared/usePageType";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
@@ -142,7 +142,7 @@ function DocTemplate({
     availablePlans.push("essential");
   }
 
-  const pageType = getPageType(language, pageUrl);
+  const pageType = usePageType(language, pageUrl);
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
     let tocItems: TableOfContent[] = [];
     if (toc?.items?.length === 1) {

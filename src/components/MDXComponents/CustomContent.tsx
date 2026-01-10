@@ -1,11 +1,14 @@
 import { PropsWithChildren } from "react";
-import { PageType } from "shared/getPageType";
+import { PageType } from "shared/usePageType";
 import { CloudPlan } from "shared/interface";
 
 interface CustomContentProps {
-  platform?: "tidb" | "tidb-cloud";
+  // using in markdown file
+  // "tidb-cloud" is a historical use case for tidbcloud page, we need to keep it for compatible with old content
+  platform?: PageType | "tidb-cloud";
   language?: string;
   plan?: CloudPlan;
+
   pageTypeFromURL?: PageType;
   languageFromURL?: string;
   cloudPlanFromURL?: CloudPlan | null;
@@ -40,7 +43,7 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     cloudPlanFromURL,
     plan,
   } = props;
-  const pageType = _pageType?.replace("-", "") || "";
+  const pageType = convertMarkdownPageTypeToPageType(_pageType);
   const shouldDisplayByPageType = pageTypeFromURL === pageType;
 
   const cloudPlanArray = plan?.split(",").map((p) => p.trim()) || [];
@@ -60,4 +63,12 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
   const shouldDisplay = isPageTypeMatch && isLanguageMatch && isCloudPlanMatch;
 
   return <>{shouldDisplay ? children : <></>}</>;
+};
+
+const convertMarkdownPageTypeToPageType = (
+  pageType?: string
+): PageType | undefined => {
+  if (!pageType) return;
+  if (pageType === "tidb-cloud") return PageType.TiDBCloud;
+  return pageType as PageType;
 };

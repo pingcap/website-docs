@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import LinkComponent from "components/Link";
-import { getPageType, PageType } from "shared/getPageType";
+import { usePageType, PageType } from "shared/usePageType";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
@@ -20,13 +20,13 @@ import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
 // it will be `undefined` in client side render
 const useSelectedNavItem = (language?: string, pageUrl?: string) => {
   // init in server side
-  const [selectedItem, setSelectedItem] = React.useState<PageType>(
-    () => getPageType(language, pageUrl) || "home"
+  const [selectedItem, setSelectedItem] = React.useState<PageType>(() =>
+    usePageType(language, pageUrl)
   );
 
   // update in client side
   React.useEffect(() => {
-    setSelectedItem(getPageType(language, window.location.pathname));
+    setSelectedItem(usePageType(language, window.location.pathname));
   }, [language]);
 
   return selectedItem;
@@ -86,7 +86,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           <MenuItem
             onClick={handleClose}
             disableRipple
-            selected={selectedItem === "home"}
+            selected={selectedItem === PageType.Home}
           >
             <LinkComponent
               isI18n
@@ -113,7 +113,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           <MenuItem
             onClick={handleClose}
             disableRipple
-            selected={selectedItem === "tidbcloud"}
+            selected={selectedItem === PageType.TiDBCloud}
           >
             <LinkComponent
               isI18n
@@ -139,7 +139,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
         <MenuItem
           onClick={handleClose}
           disableRipple
-          selected={selectedItem === "tidb"}
+          selected={selectedItem === PageType.TiDB}
         >
           <LinkComponent
             isI18n

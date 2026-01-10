@@ -12,7 +12,7 @@ import { PathConfig, BuildType, CloudPlan } from "shared/interface";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
-import { getPageType } from "shared/getPageType";
+import { usePageType } from "shared/usePageType";
 import { H1 } from "./MDXComponents/H1";
 
 export default function MDXContent(props: {
@@ -40,7 +40,7 @@ export default function MDXContent(props: {
     cloudPlan,
   } = props;
 
-  const pageType = getPageType(language, pageUrl);
+  const pageType = usePageType(language, pageUrl);
   const CustomContent = useCustomContent(pageType, cloudPlan, language);
   // const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 

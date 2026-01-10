@@ -19,7 +19,7 @@ import FileIcon from "media/icons/file.svg";
 
 import { BuildType, PathConfig } from "shared/interface";
 import { calcPDFUrl, getRepoFromPathCfg } from "shared/utils";
-import { getPageType } from "shared/getPageType";
+import { usePageType, PageType } from "shared/usePageType";
 import { Tooltip, Divider } from "@mui/material";
 
 interface TitleActionProps {
@@ -39,7 +39,7 @@ export const TitleAction = (props: TitleActionProps) => {
   const [copied, setCopied] = React.useState(false);
   const isArchive = buildType === "archive";
   const pageType = React.useMemo(
-    () => getPageType(language, pageUrl),
+    () => usePageType(language, pageUrl),
     [pageUrl]
   );
 
@@ -250,7 +250,7 @@ export const TitleAction = (props: TitleActionProps) => {
       )}
 
       {/* Download PDF */}
-      {pageType === "tidb" && language !== "ja" && (
+      {pageType === PageType.TiDB && language !== "ja" && (
         <Button
           onClick={handleDownloadPDF}
           startIcon={<FileIcon sx={{ fill: theme.palette.carbon[700] }} />}

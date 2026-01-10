@@ -24,7 +24,7 @@ import {
   removeHtmlTag,
 } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
-import { getPageType } from "shared/getPageType";
+import { usePageType } from "shared/usePageType";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -50,7 +50,7 @@ export default function RightNav(props: RightNavProps) {
 
   const pdfUrlMemo = React.useMemo(() => calcPDFUrl(pathConfig), [pathConfig]);
   const pageType = React.useMemo(
-    () => getPageType(language, pageUrl),
+    () => usePageType(language, pageUrl),
     [pageUrl]
   );
 

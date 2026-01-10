@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 
 import LinkComponent from "components/Link";
-import { getPageType, PageType } from "shared/getPageType";
+import { usePageType, PageType } from "shared/usePageType";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
@@ -15,13 +15,13 @@ import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
 // it will be `undefined` in client side render
 const useSelectedNavItem = (language?: string, pageUrl?: string) => {
   // init in server side
-  const [selectedItem, setSelectedItem] = React.useState<PageType>(
-    () => getPageType(language, pageUrl) || "home"
+  const [selectedItem, setSelectedItem] = React.useState<PageType>(() =>
+    usePageType(language, pageUrl)
   );
 
   // update in client side
   React.useEffect(() => {
-    setSelectedItem(getPageType(language, window.location.pathname));
+    setSelectedItem(usePageType(language, window.location.pathname));
   }, [language]);
 
   return selectedItem;
@@ -50,7 +50,7 @@ export default function HeaderNavStack(props: {
     >
       {props.buildType !== "archive" && (
         <NavItem
-          selected={selectedItem === "tidbcloud"}
+          selected={selectedItem === PageType.TiDBCloud}
           label={t("navbar.cloud")}
           to={
             cloudPlan === "dedicated" || !cloudPlan
@@ -61,7 +61,7 @@ export default function HeaderNavStack(props: {
       )}
 
       <NavItem
-        selected={selectedItem === "tidb"}
+        selected={selectedItem === PageType.TiDB}
         label={t("navbar.tidb")}
         to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
       />

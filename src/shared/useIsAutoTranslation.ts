@@ -1,11 +1,12 @@
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { getPageType } from "./getPageType";
+import { usePageType, PageType } from "shared/usePageType";
 
 export const useIsAutoTranslation = (pageUrl: string) => {
   const { language } = useI18next();
-  const pageType = getPageType(language, pageUrl);
+  const pageType = usePageType(language, pageUrl);
   const isAutoTranslation =
-    pageType !== "home" &&
-    (language === "ja" || (language === "zh" && pageType === "tidbcloud"));
+    pageType !== PageType.Home &&
+    (language === "ja" ||
+      (language === "zh" && pageType === PageType.TiDBCloud));
   return isAutoTranslation;
 };
