@@ -67,36 +67,33 @@ export default function HeaderAction(props: {
   return (
     <Stack
       direction="row"
-      spacing={{
-        xs: 1,
-        lg: 2,
-      }}
+      spacing={2}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
-          <Stack direction="row" spacing={1}>
-            <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
-            {language === "en" && showTiDBAIButton && (
-              <ActionButton
-                id="header-ask-ai"
-                variant="outlined"
-                startIcon={<StarIcon />}
-                disabled={initializingTiDBAI}
-                sx={{
-                  display: {
-                    xs: "none",
-                    xl: "flex",
-                  },
-                }}
-                onClick={() => {
-                  window.tidbai.open = true;
-                }}
-              >
-                Ask AI
-              </ActionButton>
-            )}
-          </Stack>
+          <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+          {language === "en" && showTiDBAIButton && (
+            <ActionButton
+              id="header-ask-ai"
+              variant="outlined"
+              startIcon={<StarIcon />}
+              disabled={initializingTiDBAI}
+              size="large"
+              sx={{
+                fontSize: "14px",
+                display: {
+                  xs: "none",
+                  xl: "flex",
+                },
+              }}
+              onClick={() => {
+                window.tidbai.open = true;
+              }}
+            >
+              Ask TiDB.ai
+            </ActionButton>
+          )}
         </>
       )}
       {language === "en" && <TiDBCloudBtnGroup />}
@@ -118,18 +115,22 @@ const TiDBCloudBtnGroup = () => {
     <>
       <Stack
         direction="row"
-        spacing={1}
+        spacing={2}
         display={{
           xs: "none",
           xl: "flex",
         }}
       >
         <Button
-          variant="text"
+          variant="outlined"
           href={`https://tidbcloud.com/signin`}
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
+          size="large"
+          sx={{
+            fontSize: "14px",
+          }}
         >
           Sign In
         </Button>
@@ -139,11 +140,16 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
+          size="large"
+          sx={{
+            fontSize: "14px",
+          }}
         >
           Start for Free
         </Button>
       </Stack>
 
+      {/* Mobile menu */}
       <IconButton
         id="tidb-cloud-menu-button"
         aria-controls={open ? "tidb-cloud-menu" : undefined}

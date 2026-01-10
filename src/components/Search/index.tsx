@@ -18,8 +18,8 @@ const StyledTextField = styled((props: TextFieldProps) => (
   "& .MuiOutlinedInput-root": {
     paddingLeft: "12px",
     background: theme.palette.background.paper,
-    height: "32px",
-    fontSize: "14px",
+    height: "40px",
+    fontSize: "16px",
     "&:hover fieldset": {
       borderColor: theme.palette.text.secondary,
       borderWidth: "1px",
@@ -31,7 +31,7 @@ const StyledTextField = styled((props: TextFieldProps) => (
   },
 }));
 
-const SEARCH_WIDTH = 250;
+const SEARCH_WIDTH = 400;
 
 enum SearchType {
   Onsite = "onsite",

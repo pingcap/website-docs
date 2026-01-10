@@ -15,8 +15,8 @@ import TranslateIcon from "media/icons/globe-02.svg";
 import { Locale } from "shared/interface";
 
 const LANG_MAP = {
-  [Locale.en]: "EN",
-  [Locale.zh]: "中文",
+  [Locale.en]: "English",
+  [Locale.zh]: "简体中文",
   [Locale.ja]: "日本語",
 };
 
@@ -72,7 +72,10 @@ export const LangSwitch = (props: {
             sx={{ fill: theme.palette.carbon[900], marginLeft: "-4px" }}
           />
         }
+        size="large"
         sx={{
+          fontSize: "14px",
+          paddingLeft: "16px",
           display: {
             xs: "none",
             lg: "inline-flex",

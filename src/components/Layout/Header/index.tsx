@@ -5,9 +5,8 @@ import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
 
 import LinkComponent, { BlueAnchorLink } from "components/Link";
-import HeaderNavStack, {
-  HeaderNavStackMobile,
-} from "components/Layout/Header/HeaderNav";
+import HeaderNavStack from "components/Layout/Header/HeaderNav";
+import { HeaderNavStackMobile } from "components/Layout/Header/HeaderNavMobile";
 import HeaderAction from "components/Layout/Header/HeaderAction";
 import { LangSwitch } from "components/Layout/Header/LangSwitch";
 
