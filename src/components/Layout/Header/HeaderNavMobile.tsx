@@ -6,9 +6,9 @@ import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import LinkComponent from "components/Link";
+import ChevronDownIcon from "media/icons/chevron-down.svg";
 import { usePageType, PageType } from "shared/usePageType";
 import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
@@ -65,7 +65,7 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
         onClick={handleClick}
         color="inherit"
         startIcon={<TiDBLogo />}
-        endIcon={<KeyboardArrowDownIcon />}
+        endIcon={<ChevronDownIcon />}
       ></Button>
       <Menu
         id="header-nav-menu"

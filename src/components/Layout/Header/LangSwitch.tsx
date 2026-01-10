@@ -9,8 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TranslateIcon from "media/icons/globe-02.svg";
+import ChevronDownIcon from "media/icons/chevron-down.svg";
 
 import { Locale } from "shared/interface";
 
@@ -68,7 +68,7 @@ export const LangSwitch = (props: {
         color="inherit"
         startIcon={<TranslateIcon sx={{ fill: theme.palette.carbon[900] }} />}
         endIcon={
-          <KeyboardArrowDownIcon
+          <ChevronDownIcon
             sx={{ fill: theme.palette.carbon[900], marginLeft: "-4px" }}
           />
         }

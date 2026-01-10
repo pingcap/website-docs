@@ -9,8 +9,8 @@ import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
+import ChevronDownIcon from "media/icons/chevron-down.svg";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -350,7 +350,7 @@ export function RightNavMobile(props: RightNavProps) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
+        endIcon={<ChevronDownIcon />}
         sx={{
           width: "100%",
         }}

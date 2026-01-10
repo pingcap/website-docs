@@ -7,9 +7,8 @@ import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
 import { TableOfContent, PathConfig, BuildType } from "shared/interface";
+import ChevronDownIcon from "media/icons/chevron-down.svg";
 import { transformCustomId, removeHtmlTag } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
 import { getHeaderHeight } from "shared/headerHeight";
@@ -224,7 +223,7 @@ export function RightNavMobile(props: RightNavProps) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
+        endIcon={<ChevronDownIcon />}
         sx={{
           width: "100%",
         }}

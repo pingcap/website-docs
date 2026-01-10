@@ -10,12 +10,11 @@ import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
 import EditIcon from "media/icons/edit.svg";
 import CopyIcon from "media/icons/copy.svg";
 import MarkdownIcon from "media/icons/markdown.svg";
 import FileIcon from "media/icons/file.svg";
+import ChevronDownIcon from "media/icons/chevron-down.svg";
 
 import { BuildType, PathConfig } from "shared/interface";
 import { calcPDFUrl, getRepoFromPathCfg } from "shared/utils";
@@ -146,7 +145,7 @@ export const TitleAction = (props: TitleActionProps) => {
             onClick={handleContributeClick}
             startIcon={<EditIcon sx={{ fill: theme.palette.carbon[700] }} />}
             endIcon={
-              <KeyboardArrowDownIcon
+              <ChevronDownIcon
                 sx={{ fill: theme.palette.carbon[700], marginLeft: "-4px" }}
               />
             }
