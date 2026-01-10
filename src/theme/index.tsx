@@ -175,7 +175,7 @@ theme = createTheme(theme, {
         100: "#FBFDFD",
         200: "#F5F8FA",
         300: "#EDF0F1",
-        400: "#ECE3E5",
+        400: "#DCE3E5",
         500: "#C8CED0",
         600: "#9FA9AD",
         700: "#6F787B",

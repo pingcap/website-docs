@@ -7,14 +7,15 @@ import { useTheme } from "@mui/material/styles";
 import LinkComponent, { BlueAnchorLink } from "components/Link";
 import HeaderNavStack, {
   HeaderNavStackMobile,
-} from "components/Layout/HeaderNav";
-import HeaderAction, { LangSwitch } from "components/Layout/HeaderAction";
+} from "components/Layout/Header/HeaderNav";
+import HeaderAction from "components/Layout/Header/HeaderAction";
+import { LangSwitch } from "components/Layout/Header/LangSwitch";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
 import { Locale, BuildType, PathConfig } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
-import { Banner } from "./Banner";
+import { Banner } from "components/Layout/Banner";
 import { generateDocsHomeUrl, generateUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
@@ -94,7 +95,6 @@ export default function Header(props: HeaderProps) {
             docInfo={props.docInfo}
             buildType={props.buildType}
             pageUrl={props.pageUrl}
-            showLangSwitch={false}
           />
         </Box>
 

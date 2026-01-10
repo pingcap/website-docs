@@ -1,0 +1,138 @@
+import * as React from "react";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import { useTheme } from "@mui/material/styles";
+
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import TranslateIcon from "media/icons/globe-02.svg";
+
+import { Locale } from "shared/interface";
+
+const LANG_MAP = {
+  [Locale.en]: "EN",
+  [Locale.zh]: "中文",
+  [Locale.ja]: "日本語",
+};
+
+export const LangSwitch = (props: {
+  language?: string;
+  changeLanguage?: () => void;
+  supportedLocales: Locale[];
+}) => {
+  const { supportedLocales } = props;
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const theme = useTheme();
+  const { language, changeLanguage } = useI18next();
+
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const toggleLanguage = (locale: Locale) => () => {
+    changeLanguage(locale);
+    handleClose();
+  };
+
+  return (
+    <Box color={theme.palette.carbon[900]}>
+      <IconButton
+        onClick={handleClick}
+        sx={{
+          color: "inherit",
+          display: {
+            lg: "none",
+          },
+        }}
+      >
+        <TranslateIcon />
+      </IconButton>
+      <Button
+        id="header-lang-switch"
+        aria-controls={open ? "languages-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        disableElevation
+        onClick={handleClick}
+        color="inherit"
+        startIcon={<TranslateIcon sx={{ fill: theme.palette.carbon[900] }} />}
+        endIcon={
+          <KeyboardArrowDownIcon
+            sx={{ fill: theme.palette.carbon[900], marginLeft: "-4px" }}
+          />
+        }
+        sx={{
+          display: {
+            xs: "none",
+            lg: "inline-flex",
+          },
+        }}
+      >
+        {LANG_MAP[language as Locale]}
+      </Button>
+      <Menu
+        id="header-lang-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        elevation={0}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        PaperProps={{
+          sx: {
+            border: "1px solid #F4F4F4",
+            filter: "drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.08))",
+          },
+        }}
+      >
+        <MenuItem
+          onClick={toggleLanguage(Locale.en)}
+          disableRipple
+          selected={language === Locale.en}
+          disabled={!supportedLocales.includes(Locale.en)}
+        >
+          <Typography component="span" color={theme.palette.carbon[900]}>
+            <Trans i18nKey="lang.en" />
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={toggleLanguage(Locale.zh)}
+          disableRipple
+          selected={language === Locale.zh}
+          disabled={!supportedLocales.includes(Locale.zh)}
+        >
+          <Typography component="span" color={theme.palette.carbon[900]}>
+            <Trans i18nKey="lang.zh" />
+          </Typography>
+        </MenuItem>
+        <MenuItem
+          onClick={toggleLanguage(Locale.ja)}
+          disableRipple
+          selected={language === Locale.ja}
+          disabled={!supportedLocales.includes(Locale.ja)}
+        >
+          <Typography component="span" color={theme.palette.carbon[900]}>
+            <Trans i18nKey="lang.ja" />
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </Box>
+  );
+};
