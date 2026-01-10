@@ -68,4 +68,9 @@ export type RepoNav = RepoNavLink[];
 
 export type BuildType = "prod" | "archive";
 
-export type CloudPlan = "dedicated" | "starter" | "essential" | "premium";
+export enum CloudPlan {
+  Dedicated = "dedicated",
+  Starter = "starter",
+  Essential = "essential",
+  Premium = "premium",
+}

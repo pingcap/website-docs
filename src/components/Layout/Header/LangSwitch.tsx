@@ -111,7 +111,7 @@ export const LangSwitch = (props: {
           selected={language === Locale.en}
           disabled={!supportedLocales.includes(Locale.en)}
         >
-          <Typography component="span" color={theme.palette.carbon[900]}>
+          <Typography component="span">
             <Trans i18nKey="lang.en" />
           </Typography>
         </MenuItem>
@@ -121,7 +121,7 @@ export const LangSwitch = (props: {
           selected={language === Locale.zh}
           disabled={!supportedLocales.includes(Locale.zh)}
         >
-          <Typography component="span" color={theme.palette.carbon[900]}>
+          <Typography component="span">
             <Trans i18nKey="lang.zh" />
           </Typography>
         </MenuItem>
@@ -131,7 +131,7 @@ export const LangSwitch = (props: {
           selected={language === Locale.ja}
           disabled={!supportedLocales.includes(Locale.ja)}
         >
-          <Typography component="span" color={theme.palette.carbon[900]}>
+          <Typography component="span">
             <Trans i18nKey="lang.ja" />
           </Typography>
         </MenuItem>
