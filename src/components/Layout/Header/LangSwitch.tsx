@@ -67,15 +67,10 @@ export const LangSwitch = (props: {
         onClick={handleClick}
         color="inherit"
         startIcon={<TranslateIcon sx={{ fill: theme.palette.carbon[900] }} />}
-        endIcon={
-          <ChevronDownIcon
-            sx={{ fill: theme.palette.carbon[900], marginLeft: "-4px" }}
-          />
-        }
+        endIcon={<ChevronDownIcon sx={{ fill: theme.palette.carbon[900] }} />}
         size="large"
         sx={{
           fontSize: "14px",
-          paddingLeft: "16px",
           display: {
             xs: "none",
             lg: "inline-flex",

@@ -256,6 +256,12 @@ theme = createTheme(theme, {
           fontSize: "16px",
         },
         root: ({ ownerState }) => ({
+          ".MuiButton-startIcon": {
+            marginLeft: "0",
+          },
+          ".MuiButton-endIcon": {
+            marginRight: "0",
+          },
           ...(ownerState.variant === "text" && {
             color: theme.palette.text.primary,
             "&:hover": {
