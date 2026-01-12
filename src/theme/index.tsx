@@ -262,15 +262,24 @@ theme = createTheme(theme, {
               backgroundColor: theme.palette.carbon[300],
             },
           }),
-          ...(ownerState.variant === "outlined" && {
-            color: theme.palette.text.primary,
-            borderColor: "#D9D9D9",
-            backgroundColor: "#F9F9F9",
-            "&:hover": {
-              borderColor: "#262A2C",
-              backgroundColor: "#F9F9F9",
-            },
-          }),
+          ...(ownerState.variant === "outlined" &&
+            ownerState.color === "secondary" && {
+              color: theme.palette.text.primary,
+              borderColor: "#C4CDD0",
+              backgroundColor: "#F9FAFB",
+              "&:hover": {
+                borderColor: "#262A2C",
+                backgroundColor: "#F9FAFB",
+              },
+            }),
+          ...(ownerState.variant === "contained" &&
+            ownerState.color === "secondary" && {
+              color: theme.palette.carbon[50],
+              backgroundColor: theme.palette.carbon[900],
+              "&:hover": {
+                backgroundColor: theme.palette.carbon[800],
+              },
+            }),
         }),
       },
     },

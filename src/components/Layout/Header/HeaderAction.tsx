@@ -14,7 +14,6 @@ import CloudIcon from "@mui/icons-material/Cloud";
 import Search from "components/Search";
 
 import { Locale, BuildType } from "shared/interface";
-import { ActionButton } from "components/Card/FeedbackSection/components";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
@@ -74,7 +73,7 @@ export default function HeaderAction(props: {
         <>
           <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
           {language === "en" && showTiDBAIButton && (
-            <ActionButton
+            <Button
               id="header-ask-ai"
               variant="outlined"
               startIcon={<StarIcon />}
@@ -92,7 +91,7 @@ export default function HeaderAction(props: {
               }}
             >
               Ask TiDB.ai
-            </ActionButton>
+            </Button>
           )}
         </>
       )}
@@ -123,6 +122,7 @@ const TiDBCloudBtnGroup = () => {
       >
         <Button
           variant="outlined"
+          color="secondary"
           href={`https://tidbcloud.com/signin`}
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
@@ -136,6 +136,7 @@ const TiDBCloudBtnGroup = () => {
         </Button>
         <Button
           variant="contained"
+          color="secondary"
           target="_blank"
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
