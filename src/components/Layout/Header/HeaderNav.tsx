@@ -254,19 +254,14 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
             return (
               <>
                 {groups.length > 0 && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      gap: 0,
-                    }}
-                  >
+                  <Box display="flex" flexDirection="row" gap="0">
                     {groups.map((child, index) => (
                       <React.Fragment key={index}>
                         <Box
-                          sx={{
-                            minWidth: "200px",
-                          }}
+                          display="flex"
+                          flexDirection="column"
+                          gap="4px"
+                          minWidth="200px"
                         >
                           <GroupTitle
                             title={child.title}
@@ -303,9 +298,10 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
                 )}
                 {items.length > 0 && (
                   <Box
-                    sx={{
-                      minWidth: "200px",
-                    }}
+                    display="flex"
+                    flexDirection="column"
+                    gap="4px"
+                    minWidth="200px"
                   >
                     {items.map((child, index) => (
                       <NavMenuItem
