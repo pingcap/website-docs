@@ -16,6 +16,7 @@ import { useCloudPlan } from "shared/useCloudPlan";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
 import { NavConfig, NavGroupConfig, NavItemConfig } from "./HeaderNavConfig";
 import { generateNavConfig } from "./HeaderNavConfigData";
+import { clearAllNavStates } from "../LeftNav/LeftNavTree";
 
 // `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
 // it will be `undefined` in client side render
@@ -379,6 +380,7 @@ const NavMenuItem = (props: {
     >
       <MenuItem
         onClick={() => {
+          clearAllNavStates();
           onClose();
           item.onClick?.();
         }}
@@ -458,6 +460,7 @@ const NavButton = (props: {
           isI18n={isI18n}
           to={to}
           onClick={() => {
+            clearAllNavStates();
             gtmTrack(GTMEvent.ClickHeadNav, {
               item_name: label || alt,
             });

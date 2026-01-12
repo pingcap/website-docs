@@ -320,20 +320,21 @@ theme = createTheme(theme, {
             "&:hover": {
               backgroundColor: theme.palette.carbon[300],
             },
-            "&.Mui-focused": {
+            [`&.${treeItemClasses.focused}`]: {
               backgroundColor: "#fff",
               "&:hover": {
                 backgroundColor: theme.palette.carbon[300],
               },
             },
-            "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover":
-              {
-                backgroundColor: theme.palette.carbon[300],
-                color: theme.palette.secondary.main,
-                [`& svg.MuiTreeItem-ChevronRightIcon`]: {
-                  fill: theme.palette.carbon[700],
-                },
+            "&.Mui-selected, &.Mui-selected:hover": {
+              backgroundColor: theme.palette.carbon[300],
+              [`& svg.MuiTreeItem-ChevronRightIcon`]: {
+                fill: theme.palette.carbon[700],
               },
+            },
+            [`&.${treeItemClasses.selected} .MuiTypography-root`]: {
+              fontWeight: 700,
+            },
             [`& .${treeItemClasses.iconContainer}`]: {
               display: "none",
             },

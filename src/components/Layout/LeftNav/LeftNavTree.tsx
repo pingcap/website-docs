@@ -138,6 +138,40 @@ const getScrollableContainer = (): HTMLElement | null => {
   return null;
 };
 
+// Clear all navigation state from session storage for a given path
+export const clearNavState = (path: string): void => {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.removeItem(`${NAV_ITEM_ID_STORAGE_KEY}${path}`);
+    sessionStorage.removeItem(`${NAV_SCROLL_POSITION_STORAGE_KEY}${path}`);
+    sessionStorage.removeItem(`${NAV_EXPANDED_IDS_STORAGE_KEY}${path}`);
+  } catch {
+    // Ignore storage errors
+  }
+};
+
+// Clear all navigation states from session storage (for all paths)
+export const clearAllNavStates = (): void => {
+  if (typeof window === "undefined") return;
+  try {
+    const keysToRemove: string[] = [];
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      if (
+        key &&
+        (key.startsWith(NAV_ITEM_ID_STORAGE_KEY) ||
+          key.startsWith(NAV_SCROLL_POSITION_STORAGE_KEY) ||
+          key.startsWith(NAV_EXPANDED_IDS_STORAGE_KEY))
+      ) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((key) => sessionStorage.removeItem(key));
+  } catch {
+    // Ignore storage errors
+  }
+};
+
 export default function ControlledTreeView(props: {
   data: RepoNav;
   current: string;

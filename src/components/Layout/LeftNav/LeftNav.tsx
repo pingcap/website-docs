@@ -13,14 +13,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { RepoNav, PathConfig, BuildType } from "shared/interface";
 import { NavItemConfig } from "../Header/HeaderNavConfig";
 import LinkComponent from "components/Link";
-import LeftNavTree from "./LeftNavTree";
+import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "../VersionSelect/VersionSelect";
 import { getHeaderHeight } from "shared/headerHeight";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
-import CloudVersionSelect from "../VersionSelect/CloudVersionSelect";
 
 interface LeftNavProps {
   data: RepoNav;
@@ -42,7 +41,6 @@ export function LeftNavDesktop(props: LeftNavProps) {
     pathConfig,
     availIn,
     buildType,
-    availablePlans,
     selectedNavItem,
   } = props;
   const theme = useTheme();
@@ -85,6 +83,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
               isI18n={selectedNavItem.isI18n ?? true}
               to={selectedNavItem.to}
               style={{ textDecoration: "none", display: "block" }}
+              onClick={() => {
+                clearAllNavStates();
+              }}
             >
               <Typography
                 variant="h6"
