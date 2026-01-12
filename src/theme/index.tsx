@@ -1,10 +1,7 @@
 import * as React from "react";
-import {
-  createTheme,
-  PaletteColorOptions,
-  ThemeOptions,
-} from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { ColorPartial } from "@mui/material/styles/createPalette";
+import { treeItemClasses } from "@mui/lab/TreeItem";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -172,15 +169,15 @@ theme = createTheme(theme, {
     carbon: theme.palette.augmentColor({
       color: {
         50: "#FFFFFF",
-        100: "#FBFDFD",
-        200: "#F5F8FA",
-        300: "#EDF0F1",
+        100: "#FDFEFF",
+        200: "#F9FAFB",
+        300: "#EDF1F2",
         400: "#DCE3E5",
-        500: "#C8CED0",
+        500: "#C4CDD0",
         600: "#9FA9AD",
         700: "#6F787B",
-        800: "#3D4143",
-        900: "#262A2C",
+        800: "#383E40",
+        900: "#1E2426",
       },
       name: "carbon",
     }),
@@ -310,6 +307,39 @@ theme = createTheme(theme, {
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.text.primary,
             borderWidth: "1px",
+          },
+        },
+      },
+    },
+    MuiTreeItem: {
+      styleOverrides: {
+        root: {
+          marginTop: "4px",
+          marginBottom: "4px",
+          [`& .${treeItemClasses.content}`]: {
+            "&:hover": {
+              backgroundColor: theme.palette.carbon[300],
+            },
+            "&.Mui-focused": {
+              backgroundColor: "#fff",
+              "&:hover": {
+                backgroundColor: theme.palette.carbon[300],
+              },
+            },
+            "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover":
+              {
+                backgroundColor: theme.palette.carbon[300],
+                color: theme.palette.secondary.main,
+                [`& svg.MuiTreeItem-ChevronRightIcon`]: {
+                  fill: theme.palette.carbon[700],
+                },
+              },
+            [`& .${treeItemClasses.iconContainer}`]: {
+              display: "none",
+            },
+          },
+          [`& .${treeItemClasses.group}`]: {
+            marginLeft: 0,
           },
         },
       },
