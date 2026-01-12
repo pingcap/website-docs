@@ -8,6 +8,7 @@ import {
   Radio,
   FormControlLabel,
   TextField,
+  Button,
 } from "@mui/material";
 import { ThumbUpOutlined, ThumbDownOutlined } from "@mui/icons-material";
 import { Locale } from "shared/interface";
@@ -15,12 +16,7 @@ import { useState } from "react";
 import { trackCustomEvent } from "gatsby-plugin-google-analytics";
 import { submitFeedbackDetail, submitLiteFeedback } from "./tracking";
 import { FeedbackCategory } from "./types";
-import {
-  ActionButton,
-  controlLabelSx,
-  labelProps,
-  radioSx,
-} from "./components";
+import { controlLabelSx, labelProps, radioSx } from "./components";
 
 interface FeedbackSectionProps {
   title: string;
@@ -120,8 +116,9 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
       </Typography>
       {thumbVisible && (
         <Stack direction="row" spacing={2} mb="48px">
-          <ActionButton
+          <Button
             variant="outlined"
+            color="secondary"
             size="small"
             startIcon={<ThumbUpOutlined sx={{ width: 14, height: 14 }} />}
             className="FeedbackBtn-thumbUp"
@@ -129,9 +126,10 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
             onClick={() => onThumbClick(true)}
           >
             <Trans i18nKey="docHelpful.thumbUp" />
-          </ActionButton>
-          <ActionButton
+          </Button>
+          <Button
             variant="outlined"
+            color="secondary"
             size="small"
             startIcon={<ThumbDownOutlined sx={{ width: 14, height: 14 }} />}
             className="FeedbackBtn-thumbDown"
@@ -139,7 +137,7 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
             onClick={() => onThumbClick(false)}
           >
             <Trans i18nKey="docHelpful.thumbDown" />
-          </ActionButton>
+          </Button>
         </Stack>
       )}
       {surveyVisible && helpful && (
@@ -204,17 +202,23 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
           </Stack>
 
           <Stack direction="row" spacing={2} mt="12px" mb="24px">
-            <ActionButton
+            <Button
               variant="outlined"
+              color="secondary"
               size="small"
               disabled={!positiveVal}
               onClick={onPositiveSubmit}
             >
               <Trans i18nKey="docFeedbackSurvey.action.submit" />
-            </ActionButton>
-            <ActionButton variant="outlined" size="small" onClick={onSkip}>
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={onSkip}
+            >
               <Trans i18nKey="docFeedbackSurvey.action.skip" />
-            </ActionButton>
+            </Button>
           </Stack>
         </Box>
       )}
@@ -289,17 +293,23 @@ export function FeedbackSection({ title, locale }: FeedbackSectionProps) {
           </Stack>
 
           <Stack direction="row" spacing={2} mt="12px" mb="24px">
-            <ActionButton
+            <Button
               variant="outlined"
+              color="secondary"
               size="small"
               disabled={!negativeVal}
               onClick={onNegativeSubmit}
             >
               <Trans i18nKey="docFeedbackSurvey.action.submit" />
-            </ActionButton>
-            <ActionButton variant="outlined" size="small" onClick={onSkip}>
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={onSkip}
+            >
               <Trans i18nKey="docFeedbackSurvey.action.skip" />
-            </ActionButton>
+            </Button>
           </Stack>
         </Box>
       )}
