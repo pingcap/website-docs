@@ -71,6 +71,7 @@ const VersionItems = (props: {
   return (
     <>
       <MenuItem
+        disableRipple
         key={`menu-dev`}
         value={`menu-dev`}
         hidden={shouldHideDevMemo}
@@ -90,7 +91,7 @@ const VersionItems = (props: {
         </Typography>
       </MenuItem>
 
-      <Divider sx={{ margin: "4px 0" }} />
+      <Divider />
 
       {pathConfig.repo === "tidb" && (
         <FormLabel
@@ -100,7 +101,6 @@ const VersionItems = (props: {
             lineHeight: "1.25rem",
             color: "#6F787B",
             pl: "12px",
-            mb: "8px",
           }}
         >
           Long-Term Support
@@ -108,6 +108,7 @@ const VersionItems = (props: {
       )}
       {LTSVersions.map((version) => (
         <MenuItem
+          disableRipple
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
@@ -127,7 +128,7 @@ const VersionItems = (props: {
         </MenuItem>
       ))}
 
-      <Divider sx={{ margin: "4px 0" }} />
+      <Divider />
 
       {pathConfig.repo === "tidb" && DMRVersions.length > 0 && (
         <>
@@ -145,6 +146,7 @@ const VersionItems = (props: {
           </FormLabel>
           {DMRVersions.map((version) => (
             <MenuItem
+              disableRipple
               key={`menu-${version}`}
               value={`menu-${version}`}
               disabled={!availIn.includes(version || "")}
@@ -163,11 +165,12 @@ const VersionItems = (props: {
               </Typography>
             </MenuItem>
           ))}
-          <Divider sx={{ margin: "4px 0" }} />
+          <Divider />
         </>
       )}
 
       <MenuItem
+        disableRipple
         component={LinkComponent}
         isI18n
         to={generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo)}
@@ -213,6 +216,7 @@ const VersionItemsArchived = (props: {
       </FormLabel>
       {archiveList.map((version) => (
         <MenuItem
+          disableRipple
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { ColorPartial } from "@mui/material/styles/createPalette";
 import { treeItemClasses } from "@mui/lab/TreeItem";
@@ -284,6 +283,30 @@ theme = createTheme(theme, {
               },
             }),
         }),
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          "& .MuiPaper-root .MuiList-root .MuiMenuItem-root:active": {
+            backgroundColor: theme.palette.carbon[300],
+          },
+        },
+        item: {
+          "&:active": {
+            backgroundColor: theme.palette.carbon[300],
+          },
+        },
+        list: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+          padding: "8px",
+          "& .MuiButtonBase-root+.MuiDivider-root": {
+            marginTop: "4px",
+            marginBottom: "4px",
+          },
+        },
       },
     },
     MuiMenuItem: {
