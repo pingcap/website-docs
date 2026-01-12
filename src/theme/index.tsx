@@ -349,12 +349,13 @@ theme = createTheme(theme, {
                 backgroundColor: theme.palette.carbon[300],
               },
             },
-            "&.Mui-selected, &.Mui-selected:hover": {
-              backgroundColor: theme.palette.carbon[300],
-              [`& svg.MuiTreeItem-ChevronRightIcon`]: {
-                fill: theme.palette.carbon[700],
+            "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover":
+              {
+                backgroundColor: theme.palette.carbon[300],
+                [`& svg.MuiTreeItem-ChevronRightIcon`]: {
+                  fill: theme.palette.carbon[700],
+                },
               },
-            },
             [`&.${treeItemClasses.selected} .MuiTypography-root`]: {
               fontWeight: 700,
             },
