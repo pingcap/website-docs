@@ -138,6 +138,12 @@ export function calculateFileUrlWithConfig(
       continue;
     }
 
+    // Replace filename variable with parsed filename (without .md extension)
+    // This ensures conditions can check against the actual filename without extension
+    if (variables.filename) {
+      variables.filename = parsed.filename;
+    }
+
     // Check conditions using matched variables
     if (!checkConditions(rule.conditions, variables)) {
       continue;

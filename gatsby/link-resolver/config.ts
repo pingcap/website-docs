@@ -47,13 +47,5 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/{repo}/{branch}/{docname}",
     },
-    // Rule 4: Fallback (path-based mapping)
-    // Current page: /{lang}/{repo}/{...any}
-    // Link: /{...any}/{docname} -> /{lang}/{repo}/stable/{docname}
-    {
-      pathPattern: "/{lang}/{repo}/{...any}",
-      linkPattern: "/{...any}/{docname}",
-      targetPattern: "/{lang}/{repo}/stable/{docname}",
-    },
   ],
 };

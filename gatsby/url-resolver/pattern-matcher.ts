@@ -88,6 +88,21 @@ export function matchPattern(
     }
   }
 
+  // Handle case where {...variableName} is the last pattern part and there are no more segments
+  // This allows {...variableName} at the end to match 0 segments
+  if (patternIndex < patternParts.length && segmentIndex === segments.length) {
+    const remainingPatternPart = patternParts[patternIndex];
+    if (
+      remainingPatternPart.startsWith("{...") &&
+      remainingPatternPart.endsWith("}")
+    ) {
+      // This is a {...variableName} pattern at the end, allow it to match 0 segments
+      const variableName = remainingPatternPart.slice(4, -1);
+      result[variableName] = "";
+      patternIndex++;
+    }
+  }
+
   // Check if we consumed all segments and patterns
   if (
     segmentIndex !== segments.length ||

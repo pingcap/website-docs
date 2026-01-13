@@ -56,7 +56,17 @@ module.exports = function ({
             ];
           } else {
             // Resolve markdown link using link-resolver
-            const resolvedPath = resolveMarkdownLink(ele.url, currentFileUrl);
+            const resolvedPath = resolveMarkdownLink(
+              ele.url.replace(".md", ""),
+              currentFileUrl
+            );
+            if (
+              currentFileUrl.includes("en/tidbcloud") &&
+              !currentFileUrl.includes("TOC")
+            ) {
+              console.log("currentFileUrl", currentFileUrl);
+              console.log("resolvedPath", resolvedPath);
+            }
 
             return [
               {

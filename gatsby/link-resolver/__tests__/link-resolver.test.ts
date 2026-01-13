@@ -61,12 +61,16 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/stable/upgrade-tidb-using-tiup#prerequisites");
     });
 
-    it("should preserve hash for fallback links", () => {
+    it("should preserve hash for links that don't match any rule", () => {
       const result = resolveMarkdownLink(
         "/some/path/to/page#section",
         "/en/tidb/some-path"
       );
-      expect(result).toBe("/tidb/stable/page#section");
+      // /en/tidb/some-path matches Rule 3 /{lang}/{repo}/{branch}/{...any} where branch=some-path, {...any}=""
+      // Link /some/path/to/page matches /{...any}/{docname} where {...any}=some/path/to, docname=page
+      // Target: /{lang}/{repo}/{branch}/{docname} = /en/tidb/some-path/page
+      // After defaultLanguage omission: /tidb/some-path/page
+      expect(result).toBe("/tidb/some-path/page#section");
     });
 
     it("should preserve hash with multiple segments", () => {
@@ -209,6 +213,14 @@ describe("resolveMarkdownLink", () => {
       );
       expect(result).toBe("/tidbcloud/configuration");
     });
+
+    it("should resolve links from tidbcloud pages /tidbcloud", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search/vector-search-data-types",
+        "/en/tidbcloud"
+      );
+      expect(result).toBe("/tidbcloud/vector-search-data-types");
+    });
   });
 
   describe("linkMappingsByPath - tidb pages with branch", () => {
@@ -243,8 +255,8 @@ describe("resolveMarkdownLink", () => {
         "/upgrade/upgrade-tidb-using-tiup",
         "/en/other-repo/stable/upgrade"
       );
-      // Should not match pathConditions for tidb/tidb-in-kubernetes, but matches fallback rule
-      expect(result).toBe("/other-repo/stable/upgrade-tidb-using-tiup");
+      // Should not match pathConditions for tidb/tidb-in-kubernetes, no fallback rule
+      expect(result).toBe("/upgrade/upgrade-tidb-using-tiup");
     });
 
     it("should resolve links with multiple path segments from tidb pages", () => {
@@ -253,25 +265,6 @@ describe("resolveMarkdownLink", () => {
         "/en/tidb/stable/upgrade"
       );
       expect(result).toBe("/tidb/stable/page");
-    });
-  });
-
-  describe("linkMappingsByPath - fallback rule", () => {
-    it("should resolve links from fallback pages (with lang)", () => {
-      const result = resolveMarkdownLink(
-        "/some/path/to/page",
-        "/en/tidb/some-path"
-      );
-      expect(result).toBe("/tidb/stable/page");
-    });
-
-    it("should resolve links from fallback pages (without lang, default omitted)", () => {
-      const result = resolveMarkdownLink(
-        "/some/path/to/page",
-        "/tidb/some-path"
-      );
-      // Should not match because pathPattern requires /{lang}/{repo}
-      expect(result).toBe("/some/path/to/page");
     });
   });
 
@@ -359,13 +352,8 @@ describe("resolveMarkdownLink", () => {
         "/unknown/path/to/page",
         "/en/unknown/current/page"
       );
-      // Current page /en/unknown/current/page matches fallback /{lang}/{repo}/{...any}:
-      // - lang = en, repo = unknown, {...any} = current/page
-      // Link /unknown/path/to/page matches /{...any}/{docname}:
-      // - {...any} = unknown/path/to, docname = page
-      // Target pattern /{lang}/{repo}/stable/{docname} = /en/unknown/stable/page
-      // After defaultLanguage omission: /unknown/stable/page
-      expect(result).toBe("/unknown/stable/page");
+      // No matching rule, should return original link
+      expect(result).toBe("/unknown/path/to/page");
     });
 
     it("should handle root path links", () => {
@@ -378,10 +366,10 @@ describe("resolveMarkdownLink", () => {
         "/page",
         "/en/tidb/stable/alert-rules"
       );
-      // Current page /en/tidb/stable/alert-rules matches fallback /{lang}/{repo}/{...any}:
-      // - lang = en, repo = tidb, {...any} = stable/alert-rules
+      // Current page /en/tidb/stable/alert-rules matches Rule 3 /{lang}/{repo}/{branch}/{...any}:
+      // - lang = en, repo = tidb, branch = stable, {...any} = alert-rules
       // Link /page matches /{...any}/{docname} where {...any} is empty, docname = page
-      // Target pattern /{lang}/{repo}/stable/{docname} = /en/tidb/stable/page
+      // Target pattern /{lang}/{repo}/{branch}/{docname} = /en/tidb/stable/page
       // After defaultLanguage omission: /tidb/stable/page
       expect(result).toBe("/tidb/stable/page");
     });

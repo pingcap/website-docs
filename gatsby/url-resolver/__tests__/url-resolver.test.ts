@@ -4,6 +4,7 @@
 
 import { parseSourcePath, calculateFileUrlWithConfig } from "../url-resolver";
 import type { UrlResolverConfig } from "../types";
+import { defaultUrlResolverConfig } from "../config";
 import path from "path";
 
 describe("parseSourcePath", () => {
@@ -21,10 +22,17 @@ describe("parseSourcePath", () => {
 
   it("should handle _index.md files", () => {
     const absolutePath =
-      "/base/path/docs/markdown-pages/en/tidbcloud/tidb-cloud/dedicated/_index.md";
+      "/base/path/docs/markdown-pages/en/tidbcloud/master/tidb-cloud/dedicated/_index.md";
     const result = parseSourcePath(absolutePath, sourceBasePath);
     expect(result).toEqual({
-      segments: ["en", "tidbcloud", "tidb-cloud", "dedicated", "_index.md"],
+      segments: [
+        "en",
+        "tidbcloud",
+        "master",
+        "tidb-cloud",
+        "dedicated",
+        "_index.md",
+      ],
       filename: "_index",
     });
   });
@@ -57,10 +65,17 @@ describe("parseSourcePath", () => {
   });
 
   it("should handle relative path for tidbcloud", () => {
-    const slug = "en/tidbcloud/tidb-cloud/dedicated/_index";
+    const slug = "en/tidbcloud/master/tidb-cloud/dedicated/_index";
     const result = parseSourcePath(slug, sourceBasePath);
     expect(result).toEqual({
-      segments: ["en", "tidbcloud", "tidb-cloud", "dedicated", "_index.md"],
+      segments: [
+        "en",
+        "tidbcloud",
+        "master",
+        "tidb-cloud",
+        "dedicated",
+        "_index.md",
+      ],
       filename: "_index",
     });
   });
@@ -89,64 +104,11 @@ describe("calculateFileUrl", () => {
   );
 
   const testConfig: UrlResolverConfig = {
+    ...defaultUrlResolverConfig,
     sourceBasePath,
     // Test config: don't omit default language, use auto trailing slash
     defaultLanguage: undefined,
     trailingSlash: "auto",
-    pathMappings: [
-      // tidbcloud with prefix
-      {
-        sourcePattern: "/{lang}/{repo}/{namespace}/{...prefixes}/{filename}",
-        targetPattern: "/{lang}/{repo}/{filename}",
-        conditions: {
-          repo: ["tidbcloud"],
-          namespace: ["tidb-cloud"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index"],
-          conditionalTarget: {
-            keepIf: ["_index"],
-            keepTargetPattern: "/{lang}/{repo}/{prefixes}",
-          },
-        },
-      },
-      // develop, best-practice, api, releases
-      {
-        sourcePattern:
-          "/{lang}/{repo}/{branch}/{folder}/{...folders}/{filename}",
-        targetPattern: "/{lang}/{folder}/{filename}",
-        conditions: {
-          repo: ["tidb"],
-          folder: ["develop", "best-practice", "api", "releases"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index"],
-          conditionalTarget: {
-            keepIf: ["_index"],
-            keepTargetPattern: "/{lang}/{folder}/{folders}",
-          },
-        },
-      },
-      // tidb with branch
-      {
-        sourcePattern: "/{lang}/{repo}/{branch}/{...folders}/{filename}",
-        targetPattern: "/{lang}/{repo}/{branch:branch-alias}/{filename}",
-        conditions: {
-          repo: ["tidb", "tidb-in-kubernetes"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index", "_docHome"],
-        },
-      },
-      // Fallback
-      {
-        sourcePattern: "/{lang}/{repo}/{...any}/{filename}",
-        targetPattern: "/{lang}/{repo}/{filename}",
-        filenameTransform: {
-          ignoreIf: ["_index", "_docHome"],
-        },
-      },
-    ],
     aliases: {
       "branch-alias": {
         context: {
@@ -161,19 +123,34 @@ describe("calculateFileUrl", () => {
     },
   };
 
-  it("should resolve tidbcloud _index with prefixes", () => {
+  it("should resolve tidbcloud dedicated _index to /tidbcloud (first rule)", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidbcloud/tidb-cloud/dedicated/_index.md"
+      "en/tidbcloud/master/tidb-cloud/dedicated/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidbcloud/dedicated");
+    // First rule matches: /{lang}/tidbcloud/master/tidb-cloud/dedicated/{filename}
+    // with condition filename = "_index" -> /{lang}/tidbcloud
+    // trailingSlash: "auto" adds trailing slash for _index files
+    expect(url).toBe("/en/tidbcloud/");
+  });
+
+  it("should resolve tidbcloud _index with prefixes (second rule)", () => {
+    // This test verifies the second rule for paths with multiple prefixes
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidbcloud/master/tidb-cloud/dedicated/starter/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    // Second rule matches: /{lang}/tidbcloud/{branch}/tidb-cloud/{...prefixes}/{filename}
+    // with conditionalTarget for _index -> /{lang}/tidbcloud/{prefixes}
+    expect(url).toBe("/en/tidbcloud/dedicated/starter");
   });
 
   it("should resolve tidbcloud non-index without prefixes", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidbcloud/tidb-cloud/dedicated/some-page.md"
+      "en/tidbcloud/master/tidb-cloud/dedicated/some-page.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/tidbcloud/some-page/");
@@ -182,7 +159,7 @@ describe("calculateFileUrl", () => {
   it("should resolve tidbcloud with multiple prefixes for _index", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidbcloud/tidb-cloud/dedicated/starter/_index.md"
+      "en/tidbcloud/master/tidb-cloud/dedicated/starter/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/tidbcloud/dedicated/starter");
@@ -298,75 +275,10 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
   );
 
   const configWithDefaultLang: UrlResolverConfig = {
+    ...defaultUrlResolverConfig,
     sourceBasePath,
     defaultLanguage: "en",
     trailingSlash: "never",
-    pathMappings: [
-      // tidbcloud with prefix
-      {
-        sourcePattern: "/{lang}/{repo}/{namespace}/{...prefixes}/{filename}",
-        targetPattern: "/{lang}/{repo}/{filename}",
-        conditions: {
-          repo: ["tidbcloud"],
-          namespace: ["tidb-cloud"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index"],
-          conditionalTarget: {
-            keepIf: ["_index"],
-            keepTargetPattern: "/{lang}/{repo}/{prefixes}",
-          },
-        },
-      },
-      // develop, best-practice, api, releases
-      {
-        sourcePattern:
-          "/{lang}/{repo}/{branch}/{folder}/{...folders}/{filename}",
-        targetPattern: "/{lang}/{folder}/{filename}",
-        conditions: {
-          repo: ["tidb"],
-          folder: ["develop", "best-practice", "api", "releases"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index"],
-          conditionalTarget: {
-            keepIf: ["_index"],
-            keepTargetPattern: "/{lang}/{folder}/{folders}",
-          },
-        },
-      },
-      // tidb with branch
-      {
-        sourcePattern: "/{lang}/{repo}/{branch}/{...folders}/{filename}",
-        targetPattern: "/{lang}/{repo}/{branch:branch-alias}/{filename}",
-        conditions: {
-          repo: ["tidb", "tidb-in-kubernetes"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index", "_docHome"],
-        },
-      },
-      // Fallback
-      {
-        sourcePattern: "/{lang}/{repo}/{...any}/{filename}",
-        targetPattern: "/{lang}/{repo}/{filename}",
-        filenameTransform: {
-          ignoreIf: ["_index", "_docHome"],
-        },
-      },
-    ],
-    aliases: {
-      "branch-alias": {
-        context: {
-          repo: ["tidb", "tidb-in-kubernetes"],
-        },
-        mappings: {
-          master: "stable",
-          main: "stable",
-          "release-*": "v*",
-        },
-      },
-    },
   };
 
   it("should omit /en/ prefix for English files (tidb)", () => {
@@ -374,26 +286,42 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       sourceBasePath,
       "en/tidb/master/alert-rules.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/tidb/stable/alert-rules");
   });
 
   it("should omit /en/ prefix for English files (tidbcloud)", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidbcloud/tidb-cloud/dedicated/some-page.md"
+      "en/tidbcloud/master/tidb-cloud/dedicated/some-page.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/tidbcloud/some-page");
   });
 
-  it("should omit /en/ prefix for English _index files (tidbcloud)", () => {
+  it("should omit /en/ prefix for English dedicated _index files (tidbcloud)", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidbcloud/tidb-cloud/dedicated/_index.md"
+      "en/tidbcloud/master/tidb-cloud/dedicated/_index.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
-    expect(url).toBe("/tidbcloud/dedicated");
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
+    // First rule matches: /{lang}/tidbcloud/master/tidb-cloud/dedicated/{filename}
+    // with condition filename = "_index" -> /{lang}/tidbcloud
+    // After defaultLanguage omission: /tidbcloud
+    // trailingSlash: "never" removes trailing slash
+    expect(url).toBe("/tidbcloud");
   });
 
   it("should omit /en/ prefix for English develop files", () => {
@@ -401,7 +329,11 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       sourceBasePath,
       "en/tidb/master/develop/overview.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/develop/overview");
   });
 
@@ -428,7 +360,11 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       sourceBasePath,
       "en/tidb/master/api/overview.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/api/overview");
   });
 
@@ -437,7 +373,11 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       sourceBasePath,
       "en/tidb/release-8.5/alert-rules.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/tidb/v8.5/alert-rules");
   });
 });
@@ -455,7 +395,8 @@ describe("calculateFileUrl with slug format (relative path)", () => {
     pathMappings: [
       // tidbcloud with prefix
       {
-        sourcePattern: "/{lang}/{repo}/{namespace}/{...prefixes}/{filename}",
+        sourcePattern:
+          "/{lang}/{repo}/{branch}/{namespace}/{...prefixes}/{filename}",
         targetPattern: "/{lang}/{repo}/{filename}",
         conditions: {
           repo: ["tidbcloud"],
@@ -509,13 +450,13 @@ describe("calculateFileUrl with slug format (relative path)", () => {
   });
 
   it("should resolve slug format for tidbcloud files", () => {
-    const slug = "en/tidbcloud/tidb-cloud/dedicated/some-page";
+    const slug = "en/tidbcloud/master/tidb-cloud/dedicated/some-page";
     const url = calculateFileUrlWithConfig(slug, configWithDefaultLang, true);
     expect(url).toBe("/tidbcloud/some-page");
   });
 
   it("should resolve slug format for tidbcloud _index files", () => {
-    const slug = "en/tidbcloud/tidb-cloud/dedicated/_index";
+    const slug = "en/tidbcloud/master/tidb-cloud/dedicated/_index";
     const url = calculateFileUrlWithConfig(slug, configWithDefaultLang, true);
     expect(url).toBe("/tidbcloud/dedicated");
   });
@@ -546,31 +487,10 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
   );
 
   const configWithDefaultLang: UrlResolverConfig = {
+    ...defaultUrlResolverConfig,
     sourceBasePath,
     defaultLanguage: "en",
     trailingSlash: "never",
-    pathMappings: [
-      {
-        sourcePattern: "/{lang}/{repo}/{branch}/{...folders}/{filename}",
-        targetPattern: "/{lang}/{repo}/{branch:branch-alias}/{filename}",
-        conditions: {
-          repo: ["tidb"],
-        },
-        filenameTransform: {
-          ignoreIf: ["_index"],
-        },
-      },
-    ],
-    aliases: {
-      "branch-alias": {
-        context: {
-          repo: ["tidb"],
-        },
-        mappings: {
-          master: "stable",
-        },
-      },
-    },
   };
 
   it("should keep default language when omitDefaultLanguage is false (default)", () => {
@@ -587,7 +507,11 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       sourceBasePath,
       "en/tidb/master/alert-rules.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, false);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      false
+    );
     expect(url).toBe("/en/tidb/stable/alert-rules");
   });
 
@@ -596,7 +520,11 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       sourceBasePath,
       "en/tidb/master/alert-rules.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/tidb/stable/alert-rules");
   });
 
@@ -605,7 +533,11 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       sourceBasePath,
       "zh/tidb/master/alert-rules.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, false);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      false
+    );
     expect(url).toBe("/zh/tidb/stable/alert-rules");
   });
 
@@ -614,7 +546,11 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       sourceBasePath,
       "zh/tidb/master/alert-rules.md"
     );
-    const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang, true);
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
     expect(url).toBe("/zh/tidb/stable/alert-rules");
   });
 });

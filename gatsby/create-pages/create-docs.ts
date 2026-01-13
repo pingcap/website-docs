@@ -131,14 +131,16 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     //   // Fallback to old generateUrl if fileAbsolutePath is not available
     //   path = generateUrl(name, pathConfig);
     // }
-    const fileAbsolutePath = node.parent?.fileAbsolutePath;
+    // const fileAbsolutePath = node.parent?.fileAbsolutePath;
     const path = calculateFileUrl(node.slug, true);
     if (!path) {
       console.info(
-        `Failed to calculate URL for ${fileAbsolutePath}, filePath: ${filePath}`
+        `Failed to calculate URL for ${node.slug}, filePath: ${filePath}`
       );
       return;
     }
+    // console.log("path::::::::", path);
+    // console.log("node.slug::::::::", node.slug);
 
     const navUrl = generateNav(pathConfig);
     const starterNavUrl = generateStarterNav(pathConfig);

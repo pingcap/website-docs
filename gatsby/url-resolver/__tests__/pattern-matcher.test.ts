@@ -88,12 +88,21 @@ describe("matchPattern", () => {
   });
 
   it("should match complex pattern with conditions", () => {
-    const pattern = "/{lang}/{repo}/{namespace}/{...prefixes}/{filename}";
-    const segments = ["en", "tidbcloud", "tidb-cloud", "dedicated", "_index"];
+    const pattern =
+      "/{lang}/{repo}/{branch}/{namespace}/{...prefixes}/{filename}";
+    const segments = [
+      "en",
+      "tidbcloud",
+      "master",
+      "tidb-cloud",
+      "dedicated",
+      "_index",
+    ];
     const result = matchPattern(pattern, segments);
     expect(result).toEqual({
       lang: "en",
       repo: "tidbcloud",
+      branch: "master",
       namespace: "tidb-cloud",
       prefixes: "dedicated",
       filename: "_index",

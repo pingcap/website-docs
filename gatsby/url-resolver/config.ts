@@ -13,21 +13,25 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
   trailingSlash: "never",
 
   pathMappings: [
+    // tidbcloud dedicated _index
+    // /en/tidbcloud/master/tidb-cloud/dedicated/_index.md -> /en/tidbcloud/dedicated/
+    {
+      sourcePattern: "/{lang}/tidbcloud/master/tidb-cloud/dedicated/{filename}",
+      targetPattern: "/{lang}/tidbcloud",
+      conditions: { filename: ["_index"] },
+    },
     // tidbcloud with prefix (dedicated, starter, etc.)
     // When filename = "_index": /en/tidbcloud/tidb-cloud/{prefix}/_index.md -> /en/tidbcloud/{prefix}/
     // When filename != "_index": /en/tidbcloud/tidb-cloud/{prefix}/{filename}.md -> /en/tidbcloud/{filename}/
     {
-      sourcePattern: "/{lang}/{repo}/{namespace}/{...prefixes}/{filename}",
-      targetPattern: "/{lang}/{repo}/{filename}",
-      conditions: {
-        repo: ["tidbcloud"],
-        namespace: ["tidb-cloud"],
-      },
+      sourcePattern:
+        "/{lang}/tidbcloud/{branch}/tidb-cloud/{...prefixes}/{filename}",
+      targetPattern: "/{lang}/tidbcloud/{filename}",
       filenameTransform: {
         ignoreIf: ["_index"],
         conditionalTarget: {
           keepIf: ["_index"],
-          keepTargetPattern: "/{lang}/{repo}/{prefixes}",
+          keepTargetPattern: "/{lang}/tidbcloud/{prefixes}",
         },
       },
     },
