@@ -1,10 +1,7 @@
 import visit from "unist-util-visit";
 import type { Root, Link, Blockquote } from "mdast";
-import {
-  calculateFileUrl,
-  resolveMarkdownLink,
-  defaultUrlResolverConfig,
-} from "../../url-resolver";
+import { calculateFileUrl } from "../../url-resolver";
+import { resolveMarkdownLink } from "../../link-resolver";
 
 function textToJsx(text: string) {
   switch (text) {
@@ -40,10 +37,7 @@ module.exports = function ({
   markdownAST: Root;
   markdownNode: { fileAbsolutePath: string };
 }) {
-  // Calculate current file URL
-  const currentFileUrl =
-    calculateFileUrl(markdownNode.fileAbsolutePath, defaultUrlResolverConfig) ||
-    "";
+  const currentFileUrl = calculateFileUrl(markdownNode.fileAbsolutePath) || "";
 
   visit(markdownAST, (node: any) => {
     if (Array.isArray(node.children)) {
@@ -61,27 +55,13 @@ module.exports = function ({
               { type: "jsx", value: "</a>" },
             ];
           } else {
-            // Resolve markdown link using URL resolver
-            const urlWithoutMd = ele.url.replace(/\.md$/, "");
-            const resolvedUrl =
-              resolveMarkdownLink(
-                urlWithoutMd,
-                currentFileUrl,
-                defaultUrlResolverConfig
-              ) || urlWithoutMd;
-            // if (
-            //   currentFileUrl.includes("tidbcloud") &&
-            //   !currentFileUrl.includes("TOC")
-            // ) {
-            //   console.log("currentFileUrl:::::::::::::", currentFileUrl);
-            //   console.log("ele.url:::::::::::::", ele.url);
-            //   console.log("resolvedUrl:::::::::::::", resolvedUrl);
-            // }
+            // Resolve markdown link using link-resolver
+            const resolvedPath = resolveMarkdownLink(ele.url, currentFileUrl);
 
             return [
               {
                 type: "jsx",
-                value: `<Link to="${resolvedUrl}">`,
+                value: `<Link to="${resolvedPath}">`,
               },
               ...node.children,
               { type: "jsx", value: "</Link>" },

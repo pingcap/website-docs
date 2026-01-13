@@ -1,6 +1,7 @@
 import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
 import CONFIG from "../docs/docs.json";
 
+// @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
 

@@ -6,11 +6,11 @@ import sig from "signale";
 import { Locale, Repo, BuildType } from "../../src/shared/interface";
 import {
   generateConfig,
-  generateUrl,
   generateNav,
   generateStarterNav,
   generateEssentialNav,
 } from "../../gatsby/path";
+import { calculateFileUrl } from "../../gatsby/url-resolver";
 import { cpMarkdown } from "../../gatsby/cp-markdown";
 import {
   getTidbCloudFilesFromTocs,
@@ -112,7 +112,34 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       return;
     }
 
-    const path = generateUrl(name, pathConfig);
+    // Use url-resolver to generate URL from file absolute path
+    // Fallback to generateUrl if fileAbsolutePath is not available or url-resolver fails
+    // let path: string;
+    // const fileAbsolutePath = node.parent?.fileAbsolutePath;
+    // if (fileAbsolutePath) {
+    //   const resolvedUrl = calculateFileUrl(
+    //     fileAbsolutePath,
+    //     defaultUrlResolverConfig
+    //   );
+    //   if (resolvedUrl) {
+    //     path = resolvedUrl;
+    //   } else {
+    //     // Fallback to old generateUrl if url-resolver fails
+    //     path = generateUrl(name, pathConfig);
+    //   }
+    // } else {
+    //   // Fallback to old generateUrl if fileAbsolutePath is not available
+    //   path = generateUrl(name, pathConfig);
+    // }
+    const fileAbsolutePath = node.parent?.fileAbsolutePath;
+    const path = calculateFileUrl(node.slug, true);
+    if (!path) {
+      console.info(
+        `Failed to calculate URL for ${fileAbsolutePath}, filePath: ${filePath}`
+      );
+      return;
+    }
+
     const navUrl = generateNav(pathConfig);
     const starterNavUrl = generateStarterNav(pathConfig);
     const essentialNavUrl = generateEssentialNav(pathConfig);

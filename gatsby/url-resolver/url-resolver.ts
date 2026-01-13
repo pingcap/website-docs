@@ -8,11 +8,20 @@ import type {
   ParsedSourcePath,
 } from "./types";
 import { matchPattern, applyPattern } from "./pattern-matcher";
-import { getBranchAlias } from "./branch-alias";
+import { defaultUrlResolverConfig } from "./config";
 
 /**
  * Parse source file path into segments and filename
  * No hardcoded logic - variables will be extracted via pattern matching
+ *
+ * Supports both absolute paths and relative paths (slug format):
+ * - Absolute path: "/path/to/docs/markdown-pages/en/tidb/master/alert-rules.md"
+ * - Relative path (slug): "en/tidb/master/alert-rules" (will be treated as relative to sourceBasePath)
+ *
+ * A path is considered a slug (relative path) if:
+ * - It doesn't start with sourceBasePath
+ * - It doesn't start with "/" (unless it's a valid slug starting with lang code)
+ * - It looks like a slug format (starts with lang code like "en/", "zh/", "ja/")
  */
 export function parseSourcePath(
   absolutePath: string,
@@ -22,12 +31,37 @@ export function parseSourcePath(
   const normalizedBase = sourceBasePath.replace(/\/$/, "");
   const normalizedPath = absolutePath.replace(/\/$/, "");
 
-  // Extract relative path
-  if (!normalizedPath.startsWith(normalizedBase)) {
-    return null;
+  let relativePath: string;
+
+  // Check if path is absolute (starts with sourceBasePath)
+  if (normalizedPath.startsWith(normalizedBase)) {
+    // Absolute path: extract relative path
+    relativePath = normalizedPath.slice(normalizedBase.length);
+  } else {
+    // Check if it looks like a slug (relative path)
+    // Remove leading slash if present for checking
+    const pathWithoutLeadingSlash = normalizedPath.startsWith("/")
+      ? normalizedPath.slice(1)
+      : normalizedPath;
+
+    // Slug format: must start with valid lang code (en/, zh/, ja/)
+    // This ensures we only accept valid slug formats, not arbitrary paths
+    const isSlugFormat = /^(en|zh|ja)\//.test(pathWithoutLeadingSlash);
+
+    if (isSlugFormat) {
+      // Relative path (slug format): use path without leading slash
+      relativePath = pathWithoutLeadingSlash;
+    } else {
+      // Invalid path: doesn't match absolute path and doesn't look like a slug
+      return null;
+    }
   }
 
-  const relativePath = normalizedPath.slice(normalizedBase.length);
+  // Remove leading slash for processing
+  if (relativePath.startsWith("/")) {
+    relativePath = relativePath.slice(1);
+  }
+
   const segments = relativePath
     .split("/")
     .filter((s) => s.length > 0)
@@ -39,8 +73,15 @@ export function parseSourcePath(
   }
 
   // Extract filename (last segment)
-  const lastSegment = segments[segments.length - 1];
+  // If it doesn't have .md extension, add it for consistency
+  let lastSegment = segments[segments.length - 1];
+  if (!lastSegment.endsWith(".md")) {
+    lastSegment = lastSegment + ".md";
+  }
   const filename = lastSegment.replace(/\.md$/, "");
+
+  // Update segments array to include .md extension if it was added
+  segments[segments.length - 1] = lastSegment;
 
   return {
     segments,
@@ -73,12 +114,13 @@ function checkConditions(
 }
 
 /**
- * Calculate file URL from source path
+ * Calculate file URL from source path (internal implementation with config)
  * Variables are dynamically extracted via pattern matching
  */
-export function calculateFileUrl(
+export function calculateFileUrlWithConfig(
   absolutePath: string,
-  config: UrlResolverConfig
+  config: UrlResolverConfig,
+  omitDefaultLanguage: boolean = false
 ): string | null {
   const parsed = parseSourcePath(absolutePath, config.sourceBasePath);
   if (!parsed) {
@@ -101,26 +143,24 @@ export function calculateFileUrl(
       continue;
     }
 
-    // Apply branch alias if needed
-    if (
-      variables.branch &&
-      variables.repo &&
-      config.branchAliases[variables.repo]
-    ) {
-      const alias = getBranchAlias(
-        config.branchAliases[variables.repo],
-        variables.branch
-      );
-      if (alias) {
-        variables["branch-alias"] = alias;
-      }
-    }
-
     // Handle filename transform
     let finalFilename = parsed.filename;
     if (rule.filenameTransform?.ignoreIf) {
       if (rule.filenameTransform.ignoreIf.includes(parsed.filename)) {
         finalFilename = "";
+      }
+    }
+
+    // Determine which target pattern to use
+    let targetPatternToUse = rule.targetPattern;
+    if (rule.filenameTransform?.conditionalTarget?.keepIf) {
+      if (
+        rule.filenameTransform.conditionalTarget.keepIf.includes(
+          parsed.filename
+        )
+      ) {
+        targetPatternToUse =
+          rule.filenameTransform.conditionalTarget.keepTargetPattern;
       }
     }
 
@@ -132,16 +172,33 @@ export function calculateFileUrl(
       delete targetVars.filename;
     }
 
-    let url = applyPattern(rule.targetPattern, targetVars);
+    let url = applyPattern(targetPatternToUse, targetVars, config);
 
-    // Remove trailing slash if filename was ignored
-    if (!finalFilename && url.endsWith("/")) {
-      url = url.slice(0, -1);
+    // Handle default language omission
+    // Only omit if omitDefaultLanguage is explicitly true
+    if (
+      omitDefaultLanguage === true &&
+      config.defaultLanguage &&
+      url.startsWith(`/${config.defaultLanguage}/`)
+    ) {
+      url = url.replace(`/${config.defaultLanguage}/`, "/");
     }
 
-    // Add trailing slash for non-index files
-    if (finalFilename && !url.endsWith("/")) {
-      url = url + "/";
+    // Handle trailing slash based on config
+    const trailingSlash = config.trailingSlash || "auto";
+    if (trailingSlash === "never") {
+      url = url.replace(/\/$/, "");
+    } else if (trailingSlash === "always") {
+      if (!url.endsWith("/")) {
+        url = url + "/";
+      }
+    } else {
+      // "auto" mode: remove trailing slash if filename was ignored, add for non-index files
+      if (!finalFilename && url.endsWith("/")) {
+        url = url.slice(0, -1);
+      } else if (finalFilename && !url.endsWith("/")) {
+        url = url + "/";
+      }
     }
 
     return url;
@@ -158,8 +215,49 @@ export function calculateFileUrl(
     } else {
       url = url + "/";
     }
+
+    // Handle default language omission
+    // Only omit if omitDefaultLanguage is explicitly true
+    if (
+      omitDefaultLanguage === true &&
+      config.defaultLanguage &&
+      url.startsWith(`/${config.defaultLanguage}/`)
+    ) {
+      url = url.replace(`/${config.defaultLanguage}/`, "/");
+    }
+
+    // Handle trailing slash based on config
+    const trailingSlash = config.trailingSlash || "auto";
+    if (trailingSlash === "never") {
+      url = url.replace(/\/$/, "");
+    } else if (trailingSlash === "always") {
+      if (!url.endsWith("/")) {
+        url = url + "/";
+      }
+    }
+    // "auto" mode is already handled above
+
     return url;
   }
 
   return null;
+}
+
+/**
+ * Calculate file URL from source path
+ * Variables are dynamically extracted via pattern matching
+ * Uses global defaultUrlResolverConfig
+ *
+ * @param absolutePath - Absolute path to the source file or slug format (e.g., "en/tidb/master/alert-rules")
+ * @param omitDefaultLanguage - Whether to omit default language prefix (default: false, keeps language prefix)
+ */
+export function calculateFileUrl(
+  absolutePath: string,
+  omitDefaultLanguage: boolean = false
+): string | null {
+  return calculateFileUrlWithConfig(
+    absolutePath,
+    defaultUrlResolverConfig,
+    omitDefaultLanguage
+  );
 }

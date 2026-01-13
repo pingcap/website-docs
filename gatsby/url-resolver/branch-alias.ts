@@ -1,8 +1,8 @@
 /**
- * Branch alias matching utilities
+ * Alias matching utilities (generalized from branch alias)
  */
 
-import type { BranchAlias, BranchAliasPattern } from "./types";
+import type { AliasMapping, AliasPattern } from "./types";
 
 /**
  * Convert wildcard pattern to regex
@@ -79,54 +79,54 @@ function applyRegexReplacement(
 }
 
 /**
- * Get branch alias for a given branch name
+ * Get alias for a given value
  * Supports both exact matches and pattern-based matches
  */
-export function getBranchAlias(
-  branchAliases: BranchAlias,
-  branch: string
+export function getAlias(
+  aliasMappings: AliasMapping,
+  value: string
 ): string | null {
   // First, try exact match
-  const exactMatch = branchAliases[branch];
+  const exactMatch = aliasMappings[value];
   if (typeof exactMatch === "string") {
     return exactMatch;
   }
 
   // Then, try pattern-based matches
-  // Check each entry in branchAliases
-  for (const [key, value] of Object.entries(branchAliases)) {
+  // Check each entry in aliasMappings
+  for (const [key, mappingValue] of Object.entries(aliasMappings)) {
     // Skip if it's an exact match (already checked)
-    if (key === branch) {
+    if (key === value) {
       continue;
     }
 
     // Check if it's a pattern-based alias
-    if (typeof value === "object" && value !== null) {
-      const pattern = value as BranchAliasPattern;
+    if (typeof mappingValue === "object" && mappingValue !== null) {
+      const pattern = mappingValue as AliasPattern;
       if (pattern.pattern && pattern.replacement) {
         let result: string | null = null;
         if (pattern.useRegex) {
           result = applyRegexReplacement(
             pattern.pattern,
             pattern.replacement,
-            branch
+            value
           );
         } else {
           // Try wildcard matching
           result = applyWildcardReplacement(
             pattern.pattern,
             pattern.replacement,
-            branch
+            value
           );
         }
         if (result) {
           return result;
         }
       }
-    } else if (typeof value === "string") {
+    } else if (typeof mappingValue === "string") {
       // Check if key is a wildcard pattern
       if (key.includes("*")) {
-        const result = applyWildcardReplacement(key, value, branch);
+        const result = applyWildcardReplacement(key, mappingValue, value);
         if (result) {
           return result;
         }
@@ -135,4 +135,57 @@ export function getBranchAlias(
   }
 
   return null;
+}
+
+/**
+ * Check if context conditions are met
+ */
+function checkContext(
+  context: Record<string, string[]> | undefined,
+  variables: Record<string, string>
+): boolean {
+  if (!context) return true;
+
+  for (const [varName, allowedValues] of Object.entries(context)) {
+    const varValue = variables[varName];
+    if (varValue && allowedValues) {
+      if (!allowedValues.includes(varValue)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+/**
+ * Get alias for a variable value using alias configuration
+ * Supports context-based alias selection
+ */
+export function getVariableAlias(
+  aliasName: string,
+  variableValue: string,
+  config: {
+    aliases?: {
+      [aliasName: string]: {
+        context?: Record<string, string[]>;
+        mappings: AliasMapping;
+      };
+    };
+  },
+  contextVariables: Record<string, string>
+): string | null {
+  if (!config.aliases || !config.aliases[aliasName]) {
+    return null;
+  }
+
+  const aliasConfig = config.aliases[aliasName];
+
+  // Check context conditions if specified
+  if (!checkContext(aliasConfig.context, contextVariables)) {
+    return null;
+  }
+
+  // Get alias from mappings
+  return getAlias(aliasConfig.mappings, variableValue);
 }
