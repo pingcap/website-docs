@@ -5,10 +5,10 @@ export enum PageType {
   TiDB = "tidb",
   TiDBCloud = "tidbcloud",
   TiDBInKubernetes = "tidb-in-kubernetes",
-  Developer = "developer",
+  Develop = "develop",
   BestPractice = "best-practice",
   Api = "api",
-  Release = "release",
+  Releases = "releases",
 }
 
 const LANGUAGE_CODES = Object.values(Locale);
@@ -88,8 +88,8 @@ export const usePageType = (language?: string, pageUrl?: string): PageType => {
 
   // Check page types in priority order
   // Check for release pages
-  if (matchesPageType(segment, PageType.Release, pageUrl)) {
-    return PageType.Release;
+  if (matchesPageType(segment, PageType.Releases, pageUrl)) {
+    return PageType.Releases;
   }
 
   // Check for api pages
@@ -98,8 +98,8 @@ export const usePageType = (language?: string, pageUrl?: string): PageType => {
   }
 
   // Check for developer pages
-  if (matchesPageType(segment, PageType.Developer, pageUrl)) {
-    return PageType.Developer;
+  if (matchesPageType(segment, PageType.Develop, pageUrl)) {
+    return PageType.Develop;
   }
 
   // Check for best-practice pages

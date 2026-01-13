@@ -4,6 +4,7 @@
 
 import path from "path";
 import type { UrlResolverConfig } from "./types";
+import CONFIG from "../../docs/docs.json";
 
 export const defaultUrlResolverConfig: UrlResolverConfig = {
   sourceBasePath: path.resolve(__dirname, "../../docs/markdown-pages"),
@@ -39,7 +40,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // When filename = "_index": /en/tidb/master/develop/{folders}/_index.md -> /en/develop/{folders}/
     // When filename != "_index": /en/tidb/master/develop/{folders}/{filename}.md -> /en/develop/{filename}/
     {
-      sourcePattern: "/{lang}/{repo}/{branch}/{folder}/{...folders}/{filename}",
+      sourcePattern: `/{lang}/{repo}/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
       targetPattern: "/{lang}/{folder}/{filename}",
       conditions: {
         repo: ["tidb"],

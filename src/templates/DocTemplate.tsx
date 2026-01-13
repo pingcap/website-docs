@@ -236,6 +236,7 @@ function DocTemplate({
         <Box sx={{ display: "flex", width: "100%" }}>
           {!frontmatter?.hide_leftNav && (
             <LeftNavDesktop
+              language={language}
               data={navigation}
               current={pageUrl}
               name={name}

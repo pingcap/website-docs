@@ -7,8 +7,7 @@ import { Locale, Repo, BuildType } from "../../src/shared/interface";
 import {
   generateConfig,
   generateNav,
-  generateStarterNav,
-  generateEssentialNav,
+  getSharedNamespace,
 } from "../../gatsby/path";
 import { calculateFileUrl } from "../../gatsby/url-resolver";
 import { cpMarkdown } from "../../gatsby/cp-markdown";
@@ -120,9 +119,10 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       return;
     }
 
-    const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
+    const namespace = getSharedNamespace(node.slug);
+    const navUrl = generateNav(pathConfig, namespace);
+    const starterNavUrl = generateNav(pathConfig, "tidb-cloud-starter");
+    const essentialNavUrl = generateNav(pathConfig, "tidb-cloud-essential");
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>

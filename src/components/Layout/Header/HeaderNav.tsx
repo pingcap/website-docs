@@ -489,6 +489,7 @@ const NavButton = (props: {
               borderBottom: isSelectedState
                 ? `4px solid ${theme.palette.primary.main}`
                 : ``,
+              fontWeight: isSelectedState ? 700 : 400,
             }}
           >
             {startIcon}
@@ -532,7 +533,7 @@ const NavButton = (props: {
                 alignItems: "center",
                 gap: 0.5,
                 fontSize: 14,
-                fontWeight: hasSelectedChild ? 700 : 400,
+                fontWeight: isSelectedState ? 700 : 400,
                 color: theme.palette.carbon[900],
               }}
             >
