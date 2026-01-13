@@ -9,11 +9,11 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
   defaultLanguage: "en",
 
   linkMappings: [
-    // Rule 1: Links starting with specific namespaces
+    // Rule 1: Links starting with specific namespaces (direct link mapping)
     // /{namespace}/{...any}/{docname} -> /{namespace}/{docname}
     // Special: tidb-cloud -> tidbcloud
     {
-      sourcePattern: "/{namespace}/{...any}/{docname}",
+      linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{namespace}/{docname}",
       conditions: {
         namespace: [
@@ -28,9 +28,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
         "tidb-cloud": "tidbcloud",
       },
     },
-  ],
-  linkMappingsByPath: [
-    // tidbcloud with prefix pages
+    // Rule 2: tidbcloud with prefix pages (path-based mapping)
     // Current page: /{lang}/tidbcloud/{...any}
     // Link: /{...any}/{docname} -> /{lang}/tidbcloud/{docname}
     {
@@ -38,7 +36,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloud/{docname}",
     },
-    // tidb with branch pages (with lang prefix)
+    // Rule 3: tidb with branch pages (path-based mapping)
     // Current page: /{lang}/tidb/{branch}/{...any} (branch is already aliased, e.g., "stable", "v8.5")
     // Link: /{...any}/{docname} -> /{lang}/tidb/{branch}/{docname}
     {
@@ -49,10 +47,9 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/{repo}/{branch}/{docname}",
     },
-    // Fallback
-    // develop, best-practice, api, releases pages
-    // Current page: /{namespace}/{...any} where namespace is one of these
-    // Link: /{...any}/{docname} -> /{lang}/tidb/stable/{docname}
+    // Rule 4: Fallback (path-based mapping)
+    // Current page: /{lang}/{repo}/{...any}
+    // Link: /{...any}/{docname} -> /{lang}/{repo}/stable/{docname}
     {
       pathPattern: "/{lang}/{repo}/{...any}",
       linkPattern: "/{...any}/{docname}",

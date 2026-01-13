@@ -65,35 +65,80 @@ export function resolveMarkdownLink(
     return linkPath;
   }
 
-  // Rule 1: Try link mappings first
-  for (const rule of linkConfig.linkMappings) {
-    const variables = matchPattern(rule.sourcePattern, linkSegments);
-    if (!variables) {
-      continue;
-    }
+  // Process all rules in order (first match wins)
+  const currentPageSegments = parseLinkPath(currentPageUrl);
 
-    // Check conditions
-    if (rule.conditions) {
-      let conditionsMet = true;
-      for (const [varName, allowedValues] of Object.entries(rule.conditions)) {
-        const varValue = variables[varName];
-        if (varValue && allowedValues) {
-          if (!allowedValues.includes(varValue)) {
-            conditionsMet = false;
-            break;
-          }
-        }
-      }
-      if (!conditionsMet) {
+  for (const rule of linkConfig.linkMappings) {
+    let variables: Record<string, string> | null = null;
+
+    // Check if this is a direct link mapping (linkPattern only) or path-based mapping (pathPattern + linkPattern)
+    if (!rule.pathPattern) {
+      // Direct link mapping: match link path directly
+      variables = matchPattern(rule.linkPattern, linkSegments);
+      if (!variables) {
         continue;
       }
-    }
 
-    // Apply namespace transformation if needed
-    if (rule.namespaceTransform && variables.namespace) {
-      const transformed = rule.namespaceTransform[variables.namespace];
-      if (transformed) {
-        variables.namespace = transformed;
+      // Check conditions
+      if (rule.conditions) {
+        let conditionsMet = true;
+        for (const [varName, allowedValues] of Object.entries(
+          rule.conditions
+        )) {
+          const varValue = variables[varName];
+          if (varValue && allowedValues) {
+            if (!allowedValues.includes(varValue)) {
+              conditionsMet = false;
+              break;
+            }
+          }
+        }
+        if (!conditionsMet) {
+          continue;
+        }
+      }
+
+      // Apply namespace transformation if needed
+      if (rule.namespaceTransform && variables.namespace) {
+        const transformed = rule.namespaceTransform[variables.namespace];
+        if (transformed) {
+          variables.namespace = transformed;
+        }
+      }
+    } else {
+      // Path-based mapping: match current page path first, then link path
+      const pageVars = matchPattern(rule.pathPattern, currentPageSegments);
+      if (!pageVars) {
+        continue;
+      }
+
+      // Check path conditions (if specified, check against page variables)
+      if (rule.pathConditions) {
+        if (!checkConditions(rule.pathConditions, pageVars)) {
+          continue;
+        }
+      }
+
+      // Check conditions (if specified, check against page variables as fallback)
+      if (rule.conditions && !rule.pathConditions) {
+        if (!checkConditions(rule.conditions, pageVars)) {
+          continue;
+        }
+      }
+
+      // Match link pattern
+      const linkVars = matchPattern(rule.linkPattern, linkSegments);
+      if (!linkVars) {
+        continue;
+      }
+
+      // Merge current page variables with link variables
+      variables = { ...pageVars, ...linkVars };
+
+      // Set default values for missing variables
+      // For tidb pages without lang prefix, default to "en"
+      if (pageVars.repo === "tidb" && !variables.lang) {
+        variables.lang = "en";
       }
     }
 
@@ -113,69 +158,6 @@ export function resolveMarkdownLink(
     }
 
     return result;
-  }
-
-  // Rule 2: Path-based link mappings (based on current page path)
-  if (linkConfig.linkMappingsByPath) {
-    const currentPageSegments = parseLinkPath(currentPageUrl);
-
-    for (const pathRule of linkConfig.linkMappingsByPath) {
-      // Match current page path pattern
-      const pageVars = matchPattern(pathRule.pathPattern, currentPageSegments);
-      if (!pageVars) {
-        continue;
-      }
-
-      // Check path conditions (if specified, check against page variables)
-      if (pathRule.pathConditions) {
-        if (!checkConditions(pathRule.pathConditions, pageVars)) {
-          continue;
-        }
-      }
-
-      // Check conditions (if specified, check against page variables as fallback)
-      if (pathRule.conditions && !pathRule.pathConditions) {
-        if (!checkConditions(pathRule.conditions, pageVars)) {
-          continue;
-        }
-      }
-
-      // Match link pattern
-      const linkVars = matchPattern(pathRule.linkPattern, linkSegments);
-      if (!linkVars) {
-        continue;
-      }
-
-      // Merge current page variables with link variables
-      const mergedVars = { ...pageVars, ...linkVars };
-
-      // Set default values for missing variables
-      // For tidb pages without lang prefix, default to "en"
-      if (pageVars.repo === "tidb" && !mergedVars.lang) {
-        mergedVars.lang = "en";
-      }
-
-      // Build target URL
-      const targetUrl = applyPattern(
-        pathRule.targetPattern,
-        mergedVars,
-        urlConfig
-      );
-
-      // Handle default language and trailing slash
-      let result = targetUrl;
-      // Use linkConfig.defaultLanguage if available, otherwise fallback to urlConfig.defaultLanguage
-      const defaultLanguage =
-        linkConfig.defaultLanguage || urlConfig.defaultLanguage;
-      if (defaultLanguage && result.startsWith(`/${defaultLanguage}/`)) {
-        result = result.replace(`/${defaultLanguage}/`, "/");
-      }
-      if (urlConfig.trailingSlash === "never") {
-        result = result.replace(/\/$/, "");
-      }
-
-      return result;
-    }
   }
 
   // No match found, return original link
