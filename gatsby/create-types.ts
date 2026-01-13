@@ -58,7 +58,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
           if (!slug.endsWith("TOC"))
             throw new Error(`unsupported query in ${slug}`);
           const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
+          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
           mdxNode.nav = res;
           return res;
         },
@@ -94,7 +94,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
           if (!slug.endsWith("TOC-tidb-cloud-starter"))
             throw new Error(`unsupported query in ${slug}`);
           const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
+          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
           mdxNode.starterNav = res;
           return res;
         },
@@ -130,7 +130,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
           if (!slug.endsWith("TOC-tidb-cloud-essential"))
             throw new Error(`unsupported query in ${slug}`);
           const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
+          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
           mdxNode.essentialNav = res;
           return res;
         },

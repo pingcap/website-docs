@@ -46,7 +46,7 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
 
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
-    const toc = mdxAstToToc(node.mdxAST.children, config);
+    const toc = mdxAstToToc(node.mdxAST.children, node.slug);
     const files = extractFilesFromToc(toc);
 
     // Create a key for this specific locale/repo/version combination

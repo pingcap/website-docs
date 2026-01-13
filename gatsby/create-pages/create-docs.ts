@@ -112,26 +112,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       return;
     }
 
-    // Use url-resolver to generate URL from file absolute path
-    // Fallback to generateUrl if fileAbsolutePath is not available or url-resolver fails
-    // let path: string;
-    // const fileAbsolutePath = node.parent?.fileAbsolutePath;
-    // if (fileAbsolutePath) {
-    //   const resolvedUrl = calculateFileUrl(
-    //     fileAbsolutePath,
-    //     defaultUrlResolverConfig
-    //   );
-    //   if (resolvedUrl) {
-    //     path = resolvedUrl;
-    //   } else {
-    //     // Fallback to old generateUrl if url-resolver fails
-    //     path = generateUrl(name, pathConfig);
-    //   }
-    // } else {
-    //   // Fallback to old generateUrl if fileAbsolutePath is not available
-    //   path = generateUrl(name, pathConfig);
-    // }
-    // const fileAbsolutePath = node.parent?.fileAbsolutePath;
     const path = calculateFileUrl(node.slug, true);
     if (!path) {
       console.info(
@@ -139,8 +119,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       );
       return;
     }
-    // console.log("path::::::::", path);
-    // console.log("node.slug::::::::", node.slug);
 
     const navUrl = generateNav(pathConfig);
     const starterNavUrl = generateStarterNav(pathConfig);

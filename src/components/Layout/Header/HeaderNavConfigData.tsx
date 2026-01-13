@@ -1,4 +1,4 @@
-import { NavConfig } from "./HeaderNavConfig";
+import { NavConfig } from "./HeaderNavConfigType";
 import { PageType } from "shared/usePageType";
 import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
 import { CloudPlan } from "shared/interface";
@@ -45,19 +45,19 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
               }
             },
           },
-          {
-            type: "item",
-            label: "TiDB Cloud Premium",
-            to: `/tidbcloud/premium?${CLOUD_MODE_KEY}=premium`,
-            selected: (pageType) =>
-              pageType === PageType.TiDBCloud &&
-              cloudPlan === CloudPlan.Premium,
-            onClick: () => {
-              if (typeof window !== "undefined") {
-                sessionStorage.setItem(CLOUD_MODE_KEY, "premium");
-              }
-            },
-          },
+          // {
+          //   type: "item",
+          //   label: "TiDB Cloud Premium",
+          //   to: `/tidbcloud/premium?${CLOUD_MODE_KEY}=premium`,
+          //   selected: (pageType) =>
+          //     pageType === PageType.TiDBCloud &&
+          //     cloudPlan === CloudPlan.Premium,
+          //   onClick: () => {
+          //     if (typeof window !== "undefined") {
+          //       sessionStorage.setItem(CLOUD_MODE_KEY, "premium");
+          //     }
+          //   },
+          // },
           {
             type: "item",
             label: "TiDB Cloud Dedicated",

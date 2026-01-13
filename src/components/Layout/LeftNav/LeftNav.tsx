@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { RepoNav, PathConfig, BuildType } from "shared/interface";
-import { NavItemConfig } from "../Header/HeaderNavConfig";
+import { NavItemConfig } from "../Header/HeaderNavConfigType";
 import LinkComponent from "components/Link";
 import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
 import VersionSelect, {

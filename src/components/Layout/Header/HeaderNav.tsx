@@ -14,7 +14,11 @@ import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { useCloudPlan } from "shared/useCloudPlan";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
-import { NavConfig, NavGroupConfig, NavItemConfig } from "./HeaderNavConfig";
+import {
+  NavConfig,
+  NavGroupConfig,
+  NavItemConfig,
+} from "./HeaderNavConfigType";
 import { generateNavConfig } from "./HeaderNavConfigData";
 import { clearAllNavStates } from "../LeftNav/LeftNavTree";
 
