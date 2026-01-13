@@ -268,6 +268,159 @@ describe("resolveMarkdownLink", () => {
     });
   });
 
+  describe("linkMappingsByPath - Rule 3: develop/best-practice/api/releases namespace pages", () => {
+    it("should resolve links from develop namespace page", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search/vector-search-overview",
+        "/en/develop/vector-search"
+      );
+      expect(result).toBe("/tidb/stable/vector-search-overview");
+    });
+
+    it("should resolve links from best-practice namespace page", () => {
+      const result = resolveMarkdownLink(
+        "/optimization/query-optimization",
+        "/en/best-practice/optimization"
+      );
+      expect(result).toBe("/tidb/stable/query-optimization");
+    });
+
+    it("should resolve links from api namespace page", () => {
+      const result = resolveMarkdownLink(
+        "/tiproxy/tiproxy-api",
+        "/en/api/tiproxy-api-overview"
+      );
+      expect(result).toBe("/tidb/stable/tiproxy-api");
+    });
+
+    it("should resolve links from releases namespace page", () => {
+      const result = resolveMarkdownLink(
+        "/v8.5/release-notes",
+        "/en/releases/v8.5"
+      );
+      expect(result).toBe("/tidb/stable/release-notes");
+    });
+
+    it("should resolve links with multiple path segments from develop namespace", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search/data-types/vector-search-data-types-overview",
+        "/en/develop/vector-search/data-types"
+      );
+      expect(result).toBe("/tidb/stable/vector-search-data-types-overview");
+    });
+
+    it("should resolve links with multiple path segments from best-practice namespace", () => {
+      const result = resolveMarkdownLink(
+        "/optimization/query/query-performance-tuning",
+        "/en/best-practice/optimization/query"
+      );
+      expect(result).toBe("/tidb/stable/query-performance-tuning");
+    });
+
+    it("should resolve links with multiple path segments from api namespace", () => {
+      const result = resolveMarkdownLink(
+        "/overview/api-reference/getting-started",
+        "/en/api/overview/api-reference"
+      );
+      expect(result).toBe("/tidb/stable/getting-started");
+    });
+
+    it("should resolve links with multiple path segments from releases namespace", () => {
+      const result = resolveMarkdownLink(
+        "/v8.5/whats-new/features",
+        "/en/releases/v8.5/whats-new"
+      );
+      expect(result).toBe("/tidb/stable/features");
+    });
+
+    it("should preserve hash for links from develop namespace", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search/vector-search-overview#data-types",
+        "/en/develop/vector-search"
+      );
+      expect(result).toBe("/tidb/stable/vector-search-overview#data-types");
+    });
+
+    it("should preserve hash for links from best-practice namespace", () => {
+      const result = resolveMarkdownLink(
+        "/optimization/query-optimization#index-selection",
+        "/en/best-practice/optimization"
+      );
+      expect(result).toBe("/tidb/stable/query-optimization#index-selection");
+    });
+
+    it("should resolve links from Chinese develop namespace", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search/vector-search-overview",
+        "/zh/develop/vector-search"
+      );
+      expect(result).toBe("/zh/tidb/stable/vector-search-overview");
+    });
+
+    it("should resolve links from Japanese develop namespace", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search/vector-search-overview",
+        "/ja/develop/vector-search"
+      );
+      expect(result).toBe("/ja/tidb/stable/vector-search-overview");
+    });
+
+    it("should resolve single segment links from develop namespace", () => {
+      const result = resolveMarkdownLink(
+        "/page-name",
+        "/en/develop/vector-search"
+      );
+      expect(result).toBe("/tidb/stable/page-name");
+    });
+
+    it("should resolve links from develop namespace root", () => {
+      const result = resolveMarkdownLink(
+        "/vector-search-overview",
+        "/en/develop"
+      );
+      expect(result).toBe("/tidb/stable/vector-search-overview");
+    });
+
+    it("should resolve links from api namespace root", () => {
+      const result = resolveMarkdownLink("/api-overview", "/en/api");
+      expect(result).toBe("/tidb/stable/api-overview");
+    });
+
+    it("should handle links without leading slash from develop namespace", () => {
+      const result = resolveMarkdownLink(
+        "vector-search/vector-search-overview",
+        "/en/develop/vector-search"
+      );
+      expect(result).toBe("/tidb/stable/vector-search-overview");
+    });
+
+    it("should resolve links from best-practice namespace with deep nesting", () => {
+      const result = resolveMarkdownLink(
+        "/a/b/c/d/e/page",
+        "/en/best-practice/a/b/c/d/e"
+      );
+      expect(result).toBe("/tidb/stable/page");
+    });
+
+    it("should resolve links from releases namespace with version segments", () => {
+      const result = resolveMarkdownLink(
+        "/v8.5/changelog/changes",
+        "/en/releases/v8.5/changelog"
+      );
+      expect(result).toBe("/tidb/stable/changes");
+    });
+
+    it("should not match non-develop/best-practice/api/releases namespace pages", () => {
+      const result = resolveMarkdownLink(
+        "/some/path/to/page",
+        "/en/other-namespace/some/path"
+      );
+      // Should not match Rule 3 (namespace is "other-namespace", not in pathConditions)
+      // Should return original link or match other rules
+      expect(result).toBe("/some/path/to/page");
+    });
+  });
+
   describe("Default language omission", () => {
     it("should omit /en/ prefix for English links from tidbcloud pages", () => {
       const result = resolveMarkdownLink(

@@ -3,6 +3,7 @@
  */
 
 import type { LinkResolverConfig } from "./types";
+import CONFIG from "../../docs/docs.json";
 
 export const defaultLinkResolverConfig: LinkResolverConfig = {
   // Default language to omit from resolved URLs
@@ -36,7 +37,18 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloud/{docname}",
     },
-    // Rule 3: tidb with branch pages (path-based mapping)
+    // Rule 3: develop, best-practice, api, releases namespace in tidb folder
+    // Current page: /{lang}/{namespace}/{...any}
+    // Link: /{...any}/{docname} -> /{lang}/{namespace}/{docname}
+    {
+      pathPattern: `/{lang}/{namespace}/{...any}`,
+      pathConditions: {
+        namespace: ["develop", "best-practice", "api", "releases"],
+      },
+      linkPattern: "/{...any}/{docname}",
+      targetPattern: "/{lang}/tidb/stable/{docname}",
+    },
+    // Rule 4: tidb with branch pages (path-based mapping)
     // Current page: /{lang}/tidb/{branch}/{...any} (branch is already aliased, e.g., "stable", "v8.5")
     // Link: /{...any}/{docname} -> /{lang}/tidb/{branch}/{docname}
     {
