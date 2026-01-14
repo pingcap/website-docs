@@ -68,6 +68,9 @@ export function resolveMarkdownLink(
   // Process all rules in order (first match wins)
   const currentPageSegments = parseLinkPath(currentPageUrl);
 
+  // Extract curLang from the first segment of currentPageUrl
+  const curLang = currentPageSegments.length > 0 ? currentPageSegments[0] : "";
+
   for (const rule of linkConfig.linkMappings) {
     let variables: Record<string, string> | null = null;
 
@@ -77,6 +80,11 @@ export function resolveMarkdownLink(
       variables = matchPattern(rule.linkPattern, linkSegments);
       if (!variables) {
         continue;
+      }
+
+      // Add curLang as default variable
+      if (curLang) {
+        variables.curLang = curLang;
       }
 
       // Check conditions
@@ -134,6 +142,11 @@ export function resolveMarkdownLink(
 
       // Merge current page variables with link variables
       variables = { ...pageVars, ...linkVars };
+
+      // Add curLang as default variable
+      if (curLang) {
+        variables.curLang = curLang;
+      }
 
       // Set default values for missing variables
       // For tidb pages without lang prefix, default to "en"
