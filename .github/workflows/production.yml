@@ -2,7 +2,7 @@ name: Build and deploy to server
 
 on:
   push:
-    branches: ["master"]
+    branches: ["preview-nextgen"]
     paths-ignore:
       - ".github/**"
       - ".docs/**"
@@ -11,7 +11,7 @@ on:
       hash:
         description: "Docs Staging Hash"
         type: string
-        default: main
+        default: nextgen
         required: true
       fallback:
         description: "Fallback by hash"
@@ -49,7 +49,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          ref: "master"
+          ref: "preview-nextgen"
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -90,9 +90,9 @@ jobs:
           path: |
             .cache
             public
-          key: ${{ runner.os }}-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}
+          key: ${{ runner.os }}-gatsby-cache-tidbio-${{ steps.calc-cache-key.outputs.key }}
           restore-keys: |
-            ${{ runner.os }}-gatsby-cache-docs-staging-
+            ${{ runner.os }}-gatsby-cache-tidbio-
 
       - name: Clean up temporary files
         run: |
@@ -132,7 +132,7 @@ jobs:
       - name: Deploy to COS
         if: ${{ !inputs.cos_backup }}
         run: |
-          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_TIDBIO_BUCKET_ID }} \
             --init-skip \
             --recursive \
             --routines 16 \
@@ -146,41 +146,13 @@ jobs:
       - name: Deploy md to COS
         if: ${{ !inputs.cos_backup }}
         run: |
-          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BUCKET_ID }} \
+          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_TIDBIO_BUCKET_ID }} \
             --init-skip \
             --recursive \
             --routines 16 \
             --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
             --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
             --endpoint cos.na-ashburn.myqcloud.com \
-            --include ".*\.(md|txt)$" \
-            --meta "Content-Type:text/plain; charset=utf-8" \
-            --force
-
-      - name: Deploy to COS backup
-        if: ${{ inputs.cos_backup }}
-        run: |
-          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BACKUP_BUCKET_ID }} \
-            --init-skip \
-            --recursive \
-            --routines 16 \
-            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
-            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint cos.ap-tokyo.myqcloud.com \
-            --delete \
-            --exclude ".*\.(md|txt)$" \
-            --force
-
-      - name: Deploy md to COS backup
-        if: ${{ inputs.cos_backup }}
-        run: |
-          ./coscli sync public/ cos://${{ secrets.TENCENTCLOUD_BACKUP_BUCKET_ID }} \
-            --init-skip \
-            --recursive \
-            --routines 16 \
-            --secret-id ${{ secrets.TENCENTCLOUD_SECRET_ID }} \
-            --secret-key ${{ secrets.TENCENTCLOUD_SECRET_KEY }} \
-            --endpoint cos.ap-tokyo.myqcloud.com \
             --include ".*\.(md|txt)$" \
             --meta "Content-Type:text/plain; charset=utf-8" \
             --force
@@ -207,5 +179,4 @@ jobs:
           pipx install tccli
 
       - name: Purge production CDN cache
-        run: |
-          tccli teo CreatePurgeTask --cli-unfold-argument --ZoneId ${{ secrets.TENCENTCLOUD_EO_DOCS_ZONEID }} --Type purge_prefix --Method invalidate --Targets 'https://docs.pingcap.com'
+        run: tccli cdn PurgePathCache --Paths '["https://docs.tidb.io/"]' --FlushType flush

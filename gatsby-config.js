@@ -189,25 +189,20 @@ module.exports = {
     // },
     `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-meta-redirect`,
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        excludes: ["/404", "/zh/404", "/search", "/zh/search"],
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-sitemap`,
+    //   options: {
+    //     excludes: ["/404", "/zh/404", "/search", "/zh/search"],
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
         host:
           process.env.WEBSITE_BUILD_TYPE === "archive"
-            ? "https://docs-archive.pingcap.com"
-            : "https://docs.pingcap.com",
-        sitemap: `${
-          process.env.WEBSITE_BUILD_TYPE === "archive"
-            ? "https://docs-archive.pingcap.com"
-            : "https://docs.pingcap.com"
-        }/sitemap/sitemap-index.xml`,
-        policy: [{ userAgent: "*", allow: "/" }],
+            ? "https://docs-archive.tidb.io"
+            : "https://docs.tidb.io",
+        policy: [{ userAgent: "*", disallow: "/" }],
       },
     },
     {
