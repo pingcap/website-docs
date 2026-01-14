@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { CloudPlan, Repo } from "./interface";
+import { CloudPlan, Repo, TOCNamespace } from "./interface";
 
 export const CLOUD_MODE_KEY = "plan";
 export const CLOUD_MODE_VALUE_STARTER = "starter";
@@ -72,11 +72,11 @@ export const useCloudPlan = () => {
 };
 
 export const useCloudPlanNavigate = (
-  repo: Repo,
+  namespace: TOCNamespace,
   inDefaultPlan: string | null
 ) => {
   useEffect(() => {
-    if (repo !== Repo.tidbcloud) {
+    if (namespace !== TOCNamespace.TiDBCloud) {
       return;
     }
     const searchParams = new URLSearchParams(location.search);

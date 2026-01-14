@@ -122,7 +122,7 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
       {
         type: "item",
         label: "TiDB Cloud Releases",
-        to: "/release/tidbcloud",
+        to: "/releases/tidb-cloud",
         selected: (namespace) => namespace === TOCNamespace.TidbCloudReleases,
       },
       {
@@ -134,7 +134,7 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
       {
         type: "item",
         label: "TiDB Operator Releases",
-        to: "/release/tidb-in-kubernetes",
+        to: "/releases/tidb-in-kubernetes",
         selected: (namespace) =>
           namespace === TOCNamespace.TiDBInKubernetesReleases,
       },

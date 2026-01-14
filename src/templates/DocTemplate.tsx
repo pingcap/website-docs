@@ -119,7 +119,7 @@ function DocTemplate({
   } = data;
 
   const { cloudPlan, isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(pathConfig.repo, inDefaultPlan);
+  useCloudPlanNavigate(namespace, inDefaultPlan);
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
@@ -127,13 +127,15 @@ function DocTemplate({
   const essentialNavigation = essentialNav
     ? essentialNav.essentialNavigation
     : [];
-  const navigation = filterTOC(
-    isStarter
+  const navigationByNamespace =
+    namespace !== TOCNamespace.TiDBCloud
+      ? classicNavigation
+      : isStarter
       ? starterNavigation
       : isEssential
       ? essentialNavigation
-      : classicNavigation
-  );
+      : classicNavigation;
+  const navigation = filterTOC(navigationByNamespace);
 
   const { language } = useI18next();
   const haveStarter = starterNavigation.length > 0;

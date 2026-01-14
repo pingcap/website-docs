@@ -36,14 +36,6 @@ export interface NamespaceRule {
  */
 const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   {
-    namespace: TOCNamespace.TiDBCloud,
-    repo: Repo.tidbcloud,
-  },
-  {
-    namespace: TOCNamespace.TiDBInKubernetes,
-    repo: Repo.operator,
-  },
-  {
     namespace: TOCNamespace.Develop,
     repo: Repo.tidb,
     branch: CONFIG.docs.tidb.stable,
@@ -73,22 +65,28 @@ const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   },
   {
     namespace: TOCNamespace.TidbCloudReleases,
-    repo: Repo.tidb,
-    branch: CONFIG.docs.tidb.stable,
+    repo: Repo.tidbcloud,
     folder: "tidb-cloud",
     restPath: (rest) => rest[0] === "releases",
-    minRestLength: 1,
   },
   {
     namespace: TOCNamespace.TiDBInKubernetesReleases,
     repo: Repo.operator,
-    branch: CONFIG.docs.tidb.stable,
+    branch: CONFIG.docs["tidb-in-kubernetes"].stable,
     folder: "releases",
     minRestLength: 1,
   },
   {
     namespace: TOCNamespace.TiDB,
     repo: Repo.tidb,
+  },
+  {
+    namespace: TOCNamespace.TiDBCloud,
+    repo: Repo.tidbcloud,
+  },
+  {
+    namespace: TOCNamespace.TiDBInKubernetes,
+    repo: Repo.operator,
   },
 ];
 
