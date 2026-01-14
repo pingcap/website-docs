@@ -106,7 +106,8 @@ export function LeftNavDesktop(props: LeftNavProps) {
           </Box>
         )}
 
-        {namespace === TOCNamespace.TiDB && (
+        {(namespace === TOCNamespace.TiDB ||
+          namespace === TOCNamespace.TiDBInKubernetes) && (
           <VersionSelect
             name={name}
             pathConfig={pathConfig}

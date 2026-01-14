@@ -71,11 +71,20 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // /en/tidb/master/{...folders}/{filename} -> /en/tidb/stable/{filename}
     // /en/tidb/release-8.5/{...folders}/{filename} -> /en/tidb/v8.5/{filename}
     {
-      sourcePattern: "/{lang}/{repo}/{branch}/{...folders}/{filename}",
-      targetPattern: "/{lang}/{repo}/{branch:branch-alias}/{filename}",
-      conditions: {
-        repo: ["tidb", "tidb-in-kubernetes"],
+      sourcePattern: "/{lang}/tidb/{branch}/{...folders}/{filename}",
+      targetPattern: "/{lang}/tidb/{branch:branch-alias-tidb}/{filename}",
+      filenameTransform: {
+        ignoreIf: ["_index", "_docHome"],
       },
+    },
+    // tidb-in-kubernetes with branch and optional folders
+    // /en/tidb-in-kubernetes/main/{...folders}/{filename} -> /en/tidb-in-kubernetes/stable/{filename}
+    // /en/tidb-in-kubernetes/release-1.6/{...folders}/{filename} -> /en/tidb-in-kubernetes/v1.6/{filename}
+    {
+      sourcePattern:
+        "/{lang}/tidb-in-kubernetes/{branch}/{...folders}/{filename}",
+      targetPattern:
+        "/{lang}/tidb-in-kubernetes/{branch:branch-alias-tidb-in-kubernetes}/{filename}",
       filenameTransform: {
         ignoreIf: ["_index", "_docHome"],
       },
@@ -91,17 +100,12 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
   ],
 
   aliases: {
-    // Branch alias: used in {branch:branch-alias}
-    // Supports context-based alias selection
-    "branch-alias": {
-      // Context: only apply this alias when repo is tidb or tidb-in-kubernetes
-      context: {
-        repo: ["tidb", "tidb-in-kubernetes"],
-      },
+    // Branch alias for tidb: used in {branch:branch-alias-tidb}
+    "branch-alias-tidb": {
       mappings: {
-        // Exact matches (repo-specific)
-        master: "stable", // for tidb
-        main: "stable", // for tidb-in-kubernetes
+        master: "dev",
+        // Exact match for tidb stable branch
+        [CONFIG.docs.tidb.stable]: "stable",
         // Wildcard pattern: release-* -> v*
         // Matches any branch starting with "release-" and replaces with "v" prefix
         // Examples:
@@ -109,19 +113,22 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         //   release-8.1 -> v8.1
         //   release-7.5 -> v7.5
         "release-*": "v*",
-        // You can also use regex pattern with object syntax:
-        // {
-        //   pattern: "release-(.*)",
-        //   replacement: "v$1",
-        //   useRegex: true
-        // }
       },
     },
-    // Example: repo alias (if needed in the future)
-    // "repo-alias": {
-    //   mappings: {
-    //     "tidbcloud": "tidb-cloud",
-    //   },
-    // },
+    // Branch alias for tidb-in-kubernetes: used in {branch:branch-alias-tidb-in-kubernetes}
+    "branch-alias-tidb-in-kubernetes": {
+      mappings: {
+        main: "dev",
+        // Exact match for tidb-in-kubernetes stable branch
+        [CONFIG.docs["tidb-in-kubernetes"].stable]: "stable",
+        // Wildcard pattern: release-* -> v*
+        // Matches any branch starting with "release-" and replaces with "v" prefix
+        // Examples:
+        //   release-1.6 -> v1.6
+        //   release-1.5 -> v1.5
+        //   release-2.0 -> v2.0
+        "release-*": "v*",
+      },
+    },
   },
 };
