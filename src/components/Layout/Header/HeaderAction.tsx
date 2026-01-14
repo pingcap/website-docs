@@ -13,7 +13,7 @@ import CloudIcon from "@mui/icons-material/Cloud";
 
 import Search from "components/Search";
 
-import { Locale, BuildType } from "shared/interface";
+import { Locale, BuildType, TOCNamespace } from "shared/interface";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
@@ -56,12 +56,12 @@ export default function HeaderAction(props: {
   supportedLocales: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
-  pageUrl?: string;
+  namespace: TOCNamespace;
 }) {
-  const { docInfo, buildType, pageUrl } = props;
+  const { docInfo, buildType, namespace } = props;
   const { language, t } = useI18next();
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
-  const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
+  const isAutoTranslation = useIsAutoTranslation(namespace);
 
   return (
     <Stack

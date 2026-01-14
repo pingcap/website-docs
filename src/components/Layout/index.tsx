@@ -18,10 +18,9 @@ export default function Layout(props: {
   locales?: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
-  pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
-  namespace?: TOCNamespace;
+  namespace: TOCNamespace;
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   return (
@@ -33,7 +32,6 @@ export default function Layout(props: {
         locales={props.locales || []}
         docInfo={props.docInfo}
         buildType={props.buildType}
-        pageUrl={props.pageUrl}
         name={props.name}
         pathConfig={props.pathConfig}
         namespace={props.namespace}
