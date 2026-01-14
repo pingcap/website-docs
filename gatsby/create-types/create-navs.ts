@@ -1,34 +1,10 @@
 import { CreatePagesArgs } from "gatsby";
-import { generateConfig } from "./path";
-import { mdxAstToToc } from "./toc";
-import { Root, List } from "mdast";
+import { generateConfig } from "../path";
+import { mdxAstToToc } from "../toc";
+import { Root } from "mdast";
 
-export const createExtraType = ({ actions }: CreatePagesArgs) => {
+export const createNavs = ({ actions }: CreatePagesArgs) => {
   const { createTypes, createFieldExtension } = actions;
-
-  const typeDefs = `
-    """
-    Markdown Node
-    """
-    type Mdx implements Node @dontInfer {
-      frontmatter: Frontmatter
-    }
-
-    """
-    Markdown Frontmatter
-    """
-    type Frontmatter {
-      title: String!
-      summary: String
-      aliases: [String!]
-      draft: Boolean
-      hide_sidebar: Boolean
-      hide_commit: Boolean
-      hide_leftNav: Boolean
-    }
-  `;
-
-  createTypes(typeDefs);
 
   createFieldExtension({
     name: "navigation",
@@ -55,10 +31,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
             }
           );
 
-          if (!slug.endsWith("TOC"))
-            throw new Error(`unsupported query in ${slug}`);
-          const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
+          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
           mdxNode.nav = res;
           return res;
         },
@@ -93,8 +66,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
 
           if (!slug.endsWith("TOC-tidb-cloud-starter"))
             throw new Error(`unsupported query in ${slug}`);
-          const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
+          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
           mdxNode.starterNav = res;
           return res;
         },
@@ -129,8 +101,7 @@ export const createExtraType = ({ actions }: CreatePagesArgs) => {
 
           if (!slug.endsWith("TOC-tidb-cloud-essential"))
             throw new Error(`unsupported query in ${slug}`);
-          const { config } = generateConfig(slug);
-          const res = mdxAstToToc(mdxAST.children, config, undefined, true);
+          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
           mdxNode.essentialNav = res;
           return res;
         },

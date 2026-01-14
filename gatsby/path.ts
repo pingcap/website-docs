@@ -1,6 +1,7 @@
 import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
 import CONFIG from "../docs/docs.json";
 
+// @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
 
@@ -27,14 +28,38 @@ export function generatePdfUrl(config: PathConfig) {
   }-manual.pdf`;
 }
 
-export function generateNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC`;
-}
-export function generateStarterNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-starter`;
-}
-export function generateEssentialNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-essential`;
+export const getSharedNamespace = (slug: string) => {
+  const [locale, repo, branch, folder, ...rest] = slug.split("/") as [
+    Locale,
+    Repo,
+    string,
+    string,
+    ...string[]
+  ];
+  if (
+    repo === Repo.tidb &&
+    branch === CONFIG.docs.tidb.stable &&
+    !!folder &&
+    rest.length > 0
+  ) {
+    if (folder === "develop") {
+      return "develop";
+    } else if (folder === "best-practice") {
+      return "best-practice";
+    } else if (folder === "api") {
+      return "api";
+    } else if (folder === "releases") {
+      return "tidb-releases";
+    }
+  }
+
+  return "";
+};
+
+export function generateNav(config: PathConfig, postSlug: string) {
+  return `${config.locale}/${config.repo}/${config.branch}/TOC${
+    postSlug ? `-${postSlug}` : ""
+  }`;
 }
 
 export function generateConfig(slug: string): {

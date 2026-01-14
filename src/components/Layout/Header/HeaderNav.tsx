@@ -14,7 +14,11 @@ import { BuildType } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { useCloudPlan } from "shared/useCloudPlan";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
-import { NavConfig, NavGroupConfig, NavItemConfig } from "./HeaderNavConfig";
+import {
+  NavConfig,
+  NavGroupConfig,
+  NavItemConfig,
+} from "./HeaderNavConfigType";
 import { generateNavConfig } from "./HeaderNavConfigData";
 import { clearAllNavStates } from "../LeftNav/LeftNavTree";
 
@@ -485,6 +489,7 @@ const NavButton = (props: {
               borderBottom: isSelectedState
                 ? `4px solid ${theme.palette.primary.main}`
                 : ``,
+              fontWeight: isSelectedState ? 700 : 400,
             }}
           >
             {startIcon}
@@ -528,7 +533,7 @@ const NavButton = (props: {
                 alignItems: "center",
                 gap: 0.5,
                 fontSize: 14,
-                fontWeight: hasSelectedChild ? 700 : 400,
+                fontWeight: isSelectedState ? 700 : 400,
                 color: theme.palette.carbon[900],
               }}
             >

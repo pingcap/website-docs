@@ -21,7 +21,7 @@ import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { ErrorOutlineOutlined } from "@mui/icons-material";
 import { getHeaderHeight, HEADER_HEIGHT } from "shared/headerHeight";
 
-import { NavItemConfig } from "./HeaderNavConfig";
+import { NavItemConfig } from "./HeaderNavConfigType";
 
 interface HeaderProps {
   bannerEnabled?: boolean;

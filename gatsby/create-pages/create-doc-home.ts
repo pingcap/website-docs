@@ -8,8 +8,6 @@ import {
   generateConfig,
   generateNav,
   generateDocHomeUrl,
-  generateStarterNav,
-  generateEssentialNav,
 } from "../../gatsby/path";
 import { DEFAULT_BUILD_TYPE, PageQueryData } from "./interface";
 
@@ -86,9 +84,9 @@ export const createDocHome = async ({
   nodes.forEach((node) => {
     const { id, name, pathConfig, filePath, slug } = node;
     const path = generateDocHomeUrl(name, pathConfig);
-    const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
+    const navUrl = generateNav(pathConfig, slug);
+    const starterNavUrl = generateNav(pathConfig, "tidb-cloud-starter");
+    const essentialNavUrl = generateNav(pathConfig, "tidb-cloud-essential");
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]

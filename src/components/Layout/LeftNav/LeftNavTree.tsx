@@ -207,11 +207,7 @@ export default function ControlledTreeView(props: {
       // Use saved expanded IDs if available
       expandedIds = savedExpandedIds;
       // Use storedId for selected if available, otherwise use the last expanded ID
-      selectedId =
-        storedId ||
-        (expandedIds.length > 0
-          ? expandedIds[expandedIds.length - 1]
-          : undefined);
+      selectedId = storedId || undefined;
 
       // Disable transition animation only when restoring saved state and URL changed
       if (isUrlChanged) {
@@ -224,11 +220,7 @@ export default function ControlledTreeView(props: {
     } else {
       // Fallback to calculating from current URL
       expandedIds = calcExpandedIds(data, currentUrl, storedId || undefined);
-      selectedId =
-        storedId ||
-        (expandedIds.length > 0
-          ? expandedIds[expandedIds.length - 1]
-          : undefined);
+      selectedId = storedId || undefined;
     }
 
     setExpanded(expandedIds);
