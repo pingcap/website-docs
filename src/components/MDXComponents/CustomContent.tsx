@@ -1,21 +1,19 @@
 import { PropsWithChildren } from "react";
-import { PageType } from "shared/usePageType";
-import { CloudPlan } from "shared/interface";
+import { TOCNamespace, CloudPlan } from "shared/interface";
 
 interface CustomContentProps {
   // using in markdown file
-  // "tidb-cloud" is a historical use case for tidbcloud page, we need to keep it for compatible with old content
-  platform?: PageType | "tidb-cloud";
+  platform?: TOCNamespace;
   language?: string;
   plan?: CloudPlan;
 
-  pageTypeFromURL?: PageType;
+  currentNamespace?: TOCNamespace;
   languageFromURL?: string;
   cloudPlanFromURL?: CloudPlan | null;
 }
 
 export const useCustomContent = (
-  pageTypeFromURL: PageType,
+  currentNamespace: TOCNamespace,
   cloudPlanFromURL?: CloudPlan | null,
   languageFromURL?: string
 ) => {
@@ -23,7 +21,7 @@ export const useCustomContent = (
     return (
       <CustomContent
         {...props}
-        pageTypeFromURL={pageTypeFromURL}
+        currentNamespace={currentNamespace}
         languageFromURL={languageFromURL}
         cloudPlanFromURL={cloudPlanFromURL}
       />
@@ -35,16 +33,15 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
   props
 ) => {
   const {
-    platform: _pageType,
-    pageTypeFromURL,
+    platform: namespace,
+    currentNamespace,
     children,
     languageFromURL,
     language,
     cloudPlanFromURL,
     plan,
   } = props;
-  const pageType = convertMarkdownPageTypeToPageType(_pageType);
-  const shouldDisplayByPageType = pageTypeFromURL === pageType;
+  const shouldDisplayByNamespace = currentNamespace === namespace;
 
   const cloudPlanArray = plan?.split(",").map((p) => p.trim()) || [];
   const shouldDisplayByCloudPlan = cloudPlanArray.includes(
@@ -56,19 +53,11 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     : [];
   const shouldDisplayByLanguage = languageArray.includes(languageFromURL || "");
 
-  const isPageTypeMatch = !pageType || shouldDisplayByPageType;
+  const isNamespaceMatch = !namespace || shouldDisplayByNamespace;
   const isLanguageMatch = !language || shouldDisplayByLanguage;
   const isCloudPlanMatch = !plan || shouldDisplayByCloudPlan;
 
-  const shouldDisplay = isPageTypeMatch && isLanguageMatch && isCloudPlanMatch;
+  const shouldDisplay = isNamespaceMatch && isLanguageMatch && isCloudPlanMatch;
 
   return <>{shouldDisplay ? children : <></>}</>;
-};
-
-const convertMarkdownPageTypeToPageType = (
-  pageType?: string
-): PageType | undefined => {
-  if (!pageType) return;
-  if (pageType === "tidb-cloud") return PageType.TiDBCloud;
-  return pageType as PageType;
 };

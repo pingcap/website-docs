@@ -10,6 +10,7 @@ export interface TableOfContent {
 }
 
 export enum TOCNamespace {
+  Home = "home",
   TiDB = "tidb",
   TiDBCloud = "tidb-cloud",
   TiDBInKubernetes = "tidb-in-kubernetes",
@@ -22,6 +23,7 @@ export enum TOCNamespace {
 }
 
 export const TOCNamespaceSlugMap: Record<TOCNamespace, string> = {
+  [TOCNamespace.Home]: "",
   [TOCNamespace.TiDB]: "",
   [TOCNamespace.TiDBCloud]: "",
   [TOCNamespace.TiDBInKubernetes]: "",

@@ -17,7 +17,6 @@ import {
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
-import { usePageType } from "shared/usePageType";
 import { H1 } from "./MDXComponents/H1";
 
 export default function MDXContent(props: {
@@ -47,8 +46,11 @@ export default function MDXContent(props: {
     namespace,
   } = props;
 
-  const pageType = usePageType(language, pageUrl);
-  const CustomContent = useCustomContent(pageType, cloudPlan, language);
+  const CustomContent = useCustomContent(
+    namespace || TOCNamespace.TiDB,
+    cloudPlan,
+    language
+  );
   // const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
   React.useEffect(() => {

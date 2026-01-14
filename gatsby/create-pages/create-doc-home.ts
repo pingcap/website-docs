@@ -3,7 +3,12 @@ import { resolve } from "path";
 import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
-import { Locale, BuildType, TOCNamespace } from "../../src/shared/interface";
+import {
+  Locale,
+  BuildType,
+  TOCNamespace,
+  TOCNamespaceSlugMap,
+} from "../../src/shared/interface";
 import {
   generateConfig,
   generateNavTOCPath,
@@ -84,7 +89,9 @@ export const createDocHome = async ({
   nodes.forEach((node) => {
     const { id, name, pathConfig, filePath, slug } = node;
     const path = generateDocHomeUrl(name, pathConfig);
-    const navUrl = generateNavTOCPath(pathConfig, slug);
+    const namespace = TOCNamespace.Home;
+    const namespaceSlug = TOCNamespaceSlugMap[namespace];
+    const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
     const essentialNavUrl = generateNavTOCPath(
       pathConfig,
@@ -119,6 +126,7 @@ export const createDocHome = async ({
           feedback: true,
           globalHome: true,
         },
+        namespace,
       },
     });
   });
