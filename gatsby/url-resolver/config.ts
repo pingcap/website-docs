@@ -32,7 +32,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // /en/tidb/master/releases/_index.md -> /en/releases/tidb
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/releases/{filename}`,
-      targetPattern: "/{lang}/releases",
+      targetPattern: "/{lang}/releases/tidb",
       conditions: { filename: ["_index"] },
     },
     {

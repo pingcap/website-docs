@@ -72,7 +72,7 @@ const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   {
     namespace: TOCNamespace.TiDBInKubernetesReleases,
     repo: Repo.operator,
-    branch: CONFIG.docs["tidb-in-kubernetes"].stable,
+    branch: "main",
     folder: "releases",
     minRestLength: 1,
   },

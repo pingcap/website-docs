@@ -128,7 +128,7 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
       {
         type: "item",
         label: "TiDB Self-Managed Releases",
-        to: "/releases",
+        to: "/releases/tidb",
         selected: (namespace) => namespace === TOCNamespace.TiDBReleases,
       },
       {

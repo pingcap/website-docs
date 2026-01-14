@@ -10,8 +10,8 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
 
   linkMappings: [
     {
-      linkPattern: "/releases",
-      targetPattern: "/releases",
+      linkPattern: "/releases/tidb",
+      targetPattern: "/releases/tidb",
     },
     {
       linkPattern: "/releases/tidb-cloud",

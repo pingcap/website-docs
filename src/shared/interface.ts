@@ -30,7 +30,7 @@ export const TOCNamespaceSlugMap: Record<TOCNamespace, string> = {
   [TOCNamespace.API]: "api",
   [TOCNamespace.TiDBReleases]: "tidb-releases",
   [TOCNamespace.TidbCloudReleases]: "tidb-cloud-releases",
-  [TOCNamespace.TiDBInKubernetesReleases]: "",
+  [TOCNamespace.TiDBInKubernetesReleases]: "tidb-operator-releases",
 };
 
 export enum Repo {
