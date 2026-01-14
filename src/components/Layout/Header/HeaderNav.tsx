@@ -47,7 +47,6 @@ const findSelectedItem = (
 
 export default function HeaderNavStack(props: {
   buildType?: BuildType;
-  pageUrl?: string;
   config?: NavConfig[];
   namespace?: TOCNamespace;
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;

@@ -26,7 +26,6 @@ import {
 } from "shared/interface";
 import Seo from "components/Seo";
 import { getStable, generateUrl } from "shared/utils";
-import { usePageType } from "shared/usePageType";
 import { NavItemConfig } from "components/Layout/Header/HeaderNavConfigType";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
@@ -148,7 +147,6 @@ function DocTemplate({
     availablePlans.push("essential");
   }
 
-  const pageType = usePageType(language, pageUrl);
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
     let tocItems: TableOfContent[] = [];
     if (toc?.items?.length === 1) {
@@ -158,8 +156,8 @@ function DocTemplate({
     }
 
     // Filter TOC based on CustomContent conditions
-    return filterRightToc(tocItems, pageType, cloudPlan, language);
-  }, [toc, pageType, cloudPlan, language]);
+    return filterRightToc(tocItems, namespace, cloudPlan, language);
+  }, [toc, namespace, cloudPlan, language]);
 
   const stableBranch = getStable(pathConfig.repo);
 
@@ -175,7 +173,6 @@ function DocTemplate({
       pathConfig={pathConfig}
       locales={availIn.locale}
       bannerEnabled={bannerVisible}
-      pageUrl={pageUrl}
       menu={
         frontmatter?.hide_leftNav ? null : (
           <LeftNavMobile

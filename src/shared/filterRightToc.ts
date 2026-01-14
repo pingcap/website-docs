@@ -1,13 +1,12 @@
-import { TableOfContent, CloudPlan } from "./interface";
-import { PageType } from "shared/usePageType";
+import { TableOfContent, CloudPlan, TOCNamespace } from "./interface";
 
 /**
  * Filter right TOC based on CustomContent conditions
- * Removes TOC items that don't match current context (pageType, cloudPlan, language)
+ * Removes TOC items that don't match current context (namespace, cloudPlan, language)
  */
 export function filterRightToc(
   items: TableOfContent[],
-  pageType: PageType,
+  namespace: TOCNamespace,
   cloudPlan: CloudPlan | null,
   language: string
 ): TableOfContent[] {
@@ -19,10 +18,10 @@ export function filterRightToc(
       if (item.condition) {
         const { platform, plan, language: conditionLang } = item.condition;
 
-        // Check platform match
+        // Check platform match (namespace)
         if (platform) {
-          const normalizedPlatform = platform.replace("-", "");
-          if (normalizedPlatform !== pageType) {
+          // platform value should match TOCNamespace enum value
+          if (platform !== namespace) {
             return null; // Filter out this item
           }
         }
@@ -48,7 +47,7 @@ export function filterRightToc(
       if (item.items && item.items.length > 0) {
         const filteredItems = filterRightToc(
           item.items,
-          pageType,
+          namespace,
           cloudPlan,
           language
         );

@@ -30,10 +30,9 @@ interface HeaderProps {
   locales: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
-  pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
-  namespace?: TOCNamespace;
+  namespace: TOCNamespace;
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }
 
@@ -59,7 +58,10 @@ export default function Header(props: HeaderProps) {
           height: "100%",
           paddingLeft: "24px",
           paddingRight: "24px",
-          flexDirection: "column",
+          flexDirection: {
+            xs: "column-reverse",
+            md: "column",
+          },
           alignItems: "stretch",
           borderBottom: `1px solid ${theme.palette.carbon[400]}`,
         }}
@@ -98,7 +100,7 @@ export default function Header(props: HeaderProps) {
             supportedLocales={props.locales}
             docInfo={props.docInfo}
             buildType={props.buildType}
-            pageUrl={props.pageUrl}
+            namespace={props.namespace}
           />
         </Box>
 
@@ -113,11 +115,13 @@ export default function Header(props: HeaderProps) {
         >
           <HeaderNavStack
             buildType={props.buildType}
-            pageUrl={props.pageUrl}
             namespace={props.namespace}
             onSelectedNavItemChange={props.onSelectedNavItemChange}
           />
-          <HeaderNavStackMobile buildType={props.buildType} />
+          <HeaderNavStackMobile
+            buildType={props.buildType}
+            namespace={props.namespace}
+          />
 
           {props.locales.length > 0 && (
             <Box sx={{ marginLeft: "auto" }}>
@@ -132,7 +136,7 @@ export default function Header(props: HeaderProps) {
 
 const HeaderBanner = (props: HeaderProps) => {
   const { t } = useI18next();
-  const isAutoTranslation = useIsAutoTranslation(props.pageUrl || "");
+  const isAutoTranslation = useIsAutoTranslation(props.namespace);
   const urlAutoTranslation =
     props.pathConfig?.repo === "tidbcloud"
       ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`

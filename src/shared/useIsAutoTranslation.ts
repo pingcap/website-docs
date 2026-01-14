@@ -1,12 +1,11 @@
 import { useI18next } from "gatsby-plugin-react-i18next";
-import { usePageType, PageType } from "shared/usePageType";
+import { TOCNamespace } from "shared/interface";
 
-export const useIsAutoTranslation = (pageUrl: string) => {
+export const useIsAutoTranslation = (namespace: TOCNamespace) => {
   const { language } = useI18next();
-  const pageType = usePageType(language, pageUrl);
   const isAutoTranslation =
-    pageType !== PageType.Home &&
+    namespace !== TOCNamespace.Home &&
     (language === "ja" ||
-      (language === "zh" && pageType === PageType.TiDBCloud));
+      (language === "zh" && namespace === TOCNamespace.TiDBCloud));
   return isAutoTranslation;
 };

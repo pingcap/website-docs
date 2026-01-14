@@ -1,43 +1,36 @@
 import * as React from "react";
-import { Trans, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import Divider from "@mui/material/Divider";
 
 import LinkComponent from "components/Link";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
-import { usePageType, PageType } from "shared/usePageType";
-import { BuildType } from "shared/interface";
+import { BuildType, TOCNamespace } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
-import { CLOUD_MODE_KEY, useCloudPlan } from "shared/useCloudPlan";
+import { useCloudPlan } from "shared/useCloudPlan";
+import {
+  NavConfig,
+  NavItemConfig,
+  NavGroupConfig,
+} from "./HeaderNavConfigType";
+import { generateNavConfig } from "./HeaderNavConfigData";
+import { clearAllNavStates } from "../LeftNav/LeftNavTree";
 
-// `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
-// it will be `undefined` in client side render
-const useSelectedNavItem = (language?: string, pageUrl?: string) => {
-  // init in server side
-  const [selectedItem, setSelectedItem] = React.useState<PageType>(() =>
-    usePageType(language, pageUrl)
-  );
-
-  // update in client side
-  React.useEffect(() => {
-    setSelectedItem(usePageType(language, window.location.pathname));
-  }, [language]);
-
-  return selectedItem;
-};
-
-export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
+export function HeaderNavStackMobile(props: {
+  buildType?: BuildType;
+  namespace?: TOCNamespace;
+}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const theme = useTheme();
   const { language, t } = useI18next();
-  const selectedItem = useSelectedNavItem(language);
   const { cloudPlan } = useCloudPlan();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -46,6 +39,11 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // Generate navigation config
+  const navConfig: NavConfig[] = React.useMemo(() => {
+    return generateNavConfig(t, cloudPlan, props.buildType);
+  }, [t, cloudPlan, props.buildType]);
 
   return (
     <Box
@@ -81,136 +79,232 @@ export function HeaderNavStackMobile(props: { buildType?: BuildType }) {
           vertical: "top",
           horizontal: "center",
         }}
+        PaperProps={{
+          sx: {
+            maxHeight: "80vh",
+            overflowY: "auto",
+          },
+        }}
       >
-        {["en", "zh"].includes(language) && (
-          <MenuItem
-            onClick={handleClose}
-            disableRipple
-            selected={selectedItem === PageType.Home}
-          >
-            <LinkComponent
-              isI18n
-              to="/"
-              style={{ width: "100%" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: "home",
-                })
-              }
-            >
-              <Typography variant="body1" component="div" color="website.f1">
-                {props.buildType === "archive" ? (
-                  <Trans i18nKey="navbar.archive-home" />
-                ) : (
-                  <Trans i18nKey="navbar.home" />
-                )}
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        )}
-
-        {props.buildType !== "archive" && (
-          <MenuItem
-            onClick={handleClose}
-            disableRipple
-            selected={selectedItem === PageType.TiDBCloud}
-          >
-            <LinkComponent
-              isI18n
-              to={
-                cloudPlan === "dedicated" || !cloudPlan
-                  ? `/tidbcloud`
-                  : `/tidbcloud/${cloudPlan}?${CLOUD_MODE_KEY}=${cloudPlan}`
-              }
-              style={{ width: "100%" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: t("navbar.cloud"),
-                })
-              }
-            >
-              <Typography variant="body1" component="div" color="website.f1">
-                <Trans i18nKey="navbar.cloud" />
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        )}
-
-        <MenuItem
-          onClick={handleClose}
-          disableRipple
-          selected={selectedItem === PageType.TiDB}
-        >
-          <LinkComponent
-            isI18n
-            to={props.buildType === "archive" ? "/tidb/v2.1" : "/tidb/stable"}
-            style={{ width: "100%" }}
-            onClick={() =>
-              gtmTrack(GTMEvent.ClickHeadNav, {
-                item_name: t("navbar.tidb"),
-              })
+        {navConfig
+          .filter((config) => {
+            // Filter out configs that don't meet condition
+            if (
+              config.condition &&
+              !config.condition(language, props.buildType)
+            ) {
+              return false;
             }
-          >
-            <Typography variant="body1" component="div" color="website.f1">
-              <Trans i18nKey="navbar.tidb" />
-            </Typography>
-          </LinkComponent>
-        </MenuItem>
-
-        {/* {language === "zh" && (
-          <MenuItem onClick={handleClose} disableRipple>
-            <LinkComponent
-              to={generateDownloadURL(language)}
-              style={{ width: "100%" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: t("navbar.download"),
-                })
-              }
-            >
-              <Typography variant="body1" component="div" color="website.f1">
-                <Trans i18nKey="navbar.download" />
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        )}
-
-        {["ja", "en"].includes(language) && (
-          <MenuItem onClick={handleClose} disableRipple>
-            <LinkComponent
-              to={generateLearningCenterURL(language)}
-              style={{ width: "100%" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: t("navbar.learningCenter"),
-                })
-              }
-            >
-              <Typography variant="body1" component="div" color="website.f1">
-                <Trans i18nKey="navbar.learningCenter" />
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        )}
-
-        {["zh"].includes(language) && (
-          <MenuItem onClick={handleClose} disableRipple>
-            <LinkComponent
-              to="https://asktug.com/"
-              style={{ width: "100%" }}
-              onClick={() =>
-                gtmTrack(GTMEvent.ClickHeadNav, {
-                  item_name: t("navbar.asktug"),
-                })
-              }
-            >
-              <Typography variant="body1" component="div" color="website.f1">
-                <Trans i18nKey="navbar.asktug" />
-              </Typography>
-            </LinkComponent>
-          </MenuItem>
-        )} */}
+            return true;
+          })
+          .map((config, index, filteredArray) => {
+            return (
+              <React.Fragment key={index}>
+                {index > 0 && <Divider />}
+                <RenderNavConfig
+                  config={config}
+                  namespace={props.namespace}
+                  onClose={handleClose}
+                />
+              </React.Fragment>
+            );
+          })}
       </Menu>
     </Box>
   );
 }
+
+// Recursive component to render nav config (item or group)
+const RenderNavConfig = (props: {
+  config: NavConfig;
+  namespace?: TOCNamespace;
+  onClose: () => void;
+}) => {
+  const { config, namespace, onClose } = props;
+
+  if (config.type === "item") {
+    return (
+      <NavMenuItem item={config} namespace={namespace} onClose={onClose} />
+    );
+  }
+
+  // Handle group
+  if (config.type === "group") {
+    const groups = config.children.filter(
+      (child) => child.type === "group"
+    ) as NavGroupConfig[];
+    const items = config.children.filter(
+      (child) => child.type === "item"
+    ) as NavItemConfig[];
+
+    // Don't render if no children
+    if (groups.length === 0 && items.length === 0) {
+      return null;
+    }
+
+    return (
+      <>
+        {/* Render group title if it exists */}
+        {config.title && (
+          <Box
+            sx={{
+              padding: "12px 16px 8px",
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            {config.titleIcon && (
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                {config.titleIcon}
+              </Box>
+            )}
+            <Typography
+              variant="subtitle2"
+              component="div"
+              sx={{
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "carbon.900",
+              }}
+            >
+              {config.title}
+            </Typography>
+          </Box>
+        )}
+
+        {/* Render nested groups */}
+        {groups.map((group, groupIndex) => {
+          const groupItems = group.children.filter(
+            (child) => child.type === "item"
+          ) as NavItemConfig[];
+
+          if (groupItems.length === 0) {
+            return null;
+          }
+
+          return (
+            <React.Fragment key={`group-${groupIndex}`}>
+              {groupIndex > 0 && <Divider sx={{ margin: "8px 0" }} />}
+              {group.title && (
+                <Box
+                  sx={{
+                    padding: "8px 16px 4px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  {group.titleIcon && (
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      {group.titleIcon}
+                    </Box>
+                  )}
+                  <Typography
+                    variant="subtitle2"
+                    component="div"
+                    sx={{
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: "carbon.700",
+                    }}
+                  >
+                    {group.title}
+                  </Typography>
+                </Box>
+              )}
+              {groupItems.map((child, childIndex) => (
+                <NavMenuItem
+                  key={`group-${groupIndex}-item-${childIndex}`}
+                  item={child}
+                  namespace={namespace}
+                  onClose={onClose}
+                />
+              ))}
+            </React.Fragment>
+          );
+        })}
+
+        {/* Render direct items */}
+        {items.map((item, itemIndex) => (
+          <NavMenuItem
+            key={`item-${itemIndex}`}
+            item={item}
+            namespace={namespace}
+            onClose={onClose}
+          />
+        ))}
+      </>
+    );
+  }
+
+  return null;
+};
+
+// Menu item component
+const NavMenuItem = (props: {
+  item: NavItemConfig;
+  namespace?: TOCNamespace;
+  onClose: () => void;
+}) => {
+  const { item, namespace, onClose } = props;
+  const isSelected =
+    typeof item.selected === "function"
+      ? item.selected(namespace)
+      : item.selected ?? false;
+
+  return (
+    <LinkComponent
+      isI18n={item.isI18n ?? true}
+      to={item.to}
+      style={{ width: "100%", textDecoration: "none" }}
+      onClick={() => {
+        gtmTrack(GTMEvent.ClickHeadNav, {
+          item_name: item.label || item.alt,
+        });
+      }}
+    >
+      <MenuItem
+        onClick={() => {
+          clearAllNavStates();
+          onClose();
+          item.onClick?.();
+        }}
+        disableRipple
+        selected={isSelected}
+        sx={{
+          padding: "10px 16px",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            width: "100%",
+          }}
+        >
+          {item.startIcon && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              {item.startIcon}
+            </Box>
+          )}
+          <Typography
+            component="span"
+            sx={{
+              fontSize: "14px",
+              fontWeight: isSelected ? 600 : 400,
+            }}
+          >
+            {item.label}
+          </Typography>
+        </Box>
+      </MenuItem>
+    </LinkComponent>
+  );
+};
