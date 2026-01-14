@@ -3,7 +3,6 @@
  */
 
 import type { LinkResolverConfig } from "./types";
-import CONFIG from "../../docs/docs.json";
 
 export const defaultLinkResolverConfig: LinkResolverConfig = {
   // Default language to omit from resolved URLs
