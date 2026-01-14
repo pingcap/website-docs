@@ -7,8 +7,22 @@ import type {
   UrlResolverConfig,
   ParsedSourcePath,
 } from "./types";
-import { matchPattern, applyPattern } from "./pattern-matcher";
+import {
+  matchPattern,
+  applyPattern,
+  clearPatternCache,
+} from "./pattern-matcher";
 import { defaultUrlResolverConfig } from "./config";
+
+// Cache for calculateFileUrl results
+// Key: absolutePath + omitDefaultLanguage flag
+// Value: resolved URL or null
+const fileUrlCache = new Map<string, string | null>();
+
+// Cache for parseSourcePath results
+// Key: absolutePath + sourceBasePath
+// Value: ParsedSourcePath or null
+const parsedPathCache = new Map<string, ParsedSourcePath | null>();
 
 /**
  * Parse source file path into segments and filename
@@ -27,6 +41,13 @@ export function parseSourcePath(
   absolutePath: string,
   sourceBasePath: string
 ): ParsedSourcePath | null {
+  // Check cache first
+  const cacheKey = `${absolutePath}::${sourceBasePath}`;
+  const cached = parsedPathCache.get(cacheKey);
+  if (cached !== undefined) {
+    return cached;
+  }
+
   // Normalize paths
   const normalizedBase = sourceBasePath.replace(/\/$/, "");
   const normalizedPath = absolutePath.replace(/\/$/, "");
@@ -83,10 +104,14 @@ export function parseSourcePath(
   // Update segments array to include .md extension if it was added
   segments[segments.length - 1] = lastSegment;
 
-  return {
+  const result: ParsedSourcePath = {
     segments,
     filename,
   };
+
+  // Cache the result
+  parsedPathCache.set(cacheKey, result);
+  return result;
 }
 
 /**
@@ -122,8 +147,17 @@ export function calculateFileUrlWithConfig(
   config: UrlResolverConfig,
   omitDefaultLanguage: boolean = false
 ): string | null {
+  // Check cache first
+  const cacheKey = `${absolutePath}::${omitDefaultLanguage}`;
+  const cached = fileUrlCache.get(cacheKey);
+  if (cached !== undefined) {
+    return cached;
+  }
+
   const parsed = parseSourcePath(absolutePath, config.sourceBasePath);
   if (!parsed) {
+    // Cache null result
+    fileUrlCache.set(cacheKey, null);
     return null;
   }
 
@@ -243,9 +277,15 @@ export function calculateFileUrlWithConfig(
     }
     // "auto" mode is already handled above
 
+    // Cache the result before returning
+    fileUrlCache.set(cacheKey, url);
     return url;
   }
 
+  // Cache null result
+  fileUrlCache.set(cacheKey, null);
+  // Cache null result
+  fileUrlCache.set(cacheKey, null);
   return null;
 }
 
@@ -266,4 +306,14 @@ export function calculateFileUrl(
     defaultUrlResolverConfig,
     omitDefaultLanguage
   );
+}
+
+/**
+ * Clear all caches (useful for testing or when config changes)
+ */
+export function clearUrlResolverCache(): void {
+  fileUrlCache.clear();
+  parsedPathCache.clear();
+  // Also clear pattern cache
+  clearPatternCache();
 }

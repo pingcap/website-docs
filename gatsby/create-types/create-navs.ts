@@ -1,7 +1,7 @@
 import { CreatePagesArgs } from "gatsby";
-import { generateConfig } from "../path";
 import { mdxAstToToc } from "../toc";
 import { Root } from "mdast";
+import { calculateFileUrl } from "../url-resolver";
 
 export const createNavs = ({ actions }: CreatePagesArgs) => {
   const { createTypes, createFieldExtension } = actions;
@@ -31,7 +31,13 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
             }
           );
 
-          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
+          const tocPath = calculateFileUrl(slug);
+          const res = mdxAstToToc(
+            mdxAST.children,
+            tocPath || slug,
+            undefined,
+            true
+          );
           mdxNode.nav = res;
           return res;
         },
@@ -66,7 +72,13 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
 
           if (!slug.endsWith("TOC-tidb-cloud-starter"))
             throw new Error(`unsupported query in ${slug}`);
-          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
+          const tocPath = calculateFileUrl(slug);
+          const res = mdxAstToToc(
+            mdxAST.children,
+            tocPath || slug,
+            undefined,
+            true
+          );
           mdxNode.starterNav = res;
           return res;
         },
@@ -101,7 +113,13 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
 
           if (!slug.endsWith("TOC-tidb-cloud-essential"))
             throw new Error(`unsupported query in ${slug}`);
-          const res = mdxAstToToc(mdxAST.children, slug, undefined, true);
+          const tocPath = calculateFileUrl(slug);
+          const res = mdxAstToToc(
+            mdxAST.children,
+            tocPath || slug,
+            undefined,
+            true
+          );
           mdxNode.essentialNav = res;
           return res;
         },

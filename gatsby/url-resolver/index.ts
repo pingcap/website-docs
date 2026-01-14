@@ -16,7 +16,7 @@ export type {
 } from "./types";
 
 // Export URL resolver functions
-export { parseSourcePath, calculateFileUrl, calculateFileUrlWithConfig } from "./url-resolver";
+export { parseSourcePath, calculateFileUrl, calculateFileUrlWithConfig, clearUrlResolverCache } from "./url-resolver";
 
 // Export pattern matcher utilities (for advanced use cases)
 export { matchPattern, applyPattern } from "./pattern-matcher";

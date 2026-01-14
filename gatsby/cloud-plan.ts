@@ -2,6 +2,7 @@ import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 import { extractFilesFromToc } from "./toc-filter";
 import { CloudPlan } from "../src/shared/interface";
+import { calculateFileUrl } from "./url-resolver";
 
 type TocMap = Map<
   string,
@@ -46,7 +47,8 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
 
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
-    const toc = mdxAstToToc(node.mdxAST.children, node.slug);
+    const tocPath = calculateFileUrl(node.slug);
+    const toc = mdxAstToToc(node.mdxAST.children, tocPath || node.slug);
     const files = extractFilesFromToc(toc);
 
     // Create a key for this specific locale/repo/version combination

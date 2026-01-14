@@ -109,18 +109,6 @@ describe("calculateFileUrl", () => {
     // Test config: don't omit default language, use auto trailing slash
     defaultLanguage: undefined,
     trailingSlash: "auto",
-    aliases: {
-      "branch-alias": {
-        context: {
-          repo: ["tidb", "tidb-in-kubernetes"],
-        },
-        mappings: {
-          master: "stable",
-          main: "stable",
-          "release-*": "v*",
-        },
-      },
-    },
   };
 
   it("should resolve tidbcloud dedicated _index to /tidbcloud (first rule)", () => {
@@ -168,7 +156,7 @@ describe("calculateFileUrl", () => {
   it("should resolve develop _index with folders", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/develop/subfolder/_index.md"
+      "en/tidb/release-8.5/develop/subfolder/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/develop/subfolder");
@@ -177,34 +165,35 @@ describe("calculateFileUrl", () => {
   it("should resolve develop non-index without folders", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/develop/subfolder/some-page.md"
+      "en/tidb/release-8.5/develop/subfolder/some-page.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/develop/some-page/");
   });
 
-  it("should resolve tidb with branch alias (master -> stable)", () => {
+  it("should resolve tidb with branch alias (master -> dev)", () => {
     const absolutePath = path.join(
       sourceBasePath,
       "en/tidb/master/alert-rules.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidb/stable/alert-rules/");
+    expect(url).toBe("/en/tidb/dev/alert-rules/");
   });
 
-  it("should resolve tidb with branch alias (release-8.5 -> v8.5)", () => {
+  it("should resolve tidb with branch alias (release-8.5 -> stable)", () => {
     const absolutePath = path.join(
       sourceBasePath,
       "en/tidb/release-8.5/alert-rules.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidb/v8.5/alert-rules/");
+    // release-8.5 -> stable via branch-alias-tidb (exact match takes precedence)
+    expect(url).toBe("/en/tidb/stable/alert-rules/");
   });
 
   it("should resolve tidb _index with branch alias", () => {
     const absolutePath = path.join(sourceBasePath, "en/tidb/master/_index.md");
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidb/stable");
+    expect(url).toBe("/en/tidb/dev");
   });
 
   it("should resolve tidb with folders and branch alias", () => {
@@ -213,13 +202,13 @@ describe("calculateFileUrl", () => {
       "en/tidb/master/subfolder/page.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidb/stable/page/");
+    expect(url).toBe("/en/tidb/dev/page/");
   });
 
   it("should resolve api folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/api/overview.md"
+      "en/tidb/release-8.5/api/overview.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/api/overview/");
@@ -228,7 +217,7 @@ describe("calculateFileUrl", () => {
   it("should resolve best-practice folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/best-practice/guide.md"
+      "en/tidb/release-8.5/best-practice/guide.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/best-practice/guide/");
@@ -237,10 +226,12 @@ describe("calculateFileUrl", () => {
   it("should resolve releases folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/releases/v8.5.md"
+      "en/tidb/release-8.5/releases/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/releases/v8.5/");
+    // Matches rule: /{lang}/tidb/release-8.5/releases/{filename} -> /{lang}/releases/tidb
+    // trailingSlash: "auto" adds trailing slash for _index files
+    expect(url).toBe("/en/releases/tidb/");
   });
 
   it("should use fallback rule for unmatched patterns", () => {
@@ -265,6 +256,16 @@ describe("calculateFileUrl", () => {
     const absolutePath = "/invalid/path/file.md";
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBeNull();
+  });
+
+  it("should resolve tidb with release-8.5 branch alias (release-8.5 -> stable)", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/alert-rules.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    // release-8.5 -> stable via branch-alias-tidb (exact match)
+    expect(url).toBe("/en/tidb/stable/alert-rules/");
   });
 });
 
@@ -291,7 +292,8 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/tidb/dev/alert-rules");
   });
 
   it("should omit /en/ prefix for English files (tidbcloud)", () => {
@@ -327,7 +329,7 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
   it("should omit /en/ prefix for English develop files", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/develop/overview.md"
+      "en/tidb/release-8.5/develop/overview.md"
     );
     const url = calculateFileUrlWithConfig(
       absolutePath,
@@ -343,22 +345,24 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       "zh/tidb/master/alert-rules.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang);
-    expect(url).toBe("/zh/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/zh/tidb/dev/alert-rules");
   });
 
   it("should keep /ja/ prefix for Japanese files", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "ja/tidb/master/alert-rules.md"
+      "ja/tidb/release-8.5/alert-rules.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang);
+    // release-8.5 -> stable via branch-alias-tidb (exact match)
     expect(url).toBe("/ja/tidb/stable/alert-rules");
   });
 
   it("should omit /en/ prefix for English api files", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/master/api/overview.md"
+      "en/tidb/release-8.5/api/overview.md"
     );
     const url = calculateFileUrlWithConfig(
       absolutePath,
@@ -378,7 +382,8 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/tidb/v8.5/alert-rules");
+    // release-8.5 -> stable via branch-alias-tidb (exact match takes precedence)
+    expect(url).toBe("/tidb/stable/alert-rules");
   });
 });
 
@@ -413,9 +418,21 @@ describe("calculateFileUrl with slug format (relative path)", () => {
       // tidb with branch
       {
         sourcePattern: "/{lang}/{repo}/{branch}/{...folders}/{filename}",
-        targetPattern: "/{lang}/{repo}/{branch:branch-alias}/{filename}",
+        targetPattern: "/{lang}/{repo}/{branch:branch-alias-tidb}/{filename}",
         conditions: {
-          repo: ["tidb", "tidb-in-kubernetes"],
+          repo: ["tidb"],
+        },
+        filenameTransform: {
+          ignoreIf: ["_index", "_docHome"],
+        },
+      },
+      // tidb-in-kubernetes with branch
+      {
+        sourcePattern: "/{lang}/{repo}/{branch}/{...folders}/{filename}",
+        targetPattern:
+          "/{lang}/{repo}/{branch:branch-alias-tidb-in-kubernetes}/{filename}",
+        conditions: {
+          repo: ["tidb-in-kubernetes"],
         },
         filenameTransform: {
           ignoreIf: ["_index", "_docHome"],
@@ -431,12 +448,17 @@ describe("calculateFileUrl with slug format (relative path)", () => {
       },
     ],
     aliases: {
-      "branch-alias": {
-        context: {
-          repo: ["tidb", "tidb-in-kubernetes"],
-        },
+      "branch-alias-tidb": {
         mappings: {
-          master: "stable",
+          master: "dev",
+          "release-8.5": "stable",
+          "release-*": "v*",
+        },
+      },
+      "branch-alias-tidb-in-kubernetes": {
+        mappings: {
+          main: "dev",
+          "release-1.6": "stable",
           "release-*": "v*",
         },
       },
@@ -446,7 +468,8 @@ describe("calculateFileUrl with slug format (relative path)", () => {
   it("should resolve slug format for tidb files", () => {
     const slug = "en/tidb/master/alert-rules";
     const url = calculateFileUrlWithConfig(slug, configWithDefaultLang, true);
-    expect(url).toBe("/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/tidb/dev/alert-rules");
   });
 
   it("should resolve slug format for tidbcloud files", () => {
@@ -464,13 +487,15 @@ describe("calculateFileUrl with slug format (relative path)", () => {
   it("should resolve slug format with leading slash", () => {
     const slug = "/en/tidb/master/alert-rules";
     const url = calculateFileUrlWithConfig(slug, configWithDefaultLang, true);
-    expect(url).toBe("/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/tidb/dev/alert-rules");
   });
 
   it("should resolve slug format for Chinese files", () => {
     const slug = "zh/tidb/master/alert-rules";
     const url = calculateFileUrlWithConfig(slug, configWithDefaultLang);
-    expect(url).toBe("/zh/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/zh/tidb/dev/alert-rules");
   });
 
   it("should return null for invalid slug format", () => {
@@ -499,7 +524,8 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       "en/tidb/master/alert-rules.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, configWithDefaultLang);
-    expect(url).toBe("/en/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/en/tidb/dev/alert-rules");
   });
 
   it("should keep default language when omitDefaultLanguage is undefined (default)", () => {
@@ -512,7 +538,8 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       configWithDefaultLang,
       false
     );
-    expect(url).toBe("/en/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/en/tidb/dev/alert-rules");
   });
 
   it("should omit default language when omitDefaultLanguage is true", () => {
@@ -525,7 +552,8 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/tidb/dev/alert-rules");
   });
 
   it("should keep non-default language even when omitDefaultLanguage is false", () => {
@@ -538,7 +566,8 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       configWithDefaultLang,
       false
     );
-    expect(url).toBe("/zh/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/zh/tidb/dev/alert-rules");
   });
 
   it("should keep non-default language when omitDefaultLanguage is true", () => {
@@ -551,6 +580,7 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/zh/tidb/stable/alert-rules");
+    // master -> dev via branch-alias-tidb
+    expect(url).toBe("/zh/tidb/dev/alert-rules");
   });
 });
