@@ -1,5 +1,6 @@
 import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
+import { calculateFileUrl } from "./url-resolver";
 
 // Whitelist of files that should always be built regardless of TOC content
 const WHITELIST = [""];
@@ -78,7 +79,8 @@ export async function getFilesFromTocs(
 
   filteredTocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
-    const toc = mdxAstToToc(node.mdxAST.children, node.slug);
+    const tocPath = calculateFileUrl(node.slug);
+    const toc = mdxAstToToc(node.mdxAST.children, tocPath || node.slug);
     const files = extractFilesFromToc(toc);
 
     // Create a key for this specific locale/repo/version combination

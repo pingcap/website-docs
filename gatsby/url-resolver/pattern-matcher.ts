@@ -4,6 +4,9 @@
 
 import { getAlias } from "./branch-alias";
 
+// Cache for parsed pattern parts
+const patternPartsCache = new Map<string, string[]>();
+
 /**
  * Match path segments against a pattern
  * Supports patterns with variable number of segments using {...variableName} syntax
@@ -17,10 +20,15 @@ export function matchPattern(
   pattern: string,
   segments: string[]
 ): Record<string, string> | null {
-  const patternParts = pattern
-    .split("/")
-    .filter((p) => p.length > 0)
-    .filter((p) => !p.startsWith("/"));
+  // Cache pattern parts parsing
+  let patternParts = patternPartsCache.get(pattern);
+  if (!patternParts) {
+    patternParts = pattern
+      .split("/")
+      .filter((p) => p.length > 0)
+      .filter((p) => !p.startsWith("/"));
+    patternPartsCache.set(pattern, patternParts);
+  }
 
   const result: Record<string, string> = {};
   let segmentIndex = 0;
@@ -132,10 +140,15 @@ export function applyPattern(
     };
   }
 ): string {
-  const parts = pattern
-    .split("/")
-    .filter((p) => p.length > 0)
-    .filter((p) => !p.startsWith("/"));
+  // Cache pattern parts parsing
+  let parts = patternPartsCache.get(pattern);
+  if (!parts) {
+    parts = pattern
+      .split("/")
+      .filter((p) => p.length > 0)
+      .filter((p) => !p.startsWith("/"));
+    patternPartsCache.set(pattern, parts);
+  }
 
   const result: string[] = [];
   for (const part of parts) {
@@ -200,4 +213,11 @@ export function applyPattern(
   }
 
   return "/" + result.join("/");
+}
+
+/**
+ * Clear pattern parts cache (useful for testing or when patterns change)
+ */
+export function clearPatternCache(): void {
+  patternPartsCache.clear();
 }

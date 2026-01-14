@@ -7,14 +7,10 @@
  */
 
 // Export types
-export type {
-  LinkMappingRule,
-  LinkMappingByPath,
-  LinkResolverConfig,
-} from "./types";
+export type { LinkMappingRule, LinkResolverConfig } from "./types";
 
 // Export link resolver functions
-export { resolveMarkdownLink } from "./link-resolver";
+export { resolveMarkdownLink, clearLinkResolverCache } from "./link-resolver";
 
 // Export default configuration
 export { defaultLinkResolverConfig } from "./config";

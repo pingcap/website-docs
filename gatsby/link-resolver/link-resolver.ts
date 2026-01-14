@@ -6,16 +6,35 @@ import { matchPattern, applyPattern } from "../url-resolver/pattern-matcher";
 import { defaultUrlResolverConfig } from "../url-resolver/config";
 import { defaultLinkResolverConfig } from "./config";
 
+// Cache for resolveMarkdownLink results
+// Key: linkPath + currentPageUrl
+// Value: resolved URL or original linkPath
+const linkResolverCache = new Map<string, string>();
+
+// Cache for parseLinkPath results
+// Key: linkPath
+// Value: parsed segments array
+const parsedLinkPathCache = new Map<string, string[]>();
+
 /**
  * Parse link path into segments
  */
 function parseLinkPath(linkPath: string): string[] {
+  // Check cache first
+  const cached = parsedLinkPathCache.get(linkPath);
+  if (cached !== undefined) {
+    return cached;
+  }
+
   // Remove leading and trailing slashes, then split
   const normalized = linkPath.replace(/^\/+|\/+$/g, "");
   if (!normalized) {
+    parsedLinkPathCache.set(linkPath, []);
     return [];
   }
-  return normalized.split("/").filter((s) => s.length > 0);
+  const segments = normalized.split("/").filter((s) => s.length > 0);
+  parsedLinkPathCache.set(linkPath, segments);
+  return segments;
 }
 
 /**
@@ -50,18 +69,28 @@ export function resolveMarkdownLink(
   linkPath: string,
   currentPageUrl: string
 ): string | null {
-  const linkConfig = defaultLinkResolverConfig;
-  const urlConfig = defaultUrlResolverConfig;
+  // Early exit for external links and anchor links (most common case)
   if (!linkPath || linkPath.startsWith("http") || linkPath.startsWith("#")) {
-    // Skip external links and anchor links
     return linkPath;
   }
+
+  // Check cache
+  const cacheKey = `${linkPath}::${currentPageUrl}`;
+  const cached = linkResolverCache.get(cacheKey);
+  if (cached !== undefined) {
+    return cached;
+  }
+
+  const linkConfig = defaultLinkResolverConfig;
+  const urlConfig = defaultUrlResolverConfig;
 
   // Normalize link path
   const normalizedLink = linkPath.startsWith("/") ? linkPath : "/" + linkPath;
   const linkSegments = parseLinkPath(normalizedLink);
 
+  // Early exit for empty links
   if (linkSegments.length === 0) {
+    linkResolverCache.set(cacheKey, linkPath);
     return linkPath;
   }
 
@@ -170,9 +199,21 @@ export function resolveMarkdownLink(
       result = result.replace(/\/$/, "");
     }
 
+    // Cache the result
+    linkResolverCache.set(cacheKey, result);
     return result;
   }
 
   // No match found, return original link
+  // Cache the original linkPath
+  linkResolverCache.set(cacheKey, linkPath);
   return linkPath;
+}
+
+/**
+ * Clear link resolver cache (useful for testing or when config changes)
+ */
+export function clearLinkResolverCache(): void {
+  linkResolverCache.clear();
+  parsedLinkPathCache.clear();
 }
