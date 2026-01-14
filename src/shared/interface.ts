@@ -11,6 +11,9 @@ export interface TableOfContent {
 
 export enum TOCNamespace {
   Home = "home",
+  NotFound = "not-found",
+  Search = "search",
+  CloudAPIApp = "cloud-api-app",
   TiDB = "tidb",
   TiDBCloud = "tidb-cloud",
   TiDBInKubernetes = "tidb-in-kubernetes",
@@ -24,6 +27,9 @@ export enum TOCNamespace {
 
 export const TOCNamespaceSlugMap: Record<TOCNamespace, string> = {
   [TOCNamespace.Home]: "",
+  [TOCNamespace.NotFound]: "",
+  [TOCNamespace.Search]: "",
+  [TOCNamespace.CloudAPIApp]: "",
   [TOCNamespace.TiDB]: "",
   [TOCNamespace.TiDBCloud]: "",
   [TOCNamespace.TiDBInKubernetes]: "",

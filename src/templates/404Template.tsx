@@ -16,6 +16,7 @@ import { getHeaderHeight } from "shared/headerHeight";
 
 import CONFIG from "../../docs/docs.json";
 import { useEffect, useRef, useState } from "react";
+import { TOCNamespace } from "shared/interface";
 interface AllLocales {
   locales: {
     edges: {
@@ -120,7 +121,11 @@ export default function PageNotFoundTemplate({
     <>
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
-          <Layout bannerEnabled={bannerVisible} buildType={buildType}>
+          <Layout
+            bannerEnabled={bannerVisible}
+            buildType={buildType}
+            namespace={TOCNamespace.NotFound}
+          >
             <Seo lang={language} title="404 Not Found" noindex />
             <Container
               sx={{

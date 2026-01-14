@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 import Seo from "components/Seo";
 import Layout from "components/Layout";
-import { type BuildType, Locale } from "../shared/interface";
+import { type BuildType, Locale, TOCNamespace } from "../shared/interface";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { getHeaderHeight } from "shared/headerHeight";
 
@@ -118,6 +118,7 @@ export default function APIReferenceTemplate({
         //   type: pathConfig.repo,
         // }}
         buildType={buildType}
+        namespace={TOCNamespace.CloudAPIApp}
       >
         <Seo
           title="TiDB Cloud API"
@@ -134,7 +135,10 @@ export default function APIReferenceTemplate({
           ]}
         />
         <Box
-          sx={{ marginTop: getHeaderHeight(bannerVisible || false), width: "100%" }}
+          sx={{
+            marginTop: getHeaderHeight(bannerVisible || false),
+            width: "100%",
+          }}
         >
           <Box id="redoc-container" data-testid="redoc-container" />
         </Box>
