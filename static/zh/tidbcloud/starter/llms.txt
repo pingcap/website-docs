@@ -1,0 +1,713 @@
+# TiDB Cloud Starter
+
+> TiDB Cloud Starter 是一款全托管的多租户 TiDB 服务。它提供即时、自动扩縮容的 MySQL 兼容数据库，并在超出免费额度后按用量计费。
+
+## 快速开始
+
+- 为什么选择 TiDB Cloud
+  - [简介](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-intro.md): 了解 TiDB Cloud 及其架构。
+  - [功能概览](https://docs.pingcap.com/zh/tidbcloud/features.md): 了解不同 TiDB Cloud 方案的功能支持状态。
+  - [与 MySQL 的兼容性](https://docs.pingcap.com/zh/tidbcloud/mysql-compatibility.md): 了解 TiDB 与 MySQL 的兼容性，以及不支持和存在差异的特性。
+- 快速上手
+  - [试用 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-quickstart.md): 快速注册体验 TiDB Cloud 并创建你的 TiDB 集群。
+  - [试用 TiDB + AI 工具](https://docs.pingcap.com/zh/tidbcloud/use-tidb-cloud-with-ai-tools.md): 了解如何将 TiDB Cloud Starter 集群连接到支持 Model Context Protocol (MCP) 的 AI 驱动开发工具，如 Cursor、Claude Code、VS Code 和 Windsurf。
+  - [试用 TiDB + 向量搜索](https://docs.pingcap.com/zh/tidbcloud/vector-search-get-started-using-python.md): 学习如何使用 Python 和 TiDB 向量检索快速开发一个实现语义搜索的 AI 应用。
+  - [试用 HTAP](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-htap-quickstart.md): 了解如何在 TiDB Cloud 中开始使用 HTAP。
+  - [试用 TiDB Cloud CLI](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli.md): 了解如何通过 TiDB Cloud CLI 管理 TiDB Cloud 资源。
+- 关键概念
+  - [概览](https://docs.pingcap.com/zh/tidbcloud/key-concepts.md): 了解 TiDB Cloud 中的关键概念。
+  - [架构](https://docs.pingcap.com/zh/tidbcloud/architecture-concepts.md): 了解 TiDB Cloud 的架构概念。
+  - [数据库 Schema](https://docs.pingcap.com/zh/tidbcloud/database-schema-concepts.md): 了解 TiDB Cloud 的数据库模式概念。
+  - [事务](https://docs.pingcap.com/zh/tidbcloud/transaction-concepts.md): 了解 TiDB Cloud 的事务概念。
+  - [SQL](https://docs.pingcap.com/zh/tidbcloud/sql-concepts.md): 了解 TiDB 的 SQL 概念。
+  - [AI 功能](https://docs.pingcap.com/zh/tidbcloud/ai-feature-concepts.md): 了解 TiDB Cloud 的 AI 功能。
+  - [数据服务](https://docs.pingcap.com/zh/tidbcloud/data-service-concepts.md): 了解 TiDB Cloud 的数据服务概念。 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [可扩展性](https://docs.pingcap.com/zh/tidbcloud/scalability-concepts.md): 了解 TiDB Cloud 的可扩展性相关概念。
+  - [高可用性](https://docs.pingcap.com/zh/tidbcloud/serverless-high-availability.md): 了解 TiDB Cloud 的高可用架构。探索分区高可用和区域高可用选项、自动备份、故障转移流程，以及 TiDB 如何确保数据持久性和业务可持续性。
+  - [监控](https://docs.pingcap.com/zh/tidbcloud/monitoring-concepts.md): 了解 TiDB Cloud 的监控概念。
+  - [备份 & 恢复](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-concepts.md): 了解 TiDB Cloud 的备份与恢复相关概念。
+  - [安全性](https://docs.pingcap.com/zh/tidbcloud/security-concepts.md): 了解 TiDB Cloud 的安全概念。
+
+## 应用开发
+
+- 开发快速入门
+  - [概览](https://docs.pingcap.com/zh/tidbcloud/dev-guide-overview.md): 介绍 TiDB Cloud 和 TiDB 自托管的开发者指南总览。
+  - [构建 TiDB Cloud 集群](https://docs.pingcap.com/zh/tidbcloud/dev-guide-build-cluster-in-cloud.md): 了解如何在 TiDB Cloud 中构建 TiDB Cloud Starter 集群并连接到它。
+  - [使用 TiDB 的增删改查 SQL](https://docs.pingcap.com/zh/tidbcloud/dev-guide-tidb-crud-sql.md): 对 TiDB 的 CRUD SQL 的简要介绍。
+- 连接到 TiDB Cloud
+  - GUI 数据库工具
+    - [JetBrains DataGrip](https://docs.pingcap.com/zh/tidbcloud/dev-guide-gui-datagrip.md): 学习如何使用 JetBrains DataGrip 连接 TiDB。此教程同样适用于其他 JetBrains IDE（如 IntelliJ、PhpStorm 和 PyCharm）中的 Database Tools and SQL 插件。
+    - [DBeaver](https://docs.pingcap.com/zh/tidbcloud/dev-guide-gui-dbeaver.md): 学习如何使用 DBeaver Community 连接 TiDB。
+    - [VS Code](https://docs.pingcap.com/zh/tidbcloud/dev-guide-gui-vscode-sqltools.md): 学习如何使用 Visual Studio Code 或 GitHub Codespaces 连接 TiDB。
+    - [MySQL Workbench](https://docs.pingcap.com/zh/tidbcloud/dev-guide-gui-mysql-workbench.md): 学习如何使用 MySQL Workbench 连接 TiDB。
+    - [Navicat](https://docs.pingcap.com/zh/tidbcloud/dev-guide-gui-navicat.md): 学习如何使用 Navicat 连接 TiDB。
+  - [选择驱动或 ORM 框架](https://docs.pingcap.com/zh/tidbcloud/dev-guide-choose-driver-or-orm.md): 了解如何选择驱动或 ORM 框架以连接到 TiDB。
+  - BI
+    - [Looker Studio](https://docs.pingcap.com/zh/tidbcloud/dev-guide-bi-looker-studio.md): 了解如何使用 Looker Studio 连接 TiDB Cloud。
+  - Java
+    - [JDBC](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-java-jdbc.md): 学习如何使用 JDBC 连接 TiDB。本教程提供了可用于 TiDB 的 Java 示例代码片段。
+    - [MyBatis](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-java-mybatis.md): 学习如何使用 MyBatis 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Java 示例代码片段。
+    - [Hibernate](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-java-hibernate.md): 学习如何使用 Hibernate 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Java 示例代码片段。
+    - [Spring Boot](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-java-spring-boot.md): 学习如何使用 Spring Boot 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Java 示例代码片段。
+    - [连接池与连接参数](https://docs.pingcap.com/zh/tidbcloud/dev-guide-connection-parameters.md): 本文档介绍如何为 TiDB 配置连接池和连接参数。内容涵盖连接池大小、探测配置、最佳吞吐量的经验公式，同时讨论 JDBC API 的使用及 MySQL Connector/J 参数配置以优化性能。
+  - Go
+    - [Go-MySQL-Driver](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-golang-sql-driver.md): 学习如何使用 Go-MySQL-Driver 连接 TiDB。本教程提供了适用于 TiDB 的 Golang 示例代码片段，演示如何通过 Go-MySQL-Driver 进行操作。
+    - [GORM](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-golang-gorm.md): 学习如何使用 GORM 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Golang 示例代码片段。
+  - Python
+    - [mysqlclient](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-python-mysqlclient.md): 学习如何使用 mysqlclient 连接 TiDB。本教程提供了适用于 TiDB 的 Python 代码示例片段。
+    - [MySQL Connector/Python](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-python-mysql-connector.md): 学习如何使用 MySQL Connector/Python 连接 TiDB。本教程提供了可用于 TiDB 的 Python 示例代码片段，基于 MySQL Connector/Python。
+    - [PyMySQL](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-python-pymysql.md): 学习如何使用 PyMySQL 连接 TiDB。本教程提供了可用于 TiDB 的 Python 示例代码片段。
+    - [SQLAlchemy](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-python-sqlalchemy.md): 学习如何使用 SQLAlchemy 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Python 示例代码片段。
+    - [peewee](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-python-peewee.md): 学习如何使用 peewee 连接 TiDB。本教程提供了适用于 TiDB 的 Python 示例代码片段，演示如何使用 peewee 进行操作。
+    - [Django](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-python-django.md): 学习如何使用 Django 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Python 示例代码片段。
+  - Node.js
+    - [node-mysql2](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-nodejs-mysql2.md): 学习如何使用 node-mysql2 连接 TiDB。本教程提供了可与 TiDB 搭配使用的 Node.js 示例代码片段。
+    - [mysql.js](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-nodejs-mysqljs.md): 学习如何使用 mysql.js 连接 TiDB。本教程提供了适用于 TiDB 的 Node.js 示例代码片段，基于 mysql.js。
+    - [Prisma](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-nodejs-prisma.md): 学习如何使用 Prisma 连接 TiDB。本教程提供了适用于 Node.js 的示例代码片段，演示如何通过 Prisma 操作 TiDB。
+    - [Sequelize](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-nodejs-sequelize.md): 学习如何使用 Sequelize 连接 TiDB。本教程提供了可在 Node.js 中通过 Sequelize 操作 TiDB 的示例代码片段。
+    - [TypeORM](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-nodejs-typeorm.md): 学习如何使用 TypeORM 连接 TiDB。本教程提供了可在 Node.js 环境下通过 TypeORM 操作 TiDB 的示例代码片段。
+    - [Next.js](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-nextjs.md): 本文介绍如何在 Next.js 中结合 TiDB 和 mysql2 构建一个 CRUD 应用，并提供一个简单的示例代码片段。
+    - [AWS Lambda](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-aws-lambda.md): 本文介绍如何在 AWS Lambda 函数中使用 TiDB 和 mysql2 构建一个 CRUD 应用，并提供一个简单的示例代码片段。
+  - Ruby
+    - [mysql2](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-ruby-mysql2.md): 学习如何使用 Ruby 的 mysql2 连接 TiDB。本教程提供了可与 TiDB 协同工作的 Ruby 示例代码片段，基于 mysql2 gem。
+    - [Rails](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-ruby-rails.md): 学习如何使用 Rails 框架连接 TiDB。本教程提供了可在 Rails 框架下通过 ActiveRecord ORM 操作 TiDB 的 Ruby 示例代码片段。
+  - C#
+    - [C#](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-cs.md): 学习如何使用 C# 连接 TiDB。本教程提供了与 TiDB 交互的 C# 代码示例片段。
+  - [WordPress](https://docs.pingcap.com/zh/tidbcloud/dev-guide-wordpress.md): 学习如何使用 TiDB Cloud Starter 运行 WordPress。本教程将为你提供分步指导，让你在几分钟内运行 WordPress + TiDB Cloud Starter。
+  - Serverless Driver ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
+    - [TiDB Cloud Serverless Driver](https://docs.pingcap.com/zh/tidbcloud/serverless-driver.md): 了解如何从 serverless 和 edge 环境连接到 TiDB Cloud Starter 或 TiDB Cloud Essential。
+    - [Node.js 示例](https://docs.pingcap.com/zh/tidbcloud/serverless-driver-node-example.md): 学习如何在本地 Node.js 项目中使用 TiDB Cloud serverless driver。
+    - [Prisma 示例](https://docs.pingcap.com/zh/tidbcloud/serverless-driver-prisma-example.md): 学习如何将 TiDB Cloud serverless driver 与 Prisma ORM 一起使用。
+    - [Kysely 示例](https://docs.pingcap.com/zh/tidbcloud/serverless-driver-kysely-example.md): 学习如何在 Kysely 中使用 TiDB Cloud serverless driver。
+    - [Drizzle 示例](https://docs.pingcap.com/zh/tidbcloud/serverless-driver-drizzle-example.md): 学习如何在 Drizzle 中使用 TiDB Cloud serverless driver。
+- 开发参考
+  - 数据库模式设计
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/dev-guide-schema-design-overview.md): 了解 TiDB 数据库模式设计的基础知识。
+    - [创建数据库](https://docs.pingcap.com/zh/tidbcloud/dev-guide-create-database.md): 了解创建数据库的步骤、规则和示例。
+    - [创建表](https://docs.pingcap.com/zh/tidbcloud/dev-guide-create-table.md): 了解表创建中的定义、规则和指南。
+    - [创建二级索引](https://docs.pingcap.com/zh/tidbcloud/dev-guide-create-secondary-indexes.md): 了解创建二级索引的步骤、规则和示例。
+  - 数据写入
+    - [插入数据](https://docs.pingcap.com/zh/tidbcloud/dev-guide-insert-data.md): 了解如何插入数据。
+    - [更新数据](https://docs.pingcap.com/zh/tidbcloud/dev-guide-update-data.md): 了解如何更新数据和批量更新数据。
+    - [删除数据](https://docs.pingcap.com/zh/tidbcloud/dev-guide-delete-data.md): 了解用于删除数据的 SQL 语法、最佳实践和示例。
+    - [使用 TTL (Time to Live) 定期删除过期数据](https://docs.pingcap.com/zh/tidbcloud/time-to-live.md): Time to live (TTL) 是一项允许你在行级别管理 TiDB 数据存活时间的功能。在本文档中，你可以了解如何使用 TTL 自动过期并删除旧数据。
+    - [预处理语句](https://docs.pingcap.com/zh/tidbcloud/dev-guide-prepared-statement.md): 了解如何使用 TiDB 预处理语句。
+  - 数据读取
+    - [单表读取](https://docs.pingcap.com/zh/tidbcloud/dev-guide-get-data-from-single-table.md): 本文档介绍如何在数据库中查询单个表的数据。
+    - [多表连接查询](https://docs.pingcap.com/zh/tidbcloud/dev-guide-join-tables.md): 本文档描述了如何使用多表连接查询。
+    - [子查询](https://docs.pingcap.com/zh/tidbcloud/dev-guide-use-subqueries.md): 学习如何在 TiDB 中使用子查询。
+    - [查询结果分页](https://docs.pingcap.com/zh/tidbcloud/dev-guide-paginate-results.md): 介绍 TiDB 中的分页结果功能。
+    - [视图](https://docs.pingcap.com/zh/tidbcloud/dev-guide-use-views.md): 学习如何在 TiDB 中使用视图。
+    - [临时表](https://docs.pingcap.com/zh/tidbcloud/dev-guide-use-temporary-tables.md): 学习如何创建、查看、查询和删除临时表。
+    - [公共表表达式](https://docs.pingcap.com/zh/tidbcloud/dev-guide-use-common-table-expression.md): 了解 TiDB 的 CTE 特性，帮助你更高效地编写 SQL 语句。
+    - 读取副本数据
+      - [Follower Read](https://docs.pingcap.com/zh/tidbcloud/dev-guide-use-follower-read.md): 学习如何使用 Follower Read 来优化查询性能。
+      - [Stale Read](https://docs.pingcap.com/zh/tidbcloud/dev-guide-use-stale-read.md): 了解如何在特定条件下使用 Stale Read 来加快查询速度。
+    - [HTAP 查询](https://docs.pingcap.com/zh/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries.md): 介绍 TiDB 中的 HTAP 查询。
+  - 事务
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/dev-guide-transaction-overview.md): 对 TiDB 中事务的简要介绍。
+    - [乐观事务和悲观事务](https://docs.pingcap.com/zh/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction.md): 了解 TiDB 中的乐观事务和悲观事务。
+    - [事务限制](https://docs.pingcap.com/zh/tidbcloud/dev-guide-transaction-restraints.md): 了解 TiDB 中的事务限制。
+    - [事务错误处理](https://docs.pingcap.com/zh/tidbcloud/dev-guide-transaction-troubleshoot.md): 了解如何处理事务错误，例如死锁和应用重试错误。
+  - 优化 SQL 性能
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/dev-guide-optimize-sql-overview.md): 提供 TiDB 应用开发者关于 SQL 性能调优的概述。
+    - [SQL 性能调优](https://docs.pingcap.com/zh/tidbcloud/dev-guide-optimize-sql.md): 介绍 TiDB 的 SQL 性能调优方案和分析方法。
+    - [性能调优最佳实践](https://docs.pingcap.com/zh/tidbcloud/dev-guide-optimize-sql-best-practices.md): 介绍 TiDB 性能调优的最佳实践。
+    - [索引的最佳实践](https://docs.pingcap.com/zh/tidbcloud/dev-guide-index-best-practice.md): 了解在 TiDB 中创建和使用索引的一些最佳实践。
+    - 其他优化
+      - [避免隐式类型转换](https://docs.pingcap.com/zh/tidbcloud/dev-guide-implicit-type-conversion.md): 介绍 TiDB 中隐式类型转换的可能后果及避免方法。
+      - [唯一序列号生成方案](https://docs.pingcap.com/zh/tidbcloud/dev-guide-unique-serial-number-generation.md): 面向开发者的唯一 ID 生成方案，用于生成自己的唯一序列号。
+  - 故障诊断
+    - [SQL 或事务问题](https://docs.pingcap.com/zh/tidbcloud/dev-guide-troubleshoot-overview.md): 了解在应用开发过程中可能出现的 SQL 或事务问题的排查方法。
+    - [结果集不稳定](https://docs.pingcap.com/zh/tidbcloud/dev-guide-unstable-result-set.md): 学习如何处理不稳定的结果集错误。
+    - [超时](https://docs.pingcap.com/zh/tidbcloud/dev-guide-timeouts-in-tidb.md): 了解 TiDB 中的超时机制，以及排查错误的解决方案。
+  - 引用文档
+    - [命名规范](https://docs.pingcap.com/zh/tidbcloud/dev-guide-object-naming-guidelines.md): 了解 TiDB 中的对象命名规范。
+    - [SQL 开发规范](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sql-development-specification.md): 了解 TiDB 的 SQL 开发规范。
+  - [Bookshop 示例应用](https://docs.pingcap.com/zh/tidbcloud/dev-guide-bookshop-schema-design.md): Bookshop 是一个在线书店应用，供你购买和评价书籍。你可以通过 TiUP 或 TiDB Cloud 导入表结构和数据。方法 1 使用 TiUP 快速生成并导入示例数据，方法 2 从 Amazon S3 导入数据到 TiDB Cloud。数据库表包括 books、authors、users、ratings、book_authors 和 orders。数据库初始化脚本 `dbinit.sql` 创建了 Bookshop 应用的表结构。
+  - 第三方工具支持
+    - [TiDB 支持的第三方工具](https://docs.pingcap.com/zh/tidbcloud/dev-guide-third-party-support.md): 了解 TiDB 支持的第三方工具。
+    - [已知的第三方工具兼容问题](https://docs.pingcap.com/zh/tidbcloud/dev-guide-third-party-tools-compatibility.md): 描述在测试过程中发现的 TiDB 与第三方工具的兼容性问题。
+
+## 指南
+
+- 管理集群
+  - [选择集群方案](https://docs.pingcap.com/zh/tidbcloud/select-cluster-tier.md): 了解如何在 TiDB Cloud 上选择你的集群方案。
+  - 管理 TiDB Cloud 集群
+    - [创建 TiDB Cloud 集群](https://docs.pingcap.com/zh/tidbcloud/create-tidb-cluster-serverless.md): 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+    - 连接到 TiDB Cloud 集群
+      - [连接概览](https://docs.pingcap.com/zh/tidbcloud/connect-to-tidb-cluster-serverless.md): 了解如何通过不同方式连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+      - [通过 Public Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-via-standard-connection-serverless.md): 了解如何通过公共端点连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+      - [通过 AWS Private Link 连接](https://docs.pingcap.com/zh/tidbcloud/set-up-private-endpoint-connections-serverless.md): 了解如何通过私有终端节点连接到你的 TiDB Cloud 集群。
+      - [通过 Alibaba Cloud Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): 了解如何通过阿里云私有终端节点连接到你的 TiDB Cloud 集群。
+    - 分支 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+      - [概览](https://docs.pingcap.com/zh/tidbcloud/branch-overview.md): 了解 TiDB Cloud 分支的概念。
+      - [管理分支](https://docs.pingcap.com/zh/tidbcloud/branch-manage.md): 了解如何管理 TiDB Cloud 分支。
+      - [GitHub 集成](https://docs.pingcap.com/zh/tidbcloud/branch-github-integration.md): 了解如何将 TiDB Cloud Branching 功能与 GitHub 集成。
+    - [管理消费限额](https://docs.pingcap.com/zh/tidbcloud/manage-serverless-spend-limit.md): 了解如何管理 TiDB Cloud Starter 集群的消费限额。
+    - [备份和恢复 TiDB Cloud 数据](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-serverless.md): 了解如何备份和恢复你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+    - [从 TiDB Cloud 导出数据](https://docs.pingcap.com/zh/tidbcloud/serverless-export.md): 了解如何从 TiDB Cloud Starter 或 TiDB Cloud Essential 集群导出数据。
+  - 使用带有 TiFlash 的 HTAP 集群
+    - [TiFlash 简介](https://docs.pingcap.com/zh/tidbcloud/tiflash-overview.md): 了解 TiFlash 的架构和关键特性。
+    - [构建 TiFlash 副本](https://docs.pingcap.com/zh/tidbcloud/create-tiflash-replicas.md): 了解如何创建 TiFlash 副本。
+    - [使用 TiDB 读取 TiFlash](https://docs.pingcap.com/zh/tidbcloud/use-tidb-to-read-tiflash.md): 了解如何使用 TiDB 读取 TiFlash 副本。
+    - [使用 MPP 模式](https://docs.pingcap.com/zh/tidbcloud/use-tiflash-mpp-mode.md): 了解 TiFlash 的 MPP 模式及其使用方法。
+    - [使用 FastScan 功能](https://docs.pingcap.com/zh/tidbcloud/use-fastscan.md): 介绍在 OLAP 场景中通过使用 FastScan 来加快查询速度的方法。
+    - [TiFlash 支持的计算下推](https://docs.pingcap.com/zh/tidbcloud/tiflash-supported-pushdown-calculations.md): 了解 TiFlash 支持的下推计算。
+    - [TiFlash 查询结果物化](https://docs.pingcap.com/zh/tidbcloud/tiflash-results-materialization.md): 了解如何在事务中保存 TiFlash 的查询结果。
+    - [TiFlash 延迟物化](https://docs.pingcap.com/zh/tidbcloud/tiflash-late-materialization.md): 描述如何使用 TiFlash late materialization 功能在 OLAP 场景中加速查询。
+    - [TiFlash 兼容性说明](https://docs.pingcap.com/zh/tidbcloud/tiflash-compatibility.md): 了解与 TiFlash 不兼容的 TiDB 特性。
+    - [TiFlash Pipeline Model 执行模型](https://docs.pingcap.com/zh/tidbcloud/tiflash-pipeline-model.md): 了解 TiFlash Pipeline Execution Model。
+  - 监控和告警
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster.md): 了解如何监控你的 TiDB 集群。
+    - [内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring.md): 了解如何查看 TiDB Cloud 内置统计/指标（信息）及其含义。
+    - [集群事件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 集群的事件。
+  - 性能调优
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
+    - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
+    - SQL 调优
+      - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-sql-tuning-overview.md): 了解如何在 TiDB Cloud 中调优 SQL 性能。
+      - 理解 TiDB 执行计划
+        - [TiDB 执行计划概览](https://docs.pingcap.com/zh/tidbcloud/explain-overview.md): 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+        - [使用 `EXPLAIN` 解读执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-walkthrough.md): 通过示例语句学习如何使用 EXPLAIN
+        - [索引查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-indexes.md): 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
+        - [Join 查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-joins.md): 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
+        - [MPP 模式查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-mpp.md): 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
+        - [子查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-subqueries.md): 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
+        - [聚合查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-aggregation.md): 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+        - [视图查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-views.md): 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+        - [分区查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-partitions.md): 了解 TiDB 中 EXPLAIN 语句返回的执行计划信息。
+        - [开启 IndexMerge 查询的执行计划](https://docs.pingcap.com/zh/tidbcloud/explain-index-merge.md): 了解 TiDB 中 `EXPLAIN` 语句返回的执行计划信息。
+      - SQL 优化过程
+        - [SQL 优化流程概览](https://docs.pingcap.com/zh/tidbcloud/sql-optimization-concepts.md): 了解 TiDB 中 SQL 的逻辑和物理优化。
+        - 逻辑优化
+          - [逻辑优化概览](https://docs.pingcap.com/zh/tidbcloud/sql-logical-optimization.md): SQL 逻辑优化章节解释了 TiDB 查询计划生成中的关键逻辑重写。例如，`IN` 子查询 `t.a in (select t1.a from t1 where t1.b=t.b)` 不存在，是因为 TiDB 在此进行了重写。关键重写包括子查询相关优化、列裁剪、相关子查询去相关、消除 Max/Min、谓词下推、分区裁剪、TopN 和 Limit 操作符下推，以及 Join 重排序。
+          - [子查询相关的优化](https://docs.pingcap.com/zh/tidbcloud/subquery-optimization.md): 了解与子查询相关的优化。
+          - [列裁剪](https://docs.pingcap.com/zh/tidbcloud/column-pruning.md): 了解 TiDB 中的 column pruning 的用法。
+          - [关联子查询去关联](https://docs.pingcap.com/zh/tidbcloud/correlated-subquery-optimization.md): 了解如何对相关子查询进行去相关处理。
+          - [Max/Min 消除](https://docs.pingcap.com/zh/tidbcloud/max-min-eliminate.md): 介绍消除 Max/Min 函数的规则。
+          - [谓词下推](https://docs.pingcap.com/zh/tidbcloud/predicate-push-down.md): 介绍 TiDB 的一种逻辑优化规则——Predicate Push Down (PPD)。
+          - [分区裁剪](https://docs.pingcap.com/zh/tidbcloud/partition-pruning.md): 了解 TiDB 分区裁剪的使用场景。
+          - [TopN 和 Limit 下推](https://docs.pingcap.com/zh/tidbcloud/topn-limit-push-down.md): 了解 TopN 和 Limit 操作符下推的实现方式。
+          - [Join Reorder](https://docs.pingcap.com/zh/tidbcloud/join-reorder.md): 使用连接重排序算法在 TiDB 中对多个表进行连接。
+          - [从窗口函数中推导 TopN 或 Limit](https://docs.pingcap.com/zh/tidbcloud/derive-topn-from-window.md): 介绍从 window functions 派生 TopN 或 Limit 的优化规则以及如何启用该规则。
+        - 物理优化
+          - [物理优化概览](https://docs.pingcap.com/zh/tidbcloud/sql-physical-optimization.md): 物理优化是一种基于成本的过程，用于为逻辑执行计划创建物理执行计划。优化器根据数据统计信息、时间复杂度和资源消耗，为每个操作符选择最优的物理实现方式。这包括索引选择、统计信息收集、使用合适的索引、去重关键字优化以及成本模型，以实现最优的执行计划。
+          - [索引的选择](https://docs.pingcap.com/zh/tidbcloud/choose-index.md): 为 TiDB 查询优化选择最佳索引。
+          - [常规统计信息](https://docs.pingcap.com/zh/tidbcloud/statistics.md): 学习统计信息如何收集表级和列级信息。
+          - [扩展统计信息](https://docs.pingcap.com/zh/tidbcloud/extended-statistics.md): 学习如何使用扩展统计信息来指导优化器。
+          - [错误索引的解决方案](https://docs.pingcap.com/zh/tidbcloud/wrong-index-solution.md): 学习如何解决错误索引问题。
+          - [Distinct 优化](https://docs.pingcap.com/zh/tidbcloud/agg-distinct-optimization.md): 介绍 TiDB 查询优化器中的 `distinct` 优化。
+          - [代价模型](https://docs.pingcap.com/zh/tidbcloud/cost-model.md): 了解 TiDB 在物理优化过程中使用的成本模型的工作原理。
+          - [Runtime Filter](https://docs.pingcap.com/zh/tidbcloud/runtime-filter.md): 了解 Runtime Filter 的工作原理及其使用方法。
+        - [Prepare 语句执行计划缓存](https://docs.pingcap.com/zh/tidbcloud/sql-prepared-plan-cache.md): 了解 TiDB 中的 SQL Prepared 执行计划缓存。
+        - [非 Prepare 语句执行计划缓存](https://docs.pingcap.com/zh/tidbcloud/sql-non-prepared-plan-cache.md): 了解 TiDB 中 SQL 非预处理执行计划缓存的原理、用法和示例。
+      - 控制执行计划
+        - [控制执行计划概览](https://docs.pingcap.com/zh/tidbcloud/control-execution-plan.md): 本章介绍在 TiDB 中控制执行计划生成的方法，包括使用 hints、SQL 计划管理以及优化规则的 blocklist。此外，还可以通过修改系统变量和 `tidb_opt_fix_control` 变量来控制执行计划。这些方法有助于防止集群升级后由于优化器行为变化引起的性能回归。
+        - [Optimizer Hints](https://docs.pingcap.com/zh/tidbcloud/optimizer-hints.md): 使用优化器 Hint 影响查询执行计划
+        - [执行计划管理](https://docs.pingcap.com/zh/tidbcloud/sql-plan-management.md): 了解 TiDB 中的 SQL 执行计划管理。
+        - [优化规则及表达式下推的黑名单](https://docs.pingcap.com/zh/tidbcloud/blocklist-control-plan.md): 了解关于控制优化规则和表达式下推行为的黑名单机制。
+        - [Optimizer Fix Controls](https://docs.pingcap.com/zh/tidbcloud/optimizer-fix-controls.md): 了解优化器修复控制功能，以及如何使用 `tidb_opt_fix_control` 以更细粒度地控制 TiDB 优化器。
+    - [TiKV Follower Read](https://docs.pingcap.com/zh/tidbcloud/follower-read.md): 本文档描述了 Follower Read 的使用和实现。
+    - [下推计算结果缓存](https://docs.pingcap.com/zh/tidbcloud/coprocessor-cache.md): 了解 Coprocessor Cache 的特性。
+    - 垃圾回收 (GC)
+      - [GC 机制简介](https://docs.pingcap.com/zh/tidbcloud/garbage-collection-overview.md): 了解 TiDB 中的垃圾回收（Garbage Collection）。
+      - [GC 配置](https://docs.pingcap.com/zh/tidbcloud/garbage-collection-configuration.md): 了解 GC 配置参数。
+    - [TiFlash 调优](https://docs.pingcap.com/zh/tidbcloud/tune-tiflash-performance.md): 了解如何通过规划机器资源和调整 TiDB 参数来调优 TiFlash 的性能。
+  - [升级 TiDB 集群](https://docs.pingcap.com/zh/tidbcloud/upgrade-tidb-cluster.md): 了解如何升级 TiDB 集群。
+  - [删除 TiDB 集群](https://docs.pingcap.com/zh/tidbcloud/delete-tidb-cluster.md): 了解如何删除 TiDB 集群。
+- 迁移或导入数据
+  - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-migration-overview.md): 了解 TiDB Cloud 的数据迁移和导入场景概览。
+  - 将数据迁移到 TiDB Cloud
+    - [从本地部署的 TiDB 迁移到 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/migrate-from-op-tidb.md): 了解如何将数据从 TiDB 自建集群迁移到 TiDB Cloud。
+    - [迁移和合并大型数据集的 MySQL 分片](https://docs.pingcap.com/zh/tidbcloud/migrate-sql-shards.md): 了解如何将大型 MySQL 分片数据集迁移并合并到 TiDB Cloud。
+    - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-oracle-using-aws-dms.md): 了解如何使用 AWS Database Migration Service (AWS DMS) 将数据从 Amazon RDS for Oracle 迁移到 TiDB Cloud Serverless。
+  - 将数据导入 TiDB Cloud
+    - [导入本地文件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-import-local-files.md): 了解如何将本地文件导入 TiDB Cloud Starter 或 TiDB Cloud Essential。
+    - [从云存储导入示例数据（SQL 文件）](https://docs.pingcap.com/zh/tidbcloud/import-sample-data-serverless.md): 了解如何通过 UI 将示例数据导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
+    - [从云存储导入 CSV 文件](https://docs.pingcap.com/zh/tidbcloud/import-csv-files-serverless.md): 了解如何将 CSV 文件从 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务（OSS）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
+    - [从云存储导入 Parquet 文件](https://docs.pingcap.com/zh/tidbcloud/import-parquet-files-serverless.md): 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务（OSS）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
+    - [从云存储导入快照文件](https://docs.pingcap.com/zh/tidbcloud/import-snapshot-files-serverless.md): 了解如何将 Amazon Aurora 或 RDS for MySQL 的快照文件导入 TiDB Cloud Starter 或 Essential。
+    - [使用 MySQL CLI 导入](https://docs.pingcap.com/zh/tidbcloud/import-with-mysql-cli-serverless.md): 学习如何通过 MySQL CLI 向 TiDB Cloud Starter 或 TiDB Cloud Essential 导入数据。
+  - 参考
+    - [为 TiDB Cloud 配置外部存储访问](https://docs.pingcap.com/zh/tidbcloud/configure-external-storage-access.md): 了解如何为外部存储（如 Amazon Simple Storage Service (Amazon S3)）配置跨账户访问。
+    - [数据导入的命名约定](https://docs.pingcap.com/zh/tidbcloud/naming-conventions-for-data-import.md): 了解 CSV、Parquet、Aurora Snapshot 和 SQL 文件在数据导入过程中的命名规范。
+    - [导入数据的 CSV 配置](https://docs.pingcap.com/zh/tidbcloud/csv-config-for-import-data.md): 了解如何在 TiDB Cloud 的导入数据服务中使用 CSV 配置。
+    - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](https://docs.pingcap.com/zh/tidbcloud/troubleshoot-import-access-denied-error.md): 了解如何排查从 Amazon S3 导入数据到 TiDB Cloud 时的访问被拒绝错误。
+    - [将 AWS DMS 连接到 TiDB Cloud 集群](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-connect-aws-dms.md): 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cloud 迁移数据或向 TiDB Cloud 迁移数据。
+- 探索数据
+  - [SQL 编辑器中的 Chat2Query](https://docs.pingcap.com/zh/tidbcloud/explore-data-with-chat2query.md): 了解如何在 TiDB Cloud 控制台中使用 AI 辅助 SQL 编辑器，最大化你的数据价值。 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL 代理账户](https://docs.pingcap.com/zh/tidbcloud/sql-proxy-account.md): 了解 TiDB Cloud 中的 SQL 代理账号。
+- 向量搜索 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](https://docs.pingcap.com/zh/tidbcloud/vector-search-overview.md): 了解 TiDB 中的向量检索功能。该功能为文档、图片、音频和视频等多种数据类型提供了先进的语义相似性检索解决方案。
+  - 快速上手
+    - [使用 SQL 开始向量搜索](https://docs.pingcap.com/zh/tidbcloud/vector-search-get-started-using-sql.md): 学习如何仅使用 SQL 语句在 TiDB 中快速开始向量检索，为你的生成式 AI 应用提供支持。
+    - [使用 Python 开始向量搜索](https://docs.pingcap.com/zh/tidbcloud/vector-search-get-started-using-python.md): 学习如何使用 Python 和 TiDB 向量检索快速开发一个实现语义搜索的 AI 应用。
+  - 自动嵌入
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-overview.md): 了解如何使用 Auto Embedding 通过纯文本而非向量进行语义搜索。
+    - [Amazon Titan Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-amazon-titan.md): 了解如何在 TiDB Cloud 中使用 Amazon Titan 嵌入模型。
+    - [Cohere Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-cohere.md): 了解如何在 TiDB Cloud 中使用 Cohere 嵌入模型。
+    - [Jina AI Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-jina-ai.md): 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
+    - [OpenAI Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-openai.md): 了解如何在 TiDB Cloud 中使用 OpenAI 嵌入模型。
+    - [Gemini Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-gemini.md): 了解如何在 TiDB Cloud 中使用 Google Gemini 嵌入模型。
+    - [HuggingFace Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-huggingface.md): 了解如何在 TiDB Cloud 中使用 HuggingFace 嵌入模型。
+    - [NVIDIA NIM Embeddings](https://docs.pingcap.com/zh/tidbcloud/vector-search-auto-embedding-nvidia-nim.md): 了解如何在 TiDB Cloud 中使用 NVIDIA NIM 嵌入模型。
+  - 集成
+    - [集成概览](https://docs.pingcap.com/zh/tidbcloud/vector-search-integration-overview.md): TiDB 向量检索集成的概览，包括支持的 AI 框架、嵌入模型和 ORM 库。
+    - AI 框架
+      - [LlamaIndex](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-llamaindex.md): 了解如何将 TiDB Vector Search 集成到 LlamaIndex 中。
+      - [LangChain](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-langchain.md): 学习如何将 TiDB 向量检索与 LangChain 集成。
+    - AI 服务
+      - [Amazon Bedrock](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-amazon-bedrock.md): 学习如何将 TiDB 向量检索与 Amazon Bedrock 集成，构建基于检索增强生成（RAG）的问答机器人。
+    - 嵌入模型/服务
+      - [Jina AI](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-jinaai-embedding.md): 学习如何将 TiDB 向量检索与 Jina AI Embeddings API 集成，实现向量存储与语义检索。
+    - ORM 库
+      - [SQLAlchemy](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-sqlalchemy.md): 学习如何将 TiDB 向量检索与 SQLAlchemy 集成，用于存储嵌入向量并执行语义检索。
+      - [peewee](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-peewee.md): 学习如何将 TiDB 向量检索与 peewee 集成，以存储嵌入向量并执行语义检索。
+      - [Django](https://docs.pingcap.com/zh/tidbcloud/vector-search-integrate-with-django-orm.md): 学习如何将 TiDB 向量检索集成到 Django ORM，用于存储嵌入向量并执行语义检索。
+  - 文本搜索
+    - [使用 SQL 进行全文搜索](https://docs.pingcap.com/zh/tidbcloud/vector-search-full-text-search-sql.md): 全文检索允许你根据精确关键词检索文档。在 RAG（检索增强生成）场景中，你可以将全文检索与向量检索结合使用，以提升检索质量。
+    - [使用 Python 进行全文搜索](https://docs.pingcap.com/zh/tidbcloud/vector-search-full-text-search-python.md): 全文检索允许你根据精确的关键词检索文档。在 RAG（检索增强生成）场景中，你可以将全文检索与向量检索结合使用，以提升检索质量。
+    - [混合搜索](https://docs.pingcap.com/zh/tidbcloud/vector-search-hybrid-search.md): 同时使用全文检索和向量检索以提升检索质量。
+  - 参考
+    - [向量数据类型](https://docs.pingcap.com/zh/tidbcloud/vector-search-data-types.md): 了解 TiDB 中的 Vector 数据类型。
+    - [向量函数和操作符](https://docs.pingcap.com/zh/tidbcloud/vector-search-functions-and-operators.md): 了解可用于向量数据类型的函数与运算符。
+    - [向量索引](https://docs.pingcap.com/zh/tidbcloud/vector-search-index.md): 了解如何构建和使用向量检索索引，以加速 TiDB 中的 K-最近邻（KNN）查询。
+  - [优化搜索性能](https://docs.pingcap.com/zh/tidbcloud/vector-search-improve-performance.md): 了解提升 TiDB 向量检索性能的最佳实践。
+  - [使用限制](https://docs.pingcap.com/zh/tidbcloud/vector-search-limitations.md): 了解 TiDB 向量检索的限制。
+- 数据服务 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](https://docs.pingcap.com/zh/tidbcloud/data-service-overview.md): 了解 TiDB Cloud 中的 Data Service 及其应用场景。
+  - [快速上手](https://docs.pingcap.com/zh/tidbcloud/data-service-get-started.md): 了解如何使用 TiDB Cloud Data Service 通过 HTTPS 请求访问你的数据。
+  - Chat2Query API
+    - [快速上手](https://docs.pingcap.com/zh/tidbcloud/use-chat2query-api.md): 了解如何通过 TiDB Cloud Chat2Query API 提供指令，利用 AI 生成并执行 SQL 语句。
+    - [启动多轮 Chat2Query](https://docs.pingcap.com/zh/tidbcloud/use-chat2query-sessions.md): 了解如何使用 Chat2Query 会话相关的 API 开始多轮对话。
+    - [使用知识库](https://docs.pingcap.com/zh/tidbcloud/use-chat2query-knowledge.md): 了解如何通过使用 Chat2Query 知识库 API 提升 Chat2Query 的查询结果。
+  - [管理数据应用](https://docs.pingcap.com/zh/tidbcloud/data-service-manage-data-app.md): 了解如何在 TiDB Cloud 控制台中创建、查看、修改和删除 Data App。
+  - [管理端点](https://docs.pingcap.com/zh/tidbcloud/data-service-manage-endpoint.md): 了解如何在 TiDB Cloud 控制台中创建、开发、测试、部署和删除 Data App 中的端点。
+  - [API 密钥](https://docs.pingcap.com/zh/tidbcloud/data-service-api-key.md): 了解如何为 Data App 创建、编辑和删除 API 密钥。
+  - [自定义域名](https://docs.pingcap.com/zh/tidbcloud/data-service-custom-domain.md): 了解如何使用自定义域名访问 TiDB Cloud Data Service 中的 Data App。
+  - [集成](https://docs.pingcap.com/zh/tidbcloud/data-service-integrations.md): 了解如何在 TiDB Cloud 控制台中将 TiDB Cloud Data App 与第三方工具（如 GPTs 和 Dify）集成。
+  - [在 Postman 中运行](https://docs.pingcap.com/zh/tidbcloud/data-service-postman-integration.md): 了解如何在 Postman 中运行数据应用。
+  - [使用 GitHub 自动部署](https://docs.pingcap.com/zh/tidbcloud/data-service-manage-github-connection.md): 了解如何使用 GitHub 自动部署 Data App。
+  - [将 OpenAPI 规范与 Next.js 结合使用](https://docs.pingcap.com/zh/tidbcloud/data-service-oas-with-nextjs.md): 学习如何使用 Data App 的 OpenAPI 规范生成客户端代码并开发 Next.js 应用。
+  - [数据应用配置文件](https://docs.pingcap.com/zh/tidbcloud/data-service-app-config-files.md): 本文档描述了 TiDB Cloud 中 Data App 的配置文件。
+  - [响应和状态代码](https://docs.pingcap.com/zh/tidbcloud/data-service-response-and-status-code.md): 本文档描述了 TiDB Cloud 中 Data Service 的响应和 HTTP 状态码。
+- 安全
+  - [安全概览](https://docs.pingcap.com/zh/tidbcloud/security-overview.md): 了解 TiDB Cloud 的全面安全框架，包括身份管理、网络隔离、数据保护、访问控制和审计。
+  - 身份访问控制
+    - [密码验证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-password-authentication.md): 了解如何在 TiDB Cloud 控制台中管理密码和启用多因素认证（MFA）。
+    - [标准 SSO 身份验证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-sso-authentication.md): 了解如何通过 Google、GitHub 或 Microsoft 账号登录 TiDB Cloud 控制台。
+    - [组织 SSO 身份验证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-org-sso-authentication.md): 了解如何通过自定义的组织认证登录 TiDB Cloud 控制台。
+    - [身份访问管理](https://docs.pingcap.com/zh/tidbcloud/manage-user-access.md): 了解如何在 TiDB Cloud 中管理身份访问。
+    - [OAuth 2.0](https://docs.pingcap.com/zh/tidbcloud/oauth2.md): 了解如何在 TiDB Cloud 中使用 OAuth 2.0。
+  - 网络访问控制
+    - [通过 AWS Private Link 连接](https://docs.pingcap.com/zh/tidbcloud/set-up-private-endpoint-connections-serverless.md): 了解如何通过私有终端节点连接到你的 TiDB Cloud 集群。
+    - [通过 Alibaba Cloud Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): 了解如何通过阿里云私有终端节点连接到你的 TiDB Cloud 集群。
+    - [为 Public Endpoint 配置防火墙规则](https://docs.pingcap.com/zh/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints.md): 了解如何安全地为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群配置和管理具有公共访问权限的防火墙规则。
+    - [通过 TLS 连接](https://docs.pingcap.com/zh/tidbcloud/secure-connections-to-serverless-clusters.md): Introduce TLS connections in TiDB Cloud Starter and TiDB Cloud Essential.
+  - 审计管理
+    - [控制台审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-console-auditing.md): 了解 TiDB Cloud 控制台的审计日志功能。
+- 账单
+  - [发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#invoices): 了解 TiDB Cloud 计费。
+  - [账单详情](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#billing-details): 了解 TiDB Cloud 计费。
+  - [成本资源管理器](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#cost-explorer): 了解 TiDB Cloud 计费。
+  - [账单资料](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#billing-profile): 了解 TiDB Cloud 计费。
+  - [抵扣金](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#credits): 了解 TiDB Cloud 计费。
+  - [支付方式设置](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#payment-method): 了解 TiDB Cloud 计费。
+  - [设置通过云提供商的 Marketplace 计费](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace): 了解 TiDB Cloud 计费。
+  - [管理预算](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-budget.md): 了解如何使用 TiDB Cloud 的预算功能来监控你的成本。
+- 集成
+  - [Airbyte](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-airbyte.md): 了解如何使用 Airbyte TiDB 连接器。
+  - [Amazon AppFlow](https://docs.pingcap.com/zh/tidbcloud/dev-guide-aws-appflow-integration.md): 逐步介绍如何将 TiDB 集成到 Amazon AppFlow。
+  - [AWS Lambda](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-aws-lambda.md): 逐步介绍如何通过 AWS CloudFormation 将 TiDB Cloud Starter 与 Amazon Lambda 集成。
+  - [Cloudflare](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-cloudflare.md): 了解如何将 Cloudflare Workers 与 TiDB Cloud 部署集成。
+  - [dbt](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-dbt.md): 了解 dbt 在 TiDB Cloud 中的使用场景。
+  - [Gitpod](https://docs.pingcap.com/zh/tidbcloud/dev-guide-playground-gitpod.md): Gitpod 提供一个完整的、自动化的、预配置的云原生开发环境。你可以直接在浏览器中开发、运行和测试代码，无需任何本地配置。
+  - [n8n](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-n8n.md): 了解如何在 n8n 中使用 TiDB Cloud 节点。
+  - [Netlify](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-netlify.md): 了解如何将你的 TiDB Cloud 集群连接到 Netlify 项目。
+  - [ProxySQL](https://docs.pingcap.com/zh/tidbcloud/dev-guide-proxysql-integration.md): 学习如何将 TiDB Cloud 和 TiDB（自托管）与 ProxySQL 集成。
+  - Terraform
+    - [Terraform 集成概览](https://docs.pingcap.com/zh/tidbcloud/terraform-tidbcloud-provider-overview.md): 通过 Terraform 创建、管理和更新你的 TiDB Cloud 资源。
+    - [获取 TiDB Cloud Terraform Provider](https://docs.pingcap.com/zh/tidbcloud/terraform-get-tidbcloud-provider.md): 了解如何获取 TiDB Cloud Terraform Provider。
+    - [使用 `tidbcloud_serverless_cluster` 资源](https://docs.pingcap.com/zh/tidbcloud/terraform-use-serverless-cluster-resource.md): 了解如何使用 `tidbcloud_serverless_cluster` 资源来创建和修改 TiDB Cloud Starter 集群。
+    - [使用 `tidbcloud_serverless_branch` 资源](https://docs.pingcap.com/zh/tidbcloud/terraform-use-serverless-branch-resource.md): 了解如何使用 serverless branch 资源来创建和修改 TiDB Cloud Starter 或 TiDB Cloud Essential 分支。
+    - [使用 `tidbcloud_serverless_export` 资源](https://docs.pingcap.com/zh/tidbcloud/terraform-use-serverless-export-resource.md): 了解如何使用 `tidbcloud_serverless_export` 资源为 TiDB Cloud Starter 或 TiDB Cloud Essential 集群创建和修改数据导出任务。
+    - [使用 `tidbcloud_sql_user` 资源](https://docs.pingcap.com/zh/tidbcloud/terraform-use-sql-user-resource.md): 了解如何使用 SQL 用户资源在 TiDB Cloud 中创建和修改 SQL 用户。
+    - [使用 `tidbcloud_import` 资源](https://docs.pingcap.com/zh/tidbcloud/terraform-use-import-resource.md): 学习如何使用 import 资源管理导入任务。
+    - [迁移集群资源](https://docs.pingcap.com/zh/tidbcloud/terraform-migrate-cluster-resource.md): 了解如何将集群资源迁移到无服务器或专用集群资源。
+  - [Vercel](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-vercel.md): 了解如何将你的 TiDB Cloud 集群连接到 Vercel 项目。
+  - [Zapier](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-zapier.md): 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。
+
+## 参考
+
+- SQL 参考
+  - [SQL 基本操作](https://docs.pingcap.com/zh/tidbcloud/basic-sql-operations.md): 了解 TiDB 数据库的基本 SQL 语句。
+  - SQL 语言结构和语法
+    - 属性
+      - [AUTO_INCREMENT](https://docs.pingcap.com/zh/tidbcloud/auto-increment.md): 了解 TiDB 的 `AUTO_INCREMENT` 列属性。
+      - [AUTO_RANDOM](https://docs.pingcap.com/zh/tidbcloud/auto-random.md): 学习 AUTO_RANDOM 属性。
+      - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidbcloud/shard-row-id-bits.md): 了解 SHARD_ROW_ID_BITS 属性。
+    - [字面值](https://docs.pingcap.com/zh/tidbcloud/literal-values.md): 本文介绍 TiDB SQL 语句的字面值。
+    - [Schema 对象名](https://docs.pingcap.com/zh/tidbcloud/schema-object-names.md): 了解 TiDB SQL 语句中的 schema object names。
+    - [关键字](https://docs.pingcap.com/zh/tidbcloud/keywords.md): 关键词和保留字
+    - [用户自定义变量](https://docs.pingcap.com/zh/tidbcloud/user-defined-variables.md): 了解如何使用用户定义变量。
+    - [表达式语法](https://docs.pingcap.com/zh/tidbcloud/expression-syntax.md): 了解 TiDB 中的表达式语法。
+    - [注释语法](https://docs.pingcap.com/zh/tidbcloud/comment-syntax.md): 本文档介绍了 TiDB 支持的注释语法。
+  - SQL 语句
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/sql-statement-overview.md): 了解 TiDB 支持的 SQL 语句。
+    - [`ADMIN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin.md): TiDB 数据库中 ADMIN 的用法概述。
+    - [`ADMIN CANCEL DDL`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin-cancel-ddl.md): 关于 TiDB 数据库中使用 ADMIN CANCEL DDL 的概述。
+    - [`ADMIN CHECKSUM TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin-checksum-table.md): 关于 TiDB 数据库中 ADMIN 的用法概述。
+    - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+    - [`ADMIN CLEANUP INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin-cleanup.md): 关于 TiDB 数据库中 ADMIN CLEANUP 的使用概述。
+    - [`ADMIN PAUSE DDL`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin-pause-ddl.md): 关于在 TiDB 数据库中使用 ADMIN PAUSE DDL JOBS 的概述。
+    - [`ADMIN RECOVER INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin-recover.md): 关于在 TiDB 数据库中使用 ADMIN RECOVER INDEX 的概述。
+    - [`ADMIN RESUME DDL`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-admin-resume-ddl.md): 关于 TiDB 数据库中 ADMIN RESUME DDL 的使用概述。
+    - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+    - [`ALTER DATABASE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-database.md): 关于 TiDB 数据库中 ALTER DATABASE 的用法概述。
+    - [`ALTER INSTANCE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-instance.md): 了解 TiDB 中 `ALTER INSTANCE` 的用法概述。
+    - [`ALTER SEQUENCE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-sequence.md): 关于在 TiDB 数据库中使用 ALTER SEQUENCE 的概述。
+    - `ALTER TABLE`
+      - [概述](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-table.md): 关于在 TiDB 数据库中使用 ALTER TABLE 的概述。
+      - [`ADD COLUMN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-add-column.md): TiDB 数据库中 ADD COLUMN 的用法概述。
+      - [`ADD INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-add-index.md): TiDB 数据库中 ADD INDEX 的用法概述。
+      - [`ALTER INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-index.md): 关于 TiDB 数据库中 ALTER INDEX 的用法概述。
+      - [`CHANGE COLUMN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-change-column.md): 关于 TiDB 数据库中 CHANGE COLUMN 的用法概述。
+      - [`COMPACT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-table-compact.md): 关于 TiDB 数据库中使用 ALTER TABLE ... COMPACT 的概述。
+      - [`DROP COLUMN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-column.md): 关于在 TiDB 数据库中使用 DROP COLUMN 的概述。
+      - [`DROP INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-index.md): 关于在 TiDB 数据库中使用 DROP INDEX 的概述。
+      - [`MODIFY COLUMN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-modify-column.md): 关于在 TiDB 数据库中使用 MODIFY COLUMN 的概述。
+      - [`RENAME INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-rename-index.md): 关于在 TiDB 数据库中使用 RENAME INDEX 的概述。
+    - [`ALTER USER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-alter-user.md): TiDB 数据库中 ALTER USER 的用法概述。
+    - [`ANALYZE TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-analyze-table.md): 关于在 TiDB 数据库中使用 ANALYZE 的概述。
+    - [`BATCH`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-batch.md): 关于在 TiDB 数据库中使用 BATCH 的概述。
+    - [`BEGIN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-begin.md): 关于 TiDB 数据库中 BEGIN 的用法概述。
+    - [`CANCEL IMPORT JOB`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-cancel-import-job.md): 关于 TiDB 中 CANCEL IMPORT 的用法概述。
+    - [`COMMIT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-commit.md): 关于 TiDB 数据库中 COMMIT 的用法概述。
+    - [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
+    - [`CREATE DATABASE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-database.md): 关于在 TiDB 中使用 CREATE DATABASE 的概述。
+    - [`CREATE INDEX`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-index.md): TiDB 数据库中 CREATE INDEX 的用法概述。
+    - [`CREATE ROLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-role.md): 关于 TiDB 数据库中 CREATE ROLE 的用法概述。
+    - [`CREATE SEQUENCE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-sequence.md): 关于在 TiDB 数据库中使用 CREATE SEQUENCE 的概述。
+    - [`CREATE TABLE LIKE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-table-like.md): 关于在 TiDB 数据库中使用 CREATE TABLE LIKE 的概述。
+    - [`CREATE TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-table.md): TiDB 数据库中 CREATE TABLE 的用法概述。
+    - [`CREATE USER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-user.md): CREATE USER 在 TiDB 数据库中的用法概述。
+    - [`CREATE VIEW`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-view.md): 关于在 TiDB 数据库中使用 CREATE VIEW 的概述。
+    - [`DEALLOCATE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-deallocate.md): 关于 TiDB 数据库中 DEALLOCATE 的用法概述。
+    - [`DELETE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-delete.md): 关于在 TiDB 数据库中使用 DELETE 的概述。
+    - [`DESC`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-desc.md): 关于在 TiDB 数据库中使用 `DESC` 的概述。
+    - [`DESCRIBE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-describe.md): 关于在 TiDB 数据库中使用 DESCRIBE 的概述。
+    - [`DO`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-do.md): 关于在 TiDB 数据库中使用 DO 的概述。
+    - [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
+    - [`DROP DATABASE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-database.md): 关于 TiDB 数据库中 DROP DATABASE 的用法概述。
+    - [`DROP ROLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-role.md): 关于在 TiDB 数据库中使用 DROP ROLE 的概述。
+    - [`DROP SEQUENCE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-sequence.md): 关于在 TiDB 数据库中使用 DROP SEQUENCE 的概述。
+    - [`DROP STATS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-stats.md): 关于 TiDB 数据库中 DROP STATS 的使用概述。
+    - [`DROP TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-table.md): 关于 TiDB 数据库中 DROP TABLE 的用法概述。
+    - [`DROP USER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-user.md): 关于在 TiDB 数据库中使用 DROP USER 的概述。
+    - [`DROP VIEW`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-view.md): 关于 TiDB 数据库中 DROP VIEW 的用法概述。
+    - [`EXECUTE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-execute.md): 关于在 TiDB 数据库中使用 EXECUTE 的概述。
+    - [`EXPLAIN ANALYZE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-explain-analyze.md): 关于在 TiDB 数据库中使用 EXPLAIN ANALYZE 的概述。
+    - [`EXPLAIN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-explain.md): An overview of the usage of EXPLAIN for the TiDB database.
+    - [`FLASHBACK CLUSTER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-flashback-cluster.md): 了解在 TiDB 数据库中使用 FLASHBACK CLUSTER 的方法。
+    - [`FLASHBACK DATABASE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-flashback-database.md): 了解 TiDB 数据库中 FLASHBACK DATABASE 的用法。
+    - [`FLASHBACK TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-flashback-table.md): 学习如何使用 `FLASHBACK TABLE` 语句恢复表。
+    - [`FLUSH PRIVILEGES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-flush-privileges.md): 关于在 TiDB 数据库中使用 FLUSH PRIVILEGES 的概述。
+    - [`FLUSH STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-flush-status.md): 关于 TiDB 数据库中使用 FLUSH STATUS 的概述。
+    - [`FLUSH TABLES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-flush-tables.md): 关于在 TiDB 数据库中使用 FLUSH TABLES 的概述。
+    - [`GRANT <privileges>`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-grant-privileges.md): 关于在 TiDB 数据库中使用 GRANT <privileges> 的概述。
+    - [`GRANT <role>`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-grant-role.md): 关于在 TiDB 数据库中使用 GRANT <role> 的概述。
+    - [`IMPORT INTO`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-import-into.md): TiDB 中 IMPORT INTO 的用法概述。
+    - [`INSERT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-insert.md): TiDB 数据库中 INSERT 的用法概述。
+    - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
+    - [`LOAD DATA`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-load-data.md): TiDB 数据库中 LOAD DATA 的用法概述。
+    - [`LOCK STATS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-lock-stats.md): 关于 TiDB 数据库中 LOCK STATS 使用情况的概述。
+    - [`LOCK TABLES` 和 `UNLOCK TABLES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-lock-tables-and-unlock-tables.md): TiDB 数据库中 LOCK TABLES 和 UNLOCK TABLES 的用法概述。
+    - [`PREPARE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-prepare.md): 关于在 TiDB 数据库中使用 PREPARE 的概述。
+    - [`RECOVER TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-recover-table.md): 关于在 TiDB 数据库中使用 RECOVER TABLE 的概述。
+    - [`RENAME TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-rename-table.md): 关于在 TiDB 数据库中使用 RENAME TABLE 的概述。
+    - [`RENAME USER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-rename-user.md): 关于 TiDB 数据库中 RENAME USER 用法的概述。
+    - [`REPLACE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-replace.md): 关于 TiDB 数据库中 REPLACE 的用法概述。
+    - [`REVOKE <privileges>`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-revoke-privileges.md): 关于 TiDB 数据库中 REVOKE <privileges> 的用法概述。
+    - [`REVOKE <role>`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-revoke-role.md): 关于在 TiDB 数据库中使用 REVOKE <role> 的概述。
+    - [`ROLLBACK`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-rollback.md): 关于在 TiDB 数据库中使用 ROLLBACK 的概述。
+    - [`SAVEPOINT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-savepoint.md): 关于在 TiDB 数据库中使用 SAVEPOINT 的概述。
+    - [`SELECT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-select.md): 关于在 TiDB 数据库中使用 SELECT 的概述。
+    - [`SET DEFAULT ROLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-set-default-role.md): 关于在 TiDB 数据库中使用 SET DEFAULT ROLE 的概述。
+    - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
+    - [`SET PASSWORD`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-set-password.md): 关于在 TiDB 数据库中使用 SET PASSWORD 的概述。
+    - [`SET ROLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-set-role.md): 关于在 TiDB 数据库中使用 SET ROLE 的概述。
+    - [`SET TRANSACTION`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-set-transaction.md): 关于在 TiDB 数据库中使用 SET TRANSACTION 的概述。
+    - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+    - [`SHOW ANALYZE STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-analyze-status.md): 关于 TiDB 数据库中 SHOW ANALYZE STATUS 使用情况的概述。
+    - [`SHOW [GLOBAL|SESSION] BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
+    - [`SHOW BUILTINS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-builtins.md): SHOW BUILTINS 在 TiDB 中的用法。
+    - [`SHOW CHARACTER SET`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-character-set.md): 关于在 TiDB 数据库中使用 SHOW CHARACTER SET 的概述。
+    - [`SHOW COLLATION`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-collation.md): 关于在 TiDB 数据库中使用 SHOW COLLATION 的概述。
+    - [`SHOW COLUMN_STATS_USAGE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-column-stats-usage.md): 关于 TiDB 数据库中 SHOW COLUMN_STATS_USAGE 的使用概述。
+    - [`SHOW COLUMNS FROM`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-columns-from.md): 关于在 TiDB 数据库中使用 SHOW [FULL] COLUMNS FROM 的概述。
+    - [`SHOW CREATE DATABASE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-create-database.md): 关于在 TiDB 数据库中使用 SHOW CREATE DATABASE 的概述。
+    - [`SHOW CREATE SEQUENCE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-create-sequence.md): 关于 TiDB 数据库中使用 SHOW CREATE SEQUENCE 的概述。
+    - [`SHOW CREATE TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-create-table.md): 关于在 TiDB 数据库中使用 SHOW CREATE TABLE 的概述。
+    - [`SHOW CREATE USER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-create-user.md): 关于 TiDB 数据库中 SHOW CREATE USER 的用法概述。
+    - [`SHOW DATABASES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-databases.md): 关于 TiDB 数据库中 SHOW DATABASES 的用法概述。
+    - [`SHOW ENGINES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-engines.md): 关于 TiDB 数据库中使用 SHOW ENGINES 的概述。
+    - [`SHOW ERRORS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-errors.md): 关于 TiDB 数据库中 SHOW ERRORS 的用法概述。
+    - [`SHOW FIELDS FROM`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-fields-from.md): 关于 TiDB 数据库中 SHOW [FULL] FIELDS FROM 的用法概述。
+    - [`SHOW GRANTS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-grants.md): 关于 TiDB 数据库中 SHOW GRANTS 的用法概述。
+    - [`SHOW IMPORT JOB`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-import-job.md): 关于在 TiDB 中使用 SHOW IMPORT 的概述。
+    - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
+    - [`SHOW MASTER STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-master-status.md): 关于在 TiDB 数据库中使用 SHOW MASTER STATUS 的概述。
+    - [`SHOW PRIVILEGES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-privileges.md): 关于在 TiDB 数据库中使用 SHOW PRIVILEGES 的概述。
+    - [`SHOW PROCESSLIST`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-processlist.md): TiDB 数据库中 SHOW [FULL] PROCESSLIST 的用法概述。
+    - [`SHOW PROFILES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-profiles.md): 关于 TiDB 数据库中使用 SHOW PROFILES 的概述。
+    - [`SHOW SCHEMAS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-schemas.md): 对 TiDB 数据库中 SHOW SCHEMAS 的用法进行概述。
+    - [`SHOW STATS_BUCKETS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-buckets.md): TiDB 数据库中 SHOW STATS_BUCKETS 使用情况的概述。
+    - [`SHOW STATS_HEALTHY`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-healthy.md): 关于 TiDB 数据库中 SHOW STATS_HEALTHY 的使用概述。
+    - [`SHOW STATS_HISTOGRAMS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-histograms.md): 关于 TiDB 数据库中 SHOW STATS_HISTOGRAMS 的使用概述。
+    - [`SHOW STATS_LOCKED`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-locked.md): 关于 TiDB 数据库中 SHOW STATS_LOCKED 的使用概述。
+    - [`SHOW STATS_META`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-meta.md): SHOW STATS_META 在 TiDB 数据库中的用法概述。
+    - [`SHOW STATS_TOPN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-topn.md): 关于 TiDB 数据库中 SHOW STATS_TOPN 的用法概述。
+    - [`SHOW STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-status.md): 关于 TiDB 数据库中使用 SHOW [GLOBAL|SESSION] STATUS 的概述。
+    - [`SHOW TABLE NEXT_ROW_ID`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-table-next-rowid.md): 了解 TiDB 中 `SHOW TABLE NEXT_ROW_ID` 的用法。
+    - [`SHOW TABLE STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-table-status.md): 关于 TiDB 数据库中使用 SHOW TABLE STATUS 的概述。
+    - [`SHOW TABLES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-tables.md): 关于 TiDB 数据库中使用 SHOW [FULL] TABLES 的概述。
+    - [`SHOW [GLOBAL|SESSION] VARIABLES`](/sql-statements/sql-statement-show-variables.md)
+    - [`SHOW WARNINGS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-warnings.md): 关于 TiDB 数据库中 SHOW WARNINGS 的用法概述。
+    - [`START TRANSACTION`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-start-transaction.md): 关于在 TiDB 数据库中使用 START TRANSACTION 的概述。
+    - [`TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-table.md): 关于 TiDB 数据库中 TABLE 的用法概述。
+    - [`TRACE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-trace.md): 关于在 TiDB 数据库中使用 TRACE 的概述。
+    - [`TRUNCATE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-truncate.md): 关于在 TiDB 数据库中使用 TRUNCATE 的概述。
+    - [`UNLOCK STATS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-unlock-stats.md): 关于 TiDB 数据库中 UNLOCK STATS 使用情况的概述。
+    - [`UPDATE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-update.md): TiDB 数据库中 UPDATE 的用法概述。
+    - [`USE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-use.md): 关于在 TiDB 中使用 USE 的概述。
+    - [`WITH`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-with.md): 关于在 TiDB 数据库中使用 WITH (Common Table Expression) 的概述。
+  - 数据类型
+    - [数据类型概述](https://docs.pingcap.com/zh/tidbcloud/data-type-overview.md): 了解 TiDB 支持的数据类型。
+    - [数据类型默认值](https://docs.pingcap.com/zh/tidbcloud/data-type-default-values.md): 了解 TiDB 中数据类型的默认值。
+    - [数值类型](https://docs.pingcap.com/zh/tidbcloud/data-type-numeric.md): 了解 TiDB 支持的数值数据类型。
+    - [日期和时间类型](https://docs.pingcap.com/zh/tidbcloud/data-type-date-and-time.md): 了解支持的日期和时间类型。
+    - [字符串类型](https://docs.pingcap.com/zh/tidbcloud/data-type-string.md): 了解 TiDB 支持的字符串类型。
+    - [JSON 类型](https://docs.pingcap.com/zh/tidbcloud/data-type-json.md): 了解 TiDB 中的 JSON 数据类型。
+  - 函数与操作符
+    - [函数与操作符概述](https://docs.pingcap.com/zh/tidbcloud/functions-and-operators-overview.md): Learn how to use the functions and operators.
+    - [表达式求值的类型转换](https://docs.pingcap.com/zh/tidbcloud/type-conversion-in-expression-evaluation.md): 了解表达式求值中的类型转换。
+    - [操作符](https://docs.pingcap.com/zh/tidbcloud/operators.md): 了解运算符的优先级、比较函数和运算符、逻辑运算符以及赋值运算符。
+    - [控制流程函数](https://docs.pingcap.com/zh/tidbcloud/control-flow-functions.md): 了解控制流函数。
+    - [字符串函数](https://docs.pingcap.com/zh/tidbcloud/string-functions.md): 了解 TiDB 中的字符串函数。
+    - [数值函数与操作符](https://docs.pingcap.com/zh/tidbcloud/numeric-functions-and-operators.md): 了解数值函数与运算符。
+    - [日期和时间函数](https://docs.pingcap.com/zh/tidbcloud/date-and-time-functions.md): 学习如何使用日期和时间函数。
+    - [位函数和操作符](https://docs.pingcap.com/zh/tidbcloud/bit-functions-and-operators.md): Learn about the bit functions and operators.
+    - [Cast 函数和操作符](https://docs.pingcap.com/zh/tidbcloud/cast-functions-and-operators.md): 了解转换函数和操作符。
+    - [加密和压缩函数](https://docs.pingcap.com/zh/tidbcloud/encryption-and-compression-functions.md): 了解加密与压缩函数。
+    - [锁函数](https://docs.pingcap.com/zh/tidbcloud/locking-functions.md): 了解 TiDB 中的用户级锁定函数。
+    - [信息函数](https://docs.pingcap.com/zh/tidbcloud/information-functions.md): 了解信息函数。
+    - JSON 函数
+      - [概览](https://docs.pingcap.com/zh/tidbcloud/json-functions.md): 了解 JSON 函数。
+      - [创建 JSON 的函数](https://docs.pingcap.com/zh/tidbcloud/json-functions-create.md): 了解用于创建 JSON 值的 JSON 函数。
+      - [搜索 JSON 的函数](https://docs.pingcap.com/zh/tidbcloud/json-functions-search.md): Learn about JSON functions that search JSON values.
+      - [修改 JSON 的函数](https://docs.pingcap.com/zh/tidbcloud/json-functions-modify.md): 了解用于修改 JSON 值的 JSON 函数。
+      - [返回 JSON 的函数](https://docs.pingcap.com/zh/tidbcloud/json-functions-return.md): 了解返回 JSON 值的 JSON 函数。
+      - [JSON 效用函数](https://docs.pingcap.com/zh/tidbcloud/json-functions-utility.md): Learn about JSON utility functions.
+      - [聚合 JSON 的函数](https://docs.pingcap.com/zh/tidbcloud/json-functions-aggregate.md): 了解用于聚合 JSON 值的 JSON 函数。
+    - [GROUP BY 聚合函数](https://docs.pingcap.com/zh/tidbcloud/aggregate-group-by-functions.md): 了解 TiDB 支持的聚合函数。
+    - [GROUP BY 修饰符](https://docs.pingcap.com/zh/tidbcloud/group-by-modifier.md): 学习如何使用 TiDB 的 GROUP BY 修饰符。
+    - [窗口函数](https://docs.pingcap.com/zh/tidbcloud/window-functions.md): 本文档介绍了 TiDB 支持的窗口函数。
+    - [其它函数](https://docs.pingcap.com/zh/tidbcloud/miscellaneous-functions.md): 了解 TiDB 中的杂项函数。
+    - [精度数学](https://docs.pingcap.com/zh/tidbcloud/precision-math.md): 了解 TiDB 中的精确数学支持。
+    - [集合运算](https://docs.pingcap.com/zh/tidbcloud/set-operators.md): 了解 TiDB 支持的集合操作。
+    - [序列函数](https://docs.pingcap.com/zh/tidbcloud/sequence-functions.md): 本文档介绍了 TiDB 支持的序列函数。
+    - [下推到 TiKV 的表达式列表](https://docs.pingcap.com/zh/tidbcloud/expressions-pushed-down.md): 学习可以下推到 TiKV 的表达式列表及相关操作。
+    - [TiDB 特有的函数](https://docs.pingcap.com/zh/tidbcloud/tidb-functions.md): 了解 TiDB 专有函数的用法。
+  - [聚簇索引](https://docs.pingcap.com/zh/tidbcloud/clustered-indexes.md): 了解聚簇索引的概念、用户场景、用法、限制和兼容性。
+  - [全局索引](https://docs.pingcap.com/zh/tidbcloud/global-indexes.md): 了解 TiDB 全局索引的使用场景、优势、用法、工作原理和限制。
+  - [约束](https://docs.pingcap.com/zh/tidbcloud/constraints.md): 了解 SQL Constraints 在 TiDB 中的应用。
+  - [生成列](https://docs.pingcap.com/zh/tidbcloud/generated-columns.md): 学习如何使用 generated columns。
+  - [SQL 模式](https://docs.pingcap.com/zh/tidbcloud/sql-mode.md)
+  - [表属性](https://docs.pingcap.com/zh/tidbcloud/table-attributes.md): 了解如何使用 TiDB 的 table attribute 功能。
+  - 事务
+    - [事务概览](https://docs.pingcap.com/zh/tidbcloud/transaction-overview.md): 了解 TiDB 中的事务。
+    - [隔离级别](https://docs.pingcap.com/zh/tidbcloud/transaction-isolation-levels.md): 了解 TiDB 中的事务隔离级别。
+    - [乐观事务](https://docs.pingcap.com/zh/tidbcloud/optimistic-transaction.md): 了解 TiDB 中的乐观事务模型。
+    - [悲观事务](https://docs.pingcap.com/zh/tidbcloud/pessimistic-transaction.md): 了解 TiDB 中的悲观事务模式。
+    - [非事务 DML 语句](https://docs.pingcap.com/zh/tidbcloud/non-transactional-dml.md): 了解 TiDB 中的非事务性 DML 语句。在牺牲原子性和隔离性的情况下，将一个 DML 语句拆分成多个语句依次执行，从而提升批量数据处理场景中的稳定性和易用性。
+  - [视图](https://docs.pingcap.com/zh/tidbcloud/views.md): 学习如何在 TiDB 中使用视图。
+  - [分区表](https://docs.pingcap.com/zh/tidbcloud/partitioned-table.md): 了解如何在 TiDB 中使用分区。
+  - [临时表](https://docs.pingcap.com/zh/tidbcloud/temporary-tables.md): 了解 TiDB 中的临时表功能，学习如何使用临时表存储应用的中间数据，有助于减少表管理开销并提升性能。
+  - [缓存表](https://docs.pingcap.com/zh/tidbcloud/cached-tables.md): 了解 TiDB 中的 cached table 功能，该功能用于很少更新的小型热点表，以提升读取性能。
+  - [外键约束](https://docs.pingcap.com/zh/tidbcloud/foreign-key.md): 关于 TiDB 数据库中 FOREIGN KEY 约束的使用概述。
+  - 字符集和排序规则
+    - [概述](https://docs.pingcap.com/zh/tidbcloud/character-set-and-collation.md): 了解 TiDB 支持的字符集和排序规则。
+    - [GBK](https://docs.pingcap.com/zh/tidbcloud/character-set-gbk.md): 本文档介绍了 TiDB 对 GBK 字符集的支持详情。
+  - 读取历史数据
+    - 使用 Stale Read 功能读取历史数据（推荐）
+      - [Stale Read 使用场景介绍](https://docs.pingcap.com/zh/tidbcloud/stale-read.md): 了解 Stale Read 及其使用场景。
+      - [使用 `AS OF TIMESTAMP` 语法读取历史数据](https://docs.pingcap.com/zh/tidbcloud/as-of-timestamp.md): 学习如何使用 `AS OF TIMESTAMP` 语句子句读取历史数据。
+      - [使用系统变量 `tidb_read_staleness` 读取历史数据](https://docs.pingcap.com/zh/tidbcloud/tidb-read-staleness.md): 了解如何通过 `tidb_read_staleness` 系统变量读取历史数据。
+      - [使用系统变量 `tidb_external_ts` 读取历史数据](https://docs.pingcap.com/zh/tidbcloud/tidb-external-ts.md): 了解如何使用 `tidb_external_ts` 变量读取历史数据。
+    - [使用系统变量 `tidb_snapshot` 读取历史数据](https://docs.pingcap.com/zh/tidbcloud/read-historical-data.md): 了解 TiDB 如何使用系统变量 `tidb_snapshot` 从历史版本中读取数据。
+  - 系统表
+    - `mysql` Schema
+      - [概述](https://docs.pingcap.com/zh/tidbcloud/mysql-schema.md): 了解 TiDB 系统表。
+      - [`user`](https://docs.pingcap.com/zh/tidbcloud/mysql-schema-user.md): 了解 `mysql` 模式中的 `user` 表。
+    - INFORMATION_SCHEMA
+      - [概述](https://docs.pingcap.com/zh/tidbcloud/information-schema.md): TiDB 实现了 ANSI 标准的 information_schema，用于查看系统元数据。
+      - [`ANALYZE_STATUS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-analyze-status.md): 了解 `ANALYZE_STATUS` information_schema 表。
+      - [`CHECK_CONSTRAINTS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-check-constraints.md): 了解 `CHECK_CONSTRAINTS` INFORMATION_SCHEMA 表。
+      - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](https://docs.pingcap.com/zh/tidbcloud/client-errors-summary-by-host.md): 了解 `CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA 表。
+      - [`CLIENT_ERRORS_SUMMARY_BY_USER`](https://docs.pingcap.com/zh/tidbcloud/client-errors-summary-by-user.md): 了解 `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA 表。
+      - [`CLIENT_ERRORS_SUMMARY_GLOBAL`](https://docs.pingcap.com/zh/tidbcloud/client-errors-summary-global.md): 了解关于 `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA 表的信息。
+      - [`CHARACTER_SETS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-character-sets.md): 了解 `CHARACTER_SETS` INFORMATION_SCHEMA 表。
+      - [`COLLATIONS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-collations.md): 了解 `COLLATIONS` information_schema 表。
+      - [`COLLATION_CHARACTER_SET_APPLICABILITY`](https://docs.pingcap.com/zh/tidbcloud/information-schema-collation-character-set-applicability.md): 了解 `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA 表。
+      - [`COLUMNS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-columns.md): 了解 `COLUMNS` INFORMATION_SCHEMA 表。
+      - [`DATA_LOCK_WAITS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-data-lock-waits.md): 了解 `DATA_LOCK_WAITS` information_schema 表。
+      - [`DDL_JOBS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-ddl-jobs.md): 了解 `DDL_JOBS` information_schema 表。
+      - [`DEADLOCKS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-deadlocks.md): 了解 `DEADLOCKS` INFORMATION_SCHEMA 表。
+      - [`ENGINES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-engines.md): 了解 `ENGINES` information_schema 表。
+      - [`KEYWORDS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-keywords.md): 了解 `KEYWORDS` INFORMATION_SCHEMA 表。
+      - [`KEY_COLUMN_USAGE`](https://docs.pingcap.com/zh/tidbcloud/information-schema-key-column-usage.md): 了解 `KEY_COLUMN_USAGE` information_schema 表。
+      - [`MEMORY_USAGE`](https://docs.pingcap.com/zh/tidbcloud/information-schema-memory-usage.md): 了解 `MEMORY_USAGE` information_schema 系统表。
+      - [`MEMORY_USAGE_OPS_HISTORY`](https://docs.pingcap.com/zh/tidbcloud/information-schema-memory-usage-ops-history.md): 了解 `MEMORY_USAGE_OPS_HISTORY` information_schema 系统表。
+      - [`PARTITIONS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-partitions.md): 了解 `PARTITIONS` INFORMATION_SCHEMA 表。
+      - [`PROCESSLIST`](https://docs.pingcap.com/zh/tidbcloud/information-schema-processlist.md): 了解 `PROCESSLIST` information_schema 表。
+      - [`REFERENTIAL_CONSTRAINTS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-referential-constraints.md): 了解 `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA 表。
+      - [`SCHEMATA`](https://docs.pingcap.com/zh/tidbcloud/information-schema-schemata.md): 了解 `SCHEMATA` information_schema 表。
+      - [`SEQUENCES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-sequences.md): 了解 `SEQUENCES` INFORMATION_SCHEMA 表。
+      - [`SESSION_VARIABLES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-session-variables.md): 了解 `SESSION_VARIABLES` INFORMATION_SCHEMA 表。
+      - [`STATISTICS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-statistics.md): 了解 `STATISTICS` information_schema 表。
+      - [`TABLES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tables.md): 了解 `TABLES` information_schema 表。
+      - [`TABLE_CONSTRAINTS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-table-constraints.md): 了解 `TABLE_CONSTRAINTS` information_schema 表。
+      - [`TABLE_STORAGE_STATS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-table-storage-stats.md): 了解 `TABLE_STORAGE_STATS` INFORMATION_SCHEMA 表。
+      - [`TIDB_CHECK_CONSTRAINTS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tidb-check-constraints.md): 了解 `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA 表。
+      - [`TIDB_INDEXES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tidb-indexes.md): 了解 `TIDB_INDEXES` information_schema 表。
+      - [`TIDB_INDEX_USAGE`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tidb-index-usage.md): 了解 `TIDB_INDEX_USAGE` INFORMATION_SCHEMA 表。
+      - [`TIDB_TRX`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tidb-trx.md): 了解 `TIDB_TRX` INFORMATION_SCHEMA 表。
+      - [`TIFLASH_REPLICA`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tiflash-replica.md): 了解 `TIFLASH_REPLICA` INFORMATION_SCHEMA 表。
+      - [`TIFLASH_SEGMENTS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tiflash-segments.md): 了解 `TIFLASH_SEGMENTS` information_schema 表。
+      - [`TIFLASH_TABLES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-tiflash-tables.md): 了解 `TIFLASH_TABLES` information_schema 表。
+      - [`USER_ATTRIBUTES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-user-attributes.md): 了解 `USER_ATTRIBUTES` INFORMATION_SCHEMA 表。
+      - [`USER_PRIVILEGES`](https://docs.pingcap.com/zh/tidbcloud/information-schema-user-privileges.md): 了解 `USER_PRIVILEGES` information_schema 表。
+      - [`VARIABLES_INFO`](https://docs.pingcap.com/zh/tidbcloud/information-schema-variables-info.md): 了解 `VARIABLES_INFO` information_schema 表。
+      - [`VIEWS`](https://docs.pingcap.com/zh/tidbcloud/information-schema-views.md): 了解 `VIEWS` INFORMATION_SCHEMA 表。
+    - PERFORMANCE_SCHEMA
+      - [概述](https://docs.pingcap.com/zh/tidbcloud/performance-schema.md): TiDB 实现了 performance_schema 用于查看系统元数据。
+      - [`SESSION_CONNECT_ATTRS`](https://docs.pingcap.com/zh/tidbcloud/performance-schema-session-connect-attrs.md): 了解 `SESSION_CONNECT_ATTRS` performance_schema 表。
+    - SYS
+      - [概述](https://docs.pingcap.com/zh/tidbcloud/sys-schema.md): 了解 `sys` schema 中的系统表。
+      - [`schema_unused_indexes`](https://docs.pingcap.com/zh/tidbcloud/sys-schema-unused-indexes.md): 了解 `schema_unused_indexes` 表在 `sys` 模式中的作用。
+  - [元数据锁](https://docs.pingcap.com/zh/tidbcloud/metadata-lock.md): 介绍 TiDB 中元信息锁的概念、原理及实现细节。
+  - [使用 UUID](https://docs.pingcap.com/zh/tidbcloud/uuid.md): UUIDs（通用唯一标识符）在作为主键时，具有减少网络请求次数、支持大部分编程语言和数据库、以及防止枚举攻击等优点。建议将 UUID 以二进制格式存储在 `BINARY(16)` 列中。同时，建议避免在 TiDB 中设置 `swap_flag` 以防热点。UUIDs 也兼容 MySQL。
+  - [TiDB 加速建表](https://docs.pingcap.com/zh/tidbcloud/accelerated-table-creation.md): 了解 TiDB 中创建表的性能优化的概念、原理和实现细节。
+- API 参考 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](https://docs.pingcap.com/zh/tidbcloud/api-overview.md): 了解什么是 TiDB Cloud API、其功能，以及如何使用 API 管理你的 TiDB Cloud 集群。
+  - v1beta1
+    - [计费](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+    - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
+    - [MSP (已弃用)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+  - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
+- CLI 参考 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](https://docs.pingcap.com/zh/tidbcloud/cli-reference.md): 提供 TiDB Cloud CLI 的概览。
+  - auth
+    - [login](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-login.md): `ticloud auth login` 命令的参考。
+    - [logout](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-logout.md): `ticloud auth logout` 命令的参考。
+    - [whoami](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-whoami.md): `ticloud auth whoami` 命令的参考文档。
+  - serverless
+    - [capacity](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-capacity.md): `ticloud serverless capacity` 的参考文档。
+    - [create](https://docs.pingcap.com/zh/tidbcloud/ticloud-cluster-create.md): `ticloud serverless create` 的参考文档。
+    - [delete](https://docs.pingcap.com/zh/tidbcloud/ticloud-cluster-delete.md): `ticloud serverless delete` 的参考文档。
+    - [describe](https://docs.pingcap.com/zh/tidbcloud/ticloud-cluster-describe.md): The reference of `ticloud serverless describe`.
+    - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-cluster-list.md): `ticloud serverless list` 的参考文档。
+    - [update](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-update.md): `ticloud serverless update` 的参考文档。
+    - [spending-limit](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-spending-limit.md): `ticloud serverless spending-limit` 的参考文档。
+    - [region](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-region.md): `ticloud serverless region` 的参考文档。
+    - [shell](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-shell.md): `ticloud serverless shell` 的参考文档。
+    - branch
+      - [create](https://docs.pingcap.com/zh/tidbcloud/ticloud-branch-create.md): `ticloud serverless branch create` 的参考文档。
+      - [delete](https://docs.pingcap.com/zh/tidbcloud/ticloud-branch-delete.md): `ticloud serverless branch delete` 的参考文档。
+      - [describe](https://docs.pingcap.com/zh/tidbcloud/ticloud-branch-describe.md): `ticloud serverless branch describe` 的参考文档。
+      - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-branch-list.md): `ticloud serverless branch list` 的参考文档。
+      - [shell](https://docs.pingcap.com/zh/tidbcloud/ticloud-branch-shell.md): `ticloud serverless branch shell` 的参考文档。
+    - import
+      - [cancel](https://docs.pingcap.com/zh/tidbcloud/ticloud-import-cancel.md): `ticloud serverless import cancel` 命令的参考。
+      - [describe](https://docs.pingcap.com/zh/tidbcloud/ticloud-import-describe.md): `ticloud serverless import describe` 命令的参考。
+      - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-import-list.md): `ticloud serverless import list` 命令的参考文档。
+      - [start](https://docs.pingcap.com/zh/tidbcloud/ticloud-import-start.md): `ticloud serverless import start` 命令的参考。
+    - export
+      - [create](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-export-create.md): The reference of `ticloud serverless export create`.
+      - [describe](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-export-describe.md): `ticloud serverless export describe` 的参考文档。
+      - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-export-list.md): `ticloud serverless export list` 的参考文档。
+      - [cancel](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-export-cancel.md): `ticloud serverless export cancel` 命令的参考文档。
+      - [download](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-export-download.md): `ticloud serverless export download` 的参考文档。
+    - sql-user
+      - [create](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-sql-user-create.md): `ticloud serverless sql-user create` 的参考文档。
+      - [delete](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-sql-user-delete.md): `ticloud serverless sql-user delete` 的参考文档。
+      - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-sql-user-list.md): `ticloud serverless sql-user list` 的参考文档。
+      - [update](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-sql-user-update.md): `ticloud serverless sql-user update` 的参考文档。
+    - authorized-network
+      - [create](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-authorized-network-create.md): `ticloud serverless authorized-network create` 命令的参考。
+      - [delete](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-authorized-network-delete.md): `ticloud serverless authorized-network delete` 命令的参考。
+      - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-authorized-network-list.md): `ticloud serverless authorized-network list` 命令的参考文档。
+      - [update](https://docs.pingcap.com/zh/tidbcloud/ticloud-serverless-authorized-network-update.md): `ticloud serverless authorized-network update` 命令的参考。
+  - [completion](https://docs.pingcap.com/zh/tidbcloud/ticloud-completion.md): `ticloud completion` 命令的参考。
+  - config
+    - [create](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-create.md): `ticloud config create` 命令的参考。
+    - [delete](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-delete.md): `ticloud config delete` 命令的参考。
+    - [describe](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-describe.md): `ticloud config describe` 命令的参考。
+    - [edit](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-edit.md): `ticloud config edit` 命令的参考。
+    - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-list.md): `ticloud config list` 命令的参考。
+    - [set](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-set.md): `ticloud config set` 命令的参考。
+    - [use](https://docs.pingcap.com/zh/tidbcloud/ticloud-config-use.md): `ticloud config use` 命令的参考文档。
+  - project
+    - [list](https://docs.pingcap.com/zh/tidbcloud/ticloud-project-list.md): `ticloud project list` 命令的参考。
+  - [upgrade](https://docs.pingcap.com/zh/tidbcloud/ticloud-upgrade.md): `ticloud upgrade` 命令的参考。
+  - [help](https://docs.pingcap.com/zh/tidbcloud/ticloud-help.md): `ticloud help` 命令的参考。
+- 通用参考
+  - TiDB 集群架构
+    - [概述](https://docs.pingcap.com/zh/tidbcloud/tidb-architecture.md): TiDB 平台的关键架构组件
+    - [存储](https://docs.pingcap.com/zh/tidbcloud/tidb-storage.md): 了解 TiDB 数据库的存储层。
+    - [计算](https://docs.pingcap.com/zh/tidbcloud/tidb-computing.md): 了解 TiDB 数据库的计算层。
+    - [调度](https://docs.pingcap.com/zh/tidbcloud/tidb-scheduling.md): 介绍 TiDB 集群中的 PD 调度组件。
+    - [TSO](https://docs.pingcap.com/zh/tidbcloud/tso.md): 了解 TiDB 中的 TimeStamp Oracle (TSO)。
+  - 存储引擎
+    - TiKV
+      - [TiKV 简介](https://docs.pingcap.com/zh/tidbcloud/tikv-overview.md): TiKV 存储引擎的概述。
+      - [RocksDB 简介](https://docs.pingcap.com/zh/tidbcloud/rocksdb-overview.md): 了解 RocksDB 的基本概念和工作原理。
+    - TiFlash
+      - [TiFlash 简介](https://docs.pingcap.com/zh/tidbcloud/tiflash-overview.md): 了解 TiFlash 的架构和关键特性。
+      - [TiFlash 数据落盘](https://docs.pingcap.com/zh/tidbcloud/tiflash-spill-disk.md): 了解 TiFlash 如何将数据溢写到磁盘以及如何自定义溢写行为。
+  - TiDB Cloud 合作伙伴 Web 控制台
+    - [TiDB Cloud 合作伙伴](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-partners.md): 了解作为经销商和托管服务提供商（MSP）如何使用 TiDB Cloud 合作伙伴控制台。
+    - [MSP 客户](https://docs.pingcap.com/zh/tidbcloud/managed-service-provider-customer.md): 了解如何成为托管服务提供商 (MSP) 客户。
+    - [经销商的客户](https://docs.pingcap.com/zh/tidbcloud/cppo-customer.md): 了解如何成为代理商的客户。
+  - [TiDB Cloud Starter 和 Essential 的使用限制](https://docs.pingcap.com/zh/tidbcloud/serverless-limitations.md): 了解 TiDB Cloud Starter 的限制。
+  - [TiDB Cloud 上的 SQL 功能限制](https://docs.pingcap.com/zh/tidbcloud/limited-sql-features.md): 了解 TiDB Cloud 上受限的 SQL 功能。
+  - [TiDB 限制](https://docs.pingcap.com/zh/tidbcloud/tidb-limitations.md): 了解 TiDB 的使用限制。
+  - [系统变量](https://docs.pingcap.com/zh/tidbcloud/system-variables.md): 使用系统变量来优化性能或改变运行行为。
+  - [服务器状态变量](https://docs.pingcap.com/zh/tidbcloud/status-variables.md): 使用状态变量查看系统和会话状态
+  - [表库过滤](https://docs.pingcap.com/zh/tidbcloud/table-filter.md): TiDB 工具中表过滤器功能的使用方法。
+  - [外部存储服务的 URI 格式](https://docs.pingcap.com/zh/tidbcloud/external-storage-uri.md): 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
+  - [DDL 最佳实践](https://docs.pingcap.com/zh/tidbcloud/ddl-introduction.md): 了解 TiDB 中 DDL 语句的实现方式、在线变更流程以及最佳实践。
+  - [数据索引不一致报错](https://docs.pingcap.com/zh/tidbcloud/troubleshoot-data-inconsistency-errors.md): 了解如何处理由数据与索引一致性检查报告的错误。
+  - [通知](https://docs.pingcap.com/zh/tidbcloud/notifications.md): 了解 TiDB Cloud 控制台中的通知，包括通知类型、用途以及如何查看通知。
+- 支持计划
+  - [Connected Care 概述](https://docs.pingcap.com/zh/tidbcloud/connected-care-overview.md): 介绍新一代 TiDB Cloud 支持服务 - Connected Care。
+  - [Connected Care 详情](https://docs.pingcap.com/zh/tidbcloud/connected-care-detail.md): 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
+  - Connected Care 支持服务
+    - [Connected：IM 中的 AI 聊天](https://docs.pingcap.com/zh/tidbcloud/connected-ai-chat-in-im.md): 介绍即时通讯（IM）中 AI 聊天的详细信息。
+    - Connected：通过 IM 创建工单并订阅更新
+      - [通过 Slack 创建工单并订阅工单更新](https://docs.pingcap.com/zh/tidbcloud/connected-slack-ticket-creation.md): 介绍在 Slack 中创建工单和订阅工单更新的详细信息。
+      - [通过 Lark 创建工单并订阅工单更新](https://docs.pingcap.com/zh/tidbcloud/connected-lark-ticket-creation.md): 介绍 Lark 工单创建和更新订阅的详细信息。
+    - Connected：通过 IM 与工单交互
+      - [通过 Slack 与工单交互](https://docs.pingcap.com/zh/tidbcloud/connected-slack-ticket-interaction.md): 介绍 Slack 支持工单交互的详细信息。
+      - [通过 Lark 与工单交互](https://docs.pingcap.com/zh/tidbcloud/connected-lark-ticket-interaction.md): 介绍支持工单的飞书互动详细信息
+  - [获取支持](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-support.md): 了解如何联系 TiDB Cloud 的支持团队。
+- 常见问题
+  - [TiDB Cloud 常见问题](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-faq.md): 了解与 TiDB Cloud 相关的最常见问题（FAQs）。
+  - [TiDB Cloud Starter 常见问题](https://docs.pingcap.com/zh/tidbcloud/serverless-faqs.md): 了解与 TiDB Cloud Starter 相关的最常见问题（FAQ）。
+- [术语表](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-glossary.md): 了解 TiDB Cloud 中使用的术语。
+
+## 发布
+
+- Release Notes
+  - [2025](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-release-notes.md): 了解 2025 年 TiDB Cloud 的发布说明。

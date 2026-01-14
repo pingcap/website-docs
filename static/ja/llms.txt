@@ -1,0 +1,44 @@
+# TiDB ドキュメント
+
+> TiDB は、ハイブリッドトランザクション/分析処理 (HTAP) 向けに設計されたオープンソースの分散型 SQL データベースです。このドキュメントでは、セルフマネージドデプロイメントと TiDB Cloud マネージドサービスの両方について説明します。
+
+TiDB は複数のデプロイオプションで利用できます。
+
+- **TiDB Cloud**: Dedicated、Essential、Starter プランを備えたフルマネージドデータベースサービス。
+- **TiDB Self-Managed**: 独自のインフラストラクチャで TiDB をデプロイおよび運用します。
+- **TiDB on Kubernetes**: TiDB Operator を使用して TiDB をデプロイおよび管理します。
+
+## TiDB Cloud
+
+TiDB Cloud は、TiDB の優れた機能をすべてクラウドにもたらすフルマネージドの Database-as-a-Service (DBaaS) であり、データベースの複雑さではなくアプリケーションに集中できます。
+
+### TiDB Cloud Dedicated
+
+- [TiDB Cloud Dedicated ドキュメント](https://docs.pingcap.com/ja/tidbcloud/llms.txt): 専用リソース、高度なセキュリティ、コンプライアンス機能を備えたエンタープライズグレードのマネージド TiDB。
+
+### TiDB Cloud Essential
+
+- [TiDB Cloud Essential ドキュメント](https://docs.pingcap.com/ja/tidbcloud/essential/llms.txt): 成長するアプリケーション向けの費用対効果の高いマネージド TiDB で、パフォーマンスと手頃な価格のバランスが取れています。
+
+### TiDB Cloud Starter
+
+- [TiDB Cloud Starter ドキュメント](https://docs.pingcap.com/ja/tidbcloud/starter/llms.txt): 開発、テスト、小規模なワークロード向けのサーバーレスで従量課金制の TiDB Cloud オファリング。
+
+## TiDB Self-Managed
+
+- [TiDB Self-Managed ドキュメント](https://docs.pingcap.com/ja/tidb/llms.txt): セルフマネージドインフラストラクチャで TiDB クラスターをデプロイ、構成、運用するためのドキュメント。
+
+## TiDB on Kubernetes
+
+- [TiDB on Kubernetes ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/llms.txt): TiDB Operator を使用して Kubernetes で TiDB を実行するためのドキュメント。
+
+## その他のリソース
+
+- [ドキュメントホーム](https://docs.pingcap.com): TiDB Cloud Serverless、TiDB Cloud Dedicated、TiDB Self-Managed を使用し、データを移行し、データベース上にアプリケーションを構築するために必要なハウツーガイドとリファレンスを探索します。
+- [ラーニングセンター](https://www.pingcap.com/education/): よく設計されたオンラインコースとインストラクター主導のトレーニングを通じて、TiDB Cloud と TiDB Self-Managed を学習します。
+- [ブログ](https://www.pingcap.com/blog/): TiDB Cloud と TiDB Self-Managed に関する素晴らしい記事を読みます。
+- [イベント](https://www.pingcap.com/event/): PingCAP とコミュニティが主催するイベントについて学びます。
+- [eBook とホワイトペーパー](https://www.pingcap.com/ebook-whitepaper/): eBook とホワイトペーパーをダウンロードします。
+- [ビデオ](https://www.pingcap.com/videos/): TiDB とさまざまなユースケースを説明する短いビデオのコンピレーションを視聴します。
+- [OSS Insight](https://ossinsight.io/): TiDB Cloud を搭載した、あらゆる GitHub リポジトリの詳細な分析を提供する強力なインサイトツール。
+- [Playground](https://play.tidbcloud.com/): 登録なしで TiDB の機能を体験できます。
