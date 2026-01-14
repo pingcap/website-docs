@@ -22,6 +22,7 @@ import { ErrorOutlineOutlined } from "@mui/icons-material";
 import { getHeaderHeight, HEADER_HEIGHT } from "shared/headerHeight";
 
 import { NavItemConfig } from "./HeaderNavConfigType";
+import { Typography } from "@mui/material";
 
 interface HeaderProps {
   bannerEnabled?: boolean;
@@ -197,18 +198,28 @@ const HeaderBanner = (props: HeaderProps) => {
 
   return props.bannerEnabled ? (
     <Banner
-      logo={"📣"}
+      logo={
+        <ErrorOutlineOutlined sx={{ fontSize: "1rem", color: "#F2AA18" }} />
+      }
+      bgColor="#FEFBF3"
+      textColor="#AE6D0C"
       textList={[
-        <BlueAnchorLink
-          to="https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/"
+        "This site is for internal preview only.",
+        <LinkComponent
+          to="https://docs.pingcap.com/"
           target="_blank"
+          sx={{
+            color: "secondary.main",
+            textDecoration: "none",
+            "&:hover": {
+              textDecoration: "underline!important",
+            },
+          }}
         >
-          {t("banner.campaign.title1")}
-        </BlueAnchorLink>,
-        t("banner.campaign.title2"),
-        <BlueAnchorLink to={t("banner.campaign.link")} target="_blank">
-          {t("banner.campaign.end")}
-        </BlueAnchorLink>,
+          <Typography component="span" variant="body2" color="inherit">
+            View the official TiDB documentation ↗
+          </Typography>
+        </LinkComponent>,
       ]}
     />
   ) : null;
