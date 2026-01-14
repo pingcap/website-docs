@@ -17,6 +17,10 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/releases/tidb-cloud",
       targetPattern: "/releases/tidb-cloud",
     },
+    {
+      linkPattern: "/releases/tidb-operator",
+      targetPattern: "/releases/tidb-operator",
+    },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
     // /{namespace}/{...any}/{docname} -> /{namespace}/{docname}
     // Special: tidb-cloud -> tidbcloud

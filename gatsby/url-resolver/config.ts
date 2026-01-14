@@ -35,6 +35,11 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       targetPattern: "/{lang}/releases",
       conditions: { filename: ["_index"] },
     },
+    {
+      sourcePattern: `/{lang}/tidb-in-kubernetes/main/releases/{filename}`,
+      targetPattern: "/{lang}/releases/tidb-operator",
+      conditions: { filename: ["_index"] },
+    },
     // tidbcloud with prefix (dedicated, starter, etc.)
     // When filename = "_index": /en/tidbcloud/tidb-cloud/{prefix}/_index.md -> /en/tidbcloud/{prefix}/
     // When filename != "_index": /en/tidbcloud/tidb-cloud/{prefix}/{filename}.md -> /en/tidbcloud/{filename}/

@@ -76,6 +76,7 @@ const VersionItems = (props: {
         value={`menu-dev`}
         hidden={shouldHideDevMemo}
         disabled={!availIn.includes(`dev`)}
+        selected={pathConfig.version === "dev"}
         component={LinkComponent}
         isI18n
         to={`/${pathConfig.repo}/dev/${name}`}
@@ -112,6 +113,7 @@ const VersionItems = (props: {
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          selected={pathConfig.version === version}
           component={LinkComponent}
           isI18n
           to={`/${pathConfig.repo}/${version}/${name}`}
@@ -150,6 +152,7 @@ const VersionItems = (props: {
               key={`menu-${version}`}
               value={`menu-${version}`}
               disabled={!availIn.includes(version || "")}
+              selected={pathConfig.version === version}
               component={LinkComponent}
               isI18n
               to={`/${pathConfig.repo}/${version}/${name}`}
@@ -220,6 +223,7 @@ const VersionItemsArchived = (props: {
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          selected={pathConfig.version === version}
           component={LinkComponent}
           isI18n
           to={`/${pathConfig.repo}/${version}/${name}`}

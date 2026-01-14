@@ -134,7 +134,7 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
       {
         type: "item",
         label: "TiDB Operator Releases",
-        to: "/releases/tidb-in-kubernetes",
+        to: "/releases/tidb-operator",
         selected: (namespace) =>
           namespace === TOCNamespace.TiDBInKubernetesReleases,
       },
