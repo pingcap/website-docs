@@ -1,0 +1,693 @@
+# TiDB Cloud Essential
+
+> For applications experiencing growing workloads and needing scalability in real time, TiDB Cloud Essential provides the flexibility and performance to keep pace with your business growth.
+
+## GET STARTED
+
+- Why TiDB Cloud
+  - [Introduction](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro.md): Learn about TiDB Cloud and its architecture.
+  - [Features](https://docs.pingcap.com/tidbcloud/features.md): Learn about feature support status for different TiDB Cloud plans.
+  - [MySQL Compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility.md): Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
+- Get Started
+  - [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart.md): Sign up quickly to try TiDB Cloud and create your TiDB cluster.
+  - [Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python.md): Learn how to quickly develop an AI application that performs semantic search using Python and TiDB Vector Search.
+  - [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart.md): Learn how to get started with HTAP in TiDB Cloud.
+  - [Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
+- Key Concepts
+  - [Overview](https://docs.pingcap.com/tidbcloud/key-concepts.md): Learn about the key concepts in TiDB Cloud.
+  - [Architecture](https://docs.pingcap.com/tidbcloud/architecture-concepts.md): Learn about architecture concepts for TiDB Cloud.
+  - [Database Schema](https://docs.pingcap.com/tidbcloud/database-schema-concepts.md): Learn about database schema concepts for TiDB Cloud.
+  - [Transactions](https://docs.pingcap.com/tidbcloud/transaction-concepts.md): Learn about transaction concepts for TiDB Cloud.
+  - [SQL](https://docs.pingcap.com/tidbcloud/sql-concepts.md): Learn about SQL concepts for TiDB.
+  - [AI Features](https://docs.pingcap.com/tidbcloud/ai-feature-concepts.md): Learn about AI features for TiDB Cloud.
+  - [Scalability](https://docs.pingcap.com/tidbcloud/scalability-concepts.md): Learn about scalability concepts for TiDB Cloud.
+  - [High Availability](https://docs.pingcap.com/tidbcloud/serverless-high-availability.md): Learn about the high availability architecture of TiDB Cloud. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
+  - [Monitoring](https://docs.pingcap.com/tidbcloud/monitoring-concepts.md): Learn about monitoring concepts for TiDB Cloud.
+  - [Backup & Restore](https://docs.pingcap.com/tidbcloud/backup-and-restore-concepts.md): Learn about backup & restore concepts for TiDB Cloud.
+  - [Security](https://docs.pingcap.com/tidbcloud/security-concepts.md): Learn about security concepts for TiDB Cloud.
+
+## DEVELOP
+
+- Development Quick Start
+  - [Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview.md): Introduce the overview of the developer guide for TiDB Cloud and TiDB Self-Managed.
+  - [Build a TiDB Cloud Cluster](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud.md): Learn how to build a TiDB Cloud Starter cluster in TiDB Cloud and connect to it.
+  - [CRUD SQL in TiDB](https://docs.pingcap.com/tidbcloud/dev-guide-tidb-crud-sql.md): A brief introduction to TiDB's CRUD SQL.
+- Connect to TiDB Cloud
+  - GUI Database Tools
+    - [JetBrains DataGrip](https://docs.pingcap.com/tidbcloud/dev-guide-gui-datagrip.md): Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+    - [DBeaver](https://docs.pingcap.com/tidbcloud/dev-guide-gui-dbeaver.md): Learn how to connect to TiDB using DBeaver Community.
+    - [VS Code](https://docs.pingcap.com/tidbcloud/dev-guide-gui-vscode-sqltools.md): Learn how to connect to TiDB using Visual Studio Code or GitHub Codespaces.
+    - [MySQL Workbench](https://docs.pingcap.com/tidbcloud/dev-guide-gui-mysql-workbench.md): Learn how to connect to TiDB using MySQL Workbench.
+    - [Navicat](https://docs.pingcap.com/tidbcloud/dev-guide-gui-navicat.md): Learn how to connect to TiDB using Navicat.
+  - [Choose Driver or ORM](https://docs.pingcap.com/tidbcloud/dev-guide-choose-driver-or-orm.md): Learn how to choose a driver or ORM framework to connect to TiDB.
+  - BI
+    - [Looker Studio](https://docs.pingcap.com/tidbcloud/dev-guide-bi-looker-studio.md): Learn how to connect to TiDB Cloud using Looker Studio.
+  - Java
+    - [JDBC](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-java-jdbc.md): Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+    - [MyBatis](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-java-mybatis.md): Learn how to connect to TiDB using MyBatis. This tutorial gives Java sample code snippets that work with TiDB using MyBatis.
+    - [Hibernate](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-java-hibernate.md): Learn how to connect to TiDB using Hibernate. This tutorial gives Java sample code snippets that work with TiDB using Hibernate.
+    - [Spring Boot](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-java-spring-boot.md): Learn how to connect to TiDB using Spring Boot. This tutorial gives Java sample code snippets that work with TiDB using Spring Boot.
+    - [Connection Pools and Connection Parameters](https://docs.pingcap.com/tidbcloud/dev-guide-connection-parameters.md): This document explains how to configure connection pools and parameters for TiDB. It covers connection pool size, probe configuration, and formulas for optimal throughput. It also discusses JDBC API usage and MySQL Connector/J parameter configurations for performance optimization.
+  - Go
+    - [Go-MySQL-Driver](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-golang-sql-driver.md): Learn how to connect to TiDB using Go-MySQL-Driver. This tutorial gives Golang sample code snippets that work with TiDB using Go-MySQL-Driver.
+    - [GORM](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-golang-gorm.md): Learn how to connect to TiDB using GORM. This tutorial gives Golang sample code snippets that work with TiDB using GORM.
+  - Python
+    - [mysqlclient](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-python-mysqlclient.md): Learn how to connect to TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
+    - [MySQL Connector/Python](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-python-mysql-connector.md): Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
+    - [PyMySQL](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-python-pymysql.md): Learn how to connect to TiDB using PyMySQL. This tutorial gives Python sample code snippets that work with TiDB using PyMySQL.
+    - [SQLAlchemy](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-python-sqlalchemy.md): Learn how to connect to TiDB using SQLAlchemy. This tutorial gives Python sample code snippets that work with TiDB using SQLAlchemy.
+    - [peewee](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-python-peewee.md): Learn how to connect to TiDB using peewee. This tutorial gives Python sample code snippets that work with TiDB using peewee.
+    - [Django](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-python-django.md): Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
+  - Node.js
+    - [node-mysql2](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nodejs-mysql2.md): Learn how to connect to TiDB using node-mysql2. This tutorial gives Node.js sample code snippets that work with TiDB using node-mysql2.
+    - [mysql.js](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nodejs-mysqljs.md): Learn how to connect to TiDB using mysql.js. This tutorial gives Node.js sample code snippets that work with TiDB using mysql.js.
+    - [Prisma](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nodejs-prisma.md): Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
+    - [Sequelize](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nodejs-sequelize.md): Learn how to connect to TiDB using Sequelize. This tutorial gives Node.js sample code snippets that work with TiDB using Sequelize.
+    - [TypeORM](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nodejs-typeorm.md): Learn how to connect to TiDB using TypeORM. This tutorial gives Node.js sample code snippets that work with TiDB using TypeORM.
+    - [Next.js](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-nextjs.md): This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
+  - Ruby
+    - [mysql2](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-ruby-mysql2.md): Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Ruby sample code snippets that work with TiDB using mysql2 gem.
+    - [Rails](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-ruby-rails.md): Learn how to connect to TiDB using the Rails framework. This tutorial gives Ruby sample code snippets that work with TiDB using the Rails framework and ActiveRecord ORM.
+  - C#
+    - [C#](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-cs.md): Learn how to connect to TiDB using C#. This tutorial provides sample C# code snippets for interacting with TiDB.
+  - [WordPress](https://docs.pingcap.com/tidbcloud/dev-guide-wordpress.md): Learn how to use TiDB Cloud Starter to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Cloud Starter in a few minutes.
+  - Serverless Driver ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png) <!--TBD, ToDo: Not sure if we need to update the driver name-->
+    - [TiDB Cloud Serverless Driver](https://docs.pingcap.com/tidbcloud/serverless-driver.md): Learn how to connect to TiDB Cloud Starter or TiDB Cloud Essential from serverless and edge environments.
+    - [Node.js Example](https://docs.pingcap.com/tidbcloud/serverless-driver-node-example.md): Learn how to use TiDB Cloud serverless driver in a local Node.js project.
+    - [Prisma Example](https://docs.pingcap.com/tidbcloud/serverless-driver-prisma-example.md): Learn how to use TiDB Cloud serverless driver with Prisma ORM.
+    - [Kysely Example](https://docs.pingcap.com/tidbcloud/serverless-driver-kysely-example.md): Learn how to use TiDB Cloud serverless driver with Kysely.
+    - [Drizzle Example](https://docs.pingcap.com/tidbcloud/serverless-driver-drizzle-example.md): Learn how to use TiDB Cloud serverless driver with Drizzle.
+- Development Reference
+  - Design Database Schema
+    - [Overview](https://docs.pingcap.com/tidbcloud/dev-guide-schema-design-overview.md): Learn the basics on TiDB database schema design.
+    - [Create a Database](https://docs.pingcap.com/tidbcloud/dev-guide-create-database.md): Learn steps, rules, and examples to create a database.
+    - [Create a Table](https://docs.pingcap.com/tidbcloud/dev-guide-create-table.md): Learn the definitions, rules, and guidelines in table creation.
+    - [Create a Secondary Index](https://docs.pingcap.com/tidbcloud/dev-guide-create-secondary-indexes.md): Learn steps, rules, and examples to create a secondary index.
+  - Write Data
+    - [Insert Data](https://docs.pingcap.com/tidbcloud/dev-guide-insert-data.md): Learn about how to insert data.
+    - [Update Data](https://docs.pingcap.com/tidbcloud/dev-guide-update-data.md): Learn about how to update data and batch update data.
+    - [Delete Data](https://docs.pingcap.com/tidbcloud/dev-guide-delete-data.md): Learn about the SQL syntax, best practices, and examples for deleting data.
+    - [Periodically Delete Expired Data Using TTL (Time to Live)](https://docs.pingcap.com/tidbcloud/time-to-live.md): Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. In this document, you can learn how to use TTL to automatically expire and delete old data.
+    - [Prepared Statements](https://docs.pingcap.com/tidbcloud/dev-guide-prepared-statement.md): Learn about how to use the TiDB prepared statements.
+  - Read Data
+    - [Query Data from a Single Table](https://docs.pingcap.com/tidbcloud/dev-guide-get-data-from-single-table.md): This document describes how to query data from a single table in a database.
+    - [Multi-table Join Queries](https://docs.pingcap.com/tidbcloud/dev-guide-join-tables.md): This document describes how to use multi-table join queries.
+    - [Subquery](https://docs.pingcap.com/tidbcloud/dev-guide-use-subqueries.md): Learn how to use subquery in TiDB.
+    - [Paginate Results](https://docs.pingcap.com/tidbcloud/dev-guide-paginate-results.md): Introduce paginate result feature in TiDB.
+    - [Views](https://docs.pingcap.com/tidbcloud/dev-guide-use-views.md): Learn how to use views in TiDB.
+    - [Temporary Tables](https://docs.pingcap.com/tidbcloud/dev-guide-use-temporary-tables.md): Learn how to create, view, query, and delete temporary tables.
+    - [Common Table Expression](https://docs.pingcap.com/tidbcloud/dev-guide-use-common-table-expression.md): Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
+    - Read Replica Data
+      - [Follower Read](https://docs.pingcap.com/tidbcloud/dev-guide-use-follower-read.md): Learn how to use Follower Read to optimize query performance.
+      - [Stale Read](https://docs.pingcap.com/tidbcloud/dev-guide-use-stale-read.md): Learn how to use Stale Read to accelerate queries under certain conditions.
+    - [HTAP Queries](https://docs.pingcap.com/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries.md): Introduce the HTAP queries in TiDB.
+  - Transaction
+    - [Overview](https://docs.pingcap.com/tidbcloud/dev-guide-transaction-overview.md): A brief introduction to transactions in TiDB.
+    - [Optimistic and Pessimistic Transactions](https://docs.pingcap.com/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction.md): Learn about optimistic and pessimistic transactions in TiDB.
+    - [Transaction Restraints](https://docs.pingcap.com/tidbcloud/dev-guide-transaction-restraints.md): Learn about transaction restraints in TiDB.
+    - [Handle Transaction Errors](https://docs.pingcap.com/tidbcloud/dev-guide-transaction-troubleshoot.md): Learn about how to handle transaction errors, such as deadlocks and application retry errors.
+  - Optimize
+    - [Overview](https://docs.pingcap.com/tidbcloud/dev-guide-optimize-sql-overview.md): Provides an overview of SQL performance tuning for TiDB application developers.
+    - [SQL Performance Tuning](https://docs.pingcap.com/tidbcloud/dev-guide-optimize-sql.md): Introduces TiDB's SQL performance tuning scheme and analysis approach.
+    - [Best Practices for Performance Tuning](https://docs.pingcap.com/tidbcloud/dev-guide-optimize-sql-best-practices.md): Introduces the best practices for tuning TiDB performance.
+    - [Best Practices for Indexing](https://docs.pingcap.com/tidbcloud/dev-guide-index-best-practice.md): Learn some best practices for creating and using indexes in TiDB.
+    - Other Optimization Methods
+      - [Avoid Implicit Type Conversions](https://docs.pingcap.com/tidbcloud/dev-guide-implicit-type-conversion.md): Introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
+      - [Unique Serial Number Generation](https://docs.pingcap.com/tidbcloud/dev-guide-unique-serial-number-generation.md): Unique serial number generation solution for developers who generate their own unique IDs.
+  - Troubleshoot
+    - [SQL or Transaction Issues](https://docs.pingcap.com/tidbcloud/dev-guide-troubleshoot-overview.md): Learn how to troubleshoot SQL or transaction issues that might occur during application development.
+    - [Unstable Result Set](https://docs.pingcap.com/tidbcloud/dev-guide-unstable-result-set.md): Learn how to handle the error of an unstable result set.
+    - [Timeouts](https://docs.pingcap.com/tidbcloud/dev-guide-timeouts-in-tidb.md): Learn about timeouts in TiDB, and solutions for troubleshooting errors.
+  - Development Guidelines
+    - [Object Naming Convention](https://docs.pingcap.com/tidbcloud/dev-guide-object-naming-guidelines.md): Learn the object naming convention in TiDB.
+    - [SQL Development Specifications](https://docs.pingcap.com/tidbcloud/dev-guide-sql-development-specification.md): Learn about the SQL development specifications for TiDB.
+  - [Bookshop Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-bookshop-schema-design.md): Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from Amazon S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
+  - Third-Party Support
+    - [Third-Party Tools Supported by TiDB](https://docs.pingcap.com/tidbcloud/dev-guide-third-party-support.md): Learn about third-party tools supported by TiDB.
+    - [Known Incompatibility Issues with Third-Party Tools](https://docs.pingcap.com/tidbcloud/dev-guide-third-party-tools-compatibility.md): Describes TiDB compatibility issues with third-party tools found during testing.
+
+## GUIDES
+
+- Manage Cluster
+  - [Select Your Cluster Plan](https://docs.pingcap.com/tidbcloud/select-cluster-tier.md): Learn how to select your cluster plan on TiDB Cloud.
+  - Manage TiDB Cloud Clusters
+    - [Create a TiDB Cloud Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless.md): Learn how to create a TiDB Cloud Starter or TiDB Cloud Essential cluster.
+    - Connect to Your TiDB Cloud Cluster
+      - [Connection Overview](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential cluster via different methods.
+      - [Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential cluster via public endpoint.
+      - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud cluster via private endpoint.
+      - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
+    - Branch ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+      - [Overview](https://docs.pingcap.com/tidbcloud/branch-overview.md): Learn the concept of TiDB Cloud branches.
+      - [Manage Branches](https://docs.pingcap.com/tidbcloud/branch-manage.md): Learn How to manage TiDB Cloud branches.
+      - [GitHub Integration](https://docs.pingcap.com/tidbcloud/branch-github-integration.md): Learn how to integrate the TiDB Cloud Branching feature with GitHub.
+    - [Back Up and Restore TiDB Cloud Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless.md): Learn how to back up and restore your TiDB Cloud Starter or TiDB Cloud Essential clusters.
+    - [Export Data from TiDB Cloud](https://docs.pingcap.com/tidbcloud/serverless-export.md): Learn how to export data from TiDB Cloud Starter or TiDB Cloud Essential clusters.
+  - Use an HTAP Cluster with TiFlash
+    - [TiFlash Overview](https://docs.pingcap.com/tidbcloud/tiflash-overview.md): Learn the architecture and key features of TiFlash.
+    - [Create TiFlash Replicas](https://docs.pingcap.com/tidbcloud/create-tiflash-replicas.md): Learn how to create TiFlash replicas.
+    - [Read Data from TiFlash](https://docs.pingcap.com/tidbcloud/use-tidb-to-read-tiflash.md): Learn how to use TiDB to read TiFlash replicas.
+    - [Use MPP Mode](https://docs.pingcap.com/tidbcloud/use-tiflash-mpp-mode.md): Learn the MPP mode of TiFlash and how to use it.
+    - [Use FastScan](https://docs.pingcap.com/tidbcloud/use-fastscan.md): Introduces a way to speed up querying in OLAP scenarios by using FastScan.
+    - [Supported Push-down Calculations](https://docs.pingcap.com/tidbcloud/tiflash-supported-pushdown-calculations.md): Learn the push-down calculations supported by TiFlash.
+    - [TiFlash Query Result Materialization](https://docs.pingcap.com/tidbcloud/tiflash-results-materialization.md): Learn how to save the query results of TiFlash in a transaction.
+    - [TiFlash Late Materialization](https://docs.pingcap.com/tidbcloud/tiflash-late-materialization.md): Describe how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
+    - [Compatibility](https://docs.pingcap.com/tidbcloud/tiflash-compatibility.md): Learn the TiDB features that are incompatible with TiFlash.
+    - [Pipeline Execution Model](https://docs.pingcap.com/tidbcloud/tiflash-pipeline-model.md): Learn about the TiFlash Pipeline Execution Model.
+  - Monitor and Alert
+    - [Overview](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster.md): Learn how to monitor your TiDB cluster.
+    - [Built-in Metrics](https://docs.pingcap.com/tidbcloud/built-in-monitoring.md): Learn how to view TiDB Cloud built-in metrics and understand the meanings of these metrics.
+    - [Cluster Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud clusters using the Events page.
+  - Tune Performance
+    - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
+    - [Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance.md): Learn how to analyze and tune performance in TiDB Cloud.
+    - SQL Tuning
+      - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview.md): Learn about how to tune SQL performance in TiDB Cloud.
+      - Understanding the Query Execution Plan
+        - [Overview](https://docs.pingcap.com/tidbcloud/explain-overview.md): Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+        - [`EXPLAIN` Walkthrough](https://docs.pingcap.com/tidbcloud/explain-walkthrough.md): Learn how to use EXPLAIN by walking through an example statement
+        - [Indexes](https://docs.pingcap.com/tidbcloud/explain-indexes.md): Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+        - [Joins](https://docs.pingcap.com/tidbcloud/explain-joins.md): Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+        - [MPP Queries](https://docs.pingcap.com/tidbcloud/explain-mpp.md): Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+        - [Subqueries](https://docs.pingcap.com/tidbcloud/explain-subqueries.md): Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+        - [Aggregation](https://docs.pingcap.com/tidbcloud/explain-aggregation.md): Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+        - [Views](https://docs.pingcap.com/tidbcloud/explain-views.md): Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+        - [Partitions](https://docs.pingcap.com/tidbcloud/explain-partitions.md): Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
+        - [Index Merge](https://docs.pingcap.com/tidbcloud/explain-index-merge.md): Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
+      - SQL Optimization Process
+        - [Overview](https://docs.pingcap.com/tidbcloud/sql-optimization-concepts.md): Learn about the logical and physical optimization of SQL in TiDB.
+        - Logic Optimization
+          - [Overview](https://docs.pingcap.com/tidbcloud/sql-logical-optimization.md): SQL Logical Optimization chapter explains key logic rewrites in TiDB query plan generation. For example, `IN` sub-query `t.a in (select t1.a from t1 where t1.b=t.b)` does not exist due to TiDB rewrites. Key rewrites include Subquery Related Optimizations, Column Pruning, Decorrelation of Correlated Subquery, Eliminate Max/Min, Predicates Push Down, Partition Pruning, TopN and Limit Operator Push Down, and Join Reorder.
+          - [Subquery Related Optimizations](https://docs.pingcap.com/tidbcloud/subquery-optimization.md): Understand optimizations related to subqueries.
+          - [Column Pruning](https://docs.pingcap.com/tidbcloud/column-pruning.md): Learn about the usage of column pruning in TiDB.
+          - [Decorrelation of Correlated Subquery](https://docs.pingcap.com/tidbcloud/correlated-subquery-optimization.md): Understand how to decorrelate correlated subqueries.
+          - [Eliminate Max/Min](https://docs.pingcap.com/tidbcloud/max-min-eliminate.md): Introduce the rules for eliminating Max/Min functions.
+          - [Predicates Push Down](https://docs.pingcap.com/tidbcloud/predicate-push-down.md): Introduce one of the TiDB's logic optimization rules—Predicate Push Down (PPD).
+          - [Partition Pruning](https://docs.pingcap.com/tidbcloud/partition-pruning.md): Learn about the usage scenarios of TiDB partition pruning.
+          - [TopN and Limit Push Down](https://docs.pingcap.com/tidbcloud/topn-limit-push-down.md): Learn the implementation of TopN and Limit operator pushdown.
+          - [Join Reorder](https://docs.pingcap.com/tidbcloud/join-reorder.md): Use the Join Reorder algorithm to join multiple tables in TiDB.
+          - [Derive TopN or Limit from Window Functions](https://docs.pingcap.com/tidbcloud/derive-topn-from-window.md): Introduce the optimization rule of deriving TopN or Limit from window functions and how to enable this rule.
+        - Physical Optimization
+          - [Overview](https://docs.pingcap.com/tidbcloud/sql-physical-optimization.md): Physical optimization is a cost-based process that creates a physical execution plan for the logical execution plan. The optimizer selects the best physical implementation for each operator based on data statistics, time complexity, and resource consumption. This includes index selection, statistics collection, using the right index, distinct keyword optimization, and cost model for optimal execution plan selection.
+          - [Index Selection](https://docs.pingcap.com/tidbcloud/choose-index.md): Choose the best indexes for TiDB query optimization.
+          - [Statistics](https://docs.pingcap.com/tidbcloud/statistics.md): Learn how the statistics collect table-level and column-level information.
+          - [Extended Statistics](https://docs.pingcap.com/tidbcloud/extended-statistics.md): Learn how to use extended statistics to guide the optimizer.
+          - [Wrong Index Solution](https://docs.pingcap.com/tidbcloud/wrong-index-solution.md): Learn how to solve the wrong index issue.
+          - [Distinct Optimization](https://docs.pingcap.com/tidbcloud/agg-distinct-optimization.md): Introduce the `distinct` optimization in the TiDB query optimizer.
+          - [Cost Model](https://docs.pingcap.com/tidbcloud/cost-model.md): Learn how the cost model used by TiDB works during physical optimization.
+          - [Runtime Filter](https://docs.pingcap.com/tidbcloud/runtime-filter.md): Learn the working principles of Runtime Filter and how to use it.
+        - [Prepared Execution Plan Cache](https://docs.pingcap.com/tidbcloud/sql-prepared-plan-cache.md): Learn about SQL Prepared Execution Plan Cache in TiDB.
+        - [Non-Prepared Execution Plan Cache](https://docs.pingcap.com/tidbcloud/sql-non-prepared-plan-cache.md): Learn about the principle, usage, and examples of the SQL non-prepared execution plan cache in TiDB.
+      - Control Execution Plans
+        - [Overview](https://docs.pingcap.com/tidbcloud/control-execution-plan.md): This chapter introduces methods to control the generation of execution plans in TiDB. It includes using hints, SQL plan management, and the blocklist of optimization rules. Additionally, system variables and the `tidb_opt_fix_control` variable can be modified to control the execution plan. These methods help prevent performance regression caused by behavior changes in the optimizer after cluster upgrades.
+        - [Optimizer Hints](https://docs.pingcap.com/tidbcloud/optimizer-hints.md): Use Optimizer Hints to influence query execution plans
+        - [SQL Plan Management](https://docs.pingcap.com/tidbcloud/sql-plan-management.md): Learn about SQL Plan Management in TiDB.
+        - [The Blocklist of Optimization Rules and Expression Pushdown](https://docs.pingcap.com/tidbcloud/blocklist-control-plan.md): Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
+        - [Optimizer Fix Controls](https://docs.pingcap.com/tidbcloud/optimizer-fix-controls.md): Learn about the Optimizer Fix Controls feature and how to use `tidb_opt_fix_control` to control the TiDB optimizer in a more fine-grained way.
+    - [TiKV Follower Read](https://docs.pingcap.com/tidbcloud/follower-read.md): This document describes the use and implementation of Follower Read.
+    - [Coprocessor Cache](https://docs.pingcap.com/tidbcloud/coprocessor-cache.md): Learn the features of Coprocessor Cache.
+    - Garbage Collection (GC)
+       - [Overview](https://docs.pingcap.com/tidbcloud/garbage-collection-overview.md): Learn about Garbage Collection in TiDB.
+       - [Configuration](https://docs.pingcap.com/tidbcloud/garbage-collection-configuration.md): Learn about GC configuration parameters.
+    - [Tune TiFlash Performance](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance.md): Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.
+  - [Upgrade a TiDB Cluster](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster.md): Learn how to upgrade a TiDB cluster.
+  - [Delete a TiDB Cluster](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster.md): Learn how to delete a TiDB cluster.
+- Migrate or Import Data
+  - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview.md): Learn an overview of data migration and import scenarios for TiDB Cloud.
+  - Migrate Data into TiDB Cloud
+    - [Migrate from TiDB Self-Managed to TiDB Cloud](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb.md): Learn how to migrate data from TiDB Self-Managed to TiDB Cloud.
+    - [Migrate and Merge MySQL Shards of Large Datasets](https://docs.pingcap.com/tidbcloud/migrate-sql-shards.md): Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
+    - [Migrate from Amazon RDS for Oracle Using AWS DMS](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms.md): Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Starter using AWS Database Migration Service (AWS DMS).
+  - Import Data into TiDB Cloud
+    - [Import Local Files](https://docs.pingcap.com/tidbcloud/tidb-cloud-import-local-files.md): Learn how to import local files to TiDB Cloud Starter or TiDB Cloud Essential.
+    - [Import Sample Data (SQL Files) from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-sample-data-serverless.md): Learn how to import sample data into TiDB Cloud Starter or TiDB Cloud Essential via the UI.
+    - [Import CSV Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-csv-files-serverless.md): Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter or TiDB Cloud Essential.
+    - [Import Parquet Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-parquet-files-serverless.md): Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter or TiDB Cloud Essential.
+    - [Import Snapshot Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-snapshot-files-serverless.md): Learn how to import Amazon Aurora or RDS for MySQL snapshot files into TiDB Cloud Starter or Essential.
+    - [Import with MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli-serverless.md): Learn how to import Data into TiDB Cloud Starter or TiDB Cloud Essential via MySQL CLI.
+  - Reference
+    - [Configure External Storage Access for TiDB Cloud](https://docs.pingcap.com/tidbcloud/configure-external-storage-access.md): Learn how to configure cross-account access to an external storage such as Amazon Simple Storage Service (Amazon S3).
+    - [Naming Conventions for Data Import](https://docs.pingcap.com/tidbcloud/naming-conventions-for-data-import.md): Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
+    - [CSV Configurations for Importing Data](https://docs.pingcap.com/tidbcloud/csv-config-for-import-data.md): Learn how to use CSV configurations for the Import Data service on TiDB Cloud.
+    - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](https://docs.pingcap.com/tidbcloud/troubleshoot-import-access-denied-error.md): Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
+    - [Connect AWS DMS to TiDB Cloud clusters](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
+- Vector Search ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](https://docs.pingcap.com/tidbcloud/vector-search-overview.md): Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+  - Get Started
+    - [Get Started with SQL](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-sql.md): Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
+    - [Get Started with Python](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python.md): Learn how to quickly develop an AI application that performs semantic search using Python and TiDB Vector Search.
+  - Integrations
+    - [Overview](https://docs.pingcap.com/tidbcloud/vector-search-integration-overview.md): An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+    - AI Frameworks
+      - [LlamaIndex](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-llamaindex.md): Learn how to integrate TiDB Vector Search with LlamaIndex.
+      - [LangChain](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-langchain.md): Learn how to integrate TiDB Vector Search with LangChain.
+    - AI Services
+      - [Amazon Bedrock](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-amazon-bedrock.md): Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval-Augmented Generation (RAG) Q&A bot.
+    - Embedding Models/Services
+      - [Jina AI](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-jinaai-embedding.md): Learn how to integrate TiDB Vector Search with Jina AI Embeddings API to store embeddings and perform semantic search.
+    - ORM Libraries
+      - [SQLAlchemy](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-sqlalchemy.md): Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
+      - [peewee](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-peewee.md): Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
+      - [Django ORM](https://docs.pingcap.com/tidbcloud/vector-search-integrate-with-django-orm.md): Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
+  - Text Search
+    - [Full-Text Search with SQL](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+    - [Full-Text Search with Python](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-python.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+    - [Hybrid Search](https://docs.pingcap.com/tidbcloud/vector-search-hybrid-search.md): Use full-text search and vector search together to improve the retrieval quality.
+  - Reference
+    - [Vector Data Types](https://docs.pingcap.com/tidbcloud/vector-search-data-types.md): Learn about the Vector data types in TiDB.
+    - [Vector Functions and Operators](https://docs.pingcap.com/tidbcloud/vector-search-functions-and-operators.md): Learn about functions and operators available for Vector data types.
+    - [Vector Index](https://docs.pingcap.com/tidbcloud/vector-search-index.md): Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
+  - [Improve Performance](https://docs.pingcap.com/tidbcloud/vector-search-improve-performance.md): Learn best practices for improving the performance of TiDB Vector Search.
+  - [Limitations](https://docs.pingcap.com/tidbcloud/vector-search-limitations.md): Learn the limitations of the TiDB vector search.
+- Security
+  - [Security Overview](https://docs.pingcap.com/tidbcloud/security-overview.md): Learn about the comprehensive security framework of TiDB Cloud, including identity management, network isolation, data protection, access control, and auditing.
+  - Identity Access Control
+    - [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication.md): Learn how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console.
+    - [Standard SSO Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-sso-authentication.md): Learn how to log in to the TiDB Cloud console via your Google, GitHub, or Microsoft account.
+    - [Organization SSO Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-org-sso-authentication.md): Learn how to log in to the TiDB Cloud console via your customized organization authentication.
+    - [Identity Access Management](https://docs.pingcap.com/tidbcloud/manage-user-access.md): Learn how to manage identity access in TiDB Cloud.
+    - [OAuth 2.0](https://docs.pingcap.com/tidbcloud/oauth2.md): Learn about how to use OAuth 2.0 in TiDB Cloud.
+  - Network Access Control
+    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud cluster via private endpoint.
+    - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
+    - [Configure Firewall Rules for Public Endpoints](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints.md): Learn how to configure and manage firewall rules with public access to your TiDB Cloud Starter or TiDB Cloud Essential cluster securely.
+    - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters.md): Introduce TLS connections in TiDB Cloud Starter and TiDB Cloud Essential.
+  - Private Link Connection
+    - [Private Link Connection Overview](https://docs.pingcap.com/tidbcloud/serverless-private-link-connection.md): Learn how to set up private link connections for Dataflow.
+    - [Connect to Confluent Cloud on AWS](https://docs.pingcap.com/tidbcloud/serverless-private-link-connection-to-aws-confluent.md): Learn how to connect to a Confluent Cloud Dedicated cluster on AWS using an AWS Endpoint Service private link connection.
+  - Audit Management
+    - [Console Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing.md): Learn about the audit logging feature for the TiDB Cloud console.
+    - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/essential-database-audit-logging.md): Learn about how to audit a TiDB Cloud Essential cluster in TiDB Cloud.
+- Billing
+  - [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#invoices): Learn about TiDB Cloud billing.
+  - [Billing Details](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#billing-details): Learn about TiDB Cloud billing.
+  - [Cost Explorer](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#cost-explorer): Learn about TiDB Cloud billing.
+  - [Billing Profile](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#billing-profile): Learn about TiDB Cloud billing.
+  - [Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#credits): Learn about TiDB Cloud billing.
+  - [Payment Method Setting](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#payment-method): Learn about TiDB Cloud billing.
+  - [Billing from Cloud Provider Marketplace](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace): Learn about TiDB Cloud billing.
+  - [Manage Budgets](https://docs.pingcap.com/tidbcloud/tidb-cloud-budget.md): Learn about how to use the budget feature of TiDB Cloud to monitor your costs.
+- Integrations
+  - [Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte.md): Learn how to use Airbyte TiDB connector.
+  - [Cloudflare](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-cloudflare.md): Learn how to deploy Cloudflare Workers with TiDB Cloud.
+  - [dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt.md): Learn the use cases of dbt in TiDB Cloud.
+  - [Gitpod](https://docs.pingcap.com/tidbcloud/dev-guide-playground-gitpod.md): Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
+  - [n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n.md): Learn the use of TiDB Cloud node in n8n.
+  - [Netlify](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify.md): Learn how to connect your TiDB Cloud clusters to Netlify projects.
+  - [ProxySQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration.md): Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+  - Terraform
+    - [Terraform Integration Overview](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview.md): Create, manage, and update your TiDB Cloud resources through Terraform.
+    - [Get TiDB Cloud Terraform Provider](https://docs.pingcap.com/tidbcloud/terraform-get-tidbcloud-provider.md): Learn how to get TiDB Cloud Terraform Provider.
+    - [Use the `tidbcloud_serverless_cluster` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-cluster-resource-manage-essential.md): Learn how to use the `tidbcloud_serverless_cluster` resource to create and modify a TiDB Cloud Essential cluster.
+    - [Use the `tidbcloud_serverless_branch` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-branch-resource.md): Learn how to use the serverless branch resource to create and modify a TiDB Cloud Starter or TiDB Cloud Essential branch.
+    - [Use the `tidbcloud_serverless_export` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-export-resource.md): Learn how to use the `tidbcloud_serverless_export` resource to create and modify data export tasks for TiDB Cloud Starter or TiDB Cloud Essential clusters.
+    - [Use the `tidbcloud_sql_user` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-sql-user-resource.md): Learn how to use the `tidbcloud_sql_user` resource to create and modify a TiDB Cloud SQL user.
+    - [Use the `tidbcloud_import` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-import-resource.md): Learn how to manage the import task using the `tidbcloud_import` resource.
+    - [Migrate Cluster Resource](https://docs.pingcap.com/tidbcloud/terraform-migrate-cluster-resource.md): Learn how to migrate a cluster resource to a serverless or dedicated cluster resource.
+  - [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel.md): Learn how to connect your TiDB Cloud clusters to Vercel projects.
+  - [Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier.md): Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
+
+## REFERENCE
+
+- SQL Reference
+  - [Explore SQL with TiDB](https://docs.pingcap.com/tidbcloud/basic-sql-operations.md): Learn about the basic SQL statements for the TiDB database.
+  - SQL Language Structure and Syntax
+    - Attributes
+      - [AUTO_INCREMENT](https://docs.pingcap.com/tidbcloud/auto-increment.md): Learn the `AUTO_INCREMENT` column attribute of TiDB.
+      - [AUTO_RANDOM](https://docs.pingcap.com/tidbcloud/auto-random.md): Learn the AUTO_RANDOM attribute.
+      - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidbcloud/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
+    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
+    - [Schema Object Names](https://docs.pingcap.com/tidbcloud/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
+    - [Keywords and Reserved Words](https://docs.pingcap.com/tidbcloud/keywords.md): Keywords and Reserved Words
+    - [User-Defined Variables](https://docs.pingcap.com/tidbcloud/user-defined-variables.md): Learn how to use user-defined variables.
+    - [Expression Syntax](https://docs.pingcap.com/tidbcloud/expression-syntax.md): Learn about the expression syntax in TiDB.
+    - [Comment Syntax](https://docs.pingcap.com/tidbcloud/comment-syntax.md): This document introduces the comment syntax supported by TiDB.
+  - SQL Statements
+    - [Overview](https://docs.pingcap.com/tidbcloud/sql-statement-overview.md): Learn about supported SQL statements in TiDB.
+    - [`ADMIN`](https://docs.pingcap.com/tidbcloud/sql-statement-admin.md): An overview of the usage of ADMIN for the TiDB database.
+    - [`ADMIN CANCEL DDL`](https://docs.pingcap.com/tidbcloud/sql-statement-admin-cancel-ddl.md): An overview of the usage of ADMIN CANCEL DDL for the TiDB database.
+    - [`ADMIN CHECKSUM TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-admin-checksum-table.md): An overview of the usage of ADMIN for the TiDB database.
+    - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+    - [`ADMIN CLEANUP INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-admin-cleanup.md): An overview of the usage of ADMIN CLEANUP for the TiDB database.
+    - [`ADMIN PAUSE DDL`](https://docs.pingcap.com/tidbcloud/sql-statement-admin-pause-ddl.md): An overview of the usage of ADMIN PAUSE DDL JOBS for the TiDB database.
+    - [`ADMIN RECOVER INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-admin-recover.md): An overview of the usage of ADMIN RECOVER INDEX for the TiDB database.
+    - [`ADMIN RESUME DDL`](https://docs.pingcap.com/tidbcloud/sql-statement-admin-resume-ddl.md): An overview of the usage of ADMIN RESUME DDL for the TiDB database.
+    - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+    - [`ALTER DATABASE`](https://docs.pingcap.com/tidbcloud/sql-statement-alter-database.md): An overview of the usage of ALTER DATABASE for the TiDB database.
+    - [`ALTER INSTANCE`](https://docs.pingcap.com/tidbcloud/sql-statement-alter-instance.md): Learn the overview of the `ALTER INSTANCE` usage in TiDB.
+    - [`ALTER SEQUENCE`](https://docs.pingcap.com/tidbcloud/sql-statement-alter-sequence.md): An overview of the usage of ALTER SEQUENCE for the TiDB database.
+    - `ALTER TABLE`
+      - [Overview](https://docs.pingcap.com/tidbcloud/sql-statement-alter-table.md): An overview of the usage of ALTER TABLE for the TiDB database.
+      - [`ADD COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-add-column.md): An overview of the usage of ADD COLUMN for the TiDB database.
+      - [`ADD INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-add-index.md): An overview of the usage of ADD INDEX for the TiDB database.
+      - [`ALTER INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-alter-index.md): An overview of the usage of ALTER INDEX for the TiDB database.
+      - [`CHANGE COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-change-column.md): An overview of the usage of CHANGE COLUMN for the TiDB database.
+      - [`COMPACT`](https://docs.pingcap.com/tidbcloud/sql-statement-alter-table-compact.md): An overview of the usage of ALTER TABLE ... COMPACT for the TiDB database.
+      - [`DROP COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-column.md): An overview of the usage of DROP COLUMN for the TiDB database.
+      - [`DROP INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-index.md): An overview of the usage of DROP INDEX for the TiDB database.
+      - [`MODIFY COLUMN`](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column.md): An overview of the usage of MODIFY COLUMN for the TiDB database.
+      - [`RENAME INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-rename-index.md): An overview of the usage of RENAME INDEX for the TiDB database.
+    - [`ALTER USER`](https://docs.pingcap.com/tidbcloud/sql-statement-alter-user.md): An overview of the usage of ALTER USER for the TiDB database.
+    - [`ANALYZE TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-analyze-table.md): An overview of the usage of ANALYZE for the TiDB database.
+    - [`BATCH`](https://docs.pingcap.com/tidbcloud/sql-statement-batch.md): An overview of the usage of BATCH for the TiDB database.
+    - [`BEGIN`](https://docs.pingcap.com/tidbcloud/sql-statement-begin.md): An overview of the usage of BEGIN for the TiDB database.
+    - [`CANCEL IMPORT JOB`](https://docs.pingcap.com/tidbcloud/sql-statement-cancel-import-job.md): An overview of the usage of CANCEL IMPORT in TiDB.
+    - [`COMMIT`](https://docs.pingcap.com/tidbcloud/sql-statement-commit.md): An overview of the usage of COMMIT for the TiDB database.
+    - [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
+    - [`CREATE DATABASE`](https://docs.pingcap.com/tidbcloud/sql-statement-create-database.md): An overview of the usage of CREATE DATABASE for the TiDB database.
+    - [`CREATE INDEX`](https://docs.pingcap.com/tidbcloud/sql-statement-create-index.md): An overview of the usage of CREATE INDEX for the TiDB database.
+    - [`CREATE ROLE`](https://docs.pingcap.com/tidbcloud/sql-statement-create-role.md): An overview of the usage of CREATE ROLE for the TiDB database.
+    - [`CREATE SEQUENCE`](https://docs.pingcap.com/tidbcloud/sql-statement-create-sequence.md): An overview of the usage of CREATE SEQUENCE for the TiDB database.
+    - [`CREATE TABLE LIKE`](https://docs.pingcap.com/tidbcloud/sql-statement-create-table-like.md): An overview of the usage of CREATE TABLE LIKE for the TiDB database.
+    - [`CREATE TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-create-table.md): An overview of the usage of CREATE TABLE for the TiDB database.
+    - [`CREATE USER`](https://docs.pingcap.com/tidbcloud/sql-statement-create-user.md): An overview of the usage of CREATE USER for the TiDB database.
+    - [`CREATE VIEW`](https://docs.pingcap.com/tidbcloud/sql-statement-create-view.md): An overview of the usage of CREATE VIEW for the TiDB database.
+    - [`DEALLOCATE`](https://docs.pingcap.com/tidbcloud/sql-statement-deallocate.md): An overview of the usage of DEALLOCATE for the TiDB database.
+    - [`DELETE`](https://docs.pingcap.com/tidbcloud/sql-statement-delete.md): An overview of the usage of DELETE for the TiDB database.
+    - [`DESC`](https://docs.pingcap.com/tidbcloud/sql-statement-desc.md): An overview of the usage of `DESC` for the TiDB database.
+    - [`DESCRIBE`](https://docs.pingcap.com/tidbcloud/sql-statement-describe.md): An overview of the usage of DESCRIBE for the TiDB database.
+    - [`DO`](https://docs.pingcap.com/tidbcloud/sql-statement-do.md): An overview of the usage of DO for the TiDB database.
+    - [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
+    - [`DROP DATABASE`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-database.md): An overview of the usage of DROP DATABASE for the TiDB database.
+    - [`DROP ROLE`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-role.md): An overview of the usage of DROP ROLE for the TiDB database.
+    - [`DROP SEQUENCE`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-sequence.md): An overview of the usage of DROP SEQUENCE for the TiDB database.
+    - [`DROP STATS`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-stats.md): An overview of the usage of DROP STATS for the TiDB database.
+    - [`DROP TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-table.md): An overview of the usage of DROP TABLE for the TiDB database.
+    - [`DROP USER`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-user.md): An overview of the usage of DROP USER for the TiDB database.
+    - [`DROP VIEW`](https://docs.pingcap.com/tidbcloud/sql-statement-drop-view.md): An overview of the usage of DROP VIEW for the TiDB database.
+    - [`EXECUTE`](https://docs.pingcap.com/tidbcloud/sql-statement-execute.md): An overview of the usage of EXECUTE for the TiDB database.
+    - [`EXPLAIN ANALYZE`](https://docs.pingcap.com/tidbcloud/sql-statement-explain-analyze.md): An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
+    - [`EXPLAIN`](https://docs.pingcap.com/tidbcloud/sql-statement-explain.md): An overview of the usage of EXPLAIN for the TiDB database.
+    - [`FLASHBACK CLUSTER`](https://docs.pingcap.com/tidbcloud/sql-statement-flashback-cluster.md): Learn the usage of FLASHBACK CLUSTER in TiDB databases.
+    - [`FLASHBACK DATABASE`](https://docs.pingcap.com/tidbcloud/sql-statement-flashback-database.md): Learn the usage of FLASHBACK DATABASE in TiDB databases.
+    - [`FLASHBACK TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-flashback-table.md): Learn how to recover tables using the `FLASHBACK TABLE` statement.
+    - [`FLUSH PRIVILEGES`](https://docs.pingcap.com/tidbcloud/sql-statement-flush-privileges.md): An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
+    - [`FLUSH STATUS`](https://docs.pingcap.com/tidbcloud/sql-statement-flush-status.md): An overview of the usage of FLUSH STATUS for the TiDB database.
+    - [`FLUSH TABLES`](https://docs.pingcap.com/tidbcloud/sql-statement-flush-tables.md): An overview of the usage of FLUSH TABLES for the TiDB database.
+    - [`GRANT <privileges>`](https://docs.pingcap.com/tidbcloud/sql-statement-grant-privileges.md): An overview of the usage of GRANT <privileges> for the TiDB database.
+    - [`GRANT <role>`](https://docs.pingcap.com/tidbcloud/sql-statement-grant-role.md): An overview of the usage of GRANT <role> for the TiDB database.
+    - [`IMPORT INTO`](https://docs.pingcap.com/tidbcloud/sql-statement-import-into.md): An overview of the usage of IMPORT INTO in TiDB.
+    - [`INSERT`](https://docs.pingcap.com/tidbcloud/sql-statement-insert.md): An overview of the usage of INSERT for the TiDB database.
+    - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
+    - [`LOAD DATA`](https://docs.pingcap.com/tidbcloud/sql-statement-load-data.md): An overview of the usage of LOAD DATA for the TiDB database.
+    - [`LOCK STATS`](https://docs.pingcap.com/tidbcloud/sql-statement-lock-stats.md): An overview of the usage of LOCK STATS for the TiDB database.
+    - [`LOCK TABLES` and `UNLOCK TABLES`](https://docs.pingcap.com/tidbcloud/sql-statement-lock-tables-and-unlock-tables.md): An overview of the usage of LOCK TABLES and UNLOCK TABLES for the TiDB database.
+    - [`PREPARE`](https://docs.pingcap.com/tidbcloud/sql-statement-prepare.md): An overview of the usage of PREPARE for the TiDB database.
+    - [`RECOVER TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-recover-table.md): An overview of the usage of RECOVER TABLE for the TiDB database.
+    - [`RENAME TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-rename-table.md): An overview of the usage of RENAME TABLE for the TiDB database.
+    - [`RENAME USER`](https://docs.pingcap.com/tidbcloud/sql-statement-rename-user.md): An overview of the usage of RENAME USER for the TiDB database.
+    - [`REPLACE`](https://docs.pingcap.com/tidbcloud/sql-statement-replace.md): An overview of the usage of REPLACE for the TiDB database.
+    - [`REVOKE <privileges>`](https://docs.pingcap.com/tidbcloud/sql-statement-revoke-privileges.md): An overview of the usage of REVOKE <privileges> for the TiDB database.
+    - [`REVOKE <role>`](https://docs.pingcap.com/tidbcloud/sql-statement-revoke-role.md): An overview of the usage of REVOKE <role> for the TiDB database.
+    - [`ROLLBACK`](https://docs.pingcap.com/tidbcloud/sql-statement-rollback.md): An overview of the usage of ROLLBACK for the TiDB database.
+    - [`SAVEPOINT`](https://docs.pingcap.com/tidbcloud/sql-statement-savepoint.md): An overview of the usage of SAVEPOINT for the TiDB database.
+    - [`SELECT`](https://docs.pingcap.com/tidbcloud/sql-statement-select.md): An overview of the usage of SELECT for the TiDB database.
+    - [`SET DEFAULT ROLE`](https://docs.pingcap.com/tidbcloud/sql-statement-set-default-role.md): An overview of the usage of SET DEFAULT ROLE for the TiDB database.
+    - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
+    - [`SET PASSWORD`](https://docs.pingcap.com/tidbcloud/sql-statement-set-password.md): An overview of the usage of SET PASSWORD for the TiDB database.
+    - [`SET ROLE`](https://docs.pingcap.com/tidbcloud/sql-statement-set-role.md): An overview of the usage of SET ROLE for the TiDB database.
+    - [`SET TRANSACTION`](https://docs.pingcap.com/tidbcloud/sql-statement-set-transaction.md): An overview of the usage of SET TRANSACTION for the TiDB database.
+    - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
+    - [`SHOW ANALYZE STATUS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-analyze-status.md): An overview of the usage of SHOW ANALYZE STATUS for the TiDB database.
+    - [`SHOW [GLOBAL|SESSION] BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
+    - [`SHOW BUILTINS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-builtins.md): The usage of SHOW BUILTINS in TiDB.
+    - [`SHOW CHARACTER SET`](https://docs.pingcap.com/tidbcloud/sql-statement-show-character-set.md): An overview of the usage of SHOW CHARACTER SET for the TiDB database.
+    - [`SHOW COLLATION`](https://docs.pingcap.com/tidbcloud/sql-statement-show-collation.md): An overview of the usage of SHOW COLLATION for the TiDB database.
+    - [`SHOW COLUMN_STATS_USAGE`](https://docs.pingcap.com/tidbcloud/sql-statement-show-column-stats-usage.md): An overview of the usage of SHOW COLUMN_STATS_USAGE for TiDB database.
+    - [`SHOW COLUMNS FROM`](https://docs.pingcap.com/tidbcloud/sql-statement-show-columns-from.md): An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
+    - [`SHOW CREATE DATABASE`](https://docs.pingcap.com/tidbcloud/sql-statement-show-create-database.md): An overview of the use of SHOW CREATE DATABASE in the TiDB database.
+    - [`SHOW CREATE SEQUENCE`](https://docs.pingcap.com/tidbcloud/sql-statement-show-create-sequence.md): An overview of the usage of SHOW CREATE SEQUENCE for the TiDB database.
+    - [`SHOW CREATE TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-show-create-table.md): An overview of the usage of SHOW CREATE TABLE for the TiDB database.
+    - [`SHOW CREATE USER`](https://docs.pingcap.com/tidbcloud/sql-statement-show-create-user.md): An overview of the usage of SHOW CREATE USER for the TiDB database.
+    - [`SHOW DATABASES`](https://docs.pingcap.com/tidbcloud/sql-statement-show-databases.md): An overview of the usage of SHOW DATABASES for the TiDB database.
+    - [`SHOW ENGINES`](https://docs.pingcap.com/tidbcloud/sql-statement-show-engines.md): An overview of the usage of SHOW ENGINES for the TiDB database.
+    - [`SHOW ERRORS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-errors.md): An overview of the usage of SHOW ERRORS for the TiDB database.
+    - [`SHOW FIELDS FROM`](https://docs.pingcap.com/tidbcloud/sql-statement-show-fields-from.md): An overview of the usage of SHOW [FULL] FIELDS FROM for the TiDB database.
+    - [`SHOW GRANTS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-grants.md): An overview of the usage of SHOW GRANTS for the TiDB database.
+    - [`SHOW IMPORT JOB`](https://docs.pingcap.com/tidbcloud/sql-statement-show-import-job.md): An overview of the usage of SHOW IMPORT in TiDB.
+    - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
+    - [`SHOW MASTER STATUS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-master-status.md): An overview of the usage of SHOW MASTER STATUS for the TiDB database.
+    - [`SHOW PRIVILEGES`](https://docs.pingcap.com/tidbcloud/sql-statement-show-privileges.md): An overview of the usage of SHOW PRIVILEGES for the TiDB database.
+    - [`SHOW PROCESSLIST`](https://docs.pingcap.com/tidbcloud/sql-statement-show-processlist.md): An overview of the usage of SHOW [FULL] PROCESSLIST for the TiDB database.
+    - [`SHOW PROFILES`](https://docs.pingcap.com/tidbcloud/sql-statement-show-profiles.md): An overview of the usage of SHOW PROFILES for the TiDB database.
+    - [`SHOW SCHEMAS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-schemas.md): An overview of the usage of SHOW SCHEMAS for the TiDB database.
+    - [`SHOW STATS_BUCKETS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-stats-buckets.md): An overview of the usage of SHOW STATS_BUCKETS for TiDB database.
+    - [`SHOW STATS_HEALTHY`](https://docs.pingcap.com/tidbcloud/sql-statement-show-stats-healthy.md): An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
+    - [`SHOW STATS_HISTOGRAMS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-stats-histograms.md): An overview of the usage of SHOW STATS_HISTOGRAMS for TiDB database.
+    - [`SHOW STATS_LOCKED`](https://docs.pingcap.com/tidbcloud/sql-statement-show-stats-locked.md): An overview of the usage of SHOW STATS_LOCKED for the TiDB database.
+    - [`SHOW STATS_META`](https://docs.pingcap.com/tidbcloud/sql-statement-show-stats-meta.md): An overview of the usage of SHOW STATS_META for TiDB database.
+    - [`SHOW STATS_TOPN`](https://docs.pingcap.com/tidbcloud/sql-statement-show-stats-topn.md): An overview of the usage of SHOW STATS_TOPN for TiDB database.
+    - [`SHOW STATUS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-status.md): An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB database.
+    - [`SHOW TABLE NEXT_ROW_ID`](https://docs.pingcap.com/tidbcloud/sql-statement-show-table-next-rowid.md): Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
+    - [`SHOW TABLE STATUS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-table-status.md): An overview of the usage of SHOW TABLE STATUS for the TiDB database.
+    - [`SHOW TABLES`](https://docs.pingcap.com/tidbcloud/sql-statement-show-tables.md): An overview of the usage of SHOW [FULL] TABLES for the TiDB database.
+    - [`SHOW [GLOBAL|SESSION] VARIABLES`](/sql-statements/sql-statement-show-variables.md)
+    - [`SHOW WARNINGS`](https://docs.pingcap.com/tidbcloud/sql-statement-show-warnings.md): An overview of the usage of SHOW WARNINGS for the TiDB database.
+    - [`START TRANSACTION`](https://docs.pingcap.com/tidbcloud/sql-statement-start-transaction.md): An overview of the usage of START TRANSACTION for the TiDB database.
+    - [`TABLE`](https://docs.pingcap.com/tidbcloud/sql-statement-table.md): An overview of the usage of TABLE for the TiDB database.
+    - [`TRACE`](https://docs.pingcap.com/tidbcloud/sql-statement-trace.md): An overview of the usage of TRACE for the TiDB database.
+    - [`TRUNCATE`](https://docs.pingcap.com/tidbcloud/sql-statement-truncate.md): An overview of the usage of TRUNCATE for the TiDB database.
+    - [`UNLOCK STATS`](https://docs.pingcap.com/tidbcloud/sql-statement-unlock-stats.md): An overview of the usage of UNLOCK STATS for the TiDB database.
+    - [`UPDATE`](https://docs.pingcap.com/tidbcloud/sql-statement-update.md): An overview of the usage of UPDATE for the TiDB database.
+    - [`USE`](https://docs.pingcap.com/tidbcloud/sql-statement-use.md): An overview of the usage of USE for the TiDB database.
+    - [`WITH`](https://docs.pingcap.com/tidbcloud/sql-statement-with.md): An overview of the usage of WITH (Common Table Expression) for the TiDB database.
+  - Data Types
+    - [Overview](https://docs.pingcap.com/tidbcloud/data-type-overview.md): Learn about the data types supported in TiDB.
+    - [Default Values](https://docs.pingcap.com/tidbcloud/data-type-default-values.md): Learn about default values for data types in TiDB.
+    - [Numeric Types](https://docs.pingcap.com/tidbcloud/data-type-numeric.md): Learn about numeric data types supported in TiDB.
+    - [Date and Time Types](https://docs.pingcap.com/tidbcloud/data-type-date-and-time.md): Learn about the supported date and time types.
+    - [String Types](https://docs.pingcap.com/tidbcloud/data-type-string.md): Learn about the string types supported in TiDB.
+    - [JSON Type](https://docs.pingcap.com/tidbcloud/data-type-json.md): Learn about the JSON data type in TiDB.
+  - Functions and Operators
+    - [Overview](https://docs.pingcap.com/tidbcloud/functions-and-operators-overview.md): Learn how to use the functions and operators.
+    - [Type Conversion in Expression Evaluation](https://docs.pingcap.com/tidbcloud/type-conversion-in-expression-evaluation.md): Learn about the type conversion in expression evaluation.
+    - [Operators](https://docs.pingcap.com/tidbcloud/operators.md): Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
+    - [Control Flow Functions](https://docs.pingcap.com/tidbcloud/control-flow-functions.md): Learn about the Control Flow functions.
+    - [String Functions](https://docs.pingcap.com/tidbcloud/string-functions.md): Learn about the string functions in TiDB.
+    - [Numeric Functions and Operators](https://docs.pingcap.com/tidbcloud/numeric-functions-and-operators.md): Learn about the numeric functions and operators.
+    - [Date and Time Functions](https://docs.pingcap.com/tidbcloud/date-and-time-functions.md): Learn how to use the data and time functions.
+    - [Bit Functions and Operators](https://docs.pingcap.com/tidbcloud/bit-functions-and-operators.md): Learn about the bit functions and operators.
+    - [Cast Functions and Operators](https://docs.pingcap.com/tidbcloud/cast-functions-and-operators.md): Learn about the cast functions and operators.
+    - [Encryption and Compression Functions](https://docs.pingcap.com/tidbcloud/encryption-and-compression-functions.md): Learn about the encryption and compression functions.
+    - [Locking Functions](https://docs.pingcap.com/tidbcloud/locking-functions.md): Learn about user-level locking functions in TiDB.
+    - [Information Functions](https://docs.pingcap.com/tidbcloud/information-functions.md): Learn about the information functions.
+    - JSON Functions
+      - [Overview](https://docs.pingcap.com/tidbcloud/json-functions.md): Learn about JSON functions.
+      - [Functions That Create JSON](https://docs.pingcap.com/tidbcloud/json-functions-create.md): Learn about JSON functions that create JSON values.
+      - [Functions That Search JSON](https://docs.pingcap.com/tidbcloud/json-functions-search.md): Learn about JSON functions that search JSON values.
+      - [Functions That Modify JSON](https://docs.pingcap.com/tidbcloud/json-functions-modify.md): Learn about JSON functions that modify JSON values.
+      - [Functions That Return JSON](https://docs.pingcap.com/tidbcloud/json-functions-return.md): Learn about JSON functions that return JSON values.
+      - [JSON Utility Functions](https://docs.pingcap.com/tidbcloud/json-functions-utility.md): Learn about JSON utility functions.
+      - [Functions That Aggregate JSON](https://docs.pingcap.com/tidbcloud/json-functions-aggregate.md): Learn about JSON functions that aggregate JSON values.
+    - [Aggregate (GROUP BY) Functions](https://docs.pingcap.com/tidbcloud/aggregate-group-by-functions.md): Learn about the supported aggregate functions in TiDB.
+    - [GROUP BY Modifiers](https://docs.pingcap.com/tidbcloud/group-by-modifier.md): Learn how to use TiDB GROUP BY modifiers.
+    - [Window Functions](https://docs.pingcap.com/tidbcloud/window-functions.md): This document introduces window functions supported in TiDB.
+    - [Miscellaneous Functions](https://docs.pingcap.com/tidbcloud/miscellaneous-functions.md): Learn about miscellaneous functions in TiDB.
+    - [Precision Math](https://docs.pingcap.com/tidbcloud/precision-math.md): Learn about the precision math in TiDB.
+    - [Set Operations](https://docs.pingcap.com/tidbcloud/set-operators.md): Learn the supported set operations in TiDB.
+    - [Sequence Functions](https://docs.pingcap.com/tidbcloud/sequence-functions.md): This document introduces sequence functions supported in TiDB.
+    - [List of Expressions for Pushdown](https://docs.pingcap.com/tidbcloud/expressions-pushed-down.md): Learn a list of expressions that can be pushed down to TiKV and the related operations.
+    - [TiDB Specific Functions](https://docs.pingcap.com/tidbcloud/tidb-functions.md): Learn about the usage of TiDB specific functions.
+  - [Clustered Indexes](https://docs.pingcap.com/tidbcloud/clustered-indexes.md): Learn the concept, user scenarios, usages, limitations, and compatibility of clustered indexes.
+  - [Global Indexes](https://docs.pingcap.com/tidbcloud/global-indexes.md): Learn the use cases, advantages, usage, working principles, and limitations of TiDB global indexes.
+  - [Constraints](https://docs.pingcap.com/tidbcloud/constraints.md): Learn how SQL Constraints apply to TiDB.
+  - [Generated Columns](https://docs.pingcap.com/tidbcloud/generated-columns.md): Learn how to use generated columns.
+  - [SQL Mode](https://docs.pingcap.com/tidbcloud/sql-mode.md)
+  - [Table Attributes](https://docs.pingcap.com/tidbcloud/table-attributes.md): Learn how to use the table attribute feature of TiDB.
+  - Transactions
+    - [Overview](https://docs.pingcap.com/tidbcloud/transaction-overview.md): Learn transactions in TiDB.
+    - [Isolation Levels](https://docs.pingcap.com/tidbcloud/transaction-isolation-levels.md): Learn about the transaction isolation levels in TiDB.
+    - [Optimistic Transactions](https://docs.pingcap.com/tidbcloud/optimistic-transaction.md): Learn the optimistic transaction model in TiDB.
+    - [Pessimistic Transactions](https://docs.pingcap.com/tidbcloud/pessimistic-transaction.md): Learn the pessimistic transaction mode in TiDB.
+    - [Non-Transactional DML Statements](https://docs.pingcap.com/tidbcloud/non-transactional-dml.md): Learn the non-transactional DML statements in TiDB. At the expense of atomicity and isolation, a DML statement is split into multiple statements to be executed in sequence, which improves the stability and ease of use in batch data processing scenarios.
+  - [Views](https://docs.pingcap.com/tidbcloud/views.md): Learn how to use views in TiDB.
+  - [Partitioning](https://docs.pingcap.com/tidbcloud/partitioned-table.md): Learn how to use partitioning in TiDB.
+  - [Temporary Tables](https://docs.pingcap.com/tidbcloud/temporary-tables.md): Learn the temporary tables feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
+  - [Cached Tables](https://docs.pingcap.com/tidbcloud/cached-tables.md): Learn the cached table feature in TiDB, which is used for rarely-updated small hotspot tables to improve read performance.
+  - [FOREIGN KEY Constraints](https://docs.pingcap.com/tidbcloud/foreign-key.md): An overview of the usage of FOREIGN KEY constraints for the TiDB database.
+  - Character Set and Collation
+    - [Overview](https://docs.pingcap.com/tidbcloud/character-set-and-collation.md): Learn about the supported character sets and collations in TiDB.
+    - [GBK](https://docs.pingcap.com/tidbcloud/character-set-gbk.md): This document provides details about the TiDB support of the GBK character set.
+  - Read Historical Data
+    - Use Stale Read (Recommended)
+      - [Usage Scenarios of Stale Read](https://docs.pingcap.com/tidbcloud/stale-read.md): Learn about Stale Read and its usage scenarios.
+      - [Perform Stale Read Using `As OF TIMESTAMP`](https://docs.pingcap.com/tidbcloud/as-of-timestamp.md): Learn how to read historical data using the `AS OF TIMESTAMP` statement clause.
+      - [Perform Stale Read Using `tidb_read_staleness`](https://docs.pingcap.com/tidbcloud/tidb-read-staleness.md): Learn how to read historical data using the `tidb_read_staleness` system variable.
+      - [Perform Stale Read Using `tidb_external_ts`](https://docs.pingcap.com/tidbcloud/tidb-external-ts.md): Learn how to read historical data using the `tidb_external_ts` variable.
+    - [Use the `tidb_snapshot` System Variable](https://docs.pingcap.com/tidbcloud/read-historical-data.md): Learn about how TiDB reads data from history versions using the system variable `tidb_snapshot`.
+  - System Tables
+    - `mysql` Schema
+      - [Overview](https://docs.pingcap.com/tidbcloud/mysql-schema.md): Learn about the TiDB system tables.
+      - [`user`](https://docs.pingcap.com/tidbcloud/mysql-schema-user.md): Learn about the `user` table in the `mysql` schema.
+    - INFORMATION_SCHEMA
+      - [Overview](https://docs.pingcap.com/tidbcloud/information-schema.md): TiDB implements the ANSI-standard information_schema for viewing system metadata.
+      - [`ANALYZE_STATUS`](https://docs.pingcap.com/tidbcloud/information-schema-analyze-status.md): Learn the `ANALYZE_STATUS` information_schema table.
+      - [`CHECK_CONSTRAINTS`](https://docs.pingcap.com/tidbcloud/information-schema-check-constraints.md): Learn the `CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
+      - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](https://docs.pingcap.com/tidbcloud/client-errors-summary-by-host.md): Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA table.
+      - [`CLIENT_ERRORS_SUMMARY_BY_USER`](https://docs.pingcap.com/tidbcloud/client-errors-summary-by-user.md): Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA table.
+      - [`CLIENT_ERRORS_SUMMARY_GLOBAL`](https://docs.pingcap.com/tidbcloud/client-errors-summary-global.md): Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA table.
+      - [`CHARACTER_SETS`](https://docs.pingcap.com/tidbcloud/information-schema-character-sets.md): Learn the `CHARACTER_SETS` INFORMATION_SCHEMA table.
+      - [`COLLATIONS`](https://docs.pingcap.com/tidbcloud/information-schema-collations.md): Learn the `COLLATIONS` information_schema table.
+      - [`COLLATION_CHARACTER_SET_APPLICABILITY`](https://docs.pingcap.com/tidbcloud/information-schema-collation-character-set-applicability.md): Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA table.
+      - [`COLUMNS`](https://docs.pingcap.com/tidbcloud/information-schema-columns.md): Learn the `COLUMNS` INFORMATION_SCHEMA table.
+      - [`DATA_LOCK_WAITS`](https://docs.pingcap.com/tidbcloud/information-schema-data-lock-waits.md): Learn the `DATA_LOCK_WAITS` information_schema table.
+      - [`DDL_JOBS`](https://docs.pingcap.com/tidbcloud/information-schema-ddl-jobs.md): Learn the `DDL_JOBS` information_schema table.
+      - [`DEADLOCKS`](https://docs.pingcap.com/tidbcloud/information-schema-deadlocks.md): Learn the `DEADLOCKS` INFORMATION_SCHEMA table.
+      - [`ENGINES`](https://docs.pingcap.com/tidbcloud/information-schema-engines.md): Learn the `ENGINES` information_schema table.
+      - [`KEYWORDS`](https://docs.pingcap.com/tidbcloud/information-schema-keywords.md): Learn the `KEYWORDS` INFORMATION_SCHEMA table.
+      - [`KEY_COLUMN_USAGE`](https://docs.pingcap.com/tidbcloud/information-schema-key-column-usage.md): Learn the `KEY_COLUMN_USAGE` information_schema table.
+      - [`MEMORY_USAGE`](https://docs.pingcap.com/tidbcloud/information-schema-memory-usage.md): Learn the `MEMORY_USAGE` information_schema system table.
+      - [`MEMORY_USAGE_OPS_HISTORY`](https://docs.pingcap.com/tidbcloud/information-schema-memory-usage-ops-history.md): Learn the `MEMORY_USAGE_OPS_HISTORY` information_schema system table.
+      - [`PARTITIONS`](https://docs.pingcap.com/tidbcloud/information-schema-partitions.md): Learn the `PARTITIONS` INFORMATION_SCHEMA table.
+      - [`PROCESSLIST`](https://docs.pingcap.com/tidbcloud/information-schema-processlist.md): Learn the `PROCESSLIST` information_schema table.
+      - [`REFERENTIAL_CONSTRAINTS`](https://docs.pingcap.com/tidbcloud/information-schema-referential-constraints.md): Learn the `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA table.
+      - [`SCHEMATA`](https://docs.pingcap.com/tidbcloud/information-schema-schemata.md): Learn the `SCHEMATA` information_schema table.
+      - [`SEQUENCES`](https://docs.pingcap.com/tidbcloud/information-schema-sequences.md): Learn the `SEQUENCES` INFORMATION_SCHEMA table.
+      - [`SESSION_VARIABLES`](https://docs.pingcap.com/tidbcloud/information-schema-session-variables.md): Learn the `SESSION_VARIABLES` INFORMATION_SCHEMA table.
+      - [`STATISTICS`](https://docs.pingcap.com/tidbcloud/information-schema-statistics.md): Learn the `STATISTICS` information_schema table.
+      - [`TABLES`](https://docs.pingcap.com/tidbcloud/information-schema-tables.md): Learn the `TABLES` information_schema table.
+      - [`TABLE_CONSTRAINTS`](https://docs.pingcap.com/tidbcloud/information-schema-table-constraints.md): Learn the `TABLE_CONSTRAINTS` information_schema table.
+      - [`TABLE_STORAGE_STATS`](https://docs.pingcap.com/tidbcloud/information-schema-table-storage-stats.md): Learn the `TABLE_STORAGE_STATS` INFORMATION_SCHEMA table.
+      - [`TIDB_CHECK_CONSTRAINTS`](https://docs.pingcap.com/tidbcloud/information-schema-tidb-check-constraints.md): Learn the `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
+      - [`TIDB_INDEXES`](https://docs.pingcap.com/tidbcloud/information-schema-tidb-indexes.md): Learn the `TIDB_INDEXES` information_schema table.
+      - [`TIDB_INDEX_USAGE`](https://docs.pingcap.com/tidbcloud/information-schema-tidb-index-usage.md): Learn the `TIDB_INDEX_USAGE` INFORMATION_SCHEMA table.
+      - [`TIDB_TRX`](https://docs.pingcap.com/tidbcloud/information-schema-tidb-trx.md): Learn the `TIDB_TRX` INFORMATION_SCHEMA table.
+      - [`TIFLASH_REPLICA`](https://docs.pingcap.com/tidbcloud/information-schema-tiflash-replica.md): Learn the `TIFLASH_REPLICA` INFORMATION_SCHEMA table.
+      - [`TIFLASH_SEGMENTS`](https://docs.pingcap.com/tidbcloud/information-schema-tiflash-segments.md): Learn the `TIFLASH_SEGMENTS` information_schema table.
+      - [`TIFLASH_TABLES`](https://docs.pingcap.com/tidbcloud/information-schema-tiflash-tables.md): Learn the `TIFLASH_TABLES` information_schema table.
+      - [`USER_ATTRIBUTES`](https://docs.pingcap.com/tidbcloud/information-schema-user-attributes.md): Learn the `USER_ATTRIBUTES` INFORMATION_SCHEMA table.
+      - [`USER_PRIVILEGES`](https://docs.pingcap.com/tidbcloud/information-schema-user-privileges.md): Learn the `USER_PRIVILEGES` information_schema table.
+      - [`VARIABLES_INFO`](https://docs.pingcap.com/tidbcloud/information-schema-variables-info.md): Learn the `VARIABLES_INFO` information_schema table.
+      - [`VIEWS`](https://docs.pingcap.com/tidbcloud/information-schema-views.md): Learn the `VIEWS` INFORMATION_SCHEMA table.
+    - PERFORMANCE_SCHEMA
+      - [Overview](https://docs.pingcap.com/tidbcloud/performance-schema.md): TiDB implements the performance_schema for viewing system metadata.
+      - [`SESSION_CONNECT_ATTRS`](https://docs.pingcap.com/tidbcloud/performance-schema-session-connect-attrs.md): Learn the `SESSION_CONNECT_ATTRS` performance_schema table.
+    - SYS
+      - [Overview](https://docs.pingcap.com/tidbcloud/sys-schema.md): Learn about the system tables in the `sys` schema.
+      - [`schema_unused_indexes`](https://docs.pingcap.com/tidbcloud/sys-schema-unused-indexes.md): Learn about the `schema_unused_indexes` table in the `sys` schema.
+  - [Metadata Lock](https://docs.pingcap.com/tidbcloud/metadata-lock.md): Introduce the concept, principles, and implementation details of metadata lock in TiDB.
+  - [Use UUIDs](https://docs.pingcap.com/tidbcloud/uuid.md): UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
+  - [TiDB Accelerated Table Creation](https://docs.pingcap.com/tidbcloud/accelerated-table-creation.md): Learn the concept, principles, and implementation details of performance optimization for creating tables in TiDB.
+- API Reference ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](https://docs.pingcap.com/tidbcloud/api-overview.md): Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
+  - v1beta1
+    - [Billing](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
+    - [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
+    - [MSP (Deprecated)](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
+  - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
+- CLI Reference ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](https://docs.pingcap.com/tidbcloud/cli-reference.md): Provides an overview of TiDB Cloud CLI.
+  - auth
+    - [login](https://docs.pingcap.com/tidbcloud/ticloud-auth-login.md): The reference of `ticloud auth login`.
+    - [logout](https://docs.pingcap.com/tidbcloud/ticloud-auth-logout.md): The reference of `ticloud auth logout`.
+    - [whoami](https://docs.pingcap.com/tidbcloud/ticloud-auth-whoami.md): The reference of `ticloud auth whoami`.
+  - serverless
+    - [capacity](https://docs.pingcap.com/tidbcloud/ticloud-serverless-capacity.md): The reference of `ticloud serverless capacity`.
+    - [create](https://docs.pingcap.com/tidbcloud/ticloud-cluster-create.md): The reference of `ticloud serverless create`.
+    - [delete](https://docs.pingcap.com/tidbcloud/ticloud-cluster-delete.md): The reference of `ticloud serverless delete`.
+    - [describe](https://docs.pingcap.com/tidbcloud/ticloud-cluster-describe.md): The reference of `ticloud serverless describe`.
+    - [list](https://docs.pingcap.com/tidbcloud/ticloud-cluster-list.md): The reference of `ticloud serverless list`.
+    - [update](https://docs.pingcap.com/tidbcloud/ticloud-serverless-update.md): The reference of `ticloud serverless update`.
+    - [spending-limit](https://docs.pingcap.com/tidbcloud/ticloud-serverless-spending-limit.md): The reference of `ticloud serverless spending-limit`.
+    - [region](https://docs.pingcap.com/tidbcloud/ticloud-serverless-region.md): The reference of `ticloud serverless region`.
+    - [shell](https://docs.pingcap.com/tidbcloud/ticloud-serverless-shell.md): The reference of `ticloud serverless shell`.
+    - branch
+      - [create](https://docs.pingcap.com/tidbcloud/ticloud-branch-create.md): The reference of `ticloud serverless branch create`.
+      - [delete](https://docs.pingcap.com/tidbcloud/ticloud-branch-delete.md): The reference of `ticloud serverless branch delete`.
+      - [describe](https://docs.pingcap.com/tidbcloud/ticloud-branch-describe.md): The reference of `ticloud serverless branch describe`.
+      - [list](https://docs.pingcap.com/tidbcloud/ticloud-branch-list.md): The reference of `ticloud serverless branch list`.
+      - [shell](https://docs.pingcap.com/tidbcloud/ticloud-branch-shell.md): The reference of `ticloud serverless branch shell`.
+    - import
+      - [cancel](https://docs.pingcap.com/tidbcloud/ticloud-import-cancel.md): The reference of `ticloud serverless import cancel`.
+      - [describe](https://docs.pingcap.com/tidbcloud/ticloud-import-describe.md): The reference of `ticloud serverless import describe`.
+      - [list](https://docs.pingcap.com/tidbcloud/ticloud-import-list.md): The reference of `ticloud serverless import list`.
+      - [start](https://docs.pingcap.com/tidbcloud/ticloud-import-start.md): The reference of `ticloud serverless import start`.
+    - export
+      - [create](https://docs.pingcap.com/tidbcloud/ticloud-serverless-export-create.md): The reference of `ticloud serverless export create`.
+      - [describe](https://docs.pingcap.com/tidbcloud/ticloud-serverless-export-describe.md): The reference of `ticloud serverless export describe`.
+      - [list](https://docs.pingcap.com/tidbcloud/ticloud-serverless-export-list.md): The reference of `ticloud serverless export list`.
+      - [cancel](https://docs.pingcap.com/tidbcloud/ticloud-serverless-export-cancel.md): The reference of `ticloud serverless export cancel`.
+      - [download](https://docs.pingcap.com/tidbcloud/ticloud-serverless-export-download.md): The reference of `ticloud serverless export download`.
+    - sql-user
+      - [create](https://docs.pingcap.com/tidbcloud/ticloud-serverless-sql-user-create.md): The reference of `ticloud serverless sql-user create`.
+      - [delete](https://docs.pingcap.com/tidbcloud/ticloud-serverless-sql-user-delete.md): The reference of `ticloud serverless sql-user delete`.
+      - [list](https://docs.pingcap.com/tidbcloud/ticloud-serverless-sql-user-list.md): The reference of `ticloud serverless sql-user list`.
+      - [update](https://docs.pingcap.com/tidbcloud/ticloud-serverless-sql-user-update.md): The reference of `ticloud serverless sql-user update`.
+    - authorized-network
+      - [create](https://docs.pingcap.com/tidbcloud/ticloud-serverless-authorized-network-create.md): The reference of `ticloud serverless authorized-network create`.
+      - [delete](https://docs.pingcap.com/tidbcloud/ticloud-serverless-authorized-network-delete.md): The reference of `ticloud serverless authorized-network delete`.
+      - [list](https://docs.pingcap.com/tidbcloud/ticloud-serverless-authorized-network-list.md): The reference of `ticloud serverless authorized-network list`.
+      - [update](https://docs.pingcap.com/tidbcloud/ticloud-serverless-authorized-network-update.md): The reference of `ticloud serverless authorized-network update`.
+    - audit-log
+      - config
+        - [update](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-config-update.md): The reference of `ticloud serverless audit-log config update`.
+        - [describe](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-config-describe.md): The reference of `ticloud serverless audit-log config describe`.
+      - filter-rule
+        - [create](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-filter-rule-create.md): The reference of `ticloud serverless audit-log filter-rule create`.
+        - [delete](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-filter-rule-delete.md): The reference of `ticloud serverless audit-log filter-rule delete`.
+        - [describe](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-filter-rule-describe.md): The reference of `ticloud serverless audit-log filter-rule describe`.
+        - [list](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-filter-rule-list.md): The reference of `ticloud serverless audit-log filter-rule list`.
+        - [update](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-filter-rule-update.md): The reference of `ticloud serverless audit-log filter-rule update`.
+        - [template](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-filter-rule-template.md): The reference of `ticloud serverless audit-log filter-rule template`.
+      - [download](https://docs.pingcap.com/tidbcloud/ticloud-serverless-audit-log-download.md): The reference of `ticloud serverless audit-log download`.
+  - [completion](https://docs.pingcap.com/tidbcloud/ticloud-completion.md): The reference of `ticloud completion`.
+  - config
+    - [create](https://docs.pingcap.com/tidbcloud/ticloud-config-create.md): The reference of `ticloud config create`.
+    - [delete](https://docs.pingcap.com/tidbcloud/ticloud-config-delete.md): The reference of `ticloud config delete`.
+    - [describe](https://docs.pingcap.com/tidbcloud/ticloud-config-describe.md): The reference of `ticloud config describe`.
+    - [edit](https://docs.pingcap.com/tidbcloud/ticloud-config-edit.md): The reference of `ticloud config edit`.
+    - [list](https://docs.pingcap.com/tidbcloud/ticloud-config-list.md): The reference of `ticloud config list`.
+    - [set](https://docs.pingcap.com/tidbcloud/ticloud-config-set.md): The reference of `ticloud config set`.
+    - [use](https://docs.pingcap.com/tidbcloud/ticloud-config-use.md): The reference of `ticloud config use`.
+  - project
+    - [list](https://docs.pingcap.com/tidbcloud/ticloud-project-list.md): The reference of `ticloud project list`.
+  - [upgrade](https://docs.pingcap.com/tidbcloud/ticloud-upgrade.md): The reference of `ticloud upgrade`.
+  - [help](https://docs.pingcap.com/tidbcloud/ticloud-help.md): The reference of `ticloud help`.
+- General Reference
+  - TiDB Cluster Architecture
+    - [Overview](https://docs.pingcap.com/tidbcloud/tidb-architecture.md): The key architecture components of the TiDB platform
+    - [Storage](https://docs.pingcap.com/tidbcloud/tidb-storage.md): Understand the storage layer of a TiDB database.
+    - [Computing](https://docs.pingcap.com/tidbcloud/tidb-computing.md): Understand the computing layer of the TiDB database.
+    - [Scheduling](https://docs.pingcap.com/tidbcloud/tidb-scheduling.md): Introduces the PD scheduling component in a TiDB cluster.
+    - [TSO](https://docs.pingcap.com/tidbcloud/tso.md): Learn about TimeStamp Oracle (TSO) in TiDB.
+  - Storage Engines
+    - TiKV
+        - [TiKV Overview](https://docs.pingcap.com/tidbcloud/tikv-overview.md): An overview of the TiKV storage engine.
+        - [RocksDB Overview](https://docs.pingcap.com/tidbcloud/rocksdb-overview.md): Learn the basic concepts and working principles of RocksDB.
+    - TiFlash
+      - [TiFlash Overview](https://docs.pingcap.com/tidbcloud/tiflash-overview.md): Learn the architecture and key features of TiFlash.
+      - [Spill to Disk](https://docs.pingcap.com/tidbcloud/tiflash-spill-disk.md): Learn how TiFlash spills data to disk and how to customize the spill behavior.
+  - TiDB Cloud Partner Web Console
+    - [TiDB Cloud Partners](https://docs.pingcap.com/tidbcloud/tidb-cloud-partners.md): Learn how to use the TiDB Cloud Partner web console as a reseller and Managed Service Provider (MSP).
+    - [MSP Customer](https://docs.pingcap.com/tidbcloud/managed-service-provider-customer.md): Learn how to become a Managed Service Provider (MSP) customer.
+    - [Reseller's Customer](https://docs.pingcap.com/tidbcloud/cppo-customer.md): Learn how to become a reseller's customer.
+  - [TiDB Cloud Starter and Essential Limitations](https://docs.pingcap.com/tidbcloud/serverless-limitations.md): Learn about the limitations of TiDB Cloud Starter.
+  - [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features.md): Learn about the limited SQL features on TiDB Cloud.
+  - [TiDB Limitations](https://docs.pingcap.com/tidbcloud/tidb-limitations.md): Learn the usage limitations of TiDB.
+  - [System Variables](https://docs.pingcap.com/tidbcloud/system-variables.md): Use system variables to optimize performance or alter running behavior.
+  - [Server Status Variables](https://docs.pingcap.com/tidbcloud/status-variables.md): Use status variables to see the system and session status
+  - [Table Filter](https://docs.pingcap.com/tidbcloud/table-filter.md): Usage of table filter feature in TiDB tools.
+  - [URI Formats of External Storage Services](https://docs.pingcap.com/tidbcloud/external-storage-uri.md): Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+  - [DDL Execution Principles and Best Practices](https://docs.pingcap.com/tidbcloud/ddl-introduction.md): Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
+  - [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidbcloud/troubleshoot-data-inconsistency-errors.md): Learn how to deal with errors reported by the consistency check between data and indexes.
+  - [Notifications](https://docs.pingcap.com/tidbcloud/notifications.md): Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
+- Support Plan
+  - [Connected Care Overview](https://docs.pingcap.com/tidbcloud/connected-care-overview.md): Introduces the new generation of TiDB Cloud support services - Connected Care.
+  - [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail.md): Introduces detailed information about the Connected Care support services for TiDB Cloud.
+  - Connected Care Support Service Features
+    - [Connected: AI Chat in IM](https://docs.pingcap.com/tidbcloud/connected-ai-chat-in-im.md): Introduces detailed information about the AI chat in Instant Message (IM).
+    - Connected: IM Ticket Creation and Update Subscription
+      - [Create Tickets and Subscribe to Ticket Updates via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-creation.md): Introduces detailed information about the Slack ticket creation and update subscription.
+      - [Create Tickets and Subscribe to Ticket Updates via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-creation.md): Introduces detailed information about the Lark ticket creation and update subscription.
+    - Connected: IM Interaction for Support Tickets
+      - [Interact with Support Tickets via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-interaction.md): Introduces detailed information about the Slack interaction for support tickets.
+      - [Interact with Support Tickets via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-interaction.md): Introduces detailed information about the Lark interaction for support tickets
+  - [Get Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support.md): Learn how to contact the support team of TiDB Cloud.
+- FAQs
+  - [TiDB Cloud FAQs](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq.md): Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud.
+- [Glossary](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary.md): Learn the terms used in TiDB Cloud.
+
+## RELEASES
+
+- Release Notes
+  - [2025](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes.md): Learn about the release notes of TiDB Cloud in 2025.

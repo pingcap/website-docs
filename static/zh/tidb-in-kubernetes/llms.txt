@@ -1,0 +1,234 @@
+# TiDB on Kubernetes
+
+> 使用 PingCAP 提供的 TiDB Operator，你可以在公有云或自托管的 Kubernetes 集群上自动运维 TiDB 集群，实现 TiDB 在 Kubernetes 上的无缝运行。
+
+- [TiDB on Kubernetes 文档](https://docs.pingcap.com/zh/tidb-in-kubernetes/v1.6/)
+- 关于 TiDB Operator
+  - [简介](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/tidb-operator-overview.md): 介绍 TiDB Operator 的整体架构及使用方式。
+  - [v1.6 新特性](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/whats-new-in-v1.6.md): 了解 TiDB Operator 1.6.0 版本引入的新特性。
+- [快速上手](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/get-started.md): 介绍如何快速地在 Kubernetes 上使用 TiDB Operator 部署 TiDB 集群
+- 部署
+  - 自托管的 Kubernetes
+    - [集群环境要求](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/prerequisites.md): 介绍在 Kubernetes 上部署 TiDB 集群的软硬件环境需求。
+    - [配置 Storage Class](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/configure-storage-class.md): 介绍 Kubernetes 上的数据持久化存储类型配置。
+    - [部署 TiDB Operator](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tidb-operator.md): 了解如何在 Kubernetes 上部署 TiDB Operator。
+    - [配置 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/configure-a-tidb-cluster.md): 了解如何在 Kubernetes 中配置 TiDB 集群。
+    - [部署 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-on-general-kubernetes.md): 介绍如何在标准 Kubernetes 集群上通过 TiDB Operator 部署 TiDB 集群。
+    - [初始化 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/initialize-a-cluster.md): 介绍如何初始化配置 Kubernetes 上的 TiDB 集群。
+    - [访问 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/access-tidb.md): 介绍如何访问 Kubernetes 上的 TiDB 集群。
+  - 公有云的 Kubernetes
+    - [Amazon EKS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-on-aws-eks.md): 介绍如何在 AWS EKS (Elastic Kubernetes Service) 上部署 TiDB 集群。
+    - [Google Cloud GKE](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-on-gcp-gke.md): 了解如何在 Google Cloud GKE 上部署 TiDB 集群。
+    - [Azure AKS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-on-azure-aks.md): 介绍如何在 Azure AKS (Azure Kubernetes Service) 上部署 TiDB 集群。
+  - [在 ARM64 机器上部署 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-cluster-on-arm64.md): 本文档介绍如何在 ARM64 机器上部署 TiDB 集群
+  - [部署 TiDB HTAP 存储引擎 TiFlash](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiflash.md): 了解如何在 Kubernetes 上为已有 TiDB 集群部署 TiDB HTAP 存储引擎 TiFlash。
+  - [部署 TiDB 负载均衡 TiProxy](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tiproxy.md): 了解如何在 Kubernetes 上为已有 TiDB 集群部署负载均衡 TiProxy。
+  - 跨多个 Kubernetes 集群部署 TiDB 集群
+    - [构建多个网络互通的 AWS EKS 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/build-multi-aws-eks.md): 介绍如何构建多个 AWS EKS 集群互通网络，为跨 Kubernetes 集群部署 TiDB 集群作准备
+    - [构建多个网络互通的 GKE 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/build-multi-gcp-gke.md): 介绍如何构建多个 Google Cloud GKE 集群互通网络，为跨 Kubernetes 集群部署 TiDB 集群作准备
+    - [跨多个 Kubernetes 集群部署 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tidb-cluster-across-multiple-kubernetes.md): 本文档介绍如何实现跨多个 Kubernetes 集群部署 TiDB 集群
+  - [部署 TiDB 异构集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-heterogeneous-tidb-cluster.md): 本文档介绍如何为已有的 TiDB 集群部署一个异构集群。
+  - [部署增量数据同步工具 TiCDC](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-ticdc.md): 了解如何在 Kubernetes 上部署 TiCDC。
+  - [部署 Binlog 收集工具](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tidb-binlog.md): 了解如何在 Kubernetes 上部署 TiDB 集群的 TiDB Binlog。
+- 监控与告警
+  - [部署 TiDB 集群监控与告警](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/monitor-a-tidb-cluster.md): 介绍如何监控 TiDB 集群。
+  - [使用 TiDB Dashboard 监控诊断 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/access-dashboard.md): 介绍如何在 Kubernetes 环境下访问 TiDB Dashboard
+  - [聚合多个 TiDB 集群的监控数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/aggregate-multiple-cluster-monitor-data.md): 通过 Thanos 框架聚合多个 TiDB 集群的监控数据
+  - [跨多个 Kubernetes 集群监控 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tidb-monitor-across-multiple-kubernetes.md): 介绍如何对跨多个 Kubernetes 集群的 TiDB 集群进行监控，并集成到常见 Prometheus 多集群监控体系中
+  - [开启 TidbMonitor 动态配置](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-monitor-dynamic-configuration.md): 动态更新 TidbMonitor 配置
+  - [开启 TidbMonitor 分片功能](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-monitor-shards.md): 如何使用 TidbMonitor 分片功能
+- 数据迁移
+  - [导入集群数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning.md): 使用 TiDB Lightning 导入集群数据。
+  - 从 MySQL 迁移
+    - [部署 DM](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-tidb-dm.md): 了解如何在 Kubernetes 上部署 TiDB DM 集群。
+    - [使用 DM 迁移 MySQL 数据到 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/use-tidb-dm.md): 了解如何在 Kubernetes 上使用 TiDB DM 迁移数据。
+  - [迁移 TiDB 至 Kubernetes](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/migrate-tidb-to-kubernetes.md): 介绍如何将部署在物理机或虚拟机中的 TiDB 迁移至 Kubernetes 集群中
+- 运维管理
+  - 安全
+    - [为 MySQL 客户端开启 TLS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-tls-for-mysql-client.md): 在 Kubernetes 上如何为 TiDB 集群的 MySQL 客户端开启 TLS。
+    - [为 TiDB 组件间开启 TLS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-tls-between-components.md): 在 Kubernetes 上如何为 TiDB 集群组件间开启 TLS。
+    - [为 DM 组件开启 TLS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-tls-for-dm.md): 在 Kubernetes 上如何为 DM 开启 TLS。
+    - [同步数据到开启 TLS 的下游服务](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-tls-for-ticdc-sink.md): 了解在 Kubernetes 上如何同步数据到开启 TLS 的下游服务。
+    - [更新和替换 TLS 证书](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/renew-tls-certificate.md): 介绍如何更新和替换 TiDB 组件间的 TLS 证书。
+    - [以非 root 用户运行](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/containers-run-as-non-root-user.md): 了解如何以非 root 用户运行容器。
+  - [扩缩容](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/scale-a-tidb-cluster.md): 了解如何在 Kubernetes 上对 TiDB 集群手动扩缩容。
+  - 升级
+    - [升级 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster.md): 介绍如何升级 Kubernetes 上的 TiDB 集群。
+    - 升级 TiDB Operator
+      - [常规升级](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/upgrade-tidb-operator.md): 介绍如何升级 TiDB Operator。
+      - [灰度升级](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/canary-upgrade-tidb-operator.md): 介绍如何灰度升级 TiDB Operator，避免 TiDB Operator 升级对整个 Kubernetes 集群中的所有 TiDB 集群产生不可预知的影响。
+  - 备份与恢复
+    - [备份与恢复简介](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-restore-overview.md): 介绍如何使用 BR、Dumpling、TiDB Lightning 工具对 Kubernetes 上的 TiDB 集群进行数据备份和数据恢复。
+    - [备份与恢复 CR 介绍](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-restore-cr.md): 介绍用于备份与恢复的 Custom Resource (CR) 资源的各字段。
+    - [远程存储访问授权](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/grant-permissions-to-remote-storage.md): 介绍如何授权访问远程存储。
+    - 使用 Amazon S3 兼容的存储
+      - [使用 BR 备份 TiDB 集群数据到兼容 Amazon S3 的存储](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br.md): 介绍如何使用 BR 备份 TiDB 集群数据到兼容 Amazon S3 的存储。
+      - [使用 BR 恢复 Amazon S3 兼容存储上的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br.md): 介绍如何使用 BR 恢复 Amazon S3 兼容存储上的备份数据。
+      - [使用 Dumpling 备份 TiDB 集群数据到兼容 Amazon S3 的存储](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-s3-using-job.md): 本文介绍如何使用 Dumpling 将 TiDB 集群数据备份到兼容 Amazon S3 的存储。
+      - [使用 TiDB Lightning 恢复 Amazon S3 兼容存储上的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-s3-using-job.md): 介绍如何使用 TiDB Lightning 将兼容 Amazon S3 存储上的备份数据恢复到 TiDB 集群。
+      - [使用 Dumpling 备份 TiDB 集群数据到兼容 Amazon S3 的存储（已弃用）](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-s3.md): 介绍如何使用 Dumpling 备份 TiDB 集群数据到兼容 S3 的存储。
+      - [使用 TiDB Lightning 恢复 Amazon S3 兼容存储上的备份数据（已弃用）](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-s3.md): 了解如何使用 TiDB Lightning 将兼容 S3 存储上的备份数据恢复到 TiDB 集群。
+    - 使用 Google Cloud Storage
+      - [使用 BR 备份 TiDB 集群数据到 GCS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-gcs-using-br.md): 介绍如何使用 BR 备份 TiDB 集群到 Google Cloud Storage (GCS)。
+      - [使用 BR 恢复 GCS 上的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-gcs-using-br.md): 介绍如何使用 BR 将存储在 GCS 上的备份数据恢复到 TiDB 集群。
+      - [使用 Dumpling 备份 TiDB 集群数据到 GCS](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-gcs-using-job.md): 本文介绍如何使用 Dumpling 将 TiDB 集群数据备份到 Google Cloud Storage (GCS)。
+      - [使用 TiDB Lightning 恢复 GCS 上的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-gcs-using-job.md): 介绍如何使用 TiDB Lightning 将存储在 Google Cloud Storage (GCS) 上的备份数据恢复到 TiDB 集群。
+      - [使用 Dumpling 备份 TiDB 集群数据到 GCS（已弃用）](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-gcs.md): 介绍如何使用 Helm 部署 Dumpling 将 TiDB 集群数据备份到 Google Cloud Storage (GCS)。
+      - [使用 TiDB Lightning 恢复 GCS 上的备份数据（已弃用）](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-gcs.md): 介绍如何使用 TiDB Lightning 将存储在 GCS 上的备份数据恢复到 TiDB 集群。
+    - 使用 Azure Blob Storage
+      - [使用 BR 备份 TiDB 集群数据到 Azure Blob Storage](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-azblob-using-br.md): 介绍如何使用 BR 备份 TiDB 集群数据到 Azure Blob Storage 上。
+      - [使用 BR 恢复 Azure Blob Storage 上的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-azblob-using-br.md): 介绍如何使用 BR 恢复 Azure Blob Storage 上的备份数据。
+      - [使用 Dumpling 备份 TiDB 集群数据到 Azure Blob Storage](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-blob-using-job.md): 本文介绍如何使用 Dumpling 将 TiDB 集群数据备份到 Azure Blob Storage。
+      - [使用 TiDB Lightning 恢复 Azure Blob Storage 的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-blob-using-job.md): 介绍如何使用 TiDB Lightning 将存储在 Azure Blob Storage 上的备份数据恢复到 TiDB 集群。
+    - 使用持久卷
+      - [使用 BR 备份 TiDB 集群数据到持久卷](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-pv-using-br.md): 介绍如何使用 BR 备份 TiDB 集群数据到持久卷。
+      - [使用 BR 恢复持久卷上的备份数据](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-pv-using-br.md): 介绍如何将存储在持久卷上的备份数据恢复到 TiDB 集群。
+    - 基于快照的备份和恢复
+      - [功能架构](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/volume-snapshot-backup-restore.md): 了解 TiDB EBS 卷快照的备份恢复架构设计。
+      - [基于 EBS 快照备份 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-to-aws-s3-by-snapshot.md): 介绍如何基于 EBS 卷快照使用 TiDB Operator 备份 TiDB 集群数据到 S3。
+      - [基于 EBS 快照恢复 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restore-from-aws-s3-by-snapshot.md): 介绍如何将存储在 S3 上的备份元数据以及 EBS 卷快照恢复到 TiDB 集群。
+      - [基于 EBS 卷快照备份恢复的性能介绍](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-restore-snapshot-perf.md): 了解 EBS 卷快照备份恢复的性能基线。
+      - [基于 EBS 快照备份恢复的常见问题](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/backup-restore-faq.md): 介绍卷快照备份恢复中的常见问题以及解决方案。
+  - 运维
+    - [重启 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/restart-a-tidb-cluster.md): 了解如何重启 Kubernetes 集群上的 TiDB 集群。
+    - [销毁 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/destroy-a-tidb-cluster.md): 介绍如何销毁 Kubernetes 集群上的 TiDB 集群。
+    - [查看 TiDB 日志](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/view-logs.md): 介绍如何查看 TiDB 集群各组件日志以及 TiDB 慢查询日志。
+    - [修改 TiDB 集群配置](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/modify-tidb-configuration.md): 了解如何修改部署在 Kubernetes 上的 TiDB 的集群配置。
+    - [配置集群故障自动转移](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/use-auto-failover.md): 介绍 Kubernetes 上的 TiDB 集群故障自动转移的功能。
+    - [暂停 TiDB 集群同步](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/pause-sync-of-tidb-cluster.md): 介绍如何暂停同步 Kubernetes 上的 TiDB 集群
+    - [挂起 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/suspend-tidb-cluster.md): 了解如何通过配置挂起 Kubernetes 上的 TiDB 集群。
+    - [使用多套 TiDB Operator 单独管理不同的 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-multiple-tidb-operator.md): 介绍如何部署多套 TiDB Operator 分别管理不同的 TiDB 集群。
+    - [维护 TiDB 集群所在的 Kubernetes 节点](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/maintain-a-kubernetes-node.md): 介绍如何维护 TiDB 集群所在的 Kubernetes 节点。
+    - [从 Helm 2 迁移到 Helm 3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/migrate-to-helm3.md): 介绍如何将由 Helm 2 管理的组件迁移到由 Helm 3 管理。
+    - 为 TiDB 集群更换节点
+        - [更换云存储节点](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/replace-nodes-for-cloud-disk.md): 介绍如何为使用云存储的 TiDB 集群更换节点。
+        - [更换本地存储节点](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/replace-nodes-for-local-disk.md): 介绍如何为使用本地存储的 TiDB 集群更换节点。
+  - 灾难恢复
+    - [恢复误删的 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/recover-deleted-cluster.md): 介绍如何恢复误删的 TiDB 集群。
+    - [恢复 PD 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/pd-recover.md): 了解如何使用 PD Recover 恢复 PD 集群。
+- 故障诊断
+  - [使用技巧](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/tips.md): 介绍 Kubernetes 上 TiDB 集群管理常用使用技巧。
+  - [部署错误](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/deploy-failures.md): 介绍 Kubernetes 上 TiDB 部署的常见错误以及处理办法。
+  - [集群异常](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/exceptions.md): 介绍 TiDB 集群运行过程中常见异常以及处理办法。
+  - [网络问题](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/network-issues.md): 介绍 Kubernetes 上 TiDB 集群的常见网络问题以及诊断解决方案。
+  - [使用 PingCAP Clinic 诊断 TiDB 集群](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/clinic-user-guide.md): 详细介绍在使用 TiDB Operator 部署的集群上如何安装、使用 PingCAP Clinic 诊断服务进行数据采集和快速检查。
+- [常见问题](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/faq.md): 介绍 Kubernetes 上的 TiDB 集群常见问题以及解决方案。
+- 参考
+  - 架构
+    - [TiDB Operator 架构](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/architecture.md): 了解 TiDB Operator 架构及其工作原理。
+    - [TiDB Scheduler 扩展调度器](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/tidb-scheduler.md): 了解 TiDB Scheduler 扩展调度器及其工作原理。
+    - [增强型 StatefulSet 控制器](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/advanced-statefulset.md): 介绍如何开启、使用增强型 StatefulSet 控制器
+    - [准入控制器](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/enable-admission-webhook.md): 介绍如何开启 TiDB Operator 准入控制器以及它的作用。
+  - [Sysbench 性能测试](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/benchmark-sysbench.md): TiDB Operator GA 发布后，我们在 GKE 平台进行了全面的性能测试。测试结果显示，在 Host 网络模式下，TiDB 性能略优于 Pod 网络模式（约 7%）。此外，使用 Ubuntu 系统的 Host 网络模式下，TiDB 性能也略优于 COS 系统（约 9%）。在集群外访问时，使用 Load Balancer 会略损失性能（约 5%）。多可用区下节点之间的延迟增加，会对 TiDB 性能产生一定影响（30% ~ 6%）。计算型机型相对普通型机器带来了很大 QPS 提升（50% ~ 60%）。
+  - [API 参考文档](<https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md>)
+  - [Cheat Sheet](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/cheat-sheet.md): 介绍管理 TiDB 集群的 Command Cheat Sheet。
+  - [TiDB Operator RBAC 规则](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/tidb-operator-rbac.md): 介绍 TiDB Operator 需要的 RBAC 规则。
+  - 工具
+    - [TiDB Toolkit](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/tidb-toolkit.md): 详细介绍 Kubernetes 上的 TiDB 相关的工具及其使用方法。
+  - 配置
+    - [tidb-drainer chart 配置](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer.md): 了解 Kubernetes 上的 TiDB Binlog Drainer 配置参数。
+  - [日志收集](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/logs-collection.md): 介绍收集 TiDB 及相关组件日志的方法。
+  - [Kubernetes 监控与告警](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/monitor-kubernetes.md): 介绍如何监控 Kubernetes。
+  - [PingCAP Clinic 数据采集范围说明](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/clinic-data-collection.md): 详细说明 PingCAP Clinic 诊断服务在使用 Operator 部署的 TiDB 集群中能够采集的诊断数据类型、输出文件及采集参数。
+- 版本发布历史
+  - v1.6
+    - [1.6.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.6.4.md): 了解 TiDB Operator 1.6.4 版本的新功能。
+    - [1.6.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.6.3.md): 了解 TiDB Operator 1.6.3 版本的 Bug 修复。
+    - [1.6.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.6.2.md): 了解 TiDB Operator 1.6.2 版本的新功能、优化提升，以及 Bug 修复。
+    - [1.6.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.6.1.md): 了解 TiDB Operator 1.6.1 版本的新功能、优化提升，以及 Bug 修复。
+    - [1.6 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.6.0.md): 了解 TiDB Operator 1.6.0 版本的新功能、优化提升，以及 Bug 修复。
+    - [1.6.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.6.0-beta.1.md): 了解 TiDB Operator 1.6.0-beta.1 版本的新功能、优化提升，以及 Bug 修复。
+  - v1.5
+    - [1.5.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.5.md): 了解 TiDB Operator 1.5.5 版本的新功能和优化提升。
+    - [1.5.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.4.md): 了解 TiDB Operator 1.5.4 版本的优化提升和 Bug 修复。
+    - [1.5.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.3.md): 了解 TiDB Operator 1.5.3 版本的新功能和 Bug 修复。
+    - [1.5.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.2.md): TiDB Operator 1.5.2 版本新增了对 AWS EBS 快照的备份能力的跨多个 K8S 集群的支持。优化了重启 PD、TiKV 时的启动流程，修复了替换 volume 时可能出现的问题。
+    - [1.5.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.1.md): TiDB Operator 1.5.1 发布，新增支持替换 PD、TiKV 和 TiDB 所使用的 volume。修复了多个 Bug，包括手动触发 TiKV eviction 时 PVC Modifier 报错的问题，替换 TiKV volume 过程中再触发 TiKV eviction 时可能造成 TiDB Operator reconcile 死锁的问题，TidbCluster 在 Upgrade 过程中可能无法回滚的问题，以及 MaxReservedTime 选项没有被 backup schedule gc 使用的问题。
+    - [1.5 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.0.md): 了解 TiDB Operator 1.5.0 版本的新功能、优化提升，以及 Bug 修复。
+    - [1.5.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.5.0-beta.1.md): TiDB Operator 1.5.0-beta.1 发布，新增支持优雅重启 PD 和 TiDB Pod，使用 Advanced StatefulSet 管理 TiCDC 和 TiProxy，新增 TiDB Spec 字段，允许用户定义策略重启失败备份任务，升级 Kubernetes 依赖库至 v1.20 版本，添加与 reconciler 和 worker queue 相关的 Metric，优化滚动升级 TiKV 节点性能，允许用户自定义 Prometheus Scraping 相关配置，TiProxy 支持共享部分 TiDB 证书，配置 `spec.preferIPv6` 为 `true` 时，Service 的 `ipFamilyPolicy` 将配置为 `PreferDualStack`，添加统计协调流程失败计数的 Metric，修复了因为 metric 接口冲突而导致 pprof 接口无法访问的问题。
+  - v1.4
+    - [1.4.7](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.7.md): TiDB Operator 1.4.7 发布，修复了 BackupSchedule CR 字段中的 `logBackupTemplate` 字段变成可选值的问题。
+    - [1.4.6](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.6.md): TiDB Operator 1.4.6 发布，优化默认启用 volume resize 支持，修复备份恢复时报错问题，修复 TiCDC image tag 不符合语义化版本时无法 Graceful Drain TiCDC 的问题。
+    - [1.4.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.5.md): TiDB Operator 1.4.5 版本发布，优化了 TidbCluster 的错误处理相关 metrics 和 worker 队列相关 metrics，增加了 DM master 组件的 `startUpScriptVersion` 字段，以及跨 Kubernetes 集群滚动重启或缩容 TiCDC 集群的能力。同时修复了定时备份中取消 GC、Backup CR 字段可选值、TiDB Operator 未配置权限时的 panic 问题，以及 TidbCluster 中设置 `AdditionalVolumeMounts` 时可能的 panic 问题。
+    - [1.4.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.4.md): TiDB Operator 1.4.4 发布，新增支持在已部署 TiFlash 的集群上使用卷快照备份和恢复，准确显示备份大小，支持重试快照备份，集成管理日志备份和快照备份。修复了使用非语义版本格式的 TiDB 镜像同步失败的问题，使用卷快照备份一个已缩容的集群后无法恢复数据的问题，卷快照备份可能崩溃的问题，卷快照恢复可能在最后阶段失败的问题。
+    - [1.4.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.3.md): TiDB Operator 1.4.3 发布，修复了开启 `preferIPv6` 时 TiFlash 的 metric server 未监听正确 IPv6 地址的问题，以及在 AWS 环境中打开了 feature gate `VolumeModifying` 且 `StorageClass` 缺少 EBS 相关参数时 TiDB Operator 会一直尝试修改 EBS 参数的问题。
+    - [1.4.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.2.md): TiDB Operator 1.4.2 发布，修复了开启 `preferIPv6` 时 TiFlash 没有监听 IPv6 地址的问题。
+    - [1.4.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.1.md): TiDB Operator 1.4.1 版本发布，新增故障自动转移功能，优化了 TiDB Controller Manager 中 Kubernetes 客户端的配置，修复了未配置 PV 权限时 TiDB Controller Manager panic 的问题。
+    - [1.4 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.0.md): TiDB Operator 1.4.0 版本发布，新增支持独立管理 TiDB Dashboard，配置 TiKV 和 PD 的 Readiness Probe，以及基于 Amazon EBS 的 TiDB 集群 volume-snapshot 备份和恢复。优化支持 IPv6 网络环境，修复了基于 EBS 快照备份无法恢复到不同 namespace 的问题和日志备份停止占用 Complete 状态的 bug。
+    - [1.4.0-beta.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.0-beta.3.md): TiDB Operator 1.4.0-beta.3 发布，新增 TiProxy 实验性支持和基于 Amazon EBS 的 TiDB 集群 volume-snapshot 备份和恢复 GA。修复了拼写错误和清理卷快照备份失败的问题，以及大规模 TiKV 节点下备份 TiDB 集群失败的问题。
+    - [1.4.0-beta.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.0-beta.2.md): TiDB Operator 1.4.0-beta.2 发布日期为 2022 年 11 月 11 日。此版本修复了使用 Azure Blob Storage 时未设置前缀的问题，并升级了 AWS SDK 到 v1.44.72 以支持使用 AWS 的 Asia Pacific (Jakarta) 区域 (`ap-southeast-3`)。
+    - [1.4.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.0-beta.1.md): TiDB Operator 1.4.0-beta.1 发布，新增支持基于 Amazon EBS 的 TiDB 集群 volume-snapshot 备份和恢复（实验特性），修复了日志备份的 checkpoint ts 无法更新的问题。
+    - [1.4.0-alpha.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.4.0-alpha.1.md): TiDB Operator 1.4.0-alpha.1 发布，包含兼容性改动、滚动升级改动、新功能、优化提升和错误修复。新增自动设置 TiDB 的 location labels、新字段 `spec.tikv.scalePolicy` 与 `spec.tiflash.scalePolicy`、`startScriptVersion` 字段、BR 恢复集群到备份时间点、feature gate `VolumeModifying`、修改存储参数、配置 BR 的 `--check-requirements` 参数、使用字段 `additionalContainers` 自定义 Pod 容器配置。优化了 `TidbMonitor` 使用的 Prometheus 的 remoteWrite 配置和 TiFlash `Service` 添加 metric 端口。修复了集群扩缩容时的问题和 PD spec 为空导致 TiDB Operator 崩溃的问题。
+  - v1.3
+    - [1.3.10](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.10.md): TiDB Operator 1.3.10 发布，优化提升包括升级 Golang 版本到 1.19 以修复安全漏洞。
+    - [1.3.9](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.9.md): TiDB Operator 1.3.9 发布，修复了在已设置 `acrossK8s` 字段但未设置 `clusterDomain` 的情况下，PD 升级流程会卡住的问题。
+    - [1.3.8](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.8.md): TiDB Operator 1.3.8 版本发布，新增了为 `TidbCluster` 添加特殊 Annotation 的功能，支持配置 TiDB、TiKV 和 TiFlash 的 Pod 的最小等待时间。此外，还优化了支持优雅升级版本大于或等于 6.3.0 的 TiCDC pod。
+    - [1.3.7](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.7.md): TiDB Operator 1.3.7 版本发布，新增了暂停组件功能，优化了扩容完成后重建 StatefulSet 的流程，修复了本地存储升级 TiKV 和清理备份文件后残留的问题。
+    - [1.3.6](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.6.md): TiDB Operator 1.3.6 版本发布日期为 2022 年 7 月 5 日。此版本优化了扩容 PVC 对集群性能的影响，现在扩容 PVC 时按照 Pod 一个个扩容，并且在扩容 TiKV 的 PVC 前会先驱逐该 TiKV 上的 leader。
+    - [1.3.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.5.md): TiDB Operator 1.3.5 发布，新增功能支持使用 Azure Blob Storage 备份与恢复 TiDB 集群数据。
+    - [1.3.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.4.md): TiDB Operator 1.3.4 发布，优化提升包括在各个组件的状态信息中添加了 `volumes` 字段，以展示存储卷状态。
+    - [1.3.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.3.md): TiDB Operator 1.3.3 发布，新增了 `spec.tidb.service.port` 字段，修复了集群升级过程中可能泄漏的问题，更新了 `tidb-backup-manager` 镜像的基础镜像，修复了不兼容 ARM 架构的问题，修复了当 tidb Service 没有 Endpoint 时可能会 panic 的问题，修复了 Kubernetes 集群访问失败并重试后组件 Pod 的 Labels 和 Annotations 可能丢失的问题。
+    - [1.3.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.2.md): TiDB Operator 1.3.2 版本发布，优化支持在启用 Istio 的 Kubernetes 集群上部署与运行 TiDB，支持多架构 Docker 镜像包括 ARM 系统。
+    - [1.3.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.1.md): TiDB Operator 1.3.1 版本发布日期为 2022 年 2 月 24 日。此版本修复了 TiFlash 丢失元数据的问题，并添加了新的 `spec.dnsPolicy` 字段以支持配置 Pod 的 DNSPolicy。另外，`tidb-lightning` Helm chart 默认后端改为使用 `local`。还修复了 TiFlash 配置中缺少 `tmp_path` 字段时无法使用 TiFlash v5.4.0 及以后版本的问题，以及 Discovery 服务错误导致 TiDB 集群 PD 组件启动失败的问题。
+    - [1.3 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.0.md): TiDB Operator 1.3.0 版本发布，包括兼容性改动、新功能、优化提升和 Bug 修复。兼容性改动包括跨集群部署 TiDB 集群升级操作，TiFlash 升级操作需注意。新增功能包括支持内部组件访问 TiDB 时跳过服务端证书验证、设置所有组件 Pod 的 DNS 配置等。优化提升包括部署或更新组件的 StatefulSet 预先检查配置的 VolumeMount 是否存在，跨集群部署 TiDB 集群功能增强。Bug 修复包括修复 Kubernetes v1.23 及之后版本无法部署 tidb scheduler 的问题。
+    - [1.3.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.3.0-beta.1.md): TiDB Operator 1.3.0-beta.1 发布日期为 2022 年 1 月 12 日。此版本的兼容性改动包括删除 Pod `ValidatingWebhook` 和 `MutatingWebhook`，升级后不会影响 TiDB 集群管理。升级到 1.3.0-beta.1 版本后，需要按照操作来升级 TiDB Operator。此版本还支持新功能和优化提升，包括支持 TiFlash 的 init container 配置资源使用量，支持持续性能分析，以及优化 TidbMonitor 部署示例等。
+  - v1.2
+    - [1.2.7](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.7.md): TiDB Operator 1.2.7 发布，新增 `spec.pd.startUpScriptVersion` 字段，支持在 PD 启动脚本中使用 `dig` 命令解析域名。优化部署或更新组件的 StatefulSet，预先检查配置的 VolumeMount 是否存在，防止集群进行失败的滚动更新。
+    - [1.2.6](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.6.md): TiDB Operator 1.2.6 发布日期 2022 年 1 月 4 日。优化更新 Restore 和 Backup 状态时的重试逻辑。
+    - [1.2.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.5.md): TiDB Operator 1.2.5 版本发布，优化了 DM 配置、TiFlash init container 资源配置和 TiDB TLS 客户端认证参数配置。修复了组件启动脚本更新后的滚动更新问题、启用 TLS 后 TidbCluster spec 自动更新问题、TiKV Region leader 数量计算可能导致 goroutine 泄露的问题和一些高级别的安全问题。
+    - [1.2.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.4.md): TiDB Operator 1.2.4 版本发布，包括滚动升级改动、新功能、优化提升和 Bug 修复。滚动升级会导致 TidbMonitor Pod 删除重建。新增 TidbMonitor 支持用户自定义 Prometheus 告警规则和动态重新加载告警规则，以及支持批量删除备份数据。优化了 TiFlash 滚动升级流程，修复了镜像中的安全漏洞和备份数据残留的问题。
+    - [1.2.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.3.md): TiDB Operator 1.2.3 版本发布日期为 2021 年 9 月 7 日。此版本修复了升级到 TiDB Operator v1.2.2 时导致 TiFlash Pod 滚动重启的问题。
+    - [1.2.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.2.md): TiDB Operator 1.2.2 版本发布日期为 2021 年 9 月 3 日。滚动升级改动包括升级 TiDB Operator 会导致 TiDBMonitor Pod 和 TiFlash Pod 删除重建。新功能包括 TiDBMonitor 支持动态重新加载配置。Bug 修复包括修复 TiCDC 无法从低版本升级到 v5.2.0 的问题。
+    - [1.2.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.1.md): TiDB Operator 1.2.1 版本发布日期为 2021 年 8 月 18 日。滚动升级改动，如果部署 TiCDC 时配置了 hostNetwork 为 true，升级 TiDB Operator 后会导致 TiCDC Pod 删除重建。优化提升包括支持为 TidbCluster 的所有组件配置 hostNetwork，使所有组件都可以使用宿主机网络。
+    - [1.2 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.0.md): TiDB Operator 1.2.0 版本发布，包括滚动升级改动、新功能、优化提升和 Bug 修复。滚动升级改动包括升级 TiDB Operator 会导致 TidbMonitor Pod 删除重建。新功能包括支持为 `TiDBMonitor` 的 `Prometheus` 设置更细粒度的 `retentionTime` 和通过 `priorityClassName` 设置备份 Job 优先级。优化提升包括调整升级过程中驱逐 TiKV 的 Region Leader 超时的默认值。Bug 修复包括修复解析 `TiDBMonitor` 定义中 `Prometheus.RemoteWrite` 的 URL 可能失败的问题。
+    - [1.2.0-rc.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.0-rc.2.md): TiDB Operator 1.2.0-rc.2 发布，新增支持透传 TiCDC 的 TOML 格式配置、为 TiCDC 设置存储卷和挂载、自定义 Discovery、TidbMonitor 和 TidbInitializer 的标签和注释、修改 Grafana 仪表盘。优化支持未指定 BR toolImage tag 时将 TiKV 版本作为 tag、扩缩容 TiDB 过程中协调 PVC、增加 liveness 与 readiness 探测器。修复部署异构集群时可能 panic 的问题、TidbCluster spec 未更改时 TiDB service 与 TidbCluster 状态持续更新的问题。
+    - [1.2.0-rc.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.0-rc.1.md): TiDB Operator 1.2.0-rc.1 发布，滚动升级改动会导致 Pump Pod 删除重建。新增支持为 TidbCluster 中的 Pod 与 service 设置自定义的 label，以及对 Pump 的完整生命周期管理。优化提升包括隐藏数据库密码的展示、支持为 Grafana 配置额外的 volumeMount、为 TidbMonitor 增加额外的信息展示列，以及 TidbMonitor 支持将配置信息直接写入到 PD 的 etcd 中。Bug 修复包括对启用了 TLS 的 DmCluster 进行监控的问题、PD 在扩容过程中 member 数量统计不正确的问题、DM-master 可能无法成功重启的问题、`configUpdateStrategy` 从 `InPlace` 修改为 `RollingUpdate` 后可能造成的 TidbCluster 组件滚动更新的问题，以及使用 Dumpling 备份数据时可能失败的问题。
+    - [1.2.0-beta.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.0-beta.2.md): TiDB Operator 1.2.0-beta.2 版本发布，包括滚动升级改动、新功能、优化提升和 Bug 修复。新功能包括 TidbMonitor 支持监控多个启用了 TLS 的 TidbCluster，以及为所有 TiDB 组件设置安全上下文和拓扑约束。优化提升包括为 TidbMonitor Pod 增加 readiness 探测器和支持不生成 Prometheus 的告警规则。 Bug 修复包括修复 TiDB 实例缩容后仍在 TiDB Dashboard 中展示的问题和解决 TidbCluster CR 同步问题。
+    - [1.2.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.0-beta.1.md): TiDB Operator 1.2.0-beta.1 发布日期为 2021 年 4 月 7 日。此版本包含兼容性改动和滚动升级改动。新增功能包括为备份和恢复 Job 设置自定义环境变量，支持配置额外的 volume 和 volumeMount，以及支持设置自定义 Store 标签。优化提升方面包括增加重试机制解决 DNS 查询异常处理问题，优化 Thanos 的 example yaml，以及在 PD 的扩缩容和容灾过程中增加多 PVC 支持。Bug 修复方面包括修复挂载多 PVC 时容量设置错误的问题，修复 TidbMonitor 外部标签包含无法识别的环境变量的问题，以及修复备份或恢复 Pod 状态没有正常更新为 Failed 的问题。
+    - [1.2.0-alpha.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.2.0-alpha.1.md): TiDB Operator 1.2.0-alpha.1 版本发布。滚动升级改动包括 TidbMonitor Pod 重建。新增功能包括跨多个 Kubernetes 集群部署 TiDB 集群、管理 DM 2.0、PD API 弹性伸缩、灰度升级 TiDB Operator。优化提升包括 TiDB Lightning chart 支持 local backend、TLS、持久化 checkpoint，TidbMonitor 支持配置 Thanos sidecar，管理资源从 Deployment 变为 StatefulSet。其他改进包括优化队列 rate limiter 间隔，修改 TidbMonitor 自定义告警规则存储目录。
+  - v1.1
+    - [1.1.15](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.15.md): TiDB Operator 1.1.15 发布日期为 2022 年 2 月 17 日。此版本修复了 TiDB Operator 计算 TiKV Region leader 数量时可能会造成 goroutine 泄露的问题。
+    - [1.1.14](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.14.md): TiDB Operator 1.1.14 版本发布日期为 2021 年 10 月 21 日。此版本修复了 `tidb-backup-manager` 和 `tidb-operator` 镜像中的安全漏洞。
+    - [1.1.13](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.13.md): TiDB Operator 1.1.13 版本发布，优化了 TiCDC 配置 TLS 证书、BR 工具镜像 tag、扩缩容 TiDB 过程中协调 PVC、备份日志中隐藏数据库密码。修复了部署异构集群时可能 panic 的问题和 TiDB 实例缩容后在 TiDB Dashboard 中仍然存在的问题。
+    - [1.1.12](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.12.md): TiDB Operator 1.1.12 版本发布日期为 2021 年 4 月 15 日。新功能包括支持为备份和恢复 Job 设置自定义环境变量，支持备份恢复 CR 设置 affinity 和 tolerations，以及支持 tidb-operator chart 使用新的 service account。优化提升包括 TiDBInitializer 中增加重试机制，增加多 PVC 支持，以及优化 `PodsAreChanged` 函数。Bug 修复包括修复挂载多 PVC 时容量设置错误的问题，修复创建 `.spec.tidb` 为空并开启 TLS 的 TidbCluster 导致 tidb-controller-manager panic 的问题，以及修复 `UnjoinedMembers` 中 PVC 状态异常的问题。
+    - [1.1.11](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.11.md): TiDB Operator 1.1.11 版本发布，新增优化 LeaderElection 和自定义 Store 标签功能。优化 TiFlash 滚动更新机制，改进获取 region leader 数量方式。支持打印 RocksDB 和 Raft 日志到 stdout。
+    - [1.1.10](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.10.md): TiDB Operator 1.1.10 版本发布，包含兼容性改动、滚动升级改动、新功能、优化提升和 Bug 修复。兼容性改动包括 `apiVersion` 更改，滚动升级改动导致 TidbMonitor Pod 删除重建。新功能包括灰度升级、TidbMonitor 支持 `remotewrite`、配置 init containers 等。优化提升包括自定义存储、增加 label 支持多集群监控等。Bug 修复包括备份或者恢复失败、Pod 在升级过程中不会进行迁移 leader 等问题。
+    - [1.1.9](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.9.md): TiDB Operator 1.1.9 版本发布日期为 2020 年 12 月 28 日。此版本优化了支持使用 `spec.toolImage` 来为 `Backup` 和 `Restore` 指定 Dumpling/TiDB Lightning 的二进制可执行文件。同时修复了 Prometheus 不能拉取 TiKV Importer 的 metrics 以及用 BR 和 GCS 进行备份与恢复时的兼容性问题。
+    - [1.1.8](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.8.md): TiDB Operator 1.1.8 版本新增了对备份和恢复任务的支持，用户可以利用该功能实现基于 NFS 或者任意 Kubernetes 支持的 Volume 类型的任务。此外，还优化了 TiDB 组件和客户端开启 TLS 的功能，支持为 TiDB service 指定额外的端口，以及在连接 TiDB server 时不使用 TLS。修复了一系列 Bug，包括部署 TiDB 集群问题、编码错误问题、Pods 误认为问题等。
+    - [1.1.7](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.7.md): TiDB Operator 1.1.7 版本发布日期为 2020 年 11 月 13 日。此版本中兼容性变化包括配置项 `prometheus.spec.config.commandOptions` 的行为变化。新增功能包括对 `Backup` 和 `Restore` CR 的配置项 `spec.toolImage` 的新增，以及对 `spec.pd.storageVolumes`、`spec.tidb.storageVolumes` 和 `spec.tikv.storageVolumes` 的支持。优化提升方面包括禁止缩容 TiKV 实例和新增 `BackupStatus` 和 `RestoreStatus` 中的 `phase` 状态。此外还修复了当前 `TidbCluster` 之外存在 PD member 时无法把 PD scale 到 0 的 bug。
+    - [1.1.6](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.6.md): TiDB Operator 1.1.6 版本发布日期为 2020 年 10 月 16 日。此版本包含兼容性变化、滚动升级改动、新功能、优化提升和 Bug 修复。兼容性变化包括 `spec.pd.config` 参数的自动转换和需要手动编辑 TidbCluster CR 的配置。滚动升级改动包括 TiDB 或 TiKV 集群的滚动升级以及 TiFlash 集群的滚动升级。新功能包括支持 Backup 和 Restore CR 自定义 BR 命令行参数、配置 TiKV evict leader 超时时间等。优化提升包括透传 TiFlash/TiKV/PD/Pump 的 TOML 格式配置、定时备份到 GCS 时目录名称添加备份时间等。Bug 修复包括修复 Discovery 可能导致启动多个 PD 集群的错误。
+    - [1.1.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.5.md): TiDB Operator 1.1.5 版本发布日期为 2020 年 9 月 18 日。此版本兼容性变化需要注意 TiFlash 版本低于 `v4.0.5` 的设置。新功能包括支持为 TiDB/Pump/PD 配置 `serviceAccount`，以及配置 `spec.tikv.config.log-format` 和 `spec.tikv.config.server.max-grpc-send-msg-len`。优化提升方面支持 TiDB/PD/TiKV 的 v4.0.6 配置，挂载集群客户端证书到 PD Pod，以及对于 TiFlash/PD/TiDB 的伸缩实例优先于升级。同时修复了 TidbMonitor CR 中的 Grafana container 忽略 `Env` 配置的问题。
+    - [1.1.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.4.md): TiDB Operator 1.1.4 版本发布，重大变化包括添加 TableFilter 到 BackupSpec 和 RestoreSpec，更新 TiDB 和配套工具版本为 v4.0.4，支持自定义环境变量，增加存储请求，为备份恢复添加 TLS 支持，支持 TiFlash 中的 cert-allowed-cn 配置项，修复了启用 TLS 时的内存泄漏问题，为 TiFlash 添加 TLS 支持，配置 TZ 环境。
+    - [1.1.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.3.md): TiDB Operator 1.1.3 版本发布，需要采取的行动包括在 `BackupSpec` 中添加 `cleanPolicy` 字段，将 `mydumper` 替换为 `dumpling` 进行备份。其他变更包括更新 backup manager 工具、为 TiCDC 添加 TLS 支持、在 Drainer 和下游数据库服务器之间添加 TLS 支持等。
+    - [1.1.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.2.md): TiDB Operator 1.1.2 版本修复了与 PD 4.0.2 不兼容的问题。需要将 TiDB Operator 升级到 v1.1.2 后再部署 TiDB 4.0.2 及更高版本。其他变更包括抓取监控指标和更新配置为 v4.0.2，修复缩容后 PD 成员可能仍然存在的错误，同步信息到 `TidbCluster` `Status` 字段，以及支持在 TiDB 参数中配置容器生命周期 hook 和 `terminationGracePeriodSeconds`。
+    - [1.1.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.1.md): TiDB Operator 1.1.1 版本发布，重大变化包括添加 `additionalContainers` 和 `additionalVolumes` 字段，修复了多个问题，并更新了配置版本到 v4.0.1。
+    - [1.1 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1-ga.md): TiDB Operator 1.1 GA 发布日期 2020 年 5 月 28 日。将 TiDB Pod 的 readiness 探针从 HTTPGet 更改为 TCPSocket 4000 端口。这将触发 tidb-server 组件滚动升级。你可以在升级 TiDB Operator 之前将 spec.paused 设置为 true 以避免滚动升级，并在准备升级 tidb-server 时将其重新设置为 false。
+    - [1.1.0-rc.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.0-rc.4.md): TiDB Operator 1.1 RC.4 发布于 2020 年 5 月 15 日。每个组件可以使用单独的 TiDB 客户端证书。用户应该将 `Backup` 和 `Restore` CR 中的旧的 TLS 配置迁移到新的配置。
+    - [1.1.0-rc.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.0-rc.3.md): TiDB Operator 1.1 RC.3 was released on April 30, 2020. Notable changes include support for TiFlash metrics in TidbMonitor, fixing bugs related to failover pods and statefulsets, and adding new features like configuring Ingress in TidbMonitor and supporting failover for TiFlash. Other changes include updates to terraform scripts and adding new fields in TiKVConfig.
+    - [1.1.0-rc.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.0-rc.2.md): TiDB Operator 1.1 RC.2 was released on April 15, 2020. Action required includes changing TiDB pod readiness probe and setting spec.paused to true before upgrading. Notable changes include adding status field for TidbAutoScaler CR, emitting more events for TidbCluster and TidbClusterAutoScaler, and adding TLS support for TiKV metrics API. Other changes involve adding a switch to skip PD Dashboard TLS configuration, supporting TiFlash in TidbCluster CR, and fixing errors related to alertmanager in TidbMonitor.
+    - [1.1.0-rc.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.0-rc.1.md): 此版本包括对 tidb-server 的配置选项的更新，备份和恢复规范的修改，以及对 TiDB 组件的一些修复和改进。还支持通过 Terraform 在 AWS 和 ACK 上部署 TiDB 集群，并添加了一些新的功能和文档。
+    - [1.1.0-beta.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.0-beta.2.md): 默认存储类和备份存储类已废弃，现在使用 Kubernetes 默认存储类。用户可设置备份和恢复的亲和性和容忍度。解决了 AdvancedStatefulSet 和 Admission Webhook 一起使用的问题。支持基于 CPU 平均负载的集群自动扩容。支持用户自定义证书。修复了一些问题并优化了日志。
+    - [1.1.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.1.0-beta.1.md): 支持配置时区，备份到 S3，基础默认设置，增强型 StatefulSet 扩缩容，自定义资源初始化 TiDB 集群，优化配置结构，支持临时存储，发布 Terraform Aliyun ACK 版本，优化报错信息，支持 TLS 加密连接，支持动态扩展云存储 PV，支持自动生成证书，支持暂停备份计划，升级 TiDB 版本。
+  - v1.0
+    - [1.0.7](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.7.md): TiDB Operator 1.0.7 was released on June 16, 2020. Notable changes include fixing alert rules lost after rolling upgrade, upgrading local volume provisioner to 2.3.4, fixing operator failover config invalid, removing unnecessary duplicated docs, updating doc links and image in readme, emitting events when PD failover, fixing some broken urls, and removing some not very useful update events.
+    - [1.0.6](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.6.md): TiDB Operator 1.0.6 was released on December 27, 2019. Users need to migrate configs from the old `values.yaml` to the new one to avoid monitor pod failures. The new release includes improvements in monitor, TiDB Scheduler, compatibility, TiKV Importer, E2E, and CI. Notable changes include enabling alert rule persistence, adding node & pod info in TiDB Grafana, refining scheduler error messages, fixing compatibility issues in Kubernetes v1.17, and adjusting the release CI script.
+    - [1.0.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.5.md): TiDB Operator version 1.0.5 was released on December 11, 2019. The new features include fixing backup failure issue, recommending deployment of TiDB and Pump on the same node, fixing RBAC permission, and resolving e2e nil point dereference. No action is required for upgrading from v1.0.4.
+    - [1.0.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.4.md): TiDB Operator version 1.0.4 was released on November 23, 2019. The new version introduces HostNetwork support for better performance, podSecurityContext support, and new Helm charts for TiDB Lightning and TiDB Binlog. It also includes bug fixes and changes. Users of the v1.1.0.alpha branch are advised to upgrade to v1.0.4, as it includes all fixes from the alpha branch and introduces additional improvements.
+    - [1.0.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.3.md): TiDB Operator version 1.0.3 was released on November 13, 2019. The new version requires an upgrade to TiDB v3.0.5 and adds timezone support for all charts. Existing TiDB clusters with customized timezones will trigger a rolling update. Improvements include timezone support and configuring resource requests and limits for all containers of the TiDB cluster. Bug fixes include upgrading default TiDB version to v3.0.5 and adding timezone support for all containers of the TiDB cluster.
+    - [1.0.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.2.md): TiDB Operator version 1.0.2 was released on November 1, 2019. The new version includes improvements such as suspending the ReplaceUnhealthy process for AWS TiKV auto-scaling-group, adding a new VM manager 'qm' in stability test, and setting default externalTrafficPolicy to 'Local' for TiDB service in AWS/GCP/Aliyun. Bug fixes include issues with tkctl version, create_tidb_cluster_release variable in AWS Terraform script, and compatibility issues with Kubernetes 1.16 and above versions. Other fixes and changes are also included in this release.
+    - [1.0.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.1.md): TiDB Operator version 1.0.1 was released on September 17, 2019. The release includes important bug fixes and improvements. Users of version 1.0.0 or prior must upgrade to avoid potential service outage. The backup tool image has been updated to fix a serious bug. Other improvements include modularizing GCP Terraform, adding support for various configurations, and reducing e2e run time. Bug fixes address issues such as TiKV scale-in failure, orphan pods cleaner bugs, and incorrect condition judgment. The release also includes detailed bug fixes and changes.
+    - [1.0 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0-ga.md): TiDB Operator 1.0.0 has been released on July 30, 2019. The new version requires action to be taken for configuration changes in `values.yaml`. Stability test cases have been added, along with improvements such as GKE SSD setup simplification and AWS Terraform script modularization. Bug fixes include sysbench installation and TiKV metrics monitoring. Detailed bug fixes and changes include upgrading TiDB monitor, specifying TiKV status address, and enabling nlb cross zone load balancing by default. Multiple TiDB clusters management is now supported in Alibaba Cloud. The default TiDB version has been upgraded to v3.0.1. The release also includes various other bug fixes and improvements.
+    - [1.0.0-rc.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-rc.1.md): TiDB Operator 1.0 RC.1 was released on July 12, 2019. The new version includes stability test cases, improvements such as increasing TiKV GC life time, and bug fixes like fixing unbound variables in the backup script and scheduled backup bugs. It also supports force upgrade when PD cluster is unavailable and adds Amazon S3 support for backup/restore features. Multiple clusters management in EKS and local SSD provision for COS on GKE are also included. The release notes contain detailed bug fixes and changes, including various pull requests for bug fixes and improvements.
+    - [1.0.0-beta.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-beta.3.md): TiDB Operator 1.0 Beta.3 was released on June 6, 2019. The new version includes the removal of `nodeSelectorRequired` from values.yaml and the addition of stability cases, new features, documentation improvements, and bug fixes. Some notable new features include ConfigMap rollout management, stable scheduling for pods, and support for adding additional pod annotations. The default TiDB version has been upgraded to v3.0.0-rc.1, and various bug fixes and changes have been implemented.
+    - [1.0.0-beta.2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-beta.2.md): TiDB Operator 1.0 Beta.2 has been released on May 10, 2019. The new version includes enhanced stability, improved ease of use, bug fixes, and other improvements. Some of the key changes include refactored e2e test, one-command deployment for AWS and Aliyun, and support for slow log of TiDB. Numerous bug fixes and detailed changes have also been made to improve the overall performance and user experience.
+    - [1.0.0-beta.1-p2](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-beta.1-p2.md): TiDB Operator 1.0 Beta.1 P2 was released on February 21, 2019. Notable changes include a new algorithm for scheduler HA predicate, addition of TiDB discovery service, serial scheduling, change in tolerations type to an array, direct start when there is a join file, addition of code coverage icon, omission of just the empty leaves in `values.yml`, backup to ceph object storage in charts, and addition of `ClusterIDLabelKey` label to TidbCluster.
+    - [1.0.0-beta.1-p1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-beta.1-p1.md): TiDB Operator 1.0 Beta.1 P1 was released on January 7, 2019. The bug fixes include resolving scheduler policy issues for Kubernetes v1.10, v1.11, and v1.12. The documentation updates include a proposal to add multiple statefulsets support to TiDB Operator and an updated roadmap.
+    - [1.0.0-beta.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-beta.1.md): TiDB Operator 1.0 Beta.1 was released on December 27, 2018. The release includes bug fixes such as pd_control bug, orphan pod cleaner, scheduler configuration fix, Grafana configuration fix, and more. Minor improvements include adding Kubernetes 1.12 local DinD scripts, bumping default TiDB to v2.1.0, releasing tidb-operator/tidb-cluster charts, and adding connection timeout for TiDB password setter job. Other improvements involve separating ad-hoc backup and restore to another chart, adding compiler version info to tidb-operator binary, allowing specifying TiDB service LoadBalancer IP, and exposing TiKV cpu/memory related configuration to values.yaml.
+    - [1.0.0-beta.0](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-1.0.0-beta.0.md): TiDB Operator 1.0 Beta.0 was released on November 26, 2018. Notable changes include the introduction of basic chaos testing, improved unit test coverage, default log-level values for PD/TiKV/TiDB, and various bug fixes and enhancements. The release also includes a user guide and migration to Go 1.11 module.
+  - v0
+    - [0.4.0](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-0.4.0.md): TiDB Operator 0.4.0 was released on November 9, 2018. Notable changes include extending Kubernetes scheduler for TiDB data awareness, restoring backup data from GCS bucket, and setting password for TiDB when first deployed. Minor changes and bug fixes include updating roadmap, adding unit tests, E2E tests, adding TiDB failover limit, synchronizing PV reclaim policy early, using helm release name as instance label, and fixing local PV setup script.
+    - [0.3.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-0.3.1.md): TiDB Operator 0.3.1 was released on October 31, 2018. The release includes minor changes such as parameterizing the serviceAccount, bumping TiDB to v2.0.7, and allowing user-specified config files. Bug fixes include addressing issues with parallel upgrades, wrong parameters, and recovery after a failed upgrade.
+    - [0.3.0](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-0.3.0.md): TiDB Operator 0.3.0 was released on October 12, 2018. Notable changes include the addition of full backup support, TiDB Binlog support, graceful upgrade feature, and the ability to persist monitor data.
+    - [0.2.1](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-0.2.1.md): TiDB Operator 0.2.1 was released on September 20, 2018. This version includes bug fixes for retry on conflict logic, TiDB timezone configuration, failover, and repeated updating of pod and pd/tidb StatefulSet.
+    - [0.2.0](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-0.2.0.md): TiDB Operator 0.2.0 was released on September 11, 2018. Notable changes include experimental support for auto-failover, unification of Tiller and TiDB Operator managed resources labels, managing TiDB service via Tiller, adding toleration for TiDB cluster components, and refactoring upgrade functions as interface. Additionally, a script for easy setup of DinD environment was added, and code was linted and formatted in CI.
+    - [0.1.0](https://docs.pingcap.com/zh/tidb-in-kubernetes/stable/release-0.1.0.md): TiDB Operator 0.1.0 was released on August 22, 2018. Notable changes include the ability to bootstrap multiple TiDB clusters, support for monitoring deployment and Helm charts, basic Network PV/Local PV support, safe scaling of the TiDB cluster, orderly cluster upgrades, and stopping the TiDB process without terminating the Pod. Additionally, cluster meta info can be synchronized to POD/PV/PVC labels, and basic unit tests & E2E tests are available. Tutorials for GKE and local DinD are also provided.
