@@ -9,6 +9,30 @@ export interface TableOfContent {
   };
 }
 
+export enum TOCNamespace {
+  TiDB = "tidb",
+  TiDBCloud = "tidb-cloud",
+  TiDBInKubernetes = "tidb-in-kubernetes",
+  Develop = "develop",
+  BestPractice = "best-practice",
+  API = "api",
+  TiDBReleases = "tidb-releases",
+  TidbCloudReleases = "tidb-cloud-releases",
+  TiDBInKubernetesReleases = "tidb-in-kubernetes-releases",
+}
+
+export const TOCNamespaceSlugMap: Record<TOCNamespace, string> = {
+  [TOCNamespace.TiDB]: "",
+  [TOCNamespace.TiDBCloud]: "",
+  [TOCNamespace.TiDBInKubernetes]: "",
+  [TOCNamespace.Develop]: "develop",
+  [TOCNamespace.BestPractice]: "best-practice",
+  [TOCNamespace.API]: "api",
+  [TOCNamespace.TiDBReleases]: "tidb-releases",
+  [TOCNamespace.TidbCloudReleases]: "tidb-cloud-releases",
+  [TOCNamespace.TiDBInKubernetesReleases]: "",
+};
+
 export enum Repo {
   tidb = "tidb",
   dm = "tidb-data-migration",

@@ -3,10 +3,10 @@ import { resolve } from "path";
 import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
-import { Locale, BuildType } from "../../src/shared/interface";
+import { Locale, BuildType, TOCNamespace } from "../../src/shared/interface";
 import {
   generateConfig,
-  generateNav,
+  generateNavTOCPath,
   generateDocHomeUrl,
 } from "../../gatsby/path";
 import { DEFAULT_BUILD_TYPE, PageQueryData } from "./interface";
@@ -84,9 +84,12 @@ export const createDocHome = async ({
   nodes.forEach((node) => {
     const { id, name, pathConfig, filePath, slug } = node;
     const path = generateDocHomeUrl(name, pathConfig);
-    const navUrl = generateNav(pathConfig, slug);
-    const starterNavUrl = generateNav(pathConfig, "tidb-cloud-starter");
-    const essentialNavUrl = generateNav(pathConfig, "tidb-cloud-essential");
+    const navUrl = generateNavTOCPath(pathConfig, slug);
+    const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
+    const essentialNavUrl = generateNavTOCPath(
+      pathConfig,
+      "tidb-cloud-essential"
+    );
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]

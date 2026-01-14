@@ -9,6 +9,14 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
   defaultLanguage: "en",
 
   linkMappings: [
+    {
+      linkPattern: "/releases",
+      targetPattern: "/releases",
+    },
+    {
+      linkPattern: "/releases/tidb-cloud",
+      targetPattern: "/releases/tidb-cloud",
+    },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
     // /{namespace}/{...any}/{docname} -> /{namespace}/{docname}
     // Special: tidb-cloud -> tidbcloud
@@ -16,13 +24,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{namespace}/{docname}",
       conditions: {
-        namespace: [
-          "tidb-cloud",
-          "develop",
-          "best-practice",
-          "api",
-          "releases",
-        ],
+        namespace: ["tidb-cloud", "develop", "best-practice", "api"],
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
@@ -42,7 +44,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     {
       pathPattern: `/{lang}/{namespace}/{...any}`,
       pathConditions: {
-        namespace: ["develop", "best-practice", "api", "releases"],
+        namespace: ["develop", "best-practice", "api"],
       },
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",

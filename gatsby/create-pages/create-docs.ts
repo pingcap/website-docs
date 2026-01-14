@@ -3,11 +3,17 @@ import { resolve } from "path";
 import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
-import { Locale, Repo, BuildType } from "../../src/shared/interface";
+import {
+  Locale,
+  Repo,
+  BuildType,
+  TOCNamespaceSlugMap,
+  TOCNamespace,
+} from "../../src/shared/interface";
 import {
   generateConfig,
-  generateNav,
-  getSharedNamespace,
+  generateNavTOCPath,
+  getTOCNamespace,
 } from "../../gatsby/path";
 import { calculateFileUrl } from "../../gatsby/url-resolver";
 import { cpMarkdown } from "../../gatsby/cp-markdown";
@@ -119,10 +125,14 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       return;
     }
 
-    const namespace = getSharedNamespace(node.slug);
-    const navUrl = generateNav(pathConfig, namespace);
-    const starterNavUrl = generateNav(pathConfig, "tidb-cloud-starter");
-    const essentialNavUrl = generateNav(pathConfig, "tidb-cloud-essential");
+    const namespace = getTOCNamespace(node.slug);
+    const namespaceSlug = TOCNamespaceSlugMap[namespace];
+    const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
+    const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
+    const essentialNavUrl = generateNavTOCPath(
+      pathConfig,
+      "tidb-cloud-essential"
+    );
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
@@ -164,6 +174,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
           feedback: true,
         },
         inDefaultPlan,
+        namespace,
       },
     });
 

@@ -8,7 +8,7 @@ import "@fontsource/ibm-plex-sans";
 import theme from "theme/index";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";
-import { Locale, BuildType, PathConfig } from "shared/interface";
+import { Locale, BuildType, PathConfig, TOCNamespace } from "shared/interface";
 import { NavItemConfig } from "components/Layout/Header/HeaderNavConfigType";
 
 export default function Layout(props: {
@@ -21,6 +21,7 @@ export default function Layout(props: {
   pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
+  namespace?: TOCNamespace;
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   return (
@@ -35,6 +36,7 @@ export default function Layout(props: {
         pageUrl={props.pageUrl}
         name={props.name}
         pathConfig={props.pathConfig}
+        namespace={props.namespace}
         onSelectedNavItemChange={props.onSelectedNavItemChange}
       />
       {props.children}

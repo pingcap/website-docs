@@ -21,6 +21,20 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       targetPattern: "/{lang}/tidbcloud",
       conditions: { filename: ["_index"] },
     },
+    // tidbcloud releases
+    // /en/tidbcloud/master/tidb-cloud/releases/_index.md -> /en/releases/tidb-cloud
+    {
+      sourcePattern: "/{lang}/tidbcloud/master/tidb-cloud/releases/{filename}",
+      targetPattern: "/{lang}/releases/tidb-cloud",
+      conditions: { filename: ["_index"] },
+    },
+    // tidb releases
+    // /en/tidb/master/releases/_index.md -> /en/releases/tidb
+    {
+      sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/releases/{filename}`,
+      targetPattern: "/{lang}/releases",
+      conditions: { filename: ["_index"] },
+    },
     // tidbcloud with prefix (dedicated, starter, etc.)
     // When filename = "_index": /en/tidbcloud/tidb-cloud/{prefix}/_index.md -> /en/tidbcloud/{prefix}/
     // When filename != "_index": /en/tidbcloud/tidb-cloud/{prefix}/{filename}.md -> /en/tidbcloud/{filename}/
@@ -40,11 +54,10 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // When filename = "_index": /en/tidb/master/develop/{folders}/_index.md -> /en/develop/{folders}/
     // When filename != "_index": /en/tidb/master/develop/{folders}/{filename}.md -> /en/develop/{filename}/
     {
-      sourcePattern: `/{lang}/{repo}/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
+      sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
       targetPattern: "/{lang}/{folder}/{filename}",
       conditions: {
-        repo: ["tidb"],
-        folder: ["develop", "best-practice", "api", "releases"],
+        folder: ["develop", "best-practice", "api"],
       },
       filenameTransform: {
         ignoreIf: ["_index"],

@@ -1,7 +1,6 @@
 import { NavConfig } from "./HeaderNavConfigType";
-import { PageType } from "shared/usePageType";
 import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
-import { CloudPlan } from "shared/interface";
+import { CloudPlan, TOCNamespace } from "shared/interface";
 
 import TiDBCloudIcon from "media/icons/cloud-03.svg";
 import TiDBIcon from "media/icons/layers-three-01.svg";
@@ -23,8 +22,8 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
             type: "item",
             label: "TiDB Cloud Starter",
             to: `/tidbcloud/starter?${CLOUD_MODE_KEY}=starter`,
-            selected: (pageType) =>
-              pageType === PageType.TiDBCloud &&
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Starter,
             onClick: () => {
               if (typeof window !== "undefined") {
@@ -36,8 +35,8 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
             type: "item",
             label: "TiDB Cloud Essential",
             to: `/tidbcloud/essential?${CLOUD_MODE_KEY}=essential`,
-            selected: (pageType) =>
-              pageType === PageType.TiDBCloud &&
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Essential,
             onClick: () => {
               if (typeof window !== "undefined") {
@@ -49,8 +48,8 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
           //   type: "item",
           //   label: "TiDB Cloud Premium",
           //   to: `/tidbcloud/premium?${CLOUD_MODE_KEY}=premium`,
-          //   selected: (pageType) =>
-          //     pageType === PageType.TiDBCloud &&
+          //   selected: (namespace) =>
+          //     namespace === TOCNamespace.TiDBCloud &&
           //     cloudPlan === CloudPlan.Premium,
           //   onClick: () => {
           //     if (typeof window !== "undefined") {
@@ -65,8 +64,8 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
               cloudPlan === "dedicated" || !cloudPlan
                 ? `/tidbcloud`
                 : `/tidbcloud?${CLOUD_MODE_KEY}=dedicated`,
-            selected: (pageType) =>
-              pageType === PageType.TiDBCloud &&
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Dedicated,
             onClick: () => {
               if (typeof window !== "undefined") {
@@ -85,13 +84,14 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
             type: "item",
             label: "TiDB Self-Managed",
             to: "/tidb/stable",
-            selected: (pageType) => pageType === PageType.TiDB,
+            selected: (namespace) => namespace === TOCNamespace.TiDB,
           },
           {
             type: "item",
             label: "TiDB Self-Managed on Kubernetes",
             to: "/tidb-in-kubernetes/stable",
-            selected: (pageType) => pageType === PageType.TiDBInKubernetes,
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBInKubernetes,
           },
         ],
       },
@@ -101,19 +101,19 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
     type: "item",
     label: "Developer",
     to: "/develop",
-    selected: (pageType) => pageType === PageType.Develop,
+    selected: (namespace) => namespace === TOCNamespace.Develop,
   },
   {
     type: "item",
     label: "Best Practices",
     to: "/best-practice",
-    selected: (pageType) => pageType === PageType.BestPractice,
+    selected: (namespace) => namespace === TOCNamespace.BestPractice,
   },
   {
     type: "item",
     label: "API",
     to: "/api",
-    selected: (pageType) => pageType === PageType.Api,
+    selected: (namespace) => namespace === TOCNamespace.API,
   },
   {
     type: "group",
@@ -123,25 +123,26 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
         type: "item",
         label: "TiDB Cloud Releases",
         to: "/release/tidbcloud",
-        selected: (pageType) => pageType === PageType.Releases,
+        selected: (namespace) => namespace === TOCNamespace.TidbCloudReleases,
       },
       {
         type: "item",
         label: "TiDB Self-Managed Releases",
         to: "/releases",
-        selected: (pageType) => pageType === PageType.Releases,
+        selected: (namespace) => namespace === TOCNamespace.TiDBReleases,
       },
       {
         type: "item",
         label: "TiDB Operator Releases",
         to: "/release/tidb-in-kubernetes",
-        selected: (pageType) => pageType === PageType.Releases,
+        selected: (namespace) =>
+          namespace === TOCNamespace.TiDBInKubernetesReleases,
       },
       {
         type: "item",
         label: "TiUP Releases",
-        to: "/release/tiup",
-        selected: (pageType) => pageType === PageType.Releases,
+        to: "https://github.com/pingcap/tiup/releases",
+        selected: () => false,
       },
     ],
   },
@@ -155,7 +156,7 @@ const archiveNavConfig: NavConfig[] = [
     type: "item",
     label: "TiDB Self-Managed",
     to: "/tidb/v2.1",
-    selected: (pageType) => pageType === PageType.TiDB,
+    selected: (namespace) => namespace === TOCNamespace.TiDB,
   },
 ];
 

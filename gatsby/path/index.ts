@@ -1,5 +1,13 @@
-import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
-import CONFIG from "../docs/docs.json";
+import {
+  Locale,
+  Repo,
+  PathConfig,
+  CloudPlan,
+} from "../../src/shared/interface";
+import CONFIG from "../../docs/docs.json";
+
+// Re-export getSharedNamespace from namespace module
+export * from "./getTOCPath";
 
 // @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
@@ -26,40 +34,6 @@ export function generatePdfUrl(config: PathConfig) {
   return `${config.repo}-${config.version ? config.version + "-" : ""}${
     config.locale
   }-manual.pdf`;
-}
-
-export const getSharedNamespace = (slug: string) => {
-  const [locale, repo, branch, folder, ...rest] = slug.split("/") as [
-    Locale,
-    Repo,
-    string,
-    string,
-    ...string[]
-  ];
-  if (
-    repo === Repo.tidb &&
-    branch === CONFIG.docs.tidb.stable &&
-    !!folder &&
-    rest.length > 0
-  ) {
-    if (folder === "develop") {
-      return "develop";
-    } else if (folder === "best-practice") {
-      return "best-practice";
-    } else if (folder === "api") {
-      return "api";
-    } else if (folder === "releases") {
-      return "tidb-releases";
-    }
-  }
-
-  return "";
-};
-
-export function generateNav(config: PathConfig, postSlug: string) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC${
-    postSlug ? `-${postSlug}` : ""
-  }`;
 }
 
 export function generateConfig(slug: string): {

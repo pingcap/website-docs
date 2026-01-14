@@ -22,6 +22,7 @@ import {
   BuildType,
   Locale,
   CloudPlan,
+  TOCNamespace,
 } from "shared/interface";
 import Seo from "components/Seo";
 import { getStable, generateUrl } from "shared/utils";
@@ -51,6 +52,7 @@ interface DocTemplateProps {
       feedback?: boolean;
     };
     inDefaultPlan: string | null;
+    namespace: TOCNamespace;
   };
   data: {
     site: {
@@ -105,6 +107,7 @@ function DocTemplate({
     buildType,
     feature,
     inDefaultPlan,
+    namespace,
   },
   data,
 }: DocTemplateProps) {
@@ -188,6 +191,7 @@ function DocTemplate({
         type: pathConfig.repo,
       }}
       buildType={buildType}
+      namespace={namespace}
       onSelectedNavItemChange={setSelectedNavItem}
     >
       <Seo
@@ -236,7 +240,6 @@ function DocTemplate({
         <Box sx={{ display: "flex", width: "100%" }}>
           {!frontmatter?.hide_leftNav && (
             <LeftNavDesktop
-              language={language}
               data={navigation}
               current={pageUrl}
               name={name}
@@ -246,6 +249,7 @@ function DocTemplate({
               bannerEnabled={bannerVisible}
               availablePlans={availablePlans}
               selectedNavItem={selectedNavItem}
+              namespace={namespace}
             />
           )}
           <Box
@@ -303,6 +307,7 @@ function DocTemplate({
                     buildType={buildType}
                     pageUrl={pageUrl}
                     cloudPlan={cloudPlan}
+                    namespace={namespace}
                   />
                   {!frontmatter?.hide_commit && buildType !== "archive" && (
                     <GitCommitInfoCard

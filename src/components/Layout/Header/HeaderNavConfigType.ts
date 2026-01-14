@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { PageType } from "shared/usePageType";
+import { TOCNamespace } from "shared/interface";
 
 /**
  * Single navigation item configuration
@@ -15,7 +15,7 @@ export interface NavItemConfig {
   /** Optional alt text for GTM tracking */
   alt?: string;
   /** Whether this item is selected (can be a function that returns boolean) */
-  selected?: boolean | ((pageType: PageType) => boolean);
+  selected?: boolean | ((namespace?: TOCNamespace) => boolean);
   /** Optional click handler */
   onClick?: () => void;
   /** Whether to use i18n for the link */

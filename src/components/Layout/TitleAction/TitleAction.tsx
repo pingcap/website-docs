@@ -16,9 +16,8 @@ import MarkdownIcon from "media/icons/markdown.svg";
 import FileIcon from "media/icons/file.svg";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
 
-import { BuildType, PathConfig } from "shared/interface";
+import { BuildType, PathConfig, TOCNamespace } from "shared/interface";
 import { calcPDFUrl, getRepoFromPathCfg } from "shared/utils";
-import { usePageType, PageType } from "shared/usePageType";
 import { Tooltip, Divider } from "@mui/material";
 
 interface TitleActionProps {
@@ -27,20 +26,18 @@ interface TitleActionProps {
   pageUrl: string;
   buildType: BuildType;
   language: string;
+  namespace?: TOCNamespace;
 }
 
 export const TitleAction = (props: TitleActionProps) => {
-  const { pathConfig, filePath, pageUrl, buildType, language } = props;
+  const { pathConfig, filePath, pageUrl, buildType, language, namespace } =
+    props;
   const { t } = useI18next();
   const theme = useTheme();
   const [contributeAnchorEl, setContributeAnchorEl] =
     React.useState<null | HTMLElement>(null);
   const [copied, setCopied] = React.useState(false);
   const isArchive = buildType === "archive";
-  const pageType = React.useMemo(
-    () => usePageType(language, pageUrl),
-    [pageUrl]
-  );
 
   const contributeOpen = Boolean(contributeAnchorEl);
 
@@ -249,7 +246,7 @@ export const TitleAction = (props: TitleActionProps) => {
       )}
 
       {/* Download PDF */}
-      {pageType === PageType.TiDB && language !== "ja" && (
+      {namespace === TOCNamespace.TiDB && language !== "ja" && (
         <Button
           onClick={handleDownloadPDF}
           startIcon={<FileIcon sx={{ fill: theme.palette.carbon[700] }} />}

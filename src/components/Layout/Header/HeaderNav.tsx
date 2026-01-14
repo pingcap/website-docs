@@ -9,8 +9,7 @@ import Popover from "@mui/material/Popover";
 import Divider from "@mui/material/Divider";
 
 import LinkComponent from "components/Link";
-import { usePageType, PageType } from "shared/usePageType";
-import { BuildType } from "shared/interface";
+import { BuildType, TOCNamespace } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { useCloudPlan } from "shared/useCloudPlan";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
@@ -22,38 +21,22 @@ import {
 import { generateNavConfig } from "./HeaderNavConfigData";
 import { clearAllNavStates } from "../LeftNav/LeftNavTree";
 
-// `pageUrl` comes from server side render (or build): gatsby/path.ts/generateUrl
-// it will be `undefined` in client side render
-const useSelectedNavItem = (language?: string, pageUrl?: string) => {
-  // init in server side
-  const [selectedItem, setSelectedItem] = React.useState<PageType>(() =>
-    usePageType(language, pageUrl)
-  );
-
-  // update in client side
-  React.useEffect(() => {
-    setSelectedItem(usePageType(language, window.location.pathname));
-  }, [language]);
-
-  return selectedItem;
-};
-
 // Helper function to find selected item recursively
 const findSelectedItem = (
   configs: NavConfig[],
-  selectedItem: PageType
+  namespace?: TOCNamespace
 ): NavItemConfig | null => {
   for (const config of configs) {
     if (config.type === "item") {
       const isSelected =
         typeof config.selected === "function"
-          ? config.selected(selectedItem)
+          ? config.selected(namespace)
           : config.selected ?? false;
       if (isSelected) {
         return config;
       }
     } else if (config.type === "group" && config.children) {
-      const item = findSelectedItem(config.children, selectedItem);
+      const item = findSelectedItem(config.children, namespace);
       if (item) {
         return item;
       }
@@ -66,10 +49,10 @@ export default function HeaderNavStack(props: {
   buildType?: BuildType;
   pageUrl?: string;
   config?: NavConfig[];
+  namespace?: TOCNamespace;
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   const { language, t } = useI18next();
-  const selectedItem = useSelectedNavItem(language, props.pageUrl);
   const { cloudPlan } = useCloudPlan();
 
   // Default configuration (backward compatible)
@@ -84,10 +67,10 @@ export default function HeaderNavStack(props: {
   // Find and notify selected item
   React.useEffect(() => {
     if (props.onSelectedNavItemChange) {
-      const selectedNavItem = findSelectedItem(defaultConfig, selectedItem);
+      const selectedNavItem = findSelectedItem(defaultConfig, props.namespace);
       props.onSelectedNavItemChange(selectedNavItem);
     }
-  }, [defaultConfig, selectedItem, props.onSelectedNavItemChange]);
+  }, [defaultConfig, props.namespace, props.onSelectedNavItemChange]);
 
   return (
     <Stack
@@ -115,7 +98,7 @@ export default function HeaderNavStack(props: {
           <NavGroup
             key={index}
             config={navConfig}
-            selectedItem={selectedItem}
+            namespace={props.namespace}
           />
         );
       })}
@@ -123,8 +106,8 @@ export default function HeaderNavStack(props: {
   );
 }
 
-const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
-  const { config, selectedItem } = props;
+const NavGroup = (props: { config: NavConfig; namespace?: TOCNamespace }) => {
+  const { config } = props;
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
@@ -173,7 +156,7 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
   // Check if this item/group is selected
   const isSelected: boolean =
     isItem && typeof config.selected === "function"
-      ? config.selected(selectedItem)
+      ? config.selected(props.namespace)
       : isItem
       ? ((config.selected ?? false) as boolean)
       : false;
@@ -185,7 +168,7 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
           if (child.type === "item") {
             const childSelected =
               typeof child.selected === "function"
-                ? child.selected(selectedItem)
+                ? child.selected(props.namespace)
                 : child.selected ?? false;
             return childSelected;
           } else {
@@ -194,7 +177,7 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
               if (nestedChild.type === "item") {
                 const nestedSelected =
                   typeof nestedChild.selected === "function"
-                    ? nestedChild.selected(selectedItem)
+                    ? nestedChild.selected(props.namespace)
                     : nestedChild.selected ?? false;
                 return nestedSelected;
               }
@@ -279,7 +262,7 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
                                   key={`${index}-${nestedIndex}`}
                                   item={nestedChild}
                                   groupTitle={child.title}
-                                  selectedItem={selectedItem}
+                                  namespace={props.namespace}
                                   onClose={handlePopoverClose}
                                 />
                               );
@@ -312,7 +295,7 @@ const NavGroup = (props: { config: NavConfig; selectedItem: PageType }) => {
                       <NavMenuItem
                         key={index}
                         item={child}
-                        selectedItem={selectedItem}
+                        namespace={props.namespace}
                         onClose={handlePopoverClose}
                       />
                     ))}
@@ -362,13 +345,13 @@ const GroupTitle = (props: {
 const NavMenuItem = (props: {
   item: NavItemConfig;
   groupTitle?: string | React.ReactNode;
-  selectedItem: PageType;
+  namespace?: TOCNamespace;
   onClose: () => void;
 }) => {
-  const { item, groupTitle, selectedItem, onClose } = props;
+  const { item, groupTitle, namespace, onClose } = props;
   const isSelected =
     typeof item.selected === "function"
-      ? item.selected(selectedItem)
+      ? item.selected(namespace)
       : item.selected ?? false;
 
   return (

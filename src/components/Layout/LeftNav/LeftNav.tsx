@@ -10,7 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { RepoNav, PathConfig, BuildType } from "shared/interface";
+import { RepoNav, PathConfig, BuildType, TOCNamespace } from "shared/interface";
 import { NavItemConfig } from "../Header/HeaderNavConfigType";
 import LinkComponent from "components/Link";
 import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
@@ -20,7 +20,6 @@ import VersionSelect, {
 import { getHeaderHeight } from "shared/headerHeight";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
-import { PageType, usePageType } from "shared/usePageType";
 
 interface LeftNavProps {
   data: RepoNav;
@@ -33,6 +32,7 @@ interface LeftNavProps {
   availablePlans: string[];
   selectedNavItem?: NavItemConfig | null;
   language?: string;
+  namespace?: TOCNamespace;
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
@@ -44,10 +44,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
     availIn,
     buildType,
     selectedNavItem,
-    language,
+    namespace,
   } = props;
   const theme = useTheme();
-  const pageType = usePageType(language, current);
 
   return (
     <Box
@@ -107,7 +106,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
           </Box>
         )}
 
-        {pageType === PageType.TiDB && (
+        {namespace === TOCNamespace.TiDB && (
           <VersionSelect
             name={name}
             pathConfig={pathConfig}

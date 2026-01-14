@@ -12,7 +12,7 @@ import { LangSwitch } from "components/Layout/Header/LangSwitch";
 
 import TiDBLogo from "media/logo/tidb-logo-withtext.svg";
 
-import { Locale, BuildType, PathConfig } from "shared/interface";
+import { Locale, BuildType, PathConfig, TOCNamespace } from "shared/interface";
 import { GTMEvent, gtmTrack } from "shared/utils/gtm";
 import { Banner } from "components/Layout/Banner";
 import { generateDocsHomeUrl, generateUrl } from "shared/utils";
@@ -32,6 +32,7 @@ interface HeaderProps {
   pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
+  namespace?: TOCNamespace;
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }
 
@@ -112,6 +113,7 @@ export default function Header(props: HeaderProps) {
           <HeaderNavStack
             buildType={props.buildType}
             pageUrl={props.pageUrl}
+            namespace={props.namespace}
             onSelectedNavItemChange={props.onSelectedNavItemChange}
           />
           <HeaderNavStackMobile buildType={props.buildType} />
