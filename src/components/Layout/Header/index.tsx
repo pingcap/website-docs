@@ -58,7 +58,10 @@ export default function Header(props: HeaderProps) {
           height: "100%",
           paddingLeft: "24px",
           paddingRight: "24px",
-          flexDirection: "column",
+          flexDirection: {
+            xs: "column-reverse",
+            md: "column",
+          },
           alignItems: "stretch",
           borderBottom: `1px solid ${theme.palette.carbon[400]}`,
         }}
@@ -116,7 +119,10 @@ export default function Header(props: HeaderProps) {
             namespace={props.namespace}
             onSelectedNavItemChange={props.onSelectedNavItemChange}
           />
-          <HeaderNavStackMobile buildType={props.buildType} />
+          <HeaderNavStackMobile
+            buildType={props.buildType}
+            namespace={props.namespace}
+          />
 
           {props.locales.length > 0 && (
             <Box sx={{ marginLeft: "auto" }}>
