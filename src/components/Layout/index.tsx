@@ -9,7 +9,7 @@ import theme from "theme/index";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";
 import { Locale, BuildType, PathConfig } from "shared/interface";
-import { NavItemConfig } from "components/Layout/Header/HeaderNavConfig";
+import { NavItemConfig } from "components/Layout/Header/HeaderNavConfigType";
 
 export default function Layout(props: {
   children?: React.ReactNode;

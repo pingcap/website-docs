@@ -1,7 +1,7 @@
 import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 import { extractFilesFromToc } from "./toc-filter";
-import { CloudPlan } from "shared/interface";
+import { CloudPlan } from "../src/shared/interface";
 
 type TocMap = Map<
   string,
@@ -46,7 +46,7 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
 
   tocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {
     const { config } = generateConfig(node.slug);
-    const toc = mdxAstToToc(node.mdxAST.children, config);
+    const toc = mdxAstToToc(node.mdxAST.children, node.slug);
     const files = extractFilesFromToc(toc);
 
     // Create a key for this specific locale/repo/version combination
@@ -59,13 +59,13 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
     let tocType: CloudPlan | null = null;
 
     if (relativePath.includes("TOC.md")) {
-      tocType = "dedicated";
+      tocType = CloudPlan.Dedicated;
     } else if (relativePath.includes("TOC-tidb-cloud-starter")) {
-      tocType = "starter";
+      tocType = CloudPlan.Starter;
     } else if (relativePath.includes("TOC-tidb-cloud-essential")) {
-      tocType = "essential";
+      tocType = CloudPlan.Essential;
     } else if (relativePath.includes("TOC-tidb-cloud-premium")) {
-      tocType = "premium";
+      tocType = CloudPlan.Premium;
     }
 
     // Initialize the entry if it doesn't exist
@@ -118,12 +118,12 @@ export function determineInDefaultPlan(
 
   // Check if article is in TOC.md (dedicated)
   if (dedicated.has(fileName)) {
-    return "dedicated";
+    return CloudPlan.Dedicated;
   }
 
   // Check if article is in TOC-tidb-cloud-starter.md but not in TOC.md
   if (starter.has(fileName) && !dedicated.has(fileName)) {
-    return "starter";
+    return CloudPlan.Starter;
   }
 
   // Check if article is only in TOC-tidb-cloud-essential.md
@@ -132,7 +132,7 @@ export function determineInDefaultPlan(
     !dedicated.has(fileName) &&
     !starter.has(fileName)
   ) {
-    return "essential";
+    return CloudPlan.Essential;
   }
 
   if (
@@ -141,7 +141,7 @@ export function determineInDefaultPlan(
     !dedicated.has(fileName) &&
     !starter.has(fileName)
   ) {
-    return "premium";
+    return CloudPlan.Premium;
   }
 
   return null;
