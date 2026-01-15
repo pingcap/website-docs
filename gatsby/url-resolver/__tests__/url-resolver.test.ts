@@ -234,6 +234,39 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/releases/tidb/");
   });
 
+  it("should resolve releases folder zh", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "zh/tidb/release-8.5/releases/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    // Matches rule: /{lang}/tidb/release-8.5/releases/{filename} -> /{lang}/releases/tidb
+    // trailingSlash: "auto" adds trailing slash for _index files
+    expect(url).toBe("/zh/releases/tidb/");
+  });
+
+  it("should resolve tidbcloud releases folder", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidbcloud/master/tidb-cloud/releases/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    // Matches rule: /{lang}/tidbcloud/master/tidb-cloud/releases/{filename} -> /{lang}/releases/tidb-cloud
+    // trailingSlash: "auto" adds trailing slash for _index files
+    expect(url).toBe("/en/releases/tidb-cloud/");
+  });
+
+  it("should resolve tidbcloud releases folder zh", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "zh/tidbcloud/master/tidb-cloud/releases/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    // Matches rule: /{lang}/tidbcloud/master/tidb-cloud/releases/{filename} -> /{lang}/releases/tidb-cloud
+    // trailingSlash: "auto" adds trailing slash for _index files
+    expect(url).toBe("/zh/releases/tidb-cloud/");
+  });
+
   it("should use fallback rule for unmatched patterns", () => {
     const absolutePath = path.join(
       sourceBasePath,
