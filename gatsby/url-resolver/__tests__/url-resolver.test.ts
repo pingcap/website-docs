@@ -231,7 +231,7 @@ describe("calculateFileUrl", () => {
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     // Matches rule: /{lang}/tidb/release-8.5/releases/{filename} -> /{lang}/releases/tidb
     // trailingSlash: "auto" adds trailing slash for _index files
-    expect(url).toBe("/en/releases/tidb/");
+    expect(url).toBe("/en/releases/tidb-self-managed/");
   });
 
   it("should resolve releases folder zh", () => {
@@ -242,7 +242,7 @@ describe("calculateFileUrl", () => {
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     // Matches rule: /{lang}/tidb/release-8.5/releases/{filename} -> /{lang}/releases/tidb
     // trailingSlash: "auto" adds trailing slash for _index files
-    expect(url).toBe("/zh/releases/tidb/");
+    expect(url).toBe("/zh/releases/tidb-self-managed/");
   });
 
   it("should resolve tidbcloud releases folder", () => {

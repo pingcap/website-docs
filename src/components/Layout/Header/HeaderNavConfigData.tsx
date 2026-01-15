@@ -1,6 +1,7 @@
 import { NavConfig } from "./HeaderNavConfigType";
 import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
 import { CloudPlan, TOCNamespace } from "shared/interface";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import TiDBCloudIcon from "media/icons/cloud-03.svg";
 import TiDBIcon from "media/icons/layers-three-01.svg";
@@ -8,7 +9,10 @@ import TiDBIcon from "media/icons/layers-three-01.svg";
 /**
  * Default navigation configuration
  */
-const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
+const getDefaultNavConfig = (
+  cloudPlan: CloudPlan | null,
+  language?: string
+): NavConfig[] => [
   {
     type: "group",
     title: "Product",
@@ -92,6 +96,7 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
             to: "/tidb-in-kubernetes/stable",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBInKubernetes,
+            disabled: (lang: string) => lang === "ja",
           },
         ],
       },
@@ -128,7 +133,7 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
       {
         type: "item",
         label: "TiDB Self-Managed Releases",
-        to: "/releases/tidb",
+        to: "/releases/tidb-self-managed",
         selected: (namespace) => namespace === TOCNamespace.TiDBReleases,
       },
       {
@@ -137,12 +142,14 @@ const getDefaultNavConfig = (cloudPlan: CloudPlan | null): NavConfig[] => [
         to: "/releases/tidb-operator",
         selected: (namespace) =>
           namespace === TOCNamespace.TiDBInKubernetesReleases,
+        disabled: (lang: string) => lang === "ja",
       },
       {
         type: "item",
         label: "TiUP Releases",
         to: "https://github.com/pingcap/tiup/releases",
         selected: () => false,
+        endIcon: <OpenInNewIcon sx={{ fontSize: "14px", marginLeft: "4px" }} />,
       },
     ],
   },
@@ -166,10 +173,11 @@ const archiveNavConfig: NavConfig[] = [
 export const generateNavConfig = (
   t: (key: string) => string,
   cloudPlan: CloudPlan | null,
-  buildType?: string
+  buildType?: string,
+  language?: string
 ): NavConfig[] => {
   if (buildType === "archive") {
     return archiveNavConfig;
   }
-  return getDefaultNavConfig(cloudPlan);
+  return getDefaultNavConfig(cloudPlan, language);
 };

@@ -12,6 +12,8 @@ export interface NavItemConfig {
   to: string;
   /** Optional icon before label */
   startIcon?: ReactNode;
+  /** Optional icon after label */
+  endIcon?: ReactNode;
   /** Optional alt text for GTM tracking */
   alt?: string;
   /** Whether this item is selected (can be a function that returns boolean) */
@@ -22,6 +24,8 @@ export interface NavItemConfig {
   isI18n?: boolean;
   /** Condition to show this item */
   condition?: (language: string, buildType?: string) => boolean;
+  /** Whether this item is disabled (can be a function that returns boolean based on language) */
+  disabled?: boolean | ((language: string) => boolean);
 }
 
 /**

@@ -42,8 +42,8 @@ export function HeaderNavStackMobile(props: {
 
   // Generate navigation config
   const navConfig: NavConfig[] = React.useMemo(() => {
-    return generateNavConfig(t, cloudPlan, props.buildType);
-  }, [t, cloudPlan, props.buildType]);
+    return generateNavConfig(t, cloudPlan, props.buildType, language);
+  }, [t, cloudPlan, props.buildType, language]);
 
   return (
     <Box
@@ -105,6 +105,7 @@ export function HeaderNavStackMobile(props: {
                   config={config}
                   namespace={props.namespace}
                   onClose={handleClose}
+                  language={language}
                 />
               </React.Fragment>
             );
@@ -119,12 +120,13 @@ const RenderNavConfig = (props: {
   config: NavConfig;
   namespace?: TOCNamespace;
   onClose: () => void;
+  language?: string;
 }) => {
-  const { config, namespace, onClose } = props;
+  const { config, namespace, onClose, language } = props;
 
   if (config.type === "item") {
     return (
-      <NavMenuItem item={config} namespace={namespace} onClose={onClose} />
+      <NavMenuItem item={config} namespace={namespace} onClose={onClose} language={language} />
     );
   }
 
@@ -219,6 +221,7 @@ const RenderNavConfig = (props: {
                   item={child}
                   namespace={namespace}
                   onClose={onClose}
+                  language={language}
                 />
               ))}
             </React.Fragment>
@@ -232,6 +235,7 @@ const RenderNavConfig = (props: {
             item={item}
             namespace={namespace}
             onClose={onClose}
+            language={language}
           />
         ))}
       </>
@@ -246,44 +250,44 @@ const NavMenuItem = (props: {
   item: NavItemConfig;
   namespace?: TOCNamespace;
   onClose: () => void;
+  language?: string;
 }) => {
-  const { item, namespace, onClose } = props;
+  const { item, namespace, onClose, language } = props;
   const isSelected =
     typeof item.selected === "function"
       ? item.selected(namespace)
       : item.selected ?? false;
 
-  return (
-    <LinkComponent
-      isI18n={item.isI18n ?? true}
-      to={item.to}
-      style={{ width: "100%", textDecoration: "none" }}
+  const isDisabled =
+    typeof item.disabled === "function"
+      ? item.disabled(language || "")
+      : item.disabled ?? false;
+
+  const menuItemContent = (
+    <MenuItem
       onClick={() => {
-        gtmTrack(GTMEvent.ClickHeadNav, {
-          item_name: item.label || item.alt,
-        });
+        if (isDisabled) return;
+        clearAllNavStates();
+        onClose();
+        item.onClick?.();
+      }}
+      disableRipple
+      selected={isSelected}
+      disabled={isDisabled}
+      sx={{
+        padding: "10px 16px",
+        opacity: isDisabled ? 0.5 : 1,
+        cursor: isDisabled ? "not-allowed" : "pointer",
       }}
     >
-      <MenuItem
-        onClick={() => {
-          clearAllNavStates();
-          onClose();
-          item.onClick?.();
-        }}
-        disableRipple
-        selected={isSelected}
+      <Box
         sx={{
-          padding: "10px 16px",
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          width: "100%",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            width: "100%",
-          }}
-        >
           {item.startIcon && (
             <Box
               sx={{
@@ -303,8 +307,37 @@ const NavMenuItem = (props: {
           >
             {item.label}
           </Typography>
+          {item.endIcon && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginLeft: "auto",
+              }}
+            >
+              {item.endIcon}
+            </Box>
+          )}
         </Box>
-      </MenuItem>
+    </MenuItem>
+  );
+
+  if (isDisabled) {
+    return menuItemContent;
+  }
+
+  return (
+    <LinkComponent
+      isI18n={item.isI18n ?? true}
+      to={item.to}
+      style={{ width: "100%", textDecoration: "none" }}
+      onClick={() => {
+        gtmTrack(GTMEvent.ClickHeadNav, {
+          item_name: item.label || item.alt,
+        });
+      }}
+    >
+      {menuItemContent}
     </LinkComponent>
   );
 };
