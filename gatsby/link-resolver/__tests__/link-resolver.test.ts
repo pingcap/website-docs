@@ -182,50 +182,50 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/api/introduction");
     });
 
-    it("should resolve releases/tidb links (en - default language omitted)", () => {
+    it("should resolve releases/_index links to tidb-self-managed (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb",
+        "/releases/_index",
         "/en/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/releases/tidb");
+      expect(result).toBe("/releases/tidb-self-managed");
     });
 
-    it("should resolve releases/tidb links (zh - language prefix included)", () => {
+    it("should resolve releases/_index links to tidb-self-managed (zh - language prefix included)", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb",
+        "/releases/_index",
         "/zh/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/zh/releases/tidb");
+      expect(result).toBe("/zh/releases/tidb-self-managed");
     });
 
-    it("should resolve releases/tidb-cloud links (en - default language omitted)", () => {
+    it("should resolve tidb-cloud/releases/_index links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb-cloud",
+        "/tidb-cloud/releases/_index",
         "/en/tidb/stable/alert-rules"
       );
       expect(result).toBe("/releases/tidb-cloud");
     });
 
-    it("should resolve releases/tidb-cloud links (zh - language prefix included)", () => {
+    it("should resolve tidb-cloud/releases/_index links (zh - language prefix included)", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb-cloud",
+        "/tidb-cloud/releases/_index",
         "/zh/tidb/stable/alert-rules"
       );
       expect(result).toBe("/zh/releases/tidb-cloud");
     });
 
-    it("should resolve releases/tidb-operator links (en - default language omitted)", () => {
+    it("should resolve tidb-in-kubernetes/releases/_index links from tidb-in-kubernetes pages (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb-operator",
-        "/en/tidb/stable/alert-rules"
+        "/tidb-in-kubernetes/releases/_index",
+        "/en/tidb-in-kubernetes/stable/deploy"
       );
       expect(result).toBe("/releases/tidb-operator");
     });
 
-    it("should resolve releases/tidb-operator links (zh - language prefix included)", () => {
+    it("should resolve tidb-in-kubernetes/releases/_index links from tidb-in-kubernetes pages (zh - language prefix included)", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb-operator",
-        "/zh/tidb/stable/alert-rules"
+        "/tidb-in-kubernetes/releases/_index",
+        "/zh/tidb-in-kubernetes/stable/deploy"
       );
       expect(result).toBe("/zh/releases/tidb-operator");
     });
@@ -623,20 +623,28 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/develop/vector-search");
     });
 
-    it("should use curLang in releases/tidb target pattern", () => {
+    it("should use curLang in releases/_index target pattern for tidb-self-managed", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb",
+        "/releases/_index",
         "/zh/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/zh/releases/tidb");
+      expect(result).toBe("/zh/releases/tidb-self-managed");
     });
 
-    it("should use curLang in releases/tidb-cloud target pattern", () => {
+    it("should use curLang in tidb-cloud/releases/_index target pattern", () => {
       const result = resolveMarkdownLink(
-        "/releases/tidb-cloud",
+        "/tidb-cloud/releases/_index",
         "/ja/tidb/stable/alert-rules"
       );
       expect(result).toBe("/ja/releases/tidb-cloud");
+    });
+
+    it("should use curLang in tidb-in-kubernetes/releases/_index target pattern", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-in-kubernetes/releases/_index",
+        "/ja/tidb-in-kubernetes/stable/deploy"
+      );
+      expect(result).toBe("/ja/releases/tidb-operator");
     });
 
     it("should use curLang in namespace links target pattern", () => {

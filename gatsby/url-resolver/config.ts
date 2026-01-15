@@ -29,10 +29,10 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       conditions: { filename: ["_index"] },
     },
     // tidb releases
-    // /en/tidb/master/releases/_index.md -> /en/releases/tidb
+    // /en/tidb/master/releases/_index.md -> /en/releases/tidb-self-managed
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/releases/{filename}`,
-      targetPattern: "/{lang}/releases/tidb",
+      targetPattern: "/{lang}/releases/tidb-self-managed",
       conditions: { filename: ["_index"] },
     },
     {

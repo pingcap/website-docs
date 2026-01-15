@@ -60,8 +60,8 @@ export default function HeaderNavStack(props: {
       return props.config;
     }
     // Use new config generator
-    return generateNavConfig(t, cloudPlan, props.buildType);
-  }, [props.config, props.buildType, cloudPlan, t]);
+    return generateNavConfig(t, cloudPlan, props.buildType, language);
+  }, [props.config, props.buildType, cloudPlan, t, language]);
 
   // Find and notify selected item
   React.useEffect(() => {
@@ -98,6 +98,7 @@ export default function HeaderNavStack(props: {
             key={index}
             config={navConfig}
             namespace={props.namespace}
+            language={language}
           />
         );
       })}
@@ -105,7 +106,11 @@ export default function HeaderNavStack(props: {
   );
 }
 
-const NavGroup = (props: { config: NavConfig; namespace?: TOCNamespace }) => {
+const NavGroup = (props: {
+  config: NavConfig;
+  namespace?: TOCNamespace;
+  language?: string;
+}) => {
   const { config } = props;
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
@@ -197,6 +202,7 @@ const NavGroup = (props: { config: NavConfig; namespace?: TOCNamespace }) => {
         open={open}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
+        language={props.language}
       />
 
       {shouldShowPopover && (
@@ -263,6 +269,7 @@ const NavGroup = (props: { config: NavConfig; namespace?: TOCNamespace }) => {
                                   groupTitle={child.title}
                                   namespace={props.namespace}
                                   onClose={handlePopoverClose}
+                                  language={props.language}
                                 />
                               );
                             }
@@ -296,6 +303,7 @@ const NavGroup = (props: { config: NavConfig; namespace?: TOCNamespace }) => {
                         item={child}
                         namespace={props.namespace}
                         onClose={handlePopoverClose}
+                        language={props.language}
                       />
                     ))}
                   </Box>
@@ -346,12 +354,75 @@ const NavMenuItem = (props: {
   groupTitle?: string | React.ReactNode;
   namespace?: TOCNamespace;
   onClose: () => void;
+  language?: string;
 }) => {
-  const { item, groupTitle, namespace, onClose } = props;
+  const { item, groupTitle, namespace, onClose, language } = props;
   const isSelected =
     typeof item.selected === "function"
       ? item.selected(namespace)
       : item.selected ?? false;
+
+  const isDisabled =
+    typeof item.disabled === "function"
+      ? item.disabled(language || "")
+      : item.disabled ?? false;
+
+  const menuItemContent = (
+    <MenuItem
+      onClick={() => {
+        if (isDisabled) return;
+        clearAllNavStates();
+        onClose();
+        item.onClick?.();
+      }}
+      disableRipple
+      selected={isSelected}
+      disabled={isDisabled}
+      sx={{
+        padding: groupTitle ? "10px 12px" : "8px 12px",
+        opacity: isDisabled ? 0.5 : 1,
+        cursor: isDisabled ? "not-allowed" : "pointer",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          width: "100%",
+        }}
+      >
+        {item.startIcon && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {item.startIcon}
+          </Box>
+        )}
+        <Typography component="span" sx={{ fontSize: "14px" }}>
+          {item.label}
+        </Typography>
+        {item.endIcon && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "auto",
+            }}
+          >
+            {item.endIcon}
+          </Box>
+        )}
+      </Box>
+    </MenuItem>
+  );
+
+  if (isDisabled) {
+    return menuItemContent;
+  }
 
   return (
     <LinkComponent
@@ -364,41 +435,7 @@ const NavMenuItem = (props: {
         });
       }}
     >
-      <MenuItem
-        onClick={() => {
-          clearAllNavStates();
-          onClose();
-          item.onClick?.();
-        }}
-        disableRipple
-        selected={isSelected}
-        sx={{
-          padding: groupTitle ? "10px 12px" : "8px 12px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            width: "100%",
-          }}
-        >
-          {item.startIcon && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {item.startIcon}
-            </Box>
-          )}
-          <Typography component="span" sx={{ fontSize: "14px" }}>
-            {item.label}
-          </Typography>
-        </Box>
-      </MenuItem>
+      {menuItemContent}
     </LinkComponent>
   );
 };
@@ -413,6 +450,7 @@ const NavButton = (props: {
   open: boolean;
   onMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void;
   onMouseLeave?: () => void;
+  language?: string;
 }) => {
   const {
     config,
@@ -423,6 +461,7 @@ const NavButton = (props: {
     open,
     onMouseEnter,
     onMouseLeave,
+    language,
   } = props;
   const theme = useTheme();
   const label = isItem
@@ -432,8 +471,18 @@ const NavButton = (props: {
   const startIcon = isItem
     ? (config as NavItemConfig).startIcon
     : (config as NavGroupConfig).titleIcon;
+  const endIcon = isItem ? (config as NavItemConfig).endIcon : undefined;
   const alt = isItem ? (config as NavItemConfig).alt : undefined;
   const isI18n = isItem ? (config as NavItemConfig).isI18n ?? true : true;
+  const disabled = isItem
+    ? (() => {
+        const itemDisabled = (config as NavItemConfig).disabled;
+        if (typeof itemDisabled === "function") {
+          return itemDisabled(language || "");
+        }
+        return itemDisabled ?? false;
+      })()
+    : false;
 
   // Determine selected state for border styling
   const isSelectedState = isItem ? selected : hasSelectedChild;
@@ -441,20 +490,8 @@ const NavButton = (props: {
   return (
     <>
       {isItem && to ? (
-        // Render as link for item
-        <LinkComponent
-          isI18n={isI18n}
-          to={to}
-          onClick={() => {
-            clearAllNavStates();
-            gtmTrack(GTMEvent.ClickHeadNav, {
-              item_name: label || alt,
-            });
-            if (isItem) {
-              (config as NavItemConfig).onClick?.();
-            }
-          }}
-        >
+        // Render as link for item (or disabled text if disabled)
+        disabled ? (
           <Typography
             variant="body1"
             component="div"
@@ -465,19 +502,57 @@ const NavButton = (props: {
               alignItems: "center",
               gap: 0.5,
               fontSize: "14px",
-              color: theme.palette.carbon[900],
+              color: theme.palette.carbon[400],
               height: "100%",
-              paddingBottom: isSelectedState ? "0" : "4px",
-              borderBottom: isSelectedState
-                ? `4px solid ${theme.palette.primary.main}`
-                : ``,
-              fontWeight: isSelectedState ? 700 : 400,
+              paddingBottom: "4px",
+              fontWeight: 400,
+              opacity: 0.5,
+              cursor: "not-allowed",
             }}
           >
             {startIcon}
             {label}
+            {endIcon}
           </Typography>
-        </LinkComponent>
+        ) : (
+          <LinkComponent
+            isI18n={isI18n}
+            to={to}
+            onClick={() => {
+              clearAllNavStates();
+              gtmTrack(GTMEvent.ClickHeadNav, {
+                item_name: label || alt,
+              });
+              if (isItem) {
+                (config as NavItemConfig).onClick?.();
+              }
+            }}
+          >
+            <Typography
+              variant="body1"
+              component="div"
+              padding="0 12px 4px"
+              sx={{
+                display: "inline-flex",
+                boxSizing: "border-box",
+                alignItems: "center",
+                gap: 0.5,
+                fontSize: "14px",
+                color: theme.palette.carbon[900],
+                height: "100%",
+                paddingBottom: isSelectedState ? "0" : "4px",
+                borderBottom: isSelectedState
+                  ? `4px solid ${theme.palette.primary.main}`
+                  : ``,
+                fontWeight: isSelectedState ? 700 : 400,
+              }}
+            >
+              {startIcon}
+              {label}
+              {endIcon}
+            </Typography>
+          </LinkComponent>
+        )
       ) : (
         // Render as button for group (with or without popover)
         <Box

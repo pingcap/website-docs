@@ -27,7 +27,7 @@ import {
   ZH_DOC_TYPE_LIST,
   TIDB_ZH_SEARCH_INDEX_VERSION,
 } from "shared/resources";
-import { Locale } from "shared/interface";
+import { Locale, TOCNamespace } from "shared/interface";
 import { getHeaderHeight } from "shared/headerHeight";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { useEffect } from "react";
@@ -201,7 +201,7 @@ export default function DocSearchTemplate({
 
   return (
     <>
-      <Layout bannerEnabled={bannerVisible}>
+      <Layout bannerEnabled={bannerVisible} namespace={TOCNamespace.Search}>
         <Container
           sx={{
             marginTop: getHeaderHeight(bannerVisible || false),

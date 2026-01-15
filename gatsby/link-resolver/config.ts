@@ -10,15 +10,16 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
 
   linkMappings: [
     {
-      linkPattern: "/releases/tidb",
-      targetPattern: "/{curLang}/releases/tidb",
+      linkPattern: "/releases/_index",
+      targetPattern: "/{curLang}/releases/tidb-self-managed",
     },
     {
-      linkPattern: "/releases/tidb-cloud",
+      linkPattern: "/tidb-cloud/releases/_index",
       targetPattern: "/{curLang}/releases/tidb-cloud",
     },
     {
-      linkPattern: "/releases/tidb-operator",
+      pathPattern: "/{lang}/tidb-in-kubernetes/{branch}/{...any}",
+      linkPattern: "/tidb-in-kubernetes/releases/_index",
       targetPattern: "/{curLang}/releases/tidb-operator",
     },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
