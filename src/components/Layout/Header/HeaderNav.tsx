@@ -148,6 +148,30 @@ const NavGroup = (props: {
     }
   };
 
+  const handlePopoverToggle = (event: React.MouseEvent<HTMLElement>) => {
+    // Toggle popover on click
+    if (anchorEl) {
+      // If already open, close it immediately
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+      setAnchorEl(null);
+    } else {
+      // If closed, open it
+      handlePopoverOpen(event);
+    }
+  };
+
+  const handlePopoverCloseImmediate = () => {
+    // Close popover immediately (for click outside)
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setAnchorEl(null);
+  };
+
   React.useEffect(() => {
     return () => {
       // Cleanup timeout on unmount
@@ -202,6 +226,7 @@ const NavGroup = (props: {
         open={open}
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
+        onClick={shouldShowPopover ? handlePopoverToggle : undefined}
         language={props.language}
       />
 
@@ -218,7 +243,7 @@ const NavGroup = (props: {
             vertical: "top",
             horizontal: "left",
           }}
-          onClose={handlePopoverClose}
+          onClose={handlePopoverCloseImmediate}
           disableRestoreFocus
           sx={{ pointerEvents: "none" }}
           PaperProps={{
@@ -268,7 +293,7 @@ const NavGroup = (props: {
                                   item={nestedChild}
                                   groupTitle={child.title}
                                   namespace={props.namespace}
-                                  onClose={handlePopoverClose}
+                                  onClose={handlePopoverCloseImmediate}
                                   language={props.language}
                                 />
                               );
@@ -302,7 +327,7 @@ const NavGroup = (props: {
                         key={index}
                         item={child}
                         namespace={props.namespace}
-                        onClose={handlePopoverClose}
+                        onClose={handlePopoverCloseImmediate}
                         language={props.language}
                       />
                     ))}
@@ -450,6 +475,7 @@ const NavButton = (props: {
   open: boolean;
   onMouseEnter?: (event: React.MouseEvent<HTMLElement>) => void;
   onMouseLeave?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   language?: string;
 }) => {
   const {
@@ -461,6 +487,7 @@ const NavButton = (props: {
     open,
     onMouseEnter,
     onMouseLeave,
+    onClick,
     language,
   } = props;
   const theme = useTheme();
@@ -560,8 +587,10 @@ const NavButton = (props: {
             shouldShowPopover && open ? "mouse-over-popover" : undefined
           }
           aria-haspopup={shouldShowPopover ? "true" : undefined}
+          aria-expanded={shouldShowPopover ? open : undefined}
           onMouseEnter={shouldShowPopover ? onMouseEnter : undefined}
           onMouseLeave={shouldShowPopover ? onMouseLeave : undefined}
+          onClick={shouldShowPopover ? onClick : undefined}
           sx={{
             cursor: shouldShowPopover ? "pointer" : "default",
             display: "inline-flex",
