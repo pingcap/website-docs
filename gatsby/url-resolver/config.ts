@@ -111,6 +111,16 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         ignoreIf: ["_index", "_docHome"],
       },
     },
+    // _index pages in nested folders (before generic fallback)
+    // /{lang}/{repo}/{...folder}/_index.md -> /{lang}/{repo}/{folder}
+    {
+      sourcePattern: "/{lang}/{repo}/{...folder}/{filename}",
+      targetPattern: "/{lang}/{repo}/{folder}",
+      conditions: { filename: ["_index"] },
+      filenameTransform: {
+        ignoreIf: ["_index"],
+      },
+    },
     // Fallback: /{lang}/{repo}/{...any}/{filename} -> /{lang}/{repo}/{filename}
     {
       sourcePattern: "/{lang}/{repo}/{...any}/{filename}",

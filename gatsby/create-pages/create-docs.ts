@@ -126,7 +126,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     }
 
     const namespace = getTOCNamespace(node.slug);
-    const namespaceSlug = TOCNamespaceSlugMap[namespace];
+    const namespaceSlug = TOCNamespaceSlugMap[namespace || TOCNamespace.TiDB];
     const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
     const essentialNavUrl = generateNavTOCPath(

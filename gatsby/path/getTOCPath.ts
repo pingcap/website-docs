@@ -181,7 +181,7 @@ function matchesRule(
  * Get shared namespace from slug based on configured rules
  * Returns the first matching namespace or empty string if no match
  */
-export const getTOCNamespace = (slug: string): TOCNamespace => {
+export const getTOCNamespace = (slug: string): TOCNamespace | undefined => {
   const [locale, repo, branch, folder, ...rest] = slug.split("/") as [
     Locale,
     Repo,
@@ -197,5 +197,5 @@ export const getTOCNamespace = (slug: string): TOCNamespace => {
     }
   }
 
-  return TOCNamespace.TiDB;
+  return;
 };
