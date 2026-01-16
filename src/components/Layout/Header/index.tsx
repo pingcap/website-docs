@@ -77,6 +77,7 @@ export default function Header(props: HeaderProps) {
         >
           {props.menu}
           <Box
+            height="34px"
             sx={{
               display: {
                 xs: "none",
@@ -92,7 +93,7 @@ export default function Header(props: HeaderProps) {
                 })
               }
             >
-              <TiDBLogo />
+              <TiDBLogo height="100%" width="100%" />
             </LinkComponent>
           </Box>
 
