@@ -114,7 +114,7 @@ export default function RightNav(props: RightNavProps) {
                 paddingLeft: "0.5rem",
                 color: theme.palette.carbon[700],
                 fontSize: "0.875rem",
-                fontWeight: "500",
+                fontWeight: "300",
                 lineHeight: "1.25rem",
                 paddingBottom: "0.5rem",
               }}
@@ -166,8 +166,7 @@ const generateToc = (items: TableOfContent[], level = 0, activeId = "") => {
                 fontWeight: isActive ? "700" : "400",
                 color: isActive ? theme.palette.website.f1 : "inherit",
                 "&:hover": {
-                  color: theme.palette.website.f3,
-                  borderLeft: `1px solid ${theme.palette.website.f3}`,
+                  fontWeight: "700",
                 },
               }}
             >

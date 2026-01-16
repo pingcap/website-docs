@@ -73,10 +73,12 @@ export default function Header(props: HeaderProps) {
             alignItems: "center",
             width: "100%",
             height: HEADER_HEIGHT.FIRST_ROW,
+            flexShrink: 0,
           }}
         >
           {props.menu}
           <Box
+            height="34px"
             sx={{
               display: {
                 xs: "none",
@@ -92,7 +94,7 @@ export default function Header(props: HeaderProps) {
                 })
               }
             >
-              <TiDBLogo />
+              <TiDBLogo height="100%" width="100%" />
             </LinkComponent>
           </Box>
 

@@ -24,7 +24,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
     // /{namespace}/{...any}/{docname} -> /{curLang}/{namespace}/{docname}
-    // Special: tidb-cloud -> tidbcloud
+    // Special: tidb-cloud -> tidbcloud, develop -> developer
     {
       linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{curLang}/{namespace}/{docname}",
@@ -33,6 +33,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
+        develop: "developer",
       },
     },
     // Rule 2: tidbcloud with prefix pages (path-based mapping)
@@ -49,7 +50,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     {
       pathPattern: `/{lang}/{namespace}/{...any}`,
       pathConditions: {
-        namespace: ["develop", "best-practice", "api"],
+        namespace: ["developer", "develop", "best-practice", "api"],
       },
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",

@@ -2,17 +2,20 @@
  * Header height constants
  * These values should be kept in sync with the actual header height in Header.tsx
  */
+const BANNER_HEIGHT_PX = 40;
+const FIRST_ROW_HEIGHT_PX = 56;
+const SECOND_ROW_HEIGHT_PX = 56;
+const WITHOUT_BANNER_HEIGHT_PX = FIRST_ROW_HEIGHT_PX + SECOND_ROW_HEIGHT_PX;
+const WITH_BANNER_HEIGHT_PX = WITHOUT_BANNER_HEIGHT_PX + BANNER_HEIGHT_PX;
+
+const px = (value: number) => `${value}px`;
+
 export const HEADER_HEIGHT = {
-  /** Banner height: 40px */
-  BANNER: "40px",
-  /** First row height (Logo row): 72px */
-  FIRST_ROW: "72px",
-  /** Second row height (Navigation row): 56px */
-  SECOND_ROW: "56px",
-  /** Header height without banner: 128px (72px + 56px) */
-  WITHOUT_BANNER: "128px",
-  /** Header height with banner: 168px (40px + 72px + 56px) */
-  WITH_BANNER: "168px",
+  BANNER: px(BANNER_HEIGHT_PX),
+  FIRST_ROW: px(FIRST_ROW_HEIGHT_PX),
+  SECOND_ROW: px(SECOND_ROW_HEIGHT_PX),
+  WITHOUT_BANNER: px(WITHOUT_BANNER_HEIGHT_PX),
+  WITH_BANNER: px(WITH_BANNER_HEIGHT_PX),
 } as const;
 
 /**
