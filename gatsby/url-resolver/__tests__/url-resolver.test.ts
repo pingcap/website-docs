@@ -282,6 +282,12 @@ describe("calculateFileUrl", () => {
       "en/other-repo/some-folder/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/other-repo/some-folder");
+  });
+
+  it("should handle nested fallback with _index at repo root", () => {
+    const absolutePath = path.join(sourceBasePath, "en/other-repo/_index.md");
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/other-repo");
   });
 

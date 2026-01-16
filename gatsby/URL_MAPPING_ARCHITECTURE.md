@@ -349,7 +349,27 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: Fallback Rule
+### Rule 9: Fallback Nested `_index` Rule
+
+**Effect**: For repos not matched by earlier rules, maps nested `_index.md` pages to their folder URL instead of collapsing to the repo root.
+
+**Source Pattern**: `/{lang}/{repo}/{...folder}/{filename}`
+
+**Target Pattern**: `/{lang}/{repo}/{folder}`
+
+**Conditions**: `filename = "_index"`
+
+**Filename Transform**: `ignoreIf: ["_index"]`
+
+**Example**:
+- Source: `en/other-repo/some-folder/_index.md`
+- Target: `/en/other-repo/some-folder`
+
+**Use Case**: Prevents multiple nested `_index.md` pages from resolving to the same `/{lang}/{repo}` URL.
+
+---
+
+### Rule 10: Fallback Rule
 
 **Effect**: Generic fallback for any remaining paths.
 
