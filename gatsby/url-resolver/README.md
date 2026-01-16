@@ -92,6 +92,25 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
 };
 ```
 
+### `UrlResolverConfig` Options
+
+- `sourceBasePath` (`string`): Base directory of the source markdown files. Used by `parseSourcePath()` to convert absolute file paths into slug-like relative paths.
+- `pathMappings` (`PathMappingRule[]`): Ordered mapping rules (first match wins).
+  - `sourcePattern` (`string`): Pattern to match the parsed source path (supports `{var}` and `{...var}` variables).
+  - `targetPattern` (`string`): Pattern to generate the published URL. Supports alias syntax like `{branch:branch-alias-tidb}`.
+  - `conditions` (`Record<string, string[]>`, optional): Restricts when the rule applies by allowing only specific values for variables extracted from `sourcePattern`.
+  - `filenameTransform` (optional): Special handling for filenames like `_index`/`_docHome`.
+    - `ignoreIf` (`string[]`, optional): If the filename matches, omit the `{filename}` part in the generated URL.
+    - `conditionalTarget` (optional): Use an alternate `keepTargetPattern` when the filename matches `keepIf`.
+- `aliases` (optional): Named alias tables referenced from `targetPattern` via `{var:alias-name}`.
+  - `context` (`Record<string, string[]>`, optional): Apply the alias only when other variables match specific values (for example, only for certain `repo` values).
+  - `mappings` (`AliasMapping`): Alias definitions supporting exact matches (for example, `master -> dev`) and wildcard/regex replacements (for example, `release-* -> v*`).
+- `defaultLanguage` (`string`, optional): When `calculateFileUrl(..., omitDefaultLanguage=true)` and the resolved URL starts with `/{defaultLanguage}/`, the language prefix is removed.
+- `trailingSlash` (`"always" | "never" | "auto"`, optional): Controls trailing slash behavior of the resolved URL.
+  - `"never"`: never ends with `/`
+  - `"always"`: always ends with `/`
+  - `"auto"`: add/remove `/` based on whether the resolved URL represents an index page (for example, when `{filename}` is omitted)
+
 ### Pattern Syntax
 
 #### Variables

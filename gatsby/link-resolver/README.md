@@ -115,6 +115,22 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
 };
 ```
 
+### `LinkResolverConfig` Options
+
+- `linkMappings` (`LinkMappingRule[]`): Ordered link resolution rules (first match wins). Each rule can be either:
+  - **Direct mapping**: `linkPattern` + `targetPattern`
+  - **Path-based mapping**: `pathPattern` + `linkPattern` + `targetPattern`
+- `defaultLanguage` (`string`, optional): If the resolved URL starts with `/{defaultLanguage}/`, the language prefix is removed (for example, `/en/tidb/stable/...` -> `/tidb/stable/...`). If omitted, it falls back to the `url-resolver` `defaultLanguage`.
+
+#### `LinkMappingRule` Fields
+
+- `pathPattern` (`string`, optional): Pattern to match the current page URL (enables path-based mapping and provides context variables like `{lang}`, `{repo}`, `{branch}`).
+- `linkPattern` (`string`): Pattern to match the markdown link path (the input link is normalized to start with `/` before matching).
+- `targetPattern` (`string`): Pattern to generate the resolved URL. Can reference extracted variables and `{curLang}` (current page language).
+- `conditions` (`Record<string, string[]>`, optional): Restricts when the rule applies by allowing only specific values for extracted variables.
+- `pathConditions` (`Record<string, string[]>`, optional): Like `conditions`, but checked against variables extracted from `pathPattern` (only for path-based mappings).
+- `namespaceTransform` (`Record<string, string>`, optional): Transforms the `{namespace}` variable before applying `targetPattern` (for example, `develop -> developer`, `tidb-cloud -> tidbcloud`).
+
 ### Pattern Syntax
 
 #### Variables
