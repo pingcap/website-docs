@@ -11,6 +11,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -46,3 +47,17 @@ jobs:
           git merge --no-ff "origin/${SOURCE_BRANCH}" -m "sync-nextgen: merge ${SOURCE_BRANCH} into ${TARGET_BRANCH}"
           git push origin "${TARGET_BRANCH}"
 
+      - name: Dispatch production workflow on preview-nextgen
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "production.yml",
+              ref: "preview-nextgen",
+              inputs: {
+                hash: "nextgen",
+              },
+            });
