@@ -70,6 +70,7 @@ export default function HeaderAction(props: {
       spacing={2}
       sx={{ marginLeft: "auto", alignItems: "center" }}
     >
+      {/* test */}
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
           <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
