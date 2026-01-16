@@ -81,7 +81,7 @@ module.exports = {
           {
             matchPath: `/:lang?/(${Object.keys(docs.docs).join(
               "|"
-            )}|develop|best-practice|api|releases)/(.*)`,
+            )}|developer|develop|best-practice|api|releases)/(.*)`,
             getLanguageFromPath: true,
           },
           {

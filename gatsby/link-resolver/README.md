@@ -9,7 +9,7 @@ The Link Resolver is a module that transforms internal markdown links within art
 The Link Resolver serves the following purposes:
 
 1. **Context-Aware Resolution**: Resolves relative links based on the current page's URL, maintaining proper navigation structure
-2. **Namespace Handling**: Handles special namespaces (`develop`, `best-practice`, `api`, `tidb-cloud`) with custom transformation rules
+2. **Namespace Handling**: Handles special namespaces (`develop`, `best-practice`, `api`, `tidb-cloud`) with custom transformation rules (`develop` links are mapped to `developer`)
 3. **Language Preservation**: Automatically preserves the current page's language in resolved links
 4. **Path-Based Mapping**: Supports both direct link mappings and path-based mappings (where rules depend on the current page's path)
 5. **Default Language Omission**: Optionally omits the default language prefix from resolved URLs
@@ -28,12 +28,12 @@ const resolved = resolveMarkdownLink(
 );
 // Result: "/tidbcloud/getting-started"
 
-// Resolve a link from a develop namespace page
+// Resolve a legacy namespace link (/develop -> /developer)
 const resolved2 = resolveMarkdownLink(
-  "/vector-search",
-  "/develop/overview"
+  "/develop/vector-search",
+  "/en/tidb/stable/overview"
 );
-// Result: "/develop/vector-search"
+// Result: "/developer/vector-search"
 
 // Resolve a link from a tidb page
 const resolved3 = resolveMarkdownLink(
@@ -100,6 +100,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
+        develop: "developer",
       },
     },
 
@@ -144,8 +145,8 @@ Direct link mappings match links directly without considering the current page p
 
 **Example**:
 - Link: `/develop/vector-search`
-- Current Page: `/tidb/stable/overview` (any page)
-- Result: `/develop/vector-search` (or `/en/develop/vector-search` if default language not omitted)
+- Current Page: `/en/tidb/stable/overview` (any page)
+- Result: `/developer/vector-search` (or `/zh/developer/vector-search` depending on current page language)
 
 #### 2. Path-Based Mapping
 
@@ -281,13 +282,14 @@ Clears all caches (useful for testing or when configuration changes).
 
 ```typescript
 // Link: "/develop/vector-search"
-// Current Page: "/tidb/stable/overview" (any page)
+// Current Page: "/en/tidb/stable/overview" (any page)
 // Rule: Direct link mapping
 //   linkPattern: "/{namespace}/{...any}/{docname}"
 //   Matches: namespace="develop", docname="vector-search"
 //   targetPattern: "/{curLang}/{namespace}/{docname}"
-//   curLang extracted from current page: "en" (default)
-// Result: "/develop/vector-search" (default language omitted)
+//   curLang extracted from current page: "en"
+//   namespaceTransform: "develop" -> "developer"
+// Result: "/developer/vector-search" (default language omitted)
 ```
 
 ### Example 2: TiDBCloud Page Link
@@ -323,7 +325,7 @@ Clears all caches (useful for testing or when configuration changes).
 
 ```typescript
 // Link: "/tidb-cloud/releases/_index"
-// Current Page: "/tidb/stable/overview" (any page)
+// Current Page: "/en/tidb/stable/overview" (any page)
 // Rule: Direct link mapping with namespace transform
 //   linkPattern: "/{namespace}/{...any}/{docname}"
 //     Matches: namespace="tidb-cloud", docname="_index"
@@ -336,22 +338,22 @@ Clears all caches (useful for testing or when configuration changes).
 
 ```typescript
 // Link: "/develop/vector-search#data-types"
-// Current Page: "/tidb/stable/overview"
+// Current Page: "/en/tidb/stable/overview"
 // Rule: Direct link mapping
 //   Hash is preserved automatically
-// Result: "/develop/vector-search#data-types"
+// Result: "/developer/vector-search#data-types"
 ```
 
 ## Common Patterns
 
 ### Pattern 1: Namespace Links
 
-Links starting with `develop`, `best-practice`, `api`, or `tidb-cloud` are resolved to namespace URLs:
+Links starting with `develop`, `best-practice`, `api`, or `tidb-cloud` are resolved to namespace URLs (`develop` is mapped to `/developer`):
 
 ```markdown
 <!-- In any markdown file -->
 [Vector Search](/develop/vector-search)
-<!-- Resolves to: /develop/vector-search -->
+<!-- Resolves to: /developer/vector-search -->
 ```
 
 ### Pattern 2: Relative Links from TiDBCloud Pages

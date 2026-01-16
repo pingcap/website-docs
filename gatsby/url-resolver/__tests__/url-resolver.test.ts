@@ -159,7 +159,7 @@ describe("calculateFileUrl", () => {
       "en/tidb/release-8.5/develop/subfolder/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/develop/subfolder");
+    expect(url).toBe("/en/developer/subfolder");
   });
 
   it("should resolve develop non-index without folders", () => {
@@ -168,7 +168,7 @@ describe("calculateFileUrl", () => {
       "en/tidb/release-8.5/develop/subfolder/some-page.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/develop/some-page/");
+    expect(url).toBe("/en/developer/some-page/");
   });
 
   it("should resolve tidb with branch alias (master -> dev)", () => {
@@ -369,7 +369,7 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/develop/overview");
+    expect(url).toBe("/developer/overview");
   });
 
   it("should keep /zh/ prefix for Chinese files", () => {

@@ -105,7 +105,7 @@ const getDefaultNavConfig = (
   {
     type: "item",
     label: "Developer",
-    to: "/develop",
+    to: "/developer",
     selected: (namespace) => namespace === TOCNamespace.Develop,
   },
   {

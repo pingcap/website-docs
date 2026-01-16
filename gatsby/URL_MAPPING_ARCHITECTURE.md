@@ -50,9 +50,9 @@ const path = calculateFileUrl(node.slug, true);
 ```typescript
 // TOC file: docs/markdown-pages/en/tidb/stable/TOC.md
 // Contains link: [Getting Started](/develop/getting-started)
-// TOC path: "/tidb/stable" (resolved from TOC file slug)
-const resolvedLink = resolveMarkdownLink("/develop/getting-started", "/tidb/stable");
-// Result: "/develop/getting-started"
+// TOC path: "/en/tidb/stable" (resolved from TOC file slug)
+const resolvedLink = resolveMarkdownLink("/develop/getting-started", "/en/tidb/stable");
+// Result: "/developer/getting-started"
 // Used in navigation menu
 ```
 
@@ -153,13 +153,13 @@ Final HTML/JSX
    - Namespace: `TOCNamespace.TiDB`
 
 5. **Content Processing** (`plugin/content/index.ts`):
-   - Current page URL: `/tidb/dev/alert-rules`
+   - Current page URL: `/en/tidb/dev/alert-rules`
    - Link `/develop/vector-search` resolved:
      ```typescript
-     resolveMarkdownLink("/develop/vector-search", "/tidb/dev/alert-rules")
-     // Result: "/develop/vector-search"
+     resolveMarkdownLink("/develop/vector-search", "/en/tidb/dev/alert-rules")
+     // Result: "/developer/vector-search"
      ```
-   - Rendered as: `<Link to="/develop/vector-search">Vector Search</Link>`
+   - Rendered as: `<Link to="/developer/vector-search">Vector Search</Link>`
 
 ## Configuration Rules
 
@@ -267,17 +267,23 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Develop/Best-Practice/API Namespace
+### Rule 6: Developer/Best-Practice/API Namespace
 
-**Effect**: Maps TiDB pages in `develop`, `best-practice`, or `api` folders to namespace URLs.
+**Effect**: Maps TiDB pages in `develop` (published as `developer`), `best-practice`, or `api` folders to namespace URLs.
 
 **Source Pattern**: `/{lang}/tidb/{stable}/{folder}/{...folders}/{filename}`
 
 **Target Pattern**:
-- For `_index`: `/{lang}/{folder}/{folders}` (keeps folder structure)
-- For other files: `/{lang}/{folder}/{filename}` (removes folder structure)
+- For `develop` folder:
+  - `_index`: `/{lang}/developer/{folders}` (keeps folder structure)
+  - Other files: `/{lang}/developer/{filename}` (removes folder structure)
+- For `best-practice` and `api` folders:
+  - `_index`: `/{lang}/{folder}/{folders}` (keeps folder structure)
+  - Other files: `/{lang}/{folder}/{filename}` (removes folder structure)
 
-**Conditions**: `folder = ["develop", "best-practice", "api"]`
+**Conditions**:
+- `folder = ["develop"]` → published under `/developer`
+- `folder = ["best-practice", "api"]` → published under `/{folder}`
 
 **Filename Transform**:
 - `ignoreIf: ["_index"]` - Filename removed from URL for non-index files
@@ -285,9 +291,9 @@ Rules are evaluated in order; the first matching rule wins.
 
 **Example**:
 - Source: `en/tidb/release-8.5/develop/subfolder/_index.md`
-- Target: `/develop/subfolder`
+- Target: `/developer/subfolder`
 - Source: `en/tidb/release-8.5/develop/subfolder/vector-search.md`
-- Target: `/develop/vector-search`
+- Target: `/developer/vector-search`
 
 **Use Case**: These namespaces are shared across all TiDB versions, so folder structure is flattened for non-index files.
 
@@ -420,7 +426,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 4: Namespace Links (Direct Mapping)
 
-**Effect**: Resolves namespace links (`develop`, `best-practice`, `api`, `tidb-cloud`) to namespace URLs.
+**Effect**: Resolves namespace links (`develop`, `best-practice`, `api`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practice`, `/api`, `/tidbcloud`).
 
 **Link Pattern**: `/{namespace}/{...any}/{docname}`
 
@@ -428,12 +434,14 @@ Rules are evaluated in order; the first matching rule wins.
 
 **Conditions**: `namespace = ["tidb-cloud", "develop", "best-practice", "api"]`
 
-**Namespace Transform**: `tidb-cloud` → `tidbcloud`
+**Namespace Transform**:
+- `tidb-cloud` → `tidbcloud`
+- `develop` → `developer`
 
 **Example**:
 - Link: `/develop/vector-search`
 - Current Page: Any page
-- Result: `/develop/vector-search`
+- Result: `/developer/vector-search`
 - Link: `/tidb-cloud/releases/_index`
 - Current Page: Any page
 - Result: `/tidbcloud/releases/_index` (namespace transformed)
@@ -464,20 +472,20 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Develop/Best-Practice/API Namespace Page Links (Path-Based)
+### Rule 6: Developer/Best-Practice/API Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
 **Path Pattern**: `/{lang}/{namespace}/{...any}`
 
-**Path Conditions**: `namespace = ["develop", "best-practice", "api"]`
+**Path Conditions**: `namespace = ["develop", "developer", "best-practice", "api"]`
 
 **Link Pattern**: `/{...any}/{docname}`
 
 **Target Pattern**: `/{lang}/tidb/stable/{docname}`
 
 **Example**:
-- Current Page: `/develop/overview`
+- Current Page: `/developer/overview`
 - Link: `/vector-search`
 - Result: `/tidb/stable/vector-search`
 - Current Page: `/best-practice/guide`
@@ -521,7 +529,7 @@ The URL mapping system provides:
 
 1. **Consistent URL Structure**: Source files are mapped to clean, SEO-friendly URLs
 2. **Context-Aware Link Resolution**: Links are resolved based on the current page's context
-3. **Namespace Support**: Special namespaces (`develop`, `best-practice`, `api`) have their own URL structure
+3. **Namespace Support**: Special namespaces (`developer`, `best-practice`, `api`) have their own URL structure
 4. **Branch Aliasing**: Internal branch names are transformed to user-friendly versions
 5. **Default Language Omission**: Default language (`en`) is omitted from URLs for cleaner paths
 6. **TOC-Driven Build**: Only files referenced in TOC files are built, reducing build size

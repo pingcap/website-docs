@@ -10,7 +10,7 @@ The URL Resolver serves the following purposes:
 
 1. **Path Transformation**: Converts source file paths (e.g., `/docs/markdown-pages/en/tidb/master/alert-rules.md`) into published URLs (e.g., `/tidb/dev/alert-rules`)
 2. **Branch Aliasing**: Maps internal branch names (e.g., `master`, `release-8.5`) to display versions (e.g., `dev`, `v8.5`)
-3. **Namespace Handling**: Handles special namespaces like `develop`, `best-practice`, `api`, and `releases` with custom URL structures
+3. **Namespace Handling**: Handles special namespaces like `developer` (source folder `develop`), `best-practice`, `api`, and `releases` with custom URL structures
 4. **Default Language Omission**: Optionally omits the default language prefix (e.g., `/en/`) from URLs
 5. **Trailing Slash Control**: Configures trailing slash behavior (`always`, `never`, or `auto`)
 
@@ -101,7 +101,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
 - `{branch}` - Branch name (e.g., `master`, `release-8.5`)
 - `{filename}` - File name without extension (e.g., `alert-rules`, `_index`)
 - `{...folders}` - Variable number of folder segments (captures all remaining segments)
-- `{namespace}` - Namespace (e.g., `develop`, `best-practice`, `api`)
+- `{namespace}` - Namespace (e.g., `developer`, `best-practice`, `api`)
 
 #### Alias Syntax
 
@@ -143,18 +143,18 @@ filenameTransform: {
 - Source: `/en/tidbcloud/master/tidb-cloud/dedicated/_index.md`
 - Target: `/en/tidbcloud` (or `/tidbcloud` if default language is omitted)
 
-#### 2. Develop Namespace with Folders
+#### 2. Developer Namespace with Folders (Source: `develop`)
 
 ```typescript
 {
   sourcePattern: "/{lang}/tidb/{branch}/{folder}/{...folders}/{filename}",
-  targetPattern: "/{lang}/{folder}/{filename}",
-  conditions: { folder: ["develop", "best-practice", "api"] },
+  targetPattern: "/{lang}/developer/{filename}",
+  conditions: { folder: ["develop"] },
   filenameTransform: {
     ignoreIf: ["_index"],
     conditionalTarget: {
       keepIf: ["_index"],
-      keepTargetPattern: "/{lang}/{folder}/{folders}",
+      keepTargetPattern: "/{lang}/developer/{folders}",
     },
   },
 }
@@ -162,9 +162,9 @@ filenameTransform: {
 
 **Result**:
 - Source: `/en/tidb/master/develop/subfolder/_index.md`
-- Target: `/en/develop/subfolder`
+- Target: `/en/developer/subfolder`
 - Source: `/en/tidb/master/develop/subfolder/page.md`
-- Target: `/en/develop/page`
+- Target: `/en/developer/page`
 
 #### 3. Branch Aliasing
 
@@ -268,7 +268,7 @@ Clears all caches (useful for testing or when configuration changes).
 // omitDefaultLanguage=true: /tidb/dev/alert-rules
 ```
 
-### Example 2: Develop Namespace Index
+### Example 2: Developer Namespace Index (Source: `develop`)
 
 ```typescript
 // Input: "en/tidb/release-8.5/develop/subfolder/_index.md"
@@ -276,8 +276,8 @@ Clears all caches (useful for testing or when configuration changes).
 //   with condition: folder = "develop"
 // Variables: { lang: "en", repo: "tidb", branch: "release-8.5", folder: "develop", folders: ["subfolder"], filename: "_index" }
 // Filename transform: _index matches keepIf, use keepTargetPattern
-// Target: /{lang}/{folder}/{folders} = /en/develop/subfolder
-// omitDefaultLanguage=true: /develop/subfolder
+// Target: /{lang}/developer/{folders} = /en/developer/subfolder
+// omitDefaultLanguage=true: /developer/subfolder
 ```
 
 ### Example 3: TiDBCloud with Prefix

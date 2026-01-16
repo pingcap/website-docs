@@ -79,7 +79,7 @@ export default function HeaderAction(props: {
               variant="outlined"
               startIcon={<StarIcon />}
               disabled={initializingTiDBAI}
-              size="large"
+              size="medium"
               sx={{
                 fontSize: "14px",
                 display: {
@@ -129,7 +129,7 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
-          size="large"
+          size="medium"
           sx={{
             fontSize: "14px",
           }}
@@ -143,7 +143,7 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
-          size="large"
+          size="medium"
           sx={{
             fontSize: "14px",
           }}

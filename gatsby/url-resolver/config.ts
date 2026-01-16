@@ -55,14 +55,31 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         },
       },
     },
-    // develop, best-practice, api, releases namespace in tidb folder
-    // When filename = "_index": /en/tidb/master/develop/{folders}/_index.md -> /en/develop/{folders}/
-    // When filename != "_index": /en/tidb/master/develop/{folders}/{filename}.md -> /en/develop/{filename}/
+    // develop namespace in tidb folder
+    // When filename = "_index": /en/tidb/master/develop/{folders}/_index.md -> /en/developer/{folders}/
+    // When filename != "_index": /en/tidb/master/develop/{folders}/{filename}.md -> /en/developer/{filename}/
+    {
+      sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
+      targetPattern: "/{lang}/developer/{filename}",
+      conditions: {
+        folder: ["develop"],
+      },
+      filenameTransform: {
+        ignoreIf: ["_index"],
+        conditionalTarget: {
+          keepIf: ["_index"],
+          keepTargetPattern: "/{lang}/developer/{folders}",
+        },
+      },
+    },
+    // best-practice, api namespace in tidb folder
+    // When filename = "_index": /en/tidb/master/best-practice/{folders}/_index.md -> /en/best-practice/{folders}/
+    // When filename != "_index": /en/tidb/master/api/{folders}/{filename}.md -> /en/api/{filename}/
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
       targetPattern: "/{lang}/{folder}/{filename}",
       conditions: {
-        folder: ["develop", "best-practice", "api"],
+        folder: ["best-practice", "api"],
       },
       filenameTransform: {
         ignoreIf: ["_index"],
