@@ -86,13 +86,13 @@ const getDefaultNavConfig = (
         children: [
           {
             type: "item",
-            label: "TiDB Self-Managed",
+            label: "Deploy Using TiUP",
             to: "/tidb/stable",
             selected: (namespace) => namespace === TOCNamespace.TiDB,
           },
           {
             type: "item",
-            label: "TiDB Self-Managed on Kubernetes",
+            label: "Deploy on Kubernetes",
             to: "/tidb-in-kubernetes/stable",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBInKubernetes,

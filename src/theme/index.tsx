@@ -319,7 +319,7 @@ theme = createTheme(theme, {
             },
           },
           "&:hover": {
-            backgroundColor: theme.palette.carbon[300],
+            backgroundColor: theme.palette.carbon[200],
           },
         },
       },
@@ -341,12 +341,12 @@ theme = createTheme(theme, {
           marginBottom: "4px",
           [`& .${treeItemClasses.content}`]: {
             "&:hover": {
-              backgroundColor: theme.palette.carbon[300],
+              backgroundColor: theme.palette.carbon[200],
             },
             [`&.${treeItemClasses.focused}`]: {
               backgroundColor: "#fff",
               "&:hover": {
-                backgroundColor: theme.palette.carbon[300],
+                backgroundColor: theme.palette.carbon[200],
               },
             },
             "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover":
