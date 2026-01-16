@@ -86,13 +86,13 @@ const getDefaultNavConfig = (
         children: [
           {
             type: "item",
-            label: "TiDB Self-Managed",
+            label: "Deploy Using TiUP",
             to: "/tidb/stable",
             selected: (namespace) => namespace === TOCNamespace.TiDB,
           },
           {
             type: "item",
-            label: "TiDB Self-Managed on Kubernetes",
+            label: "Deploy on Kubernetes",
             to: "/tidb-in-kubernetes/stable",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBInKubernetes,
@@ -105,14 +105,14 @@ const getDefaultNavConfig = (
   {
     type: "item",
     label: "Developer",
-    to: "/develop",
+    to: "/developer",
     selected: (namespace) => namespace === TOCNamespace.Develop,
   },
   {
     type: "item",
     label: "Best Practices",
-    to: "/best-practice",
-    selected: (namespace) => namespace === TOCNamespace.BestPractice,
+    to: "/best-practices",
+    selected: (namespace) => namespace === TOCNamespace.BestPractices,
   },
   {
     type: "item",

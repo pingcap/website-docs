@@ -159,7 +159,7 @@ describe("calculateFileUrl", () => {
       "en/tidb/release-8.5/develop/subfolder/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/develop/subfolder");
+    expect(url).toBe("/en/developer/subfolder");
   });
 
   it("should resolve develop non-index without folders", () => {
@@ -168,7 +168,7 @@ describe("calculateFileUrl", () => {
       "en/tidb/release-8.5/develop/subfolder/some-page.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/develop/some-page/");
+    expect(url).toBe("/en/developer/some-page/");
   });
 
   it("should resolve tidb with branch alias (master -> dev)", () => {
@@ -214,13 +214,13 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/api/overview/");
   });
 
-  it("should resolve best-practice folder", () => {
+  it("should resolve best-practices folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/release-8.5/best-practice/guide.md"
+      "en/tidb/release-8.5/best-practices/guide.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/best-practice/guide/");
+    expect(url).toBe("/en/best-practices/guide/");
   });
 
   it("should resolve releases folder", () => {
@@ -369,7 +369,7 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/develop/overview");
+    expect(url).toBe("/developer/overview");
   });
 
   it("should keep /zh/ prefix for Chinese files", () => {

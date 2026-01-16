@@ -43,10 +43,10 @@ const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
     minRestLength: 1,
   },
   {
-    namespace: TOCNamespace.BestPractice,
+    namespace: TOCNamespace.BestPractices,
     repo: Repo.tidb,
     branch: CONFIG.docs.tidb.stable,
-    folder: "best-practice",
+    folder: "best-practices",
     minRestLength: 1,
   },
   {

@@ -70,7 +70,6 @@ export const LangSwitch = (props: {
         endIcon={<ChevronDownIcon sx={{ fill: theme.palette.carbon[900] }} />}
         size="large"
         sx={{
-          fontSize: "14px",
           display: {
             xs: "none",
             lg: "inline-flex",

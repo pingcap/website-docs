@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import StarIcon from "media/icons/star.svg";
 
 import CloudIcon from "@mui/icons-material/Cloud";
+import { useTheme } from "@mui/material/styles";
 
 import Search from "components/Search";
 
@@ -78,7 +79,7 @@ export default function HeaderAction(props: {
               variant="outlined"
               startIcon={<StarIcon />}
               disabled={initializingTiDBAI}
-              size="large"
+              size="medium"
               sx={{
                 fontSize: "14px",
                 display: {
@@ -101,6 +102,7 @@ export default function HeaderAction(props: {
 }
 
 const TiDBCloudBtnGroup = () => {
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -127,7 +129,7 @@ const TiDBCloudBtnGroup = () => {
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
           target="_blank"
-          size="large"
+          size="medium"
           sx={{
             fontSize: "14px",
           }}
@@ -141,7 +143,7 @@ const TiDBCloudBtnGroup = () => {
           href="https://tidbcloud.com/free-trial"
           // https://developer.chrome.com/blog/referrer-policy-new-chrome-default/
           referrerPolicy="no-referrer-when-downgrade"
-          size="large"
+          size="medium"
           sx={{
             fontSize: "14px",
           }}
@@ -164,7 +166,7 @@ const TiDBCloudBtnGroup = () => {
           },
         }}
       >
-        <CloudIcon />
+        <CloudIcon sx={{ fill: theme.palette.carbon[900] }} />
       </IconButton>
       <Menu
         id="tidb-cloud-menu"
