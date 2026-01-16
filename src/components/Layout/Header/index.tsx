@@ -72,6 +72,7 @@ export default function Header(props: HeaderProps) {
             alignItems: "center",
             width: "100%",
             height: HEADER_HEIGHT.FIRST_ROW,
+            flexShrink: 0,
           }}
         >
           {props.menu}
