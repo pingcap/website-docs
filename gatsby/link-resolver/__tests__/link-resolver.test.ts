@@ -182,6 +182,22 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/api/introduction");
     });
 
+    it("should resolve ai namespace links (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/ai/overview/introduction",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/ai/introduction");
+    });
+
+    it("should resolve ai namespace links (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/ai/overview/introduction",
+        "/zh/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/zh/ai/introduction");
+    });
+
     it("should resolve releases/_index links to tidb-self-managed (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/releases/_index",
@@ -378,7 +394,7 @@ describe("resolveMarkdownLink", () => {
     });
   });
 
-  describe("linkMappingsByPath - Rule 3: developer/best-practices/api/releases namespace pages", () => {
+  describe("linkMappingsByPath - Rule 3: developer/best-practices/api/ai/releases namespace pages", () => {
     it("should resolve links from develop namespace page", () => {
       const result = resolveMarkdownLink(
         "/vector-search/vector-search-overview",
@@ -401,6 +417,11 @@ describe("resolveMarkdownLink", () => {
         "/en/api/tiproxy-api-overview"
       );
       expect(result).toBe("/tidb/stable/tiproxy-api");
+    });
+
+    it("should resolve links from ai namespace page", () => {
+      const result = resolveMarkdownLink("/some/linked-doc", "/en/ai/overview");
+      expect(result).toBe("/tidb/stable/linked-doc");
     });
 
     it("should resolve links from releases namespace page", () => {
