@@ -214,13 +214,13 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/api/overview/");
   });
 
-  it("should resolve best-practice folder", () => {
+  it("should resolve best-practices folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/release-8.5/best-practice/guide.md"
+      "en/tidb/release-8.5/best-practices/guide.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/best-practice/guide/");
+    expect(url).toBe("/en/best-practices/guide/");
   });
 
   it("should resolve releases folder", () => {

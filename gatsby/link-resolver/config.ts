@@ -29,7 +29,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{curLang}/{namespace}/{docname}",
       conditions: {
-        namespace: ["tidb-cloud", "develop", "best-practice", "api"],
+        namespace: ["tidb-cloud", "develop", "best-practices", "api"],
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
@@ -44,13 +44,13 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloud/{docname}",
     },
-    // Rule 3: develop, best-practice, api, releases namespace in tidb folder
+    // Rule 3: developer, best-practices, api, releases namespace in tidb folder
     // Current page: /{lang}/{namespace}/{...any}
     // Link: /{...any}/{docname} -> /{lang}/{namespace}/{docname}
     {
       pathPattern: `/{lang}/{namespace}/{...any}`,
       pathConditions: {
-        namespace: ["developer", "develop", "best-practice", "api"],
+        namespace: ["developer", "best-practices", "api"],
       },
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",

@@ -10,7 +10,7 @@ The URL Resolver serves the following purposes:
 
 1. **Path Transformation**: Converts source file paths (e.g., `/docs/markdown-pages/en/tidb/master/alert-rules.md`) into published URLs (e.g., `/tidb/dev/alert-rules`)
 2. **Branch Aliasing**: Maps internal branch names (e.g., `master`, `release-8.5`) to display versions (e.g., `dev`, `v8.5`)
-3. **Namespace Handling**: Handles special namespaces like `developer` (source folder `develop`), `best-practice`, `api`, and `releases` with custom URL structures
+3. **Namespace Handling**: Handles special namespaces like `developer` (source folder `develop`), `best-practices`, `api`, and `releases` with custom URL structures
 4. **Default Language Omission**: Optionally omits the default language prefix (e.g., `/en/`) from URLs
 5. **Trailing Slash Control**: Configures trailing slash behavior (`always`, `never`, or `auto`)
 
@@ -101,7 +101,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
 - `{branch}` - Branch name (e.g., `master`, `release-8.5`)
 - `{filename}` - File name without extension (e.g., `alert-rules`, `_index`)
 - `{...folders}` - Variable number of folder segments (captures all remaining segments)
-- `{namespace}` - Namespace (e.g., `developer`, `best-practice`, `api`)
+- `{namespace}` - Namespace (e.g., `developer`, `best-practices`, `api`)
 
 #### Alias Syntax
 

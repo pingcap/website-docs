@@ -9,7 +9,7 @@ The Link Resolver is a module that transforms internal markdown links within art
 The Link Resolver serves the following purposes:
 
 1. **Context-Aware Resolution**: Resolves relative links based on the current page's URL, maintaining proper navigation structure
-2. **Namespace Handling**: Handles special namespaces (`develop`, `best-practice`, `api`, `tidb-cloud`) with custom transformation rules (`develop` links are mapped to `developer`)
+2. **Namespace Handling**: Handles special namespaces (`develop`, `best-practices`, `api`, `tidb-cloud`) with custom transformation rules (`develop` links are mapped to `developer`)
 3. **Language Preservation**: Automatically preserves the current page's language in resolved links
 4. **Path-Based Mapping**: Supports both direct link mappings and path-based mappings (where rules depend on the current page's path)
 5. **Default Language Omission**: Optionally omits the default language prefix from resolved URLs
@@ -96,7 +96,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{curLang}/{namespace}/{docname}",
       conditions: {
-        namespace: ["tidb-cloud", "develop", "best-practice", "api"],
+        namespace: ["tidb-cloud", "develop", "best-practices", "api"],
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
@@ -123,7 +123,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
 - `{lang}` - Language from current page or link path
 - `{repo}` - Repository name (e.g., `tidb`, `tidbcloud`)
 - `{branch}` - Branch name (e.g., `stable`, `v8.5`)
-- `{namespace}` - Namespace (e.g., `develop`, `best-practice`, `api`)
+- `{namespace}` - Namespace (e.g., `develop`, `best-practices`, `api`)
 - `{docname}` - Document name (filename without extension)
 - `{...any}` - Variable number of path segments
 
@@ -138,7 +138,7 @@ Direct link mappings match links directly without considering the current page p
   linkPattern: "/{namespace}/{...any}/{docname}",
   targetPattern: "/{curLang}/{namespace}/{docname}",
   conditions: {
-    namespace: ["develop", "best-practice", "api"],
+    namespace: ["develop", "best-practices", "api"],
   },
 }
 ```
@@ -184,7 +184,7 @@ Conditions are checked against link variables (for direct mappings) or merged va
   linkPattern: "/{namespace}/{...any}/{docname}",
   targetPattern: "/{curLang}/{namespace}/{docname}",
   conditions: {
-    namespace: ["develop", "best-practice", "api"],
+    namespace: ["develop", "best-practices", "api"],
   },
 }
 ```
@@ -348,7 +348,7 @@ Clears all caches (useful for testing or when configuration changes).
 
 ### Pattern 1: Namespace Links
 
-Links starting with `develop`, `best-practice`, `api`, or `tidb-cloud` are resolved to namespace URLs (`develop` is mapped to `/developer`):
+Links starting with `develop`, `best-practices`, `api`, or `tidb-cloud` are resolved to namespace URLs (`develop` is mapped to `/developer`):
 
 ```markdown
 <!-- In any markdown file -->

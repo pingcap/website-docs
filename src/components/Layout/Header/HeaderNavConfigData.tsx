@@ -111,8 +111,8 @@ const getDefaultNavConfig = (
   {
     type: "item",
     label: "Best Practices",
-    to: "/best-practice",
-    selected: (namespace) => namespace === TOCNamespace.BestPractice,
+    to: "/best-practices",
+    selected: (namespace) => namespace === TOCNamespace.BestPractices,
   },
   {
     type: "item",
