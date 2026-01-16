@@ -72,14 +72,14 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         },
       },
     },
-    // best-practices, api namespace in tidb folder
+    // best-practices, api, ai namespace in tidb folder
     // When filename = "_index": /en/tidb/master/best-practices/{folders}/_index.md -> /en/best-practices/{folders}/
     // When filename != "_index": /en/tidb/master/api/{folders}/{filename}.md -> /en/api/{filename}/
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
       targetPattern: "/{lang}/{folder}/{filename}",
       conditions: {
-        folder: ["best-practices", "api"],
+        folder: ["best-practices", "api", "ai"],
       },
       filenameTransform: {
         ignoreIf: ["_index"],
@@ -109,16 +109,6 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         "/{lang}/tidb-in-kubernetes/{branch:branch-alias-tidb-in-kubernetes}/{filename}",
       filenameTransform: {
         ignoreIf: ["_index", "_docHome"],
-      },
-    },
-    // _index pages in nested folders (before generic fallback)
-    // /{lang}/{repo}/{...folder}/_index.md -> /{lang}/{repo}/{folder}
-    {
-      sourcePattern: "/{lang}/{repo}/{...folder}/{filename}",
-      targetPattern: "/{lang}/{repo}/{folder}",
-      conditions: { filename: ["_index"] },
-      filenameTransform: {
-        ignoreIf: ["_index"],
       },
     },
     // Fallback: /{lang}/{repo}/{...any}/{filename} -> /{lang}/{repo}/{filename}

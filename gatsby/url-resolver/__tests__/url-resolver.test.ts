@@ -223,6 +223,24 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/best-practices/guide/");
   });
 
+  it("should resolve ai folder", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/ai/overview.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/ai/overview/");
+  });
+
+  it("should resolve ai _index with folders", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/ai/subfolder/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/ai/subfolder");
+  });
+
   it("should resolve releases folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
@@ -282,7 +300,7 @@ describe("calculateFileUrl", () => {
       "en/other-repo/some-folder/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/other-repo/some-folder");
+    expect(url).toBe("/en/other-repo");
   });
 
   it("should handle nested fallback with _index at repo root", () => {

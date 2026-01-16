@@ -267,9 +267,9 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Developer/Best-Practices/API Namespace
+### Rule 6: Developer/Best-Practices/API/AI Namespace
 
-**Effect**: Maps TiDB pages in `develop` (published as `developer`), `best-practices`, or `api` folders to namespace URLs.
+**Effect**: Maps TiDB pages in `develop` (published as `developer`), `best-practices`, `api`, or `ai` folders to namespace URLs.
 
 **Source Pattern**: `/{lang}/tidb/{stable}/{folder}/{...folders}/{filename}`
 
@@ -277,13 +277,13 @@ Rules are evaluated in order; the first matching rule wins.
 - For `develop` folder:
   - `_index`: `/{lang}/developer/{folders}` (keeps folder structure)
   - Other files: `/{lang}/developer/{filename}` (removes folder structure)
-- For `best-practices` and `api` folders:
+- For `best-practices`, `api`, and `ai` folders:
   - `_index`: `/{lang}/{folder}/{folders}` (keeps folder structure)
   - Other files: `/{lang}/{folder}/{filename}` (removes folder structure)
 
 **Conditions**:
 - `folder = ["develop"]` → published under `/developer`
-- `folder = ["best-practices", "api"]` → published under `/{folder}`
+- `folder = ["best-practices", "api", "ai"]` → published under `/{folder}`
 
 **Filename Transform**:
 - `ignoreIf: ["_index"]` - Filename removed from URL for non-index files
@@ -294,6 +294,8 @@ Rules are evaluated in order; the first matching rule wins.
 - Target: `/developer/subfolder`
 - Source: `en/tidb/release-8.5/develop/subfolder/vector-search.md`
 - Target: `/developer/vector-search`
+- Source: `en/tidb/release-8.5/ai/overview.md`
+- Target: `/ai/overview`
 
 **Use Case**: These namespaces are shared across all TiDB versions, so folder structure is flattened for non-index files.
 
@@ -349,27 +351,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: Fallback Nested `_index` Rule
-
-**Effect**: For repos not matched by earlier rules, maps nested `_index.md` pages to their folder URL instead of collapsing to the repo root.
-
-**Source Pattern**: `/{lang}/{repo}/{...folder}/{filename}`
-
-**Target Pattern**: `/{lang}/{repo}/{folder}`
-
-**Conditions**: `filename = "_index"`
-
-**Filename Transform**: `ignoreIf: ["_index"]`
-
-**Example**:
-- Source: `en/other-repo/some-folder/_index.md`
-- Target: `/en/other-repo/some-folder`
-
-**Use Case**: Prevents multiple nested `_index.md` pages from resolving to the same `/{lang}/{repo}` URL.
-
----
-
-### Rule 10: Fallback Rule
+### Rule 9: Fallback Rule
 
 **Effect**: Generic fallback for any remaining paths.
 
@@ -446,13 +428,13 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 4: Namespace Links (Direct Mapping)
 
-**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/tidbcloud`).
+**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
 
 **Link Pattern**: `/{namespace}/{...any}/{docname}`
 
 **Target Pattern**: `/{curLang}/{namespace}/{docname}`
 
-**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practices", "api"]`
+**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practices", "api", "ai"]`
 
 **Namespace Transform**:
 - `tidb-cloud` → `tidbcloud`
@@ -492,13 +474,13 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Developer/Best-Practices/API Namespace Page Links (Path-Based)
+### Rule 6: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
 **Path Pattern**: `/{lang}/{namespace}/{...any}`
 
-**Path Conditions**: `namespace = ["developer", "best-practices", "api"]`
+**Path Conditions**: `namespace = ["developer", "best-practices", "api", "ai"]`
 
 **Link Pattern**: `/{...any}/{docname}`
 
@@ -549,7 +531,7 @@ The URL mapping system provides:
 
 1. **Consistent URL Structure**: Source files are mapped to clean, SEO-friendly URLs
 2. **Context-Aware Link Resolution**: Links are resolved based on the current page's context
-3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`) have their own URL structure
+3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`, `ai`) have their own URL structure
 4. **Branch Aliasing**: Internal branch names are transformed to user-friendly versions
 5. **Default Language Omission**: Default language (`en`) is omitted from URLs for cleaner paths
 6. **TOC-Driven Build**: Only files referenced in TOC files are built, reducing build size
