@@ -340,7 +340,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
 
   return (
     <>
-      <FormControl sx={{ m: 1 }} variant="standard">
+      <FormControl variant="standard">
         <NativeSelect
           id="version-select-native"
           value={`${pathConfig.version}`}

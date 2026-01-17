@@ -30,8 +30,8 @@ import { NavItemConfig } from "components/Layout/Header/HeaderNavConfigType";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
-import { getHeaderHeight } from "shared/headerHeight";
 import { DOC_HOME_URL } from "shared/resources";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { useReportReadingRate } from "shared/useReportReadingRate";
 import {
   CloudPlanProvider,
@@ -161,7 +161,9 @@ function DocTemplate({
 
   const stableBranch = getStable(pathConfig.repo);
 
-  const bannerVisible = feature?.banner;
+  const isAutoTranslation = useIsAutoTranslation(namespace);
+  const bannerVisible =
+    buildType === "archive" || isAutoTranslation || feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
   const [selectedNavItem, setSelectedNavItem] =
@@ -182,6 +184,7 @@ function DocTemplate({
             pathConfig={pathConfig}
             availIn={availIn.version}
             availablePlans={availablePlans}
+            namespace={namespace}
           />
         )
       }
@@ -229,7 +232,6 @@ function DocTemplate({
       />
       <Box
         sx={{
-          marginTop: getHeaderHeight(bannerVisible || false),
           display: "flex",
         }}
         className={clsx("PingCAP-Doc", {
