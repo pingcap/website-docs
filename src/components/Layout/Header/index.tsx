@@ -1,5 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 
 import LinkComponent, { BlueAnchorLink } from "components/Link";
@@ -16,7 +17,7 @@ import { Banner } from "components/Layout/Banner";
 import { generateDocsHomeUrl, generateUrl } from "shared/utils";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
-import { ErrorOutlineOutlined } from "@mui/icons-material";
+import { ErrorOutlineOutlined, ArrowUpward } from "@mui/icons-material";
 import { HEADER_HEIGHT } from "shared/headerHeight";
 
 import { NavItemConfig } from "./HeaderNavConfigType";
@@ -58,6 +59,15 @@ export default function Header(props: HeaderProps) {
   const logoMeasureRef = React.useRef<HTMLDivElement | null>(null);
   const leftClusterWidthRef = React.useRef(0);
   const logoWidthRef = React.useRef(0);
+  const [showBackToTop, setShowBackToTop] = React.useState(false);
+  const showBackToTopRef = React.useRef(false);
+
+  const handleBackToTop = React.useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const syncScrollStyles = React.useCallback(() => {
     if (typeof window === "undefined") {
@@ -109,7 +119,7 @@ export default function Header(props: HeaderProps) {
       }
     }
     syncScrollStyles();
-  }, [syncScrollStyles]);
+  }, [firstRowHeightPx, syncScrollStyles]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") {
@@ -140,10 +150,16 @@ export default function Header(props: HeaderProps) {
     let rafId: number | null = null;
     const update = () => {
       syncScrollStyles();
+      const y = window.scrollY || 0;
+      const shouldShowBackToTop = y >= firstRowHeightPx;
+      if (shouldShowBackToTop !== showBackToTopRef.current) {
+        showBackToTopRef.current = shouldShowBackToTop;
+        setShowBackToTop(shouldShowBackToTop);
+      }
       ticking = false;
     };
 
-    syncScrollStyles();
+    update();
     const onScroll = () => {
       if (ticking) {
         return;
@@ -200,35 +216,35 @@ export default function Header(props: HeaderProps) {
           paddingRight: "24px",
           pointerEvents: "none",
         }}
-	      >
-	        <Box
-	          sx={{
-	            display: "flex",
-	            alignItems: "center",
-	            pointerEvents: "none",
-	          }}
-	        >
-	          {props.menu && (
-	            <Box
-	              sx={{
-	                display: "flex",
-	                alignItems: "center",
-	                pointerEvents: "auto",
-	              }}
-	            >
-	              {props.menu}
-	            </Box>
-	          )}
-	          <Box
-	            height="34px"
-	            sx={{
-	              display: "block",
-	              pointerEvents: "auto",
-	              transform: `scale(var(${CSS_VAR_LOGO_SCALE}))`,
-	              transformOrigin: "left center",
-	              willChange: "transform",
-	            }}
-	          >
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            pointerEvents: "none",
+          }}
+        >
+          {props.menu && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                pointerEvents: "auto",
+              }}
+            >
+              {props.menu}
+            </Box>
+          )}
+          <Box
+            height="34px"
+            sx={{
+              display: "block",
+              pointerEvents: "auto",
+              transform: `scale(var(${CSS_VAR_LOGO_SCALE}))`,
+              transformOrigin: "left center",
+              willChange: "transform",
+            }}
+          >
             <LinkComponent
               to={generateDocsHomeUrl(language)}
               onClick={() =>
@@ -384,6 +400,16 @@ export default function Header(props: HeaderProps) {
                 namespace={props.namespace}
               />
             </Box>
+            {showBackToTop && (
+              <IconButton
+                aria-label="Back to top"
+                size="small"
+                onClick={handleBackToTop}
+                sx={{ color: theme.palette.carbon[700] }}
+              >
+                <ArrowUpward fontSize="small" />
+              </IconButton>
+            )}
             {props.locales.length > 0 && (
               <LangSwitch supportedLocales={props.locales} />
             )}
