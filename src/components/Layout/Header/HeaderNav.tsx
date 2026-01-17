@@ -20,30 +20,7 @@ import {
 } from "./HeaderNavConfigType";
 import { generateNavConfig } from "./HeaderNavConfigData";
 import { clearAllNavStates } from "../LeftNav/LeftNavTree";
-
-// Helper function to find selected item recursively
-const findSelectedItem = (
-  configs: NavConfig[],
-  namespace?: TOCNamespace
-): NavItemConfig | null => {
-  for (const config of configs) {
-    if (config.type === "item") {
-      const isSelected =
-        typeof config.selected === "function"
-          ? config.selected(namespace)
-          : config.selected ?? false;
-      if (isSelected) {
-        return config;
-      }
-    } else if (config.type === "group" && config.children) {
-      const item = findSelectedItem(config.children, namespace);
-      if (item) {
-        return item;
-      }
-    }
-  }
-  return null;
-};
+import { getSelectedNavItem } from "./getSelectedNavItem";
 
 export default function HeaderNavStack(props: {
   buildType?: BuildType;
@@ -66,7 +43,7 @@ export default function HeaderNavStack(props: {
   // Find and notify selected item
   React.useEffect(() => {
     if (props.onSelectedNavItemChange) {
-      const selectedNavItem = findSelectedItem(defaultConfig, props.namespace);
+      const selectedNavItem = getSelectedNavItem(defaultConfig, props.namespace);
       props.onSelectedNavItemChange(selectedNavItem);
     }
   }, [defaultConfig, props.namespace, props.onSelectedNavItemChange]);
