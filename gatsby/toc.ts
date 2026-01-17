@@ -9,8 +9,9 @@ import {
   Heading,
 } from "mdast";
 
-import { RepoNav, RepoNavLink, PathConfig } from "../src/shared/interface";
-import { generateUrl } from "./path";
+import { RepoNav, RepoNavLink } from "../src/shared/interface";
+import { calculateFileUrl } from "./url-resolver";
+import { resolveMarkdownLink } from "./link-resolver";
 
 const SKIP_MODE_HEADING = "_BUILD_ALLOWLIST";
 
@@ -82,11 +83,12 @@ export interface TocQueryData {
 
 export function mdxAstToToc(
   ast: Content[],
-  tocConfig: PathConfig,
+  tocSlug: string,
   prefixId = `0`,
   filterWhitelist = false
 ): RepoNav {
   const filteredAst = filterWhitelist ? filterWhitelistContent(ast) : ast;
+  const tocPath = calculateFileUrl(tocSlug) || "";
 
   return filteredAst
     .filter(
@@ -95,7 +97,7 @@ export function mdxAstToToc(
     )
     .map((node, idx) => {
       if (node.type === "list") {
-        return handleList(node.children, tocConfig, `${prefixId}-${idx}`);
+        return handleList(node.children, tocPath, `${prefixId}-${idx}`);
       } else {
         return handleHeading((node as Heading).children, `${prefixId}-${idx}`);
       }
@@ -103,15 +105,11 @@ export function mdxAstToToc(
     .flat();
 }
 
-function handleList(ast: ListItem[], tocConfig: PathConfig, prefixId = `0`) {
+function handleList(ast: ListItem[], tocPath: string, prefixId = `0`) {
   return ast.map((node, idx) => {
     const content = node.children as [Paragraph, List | undefined];
     if (content.length > 0 && content.length <= 2) {
-      const ret = getContentFromLink(
-        content[0],
-        tocConfig,
-        `${prefixId}-${idx}`
-      );
+      const ret = getContentFromLink(content[0], tocPath, `${prefixId}-${idx}`);
 
       if (content[1]) {
         const list = content[1];
@@ -121,11 +119,7 @@ function handleList(ast: ListItem[], tocConfig: PathConfig, prefixId = `0`) {
           );
         }
 
-        ret.children = handleList(
-          list.children,
-          tocConfig,
-          `${prefixId}-${idx}`
-        );
+        ret.children = handleList(list.children, tocPath, `${prefixId}-${idx}`);
       }
 
       return ret;
@@ -152,7 +146,7 @@ function handleHeading(ast: PhrasingContent[], id = `0`): RepoNavLink[] {
 
 function getContentFromLink(
   content: Paragraph,
-  tocConfig: PathConfig,
+  tocPath: string,
   id: string
 ): RepoNavLink {
   if (content.type !== "paragraph" || content.children.length === 0) {
@@ -195,12 +189,10 @@ function getContentFromLink(
       };
     }
 
-    const urlSegs = child.url.split("/");
-    let filename = urlSegs[urlSegs.length - 1].replace(".md", "");
-
     return {
       type: "nav",
-      link: generateUrl(filename, tocConfig),
+      link:
+        resolveMarkdownLink(child.url.replace(".md", ""), tocPath || "") || "",
       content,
       tag,
       id,

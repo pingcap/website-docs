@@ -8,11 +8,15 @@ import Box from "@mui/material/Box";
 
 import * as MDXComponents from "components/MDXComponents";
 import { CustomNotice } from "components/Card/CustomNotice";
-import { PathConfig, BuildType, CloudPlan } from "shared/interface";
+import {
+  PathConfig,
+  BuildType,
+  CloudPlan,
+  TOCNamespace,
+} from "shared/interface";
 import replaceInternalHref from "shared/utils/anchor";
 import { Pre } from "components/MDXComponents/Pre";
 import { useCustomContent } from "components/MDXComponents/CustomContent";
-import { getPageType } from "shared/utils";
 import { H1 } from "./MDXComponents/H1";
 
 export default function MDXContent(props: {
@@ -26,6 +30,7 @@ export default function MDXContent(props: {
   buildType: BuildType;
   pageUrl: string;
   cloudPlan: CloudPlan | null;
+  namespace?: TOCNamespace;
 }) {
   const {
     data,
@@ -38,10 +43,14 @@ export default function MDXContent(props: {
     buildType,
     pageUrl,
     cloudPlan,
+    namespace,
   } = props;
 
-  const pageType = getPageType(language, pageUrl);
-  const CustomContent = useCustomContent(pageType, cloudPlan, language);
+  const CustomContent = useCustomContent(
+    namespace || TOCNamespace.TiDB,
+    cloudPlan,
+    language
+  );
   // const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
   React.useEffect(() => {
@@ -67,7 +76,7 @@ export default function MDXContent(props: {
         {...props}
       />
     ),
-    [pathConfig, filePath, pageUrl]
+    [pathConfig, filePath, pageUrl, namespace]
   );
 
   return (

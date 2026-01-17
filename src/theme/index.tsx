@@ -1,10 +1,6 @@
-import * as React from "react";
-import {
-  createTheme,
-  PaletteColorOptions,
-  ThemeOptions,
-} from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { ColorPartial } from "@mui/material/styles/createPalette";
+import { treeItemClasses } from "@mui/lab/TreeItem";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -172,15 +168,15 @@ theme = createTheme(theme, {
     carbon: theme.palette.augmentColor({
       color: {
         50: "#FFFFFF",
-        100: "#FBFDFD",
-        200: "#F5F8FA",
-        300: "#EDF0F1",
-        400: "#ECE3E5",
-        500: "#C8CED0",
+        100: "#FDFEFF",
+        200: "#F9FAFB",
+        300: "#EDF1F2",
+        400: "#DCE3E5",
+        500: "#C4CDD0",
         600: "#9FA9AD",
         700: "#6F787B",
-        800: "#3D4143",
-        900: "#262A2C",
+        800: "#383E40",
+        900: "#1E2426",
       },
       name: "carbon",
     }),
@@ -256,22 +252,61 @@ theme = createTheme(theme, {
           fontSize: "16px",
         },
         root: ({ ownerState }) => ({
+          ".MuiButton-startIcon": {
+            marginLeft: "0",
+          },
+          ".MuiButton-endIcon": {
+            marginRight: "0",
+          },
           ...(ownerState.variant === "text" && {
             color: theme.palette.text.primary,
             "&:hover": {
               backgroundColor: theme.palette.carbon[300],
             },
           }),
-          ...(ownerState.variant === "outlined" && {
-            color: theme.palette.text.primary,
-            borderColor: "#D9D9D9",
-            backgroundColor: "#F9F9F9",
-            "&:hover": {
-              borderColor: "#262A2C",
-              backgroundColor: "#F9F9F9",
-            },
-          }),
+          ...(ownerState.variant === "outlined" &&
+            ownerState.color === "secondary" && {
+              color: theme.palette.text.primary,
+              borderColor: "#C4CDD0",
+              backgroundColor: "#F9FAFB",
+              "&:hover": {
+                borderColor: "#262A2C",
+                backgroundColor: "#F9FAFB",
+              },
+            }),
+          ...(ownerState.variant === "contained" &&
+            ownerState.color === "secondary" && {
+              color: theme.palette.carbon[50],
+              backgroundColor: theme.palette.carbon[900],
+              "&:hover": {
+                backgroundColor: theme.palette.carbon[800],
+              },
+            }),
         }),
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          "& .MuiPaper-root .MuiList-root .MuiMenuItem-root:active": {
+            backgroundColor: theme.palette.carbon[300],
+          },
+        },
+        item: {
+          "&:active": {
+            backgroundColor: theme.palette.carbon[300],
+          },
+        },
+        list: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+          padding: "8px",
+          "& .MuiButtonBase-root+.MuiDivider-root": {
+            marginTop: "4px",
+            marginBottom: "4px",
+          },
+        },
       },
     },
     MuiMenuItem: {
@@ -284,7 +319,7 @@ theme = createTheme(theme, {
             },
           },
           "&:hover": {
-            backgroundColor: theme.palette.carbon[300],
+            backgroundColor: theme.palette.carbon[200],
           },
         },
       },
@@ -295,6 +330,41 @@ theme = createTheme(theme, {
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.text.primary,
             borderWidth: "1px",
+          },
+        },
+      },
+    },
+    MuiTreeItem: {
+      styleOverrides: {
+        root: {
+          marginTop: "4px",
+          marginBottom: "4px",
+          [`& .${treeItemClasses.content}`]: {
+            "&:hover": {
+              backgroundColor: theme.palette.carbon[200],
+            },
+            [`&.${treeItemClasses.focused}`]: {
+              backgroundColor: "#fff",
+              "&:hover": {
+                backgroundColor: theme.palette.carbon[200],
+              },
+            },
+            "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover":
+              {
+                backgroundColor: theme.palette.carbon[300],
+                [`& svg.MuiTreeItem-ChevronRightIcon`]: {
+                  fill: theme.palette.carbon[700],
+                },
+              },
+            [`&.${treeItemClasses.selected} .MuiTypography-root`]: {
+              fontWeight: 700,
+            },
+            [`& .${treeItemClasses.iconContainer}`]: {
+              display: "none",
+            },
+          },
+          [`& .${treeItemClasses.group}`]: {
+            marginLeft: 0,
           },
         },
       },

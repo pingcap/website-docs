@@ -15,6 +15,7 @@ import Seo from "components/Seo";
 
 import CONFIG from "../../docs/docs.json";
 import { useEffect, useRef, useState } from "react";
+import { TOCNamespace } from "shared/interface";
 interface AllLocales {
   locales: {
     edges: {
@@ -77,8 +78,11 @@ export default function PageNotFoundTemplate({
   }, [language, data]);
 
   const isArchived = buildType === "archive";
+  const isAutoTranslation = language === Locale.ja;
   const bannerVisible =
-    (feature?.banner && language !== Locale.ja) || isArchived;
+    isArchived ||
+    isAutoTranslation ||
+    (feature?.banner && language !== Locale.ja);
 
   const secondsRef = useRef(REDIRECT_SECONDS);
   const [seconds, setSeconds] = useState(REDIRECT_SECONDS);
@@ -119,11 +123,14 @@ export default function PageNotFoundTemplate({
     <>
       <I18nextProvider i18n={i18n}>
         <I18nextContext.Provider value={{ ...context, language }}>
-          <Layout bannerEnabled={bannerVisible} buildType={buildType}>
+          <Layout
+            bannerEnabled={bannerVisible}
+            buildType={buildType}
+            namespace={TOCNamespace.NotFound}
+          >
             <Seo lang={language} title="404 Not Found" noindex />
             <Container
               sx={{
-                marginTop: bannerVisible ? "7.5rem" : "5rem",
                 minHeight: "calc(100vh - 30rem)",
                 display: "flex",
                 alignItems: "center",

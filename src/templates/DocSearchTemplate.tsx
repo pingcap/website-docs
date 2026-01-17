@@ -27,9 +27,10 @@ import {
   ZH_DOC_TYPE_LIST,
   TIDB_ZH_SEARCH_INDEX_VERSION,
 } from "shared/resources";
-import { Locale } from "shared/interface";
+import { Locale, TOCNamespace } from "shared/interface";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { useEffect } from "react";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
 // TiDB: get searchable versions from fetchTidbSearchIndcies
 // TiDB Cloud: only has one version
@@ -196,14 +197,15 @@ export default function DocSearchTemplate({
     });
   };
 
-  const bannerVisible = feature?.banner && language !== Locale.ja;
+  const isAutoTranslation = useIsAutoTranslation(TOCNamespace.Search);
+  const bannerVisible =
+    isAutoTranslation || (feature?.banner && language !== Locale.ja);
 
   return (
     <>
-      <Layout bannerEnabled={bannerVisible}>
+      <Layout bannerEnabled={bannerVisible} namespace={TOCNamespace.Search}>
         <Container
           sx={{
-            marginTop: bannerVisible ? "7.5rem" : "5rem",
             minHeight: "calc(100vh - 30rem)",
             position: "relative",
           }}

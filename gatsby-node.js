@@ -8,7 +8,7 @@ const {
   createDocSearch,
   create404,
 } = require("./gatsby/create-pages");
-const { createExtraType } = require("./gatsby/create-types");
+const { createFrontmatter, createNavs } = require("./gatsby/create-types");
 const {
   createConditionalToc,
 } = require("./gatsby/plugin/conditional-toc/conditional-toc");
@@ -26,6 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
 };
 
 exports.createSchemaCustomization = (options) => {
-  createExtraType(options);
+  createFrontmatter(options);
+  createNavs(options);
   createConditionalToc(options);
 };

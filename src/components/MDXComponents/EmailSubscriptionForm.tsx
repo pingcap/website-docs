@@ -104,6 +104,7 @@ function EmailSubscriptionForm() {
               <LoadingButton
                 type="submit"
                 variant="contained"
+                size="large"
                 loading={formData.loading}
                 aria-label="subscribe"
                 sx={{

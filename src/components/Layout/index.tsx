@@ -8,7 +8,8 @@ import "@fontsource/ibm-plex-sans";
 import theme from "theme/index";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";
-import { Locale, BuildType, PathConfig } from "shared/interface";
+import { Locale, BuildType, PathConfig, TOCNamespace } from "shared/interface";
+import { NavItemConfig } from "components/Layout/Header/HeaderNavConfigType";
 
 export default function Layout(props: {
   children?: React.ReactNode;
@@ -17,9 +18,10 @@ export default function Layout(props: {
   locales?: Locale[];
   docInfo?: { type: string; version: string };
   buildType?: BuildType;
-  pageUrl?: string;
   name?: string;
   pathConfig?: PathConfig;
+  namespace: TOCNamespace;
+  onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   return (
     <ThemeProvider theme={theme}>
@@ -30,12 +32,14 @@ export default function Layout(props: {
         locales={props.locales || []}
         docInfo={props.docInfo}
         buildType={props.buildType}
-        pageUrl={props.pageUrl}
         name={props.name}
         pathConfig={props.pathConfig}
-      />
-      {props.children}
-      <Footer />
+        namespace={props.namespace}
+        onSelectedNavItemChange={props.onSelectedNavItemChange}
+      >
+        {props.children}
+        <Footer />
+      </Header>
     </ThemeProvider>
   );
 }

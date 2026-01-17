@@ -1,6 +1,15 @@
-import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
-import CONFIG from "../docs/docs.json";
+import {
+  Locale,
+  Repo,
+  PathConfig,
+  CloudPlan,
+} from "../../src/shared/interface";
+import CONFIG from "../../docs/docs.json";
 
+// Re-export getSharedNamespace from namespace module
+export * from "./getTOCPath";
+
+// @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
 
@@ -25,16 +34,6 @@ export function generatePdfUrl(config: PathConfig) {
   return `${config.repo}-${config.version ? config.version + "-" : ""}${
     config.locale
   }-manual.pdf`;
-}
-
-export function generateNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC`;
-}
-export function generateStarterNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-starter`;
-}
-export function generateEssentialNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-essential`;
 }
 
 export function generateConfig(slug: string): {

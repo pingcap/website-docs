@@ -1,4 +1,6 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import * as React from "react";
+import { Box, Stack, Typography } from "@mui/material";
+import { HEADER_HEIGHT } from "shared/headerHeight";
 
 export function Banner({
   url,
@@ -17,14 +19,12 @@ export function Banner({
     <Box
       sx={{
         flexShrink: 0,
-        minHeight: "1.5rem",
+        height: HEADER_HEIGHT.BANNER,
         backgroundColor: bgColor || "var(--tiui-palette-peacock-100)",
         // backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
         backgroundSize: "400px auto",
         backgroundRepeat: "no-repeat",
-        paddingTop: "0.5rem",
-        paddingBottom: "0.5rem",
       }}
     >
       <Stack
@@ -56,7 +56,7 @@ export function Banner({
         {textList.map((text, index) =>
           typeof text === "string" ? (
             <Typography
-              key={index}
+              key={`banner-text-${index}`}
               component="span"
               variant="body2"
               color="inherit"
@@ -65,7 +65,7 @@ export function Banner({
               {text}
             </Typography>
           ) : (
-            text
+            <React.Fragment key={`banner-node-${index}`}>{text}</React.Fragment>
           )
         )}
       </Stack>

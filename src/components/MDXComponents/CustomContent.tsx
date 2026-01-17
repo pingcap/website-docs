@@ -1,18 +1,19 @@
 import { PropsWithChildren } from "react";
-import { PageType } from "shared/utils";
-import { CloudPlan } from "shared/interface";
+import { TOCNamespace, CloudPlan } from "shared/interface";
 
 interface CustomContentProps {
-  platform?: "tidb" | "tidb-cloud";
+  // using in markdown file
+  platform?: TOCNamespace;
   language?: string;
   plan?: CloudPlan;
-  pageTypeFromURL?: PageType;
+
+  currentNamespace?: TOCNamespace;
   languageFromURL?: string;
   cloudPlanFromURL?: CloudPlan | null;
 }
 
 export const useCustomContent = (
-  pageTypeFromURL: PageType,
+  currentNamespace: TOCNamespace,
   cloudPlanFromURL?: CloudPlan | null,
   languageFromURL?: string
 ) => {
@@ -20,7 +21,7 @@ export const useCustomContent = (
     return (
       <CustomContent
         {...props}
-        pageTypeFromURL={pageTypeFromURL}
+        currentNamespace={currentNamespace}
         languageFromURL={languageFromURL}
         cloudPlanFromURL={cloudPlanFromURL}
       />
@@ -32,16 +33,15 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
   props
 ) => {
   const {
-    platform: _pageType,
-    pageTypeFromURL,
+    platform: namespace,
+    currentNamespace,
     children,
     languageFromURL,
     language,
     cloudPlanFromURL,
     plan,
   } = props;
-  const pageType = _pageType?.replace("-", "") || "";
-  const shouldDisplayByPageType = pageTypeFromURL === pageType;
+  const shouldDisplayByNamespace = currentNamespace === namespace;
 
   const cloudPlanArray = plan?.split(",").map((p) => p.trim()) || [];
   const shouldDisplayByCloudPlan = cloudPlanArray.includes(
@@ -53,11 +53,11 @@ export const CustomContent: React.FC<PropsWithChildren<CustomContentProps>> = (
     : [];
   const shouldDisplayByLanguage = languageArray.includes(languageFromURL || "");
 
-  const isPageTypeMatch = !pageType || shouldDisplayByPageType;
+  const isNamespaceMatch = !namespace || shouldDisplayByNamespace;
   const isLanguageMatch = !language || shouldDisplayByLanguage;
   const isCloudPlanMatch = !plan || shouldDisplayByCloudPlan;
 
-  const shouldDisplay = isPageTypeMatch && isLanguageMatch && isCloudPlanMatch;
+  const shouldDisplay = isNamespaceMatch && isLanguageMatch && isCloudPlanMatch;
 
   return <>{shouldDisplay ? children : <></>}</>;
 };

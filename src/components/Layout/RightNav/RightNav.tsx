@@ -7,11 +7,11 @@ import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
 import { TableOfContent, PathConfig, BuildType } from "shared/interface";
+import ChevronDownIcon from "media/icons/chevron-down.svg";
 import { transformCustomId, removeHtmlTag } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
+import { getHeaderStickyHeight } from "shared/headerHeight";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -96,11 +96,11 @@ export default function RightNav(props: RightNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: bannerVisible ? "7.5rem" : "5rem",
+          top: getHeaderStickyHeight(bannerVisible || false),
           height: "100%",
-          maxHeight: bannerVisible
-            ? "calc(100vh - 7.5rem)"
-            : "calc(100vh - 5rem)",
+          maxHeight: `calc(100vh - ${getHeaderStickyHeight(
+            bannerVisible || false
+          )})`,
           overflowY: "auto",
           padding: "36px 16px",
           display: "flex",
@@ -116,7 +116,7 @@ export default function RightNav(props: RightNavProps) {
                 paddingLeft: "0.5rem",
                 color: theme.palette.carbon[700],
                 fontSize: "0.875rem",
-                fontWeight: "500",
+                fontWeight: "300",
                 lineHeight: "1.25rem",
                 paddingBottom: "0.5rem",
               }}
@@ -166,10 +166,8 @@ const generateToc = (items: TableOfContent[], level = 0, activeId = "") => {
                 paddingTop: "0.25rem",
                 paddingBottom: "0.25rem",
                 fontWeight: isActive ? "700" : "400",
-                color: isActive ? theme.palette.website.f1 : "inherit",
                 "&:hover": {
-                  color: theme.palette.website.f3,
-                  borderLeft: `1px solid ${theme.palette.website.f3}`,
+                  fontWeight: "700",
                 },
               }}
             >
@@ -225,7 +223,7 @@ export function RightNavMobile(props: RightNavProps) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
+        endIcon={<ChevronDownIcon />}
         sx={{
           width: "100%",
         }}

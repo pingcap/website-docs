@@ -23,7 +23,6 @@ export const VersionSelectButton = forwardRef(
           position: "sticky",
           top: "-20px",
           backgroundColor: "#fff",
-          marginTop: "-20px",
           marginLeft: "-16px",
           marginRight: "-16px",
           paddingTop: "20px",

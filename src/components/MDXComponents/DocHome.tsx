@@ -203,11 +203,11 @@ export function DocHomeContainer(
                   component="div"
                   sx={{
                     paddingLeft: "0.5rem",
-                    paddingBottom: "1rem",
-                    color: theme.palette.website.f1,
+                    color: theme.palette.carbon[700],
                     fontSize: "0.875rem",
-                    fontWeight: "700",
+                    fontWeight: "300",
                     lineHeight: "1.25rem",
+                    paddingBottom: "0.5rem",
                   }}
                 >
                   <Trans i18nKey="doc.toc" />
@@ -243,15 +243,15 @@ export function DocHomeContainer(
                         sx={{
                           display: "flex",
                           textDecoration: "none",
-                          fontSize: "13px",
+                          fontSize: "14px",
                           lineHeight: "1.25rem",
                           borderLeft: `1px solid transparent`,
                           paddingLeft: `0.5rem`,
-                          paddingTop: `4px`,
-                          paddingBottom: `4px`,
+                          paddingTop: "0.25rem",
+                          paddingBottom: "0.25rem",
+                          fontWeight: "400",
                           "&:hover": {
-                            color: theme.palette.website.f3,
-                            borderLeft: `1px solid ${theme.palette.website.f3}`,
+                            fontWeight: "700",
                           },
                         }}
                       >
@@ -262,13 +262,6 @@ export function DocHomeContainer(
                 </Box>
               </>
             )}
-            {/* <ul>
-            {headingsMemo.map((i) => (
-              <li key={i.id}>
-                <a href={`#${i.anchor}`}>{i.label}</a>
-              </li>
-            ))}
-          </ul> */}
           </Grid2>
         )}
       </Grid2>
