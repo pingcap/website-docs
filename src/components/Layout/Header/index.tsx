@@ -406,7 +406,10 @@ export default function Header(props: HeaderProps) {
                 aria-label="Back to top"
                 size="small"
                 onClick={handleBackToTop}
-                sx={{ color: theme.palette.carbon[700] }}
+                sx={{
+                  display: { xs: "none", md: "inline-flex" },
+                  color: theme.palette.carbon[700],
+                }}
               >
                 <ArrowUpward fontSize="small" />
               </IconButton>
