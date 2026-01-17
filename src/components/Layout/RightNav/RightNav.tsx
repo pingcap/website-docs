@@ -166,7 +166,6 @@ const generateToc = (items: TableOfContent[], level = 0, activeId = "") => {
                 paddingTop: "0.25rem",
                 paddingBottom: "0.25rem",
                 fontWeight: isActive ? "700" : "400",
-                color: isActive ? theme.palette.website.f1 : "inherit",
                 "&:hover": {
                   fontWeight: "700",
                 },
