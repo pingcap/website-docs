@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
@@ -17,7 +16,7 @@ import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "../VersionSelect/VersionSelect";
-import { getHeaderHeight } from "shared/headerHeight";
+import { getHeaderStickyHeight } from "shared/headerHeight";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 
@@ -63,9 +62,9 @@ export function LeftNavDesktop(props: LeftNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: getHeaderHeight(props.bannerEnabled || false),
+          top: getHeaderStickyHeight(props.bannerEnabled || false),
           height: "100%",
-          maxHeight: `calc(100vh - ${getHeaderHeight(
+          maxHeight: `calc(100vh - ${getHeaderStickyHeight(
             props.bannerEnabled || false
           )})`,
           boxSizing: "border-box",
@@ -115,15 +114,6 @@ export function LeftNavDesktop(props: LeftNavProps) {
             buildType={buildType}
           />
         )}
-        {/* {pathConfig.repo === "tidbcloud" && (
-          <CloudVersionSelect
-            name={name}
-            pathConfig={pathConfig}
-            availIn={availIn}
-            buildType={buildType}
-            availablePlans={availablePlans}
-          />
-        )} */}
         <LeftNavTree data={data} current={current} />
       </Box>
     </Box>
@@ -131,11 +121,10 @@ export function LeftNavDesktop(props: LeftNavProps) {
 }
 
 export function LeftNavMobile(props: LeftNavProps) {
-  const { data, current, name, pathConfig, availIn, buildType } = props;
+  const { data, current, name, pathConfig, availIn, buildType, namespace } =
+    props;
 
   const [open, setOpen] = React.useState(false);
-
-  const { language } = useI18next();
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -163,7 +152,7 @@ export function LeftNavMobile(props: LeftNavProps) {
         <MenuIcon />
       </IconButton>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        <Box sx={{ width: "17.125rem", padding: "0.625rem" }}>
+        <Box sx={{ padding: "0.625rem" }}>
           <Stack
             direction="row"
             sx={{
@@ -181,7 +170,8 @@ export function LeftNavMobile(props: LeftNavProps) {
                 paddingLeft: "1.25rem",
               }}
             />
-            {pathConfig.repo !== "tidbcloud" && (
+            {(namespace === TOCNamespace.TiDB ||
+              namespace === TOCNamespace.TiDBInKubernetes) && (
               <NativeVersionSelect
                 name={name}
                 pathConfig={pathConfig}

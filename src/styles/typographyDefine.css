@@ -72,7 +72,7 @@ h3,
 h4,
 h5,
 h6 {
-  scroll-margin-top: 128px;
+  scroll-margin-top: 72px;
 }
 
 .doc-feature-banner h1,
@@ -81,5 +81,5 @@ h6 {
 .doc-feature-banner h4,
 .doc-feature-banner h5,
 .doc-feature-banner h6 {
-  scroll-margin-top: 168px;
+  scroll-margin-top: 112px;
 }

@@ -12,7 +12,6 @@ import Layout from "components/Layout";
 import { BuildType, Locale, Repo } from "shared/interface";
 import { Page404Icon } from "components/Icons";
 import Seo from "components/Seo";
-import { getHeaderHeight } from "shared/headerHeight";
 
 import CONFIG from "../../docs/docs.json";
 import { useEffect, useRef, useState } from "react";
@@ -79,8 +78,11 @@ export default function PageNotFoundTemplate({
   }, [language, data]);
 
   const isArchived = buildType === "archive";
+  const isAutoTranslation = language === Locale.ja;
   const bannerVisible =
-    (feature?.banner && language !== Locale.ja) || isArchived;
+    isArchived ||
+    isAutoTranslation ||
+    (feature?.banner && language !== Locale.ja);
 
   const secondsRef = useRef(REDIRECT_SECONDS);
   const [seconds, setSeconds] = useState(REDIRECT_SECONDS);
@@ -129,7 +131,6 @@ export default function PageNotFoundTemplate({
             <Seo lang={language} title="404 Not Found" noindex />
             <Container
               sx={{
-                marginTop: getHeaderHeight(bannerVisible || false),
                 minHeight: "calc(100vh - 30rem)",
                 display: "flex",
                 alignItems: "center",

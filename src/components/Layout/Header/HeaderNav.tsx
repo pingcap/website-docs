@@ -522,7 +522,7 @@ const NavButton = (props: {
           <Typography
             variant="body1"
             component="div"
-            padding="0 12px 4px"
+            padding="4px 12px"
             sx={{
               display: "inline-flex",
               boxSizing: "border-box",
@@ -531,7 +531,6 @@ const NavButton = (props: {
               fontSize: "16px",
               color: theme.palette.carbon[400],
               height: "100%",
-              paddingBottom: "4px",
               fontWeight: 400,
               opacity: 0.5,
               cursor: "not-allowed",
@@ -558,7 +557,7 @@ const NavButton = (props: {
             <Typography
               variant="body1"
               component="div"
-              padding="0 12px 4px"
+              padding="4px 12px"
               sx={{
                 display: "inline-flex",
                 boxSizing: "border-box",
@@ -597,7 +596,7 @@ const NavButton = (props: {
             boxSizing: "border-box",
             alignItems: "center",
             gap: 0.5,
-            padding: "0 12px 4px",
+            padding: "4px 12px",
             height: "100%",
             paddingBottom: isSelectedState ? "0" : "4px",
             borderBottom: isSelectedState
