@@ -40,6 +40,8 @@ const clamp = (value: number, min: number, max: number): number => {
 };
 
 const LOGO_GAP = 24;
+const CSS_VAR_TRANSLATE_X = "--pc-docs-header-translate-x";
+const CSS_VAR_LOGO_SCALE = "--pc-docs-header-logo-scale";
 
 export default function Header(props: HeaderProps) {
   const { language } = useI18next();
@@ -52,11 +54,40 @@ export default function Header(props: HeaderProps) {
     return Number.parseInt(HEADER_HEIGHT.FIRST_ROW, 10);
   }, []);
 
+  const cssVarRootRef = React.useRef<HTMLDivElement | null>(null);
   const leftClusterRef = React.useRef<HTMLDivElement | null>(null);
   const logoMeasureRef = React.useRef<HTMLDivElement | null>(null);
-  const [leftClusterWidth, setLeftClusterWidth] = React.useState(0);
-  const [logoWidth, setLogoWidth] = React.useState(0);
-  const [collapseProgress, setCollapseProgress] = React.useState(0);
+  const leftClusterWidthRef = React.useRef(0);
+  const logoWidthRef = React.useRef(0);
+
+  const syncScrollStyles = React.useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    const root = cssVarRootRef.current;
+    if (!root) {
+      return;
+    }
+
+    const y = window.scrollY || 0;
+    const progress = clamp(y / firstRowHeightPx, 0, 1);
+
+    const logoWidth = logoWidthRef.current;
+    const leftClusterWidth = leftClusterWidthRef.current;
+    if (logoWidth === 0 || leftClusterWidth === 0) {
+      root.style.setProperty(CSS_VAR_TRANSLATE_X, "0px");
+      root.style.setProperty(CSS_VAR_LOGO_SCALE, "1");
+      return;
+    }
+    const logoScale = 1 - progress * 0.2;
+
+    const menuWidth = Math.max(0, leftClusterWidth - logoWidth);
+    const translateX =
+      progress * (menuWidth + logoWidth * logoScale + LOGO_GAP);
+
+    root.style.setProperty(CSS_VAR_TRANSLATE_X, `${translateX}px`);
+    root.style.setProperty(CSS_VAR_LOGO_SCALE, `${logoScale}`);
+  }, [firstRowHeightPx]);
 
   const updateLeftClusterSizes = React.useCallback(() => {
     if (typeof window === "undefined") {
@@ -67,7 +98,7 @@ export default function Header(props: HeaderProps) {
     if (clusterElement) {
       const rect = clusterElement.getBoundingClientRect();
       if (rect.width !== 0) {
-        setLeftClusterWidth(rect.width);
+        leftClusterWidthRef.current = rect.width;
       }
     }
 
@@ -75,10 +106,11 @@ export default function Header(props: HeaderProps) {
     if (logoElement) {
       const rect = logoElement.getBoundingClientRect();
       if (rect.width !== 0) {
-        setLogoWidth(rect.width);
+        logoWidthRef.current = rect.width;
       }
     }
-  }, []);
+    syncScrollStyles();
+  }, [syncScrollStyles]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") {
@@ -106,35 +138,38 @@ export default function Header(props: HeaderProps) {
     }
 
     let ticking = false;
+    let rafId: number | null = null;
     const update = () => {
-      const y = window.scrollY || 0;
-      setCollapseProgress(clamp(y / firstRowHeightPx, 0, 1));
+      syncScrollStyles();
       ticking = false;
     };
 
-    update();
+    syncScrollStyles();
     const onScroll = () => {
       if (ticking) {
         return;
       }
       ticking = true;
-      window.requestAnimationFrame(update);
+      rafId = window.requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+      }
       window.removeEventListener("scroll", onScroll);
     };
-  }, [firstRowHeightPx]);
-
-  const logoScale = 1 - collapseProgress * 0.2;
-  const menuWidth = Math.max(0, leftClusterWidth - logoWidth);
-  const scaledLogoWidth = logoWidth ? logoWidth * logoScale : undefined;
-  const translateX =
-    collapseProgress * (menuWidth + logoWidth * logoScale + LOGO_GAP);
+  }, [syncScrollStyles]);
 
   return (
-    <>
+    <Box
+      ref={cssVarRootRef}
+      sx={{
+        [CSS_VAR_TRANSLATE_X]: "0px",
+        [CSS_VAR_LOGO_SCALE]: "1",
+      }}
+    >
       {bannerVisible && (
         <Box
           sx={{
@@ -166,22 +201,35 @@ export default function Header(props: HeaderProps) {
           paddingRight: "24px",
           pointerEvents: "none",
         }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            pointerEvents: "auto",
-          }}
-        >
-          {props.menu}
-          <Box
-            height="34px"
-            sx={{
-              display: "block",
-              width: scaledLogoWidth,
-            }}
-          >
+	      >
+	        <Box
+	          sx={{
+	            display: "flex",
+	            alignItems: "center",
+	            pointerEvents: "none",
+	          }}
+	        >
+	          {props.menu && (
+	            <Box
+	              sx={{
+	                display: "flex",
+	                alignItems: "center",
+	                pointerEvents: "auto",
+	              }}
+	            >
+	              {props.menu}
+	            </Box>
+	          )}
+	          <Box
+	            height="34px"
+	            sx={{
+	              display: "block",
+	              pointerEvents: "auto",
+	              transform: `scale(var(${CSS_VAR_LOGO_SCALE}))`,
+	              transformOrigin: "left center",
+	              willChange: "transform",
+	            }}
+	          >
             <LinkComponent
               to={generateDocsHomeUrl(language)}
               onClick={() =>
@@ -302,7 +350,7 @@ export default function Header(props: HeaderProps) {
               height: "100%",
               transform: {
                 xs: "none",
-                md: `translateX(${translateX}px)`,
+                md: `translate3d(var(${CSS_VAR_TRANSLATE_X}), 0, 0)`,
               },
               willChange: {
                 xs: "auto",
@@ -345,7 +393,7 @@ export default function Header(props: HeaderProps) {
 
         <Box sx={{ order: 2 }}>{props.children}</Box>
       </Box>
-    </>
+    </Box>
   );
 }
 
