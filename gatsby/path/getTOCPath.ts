@@ -36,6 +36,13 @@ export interface NamespaceRule {
  */
 const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   {
+    namespace: TOCNamespace.AI,
+    repo: Repo.tidb,
+    branch: CONFIG.docs.tidb.stable,
+    folder: "ai",
+    minRestLength: 1,
+  },
+  {
     namespace: TOCNamespace.Develop,
     repo: Repo.tidb,
     branch: CONFIG.docs.tidb.stable,
