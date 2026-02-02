@@ -91,7 +91,7 @@ export default function HeaderAction(props: {
                 window.tidbai.open = true;
               }}
             >
-              Ask TiDB.ai
+              Ask AI
             </Button>
           )}
         </>
