@@ -104,6 +104,12 @@ const getDefaultNavConfig = (
   },
   {
     type: "item",
+    label: "AI",
+    to: "/ai",
+    selected: (namespace) => namespace === TOCNamespace.AI,
+  },
+  {
+    type: "item",
     label: "Developer",
     to: "/developer",
     selected: (namespace) => namespace === TOCNamespace.Develop,
