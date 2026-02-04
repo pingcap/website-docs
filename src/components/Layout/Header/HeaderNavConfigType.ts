@@ -8,6 +8,8 @@ export interface NavItemConfig {
   type: "item";
   /** Navigation label */
   label: string | ReactNode;
+  /** Optional alias label displayed in left navigation title */
+  leftNavLabel?: string | ReactNode;
   /** Navigation URL */
   to: string;
   /** Optional icon before label */
