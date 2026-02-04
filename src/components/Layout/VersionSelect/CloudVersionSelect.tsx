@@ -125,10 +125,12 @@ interface VersionSelectProps {
   availIn: string[];
   buildType?: BuildType;
   availablePlans: string[];
+  disableStickyContainer?: boolean;
 }
 
 export default function CloudVersionSelect(props: VersionSelectProps) {
-  const { name, pathConfig, availIn, availablePlans } = props;
+  const { name, pathConfig, availIn, availablePlans, disableStickyContainer } =
+    props;
   const { cloudPlan } = useCloudPlan();
   const currentCloudVersion =
     CLOUD_VERSIONS.find((version) => version.value === cloudPlan) ||
@@ -144,7 +146,12 @@ export default function CloudVersionSelect(props: VersionSelectProps) {
 
   return (
     <>
-      <VersionSelectButton open={open} handleClick={handleClick} ref={anchorEl}>
+      <VersionSelectButton
+        open={open}
+        handleClick={handleClick}
+        ref={anchorEl}
+        disableStickyContainer={disableStickyContainer}
+      >
         <Box display="flex">
           <Typography
             component="div"
