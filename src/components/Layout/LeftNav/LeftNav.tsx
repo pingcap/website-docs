@@ -97,9 +97,23 @@ export function LeftNavDesktop(props: LeftNavProps) {
                   fontWeight: 700,
                   color: theme.palette.carbon[900],
                   padding: "8px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 1,
                 }}
               >
-                {selectedNavItem.label}
+                {selectedNavItem.leftNavLabel ?? selectedNavItem.label}
+                {selectedNavItem.endIcon && (
+                  <Box
+                    component="span"
+                    sx={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {selectedNavItem.endIcon}
+                  </Box>
+                )}
               </Typography>
             </LinkComponent>
           </Box>
