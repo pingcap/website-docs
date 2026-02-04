@@ -16,6 +16,7 @@ import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "../VersionSelect/VersionSelect";
+import { LeftNavStickyContainer } from "../VersionSelect/SharedSelect";
 import { getHeaderStickyHeight } from "shared/headerHeight";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
@@ -69,65 +70,69 @@ export function LeftNavDesktop(props: LeftNavProps) {
           )})`,
           boxSizing: "border-box",
           overflowY: "auto",
-          padding: "20px 16px",
+          padding: "0 16px 20px",
         }}
       >
-        {selectedNavItem && (
-          <Box
-            sx={{
-              borderRadius: "4px",
-              "&:hover": {
-                backgroundColor: theme.palette.carbon[200],
-              },
-            }}
-          >
-            <LinkComponent
-              isI18n={selectedNavItem.isI18n ?? true}
-              to={selectedNavItem.to}
-              style={{ textDecoration: "none", display: "block" }}
-              onClick={() => {
-                clearAllNavStates();
+        <LeftNavStickyContainer top={0} paddingTop="20px">
+          {selectedNavItem && (
+            <Box
+              sx={{
+                borderRadius: "4px",
+                "&:hover": {
+                  backgroundColor: theme.palette.carbon[200],
+                },
               }}
             >
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                  fontSize: "18px",
-                  fontWeight: 700,
-                  color: theme.palette.carbon[900],
-                  padding: "8px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 1,
+              <LinkComponent
+                isI18n={selectedNavItem.isI18n ?? true}
+                to={selectedNavItem.to}
+                style={{ textDecoration: "none", display: "block" }}
+                onClick={() => {
+                  clearAllNavStates();
                 }}
               >
-                {selectedNavItem.leftNavLabel ?? selectedNavItem.label}
-                {selectedNavItem.endIcon && (
-                  <Box
-                    component="span"
-                    sx={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    {selectedNavItem.endIcon}
-                  </Box>
-                )}
-              </Typography>
-            </LinkComponent>
-          </Box>
-        )}
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    color: theme.palette.carbon[900],
+                    padding: "8px",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  {selectedNavItem.leftNavLabel ?? selectedNavItem.label}
+                  {selectedNavItem.endIcon && (
+                    <Box
+                      component="span"
+                      sx={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {selectedNavItem.endIcon}
+                    </Box>
+                  )}
+                </Typography>
+              </LinkComponent>
+            </Box>
+          )}
 
-        {(namespace === TOCNamespace.TiDB ||
-          namespace === TOCNamespace.TiDBInKubernetes) && (
-          <VersionSelect
-            name={name}
-            pathConfig={pathConfig}
-            availIn={availIn}
-            buildType={buildType}
-          />
-        )}
+          {(namespace === TOCNamespace.TiDB ||
+            namespace === TOCNamespace.TiDBInKubernetes) && (
+            <VersionSelect
+              name={name}
+              pathConfig={pathConfig}
+              availIn={availIn}
+              buildType={buildType}
+              disableStickyContainer
+            />
+          )}
+        </LeftNavStickyContainer>
+
         <LeftNavTree data={data} current={current} />
       </Box>
     </Box>
