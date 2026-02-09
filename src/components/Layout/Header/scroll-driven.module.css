@@ -1,0 +1,34 @@
+@media (min-width: 900px) {
+  @supports (animation-timeline: scroll()) {
+    .scrollDrivenLogo {
+      animation: pcDocsHeaderLogoScale 1s linear both;
+      animation-timeline: scroll();
+      animation-range: 0px var(--pc-docs-header-scroll-range, 56px);
+    }
+
+    .scrollDrivenNav {
+      animation: pcDocsHeaderNavShift 1s linear both;
+      animation-timeline: scroll();
+      animation-range: 0px var(--pc-docs-header-scroll-range, 56px);
+    }
+
+    @keyframes pcDocsHeaderLogoScale {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(0.8);
+      }
+    }
+
+    @keyframes pcDocsHeaderNavShift {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(var(--pc-docs-header-shift-max, 0px), 0, 0);
+      }
+    }
+  }
+}
+
