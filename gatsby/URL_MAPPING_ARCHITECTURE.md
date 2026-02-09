@@ -446,22 +446,22 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 5: Links from TiDB Operator Releases Landing Page (Path-Based)
+### Rule 5: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/*)
 
-**Effect**: Resolves relative links from the operator releases landing page to TiDB-in-Kubernetes `dev` branch URLs.
+**Effect**: Resolves `/releases/*` links from the operator releases landing page to TiDB-in-Kubernetes `dev` branch URLs.
 
 **Path Pattern**: `/{lang}/releases/tidb-operator/{...any}`
 
-**Link Pattern**: `/{docname}`
+**Link Pattern**: `/releases/{docname}`
 
 **Target Pattern**: `/{lang}/tidb-in-kubernetes/dev/{docname}`
 
 **Example**:
 - Current Page: `/releases/tidb-operator`
-- Link: `release-2.0.0`
+- Link: `/releases/release-2.0.0`
 - Result: `/tidb-in-kubernetes/dev/release-2.0.0` (or `/en/tidb-in-kubernetes/dev/release-2.0.0` if default language not omitted)
 
-**Use Case**: The operator releases landing page comes from `tidb-in-kubernetes/main` and uses relative links; `main` is published as `/tidb-in-kubernetes/dev/*`.
+**Use Case**: The operator releases landing page is under `/releases/`, but the actual release notes pages are published under `/tidb-in-kubernetes/dev/*` (`main` is published as `dev`).
 
 ---
 
