@@ -26,15 +26,15 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     // Current page: /{lang}/releases/tidb-self-managed
     // Link: /releases/{docname} -> /{lang}/tidb/stable/{docname}
     {
-      pathPattern: "/{lang}/releases/tidb-self-managed/{...any}",
-      linkPattern: "/releases/{docname}",
+      pathPattern: "/{lang}/releases/tidb-self-managed",
+      linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",
     },
     // Current page: /{lang}/releases/tidb-operator
     // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/dev/{docname}
     {
-      pathPattern: "/{lang}/releases/tidb-operator/{...any}",
-      linkPattern: "/releases/{docname}",
+      pathPattern: "/{lang}/releases/tidb-operator",
+      linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb-in-kubernetes/dev/{docname}",
     },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
