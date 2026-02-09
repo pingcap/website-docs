@@ -18,7 +18,8 @@ The system uses two core resolvers (`url-resolver` and `link-resolver`) that wor
 **Process**:
 1. Gatsby queries all MDX files from the GraphQL data layer
 2. For each file, `calculateFileUrl()` from `url-resolver` converts the source path to a published URL
-3. The resolved URL is used to create the Gatsby page with `createPage()`
+3. `getTOCNamespace()` from `toc-namespace` determines the page's TOC namespace for navigation/context
+4. The resolved URL is used to create the Gatsby page with `createPage()`
 
 **Example**:
 ```typescript
@@ -105,7 +106,7 @@ const resolvedPath = resolveMarkdownLink(
 3. Page Creation (create-docs.ts)
    ├─> Filter files by TOC whitelist
    ├─> Resolve page URLs (url-resolver)
-   ├─> Determine namespace (getTOCNamespace)
+   ├─> Determine namespace (toc-namespace/getTOCNamespace)
    └─> Create Gatsby pages
 
 4. Content Processing (plugin/content/index.ts)

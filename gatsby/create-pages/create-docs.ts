@@ -10,11 +10,8 @@ import {
   TOCNamespaceSlugMap,
   TOCNamespace,
 } from "../../src/shared/interface";
-import {
-  generateConfig,
-  generateNavTOCPath,
-  getTOCNamespace,
-} from "../../gatsby/path";
+import { generateConfig, generateNavTOCPath } from "../../gatsby/path";
+import { getTOCNamespace } from "../../gatsby/toc-namespace";
 import { calculateFileUrl } from "../../gatsby/url-resolver";
 import { cpMarkdown } from "../../gatsby/cp-markdown";
 import {

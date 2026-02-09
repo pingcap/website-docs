@@ -1,16 +1,5 @@
-import {
-  Locale,
-  PathConfig,
-  Repo,
-  TOCNamespace,
-} from "../../src/shared/interface";
+import { Locale, Repo, TOCNamespace } from "../../src/shared/interface";
 import CONFIG from "../../docs/docs.json";
-
-export function generateNavTOCPath(config: PathConfig, postSlug: string) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC${
-    postSlug ? `-${postSlug}` : ""
-  }`;
-}
 
 /**
  * Namespace matching rule configuration
