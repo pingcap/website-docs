@@ -59,7 +59,7 @@ The tests cover:
 
 4. **URL Resolution**
    - tidbcloud with prefix mapping
-   - develop/best-practice/api/releases mapping
+   - ai/develop/best-practices/api/releases mapping
    - tidb with branch aliasing
    - Fallback rules
    - Conditional target patterns (for `_index` files)

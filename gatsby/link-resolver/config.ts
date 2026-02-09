@@ -22,6 +22,21 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/tidb-in-kubernetes/releases/_index",
       targetPattern: "/{curLang}/releases/tidb-operator",
     },
+    // Releases pages (path-based mapping)
+    // Current page: /{lang}/releases/tidb-self-managed
+    // Link: /releases/{docname} -> /{lang}/tidb/stable/{docname}
+    {
+      pathPattern: "/{lang}/releases/tidb-self-managed",
+      linkPattern: "/{...any}/{docname}",
+      targetPattern: "/{lang}/tidb/stable/{docname}",
+    },
+    // Current page: /{lang}/releases/tidb-operator
+    // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/dev/{docname}
+    {
+      pathPattern: "/{lang}/releases/tidb-operator",
+      linkPattern: "/{...any}/{docname}",
+      targetPattern: "/{lang}/tidb-in-kubernetes/dev/{docname}",
+    },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
     // /{namespace}/{...any}/{docname} -> /{curLang}/{namespace}/{docname}
     // Special: tidb-cloud -> tidbcloud, develop -> developer
@@ -29,7 +44,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{curLang}/{namespace}/{docname}",
       conditions: {
-        namespace: ["tidb-cloud", "develop", "best-practice", "api"],
+        namespace: ["tidb-cloud", "develop", "best-practices", "api", "ai"],
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
@@ -44,13 +59,13 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloud/{docname}",
     },
-    // Rule 3: develop, best-practice, api, releases namespace in tidb folder
+    // Rule 3: developer, best-practices, api, ai namespace in tidb folder
     // Current page: /{lang}/{namespace}/{...any}
     // Link: /{...any}/{docname} -> /{lang}/{namespace}/{docname}
     {
       pathPattern: `/{lang}/{namespace}/{...any}`,
       pathConditions: {
-        namespace: ["developer", "develop", "best-practice", "api"],
+        namespace: ["developer", "best-practices", "api", "ai"],
       },
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",

@@ -64,12 +64,12 @@ export default function HeaderAction(props: {
   const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
   const isAutoTranslation = useIsAutoTranslation(namespace);
 
-  return (
-    <Stack
-      direction="row"
-      spacing={2}
-      sx={{ marginLeft: "auto", alignItems: "center" }}
-    >
+	  return (
+	    <Stack
+	      direction="row"
+	      spacing={{ xs: 1, md: 2 }}
+	      sx={{ alignItems: "center" }}
+	    >
       {docInfo && !isAutoTranslation && buildType !== "archive" && (
         <>
           <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
@@ -91,7 +91,7 @@ export default function HeaderAction(props: {
                 window.tidbai.open = true;
               }}
             >
-              Ask TiDB.ai
+              Ask AI
             </Button>
           )}
         </>
@@ -166,7 +166,9 @@ const TiDBCloudBtnGroup = () => {
           },
         }}
       >
-        <CloudIcon sx={{ fill: theme.palette.carbon[900] }} />
+        <CloudIcon
+          sx={{ width: 17, height: 17, fill: theme.palette.carbon[900] }}
+        />
       </IconButton>
       <Menu
         id="tidb-cloud-menu"

@@ -1,6 +1,7 @@
 import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 import { calculateFileUrl } from "./url-resolver";
+import { isIgnoredTocRelativePath } from "./toc-ignore";
 
 // Whitelist of files that should always be built regardless of TOC content
 const WHITELIST = [""];
@@ -69,12 +70,9 @@ export async function getFilesFromTocs(
   const tocNodes = tocQuery.data!.allMdx.nodes;
   const tocFilesMap = new Map<string, Set<string>>();
 
-  // TODO: Remove this filter once premium is public. Currently filtering out TOC-tidb-cloud-premium.md
   const filteredTocNodes = tocNodes.filter(
-    (node: TocQueryData["allMdx"]["nodes"][0]) => {
-      const relativePath = node.parent?.relativePath || "";
-      return !relativePath.includes("TOC-tidb-cloud-premium.md");
-    }
+    (node: TocQueryData["allMdx"]["nodes"][0]) =>
+      !isIgnoredTocRelativePath(node.parent?.relativePath || "")
   );
 
   filteredTocNodes.forEach((node: TocQueryData["allMdx"]["nodes"][0]) => {

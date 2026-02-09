@@ -150,20 +150,20 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/ja/developer/vector-search-data-types");
     });
 
-    it("should resolve best-practice namespace links (en - default language omitted)", () => {
+    it("should resolve best-practices namespace links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
-        "/best-practice/optimization/query-optimization",
+        "/best-practices/optimization/query-optimization",
         "/en/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/best-practice/query-optimization");
+      expect(result).toBe("/best-practices/query-optimization");
     });
 
-    it("should resolve best-practice namespace links (zh - language prefix included)", () => {
+    it("should resolve best-practices namespace links (zh - language prefix included)", () => {
       const result = resolveMarkdownLink(
-        "/best-practice/optimization/query-optimization",
+        "/best-practices/optimization/query-optimization",
         "/zh/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/zh/best-practice/query-optimization");
+      expect(result).toBe("/zh/best-practices/query-optimization");
     });
 
     it("should resolve api namespace links (en - default language omitted)", () => {
@@ -180,6 +180,22 @@ describe("resolveMarkdownLink", () => {
         "/zh/tidb/stable/alert-rules"
       );
       expect(result).toBe("/zh/api/introduction");
+    });
+
+    it("should resolve ai namespace links (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/ai/overview/introduction",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/ai/introduction");
+    });
+
+    it("should resolve ai namespace links (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/ai/overview/introduction",
+        "/zh/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/zh/ai/introduction");
     });
 
     it("should resolve releases/_index links to tidb-self-managed (en - default language omitted)", () => {
@@ -228,6 +244,54 @@ describe("resolveMarkdownLink", () => {
         "/zh/tidb-in-kubernetes/stable/deploy"
       );
       expect(result).toBe("/zh/releases/tidb-operator");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-self-managed page (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-8.5.4",
+        "/en/releases/tidb-self-managed"
+      );
+      expect(result).toBe("/tidb/stable/release-8.5.4");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-self-managed page (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-8.5.4",
+        "/zh/releases/tidb-self-managed"
+      );
+      expect(result).toBe("/zh/tidb/stable/release-8.5.4");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-operator page (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-2.0.0",
+        "/en/releases/tidb-operator"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-operator page (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/release-2.0.0",
+        "/en/releases/tidb-operator"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-operator page (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-2.0.0",
+        "/zh/releases/tidb-operator"
+      );
+      expect(result).toBe("/zh/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-operator page (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/release-2.0.0",
+        "/zh/releases/tidb-operator"
+      );
+      expect(result).toBe("/zh/tidb-in-kubernetes/dev/release-2.0.0");
     });
 
     it("should resolve releases namespace links (en - matches Rule 4, not Rule 1)", () => {
@@ -378,7 +442,7 @@ describe("resolveMarkdownLink", () => {
     });
   });
 
-  describe("linkMappingsByPath - Rule 3: develop/best-practice/api/releases namespace pages", () => {
+  describe("linkMappingsByPath - Rule 3: developer/best-practices/api/ai/releases namespace pages", () => {
     it("should resolve links from develop namespace page", () => {
       const result = resolveMarkdownLink(
         "/vector-search/vector-search-overview",
@@ -387,10 +451,10 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/stable/vector-search-overview");
     });
 
-    it("should resolve links from best-practice namespace page", () => {
+    it("should resolve links from best-practices namespace page", () => {
       const result = resolveMarkdownLink(
         "/optimization/query-optimization",
-        "/en/best-practice/optimization"
+        "/en/best-practices/optimization"
       );
       expect(result).toBe("/tidb/stable/query-optimization");
     });
@@ -401,6 +465,11 @@ describe("resolveMarkdownLink", () => {
         "/en/api/tiproxy-api-overview"
       );
       expect(result).toBe("/tidb/stable/tiproxy-api");
+    });
+
+    it("should resolve links from ai namespace page", () => {
+      const result = resolveMarkdownLink("/some/linked-doc", "/en/ai/overview");
+      expect(result).toBe("/tidb/stable/linked-doc");
     });
 
     it("should resolve links from releases namespace page", () => {
@@ -425,10 +494,10 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/stable/vector-search-data-types-overview");
     });
 
-    it("should resolve links with multiple path segments from best-practice namespace", () => {
+    it("should resolve links with multiple path segments from best-practices namespace", () => {
       const result = resolveMarkdownLink(
         "/optimization/query/query-performance-tuning",
-        "/en/best-practice/optimization/query"
+        "/en/best-practices/optimization/query"
       );
       expect(result).toBe("/tidb/stable/query-performance-tuning");
     });
@@ -463,10 +532,10 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/stable/vector-search-overview#data-types");
     });
 
-    it("should preserve hash for links from best-practice namespace", () => {
+    it("should preserve hash for links from best-practices namespace", () => {
       const result = resolveMarkdownLink(
         "/optimization/query-optimization#index-selection",
-        "/en/best-practice/optimization"
+        "/en/best-practices/optimization"
       );
       expect(result).toBe("/tidb/stable/query-optimization#index-selection");
     });
@@ -516,10 +585,10 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/stable/vector-search-overview");
     });
 
-    it("should resolve links from best-practice namespace with deep nesting", () => {
+    it("should resolve links from best-practices namespace with deep nesting", () => {
       const result = resolveMarkdownLink(
         "/a/b/c/d/e/page",
-        "/en/best-practice/a/b/c/d/e"
+        "/en/best-practices/a/b/c/d/e"
       );
       expect(result).toBe("/tidb/stable/page");
     });
@@ -538,7 +607,7 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/v8.5/changelog/changes");
     });
 
-    it("should not match non-develop/best-practice/api/releases namespace pages", () => {
+    it("should not match non-develop/best-practices/api/releases namespace pages", () => {
       const result = resolveMarkdownLink(
         "/some/path/to/page",
         "/en/other-namespace/some/path"

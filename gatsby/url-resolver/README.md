@@ -10,7 +10,7 @@ The URL Resolver serves the following purposes:
 
 1. **Path Transformation**: Converts source file paths (e.g., `/docs/markdown-pages/en/tidb/master/alert-rules.md`) into published URLs (e.g., `/tidb/dev/alert-rules`)
 2. **Branch Aliasing**: Maps internal branch names (e.g., `master`, `release-8.5`) to display versions (e.g., `dev`, `v8.5`)
-3. **Namespace Handling**: Handles special namespaces like `developer` (source folder `develop`), `best-practice`, `api`, and `releases` with custom URL structures
+3. **Namespace Handling**: Handles special namespaces like `developer` (source folder `develop`), `best-practices`, `api`, and `releases` with custom URL structures
 4. **Default Language Omission**: Optionally omits the default language prefix (e.g., `/en/`) from URLs
 5. **Trailing Slash Control**: Configures trailing slash behavior (`always`, `never`, or `auto`)
 
@@ -92,6 +92,25 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
 };
 ```
 
+### `UrlResolverConfig` Options
+
+- `sourceBasePath` (`string`): Base directory of the source markdown files. Used by `parseSourcePath()` to convert absolute file paths into slug-like relative paths.
+- `pathMappings` (`PathMappingRule[]`): Ordered mapping rules (first match wins).
+  - `sourcePattern` (`string`): Pattern to match the parsed source path (supports `{var}` and `{...var}` variables).
+  - `targetPattern` (`string`): Pattern to generate the published URL. Supports alias syntax like `{branch:branch-alias-tidb}`.
+  - `conditions` (`Record<string, string[]>`, optional): Restricts when the rule applies by allowing only specific values for variables extracted from `sourcePattern`.
+  - `filenameTransform` (optional): Special handling for filenames like `_index`/`_docHome`.
+    - `ignoreIf` (`string[]`, optional): If the filename matches, omit the `{filename}` part in the generated URL.
+    - `conditionalTarget` (optional): Use an alternate `keepTargetPattern` when the filename matches `keepIf`.
+- `aliases` (optional): Named alias tables referenced from `targetPattern` via `{var:alias-name}`.
+  - `context` (`Record<string, string[]>`, optional): Apply the alias only when other variables match specific values (for example, only for certain `repo` values).
+  - `mappings` (`AliasMapping`): Alias definitions supporting exact matches (for example, `master -> dev`) and wildcard/regex replacements (for example, `release-* -> v*`).
+- `defaultLanguage` (`string`, optional): When `calculateFileUrl(..., omitDefaultLanguage=true)` and the resolved URL starts with `/{defaultLanguage}/`, the language prefix is removed.
+- `trailingSlash` (`"always" | "never" | "auto"`, optional): Controls trailing slash behavior of the resolved URL.
+  - `"never"`: never ends with `/`
+  - `"always"`: always ends with `/`
+  - `"auto"`: add/remove `/` based on whether the resolved URL represents an index page (for example, when `{filename}` is omitted)
+
 ### Pattern Syntax
 
 #### Variables
@@ -101,7 +120,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
 - `{branch}` - Branch name (e.g., `master`, `release-8.5`)
 - `{filename}` - File name without extension (e.g., `alert-rules`, `_index`)
 - `{...folders}` - Variable number of folder segments (captures all remaining segments)
-- `{namespace}` - Namespace (e.g., `developer`, `best-practice`, `api`)
+- `{namespace}` - Namespace (e.g., `developer`, `best-practices`, `api`)
 
 #### Alias Syntax
 

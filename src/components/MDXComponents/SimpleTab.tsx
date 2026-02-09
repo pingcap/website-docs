@@ -1,6 +1,16 @@
 import { tabs, active, hidden } from "./simple-tab.module.css";
 
-import { ReactElement, useState, useMemo, useEffect, useRef } from "react";
+import {
+  Children,
+  Fragment,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useState,
+  useMemo,
+  useEffect,
+  useRef,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTabGroup } from "state";
 import clsx from "clsx";
@@ -10,35 +20,72 @@ export function SimpleTab({
   children,
 }: {
   groupId: string;
-  children: ReactElement<{
-    label: string;
-    value?: string;
-    children: ReactElement[];
-  }>[];
+  children: ReactNode;
 }) {
   const [renderedTabs, setRenderedTabs] = useState<string[]>([]);
-  const actualTabs = useMemo(() => {
-    const tabs: ReactElement[] = [];
-
-    const extractTabs = (elements: ReactElement[]) => {
-      elements.forEach((element) => {
-        if (element.props.mdxType === "CustomContent") {
-          if (element.props.children) {
-            const childrenArray = Array.isArray(element.props.children)
-              ? element.props.children
-              : [element.props.children];
-            extractTabs(childrenArray);
-          }
-        } else {
-          tabs.push(element);
-        }
-      });
+  const tabEntries = useMemo(() => {
+    type TabElement = ReactElement<{ label: string; value?: string }>;
+    type TabEntry = {
+      // The actual tab <div label=... value=...> element used for labels/ids
+      tab: TabElement;
+      // The original top-level node we should render as content (could be a wrapper like <CustomContent>)
+      renderNode: ReactNode;
     };
 
-    extractTabs(children);
+    const isTabElement = (node: unknown): node is TabElement => {
+      if (!isValidElement(node as ReactElement)) {
+        return false;
+      }
+      const props = (node as any).props;
+      return typeof props?.label === "string" && props.label.length > 0;
+    };
 
-    return tabs;
+    const unwrapToTab = (node: ReactNode): TabElement | null => {
+      // Find the first tab element inside this node (supports wrapper like <CustomContent>).
+      return Children.toArray(node).reduce<TabElement | null>(
+        (found, child) => {
+          if (found) {
+            return found;
+          }
+          if (!isValidElement(child)) {
+            return null;
+          }
+          if ((child.props as any)?.mdxType === "CustomContent") {
+            return unwrapToTab(child.props?.children);
+          }
+          if (isTabElement(child)) {
+            return child;
+          }
+          // If it's some other element (e.g. Fragment), keep walking down its children.
+          return unwrapToTab(child.props?.children);
+        },
+        null
+      );
+    };
+
+    const flattenTopLevelNodes = (nodes: ReactNode): ReactNode[] => {
+      // MDX can sometimes pass a single Fragment that wraps multiple tab panes.
+      // We want each tab pane to be a top-level entry, so we manually unwrap Fragments here.
+      return Children.toArray(nodes).reduce<ReactNode[]>((acc, node) => {
+        if (isValidElement(node) && node.type === Fragment) {
+          return acc.concat(Children.toArray(node.props?.children));
+        }
+        return acc.concat(node);
+      }, []);
+    };
+
+    // Preserve original top-level nodes for rendering (keeps wrappers like <CustomContent> intact).
+    const tabEntries = flattenTopLevelNodes(children)
+      .map<TabEntry | null>((node) => {
+        const tab = unwrapToTab(node);
+        return tab ? { tab, renderNode: node } : null;
+      })
+      .filter((entry): entry is TabEntry => entry !== null);
+
+    return tabEntries;
   }, [children]);
+
+  const actualTabs = useMemo(() => tabEntries.map((e) => e.tab), [tabEntries]);
 
   const defaultValue =
     actualTabs[0]?.props?.value || actualTabs[0]?.props.label;
@@ -52,7 +99,7 @@ export function SimpleTab({
       activeTabGroup &&
       activeTabGroup !== activeTab &&
       actualTabs.some(
-        (child) => child.props?.value || child.props.label === activeTabGroup
+        (child) => (child.props?.value || child.props.label) === activeTabGroup
       )
     ) {
       setActiveTab(activeTabGroup);
@@ -96,9 +143,8 @@ export function SimpleTab({
           );
         })}
       </ul>
-      {children.map((child, index) => {
-        const actualChild = actualTabs[index];
-        const id: string = actualChild.props?.value || actualChild.props.label;
+      {tabEntries.map(({ tab, renderNode }) => {
+        const id: string = tab.props?.value || tab.props.label;
         return (
           <TabContentDetector
             key={id}
@@ -124,7 +170,7 @@ export function SimpleTab({
               });
             }}
           >
-            {child}
+            {renderNode}
           </TabContentDetector>
         );
       })}
@@ -139,7 +185,7 @@ export const TabContentDetector = ({
   renderedTabs,
   onRendered,
 }: {
-  children: ReactElement;
+  children: ReactNode;
   id: string;
   activeTab: string;
   renderedTabs: string[];

@@ -11,7 +11,7 @@ import { TableOfContent, PathConfig, BuildType } from "shared/interface";
 import ChevronDownIcon from "media/icons/chevron-down.svg";
 import { transformCustomId, removeHtmlTag } from "shared/utils";
 import { sliceVersionMark } from "shared/utils/anchor";
-import { getHeaderHeight } from "shared/headerHeight";
+import { getHeaderStickyHeight } from "shared/headerHeight";
 
 interface RightNavProps {
   toc?: TableOfContent[];
@@ -96,9 +96,11 @@ export default function RightNav(props: RightNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: getHeaderHeight(bannerVisible || false),
+          top: getHeaderStickyHeight(bannerVisible || false),
           height: "100%",
-          maxHeight: `calc(100vh - ${getHeaderHeight(bannerVisible || false)})`,
+          maxHeight: `calc(100vh - ${getHeaderStickyHeight(
+            bannerVisible || false
+          )})`,
           overflowY: "auto",
           padding: "36px 16px",
           display: "flex",
@@ -164,7 +166,6 @@ const generateToc = (items: TableOfContent[], level = 0, activeId = "") => {
                 paddingTop: "0.25rem",
                 paddingBottom: "0.25rem",
                 fontWeight: isActive ? "700" : "400",
-                color: isActive ? theme.palette.website.f1 : "inherit",
                 "&:hover": {
                   fontWeight: "700",
                 },

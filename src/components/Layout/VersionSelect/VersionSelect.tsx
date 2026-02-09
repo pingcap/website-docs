@@ -248,10 +248,11 @@ interface VersionSelectProps {
   pathConfig: PathConfig;
   availIn: string[];
   buildType?: BuildType;
+  disableStickyContainer?: boolean;
 }
 
 export default function VersionSelect(props: VersionSelectProps) {
-  const { name, pathConfig, availIn, buildType } = props;
+  const { name, pathConfig, availIn, buildType, disableStickyContainer } = props;
   const anchorEl = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);
@@ -259,7 +260,12 @@ export default function VersionSelect(props: VersionSelectProps) {
 
   return (
     <>
-      <VersionSelectButton open={open} handleClick={handleClick} ref={anchorEl}>
+      <VersionSelectButton
+        open={open}
+        handleClick={handleClick}
+        ref={anchorEl}
+        disableStickyContainer={disableStickyContainer}
+      >
         <Typography
           component="div"
           sx={{
@@ -340,7 +346,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
 
   return (
     <>
-      <FormControl sx={{ m: 1 }} variant="standard">
+      <FormControl variant="standard">
         <NativeSelect
           id="version-select-native"
           value={`${pathConfig.version}`}

@@ -2,29 +2,54 @@ import { NavConfig } from "./HeaderNavConfigType";
 import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
 import { CloudPlan, TOCNamespace } from "shared/interface";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import Chip from "@mui/material/Chip";
+import { useTheme } from "@mui/material/styles";
 
 import TiDBCloudIcon from "media/icons/cloud-03.svg";
 import TiDBIcon from "media/icons/layers-three-01.svg";
+
+const PreviewBadge = (props: { label: string }) => {
+  const theme = useTheme();
+  return (
+    <Chip
+      label={props.label}
+      size="small"
+      variant="outlined"
+      sx={{
+        height: "20px",
+        fontSize: "12px",
+        fontWeight: 400,
+        borderRadius: "10px",
+        "& .MuiChip-label": {
+          paddingLeft: "8px",
+          paddingRight: "8px",
+          lineHeight: "20px",
+          color: theme.palette.carbon[700],
+        },
+      }}
+    />
+  );
+};
 
 /**
  * Default navigation configuration
  */
 const getDefaultNavConfig = (
-  cloudPlan: CloudPlan | null,
-  language?: string
+  t: (key: string) => string,
+  cloudPlan: CloudPlan | null
 ): NavConfig[] => [
   {
     type: "group",
-    title: "Product",
+    title: t("navbar.product"),
     children: [
       {
         type: "group",
-        title: "TiDB Cloud",
+        title: t("navbar.cloud"),
         titleIcon: <TiDBCloudIcon width="16px" height="16px" />,
         children: [
           {
             type: "item",
-            label: "TiDB Cloud Starter",
+            label: t("navbar.tidbCloudStarter"),
             to: `/tidbcloud/starter?${CLOUD_MODE_KEY}=starter`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
@@ -37,7 +62,8 @@ const getDefaultNavConfig = (
           },
           {
             type: "item",
-            label: "TiDB Cloud Essential",
+            label: t("navbar.tidbCloudEssential"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: `/tidbcloud/essential?${CLOUD_MODE_KEY}=essential`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
@@ -63,7 +89,7 @@ const getDefaultNavConfig = (
           // },
           {
             type: "item",
-            label: "TiDB Cloud Dedicated",
+            label: t("navbar.tidbCloudDedicated"),
             to:
               cloudPlan === "dedicated" || !cloudPlan
                 ? `/tidbcloud`
@@ -81,18 +107,20 @@ const getDefaultNavConfig = (
       },
       {
         type: "group",
-        title: "TiDB Self-Managed",
+        title: t("navbar.tidb"),
         titleIcon: <TiDBIcon width="16px" height="16px" />,
         children: [
           {
             type: "item",
-            label: "Deploy Using TiUP",
+            label: t("navbar.deployUsingTiup"),
+            leftNavLabel: t("navbar.tidb"),
             to: "/tidb/stable",
             selected: (namespace) => namespace === TOCNamespace.TiDB,
           },
           {
             type: "item",
-            label: "Deploy on Kubernetes",
+            label: t("navbar.deployOnKubernetes"),
+            leftNavLabel: t("navbar.tidbOnKubernetes"),
             to: "/tidb-in-kubernetes/stable",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBInKubernetes,
@@ -104,41 +132,47 @@ const getDefaultNavConfig = (
   },
   {
     type: "item",
-    label: "Developer",
+    label: t("navbar.ai"),
+    to: "/ai",
+    selected: (namespace) => namespace === TOCNamespace.AI,
+  },
+  {
+    type: "item",
+    label: t("navbar.developer"),
     to: "/developer",
     selected: (namespace) => namespace === TOCNamespace.Develop,
   },
   {
     type: "item",
-    label: "Best Practices",
-    to: "/best-practice",
-    selected: (namespace) => namespace === TOCNamespace.BestPractice,
+    label: t("navbar.bestPractices"),
+    to: "/best-practices",
+    selected: (namespace) => namespace === TOCNamespace.BestPractices,
   },
   {
     type: "item",
-    label: "API",
+    label: t("navbar.api"),
     to: "/api",
     selected: (namespace) => namespace === TOCNamespace.API,
   },
   {
     type: "group",
-    title: "Releases",
+    title: t("navbar.releases"),
     children: [
       {
         type: "item",
-        label: "TiDB Cloud Releases",
+        label: t("navbar.tidbCloudReleases"),
         to: "/releases/tidb-cloud",
         selected: (namespace) => namespace === TOCNamespace.TidbCloudReleases,
       },
       {
         type: "item",
-        label: "TiDB Self-Managed Releases",
+        label: t("navbar.tidbSelfManagedReleases"),
         to: "/releases/tidb-self-managed",
         selected: (namespace) => namespace === TOCNamespace.TiDBReleases,
       },
       {
         type: "item",
-        label: "TiDB Operator Releases",
+        label: t("navbar.tidbOperatorReleases"),
         to: "/releases/tidb-operator",
         selected: (namespace) =>
           namespace === TOCNamespace.TiDBInKubernetesReleases,
@@ -146,7 +180,7 @@ const getDefaultNavConfig = (
       },
       {
         type: "item",
-        label: "TiUP Releases",
+        label: t("navbar.tiupReleases"),
         to: "https://github.com/pingcap/tiup/releases",
         selected: () => false,
         endIcon: <OpenInNewIcon sx={{ fontSize: "14px", marginLeft: "4px" }} />,
@@ -179,5 +213,5 @@ export const generateNavConfig = (
   if (buildType === "archive") {
     return archiveNavConfig;
   }
-  return getDefaultNavConfig(cloudPlan, language);
+  return getDefaultNavConfig(t, cloudPlan);
 };

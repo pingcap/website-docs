@@ -1,16 +1,5 @@
-import {
-  Locale,
-  PathConfig,
-  Repo,
-  TOCNamespace,
-} from "../../src/shared/interface";
+import { Locale, Repo, TOCNamespace } from "../../src/shared/interface";
 import CONFIG from "../../docs/docs.json";
-
-export function generateNavTOCPath(config: PathConfig, postSlug: string) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC${
-    postSlug ? `-${postSlug}` : ""
-  }`;
-}
 
 /**
  * Namespace matching rule configuration
@@ -36,6 +25,13 @@ export interface NamespaceRule {
  */
 const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   {
+    namespace: TOCNamespace.AI,
+    repo: Repo.tidb,
+    branch: CONFIG.docs.tidb.stable,
+    folder: "ai",
+    minRestLength: 1,
+  },
+  {
     namespace: TOCNamespace.Develop,
     repo: Repo.tidb,
     branch: CONFIG.docs.tidb.stable,
@@ -43,10 +39,10 @@ const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
     minRestLength: 1,
   },
   {
-    namespace: TOCNamespace.BestPractice,
+    namespace: TOCNamespace.BestPractices,
     repo: Repo.tidb,
     branch: CONFIG.docs.tidb.stable,
-    folder: "best-practice",
+    folder: "best-practices",
     minRestLength: 1,
   },
   {
@@ -181,7 +177,7 @@ function matchesRule(
  * Get shared namespace from slug based on configured rules
  * Returns the first matching namespace or empty string if no match
  */
-export const getTOCNamespace = (slug: string): TOCNamespace => {
+export const getTOCNamespace = (slug: string): TOCNamespace | undefined => {
   const [locale, repo, branch, folder, ...rest] = slug.split("/") as [
     Locale,
     Repo,
@@ -197,5 +193,5 @@ export const getTOCNamespace = (slug: string): TOCNamespace => {
     }
   }
 
-  return TOCNamespace.TiDB;
+  return;
 };

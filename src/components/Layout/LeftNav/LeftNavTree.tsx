@@ -408,6 +408,7 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
           const c = isContentString ? content : content.value;
           return (
             <Typography
+              key={`${c}_${index}`}
               component={typeof content === "string" ? "div" : "code"}
               sx={{
                 color: "inherit",

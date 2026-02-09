@@ -36,9 +36,10 @@ export default function Layout(props: {
         pathConfig={props.pathConfig}
         namespace={props.namespace}
         onSelectedNavItemChange={props.onSelectedNavItemChange}
-      />
-      {props.children}
-      <Footer />
+      >
+        {props.children}
+        <Footer />
+      </Header>
     </ThemeProvider>
   );
 }

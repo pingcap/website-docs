@@ -1,4 +1,5 @@
-import { Box, Divider, Stack, Typography } from "@mui/material";
+import * as React from "react";
+import { Box, Stack, Typography } from "@mui/material";
 import { HEADER_HEIGHT } from "shared/headerHeight";
 
 export function Banner({
@@ -55,7 +56,7 @@ export function Banner({
         {textList.map((text, index) =>
           typeof text === "string" ? (
             <Typography
-              key={index}
+              key={`banner-text-${index}`}
               component="span"
               variant="body2"
               color="inherit"
@@ -64,7 +65,7 @@ export function Banner({
               {text}
             </Typography>
           ) : (
-            text
+            <React.Fragment key={`banner-node-${index}`}>{text}</React.Fragment>
           )
         )}
       </Stack>

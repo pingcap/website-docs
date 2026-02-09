@@ -62,7 +62,9 @@ export function HeaderNavStackMobile(props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={<TiDBLogo />}
+        startIcon={
+          <TiDBLogo width={132} height={28.8} />
+        }
         endIcon={<ChevronDownIcon />}
       ></Button>
       <Menu
@@ -97,18 +99,21 @@ export function HeaderNavStackMobile(props: {
             }
             return true;
           })
-          .map((config, index, filteredArray) => {
-            return (
-              <React.Fragment key={index}>
-                {index > 0 && <Divider />}
-                <RenderNavConfig
-                  config={config}
-                  namespace={props.namespace}
-                  onClose={handleClose}
-                  language={language}
-                />
-              </React.Fragment>
+          .flatMap((config, index) => {
+            const items: React.ReactNode[] = [];
+            if (index > 0) {
+              items.push(<Divider key={`divider-${index}`} />);
+            }
+            items.push(
+              <RenderNavConfig
+                key={`config-${index}`}
+                config={config}
+                namespace={props.namespace}
+                onClose={handleClose}
+                language={language}
+              />
             );
+            return items;
           })}
       </Menu>
     </Box>

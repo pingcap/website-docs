@@ -20,30 +20,7 @@ import {
 } from "./HeaderNavConfigType";
 import { generateNavConfig } from "./HeaderNavConfigData";
 import { clearAllNavStates } from "../LeftNav/LeftNavTree";
-
-// Helper function to find selected item recursively
-const findSelectedItem = (
-  configs: NavConfig[],
-  namespace?: TOCNamespace
-): NavItemConfig | null => {
-  for (const config of configs) {
-    if (config.type === "item") {
-      const isSelected =
-        typeof config.selected === "function"
-          ? config.selected(namespace)
-          : config.selected ?? false;
-      if (isSelected) {
-        return config;
-      }
-    } else if (config.type === "group" && config.children) {
-      const item = findSelectedItem(config.children, namespace);
-      if (item) {
-        return item;
-      }
-    }
-  }
-  return null;
-};
+import { getSelectedNavItem } from "./getSelectedNavItem";
 
 export default function HeaderNavStack(props: {
   buildType?: BuildType;
@@ -66,7 +43,7 @@ export default function HeaderNavStack(props: {
   // Find and notify selected item
   React.useEffect(() => {
     if (props.onSelectedNavItemChange) {
-      const selectedNavItem = findSelectedItem(defaultConfig, props.namespace);
+      const selectedNavItem = getSelectedNavItem(defaultConfig, props.namespace);
       props.onSelectedNavItemChange(selectedNavItem);
     }
   }, [defaultConfig, props.namespace, props.onSelectedNavItemChange]);
@@ -522,7 +499,7 @@ const NavButton = (props: {
           <Typography
             variant="body1"
             component="div"
-            padding="0 12px 4px"
+            padding="4px 12px"
             sx={{
               display: "inline-flex",
               boxSizing: "border-box",
@@ -531,7 +508,6 @@ const NavButton = (props: {
               fontSize: "16px",
               color: theme.palette.carbon[400],
               height: "100%",
-              paddingBottom: "4px",
               fontWeight: 400,
               opacity: 0.5,
               cursor: "not-allowed",
@@ -558,7 +534,7 @@ const NavButton = (props: {
             <Typography
               variant="body1"
               component="div"
-              padding="0 12px 4px"
+              padding="4px 12px"
               sx={{
                 display: "inline-flex",
                 boxSizing: "border-box",
@@ -597,7 +573,7 @@ const NavButton = (props: {
             boxSizing: "border-box",
             alignItems: "center",
             gap: 0.5,
-            padding: "0 12px 4px",
+            padding: "4px 12px",
             height: "100%",
             paddingBottom: isSelectedState ? "0" : "4px",
             borderBottom: isSelectedState

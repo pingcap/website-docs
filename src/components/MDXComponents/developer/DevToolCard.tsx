@@ -51,7 +51,7 @@ export function DevToolCard({
         "> a.MuiCardActionArea-root:hover, a.MuiButton-text:hover": {
           textDecoration: "none",
         },
-        ".MuiCardActions-root > a.MuiButton-text": {
+        ".MuiCardActions-root > a.MuiButton-text:not(.button)": {
           color: "text.secondary",
           borderRadius: 0,
         },

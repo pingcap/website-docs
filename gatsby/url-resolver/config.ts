@@ -72,14 +72,14 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         },
       },
     },
-    // best-practice, api namespace in tidb folder
-    // When filename = "_index": /en/tidb/master/best-practice/{folders}/_index.md -> /en/best-practice/{folders}/
+    // best-practices, api, ai namespace in tidb folder
+    // When filename = "_index": /en/tidb/master/best-practices/{folders}/_index.md -> /en/best-practices/{folders}/
     // When filename != "_index": /en/tidb/master/api/{folders}/{filename}.md -> /en/api/{filename}/
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/{folder}/{...folders}/{filename}`,
       targetPattern: "/{lang}/{folder}/{filename}",
       conditions: {
-        folder: ["best-practice", "api"],
+        folder: ["best-practices", "api", "ai"],
       },
       filenameTransform: {
         ignoreIf: ["_index"],

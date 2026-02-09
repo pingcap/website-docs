@@ -18,7 +18,8 @@ The system uses two core resolvers (`url-resolver` and `link-resolver`) that wor
 **Process**:
 1. Gatsby queries all MDX files from the GraphQL data layer
 2. For each file, `calculateFileUrl()` from `url-resolver` converts the source path to a published URL
-3. The resolved URL is used to create the Gatsby page with `createPage()`
+3. `getTOCNamespace()` from `toc-namespace` determines the page's TOC namespace for navigation/context
+4. The resolved URL is used to create the Gatsby page with `createPage()`
 
 **Example**:
 ```typescript
@@ -105,7 +106,7 @@ const resolvedPath = resolveMarkdownLink(
 3. Page Creation (create-docs.ts)
    ├─> Filter files by TOC whitelist
    ├─> Resolve page URLs (url-resolver)
-   ├─> Determine namespace (getTOCNamespace)
+   ├─> Determine namespace (toc-namespace/getTOCNamespace)
    └─> Create Gatsby pages
 
 4. Content Processing (plugin/content/index.ts)
@@ -267,9 +268,9 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Developer/Best-Practice/API Namespace
+### Rule 6: Developer/Best-Practices/API/AI Namespace
 
-**Effect**: Maps TiDB pages in `develop` (published as `developer`), `best-practice`, or `api` folders to namespace URLs.
+**Effect**: Maps TiDB pages in `develop` (published as `developer`), `best-practices`, `api`, or `ai` folders to namespace URLs.
 
 **Source Pattern**: `/{lang}/tidb/{stable}/{folder}/{...folders}/{filename}`
 
@@ -277,13 +278,13 @@ Rules are evaluated in order; the first matching rule wins.
 - For `develop` folder:
   - `_index`: `/{lang}/developer/{folders}` (keeps folder structure)
   - Other files: `/{lang}/developer/{filename}` (removes folder structure)
-- For `best-practice` and `api` folders:
+- For `best-practices`, `api`, and `ai` folders:
   - `_index`: `/{lang}/{folder}/{folders}` (keeps folder structure)
   - Other files: `/{lang}/{folder}/{filename}` (removes folder structure)
 
 **Conditions**:
 - `folder = ["develop"]` → published under `/developer`
-- `folder = ["best-practice", "api"]` → published under `/{folder}`
+- `folder = ["best-practices", "api", "ai"]` → published under `/{folder}`
 
 **Filename Transform**:
 - `ignoreIf: ["_index"]` - Filename removed from URL for non-index files
@@ -294,6 +295,8 @@ Rules are evaluated in order; the first matching rule wins.
 - Target: `/developer/subfolder`
 - Source: `en/tidb/release-8.5/develop/subfolder/vector-search.md`
 - Target: `/developer/vector-search`
+- Source: `en/tidb/release-8.5/ai/overview.md`
+- Target: `/ai/overview`
 
 **Use Case**: These namespaces are shared across all TiDB versions, so folder structure is flattened for non-index files.
 
@@ -424,15 +427,53 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 4: Namespace Links (Direct Mapping)
+### Rule 4: Links from TiDB Releases Landing Page (Path-Based)
 
-**Effect**: Resolves namespace links (`develop`, `best-practice`, `api`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practice`, `/api`, `/tidbcloud`).
+**Effect**: Resolves `/releases/*` links from the releases landing page to TiDB stable branch URLs.
+
+**Path Pattern**: `/{lang}/releases/tidb-self-managed/{...any}`
+
+**Link Pattern**: `/releases/{docname}`
+
+**Target Pattern**: `/{lang}/tidb/stable/{docname}`
+
+**Example**:
+- Current Page: `/releases/tidb-self-managed`
+- Link: `/releases/release-8.5.4`
+- Result: `/tidb/stable/release-8.5.4` (or `/en/tidb/stable/release-8.5.4` if default language not omitted)
+
+**Use Case**: The releases landing page uses `/releases/*` links, but the actual release notes pages are published under `/tidb/stable/*`.
+
+---
+
+### Rule 5: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/*)
+
+**Effect**: Resolves `/releases/*` links from the operator releases landing page to TiDB-in-Kubernetes `dev` branch URLs.
+
+**Path Pattern**: `/{lang}/releases/tidb-operator/{...any}`
+
+**Link Pattern**: `/releases/{docname}`
+
+**Target Pattern**: `/{lang}/tidb-in-kubernetes/dev/{docname}`
+
+**Example**:
+- Current Page: `/releases/tidb-operator`
+- Link: `/releases/release-2.0.0`
+- Result: `/tidb-in-kubernetes/dev/release-2.0.0` (or `/en/tidb-in-kubernetes/dev/release-2.0.0` if default language not omitted)
+
+**Use Case**: The operator releases landing page is under `/releases/`, but the actual release notes pages are published under `/tidb-in-kubernetes/dev/*` (`main` is published as `dev`).
+
+---
+
+### Rule 6: Namespace Links (Direct Mapping)
+
+**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
 
 **Link Pattern**: `/{namespace}/{...any}/{docname}`
 
 **Target Pattern**: `/{curLang}/{namespace}/{docname}`
 
-**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practice", "api"]`
+**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practices", "api", "ai"]`
 
 **Namespace Transform**:
 - `tidb-cloud` → `tidbcloud`
@@ -450,7 +491,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 5: TiDBCloud Page Links (Path-Based)
+### Rule 7: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -472,13 +513,13 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Developer/Best-Practice/API Namespace Page Links (Path-Based)
+### Rule 8: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
 **Path Pattern**: `/{lang}/{namespace}/{...any}`
 
-**Path Conditions**: `namespace = ["develop", "developer", "best-practice", "api"]`
+**Path Conditions**: `namespace = ["developer", "best-practices", "api", "ai"]`
 
 **Link Pattern**: `/{...any}/{docname}`
 
@@ -488,7 +529,7 @@ Rules are evaluated in order; the first matching rule wins.
 - Current Page: `/developer/overview`
 - Link: `/vector-search`
 - Result: `/tidb/stable/vector-search`
-- Current Page: `/best-practice/guide`
+- Current Page: `/best-practices/guide`
 - Link: `/performance-tuning`
 - Result: `/tidb/stable/performance-tuning`
 
@@ -496,7 +537,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 9: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 
@@ -529,7 +570,7 @@ The URL mapping system provides:
 
 1. **Consistent URL Structure**: Source files are mapped to clean, SEO-friendly URLs
 2. **Context-Aware Link Resolution**: Links are resolved based on the current page's context
-3. **Namespace Support**: Special namespaces (`developer`, `best-practice`, `api`) have their own URL structure
+3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`, `ai`) have their own URL structure
 4. **Branch Aliasing**: Internal branch names are transformed to user-friendly versions
 5. **Default Language Omission**: Default language (`en`) is omitted from URLs for cleaner paths
 6. **TOC-Driven Build**: Only files referenced in TOC files are built, reducing build size

@@ -214,13 +214,31 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/api/overview/");
   });
 
-  it("should resolve best-practice folder", () => {
+  it("should resolve best-practices folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/release-8.5/best-practice/guide.md"
+      "en/tidb/release-8.5/best-practices/guide.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/best-practice/guide/");
+    expect(url).toBe("/en/best-practices/guide/");
+  });
+
+  it("should resolve ai folder", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/ai/overview.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/ai/overview/");
+  });
+
+  it("should resolve ai _index with folders", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/ai/subfolder/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/ai/subfolder");
   });
 
   it("should resolve releases folder", () => {
@@ -281,6 +299,12 @@ describe("calculateFileUrl", () => {
       sourceBasePath,
       "en/other-repo/some-folder/_index.md"
     );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/other-repo");
+  });
+
+  it("should handle nested fallback with _index at repo root", () => {
+    const absolutePath = path.join(sourceBasePath, "en/other-repo/_index.md");
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/other-repo");
   });
