@@ -27,4 +27,7 @@ export interface LinkResolverConfig {
   linkMappings: LinkMappingRule[];
   // Default language to omit from resolved URLs (e.g., "en" -> /tidb/stable instead of /en/tidb/stable)
   defaultLanguage?: string;
+  // Supported languages for parsing currentPageUrl.
+  // If currentPageUrl does not start with one of these, resolver assumes defaultLanguage is omitted.
+  languages?: string[];
 }

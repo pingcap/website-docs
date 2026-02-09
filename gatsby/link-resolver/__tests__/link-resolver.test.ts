@@ -214,6 +214,14 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/releases/tidb-self-managed");
     });
 
+    it("should resolve releases/_index links to tidb-self-managed (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/_index",
+        "/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/releases/tidb-self-managed");
+    });
+
     it("should resolve tidb-cloud/releases/_index links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/tidb-cloud/releases/_index",
@@ -228,6 +236,14 @@ describe("resolveMarkdownLink", () => {
         "/zh/tidb/stable/alert-rules"
       );
       expect(result).toBe("/zh/releases/tidb-cloud");
+    });
+
+    it("should resolve tidb-cloud/releases/_index links (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/releases/_index",
+        "/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/releases/tidb-cloud");
     });
 
     it("should resolve tidb-in-kubernetes/releases/_index links from tidb-in-kubernetes pages (en - default language omitted)", () => {
@@ -246,10 +262,26 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/releases/tidb-operator");
     });
 
+    it("should resolve tidb-in-kubernetes/releases/_index links from tidb-in-kubernetes pages (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-in-kubernetes/releases/_index",
+        "/tidb-in-kubernetes/stable/deploy"
+      );
+      expect(result).toBe("/releases/tidb-operator");
+    });
+
     it("should resolve /releases/* links from releases/tidb-self-managed page (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/releases/release-8.5.4",
         "/en/releases/tidb-self-managed"
+      );
+      expect(result).toBe("/tidb/stable/release-8.5.4");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-self-managed page (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-8.5.4",
+        "/releases/tidb-self-managed"
       );
       expect(result).toBe("/tidb/stable/release-8.5.4");
     });
@@ -270,10 +302,26 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
     });
 
+    it("should resolve /releases/* links from releases/tidb-operator page (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-2.0.0",
+        "/releases/tidb-operator"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
     it("should resolve /releases/* links from releases/tidb-operator page (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/release-2.0.0",
         "/en/releases/tidb-operator"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-operator page (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/release-2.0.0",
+        "/releases/tidb-operator"
       );
       expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
     });
@@ -376,8 +424,8 @@ describe("resolveMarkdownLink", () => {
         "/dedicated/getting-started",
         "/tidbcloud/dedicated"
       );
-      // Should not match because pathPattern requires /{lang}/tidbcloud
-      expect(result).toBe("/dedicated/getting-started");
+      // Should match by assuming default language is omitted from currentPageUrl
+      expect(result).toBe("/tidbcloud/getting-started");
     });
 
     it("should resolve links with multiple path segments from tidbcloud pages", () => {
@@ -685,11 +733,8 @@ describe("resolveMarkdownLink", () => {
         "/develop/vector-search",
         "/tidb/stable/alert-rules"
       );
-      // curLang should be "tidb" (first segment)
-      // Rule 1: /develop/vector-search matches /{namespace}/{...any}/{docname} where namespace=develop, {...any}="", docname=vector-search
-      // Target: /{curLang}/{namespace}/{docname} = /tidb/developer/vector-search
-      // But "tidb" is not the default language "en", so it's included
-      expect(result).toBe("/tidb/developer/vector-search");
+      // curLang should fallback to default language when language prefix is omitted
+      expect(result).toBe("/developer/vector-search");
     });
 
     it("should use curLang in releases/_index target pattern for tidb-self-managed", () => {
