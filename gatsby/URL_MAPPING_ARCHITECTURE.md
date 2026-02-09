@@ -426,7 +426,45 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 4: Namespace Links (Direct Mapping)
+### Rule 4: Links from TiDB Releases Landing Page (Path-Based)
+
+**Effect**: Resolves `/releases/*` links from the releases landing page to TiDB stable branch URLs.
+
+**Path Pattern**: `/{lang}/releases/tidb-self-managed/{...any}`
+
+**Link Pattern**: `/releases/{docname}`
+
+**Target Pattern**: `/{lang}/tidb/stable/{docname}`
+
+**Example**:
+- Current Page: `/releases/tidb-self-managed`
+- Link: `/releases/release-8.5.4`
+- Result: `/tidb/stable/release-8.5.4` (or `/en/tidb/stable/release-8.5.4` if default language not omitted)
+
+**Use Case**: The releases landing page uses `/releases/*` links, but the actual release notes pages are published under `/tidb/stable/*`.
+
+---
+
+### Rule 5: Links from TiDB Operator Releases Landing Page (Path-Based)
+
+**Effect**: Resolves relative links from the operator releases landing page to TiDB-in-Kubernetes `dev` branch URLs.
+
+**Path Pattern**: `/{lang}/releases/tidb-operator/{...any}`
+
+**Link Pattern**: `/{docname}`
+
+**Target Pattern**: `/{lang}/tidb-in-kubernetes/dev/{docname}`
+
+**Example**:
+- Current Page: `/releases/tidb-operator`
+- Link: `release-2.0.0`
+- Result: `/tidb-in-kubernetes/dev/release-2.0.0` (or `/en/tidb-in-kubernetes/dev/release-2.0.0` if default language not omitted)
+
+**Use Case**: The operator releases landing page comes from `tidb-in-kubernetes/main` and uses relative links; `main` is published as `/tidb-in-kubernetes/dev/*`.
+
+---
+
+### Rule 6: Namespace Links (Direct Mapping)
 
 **Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
 
@@ -452,7 +490,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 5: TiDBCloud Page Links (Path-Based)
+### Rule 7: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -474,7 +512,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 8: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -498,7 +536,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 9: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 
