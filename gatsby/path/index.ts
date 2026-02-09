@@ -6,9 +6,6 @@ import {
 } from "../../src/shared/interface";
 import CONFIG from "../../docs/docs.json";
 
-// Re-export getSharedNamespace from namespace module
-export * from "./getTOCPath";
-
 // @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
@@ -121,4 +118,10 @@ export function getRepo(config: PathConfig) {
   }
 
   throw new Error(`no ${config.locale} in repo ${config.repo}`);
+}
+
+export function generateNavTOCPath(config: PathConfig, postSlug: string) {
+  return `${config.locale}/${config.repo}/${config.branch}/TOC${
+    postSlug ? `-${postSlug}` : ""
+  }`;
 }
