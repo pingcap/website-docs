@@ -123,13 +123,15 @@ export function LeftNavDesktop(props: LeftNavProps) {
 
           {(namespace === TOCNamespace.TiDB ||
             namespace === TOCNamespace.TiDBInKubernetes) && (
-            <VersionSelect
-              name={name}
-              pathConfig={pathConfig}
-              availIn={availIn}
-              buildType={buildType}
-              disableStickyContainer
-            />
+            <Box marginTop={1}>
+              <VersionSelect
+                name={name}
+                pathConfig={pathConfig}
+                availIn={availIn}
+                buildType={buildType}
+                disableStickyContainer
+              />
+            </Box>
           )}
         </LeftNavStickyContainer>
 
