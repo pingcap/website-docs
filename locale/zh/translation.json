@@ -20,7 +20,8 @@
     "archive-label": "归档文档",
     "product": "产品",
     "ai": "AI",
-    "developer": "开发者",
+    "tidbForAI": "TiDB for AI",
+    "developer": "应用开发",
     "bestPractices": "最佳实践",
     "api": "API",
     "releases": "发布记录",
@@ -38,7 +39,7 @@
     "tidbOperatorReleases": "TiDB Operator 版本发布记录",
     "tiupReleases": "TiUP 版本发布记录",
     "badge": {
-      "preview": "预览"
+      "preview": "Preview"
     },
     "appdev": "开发指南",
     "asktug": "社区",
