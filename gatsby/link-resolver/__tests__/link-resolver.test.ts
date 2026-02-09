@@ -270,9 +270,25 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
     });
 
+    it("should resolve /releases/* links from releases/tidb-operator page (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/release-2.0.0",
+        "/en/releases/tidb-operator"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
     it("should resolve /releases/* links from releases/tidb-operator page (zh - language prefix included)", () => {
       const result = resolveMarkdownLink(
         "/releases/release-2.0.0",
+        "/zh/releases/tidb-operator"
+      );
+      expect(result).toBe("/zh/tidb-in-kubernetes/dev/release-2.0.0");
+    });
+
+    it("should resolve /releases/* links from releases/tidb-operator page (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/release-2.0.0",
         "/zh/releases/tidb-operator"
       );
       expect(result).toBe("/zh/tidb-in-kubernetes/dev/release-2.0.0");
