@@ -133,6 +133,7 @@ const getDefaultNavConfig = (
   {
     type: "item",
     label: t("navbar.ai"),
+    leftNavLabel: t("navbar.tidbForAI"),
     to: "/ai",
     selected: (namespace) => namespace === TOCNamespace.AI,
   },
