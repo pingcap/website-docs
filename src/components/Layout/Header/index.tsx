@@ -21,7 +21,6 @@ import { ErrorOutlineOutlined, ArrowUpward } from "@mui/icons-material";
 import { HEADER_HEIGHT } from "shared/headerHeight";
 
 import { NavItemConfig } from "./HeaderNavConfigType";
-import { scrollDrivenLogo, scrollDrivenNav } from "./scroll-driven.module.css";
 
 interface HeaderProps {
   bannerEnabled?: boolean;
@@ -43,8 +42,6 @@ const clamp = (value: number, min: number, max: number): number => {
 const LOGO_GAP = 24;
 const CSS_VAR_TRANSLATE_X = "--pc-docs-header-translate-x";
 const CSS_VAR_LOGO_SCALE = "--pc-docs-header-logo-scale";
-const CSS_VAR_SHIFT_MAX = "--pc-docs-header-shift-max";
-const CSS_VAR_SCROLL_RANGE = "--pc-docs-header-scroll-range";
 
 export default function Header(props: HeaderProps) {
   const { language } = useI18next();
@@ -89,7 +86,6 @@ export default function Header(props: HeaderProps) {
     if (logoWidth === 0 || leftClusterWidth === 0) {
       root.style.setProperty(CSS_VAR_TRANSLATE_X, "0px");
       root.style.setProperty(CSS_VAR_LOGO_SCALE, "1");
-      root.style.setProperty(CSS_VAR_SHIFT_MAX, "0px");
       return;
     }
     const logoScale = 1 - progress * 0.2;
@@ -100,8 +96,6 @@ export default function Header(props: HeaderProps) {
 
     root.style.setProperty(CSS_VAR_TRANSLATE_X, `${translateX}px`);
     root.style.setProperty(CSS_VAR_LOGO_SCALE, `${logoScale}`);
-    const shiftMax = menuWidth + logoWidth * 0.8 + LOGO_GAP;
-    root.style.setProperty(CSS_VAR_SHIFT_MAX, `${shiftMax}px`);
   }, [firstRowHeightPx]);
 
   const updateLeftClusterSizes = React.useCallback(() => {
@@ -154,7 +148,6 @@ export default function Header(props: HeaderProps) {
 
     let ticking = false;
     let rafId: number | null = null;
-    let postLoadRafId: number | null = null;
     const update = () => {
       syncScrollStyles();
       const y = window.scrollY || 0;
@@ -167,9 +160,6 @@ export default function Header(props: HeaderProps) {
     };
 
     update();
-    // On reload, the browser may restore scroll position after hydration.
-    postLoadRafId = window.requestAnimationFrame(update);
-    window.addEventListener("load", update);
     const onScroll = () => {
       if (ticking) {
         return;
@@ -183,11 +173,7 @@ export default function Header(props: HeaderProps) {
       if (rafId != null) {
         window.cancelAnimationFrame(rafId);
       }
-      if (postLoadRafId != null) {
-        window.cancelAnimationFrame(postLoadRafId);
-      }
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("load", update);
     };
   }, [syncScrollStyles]);
 
@@ -197,8 +183,6 @@ export default function Header(props: HeaderProps) {
       sx={{
         [CSS_VAR_TRANSLATE_X]: "0px",
         [CSS_VAR_LOGO_SCALE]: "1",
-        [CSS_VAR_SHIFT_MAX]: "0px",
-        [CSS_VAR_SCROLL_RANGE]: HEADER_HEIGHT.FIRST_ROW,
       }}
     >
       {bannerVisible && (
@@ -253,7 +237,6 @@ export default function Header(props: HeaderProps) {
           )}
           <Box
             height="34px"
-            className={scrollDrivenLogo}
             sx={{
               display: "block",
               pointerEvents: "auto",
@@ -376,7 +359,6 @@ export default function Header(props: HeaderProps) {
             </Box>
           )}
           <Box
-            className={scrollDrivenNav}
             sx={{
               display: "flex",
               alignItems: "center",
