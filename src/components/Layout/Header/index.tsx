@@ -81,22 +81,21 @@ export default function Header(props: HeaderProps) {
 
     const y = window.scrollY || 0;
     const progress = clamp(y / firstRowHeightPx, 0, 1);
+    const logoScale = 1 - progress * 0.2;
 
     const logoWidth = logoWidthRef.current;
     const leftClusterWidth = leftClusterWidthRef.current;
+    root.style.setProperty(CSS_VAR_LOGO_SCALE, `${logoScale}`);
     if (logoWidth === 0 || leftClusterWidth === 0) {
-      root.style.setProperty(CSS_VAR_TRANSLATE_X, "0px");
-      root.style.setProperty(CSS_VAR_LOGO_SCALE, "1");
+      // Keep the last known translateX (or SSR value) until we have sizes.
       return;
     }
-    const logoScale = 1 - progress * 0.2;
 
     const menuWidth = Math.max(0, leftClusterWidth - logoWidth);
     const translateX =
       progress * (menuWidth + logoWidth * logoScale + LOGO_GAP);
 
     root.style.setProperty(CSS_VAR_TRANSLATE_X, `${translateX}px`);
-    root.style.setProperty(CSS_VAR_LOGO_SCALE, `${logoScale}`);
   }, [firstRowHeightPx]);
 
   const updateLeftClusterSizes = React.useCallback(() => {
@@ -181,6 +180,7 @@ export default function Header(props: HeaderProps) {
   return (
     <Box
       ref={cssVarRootRef}
+      data-pc-docs-header-root="true"
       sx={{
         [CSS_VAR_TRANSLATE_X]: "0px",
         [CSS_VAR_LOGO_SCALE]: "1",
@@ -287,6 +287,7 @@ export default function Header(props: HeaderProps) {
         >
           <Box
             ref={leftClusterRef}
+            data-pc-docs-header-left-cluster="true"
             sx={{
               display: {
                 xs: "none",
@@ -299,7 +300,12 @@ export default function Header(props: HeaderProps) {
             }}
           >
             {props.menu}
-            <Box ref={logoMeasureRef} height="34px" sx={{ display: "block" }}>
+            <Box
+              ref={logoMeasureRef}
+              data-pc-docs-header-logo-measure="true"
+              height="34px"
+              sx={{ display: "block" }}
+            >
               <LinkComponent
                 to={generateDocsHomeUrl(language)}
                 onClick={() =>

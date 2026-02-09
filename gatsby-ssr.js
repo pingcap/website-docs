@@ -95,7 +95,113 @@ const fulfillCloudPlanScript = `
 })();
 `;
 
-export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
+const headerPrehydrateScript = `
+(function() {
+  try {
+    var ROOT_SELECTOR = "[data-pc-docs-header-root]";
+    var LEFT_CLUSTER_SELECTOR = "[data-pc-docs-header-left-cluster]";
+    var LOGO_MEASURE_SELECTOR = "[data-pc-docs-header-logo-measure]";
+    var CSS_VAR_TRANSLATE_X = "--pc-docs-header-translate-x";
+    var CSS_VAR_LOGO_SCALE = "--pc-docs-header-logo-scale";
+    var LOGO_GAP = 24;
+    var FIRST_ROW_HEIGHT = 56;
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function sync(root) {
+      if (!root || !root.style) {
+        return false;
+      }
+
+      var y = window.scrollY || 0;
+      var progress = clamp(y / FIRST_ROW_HEIGHT, 0, 1);
+      var logoScale = 1 - progress * 0.2;
+
+      var leftCluster = root.querySelector(LEFT_CLUSTER_SELECTOR);
+      var logoMeasure = root.querySelector(LOGO_MEASURE_SELECTOR);
+
+      if (!leftCluster || !logoMeasure) {
+        return false;
+      }
+
+      var leftClusterWidth = leftCluster.getBoundingClientRect().width || 0;
+      var logoWidth = logoMeasure.getBoundingClientRect().width || 0;
+
+      // Always update logo scale; translateX depends on measured widths.
+      root.style.setProperty(CSS_VAR_LOGO_SCALE, "" + logoScale);
+
+      if (!leftClusterWidth || !logoWidth) {
+        return false;
+      }
+
+      var menuWidth = Math.max(0, leftClusterWidth - logoWidth);
+      var translateX = progress * (menuWidth + logoWidth * logoScale + LOGO_GAP);
+
+      root.style.setProperty(CSS_VAR_TRANSLATE_X, translateX + "px");
+      return true;
+    }
+
+    function trySync() {
+      var root = document.querySelector(ROOT_SELECTOR);
+      if (!root) {
+        return false;
+      }
+
+      // Desktop only: xs uses a different layout and doesn't consume translateX.
+      var isDesktop = false;
+      try {
+        isDesktop = window.matchMedia && window.matchMedia("(min-width: 900px)").matches;
+      } catch (e) {
+        isDesktop = false;
+      }
+      if (!isDesktop) {
+        root.style.setProperty(CSS_VAR_TRANSLATE_X, "0px");
+        root.style.setProperty(CSS_VAR_LOGO_SCALE, "1");
+        return true;
+      }
+
+      return sync(root);
+    }
+
+    if (trySync()) {
+      return;
+    }
+
+    var observer = new MutationObserver(function() {
+      if (trySync()) {
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Fallback retries (in case layout isn't ready when the observer fires).
+    var retries = 0;
+    (function retry() {
+      if (trySync()) {
+        observer.disconnect();
+        return;
+      }
+      retries += 1;
+      if (retries >= 20) {
+        observer.disconnect();
+        return;
+      }
+      setTimeout(retry, 50);
+    })();
+  } catch (e) {
+    // no-op
+  }
+})();
+`;
+
+export const onRenderBody = ({
+  setPostBodyComponents,
+  setHeadComponents,
+  setPreBodyComponents,
+}) => {
   setHeadComponents([
     <link
       key="moderat-bold"
@@ -128,6 +234,12 @@ export const onRenderBody = ({ setPostBodyComponents, setHeadComponents }) => {
       as="font"
       type="font/woff2"
       crossOrigin="anonymous"
+    />,
+  ]);
+  setPreBodyComponents([
+    <script
+      key="header-prehydrate"
+      dangerouslySetInnerHTML={{ __html: headerPrehydrateScript }}
     />,
   ]);
   setPostBodyComponents([
