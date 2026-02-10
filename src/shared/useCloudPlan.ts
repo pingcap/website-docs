@@ -58,7 +58,25 @@ export const useCloudPlan = () => {
     setCloudPlan: _setCloudPlan,
     repo,
   } = useContext(CloudPlanContext);
+  const { search } = useLocation();
   const isTidbcloud = repo === Repo.tidbcloud;
+
+  const searchParams = new URLSearchParams(search);
+  const cloudPlanFromQueryRaw = isTidbcloud
+    ? searchParams.get(CLOUD_MODE_KEY)
+    : null;
+  const cloudPlanFromSessionRaw =
+    isTidbcloud && typeof window !== "undefined"
+      ? sessionStorage.getItem(CLOUD_MODE_KEY)
+      : null;
+  const cloudPlanFromQuery = isCloudPlan(cloudPlanFromQueryRaw)
+    ? cloudPlanFromQueryRaw
+    : null;
+  const cloudPlanFromSession = isCloudPlan(cloudPlanFromSessionRaw)
+    ? cloudPlanFromSessionRaw
+    : null;
+  const resolvedCloudPlan =
+    cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
 
   const setCloudPlan = useCallback(
     (cloudPlan: CloudPlan) => {
@@ -71,27 +89,21 @@ export const useCloudPlan = () => {
   );
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const cloudPlanFromQueryRaw = searchParams.get(CLOUD_MODE_KEY);
-    const cloudPlanFromSessionRaw = sessionStorage.getItem(CLOUD_MODE_KEY);
-    const cloudPlanFromQuery = isCloudPlan(cloudPlanFromQueryRaw)
-      ? cloudPlanFromQueryRaw
-      : null;
-    const cloudPlanFromSession = isCloudPlan(cloudPlanFromSessionRaw)
-      ? cloudPlanFromSessionRaw
-      : null;
-    const cloudPlan = cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
-    _setCloudPlan(cloudPlan);
-  }, []);
+    if (_cloudPlan !== resolvedCloudPlan) {
+      _setCloudPlan(resolvedCloudPlan);
+    }
+  }, [_cloudPlan, resolvedCloudPlan, _setCloudPlan]);
 
-  const isStarter = isTidbcloud && _cloudPlan === CloudPlan.Starter;
-  const isEssential = isTidbcloud && _cloudPlan === CloudPlan.Essential;
-  const isPremium = isTidbcloud && _cloudPlan === CloudPlan.Premium;
+  const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
+  const isEssential = isTidbcloud && resolvedCloudPlan === CloudPlan.Essential;
+  const isPremium = isTidbcloud && resolvedCloudPlan === CloudPlan.Premium;
   const isClassic =
-    !isTidbcloud || !_cloudPlan || (!isStarter && !isEssential);
+    !isTidbcloud ||
+    !resolvedCloudPlan ||
+    (!isStarter && !isEssential);
 
   return {
-    cloudPlan: _cloudPlan,
+    cloudPlan: resolvedCloudPlan,
     setCloudPlan,
     isStarter,
     isEssential,
