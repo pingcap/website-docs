@@ -100,10 +100,7 @@ export function resolveMarkdownLink(
   // Determine current language from currentPageUrl
   // If currentPageUrl does not include a language prefix, assume defaultLanguage is omitted.
   const defaultLanguage = linkConfig.defaultLanguage || urlConfig.defaultLanguage;
-  const supportedLanguages =
-    linkConfig.languages ||
-    (defaultLanguage ? [defaultLanguage] : undefined) ||
-    ["en", "zh", "ja"];
+  const supportedLanguages = linkConfig.languages || ["en", "zh", "ja"];
 
   const firstSegment = currentPageSegments.length > 0 ? currentPageSegments[0] : "";
   const hasLanguagePrefix =
