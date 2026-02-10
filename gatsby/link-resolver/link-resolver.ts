@@ -97,8 +97,19 @@ export function resolveMarkdownLink(
   // Process all rules in order (first match wins)
   const currentPageSegments = parseLinkPath(currentPageUrl);
 
-  // Extract curLang from the first segment of currentPageUrl
-  const curLang = currentPageSegments.length > 0 ? currentPageSegments[0] : "";
+  // Determine current language from currentPageUrl
+  // If currentPageUrl does not include a language prefix, assume defaultLanguage is omitted.
+  const defaultLanguage = linkConfig.defaultLanguage || urlConfig.defaultLanguage;
+  const supportedLanguages = linkConfig.languages || ["en", "zh", "ja"];
+
+  const firstSegment = currentPageSegments.length > 0 ? currentPageSegments[0] : "";
+  const hasLanguagePrefix =
+    firstSegment.length > 0 && supportedLanguages.includes(firstSegment);
+  const curLang = hasLanguagePrefix ? firstSegment : defaultLanguage || "";
+  const currentPageSegmentsWithDefaultLang =
+    !hasLanguagePrefix && curLang
+      ? [curLang, ...currentPageSegments]
+      : currentPageSegments;
 
   for (const rule of linkConfig.linkMappings) {
     let variables: Record<string, string> | null = null;
@@ -144,7 +155,13 @@ export function resolveMarkdownLink(
       }
     } else {
       // Path-based mapping: match current page path first, then link path
-      const pageVars = matchPattern(rule.pathPattern, currentPageSegments);
+      let pageVars = matchPattern(rule.pathPattern, currentPageSegments);
+      if (
+        !pageVars &&
+        currentPageSegmentsWithDefaultLang !== currentPageSegments
+      ) {
+        pageVars = matchPattern(rule.pathPattern, currentPageSegmentsWithDefaultLang);
+      }
       if (!pageVars) {
         continue;
       }
@@ -179,8 +196,8 @@ export function resolveMarkdownLink(
 
       // Set default values for missing variables
       // For tidb pages without lang prefix, default to "en"
-      if (pageVars.repo === "tidb" && !variables.lang) {
-        variables.lang = "en";
+      if (pageVars.repo === "tidb" && !variables.lang && defaultLanguage) {
+        variables.lang = defaultLanguage;
       }
     }
 
@@ -190,10 +207,12 @@ export function resolveMarkdownLink(
     // Handle default language and trailing slash
     let result = targetUrl;
     // Use linkConfig.defaultLanguage if available, otherwise fallback to urlConfig.defaultLanguage
-    const defaultLanguage =
-      linkConfig.defaultLanguage || urlConfig.defaultLanguage;
-    if (defaultLanguage && result.startsWith(`/${defaultLanguage}/`)) {
-      result = result.replace(`/${defaultLanguage}/`, "/");
+    const defaultLanguageToOmit = defaultLanguage;
+    if (
+      defaultLanguageToOmit &&
+      result.startsWith(`/${defaultLanguageToOmit}/`)
+    ) {
+      result = result.replace(`/${defaultLanguageToOmit}/`, "/");
     }
     if (urlConfig.trailingSlash === "never") {
       result = result.replace(/\/$/, "");

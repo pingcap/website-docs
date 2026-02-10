@@ -7,6 +7,8 @@ import type { LinkResolverConfig } from "./types";
 export const defaultLinkResolverConfig: LinkResolverConfig = {
   // Default language to omit from resolved URLs
   defaultLanguage: "en",
+  // Supported languages for parsing currentPageUrl
+  languages: ["en", "zh", "ja"],
 
   linkMappings: [
     {
