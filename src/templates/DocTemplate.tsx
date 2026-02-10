@@ -121,8 +121,14 @@ function DocTemplate({
     essentialNavigation: essentialNav,
   } = data;
 
-  const { cloudPlan, isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(namespace, inDefaultPlan ?? null, tocNames);
+  const { cloudPlan, setCloudPlan, isStarter, isEssential } = useCloudPlan();
+  useCloudPlanNavigate(
+    namespace,
+    inDefaultPlan ?? null,
+    tocNames,
+    cloudPlan,
+    setCloudPlan
+  );
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
@@ -170,11 +176,15 @@ function DocTemplate({
     buildType === "archive" || isAutoTranslation || feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
-  const [selectedNavItem, setSelectedNavItem] =
-    React.useState<NavItemConfig | null>(() => {
-      const headerNavConfig = generateNavConfig(t, cloudPlan, buildType, language);
-      return getSelectedNavItem(headerNavConfig, namespace);
-    });
+  const selectedNavItem = React.useMemo<NavItemConfig | null>(() => {
+    const headerNavConfig = generateNavConfig(
+      t,
+      cloudPlan,
+      buildType,
+      language
+    );
+    return getSelectedNavItem(headerNavConfig, namespace);
+  }, [t, cloudPlan, buildType, language, namespace]);
 
   return (
     <Layout
@@ -201,11 +211,14 @@ function DocTemplate({
       }}
       buildType={buildType}
       namespace={namespace}
-      onSelectedNavItemChange={setSelectedNavItem}
     >
       <Seo
         lang={language as Locale}
-        title={frontmatter.title}
+        title={`${frontmatter.title}${
+          !!pathConfig.version && pathConfig.version !== "stable"
+            ? ` - ${pathConfig.version}`
+            : ""
+        }`}
         description={frontmatter.summary}
         meta={[
           {

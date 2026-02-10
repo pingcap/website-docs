@@ -1,11 +1,12 @@
 import { navigate } from "gatsby";
+import { useLocation } from "@reach/router";
 import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
-  useState,
 } from "react";
 import { CloudPlan, Repo, TOCNamespace } from "./interface";
 
@@ -58,15 +59,16 @@ export const useCloudPlan = () => {
     repo,
   } = useContext(CloudPlanContext);
   const isTidbcloud = repo === Repo.tidbcloud;
-  const [isStarter, setIsStarter] = useState<boolean>(false);
-  const [isEssential, setIsEssential] = useState<boolean>(false);
-  const [isPremium, setIsPremium] = useState<boolean>(false);
-  const [isClassic, setIsClassic] = useState<boolean>(true);
 
-  const setCloudPlan = (cloudPlan: CloudPlan) => {
-    _setCloudPlan(cloudPlan);
-    sessionStorage.setItem(CLOUD_MODE_KEY, cloudPlan);
-  };
+  const setCloudPlan = useCallback(
+    (cloudPlan: CloudPlan) => {
+      _setCloudPlan(cloudPlan);
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem(CLOUD_MODE_KEY, cloudPlan);
+      }
+    },
+    [_setCloudPlan]
+  );
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -79,18 +81,14 @@ export const useCloudPlan = () => {
       ? cloudPlanFromSessionRaw
       : null;
     const cloudPlan = cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
-    const isStarter = isTidbcloud && cloudPlan === CloudPlan.Starter;
-    const isEssential = isTidbcloud && cloudPlan === CloudPlan.Essential;
-    const isPremium = isTidbcloud && cloudPlan === CloudPlan.Premium;
-    const isClassic =
-      !isTidbcloud || !cloudPlan || (!isStarter && !isEssential);
-
     _setCloudPlan(cloudPlan);
-    setIsStarter(isStarter);
-    setIsEssential(isEssential);
-    setIsPremium(isPremium);
-    setIsClassic(isClassic);
   }, []);
+
+  const isStarter = isTidbcloud && _cloudPlan === CloudPlan.Starter;
+  const isEssential = isTidbcloud && _cloudPlan === CloudPlan.Essential;
+  const isPremium = isTidbcloud && _cloudPlan === CloudPlan.Premium;
+  const isClassic =
+    !isTidbcloud || !_cloudPlan || (!isStarter && !isEssential);
 
   return {
     cloudPlan: _cloudPlan,
@@ -105,13 +103,18 @@ export const useCloudPlan = () => {
 export const useCloudPlanNavigate = (
   namespace: TOCNamespace,
   inDefaultPlan: CloudPlan | null,
-  tocNames: string[] | null | undefined
+  tocNames: string[] | null | undefined,
+  cloudPlan: CloudPlan | null,
+  setCloudPlan: (plan: CloudPlan) => void
 ) => {
+  const { pathname, search, hash } = useLocation();
+  const tocNamesKey = Array.isArray(tocNames) ? tocNames.join("|") : "";
+
   useEffect(() => {
     if (namespace !== TOCNamespace.TiDBCloud) {
       return;
     }
-    const searchParams = new URLSearchParams(location.search);
+    const searchParams = new URLSearchParams(search);
 
     const cloudModeFromQueryRaw = searchParams.get(CLOUD_MODE_KEY);
     const cloudModeFromSessionRaw = sessionStorage.getItem(CLOUD_MODE_KEY);
@@ -137,6 +140,10 @@ export const useCloudPlanNavigate = (
       ? defaultCloudPlan
       : requestedCloudPlan;
 
+    if (cloudPlan !== cloudMode) {
+      setCloudPlan(cloudMode);
+    }
+
     if (cloudModeFromSession !== cloudMode) {
       sessionStorage.setItem(CLOUD_MODE_KEY, cloudMode);
     }
@@ -146,9 +153,7 @@ export const useCloudPlanNavigate = (
       if (cloudModeFromQuery !== cloudMode) {
         searchParams.set(CLOUD_MODE_KEY, cloudMode);
         navigate(
-          `${location.pathname}?${searchParams.toString()}${
-            location.hash ? location.hash : ""
-          }`,
+          `${pathname}?${searchParams.toString()}${hash || ""}`,
           { replace: true }
         );
       }
@@ -159,11 +164,18 @@ export const useCloudPlanNavigate = (
     if (cloudModeFromQueryRaw && cloudModeFromQueryRaw !== CloudPlan.Dedicated) {
       searchParams.set(CLOUD_MODE_KEY, CloudPlan.Dedicated);
       navigate(
-        `${location.pathname}?${searchParams.toString()}${
-          location.hash ? location.hash : ""
-        }`,
+        `${pathname}?${searchParams.toString()}${hash || ""}`,
         { replace: true }
       );
     }
-  }, []);
+  }, [
+    namespace,
+    inDefaultPlan,
+    tocNamesKey,
+    cloudPlan,
+    setCloudPlan,
+    pathname,
+    search,
+    hash,
+  ]);
 };
