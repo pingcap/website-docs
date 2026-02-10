@@ -52,7 +52,8 @@ interface DocTemplateProps {
       banner?: boolean;
       feedback?: boolean;
     };
-    inDefaultPlan: string | null;
+    inDefaultPlan?: CloudPlan | null;
+    tocNames?: string[] | null;
     namespace: TOCNamespace;
   };
   data: {
@@ -81,7 +82,7 @@ interface DocTemplateProps {
 
 const DocTemplateWithProvider = (props: DocTemplateProps) => {
   const [cloudPlan, setCloudPlan] = React.useState<CloudPlan | null>(
-    props.pageContext.inDefaultPlan as CloudPlan | null
+    props.pageContext.inDefaultPlan ?? null
   );
   return (
     <CloudPlanProvider
@@ -108,6 +109,7 @@ function DocTemplate({
     buildType,
     feature,
     inDefaultPlan,
+    tocNames,
     namespace,
   },
   data,
@@ -120,7 +122,7 @@ function DocTemplate({
   } = data;
 
   const { cloudPlan, isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(namespace, inDefaultPlan);
+  useCloudPlanNavigate(namespace, inDefaultPlan ?? null, tocNames);
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
@@ -141,12 +143,12 @@ function DocTemplate({
   const { language, t } = useI18next();
   const haveStarter = starterNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
-  const availablePlans = ["dedicated"];
+  const availablePlans: CloudPlan[] = [CloudPlan.Dedicated];
   if (haveStarter) {
-    availablePlans.push("starter");
+    availablePlans.push(CloudPlan.Starter);
   }
   if (haveEssential) {
-    availablePlans.push("essential");
+    availablePlans.push(CloudPlan.Essential);
   }
 
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
