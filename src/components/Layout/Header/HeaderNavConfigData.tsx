@@ -20,6 +20,7 @@ const PreviewBadge = (props: { label: string }) => {
         fontSize: "12px",
         fontWeight: 400,
         borderRadius: "10px",
+        pointerEvents: "none",
         "& .MuiChip-label": {
           paddingLeft: "8px",
           paddingRight: "8px",
@@ -50,13 +51,13 @@ const getDefaultNavConfig = (
           {
             type: "item",
             label: t("navbar.tidbCloudStarter"),
-            to: `/tidbcloud/starter?${CLOUD_MODE_KEY}=starter`,
+            to: `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Starter,
             onClick: () => {
               if (typeof window !== "undefined") {
-                sessionStorage.setItem(CLOUD_MODE_KEY, "starter");
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Starter);
               }
             },
           },
@@ -64,13 +65,13 @@ const getDefaultNavConfig = (
             type: "item",
             label: t("navbar.tidbCloudEssential"),
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
-            to: `/tidbcloud/essential?${CLOUD_MODE_KEY}=essential`,
+            to: `/tidbcloud/essential?${CLOUD_MODE_KEY}=${CloudPlan.Essential}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Essential,
             onClick: () => {
               if (typeof window !== "undefined") {
-                sessionStorage.setItem(CLOUD_MODE_KEY, "essential");
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Essential);
               }
             },
           },
@@ -91,15 +92,15 @@ const getDefaultNavConfig = (
             type: "item",
             label: t("navbar.tidbCloudDedicated"),
             to:
-              cloudPlan === "dedicated" || !cloudPlan
+              cloudPlan === CloudPlan.Dedicated || !cloudPlan
                 ? `/tidbcloud`
-                : `/tidbcloud?${CLOUD_MODE_KEY}=dedicated`,
+                : `/tidbcloud?${CLOUD_MODE_KEY}=${CloudPlan.Dedicated}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Dedicated,
             onClick: () => {
               if (typeof window !== "undefined") {
-                sessionStorage.setItem(CLOUD_MODE_KEY, "dedicated");
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);
               }
             },
           },
@@ -112,15 +113,14 @@ const getDefaultNavConfig = (
         children: [
           {
             type: "item",
-            label: t("navbar.deployUsingTiup"),
+            label: t("navbar.tidbShortTerm"),
             leftNavLabel: t("navbar.tidb"),
             to: "/tidb/stable",
             selected: (namespace) => namespace === TOCNamespace.TiDB,
           },
           {
             type: "item",
-            label: t("navbar.deployOnKubernetes"),
-            leftNavLabel: t("navbar.tidbOnKubernetes"),
+            label: t("navbar.tidbOnKubernetes"),
             to: "/tidb-in-kubernetes/stable",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBInKubernetes,

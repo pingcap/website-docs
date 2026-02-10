@@ -3,7 +3,7 @@ import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import CheckIcon from "@mui/icons-material/Check";
 
-import { PathConfig, BuildType } from "shared/interface";
+import { PathConfig, BuildType, CloudPlan } from "shared/interface";
 import { AllVersion } from "shared/utils";
 import LinkComponent from "components/Link";
 import { Box, Typography } from "@mui/material";
@@ -14,16 +14,16 @@ import { useEffect, useRef, useState } from "react";
 
 export const CLOUD_PLAN_LABEL_ELEMENT_ID = "cloud-plan-label";
 
-export const CLOUD_PLAN_LABEL_STRINGS = {
-  dedicated: "Dedicated",
-  starter: "Starter (formerly Serverless)",
-  essential: "Essential",
+export const CLOUD_PLAN_LABEL_STRINGS: Partial<Record<CloudPlan, string>> = {
+  [CloudPlan.Dedicated]: "Dedicated",
+  [CloudPlan.Starter]: "Starter (formerly Serverless)",
+  [CloudPlan.Essential]: "Essential",
 };
 
 const CLOUD_VERSIONS = [
   {
     label: "Dedicated",
-    value: "dedicated",
+    value: CloudPlan.Dedicated,
   },
   {
     label: (
@@ -31,11 +31,11 @@ const CLOUD_VERSIONS = [
         Starter<span style={{ color: "#9FA9AD" }}> (formerly Serverless)</span>
       </span>
     ),
-    value: "starter",
+    value: CloudPlan.Starter,
   },
   {
     label: "Essential",
-    value: "essential",
+    value: CloudPlan.Essential,
     icon: (
       <Chip
         label="Preview"
@@ -59,7 +59,7 @@ const VersionItems = (props: {
   pathConfig: PathConfig;
   name: string;
   onClick: () => void;
-  availablePlans: string[];
+  availablePlans: CloudPlan[];
 }) => {
   const { pathConfig } = props;
   const { cloudPlan, setCloudPlan } = useCloudPlan();
@@ -70,11 +70,11 @@ const VersionItems = (props: {
   const getToUrl = (version: string) => {
     const searchParams = new URLSearchParams();
     searchParams.set(CLOUD_MODE_KEY, version);
-    return version === "dedicated"
+    return version === CloudPlan.Dedicated
       ? `/${pathConfig.repo}/`
       : `/${pathConfig.repo}/${version}/?${searchParams.toString()}`;
   };
-  const onClick = (version: string) => {
+  const onClick = (version: CloudPlan) => {
     setCloudPlan(version);
     props.onClick();
   };
@@ -90,7 +90,7 @@ const VersionItems = (props: {
           component={LinkComponent}
           isI18n
           to={getToUrl(version.value)}
-          clearCloudMode={version.value === "dedicated"}
+          clearCloudMode={version.value === CloudPlan.Dedicated}
           onClick={() => onClick(version.value)}
         >
           <Box sx={{ display: "flex" }}>
@@ -124,7 +124,7 @@ interface VersionSelectProps {
   pathConfig: PathConfig;
   availIn: string[];
   buildType?: BuildType;
-  availablePlans: string[];
+  availablePlans: CloudPlan[];
   disableStickyContainer?: boolean;
 }
 

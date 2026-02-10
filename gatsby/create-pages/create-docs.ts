@@ -30,7 +30,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   const template = resolve(__dirname, "../../src/templates/DocTemplate.tsx");
 
   // First, get the list of files that should be built based on TOC content
-  const tocFilesMap = await getFilesFromTocs(graphql);
+  const { tocFilesMap, tocNamesByFileMap } = await getFilesFromTocs(graphql);
 
   // Get tidbcloud specific TOC files for plan determination
   const tidbCloudTocFilesMap = await getTidbCloudFilesFromTocs(graphql);
@@ -71,7 +71,8 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       const { config, name, filePath } = generateConfig(node.slug);
       return { ...node, pathConfig: config, name, filePath };
     }),
-    tocFilesMap
+    tocFilesMap,
+    tocNamesByFileMap
   );
 
   sig.info(
@@ -108,7 +109,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   );
 
   nodes.forEach((node) => {
-    const { id, name, pathConfig, filePath } = node;
+    const { id, name, pathConfig, filePath, tocNames } = node;
 
     if (name?.startsWith("_")) {
       return;
@@ -156,6 +157,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         pathConfig,
         // use for edit in github
         filePath,
+        tocNames,
         pageUrl: path,
         navUrl,
         starterNavUrl,

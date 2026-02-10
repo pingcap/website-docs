@@ -9,7 +9,13 @@ import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { RepoNav, PathConfig, BuildType, TOCNamespace } from "shared/interface";
+import {
+  RepoNav,
+  PathConfig,
+  BuildType,
+  TOCNamespace,
+  CloudPlan,
+} from "shared/interface";
 import { NavItemConfig } from "../Header/HeaderNavConfigType";
 import LinkComponent from "components/Link";
 import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
@@ -29,7 +35,7 @@ interface LeftNavProps {
   availIn: string[];
   buildType?: BuildType;
   bannerEnabled?: boolean;
-  availablePlans: string[];
+  availablePlans: CloudPlan[];
   selectedNavItem?: NavItemConfig | null;
   language?: string;
   namespace?: TOCNamespace;

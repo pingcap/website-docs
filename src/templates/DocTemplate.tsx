@@ -52,7 +52,8 @@ interface DocTemplateProps {
       banner?: boolean;
       feedback?: boolean;
     };
-    inDefaultPlan: string | null;
+    inDefaultPlan?: CloudPlan | null;
+    tocNames?: string[] | null;
     namespace: TOCNamespace;
   };
   data: {
@@ -81,7 +82,7 @@ interface DocTemplateProps {
 
 const DocTemplateWithProvider = (props: DocTemplateProps) => {
   const [cloudPlan, setCloudPlan] = React.useState<CloudPlan | null>(
-    props.pageContext.inDefaultPlan as CloudPlan | null
+    props.pageContext.inDefaultPlan ?? null
   );
   return (
     <CloudPlanProvider
@@ -108,6 +109,7 @@ function DocTemplate({
     buildType,
     feature,
     inDefaultPlan,
+    tocNames,
     namespace,
   },
   data,
@@ -119,8 +121,14 @@ function DocTemplate({
     essentialNavigation: essentialNav,
   } = data;
 
-  const { cloudPlan, isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(namespace, inDefaultPlan);
+  const { cloudPlan, setCloudPlan, isStarter, isEssential } = useCloudPlan();
+  useCloudPlanNavigate(
+    namespace,
+    inDefaultPlan ?? null,
+    tocNames,
+    cloudPlan,
+    setCloudPlan
+  );
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
@@ -141,12 +149,12 @@ function DocTemplate({
   const { language, t } = useI18next();
   const haveStarter = starterNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
-  const availablePlans = ["dedicated"];
+  const availablePlans: CloudPlan[] = [CloudPlan.Dedicated];
   if (haveStarter) {
-    availablePlans.push("starter");
+    availablePlans.push(CloudPlan.Starter);
   }
   if (haveEssential) {
-    availablePlans.push("essential");
+    availablePlans.push(CloudPlan.Essential);
   }
 
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
@@ -168,11 +176,15 @@ function DocTemplate({
     buildType === "archive" || isAutoTranslation || feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
 
-  const [selectedNavItem, setSelectedNavItem] =
-    React.useState<NavItemConfig | null>(() => {
-      const headerNavConfig = generateNavConfig(t, cloudPlan, buildType, language);
-      return getSelectedNavItem(headerNavConfig, namespace);
-    });
+  const selectedNavItem = React.useMemo<NavItemConfig | null>(() => {
+    const headerNavConfig = generateNavConfig(
+      t,
+      cloudPlan,
+      buildType,
+      language
+    );
+    return getSelectedNavItem(headerNavConfig, namespace);
+  }, [t, cloudPlan, buildType, language, namespace]);
 
   return (
     <Layout
@@ -199,11 +211,14 @@ function DocTemplate({
       }}
       buildType={buildType}
       namespace={namespace}
-      onSelectedNavItemChange={setSelectedNavItem}
     >
       <Seo
         lang={language as Locale}
-        title={frontmatter.title}
+        title={`${frontmatter.title}${
+          !!pathConfig.version && pathConfig.version !== "stable"
+            ? ` - ${pathConfig.version}`
+            : ""
+        }`}
         description={frontmatter.summary}
         meta={[
           {

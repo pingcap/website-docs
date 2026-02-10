@@ -6,6 +6,14 @@ import { isIgnoredTocRelativePath } from "./toc-ignore";
 // Whitelist of files that should always be built regardless of TOC content
 const WHITELIST = [""];
 
+type TocFilesMap = Map<string, Set<string>>;
+type TocNamesByFileMap = Map<string, Map<string, Set<string>>>;
+
+export interface TocFilesResult {
+  tocFilesMap: TocFilesMap;
+  tocNamesByFileMap: TocNamesByFileMap;
+}
+
 /**
  * Extract file paths from TOC navigation structure
  */
@@ -39,13 +47,36 @@ export function extractFilesFromToc(nav: any[]): string[] {
   return [...new Set(files)];
 }
 
+function getTocNameFromRelativePath(relativePath: string): string {
+  const filename = relativePath.split("/").pop() || relativePath;
+  return filename.replace(/\.md$/, "");
+}
+
+function sortTocNames(tocNames: Iterable<string>): string[] {
+  const priority = [
+    "TOC",
+    "TOC-tidb-cloud-starter",
+    "TOC-tidb-cloud-essential",
+    "TOC-tidb-cloud-premium",
+  ];
+  const priorityIndex = new Map(priority.map((name, idx) => [name, idx]));
+  return [...new Set(tocNames)].sort((a, b) => {
+    const ai = priorityIndex.get(a);
+    const bi = priorityIndex.get(b);
+    if (ai != null && bi != null) return ai - bi;
+    if (ai != null) return -1;
+    if (bi != null) return 1;
+    return a.localeCompare(b);
+  });
+}
+
 /**
  * Get files that should be built based on TOC content
  * Returns a Map where key is "locale/repo/version" and value is Set of file names
  */
 export async function getFilesFromTocs(
   graphql: any
-): Promise<Map<string, Set<string>>> {
+): Promise<TocFilesResult> {
   const tocQuery = await graphql(`
     {
       allMdx(filter: { fileAbsolutePath: { regex: "/TOC.*md$/" } }) {
@@ -68,7 +99,8 @@ export async function getFilesFromTocs(
   }
 
   const tocNodes = tocQuery.data!.allMdx.nodes;
-  const tocFilesMap = new Map<string, Set<string>>();
+  const tocFilesMap: TocFilesMap = new Map();
+  const tocNamesByFileMap: TocNamesByFileMap = new Map();
 
   const filteredTocNodes = tocNodes.filter(
     (node: TocQueryData["allMdx"]["nodes"][0]) =>
@@ -80,11 +112,25 @@ export async function getFilesFromTocs(
     const tocPath = calculateFileUrl(node.slug);
     const toc = mdxAstToToc(node.mdxAST.children, tocPath || node.slug);
     const files = extractFilesFromToc(toc);
+    const tocName = getTocNameFromRelativePath(node.parent.relativePath);
 
     // Create a key for this specific locale/repo/version combination
     const key = `${config.locale}/${config.repo}/${
       config.version || config.branch
     }`;
+
+    // Track TOC membership for each file (normalized by removing anchor)
+    if (!tocNamesByFileMap.has(key)) {
+      tocNamesByFileMap.set(key, new Map());
+    }
+    const fileToTocs = tocNamesByFileMap.get(key)!;
+    files.forEach((file) => {
+      const normalizedFile = file.split("#")[0];
+      if (!fileToTocs.has(normalizedFile)) {
+        fileToTocs.set(normalizedFile, new Set());
+      }
+      fileToTocs.get(normalizedFile)!.add(tocName);
+    });
 
     // If key already exists, take union with existing files
     if (tocFilesMap.has(key)) {
@@ -102,7 +148,7 @@ export async function getFilesFromTocs(
     }
   });
 
-  return tocFilesMap;
+  return { tocFilesMap, tocNamesByFileMap };
 }
 
 /**
@@ -111,18 +157,21 @@ export async function getFilesFromTocs(
  */
 export function filterNodesByToc(
   nodes: any[],
-  tocFilesMap: Map<string, Set<string>>
+  tocFilesMap: TocFilesMap,
+  tocNamesByFileMap: TocNamesByFileMap
 ): any[] {
   const skippedNodes: Map<string, string[]> = new Map();
   const filteredNodes = nodes.filter((node) => {
     // Check if file is in whitelist - if so, always build it
     if (WHITELIST.includes(node.name)) {
+      node.tocNames = [];
       return true;
     }
 
     // Filter nodes based on TOC content
     if (tocFilesMap.size === 0) {
       // If no TOC files found, build all files (fallback)
+      node.tocNames = [];
       return true;
     }
 
@@ -159,6 +208,12 @@ export function filterNodesByToc(
         skippedNodes.set(key, []);
       }
       skippedNodes.get(key)!.push(node.name);
+      node.tocNames = [];
+    }
+
+    if (isIncluded) {
+      const tocNamesSet = tocNamesByFileMap.get(key)?.get(fullPath);
+      node.tocNames = tocNamesSet ? sortTocNames(tocNamesSet) : [];
     }
     return isIncluded;
   });
