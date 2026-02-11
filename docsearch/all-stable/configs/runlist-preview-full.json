@@ -1,9 +1,11 @@
 {
   "en": [
-    "en-tidb-cloud.json",
-    "en-ai.json"
+    "en-developer.json",
+    "en-best-practices.json",
+    "en-api.json",
+    "en-releases-tidb-cloud.json",
+    "en-releases-tidb-self-managed.json",
+    "en-releases-tidb-operator.json"
   ],
-  "zh": [
-    "zh-ai.json"
-  ]
+  "zh": []
 }

@@ -141,7 +141,7 @@ probe_container_runtime() {
     return 0
   fi
 
-  echo "Probe scraper runtime (container code + resolved urls): $config_name"
+  echo "Probe scraper runtime (container source): $config_name"
 
   docker run --rm \
     -e "CONFIG=$config_payload" \
@@ -180,51 +180,6 @@ else
   echo "[probe] urls_setter.py path: not found"
 fi
 
-python_bin=""
-if command -v python3 >/dev/null 2>&1; then
-  python_bin="python3"
-elif command -v python >/dev/null 2>&1; then
-  python_bin="python"
-fi
-
-if [ -z "$python_bin" ]; then
-  echo "[probe] python interpreter not found in container"
-  exit 0
-fi
-
-"$python_bin" - <<'"'"'PY'"'"'
-import os
-import importlib
-
-module_names = [
-    "scraper.src.config.config_loader",
-    "src.config.config_loader",
-    "config.config_loader",
-]
-
-config_loader_cls = None
-import_errors = []
-
-for module_name in module_names:
-    try:
-        module = importlib.import_module(module_name)
-        config_loader_cls = module.ConfigLoader
-        print(f"[probe] using ConfigLoader module: {module_name}")
-        break
-    except Exception as exc:
-        import_errors.append(f"{module_name}: {exc}")
-
-if config_loader_cls is None:
-    print("[probe] cannot import ConfigLoader")
-    for line in import_errors:
-        print(f"[probe] import error: {line}")
-    raise SystemExit(0)
-
-config = config_loader_cls(os.environ["CONFIG"], False)
-print("[probe] resolved start_urls:", [item["url"] for item in config.start_urls])
-print("[probe] resolved sitemap_urls:", config.sitemap_urls)
-print("[probe] resolved docs_info:", config.docs_info)
-PY
 '
 }
 
