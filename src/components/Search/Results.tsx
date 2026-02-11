@@ -6,8 +6,11 @@ import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import clsx from "clsx";
 import TablePagination from "@mui/material/TablePagination";
-
-import LinkComponent from "components/Link";
+import Chip from "@mui/material/Chip";
+import {
+  getSearchCategoryLabelKey,
+  resolveSearchCategory,
+} from "shared/utils/searchCategory";
 
 export default function SearchResults(props: {
   loading: boolean;
@@ -176,28 +179,60 @@ function SearchItemSkeleton() {
 
 function SearchItem(props: { data: any }) {
   const { data } = props;
+  const { t } = useI18next();
+  const category = React.useMemo(
+    () => resolveSearchCategory(data.url),
+    [data.url]
+  );
+  const categoryLabel = category ? t(getSearchCategoryLabelKey(category)) : "";
+
   return (
     <Stack spacing={1}>
-      <Typography
-        variant="h5"
-        component="a"
-        href={data.url}
+      <Box
         sx={{
-          textDecoration: "none",
-          width: "fit-content",
-          "& >div": {
-            width: "fit-content",
-          },
+          display: "flex",
+          alignItems: "flex-start",
+          flexWrap: "wrap",
+          gap: "0.5rem",
         }}
       >
-        {!!data._highlightResult?.hierarchy?.lvl0 && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data._highlightResult.hierarchy.lvl0?.value,
+        <Typography
+          variant="h5"
+          component="a"
+          href={data.url}
+          sx={{
+            textDecoration: "none",
+            minWidth: 0,
+            flex: "1 1 16rem",
+            overflowWrap: "anywhere",
+            "& >div": {
+              width: "100%",
+              maxWidth: "100%",
+            },
+          }}
+        >
+          {!!data._highlightResult?.hierarchy?.lvl0 && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data._highlightResult.hierarchy.lvl0?.value,
+              }}
+            />
+          )}
+        </Typography>
+        {!!category && !!categoryLabel && (
+          <Chip
+            size="small"
+            label={categoryLabel}
+            sx={{
+              height: "20px",
+              fontSize: "12px",
+              borderRadius: "10px",
+              backgroundColor: "carbon.100",
+              color: "carbon.800",
             }}
           />
         )}
-      </Typography>
+      </Box>
       {data?._highlightResult?.url ? (
         <Typography
           variant="body1"
