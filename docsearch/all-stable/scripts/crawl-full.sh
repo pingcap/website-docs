@@ -16,7 +16,6 @@ SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 
 CRAWL_LANG="${CRAWL_LANG:-both}"
 UPDATE_LATEST_COMMIT="${UPDATE_LATEST_COMMIT:-true}"
-CRAWL_LOCAL_URL="${CRAWL_LOCAL_URL:-}"
 
 if [ ! -d "$CONFIG_DIR" ]; then
   echo "Config directory not found: $CONFIG_DIR"
@@ -49,11 +48,7 @@ run_one() {
     exit 1
   fi
 
-  if [ -n "$CRAWL_LOCAL_URL" ]; then
-    config_payload="$(jq -r --arg crawl_local_url "$CRAWL_LOCAL_URL" '.crawl_local_url = $crawl_local_url | tostring' "$config_file")"
-  else
-    config_payload="$(jq -r tostring "$config_file")"
-  fi
+  config_payload="$(jq -r tostring "$config_file")"
 
   docker run --rm --env-file=.env \
     -e "CONFIG=$config_payload" \

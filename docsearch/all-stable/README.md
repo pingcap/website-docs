@@ -16,11 +16,13 @@ This makes search integration simpler when UI should query one index per languag
 ## Directory Layout
 
 - `all-stable/configs/`: all crawler configs and state files
-- `all-stable/configs/en-all-stable-full.json`: English full crawl config
-- `all-stable/configs/zh-all-stable-full.json`: Chinese full crawl config
+- `all-stable/configs/en-all-stable-full.json`: English full crawl config (prod)
+- `all-stable/configs/zh-all-stable-full.json`: Chinese full crawl config (prod)
 - `all-stable/configs/runlist-incremental.json`: incremental config run order
 - `all-stable/configs/latest_commit.json`: incremental base commit state
-- `all-stable/scripts/crawl-full.sh`: full crawl entry
+- `all-stable/scripts/crawl-full.sh`: production full crawl entry
+- `all-stable/scripts/crawl-preview-full.sh`: preview full prewarm entry (no sitemap dependency)
+- `all-stable/scripts/check-crawl-errors.sh`: shared crawl-log error gate helper
 - `all-stable/scripts/crawl-incremental.sh`: incremental crawl entry
 - `all-stable/scripts/sync-latest-commit.sh`: commit-state sync helper
 - `all-stable/MIGRATION.md`: old-path to new-path mapping
@@ -37,7 +39,7 @@ Each config has a `docs_info` object with these runtime effects:
 - `version`: part of URL and part of `latest_commit` key.
 - `isStable`: if `true`, URL version segment becomes `stable` during crawling.
 
-### Full mode (`crawl-full.sh`)
+### Production full mode (`crawl-full.sh`)
 
 For each full config, scraper builds one root start URL from `docs_info` and then crawls via sitemap/link traversal.
 
@@ -46,7 +48,17 @@ For all-stable full configs, we also set:
 - `sitemap_urls_regexs`
 - `force_sitemap_urls_crawling: true`
 
-This allows one full run to include multiple URL prefixes into one language index.
+This allows one production full run to include multiple URL prefixes into one language index.
+
+### Preview full prewarm mode (`crawl-preview-full.sh`)
+
+When preview site has no usable sitemap, prewarm runs each prefix config from `runlist-incremental.json` in full mode:
+
+- injects `crawl_local_url` (preview domain)
+- clears `sitemap_urls` and `sitemap_urls_regexs`
+- sets `force_sitemap_urls_crawling` to `false`
+
+This removes sitemap dependency and crawls each prefix from its root start URL.
 
 ### Incremental mode (`crawl-incremental.sh`)
 
@@ -75,30 +87,43 @@ Examples:
 
 Key format is derived from `docs_info`, not from Algolia `index_name`.
 
-## Full Crawl
+## Production Full Crawl
 
-Default full crawl (both languages, production domain, sync latest commit):
+Default production full crawl (both languages, sync latest commit):
 
 ```bash
 cd docsearch
 ./all-stable/scripts/crawl-full.sh "$(pwd)/all-stable"
 ```
 
-Optional runtime switches for manual runs:
+Optional runtime switches (manual/local):
 
 - `CRAWL_LANG=both|en|zh`
-- `CRAWL_LOCAL_URL=https://docs.tidb.io/` (preview domain)
-- `UPDATE_LATEST_COMMIT=true|false`
+- `UPDATE_LATEST_COMMIT=true|false` (debug only; CI production full always updates latest_commit)
 
-Example (preview + English only + no latest-commit update):
+Example (production full, English only):
+
+```bash
+cd docsearch
+CRAWL_LANG=en \
+./all-stable/scripts/crawl-full.sh "$(pwd)/all-stable"
+```
+
+## Preview Full Prewarm
+
+Preview full prewarm runs per-prefix full crawl and does not depend on preview sitemap:
 
 ```bash
 cd docsearch
 CRAWL_LANG=en \
 CRAWL_LOCAL_URL=https://docs.tidb.io/ \
-UPDATE_LATEST_COMMIT=false \
-./all-stable/scripts/crawl-full.sh "$(pwd)/all-stable"
+./all-stable/scripts/crawl-preview-full.sh "$(pwd)/all-stable"
 ```
+
+Notes:
+
+- this flow does not sync or commit `latest_commit.json`
+- this flow is for index prewarm; run one final production full crawl at/after release
 
 ## Incremental Crawl
 
@@ -111,15 +136,17 @@ cd docsearch
 
 ## Preview Site (`docs.tidb.io`) Notes
 
-Current scraper supports `crawl_local_url`. If set, crawler requests pages from that domain.
+Current scraper supports `crawl_local_url`. If set, crawler requests pages from that domain and writes production URLs into records.
 
-In this codebase, records written to Algolia replace `crawl_local_url` with `https://docs.pingcap.com/` in record URLs. This is useful for preview pre-crawl.
+In this codebase, records written to Algolia replace `crawl_local_url` with `https://docs.pingcap.com/` in record URLs.
+
+Preview prewarm without sitemap is a practical fallback, but it can still miss isolated pages that are not reachable by link traversal from prefix root pages.
 
 ### Safety guidance
 
-- Full preview crawl is the safest prewarm method.
-- Incremental preview crawl is usable but delete precision is weaker because URL mapping/deletion logic is path-derived and environment-dependent.
-- Best practice: use full preview crawl for prewarm, and run one final full crawl on production domain before/at release.
+- Preview full workflow probes preview base URL and fails fast when unavailable or resolving to a 404 page.
+- Full/incremental/preview-full workflows fail if spider reports crawl errors (including oversized Algolia record errors), preventing silent partial indexing.
+- Best practice: use preview full prewarm, then run one final production full crawl before/at release.
 
 ## Add a New URL Prefix
 
@@ -127,23 +154,22 @@ In this codebase, records written to Algolia replace `crawl_local_url` with `htt
 2. Set `index_name` to `en-tidb-all-stable` or `zh-tidb-all-stable`.
 3. Add config filename to `runlist-incremental.json`.
 4. Add corresponding key in `latest_commit.json` using current repo/ref head SHA.
-5. If full crawl should include it, add regex in `en-all-stable-full.json` / `zh-all-stable-full.json`.
+5. If production full crawl should include it, add regex in `en-all-stable-full.json` / `zh-all-stable-full.json`.
 
 ## CI Workflows
 
 - Incremental: `.github/workflows/docsearch-all-stable-incremental.yml`
-- Full: `.github/workflows/docsearch-all-stable-full.yml`
+- Production full: `.github/workflows/docsearch-all-stable-full.yml`
+- Preview full prewarm: `.github/workflows/docsearch-all-stable-full-preview.yml`
 
-Full workflow supports runtime inputs:
+Production full workflow inputs:
 
-- `target`: `prod` or `preview`
+- `language`: `both`, `en`, or `zh`
+
+Preview full workflow inputs:
+
 - `preview_base_url`: preview domain base URL
 - `language`: `both`, `en`, or `zh`
-- `update_latest_commit`: whether to sync/commit latest commit state
-
-Guardrail:
-
-- when `target=prod`, workflow requires `update_latest_commit=true` and fails fast otherwise
 
 ### Runbook: Prewarm English on Preview Before Prod Go-live
 
@@ -153,30 +179,24 @@ Use this when:
 - preview English docs are ready on `docs.tidb.io`
 - you want search to work immediately at prod go-live
 
-Run `.github/workflows/docsearch-all-stable-full.yml` with:
+Run `.github/workflows/docsearch-all-stable-full-preview.yml` with:
 
-- `target=preview`
 - `preview_base_url=https://docs.tidb.io/`
 - `language=en`
-- `update_latest_commit=true` (recommended)
 
-Why `update_latest_commit=true` is safe here:
+Then run `.github/workflows/docsearch-all-stable-full.yml` with:
 
-- full crawl already indexed the English content
-- sync now updates only English keys when `language=en`
-- this avoids replaying large English diffs in the next incremental run
+- `language=en` (or `both`)
 
-Conservative option:
-
-- set `update_latest_commit=false` for preview prewarm
-- after prod release, run one prod full crawl with `language=en` and `update_latest_commit=true`
+Production full workflow always syncs/commits `latest_commit.json`.
 
 ## Reliability Notes
 
 - workflows use `concurrency` to avoid same-workflow overlap
-- push step rebases before commit/push to reduce branch race failures
+- push step in commit-sync workflows now follows `add -> commit -> pull --rebase -> push`
+- full/incremental/preview-full workflows gate on spider/oversized-record errors
 - `sync-latest-commit.sh` uses `curl --retry` and fails fast on API errors
-- full sync now respects selected language (`en`/`zh`/`both`)
+- full sync respects selected language (`en`/`zh`/`both`)
 
 ## Algolia Prerequisites
 
