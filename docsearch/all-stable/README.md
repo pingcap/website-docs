@@ -19,6 +19,7 @@ This makes search integration simpler when UI should query one index per languag
 - `all-stable/configs/en-all-stable-full.json`: English full crawl config (prod)
 - `all-stable/configs/zh-all-stable-full.json`: Chinese full crawl config (prod)
 - `all-stable/configs/runlist-incremental.json`: incremental config run order
+- `all-stable/configs/runlist-preview-full.json`: preview full config run order (separate from incremental)
 - `all-stable/configs/latest_commit.json`: incremental base commit state
 - `all-stable/scripts/crawl-full.sh`: production full crawl entry
 - `all-stable/scripts/crawl-preview-full.sh`: preview full prewarm entry (no sitemap dependency)
@@ -139,13 +140,15 @@ This allows one production full run to include multiple URL prefixes into one la
 
 ### Preview full prewarm mode (`crawl-preview-full.sh`)
 
-When preview site has no usable sitemap, prewarm runs each prefix config from `runlist-incremental.json` in full mode:
+When preview site has no usable sitemap, prewarm runs each prefix config from `runlist-preview-full.json` in full mode (default):
 
 - injects `crawl_local_url` (preview domain)
 - clears `sitemap_urls` and `sitemap_urls_regexs`
 - sets `force_sitemap_urls_crawling` to `false`
 
 This removes sitemap dependency and crawls each prefix from its root start URL.
+
+You can override the preview runlist by setting `PREVIEW_RUNLIST_FILE` (for example: `runlist-incremental.json`).
 
 ### Incremental mode (`crawl-incremental.sh`)
 
@@ -204,6 +207,7 @@ Preview full prewarm runs per-prefix full crawl and does not depend on preview s
 cd docsearch
 CRAWL_LANG=en \
 CRAWL_LOCAL_URL=https://docs.tidb.io/ \
+PREVIEW_RUNLIST_FILE=runlist-preview-full.json \
 ./all-stable/scripts/crawl-preview-full.sh "$(pwd)/all-stable"
 ```
 

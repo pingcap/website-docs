@@ -17,6 +17,11 @@ on:
           - both
           - en
           - zh
+      preview_runlist:
+        description: 'Preview runlist file under all-stable/configs'
+        required: true
+        default: runlist-preview-full.json
+        type: string
 
 permissions:
   contents: read
@@ -55,8 +60,10 @@ jobs:
           export CRAWL_LANG="${{ inputs.language }}"
           PREVIEW_BASE_URL="${{ inputs.preview_base_url }}"
           export CRAWL_LOCAL_URL="${PREVIEW_BASE_URL%/}/"
+          export PREVIEW_RUNLIST_FILE="${{ inputs.preview_runlist }}"
 
           echo "Run preview full prewarm against: $CRAWL_LOCAL_URL"
+          echo "Use preview runlist file: $PREVIEW_RUNLIST_FILE"
 
           preview_home_status="$(curl -sS -o /dev/null -w "%{http_code}" "$CRAWL_LOCAL_URL")"
           if [ "$preview_home_status" != "200" ]; then
