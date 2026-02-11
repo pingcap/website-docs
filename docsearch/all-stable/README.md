@@ -29,6 +29,93 @@ This makes search integration simpler when UI should query one index per languag
 
 ## How Configs Drive Crawler Behavior
 
+### Text selector strategy (`selectors.default.text`)
+
+Legacy text selector (CSS) was:
+
+```css
+.doc-content p, .doc-content li, .doc-content table tr, .doc-content code span
+```
+
+For all-stable configs, we switched to XPath because CSS (especially with `cssselect` parser) cannot cleanly express some required constraints, such as:
+
+- exclude `li` inside table cells
+- exclude "compound" `li` nodes that contain nested `li` / `p` / `pre` / `table`
+- capture non-empty **leaf** text nodes under `pre > code` across different wrappers
+
+Current `text.selector` is one XPath union (`|`), meaning “match any of these 5 selector groups”:
+
+```xpath
+//*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//p
+| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//li[not(ancestor::table)][not(descendant::li)][not(descendant::p)][not(descendant::pre)][not(descendant::table)]
+| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//table//tr
+| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code//*[not(*)][normalize-space()]
+| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(*)][normalize-space()]
+```
+
+How to read each selector:
+
+1. `...//p`
+   - Approx. CSS: `.doc-content p`
+   - Meaning: index paragraph text.
+   - Example:
+
+     ```html
+     <p>TiDB supports ...</p>
+     ```
+
+2. `...//li[not(ancestor::table)][not(descendant::li)][not(descendant::p)][not(descendant::pre)][not(descendant::table)]`
+   - Approx. CSS: `.doc-content li` + extra XPath-only guards
+   - Meaning: index only “simple” list items; skip list items in tables and skip parent/compound list containers.
+   - Example (parent `li` skipped, child `li` can be indexed):
+
+     ```html
+     <li>
+       Parent item
+       <ul><li>Child item</li></ul>
+     </li>
+     ```
+
+   - Example (`li` in table skipped):
+
+     ```html
+     <table><tr><td><li>list in table</li></td></tr></table>
+     ```
+
+3. `...//table//tr`
+   - Approx. CSS: `.doc-content table tr`
+   - Meaning: index table rows as records.
+   - Example:
+
+     ```html
+     <table><tr><td>Parameter</td><td>Value</td></tr></table>
+     ```
+
+4. `...//pre//code//*[not(*)][normalize-space()]`
+   - Approx. CSS: no strict equivalent (requires “leaf node + non-empty text”)
+   - Meaning: index non-empty leaf text nodes under code blocks, including wrappers like `span`, `div`.
+   - Examples:
+
+     ```html
+     <pre><code><span>SELECT 1;</span></code></pre>
+     <pre><code><div>SELECT 1;</div></code></pre>
+     ```
+
+5. `...//pre//code[not(*)][normalize-space()]`
+   - Approx. CSS: no strict equivalent (requires `code` itself as leaf text node)
+   - Meaning: cover code blocks where `code` has direct text and no element children.
+   - Example:
+
+     ```html
+     <pre><code>SELECT 1;</code></pre>
+     ```
+
+Why this is safer for indexing:
+
+- reduces oversized records from large parent list items
+- avoids obvious overlap between `li` and table content
+- keeps code-block coverage across different rendered DOM shapes
+
 ### `docs_info` fields
 
 Each config has a `docs_info` object with these runtime effects:

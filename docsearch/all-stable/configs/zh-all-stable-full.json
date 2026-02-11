@@ -32,7 +32,10 @@
       "lvl2": ".doc-content h3",
       "lvl3": ".doc-content h4",
       "lvl4": ".doc-content h5",
-      "text": ".doc-content p, .doc-content li, .doc-content table tr, .doc-content code span"
+      "text": {
+        "selector": "//*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//p | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//li[not(ancestor::table)][not(descendant::li)][not(descendant::p)][not(descendant::pre)][not(descendant::table)] | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//table//tr | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code//*[not(*)][normalize-space()] | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(*)][normalize-space()]",
+        "type": "xpath"
+      }
     }
   },
   "selectors_exclude": [".error"],
