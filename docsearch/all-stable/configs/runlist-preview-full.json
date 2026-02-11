@@ -1,14 +1,4 @@
 {
   "en": [],
-  "zh": [
-    "zh-tidb-stable.json",
-    "zh-tidb-in-kubernetes-stable.json",
-    "zh-ai.json",
-    "zh-developer.json",
-    "zh-best-practices.json",
-    "zh-api.json",
-    "zh-releases-tidb-cloud.json",
-    "zh-releases-tidb-self-managed.json",
-    "zh-releases-tidb-operator.json"
-  ]
+  "zh": []
 }
