@@ -11,7 +11,7 @@ on:
       hash:
         description: "Docs Staging Hash"
         type: string
-        default: nextgen
+        default: main
         required: true
       fallback:
         description: "Fallback by hash"
