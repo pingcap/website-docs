@@ -17,7 +17,6 @@ RUNLIST_FILE="$CONFIG_DIR/$PREVIEW_RUNLIST_FILE"
 
 CRAWL_LANG="${CRAWL_LANG:-both}"
 CRAWL_LOCAL_URL="${CRAWL_LOCAL_URL:-}"
-ENABLE_CONTAINER_SOURCE_PROBE="${ENABLE_CONTAINER_SOURCE_PROBE:-true}"
 
 if [ ! -d "$CONFIG_DIR" ]; then
   echo "Config directory not found: $CONFIG_DIR"
@@ -55,7 +54,6 @@ cp "$CONFIG_DIR"/*.json "$TMP_CONFIG_DIR"/
 
 echo "Use temporary config directory: $TMP_CONFIG_DIR"
 echo "Use preview runlist: $RUNLIST_FILE"
-echo "Enable container source probe: $ENABLE_CONTAINER_SOURCE_PROBE"
 
 en_config_names="$(jq -r '.en[]' "$RUNLIST_FILE")"
 zh_config_names="$(jq -r '.zh[]' "$RUNLIST_FILE")"
@@ -109,80 +107,6 @@ build_expected_full_start_url() {
   printf '%s\n' "${CRAWL_LOCAL_URL}${lang_segment}${docs_prefix}/${version_segment}"
 }
 
-print_effective_config() {
-  config_file="$1"
-  config_name="$2"
-  expected_start_url="$3"
-
-  effective_config="$(jq -c \
-    --arg config_name "$config_name" \
-    --arg crawl_local_url "$CRAWL_LOCAL_URL" \
-    --arg expected_start_url "$expected_start_url" \
-    '{
-      config_name: $config_name,
-      index_name,
-      docs_info,
-      crawl_local_url: $crawl_local_url,
-      expected_full_start_url: $expected_start_url,
-      start_urls: [$crawl_local_url],
-      sitemap_urls: [],
-      sitemap_urls_regexs: [],
-      force_sitemap_urls_crawling: false
-    }' "$config_file")"
-
-  echo "Effective preview full config: $effective_config"
-}
-
-probe_container_runtime() {
-  config_name="$1"
-  config_payload="$2"
-
-  if [ "$ENABLE_CONTAINER_SOURCE_PROBE" != "true" ]; then
-    return 0
-  fi
-
-  echo "Probe scraper runtime (container source): $config_name"
-
-  docker run --rm \
-    -e "CONFIG=$config_payload" \
-    --entrypoint sh \
-    "$DOCKER_REGISTRY/algolia-docsearch-scraper-incremental:v0.2" \
-    -c '
-set -eu
-
-find_urls_setter() {
-  for candidate in \
-    /root/scraper/src/config/urls_setter.py \
-    /root/src/config/urls_setter.py \
-    /scraper/src/config/urls_setter.py \
-    /src/config/urls_setter.py
-  do
-    if [ -f "$candidate" ]; then
-      echo "$candidate"
-      return 0
-    fi
-  done
-
-  find / -type f -path "*scraper/src/config/urls_setter.py" 2>/dev/null | head -n 1 || true
-}
-
-urls_setter_path="$(find_urls_setter)"
-
-if [ -n "$urls_setter_path" ]; then
-  echo "[probe] urls_setter.py path: $urls_setter_path"
-  if command -v sha256sum >/dev/null 2>&1; then
-    echo "[probe] urls_setter.py sha256:"
-    sha256sum "$urls_setter_path"
-  fi
-  echo "[probe] urls_setter.py snippet (full-mode start_url composition):"
-  nl -ba "$urls_setter_path" | sed -n "100,110p"
-else
-  echo "[probe] urls_setter.py path: not found"
-fi
-
-'
-}
-
 summarize_run_log() {
   run_log_file="$1"
   config_name="$2"
@@ -201,12 +125,6 @@ summarize_run_log() {
   oversized_error_count="$(grep -c "Record at the position .* is too big" "$clean_log_file" || true)"
 
   echo "Summary ($config_name): indexed_pages=$indexed_page_count indexed_records=$indexed_record_count ignored_start=$ignored_start_count ignored_sitemap=$ignored_sitemap_count spider_errors=$spider_error_count oversized_records=$oversized_error_count"
-
-  sample_urls="$(printf '%s\n' "$record_lines" | sed -n 's/.*DocSearch: \(https\?:\/\/[^ ]*\).*/\1/p' | sed -n '1,5p')"
-  if [ -n "$sample_urls" ]; then
-    echo "Sample indexed URLs ($config_name):"
-    printf '%s\n' "$sample_urls"
-  fi
 
   all_indexed_urls="$(printf '%s\n' "$record_lines" | sed -n 's/.*DocSearch: \(https\?:\/\/[^ ]*\).*/\1/p')"
   while IFS= read -r indexed_url; do
@@ -239,7 +157,6 @@ run_one() {
     exit 1
   fi
 
-  print_effective_config "$config_file" "$config_name" "$expected_full_start_url"
 
   config_payload="$(jq -r \
     --arg crawl_local_url "$CRAWL_LOCAL_URL" \
@@ -250,7 +167,6 @@ run_one() {
     | .force_sitemap_urls_crawling = false
     | tostring' "$config_file")"
 
-  probe_container_runtime "$config_name" "$config_payload"
 
   run_log_file="$TMP_CONFIG_DIR/${config_name%.json}.preview-full.log"
   run_status_file="$TMP_CONFIG_DIR/${config_name%.json}.preview-full.status"
