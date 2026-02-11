@@ -1,0 +1,74 @@
+name: Doc Search Scripts (All Stable, Preview Full)
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_base_url:
+        description: 'Preview base URL'
+        required: true
+        default: 'https://docs.tidb.io/'
+        type: string
+      language:
+        description: 'Language scope for preview full prewarm'
+        required: true
+        default: en
+        type: choice
+        options:
+          - both
+          - en
+          - zh
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docsearch-all-stable-full-preview
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'doc-search'
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.DOCKER_REGISTRY }}
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Run scripts
+        run: |
+          set -o pipefail
+          cd docsearch
+          touch .env
+          echo "APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
+          echo "API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
+          echo "GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}" >> .env
+          export DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
+          export GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
+
+          export CRAWL_LANG="${{ inputs.language }}"
+          PREVIEW_BASE_URL="${{ inputs.preview_base_url }}"
+          export CRAWL_LOCAL_URL="${PREVIEW_BASE_URL%/}/"
+
+          echo "Run preview full prewarm against: $CRAWL_LOCAL_URL"
+
+          preview_home_status="$(curl -sS -o /dev/null -w "%{http_code}" "$CRAWL_LOCAL_URL")"
+          if [ "$preview_home_status" != "200" ]; then
+            echo "Preview base URL probe failed: $CRAWL_LOCAL_URL (status=$preview_home_status)"
+            exit 1
+          fi
+
+          if curl -sS "$CRAWL_LOCAL_URL" | grep -qi "<title>.*404"; then
+            echo "Preview base URL resolved to a 404 page: $CRAWL_LOCAL_URL"
+            exit 1
+          fi
+
+          ./all-stable/scripts/crawl-preview-full.sh "$(pwd)/all-stable" 2>&1 | tee /tmp/docsearch-all-stable-full-preview.log
+
+          ./all-stable/scripts/check-crawl-errors.sh /tmp/docsearch-all-stable-full-preview.log

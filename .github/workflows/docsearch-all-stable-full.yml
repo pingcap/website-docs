@@ -3,19 +3,6 @@ name: Doc Search Scripts (All Stable, Full)
 on:
   workflow_dispatch:
     inputs:
-      target:
-        description: 'Crawl target environment'
-        required: true
-        default: prod
-        type: choice
-        options:
-          - prod
-          - preview
-      preview_base_url:
-        description: 'Preview base URL when target=preview'
-        required: true
-        default: 'https://docs.tidb.io/'
-        type: string
       language:
         description: 'Language scope for full crawl'
         required: true
@@ -25,11 +12,6 @@ on:
           - both
           - en
           - zh
-      update_latest_commit:
-        description: 'Whether to sync and commit latest_commit.json'
-        required: true
-        default: true
-        type: boolean
 
 permissions:
   contents: write
@@ -56,6 +38,7 @@ jobs:
 
       - name: Run scripts
         run: |
+          set -o pipefail
           cd docsearch
           touch .env
           echo "APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
@@ -65,37 +48,24 @@ jobs:
           export GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
 
           export CRAWL_LANG="${{ inputs.language }}"
-          export UPDATE_LATEST_COMMIT="${{ inputs.update_latest_commit }}"
 
-          if [ "${{ inputs.target }}" = "prod" ] && [ "${{ inputs.update_latest_commit }}" != "true" ]; then
-            echo "update_latest_commit must be true when target=prod"
-            exit 1
-          fi
+          echo "Run full crawl against production domain"
+          ./all-stable/scripts/crawl-full.sh "$(pwd)/all-stable" 2>&1 | tee /tmp/docsearch-all-stable-full.log
 
-          if [ "${{ inputs.target }}" = "preview" ]; then
-            PREVIEW_BASE_URL="${{ inputs.preview_base_url }}"
-            export CRAWL_LOCAL_URL="${PREVIEW_BASE_URL%/}/"
-            echo "Run full crawl against preview domain: $CRAWL_LOCAL_URL"
-          else
-            unset CRAWL_LOCAL_URL
-            echo "Run full crawl against production domain"
-          fi
-
-          ./all-stable/scripts/crawl-full.sh "$(pwd)/all-stable" 2>&1
+          ./all-stable/scripts/check-crawl-errors.sh /tmp/docsearch-all-stable-full.log
 
       - name: Git push latest_commit
-        if: ${{ inputs.update_latest_commit }}
         run: |
           cd docsearch
           cat all-stable/configs/latest_commit.json
           git status
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git pull --rebase origin doc-search
           git add all-stable/configs/latest_commit.json
           if git diff --cached --quiet; then
             echo "No latest_commit.json changes."
             exit 0
           fi
           git commit -m "update all-stable latest_commit.json (full)"
+          git pull --rebase origin doc-search
           git push origin HEAD:doc-search
