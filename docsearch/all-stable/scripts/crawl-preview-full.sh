@@ -70,6 +70,7 @@ run_one() {
   config_payload="$(jq -r \
     --arg crawl_local_url "$CRAWL_LOCAL_URL" \
     '.crawl_local_url = $crawl_local_url
+    | .start_urls = [$crawl_local_url]
     | .sitemap_urls = []
     | .sitemap_urls_regexs = []
     | .force_sitemap_urls_crawling = false
