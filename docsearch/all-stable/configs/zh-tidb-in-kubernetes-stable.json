@@ -21,7 +21,7 @@
       "lvl3": ".doc-content h4",
       "lvl4": ".doc-content h5",
       "text": {
-        "selector": "//*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//p | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//li[not(ancestor::table)][not(descendant::li)][not(descendant::p)][not(descendant::pre)][not(descendant::table)] | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//table//tr | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code//*[not(*)][normalize-space()] | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(*)][normalize-space()]",
+        "selector": "//*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//p | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//li[not(ancestor::table)][not(descendant::li)][not(descendant::p)][not(descendant::pre)][not(descendant::table)] | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//table//tr | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(contains(concat(' ', normalize-space(@class), ' '), ' language-plaintext ') or contains(concat(' ', normalize-space(@class), ' '), ' language-text '))]//*[not(*)][normalize-space()] | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(contains(concat(' ', normalize-space(@class), ' '), ' language-plaintext ') or contains(concat(' ', normalize-space(@class), ' '), ' language-text '))][not(*)][normalize-space()]",
         "type": "xpath"
       }
     }

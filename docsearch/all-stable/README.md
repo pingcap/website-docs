@@ -49,8 +49,8 @@ Current `text.selector` is one XPath union (`|`), meaning “match any of these 
 //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//p
 | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//li[not(ancestor::table)][not(descendant::li)][not(descendant::p)][not(descendant::pre)][not(descendant::table)]
 | //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//table//tr
-| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code//*[not(*)][normalize-space()]
-| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(*)][normalize-space()]
+| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(contains(concat(' ', normalize-space(@class), ' '), ' language-plaintext ') or contains(concat(' ', normalize-space(@class), ' '), ' language-text '))]//*[not(*)][normalize-space()]
+| //*[contains(concat(' ', normalize-space(@class), ' '), ' doc-content ')]//pre//code[not(contains(concat(' ', normalize-space(@class), ' '), ' language-plaintext ') or contains(concat(' ', normalize-space(@class), ' '), ' language-text '))][not(*)][normalize-space()]
 ```
 
 How to read each selector:
@@ -91,9 +91,9 @@ How to read each selector:
      <table><tr><td>Parameter</td><td>Value</td></tr></table>
      ```
 
-4. `...//pre//code//*[not(*)][normalize-space()]`
+4. `...//pre//code[not(contains(concat(' ', normalize-space(@class), ' '), ' language-plaintext ') or contains(concat(' ', normalize-space(@class), ' '), ' language-text '))]//*[not(*)][normalize-space()]`
    - Approx. CSS: no strict equivalent (requires “leaf node + non-empty text”)
-   - Meaning: index non-empty leaf text nodes under code blocks, including wrappers like `span`, `div`.
+   - Meaning: index non-empty leaf text nodes under code blocks (for example wrappers like `span` / `div`), while excluding `code.language-plaintext` and `code.language-text` blocks.
    - Examples:
 
      ```html
@@ -101,7 +101,7 @@ How to read each selector:
      <pre><code><div>SELECT 1;</div></code></pre>
      ```
 
-5. `...//pre//code[not(*)][normalize-space()]`
+5. `...//pre//code[not(contains(concat(' ', normalize-space(@class), ' '), ' language-plaintext ') or contains(concat(' ', normalize-space(@class), ' '), ' language-text '))][not(*)][normalize-space()]`
    - Approx. CSS: no strict equivalent (requires `code` itself as leaf text node)
    - Meaning: cover code blocks where `code` has direct text and no element children.
    - Example:
@@ -114,7 +114,7 @@ Why this is safer for indexing:
 
 - reduces oversized records from large parent list items
 - avoids obvious overlap between `li` and table content
-- keeps code-block coverage across different rendered DOM shapes
+- keeps code-block coverage across different rendered DOM shapes while skipping large plain-text output blocks
 
 ### `docs_info` fields
 
