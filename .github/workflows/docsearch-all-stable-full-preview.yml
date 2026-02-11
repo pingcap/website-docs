@@ -17,6 +17,21 @@ on:
           - both
           - en
           - zh
+      preview_runlist:
+        description: 'Preview runlist file under all-stable/configs'
+        required: true
+        default: runlist-preview-full.json
+        type: string
+      scraper_repo:
+        description: 'Docsearch-scraper repo used to patch workflow image'
+        required: true
+        default: 'https://github.com/shczhen/docsearch-scraper.git'
+        type: string
+      scraper_ref:
+        description: 'Docsearch-scraper branch/ref used to patch workflow image'
+        required: true
+        default: 'incrementalCrawl'
+        type: string
 
 permissions:
   contents: read
@@ -49,14 +64,15 @@ jobs:
           echo "APPLICATION_ID=${{ secrets.ALGOLIA_APPLICATION_ID }}" >> .env
           echo "API_KEY=${{ secrets.ALGOLIA_API_KEY }}" >> .env
           echo "GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}" >> .env
-          export DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
           export GITHUB_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
 
           export CRAWL_LANG="${{ inputs.language }}"
           PREVIEW_BASE_URL="${{ inputs.preview_base_url }}"
           export CRAWL_LOCAL_URL="${PREVIEW_BASE_URL%/}/"
+          export PREVIEW_RUNLIST_FILE="${{ inputs.preview_runlist }}"
 
           echo "Run preview full prewarm against: $CRAWL_LOCAL_URL"
+          echo "Use preview runlist file: $PREVIEW_RUNLIST_FILE"
 
           preview_home_status="$(curl -sS -o /dev/null -w "%{http_code}" "$CRAWL_LOCAL_URL")"
           if [ "$preview_home_status" != "200" ]; then
@@ -69,6 +85,18 @@ jobs:
             exit 1
           fi
 
+          export BASE_DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
+          export PATCH_SCRAPER_REPO="${{ inputs.scraper_repo }}"
+          export PATCH_SCRAPER_REF="${{ inputs.scraper_ref }}"
+          export PATCHED_DOCKER_REGISTRY="local"
+          export PATCH_IMAGE_ENV_FILE="/tmp/docsearch-patched-image.env"
+
+          ./all-stable/scripts/prepare-patched-scraper-image.sh "$(pwd)/all-stable"
+          . "$PATCH_IMAGE_ENV_FILE"
+          export DOCKER_REGISTRY="$PATCHED_DOCKER_REGISTRY"
+          export ENABLE_CONTAINER_SOURCE_PROBE=true
+
+          echo "Run preview full prewarm with patched image: $PATCHED_SCRAPER_IMAGE"
           ./all-stable/scripts/crawl-preview-full.sh "$(pwd)/all-stable" 2>&1 | tee /tmp/docsearch-all-stable-full-preview.log
 
           ./all-stable/scripts/check-crawl-errors.sh /tmp/docsearch-all-stable-full-preview.log
