@@ -1,0 +1,55 @@
+{
+  "index_name": "en-tidb-all-stable",
+  "docs_info": {
+    "owner": "pingcap",
+    "docs_repo": "docs",
+    "ref": "release-8.5",
+    "docs_prefix": "tidb",
+    "lang": "en",
+    "version": "v8.5",
+    "isStable": true
+  },
+  "start_urls": [],
+  "crawl_local_url": "",
+  "delete_urls": [],
+  "sitemap_urls": ["https://docs.pingcap.com/sitemap/sitemap-index.xml"],
+  "sitemap_urls_regexs": [
+    "https://docs.pingcap.com/tidb/stable",
+    "https://docs.pingcap.com/tidb-in-kubernetes/stable",
+    "https://docs.pingcap.com/tidbcloud",
+    "https://docs.pingcap.com/ai",
+    "https://docs.pingcap.com/developer",
+    "https://docs.pingcap.com/best-practices",
+    "https://docs.pingcap.com/api",
+    "https://docs.pingcap.com/releases/tidb-cloud",
+    "https://docs.pingcap.com/releases/tidb-self-managed",
+    "https://docs.pingcap.com/releases/tidb-operator"
+  ],
+  "force_sitemap_urls_crawling": true,
+  "selectors": {
+    "default": {
+      "lvl0": ".doc-content h1",
+      "lvl1": ".doc-content h2",
+      "lvl2": ".doc-content h3",
+      "lvl3": ".doc-content h4",
+      "lvl4": ".doc-content h5",
+      "text": ".doc-content p, .doc-content li, .doc-content table tr, .doc-content code span"
+    }
+  },
+  "selectors_exclude": [".error"],
+  "custom_settings": {
+    "attributesForFaceting": ["url_without_anchor"],
+    "attributesToHighlight": ["content", "url", "hierarchy"],
+    "attributeForDistinct": "url_without_anchor",
+    "distinct": true,
+    "disableTypoToleranceOnWords": [
+      "mva",
+      "tiup",
+      "tiops",
+      "tidb4.0",
+      "tidb 4.0"
+    ]
+  },
+  "conversation_id": ["428916846"],
+  "only_content_level": true
+}

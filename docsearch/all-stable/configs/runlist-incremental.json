@@ -1,0 +1,25 @@
+{
+  "en": [
+    "en-tidb-stable.json",
+    "en-tidb-in-kubernetes-stable.json",
+    "en-tidb-cloud.json",
+    "en-ai.json",
+    "en-developer.json",
+    "en-best-practices.json",
+    "en-api.json",
+    "en-releases-tidb-cloud.json",
+    "en-releases-tidb-self-managed.json",
+    "en-releases-tidb-operator.json"
+  ],
+  "zh": [
+    "zh-tidb-stable.json",
+    "zh-tidb-in-kubernetes-stable.json",
+    "zh-ai.json",
+    "zh-developer.json",
+    "zh-best-practices.json",
+    "zh-api.json",
+    "zh-releases-tidb-cloud.json",
+    "zh-releases-tidb-self-managed.json",
+    "zh-releases-tidb-operator.json"
+  ]
+}

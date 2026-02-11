@@ -81,3 +81,8 @@ bash run-algolia-crawler-fully.sh /PATH/TO/CONFIGS
 ```
 
 Run at first time.
+
+## All-stable Workflow
+
+For the new two-index all-stable setup, see `all-stable/README.md` and `all-stable/MIGRATION.md`.
+
