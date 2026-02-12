@@ -150,6 +150,30 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/ja/developer/vector-search-data-types");
     });
 
+    it("should resolve develop/_index links to developer root (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/develop/_index",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/developer");
+    });
+
+    it("should resolve develop/_index links to developer root (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/develop/_index",
+        "/zh/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/zh/developer");
+    });
+
+    it("should resolve api/_index links to api root (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/api/_index",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/api");
+    });
+
     it("should resolve best-practices namespace links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/best-practices/optimization/query-optimization",
@@ -294,26 +318,26 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/tidb/stable/release-8.5.4");
     });
 
-    it("should resolve /releases/* links from releases/dev/tidb-self-managed page (en - default language omitted)", () => {
+    it("should resolve /releases/* links from /tidb/dev/releases page (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/releases/release-8.5.4",
-        "/en/releases/dev/tidb-self-managed"
+        "/en/tidb/dev/releases"
       );
       expect(result).toBe("/tidb/dev/release-8.5.4");
     });
 
-    it("should resolve /releases/* links from releases/dev/tidb-self-managed page (en - currentPageUrl without language prefix)", () => {
+    it("should resolve /releases/* links from /tidb/dev/releases page (en - currentPageUrl without language prefix)", () => {
       const result = resolveMarkdownLink(
         "/releases/release-8.5.4",
-        "/releases/dev/tidb-self-managed"
+        "/tidb/dev/releases"
       );
       expect(result).toBe("/tidb/dev/release-8.5.4");
     });
 
-    it("should resolve /releases/* links from releases/v8.1/tidb-self-managed page (zh - language prefix included)", () => {
+    it("should resolve /releases/* links from /tidb/v8.1/releases page (zh - language prefix included)", () => {
       const result = resolveMarkdownLink(
         "/releases/release-8.1.0",
-        "/zh/releases/v8.1/tidb-self-managed"
+        "/zh/tidb/v8.1/releases"
       );
       expect(result).toBe("/zh/tidb/v8.1/release-8.1.0");
     });
@@ -478,6 +502,14 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb/stable/upgrade-tidb-using-tiup");
     });
 
+    it("should resolve _index links from tidb pages with stable branch", () => {
+      const result = resolveMarkdownLink(
+        "/upgrade/_index",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/tidb/stable/upgrade");
+    });
+
     it("should resolve links from tidb pages with version branch", () => {
       const result = resolveMarkdownLink(
         "/upgrade/upgrade-tidb-using-tiup",
@@ -494,6 +526,14 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe(
         "/tidb-in-kubernetes/stable/deploy-tidb-on-kubernetes"
       );
+    });
+
+    it("should resolve _index links from tidb-in-kubernetes pages", () => {
+      const result = resolveMarkdownLink(
+        "/deploy/_index",
+        "/en/tidb-in-kubernetes/stable/deploy"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/stable/deploy");
     });
 
     it("should not match non-tidb repo pages (pathConditions check)", () => {

@@ -35,15 +35,6 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       targetPattern: "/{lang}/releases/tidb-self-managed",
       conditions: { filename: ["_index"] },
     },
-    // tidb releases (other branches)
-    // /en/tidb/master/releases/_index.md -> /en/releases/dev/tidb-self-managed
-    // /en/tidb/release-8.1/releases/_index.md -> /en/releases/v8.1/tidb-self-managed
-    {
-      sourcePattern: "/{lang}/tidb/{branch}/releases/{filename}",
-      targetPattern:
-        "/{lang}/releases/{branch:branch-alias-tidb}/tidb-self-managed",
-      conditions: { filename: ["_index"] },
-    },
     {
       sourcePattern: `/{lang}/tidb-in-kubernetes/main/releases/{filename}`,
       targetPattern: "/{lang}/releases/tidb-operator",
@@ -96,6 +87,18 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
           keepIf: ["_index"],
           keepTargetPattern: "/{lang}/{folder}/{folders}",
         },
+      },
+    },
+    // tidb index pages with folders (avoid URL collision)
+    // /en/tidb/master/develop/_index.md -> /en/tidb/dev/develop
+    // /en/tidb/master/releases/_index.md -> /en/tidb/dev/releases
+    // (stable releases index is handled by the stable releases rule above)
+    {
+      sourcePattern: "/{lang}/tidb/{branch}/{...folders}/{filename}",
+      targetPattern: "/{lang}/tidb/{branch:branch-alias-tidb}/{folders}",
+      conditions: { filename: ["_index"] },
+      filenameTransform: {
+        ignoreIf: ["_index"],
       },
     },
     // tidb with branch and optional folders

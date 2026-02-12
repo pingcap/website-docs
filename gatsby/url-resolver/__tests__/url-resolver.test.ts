@@ -196,6 +196,15 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/tidb/dev");
   });
 
+  it("should resolve tidb nested _index with folders (avoid /tidb/dev collision)", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/master/develop/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidb/dev/develop");
+  });
+
   it("should resolve tidb with folders and branch alias", () => {
     const absolutePath = path.join(
       sourceBasePath,
@@ -258,7 +267,7 @@ describe("calculateFileUrl", () => {
       "en/tidb/master/releases/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/releases/dev/tidb-self-managed/");
+    expect(url).toBe("/en/tidb/dev/releases");
   });
 
   it("should resolve releases folder for non-stable release branches", () => {
@@ -267,7 +276,7 @@ describe("calculateFileUrl", () => {
       "en/tidb/release-8.1/releases/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/releases/v8.1/tidb-self-managed/");
+    expect(url).toBe("/en/tidb/v8.1/releases");
   });
 
   it("should resolve releases folder zh", () => {
@@ -631,7 +640,7 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
     expect(url).toBe("/tidb/dev/alert-rules");
   });
 
-  it("should resolve master releases _index to releases namespace (omit /en/)", () => {
+  it("should resolve master releases _index to /tidb/dev/releases (omit /en/)", () => {
     const absolutePath = path.join(
       sourceBasePath,
       "en/tidb/master/releases/_index.md"
@@ -641,10 +650,10 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/releases/dev/tidb-self-managed");
+    expect(url).toBe("/tidb/dev/releases");
   });
 
-  it("should resolve non-stable release branch releases _index to versioned releases namespace (omit /en/)", () => {
+  it("should resolve non-stable release branch releases _index to /tidb/{version}/releases (omit /en/)", () => {
     const absolutePath = path.join(
       sourceBasePath,
       "en/tidb/release-8.1/releases/_index.md"
@@ -654,7 +663,7 @@ describe("calculateFileUrl with omitDefaultLanguage parameter", () => {
       configWithDefaultLang,
       true
     );
-    expect(url).toBe("/releases/v8.1/tidb-self-managed");
+    expect(url).toBe("/tidb/v8.1/releases");
   });
 
   it("should keep non-default language even when omitDefaultLanguage is false", () => {

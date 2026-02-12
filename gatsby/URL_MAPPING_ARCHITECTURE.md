@@ -208,27 +208,21 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 3: TiDB Releases Index
+### Rule 3: TiDB Releases Index (Stable)
 
-**Effect**: Maps TiDB releases `_index.md` to the releases namespace.
+**Effect**: Maps the stable TiDB releases `_index.md` file to the shared releases namespace.
 
-**Source Pattern (stable)**: `/{lang}/tidb/{stable}/releases/{filename}`
+**Source Pattern**: `/{lang}/tidb/{stable}/releases/{filename}`
 
-**Target Pattern (stable)**: `/{lang}/releases/tidb-self-managed`
-
-**Source Pattern (other branches)**: `/{lang}/tidb/{branch}/releases/{filename}`
-
-**Target Pattern (other branches)**: `/{lang}/releases/{branch:branch-alias-tidb}/tidb-self-managed`
+**Target Pattern**: `/{lang}/releases/tidb-self-managed`
 
 **Conditions**: `filename = "_index"`
 
 **Example**:
 - Source: `en/tidb/release-8.5/releases/_index.md`
 - Target: `/releases/tidb-self-managed`
-- Source: `en/tidb/master/releases/_index.md`
-- Target: `/releases/dev/tidb-self-managed`
 
-**Use Case**: Keeps the stable release notes URL unchanged while allowing branch-specific release landing pages and preventing a potential URL collision where `en/tidb/master/releases/_index.md` would otherwise collapse to `/tidb/dev`.
+**Use Case**: The stable release notes landing page is grouped under `/releases/`.
 
 ---
 
@@ -274,41 +268,79 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Developer/Best-Practices/API/AI Namespace
+### Rule 6: Developer Namespace
 
-**Effect**: Maps TiDB pages in `develop` (published as `developer`), `best-practices`, `api`, or `ai` folders to namespace URLs.
+**Effect**: Maps stable TiDB pages under the `develop` folder (published as `developer`) to the shared `/developer` namespace.
 
 **Source Pattern**: `/{lang}/tidb/{stable}/{folder}/{...folders}/{filename}`
 
 **Target Pattern**:
-- For `develop` folder:
-  - `_index`: `/{lang}/developer/{folders}` (keeps folder structure)
-  - Other files: `/{lang}/developer/{filename}` (removes folder structure)
-- For `best-practices`, `api`, and `ai` folders:
-  - `_index`: `/{lang}/{folder}/{folders}` (keeps folder structure)
-  - Other files: `/{lang}/{folder}/{filename}` (removes folder structure)
+- For `_index`: `/{lang}/developer/{folders}` (keeps folder structure)
+- For other files: `/{lang}/developer/{filename}` (flattens folder structure)
 
-**Conditions**:
-- `folder = ["develop"]` → published under `/developer`
-- `folder = ["best-practices", "api", "ai"]` → published under `/{folder}`
+**Conditions**: `folder = ["develop"]`
 
 **Filename Transform**:
-- `ignoreIf: ["_index"]` - Filename removed from URL for non-index files
-- `conditionalTarget.keepIf: ["_index"]` - Uses alternative pattern for `_index` files
+- `ignoreIf: ["_index"]`
+- `conditionalTarget.keepIf: ["_index"]`
 
 **Example**:
 - Source: `en/tidb/release-8.5/develop/subfolder/_index.md`
 - Target: `/developer/subfolder`
 - Source: `en/tidb/release-8.5/develop/subfolder/vector-search.md`
 - Target: `/developer/vector-search`
-- Source: `en/tidb/release-8.5/ai/overview.md`
-- Target: `/ai/overview`
 
-**Use Case**: These namespaces are shared across all TiDB versions, so folder structure is flattened for non-index files.
+**Use Case**: Developer docs are shared across TiDB versions and published under a stable, versionless namespace.
 
 ---
 
-### Rule 7: TiDB with Branch Alias
+### Rule 7: Best-Practices/API/AI Namespace
+
+**Effect**: Maps stable TiDB pages under `best-practices`, `api`, and `ai` to their corresponding shared namespaces.
+
+**Source Pattern**: `/{lang}/tidb/{stable}/{folder}/{...folders}/{filename}`
+
+**Target Pattern**:
+- For `_index`: `/{lang}/{folder}/{folders}` (keeps folder structure)
+- For other files: `/{lang}/{folder}/{filename}` (flattens folder structure)
+
+**Conditions**: `folder = ["best-practices", "api", "ai"]`
+
+**Filename Transform**:
+- `ignoreIf: ["_index"]`
+- `conditionalTarget.keepIf: ["_index"]`
+
+**Example**:
+- Source: `en/tidb/release-8.5/ai/subfolder/_index.md`
+- Target: `/ai/subfolder`
+- Source: `en/tidb/release-8.5/api/overview.md`
+- Target: `/api/overview`
+
+**Use Case**: These namespaces are shared across TiDB versions and published under stable, versionless paths.
+
+---
+
+### Rule 8: TiDB Index Pages with Folders
+
+**Effect**: Maps TiDB `_index.md` pages to URLs that keep their folder path, preventing multiple `_index.md` files from collapsing to the same `/tidb/{branch}` URL.
+
+**Source Pattern**: `/{lang}/tidb/{branch}/{...folders}/{filename}`
+
+**Target Pattern**: `/{lang}/tidb/{branch:branch-alias-tidb}/{folders}`
+
+**Conditions**: `filename = "_index"`
+
+**Example**:
+- Source: `en/tidb/master/develop/_index.md`
+- Target: `/tidb/dev/develop`
+- Source: `en/tidb/master/releases/_index.md`
+- Target: `/tidb/dev/releases`
+
+**Use Case**: Avoids build-time URL collisions where different source index pages would otherwise publish to the same URL (for example, `/tidb/dev`).
+
+---
+
+### Rule 9: TiDB with Branch Alias
 
 **Effect**: Maps TiDB pages with branch aliasing (master → dev, release-* → v*).
 
@@ -327,13 +359,13 @@ Rules are evaluated in order; the first matching rule wins.
 - Source: `en/tidb/master/alert-rules.md`
 - Target: `/tidb/dev/alert-rules`
 - Source: `en/tidb/release-8.5/alert-rules.md`
-- Target: `/tidb/v8.5/alert-rules`
+- Target: `/tidb/stable/alert-rules`
 
 **Use Case**: Branch names are transformed to user-friendly version identifiers.
 
 ---
 
-### Rule 8: TiDB-in-Kubernetes with Branch Alias
+### Rule 10: TiDB-in-Kubernetes with Branch Alias
 
 **Effect**: Maps TiDB-in-Kubernetes pages with branch aliasing (main → dev, release-* → v*).
 
@@ -358,7 +390,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: Fallback Rule
+### Rule 11: Fallback Rule
 
 **Effect**: Generic fallback for any remaining paths.
 
@@ -471,7 +503,33 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Namespace Links (Direct Mapping)
+### Rule 6: Namespace Index Links (Direct Mapping)
+
+**Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
+
+**Link Pattern**: `/{namespace}/{...folders}/_index`
+
+**Target Pattern**: `/{curLang}/{namespace}/{folders}`
+
+**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practices", "api", "ai"]`
+
+**Namespace Transform**:
+- `tidb-cloud` → `tidbcloud`
+- `develop` → `developer`
+
+**Example**:
+- Link: `/develop/_index`
+- Current Page: Any page
+- Result: `/developer`
+- Link: `/best-practices/performance/_index`
+- Current Page: Any page
+- Result: `/best-practices/performance`
+
+**Use Case**: Keeps namespace index links consistent with how `_index.md` pages are published.
+
+---
+
+### Rule 7: Namespace Links (Direct Mapping)
 
 **Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
 
@@ -489,15 +547,12 @@ Rules are evaluated in order; the first matching rule wins.
 - Link: `/develop/vector-search`
 - Current Page: Any page
 - Result: `/developer/vector-search`
-- Link: `/tidb-cloud/releases/_index`
-- Current Page: Any page
-- Result: `/tidbcloud/releases/_index` (namespace transformed)
 
 **Use Case**: Direct links to namespace pages from any location.
 
 ---
 
-### Rule 7: TiDBCloud Page Links (Path-Based)
+### Rule 8: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -519,7 +574,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 9: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -543,7 +598,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 10: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 
@@ -551,17 +606,20 @@ Rules are evaluated in order; the first matching rule wins.
 
 **Path Conditions**: `repo = ["tidb", "tidb-in-kubernetes"]`
 
-**Link Pattern**: `/{...any}/{docname}`
-
-**Target Pattern**: `/{lang}/{repo}/{branch}/{docname}`
+**Link Pattern / Target Pattern**:
+- Index links: `/{...folders}/_index` → `/{lang}/{repo}/{branch}/{folders}`
+- Other links: `/{...any}/{docname}` → `/{lang}/{repo}/{branch}/{docname}`
 
 **Example**:
 - Current Page: `/tidb/stable/upgrade`
 - Link: `/upgrade-tidb-using-tiup`
 - Result: `/tidb/stable/upgrade-tidb-using-tiup`
-- Current Page: `/tidb/v8.5/alert-rules`
+- Current Page: `/tidb/stable/upgrade`
+- Link: `/upgrade/_index`
+- Result: `/tidb/stable/upgrade`
+- Current Page: `/tidb/v8.1/alert-rules`
 - Link: `/monitoring`
-- Result: `/tidb/v8.5/monitoring`
+- Result: `/tidb/v8.1/monitoring`
 - Current Page: `/tidb-in-kubernetes/stable/deploy`
 - Link: `/deploy-tidb-on-kubernetes`
 - Result: `/tidb-in-kubernetes/stable/deploy-tidb-on-kubernetes`

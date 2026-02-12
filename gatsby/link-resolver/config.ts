@@ -32,13 +32,6 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",
     },
-    // Current page: /{lang}/releases/{branch}/tidb-self-managed (branch is already aliased, e.g., "dev", "v8.1")
-    // Link: /releases/{docname} -> /{lang}/tidb/{branch}/{docname}
-    {
-      pathPattern: "/{lang}/releases/{branch}/tidb-self-managed",
-      linkPattern: "/{...any}/{docname}",
-      targetPattern: "/{lang}/tidb/{branch}/{docname}",
-    },
     // Current page: /{lang}/releases/tidb-operator
     // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/dev/{docname}
     {
@@ -47,6 +40,22 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       targetPattern: "/{lang}/tidb-in-kubernetes/dev/{docname}",
     },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
+    // Special handling for namespace index links:
+    // /develop/_index -> /developer
+    // /best-practices/_index -> /best-practices
+    // /api/_index -> /api
+    // /ai/_index -> /ai
+    {
+      linkPattern: "/{namespace}/{...folders}/_index",
+      targetPattern: "/{curLang}/{namespace}/{folders}",
+      conditions: {
+        namespace: ["tidb-cloud", "develop", "best-practices", "api", "ai"],
+      },
+      namespaceTransform: {
+        "tidb-cloud": "tidbcloud",
+        develop: "developer",
+      },
+    },
     // /{namespace}/{...any}/{docname} -> /{curLang}/{namespace}/{docname}
     // Special: tidb-cloud -> tidbcloud, develop -> developer
     {
@@ -82,6 +91,14 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     // Rule 4: tidb with branch pages (path-based mapping)
     // Current page: /{lang}/tidb/{branch}/{...any} (branch is already aliased, e.g., "stable", "v8.5")
     // Link: /{...any}/{docname} -> /{lang}/tidb/{branch}/{docname}
+    {
+      pathPattern: "/{lang}/{repo}/{branch}/{...any}",
+      pathConditions: {
+        repo: ["tidb", "tidb-in-kubernetes"],
+      },
+      linkPattern: "/{...folders}/_index",
+      targetPattern: "/{lang}/{repo}/{branch}/{folders}",
+    },
     {
       pathPattern: "/{lang}/{repo}/{branch}/{...any}",
       pathConditions: {

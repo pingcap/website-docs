@@ -155,12 +155,18 @@ export function resolveMarkdownLink(
       }
     } else {
       // Path-based mapping: match current page path first, then link path
-      let pageVars = matchPattern(rule.pathPattern, currentPageSegments);
-      if (
-        !pageVars &&
-        currentPageSegmentsWithDefaultLang !== currentPageSegments
-      ) {
-        pageVars = matchPattern(rule.pathPattern, currentPageSegmentsWithDefaultLang);
+      // Prefer matching with an inferred default language prefix when the current URL omits it.
+      // This avoids false-positive matches where "{lang}" accidentally matches the repo segment
+      // (for example, "/tidb/dev/..." would otherwise match "{lang}={tidb}").
+      let pageVars: Record<string, string> | null = null;
+      if (currentPageSegmentsWithDefaultLang !== currentPageSegments) {
+        pageVars = matchPattern(
+          rule.pathPattern,
+          currentPageSegmentsWithDefaultLang
+        );
+      }
+      if (!pageVars) {
+        pageVars = matchPattern(rule.pathPattern, currentPageSegments);
       }
       if (!pageVars) {
         continue;
