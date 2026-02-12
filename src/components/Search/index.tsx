@@ -76,16 +76,11 @@ export default function Search(props: {
 
     if (searchType === SearchType.Onsite) {
       gtmTrack(GTMEvent.UseOnsiteSearch);
-      navigate(
-        `/search/?type=${docInfo.type}&version=${docInfo.version}&q=${q}`,
-        {
-          state: {
-            type: docInfo.type,
-            version: docInfo.version,
-            query: query,
-          },
-        }
-      );
+      navigate(`/search/?q=${q}`, {
+        state: {
+          query: query,
+        },
+      });
       onSubmit?.(query);
       return;
     }
