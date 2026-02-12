@@ -217,7 +217,8 @@ function DocTemplate({
         title={`${frontmatter.title}${
           !!pathConfig.version &&
           pathConfig.version !== "stable" &&
-          namespace !== TOCNamespace.Home
+          (namespace === TOCNamespace.TiDB ||
+            namespace === TOCNamespace.TiDBInKubernetes)
             ? ` - ${pathConfig.version}`
             : ""
         }`}
