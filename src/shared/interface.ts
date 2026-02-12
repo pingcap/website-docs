@@ -9,6 +9,40 @@ export interface TableOfContent {
   };
 }
 
+export enum TOCNamespace {
+  Home = "home",
+  NotFound = "not-found",
+  Search = "search",
+  CloudAPIApp = "cloud-api-app",
+  TiDB = "tidb",
+  TiDBCloud = "tidb-cloud",
+  TiDBInKubernetes = "tidb-in-kubernetes",
+  AI = "ai",
+  Develop = "develop",
+  BestPractices = "best-practices",
+  API = "api",
+  TiDBReleases = "tidb-releases",
+  TidbCloudReleases = "tidb-cloud-releases",
+  TiDBInKubernetesReleases = "tidb-in-kubernetes-releases",
+}
+
+export const TOCNamespaceSlugMap: Record<TOCNamespace, string> = {
+  [TOCNamespace.Home]: "",
+  [TOCNamespace.NotFound]: "",
+  [TOCNamespace.Search]: "",
+  [TOCNamespace.CloudAPIApp]: "",
+  [TOCNamespace.TiDB]: "",
+  [TOCNamespace.TiDBCloud]: "",
+  [TOCNamespace.TiDBInKubernetes]: "",
+  [TOCNamespace.AI]: "ai",
+  [TOCNamespace.Develop]: "develop",
+  [TOCNamespace.BestPractices]: "best-practices",
+  [TOCNamespace.API]: "api",
+  [TOCNamespace.TiDBReleases]: "tidb-releases",
+  [TOCNamespace.TidbCloudReleases]: "tidb-cloud-releases",
+  [TOCNamespace.TiDBInKubernetesReleases]: "tidb-operator-releases",
+};
+
 export enum Repo {
   tidb = "tidb",
   dm = "tidb-data-migration",
@@ -68,4 +102,9 @@ export type RepoNav = RepoNavLink[];
 
 export type BuildType = "prod" | "archive";
 
-export type CloudPlan = "dedicated" | "starter" | "essential" | "premium";
+export enum CloudPlan {
+  Dedicated = "dedicated",
+  Starter = "starter",
+  Essential = "essential",
+  Premium = "premium",
+}

@@ -1,22 +1,31 @@
 import * as React from "react";
-import { useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { RepoNav, PathConfig, BuildType } from "shared/interface";
+import {
+  RepoNav,
+  PathConfig,
+  BuildType,
+  TOCNamespace,
+  CloudPlan,
+} from "shared/interface";
+import { NavItemConfig } from "../Header/HeaderNavConfigType";
 import LinkComponent from "components/Link";
-import LeftNavTree from "./LeftNavTree";
+import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "../VersionSelect/VersionSelect";
+import { LeftNavStickyContainer } from "../VersionSelect/SharedSelect";
+import { getHeaderStickyHeight } from "shared/headerHeight";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
-import CloudVersionSelect from "../VersionSelect/CloudVersionSelect";
 
 interface LeftNavProps {
   data: RepoNav;
@@ -26,7 +35,10 @@ interface LeftNavProps {
   availIn: string[];
   buildType?: BuildType;
   bannerEnabled?: boolean;
-  availablePlans: string[];
+  availablePlans: CloudPlan[];
+  selectedNavItem?: NavItemConfig | null;
+  language?: string;
+  namespace?: TOCNamespace;
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
@@ -37,8 +49,10 @@ export function LeftNavDesktop(props: LeftNavProps) {
     pathConfig,
     availIn,
     buildType,
-    availablePlans,
+    selectedNavItem,
+    namespace,
   } = props;
+  const theme = useTheme();
 
   return (
     <Box
@@ -55,31 +69,78 @@ export function LeftNavDesktop(props: LeftNavProps) {
       <Box
         sx={{
           position: "sticky",
-          top: props.bannerEnabled ? "7.5rem" : "5rem",
+          top: getHeaderStickyHeight(props.bannerEnabled || false),
           height: "100%",
-          maxHeight: `calc(100vh - ${props.bannerEnabled ? "7.5rem" : "5rem"})`,
+          maxHeight: `calc(100vh - ${getHeaderStickyHeight(
+            props.bannerEnabled || false
+          )})`,
           boxSizing: "border-box",
           overflowY: "auto",
-          padding: "20px 14px",
+          padding: "0 16px 20px",
         }}
       >
-        {pathConfig.repo !== "tidbcloud" && (
-          <VersionSelect
-            name={name}
-            pathConfig={pathConfig}
-            availIn={availIn}
-            buildType={buildType}
-          />
-        )}
-        {pathConfig.repo === "tidbcloud" && (
-          <CloudVersionSelect
-            name={name}
-            pathConfig={pathConfig}
-            availIn={availIn}
-            buildType={buildType}
-            availablePlans={availablePlans}
-          />
-        )}
+        <LeftNavStickyContainer top={0} paddingTop="20px">
+          {selectedNavItem && (
+            <Box
+              sx={{
+                borderRadius: "4px",
+                "&:hover": {
+                  backgroundColor: theme.palette.carbon[200],
+                },
+              }}
+            >
+              <LinkComponent
+                isI18n={selectedNavItem.isI18n ?? true}
+                to={selectedNavItem.to}
+                style={{ textDecoration: "none", display: "block" }}
+                onClick={() => {
+                  clearAllNavStates();
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    color: theme.palette.carbon[900],
+                    padding: "8px",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  {selectedNavItem.leftNavLabel ?? selectedNavItem.label}
+                  {selectedNavItem.endIcon && (
+                    <Box
+                      component="span"
+                      sx={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {selectedNavItem.endIcon}
+                    </Box>
+                  )}
+                </Typography>
+              </LinkComponent>
+            </Box>
+          )}
+
+          {(namespace === TOCNamespace.TiDB ||
+            namespace === TOCNamespace.TiDBInKubernetes) && (
+            <Box marginTop={1}>
+              <VersionSelect
+                name={name}
+                pathConfig={pathConfig}
+                availIn={availIn}
+                buildType={buildType}
+                disableStickyContainer
+              />
+            </Box>
+          )}
+        </LeftNavStickyContainer>
+
         <LeftNavTree data={data} current={current} />
       </Box>
     </Box>
@@ -87,11 +148,10 @@ export function LeftNavDesktop(props: LeftNavProps) {
 }
 
 export function LeftNavMobile(props: LeftNavProps) {
-  const { data, current, name, pathConfig, availIn, buildType } = props;
+  const { data, current, name, pathConfig, availIn, buildType, namespace } =
+    props;
 
   const [open, setOpen] = React.useState(false);
-
-  const { language } = useI18next();
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -119,7 +179,7 @@ export function LeftNavMobile(props: LeftNavProps) {
         <MenuIcon />
       </IconButton>
       <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-        <Box sx={{ width: "17.125rem", padding: "0.625rem" }}>
+        <Box sx={{ padding: "0.625rem" }}>
           <Stack
             direction="row"
             sx={{
@@ -137,7 +197,8 @@ export function LeftNavMobile(props: LeftNavProps) {
                 paddingLeft: "1.25rem",
               }}
             />
-            {pathConfig.repo !== "tidbcloud" && (
+            {(namespace === TOCNamespace.TiDB ||
+              namespace === TOCNamespace.TiDBInKubernetes) && (
               <NativeVersionSelect
                 name={name}
                 pathConfig={pathConfig}

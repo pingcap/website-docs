@@ -3,14 +3,16 @@ import { resolve } from "path";
 import type { CreatePagesArgs } from "gatsby";
 import sig from "signale";
 
-import { Locale, Repo, BuildType } from "../../src/shared/interface";
 import {
-  generateConfig,
-  generateUrl,
-  generateNav,
-  generateStarterNav,
-  generateEssentialNav,
-} from "../../gatsby/path";
+  Locale,
+  Repo,
+  BuildType,
+  TOCNamespaceSlugMap,
+  TOCNamespace,
+} from "../../src/shared/interface";
+import { generateConfig, generateNavTOCPath } from "../../gatsby/path";
+import { getTOCNamespace } from "../../gatsby/toc-namespace";
+import { calculateFileUrl } from "../../gatsby/url-resolver";
 import { cpMarkdown } from "../../gatsby/cp-markdown";
 import {
   getTidbCloudFilesFromTocs,
@@ -28,7 +30,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   const template = resolve(__dirname, "../../src/templates/DocTemplate.tsx");
 
   // First, get the list of files that should be built based on TOC content
-  const tocFilesMap = await getFilesFromTocs(graphql);
+  const { tocFilesMap, tocNamesByFileMap } = await getFilesFromTocs(graphql);
 
   // Get tidbcloud specific TOC files for plan determination
   const tidbCloudTocFilesMap = await getTidbCloudFilesFromTocs(graphql);
@@ -69,7 +71,8 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       const { config, name, filePath } = generateConfig(node.slug);
       return { ...node, pathConfig: config, name, filePath };
     }),
-    tocFilesMap
+    tocFilesMap,
+    tocNamesByFileMap
   );
 
   sig.info(
@@ -106,16 +109,28 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   );
 
   nodes.forEach((node) => {
-    const { id, name, pathConfig, filePath } = node;
+    const { id, name, pathConfig, filePath, tocNames } = node;
 
     if (name?.startsWith("_")) {
       return;
     }
 
-    const path = generateUrl(name, pathConfig);
-    const navUrl = generateNav(pathConfig);
-    const starterNavUrl = generateStarterNav(pathConfig);
-    const essentialNavUrl = generateEssentialNav(pathConfig);
+    const path = calculateFileUrl(node.slug, true);
+    if (!path) {
+      console.info(
+        `Failed to calculate URL for ${node.slug}, filePath: ${filePath}`
+      );
+      return;
+    }
+
+    const namespace = getTOCNamespace(node.slug);
+    const namespaceSlug = TOCNamespaceSlugMap[namespace || TOCNamespace.TiDB];
+    const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
+    const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
+    const essentialNavUrl = generateNavTOCPath(
+      pathConfig,
+      "tidb-cloud-essential"
+    );
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
@@ -142,6 +157,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         pathConfig,
         // use for edit in github
         filePath,
+        tocNames,
         pageUrl: path,
         navUrl,
         starterNavUrl,
@@ -157,6 +173,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
           feedback: true,
         },
         inDefaultPlan,
+        namespace,
       },
     });
 

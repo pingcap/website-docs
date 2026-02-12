@@ -22,13 +22,18 @@ import {
   BuildType,
   Locale,
   CloudPlan,
+  TOCNamespace,
 } from "shared/interface";
 import Seo from "components/Seo";
-import { getStable, generateUrl, getPageType } from "shared/utils";
+import { getStable, generateUrl } from "shared/utils";
+import { NavItemConfig } from "components/Layout/Header/HeaderNavConfigType";
+import { generateNavConfig } from "components/Layout/Header/HeaderNavConfigData";
+import { getSelectedNavItem } from "components/Layout/Header/getSelectedNavItem";
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
 import { DOC_HOME_URL } from "shared/resources";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { useReportReadingRate } from "shared/useReportReadingRate";
 import {
   CloudPlanProvider,
@@ -47,7 +52,9 @@ interface DocTemplateProps {
       banner?: boolean;
       feedback?: boolean;
     };
-    inDefaultPlan: string | null;
+    inDefaultPlan?: CloudPlan | null;
+    tocNames?: string[] | null;
+    namespace: TOCNamespace;
   };
   data: {
     site: {
@@ -75,7 +82,7 @@ interface DocTemplateProps {
 
 const DocTemplateWithProvider = (props: DocTemplateProps) => {
   const [cloudPlan, setCloudPlan] = React.useState<CloudPlan | null>(
-    props.pageContext.inDefaultPlan as CloudPlan | null
+    props.pageContext.inDefaultPlan ?? null
   );
   return (
     <CloudPlanProvider
@@ -102,6 +109,8 @@ function DocTemplate({
     buildType,
     feature,
     inDefaultPlan,
+    tocNames,
+    namespace,
   },
   data,
 }: DocTemplateProps) {
@@ -112,8 +121,14 @@ function DocTemplate({
     essentialNavigation: essentialNav,
   } = data;
 
-  const { cloudPlan, isStarter, isEssential } = useCloudPlan();
-  useCloudPlanNavigate(pathConfig.repo, inDefaultPlan);
+  const { cloudPlan, setCloudPlan, isStarter, isEssential } = useCloudPlan();
+  useCloudPlanNavigate(
+    namespace,
+    inDefaultPlan ?? null,
+    tocNames,
+    cloudPlan,
+    setCloudPlan
+  );
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
@@ -121,26 +136,27 @@ function DocTemplate({
   const essentialNavigation = essentialNav
     ? essentialNav.essentialNavigation
     : [];
-  const navigation = filterTOC(
-    isStarter
+  const navigationByNamespace =
+    namespace !== TOCNamespace.TiDBCloud
+      ? classicNavigation
+      : isStarter
       ? starterNavigation
       : isEssential
       ? essentialNavigation
-      : classicNavigation
-  );
+      : classicNavigation;
+  const navigation = filterTOC(navigationByNamespace);
 
-  const { language } = useI18next();
+  const { language, t } = useI18next();
   const haveStarter = starterNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
-  const availablePlans = ["dedicated"];
+  const availablePlans: CloudPlan[] = [CloudPlan.Dedicated];
   if (haveStarter) {
-    availablePlans.push("starter");
+    availablePlans.push(CloudPlan.Starter);
   }
   if (haveEssential) {
-    availablePlans.push("essential");
+    availablePlans.push(CloudPlan.Essential);
   }
 
-  const pageType = getPageType(language, pageUrl);
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
     let tocItems: TableOfContent[] = [];
     if (toc?.items?.length === 1) {
@@ -150,13 +166,25 @@ function DocTemplate({
     }
 
     // Filter TOC based on CustomContent conditions
-    return filterRightToc(tocItems, pageType, cloudPlan, language);
-  }, [toc, pageType, cloudPlan, language]);
+    return filterRightToc(tocItems, namespace, cloudPlan, language);
+  }, [toc, namespace, cloudPlan, language]);
 
   const stableBranch = getStable(pathConfig.repo);
 
-  const bannerVisible = feature?.banner;
+  const isAutoTranslation = useIsAutoTranslation(namespace);
+  const bannerVisible =
+    buildType === "archive" || isAutoTranslation || feature?.banner;
   const isGlobalHome = !!feature?.globalHome;
+
+  const selectedNavItem = React.useMemo<NavItemConfig | null>(() => {
+    const headerNavConfig = generateNavConfig(
+      t,
+      cloudPlan,
+      buildType,
+      language
+    );
+    return getSelectedNavItem(headerNavConfig, namespace);
+  }, [t, cloudPlan, buildType, language, namespace]);
 
   return (
     <Layout
@@ -164,7 +192,6 @@ function DocTemplate({
       pathConfig={pathConfig}
       locales={availIn.locale}
       bannerEnabled={bannerVisible}
-      pageUrl={pageUrl}
       menu={
         frontmatter?.hide_leftNav ? null : (
           <LeftNavMobile
@@ -174,6 +201,7 @@ function DocTemplate({
             pathConfig={pathConfig}
             availIn={availIn.version}
             availablePlans={availablePlans}
+            namespace={namespace}
           />
         )
       }
@@ -182,10 +210,15 @@ function DocTemplate({
         type: pathConfig.repo,
       }}
       buildType={buildType}
+      namespace={namespace}
     >
       <Seo
         lang={language as Locale}
-        title={frontmatter.title}
+        title={`${frontmatter.title}${
+          !!pathConfig.version && pathConfig.version !== "stable"
+            ? ` - ${pathConfig.version}`
+            : ""
+        }`}
         description={frontmatter.summary}
         meta={[
           {
@@ -218,7 +251,9 @@ function DocTemplate({
         archived={buildType === "archive"}
       />
       <Box
-        sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", display: "flex" }}
+        sx={{
+          display: "flex",
+        }}
         className={clsx("PingCAP-Doc", {
           "doc-feature-banner": bannerVisible,
         })}
@@ -234,6 +269,8 @@ function DocTemplate({
               buildType={buildType}
               bannerEnabled={bannerVisible}
               availablePlans={availablePlans}
+              selectedNavItem={selectedNavItem}
+              namespace={namespace}
             />
           )}
           <Box
@@ -291,6 +328,7 @@ function DocTemplate({
                     buildType={buildType}
                     pageUrl={pageUrl}
                     cloudPlan={cloudPlan}
+                    namespace={namespace}
                   />
                   {!frontmatter?.hide_commit && buildType !== "archive" && (
                     <GitCommitInfoCard

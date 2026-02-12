@@ -31,7 +31,7 @@ const StyledTextField = styled((props: TextFieldProps) => (
   },
 }));
 
-const SEARCH_WIDTH = 250;
+const SEARCH_WIDTH = 400;
 
 enum SearchType {
   Onsite = "onsite",

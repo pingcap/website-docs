@@ -12,15 +12,15 @@
 
   /* Carbon */
   --tiui-palette-carbon-50: #ffffff;
-  --tiui-palette-carbon-100: #fbfdfd;
-  --tiui-palette-carbon-200: #f5f8fa;
-  --tiui-palette-carbon-300: #edf0f1;
-  --tiui-palette-carbon-400: #e3e8ea;
-  --tiui-palette-carbon-500: #c8ced0;
-  --tiui-palette-carbon-600: #9faaad;
-  --tiui-palette-carbon-700: #6c7679;
-  --tiui-palette-carbon-800: #3d4143;
-  --tiui-palette-carbon-900: #262a2c;
+  --tiui-palette-carbon-100: #fdfeff;
+  --tiui-palette-carbon-200: #f9fafb;
+  --tiui-palette-carbon-300: #edf1f2;
+  --tiui-palette-carbon-400: #c4cdd0;
+  --tiui-palette-carbon-500: #9fa9ad;
+  --tiui-palette-carbon-600: #6f787b;
+  --tiui-palette-carbon-700: #383e40;
+  --tiui-palette-carbon-800: #1e2426;
+  --tiui-palette-carbon-900: #1e2426;
 
   /* Peacock */
   --tiui-palette-peacock-50: #fbfdfe;

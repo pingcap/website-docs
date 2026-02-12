@@ -71,10 +71,12 @@ const VersionItems = (props: {
   return (
     <>
       <MenuItem
+        disableRipple
         key={`menu-dev`}
         value={`menu-dev`}
         hidden={shouldHideDevMemo}
         disabled={!availIn.includes(`dev`)}
+        selected={pathConfig.version === "dev"}
         component={LinkComponent}
         isI18n
         to={`/${pathConfig.repo}/dev/${name}`}
@@ -90,7 +92,7 @@ const VersionItems = (props: {
         </Typography>
       </MenuItem>
 
-      <Divider sx={{ margin: "4px 0" }} />
+      <Divider />
 
       {pathConfig.repo === "tidb" && (
         <FormLabel
@@ -100,7 +102,6 @@ const VersionItems = (props: {
             lineHeight: "1.25rem",
             color: "#6F787B",
             pl: "12px",
-            mb: "8px",
           }}
         >
           Long-Term Support
@@ -108,9 +109,11 @@ const VersionItems = (props: {
       )}
       {LTSVersions.map((version) => (
         <MenuItem
+          disableRipple
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          selected={pathConfig.version === version}
           component={LinkComponent}
           isI18n
           to={`/${pathConfig.repo}/${version}/${name}`}
@@ -127,7 +130,7 @@ const VersionItems = (props: {
         </MenuItem>
       ))}
 
-      <Divider sx={{ margin: "4px 0" }} />
+      <Divider />
 
       {pathConfig.repo === "tidb" && DMRVersions.length > 0 && (
         <>
@@ -145,9 +148,11 @@ const VersionItems = (props: {
           </FormLabel>
           {DMRVersions.map((version) => (
             <MenuItem
+              disableRipple
               key={`menu-${version}`}
               value={`menu-${version}`}
               disabled={!availIn.includes(version || "")}
+              selected={pathConfig.version === version}
               component={LinkComponent}
               isI18n
               to={`/${pathConfig.repo}/${version}/${name}`}
@@ -163,11 +168,12 @@ const VersionItems = (props: {
               </Typography>
             </MenuItem>
           ))}
-          <Divider sx={{ margin: "4px 0" }} />
+          <Divider />
         </>
       )}
 
       <MenuItem
+        disableRipple
         component={LinkComponent}
         isI18n
         to={generateArchivedWebsiteUrlByLangAndType(language, pathConfig.repo)}
@@ -213,9 +219,11 @@ const VersionItemsArchived = (props: {
       </FormLabel>
       {archiveList.map((version) => (
         <MenuItem
+          disableRipple
           key={`menu-${version}`}
           value={`menu-${version}`}
           disabled={!availIn.includes(version || "")}
+          selected={pathConfig.version === version}
           component={LinkComponent}
           isI18n
           to={`/${pathConfig.repo}/${version}/${name}`}
@@ -240,10 +248,11 @@ interface VersionSelectProps {
   pathConfig: PathConfig;
   availIn: string[];
   buildType?: BuildType;
+  disableStickyContainer?: boolean;
 }
 
 export default function VersionSelect(props: VersionSelectProps) {
-  const { name, pathConfig, availIn, buildType } = props;
+  const { name, pathConfig, availIn, buildType, disableStickyContainer } = props;
   const anchorEl = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);
@@ -251,7 +260,12 @@ export default function VersionSelect(props: VersionSelectProps) {
 
   return (
     <>
-      <VersionSelectButton open={open} handleClick={handleClick} ref={anchorEl}>
+      <VersionSelectButton
+        open={open}
+        handleClick={handleClick}
+        ref={anchorEl}
+        disableStickyContainer={disableStickyContainer}
+      >
         <Typography
           component="div"
           sx={{
@@ -332,7 +346,7 @@ export function NativeVersionSelect(props: VersionSelectProps) {
 
   return (
     <>
-      <FormControl sx={{ m: 1 }} variant="standard">
+      <FormControl variant="standard">
         <NativeSelect
           id="version-select-native"
           value={`${pathConfig.version}`}

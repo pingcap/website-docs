@@ -2,75 +2,16 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeView from "@mui/lab/TreeView";
-import TreeItem, { TreeItemProps, treeItemClasses } from "@mui/lab/TreeItem";
+import TreeItem from "@mui/lab/TreeItem";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { styled, useTheme } from "@mui/material/styles";
-import { SvgIconProps } from "@mui/material/SvgIcon";
+import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
 
 import { RepoNavLink, RepoNav } from "shared/interface";
 import LinkComponent from "components/Link";
 import { scrollToElementIfInView } from "shared/utils";
 import { alpha, Chip } from "@mui/material";
-
-type StyledTreeItemProps = TreeItemProps & {
-  bgColor?: string;
-  color?: string;
-  labelIcon?: React.ElementType<SvgIconProps>;
-  labelInfo?: string;
-  labelText?: string;
-};
-
-const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
-  [`& .${treeItemClasses.content}`]: {
-    color: theme.palette.website.f1,
-    "&:hover": {
-      backgroundColor: theme.palette.carbon[200],
-    },
-    "&.Mui-selected, &.Mui-selected.Mui-focused, &.Mui-selected:hover": {
-      backgroundColor: theme.palette.carbon[300],
-      color: theme.palette.secondary.main,
-      [`& svg.MuiTreeItem-ChevronRightIcon`]: {
-        fill: theme.palette.carbon[700],
-      },
-    },
-    "&.Mui-focused": {
-      backgroundColor: `#f9f9f9`,
-    },
-    [`& .${treeItemClasses.label}`]: {
-      fontWeight: "inherit",
-      color: "inherit",
-      paddingLeft: 0,
-    },
-    [`& .${treeItemClasses.iconContainer}`]: {
-      display: "none",
-    },
-  },
-  [`& .${treeItemClasses.group}`]: {
-    marginLeft: 0,
-  },
-}));
-
-function StyledTreeItem(props: StyledTreeItemProps) {
-  const {
-    bgColor,
-    color,
-    labelIcon: LabelIcon,
-    labelInfo,
-    labelText,
-    ...other
-  } = props;
-
-  return (
-    <StyledTreeItemRoot
-      style={{
-        marginTop: "4px",
-        marginBottom: "4px",
-      }}
-      {...other}
-    />
-  );
-}
 
 const calcExpandedIds = (
   data: RepoNavLink[],
@@ -99,6 +40,10 @@ const calcExpandedIds = (
 
 // Session storage key prefix for nav item id
 const NAV_ITEM_ID_STORAGE_KEY = "nav_item_id_";
+// Session storage key prefix for scroll position
+const NAV_SCROLL_POSITION_STORAGE_KEY = "nav_scroll_position_";
+// Session storage key prefix for expanded tree nodes
+const NAV_EXPANDED_IDS_STORAGE_KEY = "nav_expanded_ids_";
 
 // Get nav item id from session storage for a given path
 const getNavItemIdFromStorage = (path: string): string | null => {
@@ -115,6 +60,113 @@ const saveNavItemIdToStorage = (path: string, id: string): void => {
   if (typeof window === "undefined") return;
   try {
     sessionStorage.setItem(`${NAV_ITEM_ID_STORAGE_KEY}${path}`, id);
+  } catch {
+    // Ignore storage errors
+  }
+};
+
+// Get scroll position from session storage for a given path
+const getScrollPositionFromStorage = (path: string): number | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = sessionStorage.getItem(
+      `${NAV_SCROLL_POSITION_STORAGE_KEY}${path}`
+    );
+    return value ? parseInt(value, 10) : null;
+  } catch {
+    return null;
+  }
+};
+
+// Save scroll position to session storage for a given path
+const saveScrollPositionToStorage = (path: string, scrollTop: number): void => {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(
+      `${NAV_SCROLL_POSITION_STORAGE_KEY}${path}`,
+      scrollTop.toString()
+    );
+  } catch {
+    // Ignore storage errors
+  }
+};
+
+// Get expanded IDs from session storage for a given path
+const getExpandedIdsFromStorage = (path: string): string[] | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = sessionStorage.getItem(
+      `${NAV_EXPANDED_IDS_STORAGE_KEY}${path}`
+    );
+    return value ? JSON.parse(value) : null;
+  } catch {
+    return null;
+  }
+};
+
+// Save expanded IDs to session storage for a given path
+const saveExpandedIdsToStorage = (
+  path: string,
+  expandedIds: string[]
+): void => {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(
+      `${NAV_EXPANDED_IDS_STORAGE_KEY}${path}`,
+      JSON.stringify(expandedIds)
+    );
+  } catch {
+    // Ignore storage errors
+  }
+};
+
+// Get the scrollable container element
+const getScrollableContainer = (): HTMLElement | null => {
+  if (typeof document === "undefined") return null;
+  const treeView = document.querySelector("#left-nav-treeview");
+  if (!treeView) return null;
+
+  // Find the nearest scrollable parent
+  let parent = treeView.parentElement;
+  while (parent) {
+    const style = window.getComputedStyle(parent);
+    if (style.overflowY === "auto" || style.overflowY === "scroll") {
+      return parent;
+    }
+    parent = parent.parentElement;
+  }
+  return null;
+};
+
+// Clear all navigation state from session storage for a given path
+export const clearNavState = (path: string): void => {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.removeItem(`${NAV_ITEM_ID_STORAGE_KEY}${path}`);
+    sessionStorage.removeItem(`${NAV_SCROLL_POSITION_STORAGE_KEY}${path}`);
+    sessionStorage.removeItem(`${NAV_EXPANDED_IDS_STORAGE_KEY}${path}`);
+  } catch {
+    // Ignore storage errors
+  }
+};
+
+// Clear all navigation states from session storage (for all paths)
+export const clearAllNavStates = (): void => {
+  if (typeof window === "undefined") return;
+  try {
+    const keysToRemove: string[] = [];
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      if (
+        key &&
+        (key.startsWith(NAV_ITEM_ID_STORAGE_KEY) ||
+          key.startsWith(NAV_SCROLL_POSITION_STORAGE_KEY) ||
+          key.startsWith(NAV_EXPANDED_IDS_STORAGE_KEY))
+      ) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((key) => sessionStorage.removeItem(key));
   } catch {
     // Ignore storage errors
   }
@@ -138,16 +190,43 @@ export default function ControlledTreeView(props: {
   });
 
   const theme = useTheme();
+  const [disableTransition, setDisableTransition] = React.useState(false);
+  const previousUrlRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     const storedId = getNavItemIdFromStorage(currentUrl);
-    const expandedIds = calcExpandedIds(
-      data,
-      currentUrl,
-      storedId || undefined
-    );
+    // Try to get saved expanded IDs first
+    const savedExpandedIds = getExpandedIdsFromStorage(currentUrl);
+
+    let expandedIds: string[];
+    let selectedId: string | undefined;
+    const isUrlChanged = previousUrlRef.current !== currentUrl;
+    previousUrlRef.current = currentUrl;
+
+    if (savedExpandedIds && savedExpandedIds.length > 0) {
+      // Use saved expanded IDs if available
+      expandedIds = savedExpandedIds;
+      // Use storedId for selected if available, otherwise use the last expanded ID
+      selectedId = storedId || undefined;
+
+      // Disable transition animation only when restoring saved state and URL changed
+      if (isUrlChanged) {
+        setDisableTransition(true);
+        // Re-enable transitions after a short delay
+        setTimeout(() => {
+          setDisableTransition(false);
+        }, 100);
+      }
+    } else {
+      // Fallback to calculating from current URL
+      expandedIds = calcExpandedIds(data, currentUrl, storedId || undefined);
+      selectedId = storedId || undefined;
+    }
+
     setExpanded(expandedIds);
-    expandedIds.length && setSelected([expandedIds[expandedIds.length - 1]]);
+    if (selectedId) {
+      setSelected([selectedId]);
+    }
   }, [data, currentUrl]);
 
   // ! Add "auto scroll" to left nav is not recommended.
@@ -156,26 +235,43 @@ export default function ControlledTreeView(props: {
       | (HTMLElement & { scrollIntoViewIfNeeded: () => void })
       | null = document?.querySelector(".MuiTreeView-root .Mui-selected");
     if (targetActiveItem) {
-      scrollToElementIfInView(targetActiveItem);
+      // Check if there's a saved scroll position for this URL
+      const savedScrollPosition = getScrollPositionFromStorage(currentUrl);
+      const scrollContainer = getScrollableContainer();
+
+      if (savedScrollPosition !== null && scrollContainer) {
+        // Restore scroll position
+        scrollContainer.scrollTop = savedScrollPosition;
+      } else {
+        // Fallback to original behavior
+        scrollToElementIfInView(targetActiveItem);
+      }
     }
-  }, [selected]);
+  }, [selected, currentUrl]);
 
   const renderNavs = (items: RepoNavLink[]) => {
     return items.map((item) => {
       if (item.type === "heading") {
         return (
-          <Typography
-            pl="8px"
-            mb="8px"
-            mt="16px"
-            fontWeight={700}
-            fontSize="12px"
-            lineHeight="1.15rem"
-            color="#666"
-            sx={{ textTransform: "uppercase" }}
+          <Box
+            key={item.id || `heading-${item.content[0]}`}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              my: "16px",
+            }}
           >
-            {item.content[0] as string}
-          </Typography>
+            <Typography
+              pl="8px"
+              fontWeight={300}
+              fontSize="14px"
+              color="carbon.700"
+              sx={{ textTransform: "uppercase", flexShrink: 0 }}
+            >
+              {item.content[0] as string}
+            </Typography>
+            <Divider sx={{ flexGrow: 1, ml: "10px" }} />
+          </Box>
         );
       } else {
         return renderTreeItems([item]);
@@ -231,10 +327,22 @@ export default function ControlledTreeView(props: {
             // Save nav item id to session storage when clicked
             if (item.link) {
               saveNavItemIdToStorage(item.link, item.id);
+
+              // Save scroll position to session storage
+              const scrollContainer = getScrollableContainer();
+              if (scrollContainer) {
+                saveScrollPositionToStorage(
+                  item.link,
+                  scrollContainer.scrollTop
+                );
+              }
+
+              // Save expanded IDs to session storage
+              saveExpandedIdsToStorage(item.link, expanded);
             }
           }}
         >
-          <StyledTreeItem
+          <TreeItem
             nodeId={item.id}
             label={<LabelEle />}
             ContentProps={{
@@ -244,7 +352,7 @@ export default function ControlledTreeView(props: {
             {hasChildren
               ? renderTreeItems(item.children as RepoNavLink[], deepth + 1)
               : null}
-          </StyledTreeItem>
+          </TreeItem>
         </LinkComponent>
       );
     });
@@ -252,6 +360,10 @@ export default function ControlledTreeView(props: {
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
+    // Save expanded IDs to session storage when toggled
+    if (currentUrl) {
+      saveExpandedIdsToStorage(currentUrl, nodeIds);
+    }
   };
 
   return (
@@ -261,6 +373,16 @@ export default function ControlledTreeView(props: {
       expanded={expanded}
       selected={selected}
       onNodeToggle={handleToggle}
+      sx={{
+        ...(disableTransition && {
+          "& .MuiTreeItem-group": {
+            transition: "none !important",
+          },
+          "& .MuiCollapse-root": {
+            transition: "none !important",
+          },
+        }),
+      }}
     >
       {renderNavs(data)}
     </TreeView>
@@ -286,6 +408,7 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
           const c = isContentString ? content : content.value;
           return (
             <Typography
+              key={`${c}_${index}`}
               component={typeof content === "string" ? "div" : "code"}
               sx={{
                 color: "inherit",

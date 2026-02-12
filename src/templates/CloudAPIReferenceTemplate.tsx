@@ -4,8 +4,10 @@ import Box from "@mui/material/Box";
 
 import Seo from "components/Seo";
 import Layout from "components/Layout";
-import { type BuildType, Locale } from "../shared/interface";
+import { type BuildType, Locale, TOCNamespace } from "../shared/interface";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
+import { getHeaderStickyHeight } from "shared/headerHeight";
 
 declare const Redoc: any;
 
@@ -58,7 +60,11 @@ export default function APIReferenceTemplate({
   data,
 }: APIReferenceTemplateProps) {
   const { language } = useI18next();
-  const bannerVisible = feature?.banner && language !== Locale.ja;
+  const isAutoTranslation = useIsAutoTranslation(TOCNamespace.CloudAPIApp);
+  const bannerVisible =
+    buildType === "archive" ||
+    isAutoTranslation ||
+    (feature?.banner && language !== Locale.ja);
 
   const specUrl = isProduction ? production : preview;
 
@@ -78,7 +84,10 @@ export default function APIReferenceTemplate({
         specUrl,
         {
           schemaExpansionLevel: 3,
-          scrollYOffset: ".doc-site-header",
+          scrollYOffset: Number.parseInt(
+            getHeaderStickyHeight(bannerVisible || false),
+            10
+          ),
           theme: {
             logo: { maxHeight: 0, maxWidth: 0 },
           },
@@ -117,6 +126,7 @@ export default function APIReferenceTemplate({
         //   type: pathConfig.repo,
         // }}
         buildType={buildType}
+        namespace={TOCNamespace.CloudAPIApp}
       >
         <Seo
           title="TiDB Cloud API"
@@ -133,7 +143,9 @@ export default function APIReferenceTemplate({
           ]}
         />
         <Box
-          sx={{ marginTop: bannerVisible ? "7.5rem" : "5rem", width: "100%" }}
+          sx={{
+            width: "100%",
+          }}
         >
           <Box id="redoc-container" data-testid="redoc-container" />
         </Box>

@@ -1,6 +1,12 @@
-import { Locale, Repo, PathConfig, CloudPlan } from "../src/shared/interface";
-import CONFIG from "../docs/docs.json";
+import {
+  Locale,
+  Repo,
+  PathConfig,
+  CloudPlan,
+} from "../../src/shared/interface";
+import CONFIG from "../../docs/docs.json";
 
+// @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
 
@@ -27,16 +33,6 @@ export function generatePdfUrl(config: PathConfig) {
   }-manual.pdf`;
 }
 
-export function generateNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC`;
-}
-export function generateStarterNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-starter`;
-}
-export function generateEssentialNav(config: PathConfig) {
-  return `${config.locale}/${config.repo}/${config.branch}/TOC-tidb-cloud-essential`;
-}
-
 export function generateConfig(slug: string): {
   config: PathConfig;
   filePath: string;
@@ -60,10 +56,12 @@ export function generateConfig(slug: string): {
 
   // only index page should have a prefix, e.g. /tidbcloud/starter/
   if (repo === Repo.tidbcloud && !name && !slug.includes("dedicated/")) {
-    const simplePrefixes = ["starter", "essential", "premium"];
-    prefix = simplePrefixes.find((p) => slug.includes(`${p}/`)) as
-      | CloudPlan
-      | undefined;
+    const simplePrefixes = [
+      CloudPlan.Starter,
+      CloudPlan.Essential,
+      CloudPlan.Premium,
+    ] as const;
+    prefix = simplePrefixes.find((p) => slug.includes(`${p}/`));
   }
 
   return {
@@ -122,4 +120,10 @@ export function getRepo(config: PathConfig) {
   }
 
   throw new Error(`no ${config.locale} in repo ${config.repo}`);
+}
+
+export function generateNavTOCPath(config: PathConfig, postSlug: string) {
+  return `${config.locale}/${config.repo}/${config.branch}/TOC${
+    postSlug ? `-${postSlug}` : ""
+  }`;
 }

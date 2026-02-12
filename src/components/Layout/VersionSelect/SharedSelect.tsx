@@ -5,69 +5,88 @@ import { styled, alpha } from "@mui/material/styles";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { forwardRef } from "react";
 
+export const LeftNavStickyContainer = (
+  props: React.PropsWithChildren<{
+    top?: number | string;
+    paddingTop?: number | string;
+  }>
+) => {
+  const { top = "-20px", paddingTop = "20px", children } = props;
+  return (
+    <Box
+      sx={{
+        position: "sticky",
+        top,
+        backgroundColor: "#fff",
+        marginLeft: "-16px",
+        marginRight: "-16px",
+        paddingTop,
+        paddingLeft: "16px",
+        paddingRight: "16px",
+        zIndex: 1000,
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
 export const VersionSelectButton = forwardRef(
   (
     {
       open,
       handleClick,
       children,
+      disableStickyContainer,
     }: React.PropsWithChildren<{
       open: boolean;
       handleClick: () => void;
+      disableStickyContainer?: boolean;
     }>,
     ref
   ) => {
-    return (
-      <Box
+    const button = (
+      <Button
+        ref={ref as React.RefObject<HTMLButtonElement>}
         sx={{
-          position: "sticky",
-          top: "-20px",
-          backgroundColor: "#fff",
-          marginTop: "-20px",
-          marginLeft: "-16px",
-          marginRight: "-16px",
-          paddingTop: "20px",
-          paddingLeft: "16px",
-          paddingRight: "16px",
-          zIndex: 1000,
+          width: "100%",
+          height: "40px",
+          justifyContent: "space-between",
+          borderStyle: "solid",
+          borderWidth: "2px",
+          marginBottom: "1rem",
+          borderColor: open ? "#1E2426" : "#DCE3E5",
+          "&:hover": {
+            borderColor: "#9FA9AD",
+            backgroundColor: "#fff",
+          },
         }}
+        id="version-select-button"
+        aria-controls={open ? "verison-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        endIcon={
+          <ChevronRightIcon
+            sx={(theme) => ({
+              transform: open ? "rotate(90deg)" : "rotate(0deg)",
+              height: "16px",
+              width: "16px",
+              fill: theme.palette.website.f3,
+              marginRight: "0.25rem",
+            })}
+          />
+        }
       >
-        <Button
-          ref={ref as React.RefObject<HTMLButtonElement>}
-          sx={{
-            width: "100%",
-            height: "40px",
-            justifyContent: "space-between",
-            borderStyle: "solid",
-            borderWidth: "2px",
-            marginBottom: "1rem",
-            borderColor: open ? "#1E2426" : "#DCE3E5",
-            "&:hover": {
-              borderColor: "#9FA9AD",
-              backgroundColor: "#fff",
-            },
-          }}
-          id="version-select-button"
-          aria-controls={open ? "verison-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-          endIcon={
-            <ChevronRightIcon
-              sx={(theme) => ({
-                transform: open ? "rotate(90deg)" : "rotate(0deg)",
-                height: "16px",
-                width: "16px",
-                fill: theme.palette.website.f3,
-                marginRight: "0.25rem",
-              })}
-            />
-          }
-        >
-          {children}
-        </Button>
-      </Box>
+        {children}
+      </Button>
     );
+
+    if (disableStickyContainer) {
+      return button;
+    }
+
+    return <LeftNavStickyContainer>{button}</LeftNavStickyContainer>;
   }
 );
 
