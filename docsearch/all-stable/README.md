@@ -19,10 +19,9 @@ This makes search integration simpler when UI should query one index per languag
 - `all-stable/configs/en-all-stable-full.json`: English full crawl config (prod)
 - `all-stable/configs/zh-all-stable-full.json`: Chinese full crawl config (prod)
 - `all-stable/configs/runlist-incremental.json`: incremental config run order
-- `all-stable/configs/runlist-preview-full.json`: preview full config run order (separate from incremental)
 - `all-stable/configs/latest_commit.json`: incremental base commit state
 - `all-stable/scripts/crawl-full.sh`: production full crawl entry
-- `all-stable/scripts/crawl-preview-full.sh`: preview full prewarm entry (no sitemap dependency)
+- `all-stable/scripts/crawl-full-preview.sh`: preview full prewarm entry (sitemap mode)
 - `all-stable/scripts/check-crawl-errors.sh`: shared crawl-log error gate helper
 - `all-stable/scripts/crawl-incremental.sh`: incremental crawl entry
 - `all-stable/scripts/sync-latest-commit.sh`: commit-state sync helper
@@ -138,17 +137,21 @@ For all-stable full configs, we also set:
 
 This allows one production full run to include multiple URL prefixes into one language index.
 
-### Preview full prewarm mode (`crawl-preview-full.sh`)
+### Preview full prewarm mode (`crawl-full-preview.sh`)
 
-When preview site has no usable sitemap, prewarm runs each prefix config from `runlist-preview-full.json` in full mode (default):
+When preview sitemap is available, prewarm runs one aggregated full config per language:
 
-- injects `crawl_local_url` (preview domain)
-- clears `sitemap_urls` and `sitemap_urls_regexs`
-- sets `force_sitemap_urls_crawling` to `false`
+- `en-all-stable-full.json`
+- `zh-all-stable-full.json`
 
-This removes sitemap dependency and crawls each prefix from its root start URL.
+Runtime injection for preview mode:
 
-You can override the preview runlist by setting `PREVIEW_RUNLIST_FILE` (for example: `runlist-incremental.json`).
+- inject `crawl_local_url` (preview domain)
+- inject preview `sitemap_urls`
+- rewrite `sitemap_urls_regexs` host from `docs.pingcap.com` to preview host
+- keep `force_sitemap_urls_crawling: true`
+
+This keeps production full logic unchanged while avoiding multi-config full overwrite on the same index.
 
 ### Incremental mode (`crawl-incremental.sh`)
 
@@ -201,14 +204,14 @@ CRAWL_LANG=en \
 
 ## Preview Full Prewarm
 
-Preview full prewarm runs per-prefix full crawl and does not depend on preview sitemap:
+Preview full prewarm (sitemap mode) runs one aggregated full config per language:
 
 ```bash
 cd docsearch
 CRAWL_LANG=en \
 CRAWL_LOCAL_URL=https://docs.tidb.io/ \
-PREVIEW_RUNLIST_FILE=runlist-preview-full.json \
-./all-stable/scripts/crawl-preview-full.sh "$(pwd)/all-stable"
+PREVIEW_SITEMAP_URL=https://docs.tidb.io/sitemap/sitemap-index.xml \
+./all-stable/scripts/crawl-full-preview.sh "$(pwd)/all-stable"
 ```
 
 Notes:
@@ -231,7 +234,7 @@ Current scraper supports `crawl_local_url`. If set, crawler requests pages from 
 
 In this codebase, records written to Algolia replace `crawl_local_url` with `https://docs.pingcap.com/` in record URLs.
 
-Preview prewarm without sitemap is a practical fallback, but it can still miss isolated pages that are not reachable by link traversal from prefix root pages.
+Preview prewarm requires sitemap mode.
 
 ### Safety guidance
 
@@ -260,6 +263,7 @@ Production full workflow inputs:
 Preview full workflow inputs:
 
 - `preview_base_url`: preview domain base URL
+- `preview_sitemap_url`: preview sitemap index URL
 - `language`: `both`, `en`, or `zh`
 
 ### Runbook: Prewarm English on Preview Before Prod Go-live
@@ -273,6 +277,7 @@ Use this when:
 Run `.github/workflows/docsearch-all-stable-full-preview.yml` with:
 
 - `preview_base_url=https://docs.tidb.io/`
+- `preview_sitemap_url=https://docs.tidb.io/sitemap/sitemap-index.xml`
 - `language=en`
 
 Then run `.github/workflows/docsearch-all-stable-full.yml` with:
