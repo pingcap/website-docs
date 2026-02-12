@@ -191,12 +191,12 @@ module.exports = {
     // },
     `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-meta-redirect`,
-    // {
-    //   resolve: `gatsby-plugin-sitemap`,
-    //   options: {
-    //     excludes: ["/404", "/zh/404", "/search", "/zh/search"],
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: ["/404", "/zh/404", "/search", "/zh/search"],
+      },
+    },
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
