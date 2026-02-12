@@ -17,10 +17,10 @@ on:
           - both
           - en
           - zh
-      preview_runlist:
-        description: 'Preview runlist file under all-stable/configs'
+      preview_sitemap_url:
+        description: 'Preview sitemap index URL'
         required: true
-        default: runlist-preview-full.json
+        default: 'https://docs.tidb.io/sitemap/sitemap-index.xml'
         type: string
       scraper_repo:
         description: 'Docsearch-scraper repo used to patch workflow image'
@@ -69,10 +69,10 @@ jobs:
           export CRAWL_LANG="${{ inputs.language }}"
           PREVIEW_BASE_URL="${{ inputs.preview_base_url }}"
           export CRAWL_LOCAL_URL="${PREVIEW_BASE_URL%/}/"
-          export PREVIEW_RUNLIST_FILE="${{ inputs.preview_runlist }}"
+          export PREVIEW_SITEMAP_URL="${{ inputs.preview_sitemap_url }}"
 
           echo "Run preview full prewarm against: $CRAWL_LOCAL_URL"
-          echo "Use preview runlist file: $PREVIEW_RUNLIST_FILE"
+          echo "Use preview sitemap URL: $PREVIEW_SITEMAP_URL"
 
           preview_home_status="$(curl -sS -o /dev/null -w "%{http_code}" "$CRAWL_LOCAL_URL")"
           if [ "$preview_home_status" != "200" ]; then
@@ -85,6 +85,19 @@ jobs:
             exit 1
           fi
 
+          preview_sitemap_probe="$(curl -sS -L -o /dev/null -w "%{http_code} %{url_effective}" "$PREVIEW_SITEMAP_URL")"
+          preview_sitemap_status="${preview_sitemap_probe%% *}"
+          preview_sitemap_effective_url="${preview_sitemap_probe#* }"
+          if [ "$preview_sitemap_status" != "200" ]; then
+            echo "Preview sitemap probe failed: $PREVIEW_SITEMAP_URL (status=$preview_sitemap_status, effective=$preview_sitemap_effective_url)"
+            exit 1
+          fi
+
+          if ! curl -sS -L "$PREVIEW_SITEMAP_URL" | grep -Eqi '<(urlset|sitemapindex)'; then
+            echo "Preview sitemap does not look like XML sitemap: $PREVIEW_SITEMAP_URL"
+            exit 1
+          fi
+
           export BASE_DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
           export PATCH_SCRAPER_REPO="${{ inputs.scraper_repo }}"
           export PATCH_SCRAPER_REF="${{ inputs.scraper_ref }}"
@@ -94,9 +107,8 @@ jobs:
           ./all-stable/scripts/prepare-patched-scraper-image.sh "$(pwd)/all-stable"
           . "$PATCH_IMAGE_ENV_FILE"
           export DOCKER_REGISTRY="$PATCHED_DOCKER_REGISTRY"
-          export ENABLE_CONTAINER_SOURCE_PROBE=true
 
           echo "Run preview full prewarm with patched image: $PATCHED_SCRAPER_IMAGE"
-          ./all-stable/scripts/crawl-preview-full.sh "$(pwd)/all-stable" 2>&1 | tee /tmp/docsearch-all-stable-full-preview.log
+          ./all-stable/scripts/crawl-full-preview.sh "$(pwd)/all-stable" 2>&1 | tee /tmp/docsearch-all-stable-full-preview.log
 
           ./all-stable/scripts/check-crawl-errors.sh /tmp/docsearch-all-stable-full-preview.log
