@@ -222,6 +222,7 @@ function SearchItem(props: { data: any }) {
         {!!category && !!categoryLabel && (
           <Chip
             size="small"
+            variant="outlined"
             label={categoryLabel}
             sx={{
               height: "20px",
