@@ -433,19 +433,20 @@ export default function Header(props: HeaderProps) {
 
 const HeaderBanner = (props: HeaderProps) => {
   const { t } = useI18next();
-  const { namespace } = props;
+  const { namespace, name } = props;
   const isAutoTranslation = useIsAutoTranslation(namespace);
-  const trailPath = props.name === "_index" ? "" : props.name;
   const urlAutoTranslation =
-    namespace === TOCNamespace.TidbCloudReleases && props.name === "_index"
-      ? `/releases/tidb-cloud/`
+    namespace === TOCNamespace.TidbCloudReleases
+      ? !name
+        ? `/releases/tidb-cloud/`
+        : `/tidbcloud/${name}`
       : namespace === TOCNamespace.AI
-      ? `/ai/${trailPath}`
+      ? `/ai/${name}`
       : namespace === TOCNamespace.TiDBCloud
-      ? `/tidbcloud/${trailPath}`
+      ? `/tidbcloud/${name}`
       : `/${props.pathConfig?.repo}/${
           props.pathConfig?.version || "stable"
-        }/${trailPath}`;
+        }/${name}`;
 
   let archivedTargetUrl = "";
   if (props.name && props.pathConfig) {
