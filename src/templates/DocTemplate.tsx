@@ -215,7 +215,9 @@ function DocTemplate({
       <Seo
         lang={language as Locale}
         title={`${frontmatter.title}${
-          !!pathConfig.version && pathConfig.version !== "stable"
+          !!pathConfig.version &&
+          pathConfig.version !== "stable" &&
+          namespace !== TOCNamespace.Home
             ? ` - ${pathConfig.version}`
             : ""
         }`}
