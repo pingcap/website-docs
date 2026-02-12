@@ -435,16 +435,17 @@ const HeaderBanner = (props: HeaderProps) => {
   const { t } = useI18next();
   const { namespace } = props;
   const isAutoTranslation = useIsAutoTranslation(namespace);
+  const trailPath = props.name === "_index" ? "" : props.name;
   const urlAutoTranslation =
     namespace === TOCNamespace.TidbCloudReleases && props.name === "_index"
       ? `/releases/tidb-cloud/`
       : namespace === TOCNamespace.AI
-      ? `/ai/${props.name === "_index" ? "" : props.name}`
+      ? `/ai/${trailPath}`
       : namespace === TOCNamespace.TiDBCloud
-      ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`
-      : `/${props.pathConfig?.repo}/${props.pathConfig?.version || "stable"}/${
-          props.name === "_index" ? "" : props.name
-        }`;
+      ? `/tidbcloud/${trailPath}`
+      : `/${props.pathConfig?.repo}/${
+          props.pathConfig?.version || "stable"
+        }/${trailPath}`;
 
   let archivedTargetUrl = "";
   if (props.name && props.pathConfig) {
