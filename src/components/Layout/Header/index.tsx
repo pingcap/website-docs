@@ -433,9 +433,14 @@ export default function Header(props: HeaderProps) {
 
 const HeaderBanner = (props: HeaderProps) => {
   const { t } = useI18next();
-  const isAutoTranslation = useIsAutoTranslation(props.namespace);
+  const { namespace } = props;
+  const isAutoTranslation = useIsAutoTranslation(namespace);
   const urlAutoTranslation =
-    props.pathConfig?.repo === "tidbcloud"
+    namespace === TOCNamespace.TidbCloudReleases && props.name === "_index"
+      ? `/releases/tidb-cloud/`
+      : namespace === TOCNamespace.AI
+      ? `/ai/${props.name === "_index" ? "" : props.name}`
+      : namespace === TOCNamespace.TiDBCloud
       ? `/tidbcloud/${props.name === "_index" ? "" : props.name}`
       : `/${props.pathConfig?.repo}/${props.pathConfig?.version || "stable"}/${
           props.name === "_index" ? "" : props.name
