@@ -210,19 +210,25 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 3: TiDB Releases Index
 
-**Effect**: Maps TiDB stable branch releases `_index.md` to the releases namespace.
+**Effect**: Maps TiDB releases `_index.md` to the releases namespace.
 
-**Source Pattern**: `/{lang}/tidb/{stable}/releases/{filename}`
+**Source Pattern (stable)**: `/{lang}/tidb/{stable}/releases/{filename}`
 
-**Target Pattern**: `/{lang}/releases/tidb-self-managed`
+**Target Pattern (stable)**: `/{lang}/releases/tidb-self-managed`
+
+**Source Pattern (other branches)**: `/{lang}/tidb/{branch}/releases/{filename}`
+
+**Target Pattern (other branches)**: `/{lang}/releases/{branch:branch-alias-tidb}/tidb-self-managed`
 
 **Conditions**: `filename = "_index"`
 
 **Example**:
 - Source: `en/tidb/release-8.5/releases/_index.md`
 - Target: `/releases/tidb-self-managed`
+- Source: `en/tidb/master/releases/_index.md`
+- Target: `/releases/dev/tidb-self-managed`
 
-**Use Case**: TiDB releases are grouped under the shared releases namespace.
+**Use Case**: Keeps the stable release notes URL unchanged while allowing branch-specific release landing pages and preventing a potential URL collision where `en/tidb/master/releases/_index.md` would otherwise collapse to `/tidb/dev`.
 
 ---
 

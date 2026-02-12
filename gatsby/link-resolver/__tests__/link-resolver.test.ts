@@ -294,6 +294,30 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/tidb/stable/release-8.5.4");
     });
 
+    it("should resolve /releases/* links from releases/dev/tidb-self-managed page (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-8.5.4",
+        "/en/releases/dev/tidb-self-managed"
+      );
+      expect(result).toBe("/tidb/dev/release-8.5.4");
+    });
+
+    it("should resolve /releases/* links from releases/dev/tidb-self-managed page (en - currentPageUrl without language prefix)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-8.5.4",
+        "/releases/dev/tidb-self-managed"
+      );
+      expect(result).toBe("/tidb/dev/release-8.5.4");
+    });
+
+    it("should resolve /releases/* links from releases/v8.1/tidb-self-managed page (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-8.1.0",
+        "/zh/releases/v8.1/tidb-self-managed"
+      );
+      expect(result).toBe("/zh/tidb/v8.1/release-8.1.0");
+    });
+
     it("should resolve /releases/* links from releases/tidb-operator page (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/releases/release-2.0.0",

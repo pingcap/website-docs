@@ -29,10 +29,19 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       conditions: { filename: ["_index"] },
     },
     // tidb releases
-    // /en/tidb/master/releases/_index.md -> /en/releases/tidb-self-managed
+    // /en/tidb/release-8.5/releases/_index.md -> /en/releases/tidb-self-managed
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/releases/{filename}`,
       targetPattern: "/{lang}/releases/tidb-self-managed",
+      conditions: { filename: ["_index"] },
+    },
+    // tidb releases (other branches)
+    // /en/tidb/master/releases/_index.md -> /en/releases/dev/tidb-self-managed
+    // /en/tidb/release-8.1/releases/_index.md -> /en/releases/v8.1/tidb-self-managed
+    {
+      sourcePattern: "/{lang}/tidb/{branch}/releases/{filename}",
+      targetPattern:
+        "/{lang}/releases/{branch:branch-alias-tidb}/tidb-self-managed",
       conditions: { filename: ["_index"] },
     },
     {

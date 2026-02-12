@@ -32,6 +32,13 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",
     },
+    // Current page: /{lang}/releases/{branch}/tidb-self-managed (branch is already aliased, e.g., "dev", "v8.1")
+    // Link: /releases/{docname} -> /{lang}/tidb/{branch}/{docname}
+    {
+      pathPattern: "/{lang}/releases/{branch}/tidb-self-managed",
+      linkPattern: "/{...any}/{docname}",
+      targetPattern: "/{lang}/tidb/{branch}/{docname}",
+    },
     // Current page: /{lang}/releases/tidb-operator
     // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/dev/{docname}
     {
