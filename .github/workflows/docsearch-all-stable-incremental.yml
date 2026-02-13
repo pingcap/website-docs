@@ -1,8 +1,8 @@
 name: Doc Search Scripts (All Stable, Incremental)
 
 on:
-  schedule:
-    - cron: '00 06 * * *'
+  # schedule:
+  #   - cron: '00 06 * * *'
   workflow_dispatch:
     inputs:
       scraper_repo:
