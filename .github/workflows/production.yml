@@ -33,6 +33,9 @@ concurrency: ci-prod
 
 jobs:
   build:
+    permissions:
+      contents: read
+      actions: write
     runs-on: ubuntu-latest
     name: Build website
     steps:
@@ -105,6 +108,7 @@ jobs:
           yarn clean
 
       - name: Build website
+        id: build-website
         if: ${{ !inputs.fallback || (steps.gatsby-cache.outputs.cache-hit != 'true') }}
         env:
           CI: true
@@ -184,6 +188,14 @@ jobs:
             --include ".*\.(md|txt)$" \
             --meta "Content-Type:text/plain; charset=utf-8" \
             --force
+
+      - name: Delete gatsby cache
+        if: ${{ inputs.nocache && steps.build-website.outcome == 'success' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh cache delete "${{ runner.os }}-gatsby-cache-docs-staging-${{ steps.calc-cache-key.outputs.key }}" --repo "$GITHUB_REPOSITORY" --confirm || true
 
   cdn-refresh:
     needs: build
