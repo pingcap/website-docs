@@ -72,7 +72,7 @@ export default function MDXContent(props: {
         pageUrl={pageUrl}
         buildType={buildType}
         language={language}
-        namespace={namespace!}
+        namespace={namespace}
         {...props}
       />
     ),

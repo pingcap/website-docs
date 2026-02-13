@@ -9,7 +9,7 @@ export const H1 = (props: {
   pageUrl: string;
   buildType: BuildType;
   language: string;
-  namespace: TOCNamespace;
+  namespace?: TOCNamespace;
 }) => {
   const { children, ...restProps } = props;
   return (
