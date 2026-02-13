@@ -34,13 +34,18 @@ export function shouldIncludeTocNode(
 ): boolean {
   if (isIgnoredTocRelativePath(relativePath)) return false;
 
-  // For tidb and tidb-in-kubernetes, only stable reads all TOCs.
-  // Other versions/branches (including master/main) only read TOC.md.
-  if (config.repo === Repo.tidb || config.repo === Repo.operator) {
-    if (config.version !== "stable") {
-      const filename = relativePath.split("/").pop() || relativePath;
-      return filename === "TOC.md";
-    }
+  const filename = relativePath.split("/").pop() || relativePath;
+
+  // For tidb, only stable reads all TOCs.
+  // Other versions/branches (including master) only read TOC.md.
+  if (config.repo === Repo.tidb) {
+    if (config.version !== "stable") return filename === "TOC.md";
+  }
+
+  // For tidb-in-kubernetes, only main reads all TOCs.
+  // Other versions/branches only read TOC.md.
+  if (config.repo === Repo.operator) {
+    if (config.branch !== "main") return filename === "TOC.md";
   }
 
   // tidbcloud reads all TOCs.
@@ -64,11 +69,18 @@ export function isWhitelistedDocNode(node: {
   // Keep the legacy behavior to always build `_index.md` pages.
   if (node.pathConfig.repo === Repo.tidbcloud) return true;
 
-  // Only stable has all `_index.md` pages always built.
+  // Only stable has all `_index.md` pages always built for tidb.
   if (
-    (node.pathConfig.repo === Repo.tidb ||
-      node.pathConfig.repo === Repo.operator) &&
+    node.pathConfig.repo === Repo.tidb &&
     node.pathConfig.version === "stable"
+  ) {
+    return true;
+  }
+
+  // For tidb-in-kubernetes, only main has all `_index.md` pages always built.
+  if (
+    node.pathConfig.repo === Repo.operator &&
+    node.pathConfig.branch === "main"
   ) {
     return true;
   }
