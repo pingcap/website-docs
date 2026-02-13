@@ -1,11 +1,7 @@
 import { mdxAstToToc, TocQueryData } from "./toc";
 import { generateConfig } from "./path";
 import { calculateFileUrl } from "./url-resolver";
-import { isIgnoredTocRelativePath } from "./toc-ignore";
-import { Repo, type PathConfig } from "../src/shared/interface";
-
-// Whitelist of files that should always be built regardless of TOC content
-const WHITELIST = [""];
+import { isWhitelistedDocNode, shouldIncludeTocNode } from "./toc-ignore";
 
 type TocFilesMap = Map<string, Set<string>>;
 type TocNamesByFileMap = Map<string, Map<string, Set<string>>>;
@@ -71,21 +67,6 @@ function sortTocNames(tocNames: Iterable<string>): string[] {
   });
 }
 
-function shouldIncludeTocNode(config: PathConfig, relativePath: string): boolean {
-  const filename = relativePath.split("/").pop() || relativePath;
-
-  // For tidb and tidb-in-kubernetes, only stable reads all TOCs.
-  // Other versions/branches (including master/main) only read TOC.md.
-  if (config.repo === Repo.tidb || config.repo === Repo.operator) {
-    if (config.version !== "stable") {
-      return filename === "TOC.md";
-    }
-  }
-
-  // tidbcloud reads all TOCs (except those filtered by isIgnoredTocRelativePath).
-  return true;
-}
-
 /**
  * Get files that should be built based on TOC content
  * Returns a Map where key is "locale/repo/version" and value is Set of file names
@@ -121,8 +102,6 @@ export async function getFilesFromTocs(
   const filteredTocNodes = tocNodes.filter(
     (node: TocQueryData["allMdx"]["nodes"][0]) => {
       const relativePath = node.parent?.relativePath || "";
-      if (isIgnoredTocRelativePath(relativePath)) return false;
-
       const { config } = generateConfig(node.slug);
       return shouldIncludeTocNode(config, relativePath);
     }
@@ -183,8 +162,8 @@ export function filterNodesByToc(
 ): any[] {
   const skippedNodes: Map<string, string[]> = new Map();
   const filteredNodes = nodes.filter((node) => {
-    // Check if file is in whitelist - if so, always build it
-    if (WHITELIST.includes(node.name)) {
+    // Check if file is whitelisted - if so, always build it
+    if (isWhitelistedDocNode(node)) {
       node.tocNames = [];
       return true;
     }
