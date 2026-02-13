@@ -240,7 +240,7 @@ export const EN_FOOTER_ITEMS = [
       },
       {
         name: "Developer Guide",
-        url: "https://docs.pingcap.com/tidb/stable/dev-guide-overview",
+        url: "https://docs.pingcap.com/developer/",
       },
       {
         name: "FAQs",
@@ -343,7 +343,7 @@ export const ZH_FOOTER_ITEMS = [
       },
       {
         name: "开发者手册",
-        url: "https://docs.pingcap.com/zh/tidb/stable/dev-guide-overview",
+        url: "https://docs.pingcap.com/zh/developer/",
       },
       {
         name: "博客",
@@ -435,7 +435,7 @@ export const JA_FOOTER_ITEMS = [
       },
       {
         name: "開発者ガイド",
-        url: "https://docs.pingcap.com/ja/tidb/stable/dev-guide-overview",
+        url: "https://docs.pingcap.com/ja/developer/",
       },
       {
         name: "ニュース&ブログ",
