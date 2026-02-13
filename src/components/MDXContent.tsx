@@ -56,7 +56,11 @@ export default function MDXContent(props: {
   React.useEffect(() => {
     // https://github.com/pingcap/website-docs/issues/221
     // md title with html tag will cause anchor mismatch
-    replaceInternalHref(pathConfig.locale, pathConfig.repo, pathConfig.version || "");
+    replaceInternalHref(
+      pathConfig.locale,
+      pathConfig.repo,
+      pathConfig.version || ""
+    );
   }, [pageUrl, pathConfig.locale, pathConfig.repo, pathConfig.version]);
 
   // Create H1 wrapper with props
@@ -68,6 +72,7 @@ export default function MDXContent(props: {
         pageUrl={pageUrl}
         buildType={buildType}
         language={language}
+        namespace={namespace!}
         {...props}
       />
     ),
