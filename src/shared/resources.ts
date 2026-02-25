@@ -250,6 +250,10 @@ export const EN_FOOTER_ITEMS = [
         name: "Support",
         url: "https://tidb.support.pingcap.com/",
       },
+      {
+        name: "llms.txt",
+        url: "https://docs.pingcap.com/llms.txt",
+      },
     ],
   },
   {
@@ -353,6 +357,10 @@ export const ZH_FOOTER_ITEMS = [
         name: "Education",
         url: "https://learn.pingcap.cn/learner/course",
       },
+      {
+        name: "llms.txt",
+        url: "https://docs.pingcap.com/zh/llms.txt",
+      },
     ],
   },
   {
@@ -448,6 +456,10 @@ export const JA_FOOTER_ITEMS = [
       {
         name: "導入実績",
         url: "https://pingcap.co.jp/usecase/",
+      },
+      {
+        name: "llms.txt",
+        url: "https://docs.pingcap.com/ja/llms.txt",
       },
     ],
   },
