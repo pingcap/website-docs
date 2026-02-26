@@ -1,6 +1,6 @@
 # TiDB Cloud Dedicated
 
-> TiDB Cloud Dedicated 面向关键业务，提供跨多个可用区的高可用性、横向扩展能力以及完整的 HTAP 能力。
+> TiDB Cloud Dedicated は、ミッションクリティカルなワークロード向けに設計されており、複数の可用性ゾーンにまたがる高可用性、水平スケーリング、そして完全な HTAP 機能を提供します。
 
 ## 始める {#get-started}
 
@@ -10,7 +10,6 @@
     -   [MySQLの互換性](https://docs.pingcap.com/ja/tidbcloud/mysql-compatibility.md): TiDB と MySQL の互換性、およびサポートされていない機能と異なる機能について学習します。
 -   始める
     -   [TiDB Cloudを試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
-    -   [TiDB + AIを試す](https://docs.pingcap.com/ja/tidbcloud/vector-search-get-started-using-python.md): Python と TiDB Vector Search を使用してセマンティック検索を実行する AI アプリケーションを迅速に開発する方法を学びます。
     -   [HTAPを試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart.md): TiDB Cloudで HTAP を使い始める方法を学習します。
     -   [PoCを実行する](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-poc.md): TiDB Cloudを使用して概念実証 (PoC) を実行する方法について説明します。
 -   重要な概念
@@ -28,99 +27,6 @@
     -   [バックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-concepts.md): TiDB Cloudのバックアップと復元の概念について学習します。
     -   [Security](https://docs.pingcap.com/ja/tidbcloud/security-concepts.md): TiDB Cloudのセキュリティ概念について学習します。
 
-## 開発する {#develop}
-
--   開発クイックスタート
-    -   [開発者ガイドの概要](https://docs.pingcap.com/ja/tidbcloud/dev-guide-overview.md): TiDB Cloudおよび TiDB Self-Managed の開発者ガイドの概要を紹介します。
-    -   [TiDB Cloudクラスタを構築する](https://docs.pingcap.com/ja/tidbcloud/dev-guide-build-cluster-in-cloud.md): TiDB CloudでTiDB Cloud Starter クラスターを構築し、それに接続する方法を学習します。
-    -   [TiDB の CRUD SQL](https://docs.pingcap.com/ja/tidbcloud/dev-guide-tidb-crud-sql.md): TiDB の CRUD SQL の簡単な紹介。
--   TiDB Cloudに接続する
-    -   GUIデータベースツール
-        -   [ジェットブレインズ データグリップ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-gui-datagrip.md): JetBrains DataGripを使用してTiDBに接続する方法を学びます。このチュートリアルは、IntelliJ、PhpStorm、PyCharmなどの他のJetBrains IDEで利用可能なデータベースツールとSQLプラグインにも適用されます。
-        -   [DBeaver](https://docs.pingcap.com/ja/tidbcloud/dev-guide-gui-dbeaver.md): DBeaver Community を使用して TiDB に接続する方法を学習します。
-        -   [VSコード](https://docs.pingcap.com/ja/tidbcloud/dev-guide-gui-vscode-sqltools.md): Visual Studio Code または GitHub Codespaces を使用して TiDB に接続する方法を学習します。
-        -   [MySQLワークベンチ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-gui-mysql-workbench.md): MySQL Workbench を使用して TiDB に接続する方法を学習します。
-        -   [ナビキャット](https://docs.pingcap.com/ja/tidbcloud/dev-guide-gui-navicat.md): Navicat を使用して TiDB に接続する方法を学びます。
-    -   [DriverまたはORMを選択](https://docs.pingcap.com/ja/tidbcloud/dev-guide-choose-driver-or-orm.md): TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
-    -   BI
-        -   [ルッカースタジオ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-bi-looker-studio.md): Looker Studio を使用してTiDB Cloudに接続する方法を学習します。
-    -   Java
-        -   [JDBC](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-java-jdbc.md): JDBCを使用してTiDBに接続する方法を学びます。このチュートリアルでは、JDBCを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-        -   [マイバティス](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-java-mybatis.md): MyBatisを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使ってTiDBを操作するJavaサンプルコードを紹介します。
-        -   [休止状態](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-java-hibernate.md): Hibernateを使用してTiDBに接続する方法を学びます。このチュートリアルでは、Hibernateを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-        -   [スプリングブート](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-java-spring-boot.md): Spring Bootを使用してTiDBに接続する方法を学びます。このチュートリアルでは、Spring Bootを使用してTiDBを操作するJavaサンプルコードスニペットを紹介します。
-        -   [接続プールと接続パラメータ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを得るための計算式などについて説明します。また、パフォーマンスを最適化するための JDBC API の使用方法と MySQL Connector/J パラメータ設定についても説明します。
-    -   行く
-        -   [Go-MySQL-ドライバー](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-golang-sql-driver.md): Go-MySQL-Driverを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Go-MySQL-Driverを使ってTiDBを操作するGolang言語のサンプルコードスニペットを紹介します。
-        -   [ゴーム](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-golang-gorm.md): GORMを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、GORMを使ってTiDBを操作するGolangのサンプルコードスニペットを紹介します。
-    -   パイソン
-        -   [mysqlクライアント](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-python-mysqlclient.md): mysqlclient を使用して TiDB に接続する方法を学びます。このチュートリアルでは、mysqlclient を使用して TiDB を操作する Python サンプルコードスニペットを紹介します。
-        -   [MySQL コネクタ/Python](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-python-mysql-connector.md): MySQL Connector/Python を使用して TiDB に接続する方法を学びます。このチュートリアルでは、MySQL Connector/Python を使用して TiDB を操作する Python サンプルコードスニペットを紹介します。
-        -   [パイMySQL](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-python-pymysql.md): PyMySQLを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、PyMySQLを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
-        -   [SQLアルケミー](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-python-sqlalchemy.md): SQLAlchemyを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、SQLAlchemyを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
-        -   [ピーウィー](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-python-peewee.md): peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
-        -   [ジャンゴ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-python-django.md): Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBを操作するPythonのサンプルコードスニペットを紹介します。
-    -   ノード.js
-        -   [ノード-mysql2](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-nodejs-mysql2.md): node-mysql2 を使用して TiDB に接続する方法を学びます。このチュートリアルでは、node-mysql2 を使用して TiDB を操作する Node.js のサンプルコードスニペットを紹介します。
-        -   [mysql.js](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-nodejs-mysqljs.md): mysql.js を使用して TiDB に接続する方法を学びます。このチュートリアルでは、mysql.js を使用して TiDB を操作する Node.js のサンプルコードスニペットを紹介します。
-        -   [プリズマ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-nodejs-prisma.md): Prisma を使用して TiDB に接続する方法を学びます。このチュートリアルでは、Prisma を使用して TiDB を操作する Node.js のサンプルコードスニペットを紹介します。
-        -   [続編](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-nodejs-sequelize.md): Sequelizeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Sequelizeを使ってTiDBを操作するNode.jsのサンプルコードスニペットを紹介します。
-        -   [タイプORM](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-nodejs-typeorm.md): TypeORMを使用してTiDBに接続する方法を学びます。このチュートリアルでは、TypeORMを使用してTiDBを操作するNode.jsのサンプルコードスニペットを紹介します。
-    -   ルビー
-        -   [MySQL2](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-ruby-mysql2.md): Ruby mysql2を使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、mysql2 gemを使ってTiDBで動作するRubyのサンプルコードスニペットを紹介します。
-        -   [レール](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-ruby-rails.md): Railsフレームワークを使用してTiDBに接続する方法を学びます。このチュートリアルでは、RailsフレームワークとActiveRecord ORMを使用してTiDBを操作するRubyサンプルコードスニペットを紹介します。
-    -   C#
-        -   [C#](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sample-application-cs.md): C#を使用してTiDBに接続する方法を学びます。このチュートリアルでは、TiDBを操作するためのサンプルC#コードスニペットを提供します。
-    -   [ワードプレス](https://docs.pingcap.com/ja/tidbcloud/dev-guide-wordpress.md): TiDB Cloud Starterを使ってWordPressを実行する方法を学びましょう。このチュートリアルでは、WordPress + TiDB Cloud Starterを数分で実行するための手順をステップバイステップで説明します。
--   開発リファレンス
-    -   データベーススキーマの設計
-        -   [概要](https://docs.pingcap.com/ja/tidbcloud/dev-guide-schema-design-overview.md): TiDB データベース スキーマ設計の基礎を学びます。
-        -   [データベースを作成する](https://docs.pingcap.com/ja/tidbcloud/dev-guide-create-database.md): データベースを作成する手順、ルール、および例を学びます。
-        -   [テーブルを作成する](https://docs.pingcap.com/ja/tidbcloud/dev-guide-create-table.md): テーブル作成における定義、ルール、ガイドラインを学習します。
-        -   [セカンダリインデックスを作成する](https://docs.pingcap.com/ja/tidbcloud/dev-guide-create-secondary-indexes.md): セカンダリ インデックスを作成する手順、ルール、および例を学習します。
-    -   データの書き込み
-        -   [データの挿入](https://docs.pingcap.com/ja/tidbcloud/dev-guide-insert-data.md): データの挿入方法について学習します。
-        -   [データの更新](https://docs.pingcap.com/ja/tidbcloud/dev-guide-update-data.md): データを更新する方法とデータを一括更新する方法について説明します。
-        -   [データを削除](https://docs.pingcap.com/ja/tidbcloud/dev-guide-delete-data.md): データを削除するための SQL 構文、ベスト プラクティス、例について学習します。
-        -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](https://docs.pingcap.com/ja/tidbcloud/time-to-live.md): Time to Live（TTL）は、TiDBデータの有効期間を行レベルで管理できる機能です。このドキュメントでは、TTLを使用して古いデータを自動的に期限切れにして削除する方法を説明します。
-        -   [準備された声明](https://docs.pingcap.com/ja/tidbcloud/dev-guide-prepared-statement.md): TiDB 準備済みステートメントの使用方法について説明します。
-    -   データの読み取り
-        -   [単一のテーブルからデータをクエリする](https://docs.pingcap.com/ja/tidbcloud/dev-guide-get-data-from-single-table.md): このドキュメントでは、データベース内の単一のテーブルからデータをクエリする方法について説明します。
-        -   [複数テーブルの結合クエリ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-join-tables.md): このドキュメントでは、複数テーブル結合クエリの使用方法について説明します。
-        -   [サブクエリ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-use-subqueries.md): TiDB でサブクエリを使用する方法を学びます。
-        -   [結果をページ付けする](https://docs.pingcap.com/ja/tidbcloud/dev-guide-paginate-results.md): TiDB にページ区切り結果機能を導入します。
-        -   [ビュー](https://docs.pingcap.com/ja/tidbcloud/dev-guide-use-views.md): TiDB でビューを使用する方法を学習します。
-        -   [一時テーブル](https://docs.pingcap.com/ja/tidbcloud/dev-guide-use-temporary-tables.md): 一時テーブルを作成、表示、クエリ、および削除する方法を学習します。
-        -   [共通テーブル式](https://docs.pingcap.com/ja/tidbcloud/dev-guide-use-common-table-expression.md): SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
-        -   レプリカデータの読み取り
-            -   [Follower Read](https://docs.pingcap.com/ja/tidbcloud/dev-guide-use-follower-read.md): Follower Readを使用してクエリ パフォーマンスを最適化する方法を学習します。
-            -   [ステイル読み取り](https://docs.pingcap.com/ja/tidbcloud/dev-guide-use-stale-read.md): 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。
-        -   [HTAPクエリ](https://docs.pingcap.com/ja/tidbcloud/dev-guide-hybrid-oltp-and-olap-queries.md): TiDB に HTAP クエリを導入します。
-    -   トランザクション
-        -   [概要](https://docs.pingcap.com/ja/tidbcloud/dev-guide-transaction-overview.md): TiDB のトランザクションの簡単な紹介。
-        -   [楽観的取引と悲観的取引](https://docs.pingcap.com/ja/tidbcloud/dev-guide-optimistic-and-pessimistic-transaction.md): TiDB の楽観的と悲観的トランザクションについて学習します。
-        -   [トランザクション制限](https://docs.pingcap.com/ja/tidbcloud/dev-guide-transaction-restraints.md): TiDB のトランザクション制約について学習します。
-        -   [トランザクションエラーの処理](https://docs.pingcap.com/ja/tidbcloud/dev-guide-transaction-troubleshoot.md): デッドロックやアプリケーションの再試行エラーなどのトランザクション エラーを処理する方法について学習します。
-    -   最適化する
-        -   [概要](https://docs.pingcap.com/ja/tidbcloud/dev-guide-optimize-sql-overview.md): TiDB アプリケーション開発者向けに、SQL パフォーマンス チューニングの概要を説明します。
-        -   [SQL性能チューニング](https://docs.pingcap.com/ja/tidbcloud/dev-guide-optimize-sql.md): TiDB の SQL パフォーマンス チューニング スキームと分析アプローチを紹介します。
-        -   [性能チューニングのベストプラクティス](https://docs.pingcap.com/ja/tidbcloud/dev-guide-optimize-sql-best-practices.md): TiDB パフォーマンスをチューニングするためのベスト プラクティスを紹介します。
-        -   [インデックス作成のベストプラクティス](https://docs.pingcap.com/ja/tidbcloud/dev-guide-index-best-practice.md): TiDB でインデックスを作成および使用するためのベスト プラクティスをいくつか学習します。
-        -   その他の最適化手法
-            -   [暗黙的な型変換を避ける](https://docs.pingcap.com/ja/tidbcloud/dev-guide-implicit-type-conversion.md): TiDB での暗黙的な型変換によって起こりうる結果と、それを回避する方法を紹介します。
-            -   [一意のシリアル番号の生成](https://docs.pingcap.com/ja/tidbcloud/dev-guide-unique-serial-number-generation.md): 独自の固有 ID を生成する開発者向けの固有シリアル番号生成ソリューション。
-    -   トラブルシューティング
-        -   [SQLまたはトランザクションの問題](https://docs.pingcap.com/ja/tidbcloud/dev-guide-troubleshoot-overview.md): アプリケーション開発中に発生する可能性のある SQL またはトランザクションの問題をトラブルシューティングする方法を学習します。
-        -   [不安定な結果セット](https://docs.pingcap.com/ja/tidbcloud/dev-guide-unstable-result-set.md): 不安定な結果セットのエラーを処理する方法を学習します。
-        -   [タイムアウト](https://docs.pingcap.com/ja/tidbcloud/dev-guide-timeouts-in-tidb.md): TiDB のタイムアウトとエラーのトラブルシューティングの解決策について学習します。
-    -   開発ガイドライン
-        -   [オブジェクトの命名規則](https://docs.pingcap.com/ja/tidbcloud/dev-guide-object-naming-guidelines.md): TiDB におけるオブジェクトの命名規則について学習します。
-        -   [SQL開発仕様](https://docs.pingcap.com/ja/tidbcloud/dev-guide-sql-development-specification.md): TiDB の SQL 開発仕様について学習します。
-    -   [書店のサンプルアプリケーション](https://docs.pingcap.com/ja/tidbcloud/dev-guide-bookshop-schema-design.md): Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。テーブル構造とデータは、 TiUPまたはTiDB Cloudを介してインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成・インポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、書籍、著者、ユーザー、評価、書籍著者、注文が含まれます。データベース初期化スクリプト「dbinit.sql」は、Bookshopアプリケーションのテーブル構造を作成します。
-    -   サードパーティサポート
-        -   [TiDB でサポートされているサードパーティ ツール](https://docs.pingcap.com/ja/tidbcloud/dev-guide-third-party-support.md): TiDB でサポートされているサードパーティ ツールについて説明します。
-        -   [サードパーティ製ツールとの既知の非互換性の問題](https://docs.pingcap.com/ja/tidbcloud/dev-guide-third-party-tools-compatibility.md): テスト中に発見されたサードパーティ ツールとの TiDB 互換性の問題について説明します。
-
 ## ガイド {#guides}
 
 -   クラスタの管理
@@ -130,8 +36,8 @@
         -   [TiDB Cloudパフォーマンス リファレンス](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-performance-reference.md): TiDB Cloud のパフォーマンス テスト結果を確認します。
     -   [TiDB Cloud専用クラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster.md): TiDB Cloud Dedicated クラスターを作成する方法を学習します。
     -   TiDB Cloud専用クラスタに接続する
-        -   [接続方法の概要](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster.md): さまざまな方法でTiDB Cloud Dedicated クラスターに接続する方法を学習します。
-        -   [パブリック接続経由で接続](https://docs.pingcap.com/ja/tidbcloud/connect-via-standard-connection.md): パブリック接続を介してTiDB Cloudクラスターに接続する方法を学習します。
+        -   [ネットワーク接続の概要](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster.md): さまざまな方法でTiDB Cloud Dedicated クラスターに接続する方法を学習します。
+        -   [パブリック接続経由​​で接続](https://docs.pingcap.com/ja/tidbcloud/connect-via-standard-connection.md): パブリック接続を介してTiDB Cloudクラスターに接続する方法を学習します。
         -   [AWS のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections.md): AWS を使用してプライベートエンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
         -   [Azure のプライベート エンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-azure.md): Azure Private Link 経由でTiDB Cloud Dedicated クラスタに接続する方法を学習します。
         -   [プライベートエンドポイント経由で Google Cloud に接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-google-cloud.md): Google Cloud Private Service Connect を介してTiDB Cloudクラスタに接続する方法を学習します。
@@ -157,9 +63,9 @@
         -   [組み込みメトリック](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring.md): TiDB Cloudの組み込みメトリックを表示する方法と、これらのメトリックの意味を理解する方法について説明します。
         -   [組み込みアラート](https://docs.pingcap.com/ja/tidbcloud/monitor-built-in-alerting.md): TiDB Cloudからアラート通知を取得して、TiDB クラスターを監視する方法を学習します。
         -   アラート通知を購読する
-            -   [メールで購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-email.md): 電子メールでアラート通知を受信して TiDB クラスターを監視する方法を学習します。
-            -   [Slackで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-slack.md): Slack 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
-            -   [Zoomで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-zoom.md): Zoom 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
+            -   [メールで購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-email.md): 電子メールでアラート通知を受信して​​ TiDB クラスターを監視する方法を学習します。
+            -   [Slackで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-slack.md): Slack 経由でアラート通知を受信して​​ TiDB クラスターを監視する方法を学びます。
+            -   [Zoomで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-zoom.md): Zoom 経由でアラート通知を受信して​​ TiDB クラスターを監視する方法を学習します。
         -   [クラスタイベント](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-events.md): イベント ページを使用してTiDB Cloudクラスターのイベントを表示する方法を学習します。
         -   サードパーティのメトリクス統合
             -   [概要](https://docs.pingcap.com/ja/tidbcloud/third-party-monitoring-integrations.md): サードパーティのメトリクス統合の使用方法を学習します。
@@ -239,7 +145,7 @@
     -   [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
     -   TiDB Cloudへのデータ移行
         -   [データ移行を使用して既存データと増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-from-mysql-using-data-migration.md): データ移行機能を使用して、最小限のダウンタイムで、MySQL データベースを Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはセルフマネージド MySQL インスタンスからTiDB Cloudにシームレスに移行する方法について説明します。
-        -   [データ移行を使用して増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): Data Migration を使用して、Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、またはローカル MySQL インスタンスでホストされている MySQL 互換データベースから増分データをTiDB Cloudに移行する方法について説明します。
+        -   [データ移行を使用して増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): Data Migration を使用して、Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS でホストされている MySQL 互換データベース、またはローカル MySQL インスタンスからTiDB Cloudに増分データを移行する方法を学びます。
         -   [大規模データセットの MySQL シャードの移行とマージ](https://docs.pingcap.com/ja/tidbcloud/migrate-sql-shards.md): 大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージする方法を学びます。
         -   [TiDBセルフマネージドからTiDB Cloudへの移行](https://docs.pingcap.com/ja/tidbcloud/migrate-from-op-tidb.md): TiDB Self-Managed からTiDB Cloudにデータを移行する方法を学びます。
         -   [AWS DMS を使用して MySQL 互換データベースから移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-from-mysql-using-aws-dms.md): AWS Database Migration Service (AWS DMS) を使用して、MySQL 互換データベースからTiDB Cloudにデータを移行する方法を学びます。
@@ -260,31 +166,6 @@
 -   データを探索する
     -   [SQLエディタでのChat2Query](https://docs.pingcap.com/ja/tidbcloud/explore-data-with-chat2query.md): TiDB Cloudコンソールで AI 支援 SQL エディターを使用してデータの価値を最大化する方法を学びます。 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     -   [SQL プロキシアカウント](https://docs.pingcap.com/ja/tidbcloud/sql-proxy-account.md): TiDB Cloudの SQL プロキシ アカウントについて説明します。
--   ベクトル検索![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-    -   [概要](https://docs.pingcap.com/ja/tidbcloud/vector-search-overview.md): TiDBのベクター検索について学びましょう。この機能は、ドキュメント、画像、音声、動画など、様々なデータタイプにわたってセマンティックな類似性検索を実行するための高度な検索ソリューションを提供します。
-    -   始める
-        -   [SQLを始めよう](https://docs.pingcap.com/ja/tidbcloud/vector-search-get-started-using-sql.md): SQL ステートメントを使用して TiDB で Vector Search をすぐに開始し、生成 AI アプリケーションを強化する方法を学習します。
-        -   [Pythonを始めよう](https://docs.pingcap.com/ja/tidbcloud/vector-search-get-started-using-python.md): Python と TiDB Vector Search を使用してセマンティック検索を実行する AI アプリケーションを迅速に開発する方法を学びます。
-    -   統合
-        -   [概要](https://docs.pingcap.com/ja/tidbcloud/vector-search-integration-overview.md): サポートされている AI フレームワーク、埋め込みモデル、ORM ライブラリなど、TiDB ベクトル検索統合の概要。
-        -   AIフレームワーク
-            -   [ラマインデックス](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-llamaindex.md): TiDB Vector Search を LlamaIndex と統合する方法を学びます。
-            -   [ランチェーン](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-langchain.md): TiDB Vector Search を LangChain と統合する方法を学びます。
-        -   AIサービス
-            -   [アマゾンの岩盤](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock.md): TiDB Vector Search を Amazon Bedrock と統合して、検索拡張生成 (RAG) Q&A ボットを構築する方法を学びます。
-        -   モデル/サービスの埋め込み
-            -   [ジナ・アイ](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-jinaai-embedding.md): TiDB Vector Search を Jina AI Embeddings API と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-        -   ORMライブラリ
-            -   [SQLアルケミー](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-sqlalchemy.md): TiDB Vector Search を SQLAlchemy と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-            -   [ピーウィー](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-peewee.md): TiDB Vector Search を peewee と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-            -   [Django ORM](https://docs.pingcap.com/ja/tidbcloud/vector-search-integrate-with-django-orm.md): TiDB Vector Search を Django ORM と統合して埋め込みを保存し、セマンティック検索を実行する方法を学習します。
-    -   参照
-        -   [ベクトルデータ型](https://docs.pingcap.com/ja/tidbcloud/vector-search-data-types.md): TiDB の Vector データ型について学習します。
-        -   [ベクトル関数と演算子](https://docs.pingcap.com/ja/tidbcloud/vector-search-functions-and-operators.md): Vector データ型で使用できる関数と演算子について学習します。
-        -   [ベクトルインデックス](https://docs.pingcap.com/ja/tidbcloud/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
-    -   [パフォーマンスの向上](https://docs.pingcap.com/ja/tidbcloud/vector-search-improve-performance.md): TiDB Vector Search のパフォーマンスを向上させるためのベスト プラクティスを学びます。
-    -   [制限事項](https://docs.pingcap.com/ja/tidbcloud/vector-search-limitations.md): TiDB ベクトル検索の制限について学習します。
-    -   [変更ログ](https://docs.pingcap.com/ja/tidbcloud/vector-search-changelogs.md): TiDB ベクター検索機能の新機能、互換性の変更、改善、バグ修正について説明します。
 -   データサービス![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     -   [概要](https://docs.pingcap.com/ja/tidbcloud/data-service-overview.md): TiDB Cloudのデータ サービスとそのシナリオについて学習します。
     -   [始める](https://docs.pingcap.com/ja/tidbcloud/data-service-get-started.md): TiDB Cloudデータ サービスを使用して HTTPS リクエストでデータにアクセスする方法を学習します。
@@ -308,17 +189,12 @@
     -   [カフカシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-kafka.md): このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするための変更フィードの作成方法について説明します。Apache Kafka 用の変更フィードの設定手順、制約事項、前提条件について説明します。設定手順には、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、変更フィード仕様の設定が含まれます。
     -   [パルサーシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-pulsar.md): このドキュメントでは、 TiDB Cloudから Apache Pulsar へデータをストリーミングするための変更フィードの作成方法について説明します。Apache Pulsar 用の変更フィードの設定手順、制約事項、前提条件について説明します。このプロセスには、ネットワーク接続の設定と変更フィード仕様の設定が含まれます。
     -   [TiDB Cloudシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-tidb-cloud.md): このドキュメントでは、TiDB Cloud Dedicated クラスターからTiDB Cloud Starter またはTiDB Cloud Essential クラスターにデータをストリーミングする方法について説明します。この機能には、利用可能な変更フィード数とリージョン数に制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、 TiDB Cloudシンクの開始位置の取得が必要です。TiDB TiDB Cloudシンクを作成するには、クラスターの概要ページに移動し、接続を確立し、テーブルとイベントフィルターをカスタマイズし、レプリケーション開始位置を入力し、変更フィード仕様を指定し、構成を確認してシンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
-    -   [クラウドストレージへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-cloud-storage.md): このドキュメントでは、 TiDB Cloudから Amazon S3 または GCS にデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様の設定手順、そしてレプリケーションプロセスの開始方法も含まれています。
+    -   [クラウドストレージへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-cloud-storage.md): このドキュメントでは、TiDB Cloudから Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage にデータをストリーミングするための変更フィードを作成する方法について説明します。制限事項、宛先、レプリケーション、仕様の設定手順、そしてレプリケーションプロセスの開始方法も含まれています。
     -   参照
         -   [AWS でセルフホスト型 Kafka プライベートリンク サービスをセットアップする](https://docs.pingcap.com/ja/tidbcloud/setup-aws-self-hosted-kafka-private-link-service.md): このドキュメントでは、AWS でセルフホスト型 Kafka 用の Private Link サービスを設定し、それをTiDB Cloudで動作させる方法について説明します。
         -   [Azure でセルフホスト型 Kafka プライベート リンク サービスを設定する](https://docs.pingcap.com/ja/tidbcloud/setup-azure-self-hosted-kafka-private-link-service.md): このドキュメントでは、Azure でセルフホスト型 Kafka 用の Private Link サービスを設定し、それをTiDB Cloudで動作させる方法について説明します。
         -   [Google Cloud でセルフホスト型 Kafka プライベート サービス接続を設定する](https://docs.pingcap.com/ja/tidbcloud/setup-self-hosted-kafka-private-service-connect.md): このドキュメントでは、Google Cloud でセルフホスト型 Kafka 用に Private Service Connect を設定し、それをTiDB Cloudで動作させる方法について説明します。
         -   [Changefeeds のプライベート エンドポイントを設定する](https://docs.pingcap.com/ja/tidbcloud/set-up-sink-private-endpoint.md): 変更フィードのプライベート エンドポイントを設定する方法を学習します。
--   災害復旧
-    -   [回復グループの概要](https://docs.pingcap.com/ja/tidbcloud/recovery-group-overview.md): TiDB Cloudリカバリ グループを使用してデータベースを災害から保護する方法を学びます。
-    -   [始める](https://docs.pingcap.com/ja/tidbcloud/recovery-group-get-started.md): TiDB Cloudでリカバリ グループを作成し、その詳細を表示する方法を学習します。
-    -   [データベースのフェイルオーバーと再保護](https://docs.pingcap.com/ja/tidbcloud/recovery-group-failover.md): リカバリ グループを使用して、 TiDB Cloudクラスター間でデータベースをフェイルオーバーし、再保護する方法を学習します。
-    -   [リカバリグループを削除する](https://docs.pingcap.com/ja/tidbcloud/recovery-group-delete.md): 回復グループが不要になった場合に削除する方法を説明します。
 -   Security
     -   [Securityの概要](https://docs.pingcap.com/ja/tidbcloud/security-overview.md): ID 管理、ネットワーク分離、データ保護、アクセス制御、監査などを含むTiDB Cloudの包括的なセキュリティ フレームワークについて学習します。
     -   アイデンティティアクセス制御
@@ -353,7 +229,6 @@
     -   [クラウドプロバイダーマーケットプレイスからの請求](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace): TiDB Cloud の課金について説明します。
     -   [Changefeedの請求](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing-ticdc-rcu.md): TiDB Cloudの変更フィードに対する課金について説明します。
     -   [データ移行の請求](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing-dm.md): TiDB Cloudでのデータ移行の課金について説明します。
-    -   [リカバリグループの請求](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing-recovery-group.md): TiDB Cloudのリカバリ グループの課金について説明します。
     -   [予算を管理する](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-budget.md): TiDB Cloudの予算機能を使用してコストを監視する方法について説明します。
 -   統合
     -   [エアバイト](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-airbyte.md): Airbyte TiDB コネクタの使用方法を学びます。
@@ -405,12 +280,12 @@
         -   [`ADMIN ALTER DDL JOBS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-alter-ddl.md): TiDB データベースの ADMIN ALTER DDL JOBS` の使用法の概要。
         -   [`ADMIN CANCEL DDL`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-cancel-ddl.md): TiDB データベースの ADMIN CANCEL DDL の使用法の概要。
         -   [`ADMIN CHECKSUM TABLE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-checksum-table.md): TiDB データベースにおける ADMIN の使用法の概要。
-        -   [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+        -   [`ADMIN CHECK [TABLE|INDEX]`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-check-table-index.md): TiDB データベースにおける ADMIN の使用法の概要。
         -   [`ADMIN CLEANUP INDEX`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-cleanup.md): TiDB データベースの ADMIN CLEANUP の使用法の概要。
         -   [`ADMIN PAUSE DDL`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-pause-ddl.md): TiDB データベースの ADMIN PAUSE DDL JOBS の使用法の概要。
         -   [`ADMIN RECOVER INDEX`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-recover.md): TiDB データベースの ADMIN RECOVER INDEX の使用法の概要。
         -   [`ADMIN RESUME DDL`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-resume-ddl.md): TiDB データベースの ADMIN RESUME DDL の使用法の概要。
-        -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+        -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-show-ddl.md): TiDB データベースの ADMIN の使用法の概要。
         -   [`ALTER DATABASE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-alter-database.md): TiDB データベースに対する ALTER DATABASE の使用法の概要。
         -   [`ALTER INSTANCE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-alter-instance.md): TiDB での ALTER INSTANCE` の使用法の概要を学習します。
         -   [`ALTER PLACEMENT POLICY`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-alter-placement-policy.md): TiDB での ALTER PLACEMENT POLICY の使用法。
@@ -436,7 +311,7 @@
         -   [`CANCEL DISTRIBUTION JOB`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-cancel-distribution-job.md): TiDB での CANCEL DISTRIBUTION JOB の使用法の概要。
         -   [`CANCEL IMPORT JOB`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-cancel-import-job.md): TiDB での CANCEL IMPORT の使用法の概要。
         -   [`COMMIT`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-commit.md): TiDB データベースの COMMIT の使用法の概要。
-        -   [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
+        -   [`CREATE [GLOBAL|SESSION] BINDING`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-create-binding.md): TiDB データベースでの CREATE BINDING の使用。
         -   [`CREATE DATABASE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-create-database.md): TiDB データベースの CREATE DATABASE の使用法の概要。
         -   [`CREATE INDEX`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-create-index.md): TiDB データベースの CREATE INDEX の使用法の概要。
         -   [`CREATE PLACEMENT POLICY`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-create-placement-policy.md): TiDB での CREATE PLACEMENT POLICY の使用法。
@@ -453,7 +328,7 @@
         -   [`DESCRIBE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-describe.md): TiDB データベースにおける DESCRIBE の使用法の概要。
         -   [`DISTRIBUTE TABLE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-distribute-table.md): TiDB データベースの DISTRIBUTE TABLE の使用法の概要。
         -   [`DO`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-do.md): TiDB データベースにおける DO の使用法の概要。
-        -   [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
+        -   [`DROP [GLOBAL|SESSION] BINDING`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-drop-binding.md): TiDB データベースでの DROP BINDING の使用。
         -   [`DROP DATABASE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-drop-database.md): TiDB データベースの DROP DATABASE の使用法の概要。
         -   [`DROP PLACEMENT POLICY`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-drop-placement-policy.md): TiDB での ALTER PLACEMENT POLICY の使用法。
         -   [`DROP RESOURCE GROUP`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-drop-resource-group.md): TiDB での DROP RESOURCE GROUP の使用方法を学習します。
@@ -476,7 +351,7 @@
         -   [`GRANT &#x3C;role>`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-grant-role.md): TiDB データベースに対する GRANT <role> の使用法の概要。
         -   [`IMPORT INTO`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-import-into.md): TiDB での IMPORT INTO の使用法の概要。
         -   [`INSERT`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-insert.md): TiDB データベースでの INSERT の使用法の概要。
-        -   [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
+        -   [`KILL [TIDB]`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-kill.md): TiDB データベースに対する KILL の使用法の概要。
         -   [`LOAD DATA`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-load-data.md): TiDB データベースの LOAD DATA の使用法の概要。
         -   [`LOAD STATS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-load-stats.md): TiDB データベースの LOAD STATS の使用法の概要。
         -   [`LOCK STATS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-lock-stats.md): TiDB データベースの LOCK STATS の使用法の概要。
@@ -494,15 +369,15 @@
         -   [`SAVEPOINT`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-savepoint.md): TiDB データベースの SAVEPOINT の使用法の概要。
         -   [`SELECT`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-select.md): TiDB データベースの SELECT の使用法の概要。
         -   [`SET DEFAULT ROLE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-default-role.md): TiDB データベースの SET DEFAULT ROLE の使用法の概要。
-        -   [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
+        -   [`SET [NAMES|CHARACTER SET]`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-names.md): TiDB データベースの SET [NAMES|CHARACTER SET] の使用法の概要。
         -   [`SET PASSWORD`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-password.md): TiDB データベースの SET PASSWORD の使用法の概要。
         -   [`SET RESOURCE GROUP`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-resource-group.md): TiDB データベースにおける SET RESOURCE GROUP の使用法の概要。
         -   [`SET ROLE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-role.md): TiDB データベースの SET ROLE の使用法の概要。
         -   [`SET TRANSACTION`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-transaction.md): TiDB データベースの SET TRANSACTION の使用法の概要。
-        -   [`SET [GLOBAL|SESSION] &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+        -   [`SET [GLOBAL|SESSION] &#x3C;variable>`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-set-variable.md): TiDB データベースの SET [GLOBAL|SESSION] <variable> の使用法の概要。
         -   [`SHOW ANALYZE STATUS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-analyze-status.md): TiDB データベースの SHOW ANALYZE STATUS の使用法の概要。
-        -   [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)
-        -   [`SHOW [GLOBAL|SESSION] BINDINGS`](/sql-statements/sql-statement-show-bindings.md)
+        -   [`SHOW [BACKUPS|RESTORES]`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-backups.md): TiDB データベースに対する SHOW [BACKUPS|RESTORES] の使用法の概要。
+        -   [`SHOW [GLOBAL|SESSION] BINDINGS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-bindings.md): TiDB データベースでの SHOW BINDINGS バインディングの使用。
         -   [`SHOW BUILTINS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-builtins.md): TiDB での SHOW BUILTINS の使用法。
         -   [`SHOW CHARACTER SET`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-character-set.md): TiDB データベースの SHOW CHARACTER SET の使用法の概要。
         -   [`SHOW COLLATION`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-collation.md): TiDB データベースの SHOW COLLATION の使用法の概要。
@@ -521,7 +396,7 @@
         -   [`SHOW FIELDS FROM`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-fields-from.md): TiDB データベースの SHOW [FULL] FIELDS FROM の使用法の概要。
         -   [`SHOW GRANTS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-grants.md): TiDB データベースの SHOW GRANTS の使用法の概要。
         -   [`SHOW IMPORT JOB`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-import-job.md): TiDB での SHOW IMPORT の使用法の概要。
-        -   [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
+        -   [`SHOW INDEXES [FROM|IN]`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-indexes.md): TiDB データベースの SHOW INDEXES [FROM|IN] の使用法の概要。
         -   [`SHOW MASTER STATUS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-master-status.md): TiDB データベースの SHOW MASTER STATUS の使用法の概要。
         -   [`SHOW PLACEMENT`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-placement.md): TiDB での SHOW PLACEMENT の使用法。
         -   [`SHOW PLACEMENT FOR`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-placement-for.md): TiDB での SHOW PLACEMENT FOR の使用法。
@@ -543,7 +418,7 @@
         -   [`SHOW TABLE REGIONS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-table-regions.md): TiDB で SHOW TABLE REGIONS を使用する方法を学習します。
         -   [`SHOW TABLE STATUS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-table-status.md): TiDB データベースの SHOW TABLE STATUS の使用法の概要。
         -   [`SHOW TABLES`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-tables.md): TiDB データベースの SHOW [FULL] TABLES の使用法の概要。
-        -   [`SHOW [GLOBAL|SESSION] VARIABLES`](/sql-statements/sql-statement-show-variables.md)
+        -   [`SHOW [GLOBAL|SESSION] VARIABLES`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-variables.md): TiDB データベースの SHOW [GLOBAL|SESSION] VARIABLES の使用法の概要。
         -   [`SHOW WARNINGS`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-show-warnings.md): TiDB データベースの SHOW WARNINGS の使用法の概要。
         -   [`SPLIT REGION`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-split-region.md): TiDB データベースの Split リージョンの使用法の概要。
         -   [`START TRANSACTION`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-start-transaction.md): TiDB データベースの START TRANSACTION の使用法の概要。
@@ -686,28 +561,18 @@
             -   [概要](https://docs.pingcap.com/ja/tidbcloud/sys-schema.md): sys` スキーマ内のシステム テーブルについて学習します。
             -   [`schema_unused_indexes`](https://docs.pingcap.com/ja/tidbcloud/sys-schema-unused-indexes.md): sys` スキーマの `schema_unused_indexes` テーブルについて学習します。
     -   [メタデータロック](https://docs.pingcap.com/ja/tidbcloud/metadata-lock.md): TiDB のメタデータ ロックの概念、原則、実装の詳細を紹介します。
-    -   [UUIDを使用する](https://docs.pingcap.com/ja/tidbcloud/uuid.md): UUIDを主キーとして使用すると、ネットワーク通信の削減、ほとんどのプログラミング言語とデータベースでのサポート、列挙攻撃からの保護などの利点があります。UUIDはバイナリ形式でBINARY(16)`列に格納することをお勧めします。また、ホットスポットの発生を防ぐため、TiDBでは`swap_flag`の設定を避けることをお勧めします。UUIDはMySQLと互換性があります。
     -   [TiDB 高速テーブル作成](https://docs.pingcap.com/ja/tidbcloud/accelerated-table-creation.md): TiDB でテーブルを作成する場合のパフォーマンス最適化の概念、原則、実装の詳細を学習します。
     -   [スキーマキャッシュ](https://docs.pingcap.com/ja/tidbcloud/schema-cache.md): TiDB は、スキーマ情報に対して LRU (Least Recently Used) ベースのキャッシュ メカニズムを採用しており、これによりメモリ使用量が大幅に削減され、多数のデータベースとテーブルがあるシナリオでのパフォーマンスが向上します。
--   APIリファレンス![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-    -   [概要](https://docs.pingcap.com/ja/tidbcloud/api-overview.md): TiDB Cloud API とは何か、その機能、API を使用してTiDB Cloudクラスターを管理する方法について学習します。
-    -   v1ベータ1
-        -   [TiDB Cloud StarterとEssential](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless)
-        -   [TiDB Cloud専用](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated)
-        -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing)
-        -   [データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)
-        -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam)
-        -   [MSP（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
-    -   [v1ベータ](https://docs.pingcap.com/tidbcloud/api/v1beta)
 -   一般的な参考資料
-    -   TiDBクラスタアーキテクチャ
+    -   TiDB クラシックアーキテクチャ
         -   [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-architecture.md): TiDBプラットフォームの主要なアーキテクチャコンポーネント
         -   [ストレージ](https://docs.pingcap.com/ja/tidbcloud/tidb-storage.md): TiDB データベースのstorageレイヤーを理解します。
         -   [コンピューティング](https://docs.pingcap.com/ja/tidbcloud/tidb-computing.md): TiDB データベースのコンピューティングレイヤーを理解します。
         -   [スケジュール](https://docs.pingcap.com/ja/tidbcloud/tidb-scheduling.md): TiDB クラスターに PD スケジューリングコンポーネントを導入します。
         -   [TSO](https://docs.pingcap.com/ja/tidbcloud/tso.md): TiDB の TimeStamp Oracle (TSO) について学習します。
+    -   [TiDB Xアーキテクチャ](https://docs.pingcap.com/ja/tidbcloud/tidb-x-architecture.md): 共有ストレージのクラウドネイティブ TiDB Xアーキテクチャが、弾力的なスケーラビリティ、予測可能なパフォーマンス、最適化された総所有コストを実現する仕組みについて説明します。
     -   ストレージエンジン
-        -   TiKV
+        -   ティクブ
             -   [TiKVの概要](https://docs.pingcap.com/ja/tidbcloud/tikv-overview.md): TiKVstorageエンジンの概要。
             -   [RocksDBの概要](https://docs.pingcap.com/ja/tidbcloud/rocksdb-overview.md): RocksDB の基本的な概念と動作原理を学びます。
         -   TiFlash
@@ -744,7 +609,6 @@
     -   [サーバーステータス変数](https://docs.pingcap.com/ja/tidbcloud/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
     -   [テーブルフィルター](https://docs.pingcap.com/ja/tidbcloud/table-filter.md): TiDB ツールでのテーブル フィルター機能の使用。
     -   [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidbcloud/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部storageサービスのstorageURI 形式について説明します。
-    -   [DDL実行の原則とベストプラクティス](https://docs.pingcap.com/ja/tidbcloud/ddl-introduction.md): TiDB での DDL ステートメントの実装方法、オンライン変更プロセス、およびベスト プラクティスについて学習します。
     -   [DDL文に埋め込まれた`ANALYZE`](https://docs.pingcap.com/ja/tidbcloud/ddl_embedded_analyze.md): このドキュメントでは、新しく作成または再編成されたインデックスの DDL ステートメントに埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
     -   [バッチ処理](https://docs.pingcap.com/ja/tidbcloud/batch-processing.md): パイプライン DML、非トランザクション DML、IMPORT INTO` ステートメント、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
     -   [データとインデックス間の不整合のトラブルシューティング](https://docs.pingcap.com/ja/tidbcloud/troubleshoot-data-inconsistency-errors.md): データとインデックス間の整合性チェックによって報告されたエラーを処理する方法を学習します。
@@ -756,8 +620,10 @@
         -   [コネクテッド：クリニックサービス](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-clinic.md): 高度な監視と診断のためにTiDB Cloud Clinic を使用する方法を学習します。
         -   [接続：IMでのAIチャット](https://docs.pingcap.com/ja/tidbcloud/connected-ai-chat-in-im.md): インスタント メッセージ (IM) の AI チャットに関する詳細情報を紹介します。
         -   接続済み: TiDB Cloudアラートの IM サブスクリプション
-            -   [Slackで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-slack.md): Slack 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
-            -   [Zoomで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-zoom.md): Zoom 経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
+            -   [Slackで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-slack.md): Slack 経由でアラート通知を受信して​​ TiDB クラスターを監視する方法を学びます。
+            -   [Zoomで登録する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-zoom.md): Zoom 経由でアラート通知を受信して​​ TiDB クラスターを監視する方法を学習します。
+            -   [Flashdutyで購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-flashduty.md): Flashduty 経由でアラート通知を取得して TiDB クラスターを監視する方法を学習します。
+            -   [PagerDuty経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-pagerduty.md): PagerDuty 経由でアラート通知を取得して TiDB クラスターを監視する方法を学習します。
         -   接続: IMチケットの作成とサブスクリプションの更新
             -   [Slack 経由でチケットを作成し、チケットの更新を購読する](https://docs.pingcap.com/ja/tidbcloud/connected-slack-ticket-creation.md): Slack チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
             -   [Larkでチケットを作成し、チケットの更新を購読する](https://docs.pingcap.com/ja/tidbcloud/connected-lark-ticket-creation.md): Lark チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
@@ -768,25 +634,6 @@
 -   よくある質問
     -   [TiDB Cloudよくある質問](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-faq.md): TiDB Cloudに関するよくある質問 (FAQ) について説明します。
 -   [用語集](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-glossary.md): TiDB Cloudで使用される用語を学習します。
-
-## リリース {#releases}
-
--   リリースノート
-    -   [2025](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-release-notes.md): 2025 年のTiDB Cloudのリリース ノートについて説明します。
-    -   [2024](https://docs.pingcap.com/ja/tidbcloud/release-notes-2024.md): 2024 年のTiDB Cloudのリリース ノートについて説明します。
-    -   [2023](https://docs.pingcap.com/ja/tidbcloud/release-notes-2023.md): 2023 年のTiDB Cloudのリリース ノートについて説明します。
-    -   [2022](https://docs.pingcap.com/ja/tidbcloud/release-notes-2022.md): 2022 年のTiDB Cloudのリリース ノートについて説明します。
-    -   [2021](https://docs.pingcap.com/ja/tidbcloud/release-notes-2021.md): 2021 年のTiDB Cloudのリリース ノートについて説明します。
-    -   [2020](https://docs.pingcap.com/ja/tidbcloud/release-notes-2020.md): 2020 年のTiDB Cloudのリリース ノートについて説明します。
--   メンテナンス通知
-    -   [[2024-09-15] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2024-09-15-console-maintenance.md)
-    -   [[2024-04-18] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ](/tidb-cloud/notification-2024-04-18-dm-feature-maintenance.md)
-    -   [[2024-04-16] TiDB Cloud監視機能メンテナンスのお知らせ](/tidb-cloud/notification-2024-04-16-monitoring-features-maintenance.md)
-    -   [[2024-04-11] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ](/tidb-cloud/notification-2024-04-11-dm-feature-maintenance.md)
-    -   [[2024-04-09] TiDB Cloud監視機能メンテナンスのお知らせ](/tidb-cloud/notification-2024-04-09-monitoring-features-maintenance.md)
-    -   [[2023-11-14] TiDB Cloud専用スケール機能メンテナンスのお知らせ](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
-    -   [[2023-09-26] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
-    -   [[2023-08-31] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/notification-2023-08-31-console-maintenance.md)
 
 ## _BUILD_ALLOWLIST {#build-allowlist}
 

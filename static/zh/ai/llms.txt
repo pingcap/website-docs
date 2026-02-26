@@ -1,0 +1,85 @@
+# TiDB for AI
+
+> TiDB 是面向 AI 应用的分布式 SQL 数据库，支持向量搜索、全文搜索及混合搜索功能。本文介绍利用 TiDB 开发 AI 应用时可用的 AI 功能与工具。
+
+## 快速开始
+
+- [使用 Python 快速上手](https://docs.pingcap.com/zh/ai/quickstart-via-python.md): 学习如何使用 Python SDK 在 TiDB 中开始向量搜索。
+- [使用 SQL 快速上手](https://docs.pingcap.com/zh/ai/quickstart-via-sql.md): 学习如何仅使用 SQL 语句快速上手 TiDB 向量搜索，为你的生成式 AI 应用提供支持。
+
+## 基础概念
+
+- [向量搜索](https://docs.pingcap.com/zh/ai/vector-search-overview.md): 了解 TiDB 中的向量搜索功能。该功能为文档、图片、音频和视频等多种数据类型提供了先进的语义相似性搜索解决方案。
+
+## 使用指南
+
+- [连接 TiDB](https://docs.pingcap.com/zh/ai/connect.md): 学习如何使用 `pytidb` 客户端连接到 TiDB 数据库。
+- [使用表](https://docs.pingcap.com/zh/ai/tables.md): 了解如何在 TiDB 中使用表。
+- 搜索功能
+  - [向量搜索](https://docs.pingcap.com/zh/ai/vector-search.md): 了解如何在你的应用中使用向量搜索。
+  - 全文搜索
+    - [使用 Python 进行全文搜索](https://docs.pingcap.com/zh/ai/vector-search-full-text-search-python.md): 全文搜索允许你通过精确关键字搜索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提升搜索质量。
+    - [使用 SQL 进行全文搜索](https://docs.pingcap.com/zh/ai/vector-search-full-text-search-sql.md): 全文搜索允许你根据精确关键字搜索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提升搜索质量。
+  - [混合搜索](https://docs.pingcap.com/zh/ai/vector-search-hybrid-search.md): 同时使用全文搜索和向量搜索，以提升搜索质量。
+  - [图片搜索](https://docs.pingcap.com/zh/ai/image-search.md): 了解如何在你的应用中使用图像搜索。
+- 高级功能
+  - [自动生成向量](https://docs.pingcap.com/zh/ai/auto-embedding.md): 了解如何在你的应用程序中使用 Auto Embedding 功能。
+  - [过滤](https://docs.pingcap.com/zh/ai/filtering.md): 了解如何在你的应用中使用过滤功能。
+  - [重排序](https://docs.pingcap.com/zh/ai/reranking.md): 了解如何在你的应用中使用 reranking。
+  - [Join 查询](https://docs.pingcap.com/zh/ai/join-queries.md): 学习如何在你的应用中使用多表连接。
+  - [Raw SQL 查询](https://docs.pingcap.com/zh/ai/raw-queries.md): 学习如何在你的应用程序中使用原始查询。
+  - [事务](https://docs.pingcap.com/zh/ai/transactions.md): 了解如何在你的应用中使用事务。
+
+## 代码示例
+
+- [增删改查](https://docs.pingcap.com/zh/ai/basic-with-pytidb.md): 学习使用 `pytidb` 进行数据库连接、建表和数据操作等基础操作。
+- [自动生成向量](https://docs.pingcap.com/zh/ai/auto-embedding-with-pytidb.md): 使用内置嵌入模型为你的文本数据自动生成嵌入向量。
+- 搜索与检索
+  - [向量搜索](https://docs.pingcap.com/zh/ai/vector-search-with-pytidb.md): 使用向量嵌入实现语义搜索，查找相似内容。
+  - [全文搜索](https://docs.pingcap.com/zh/ai/fulltext-search-with-pytidb.md): 使用 TiDB 全文搜索执行传统文本搜索。
+  - [混合搜索](https://docs.pingcap.com/zh/ai/hybrid-search-with-pytidb.md): 结合向量搜索和全文搜索，获得更全面的结果。
+  - [图片搜索](https://docs.pingcap.com/zh/ai/image-search-with-pytidb.md): 使用多模态嵌入构建一个支持文本到图像和图像到图像搜索的图像搜索应用。
+- AI 应用
+  - [RAG 应用](https://docs.pingcap.com/zh/ai/rag-with-pytidb.md): 构建一个结合文档搜索与语言生成的 RAG 应用。
+  - [对话记忆](https://docs.pingcap.com/zh/ai/memory-with-pytidb.md): 为聊天机器人和会话式 AI 应用实现会话内存。
+  - [文本转 SQL](https://docs.pingcap.com/zh/ai/text2sql-with-pytidb.md): 使用 AI 模型将自然语言查询转换为 SQL 语句。
+
+## 集成指南
+
+- [集成概览](https://docs.pingcap.com/zh/ai/vector-search-integration-overview.md): TiDB 向量搜索集成的概览，包括支持的 AI 框架、嵌入模型和 ORM 库。
+- 自动生成向量
+  - [概览](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-overview.md): 了解如何使用 Auto Embedding 通过纯文本而非向量进行语义搜索。
+  - [OpenAI](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-openai.md): 了解如何在 TiDB Cloud 中使用 OpenAI 向量嵌入模型。
+  - [OpenAI 兼容](https://docs.pingcap.com/zh/ai/embedding-openai-compatible.md): 了解如何将 TiDB 向量搜索与 OpenAI 兼容的 embedding 模型集成，以存储 embedding 并执行语义搜索。
+  - [Jina AI](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-jina-ai.md): 了解如何在 TiDB Cloud 中使用 Jina AI 嵌入模型。
+  - [Cohere](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-cohere.md): 了解如何在 TiDB Cloud 中使用 Cohere 向量嵌入模型。
+  - [Google Gemini](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-gemini.md): 了解如何在 TiDB Cloud 中使用 Google Gemini 向量嵌入模型。
+  - [Hugging Face](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-huggingface.md): 了解如何在 TiDB Cloud 中使用 Hugging Face 向量嵌入模型。
+  - [NVIDIA NIM](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-nvidia-nim.md): 了解如何在 TiDB Cloud 中使用 NVIDIA NIM embedding 模型。
+  - [Amazon Titan](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-amazon-titan.md): 了解如何在 TiDB Cloud 中使用 Amazon Titan 嵌入模型。
+- AI 框架
+  - [LangChain](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-langchain.md): 学习如何将 TiDB 向量搜索集成到 LangChain。
+  - [LlamaIndex](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-llamaindex.md): 学习如何将 TiDB 向量搜索与 LlamaIndex 集成。
+- ORM 库
+  - [SQLAlchemy](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-sqlalchemy.md): 学习如何将 TiDB 向量搜索与 SQLAlchemy 集成，以存储嵌入向量并执行语义搜索。
+  - [Django ORM](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-django-orm.md): 学习如何将 TiDB 向量搜索集成到 Django ORM，用于存储嵌入向量并执行语义搜索。
+  - [Peewee](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-peewee.md): 学习如何将 TiDB 向量搜索与 peewee 集成，以存储嵌入向量并执行语义搜索。
+- 云服务
+  - [Jina AI Embedding](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-jinaai-embedding.md): 学习如何将 TiDB 向量搜索与 Jina AI Embeddings API 集成，实现 embedding 存储与语义搜索。
+  - [Amazon Bedrock](https://docs.pingcap.com/zh/ai/vector-search-integrate-with-amazon-bedrock.md): 学习如何集成 TiDB 向量搜索与 Amazon Bedrock，构建基于 RAG（检索增强生成）的问答机器人。
+- MCP Server
+  - [概览](https://docs.pingcap.com/zh/ai/tidb-mcp-server.md): 使用自然语言指令，通过 TiDB MCP Server 管理你的 TiDB 数据库。
+  - [Claude Code](https://docs.pingcap.com/zh/ai/tidb-mcp-claude-code.md): 本指南将向你展示如何在 Claude Code 中配置 TiDB MCP Server。
+  - [Claude Desktop](https://docs.pingcap.com/zh/ai/tidb-mcp-claude-desktop.md): 本指南将向你展示如何在 Claude Desktop 中配置 TiDB MCP Server。
+  - [Cursor](https://docs.pingcap.com/zh/ai/tidb-mcp-cursor.md): 本指南将演示如何在 Cursor 编辑器中配置 TiDB MCP Server。
+  - [VS Code](https://docs.pingcap.com/zh/ai/tidb-mcp-vscode.md): 本指南介绍如何在 Visual Studio Code 中配置 TiDB MCP Server。
+  - [Windsurf](https://docs.pingcap.com/zh/ai/tidb-mcp-windsurf.md): 本指南将向你展示如何在 Windsurf 中配置 TiDB MCP Server。
+
+## 参考指南
+
+- [向量数据类型](https://docs.pingcap.com/zh/ai/vector-search-data-types.md): 了解 TiDB 中的向量数据类型。
+- [函数和运算符](https://docs.pingcap.com/zh/ai/vector-search-functions-and-operators.md): 了解可用于向量数据类型的函数与运算符。
+- [向量搜索索引](https://docs.pingcap.com/zh/ai/vector-search-index.md): 了解如何在 TiDB 中构建和使用向量搜索索引，以加速 K-最近邻（KNN）查询。
+- [性能调优](https://docs.pingcap.com/zh/ai/vector-search-improve-performance.md): 学习提升 TiDB 向量搜索性能的最佳实践。
+- [限制](https://docs.pingcap.com/zh/ai/vector-search-limitations.md): 了解 TiDB 向量搜索的限制。
+- [更新记录](https://docs.pingcap.com/zh/ai/vector-search-changelogs.md): 了解 TiDB 向量搜索功能的新特性、兼容性变更、改进和缺陷修复。

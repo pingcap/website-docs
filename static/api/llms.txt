@@ -1,0 +1,17 @@
+# TiDB API
+
+> TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both TiDB Cloud and TiDB Self-Managed.
+
+## TIDB CLOUD
+
+- [API Overview](https://docs.pingcap.com/api/tidb-cloud-api-overview.md): Learn about what TiDB Cloud API is, its features, and how to use the API to manage your TiDB Cloud clusters.
+- [API v1beta1](https://docs.pingcap.com/api/tidb-cloud-api-v1beta1.md): Learn about the v1beta1 API of TiDB Cloud.
+- [API v1beta](https://docs.pingcap.com/api/tidb-cloud-api-v1beta.md): Learn about the v1beta API of TiDB Cloud.
+
+## TIDB SELF-MANAGED
+
+- [TiProxy API](https://docs.pingcap.com/api/tiproxy-api-overview.md): Learn about the API for TiProxy.
+- [Data Migration API](https://docs.pingcap.com/api/dm-api-overview.md): Learn the API of Data Migration (DM).
+- [Monitoring API](https://docs.pingcap.com/api/monitoring-api-overview.md): Learn the API of TiDB monitoring services.
+- [TiCDC API](https://docs.pingcap.com/api/ticdc-api-overview.md): Learn the API of TiCDC.
+- [TiDB Operator API](https://docs.pingcap.com/api/tidb-operator-api-overview.md): Learn the API of TiDB Operator.

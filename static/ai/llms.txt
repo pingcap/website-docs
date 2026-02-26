@@ -1,0 +1,85 @@
+# TiDB for AI
+
+> TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities. This document provides an overview of the AI features and tools available for building AI-powered applications with TiDB.
+
+## QUICK START
+
+- [Get Started via Python](https://docs.pingcap.com/ai/quickstart-via-python.md): Learn how to get started with vector search in TiDB using Python SDK.
+- [Get Started via SQL](https://docs.pingcap.com/ai/quickstart-via-sql.md): Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
+
+## CONCEPTS
+
+- [Vector Search](https://docs.pingcap.com/ai/vector-search-overview.md): Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+
+## GUIDES
+
+- [Connect to TiDB](https://docs.pingcap.com/ai/connect.md): Learn how to connect to a TiDB database using the `pytidb` client.
+- [Working with Tables](https://docs.pingcap.com/ai/tables.md): Learn how to work with tables in TiDB.
+- Search Features
+  - [Vector Search](https://docs.pingcap.com/ai/vector-search.md): Learn how to use vector search in your application.
+  - Full-Text Search
+    - [Full-Text Search via Python](https://docs.pingcap.com/ai/vector-search-full-text-search-python.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+    - [Full-Text Search via SQL](https://docs.pingcap.com/ai/vector-search-full-text-search-sql.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
+  - [Hybrid Search](https://docs.pingcap.com/ai/vector-search-hybrid-search.md): Use full-text search and vector search together to improve the retrieval quality.
+  - [Image Search](https://docs.pingcap.com/ai/image-search.md): Learn how to use image search in your application.
+- Advanced Features
+  - [Auto Embedding](https://docs.pingcap.com/ai/auto-embedding.md): Learn how to use auto embedding in your application.
+  - [Filtering](https://docs.pingcap.com/ai/filtering.md): Learn how to use filtering in your application.
+  - [Reranking](https://docs.pingcap.com/ai/reranking.md): Learn how to use reranking in your application.
+  - [Join Queries](https://docs.pingcap.com/ai/join-queries.md): Learn how to use multiple table joins in your application.
+  - [Raw SQL Queries](https://docs.pingcap.com/ai/raw-queries.md): Learn how to use raw queries in your application.
+  - [Transactions](https://docs.pingcap.com/ai/transactions.md): Learn how to use transactions in your application.
+
+## EXAMPLES
+
+- [Basic CRUD Operations](https://docs.pingcap.com/ai/basic-with-pytidb.md): Learn fundamental `pytidb` operations including database connection, table creation, and data manipulation.
+- [Auto Embedding](https://docs.pingcap.com/ai/auto-embedding-with-pytidb.md): Automatically generate embeddings for your text data using built-in embedding models.
+- Search & Retrieval
+  - [Vector Search](https://docs.pingcap.com/ai/vector-search-with-pytidb.md): Implement semantic search using vector embeddings to find similar content.
+  - [Full-Text Search](https://docs.pingcap.com/ai/fulltext-search-with-pytidb.md): Perform traditional text search using TiDB full-text search.
+  - [Hybrid Search](https://docs.pingcap.com/ai/hybrid-search-with-pytidb.md): Combine vector search and full-text search for more comprehensive results.
+  - [Image Search](https://docs.pingcap.com/ai/image-search-with-pytidb.md): Build an image search application using multimodal embeddings for both text-to-image and image-to-image search.
+- AI Applications
+  - [RAG Application](https://docs.pingcap.com/ai/rag-with-pytidb.md): Build a RAG application that combines document retrieval with language generation.
+  - [Conversational Memory](https://docs.pingcap.com/ai/memory-with-pytidb.md): Implement conversation memory for chatbots and conversational AI applications.
+  - [Text-to-SQL](https://docs.pingcap.com/ai/text2sql-with-pytidb.md): Convert natural language queries into SQL statements using AI models.
+
+## INTEGRATIONS
+
+- [Integration Overview](https://docs.pingcap.com/ai/vector-search-integration-overview.md): An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+- Auto Embedding
+  - [Overview](https://docs.pingcap.com/ai/vector-search-auto-embedding-overview.md): Learn how to use Auto Embedding to perform semantic searches with plain text instead of vectors.
+  - [OpenAI](https://docs.pingcap.com/ai/vector-search-auto-embedding-openai.md): Learn how to use OpenAI embedding models in TiDB Cloud.
+  - [OpenAI Compatible](https://docs.pingcap.com/ai/embedding-openai-compatible.md): Learn how to integrate TiDB Vector Search with an OpenAI-compatible embedding model to store embeddings and perform semantic search.
+  - [Jina AI](https://docs.pingcap.com/ai/vector-search-auto-embedding-jina-ai.md): Learn how to use Jina AI embedding models in TiDB Cloud.
+  - [Cohere](https://docs.pingcap.com/ai/vector-search-auto-embedding-cohere.md): Learn how to use Cohere embedding models in TiDB Cloud.
+  - [Google Gemini](https://docs.pingcap.com/ai/vector-search-auto-embedding-gemini.md): Learn how to use Google Gemini embedding models in TiDB Cloud.
+  - [Hugging Face](https://docs.pingcap.com/ai/vector-search-auto-embedding-huggingface.md): Learn how to use Hugging Face embedding models in TiDB Cloud.
+  - [NVIDIA NIM](https://docs.pingcap.com/ai/vector-search-auto-embedding-nvidia-nim.md): Learn how to use NVIDIA NIM embedding models in TiDB Cloud.
+  - [Amazon Titan](https://docs.pingcap.com/ai/vector-search-auto-embedding-amazon-titan.md): Learn how to use Amazon Titan embedding models in TiDB Cloud.
+- AI Frameworks
+  - [LangChain](https://docs.pingcap.com/ai/vector-search-integrate-with-langchain.md): Learn how to integrate TiDB Vector Search with LangChain.
+  - [LlamaIndex](https://docs.pingcap.com/ai/vector-search-integrate-with-llamaindex.md): Learn how to integrate TiDB Vector Search with LlamaIndex.
+- ORM Libraries
+  - [SQLAlchemy](https://docs.pingcap.com/ai/vector-search-integrate-with-sqlalchemy.md): Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.
+  - [Django ORM](https://docs.pingcap.com/ai/vector-search-integrate-with-django-orm.md): Learn how to integrate TiDB Vector Search with Django ORM to store embeddings and perform semantic search.
+  - [Peewee](https://docs.pingcap.com/ai/vector-search-integrate-with-peewee.md): Learn how to integrate TiDB Vector Search with peewee to store embeddings and perform semantic searches.
+- Cloud Services
+  - [Jina AI Embedding](https://docs.pingcap.com/ai/vector-search-integrate-with-jinaai-embedding.md): Learn how to integrate TiDB Vector Search with Jina AI Embeddings API to store embeddings and perform semantic search.
+  - [Amazon Bedrock](https://docs.pingcap.com/ai/vector-search-integrate-with-amazon-bedrock.md): Learn how to integrate TiDB Vector Search with Amazon Bedrock to build a Retrieval-Augmented Generation (RAG) Q&A bot.
+- MCP Server
+  - [Overview](https://docs.pingcap.com/ai/tidb-mcp-server.md): Manage your TiDB databases using natural language instructions with the TiDB MCP Server.
+  - [Claude Code](https://docs.pingcap.com/ai/tidb-mcp-claude-code.md): This guide shows you how to configure the TiDB MCP Server in Claude Code.
+  - [Claude Desktop](https://docs.pingcap.com/ai/tidb-mcp-claude-desktop.md): This guide shows you how to configure the TiDB MCP Server in Claude Desktop.
+  - [Cursor](https://docs.pingcap.com/ai/tidb-mcp-cursor.md): This guide shows you how to configure the TiDB MCP Server in the Cursor editor.
+  - [VS Code](https://docs.pingcap.com/ai/tidb-mcp-vscode.md): This guide shows you how to configure the TiDB MCP Server in Visual Studio Code.
+  - [Windsurf](https://docs.pingcap.com/ai/tidb-mcp-windsurf.md): This guide shows you how to configure the TiDB MCP Server in Windsurf.
+
+## REFERENCE
+
+- [Vector Data Types](https://docs.pingcap.com/ai/vector-search-data-types.md): Learn about the Vector data types in TiDB.
+- [Functions and Operators](https://docs.pingcap.com/ai/vector-search-functions-and-operators.md): Learn about functions and operators available for Vector data types.
+- [Vector Search Index](https://docs.pingcap.com/ai/vector-search-index.md): Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
+- [Performance Tuning](https://docs.pingcap.com/ai/vector-search-improve-performance.md): Learn best practices for improving the performance of TiDB Vector Search.
+- [Limitations](https://docs.pingcap.com/ai/vector-search-limitations.md): Learn the limitations of the TiDB vector search.
+- [Changelogs](https://docs.pingcap.com/ai/vector-search-changelogs.md): Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB vector search feature.

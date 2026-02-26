@@ -1,0 +1,26 @@
+# TiDB Cloud Releases
+
+> This document provides an overview of TiDB Cloud release notes and maintenance notifications.
+
+## RELEASE NOTES
+
+- [2026](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes.md): Learn about the release notes of TiDB Cloud in 2026.
+- [2025](https://docs.pingcap.com/tidbcloud/release-notes-2025.md): Learn about the release notes of TiDB Cloud in 2025.
+- [2024](https://docs.pingcap.com/tidbcloud/release-notes-2024.md): Learn about the release notes of TiDB Cloud in 2024.
+- Earlier Releases
+  - [2023](https://docs.pingcap.com/tidbcloud/release-notes-2023.md): Learn about the release notes of TiDB Cloud in 2023.
+  - [2022](https://docs.pingcap.com/tidbcloud/release-notes-2022.md): Learn about the release notes of TiDB Cloud in 2022.
+  - [2021](https://docs.pingcap.com/tidbcloud/release-notes-2021.md): Learn about the release notes of TiDB Cloud in 2021.
+  - [2020](https://docs.pingcap.com/tidbcloud/release-notes-2020.md): Learn about the release notes of TiDB Cloud in 2020.
+
+## MAINTENANCE NOTIFICATIONS
+
+- [[2024-09-15] TiDB Cloud Console Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2024-09-15-console-maintenance.md): Learn about the details of the TiDB Cloud Console maintenance on September 15, 2024, such as the maintenance window, reason, and impact.
+- [[2024-04-18] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2024-04-18-dm-feature-maintenance.md): Learn about the details of TiDB Cloud Data Migration (DM) feature maintenance on April 18, 2024, such as the maintenance window and impact.
+- [[2024-04-16] TiDB Cloud Monitoring Features Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2024-04-16-monitoring-features-maintenance.md): Learn about the details of the TiDB Cloud monitoring features maintenance on April 16, 2024, such as the maintenance window, reason, and impact.
+- [[2024-04-11] TiDB Cloud Data Migration (DM) Feature Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2024-04-11-dm-feature-maintenance.md): Learn about the details of TiDB Cloud Data Migration (DM) feature maintenance on April 11, 2024, such as the maintenance window and impact.
+- [[2024-04-09] TiDB Cloud Monitoring Features Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2024-04-09-monitoring-features-maintenance.md): Learn about the details of the TiDB Cloud monitoring features maintenance on April 9, 2024, such as the maintenance window, reason, and impact.
+- Earlier Notifications
+  - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2023-11-14-scale-feature-maintenance.md): Learn about the details of TiDB Cloud Dedicated Scale Feature Maintenance on November 14, 2023, such as the maintenance window and impact.
+  - [[2023-09-26] TiDB Cloud Console Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2023-09-26-console-maintenance.md): Learn about the details of the TiDB Cloud Console maintenance on Sep 26, 2023, such as the maintenance window, reason, and impact.
+  - [[2023-08-31] TiDB Cloud Console Maintenance Notification](https://docs.pingcap.com/tidbcloud/notification-2023-08-31-console-maintenance.md): Learn about the details of the TiDB Cloud Console maintenance on August 31, 2023, such as the maintenance window, reason, and impact.

@@ -1,0 +1,34 @@
+# TiDB Best Practices
+
+> By following best practices for deploying, configuring, and using TiDB, you can optimize the performance, reliability, and scalability of your TiDB deployments. This document provides an overview of the best practices for using TiDB.
+
+## Overview
+
+- [Use TiDB](https://docs.pingcap.com/best-practices/tidb-best-practices.md): This document summarizes best practices for using TiDB, covering SQL use and optimization tips for OLAP and OLTP scenarios, with a focus on TiDB-specific optimization options. It also recommends reading three blog posts introducing TiDB's technical principles before diving into the best practices.
+
+## Schema Design
+
+- [Manage DDL](https://docs.pingcap.com/best-practices/ddl-introduction.md): Learn about how DDL statements are implemented in TiDB, the online change process, and best practices.
+- [Use UUIDs as Primary Keys](https://docs.pingcap.com/best-practices/uuid.md): UUIDs, when used as primary keys, offer benefits such as reduced network trips, support in most programming languages and databases, and protection against enumeration attacks. Storing UUIDs as binary in a `BINARY(16)` column is recommended. It's also advised to avoid setting the `swap_flag` with TiDB to prevent hotspots. MySQL compatibility is available for UUIDs.
+- [Use TiDB Partitioned Tables](https://docs.pingcap.com/best-practices/tidb-partitioned-tables-best-practices.md): Learn best practices for using TiDB partitioned tables to improve performance, simplify data management, and handle large-scale datasets efficiently.
+- [Optimize Multi-Column Indexes](https://docs.pingcap.com/best-practices/multi-column-index-best-practices.md): Learn how to use multi-column indexes effectively in TiDB and apply advanced optimization techniques.
+- [Manage Indexes and Identify Unused Indexes](https://docs.pingcap.com/best-practices/index-management-best-practices.md): Learn the best practices for managing and optimizing indexes, identifying and removing unused indexes in TiDB.
+
+## Deployment
+
+- [Deploy TiDB on Public Cloud](https://docs.pingcap.com/best-practices/best-practices-on-public-cloud.md): Learn about the best practices for deploying TiDB on public cloud.
+- [Three-Node Hybrid Deployment](https://docs.pingcap.com/best-practices/three-nodes-hybrid-deployment.md): TiDB cluster can be deployed in a cost-effective way on three machines. Best practices for this hybrid deployment include adjusting parameters for stability and performance. Limiting resource consumption and adjusting thread pool sizes are key to optimizing the cluster. Adjusting parameters for TiKV background tasks and TiDB execution operators is also important.
+- [Local Reads in Three-Data-Center Deployments](https://docs.pingcap.com/best-practices/three-dc-local-read.md): TiDB's three data center deployment model can cause increased access latency due to cross-center data reads. To mitigate this, the Stale Read feature allows for local historical data access, reducing latency at the expense of real-time data availability. When using Stale Read in geo-distributed scenarios, TiDB accesses local replicas to avoid cross-center network latency. This is achieved by configuring the `zone` label and setting `tidb_replica_read` to `closest-replicas`. For more information on performing Stale Read, refer to the documentation.
+
+## Operations
+
+- [Use HAProxy for Load Balancing](https://docs.pingcap.com/best-practices/haproxy-best-practices.md): HAProxy is a free, open-source load balancer and proxy server for TCP and HTTP-based applications. It provides high availability, load balancing, health checks, sticky sessions, SSL support, and monitoring. To deploy HAProxy, ensure hardware and software requirements are met, then install and configure it. Use the latest stable version for best results.
+- [Use Read-Only Storage Nodes](https://docs.pingcap.com/best-practices/readonly-nodes.md): This document introduces configuring read-only storage nodes for isolating high-tolerance delay loads from online services. Steps include marking TiKV nodes as read-only, using Placement Rules to store data on read-only nodes as learners, and using Follower Read to read data from read-only nodes.
+- [Monitor TiDB Using Grafana](https://docs.pingcap.com/best-practices/grafana-monitor-best-practices.md): Best Practices for Monitoring TiDB Using Grafana. Deploy a TiDB cluster using TiUP and add Grafana and Prometheus for monitoring. Use metrics to analyze cluster status and diagnose problems. Prometheus collects metrics from TiDB components, and Grafana displays them. Tips for efficient Grafana use include modifying query expressions, switching Y-axis scale, and using API for query results. The platform is powerful for analyzing and diagnosing TiDB cluster status.
+
+## Performance Tuning
+
+- [Handle Millions of Tables in SaaS Multi-Tenant Scenarios](https://docs.pingcap.com/best-practices/saas-best-practices.md): Learn best practices for TiDB in SaaS (Software as a Service) multi-tenant scenarios, especially for environments where the number of tables in a single cluster exceeds one million.
+- [Handle High-Concurrency Writes](https://docs.pingcap.com/best-practices/high-concurrency-best-practices.md): This document provides best practices for handling highly-concurrent write-heavy workloads in TiDB. It addresses challenges and solutions for data distribution, hotspot cases, and complex hotspot problems. The article also discusses parameter configuration for optimizing performance.
+- [Tune TiKV Performance with Massive Regions](https://docs.pingcap.com/best-practices/massive-regions-best-practices.md): TiKV performance tuning involves reducing the number of Regions and messages, increasing Raftstore concurrency, enabling Hibernate Region and Region Merge, adjusting Raft base tick interval, increasing TiKV instances, and adjusting Region size. Other issues include slow PD leader switching and outdated PD routing information.
+- [Tune PD Scheduling](https://docs.pingcap.com/best-practices/pd-scheduling-best-practices.md): This document summarizes PD scheduling best practices, including scheduling process, load balancing, hot regions scheduling, cluster topology awareness, scale-in and failure recovery, region merge, query scheduling status, and control scheduling strategy. It also covers common scenarios such as uneven distribution of leaders/regions, slow node recovery, and troubleshooting TiKV nodes.
