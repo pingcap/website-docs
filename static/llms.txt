@@ -2,35 +2,62 @@
 
 > TiDB is an open-source, distributed SQL database designed for Hybrid Transactional and Analytical Processing (HTAP). This documentation covers both self-managed deployments and TiDB Cloud managed services.
 
+## Product
+
 TiDB is available in multiple deployment options:
 
 - **TiDB Cloud**: Fully managed database service with Dedicated, Essential, and Starter plan.
 - **TiDB Self-Managed**: Deploy and operate TiDB on your own infrastructure.
 - **TiDB on Kubernetes**: Deploy and manage TiDB using TiDB Operator.
 
-## TiDB Cloud
+### TiDB Cloud
 
 TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, letting you focus on your applications instead of the complexities of your database.
 
-### TiDB Cloud Dedicated
+#### TiDB Cloud Dedicated
 
 - [TiDB Cloud Dedicated Documentation](https://docs.pingcap.com/tidbcloud/llms.txt): Enterprise-grade managed TiDB with dedicated resources, advanced security, and compliance features.
 
-### TiDB Cloud Essential
+#### TiDB Cloud Essential
 
 - [TiDB Cloud Essential Documentation](https://docs.pingcap.com/tidbcloud/essential/llms.txt): Cost-effective managed TiDB for growing applications, balancing performance and affordability.
 
-### TiDB Cloud Starter
+#### TiDB Cloud Starter
 
 - [TiDB Cloud Starter Documentation](https://docs.pingcap.com/tidbcloud/starter/llms.txt): Serverless, pay-as-you-go TiDB Cloud offering for development, testing, and small-scale workloads.
 
-## TiDB Self-Managed
+### TiDB Self-Managed
 
 - [TiDB Self-Managed Documentation](https://docs.pingcap.com/tidb/llms.txt): Documentation for deploying, configuring, and operating TiDB clusters on self-managed infrastructure.
 
-## TiDB on Kubernetes
+### TiDB on Kubernetes
 
 - [TiDB on Kubernetes Documentation](https://docs.pingcap.com/tidb-in-kubernetes/llms.txt): Documentation for running TiDB on Kubernetes using TiDB Operator.
+
+## TiDB for AI
+
+- [TiDB for AI Documentation](https://docs.pingcap.com/ai/llms.txt): TiDB is a distributed SQL database designed for modern AI applications, offering integrated vector search, full-text search, and hybrid search capabilities. This document provides an overview of the AI features and tools available for building AI-powered applications with TiDB.
+
+## Developer
+
+- [Developer Guide Documentation](https://docs.pingcap.com/developer/llms.txt): This guide helps application developers quickly learn how to connect to TiDB, design databases, write and query data, and build reliable, high-performance applications on TiDB.
+
+## Best Practices
+
+- [TiDB Best Practices Documentation](https://docs.pingcap.com/best-practices/llms.txt): By following best practices for deploying, configuring, and using TiDB, you can optimize the performance, reliability, and scalability of your TiDB deployments. This document provides an overview of the best practices for using TiDB.
+
+## API
+
+- [TiDB API Documentation](https://docs.pingcap.com/api/llms.txt): TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both TiDB Cloud and TiDB Self-Managed.
+
+## Releases
+
+Release notes for TiDB products, including TiDB Cloud, TiDB Self-Managed, TiDB Operator, and TiUP.
+
+- [TiDB Cloud Release Notes](https://docs.pingcap.com/releases/tidb-cloud/llms.txt): New features and improvements in each TiDB Cloud release and scheduled maintenance activities that might affect your TiDB Cloud services.
+- [TiDB Self-Managed Release Notes](https://docs.pingcap.com/releases/tidb-self-managed/llms.txt): New features, improvements, and bug fixes for TiDB Self-Managed.
+- [TiDB Operator Release Notes](https://docs.pingcap.com/releases/tidb-operator/llms.txt): Changes and updates for deploying and managing TiDB on Kubernetes using TiDB Operator.
+- [TiUP Release Notes](https://github.com/pingcap/tiup/releases): Changes and updates for TiUP, the TiDB package manager and component management tool.
 
 ## More Resources
 

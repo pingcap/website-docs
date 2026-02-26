@@ -1,0 +1,115 @@
+# TiDB 应用开发
+
+> 本指南旨在帮助应用开发者快速掌握如何连接 TiDB、设计数据库、读写数据，并基于 TiDB 构建可靠且高性能的应用程序。
+
+## 快速上手
+
+- [创建 TiDB Cloud Starter 集群](https://docs.pingcap.com/zh/developer/dev-guide-build-cluster-in-cloud.md): 使用 TiDB Cloud Starter 构建 TiDB 集群，并连接 TiDB Cloud Starter 集群。
+- [TiDB 基础](https://docs.pingcap.com/zh/developer/dev-guide-tidb-basics.md): 介绍 TiDB 的基础知识，包括事务机制和应用程序与 TiDB 交互的方式。
+- [使用 TiDB 的增删改查 SQL](https://docs.pingcap.com/zh/developer/dev-guide-tidb-crud-sql.md): 简单介绍 TiDB 的增删改查 SQL。
+
+## 开发指南
+
+- 连接到 TiDB
+  - [概览](https://docs.pingcap.com/zh/developer/dev-guide-connect-to-tidb.md): 连接到 TiDB 的方式概览。
+  - 通过 CLI 或 GUI 连接
+    - [MySQL CLI 工具](https://docs.pingcap.com/zh/developer/dev-guide-mysql-tools.md): 介绍如何通过 MySQL 工具连接到 TiDB。
+    - [MySQL Workbench](https://docs.pingcap.com/zh/developer/dev-guide-gui-mysql-workbench.md): 了解如何使用 MySQL Workbench 连接到 TiDB。
+    - [Navicat](https://docs.pingcap.com/zh/developer/dev-guide-gui-navicat.md): 了解如何使用 Navicat 连接到 TiDB。
+  - 通过驱动或 ORM 框架连接
+    - [选择驱动或 ORM 框架](https://docs.pingcap.com/zh/developer/dev-guide-choose-driver-or-orm.md): 选择驱动或 ORM 框架连接 TiDB。
+    - Java
+      - [JDBC](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-java-jdbc.md): 了解如何使用 JDBC 连接到 TiDB。本文提供了使用 JDBC 与 TiDB 交互的 Java 示例代码片段。
+      - [MyBatis](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-java-mybatis.md): 了解如何使用 MyBatis 连接到 TiDB。本文提供了使用 MyBatis 与 TiDB 交互的 Java 示例代码片段。
+      - [Hibernate](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-java-hibernate.md): 了解如何使用 Hibernate 连接到 TiDB。本文提供了使用 Hibernate 与 TiDB 交互的 Java 示例代码片段。
+      - [Spring Boot](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-java-spring-boot.md): 了解如何使用 Spring Boot 连接到 TiDB。本文提供了使用 Spring Boot 与 TiDB 交互的 Java 示例代码片段。
+      - [配置连接池与连接参数](https://docs.pingcap.com/zh/developer/dev-guide-connection-parameters.md): 针对开发者的 TiDB 连接池与连接参数的说明。
+      - [开发 Java 应用的最佳实践](https://docs.pingcap.com/zh/developer/java-app-best-practices.md): 本文介绍了开发 Java 应用程序使用 TiDB 的常见问题与解决办法。TiDB 是高度兼容 MySQL 协议的数据库，基于 MySQL 开发的 Java 应用的最佳实践也多适用于 TiDB。
+    - Go
+      - [Go-MySQL-Driver](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-golang-sql-driver.md): 了解如何使用 Go-MySQL-Driver 连接到 TiDB。本文提供了使用 Go-MySQL-Driver 与 TiDB 交互的 Golang 示例代码片段。
+      - [GORM](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-golang-gorm.md): 了解如何使用 GORM 连接到 TiDB。本文提供了使用 GORM 与 TiDB 交互的 Golang 示例代码片段。
+    - Python
+      - [mysqlclient](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-python-mysqlclient.md): 了解如何使用 mysqlclient 连接到 TiDB。本文提供了使用 mysqlclient 与 TiDB 交互的 Python 示例代码片段。
+      - [MySQL Connector/Python](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-python-mysql-connector.md): 了解如何使用 MySQL Connector/Python 连接到 TiDB。本文提供了使用 MySQL Connector/Python 与 TiDB 交互的 Python 示例代码片段。
+      - [PyMySQL](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-python-pymysql.md): 了解如何使用 PyMySQL 连接到 TiDB。本文提供了使用 PyMySQL 与 TiDB 交互的 Python 示例代码片段。
+      - [SQLAlchemy](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-python-sqlalchemy.md): 了解如何使用 SQLAlchemy 连接到 TiDB。本文提供了使用 SQLAlchemy 与 TiDB 交互的 Python 示例代码片段。
+      - [peewee](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-python-peewee.md): 了解如何使用 peewee 连接到 TiDB。本文提供了使用 peewee 与 TiDB 交互的 Python 示例代码片段。
+      - [Django](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-python-django.md): 了解如何使用 Django 连接到 TiDB。本文提供了使用 Django 与 TiDB 交互的 Python 示例代码片段。
+    - Node.js
+      - [node-mysql2](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-nodejs-mysql2.md): 本文描述了 TiDB 和 node-mysql2 的连接步骤，并给出了简单示例代码片段。
+      - [mysql.js](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-nodejs-mysqljs.md): 本文描述了 TiDB 和 mysql.js 的连接步骤，并给出了简单示例代码片段。
+      - [Prisma](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-nodejs-prisma.md): 本文描述了 TiDB 和 Prisma 的连接步骤，并给出了简单示例代码片段。
+      - [Sequelize](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-nodejs-sequelize.md): 本文描述了 TiDB 和 Sequelize 的连接步骤，并给出了简单示例代码片段。
+      - [TypeORM](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-nodejs-typeorm.md): 本文描述了 TiDB 和 TypeORM 的连接步骤，并给出了简单示例代码片段。
+      - [Next.js](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-nextjs.md): 本文介绍了如何在 Next.js 中使用 TiDB 和 mysql2 构建一个 CRUD 应用程序，并给出了简单示例代码片段。
+      - [AWS Lambda](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-aws-lambda.md): 本文介绍如何在 AWS Lambda 函数中使用 TiDB 和 mysql2 构建一个 CRUD 应用程序，并给出了简单示例代码片段。
+    - Ruby
+      - [mysql2](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-ruby-mysql2.md): 本文描述了 TiDB 和 mysql2 的连接步骤，并给出了使用 mysql2 gem 连接 TiDB 的简单示例代码片段。
+      - [Rails](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-ruby-rails.md): 本文描述了 TiDB 和 Rails 框架的连接步骤，并给出了使用 Rails 框架和 ActiveRecord ORM 连接 TiDB 的简单示例代码片段。
+    - C#
+      - [C#](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-cs.md): 了解如何使用 C# 连接 TiDB。本教程提供了与 TiDB 交互的 C# 代码示例。
+  - 通过 TiDB Cloud Serverless Driver 连接 ![BETA](https://docs-download.pingcap.com/media/images/docs-cn/blank_transparent_placeholder.png)
+    - [概览](https://docs.pingcap.com/zh/developer/serverless-driver.md): 了解如何从 serverless 和边缘环境连接到 TiDB Cloud Starter 或 TiDB Cloud Essential。
+    - [Node.js 示例](https://docs.pingcap.com/zh/developer/serverless-driver-node-example.md): 学习如何在本地 Node.js 项目中使用 TiDB Cloud serverless driver。
+    - [Prisma 示例](https://docs.pingcap.com/zh/developer/serverless-driver-prisma-example.md): 学习如何将 TiDB Cloud serverless driver 与 Prisma ORM 一起使用。
+    - [Kysely 示例](https://docs.pingcap.com/zh/developer/serverless-driver-kysely-example.md): 学习如何在 Kysely 中使用 TiDB Cloud serverless driver。
+    - [Drizzle 示例](https://docs.pingcap.com/zh/developer/serverless-driver-drizzle-example.md): 学习如何在 Drizzle 中使用 TiDB Cloud serverless driver。
+- 数据库模式设计
+  - [概览](https://docs.pingcap.com/zh/developer/dev-guide-schema-design-overview.md): TiDB 数据库模式设计的概述。
+  - [创建数据库](https://docs.pingcap.com/zh/developer/dev-guide-create-database.md): 创建数据库的方法、规范及例子。
+  - [创建表](https://docs.pingcap.com/zh/developer/dev-guide-create-table.md): 创建表的方法、规范及例子。
+  - [创建二级索引](https://docs.pingcap.com/zh/developer/dev-guide-create-secondary-indexes.md): 创建二级索引的方法、规范及例子。
+- 数据写入
+  - [插入数据](https://docs.pingcap.com/zh/developer/dev-guide-insert-data.md): 插入数据、批量导入数据的方法、最佳实践及例子。
+  - [更新数据](https://docs.pingcap.com/zh/developer/dev-guide-update-data.md): 更新数据、批量更新数据的方法、最佳实践及例子。
+  - [删除数据](https://docs.pingcap.com/zh/developer/dev-guide-delete-data.md): 删除数据、批量删除数据的方法、最佳实践及例子。
+  - [使用 TTL (Time to Live) 定期删除过期数据](https://docs.pingcap.com/zh/developer/dev-guide-time-to-live.md): 了解如何利用 TiDB 的 TTL 功能自动定期删除过期数据。
+  - [预处理语句](https://docs.pingcap.com/zh/developer/dev-guide-prepared-statement.md): 介绍 TiDB 的预处理语句功能。
+- 数据读取
+  - [单表读取](https://docs.pingcap.com/zh/developer/dev-guide-get-data-from-single-table.md): 介绍 TiDB 中的单表查询功能。
+  - [多表连接查询](https://docs.pingcap.com/zh/developer/dev-guide-join-tables.md): 介绍 TiDB 中的多表连接查询功能。
+  - [子查询](https://docs.pingcap.com/zh/developer/dev-guide-use-subqueries.md): 介绍 TiDB 子查询功能。
+  - [查询结果分页](https://docs.pingcap.com/zh/developer/dev-guide-paginate-results.md): 介绍 TiDB 的分页查询功能。
+  - [视图](https://docs.pingcap.com/zh/developer/dev-guide-use-views.md): 介绍 TiDB 中的视图功能。
+  - [临时表](https://docs.pingcap.com/zh/developer/dev-guide-use-temporary-tables.md): 介绍 TiDB 临时表创建、删除、限制。
+  - [公共表表达式](https://docs.pingcap.com/zh/developer/dev-guide-use-common-table-expression.md): 介绍 TiDB 公共表表达式能力，用以简化 SQL。
+  - 读取副本数据
+    - [Follower Read](https://docs.pingcap.com/zh/developer/dev-guide-use-follower-read.md): 使用 Follower Read 在特定情况下加速查询。
+    - [Stale Read](https://docs.pingcap.com/zh/developer/dev-guide-use-stale-read.md): 使用 Stale Read 在特定情况下加速查询。
+  - [HTAP 查询](https://docs.pingcap.com/zh/developer/dev-guide-hybrid-oltp-and-olap-queries.md): 介绍 TiDB 中的 HTAP 查询功能。
+- [向量搜索](https://docs.pingcap.com/zh/developer/dev-guide-vector-search.md): 为应用开发者介绍 TiDB 中的向量搜索功能，包括相关概念、教程、集成方式以及参考文档。 ![BETA](https://docs-download.pingcap.com/media/images/docs-cn/blank_transparent_placeholder.png)
+- 事务处理
+  - [概览](https://docs.pingcap.com/zh/developer/dev-guide-transaction-overview.md): 简单介绍 TiDB 中的事务。
+  - [乐观事务和悲观事务](https://docs.pingcap.com/zh/developer/dev-guide-optimistic-and-pessimistic-transaction.md): 介绍 TiDB 中的乐观事务和悲观事务，乐观事务的重试等。
+  - [事务限制](https://docs.pingcap.com/zh/developer/dev-guide-transaction-restraints.md): 介绍 TiDB 中的事务限制。
+  - [事务错误处理](https://docs.pingcap.com/zh/developer/dev-guide-transaction-troubleshoot.md): 介绍 TiDB 中的事务错误处理办法。
+- 优化 SQL 性能
+  - [概览](https://docs.pingcap.com/zh/developer/dev-guide-optimize-sql-overview.md): 介绍 TiDB 的 SQL 性能调优概览。
+  - [SQL 性能调优](https://docs.pingcap.com/zh/developer/dev-guide-optimize-sql.md): 介绍 TiDB 的 SQL 性能调优方案和分析办法。
+  - [性能调优最佳实践](https://docs.pingcap.com/zh/developer/dev-guide-optimize-sql-best-practices.md): 介绍使用 TiDB 的性能调优最佳实践。
+  - [索引的最佳实践](https://docs.pingcap.com/zh/developer/dev-guide-index-best-practice.md): 介绍 TiDB 中索引的最佳实践。
+  - 其他优化
+    - [避免隐式类型转换](https://docs.pingcap.com/zh/developer/dev-guide-implicit-type-conversion.md): 介绍 TiDB 中隐式类型转换可能会带来的后果和避免方法。
+    - [唯一序列号生成方案](https://docs.pingcap.com/zh/developer/dev-guide-unique-serial-number-generation.md): 唯一序列号生成方案，为自行生成唯一 ID 的开发者提供帮助。
+- 故障诊断
+  - [SQL 或事务问题](https://docs.pingcap.com/zh/developer/dev-guide-troubleshoot-overview.md): 学习诊断在应用开发过程中可能产生的 SQL 或事务问题的方法。
+  - [结果集不稳定](https://docs.pingcap.com/zh/developer/dev-guide-unstable-result-set.md): 结果集不稳定错误的处理办法。
+  - [超时](https://docs.pingcap.com/zh/developer/dev-guide-timeouts-in-tidb.md): 简单介绍 TiDB 中的各种超时，为排查错误提供依据。
+
+## 集成指南
+
+- 第三方工具支持
+  - [TiDB 支持的第三方工具](https://docs.pingcap.com/zh/developer/dev-guide-third-party-support.md): TiDB 支持的第三方工具主要包括驱动、ORM 框架和 GUI。支持等级分为 Full 和 Compatible，其中 Full 表示绝大多数功能兼容性已得到支持，Compatible 表示大部分功能可使用但未经完整验证。对于支持的 Driver 或 ORM 框架并不包括应用端事务重试和错误处理。如果在使用工具连接 TiDB 时出现问题，可在 GitHub 上提交包含详细信息的 issue 以获得进展。
+  - [已知的第三方工具兼容问题](https://docs.pingcap.com/zh/developer/dev-guide-third-party-tools-compatibility.md): 介绍在测试中发现的 TiDB 与第三方工具的兼容性问题。
+- [ProxySQL](https://docs.pingcap.com/zh/developer/dev-guide-proxysql-integration.md): 了解如何将本地部署的 TiDB 或 TiDB Cloud 集群与 ProxySQL 集成。
+- [Amazon AppFlow](https://docs.pingcap.com/zh/developer/dev-guide-aws-appflow-integration.md): 了解如何将 TiDB 集成到 Amazon AppFlow。
+- [WordPress](https://docs.pingcap.com/zh/developer/dev-guide-wordpress.md): 学习如何使用 TiDB Cloud Starter 运行 WordPress。本教程将为你提供分步指导，让你在几分钟内运行 WordPress + TiDB Cloud Starter。
+
+## 参考指南
+
+- 开发规范
+  - [命名规范](https://docs.pingcap.com/zh/developer/dev-guide-object-naming-guidelines.md): 介绍 TiDB 中的对象命名规范。
+  - [SQL 开发规范](https://docs.pingcap.com/zh/developer/dev-guide-sql-development-specification.md): TiDB 的 SQL 开发规范。
+- [Bookshop 示例应用](https://docs.pingcap.com/zh/developer/dev-guide-bookshop-schema-design.md): Bookshop 应用设计、数据导入、连接数据库等操作。
+- 云原生开发环境
+  - [Gitpod](https://docs.pingcap.com/zh/developer/dev-guide-playground-gitpod.md): Gitpod 是一个开源 Kubernetes 应用程序，可在浏览器中获得完整的开发环境，并立即编写代码。它能够为云中的每个任务提供全新的自动化开发环境，无需本地配置。Gitpod 提供了完整的、自动化的、预配置的云原生开发环境，让你可以直接在浏览器中开发、运行、测试代码。

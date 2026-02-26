@@ -1,0 +1,118 @@
+# TiDB Developer Guide
+
+> This guide helps application developers quickly learn how to connect to TiDB, design databases, write and query data, and build reliable, high-performance applications on TiDB.
+
+## QUICK START
+
+- [Create a TiDB Cloud Starter Cluster](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud.md): Learn how to create a TiDB Cloud Starter cluster and connect to it.
+- [TiDB Basics](https://docs.pingcap.com/developer/dev-guide-tidb-basics.md): Learn the basics of TiDB for developers, such as transaction mechanisms and how applications interact with TiDB.
+- [CRUD SQL in TiDB](https://docs.pingcap.com/developer/dev-guide-tidb-crud-sql.md): A brief introduction to TiDB's CRUD SQL.
+
+## GUIDES
+
+- Connect to TiDB
+  - [Overview](https://docs.pingcap.com/developer/dev-guide-connect-to-tidb.md): An overview of methods to connect to TiDB.
+  - CLI & GUI Tools
+    - [MySQL CLI Tools](https://docs.pingcap.com/developer/dev-guide-mysql-tools.md): Learn how to connect to TiDB using MySQL tools.
+    - [JetBrains DataGrip](https://docs.pingcap.com/developer/dev-guide-gui-datagrip.md): Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+    - [DBeaver](https://docs.pingcap.com/developer/dev-guide-gui-dbeaver.md): Learn how to connect to TiDB using DBeaver Community.
+    - [VS Code](https://docs.pingcap.com/developer/dev-guide-gui-vscode-sqltools.md): Learn how to connect to TiDB using Visual Studio Code or GitHub Codespaces.
+    - [MySQL Workbench](https://docs.pingcap.com/developer/dev-guide-gui-mysql-workbench.md): Learn how to connect to TiDB using MySQL Workbench.
+    - [Navicat](https://docs.pingcap.com/developer/dev-guide-gui-navicat.md): Learn how to connect to TiDB using Navicat.
+  - Drivers & ORMs
+    - [Choose a Driver or ORM](https://docs.pingcap.com/developer/dev-guide-choose-driver-or-orm.md): Learn how to choose a driver or ORM framework to connect to TiDB.
+    - Java
+      - [JDBC](https://docs.pingcap.com/developer/dev-guide-sample-application-java-jdbc.md): Learn how to connect to TiDB using JDBC. This tutorial gives Java sample code snippets that work with TiDB using JDBC.
+      - [MyBatis](https://docs.pingcap.com/developer/dev-guide-sample-application-java-mybatis.md): Learn how to connect to TiDB using MyBatis. This tutorial gives Java sample code snippets that work with TiDB using MyBatis.
+      - [Hibernate](https://docs.pingcap.com/developer/dev-guide-sample-application-java-hibernate.md): Learn how to connect to TiDB using Hibernate. This tutorial gives Java sample code snippets that work with TiDB using Hibernate.
+      - [Spring Boot](https://docs.pingcap.com/developer/dev-guide-sample-application-java-spring-boot.md): Learn how to connect to TiDB using Spring Boot. This tutorial gives Java sample code snippets that work with TiDB using Spring Boot.
+      - [Configure Connection Pools and Connection Parameters](https://docs.pingcap.com/developer/dev-guide-connection-parameters.md): This document explains how to configure connection pools and parameters for TiDB. It covers connection pool size, probe configuration, and formulas for optimal throughput. It also discusses JDBC API usage and MySQL Connector/J parameter configurations for performance optimization.
+      - [Best Practices for Developing Java Applications](https://docs.pingcap.com/developer/java-app-best-practices.md): This document introduces best practices for developing Java applications with TiDB, covering database-related components, JDBC usage, connection pool configuration, data access framework, Spring Transaction, and troubleshooting tools. TiDB is highly compatible with MySQL, so most MySQL-based Java application best practices also apply to TiDB.
+    - Go
+      - [Go-MySQL-Driver](https://docs.pingcap.com/developer/dev-guide-sample-application-golang-sql-driver.md): Learn how to connect to TiDB using Go-MySQL-Driver. This tutorial gives Golang sample code snippets that work with TiDB using Go-MySQL-Driver.
+      - [GORM](https://docs.pingcap.com/developer/dev-guide-sample-application-golang-gorm.md): Learn how to connect to TiDB using GORM. This tutorial gives Golang sample code snippets that work with TiDB using GORM.
+    - Python
+      - [mysqlclient](https://docs.pingcap.com/developer/dev-guide-sample-application-python-mysqlclient.md): Learn how to connect to TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
+      - [MySQL Connector/Python](https://docs.pingcap.com/developer/dev-guide-sample-application-python-mysql-connector.md): Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
+      - [PyMySQL](https://docs.pingcap.com/developer/dev-guide-sample-application-python-pymysql.md): Learn how to connect to TiDB using PyMySQL. This tutorial gives Python sample code snippets that work with TiDB using PyMySQL.
+      - [SQLAlchemy](https://docs.pingcap.com/developer/dev-guide-sample-application-python-sqlalchemy.md): Learn how to connect to TiDB using SQLAlchemy. This tutorial gives Python sample code snippets that work with TiDB using SQLAlchemy.
+      - [peewee](https://docs.pingcap.com/developer/dev-guide-sample-application-python-peewee.md): Learn how to connect to TiDB using peewee. This tutorial gives Python sample code snippets that work with TiDB using peewee.
+      - [Django](https://docs.pingcap.com/developer/dev-guide-sample-application-python-django.md): Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
+    - Node.js
+      - [node-mysql2](https://docs.pingcap.com/developer/dev-guide-sample-application-nodejs-mysql2.md): Learn how to connect to TiDB using node-mysql2. This tutorial gives Node.js sample code snippets that work with TiDB using node-mysql2.
+      - [mysql.js](https://docs.pingcap.com/developer/dev-guide-sample-application-nodejs-mysqljs.md): Learn how to connect to TiDB using mysql.js. This tutorial gives Node.js sample code snippets that work with TiDB using mysql.js.
+      - [Prisma](https://docs.pingcap.com/developer/dev-guide-sample-application-nodejs-prisma.md): Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
+      - [Sequelize](https://docs.pingcap.com/developer/dev-guide-sample-application-nodejs-sequelize.md): Learn how to connect to TiDB using Sequelize. This tutorial gives Node.js sample code snippets that work with TiDB using Sequelize.
+      - [TypeORM](https://docs.pingcap.com/developer/dev-guide-sample-application-nodejs-typeorm.md): Learn how to connect to TiDB using TypeORM. This tutorial gives Node.js sample code snippets that work with TiDB using TypeORM.
+      - [Next.js](https://docs.pingcap.com/developer/dev-guide-sample-application-nextjs.md): This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
+      - [AWS Lambda](https://docs.pingcap.com/developer/dev-guide-sample-application-aws-lambda.md): This article describes how to build a CRUD application using TiDB and mysql2 in AWS Lambda Function and provides a simple example code snippet.
+    - Ruby
+      - [mysql2](https://docs.pingcap.com/developer/dev-guide-sample-application-ruby-mysql2.md): Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Ruby sample code snippets that work with TiDB using mysql2 gem.
+      - [Rails](https://docs.pingcap.com/developer/dev-guide-sample-application-ruby-rails.md): Learn how to connect to TiDB using the Rails framework. This tutorial gives Ruby sample code snippets that work with TiDB using the Rails framework and ActiveRecord ORM.
+    - C#
+      - [C#](https://docs.pingcap.com/developer/dev-guide-sample-application-cs.md): Learn how to connect to TiDB using C#. This tutorial provides sample C# code snippets for interacting with TiDB.
+  - TiDB Cloud Serverless Driver ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [Overview](https://docs.pingcap.com/developer/serverless-driver.md): Learn how to connect to TiDB Cloud Starter or TiDB Cloud Essential from serverless and edge environments.
+    - [Node.js Example](https://docs.pingcap.com/developer/serverless-driver-node-example.md): Learn how to use TiDB Cloud serverless driver in a local Node.js project.
+    - [Prisma Example](https://docs.pingcap.com/developer/serverless-driver-prisma-example.md): Learn how to use TiDB Cloud serverless driver with Prisma ORM.
+    - [Kysely Example](https://docs.pingcap.com/developer/serverless-driver-kysely-example.md): Learn how to use TiDB Cloud serverless driver with Kysely.
+    - [Drizzle Example](https://docs.pingcap.com/developer/serverless-driver-drizzle-example.md): Learn how to use TiDB Cloud serverless driver with Drizzle.
+- Design Database Schema
+  - [Overview](https://docs.pingcap.com/developer/dev-guide-schema-design-overview.md): Learn the basics on TiDB database schema design.
+  - [Create a Database](https://docs.pingcap.com/developer/dev-guide-create-database.md): Learn steps, rules, and examples to create a database.
+  - [Create a Table](https://docs.pingcap.com/developer/dev-guide-create-table.md): Learn the definitions, rules, and guidelines in table creation.
+  - [Create a Secondary Index](https://docs.pingcap.com/developer/dev-guide-create-secondary-indexes.md): Learn steps, rules, and examples to create a secondary index.
+- Write Data
+  - [Insert Data](https://docs.pingcap.com/developer/dev-guide-insert-data.md): Learn about how to insert data.
+  - [Update Data](https://docs.pingcap.com/developer/dev-guide-update-data.md): Learn about how to update data and batch update data.
+  - [Delete Data](https://docs.pingcap.com/developer/dev-guide-delete-data.md): Learn about the SQL syntax, best practices, and examples for deleting data.
+  - [Periodically Delete Expired Data Using TTL (Time to Live)](https://docs.pingcap.com/developer/dev-guide-time-to-live.md): Learn how to use the TTL feature of TiDB to automatically and periodically delete expired data.
+  - [Prepared Statements](https://docs.pingcap.com/developer/dev-guide-prepared-statement.md): Learn about how to use the TiDB prepared statements.
+- Read Data
+  - [Query Data from a Single Table](https://docs.pingcap.com/developer/dev-guide-get-data-from-single-table.md): This document describes how to query data from a single table in a database.
+  - [Multi-table Join Queries](https://docs.pingcap.com/developer/dev-guide-join-tables.md): This document describes how to use multi-table join queries.
+  - [Subquery](https://docs.pingcap.com/developer/dev-guide-use-subqueries.md): Learn how to use subquery in TiDB.
+  - [Paginate Results](https://docs.pingcap.com/developer/dev-guide-paginate-results.md): Introduce paginate result feature in TiDB.
+  - [Views](https://docs.pingcap.com/developer/dev-guide-use-views.md): Learn how to use views in TiDB.
+  - [Temporary Tables](https://docs.pingcap.com/developer/dev-guide-use-temporary-tables.md): Learn how to create, view, query, and delete temporary tables.
+  - [Common Table Expression](https://docs.pingcap.com/developer/dev-guide-use-common-table-expression.md): Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
+  - Read Replica Data
+    - [Follower Read](https://docs.pingcap.com/developer/dev-guide-use-follower-read.md): Learn how to use Follower Read to optimize query performance.
+    - [Stale Read](https://docs.pingcap.com/developer/dev-guide-use-stale-read.md): Learn how to use Stale Read to accelerate queries under certain conditions.
+  - [HTAP Queries](https://docs.pingcap.com/developer/dev-guide-hybrid-oltp-and-olap-queries.md): Introduce the HTAP queries in TiDB.
+- [Vector Search](https://docs.pingcap.com/developer/dev-guide-vector-search.md): Introduce the vector search feature in TiDB for developers, including concepts, tutorials, integrations, and reference documentation. ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- Manage Transactions
+  - [Overview](https://docs.pingcap.com/developer/dev-guide-transaction-overview.md): A brief introduction to transactions in TiDB.
+  - [Optimistic and Pessimistic Transactions](https://docs.pingcap.com/developer/dev-guide-optimistic-and-pessimistic-transaction.md): Learn about optimistic and pessimistic transactions in TiDB.
+  - [Transaction Restraints](https://docs.pingcap.com/developer/dev-guide-transaction-restraints.md): Learn about transaction restraints in TiDB.
+  - [Handle Transaction Errors](https://docs.pingcap.com/developer/dev-guide-transaction-troubleshoot.md): Learn about how to handle transaction errors, such as deadlocks and application retry errors.
+- Optimize
+  - [Overview](https://docs.pingcap.com/developer/dev-guide-optimize-sql-overview.md): Provides an overview of SQL performance tuning for TiDB application developers.
+  - [SQL Performance Tuning](https://docs.pingcap.com/developer/dev-guide-optimize-sql.md): Introduces TiDB's SQL performance tuning scheme and analysis approach.
+  - [Best Practices for Performance Tuning](https://docs.pingcap.com/developer/dev-guide-optimize-sql-best-practices.md): Introduces the best practices for tuning TiDB performance.
+  - [Best Practices for Indexing](https://docs.pingcap.com/developer/dev-guide-index-best-practice.md): Learn some best practices for creating and using indexes in TiDB.
+  - Additional Optimization Methods
+    - [Avoid Implicit Type Conversions](https://docs.pingcap.com/developer/dev-guide-implicit-type-conversion.md): Introduces the possible consequences of implicit type conversions in TiDB and ways to avoid them.
+    - [Unique Serial Number Generation](https://docs.pingcap.com/developer/dev-guide-unique-serial-number-generation.md): Unique serial number generation solution for developers who generate their own unique IDs.
+- Troubleshoot
+  - [SQL or Transaction Issues](https://docs.pingcap.com/developer/dev-guide-troubleshoot-overview.md): Learn how to troubleshoot SQL or transaction issues that might occur during application development.
+  - [Unstable Result Set](https://docs.pingcap.com/developer/dev-guide-unstable-result-set.md): Learn how to handle the error of an unstable result set.
+  - [Timeouts](https://docs.pingcap.com/developer/dev-guide-timeouts-in-tidb.md): Learn about timeouts in TiDB, and solutions for troubleshooting errors.
+
+## INTEGRATIONS
+
+- Third-Party Support
+  - [Third-Party Tools Supported by TiDB](https://docs.pingcap.com/developer/dev-guide-third-party-support.md): Learn about third-party tools supported by TiDB.
+  - [Known Incompatibility Issues with Third-Party Tools](https://docs.pingcap.com/developer/dev-guide-third-party-tools-compatibility.md): Describes TiDB compatibility issues with third-party tools found during testing.
+- [ProxySQL](https://docs.pingcap.com/developer/dev-guide-proxysql-integration.md): Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
+- [Amazon AppFlow](https://docs.pingcap.com/developer/dev-guide-aws-appflow-integration.md): Introduce how to integrate TiDB with Amazon AppFlow step by step.
+- [WordPress](https://docs.pingcap.com/developer/dev-guide-wordpress.md): Learn how to use TiDB Cloud Starter to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Cloud Starter in a few minutes.
+
+## REFERENCE
+
+- Development Guidelines
+  - [Object Naming Convention](https://docs.pingcap.com/developer/dev-guide-object-naming-guidelines.md): Learn the object naming convention in TiDB.
+  - [SQL Development Specifications](https://docs.pingcap.com/developer/dev-guide-sql-development-specification.md): Learn about the SQL development specifications for TiDB.
+- [Bookshop Example Application](https://docs.pingcap.com/developer/dev-guide-bookshop-schema-design.md): Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from Amazon S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
+- Cloud Native Development Environment
+  - [Gitpod](https://docs.pingcap.com/developer/dev-guide-playground-gitpod.md): Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.

@@ -1,0 +1,19 @@
+# 发布记录
+
+> TiDB 产品的发布记录，包括 TiDB Cloud、TiDB Self-Managed、TiDB Operator 和 TiUP。
+
+## TiDB Cloud
+
+- [TiDB Cloud 发布记录](https://docs.pingcap.com/releases/tidb-cloud/llms.txt): TiDB Cloud 发布记录的新功能和改进，以及可能影响 TiDB Cloud 服务的定期维护活动。
+
+## TiDB Self-Managed
+
+- [TiDB Self-Managed 发布记录](https://docs.pingcap.com/releases/tidb-self-managed/llms.txt): TiDB Self-Managed 的新功能、改进和错误修复。
+
+## TiDB on Kubernetes
+
+- [TiDB Operator 发布记录](https://docs.pingcap.com/releases/tidb-operator/llms.txt): 使用 TiDB Operator 在 Kubernetes 上部署和管理 TiDB 的变更与更新。
+
+## TiUP
+
+- [TiUP 发布记录](https://github.com/pingcap/tiup/releases): TiDB 包管理器和组件管理工具 TiUP 的变更与更新。

@@ -1,0 +1,34 @@
+# TiDB ベストプラクティス
+
+> TiDBの導入、設定、使用に関するベストプラクティスに従うことで、TiDBの導入におけるパフォーマンス、信頼性、スケーラビリティを最適化できます。このドキュメントでは、TiDBの使用に関するベストプラクティスの概要を説明します。
+
+## 概要 {#overview}
+
+-   [TiDBを使用する](https://docs.pingcap.com/ja/best-practices/tidb-best-practices.md): このドキュメントでは、TiDBの使用に関するベストプラクティスをまとめ、OLAPおよびOLTPシナリオにおけるSQLの使用と最適化のヒント、特にTiDB固有の最適化オプションに焦点を当てています。また、ベストプラクティスに進む前に、TiDBの技術的原理を紹介する3つのブログ記事を読むことを推奨しています。
+
+## スキーマ設計 {#schema-design}
+
+-   [DDLを管理する](https://docs.pingcap.com/ja/best-practices/ddl-introduction.md): TiDB での DDL ステートメントの実装方法、オンライン変更プロセス、およびベスト プラクティスについて学習します。
+-   [UUIDを主キーとして使用する](https://docs.pingcap.com/ja/best-practices/uuid.md): UUIDを主キーとして使用すると、ネットワーク通信の削減、ほとんどのプログラミング言語とデータベースでのサポート、列挙攻撃からの保護などの利点が得られます。UUIDはバイナリ形式でBINARY(16)`列に保存することをお勧めします。また、ホットスポットの発生を防ぐため、TiDBでは`swap_flag`の設定を避けることをお勧めします。UUIDはMySQLと互換性があります。
+-   [TiDB パーティションテーブルを使用する](https://docs.pingcap.com/ja/best-practices/tidb-partitioned-tables-best-practices.md): TiDB パーティション テーブルを使用してパフォーマンスを向上させ、データ管理を簡素化し、大規模なデータセットを効率的に処理するためのベスト プラクティスを学習します。
+-   [複数列インデックスの最適化](https://docs.pingcap.com/ja/best-practices/multi-column-index-best-practices.md): TiDB でマルチ列インデックスを効果的に使用し、高度な最適化手法を適用する方法を学習します。
+-   [インデックスを管理し、未使用のインデックスを特定する](https://docs.pingcap.com/ja/best-practices/index-management-best-practices.md): TiDB でインデックスを管理および最適化し、未使用のインデックスを識別して削除するためのベスト プラクティスを学習します。
+
+## 展開 {#deployment}
+
+-   [パブリッククラウドにTiDBをデプロイ](https://docs.pingcap.com/ja/best-practices/best-practices-on-public-cloud.md): パブリック クラウドに TiDB をデプロイするためのベスト プラクティスについて説明します。
+-   [3ノードのハイブリッド展開](https://docs.pingcap.com/ja/best-practices/three-nodes-hybrid-deployment.md): TiDBクラスタは、3台のマシンでコスト効率よく導入できます。このハイブリッド導入におけるベストプラクティスとしては、安定性とパフォーマンスを向上させるためのパラメータ調整が挙げられます。リソース消費量の制限とスレッドプールサイズの調整は、クラスタを最適化する上で重要です。TiKVバックグラウンドタスクとTiDB実行オペレータのパラメータ調整も重要です。
+-   [3つのデータセンター展開におけるローカル読み取り](https://docs.pingcap.com/ja/best-practices/three-dc-local-read.md): TiDBの3データセンター展開モデルでは、センター間データ読み取りによりアクセスレイテンシーが増加する可能性があります。これを軽減するために、 ステイル読み取り機能ではローカルの履歴データへのアクセスを可能にし、リアルタイムデータ可用性を犠牲にしてレイテンシーを削減します。地理的に分散されたシナリオでステイル読み取りを使用する場合、TiDBはセンター間ネットワークレイテンシーを回避するためにローカルレプリカにアクセスします。これは、zone`ラベルを設定し、`tidb_replica_read`を`closest-replicas`に設定することで実現されます。Stale ステイル読み取りの実行方法の詳細については、ドキュメントを参照してください。
+
+## オペレーション {#operations}
+
+-   [負荷分散にHAProxyを使用する](https://docs.pingcap.com/ja/best-practices/haproxy-best-practices.md): HAProxyは、TCPおよびHTTPベースのアプリケーション向けの無料のオープンソースロードバランサおよびプロキシサーバーです。高可用性、負荷分散、ヘルスチェック、スティッキーセッション、SSLサポート、監視機能を提供します。HAProxyを導入するには、ハードウェアとソフトウェアの要件を満たしていることを確認の上、インストールと設定を行ってください。最適な結果を得るには、最新の安定バージョンをご使用ください。
+-   [読み取り専用ストレージノードを使用する](https://docs.pingcap.com/ja/best-practices/readonly-nodes.md): このドキュメントでは、オンラインサービスから高許容遅延負荷を分離するための読み取り専用storageノードの設定方法を紹介します。手順としては、TiKVノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードに学習者としてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
+-   [Grafana を使用して TiDB を監視する](https://docs.pingcap.com/ja/best-practices/grafana-monitor-best-practices.md): Grafanaを用いたTiDB監視のベストプラクティス。TiUPを使用してTiDBクラスターをデプロイ、監視用にGrafanaとPrometheusを追加します。メトリクスを使用してクラスターの状態を分析し、問題を診断します。PrometheusはTiDBコンポーネントからメトリクスを収集し、Grafanaはそれらを表示します。Grafanaを効率的に使用するためのヒントとしては、クエリ式の変更、Y軸スケールの切り替え、クエリ結果のAPI使用などが挙げられます。このプラットフォームは、TiDBクラスターの状態の分析と診断に非常に役立ちます。
+
+## 性能チューニング {#performance-tuning}
+
+-   [SaaS マルチテナントシナリオで数百万のテーブルを処理](https://docs.pingcap.com/ja/best-practices/saas-best-practices.md): SaaS (Software as a Service) マルチテナント シナリオ、特に単一クラスター内のテーブル数が 100 万を超える環境における TiDB のベスト プラクティスを学習します。
+-   [高同時書き込みの処理](https://docs.pingcap.com/ja/best-practices/high-concurrency-best-practices.md): このドキュメントでは、TiDBにおける高同時書き込みワークロードの処理に関するベストプラクティスを紹介します。データ分散、ホットスポット発生事例、そして複雑なホットスポット問題に関する課題と解決策を解説します。また、パフォーマンスを最適化するためのパラメータ設定についても解説します。
+-   [大規模リージョンで TiKV のパフォーマンスをチューニングする](https://docs.pingcap.com/ja/best-practices/massive-regions-best-practices.md): TiKVのパフォーマンスチューニングには、リージョンとメッセージ数の削減、 Raftstoreの同時実行性の向上、Hibernateリージョンとリージョンマージの有効化、 Raftベースのティック間隔の調整、TiKVインスタンスの増加、リージョンサイズの調整が含まれます。その他の問題としては、PDリーダーの切り替え速度の低下やPDルーティング情報の古さなどが挙げられます。
+-   [PDスケジュールの調整](https://docs.pingcap.com/ja/best-practices/pd-scheduling-best-practices.md): このドキュメントでは、PDスケジューリングのベストプラクティスをまとめています。具体的には、スケジューリングプロセス、負荷分散、ホットリージョンのスケジューリング、クラスタートポロジーの認識、スケールインと障害回復、リージョンのマージ、クエリスケジューリングステータス、スケジューリング戦略の制御などが含まれます。また、リーダー/リージョンの不均等な分散、ノードの回復速度の低下、TiKVノードのトラブルシューティングといった一般的なシナリオについても解説します。

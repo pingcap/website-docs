@@ -2,35 +2,62 @@
 
 > TiDB は、ハイブリッドトランザクション/分析処理 (HTAP) 向けに設計されたオープンソースの分散型 SQL データベースです。このドキュメントでは、セルフマネージドデプロイメントと TiDB Cloud マネージドサービスの両方について説明します。
 
+## 製品
+
 TiDB は複数のデプロイオプションで利用できます。
 
 - **TiDB Cloud**: Dedicated、Essential、Starter プランを備えたフルマネージドデータベースサービス。
 - **TiDB Self-Managed**: 独自のインフラストラクチャで TiDB をデプロイおよび運用します。
 - **TiDB on Kubernetes**: TiDB Operator を使用して TiDB をデプロイおよび管理します。
 
-## TiDB Cloud
+### TiDB Cloud
 
 TiDB Cloud は、TiDB の優れた機能をすべてクラウドにもたらすフルマネージドの Database-as-a-Service (DBaaS) であり、データベースの複雑さではなくアプリケーションに集中できます。
 
-### TiDB Cloud Dedicated
+#### TiDB Cloud Dedicated
 
 - [TiDB Cloud Dedicated ドキュメント](https://docs.pingcap.com/ja/tidbcloud/llms.txt): 専用リソース、高度なセキュリティ、コンプライアンス機能を備えたエンタープライズグレードのマネージド TiDB。
 
-### TiDB Cloud Essential
+#### TiDB Cloud Essential
 
 - [TiDB Cloud Essential ドキュメント](https://docs.pingcap.com/ja/tidbcloud/essential/llms.txt): 成長するアプリケーション向けの費用対効果の高いマネージド TiDB で、パフォーマンスと手頃な価格のバランスが取れています。
 
-### TiDB Cloud Starter
+#### TiDB Cloud Starter
 
 - [TiDB Cloud Starter ドキュメント](https://docs.pingcap.com/ja/tidbcloud/starter/llms.txt): 開発、テスト、小規模なワークロード向けのサーバーレスで従量課金制の TiDB Cloud オファリング。
 
-## TiDB Self-Managed
+### TiDB Self-Managed
 
 - [TiDB Self-Managed ドキュメント](https://docs.pingcap.com/ja/tidb/llms.txt): セルフマネージドインフラストラクチャで TiDB クラスターをデプロイ、構成、運用するためのドキュメント。
 
-## TiDB on Kubernetes
+### TiDB on Kubernetes
 
-- [TiDB on Kubernetes ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/llms.txt): TiDB Operator を使用して Kubernetes で TiDB を実行するためのドキュメント。
+- [TiDB on Kubernetes ドキュメント](https://docs.pingcap.com/ja/tidb-in-kubernetes/llms.txt): TiDB Operator を使用して Kubernetes で TiDB を実行するためのドキュメント。
+
+## AI向けTiDB
+
+- [AI向けTiDB ドキュメント](https://docs.pingcap.com/ja/ai/llms.txt): TiDB は、モダンな AI アプリケーション向けに設計された分散 SQL データベースであり、ベクトル検索、全文検索、ハイブリッド検索機能を統合しています。このドキュメントでは、TiDB を使用して AI 対応アプリケーションを構築するための AI 機能とツールの概要を説明します。
+
+## 開発者向け
+
+- [開発者ガイドドキュメント](https://docs.pingcap.com/ja/developer/llms.txt): このガイドは、アプリケーション開発者が TiDB への接続、データベースの設計、データの書き込みとクエリ、および TiDB 上での信頼性の高いパフォーマンスに優れたアプリケーションの構築を迅速に習得できるよう支援します。
+
+## ベストプラクティス
+
+- [TiDB ベストプラクティスドキュメント](https://docs.pingcap.com/ja/best-practices/llms.txt): TiDB のデプロイ、構成、および使用に関するベストプラクティスに従うことで、TiDB デプロイのパフォーマンス、信頼性、スケーラビリティを最適化できます。このドキュメントでは、TiDB 使用におけるベストプラクティスの概要を説明します。
+
+## API
+
+- [TiDB API ドキュメント](https://docs.pingcap.com/ja/api/llms.txt): TiDB は、クラスターのクエリと操作、データレプリケーションの管理、システムステータスの監視などのためのさまざまな API を提供します。このドキュメントでは、TiDB Cloud および TiDB Self-Managed で利用可能な API の概要を説明します。
+
+## リリース
+
+TiDB Cloud、TiDB Self-Managed、TiDB Operator、TiUP を含む TiDB 製品のリリースノート。
+
+- [TiDB Cloud リリースノート](https://docs.pingcap.com/ja/releases/tidb-cloud/llms.txt): TiDB Cloud の各リリースにおける新機能と改善点、および TiDB Cloud サービスに影響する可能性があるメンテナンス作業のスケジュール。
+- [TiDB Self-Managed リリースノート](https://docs.pingcap.com/ja/releases/tidb-self-managed/llms.txt): TiDB Self-Managed の新機能、改善点、およびバグ修正。
+- [TiDB Operator リリースノート](https://docs.pingcap.com/ja/releases/tidb-operator/llms.txt): TiDB Operator を使用して Kubernetes 上で TiDB をデプロイおよび管理するための変更点と更新情報。
+- [TiUP リリースノート](https://github.com/pingcap/tiup/releases): TiDB パッケージマネージャーおよびコンポーネント管理ツールである TiUP の変更点と更新情報。
 
 ## その他のリソース
 

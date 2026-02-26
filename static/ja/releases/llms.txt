@@ -1,0 +1,19 @@
+# リリース
+
+> TiDB Cloud、TiDB Self-Managed、TiDB Operator、TiUP などの TiDB 製品のリリースノート。
+
+## TiDB Cloud
+
+- [TiDB Cloud リリースノート](https://docs.pingcap.com/ja/releases/tidb-cloud/llms.txt): TiDB Cloud の各リリースにおける新機能と改善点、および TiDB Cloud サービスに影響する可能性があるメンテナンス作業のスケジュール。
+
+## TiDB Self-Managed
+
+- [TiDB Self-Managed リリースノート](https://docs.pingcap.com/ja/releases/tidb-self-managed/llms.txt): TiDB Self-Managed の新機能、改善点、およびバグ修正。
+
+## TiDB on Kubernetes
+
+- [TiDB Operator リリースノート](https://docs.pingcap.com/ja/releases/tidb-operator/llms.txt): TiDB Operator を使用して Kubernetes 上で TiDB をデプロイおよび管理するための変更と更新。
+
+## TiUP
+
+- [TiUP リリースノート](https://github.com/pingcap/tiup/releases): TiDB のパッケージマネージャーおよびコンポーネント管理ツールである TiUP の変更と更新。

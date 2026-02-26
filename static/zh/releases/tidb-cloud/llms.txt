@@ -1,0 +1,25 @@
+# TiDB Cloud 发布记录
+
+> 本文档概述了 TiDB Cloud 的发布记录和维护通知相关内容。
+
+## 发布记录
+
+- [2026](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-release-notes.md): 了解 2026 年 TiDB Cloud 的发布说明。
+- [2025](https://docs.pingcap.com/zh/tidbcloud/release-notes-2025.md): 了解 2025 年 TiDB Cloud 的发布说明。
+- [2024](https://docs.pingcap.com/zh/tidbcloud/release-notes-2024.md): 了解 2024 年 TiDB Cloud 的发布说明。
+- 早期发布记录
+  - [2023](https://docs.pingcap.com/zh/tidbcloud/release-notes-2023.md): 了解 2023 年 TiDB Cloud 的发布说明。
+  - [2022](https://docs.pingcap.com/zh/tidbcloud/release-notes-2022.md): 了解 2022 年 TiDB Cloud 的发布说明。
+  - [2021](https://docs.pingcap.com/zh/tidbcloud/release-notes-2021.md): 了解 2021 年 TiDB Cloud 的发布说明。
+  - [2020](https://docs.pingcap.com/zh/tidbcloud/release-notes-2020.md): 了解 2020 年 TiDB Cloud 的发布说明。
+
+## 维护通知
+
+- [[2024-09-15] TiDB Cloud 控制台维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2024-09-15-console-maintenance.md): 了解 2024 年 9 月 15 日 TiDB Cloud 控制台维护的详细信息，包括维护窗口、原因及影响。
+- [[2024-04-18] TiDB Cloud 数据迁移 (DM) 功能维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2024-04-18-dm-feature-maintenance.md): 了解 2024 年 4 月 18 日 TiDB Cloud Data Migration (DM) 功能维护的详细信息，包括维护窗口和影响。
+- [[2024-04-16] TiDB Cloud 监控功能维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2024-04-16-monitoring-features-maintenance.md): 了解 2024 年 4 月 16 日 TiDB Cloud 监控功能维护的详细信息，包括维护窗口、原因及影响。
+- [[2024-04-11] TiDB Cloud 数据迁移 (DM) 功能维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2024-04-11-dm-feature-maintenance.md): 了解 2024 年 4 月 11 日 TiDB Cloud Data Migration (DM) 功能维护的详细信息，包括维护窗口和影响。
+- [[2024-04-09] TiDB Cloud 监控功能维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2024-04-09-monitoring-features-maintenance.md): 了解 2024 年 4 月 9 日 TiDB Cloud 监控功能维护的详细信息，包括维护窗口、原因及影响。
+- [[2023-11-14] TiDB Cloud Dedicated Scale 功能维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2023-11-14-scale-feature-maintenance.md): 了解 2023 年 11 月 14 日 TiDB Cloud Dedicated 扩展功能维护的详细信息，包括维护窗口和影响。
+- [[2023-09-26] TiDB Cloud 控制台维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2023-09-26-console-maintenance.md): 了解 2023 年 9 月 26 日 TiDB Cloud 控制台维护的详细信息，包括维护窗口、原因和影响。
+- [[2023-08-31] TiDB Cloud 控制台维护通知](https://docs.pingcap.com/zh/tidbcloud/notification-2023-08-31-console-maintenance.md): 了解 2023 年 8 月 31 日 TiDB Cloud 控制台维护的详细信息，包括维护窗口、原因及影响。

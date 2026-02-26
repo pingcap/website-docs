@@ -1,0 +1,17 @@
+# TiDB API
+
+> TiDB 提供了多种 API，可用于查询和运维集群、管理数据同步、监控系统状态等场景。本文介绍 TiDB Cloud 和 TiDB 的可用 API。
+
+## TIDB CLOUD
+
+- [API 概览](https://docs.pingcap.com/zh/api/tidb-cloud-api-overview.md): 了解 TiDB Cloud API 的定义、特性，以及如何使用该 API 管理 TiDB Cloud 集群。
+- [v1beta1 API](https://docs.pingcap.com/zh/api/tidb-cloud-api-v1beta1.md): 了解 TiDB Cloud 的 v1beta1 API。
+- [v1beta API](https://docs.pingcap.com/zh/api/tidb-cloud-api-v1beta.md): 了解 TiDB Cloud 的 v1beta API。
+
+## TIDB
+
+- [TiProxy API](https://docs.pingcap.com/zh/api/tiproxy-api-overview.md): 了解 TiProxy 的 API。
+- [Data Migration API](https://docs.pingcap.com/zh/api/dm-api-overview.md): 了解 Data Migration (DM) 的 API。
+- [监控 API](https://docs.pingcap.com/zh/api/monitoring-api-overview.md): 了解 TiDB 监控服务的 API。
+- [TiCDC API](https://docs.pingcap.com/zh/api/ticdc-api-overview.md): 了解 TiCDC 的 API。
+- [TiDB Operator API](https://docs.pingcap.com/zh/api/tidb-operator-api-overview.md): 了解 TiDB Operator 的 API 接口。

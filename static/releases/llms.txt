@@ -1,0 +1,19 @@
+# Releases
+
+> Release notes for TiDB products, including TiDB Cloud, TiDB Self-Managed, TiDB Operator, and TiUP.
+
+## TiDB Cloud
+
+- [TiDB Cloud Release Notes](https://docs.pingcap.com/releases/tidb-cloud/llms.txt): New features and improvements in each TiDB Cloud release and scheduled maintenance activities that might affect your TiDB Cloud services.
+
+## TiDB Self-Managed
+
+- [TiDB Self-Managed Release Notes](https://docs.pingcap.com/releases/tidb-self-managed/llms.txt): New features, improvements, and bug fixes for TiDB Self-Managed.
+
+## TiDB on Kubernetes
+
+- [TiDB Operator Release Notes](https://docs.pingcap.com/releases/tidb-operator/llms.txt): Changes and updates for deploying and managing TiDB on Kubernetes using TiDB Operator.
+
+## TiUP
+
+- [TiUP Release Notes](https://github.com/pingcap/tiup/releases): Changes and updates for TiUP, the TiDB package manager and component management tool.
