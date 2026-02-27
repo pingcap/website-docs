@@ -84,7 +84,7 @@ export default function SearchResults(props: {
   return (
     <Box
       sx={{
-        padding: "2rem 0",
+        padding: "1rem 0",
       }}
       className={clsx("algolia-autocomplete", props.className)}
     >
