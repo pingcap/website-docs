@@ -188,37 +188,27 @@ function SearchItem(props: { data: any }) {
 
   return (
     <Stack spacing={1}>
-      <Box
+      <Typography
+        variant="h5"
+        component="a"
+        href={data.url}
         sx={{
-          display: "flex",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-          gap: "0.5rem",
+          textDecoration: "none",
+          "& >div": {
+            width: "100%",
+            maxWidth: "100%",
+          },
         }}
       >
-        <Typography
-          variant="h5"
-          component="a"
-          href={data.url}
-          sx={{
-            textDecoration: "none",
-            minWidth: 0,
-            flex: "1 1 16rem",
-            overflowWrap: "anywhere",
-            "& >div": {
-              width: "100%",
-              maxWidth: "100%",
-            },
-          }}
-        >
-          {!!data._highlightResult?.hierarchy?.lvl0 && (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data._highlightResult.hierarchy.lvl0?.value,
-              }}
-            />
-          )}
-        </Typography>
+        {!!data._highlightResult?.hierarchy?.lvl0 && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: data._highlightResult.hierarchy.lvl0?.value,
+            }}
+          />
+        )}
+      </Typography>
+      <Stack direction="row" spacing={1} alignItems="center">
         {!!category && !!categoryLabel && (
           <Chip
             size="small"
@@ -233,36 +223,37 @@ function SearchItem(props: { data: any }) {
             }}
           />
         )}
-      </Box>
-      {data?._highlightResult?.url ? (
-        <Typography
-          variant="body1"
-          component="a"
-          href={data.url}
-          sx={{
-            textDecoration: "none",
-            width: "fit-content",
-            "& >div": {
+        {data?._highlightResult?.url ? (
+          <Typography
+            variant="body1"
+            component="a"
+            href={data.url}
+            sx={{
+              textDecoration: "none",
               width: "fit-content",
-            },
-          }}
-        >
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data._highlightResult.url.value,
+              "& >div": {
+                width: "fit-content",
+              },
+              color: "carbon.700",
             }}
-          />
-        </Typography>
-      ) : (
-        <Typography
-          sx={{
-            textDecoration: "none",
-            width: "fit-content",
-          }}
-        >
-          {data.url}
-        </Typography>
-      )}
+          >
+            <div
+              dangerouslySetInnerHTML={{
+                __html: data._highlightResult.url.value,
+              }}
+            />
+          </Typography>
+        ) : (
+          <Typography
+            sx={{
+              textDecoration: "none",
+              width: "fit-content",
+            }}
+          >
+            {data.url}
+          </Typography>
+        )}
+      </Stack>
       <Typography component="div" sx={{}}>
         <div
           dangerouslySetInnerHTML={{
