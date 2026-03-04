@@ -1,5 +1,6 @@
 ﻿import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import { MdCloseFullscreen, MdOpenInFull } from "react-icons/md";
 
 const IMAGE_LABELS = {
   en: {
@@ -65,7 +66,10 @@ export function ExpandableImage(
         }}
         aria-expanded={open}
       >
-        {expandLabel}
+        <span className="expandable-button-content">
+          <MdOpenInFull aria-hidden="true" />
+          <span>{expandLabel}</span>
+        </span>
       </button>
       <img {...props} />
       {open && (
@@ -85,7 +89,10 @@ export function ExpandableImage(
               className="expandable-modal-collapse"
               onClick={() => setOpen(false)}
             >
-              {collapseLabel}
+              <span className="expandable-button-content">
+                <MdCloseFullscreen aria-hidden="true" />
+                <span>{collapseLabel}</span>
+              </span>
             </button>
             <div className="expandable-modal-scroll">
               <img {...props} className="expandable-modal-image" />

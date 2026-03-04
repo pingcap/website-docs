@@ -1,5 +1,6 @@
 ﻿import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import { MdCloseFullscreen, MdOpenInFull } from "react-icons/md";
 
 const TABLE_LABELS = {
   en: {
@@ -61,7 +62,10 @@ export function ExpandableTable(
         onClick={() => setOpen(true)}
         aria-expanded={open}
       >
-        {expandLabel}
+        <span className="expandable-button-content">
+          <MdOpenInFull aria-hidden="true" />
+          <span>{expandLabel}</span>
+        </span>
       </button>
       <table {...props} />
       {open && (
@@ -81,7 +85,10 @@ export function ExpandableTable(
               className="expandable-modal-collapse"
               onClick={() => setOpen(false)}
             >
-              {collapseLabel}
+              <span className="expandable-button-content">
+                <MdCloseFullscreen aria-hidden="true" />
+                <span>{collapseLabel}</span>
+              </span>
             </button>
             <div className="expandable-modal-scroll">
               <table {...props} />
