@@ -34,3 +34,5 @@ export {
 } from "components/MDXComponents/developer";
 
 export { TargetLink as Link } from "./Link";
+export { ExpandableTable as table } from "./ExpandableTable";
+export { ExpandableImage as img } from "./ExpandableImage";
