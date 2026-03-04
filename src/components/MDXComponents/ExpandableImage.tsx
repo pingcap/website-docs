@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
 const IMAGE_LABELS = {
@@ -7,12 +7,12 @@ const IMAGE_LABELS = {
     collapse: "Collapse image",
   },
   zh: {
-    expand: "展开图片",
-    collapse: "收起图片",
+    expand: "Expand image",
+    collapse: "Collapse image",
   },
   ja: {
-    expand: "画像を拡大",
-    collapse: "画像を折りたたむ",
+    expand: "Expand image",
+    collapse: "Collapse image",
   },
 } as const;
 
@@ -28,27 +28,71 @@ function getImageLabel(language: string, expanded: boolean) {
 export function ExpandableImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>
 ) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const { language } = useI18next();
-  const label = getImageLabel(language, expanded);
+  const expandLabel = getImageLabel(language, false);
+  const collapseLabel = getImageLabel(language, true);
+
+  React.useEffect(() => {
+    if (!open) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   return (
-    <span className="expandable-image">
+    <div className="expandable-image">
       <button
         type="button"
         className="expandable-toggle-button"
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          setExpanded((prev) => !prev);
+          setOpen(true);
         }}
-        aria-expanded={expanded}
+        aria-expanded={open}
       >
-        {label}
+        {expandLabel}
       </button>
-      <span className={`expandable-image-frame${expanded ? " expanded" : ""}`}>
-        <img {...props} />
-      </span>
-    </span>
+      <img {...props} />
+      {open && (
+        <div
+          className="expandable-modal-backdrop"
+          role="presentation"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="expandable-modal-content expandable-image-modal-content"
+            role="dialog"
+            aria-modal="true"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="expandable-modal-collapse"
+              onClick={() => setOpen(false)}
+            >
+              {collapseLabel}
+            </button>
+            <div className="expandable-modal-scroll">
+              <img {...props} className="expandable-modal-image" />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

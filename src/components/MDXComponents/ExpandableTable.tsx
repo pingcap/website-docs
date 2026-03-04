@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
 const TABLE_LABELS = {
@@ -7,12 +7,12 @@ const TABLE_LABELS = {
     collapse: "Collapse table",
   },
   zh: {
-    expand: "展开表格",
-    collapse: "收起表格",
+    expand: "Expand table",
+    collapse: "Collapse table",
   },
   ja: {
-    expand: "表を展開",
-    collapse: "表を折りたたむ",
+    expand: "Expand table",
+    collapse: "Collapse table",
   },
 } as const;
 
@@ -28,25 +28,67 @@ function getTableLabel(language: string, expanded: boolean) {
 export function ExpandableTable(
   props: React.TableHTMLAttributes<HTMLTableElement>
 ) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   const { language } = useI18next();
-  const label = getTableLabel(language, expanded);
+  const expandLabel = getTableLabel(language, false);
+  const collapseLabel = getTableLabel(language, true);
+
+  React.useEffect(() => {
+    if (!open) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   return (
     <div className="expandable-table">
       <button
         type="button"
         className="expandable-toggle-button"
-        onClick={() => setExpanded((prev) => !prev)}
-        aria-expanded={expanded}
+        onClick={() => setOpen(true)}
+        aria-expanded={open}
       >
-        {label}
+        {expandLabel}
       </button>
-      <div
-        className={`expandable-table-container${expanded ? " expanded" : ""}`}
-      >
-        <table {...props} />
-      </div>
+      <table {...props} />
+      {open && (
+        <div
+          className="expandable-modal-backdrop"
+          role="presentation"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="expandable-modal-content expandable-table-modal-content"
+            role="dialog"
+            aria-modal="true"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="expandable-modal-collapse"
+              onClick={() => setOpen(false)}
+            >
+              {collapseLabel}
+            </button>
+            <div className="expandable-modal-scroll">
+              <table {...props} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
