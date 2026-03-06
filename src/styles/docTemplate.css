@@ -44,6 +44,111 @@
       margin: auto;
     }
 
+    .expandable-toggle-button {
+      display: block;
+      width: fit-content;
+      margin: 0 0 8px auto;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--tiui-palette-secondary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-size: 14px;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .expandable-button-content {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .expandable-table {
+      margin: 16px 0;
+    }
+
+    .expandable-image {
+      display: block;
+      margin: 16px 0;
+    }
+
+    .expandable-image > img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .expandable-inline-image {
+      cursor: zoom-in;
+    }
+
+    .expandable-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 35, 54, 0.6);
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .expandable-modal-content {
+      width: min(1200px, 100%);
+      max-height: 100%;
+      background: #fff;
+      border-radius: var(--tiui-shape-border-radius);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+      padding: 12px 12px 16px;
+      box-sizing: border-box;
+    }
+
+    .expandable-modal-collapse {
+      margin-left: auto;
+      margin-bottom: 8px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--tiui-palette-secondary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-size: 14px;
+      line-height: 1.4;
+      cursor: pointer;
+      display: block;
+    }
+
+    .expandable-modal-scroll {
+      max-height: calc(100vh - 120px);
+      overflow: auto;
+    }
+
+    .expandable-table-modal-content table {
+      margin: 0;
+      min-width: 100%;
+    }
+
+    .expandable-image-modal-content {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .expandable-image-modal-content .expandable-modal-scroll {
+      text-align: center;
+      max-height: calc(100vh - 48px);
+    }
+
+    .expandable-modal-image {
+      width: 100%;
+      max-width: 100%;
+      max-height: calc(100vh - 48px);
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
     code {
       background-color: var(--tiui-palette-carbon-200);
       border-radius: var(--tiui-shape-border-radius);
