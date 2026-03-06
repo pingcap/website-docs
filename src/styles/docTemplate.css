@@ -79,6 +79,10 @@
       height: auto;
     }
 
+    .expandable-inline-image {
+      cursor: zoom-in;
+    }
+
     .expandable-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -126,13 +130,20 @@
       min-width: 100%;
     }
 
+    .expandable-image-modal-content {
+      padding: 0;
+      overflow: hidden;
+    }
+
     .expandable-image-modal-content .expandable-modal-scroll {
       text-align: center;
+      max-height: calc(100vh - 48px);
     }
 
     .expandable-modal-image {
+      width: 100%;
       max-width: 100%;
-      max-height: calc(100vh - 180px);
+      max-height: calc(100vh - 48px);
       height: auto;
       margin: 0 auto;
       object-fit: contain;

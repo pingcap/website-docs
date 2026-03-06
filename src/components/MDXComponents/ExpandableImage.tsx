@@ -1,38 +1,9 @@
 ﻿import * as React from "react";
-import { useI18next } from "gatsby-plugin-react-i18next";
-import { MdCloseFullscreen, MdOpenInFull } from "react-icons/md";
-
-const IMAGE_LABELS = {
-  en: {
-    expand: "Expand image",
-    collapse: "Collapse image",
-  },
-  zh: {
-    expand: "Expand image",
-    collapse: "Collapse image",
-  },
-  ja: {
-    expand: "Expand image",
-    collapse: "Collapse image",
-  },
-} as const;
-
-function getImageLabel(language: string, expanded: boolean) {
-  const lang = language.startsWith("zh")
-    ? "zh"
-    : language.startsWith("ja")
-    ? "ja"
-    : "en";
-  return expanded ? IMAGE_LABELS[lang].collapse : IMAGE_LABELS[lang].expand;
-}
 
 export function ExpandableImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>
 ) {
   const [open, setOpen] = React.useState(false);
-  const { language } = useI18next();
-  const expandLabel = getImageLabel(language, false);
-  const collapseLabel = getImageLabel(language, true);
 
   React.useEffect(() => {
     if (!open) return;
@@ -56,22 +27,18 @@ export function ExpandableImage(
 
   return (
     <div className="expandable-image">
-      <button
-        type="button"
-        className="expandable-toggle-button"
+      <img
+        {...props}
+        className={`expandable-inline-image${
+          props.className ? ` ${props.className}` : ""
+        }`}
         onClick={(event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          setOpen(true);
+          props.onClick?.(event);
+          if (!event.defaultPrevented) {
+            setOpen(true);
+          }
         }}
-        aria-expanded={open}
-      >
-        <span className="expandable-button-content">
-          <MdOpenInFull aria-hidden="true" />
-          <span>{expandLabel}</span>
-        </span>
-      </button>
-      <img {...props} />
+      />
       {open && (
         <div
           className="expandable-modal-backdrop"
@@ -82,18 +49,7 @@ export function ExpandableImage(
             className="expandable-modal-content expandable-image-modal-content"
             role="dialog"
             aria-modal="true"
-            onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              className="expandable-modal-collapse"
-              onClick={() => setOpen(false)}
-            >
-              <span className="expandable-button-content">
-                <MdCloseFullscreen aria-hidden="true" />
-                <span>{collapseLabel}</span>
-              </span>
-            </button>
             <div className="expandable-modal-scroll">
               <img {...props} className="expandable-modal-image" />
             </div>
