@@ -120,6 +120,9 @@ module.exports = {
         rehypePlugins: [[require("rehype-katex"), { strict: "ignore" }]],
         gatsbyRemarkPlugins: [
           {
+            resolve: require.resolve("./gatsby/plugin/mermaid"),
+          },
+          {
             resolve: `gatsby-remark-autolink-headers`,
             options: {
               offsetY: `100`,

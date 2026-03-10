@@ -135,6 +135,12 @@
       margin-top: 1rem;
     }
 
+    .mermaid-diagram {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+    }
+
     .footnotes ol {
       list-style-type: disc;
     }
