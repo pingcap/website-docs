@@ -12,7 +12,13 @@ export const Mermaid: React.FC<{ value: string }> = ({ value }) => {
 
     import("mermaid")
       .then(({ default: mermaid }) => {
-        mermaid.initialize({ startOnLoad: false });
+        mermaid.initialize({
+          startOnLoad: false,
+          themeVariables: {
+            fontFamily:
+              'moderat, -apple-system, "Poppins", "Helvetica Neue", "Noto Sans", "Fira Code", "IBM Plex Sans", sans-serif',
+          },
+        });
         return mermaid.render(id.current, value);
       })
       .then(({ svg }) => {
