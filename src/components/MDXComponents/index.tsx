@@ -21,6 +21,7 @@ export {
   LearningPath,
   LearningPathContainer,
 } from "components/MDXComponents/LearningPath";
+export { Mermaid } from "components/MDXComponents/Mermaid";
 export { MDSvgIcon } from "components/MDXComponents/MDSvgIcon";
 export { SimpleTab } from "components/MDXComponents/SimpleTab";
 export { SyntaxDiagram } from "components/MDXComponents/SyntaxDiagram";

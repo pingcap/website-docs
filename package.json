@@ -55,6 +55,7 @@
     "highlight.js": "^11.5.1",
     "i18next": "^21.6.9",
     "katex": "^0.15.6",
+    "mermaid": "^11.12.3",
     "postcss": "^8.4.16",
     "postcss-mixins": "^9.0.3",
     "postcss-nested": "^5.0.6",
