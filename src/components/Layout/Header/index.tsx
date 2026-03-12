@@ -506,7 +506,7 @@ const HeaderBanner = (props: HeaderProps) => {
       bgColor="#FEFBF3"
       textColor="#AE6D0C"
       textList={[
-        "This site is for internal preview only.",
+        "This site is for internal preview only. ",
         <LinkComponent
           to="https://docs.pingcap.com/"
           target="_blank"
