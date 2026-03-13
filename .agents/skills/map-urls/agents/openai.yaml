@@ -1,0 +1,4 @@
+interface:
+  display_name: "Map URLs"
+  short_description: "Change URL mapping and link resolution rules"
+  default_prompt: "Use $map-urls to update URL mapping or Markdown link resolution in this repository."

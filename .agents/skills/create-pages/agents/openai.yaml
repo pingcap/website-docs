@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Pages"
+  short_description: "Add Gatsby page creation workflows"
+  default_prompt: "Use $create-pages to add or update a Gatsby page creation flow in this repository."

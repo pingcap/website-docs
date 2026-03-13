@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage TOC"
+  short_description: "Change TOC extraction and navigation"
+  default_prompt: "Use $manage-toc to change TOC extraction, filtering, or navigation behavior in this repository."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrate Search"
+  short_description: "Update search flows and Algolia wiring"
+  default_prompt: "Use $integrate-search to change onsite search behavior in this repository."
