@@ -1,9 +1,9 @@
 ---
-name: website-docs-url-mapping
+name: map-urls
 description: Modify URL mapping rules in the website-docs Gatsby site by editing gatsby/url-resolver/config.ts and gatsby/link-resolver/config.ts, updating Jest tests, updating gatsby/URL_MAPPING_ARCHITECTURE.md, and reviewing gatsby-plugin-react-i18next matchPath when URL prefixes or languages change.
 ---
 
-# Website-docs URL Mapping
+# Map URLs
 
 ## Overview
 
