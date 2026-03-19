@@ -26,15 +26,15 @@ This directory contains test cases for the URL resolver module.
 To run all tests:
 
 ```bash
-yarn test
+pnpm test
 ```
 
 To run tests for a specific file:
 
 ```bash
-yarn test pattern-matcher
-yarn test branch-alias
-yarn test url-resolver
+pnpm test pattern-matcher
+pnpm test branch-alias
+pnpm test url-resolver
 ```
 
 ## Test Coverage
