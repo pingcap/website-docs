@@ -53,7 +53,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "yarn"
+          cache: "pnpm"
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Update submodule
         id: submodule
@@ -70,7 +73,7 @@ jobs:
 
       - name: Install deps
         run: |
-          yarn
+          pnpm install --frozen-lockfile
           df -h
 
       - name: Calc gatsby cache key
@@ -102,7 +105,7 @@ jobs:
       - name: Clean cache
         if: ${{ inputs.nocache }}
         run: |
-          yarn clean
+          pnpm clean
 
       - name: Build website
         if: ${{ !inputs.fallback || (steps.gatsby-cache.outputs.cache-hit != 'true') }}
@@ -115,7 +118,7 @@ jobs:
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
           GATSBY_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: |
-          yarn build
+          pnpm build
 
       - name: Check output
         id: check-output

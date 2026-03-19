@@ -11,13 +11,13 @@
 
 ## Build, Test, and Development Commands
 
-- `yarn`: install dependencies and apply `patches/` via `patch-package`.
+- `pnpm install`: install dependencies and apply `pnpm` patched dependencies from `patches/`.
 - `git submodule update --init --depth 1 --remote`: fetch/update the docs submodule content.
-- `yarn start` (or `yarn dev`): run local development server (Gatsby develop).
-- `yarn build`: create a production build.
-- `yarn serve`: serve the production build locally.
-- `yarn clean`: remove Gatsby build caches (`.cache/`, `public/`).
-- `yarn test`: run Jest with coverage for code under `gatsby/`.
+- `pnpm start` (or `pnpm dev`): run local development server (Gatsby develop).
+- `pnpm build`: create a production build.
+- `pnpm serve`: serve the production build locally.
+- `pnpm clean`: remove Gatsby build caches (`.cache/`, `public/`).
+- `pnpm test`: run Jest with coverage for code under `gatsby/`.
 
 ## Coding Style & Naming Conventions
 
@@ -37,7 +37,7 @@
 
 - Commit messages follow a Conventional Commits pattern (common types: `feat:`, `fix:`, `refactor:`, `chore:`).
 - PRs should include: clear description + rationale, linked issue(s), and screenshots for UI changes.
-- Before requesting review, ensure `yarn test` and `yarn build` pass locally.
+- Before requesting review, ensure `pnpm test` and `pnpm build` pass locally.
 
 ## Security & Configuration Tips
 

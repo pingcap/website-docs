@@ -22,9 +22,9 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/lab": "^5.0.0-alpha.95",
-    "@mui/material": "^5.10.0",
+    "@mui/icons-material": "5.10.3",
+    "@mui/lab": "5.0.0-alpha.99",
+    "@mui/material": "5.10.5",
     "@seagreenio/react-bulma": "^0.1.0-beta.4",
     "@sentry/gatsby": "^8.42.0",
     "algoliasearch": "^4.11.0",
@@ -92,7 +92,6 @@
     "is-ci": "^3.0.1",
     "jest": "^30.2.0",
     "lint-staged": "^12.1.2",
-    "patch-package": "^8.0.0",
     "pegjs": "^0.10.0",
     "prettier": "2.5.1",
     "sass": "^1.45.0",
@@ -105,10 +104,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "postinstall": "patch-package",
-    "dev": "yarn start",
+    "dev": "pnpm start",
     "start": "gatsby develop",
-    "start:0.0.0.0": "gatsby develop -H 0.0.0.0",
+    "start:0.0.0.0": "gatsby develop --host 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -118,5 +116,24 @@
   "lint-staged": {
     "*.js?(x)": "prettier --write"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "pnpm@10.32.1",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@sentry/cli",
+      "core-js",
+      "core-js-pure",
+      "es5-ext",
+      "gatsby",
+      "gatsby-cli",
+      "gatsby-telemetry",
+      "lmdb",
+      "msgpackr-extract",
+      "sharp",
+      "unrs-resolver"
+    ],
+    "patchedDependencies": {
+      "gatsby-link@4.25.0": "patches/gatsby-link@4.25.0.patch"
+    }
+  }
 }
