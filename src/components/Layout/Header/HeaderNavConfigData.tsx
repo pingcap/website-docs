@@ -75,19 +75,6 @@ const getDefaultNavConfig = (
               }
             },
           },
-          // {
-          //   type: "item",
-          //   label: "TiDB Cloud Premium",
-          //   to: `/tidbcloud/premium?${CLOUD_MODE_KEY}=premium`,
-          //   selected: (namespace) =>
-          //     namespace === TOCNamespace.TiDBCloud &&
-          //     cloudPlan === CloudPlan.Premium,
-          //   onClick: () => {
-          //     if (typeof window !== "undefined") {
-          //       sessionStorage.setItem(CLOUD_MODE_KEY, "premium");
-          //     }
-          //   },
-          // },
           {
             type: "item",
             label: t("navbar.tidbCloudDedicated"),
@@ -95,9 +82,18 @@ const getDefaultNavConfig = (
               cloudPlan === CloudPlan.Dedicated || !cloudPlan
                 ? `/tidbcloud`
                 : `/tidbcloud?${CLOUD_MODE_KEY}=${CloudPlan.Dedicated}`,
-            selected: (namespace) =>
-              namespace === TOCNamespace.TiDBCloud &&
-              cloudPlan === CloudPlan.Dedicated,
+            selected: (namespace) => namespace === TOCNamespace.TiDBCloud,
+            onClick: () => {
+              if (typeof window !== "undefined") {
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);
+              }
+            },
+          },
+          {
+            type: "item",
+            label: t("navbar.tidbCloudLake"),
+            to: "/tidbcloudlake",
+            selected: (namespace) => namespace === TOCNamespace.TiDBCloudLake,
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);

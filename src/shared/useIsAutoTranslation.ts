@@ -10,6 +10,7 @@ export const useIsAutoTranslation = (namespace: TOCNamespace) => {
     (isJA ||
       (isZH &&
         (namespace === TOCNamespace.TiDBCloud ||
+          namespace === TOCNamespace.TiDBCloudLake ||
           namespace === TOCNamespace.TidbCloudReleases ||
           namespace === TOCNamespace.AI)));
   return isAutoTranslation;

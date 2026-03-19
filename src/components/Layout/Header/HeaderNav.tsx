@@ -43,7 +43,10 @@ export default function HeaderNavStack(props: {
   // Find and notify selected item
   React.useEffect(() => {
     if (props.onSelectedNavItemChange) {
-      const selectedNavItem = getSelectedNavItem(defaultConfig, props.namespace);
+      const selectedNavItem = getSelectedNavItem(
+        defaultConfig,
+        props.namespace
+      );
       props.onSelectedNavItemChange(selectedNavItem);
     }
   }, [defaultConfig, props.namespace, props.onSelectedNavItemChange]);

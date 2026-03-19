@@ -62,9 +62,7 @@ export function HeaderNavStackMobile(props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={
-          <TiDBLogo width={132} height={28.8} />
-        }
+        startIcon={<TiDBLogo width={132} height={28.8} />}
         endIcon={<ChevronDownIcon />}
       ></Button>
       <Menu
@@ -131,7 +129,12 @@ const RenderNavConfig = (props: {
 
   if (config.type === "item") {
     return (
-      <NavMenuItem item={config} namespace={namespace} onClose={onClose} language={language} />
+      <NavMenuItem
+        item={config}
+        namespace={namespace}
+        onClose={onClose}
+        language={language}
+      />
     );
   }
 
@@ -293,37 +296,37 @@ const NavMenuItem = (props: {
           width: "100%",
         }}
       >
-          {item.startIcon && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {item.startIcon}
-            </Box>
-          )}
-          <Typography
-            component="span"
+        {item.startIcon && (
+          <Box
             sx={{
-              fontSize: "14px",
-              fontWeight: isSelected ? 600 : 400,
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            {item.label}
-          </Typography>
-          {item.endIcon && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "auto",
-              }}
-            >
-              {item.endIcon}
-            </Box>
-          )}
-        </Box>
+            {item.startIcon}
+          </Box>
+        )}
+        <Typography
+          component="span"
+          sx={{
+            fontSize: "14px",
+            fontWeight: isSelected ? 600 : 400,
+          }}
+        >
+          {item.label}
+        </Typography>
+        {item.endIcon && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "auto",
+            }}
+          >
+            {item.endIcon}
+          </Box>
+        )}
+      </Box>
     </MenuItem>
   );
 
