@@ -18,7 +18,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: "yarn"
+          cache: "pnpm"
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Update submodule
         id: submodule
@@ -34,7 +37,7 @@ jobs:
           echo "build_date=$(date)" >> $GITHUB_OUTPUT
 
       - name: Install deps
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: Calc gatsby cache key
         id: calc-cache-key
@@ -62,7 +65,7 @@ jobs:
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
           WEBSITE_BUILD_TYPE: archive
         run: |
-          yarn build
+          pnpm build
 
       - name: Check output
         id: check-output
