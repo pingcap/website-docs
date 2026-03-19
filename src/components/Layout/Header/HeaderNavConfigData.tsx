@@ -82,7 +82,9 @@ const getDefaultNavConfig = (
               cloudPlan === CloudPlan.Dedicated || !cloudPlan
                 ? `/tidbcloud`
                 : `/tidbcloud?${CLOUD_MODE_KEY}=${CloudPlan.Dedicated}`,
-            selected: (namespace) => namespace === TOCNamespace.TiDBCloud,
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
+              cloudPlan === CloudPlan.Dedicated,
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);
