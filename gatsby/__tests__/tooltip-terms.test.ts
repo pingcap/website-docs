@@ -5,7 +5,7 @@ const {
 } = require("../tooltip-terms");
 
 describe("tooltip terms parsing", () => {
-  it("accepts valid JSON-compatible YAML content", () => {
+  it("accepts valid JSON content", () => {
     const terms = parseTooltipTerms(`
       [
         {

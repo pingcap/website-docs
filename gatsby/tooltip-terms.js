@@ -3,7 +3,7 @@ const path = require("path");
 
 const TOOLTIP_TERMS_PATH = path.resolve(
   __dirname,
-  "../src/data/tooltip-terms.yml"
+  "../src/data/tooltip-terms.json"
 );
 const SUPPORTED_TOOLTIP_LANGUAGES = ["en", "zh", "ja"];
 
@@ -13,9 +13,7 @@ function parseTooltipTerms(rawContent, sourcePath = TOOLTIP_TERMS_PATH) {
   try {
     parsedContent = JSON.parse(rawContent);
   } catch (error) {
-    throw new Error(
-      `${sourcePath} must use JSON-compatible YAML so it can be parsed without extra build dependencies.`
-    );
+    throw new Error(`${sourcePath} must contain valid JSON.`);
   }
 
   if (!Array.isArray(parsedContent)) {

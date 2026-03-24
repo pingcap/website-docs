@@ -132,7 +132,7 @@ Everything you need is just to write a JSX tag, put the text into it. Then we wi
 
 Tooltip terms are globally available in MDX, so you do not need to import them in every file.
 
-Definitions are maintained in `src/data/tooltip-terms.yml`. Keep the file in JSON-compatible YAML and define each term with:
+Definitions are maintained in `src/data/tooltip-terms.json`. Define each term with:
 
 ```json
 [
@@ -155,7 +155,7 @@ Use the term in MDX like this:
 
 Rules:
 
-- `id` must exist in `src/data/tooltip-terms.yml`.
+- `id` must exist in `src/data/tooltip-terms.json`.
 - `en`, `zh`, and `ja` definitions are all required.
 - Self-closing syntax such as `<Tooltip id="chat2query" />` is not supported.
 
