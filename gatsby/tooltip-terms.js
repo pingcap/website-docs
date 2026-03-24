@@ -3,7 +3,7 @@ const path = require("path");
 
 const TOOLTIP_TERMS_PATH = path.resolve(
   __dirname,
-  "../src/data/tooltip-terms.json"
+  "../docs/tooltip-terms.json"
 );
 const SUPPORTED_TOOLTIP_LANGUAGES = ["en", "zh", "ja"];
 
