@@ -116,7 +116,9 @@ function extractTooltipIdFromJsx(jsxValue) {
     );
   }
 
-  const idMatch = trimmedValue.match(/\bid\s*=\s*(?:"([^"]+)"|'([^']+)')/);
+  const idMatch = trimmedValue.match(
+    /(?:^|\s)id\s*=\s*(?:"([^"]+)"|'([^']+)')/
+  );
   const tooltipId = idMatch?.[1] || idMatch?.[2];
 
   if (!tooltipId) {

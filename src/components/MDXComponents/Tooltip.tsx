@@ -21,6 +21,31 @@ interface TooltipQueryData {
   };
 }
 
+type TooltipTermNodes = TooltipQueryData["allTooltipTerm"]["nodes"];
+
+const definitionsByNodeList = new WeakMap<
+  TooltipTermNodes,
+  Record<string, TooltipTermDefinition>
+>();
+
+function getDefinitionsById(nodes: TooltipTermNodes) {
+  const cachedDefinitions = definitionsByNodeList.get(nodes);
+  if (cachedDefinitions) {
+    return cachedDefinitions;
+  }
+
+  const definitions = nodes.reduce<Record<string, TooltipTermDefinition>>(
+    (acc, node) => {
+      acc[node.termId] = node.definition;
+      return acc;
+    },
+    {}
+  );
+
+  definitionsByNodeList.set(nodes, definitions);
+  return definitions;
+}
+
 export const Tooltip = (props: {
   id: string;
   children: React.ReactNode;
@@ -42,15 +67,10 @@ export const Tooltip = (props: {
     }
   `);
 
-  const definitionsById = React.useMemo(() => {
-    return data.allTooltipTerm.nodes.reduce<Record<string, TooltipTermDefinition>>(
-      (acc, node) => {
-        acc[node.termId] = node.definition;
-        return acc;
-      },
-      {}
-    );
-  }, [data.allTooltipTerm.nodes]);
+  const definitionsById = React.useMemo(
+    () => getDefinitionsById(data.allTooltipTerm.nodes),
+    [data.allTooltipTerm.nodes]
+  );
 
   const localizedDefinition =
     definitionsById[id]?.[language as Locale] ?? definitionsById[id]?.en;
@@ -108,7 +128,10 @@ export const Tooltip = (props: {
           outline: "none",
           fontVariantLigatures: "none",
           "&:focus-visible": {
-            textDecorationThickness: "1px",
+            outline: `2px solid ${theme.palette.carbon[700]}`,
+            outlineOffset: "2px",
+            textDecorationThickness: "2px",
+            textDecorationColor: theme.palette.carbon[900],
           },
         })}
       >
