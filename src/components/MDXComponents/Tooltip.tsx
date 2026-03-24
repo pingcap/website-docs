@@ -81,7 +81,11 @@ export const Tooltip = (props: {
           sx: (theme) => ({
             backgroundColor: theme.palette.carbon[800],
             color: theme.palette.carbon[50],
+            fontFamily: theme.typography.fontFamily,
             fontSize: theme.typography.body2.fontSize,
+            fontWeight: theme.typography.body2.fontWeight,
+            fontStyle: theme.typography.body2.fontStyle,
+            lineHeight: theme.typography.body2.lineHeight,
             borderRadius: "6px",
           }),
         },
