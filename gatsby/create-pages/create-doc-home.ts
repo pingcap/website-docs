@@ -9,6 +9,7 @@ import {
   TOCNamespace,
   TOCNamespaceSlugMap,
 } from "../../src/shared/interface";
+import { loadTooltipTerms, validateTooltipReferences } from "../tooltip-terms";
 import {
   generateConfig,
   generateNavTOCPath,
@@ -36,6 +37,7 @@ export const createDocHome = async ({
         frontmatter {
           aliases
         }
+        mdxAST
         slug
         parent {
           ... on File {
@@ -60,6 +62,7 @@ export const createDocHome = async ({
         frontmatter {
           aliases
         }
+        mdxAST
         slug
         parent {
           ... on File {
@@ -86,8 +89,14 @@ export const createDocHome = async ({
     return { ...node, pathConfig: config, name, filePath };
   });
 
+  const tooltipTerms = loadTooltipTerms();
+  validateTooltipReferences(
+    nodes,
+    new Set(tooltipTerms.map((term) => term.id))
+  );
+
   nodes.forEach((node) => {
-    const { id, name, pathConfig, filePath, slug } = node;
+    const { id, name, pathConfig, filePath } = node;
     const path = generateDocHomeUrl(name, pathConfig);
     const namespace = TOCNamespace.Home;
     const namespaceSlug = TOCNamespaceSlugMap[namespace];

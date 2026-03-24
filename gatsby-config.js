@@ -50,6 +50,9 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
+    {
+      resolve: `./gatsby/plugin/tooltip-terms`,
+    },
     `gatsby-plugin-root-import`,
     {
       resolve: `gatsby-source-filesystem`,
