@@ -1,8 +1,8 @@
 import * as React from "react";
 import { MdClose, MdOpenInFull } from "react-icons/md";
 
-export function ExpandableTable(
-  props: React.TableHTMLAttributes<HTMLTableElement>
+export function ExpandableImage(
+  props: React.ImgHTMLAttributes<HTMLImageElement>
 ) {
   const [open, setOpen] = React.useState(false);
 
@@ -27,16 +27,21 @@ export function ExpandableTable(
   }, [open]);
 
   return (
-    <div className="expandable-table">
+    <div className="expandable-image">
       <button
         type="button"
         className="expandable-icon-button"
-        aria-label="Expand table"
+        aria-label="Expand image"
         onClick={() => setOpen(true)}
       >
         <MdOpenInFull aria-hidden="true" />
       </button>
-      <table {...props} />
+      <img
+        {...props}
+        className={`expandable-inline-image${
+          props.className ? ` ${props.className}` : ""
+        }`}
+      />
       {open && (
         <div
           className="expandable-modal-backdrop"
@@ -44,7 +49,7 @@ export function ExpandableTable(
           onClick={() => setOpen(false)}
         >
           <div
-            className="expandable-modal-content expandable-table-modal-content"
+            className="expandable-modal-content expandable-image-modal-content"
             role="dialog"
             aria-modal="true"
             onClick={(event) => event.stopPropagation()}
@@ -52,13 +57,13 @@ export function ExpandableTable(
             <button
               type="button"
               className="expandable-modal-close-button"
-              aria-label="Close expanded table"
+              aria-label="Close expanded image"
               onClick={() => setOpen(false)}
             >
               <MdClose aria-hidden="true" />
             </button>
             <div className="expandable-modal-scroll">
-              <table {...props} />
+              <img {...props} className="expandable-modal-image" />
             </div>
           </div>
         </div>

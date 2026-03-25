@@ -44,32 +44,13 @@
       margin: auto;
     }
 
-    .expandable-toggle-button {
-      display: block;
-      width: fit-content;
-      margin: 0 0 8px auto;
-      padding: 0;
-      border: 0;
-      background: none;
-      color: var(--tiui-palette-secondary);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      font-size: 14px;
-      line-height: 1.4;
-      cursor: pointer;
-    }
-
-    .expandable-button-content {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
     .expandable-table {
+      position: relative;
       margin: 16px 0;
     }
 
     .expandable-image {
+      position: relative;
       display: block;
       margin: 16px 0;
     }
@@ -80,7 +61,41 @@
     }
 
     .expandable-inline-image {
-      cursor: zoom-in;
+      cursor: default;
+    }
+
+    .expandable-icon-button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: 1px solid rgba(14, 35, 54, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--tiui-palette-carbon-900);
+      box-shadow: 0 8px 20px rgba(14, 35, 54, 0.14);
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .expandable-icon-button:hover {
+      background: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(14, 35, 54, 0.18);
+    }
+
+    .expandable-icon-button svg {
+      width: 18px;
+      height: 18px;
     }
 
     .expandable-modal-backdrop {
@@ -101,23 +116,39 @@
       background: #fff;
       border-radius: var(--tiui-shape-border-radius);
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
-      padding: 12px 12px 16px;
+      padding: 56px 16px 16px;
       box-sizing: border-box;
+      position: relative;
     }
 
-    .expandable-modal-collapse {
-      margin-left: auto;
-      margin-bottom: 8px;
+    .expandable-modal-close-button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
       padding: 0;
       border: 0;
-      background: none;
-      color: var(--tiui-palette-secondary);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      font-size: 14px;
-      line-height: 1.4;
+      border-radius: 999px;
+      background: rgba(14, 35, 54, 0.08);
+      color: var(--tiui-palette-carbon-900);
       cursor: pointer;
-      display: block;
+      transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .expandable-modal-close-button:hover {
+      background: rgba(14, 35, 54, 0.14);
+      transform: scale(1.04);
+    }
+
+    .expandable-modal-close-button svg {
+      width: 24px;
+      height: 24px;
     }
 
     .expandable-modal-scroll {
