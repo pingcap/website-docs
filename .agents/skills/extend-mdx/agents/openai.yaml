@@ -1,0 +1,4 @@
+interface:
+  display_name: "Extend MDX"
+  short_description: "Extend MDX with components or transforms"
+  default_prompt: "Use $extend-mdx to extend MDX rendering in this repository."

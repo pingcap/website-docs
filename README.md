@@ -9,21 +9,25 @@
 
 1. Clone this repo;
 
-2. Install dependent:
+2. Enable Corepack once if `pnpm` is not already available:
 
-- Run `yarn`;
+- Run `corepack enable`;
 
-3. Download docs:
+3. Install dependencies:
+
+- Run `pnpm install`;
+
+4. Download docs:
 
 - Run `git submodule init`;
 - Run `git submodule update --depth 1 --remote`;
 
 ### After download
 
-Run `yarn start` to develop:
+Run `pnpm start` to develop:
 
 ```sh
-yarn start
+pnpm start
 ```
 
 In order to debug algolia searches, you need to provide two additional environment variables:

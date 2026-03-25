@@ -14,11 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Build website
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
         with:
-          node-version: 16
-          cache: "yarn"
+          run_install: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: "pnpm"
 
       - name: Update submodule
         id: submodule
@@ -34,12 +37,12 @@ jobs:
           echo "build_date=$(date)" >> $GITHUB_OUTPUT
 
       - name: Install deps
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: Calc gatsby cache key
         id: calc-cache-key
         run: |
-          echo "::set-output name=key::${{ steps.submodule.outputs.submodule_sha }}"
+          echo "key=${{ steps.submodule.outputs.submodule_sha }}" >> $GITHUB_OUTPUT
 
       - name: Restore gatsby cache
         uses: actions/cache@v3
@@ -62,7 +65,7 @@ jobs:
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
           WEBSITE_BUILD_TYPE: archive
         run: |
-          yarn build
+          pnpm build
 
       - name: Check output
         id: check-output

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Localize Routes"
+  short_description: "Update locale routing and translations"
+  default_prompt: "Use $localize-routes to update language-aware routing or translations in this repository."

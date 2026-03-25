@@ -1,6 +1,18 @@
 require("ts-node").register({ transpileOnly: true });
 
 const docs = require("./docs/docs.json");
+const isDevelopment = process.env.NODE_ENV === "development";
+const markdownPagesIgnore = [
+  "**/ja/**",
+  "**/zh/**",
+  "**/en/tidb-in-kubernetes/**",
+  "**/en/tidb/release-5.4/**",
+  "**/en/tidb/release-6.1/**",
+  "**/en/tidb/release-6.5/**",
+  "**/en/tidb/release-7.1/**",
+  "**/en/tidb/release-7.5/**",
+  "**/en/tidb/release-8.1/**",
+];
 
 module.exports = {
   trailingSlash: "always",
@@ -108,6 +120,7 @@ module.exports = {
       options: {
         name: `markdown-pages`,
         path: `${__dirname}/docs/markdown-pages`,
+        ...(isDevelopment ? { ignore: markdownPagesIgnore } : {}),
       },
     },
     {
@@ -119,6 +132,9 @@ module.exports = {
         remarkPlugins: [require("remark-math")],
         rehypePlugins: [[require("rehype-katex"), { strict: "ignore" }]],
         gatsbyRemarkPlugins: [
+          {
+            resolve: require.resolve("./gatsby/plugin/mermaid"),
+          },
           {
             resolve: `gatsby-remark-autolink-headers`,
             options: {

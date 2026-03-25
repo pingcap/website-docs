@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Plugin"
+  short_description: "Build local Gatsby MDX plugins"
+  default_prompt: "Use $create-plugin to add or update a local Gatsby MDX plugin in this repository."

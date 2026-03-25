@@ -1,13 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-if command -v yarn >/dev/null 2>&1; then
-  yarn run lint-staged
-elif command -v corepack >/dev/null 2>&1; then
-  corepack yarn run lint-staged
-elif command -v npm >/dev/null 2>&1; then
-  npm exec -- lint-staged
-else
-  echo "Error: yarn/corepack/npm not found in PATH"
-  exit 127
-fi
+pnpm lint-staged
