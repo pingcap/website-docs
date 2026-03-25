@@ -76,7 +76,7 @@
       width: 44px;
       height: 44px;
       padding: 0;
-      border: 1px solid rgba(14, 35, 54, 0.12);
+      border: 0;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.96);
       color: #6b7280;
@@ -87,7 +87,6 @@
       cursor: pointer;
       transition:
         background-color 0.2s ease,
-        transform 0.2s ease,
         box-shadow 0.2s ease,
         color 0.2s ease;
     }
@@ -101,7 +100,6 @@
 
     .expandable-icon-button:hover {
       background: #fff;
-      transform: translateY(-1px);
       color: #374151;
       box-shadow:
         0 14px 28px rgba(15, 23, 42, 0.12),
@@ -153,13 +151,11 @@
       cursor: pointer;
       transition:
         background-color 0.2s ease,
-        transform 0.2s ease,
         box-shadow 0.2s ease;
     }
 
     .expandable-modal-close-button:hover {
       background: rgba(14, 35, 54, 0.12);
-      transform: scale(1.03);
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
     }
 
