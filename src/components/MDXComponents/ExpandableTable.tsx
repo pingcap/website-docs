@@ -1,5 +1,8 @@
 import * as React from "react";
-import { MdClose, MdOpenInFull } from "react-icons/md";
+import {
+  CloseLargeIcon,
+  ExpandCornersIcon,
+} from "components/MDXComponents/ExpandIcons";
 
 export function ExpandableTable(
   props: React.TableHTMLAttributes<HTMLTableElement>
@@ -34,7 +37,7 @@ export function ExpandableTable(
         aria-label="Expand table"
         onClick={() => setOpen(true)}
       >
-        <MdOpenInFull aria-hidden="true" />
+        <ExpandCornersIcon />
       </button>
       <table {...props} />
       {open && (
@@ -55,7 +58,7 @@ export function ExpandableTable(
               aria-label="Close expanded table"
               onClick={() => setOpen(false)}
             >
-              <MdClose aria-hidden="true" />
+              <CloseLargeIcon />
             </button>
             <div className="expandable-modal-scroll">
               <table {...props} />

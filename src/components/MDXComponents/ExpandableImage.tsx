@@ -1,5 +1,8 @@
 import * as React from "react";
-import { MdClose, MdOpenInFull } from "react-icons/md";
+import {
+  CloseLargeIcon,
+  ExpandCornersIcon,
+} from "components/MDXComponents/ExpandIcons";
 
 export function ExpandableImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>
@@ -34,7 +37,7 @@ export function ExpandableImage(
         aria-label="Expand image"
         onClick={() => setOpen(true)}
       >
-        <MdOpenInFull aria-hidden="true" />
+        <ExpandCornersIcon />
       </button>
       <img
         {...props}
@@ -60,7 +63,7 @@ export function ExpandableImage(
               aria-label="Close expanded image"
               onClick={() => setOpen(false)}
             >
-              <MdClose aria-hidden="true" />
+              <CloseLargeIcon />
             </button>
             <div className="expandable-modal-scroll">
               <img {...props} className="expandable-modal-image" />

@@ -66,36 +66,43 @@
 
     .expandable-icon-button {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 10px;
+      right: 10px;
       z-index: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
       padding: 0;
-      border: 1px solid rgba(14, 35, 54, 0.14);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.92);
-      color: var(--tiui-palette-carbon-900);
-      box-shadow: 0 8px 20px rgba(14, 35, 54, 0.14);
+      border: 1px solid rgba(14, 35, 54, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.96);
+      color: #6b7280;
+      box-shadow:
+        0 10px 24px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
       cursor: pointer;
       transition:
         background-color 0.2s ease,
         transform 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        color 0.2s ease;
     }
 
     .expandable-icon-button:hover {
       background: #fff;
       transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(14, 35, 54, 0.18);
+      color: #374151;
+      box-shadow:
+        0 14px 28px rgba(15, 23, 42, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.92);
     }
 
-    .expandable-icon-button svg {
-      width: 18px;
-      height: 18px;
+    .expandable-icon-svg {
+      width: 20px;
+      height: 20px;
     }
 
     .expandable-modal-backdrop {
@@ -123,32 +130,34 @@
 
     .expandable-modal-close-button {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 14px;
+      right: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       padding: 0;
       border: 0;
-      border-radius: 999px;
-      background: rgba(14, 35, 54, 0.08);
+      border-radius: 14px;
+      background: rgba(14, 35, 54, 0.06);
       color: var(--tiui-palette-carbon-900);
       cursor: pointer;
       transition:
         background-color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .expandable-modal-close-button:hover {
-      background: rgba(14, 35, 54, 0.14);
-      transform: scale(1.04);
+      background: rgba(14, 35, 54, 0.12);
+      transform: scale(1.03);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
     }
 
-    .expandable-modal-close-button svg {
-      width: 24px;
-      height: 24px;
+    .expandable-close-svg {
+      width: 26px;
+      height: 26px;
     }
 
     .expandable-modal-scroll {
