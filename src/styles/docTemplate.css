@@ -78,7 +78,7 @@
       padding: 0;
       border: 0;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.96);
+      background: transparent;
       color: #6b7280;
       cursor: pointer;
       transition:
@@ -94,7 +94,7 @@
     }
 
     .expandable-icon-button:hover {
-      background: #fff;
+      background: rgba(14, 35, 54, 0.08);
       color: #374151;
     }
 
@@ -138,7 +138,7 @@
       padding: 0;
       border: 0;
       border-radius: 14px;
-      background: rgba(14, 35, 54, 0.06);
+      background: transparent;
       color: var(--tiui-palette-carbon-900);
       cursor: pointer;
       transition: background-color 0.2s ease;
