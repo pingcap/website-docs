@@ -144,6 +144,7 @@ export const Tooltip = (props: {
               sx: (theme) => ({
                 backgroundColor: theme.palette.carbon[800],
                 color: theme.palette.carbon[50],
+                padding: "8px 12px",
                 fontFamily: theme.typography.fontFamily,
                 fontSize: theme.typography.body2.fontSize,
                 fontWeight: theme.typography.body2.fontWeight,
