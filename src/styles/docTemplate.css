@@ -80,14 +80,9 @@
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.96);
       color: #6b7280;
-      box-shadow:
-        0 10px 24px rgba(15, 23, 42, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(8px);
       cursor: pointer;
       transition:
         background-color 0.2s ease,
-        box-shadow 0.2s ease,
         color 0.2s ease;
     }
 
@@ -101,9 +96,6 @@
     .expandable-icon-button:hover {
       background: #fff;
       color: #374151;
-      box-shadow:
-        0 14px 28px rgba(15, 23, 42, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.92);
     }
 
     .expandable-icon-svg {
@@ -149,14 +141,11 @@
       background: rgba(14, 35, 54, 0.06);
       color: var(--tiui-palette-carbon-900);
       cursor: pointer;
-      transition:
-        background-color 0.2s ease,
-        box-shadow 0.2s ease;
+      transition: background-color 0.2s ease;
     }
 
     .expandable-modal-close-button:hover {
       background: rgba(14, 35, 54, 0.12);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
     }
 
     .expandable-close-svg {
