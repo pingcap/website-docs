@@ -31,14 +31,16 @@ export function ExpandableTable(
 
   return (
     <div className="expandable-table">
-      <button
-        type="button"
-        className="expandable-icon-button"
-        aria-label="Expand table"
-        onClick={() => setOpen(true)}
-      >
-        <ExpandCornersIcon />
-      </button>
+      <div className="expandable-table-toolbar">
+        <button
+          type="button"
+          className="expandable-icon-button expandable-table-icon-button"
+          aria-label="Expand table"
+          onClick={() => setOpen(true)}
+        >
+          <ExpandCornersIcon />
+        </button>
+      </div>
       <table {...props} />
       {open && (
         <div

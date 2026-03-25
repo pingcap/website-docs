@@ -45,8 +45,13 @@
     }
 
     .expandable-table {
-      position: relative;
       margin: 16px 0;
+    }
+
+    .expandable-table-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 8px;
     }
 
     .expandable-image {
@@ -65,10 +70,6 @@
     }
 
     .expandable-icon-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -89,6 +90,13 @@
         transform 0.2s ease,
         box-shadow 0.2s ease,
         color 0.2s ease;
+    }
+
+    .expandable-image .expandable-icon-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1;
     }
 
     .expandable-icon-button:hover {
