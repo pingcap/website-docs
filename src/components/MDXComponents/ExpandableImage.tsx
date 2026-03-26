@@ -35,7 +35,11 @@ export function ExpandableImage(
         type="button"
         className="expandable-icon-button"
         aria-label="Expand image"
-        onClick={() => setOpen(true)}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          setOpen(true);
+        }}
       >
         <ExpandCornersIcon />
       </button>
