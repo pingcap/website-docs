@@ -1,10 +1,10 @@
-const fs = require("fs");
+import fs from "fs";
 
-const {
+import {
   TOOLTIP_TERMS_PATH,
   parseTooltipTerms,
   loadTooltipTerms,
-} = require("../tooltip-terms");
+} from "../tooltip-terms";
 
 describe("tooltip terms parsing", () => {
   it("accepts valid JSON content", () => {
