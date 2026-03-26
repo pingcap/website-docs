@@ -392,16 +392,16 @@ function DocTemplate({
                   position: "fixed",
                   bottom: "1rem",
                   right: "1rem",
-                  zIndex: 9,
+                  zIndex: 10,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-end",
                   gap: "0.75rem",
                 }}
               >
+                <ScrollToTopBtn />
                 <FeedbackSurveyCampaign />
               </Box>
-              <ScrollToTopBtn />
             </Box>
           </Box>
         </Box>

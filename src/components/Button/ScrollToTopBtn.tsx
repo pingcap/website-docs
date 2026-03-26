@@ -64,16 +64,6 @@ export default function ScrollToTopBtn() {
   return (
     <Box
       sx={{
-        position: "fixed",
-        right: {
-          xs: "0.75rem",
-          md: "1rem",
-        },
-        bottom: {
-          xs: "1.5rem",
-          md: "2.5rem",
-        },
-        zIndex: 10,
         display: show ? "block" : "none",
       }}
     >
@@ -81,39 +71,66 @@ export default function ScrollToTopBtn() {
         id="scroll-to-top"
         aria-label={t("fab.scrollToTop")}
         sx={{
-          width: "52px",
-          height: "52px",
+          width: "56px",
+          height: "56px",
           color: theme.palette.carbon[900],
-          backgroundColor: "rgba(255, 255, 255, 0.94)",
-          border: `1px solid ${theme.palette.carbon[400]}`,
+          backgroundColor: theme.palette.carbon[50],
+          border: `1.5px solid ${theme.palette.carbon[400]}`,
           borderRadius: "999px",
-          boxShadow: "0 8px 24px rgba(30, 36, 38, 0.08)",
-          backdropFilter: "blur(8px)",
+          boxShadow: "0 8px 24px rgba(30, 36, 38, 0.06)",
           "&:hover": {
             backgroundColor: theme.palette.peacock[50],
             borderColor: theme.palette.peacock[500],
           },
-          "&::before": {
-            content: '""',
-            position: "absolute",
-            width: "14px",
-            height: "14px",
-            borderLeft: `2px solid ${theme.palette.carbon[900]}`,
-            borderTop: `2px solid ${theme.palette.carbon[900]}`,
-            transform: "translateY(-3px) rotate(45deg)",
-          },
-          "&::after": {
-            content: '""',
-            position: "absolute",
-            width: "2px",
-            height: "18px",
-            backgroundColor: theme.palette.carbon[900],
-            borderRadius: "999px",
-            transform: "translateY(4px)",
-          },
         }}
         onClick={handleClick}
-      />
+      >
+        <Box
+          sx={{
+            position: "relative",
+            width: "30px",
+            height: "30px",
+          }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: "2px",
+              left: "50%",
+              width: "22px",
+              height: "3px",
+              borderRadius: "999px",
+              backgroundColor: theme.palette.carbon[900],
+              transform: "translateX(-50%)",
+            }}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              top: "10px",
+              width: "4px",
+              height: "18px",
+              borderRadius: "999px",
+              backgroundColor: theme.palette.carbon[900],
+              transform: "translateX(-50%)",
+            }}
+          />
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              top: "11px",
+              width: "14px",
+              height: "14px",
+              borderTop: `4px solid ${theme.palette.carbon[900]}`,
+              borderLeft: `4px solid ${theme.palette.carbon[900]}`,
+              transform: "translateX(-50%) rotate(45deg)",
+              transformOrigin: "center",
+            }}
+          />
+        </Box>
+      </IconButton>
     </Box>
   );
 }
