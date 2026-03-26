@@ -132,7 +132,7 @@ Everything you need is just to write a JSX tag, put the text into it. Then we wi
 
 Tooltip terms are globally available in MDX, so you do not need to import them in every file.
 
-Definitions are maintained in `docs/tooltip-terms.json`. Define each term with:
+Definitions are maintained in `docs/tooltip-terms.json` and consumed directly by the tooltip component. Define each term with:
 
 ```json
 [
