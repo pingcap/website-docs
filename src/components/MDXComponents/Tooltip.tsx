@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import MuiTooltip from "@mui/material/Tooltip";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { graphql, useStaticQuery } from "gatsby";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import tooltipTerms from "../../../docs/tooltip-terms.json";
 
 import { Locale } from "shared/interface";
 
@@ -14,39 +14,17 @@ interface TooltipTermDefinition {
   ja: string;
 }
 
-interface TooltipQueryData {
-  allTooltipTerm: {
-    nodes: {
-      termId: string;
-      definition: TooltipTermDefinition;
-    }[];
-  };
+interface TooltipTerm {
+  id: string;
+  definition: TooltipTermDefinition;
 }
 
-type TooltipTermNodes = TooltipQueryData["allTooltipTerm"]["nodes"];
-
-const definitionsByNodeList = new WeakMap<
-  TooltipTermNodes,
+const definitionsById = (tooltipTerms as TooltipTerm[]).reduce<
   Record<string, TooltipTermDefinition>
->();
-
-function getDefinitionsById(nodes: TooltipTermNodes) {
-  const cachedDefinitions = definitionsByNodeList.get(nodes);
-  if (cachedDefinitions) {
-    return cachedDefinitions;
-  }
-
-  const definitions = nodes.reduce<Record<string, TooltipTermDefinition>>(
-    (acc, node) => {
-      acc[node.termId] = node.definition;
-      return acc;
-    },
-    {}
-  );
-
-  definitionsByNodeList.set(nodes, definitions);
-  return definitions;
-}
+>((acc, term) => {
+  acc[term.id] = term.definition;
+  return acc;
+}, {});
 
 export const Tooltip = (props: {
   id: string;
@@ -58,25 +36,6 @@ export const Tooltip = (props: {
     noSsr: true,
   });
   const [isTouchTooltipOpen, setIsTouchTooltipOpen] = React.useState(false);
-  const data = useStaticQuery<TooltipQueryData>(graphql`
-    query TooltipTermDefinitions {
-      allTooltipTerm {
-        nodes {
-          termId
-          definition {
-            en
-            zh
-            ja
-          }
-        }
-      }
-    }
-  `);
-
-  const definitionsById = React.useMemo(
-    () => getDefinitionsById(data.allTooltipTerm.nodes),
-    [data.allTooltipTerm.nodes]
-  );
 
   const localizedDefinition =
     definitionsById[id]?.[language as Locale] ?? definitionsById[id]?.en;

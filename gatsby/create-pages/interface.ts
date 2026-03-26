@@ -7,12 +7,7 @@ export interface PageQueryData {
     nodes: {
       id: string;
       frontmatter: { aliases: string[] };
-      mdxAST: any;
       slug: string;
-      parent: {
-        fileAbsolutePath: string;
-        relativePath: string;
-      } | null;
     }[];
   };
 }
