@@ -155,8 +155,9 @@ Use the term in MDX like this:
 
 Rules:
 
+- `id` must exist in `docs/tooltip-terms.json`.
 - `en`, `zh`, and `ja` definitions are all required.
-- Tooltip ids and authoring format are validated in the `docs` repository CI.
+- Self-closing syntax such as `<Tooltip id="chat2query" />` is not supported.
 
 ### Tab Panels
 
