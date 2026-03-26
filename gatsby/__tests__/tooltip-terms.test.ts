@@ -1,7 +1,9 @@
+const fs = require("fs");
+
 const {
+  TOOLTIP_TERMS_PATH,
   parseTooltipTerms,
-  collectTooltipIdsFromAst,
-  validateTooltipReferences,
+  loadTooltipTerms,
 } = require("../tooltip-terms");
 
 describe("tooltip terms parsing", () => {
@@ -74,129 +76,37 @@ describe("tooltip terms parsing", () => {
   });
 });
 
-describe("tooltip reference collection", () => {
-  it("collects tooltip ids from jsx nodes", () => {
-    expect(
-      collectTooltipIdsFromAst({
-        children: [
-          {
-            type: "paragraph",
-            children: [
-              {
-                type: "jsx",
-                value: '<Tooltip id="data-branch">',
-              },
-              {
-                type: "text",
-                value: "Data Branch",
-              },
-              {
-                type: "jsx",
-                value: "</Tooltip>",
-              },
-            ],
-          },
-        ],
-      })
-    ).toEqual(["data-branch"]);
+describe("tooltip terms loading", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
-  it("rejects self-closing tooltip syntax", () => {
-    expect(() =>
-      collectTooltipIdsFromAst({
-        children: [
-          {
-            type: "jsx",
-            value: '<Tooltip id="data-branch" />',
-          },
-        ],
-      })
-    ).toThrow("does not support self-closing syntax");
-  });
-});
+  it("loads tooltip terms from the docs data file", () => {
+    jest.spyOn(fs, "readFileSync").mockReturnValue(`
+      [
+        {
+          "id": "data-branch",
+          "definition": {
+            "en": "English",
+            "zh": "Chinese",
+            "ja": "Japanese"
+          }
+        }
+      ]
+    `);
 
-describe("tooltip reference validation", () => {
-  it("passes when all tooltip ids exist", () => {
-    expect(() =>
-      validateTooltipReferences(
-        [
-          {
-            slug: "en/tidb/master/sample",
-            parent: {
-              relativePath: "docs/markdown-pages/en/tidb/master/sample.md",
-            },
-            mdxAST: {
-              children: [
-                {
-                  type: "jsx",
-                  value: '<Tooltip id="data-branch">',
-                },
-                {
-                  type: "jsx",
-                  value: "</Tooltip>",
-                },
-              ],
-            },
-          },
-        ],
-        new Set(["data-branch"])
-      )
-    ).not.toThrow();
-  });
+    const terms = loadTooltipTerms();
 
-  it("fails with file context when tooltip id is missing", () => {
-    expect(() =>
-      validateTooltipReferences(
-        [
-          {
-            slug: "en/tidb/master/sample",
-            parent: {
-              relativePath: "docs/markdown-pages/en/tidb/master/sample.md",
-            },
-            mdxAST: {
-              children: [
-                {
-                  type: "jsx",
-                  value: '<Tooltip id="missing-id">',
-                },
-                {
-                  type: "jsx",
-                  value: "</Tooltip>",
-                },
-              ],
-            },
-          },
-        ],
-        new Set(["data-branch"])
-      )
-    ).toThrow("docs/markdown-pages/en/tidb/master/sample.md references undefined tooltip ids: missing-id");
-  });
-
-  it("fails when tooltip id is omitted", () => {
-    expect(() =>
-      validateTooltipReferences(
-        [
-          {
-            slug: "en/tidb/master/sample",
-            parent: {
-              relativePath: "docs/markdown-pages/en/tidb/master/sample.md",
-            },
-            mdxAST: {
-              children: [
-                {
-                  type: "jsx",
-                  value: "<Tooltip>",
-                },
-                {
-                  type: "jsx",
-                  value: "</Tooltip>",
-                },
-              ],
-            },
-          },
-        ],
-        new Set(["data-branch"])
-      )
-    ).toThrow("Tooltip is missing a quoted id attribute");
+    expect(fs.readFileSync).toHaveBeenCalledWith(TOOLTIP_TERMS_PATH, "utf8");
+    expect(terms).toEqual([
+      {
+        id: "data-branch",
+        definition: {
+          en: "English",
+          zh: "Chinese",
+          ja: "Japanese",
+        },
+      },
+    ]);
   });
 });
