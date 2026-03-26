@@ -123,8 +123,8 @@ export default function ScrollToTopBtn() {
               top: "11px",
               width: "14px",
               height: "14px",
-              borderTop: `4px solid ${theme.palette.carbon[900]}`,
-              borderLeft: `4px solid ${theme.palette.carbon[900]}`,
+              borderTop: `3px solid ${theme.palette.carbon[900]}`,
+              borderLeft: `3px solid ${theme.palette.carbon[900]}`,
               transform: "translateX(-50%) rotate(45deg)",
               transformOrigin: "center",
             }}
