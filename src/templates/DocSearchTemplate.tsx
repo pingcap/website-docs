@@ -145,8 +145,8 @@ export default function DocSearchTemplate({
             }}
           >
             <FeedbackSurveyCampaign />
-            <ScrollToTopBtn />
           </Box>
+          <ScrollToTopBtn />
         </Container>
       </Layout>
     </>

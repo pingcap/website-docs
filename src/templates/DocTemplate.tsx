@@ -400,8 +400,8 @@ function DocTemplate({
                 }}
               >
                 <FeedbackSurveyCampaign />
-                <ScrollToTopBtn />
               </Box>
+              <ScrollToTopBtn />
             </Box>
           </Box>
         </Box>

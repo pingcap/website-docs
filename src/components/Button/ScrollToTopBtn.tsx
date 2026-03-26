@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
-import VerticalAlignTopIcon from "@mui/icons-material/VerticalAlignTop";
+import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
@@ -65,36 +64,56 @@ export default function ScrollToTopBtn() {
   return (
     <Box
       sx={{
+        position: "fixed",
+        right: {
+          xs: "0.75rem",
+          md: "1rem",
+        },
+        bottom: {
+          xs: "1.5rem",
+          md: "2.5rem",
+        },
+        zIndex: 10,
         display: show ? "block" : "none",
       }}
     >
-      <Fab
+      <IconButton
         id="scroll-to-top"
-        size="medium"
         aria-label={t("fab.scrollToTop")}
-        disableRipple
-        variant="extended"
         sx={{
-          color: theme.palette.carbon[50],
-          backgroundColor: theme.palette.carbon[900],
+          width: "52px",
+          height: "52px",
+          color: theme.palette.carbon[900],
+          backgroundColor: "rgba(255, 255, 255, 0.94)",
+          border: `1px solid ${theme.palette.carbon[400]}`,
           borderRadius: "999px",
-          minHeight: "44px",
-          paddingInline: "16px",
-          gap: "8px",
-          boxShadow: "0 10px 30px rgba(30, 36, 38, 0.16)",
-          border: `1px solid ${theme.palette.carbon[800]}`,
-          fontSize: "0.875rem",
-          fontWeight: 600,
+          boxShadow: "0 8px 24px rgba(30, 36, 38, 0.08)",
+          backdropFilter: "blur(8px)",
           "&:hover": {
-            backgroundColor: theme.palette.peacock[800],
-            borderColor: theme.palette.peacock[800],
+            backgroundColor: theme.palette.peacock[50],
+            borderColor: theme.palette.peacock[500],
+          },
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            width: "14px",
+            height: "14px",
+            borderLeft: `2px solid ${theme.palette.carbon[900]}`,
+            borderTop: `2px solid ${theme.palette.carbon[900]}`,
+            transform: "translateY(-3px) rotate(45deg)",
+          },
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            width: "2px",
+            height: "18px",
+            backgroundColor: theme.palette.carbon[900],
+            borderRadius: "999px",
+            transform: "translateY(4px)",
           },
         }}
         onClick={handleClick}
-      >
-        <VerticalAlignTopIcon fontSize="small" />
-        {t("fab.scrollToTop")}
-      </Fab>
+      />
     </Box>
   );
 }
