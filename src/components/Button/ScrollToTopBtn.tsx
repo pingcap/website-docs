@@ -90,6 +90,8 @@ export default function ScrollToTopBtn() {
             position: "relative",
             width: "30px",
             height: "30px",
+            transform: "scale(0.8)",
+            transformOrigin: "center",
           }}
         >
           <Box
