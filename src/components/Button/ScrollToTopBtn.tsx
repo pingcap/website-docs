@@ -9,7 +9,6 @@ export default function ScrollToTopBtn() {
   const theme = useTheme();
   const { t } = useI18next();
   const [show, setShow] = React.useState(false);
-  const previousScrollYRef = React.useRef(0);
   const showRef = React.useRef(false);
 
   React.useEffect(() => {
@@ -19,14 +18,11 @@ export default function ScrollToTopBtn() {
 
     let ticking = false;
     let rafId: number | null = null;
-    previousScrollYRef.current = window.scrollY || 0;
 
     const updateVisibility = () => {
       const currentScrollY = window.scrollY || 0;
-      const isScrollingUp = currentScrollY < previousScrollYRef.current;
-      const shouldShow = isScrollingUp && currentScrollY > 320;
+      const shouldShow = currentScrollY > 0;
 
-      previousScrollYRef.current = currentScrollY;
       if (shouldShow !== showRef.current) {
         showRef.current = shouldShow;
         setShow(shouldShow);
@@ -34,6 +30,8 @@ export default function ScrollToTopBtn() {
 
       ticking = false;
     };
+
+    updateVisibility();
 
     const onScroll = () => {
       if (ticking) {
@@ -86,9 +84,13 @@ export default function ScrollToTopBtn() {
         }}
         onClick={handleClick}
       >
-        <Box component="img" src={alignTopArrowIcon} alt="" sx={{ width: "24px", height: "24px" }} />
+        <Box
+          component="img"
+          src={alignTopArrowIcon}
+          alt=""
+          sx={{ width: "24px", height: "24px" }}
+        />
       </IconButton>
     </Box>
   );
 }
-
