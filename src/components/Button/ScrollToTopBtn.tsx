@@ -55,6 +55,7 @@ export default function ScrollToTopBtn() {
         "&:hover": {
           color: "website.m1",
           backgroundColor: "website.k1",
+          borderRadius: 0,
         },
       }}
       onClick={handleClick}
@@ -63,3 +64,4 @@ export default function ScrollToTopBtn() {
     </Fab>
   );
 }
+
