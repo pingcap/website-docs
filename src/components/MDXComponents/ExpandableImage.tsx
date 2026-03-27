@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  CloseLargeIcon,
-  ExpandCornersIcon,
-} from "components/MDXComponents/ExpandIcons";
+import { CloseLargeIcon } from "components/MDXComponents/ExpandIcons";
 
 export function ExpandableImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>
@@ -31,23 +28,17 @@ export function ExpandableImage(
 
   return (
     <div className="expandable-image">
-      <button
-        type="button"
-        className="expandable-icon-button"
-        aria-label="Expand image"
-        onClick={(event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          setOpen(true);
-        }}
-      >
-        <ExpandCornersIcon />
-      </button>
       <img
         {...props}
         className={`expandable-inline-image${
           props.className ? ` ${props.className}` : ""
         }`}
+        onClick={(event) => {
+          props.onClick?.(event);
+          if (!event.defaultPrevented) {
+            setOpen(true);
+          }
+        }}
       />
       {open && (
         <div
