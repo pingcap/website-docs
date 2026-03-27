@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import { useI18next } from "gatsby-plugin-react-i18next";
+import AlignTopArrowIcon from "../../../images/align-top-arrow-01.svg";
 
 export default function ScrollToTopBtn() {
   const theme = useTheme();
@@ -85,53 +86,7 @@ export default function ScrollToTopBtn() {
         }}
         onClick={handleClick}
       >
-        <Box
-          sx={{
-            position: "relative",
-            width: "30px",
-            height: "30px",
-            transform: "scale(0.8)",
-            transformOrigin: "center",
-          }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "2px",
-              left: "50%",
-              width: "22px",
-              height: "3px",
-              borderRadius: "999px",
-              backgroundColor: theme.palette.carbon[900],
-              transform: "translateX(-50%)",
-            }}
-          />
-          <Box
-            sx={{
-              position: "absolute",
-              left: "50%",
-              top: "10px",
-              width: "4px",
-              height: "18px",
-              borderRadius: "999px",
-              backgroundColor: theme.palette.carbon[900],
-              transform: "translateX(-50%)",
-            }}
-          />
-          <Box
-            sx={{
-              position: "absolute",
-              left: "50%",
-              top: "11px",
-              width: "14px",
-              height: "14px",
-              borderTop: `3px solid ${theme.palette.carbon[900]}`,
-              borderLeft: `3px solid ${theme.palette.carbon[900]}`,
-              transform: "translateX(-50%) rotate(45deg)",
-              transformOrigin: "center",
-            }}
-          />
-        </Box>
+        <AlignTopArrowIcon width="24px" height="24px" />
       </IconButton>
     </Box>
   );
