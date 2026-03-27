@@ -66,7 +66,7 @@
     }
 
     .expandable-inline-image {
-      cursor: zoom-in;
+      cursor: default;
       transition:
         opacity 0.2s ease,
         filter 0.2s ease;
@@ -304,4 +304,5 @@
     margin-top: 8px;
   }
 }
+
 
