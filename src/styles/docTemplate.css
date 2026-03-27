@@ -127,7 +127,7 @@
       position: relative;
     }
 
-    .expandable-modal-close-button {
+     .expandable-modal-close-button {
       position: absolute;
       top: 14px;
       right: 14px;
@@ -138,7 +138,7 @@
       height: 48px;
       padding: 0;
       border: 0;
-      border-radius: 14px;
+      border-radius: 0;
       background: transparent;
       color: var(--tiui-palette-carbon-900);
       cursor: pointer;
@@ -304,6 +304,7 @@
     margin-top: 8px;
   }
 }
+
 
 
 
