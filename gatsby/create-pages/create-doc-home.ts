@@ -37,11 +37,6 @@ export const createDocHome = async ({
           aliases
         }
         slug
-        parent {
-          ... on File {
-            relativePath
-          }
-        }
       }
     }
   }
@@ -61,11 +56,6 @@ export const createDocHome = async ({
           aliases
         }
         slug
-        parent {
-          ... on File {
-            relativePath
-          }
-        }
       }
     }
   }
@@ -87,7 +77,7 @@ export const createDocHome = async ({
   });
 
   nodes.forEach((node) => {
-    const { id, name, pathConfig, filePath, slug } = node;
+    const { id, name, pathConfig, filePath } = node;
     const path = generateDocHomeUrl(name, pathConfig);
     const namespace = TOCNamespace.Home;
     const namespaceSlug = TOCNamespaceSlugMap[namespace];

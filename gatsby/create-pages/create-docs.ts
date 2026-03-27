@@ -52,11 +52,6 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
             aliases
           }
           slug
-          parent {
-            ... on File {
-              relativePath
-            }
-          }
         }
       }
     }
