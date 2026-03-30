@@ -32,6 +32,7 @@ import { getSelectedNavItem } from "components/Layout/Header/getSelectedNavItem"
 import GitCommitInfoCard from "components/Card/GitCommitInfoCard";
 import { FeedbackSection } from "components/Card/FeedbackSection";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
+import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { DOC_HOME_URL } from "shared/resources";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { useReportReadingRate } from "shared/useReportReadingRate";
@@ -391,11 +392,15 @@ function DocTemplate({
                   position: "fixed",
                   bottom: "1rem",
                   right: "1rem",
-                  zIndex: 9,
+                  zIndex: 10,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  gap: "0.75rem",
                 }}
               >
+                <ScrollToTopBtn />
                 <FeedbackSurveyCampaign />
-                {/* <ScrollToTopBtn /> */}
               </Box>
             </Box>
           </Box>
