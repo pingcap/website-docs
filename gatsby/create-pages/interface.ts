@@ -8,10 +8,6 @@ export interface PageQueryData {
       id: string;
       frontmatter: { aliases: string[] };
       slug: string;
-      parent: {
-        fileAbsolutePath: string;
-        relativePath: string;
-      } | null;
     }[];
   };
 }

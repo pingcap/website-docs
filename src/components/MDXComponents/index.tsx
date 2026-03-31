@@ -26,6 +26,7 @@ export { MDSvgIcon } from "components/MDXComponents/MDSvgIcon";
 export { SimpleTab } from "components/MDXComponents/SimpleTab";
 export { SyntaxDiagram } from "components/MDXComponents/SyntaxDiagram";
 export { TabsPanel } from "components/MDXComponents/TabsPanel";
+export { Tooltip } from "components/MDXComponents/Tooltip";
 export {
   IntroHero,
   IntroHeroVideo,
@@ -35,3 +36,5 @@ export {
 } from "components/MDXComponents/developer";
 
 export { TargetLink as Link } from "./Link";
+export { ExpandableTable as table } from "./ExpandableTable";
+export { ExpandableImage as img } from "./ExpandableImage";

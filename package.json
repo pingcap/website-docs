@@ -106,8 +106,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "pnpm start",
-    "start": "gatsby develop",
-    "start:0.0.0.0": "gatsby develop --host 0.0.0.0",
+    "start": "mkdir -p .cache && gatsby develop",
+    "start:0.0.0.0": "mkdir -p .cache && gatsby develop --host 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
