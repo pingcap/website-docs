@@ -18,6 +18,7 @@ import Seo from "components/Seo";
 import { algoliaClient } from "shared/utils/algolia";
 import { Locale, TOCNamespace } from "shared/interface";
 import { FeedbackSurveyCampaign } from "components/Campaign/FeedbackSurvey";
+import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
 const SEARCH_INDEX_BY_LANGUAGE: Partial<Record<Locale, string>> = {
@@ -136,11 +137,15 @@ export default function DocSearchTemplate({
               position: "fixed",
               bottom: "1rem",
               right: "1rem",
-              zIndex: 9,
+              zIndex: 10,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: "0.75rem",
             }}
           >
+            <ScrollToTopBtn />
             <FeedbackSurveyCampaign />
-            {/* <ScrollToTopBtn /> */}
           </Box>
         </Container>
       </Layout>
