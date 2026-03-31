@@ -63,7 +63,7 @@ export default function ScrollToTopBtn() {
   return (
     <Box
       sx={{
-        display: show ? "flex" : "none",
+        display: show ? "block" : "none",
       }}
     >
       <IconButton
