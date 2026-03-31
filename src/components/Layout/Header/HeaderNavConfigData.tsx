@@ -94,6 +94,7 @@ const getDefaultNavConfig = (
           {
             type: "item",
             label: t("navbar.tidbCloudLake"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: "/tidbcloudlake",
             selected: (namespace) => namespace === TOCNamespace.TiDBCloudLake,
             onClick: () => {
