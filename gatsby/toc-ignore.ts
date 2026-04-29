@@ -10,8 +10,6 @@ function parseCommaSeparatedEnv(name: string): string[] {
 }
 
 const DEFAULT_IGNORED_TOC_RELATIVE_PATH_SUBSTRINGS = [
-  // TODO: Remove this filter once premium is public.
-  "TOC-tidb-cloud-premium.md",
   // Temporarily ignore this TOC during build.
   "TOC-pingkai.md",
 ];

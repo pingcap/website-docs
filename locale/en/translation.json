@@ -32,6 +32,7 @@
     "cloud": "TiDB Cloud",
     "tidbCloudStarter": "TiDB Cloud Starter",
     "tidbCloudEssential": "TiDB Cloud Essential",
+    "tidbCloudPremium": "TiDB Cloud Premium",
     "tidbCloudDedicated": "TiDB Cloud Dedicated",
     "tidbShortTerm": "TiDB",
     "tidbOnKubernetes": "TiDB on Kubernetes",
@@ -198,8 +199,8 @@
       "viewLatestLTSVersion": "View latest LTS version docs"
     },
     "campaign": {
-      "title1": "TiDB Cloud Essential",
-      "title2": " is now in public preview. ",
+      "title1": "TiDB Cloud Premium",
+      "title2": " is now in public preview. Unlimited growth, instant elasticity, advanced security for enterprise workloads. ",
       "end": "Try it out →",
       "link": "https://tidbcloud.com/"
     }
