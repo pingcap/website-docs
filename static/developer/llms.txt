@@ -4,7 +4,7 @@
 
 ## QUICK START
 
-- [Create a TiDB Cloud Starter Cluster](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud.md): Learn how to create a TiDB Cloud Starter cluster and connect to it.
+- [Create a TiDB Cloud Starter Instance](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud.md): Learn how to create a TiDB Cloud Starter instance and connect to it.
 - [TiDB Basics](https://docs.pingcap.com/developer/dev-guide-tidb-basics.md): Learn the basics of TiDB for developers, such as transaction mechanisms and how applications interact with TiDB.
 - [CRUD SQL in TiDB](https://docs.pingcap.com/developer/dev-guide-tidb-crud-sql.md): A brief introduction to TiDB's CRUD SQL.
 

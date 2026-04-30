@@ -75,7 +75,7 @@
     - [Alert Rules](https://docs.pingcap.com/tidb/stable/ticdc-alert-rules.md): Learn about TiCDC alert rules and how to handle the alerts.
   - Integration Scenarios
     - [Overview](https://docs.pingcap.com/tidb/stable/integration-overview.md): Learn the overview of data integration scenarios.
-    - [Integrate with Confluent and Snowflake](https://docs.pingcap.com/tidb/stable/integrate-confluent-using-ticdc.md): Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
+    - [Integrate with Confluent Cloud, Snowflake, ksqlDB, and SQL Server](https://docs.pingcap.com/tidb/stable/integrate-confluent-using-ticdc.md): Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
     - [Integrate with Apache Kafka and Apache Flink](https://docs.pingcap.com/tidb/stable/replicate-data-to-kafka.md): Learn how to replicate TiDB data to Apache Kafka and Apache Flink using TiCDC.
   - Reference
     - TiCDC Architecture
@@ -179,7 +179,7 @@
     - [Access](https://docs.pingcap.com/tidb/stable/dashboard-access.md): To access TiDB Dashboard, visit the specified URL in your browser. For multiple PD instances, replace the address with any PD instance address and port. Use Chrome, Firefox, or Edge browsers of newer versions. Sign in with the TiDB root account or a user-defined SQL user. The session remains valid for 24 hours. Switch between English and Chinese languages. To log out, click the user name and then the Logout button.
     - [Overview Page](https://docs.pingcap.com/tidb/stable/dashboard-overview.md): The TiDB overview page displays cluster QPS, latency, top SQL statements, recent slow queries, instance status, and monitor/alert links. Access it via TiDB Dashboard or left navigation menu. QPS and latency require Prometheus monitoring. Top SQL and slow queries need SQL Statements and slow query logs enabled. Instance status shows total and abnormal instances. Monitor and alert links lead to Grafana dashboard, AlertManager, and cluster diagnostics.
     - [Cluster Info Page](https://docs.pingcap.com/tidb/stable/dashboard-cluster-info.md): The TiDB Dashboard Cluster Information Page allows users to view the running status of TiDB, TiKV, PD, and TiFlash components in the entire cluster, as well as the running status of the host on which these components are located. Users can access the page by logging in to TiDB Dashboard and clicking on Cluster Info in the left navigation menu, or by visiting a specific URL in their browser. The page provides instance, host, and disk lists, showing detailed information about each component and its running status.
-    - [Top SQL Page](https://docs.pingcap.com/tidb/stable/top-sql.md): TiDB Dashboard Top SQL allows real-time monitoring and visualization of CPU overhead for SQL statements in your database. It helps optimize performance by identifying high CPU load statements and provides detailed execution information. It's suitable for analyzing performance issues and can be accessed through TiDB Dashboard or a browser. The feature has a slight impact on cluster performance and is now generally available for production use.
+    - [Top SQL Page](https://docs.pingcap.com/tidb/stable/top-sql.md): Use Top SQL to identify queries that consume the most CPU, network, and logical IO resources
     - [Key Visualizer Page](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer.md): TiDB Dashboard's Key Visualizer page analyzes and troubleshoots traffic hotspots in the TiDB cluster. It visually shows traffic changes over time, and allows users to zoom in on specific time periods or region ranges. The page also provides settings to adjust brightness, select metrics, and refresh the heatmap. It identifies common heatmap types and offers solutions to address hotspot issues.
     - [Metrics Relation Graph](https://docs.pingcap.com/tidb/stable/dashboard-metrics-relation.md): TiDB Dashboard introduces a feature called metrics relation graph, which helps users understand the duration of each internal process in a TiDB cluster. After logging in, users can access the graph and see the proportion of each monitoring metric's duration to the total query duration. Each box area represents a monitoring metric and provides information such as the total duration and proportion to the total query duration. The graph also illustrates the parent-child relations between nodes, helping users understand the relations of each monitoring metric.
     - SQL Statements Analysis
@@ -224,7 +224,7 @@
   - Diagnostic Methods
     - [SQL Diagnostics](https://docs.pingcap.com/tidb/stable/information-schema-sql-diagnostics.md): Understand SQL diagnostics in TiDB.
     - [Statement Summary Tables](https://docs.pingcap.com/tidb/stable/statement-summary-tables.md): Learn about Statement Summary Table in TiDB.
-    - [Identify Expensive Queries Using Top SQL](https://docs.pingcap.com/tidb/stable/top-sql.md): TiDB Dashboard Top SQL allows real-time monitoring and visualization of CPU overhead for SQL statements in your database. It helps optimize performance by identifying high CPU load statements and provides detailed execution information. It's suitable for analyzing performance issues and can be accessed through TiDB Dashboard or a browser. The feature has a slight impact on cluster performance and is now generally available for production use.
+    - [Identify Expensive Queries Using Top SQL](https://docs.pingcap.com/tidb/stable/top-sql.md): Use Top SQL to identify queries that consume the most CPU, network, and logical IO resources
     - [Identify Expensive Queries Using Logs](https://docs.pingcap.com/tidb/stable/identify-expensive-queries.md): TiDB helps identify expensive queries by printing information about statements that exceed the execution time or memory usage threshold. This allows for diagnosing and improving SQL performance. The expensive query log includes details such as execution time, memory usage, user, database, and TiKV Coprocessor task information. This log differs from the slow query log as it prints information as soon as the statement exceeds the resource threshold.
     - [Save and Restore the On-Site Information of a Cluster](https://docs.pingcap.com/tidb/stable/sql-plan-replayer.md): Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster.
     - [Understanding Stale Read and safe-ts in TiKV](https://docs.pingcap.com/tidb/stable/troubleshoot-stale-read.md): Introduce the principles of Stale Read and safe-ts in TiKV and provide troubleshooting tips and examples for diagnosing common issues related to Stale Read.
@@ -628,6 +628,7 @@
   - Privileges
     - [Security Compatibility with MySQL](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql.md): Learn TiDB's security compatibilities with MySQL.
     - [Privilege Management](https://docs.pingcap.com/tidb/stable/privilege-management.md): Learn how to manage the privilege.
+    - [Column-Level Privilege Management](https://docs.pingcap.com/tidb/stable/column-privilege-management.md): TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, achieving finer-grained access control.
     - [User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management.md): Learn how to manage a TiDB user account.
     - [TiDB Password Management](https://docs.pingcap.com/tidb/stable/password-management.md): Learn the mechanism of user password management in TiDB.
     - [Role-Based Access Control](https://docs.pingcap.com/tidb/stable/role-based-access-control.md): This document introduces TiDB RBAC operations and implementation.
@@ -637,6 +638,7 @@
       - Attributes
         - [AUTO_INCREMENT](https://docs.pingcap.com/tidb/stable/auto-increment.md): Learn the `AUTO_INCREMENT` column attribute of TiDB.
         - [AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random.md): Learn the AUTO_RANDOM attribute.
+        - [_tidb_rowid](https://docs.pingcap.com/tidb/stable/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
         - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
       - [Literal Values](https://docs.pingcap.com/tidb/stable/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
       - [Schema Object Names](https://docs.pingcap.com/tidb/stable/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
@@ -968,4 +970,4 @@
   - [High Availability FAQs](https://docs.pingcap.com/tidb/stable/high-availability-faq.md): Learn about the FAQs related to high availability of TiDB.
   - [High Reliability FAQs](https://docs.pingcap.com/tidb/stable/high-reliability-faq.md): Learn about the FAQs related to high reliability of TiDB.
   - [Backup and Restore FAQs](https://docs.pingcap.com/tidb/stable/backup-and-restore-faq.md): Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
-- [Glossary](https://docs.pingcap.com/tidb/stable/glossary.md): Glossaries about TiDB.
+- [Glossary](https://docs.pingcap.com/tidb/stable/glossary.md)

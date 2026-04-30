@@ -6,7 +6,7 @@
 
 TiDB is available in multiple deployment options:
 
-- **TiDB Cloud**: Fully managed database service with Dedicated, Essential, and Starter plan.
+- **TiDB Cloud**: Fully managed database service with Dedicated, Premium, Essential, and Starter plan.
 - **TiDB Self-Managed**: Deploy and operate TiDB on your own infrastructure.
 - **TiDB on Kubernetes**: Deploy and manage TiDB using TiDB Operator.
 
@@ -17,6 +17,10 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 #### TiDB Cloud Dedicated
 
 - [TiDB Cloud Dedicated Documentation](https://docs.pingcap.com/tidbcloud/llms.txt): Enterprise-grade managed TiDB with dedicated resources, advanced security, and compliance features.
+
+#### TiDB Cloud Premium
+
+- [TiDB Cloud Premium Documentation](https://docs.pingcap.com/tidbcloud/premium/llms.txt): Designed for mission-critical businesses that demand unlimited real-time scalability, delivering workload-aware auto-scaling and comprehensive enterprise capabilities.
 
 #### TiDB Cloud Essential
 
