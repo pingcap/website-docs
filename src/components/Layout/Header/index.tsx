@@ -460,7 +460,7 @@ const HeaderBanner = (props: HeaderProps) => {
         logo={"📣"}
         textList={[
           <BlueAnchorLink
-            to="https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=premium#premium"
+            to="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
             target="_blank"
           >
             {t("banner.autoTrans.title1")}
@@ -479,7 +479,7 @@ const HeaderBanner = (props: HeaderProps) => {
       logo={"📣"}
       textList={[
         <BlueAnchorLink
-          to="https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=premium#premium"
+          to="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
           target="_blank"
         >
           {t("banner.campaign.title1")}
