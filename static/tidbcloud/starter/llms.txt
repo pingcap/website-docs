@@ -9,10 +9,10 @@
   - [Features](https://docs.pingcap.com/tidbcloud/features.md): Learn about feature support status for different TiDB Cloud plans.
   - [MySQL Compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility.md): Learn about the compatibility of TiDB with MySQL, and the unsupported and different features.
 - Get Started
-  - [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart.md): Sign up quickly to try TiDB Cloud and create your TiDB cluster.
-  - [Try Out TiDB + AI Tools](https://docs.pingcap.com/tidbcloud/use-tidb-cloud-with-ai-tools.md): Learn how to connect your TiDB Cloud Starter cluster to AI-powered development tools that support the Model Context Protocol (MCP), such as Cursor, Claude Code, VS Code, and Windsurf.
+  - [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart.md): Sign up quickly to try TiDB Cloud and create a TiDB Cloud Starter instance.
+  - [Try Out TiDB + AI Tools](https://docs.pingcap.com/tidbcloud/use-tidb-cloud-with-ai-tools.md): Learn how to connect your TiDB Cloud Starter instance to AI-powered development tools that support the Model Context Protocol (MCP), such as Cursor, Claude Code, VS Code, and Windsurf.
   - [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart.md): Learn how to get started with HTAP in TiDB Cloud.
-  - [Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
+  - [Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud Starter and Essential instances through the TiDB Cloud CLI.
 - Key Concepts
   - [Overview](https://docs.pingcap.com/tidbcloud/key-concepts.md): Learn about the key concepts in TiDB Cloud.
   - [Architecture](https://docs.pingcap.com/tidbcloud/architecture-concepts.md): Learn about architecture concepts for TiDB Cloud.
@@ -29,23 +29,23 @@
 
 ## GUIDES
 
-- Manage Cluster
-  - [Select Your Cluster Plan](https://docs.pingcap.com/tidbcloud/select-cluster-tier.md): Learn how to select your cluster plan on TiDB Cloud.
-  - Manage TiDB Cloud Clusters
-    - [Create a TiDB Cloud Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless.md): Learn how to create a TiDB Cloud Starter or TiDB Cloud Essential cluster.
-    - Connect to Your TiDB Cloud Cluster
-      - [Network Connection Overview](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential cluster via different methods.
-      - [Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential cluster via public endpoint.
-      - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud cluster via private endpoint.
-      - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
-    - Branch ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-      - [Overview](https://docs.pingcap.com/tidbcloud/branch-overview.md): Learn the concept of TiDB Cloud branches.
-      - [Manage Branches](https://docs.pingcap.com/tidbcloud/branch-manage.md): Learn How to manage TiDB Cloud branches.
-      - [GitHub Integration](https://docs.pingcap.com/tidbcloud/branch-github-integration.md): Learn how to integrate the TiDB Cloud Branching feature with GitHub.
-    - [Manage Spending Limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit.md): Learn how to manage spending limit for your TiDB Cloud Starter clusters.
-    - [Back Up and Restore TiDB Cloud Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless.md): Learn how to back up and restore your TiDB Cloud Starter or TiDB Cloud Essential clusters.
-    - [Export Data from TiDB Cloud](https://docs.pingcap.com/tidbcloud/serverless-export.md): Learn how to export data from TiDB Cloud Starter or TiDB Cloud Essential clusters.
-  - Use an HTAP Cluster with TiFlash
+- [Select Your Plan](https://docs.pingcap.com/tidbcloud/select-cluster-tier.md): Learn how to select a plan on TiDB Cloud.
+- [Manage TiDB Cloud Resources and Projects](https://docs.pingcap.com/tidbcloud/manage-projects-and-resources.md): Learn how to manage your TiDB Cloud resources and projects on the My TiDB page.
+- Manage TiDB Cloud Starter Instances
+  - [Create a TiDB Cloud Starter Instance](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless.md): Learn how to create a TiDB Cloud Starter or TiDB Cloud Essential instance.
+  - Connect to Your TiDB Cloud Starter Instance
+    - [Network Connection Overview](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential instance via different methods.
+    - [Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential instance via public endpoint.
+    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud Starter or Essential instance via private endpoint.
+    - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud Starter or Essential instance via Alibaba Cloud private endpoint.
+  - Branch ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [Overview](https://docs.pingcap.com/tidbcloud/branch-overview.md): Learn the concept of TiDB Cloud branches.
+    - [Manage Branches](https://docs.pingcap.com/tidbcloud/branch-manage.md): Learn How to manage TiDB Cloud branches.
+    - [GitHub Integration](https://docs.pingcap.com/tidbcloud/branch-github-integration.md): Learn how to integrate the TiDB Cloud Branching feature with GitHub.
+  - [Manage Spending Limit](https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit.md): Learn how to manage spending limit for your TiDB Cloud Starter instances.
+  - [Back Up and Restore TiDB Cloud Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless.md): Learn how to back up and restore your TiDB Cloud Starter or TiDB Cloud Essential instances.
+  - [Export Data from TiDB Cloud](https://docs.pingcap.com/tidbcloud/serverless-export.md): Learn how to export data from TiDB Cloud Starter or TiDB Cloud Essential instances.
+  - Use TiFlash for HTAP
     - [TiFlash Overview](https://docs.pingcap.com/tidbcloud/tiflash-overview.md): Learn the architecture and key features of TiFlash.
     - [Create TiFlash Replicas](https://docs.pingcap.com/tidbcloud/create-tiflash-replicas.md): Learn how to create TiFlash replicas.
     - [Read Data from TiFlash](https://docs.pingcap.com/tidbcloud/use-tidb-to-read-tiflash.md): Learn how to use TiDB to read TiFlash replicas.
@@ -57,9 +57,9 @@
     - [Compatibility](https://docs.pingcap.com/tidbcloud/tiflash-compatibility.md): Learn the TiDB features that are incompatible with TiFlash.
     - [Pipeline Execution Model](https://docs.pingcap.com/tidbcloud/tiflash-pipeline-model.md): Learn about the TiFlash Pipeline Execution Model.
   - Monitor and Alert
-    - [Overview](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster.md): Learn how to monitor your TiDB cluster.
+    - [Overview](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster.md): Learn how to monitor your TiDB Cloud resource.
     - [Built-in Metrics](https://docs.pingcap.com/tidbcloud/built-in-monitoring.md): Learn how to view TiDB Cloud built-in metrics and understand the meanings of these metrics.
-    - [Cluster Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud clusters using the Events page.
+    - [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud resources using the Events page.
   - Tune Performance
     - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
     - [Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance.md): Learn how to analyze and tune performance in TiDB Cloud.
@@ -112,8 +112,8 @@
       - [Overview](https://docs.pingcap.com/tidbcloud/garbage-collection-overview.md): Learn about Garbage Collection in TiDB.
       - [Configuration](https://docs.pingcap.com/tidbcloud/garbage-collection-configuration.md): Learn about GC configuration parameters.
     - [Tune TiFlash Performance](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance.md): Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.
-  - [Upgrade a TiDB Cluster](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster.md): Learn how to upgrade a TiDB cluster.
-  - [Delete a TiDB Cluster](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster.md): Learn how to delete a TiDB cluster.
+  - [Upgrade the TiDB Version](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster.md): Learn how to upgrade the TiDB version of your TiDB cluster or instance.
+  - [Delete a TiDB Cloud Starter Instance](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster.md): Learn how to delete a TiDB Cloud Resource.
 - Migrate or Import Data
   - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview.md): Learn an overview of data migration and import scenarios for TiDB Cloud.
   - Migrate Data into TiDB Cloud
@@ -132,7 +132,7 @@
     - [Naming Conventions for Data Import](https://docs.pingcap.com/tidbcloud/naming-conventions-for-data-import.md): Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
     - [CSV Configurations for Importing Data](https://docs.pingcap.com/tidbcloud/csv-config-for-import-data.md): Learn how to use CSV configurations for the Import Data service on TiDB Cloud.
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](https://docs.pingcap.com/tidbcloud/troubleshoot-import-access-denied-error.md): Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
-    - [Connect AWS DMS to TiDB Cloud clusters](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
+    - [Connect AWS DMS to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 - Explore Data
   - [Chat2Query in SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md): Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to maximize your data value. ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](https://docs.pingcap.com/tidbcloud/sql-proxy-account.md): Learn about the SQL proxy account in TiDB Cloud.
@@ -162,9 +162,9 @@
     - [Identity Access Management](https://docs.pingcap.com/tidbcloud/manage-user-access.md): Learn how to manage identity access in TiDB Cloud.
     - [OAuth 2.0](https://docs.pingcap.com/tidbcloud/oauth2.md): Learn about how to use OAuth 2.0 in TiDB Cloud.
   - Network Access Control
-    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud cluster via private endpoint.
-    - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud cluster via Alibaba Cloud private endpoint.
-    - [Configure Firewall Rules for Public Endpoints](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints.md): Learn how to configure and manage firewall rules with public access to your TiDB Cloud Starter or TiDB Cloud Essential cluster securely.
+    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud Starter or Essential instance via private endpoint.
+    - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud Starter or Essential instance via Alibaba Cloud private endpoint.
+    - [Configure Firewall Rules for Public Endpoints](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints.md): Learn how to configure and manage firewall rules with public access to your TiDB Cloud Starter or TiDB Cloud Essential instance securely.
     - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters.md): Introduce TLS connections in TiDB Cloud Starter and TiDB Cloud Essential.
   - Audit Management
     - [Console Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing.md): Learn about the audit logging feature for the TiDB Cloud console.
@@ -190,9 +190,9 @@
   - Terraform
     - [Terraform Integration Overview](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview.md): Create, manage, and update your TiDB Cloud resources through Terraform.
     - [Get TiDB Cloud Terraform Provider](https://docs.pingcap.com/tidbcloud/terraform-get-tidbcloud-provider.md): Learn how to get TiDB Cloud Terraform Provider.
-    - [Use the `tidbcloud_serverless_cluster` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-cluster-resource.md): Learn how to use the `tidbcloud_serverless_cluster` resource to create and modify a TiDB Cloud Starter cluster.
+    - [Use the `tidbcloud_serverless_cluster` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-cluster-resource.md): Learn how to use the `tidbcloud_serverless_cluster` resource to create and modify a TiDB Cloud Starter instance.
     - [Use the `tidbcloud_serverless_branch` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-branch-resource.md): Learn how to use the serverless branch resource to create and modify a TiDB Cloud Starter or TiDB Cloud Essential branch.
-    - [Use the `tidbcloud_serverless_export` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-export-resource.md): Learn how to use the `tidbcloud_serverless_export` resource to create and modify data export tasks for TiDB Cloud Starter or TiDB Cloud Essential clusters.
+    - [Use the `tidbcloud_serverless_export` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-export-resource.md): Learn how to use the `tidbcloud_serverless_export` resource to create and modify data export tasks for TiDB Cloud Starter or TiDB Cloud Essential instances.
     - [Use the `tidbcloud_sql_user` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-sql-user-resource.md): Learn how to use the `tidbcloud_sql_user` resource to create and modify a TiDB Cloud SQL user.
     - [Use the `tidbcloud_import` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-import-resource.md): Learn how to manage the import task using the `tidbcloud_import` resource.
     - [Migrate Cluster Resource](https://docs.pingcap.com/tidbcloud/terraform-migrate-cluster-resource.md): Learn how to migrate a cluster resource to a serverless or dedicated cluster resource.
@@ -207,6 +207,7 @@
     - Attributes
       - [AUTO_INCREMENT](https://docs.pingcap.com/tidbcloud/auto-increment.md): Learn the `AUTO_INCREMENT` column attribute of TiDB.
       - [AUTO_RANDOM](https://docs.pingcap.com/tidbcloud/auto-random.md): Learn the AUTO_RANDOM attribute.
+      - [_tidb_rowid](https://docs.pingcap.com/tidbcloud/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
       - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidbcloud/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
     - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
     - [Schema Object Names](https://docs.pingcap.com/tidbcloud/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
@@ -466,7 +467,6 @@
     - [logout](https://docs.pingcap.com/tidbcloud/ticloud-auth-logout.md): The reference of `ticloud auth logout`.
     - [whoami](https://docs.pingcap.com/tidbcloud/ticloud-auth-whoami.md): The reference of `ticloud auth whoami`.
   - serverless
-    - [capacity](https://docs.pingcap.com/tidbcloud/ticloud-serverless-capacity.md): The reference of `ticloud serverless capacity`.
     - [create](https://docs.pingcap.com/tidbcloud/ticloud-cluster-create.md): The reference of `ticloud serverless create`.
     - [delete](https://docs.pingcap.com/tidbcloud/ticloud-cluster-delete.md): The reference of `ticloud serverless delete`.
     - [describe](https://docs.pingcap.com/tidbcloud/ticloud-cluster-describe.md): The reference of `ticloud serverless describe`.
@@ -543,6 +543,7 @@
   - [URI Formats of External Storage Services](https://docs.pingcap.com/tidbcloud/external-storage-uri.md): Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
   - [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidbcloud/troubleshoot-data-inconsistency-errors.md): Learn how to deal with errors reported by the consistency check between data and indexes.
   - [Notifications](https://docs.pingcap.com/tidbcloud/notifications.md): Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
+  - [Project API Migration Guide for TiDB Cloud Starter and Essential](https://docs.pingcap.com/tidbcloud/tidbx-starter-essential-project-api-migration-guide.md): Learn the minimum changes needed to keep your existing v1beta API calls working after TiDB Cloud introduces separate project types for TiDB X instances.
 - Support Plan
   - [Connected Care Overview](https://docs.pingcap.com/tidbcloud/connected-care-overview.md): Introduces the new generation of TiDB Cloud support services - Connected Care.
   - [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail.md): Introduces detailed information about the Connected Care support services for TiDB Cloud.
@@ -558,4 +559,5 @@
 - FAQs
   - [TiDB Cloud FAQs](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq.md): Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud.
   - [TiDB Cloud Starter FAQs](https://docs.pingcap.com/tidbcloud/serverless-faqs.md): Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud Starter.
+  - [Project Migration FAQ for TiDB X Instances](https://docs.pingcap.com/tidbcloud/tidbx-instance-move-faq.md): Learn why TiDB Cloud prompts you to move or convert your TiDB Cloud Starter and Essential resources, what changes during project migration, and what follow-up actions might be required.
 - [Glossary](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary.md): Learn the terms used in TiDB Cloud.
