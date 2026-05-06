@@ -123,6 +123,28 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         ignoreIf: ["_index", "_docHome"],
       },
     },
+    // tidb-data-migration index pages with folders (avoid URL collision)
+    {
+      sourcePattern:
+        "/{lang}/tidb-data-migration/{branch}/{...folders}/{filename}",
+      targetPattern:
+        "/{lang}/tidb-data-migration/{branch:branch-alias-tidb-data-migration}/{folders}",
+      conditions: { filename: ["_index"] },
+      filenameTransform: {
+        ignoreIf: ["_index"],
+      },
+    },
+    // tidb-data-migration with branch and optional folders
+    // /en/tidb-data-migration/release-5.3/{...folders}/{filename} -> /en/tidb-data-migration/v5.3/{filename}
+    {
+      sourcePattern:
+        "/{lang}/tidb-data-migration/{branch}/{...folders}/{filename}",
+      targetPattern:
+        "/{lang}/tidb-data-migration/{branch:branch-alias-tidb-data-migration}/{filename}",
+      filenameTransform: {
+        ignoreIf: ["_index", "_docHome"],
+      },
+    },
     // Fallback: /{lang}/{repo}/{...any}/{filename} -> /{lang}/{repo}/{filename}
     {
       sourcePattern: "/{lang}/{repo}/{...any}/{filename}",
@@ -160,6 +182,16 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         // Examples:
         //   release-1.6 -> v1.6
         //   release-1.5 -> v1.5
+        //   release-2.0 -> v2.0
+        "release-*": "v*",
+      },
+    },
+    // Branch alias for tidb-data-migration: used in {branch:branch-alias-tidb-data-migration}
+    "branch-alias-tidb-data-migration": {
+      mappings: {
+        // Wildcard pattern: release-* -> v*
+        // Examples:
+        //   release-5.3 -> v5.3
         //   release-2.0 -> v2.0
         "release-*": "v*",
       },

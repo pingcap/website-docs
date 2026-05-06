@@ -214,6 +214,42 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/tidb/dev/page/");
   });
 
+  it("should resolve tidb-data-migration _index with release branch alias", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "zh/tidb-data-migration/release-2.0/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/zh/tidb-data-migration/v2.0");
+  });
+
+  it("should resolve tidb-data-migration pages with release branch alias", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "zh/tidb-data-migration/release-2.0/overview.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/zh/tidb-data-migration/v2.0/overview/");
+  });
+
+  it("should resolve tidb-data-migration v1.0 pages with release branch alias", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "zh/tidb-data-migration/release-1.0/overview.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/zh/tidb-data-migration/v1.0/overview/");
+  });
+
+  it("should resolve tidb-data-migration nested _index with folders", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "zh/tidb-data-migration/release-2.0/releases/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/zh/tidb-data-migration/v2.0/releases");
+  });
+
   it("should resolve api folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
@@ -468,6 +504,61 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
     );
     // release-8.5 -> stable via branch-alias-tidb (exact match takes precedence)
     expect(url).toBe("/tidb/stable/alert-rules");
+  });
+
+  it("should omit /en/ prefix for English tidb-data-migration files", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-data-migration/release-5.3/dm-overview.md"
+    );
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
+    expect(url).toBe("/tidb-data-migration/v5.3/dm-overview");
+  });
+
+  it("should omit /en/ prefix for English tidb-data-migration release indexes", () => {
+    const cases = [
+      ["release-5.3", "/tidb-data-migration/v5.3"],
+      ["release-2.0", "/tidb-data-migration/v2.0"],
+      ["release-1.0", "/tidb-data-migration/v1.0"],
+    ];
+
+    for (const [branch, expected] of cases) {
+      const absolutePath = path.join(
+        sourceBasePath,
+        `en/tidb-data-migration/${branch}/_index.md`
+      );
+      const url = calculateFileUrlWithConfig(
+        absolutePath,
+        configWithDefaultLang,
+        true
+      );
+      expect(url).toBe(expected);
+    }
+  });
+
+  it("should keep /zh/ prefix for Chinese tidb-data-migration release indexes", () => {
+    const cases = [
+      ["release-5.3", "/zh/tidb-data-migration/v5.3"],
+      ["release-2.0", "/zh/tidb-data-migration/v2.0"],
+      ["release-1.0", "/zh/tidb-data-migration/v1.0"],
+    ];
+
+    for (const [branch, expected] of cases) {
+      const absolutePath = path.join(
+        sourceBasePath,
+        `zh/tidb-data-migration/${branch}/_index.md`
+      );
+      const url = calculateFileUrlWithConfig(
+        absolutePath,
+        configWithDefaultLang,
+        true
+      );
+      expect(url).toBe(expected);
+    }
   });
 });
 
