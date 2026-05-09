@@ -195,8 +195,8 @@
   },
   "banner": {
     "archive": {
-      "title": "You are viewing the archived documentation of TiDB, which no longer receives updates.",
-      "viewLatestLTSVersion": "View latest LTS version docs"
+      "title": "You are viewing the archived documentation of TiDB, which no longer receives updates. ",
+      "viewLatestLTSVersion": "View the latest LTS version docs"
     },
     "campaign": {
       "title1": "TiDB Cloud Premium",
