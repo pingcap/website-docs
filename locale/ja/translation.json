@@ -199,5 +199,13 @@
       "content": "TiDBドキュメント向上のためご協力をお願いします。",
       "action": "アンケートへ"
     }
+  },
+  "resourceCard": {
+    "learnMore": "詳しくはこちら ↗",
+    "type": {
+      "blog": "ブログ",
+      "lab": "ラボ",
+      "video": "動画"
+    }
   }
 }

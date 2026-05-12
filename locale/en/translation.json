@@ -211,5 +211,13 @@
       "content": "Your insights are invaluable in shaping the future of TiDB docs.",
       "action": "Take the survey"
     }
+  },
+  "resourceCard": {
+    "learnMore": "Learn More ↗",
+    "type": {
+      "blog": "Blog",
+      "lab": "Lab",
+      "video": "Video"
+    }
   }
 }
