@@ -215,8 +215,8 @@ export function ResourceCard({
             src={imgSrc}
             alt=""
             loading="lazy"
-            style={{ margin: 0 }}
             sx={{
+              margin: 0,
               flexShrink: 0,
               display: "block",
               width: {
