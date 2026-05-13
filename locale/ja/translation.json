@@ -32,6 +32,7 @@
     "cloud": "TiDB Cloud",
     "tidbCloudStarter": "TiDB Cloud Starter",
     "tidbCloudEssential": "TiDB Cloud Essential",
+    "tidbCloudPremium": "TiDB Cloud Premium",
     "tidbCloudDedicated": "TiDB Cloud Dedicated",
     "tidbShortTerm": "TiDB",
     "tidbOnKubernetes": "TiDB on Kubernetes",
@@ -181,14 +182,14 @@
       "viewLatestLTSVersion": "最新の LTS バージョンのドキュメントを表示する"
     },
     "campaign": {
-      "title1": "TiDB Cloud Essential",
-      "title2": " はパブリックプレビュー中です。",
-      "end": "ぜひお試しください →",
+      "title1": "TiDB Cloud Premium",
+      "title2": " はパブリックプレビュー中です。エンタープライズワークロード向けの無制限のスケーリング、即時の弾力性、高度なセキュリティを提供します。",
+      "end": "今すぐお試しください →",
       "link": "https://tidbcloud.com/"
     },
     "autoTrans": {
-      "title1": "TiDB Cloud Essential",
-      "title2": " はパブリックプレビュー中です。このページは自動翻訳されたものです。",
+      "title1": "TiDB Cloud Premium",
+      "title2": " はパブリックプレビュー中です。エンタープライズワークロード向けの無制限のスケーリング、即時の弾力性、高度なセキュリティを提供します。このページは自動翻訳されたものです。",
       "end": "原文はこちらからご覧ください。"
     }
   },

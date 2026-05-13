@@ -100,7 +100,7 @@ export const useCloudPlan = () => {
   const isClassic =
     !isTidbcloud ||
     !resolvedCloudPlan ||
-    (!isStarter && !isEssential);
+    (!isStarter && !isEssential && !isPremium);
 
   return {
     cloudPlan: resolvedCloudPlan,

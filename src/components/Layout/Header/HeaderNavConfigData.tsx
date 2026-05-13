@@ -75,19 +75,20 @@ const getDefaultNavConfig = (
               }
             },
           },
-          // {
-          //   type: "item",
-          //   label: "TiDB Cloud Premium",
-          //   to: `/tidbcloud/premium?${CLOUD_MODE_KEY}=premium`,
-          //   selected: (namespace) =>
-          //     namespace === TOCNamespace.TiDBCloud &&
-          //     cloudPlan === CloudPlan.Premium,
-          //   onClick: () => {
-          //     if (typeof window !== "undefined") {
-          //       sessionStorage.setItem(CLOUD_MODE_KEY, "premium");
-          //     }
-          //   },
-          // },
+          {
+            type: "item",
+            label: t("navbar.tidbCloudPremium"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
+            to: `/tidbcloud/premium?${CLOUD_MODE_KEY}=${CloudPlan.Premium}`,
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
+              cloudPlan === CloudPlan.Premium,
+            onClick: () => {
+              if (typeof window !== "undefined") {
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Premium);
+              }
+            },
+          },
           {
             type: "item",
             label: t("navbar.tidbCloudDedicated"),
