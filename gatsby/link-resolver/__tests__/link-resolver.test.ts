@@ -536,6 +536,48 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidb-in-kubernetes/stable/deploy");
     });
 
+    it("should resolve links from tidb-data-migration pages", () => {
+      const result = resolveMarkdownLink(
+        "/dm-overview",
+        "/zh/tidb-data-migration/v5.3/quick-start-with-dm"
+      );
+      expect(result).toBe("/zh/tidb-data-migration/v5.3/dm-overview");
+    });
+
+    it("should resolve links from tidb-data-migration pages without language prefix", () => {
+      const result = resolveMarkdownLink(
+        "/quick-start-with-dm",
+        "/tidb-data-migration/v5.3/dm-overview"
+      );
+      expect(result).toBe("/tidb-data-migration/v5.3/quick-start-with-dm");
+    });
+
+    it("should resolve nested links from tidb-data-migration pages using flattened doc URLs", () => {
+      const result = resolveMarkdownLink(
+        "/releases/2.0.7",
+        "/zh/tidb-data-migration/v2.0/TOC"
+      );
+      expect(result).toBe("/zh/tidb-data-migration/v2.0/2.0.7");
+    });
+
+    it("should preserve hash for tidb-data-migration links", () => {
+      const result = resolveMarkdownLink(
+        "/key-features#table-routing",
+        "/zh/tidb-data-migration/v2.0/overview"
+      );
+      expect(result).toBe(
+        "/zh/tidb-data-migration/v2.0/key-features#table-routing"
+      );
+    });
+
+    it("should resolve _index links from tidb-data-migration pages", () => {
+      const result = resolveMarkdownLink(
+        "/reference/_index",
+        "/en/tidb-data-migration/v5.3/TOC"
+      );
+      expect(result).toBe("/tidb-data-migration/v5.3/reference");
+    });
+
     it("should not match non-tidb repo pages (pathConditions check)", () => {
       const result = resolveMarkdownLink(
         "/upgrade/upgrade-tidb-using-tiup",
