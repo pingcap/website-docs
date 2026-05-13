@@ -215,5 +215,13 @@
       "content": "我们一起让 TiDB 文档变得更好！",
       "action": "立即参与"
     }
+  },
+  "resourceCard": {
+    "learnMore": "了解更多 ↗",
+    "type": {
+      "blog": "博客",
+      "lab": "实验",
+      "video": "视频"
+    }
   }
 }
