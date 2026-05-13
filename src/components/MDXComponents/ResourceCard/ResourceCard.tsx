@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
-import { TargetLink } from "components/MDXComponents/Link";
 import CalendarIcon from "media/icons/calendar.svg";
 import ClockIcon from "media/icons/clock.svg";
 import UserIcon from "media/icons/user.svg";
@@ -16,8 +15,6 @@ const BADGE_COLORS = {
   lab: { bg: "#E8E7F9", text: "#4A40BF" },
   video: { bg: "#FBE7E7", text: "#BF404B" },
 } as const;
-
-const isExternal = (url: string) => url.startsWith("http");
 
 const parseDateOnly = (date: string) => {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
@@ -101,7 +98,7 @@ interface ResourceCardProps {
   title: string;
   /** Resource type — controls badge label and color */
   type: "blog" | "video" | "lab";
-  /** Destination URL; external links (http…) open in a new tab */
+  /** Destination URL; always opens in a new tab (resource cards point to external blogs, videos, and labs) */
   link: string;
   /**
    * Thumbnail image CDN URL, e.g.
@@ -142,16 +139,6 @@ export function ResourceCard({
       }).format(parsedDate)
     : undefined;
 
-  const external = isExternal(link);
-  const linkProps = external
-    ? ({
-        component: "a" as const,
-        href: link,
-        target: "_blank",
-        rel: "noopener noreferrer",
-      } as const)
-    : ({ component: TargetLink, to: link } as const);
-
   return (
     <Card
       variant="outlined"
@@ -176,7 +163,10 @@ export function ResourceCard({
       })}
     >
       <CardActionArea
-        {...linkProps}
+        component="a"
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
         disableRipple
         disableTouchRipple
         draggable="false"
