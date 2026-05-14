@@ -15,6 +15,7 @@ import {
   BuildType,
   TOCNamespace,
   CloudPlan,
+  Repo,
 } from "shared/interface";
 import { NavItemConfig } from "../Header/HeaderNavConfigType";
 import LinkComponent from "components/Link";
@@ -39,6 +40,20 @@ interface LeftNavProps {
   selectedNavItem?: NavItemConfig | null;
   language?: string;
   namespace?: TOCNamespace;
+}
+
+function shouldShowVersionSelect(
+  namespace: TOCNamespace | undefined,
+  repo: Repo,
+  buildType: BuildType | undefined
+) {
+  // DM has no active docs namespace on the main site; only its archived pages
+  // need the version selector.
+  return (
+    namespace === TOCNamespace.TiDB ||
+    namespace === TOCNamespace.TiDBInKubernetes ||
+    (buildType === "archive" && repo === Repo.dm)
+  );
 }
 
 export function LeftNavDesktop(props: LeftNavProps) {
@@ -127,8 +142,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
             </Box>
           )}
 
-          {(namespace === TOCNamespace.TiDB ||
-            namespace === TOCNamespace.TiDBInKubernetes) && (
+          {shouldShowVersionSelect(namespace, pathConfig.repo, buildType) && (
             <Box marginTop={1}>
               <VersionSelect
                 name={name}
@@ -197,8 +211,7 @@ export function LeftNavMobile(props: LeftNavProps) {
                 paddingLeft: "1.25rem",
               }}
             />
-            {(namespace === TOCNamespace.TiDB ||
-              namespace === TOCNamespace.TiDBInKubernetes) && (
+            {shouldShowVersionSelect(namespace, pathConfig.repo, buildType) && (
               <NativeVersionSelect
                 name={name}
                 pathConfig={pathConfig}
