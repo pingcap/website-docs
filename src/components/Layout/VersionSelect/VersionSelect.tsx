@@ -38,6 +38,22 @@ function renderVersion(
   );
 }
 
+function getArchivedVersions(pathConfig: PathConfig): (string | null)[] {
+  const repoCfg = CONFIG.docs[pathConfig.repo] as {
+    archived?: string[];
+  };
+  return repoCfg.archived || [];
+}
+
+function getVersionOptions(
+  pathConfig: PathConfig,
+  isArchive: boolean
+): (string | null)[] {
+  return isArchive
+    ? getArchivedVersions(pathConfig)
+    : AllVersion[pathConfig.repo][pathConfig.locale];
+}
+
 const VersionItems = (props: {
   versions: (string | null)[];
   availIn: string[];
@@ -200,11 +216,6 @@ const VersionItemsArchived = (props: {
 }) => {
   const { versions, availIn, pathConfig, name } = props;
 
-  const repoCfg = CONFIG.docs[pathConfig.repo] as {
-    [key: string]: any;
-  };
-  const archiveList = (repoCfg?.archived as string[]) || [];
-
   return (
     <>
       <FormLabel
@@ -217,7 +228,7 @@ const VersionItemsArchived = (props: {
       >
         Archive
       </FormLabel>
-      {archiveList.map((version) => (
+      {versions.map((version) => (
         <MenuItem
           disableRipple
           key={`menu-${version}`}
@@ -257,6 +268,8 @@ export default function VersionSelect(props: VersionSelectProps) {
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const isArchive = buildType === "archive";
+  const versionOptions = getVersionOptions(pathConfig, isArchive);
 
   return (
     <>
@@ -275,7 +288,7 @@ export default function VersionSelect(props: VersionSelectProps) {
             fontWeight: 700,
           }}
         >
-          {buildType === "archive"
+          {isArchive
             ? renderVersion(pathConfig.version, pathConfig, true)
             : renderVersion(pathConfig.version, pathConfig)}
         </Typography>
@@ -290,9 +303,9 @@ export default function VersionSelect(props: VersionSelectProps) {
           "aria-labelledby": "version-select-button",
         }}
       >
-        {buildType === "archive" ? (
+        {isArchive ? (
           <VersionItemsArchived
-            versions={AllVersion[pathConfig.repo][pathConfig.locale]}
+            versions={versionOptions}
             availIn={availIn}
             pathConfig={pathConfig}
             name={name}
@@ -332,6 +345,8 @@ export function NativeVersionSelect(props: VersionSelectProps) {
   const { name, pathConfig, availIn, buildType } = props;
 
   const { navigate: i18nNavigate, t, language } = useI18next();
+  const isArchive = buildType === "archive";
+  const versionOptions = getVersionOptions(pathConfig, isArchive);
 
   const handleChange = (event: { target: { value: string } }) => {
     if (event.target.value === "archive") {
@@ -353,16 +368,16 @@ export function NativeVersionSelect(props: VersionSelectProps) {
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          {AllVersion[pathConfig.repo][pathConfig.locale].map((version) => (
+          {versionOptions.map((version) => (
             <option
               key={`${version}`}
               value={`${version}`}
               disabled={!availIn.includes(version || "")}
             >
-              {renderVersion(version, pathConfig)}
+              {renderVersion(version, pathConfig, isArchive)}
             </option>
           ))}
-          {buildType !== "archive" && (
+          {!isArchive && (
             <option key="archive" value="archive">
               {t("navbar.archive-label")}
             </option>

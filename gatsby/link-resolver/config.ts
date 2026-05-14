@@ -88,13 +88,13 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",
     },
-    // Rule 4: tidb with branch pages (path-based mapping)
-    // Current page: /{lang}/tidb/{branch}/{...any} (branch is already aliased, e.g., "stable", "v8.5")
-    // Link: /{...any}/{docname} -> /{lang}/tidb/{branch}/{docname}
+    // Rule 4: versioned docs with branch pages (path-based mapping)
+    // Current page: /{lang}/{repo}/{branch}/{...any} (branch is already aliased, e.g., "stable", "v8.5")
+    // Link: /{...any}/{docname} -> /{lang}/{repo}/{branch}/{docname}
     {
       pathPattern: "/{lang}/{repo}/{branch}/{...any}",
       pathConditions: {
-        repo: ["tidb", "tidb-in-kubernetes"],
+        repo: ["tidb", "tidb-in-kubernetes", "tidb-data-migration"],
       },
       linkPattern: "/{...folders}/_index",
       targetPattern: "/{lang}/{repo}/{branch}/{folders}",
@@ -102,7 +102,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     {
       pathPattern: "/{lang}/{repo}/{branch}/{...any}",
       pathConditions: {
-        repo: ["tidb", "tidb-in-kubernetes"],
+        repo: ["tidb", "tidb-in-kubernetes", "tidb-data-migration"],
       },
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/{repo}/{branch}/{docname}",
