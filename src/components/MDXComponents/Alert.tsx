@@ -11,6 +11,7 @@ function AlertContainer(props: { children: React.ReactNode }) {
     <Box
       sx={{
         paddingTop: "1rem",
+        marginBottom: "1rem",
         "& .MuiAlert-message p": {
           marginBottom: 0,
           marginTop: 0,
