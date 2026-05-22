@@ -13,7 +13,7 @@
 
 ## ガイド {#guides}
 
--   [TiDBに接続する](https://docs.pingcap.com/ja/ai/connect.md): pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
+-   [TiDBに接続する](https://docs.pingcap.com/ja/ai/connect.md): pytidb クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
 -   [表の操作](https://docs.pingcap.com/ja/ai/tables.md): TiDB でテーブルを操作する方法を学びます。
 -   検索機能
     -   [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search.md): アプリケーションでベクター検索を使用する方法を学習します。
