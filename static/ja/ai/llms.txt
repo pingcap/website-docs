@@ -32,7 +32,7 @@
 
 ## 例 {#examples}
 
--   [基本的なCRUD操作](https://docs.pingcap.com/ja/ai/basic-with-pytidb.md): データベース接続、テーブル作成、データ操作など、pytidb`の基本的な操作を学びましょう。
+-   [基本的なCRUD操作](https://docs.pingcap.com/ja/ai/basic-with-pytidb.md): データベース接続、テーブル作成、データ操作など、pytidb の基本的な操作を学びましょう。
 -   [自動埋め込み](https://docs.pingcap.com/ja/ai/auto-embedding-with-pytidb.md): 組み込みの埋め込みモデルを使用して、テキストデータの埋め込みを自動的に生成します。
 -   検索と取得
     -   [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search-with-pytidb.md): ベクトル埋め込みを用いたセマンティック検索を実装し、類似コンテンツを検索する。
