@@ -17,7 +17,7 @@
         -   [JetBrains DataGrip](https://docs.pingcap.com/ja/developer/dev-guide-gui-datagrip.md): JetBrains DataGripを使用してTiDBに接続する方法を学びましょう。このチュートリアルは、IntelliJ、PhpStorm、PyCharmなどの他のJetBrains IDEで利用可能なデータベースツールおよびSQLプラグインにも適用できます。
         -   [DBeaver](https://docs.pingcap.com/ja/developer/dev-guide-gui-dbeaver.md): DBeaver Communityを使用してTiDBに接続する方法を学びましょう。
         -   [VS Code](https://docs.pingcap.com/ja/developer/dev-guide-gui-vscode-sqltools.md): Visual Studio CodeまたはGitHub Codespacesを使用してTiDBに接続する方法を学びましょう。
-        -   [MySQL Workchen](https://docs.pingcap.com/ja/developer/dev-guide-gui-mysql-workbench.md): MySQL Workbenchを使用してTiDBに接続する方法を学びましょう。
+        -   [MySQL Workbench](https://docs.pingcap.com/ja/developer/dev-guide-gui-mysql-workbench.md): MySQL Workbenchを使用してTiDBに接続する方法を学びましょう。
         -   [ナビキャット](https://docs.pingcap.com/ja/developer/dev-guide-gui-navicat.md): Navicatを使用してTiDBに接続する方法を学びましょう。
     -   ドライバーとORM
         -   [DriverまたはORMを選択してください](https://docs.pingcap.com/ja/developer/dev-guide-choose-driver-or-orm.md): TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
