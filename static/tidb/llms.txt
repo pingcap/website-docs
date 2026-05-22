@@ -75,7 +75,7 @@
     - [Alert Rules](https://docs.pingcap.com/tidb/stable/ticdc-alert-rules.md): Learn about TiCDC alert rules and how to handle the alerts.
   - Integration Scenarios
     - [Overview](https://docs.pingcap.com/tidb/stable/integration-overview.md): Learn the overview of data integration scenarios.
-    - [Integrate with Confluent and Snowflake](https://docs.pingcap.com/tidb/stable/integrate-confluent-using-ticdc.md): Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
+    - [Integrate with Confluent Cloud, Snowflake, ksqlDB, and SQL Server](https://docs.pingcap.com/tidb/stable/integrate-confluent-using-ticdc.md): Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
     - [Integrate with Apache Kafka and Apache Flink](https://docs.pingcap.com/tidb/stable/replicate-data-to-kafka.md): Learn how to replicate TiDB data to Apache Kafka and Apache Flink using TiCDC.
   - Reference
     - TiCDC Architecture
@@ -628,6 +628,7 @@
   - Privileges
     - [Security Compatibility with MySQL](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql.md): Learn TiDB's security compatibilities with MySQL.
     - [Privilege Management](https://docs.pingcap.com/tidb/stable/privilege-management.md): Learn how to manage the privilege.
+    - [Column-Level Privilege Management](https://docs.pingcap.com/tidb/stable/column-privilege-management.md): TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges on specific columns of a table using `GRANT` or `REVOKE`, achieving finer-grained access control.
     - [User Account Management](https://docs.pingcap.com/tidb/stable/user-account-management.md): Learn how to manage a TiDB user account.
     - [TiDB Password Management](https://docs.pingcap.com/tidb/stable/password-management.md): Learn the mechanism of user password management in TiDB.
     - [Role-Based Access Control](https://docs.pingcap.com/tidb/stable/role-based-access-control.md): This document introduces TiDB RBAC operations and implementation.
@@ -637,6 +638,7 @@
       - Attributes
         - [AUTO_INCREMENT](https://docs.pingcap.com/tidb/stable/auto-increment.md): Learn the `AUTO_INCREMENT` column attribute of TiDB.
         - [AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random.md): Learn the AUTO_RANDOM attribute.
+        - [_tidb_rowid](https://docs.pingcap.com/tidb/stable/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
         - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
       - [Literal Values](https://docs.pingcap.com/tidb/stable/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
       - [Schema Object Names](https://docs.pingcap.com/tidb/stable/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
@@ -968,4 +970,4 @@
   - [High Availability FAQs](https://docs.pingcap.com/tidb/stable/high-availability-faq.md): Learn about the FAQs related to high availability of TiDB.
   - [High Reliability FAQs](https://docs.pingcap.com/tidb/stable/high-reliability-faq.md): Learn about the FAQs related to high reliability of TiDB.
   - [Backup and Restore FAQs](https://docs.pingcap.com/tidb/stable/backup-and-restore-faq.md): Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
-- [Glossary](https://docs.pingcap.com/tidb/stable/glossary.md): Glossaries about TiDB.
+- [Glossary](https://docs.pingcap.com/tidb/stable/glossary.md)

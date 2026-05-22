@@ -5,6 +5,7 @@
 ## TIDB CLOUD
 
 - [API Overview](https://docs.pingcap.com/api/tidb-cloud-api-overview.md): Learn about what TiDB Cloud API is, its features, and how to use the API to manage your TiDB Cloud clusters.
+- [API v1beta2](https://docs.pingcap.com/api/tidb-cloud-api-v1beta2.md): Learn about the v1beta2 API of TiDB Cloud.
 - [API v1beta1](https://docs.pingcap.com/api/tidb-cloud-api-v1beta1.md): Learn about the v1beta1 API of TiDB Cloud.
 - [API v1beta](https://docs.pingcap.com/api/tidb-cloud-api-v1beta.md): Learn about the v1beta API of TiDB Cloud.
 
