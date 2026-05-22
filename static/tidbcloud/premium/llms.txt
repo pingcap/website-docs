@@ -110,6 +110,8 @@
 - Migrate or Import Data
   - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview.md): Learn an overview of data migration and import scenarios for TiDB Cloud.
   - Migrate Data into TiDB Cloud
+    - [Migrate Existing and Incremental Data Using Data Migration](https://docs.pingcap.com/tidbcloud/migrate-from-mysql-using-data-migration.md): Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud with minimal downtime using the Data Migration feature.
+    - [Migrate Incremental Data Using Data Migration](https://docs.pingcap.com/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS, or a local MySQL instance to TiDB Cloud using Data Migration.
     - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb-premium.md): Learn how to migrate data from TiDB Self-Managed to TiDB Cloud Premium.
     - [Migrate and Merge MySQL Shards of Large Datasets](https://docs.pingcap.com/tidbcloud/migrate-sql-shards.md): Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms.md): Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Starter using AWS Database Migration Service (AWS DMS).
@@ -145,7 +147,6 @@
     - [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list-premium.md): Learn how to configure IP addresses that are allowed to access your TiDB Cloud Premium instance.
     - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via private endpoint with AWS.
     - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via a private endpoint on Alibaba Cloud.
-    - [Configure Firewall Rules for Public Endpoints](https://docs.pingcap.com/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints.md): Learn how to configure and manage firewall rules with public access to your TiDB Cloud Starter or TiDB Cloud Essential instance securely.
     - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-premium.md): Introduce TLS connections in TiDB Cloud Premium.
   - Data Access Control
     - [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium.md): Learn how to enable and manage Dual-Layer Data Encryption for your TiDB Cloud Premium instance hosted on AWS.
@@ -171,15 +172,6 @@
   - [n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n.md): Learn the use of TiDB Cloud node in n8n.
   - [Netlify](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify.md): Learn how to connect your TiDB Cloud clusters to Netlify projects.
   - [ProxySQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration.md): Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
-  - Terraform
-    - [Terraform Integration Overview](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview.md): Create, manage, and update your TiDB Cloud resources through Terraform.
-    - [Get TiDB Cloud Terraform Provider](https://docs.pingcap.com/tidbcloud/terraform-get-tidbcloud-provider.md): Learn how to get TiDB Cloud Terraform Provider.
-    - [Use the `tidbcloud_serverless_cluster` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-cluster-resource-manage-essential.md): Learn how to use the `tidbcloud_serverless_cluster` resource to create and modify a TiDB Cloud Essential instance.
-    - [Use the `tidbcloud_serverless_branch` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-branch-resource.md): Learn how to use the serverless branch resource to create and modify a TiDB Cloud Starter or TiDB Cloud Essential branch.
-    - [Use the `tidbcloud_serverless_export` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-serverless-export-resource.md): Learn how to use the `tidbcloud_serverless_export` resource to create and modify data export tasks for TiDB Cloud Starter or TiDB Cloud Essential instances.
-    - [Use the `tidbcloud_sql_user` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-sql-user-resource.md): Learn how to use the `tidbcloud_sql_user` resource to create and modify a TiDB Cloud SQL user.
-    - [Use the `tidbcloud_import` Resource](https://docs.pingcap.com/tidbcloud/terraform-use-import-resource.md): Learn how to manage the import task using the `tidbcloud_import` resource.
-    - [Migrate Cluster Resource](https://docs.pingcap.com/tidbcloud/terraform-migrate-cluster-resource.md): Learn how to migrate a cluster resource to a serverless or dedicated cluster resource.
   - [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel.md): Learn how to connect your TiDB Cloud clusters to Vercel projects.
   - [Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier.md): Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
