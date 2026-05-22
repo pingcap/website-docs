@@ -11,6 +11,7 @@
 ## 版本发布说明
 
 - v8.5
+  - [8.5.6](https://docs.pingcap.com/zh/tidb/stable/release-8.5.6.md): 了解 TiDB 8.5.6 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [8.5.5](https://docs.pingcap.com/zh/tidb/stable/release-8.5.5.md): 了解 TiDB 8.5.5 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [8.5.4](https://docs.pingcap.com/zh/tidb/stable/release-8.5.4.md): 了解 TiDB 8.5.4 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [8.5.3](https://docs.pingcap.com/zh/tidb/stable/release-8.5.3.md): 了解 TiDB 8.5.3 版本的兼容性变更、改进提升，以及错误修复。
@@ -89,12 +90,12 @@
   - [6.1.0](https://docs.pingcap.com/zh/tidb/stable/release-6.1.0.md): 了解 TiDB 6.1.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
 - v6.0
   - [6.0.0-DMR](https://docs.pingcap.com/zh/tidb/stable/release-6.0.0-dmr.md): 了解 TiDB 6.0.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
-- v5.4
-  - [5.4.3](https://docs.pingcap.com/zh/tidb/stable/release-5.4.3.md): TiDB 5.4.3 发布，提升了 TiKV 和 Tools 的功能，修复了多个 Bug。包括 TiKV 支持更小的 RocksDB write stall 参数，TiDB 修复了多个查询和执行时可能出现的问题。PD 也修复了一些请求和权限问题。TiFlash 修复了一些函数和并行聚合的错误。Tools 中的 TiDB Lightning 修复了一些数据导入和连接问题，DM 修复了一些数据同步和连接问题，BR 修复了备份恢复和 Region 不均衡的问题，Dumpling 修复了 IPv6 的支持问题。
-  - [5.4.2](https://docs.pingcap.com/zh/tidb/stable/release-5.4.2.md): TiDB 5.4.2 发布日期为 2022 年 7 月 8 日。该版本存在 bug，建议升级至 v5.4.3。此版本提升了 TiDB、TiKV、PD 和 Tools 的稳定性和可用性，并修复了多个 bug。
-  - [5.4.1](https://docs.pingcap.com/zh/tidb/stable/release-5.4.1.md): TiDB 5.4.1 发布日期为 2022 年 5 月 13 日。该版本未引入产品设计上的兼容性变化，但 Bug 修复可能带来兼容性变更。提升改进包括对 TiDB、TiKV、PD、TiFlash 和 Tools 的多个方面的改进。Bug 修复方面包括对 TiDB、TiKV、PD、TiFlash 和 Tools 的多个问题的修复。
-  - [5.4.0](https://docs.pingcap.com/zh/tidb/stable/release-5.4.0.md): TiDB 5.4.0 版本发布日期为 2022 年 2 月 15 日。此版本新增了许多功能和改进，包括支持 GBK 字符集、索引合并、有界限过期数据读取、统计信息采集配置持久化等。同时还修复了许多 bug，提升了稳定性和性能。
 - End of Life 版本
+  - v5.4
+    - [5.4.3](https://docs.pingcap.com/zh/tidb/stable/release-5.4.3.md): TiDB 5.4.3 发布，提升了 TiKV 和 Tools 的功能，修复了多个 Bug。包括 TiKV 支持更小的 RocksDB write stall 参数，TiDB 修复了多个查询和执行时可能出现的问题。PD 也修复了一些请求和权限问题。TiFlash 修复了一些函数和并行聚合的错误。Tools 中的 TiDB Lightning 修复了一些数据导入和连接问题，DM 修复了一些数据同步和连接问题，BR 修复了备份恢复和 Region 不均衡的问题，Dumpling 修复了 IPv6 的支持问题。
+    - [5.4.2](https://docs.pingcap.com/zh/tidb/stable/release-5.4.2.md): TiDB 5.4.2 发布日期为 2022 年 7 月 8 日。该版本存在 bug，建议升级至 v5.4.3。此版本提升了 TiDB、TiKV、PD 和 Tools 的稳定性和可用性，并修复了多个 bug。
+    - [5.4.1](https://docs.pingcap.com/zh/tidb/stable/release-5.4.1.md): TiDB 5.4.1 发布日期为 2022 年 5 月 13 日。该版本未引入产品设计上的兼容性变化，但 Bug 修复可能带来兼容性变更。提升改进包括对 TiDB、TiKV、PD、TiFlash 和 Tools 的多个方面的改进。Bug 修复方面包括对 TiDB、TiKV、PD、TiFlash 和 Tools 的多个问题的修复。
+    - [5.4.0](https://docs.pingcap.com/zh/tidb/stable/release-5.4.0.md): TiDB 5.4.0 版本发布日期为 2022 年 2 月 15 日。此版本新增了许多功能和改进，包括支持 GBK 字符集、索引合并、有界限过期数据读取、统计信息采集配置持久化等。同时还修复了许多 bug，提升了稳定性和性能。
   - v5.3
     - [5.3.4](https://docs.pingcap.com/zh/tidb/stable/release-5.3.4.md): TiDB 5.3.4 发布，提升了 TiKV 的自动 TLS 证书重新加载功能。修复了 TiDB、PD 和 TiFlash 的多个 bug，包括 Region 合并、权限清理、连接失败等问题。同时修复了工具 Dumpling 和 TiCDC 的导出数据和同步任务状态不正确的问题。
     - [5.3.3](https://docs.pingcap.com/zh/tidb/stable/release-5.3.3.md): TiDB 5.3.3 发布日期为 2022 年 9 月 14 日。此版本修复了 TiKV 存在的 bug，该 bug 导致在执行 SQL 语句时出现持续报错的问题。影响版本为 v5.3.2 和 v5.4.2，已在 v5.3.3 上修复。如果使用 v5.3.2 的 TiDB 集群，可以升级至 v5.3.3。除升级外，还可以重启无法向 PD 发送 Region 心跳的 TiKV 节点，直至不再有待发送的 Region 心跳为止。

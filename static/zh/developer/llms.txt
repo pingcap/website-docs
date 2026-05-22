@@ -4,7 +4,7 @@
 
 ## 快速上手
 
-- [创建 TiDB Cloud Starter 集群](https://docs.pingcap.com/zh/developer/dev-guide-build-cluster-in-cloud.md): 使用 TiDB Cloud Starter 构建 TiDB 集群，并连接 TiDB Cloud Starter 集群。
+- [创建 TiDB Cloud Starter 实例](https://docs.pingcap.com/zh/developer/dev-guide-build-cluster-in-cloud.md): 使用 TiDB Cloud Starter 构建 TiDB 实例，并连接到该实例。
 - [TiDB 基础](https://docs.pingcap.com/zh/developer/dev-guide-tidb-basics.md): 介绍 TiDB 的基础知识，包括事务机制和应用程序与 TiDB 交互的方式。
 - [使用 TiDB 的增删改查 SQL](https://docs.pingcap.com/zh/developer/dev-guide-tidb-crud-sql.md): 简单介绍 TiDB 的增删改查 SQL。
 

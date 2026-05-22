@@ -74,7 +74,7 @@
     - [报警规则](https://docs.pingcap.com/zh/tidb/stable/ticdc-alert-rules.md): 了解 TiCDC 集群监控报警规则以及处理方法。
   - 数据集成场景
     - [数据集成概述](https://docs.pingcap.com/zh/tidb/stable/integration-overview.md): 了解使用 TiCDC 进行数据集成的具体场景。
-    - [与 Confluent Cloud 和 Snowflake 进行数据集成](https://docs.pingcap.com/zh/tidb/stable/integrate-confluent-using-ticdc.md): 了解如何使用 TiCDC 从 TiDB 同步数据至 Confluent Cloud 以及 Snowflake、ksqlDB、SQL Server。
+    - [与 Confluent Cloud 和 Snowflake、ksqlDB、SQL Server 进行数据集成](https://docs.pingcap.com/zh/tidb/stable/integrate-confluent-using-ticdc.md): 了解如何使用 TiCDC 从 TiDB 同步数据至 Confluent Cloud 以及 Snowflake、ksqlDB、SQL Server。
     - [与 Apache Kafka 和 Apache Flink 进行数据集成](https://docs.pingcap.com/zh/tidb/stable/replicate-data-to-kafka.md): 了解如何使用 TiCDC 从 TiDB 同步数据至 Apache Kafka 和 Apache Flink。
   - 参考指南
     - TiCDC 架构设计与原理
@@ -231,6 +231,7 @@
 - 性能调优
   - 优化手册
     - [优化概述](https://docs.pingcap.com/zh/tidb/stable/performance-tuning-overview.md): 本文介绍性能优化的基本概念，比如用户响应时间、吞吐和数据库时间，以及性能优化的通用流程。
+    - [配置 TiDB 以优化性能](https://docs.pingcap.com/zh/tidb/stable/tidb-performance-tuning-config.md): 了解如何通过配置关键参数和处理特殊场景来优化 TiDB 性能。
     - [优化方法](https://docs.pingcap.com/zh/tidb/stable/performance-tuning-methods.md): 本文介绍了基于数据库时间的系统优化方法，以及如何利用 TiDB Performance Overview 面板进行性能分析和优化。
     - [OLTP 负载性能优化实践](https://docs.pingcap.com/zh/tidb/stable/performance-tuning-practices.md): 本文档介绍了如何对 OLTP 负载进行性能分析和优化。
     - [TiFlash 性能分析方法](https://docs.pingcap.com/zh/tidb/stable/tiflash-performance-tuning-methods.md): 本文介绍了 Performance Overview 面板中 TiFlash 部分，帮助你了解和监控 TiFlash 的工作负载。
@@ -634,6 +635,7 @@
   - 权限
     - [与 MySQL 安全特性差异](https://docs.pingcap.com/zh/tidb/stable/security-compatibility-with-mysql.md): TiDB 支持与 MySQL 5.7 类似的安全特性，同时也支持 MySQL 8.0 的部分安全特性。然而，在实现上存在一些差异，包括不支持列级别权限设置和部分权限属性。此外，TiDB 的密码过期策略和密码复杂度策略与 MySQL 存在一些差异。另外，TiDB 支持多种身份验证方式，包括 TLS 证书和 JWT。
     - [权限管理](https://docs.pingcap.com/zh/tidb/stable/privilege-management.md): TiDB 支持 MySQL 5.7 和 MySQL 8.0 的权限管理系统。权限相关操作包括授予权限、收回权限、查看用户权限和动态权限。权限系统的实现包括授权表和连接验证。权限生效时机是在 TiDB 启动时加载到内存，并且可以手动刷新。
+    - [列级权限管理](https://docs.pingcap.com/zh/tidb/stable/column-privilege-management.md): TiDB 支持兼容 MySQL 的列级权限管理机制。你可以通过 `GRANT` 或 `REVOKE` 在指定表上对指定列授予或回收 `SELECT`、`INSERT`、`UPDATE`、`REFERENCES` 权限，实现更细粒度的访问控制。
     - [TiDB 用户账户管理](https://docs.pingcap.com/zh/tidb/stable/user-account-management.md): TiDB 用户账户管理主要包括用户名和密码设置、添加用户、删除用户、保留用户账户、设置资源限制、设置密码、忘记密码处理和刷新权限。用户可以通过 SQL 语句或图形化界面工具进行用户管理，同时可以使用 `FLUSH PRIVILEGES` 命令立即生效修改。 TiDB 在数据库初始化时会生成一个默认账户。
     - [TiDB 密码管理](https://docs.pingcap.com/zh/tidb/stable/password-management.md): 了解 TiDB 的用户密码管理机制。
     - [基于角色的访问控制](https://docs.pingcap.com/zh/tidb/stable/role-based-access-control.md): TiDB 的基于角色的访问控制 (RBAC) 系统类似于 MySQL 8.0 的 RBAC 系统。用户可以创建、删除和授予角色权限，也可以将角色授予其他用户。角色需要在用户启用后才能生效。用户可以通过 `SHOW GRANTS` 查看角色权限，也可以设置默认启用角色。角色授权具有原子性，失败会回滚。除了角色授权外，还有用户管理和权限管理相关操作。
@@ -643,6 +645,7 @@
       - 属性
         - [AUTO_INCREMENT](https://docs.pingcap.com/zh/tidb/stable/auto-increment.md): 介绍 TiDB 的 `AUTO_INCREMENT` 列属性。
         - [AUTO_RANDOM](https://docs.pingcap.com/zh/tidb/stable/auto-random.md): 本文介绍了 TiDB 的 `AUTO_RANDOM` 列属性。
+        - [_tidb_rowid](https://docs.pingcap.com/zh/tidb/stable/tidb-rowid.md): 了解 `_tidb_rowid` 是什么，何时可用，以及如何安全地使用它。
         - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/zh/tidb/stable/shard-row-id-bits.md): 介绍 TiDB 的 `SHARD_ROW_ID_BITS` 表属性。
       - [字面值](https://docs.pingcap.com/zh/tidb/stable/literal-values.md): 本文介绍了 TiDB SQL 语句的字面值。
       - [Schema 对象名](https://docs.pingcap.com/zh/tidb/stable/schema-object-names.md): 本文介绍 TiDB SQL 语句中的模式对象名。
@@ -974,4 +977,4 @@
   - [高可用 FAQ](https://docs.pingcap.com/zh/tidb/stable/high-availability-faq.md): 介绍高可用相关的常见问题。
   - [高可靠 FAQ](https://docs.pingcap.com/zh/tidb/stable/high-reliability-faq.md): 介绍高可靠相关的常见问题。
   - [备份恢复 FAQ](https://docs.pingcap.com/zh/tidb/stable/backup-and-restore-faq.md): 了解备份恢复相关的常见问题以及解决方法。
-- [术语表](https://docs.pingcap.com/zh/tidb/stable/glossary.md): 了解 TiDB 相关术语。
+- [术语表](https://docs.pingcap.com/zh/tidb/stable/glossary.md)

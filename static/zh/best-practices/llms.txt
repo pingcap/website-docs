@@ -10,6 +10,7 @@
 
 - [DDL 最佳实践](https://docs.pingcap.com/zh/best-practices/ddl-introduction.md): 介绍 TiDB 中 DDL 语句的实现原理、在线变更过程、最佳实践等内容。
 - [将 UUID 用作主键的最佳实践](https://docs.pingcap.com/zh/best-practices/uuid.md): 了解在 TiDB 中将 UUID 用作主键的最佳实践。
+- [使用 TiDB 分区表的最佳实践](https://docs.pingcap.com/zh/best-practices/tidb-partitioned-tables-best-practices.md): 了解使用 TiDB 分区表的最佳实践，以提升性能、简化数据管理，并高效处理大规模数据集。
 - [多列索引优化最佳实践](https://docs.pingcap.com/zh/best-practices/multi-column-index-best-practices.md): 了解如何在 TiDB 中高效使用多列索引，并应用高级优化技巧。
 - [管理索引和识别未使用索引的最佳实践](https://docs.pingcap.com/zh/best-practices/index-management-best-practices.md): 了解在 TiDB 中管理和优化索引、识别并移除未使用索引的最佳实践。
 
