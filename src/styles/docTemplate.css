@@ -5,6 +5,12 @@
 @import "github-markdown-css/github-markdown-light.css";
 
 .PingCAP-Doc {
+  --pc-docs-sticky-table-top: 56px;
+
+  &.doc-feature-banner {
+    --pc-docs-sticky-table-top: 96px;
+  }
+
   .doc-global-home {
     background-image: url(../../images/docHome/home-hero-bg.svg);
     background-position: top;
@@ -46,6 +52,28 @@
 
     .expandable-table {
       margin: 16px 0;
+    }
+
+    table.sticky-header,
+    .expandable-table-modal-content table.sticky-header {
+      display: table;
+      width: 100%;
+      min-width: 100%;
+      overflow: visible;
+    }
+
+    table.sticky-header thead th {
+      position: sticky;
+      top: var(--pc-docs-sticky-table-top);
+      z-index: 2;
+      background-color: #fff;
+    }
+
+    .expandable-table-modal-content table.sticky-header thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background-color: #fff;
     }
 
     .expandable-table-toolbar {
@@ -304,7 +332,6 @@
     margin-top: 8px;
   }
 }
-
 
 
 
