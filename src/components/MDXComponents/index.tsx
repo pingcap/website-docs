@@ -40,5 +40,5 @@ export {
 } from "components/MDXComponents/ResourceCard";
 
 export { TargetLink as Link } from "./Link";
-export { ExpandableTable as table } from "./ExpandableTable";
+export { ExpandableTable as table, StickyHeaderTable } from "./ExpandableTable";
 export { ExpandableImage as img } from "./ExpandableImage";

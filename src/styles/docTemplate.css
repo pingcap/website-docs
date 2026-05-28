@@ -48,11 +48,6 @@
       margin: 16px 0;
     }
 
-    .sticky-header-table-scroll {
-      max-width: 100%;
-      overflow-x: auto;
-    }
-
     .sticky-header-scroll {
       position: sticky;
       top: var(--pc-docs-sticky-table-top);
@@ -62,18 +57,12 @@
       pointer-events: none;
     }
 
-    table.sticky-header-source,
     .expandable-table-modal-content table.sticky-header {
-      display: table;
-      width: 100%;
-      min-width: 100%;
-      max-width: none;
       overflow: visible;
     }
 
     table.sticky-header-clone {
       display: table;
-      min-width: 100%;
       max-width: none;
       margin: 0;
       overflow: visible;
@@ -368,4 +357,3 @@
     margin-top: 8px;
   }
 }
-

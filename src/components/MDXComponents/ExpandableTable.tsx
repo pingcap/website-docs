@@ -16,6 +16,16 @@ type StickyHeaderMetrics = {
   columnWidths: number[];
 };
 
+const StickyHeaderTableContext = React.createContext(false);
+
+const hasClassName = (className: string | undefined, name: string) =>
+  className?.split(/\s+/).includes(name) ?? false;
+
+const addClassName = (className: string | undefined, name: string) =>
+  hasClassName(className, name)
+    ? className
+    : `${className ?? ""} ${name}`.trim();
+
 const findTableHead = (children: React.ReactNode): React.ReactNode => {
   for (const child of React.Children.toArray(children)) {
     if (!React.isValidElement<TableChildProps>(child)) continue;
@@ -37,6 +47,18 @@ const findTableHead = (children: React.ReactNode): React.ReactNode => {
   return null;
 };
 
+export function StickyHeaderTable({
+  children,
+}: {
+  children?: React.ReactNode;
+}) {
+  return (
+    <StickyHeaderTableContext.Provider value={true}>
+      {children}
+    </StickyHeaderTableContext.Provider>
+  );
+}
+
 export function ExpandableTable(
   props: React.TableHTMLAttributes<HTMLTableElement>
 ) {
@@ -47,12 +69,17 @@ export function ExpandableTable(
   const [open, setOpen] = React.useState(false);
   const [stickyHeaderMetrics, setStickyHeaderMetrics] =
     React.useState<StickyHeaderMetrics | null>(null);
-  const tableScrollRef = React.useRef<HTMLDivElement | null>(null);
   const stickyHeaderScrollRef = React.useRef<HTMLDivElement | null>(null);
   const tableRef = React.useRef<HTMLTableElement | null>(null);
-  const isStickyHeader = tableProps.className
-    ?.split(/\s+/)
-    .includes("sticky-header");
+  const stickyHeaderOptIn = React.useContext(StickyHeaderTableContext);
+  const isStickyHeader =
+    stickyHeaderOptIn || hasClassName(tableProps.className, "sticky-header");
+  const stickyTableProps = {
+    ...tableProps,
+    className: isStickyHeader
+      ? addClassName(tableProps.className, "sticky-header")
+      : tableProps.className,
+  };
   const tableHead = findTableHead(tableProps.children);
   const hasStickyHeaderClone = Boolean(stickyHeaderMetrics && tableHead);
 
@@ -80,12 +107,11 @@ export function ExpandableTable(
     if (!isStickyHeader) return;
 
     const syncStickyHeader = () => {
-      if (!stickyHeaderScrollRef.current || !tableScrollRef.current) return;
-      stickyHeaderScrollRef.current.scrollLeft =
-        tableScrollRef.current.scrollLeft;
+      if (!stickyHeaderScrollRef.current || !tableRef.current) return;
+      stickyHeaderScrollRef.current.scrollLeft = tableRef.current.scrollLeft;
     };
 
-    const tableScroll = tableScrollRef.current;
+    const tableScroll = tableRef.current;
     tableScroll?.addEventListener("scroll", syncStickyHeader, {
       passive: true,
     });
@@ -107,7 +133,10 @@ export function ExpandableTable(
       if (!table || !tableHead || !headerCells || headerCells.length === 0) {
         return;
       }
-      const tableWidth = table.getBoundingClientRect().width;
+      const tableWidth = Math.max(
+        table.getBoundingClientRect().width,
+        table.scrollWidth
+      );
       const headerHeight = tableHead.getBoundingClientRect().height;
       if (tableWidth === 0 || headerHeight === 0) return;
 
@@ -173,10 +202,13 @@ export function ExpandableTable(
         }}
       >
         <table
-          {...tableProps}
-          className={`${tableProps.className ?? ""} sticky-header-clone`.trim()}
+          {...stickyTableProps}
+          className={addClassName(
+            stickyTableProps.className,
+            "sticky-header-clone"
+          )}
           style={{
-            ...tableProps.style,
+            ...stickyTableProps.style,
             width: stickyHeaderMetrics.tableWidth,
           }}
         >
@@ -205,15 +237,16 @@ export function ExpandableTable(
       {isStickyHeader ? (
         <>
           {stickyHeader}
-          <div className="sticky-header-table-scroll" ref={tableScrollRef}>
-            <table
-              {...tableProps}
-              ref={tableRef}
-              className={`${tableProps.className ?? ""} sticky-header-source ${
-                hasStickyHeaderClone ? "sticky-header-source-hidden" : ""
-              }`.trim()}
-            />
-          </div>
+          <table
+            {...stickyTableProps}
+            ref={tableRef}
+            className={[
+              addClassName(stickyTableProps.className, "sticky-header-source"),
+              hasStickyHeaderClone ? "sticky-header-source-hidden" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          />
         </>
       ) : (
         <table {...tableProps} />
@@ -239,7 +272,7 @@ export function ExpandableTable(
               <CloseLargeIcon />
             </button>
             <div className="expandable-modal-scroll">
-              <table {...tableProps} />
+              <table {...stickyTableProps} />
             </div>
           </div>
         </div>
