@@ -853,7 +853,7 @@
     - [Vector Index](https://docs.pingcap.com/tidb/stable/vector-search-index.md): Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
     - [Constraints](https://docs.pingcap.com/tidb/stable/constraints.md): Learn how SQL Constraints apply to TiDB.
     - [Generated Columns](https://docs.pingcap.com/tidb/stable/generated-columns.md): Learn how to use generated columns.
-    - [SQL Mode](https://docs.pingcap.com/tidb/stable/sql-mode.md)
+    - [SQL Mode](https://docs.pingcap.com/tidb/stable/sql-mode.md): Learn SQL mode.
     - [Table Attributes](https://docs.pingcap.com/tidb/stable/table-attributes.md): Learn how to use the table attribute feature of TiDB.
     - Transactions
       - [Overview](https://docs.pingcap.com/tidb/stable/transaction-overview.md): Learn transactions in TiDB.
@@ -970,4 +970,4 @@
   - [High Availability FAQs](https://docs.pingcap.com/tidb/stable/high-availability-faq.md): Learn about the FAQs related to high availability of TiDB.
   - [High Reliability FAQs](https://docs.pingcap.com/tidb/stable/high-reliability-faq.md): Learn about the FAQs related to high reliability of TiDB.
   - [Backup and Restore FAQs](https://docs.pingcap.com/tidb/stable/backup-and-restore-faq.md): Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
-- [Glossary](https://docs.pingcap.com/tidb/stable/glossary.md)
+- [Glossary](https://docs.pingcap.com/tidb/stable/glossary.md): Glossaries about TiDB.

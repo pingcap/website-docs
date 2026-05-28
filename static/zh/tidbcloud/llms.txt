@@ -475,7 +475,7 @@
   - [全局索引](https://docs.pingcap.com/zh/tidbcloud/global-indexes.md): 了解 TiDB 全局索引的使用场景、优势、用法、工作原理和限制。
   - [约束](https://docs.pingcap.com/zh/tidbcloud/constraints.md): 了解 SQL Constraints 在 TiDB 中的应用。
   - [生成列](https://docs.pingcap.com/zh/tidbcloud/generated-columns.md): 学习如何使用 generated columns。
-  - [SQL 模式](https://docs.pingcap.com/zh/tidbcloud/sql-mode.md)
+  - [SQL 模式](https://docs.pingcap.com/zh/tidbcloud/sql-mode.md): 学习 SQL 模式。
   - [表属性](https://docs.pingcap.com/zh/tidbcloud/table-attributes.md): 了解如何使用 TiDB 的 table attribute 功能。
   - 事务
     - [事务概览](https://docs.pingcap.com/zh/tidbcloud/transaction-overview.md): 了解 TiDB 中的事务。
