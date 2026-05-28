@@ -57,6 +57,10 @@
       pointer-events: none;
     }
 
+    .sticky-header-scroll-hidden {
+      visibility: hidden;
+    }
+
     .expandable-table-modal-content table.sticky-header {
       overflow: visible;
     }

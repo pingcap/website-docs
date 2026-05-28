@@ -70,6 +70,7 @@ export function ExpandableTable(
   const [open, setOpen] = React.useState(false);
   const [stickyHeaderMetrics, setStickyHeaderMetrics] =
     React.useState<StickyHeaderMetrics | null>(null);
+  const [stickyHeaderActive, setStickyHeaderActive] = React.useState(false);
   const stickyHeaderScrollRef = React.useRef<HTMLDivElement | null>(null);
   const tableRef = React.useRef<HTMLTableElement | null>(null);
   const stickyHeaderOptIn = React.useContext(StickyHeaderTableContext);
@@ -122,6 +123,59 @@ export function ExpandableTable(
       tableScroll?.removeEventListener("scroll", syncStickyHeader);
     };
   }, [isStickyHeader, stickyHeaderMetrics]);
+
+  React.useEffect(() => {
+    if (!isStickyHeader || !hasStickyHeaderClone || !stickyHeaderMetrics) {
+      setStickyHeaderActive(false);
+      return;
+    }
+
+    let rafId: number | null = null;
+    const updateStickyHeaderActive = () => {
+      rafId = null;
+      const table = tableRef.current;
+      const stickyHeader = stickyHeaderScrollRef.current;
+      if (!table || !stickyHeader) {
+        setStickyHeaderActive(false);
+        return;
+      }
+
+      const stickyTop = Number.parseFloat(
+        window.getComputedStyle(stickyHeader).top
+      );
+      const stickyHeaderTop = Number.isFinite(stickyTop) ? stickyTop : 0;
+      const tableRect = table.getBoundingClientRect();
+      const nextActive =
+        tableRect.top <= stickyHeaderTop &&
+        tableRect.bottom > stickyHeaderTop + stickyHeaderMetrics.headerHeight;
+
+      if (nextActive) {
+        stickyHeader.scrollLeft = table.scrollLeft;
+      }
+      setStickyHeaderActive((current) =>
+        current === nextActive ? current : nextActive
+      );
+    };
+
+    const scheduleUpdate = () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      rafId = window.requestAnimationFrame(updateStickyHeaderActive);
+    };
+
+    scheduleUpdate();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [isStickyHeader, hasStickyHeaderClone, stickyHeaderMetrics]);
 
   React.useEffect(() => {
     if (!isStickyHeader) return;
@@ -196,7 +250,12 @@ export function ExpandableTable(
   const stickyHeader =
     isStickyHeader && stickyHeaderMetrics && tableHead ? (
       <div
-        className="sticky-header-scroll"
+        className={[
+          "sticky-header-scroll",
+          stickyHeaderActive ? "" : "sticky-header-scroll-hidden",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         ref={stickyHeaderScrollRef}
         aria-hidden="true"
         style={{
@@ -246,7 +305,7 @@ export function ExpandableTable(
             ref={tableRef}
             className={[
               addClassName(stickyTableProps.className, "sticky-header-source"),
-              hasStickyHeaderClone ? "sticky-header-source-hidden" : "",
+              stickyHeaderActive ? "sticky-header-source-hidden" : "",
             ]
               .filter(Boolean)
               .join(" ")}
