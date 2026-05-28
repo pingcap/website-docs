@@ -381,7 +381,7 @@
   - [Global Indexes](https://docs.pingcap.com/tidbcloud/global-indexes.md): Learn the use cases, advantages, usage, working principles, and limitations of TiDB global indexes.
   - [Constraints](https://docs.pingcap.com/tidbcloud/constraints.md): Learn how SQL Constraints apply to TiDB.
   - [Generated Columns](https://docs.pingcap.com/tidbcloud/generated-columns.md): Learn how to use generated columns.
-  - [SQL Mode](https://docs.pingcap.com/tidbcloud/sql-mode.md)
+  - [SQL Mode](https://docs.pingcap.com/tidbcloud/sql-mode.md): Learn SQL mode.
   - [Table Attributes](https://docs.pingcap.com/tidbcloud/table-attributes.md): Learn how to use the table attribute feature of TiDB.
   - Transactions
     - [Overview](https://docs.pingcap.com/tidbcloud/transaction-overview.md): Learn transactions in TiDB.

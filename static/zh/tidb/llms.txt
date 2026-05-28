@@ -977,4 +977,4 @@
   - [高可用 FAQ](https://docs.pingcap.com/zh/tidb/stable/high-availability-faq.md): 介绍高可用相关的常见问题。
   - [高可靠 FAQ](https://docs.pingcap.com/zh/tidb/stable/high-reliability-faq.md): 介绍高可靠相关的常见问题。
   - [备份恢复 FAQ](https://docs.pingcap.com/zh/tidb/stable/backup-and-restore-faq.md): 了解备份恢复相关的常见问题以及解决方法。
-- [术语表](https://docs.pingcap.com/zh/tidb/stable/glossary.md)
+- [术语表](https://docs.pingcap.com/zh/tidb/stable/glossary.md): 了解 TiDB 相关术语。
