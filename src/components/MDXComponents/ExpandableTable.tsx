@@ -16,14 +16,18 @@ type StickyHeaderMetrics = {
   columnWidths: number[];
 };
 
+type TablePropsWithRef = React.TableHTMLAttributes<HTMLTableElement> & {
+  ref?: React.Ref<HTMLTableElement>;
+};
+
 const StickyHeaderTableContext = React.createContext(false);
 
 const hasClassName = (className: string | undefined, name: string) =>
   className?.split(/\s+/).includes(name) ?? false;
 
-const addClassName = (className: string | undefined, name: string) =>
+const addClassName = (className: string | undefined, name: string): string =>
   hasClassName(className, name)
-    ? className
+    ? className ?? name
     : `${className ?? ""} ${name}`.trim();
 
 const findTableHead = (children: React.ReactNode): React.ReactNode => {
@@ -62,10 +66,7 @@ export function StickyHeaderTable({
 export function ExpandableTable(
   props: React.TableHTMLAttributes<HTMLTableElement>
 ) {
-  const { ref: _ref, ...tableProps } =
-    props as React.TableHTMLAttributes<HTMLTableElement> & {
-      ref?: React.Ref<HTMLTableElement>;
-    };
+  const { ref: _ref, ...tableProps } = props as TablePropsWithRef;
   const [open, setOpen] = React.useState(false);
   const [stickyHeaderMetrics, setStickyHeaderMetrics] =
     React.useState<StickyHeaderMetrics | null>(null);
@@ -188,8 +189,10 @@ export function ExpandableTable(
       window.removeEventListener("resize", scheduleMeasure);
       resizeObserver?.disconnect();
     };
-  }, [isStickyHeader, tableProps.children]);
+  }, [isStickyHeader]);
 
+  // The cloned header is visual-only: it is aria-hidden and pointer-events are
+  // disabled in CSS, so sticky table headers should not contain controls.
   const stickyHeader =
     isStickyHeader && stickyHeaderMetrics && tableHead ? (
       <div
@@ -221,6 +224,7 @@ export function ExpandableTable(
         </table>
       </div>
     ) : null;
+  const modalTableProps = isStickyHeader ? stickyTableProps : tableProps;
 
   return (
     <div className="expandable-table">
@@ -249,7 +253,7 @@ export function ExpandableTable(
           />
         </>
       ) : (
-        <table {...tableProps} />
+        <table {...props} />
       )}
       {open && (
         <div
@@ -272,7 +276,7 @@ export function ExpandableTable(
               <CloseLargeIcon />
             </button>
             <div className="expandable-modal-scroll">
-              <table {...stickyTableProps} />
+              <table {...modalTableProps} />
             </div>
           </div>
         </div>
