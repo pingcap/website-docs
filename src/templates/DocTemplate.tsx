@@ -36,6 +36,7 @@ import ScrollToTopBtn from "components/Button/ScrollToTopBtn";
 import { DOC_HOME_URL } from "shared/resources";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 import { useReportReadingRate } from "shared/useReportReadingRate";
+import { getHeaderStickyHeight } from "shared/headerHeight";
 import {
   CloudPlanProvider,
   useCloudPlan,
@@ -268,6 +269,7 @@ function DocTemplate({
       />
       <Box
         sx={{
+          "--pc-docs-sticky-table-top": getHeaderStickyHeight(bannerVisible),
           display: "flex",
         }}
         className={clsx("PingCAP-Doc", {

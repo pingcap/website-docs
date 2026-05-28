@@ -4,10 +4,57 @@ import {
   ExpandCornersIcon,
 } from "components/MDXComponents/ExpandIcons";
 
+type TableChildProps = {
+  children?: React.ReactNode;
+  mdxType?: string;
+  originalType?: string;
+};
+
+type StickyHeaderMetrics = {
+  tableWidth: number;
+  headerHeight: number;
+  columnWidths: number[];
+};
+
+const findTableHead = (children: React.ReactNode): React.ReactNode => {
+  for (const child of React.Children.toArray(children)) {
+    if (!React.isValidElement<TableChildProps>(child)) continue;
+
+    if (
+      child.type === "thead" ||
+      child.props.mdxType === "thead" ||
+      child.props.originalType === "thead"
+    ) {
+      return child;
+    }
+
+    if (child.type === React.Fragment) {
+      const tableHead = findTableHead(child.props.children);
+      if (tableHead) return tableHead;
+    }
+  }
+
+  return null;
+};
+
 export function ExpandableTable(
   props: React.TableHTMLAttributes<HTMLTableElement>
 ) {
+  const { ref: _ref, ...tableProps } =
+    props as React.TableHTMLAttributes<HTMLTableElement> & {
+      ref?: React.Ref<HTMLTableElement>;
+    };
   const [open, setOpen] = React.useState(false);
+  const [stickyHeaderMetrics, setStickyHeaderMetrics] =
+    React.useState<StickyHeaderMetrics | null>(null);
+  const tableScrollRef = React.useRef<HTMLDivElement | null>(null);
+  const stickyHeaderScrollRef = React.useRef<HTMLDivElement | null>(null);
+  const tableRef = React.useRef<HTMLTableElement | null>(null);
+  const isStickyHeader = tableProps.className
+    ?.split(/\s+/)
+    .includes("sticky-header");
+  const tableHead = findTableHead(tableProps.children);
+  const hasStickyHeaderClone = Boolean(stickyHeaderMetrics && tableHead);
 
   React.useEffect(() => {
     if (!open) return;
@@ -29,6 +76,120 @@ export function ExpandableTable(
     };
   }, [open]);
 
+  React.useEffect(() => {
+    if (!isStickyHeader) return;
+
+    const syncStickyHeader = () => {
+      if (!stickyHeaderScrollRef.current || !tableScrollRef.current) return;
+      stickyHeaderScrollRef.current.scrollLeft =
+        tableScrollRef.current.scrollLeft;
+    };
+
+    const tableScroll = tableScrollRef.current;
+    tableScroll?.addEventListener("scroll", syncStickyHeader, {
+      passive: true,
+    });
+    syncStickyHeader();
+
+    return () => {
+      tableScroll?.removeEventListener("scroll", syncStickyHeader);
+    };
+  }, [isStickyHeader, stickyHeaderMetrics]);
+
+  React.useEffect(() => {
+    if (!isStickyHeader) return;
+
+    let rafId: number | null = null;
+    const measure = () => {
+      const table = tableRef.current;
+      const tableHead = table?.tHead;
+      const headerCells = tableHead?.querySelectorAll("th");
+      if (!table || !tableHead || !headerCells || headerCells.length === 0) {
+        return;
+      }
+      const tableWidth = table.getBoundingClientRect().width;
+      const headerHeight = tableHead.getBoundingClientRect().height;
+      if (tableWidth === 0 || headerHeight === 0) return;
+
+      const nextMetrics = {
+        tableWidth,
+        headerHeight,
+        columnWidths: Array.from(headerCells).map(
+          (cell) => cell.getBoundingClientRect().width
+        ),
+      };
+
+      setStickyHeaderMetrics((current) => {
+        if (
+          current?.tableWidth === nextMetrics.tableWidth &&
+          current.headerHeight === nextMetrics.headerHeight &&
+          current.columnWidths.length === nextMetrics.columnWidths.length &&
+          current.columnWidths.every(
+            (width, index) => width === nextMetrics.columnWidths[index]
+          )
+        ) {
+          return current;
+        }
+
+        return nextMetrics;
+      });
+    };
+
+    const scheduleMeasure = () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      rafId = window.requestAnimationFrame(measure);
+    };
+
+    scheduleMeasure();
+    window.addEventListener("resize", scheduleMeasure);
+    const resizeObserver =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(scheduleMeasure);
+    if (tableRef.current && resizeObserver) {
+      resizeObserver.observe(tableRef.current);
+    }
+
+    return () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("resize", scheduleMeasure);
+      resizeObserver?.disconnect();
+    };
+  }, [isStickyHeader, tableProps.children]);
+
+  const stickyHeader =
+    isStickyHeader && stickyHeaderMetrics && tableHead ? (
+      <div
+        className="sticky-header-scroll"
+        ref={stickyHeaderScrollRef}
+        aria-hidden="true"
+        style={{
+          height: stickyHeaderMetrics.headerHeight,
+          marginBottom: -stickyHeaderMetrics.headerHeight,
+        }}
+      >
+        <table
+          {...tableProps}
+          className={`${tableProps.className ?? ""} sticky-header-clone`.trim()}
+          style={{
+            ...tableProps.style,
+            width: stickyHeaderMetrics.tableWidth,
+          }}
+        >
+          <colgroup>
+            {stickyHeaderMetrics.columnWidths.map((width, index) => (
+              <col key={index} style={{ width }} />
+            ))}
+          </colgroup>
+          {tableHead}
+        </table>
+      </div>
+    ) : null;
+
   return (
     <div className="expandable-table">
       <div className="expandable-table-toolbar">
@@ -41,7 +202,22 @@ export function ExpandableTable(
           <ExpandCornersIcon />
         </button>
       </div>
-      <table {...props} />
+      {isStickyHeader ? (
+        <>
+          {stickyHeader}
+          <div className="sticky-header-table-scroll" ref={tableScrollRef}>
+            <table
+              {...tableProps}
+              ref={tableRef}
+              className={`${tableProps.className ?? ""} sticky-header-source ${
+                hasStickyHeaderClone ? "sticky-header-source-hidden" : ""
+              }`.trim()}
+            />
+          </div>
+        </>
+      ) : (
+        <table {...tableProps} />
+      )}
       {open && (
         <div
           className="expandable-modal-backdrop"
@@ -63,7 +239,7 @@ export function ExpandableTable(
               <CloseLargeIcon />
             </button>
             <div className="expandable-modal-scroll">
-              <table {...props} />
+              <table {...tableProps} />
             </div>
           </div>
         </div>
