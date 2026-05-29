@@ -1,4 +1,5 @@
 import * as React from "react";
+import clsx from "clsx";
 import {
   CloseLargeIcon,
   ExpandCornersIcon,
@@ -21,14 +22,6 @@ type TablePropsWithRef = React.TableHTMLAttributes<HTMLTableElement> & {
 };
 
 const StickyHeaderTableContext = React.createContext(false);
-
-const hasClassName = (className: string | undefined, name: string) =>
-  className?.split(/\s+/).includes(name) ?? false;
-
-const addClassName = (className: string | undefined, name: string): string =>
-  hasClassName(className, name)
-    ? className ?? name
-    : `${className ?? ""} ${name}`.trim();
 
 const findTableHead = (children: React.ReactNode): React.ReactNode => {
   for (const child of React.Children.toArray(children)) {
@@ -74,13 +67,15 @@ export function ExpandableTable(
   const stickyHeaderScrollRef = React.useRef<HTMLDivElement | null>(null);
   const tableRef = React.useRef<HTMLTableElement | null>(null);
   const stickyHeaderOptIn = React.useContext(StickyHeaderTableContext);
-  const isStickyHeader =
-    stickyHeaderOptIn || hasClassName(tableProps.className, "sticky-header");
+  const hasStickyHeaderClass =
+    tableProps.className?.split(/\s+/).includes("sticky-header") ?? false;
+  const isStickyHeader = stickyHeaderOptIn || hasStickyHeaderClass;
   const stickyTableProps = {
     ...tableProps,
-    className: isStickyHeader
-      ? addClassName(tableProps.className, "sticky-header")
-      : tableProps.className,
+    className: clsx(
+      tableProps.className,
+      isStickyHeader && !hasStickyHeaderClass && "sticky-header"
+    ),
   };
   const tableHead = findTableHead(tableProps.children);
   const hasStickyHeaderClone = Boolean(stickyHeaderMetrics && tableHead);
@@ -245,17 +240,15 @@ export function ExpandableTable(
     };
   }, [isStickyHeader]);
 
-  // The cloned header is visual-only: it is aria-hidden and pointer-events are
-  // disabled in CSS, so sticky table headers should not contain controls.
+  // The cloned header is visual-only and aria-hidden, so sticky table headers
+  // should not contain controls.
   const stickyHeader =
     isStickyHeader && stickyHeaderMetrics && tableHead ? (
       <div
-        className={[
+        className={clsx(
           "sticky-header-scroll",
-          stickyHeaderActive ? "" : "sticky-header-scroll-hidden",
-        ]
-          .filter(Boolean)
-          .join(" ")}
+          !stickyHeaderActive && "sticky-header-scroll-hidden"
+        )}
         ref={stickyHeaderScrollRef}
         aria-hidden="true"
         style={{
@@ -265,10 +258,7 @@ export function ExpandableTable(
       >
         <table
           {...stickyTableProps}
-          className={addClassName(
-            stickyTableProps.className,
-            "sticky-header-clone"
-          )}
+          className={clsx(stickyTableProps.className, "sticky-header-clone")}
           style={{
             ...stickyTableProps.style,
             width: stickyHeaderMetrics.tableWidth,
@@ -303,12 +293,11 @@ export function ExpandableTable(
           <table
             {...stickyTableProps}
             ref={tableRef}
-            className={[
-              addClassName(stickyTableProps.className, "sticky-header-source"),
-              stickyHeaderActive ? "sticky-header-source-hidden" : "",
-            ]
-              .filter(Boolean)
-              .join(" ")}
+            className={clsx(
+              stickyTableProps.className,
+              "sticky-header-source",
+              stickyHeaderActive && "sticky-header-source-hidden"
+            )}
           />
         </>
       ) : (

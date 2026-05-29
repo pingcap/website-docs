@@ -54,7 +54,6 @@
       z-index: 2;
       max-width: 100%;
       overflow: hidden;
-      pointer-events: none;
     }
 
     .sticky-header-scroll-hidden {
