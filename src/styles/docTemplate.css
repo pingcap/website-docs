@@ -48,6 +48,95 @@
       margin: 16px 0;
     }
 
+    .sticky-header-scroll {
+      position: sticky;
+      top: var(--pc-docs-sticky-table-top);
+      z-index: 2;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .sticky-header-scroll-hidden {
+      visibility: hidden;
+    }
+
+    .expandable-table-modal-content table.sticky-header {
+      overflow: visible;
+    }
+
+    table.sticky-header-clone {
+      display: table;
+      max-width: none;
+      margin: 0;
+      overflow: visible;
+    }
+
+    table.sticky-header-clone thead th,
+    .expandable-table-modal-content table.sticky-header thead th {
+      background-color: #fff;
+      border-bottom-color: transparent;
+      box-shadow: inset 0 -1px 0 #d1d9e0;
+    }
+
+    table.sticky-header-source-hidden thead th {
+      border-bottom-color: transparent;
+    }
+
+    table.sticky-header-source-hidden tbody tr:first-child {
+      border-top-color: transparent;
+    }
+
+    table.sticky-header-source-hidden tbody tr:first-child td {
+      border-top-color: transparent;
+    }
+
+    table.sticky-header-source-hidden thead {
+      opacity: 0;
+    }
+
+    .expandable-table-modal-content table.sticky-header thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      box-shadow: none;
+    }
+
+    .expandable-table-modal-content table.sticky-header thead th::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -8px;
+      left: 0;
+      height: 9px;
+      background: linear-gradient(
+        to bottom,
+        #fff 0,
+        #fff 8px,
+        #d1d9e0 8px,
+        #d1d9e0 9px
+      );
+      pointer-events: none;
+    }
+
+    .expandable-table-modal-content table.sticky-header thead th::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(
+        to bottom,
+        #d1d9e0 0,
+        #d1d9e0 1px,
+        #fff 1px,
+        #fff 2px
+      );
+      pointer-events: none;
+    }
+
     .expandable-table-toolbar {
       display: flex;
       justify-content: flex-end;
@@ -304,7 +393,3 @@
     margin-top: 8px;
   }
 }
-
-
-
-
