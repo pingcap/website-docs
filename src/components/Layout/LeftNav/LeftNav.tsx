@@ -56,6 +56,59 @@ function shouldShowVersionSelect(
   );
 }
 
+function LeftNavTitle({ selectedNavItem }: { selectedNavItem: NavItemConfig }) {
+  const theme = useTheme();
+  const endIcon = selectedNavItem.leftNavEndIcon ?? selectedNavItem.endIcon;
+  const hasEndIcon = endIcon !== null && endIcon !== undefined;
+
+  return (
+    <Box
+      sx={{
+        borderRadius: "4px",
+        "&:hover": {
+          backgroundColor: theme.palette.carbon[200],
+        },
+      }}
+    >
+      <LinkComponent
+        isI18n={selectedNavItem.isI18n ?? true}
+        to={selectedNavItem.to}
+        style={{ textDecoration: "none", display: "block" }}
+        onClick={() => {
+          clearAllNavStates();
+        }}
+      >
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            fontSize: "18px",
+            fontWeight: 700,
+            color: theme.palette.carbon[900],
+            padding: "8px",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          {selectedNavItem.leftNavLabel ?? selectedNavItem.label}
+          {hasEndIcon && (
+            <Box
+              component="span"
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              {endIcon}
+            </Box>
+          )}
+        </Typography>
+      </LinkComponent>
+    </Box>
+  );
+}
+
 export function LeftNavDesktop(props: LeftNavProps) {
   const {
     data,
@@ -67,7 +120,6 @@ export function LeftNavDesktop(props: LeftNavProps) {
     selectedNavItem,
     namespace,
   } = props;
-  const theme = useTheme();
 
   return (
     <Box
@@ -96,50 +148,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
       >
         <LeftNavStickyContainer top={0} paddingTop="20px">
           {selectedNavItem && (
-            <Box
-              sx={{
-                borderRadius: "4px",
-                "&:hover": {
-                  backgroundColor: theme.palette.carbon[200],
-                },
-              }}
-            >
-              <LinkComponent
-                isI18n={selectedNavItem.isI18n ?? true}
-                to={selectedNavItem.to}
-                style={{ textDecoration: "none", display: "block" }}
-                onClick={() => {
-                  clearAllNavStates();
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: "18px",
-                    fontWeight: 700,
-                    color: theme.palette.carbon[900],
-                    padding: "8px",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 1,
-                  }}
-                >
-                  {selectedNavItem.leftNavLabel ?? selectedNavItem.label}
-                  {selectedNavItem.endIcon && (
-                    <Box
-                      component="span"
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {selectedNavItem.endIcon}
-                    </Box>
-                  )}
-                </Typography>
-              </LinkComponent>
-            </Box>
+            <LeftNavTitle selectedNavItem={selectedNavItem} />
           )}
 
           {shouldShowVersionSelect(namespace, pathConfig.repo, buildType) && (
@@ -162,8 +171,16 @@ export function LeftNavDesktop(props: LeftNavProps) {
 }
 
 export function LeftNavMobile(props: LeftNavProps) {
-  const { data, current, name, pathConfig, availIn, buildType, namespace } =
-    props;
+  const {
+    data,
+    current,
+    name,
+    pathConfig,
+    availIn,
+    buildType,
+    namespace,
+    selectedNavItem,
+  } = props;
 
   const [open, setOpen] = React.useState(false);
 
@@ -224,6 +241,11 @@ export function LeftNavMobile(props: LeftNavProps) {
 
         <Divider />
         <Box sx={{ width: "17.125rem", padding: "1rem" }}>
+          {selectedNavItem && (
+            <Box sx={{ marginBottom: 1 }}>
+              <LeftNavTitle selectedNavItem={selectedNavItem} />
+            </Box>
+          )}
           <LeftNavTree data={data} current={current} />
         </Box>
       </Drawer>

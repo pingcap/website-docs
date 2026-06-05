@@ -39,7 +39,8 @@
     "tidbOperatorReleases": "TiDB Operator 版本发布记录",
     "tiupReleases": "TiUP 版本发布记录",
     "badge": {
-      "preview": "Preview"
+      "preview": "Preview",
+      "beta": "Beta"
     },
     "appdev": "开发指南",
     "asktug": "社区",

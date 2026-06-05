@@ -41,7 +41,8 @@
     "tidbOperatorReleases": "TiDB Operator Releases",
     "tiupReleases": "TiUP Releases",
     "badge": {
-      "preview": "Preview"
+      "preview": "Preview",
+      "beta": "Beta"
     },
     "appdev": "App Dev",
     "asktug": "Forum",
