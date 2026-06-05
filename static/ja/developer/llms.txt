@@ -73,7 +73,7 @@
     -   [複数テーブル結合クエリ](https://docs.pingcap.com/ja/developer/dev-guide-join-tables.md): このドキュメントでは、複数テーブル結合クエリの使用方法について説明します。
     -   [サブクエリ](https://docs.pingcap.com/ja/developer/dev-guide-use-subqueries.md): TiDB でサブクエリを使用する方法を学びます。
     -   [結果のページ分割](https://docs.pingcap.com/ja/developer/dev-guide-paginate-results.md): TiDB にページ区切り結果機能を導入します。
-    -   [閲覧数](https://docs.pingcap.com/ja/developer/dev-guide-use-views.md): TiDB でビューを使用する方法を学習します。
+    -   [ビュー](https://docs.pingcap.com/ja/developer/dev-guide-use-views.md): TiDB でビューを使用する方法を学習します。
     -   [一時テーブル](https://docs.pingcap.com/ja/developer/dev-guide-use-temporary-tables.md): 一時テーブルを作成、表示、クエリ、および削除する方法を学習します。
     -   [共通テーブル式](https://docs.pingcap.com/ja/developer/dev-guide-use-common-table-expression.md): SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
     -   レプリカデータの読み取り
@@ -81,9 +81,9 @@
         -   [ステイル読み取り](https://docs.pingcap.com/ja/developer/dev-guide-use-stale-read.md): 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。
     -   [HTAPクエリ](https://docs.pingcap.com/ja/developer/dev-guide-hybrid-oltp-and-olap-queries.md): TiDB に HTAP クエリを導入します。
 -   [ベクトル検索](https://docs.pingcap.com/ja/developer/dev-guide-vector-search.md): 概念、チュートリアル、統合、リファレンス ドキュメントなど、開発者向けに TiDB のベクトル検索機能を紹介します。![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
--   取引の管理
+-   トランザクションの管理
     -   [概要](https://docs.pingcap.com/ja/developer/dev-guide-transaction-overview.md): TiDB のトランザクションの簡単な紹介。
-    -   [楽観的取引と悲観的取引](https://docs.pingcap.com/ja/developer/dev-guide-optimistic-and-pessimistic-transaction.md): TiDB の楽観的と悲観的トランザクションについて学習します。
+    -   [楽観的トランザクションと悲観的トランザクション](https://docs.pingcap.com/ja/developer/dev-guide-optimistic-and-pessimistic-transaction.md): TiDB の楽観的と悲観的トランザクションについて学習します。
     -   [トランザクション制限](https://docs.pingcap.com/ja/developer/dev-guide-transaction-restraints.md): TiDBにおけるトランザクション制約について学びましょう。
     -   [トランザクションエラーの処理](https://docs.pingcap.com/ja/developer/dev-guide-transaction-troubleshoot.md): デッドロックやアプリケーション再試行エラーなどのトランザクション エラーを処理する方法について学習します。
 -   最適化する

@@ -4,7 +4,7 @@
 
 ## 概要 {#overview}
 
--   [TiDBを使用する](https://docs.pingcap.com/ja/best-practices/tidb-best-practices.md): このドキュメントでは、TiDBの使用に関するベストプラクティスをまとめ、OLAPおよびOLTPシナリオにおけるSQLの使用と最適化のヒント、特にTiDB固有の最適化オプションに焦点を当てています。また、ベストプラクティスに進む前に、TiDBの技術的原理を紹介する3つのブログ記事を読むことを推奨しています。
+-   [TiDBを使用する](https://docs.pingcap.com/ja/best-practices/tidb-best-practices.md): このドキュメントでは、TiDB の最適な使用方法について、SQL の使用方法や OLAP および OLTP シナリオにおける最適化のヒントを、TiDB 固有の最適化オプションに焦点を当てて解説します。また、最適な使用方法について詳しく見ていく前に、TiDB の技術原理を紹介する 3 つのブログ記事を読むことをお勧めします。
 
 ## スキーマ設計 {#schema-design}
 

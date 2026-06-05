@@ -51,6 +51,7 @@
   - Monitor and Alert
     - [Overview](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster.md): Learn how to monitor your TiDB Cloud resource.
     - [Built-in Metrics](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium.md): Learn how to view TiDB Cloud Premium built-in metrics and understand the meanings of these metrics.
+    - [Top RU](https://docs.pingcap.com/tidbcloud/top-ru.md): Learn how to use Top RU to identify the SQL statements and database users with the highest Request Unit (RU) consumption at one-minute granularity.
     - [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications from TiDB Cloud.
     - [Integrate TiDB Cloud with Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/prometheus-grafana-integration.md): Learn how to monitor your TiDB Cloud instances with the Prometheus and Grafana integration.
     - Subscribe to Alert Notifications
@@ -149,7 +150,7 @@
     - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via a private endpoint on Alibaba Cloud.
     - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-premium.md): Introduce TLS connections in TiDB Cloud Premium.
   - Data Access Control
-    - [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium.md): Learn how to enable and manage Dual-Layer Data Encryption for your TiDB Cloud Premium instance hosted on AWS.
+    - [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium.md): Learn how to enable and manage Dual-Layer Data Encryption for your TiDB Cloud Premium instance.
     - [User-Controlled Log Redaction](https://docs.pingcap.com/tidbcloud/tidb-cloud-log-redaction.md): Learn how to enable or disable user-controlled log redaction in TiDB Cloud to manage the visibility of sensitive data in execution logs.
   - Audit Management
     - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium.md): Learn how to audit an instance in TiDB Cloud Premium.

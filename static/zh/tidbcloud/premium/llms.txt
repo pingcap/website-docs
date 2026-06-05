@@ -51,6 +51,7 @@
   - 监控和告警
     - [概览](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster.md): 了解如何监控你的 TiDB Cloud 资源。
     - [内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring-premium.md): 了解如何查看 TiDB Cloud Premium 内置指标以及这些指标的含义。
+    - [Top RU](https://docs.pingcap.com/zh/tidbcloud/top-ru.md): 了解如何使用 Top RU 以一分钟粒度识别 Request Unit (RU) 消耗最高的 SQL 语句和数据库用户。
     - [内置告警](https://docs.pingcap.com/zh/tidbcloud/monitor-built-in-alerting.md): 了解如何通过 TiDB Cloud 获取告警通知来监控你的 TiDB Cloud 资源。
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](https://docs.pingcap.com/zh/tidbcloud/prometheus-grafana-integration.md): 了解如何通过 Prometheus 和 Grafana 集成监控你的 TiDB Cloud 实例。
     - 订阅告警通知
@@ -149,7 +150,7 @@
     - [通过 Alibaba Cloud Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): 了解如何通过 Alibaba Cloud 上的私有端点连接到你的 TiDB Cloud Premium 实例。
     - [通过 TLS 连接到 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tls-connect-to-premium.md): 介绍 TiDB Cloud Premium 中的 TLS 连接。
   - 数据访问控制
-    - [双层数据加密](https://docs.pingcap.com/zh/tidbcloud/dual-layer-data-encryption-premium.md): 了解如何为托管在 AWS 上的 TiDB Cloud Premium 实例启用和管理双层数据加密。
+    - [双层数据加密](https://docs.pingcap.com/zh/tidbcloud/dual-layer-data-encryption-premium.md): 了解如何为 TiDB Cloud Premium 实例启用和管理双层数据加密。
     - [用户可控的日志脱敏](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-log-redaction.md): 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱敏功能，以管理执行日志中敏感数据的可见性。
   - 审计管理
     - [数据库审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-auditing-premium.md): 了解如何在 TiDB Cloud Premium 中审计实例。

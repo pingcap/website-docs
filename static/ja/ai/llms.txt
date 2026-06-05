@@ -28,7 +28,7 @@
     -   [再ランキング](https://docs.pingcap.com/ja/ai/reranking.md): アプリケーションで再ランキングを使用する方法を学習します。
     -   [結合クエリ](https://docs.pingcap.com/ja/ai/join-queries.md): アプリケーションで複数のテーブル結合を使用する方法を学習します。
     -   [生のSQLクエリ](https://docs.pingcap.com/ja/ai/raw-queries.md): アプリケーションで生のクエリを使用する方法を学習します。
-    -   [取引](https://docs.pingcap.com/ja/ai/transactions.md): アプリケーションでトランザクションを使用する方法を学びます。
+    -   [トランザクション](https://docs.pingcap.com/ja/ai/transactions.md): アプリケーションでトランザクションを使用する方法を学びます。
 
 ## 例 {#examples}
 

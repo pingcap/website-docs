@@ -35,7 +35,7 @@
         -   [ネットワーク接続の概要](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster-serverless.md): TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにさまざまな方法で接続する方法を学びましょう。
         -   [パブリックエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/connect-via-standard-connection-serverless.md): パブリックエンドポイントを介して、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法を学びましょう。
         -   [AWS のプライベートエンドポイント経由で接続します](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-serverless.md): プライベートエンドポイントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続する方法を学びましょう。
-        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Alibaba Cloudのプライベートエンドポイントを介してTiDB Cloudクラスターに接続する方法を学びましょう。
+        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Alibaba Cloudのプライベートエンドポイントを介して、TiDB Cloud StarterまたはEssentialインスタンスに接続する方法を学びましょう。
     -   ブランチ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
         -   [概要](https://docs.pingcap.com/ja/tidbcloud/branch-overview.md): TiDB Cloudのブランチの概念を学びましょう。
         -   [支店の管理](https://docs.pingcap.com/ja/tidbcloud/branch-manage.md): TiDB Cloudブランチの管理方法を学びましょう。
@@ -56,6 +56,7 @@
     -   監視と警告
         -   [概要](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster.md): TiDB Cloudリソースの監視方法を学びましょう。
         -   [組み込みの指標](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring.md): TiDB Cloudに組み込まれているメトリクスを表示する方法と、これらのメトリクスの意味を理解する方法を学びましょう。
+        -   [トップRU](https://docs.pingcap.com/ja/tidbcloud/top-ru.md): Top RUを使用して、1分単位の粒度で最もリクエストユニット（RU）消費量が多いSQLステートメントとデータベースユーザーを特定する方法を学びましょう。
         -   [内蔵アラート機能](https://docs.pingcap.com/ja/tidbcloud/monitor-built-in-alerting.md): TiDB Cloudからアラート通知を受け取ることで、 TiDB Cloudリソースを監視する方法を学びましょう。
         -   [TiDB CloudをPrometheusおよびGrafanaと統合する](https://docs.pingcap.com/ja/tidbcloud/prometheus-grafana-integration.md): PrometheusとGrafanaの連携機能を使って、 TiDB Cloudインスタンスを監視する方法を学びましょう。
         -   アラート通知を購読する
@@ -140,7 +141,7 @@
         -   [AWS DMSをTiDB Cloudに接続する](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-connect-aws-dms.md): AWS Database Migration Service (AWS DMS) を使用して、 TiDB Cloudとの間でデータを移行する方法を学びます。
 -   ストリームデータ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     -   [変更フィードの概要](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-overview.md): TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスにデータをストリーミングできます。
-    -   [MySQLにシンクする](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-mysql.md): このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloud Essentialから MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
+    -   [MySQLへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-mysql.md): このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloud Essentialから MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
     -   [Apache Kafkaへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-kafka.md): このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用チェンジフィードの設定手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの設定が含まれます。
 -   Security
     -   [Security概要](https://docs.pingcap.com/ja/tidbcloud/security-overview.md): TiDB Cloudの包括的なセキュリティフレームワークについて学びましょう。これには、ID管理、ネットワーク分離、データ保護、アクセス制御、監査などが含まれます。
@@ -152,7 +153,7 @@
         -   [OAuth 2.0](https://docs.pingcap.com/ja/tidbcloud/oauth2.md): TiDB Cloudで OAuth 2.0 を使用する方法について説明します。
     -   ネットワークアクセス制御
         -   [AWS のプライベートエンドポイント経由で接続します](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-serverless.md): プライベートエンドポイントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続する方法を学びましょう。
-        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Alibaba Cloudのプライベートエンドポイントを介してTiDB Cloudクラスターに接続する方法を学びましょう。
+        -   [Alibaba Cloudとプライベートエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Alibaba Cloudのプライベートエンドポイントを介して、TiDB Cloud StarterまたはEssentialインスタンスに接続する方法を学びましょう。
         -   [パブリックエンドポイントのファイアウォールルールを設定する](https://docs.pingcap.com/ja/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints.md): TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへのパブリックアクセスを安全に設定および管理するためのファイアウォールルールの構成方法を学びましょう。
         -   [TiDB CloudへのTLS接続](https://docs.pingcap.com/ja/tidbcloud/secure-connections-to-serverless-clusters.md): TiDB Cloud Starter およびTiDB Cloud Essential に TLS 接続を導入します。
     -   プライベートリンク接続
