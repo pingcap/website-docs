@@ -215,6 +215,7 @@ function DocTemplate({
             pathConfig={pathConfig}
             availIn={availIn.version}
             availablePlans={availablePlans}
+            buildType={buildType}
             selectedNavItem={selectedNavItem}
             namespace={namespace}
           />
