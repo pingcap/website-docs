@@ -51,6 +51,7 @@
     -   監視と警告
         -   [概要](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster.md): TiDB Cloudリソースの監視方法を学びましょう。
         -   [組み込みの指標](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring-premium.md): TiDB Cloud Premiumに組み込まれているメトリクスを表示する方法と、これらのメトリクスの意味を理解する方法を学びましょう。
+        -   [トップRU](https://docs.pingcap.com/ja/tidbcloud/top-ru.md): Top RUを使用して、1分単位の粒度で最もリクエストユニット（RU）消費量が多いSQLステートメントとデータベースユーザーを特定する方法を学びましょう。
         -   [内蔵アラート機能](https://docs.pingcap.com/ja/tidbcloud/monitor-built-in-alerting.md): TiDB Cloudからアラート通知を受け取ることで、 TiDB Cloudリソースを監視する方法を学びましょう。
         -   [TiDB CloudをPrometheusおよびGrafanaと統合する](https://docs.pingcap.com/ja/tidbcloud/prometheus-grafana-integration.md): PrometheusとGrafanaの連携機能を使って、 TiDB Cloudインスタンスを監視する方法を学びましょう。
         -   アラート通知を購読する
@@ -149,7 +150,8 @@
         -   [Alibaba Cloudとプライベートエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Alibaba Cloud上のプライベートエンドポイントを介してTiDB Cloud Premiumインスタンスに接続する方法を学びましょう。
         -   [TiDB CloudへのTLS接続](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tls-connect-to-premium.md): TiDB Cloud PremiumにTLS接続を導入します。
     -   データアクセス制御
-        -   [二重層データ暗号化](https://docs.pingcap.com/ja/tidbcloud/dual-layer-data-encryption-premium.md): AWS上でホストされているTiDB Cloud Premiumインスタンスで、二重層データ暗号化を有効化および管理する方法を学びましょう。
+        -   [二重層データ暗号化](https://docs.pingcap.com/ja/tidbcloud/dual-layer-data-encryption-premium.md): TiDB Cloud Premiumインスタンスでデュアルレイヤーデータ暗号化を有効化および管理する方法を学びましょう。
+        -   [ユーザーによるログの編集](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-log-redaction.md): TiDB Cloudでユーザーが制御するログのマスキングを有効または無効にする方法を学び、実行ログ内の機密データの可視性を管理しましょう。
     -   監査管理
         -   [データベース監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-auditing-premium.md): TiDB Cloud Premiumでインスタンスを監査する方法を学びましょう。
         -   [コンソール監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-console-auditing.md): TiDB Cloudコンソールの監査ログ機能について学習します。

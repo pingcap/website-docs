@@ -56,6 +56,7 @@
   - 监控和告警
     - [概览](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster.md): 了解如何监控你的 TiDB Cloud 资源。
     - [内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring.md): 了解如何查看 TiDB Cloud 内置统计/指标（信息）以及这些统计/指标（信息）的含义。
+    - [Top RU](https://docs.pingcap.com/zh/tidbcloud/top-ru.md): 了解如何使用 Top RU 以一分钟粒度识别 Request Unit (RU) 消耗最高的 SQL 语句和数据库用户。
     - [内置告警](https://docs.pingcap.com/zh/tidbcloud/monitor-built-in-alerting.md): 了解如何通过 TiDB Cloud 获取告警通知来监控你的 TiDB Cloud 资源。
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](https://docs.pingcap.com/zh/tidbcloud/prometheus-grafana-integration.md): 了解如何通过 Prometheus 和 Grafana 集成监控你的 TiDB Cloud 实例。
     - 订阅告警通知

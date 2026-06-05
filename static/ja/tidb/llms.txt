@@ -107,7 +107,7 @@
 -   管理
     -   Security
         -   [TiDBSecurityコンフィグレーションのベストプラクティス](https://docs.pingcap.com/ja/tidb/stable/best-practices-for-security-configuration.md): 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベスト プラクティスを学習します。
-        -   [TiDBクライアントとサーバー間でTLSを有効にする](https://docs.pingcap.com/ja/tidb/stable/enable-tls-between-clients-and-servers.md): データのセキュリティを確保するには、安全な接続を使用します。
+        -   [TiDBクライアントとサーバー間でTLSを有効にする](https://docs.pingcap.com/ja/tidb/stable/enable-tls-between-clients-and-servers.md): データセキュリティを確保するため、安全な接続を使用してください。
         -   [TiDBコンポーネント間でTLSを有効にする](https://docs.pingcap.com/ja/tidb/stable/enable-tls-between-components.md): TiDB コンポーネント間の TLS 認証を有効にする方法を学習します。
         -   [自己署名証明書を生成する](https://docs.pingcap.com/ja/tidb/stable/generate-self-signed-certificates.md): openssl` を使用して自己署名証明書を生成します。
         -   [保存時の暗号化](https://docs.pingcap.com/ja/tidb/stable/encryption-at-rest.md): 機密データを保護するために保存時の暗号化を有効にする方法を学びます。
@@ -130,7 +130,7 @@
             -   [ログバックアップとPITRアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/br-log-architecture.md): TiDBのログバックアップとPITRアーキテクチャは、バックアップ＆リストア（BR）ツールを例として紹介します。このアーキテクチャには、ログバックアッププロセスの設計、システムコンポーネント、および主要な概念が含まれます。PITRプロセスでは、フルバックアップデータとログバックアップデータをリストアします。ログバックアップでは、ログデータ、メタデータ、グローバルチェックポイントなどのファイルが生成されます。
         -   BRを使用する
             -   [使用概要](https://docs.pingcap.com/ja/tidb/stable/br-use-overview.md): TiDB バックアップ＆リストアは、バックアップ方法の選択、バックアップデータの管理、ツールの導入に関するベストプラクティスを提供します。フルバックアップとログバックアップの両方の使用、推奨storageシステムへのデータの保存、バックアップ保持期間の設定が推奨されています。ツールは、コマンドラインツール、SQL文、またはKubernetes上のTiDB Operatorを使用して導入できます。詳細な使用方法については、付属のドキュメントをご覧ください。
-            -   [スナップショットのバックアップと復元ガイド](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-guide.md): このドキュメントでは、br コマンドラインツールを使用して TiDB スナップショットをバックアップおよび復元する方法について説明します。スナップショットのバックアップ、指定した時点のデータの復元、データベースまたはテーブルの復元の手順が含まれています。また、スナップショットのバックアップと復元のパフォーマンスと影響についても説明します。
+            -   [スナップショットのバックアップと復元ガイド](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-guide.md): このドキュメントでは、brコマンドラインツールを使用してTiDBスナップショットをバックアップおよび復元する方法について説明します。スナップショットのバックアップ、指定した時点のデータ復元、データベースまたはテーブルの復元に関する手順が含まれています。また、スナップショットのバックアップと復元のパフォーマンスと影響についても解説します。
             -   [ログバックアップとPITRガイド](https://docs.pingcap.com/ja/tidb/stable/br-pitr-guide.md): TiDB ログバックアップおよび PITR ガイドでは、br コマンドラインツールを使用してデータをバックアップおよび復元する方法について説明します。ログバックアップの開始、定期的な完全バックアップの実行、古いデータのクリーンアップの手順が含まれています。また、PITR の実行方法と PITR のパフォーマンス機能に関する情報も提供します。
             -   [コンパクトログバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-compact-log-backup.md): ログ バックアップを SST 形式に圧縮することで、ポイントインタイム リカバリ (PITR) の効率を向上させる方法を学習します。
             -   [ユースケース](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-use-cases.md): TiDBは、タイムリーなデータリカバリやビジネス監査など、特定のユースケース向けにスナップショットおよびログバックアップソリューションを提供します。ポイントインタイムリカバリ（PITR）を使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンに更新してください。Amazon S3にバックアップstorageを設定し、データ損失とリカバリの要件を満たすバックアップポリシーを設定してください。ログバックアップとスナップショットバックアップを実行し、PITRを使用して特定の時点にデータを復元します。古くなったデータは定期的にクリーンアップしてください。詳細な手順については、TiDBのドキュメントをご覧ください。
@@ -263,7 +263,7 @@
             -   [MPPに関する質問](https://docs.pingcap.com/ja/tidb/stable/explain-mpp.md): TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
             -   [サブクエリ](https://docs.pingcap.com/ja/tidb/stable/explain-subqueries.md): TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
             -   [集計](https://docs.pingcap.com/ja/tidb/stable/explain-aggregation.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
-            -   [閲覧数](https://docs.pingcap.com/ja/tidb/stable/explain-views.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
+            -   [ビュー](https://docs.pingcap.com/ja/tidb/stable/explain-views.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
             -   [パーティション](https://docs.pingcap.com/ja/tidb/stable/explain-partitions.md): TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
             -   [インデックスマージ](https://docs.pingcap.com/ja/tidb/stable/explain-index-merge.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
         -   SQL最適化プロセス
@@ -602,7 +602,7 @@
     -   [システム変数リファレンス](https://docs.pingcap.com/ja/tidb/stable/system-variable-reference.md): すべての TiDB システム変数とドキュメント内の参照のリスト。
     -   [サーバー状態変数](https://docs.pingcap.com/ja/tidb/stable/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
     -   コンフィグレーションファイルパラメータ
-        -   [tidb-server](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file.md): コマンドライン オプションに関係しない TiDB 構成ファイル オプションについて学習します。
+        -   [tidb-server](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file.md): コマンドラインオプションに関係しない、TiDB設定ファイルオプションについて学びましょう。
         -   [tikvサーバー](https://docs.pingcap.com/ja/tidb/stable/tikv-configuration-file.md): TiKVの設定ファイルについて学びましょう。
         -   [tiflash-server](https://docs.pingcap.com/ja/tidb/stable/tiflash-configuration.md): TiFlash の設定方法を学びます。
         -   [pd-server](https://docs.pingcap.com/ja/tidb/stable/pd-configuration-file.md): PD 構成ファイルについて学習します。
@@ -621,7 +621,7 @@
         -   [パフォーマンス概要](https://docs.pingcap.com/ja/tidb/stable/grafana-performance-overview-dashboard.md): パフォーマンス概要ダッシュボードに表示される主要な指標を確認します。
         -   [TiDB](https://docs.pingcap.com/ja/tidb/stable/grafana-tidb-dashboard.md): Grafana TiDB ダッシュボードに表示されるいくつかの主要なメトリックについて学習します。
         -   [PD](https://docs.pingcap.com/ja/tidb/stable/grafana-pd-dashboard.md): Grafana PD ダッシュボードに表示されるいくつかの主要なメトリックについて学習します。
-        -   [ティクヴ](https://docs.pingcap.com/ja/tidb/stable/grafana-tikv-dashboard.md): Grafana TiKVダッシュボードに表示される主要な指標について学びましょう。
+        -   [TiKV](https://docs.pingcap.com/ja/tidb/stable/grafana-tikv-dashboard.md): Grafana TiKVダッシュボードに表示される主要な指標について学びましょう。
         -   [TiFlash](https://docs.pingcap.com/ja/tidb/stable/monitor-tiflash.md): TiFlashの監視項目について学びます。
         -   [TiCDC](https://docs.pingcap.com/ja/tidb/stable/monitor-ticdc.md): Grafana TiCDC ダッシュボードに表示されるいくつかの主要なメトリックについて学習します。
         -   [リソース制御](https://docs.pingcap.com/ja/tidb/stable/grafana-resource-control-dashboard.md): Grafana Resource Control ダッシュボードに表示される主要なメトリックをいくつか学習します。
@@ -855,14 +855,14 @@
         -   [生成された列](https://docs.pingcap.com/ja/tidb/stable/generated-columns.md): 生成された列の使用方法を学習します。
         -   [SQLモード](https://docs.pingcap.com/ja/tidb/stable/sql-mode.md): SQLモードを学習する。
         -   [テーブル属性](https://docs.pingcap.com/ja/tidb/stable/table-attributes.md): TiDB のテーブル属性機能の使用方法を学習します。
-        -   取引
+        -   トランザクション
             -   [概要](https://docs.pingcap.com/ja/tidb/stable/transaction-overview.md): TiDB でのトランザクションについて学習します。
             -   [隔離レベル](https://docs.pingcap.com/ja/tidb/stable/transaction-isolation-levels.md): TiDB のトランザクション分離レベルについて学習します。
-            -   [楽観的な取引](https://docs.pingcap.com/ja/tidb/stable/optimistic-transaction.md): TiDBにおける楽観的トランザクションモデルについて学びましょう。
-            -   [悲観的な取引](https://docs.pingcap.com/ja/tidb/stable/pessimistic-transaction.md): TiDBにおける悲観的トランザクションモードについて学びましょう。
+            -   [楽観的トランザクション](https://docs.pingcap.com/ja/tidb/stable/optimistic-transaction.md): TiDBにおける楽観的トランザクションモデルについて学びましょう。
+            -   [悲観的トランザクション](https://docs.pingcap.com/ja/tidb/stable/pessimistic-transaction.md): TiDBにおける悲観的トランザクションモードについて学びましょう。
             -   [非トランザクションDMLステートメント](https://docs.pingcap.com/ja/tidb/stable/non-transactional-dml.md): TiDBの非トランザクションDMLステートメントについて学びましょう。アトミック性と独立性を犠牲にして、DMLステートメントを複数のステートメントに分割し、順番に実行することで、バッチデータ処理シナリオにおける安定性と使いやすさを向上させます。
             -   [パイプラインDML](https://docs.pingcap.com/ja/tidb/stable/pipelined-dml.md): パイプラインDMLのユースケース、メソッド、制限事項、FAQを紹介します。パイプラインDMLはTiDBのバッチ処理機能を強化し、トランザクションサイズがTiDBのメモリ制限を回避できるようにします。
-        -   [閲覧数](https://docs.pingcap.com/ja/tidb/stable/views.md): TiDB でビューを使用する方法を学習します。
+        -   [ビュー](https://docs.pingcap.com/ja/tidb/stable/views.md): TiDB でビューを使用する方法を学習します。
         -   [パーティショニング](https://docs.pingcap.com/ja/tidb/stable/partitioned-table.md): TiDBにおけるパーティショニングの使い方を学びましょう。
         -   [一時テーブル](https://docs.pingcap.com/ja/tidb/stable/temporary-tables.md): TiDB の一時テーブル機能について学習し、一時テーブルを使用してアプリケーションの中間データを保存する方法を学習します。これにより、テーブル管理のオーバーヘッドが削減され、パフォーマンスが向上します。
         -   [キャッシュされたテーブル](https://docs.pingcap.com/ja/tidb/stable/cached-tables.md): めったに更新されない小さなホットスポット テーブルで読み取りパフォーマンスを向上させるために使用される、TiDB のキャッシュ テーブル機能について学習します。

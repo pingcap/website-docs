@@ -56,6 +56,7 @@
   - Monitor and Alert
     - [Overview](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster.md): Learn how to monitor your TiDB Cloud resource.
     - [Built-in Metrics](https://docs.pingcap.com/tidbcloud/built-in-monitoring.md): Learn how to view TiDB Cloud built-in metrics and understand the meanings of these metrics.
+    - [Top RU](https://docs.pingcap.com/tidbcloud/top-ru.md): Learn how to use Top RU to identify the SQL statements and database users with the highest Request Unit (RU) consumption at one-minute granularity.
     - [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications from TiDB Cloud.
     - [Integrate TiDB Cloud with Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/prometheus-grafana-integration.md): Learn how to monitor your TiDB Cloud instances with the Prometheus and Grafana integration.
     - Subscribe to Alert Notifications
