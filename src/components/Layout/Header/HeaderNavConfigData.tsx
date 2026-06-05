@@ -160,6 +160,7 @@ const getDefaultNavConfig = (
   {
     type: "item",
     label: t("navbar.developer"),
+    leftNavLabel: t("navbar.developerGuide"),
     to: "/developer",
     selected: (namespace) => namespace === TOCNamespace.Develop,
   },
