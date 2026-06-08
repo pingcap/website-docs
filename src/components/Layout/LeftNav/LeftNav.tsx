@@ -58,8 +58,8 @@ function shouldShowVersionSelect(
 
 function LeftNavTitle({ selectedNavItem }: { selectedNavItem: NavItemConfig }) {
   const theme = useTheme();
-  const endIcon = selectedNavItem.leftNavEndIcon ?? selectedNavItem.endIcon;
-  const hasEndIcon = endIcon !== null && endIcon !== undefined;
+  const hasEndIcon =
+    selectedNavItem.endIcon !== null && selectedNavItem.endIcon !== undefined;
 
   return (
     <Box
@@ -100,7 +100,7 @@ function LeftNavTitle({ selectedNavItem }: { selectedNavItem: NavItemConfig }) {
                 alignItems: "center",
               }}
             >
-              {endIcon}
+              {selectedNavItem.endIcon}
             </Box>
           )}
         </Typography>

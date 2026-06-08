@@ -10,8 +10,6 @@ export interface NavItemConfig {
   label: string | ReactNode;
   /** Optional alias label displayed in left navigation title */
   leftNavLabel?: string | ReactNode;
-  /** Optional icon after the left navigation title */
-  leftNavEndIcon?: ReactNode;
   /** Navigation URL */
   to: string;
   /** Optional icon before label */

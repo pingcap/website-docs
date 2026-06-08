@@ -152,8 +152,12 @@ const getDefaultNavConfig = (
   {
     type: "item",
     label: t("navbar.ai"),
-    leftNavLabel: t("navbar.tidbForAI"),
-    leftNavEndIcon: <BetaTagBadge label={t("navbar.badge.beta")} />,
+    leftNavLabel: (
+      <>
+        {t("navbar.tidbForAI")}
+        <BetaTagBadge label={t("navbar.badge.beta")} />
+      </>
+    ),
     to: "/ai",
     selected: (namespace) => namespace === TOCNamespace.AI,
   },
