@@ -24,6 +24,7 @@
     "ai": "AI",
     "tidbForAI": "TiDB for AI",
     "developer": "Developer",
+    "developerGuide": "Developer Guide",
     "bestPractices": "Best Practices",
     "api": "API",
     "releases": "Releases",
@@ -41,7 +42,8 @@
     "tidbOperatorReleases": "TiDB Operator Releases",
     "tiupReleases": "TiUP Releases",
     "badge": {
-      "preview": "Preview"
+      "preview": "Preview",
+      "beta": "Beta"
     },
     "appdev": "App Dev",
     "asktug": "Forum",

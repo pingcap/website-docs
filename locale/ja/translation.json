@@ -23,7 +23,8 @@
     "product": "製品",
     "ai": "AI",
     "tidbForAI": "TiDB for AI",
-    "developer": "開発者向け",
+    "developer": "開発者",
+    "developerGuide": "開発者ガイド",
     "bestPractices": "ベストプラクティス",
     "api": "API",
     "releases": "リリース",
@@ -41,7 +42,8 @@
     "tidbOperatorReleases": "TiDB Operator リリース",
     "tiupReleases": "TiUP リリース",
     "badge": {
-      "preview": "Preview"
+      "preview": "Preview",
+      "beta": "Beta"
     },
     "appdev": "アプリ開発",
     "asktug": "Forum",
