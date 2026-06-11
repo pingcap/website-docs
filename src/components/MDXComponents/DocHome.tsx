@@ -341,7 +341,7 @@ export function DocHomeCardContainer(props: any) {
           sm: "grid",
         },
         flexDirection: "column",
-        gridTemplateColumns: "repeat(auto-fill, minmax(224px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(224px, 1fr))",
         gap: "1.25rem",
 
         "& > a.doc-home-card": {
