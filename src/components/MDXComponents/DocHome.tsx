@@ -341,9 +341,8 @@ export function DocHomeCardContainer(props: any) {
           sm: "grid",
         },
         flexDirection: "column",
-        gridTemplateColumns: "repeat(auto-fit, minmax(224px, 30%))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(224px, 1fr))",
         gap: "1.25rem",
-        justifyContent: "start",
 
         "& > a.doc-home-card": {
           backgroundColor: theme.palette.carbon[50],
@@ -386,6 +385,7 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
       referrerPolicy="no-referrer-when-downgrade"
       href={href}
       sx={(theme) => ({
+        display: "block",
         position: "relative",
         zIndex: 0,
         padding: "24px",
