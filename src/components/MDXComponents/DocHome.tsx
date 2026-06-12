@@ -341,10 +341,7 @@ export function DocHomeCardContainer(props: any) {
           sm: "grid",
         },
         flexDirection: "column",
-        gridTemplateColumns: {
-          sm: "repeat(2, minmax(0, 1fr))",
-          lg: "repeat(3, minmax(0, 1fr))",
-        },
+        gridTemplateColumns: "repeat(auto-fit, minmax(224px, 30%))",
         gap: "1.25rem",
         justifyContent: "start",
 
@@ -366,7 +363,6 @@ interface DocHomeCardProps {
   icon: string;
   label: string;
   colSpan?: 1 | 2 | 3;
-  colspan?: 1 | 2 | 3;
   actionBtnLabel?: string;
   ctaGraphic?: string;
 }
@@ -378,11 +374,9 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
     icon = "global-tidb-product",
     label,
     colSpan,
-    colspan,
     actionBtnLabel,
     ctaGraphic,
   } = props;
-  const cardColSpan = colSpan ?? colspan;
 
   return (
     <Box
@@ -397,12 +391,7 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
         padding: "24px",
         transition: ".5s",
         border: `1px solid ${theme.palette.carbon[400]}`,
-        gridColumn: cardColSpan
-          ? {
-              sm: `span ${Math.min(cardColSpan, 2)}`,
-              lg: `span ${cardColSpan}`,
-            }
-          : undefined,
+        gridColumn: colSpan ? `span ${colSpan}` : undefined,
 
         "&:hover": {
           background:
