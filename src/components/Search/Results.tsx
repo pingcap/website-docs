@@ -223,21 +223,27 @@ function SearchItem(props: {
             size="small"
             variant="outlined"
             label={categoryLabel}
-            clickable
-            onClick={(e) => {
-              e.preventDefault();
-              onFilterChange?.(category);
-            }}
+            clickable={!!onFilterChange}
+            onClick={
+              onFilterChange
+                ? (e) => {
+                    e.preventDefault();
+                    onFilterChange(category);
+                  }
+                : undefined
+            }
             sx={{
               height: "20px",
               fontSize: "12px",
               borderRadius: "10px",
               backgroundColor: "carbon.100",
               color: "carbon.800",
-              cursor: "pointer",
-              "&:hover": {
-                backgroundColor: "carbon.200",
-              },
+              ...(onFilterChange && {
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "carbon.200",
+                },
+              }),
             }}
           />
         )}
@@ -295,11 +301,16 @@ export function SearchFilterBar(props: {
   const { categoryCountMap, activeFilter, onFilterChange, visible } = props;
   const { t } = useI18next();
 
-  if (!visible || categoryCountMap.size <= 1) {
+  const entries = Array.from(categoryCountMap.entries()).filter(
+    ([category]) => {
+      const labelKey = getSearchCategoryLabelKey(category);
+      return labelKey && t(labelKey);
+    }
+  );
+
+  if (!visible || entries.length <= 1) {
     return null;
   }
-
-  const entries = Array.from(categoryCountMap.entries());
 
   return (
     <Stack
@@ -315,7 +326,6 @@ export function SearchFilterBar(props: {
       </Typography>
       {entries.map(([category, count]) => {
         const label = t(getSearchCategoryLabelKey(category));
-        if (!label) return null;
         const isActive = activeFilter === category;
         return (
           <Chip
