@@ -203,11 +203,11 @@ export function DocHomeContainer(
                   component="div"
                   sx={{
                     paddingLeft: "0.5rem",
-                    color: theme.palette.carbon[700],
+                    paddingBottom: "1rem",
+                    color: theme.palette.website.f1,
                     fontSize: "0.875rem",
-                    fontWeight: "300",
+                    fontWeight: "700",
                     lineHeight: "1.25rem",
-                    paddingBottom: "0.5rem",
                   }}
                 >
                   <Trans i18nKey="doc.toc" />
@@ -243,15 +243,15 @@ export function DocHomeContainer(
                         sx={{
                           display: "flex",
                           textDecoration: "none",
-                          fontSize: "14px",
+                          fontSize: "13px",
                           lineHeight: "1.25rem",
                           borderLeft: `1px solid transparent`,
                           paddingLeft: `0.5rem`,
-                          paddingTop: "0.25rem",
-                          paddingBottom: "0.25rem",
-                          fontWeight: "400",
+                          paddingTop: `4px`,
+                          paddingBottom: `4px`,
                           "&:hover": {
-                            fontWeight: "700",
+                            color: theme.palette.website.f3,
+                            borderLeft: `1px solid ${theme.palette.website.f3}`,
                           },
                         }}
                       >
