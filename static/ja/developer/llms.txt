@@ -61,7 +61,7 @@
     -   [概要](https://docs.pingcap.com/ja/developer/dev-guide-schema-design-overview.md): TiDBデータベースのスキーマ設計の基本を学びましょう。
     -   [データベースを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-database.md): データベースを作成するための手順、ルール、および例を学びましょう。
     -   [テーブルを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-table.md): 表作成における定義、ルール、ガイドラインを学びましょう。
-    -   [セカンダリーインデックスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-secondary-indexes.md): 二次索引を作成するための手順、ルール、および例を学びましょう。
+    -   [セカンダリーインデックスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-secondary-indexes.md): セカンダリインデックスを作成するための手順、ルール、および例を学びましょう。
 -   データを書き込む
     -   [データを挿入する](https://docs.pingcap.com/ja/developer/dev-guide-insert-data.md): データ挿入の方法について学びましょう。
     -   [データの更新](https://docs.pingcap.com/ja/developer/dev-guide-update-data.md): データの更新方法と一括データ更新方法について学びましょう。

@@ -202,7 +202,7 @@
 ## 参照 {#reference}
 
 -   SQLリファレンス
-    -   [TiDBでSQLを探求しよう](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations.md): TiDB データベースの基本的な SQL ステートメントについて学習します。
+    -   [TiDBでSQLを探求しよう](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations.md): TiDBデータベースの基本的なSQL文について学びましょう。
     -   SQL言語の構造と構文
         -   属性
             -   [自動インクリメント](https://docs.pingcap.com/ja/tidbcloud/auto-increment.md): TiDB の AUTO_INCREMENT` 列属性について学習します。

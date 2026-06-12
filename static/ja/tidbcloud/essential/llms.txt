@@ -16,7 +16,7 @@
     -   [概要](https://docs.pingcap.com/ja/tidbcloud/key-concepts.md): TiDB Cloudの主要な概念について学びましょう。
     -   [アーキテクチャ](https://docs.pingcap.com/ja/tidbcloud/architecture-concepts.md): TiDB Cloudのアーキテクチャ概念について学びましょう。
     -   [データベーススキーマ](https://docs.pingcap.com/ja/tidbcloud/database-schema-concepts.md): TiDB Cloudのデータベーススキーマの概念について学びましょう。
-    -   [取引](https://docs.pingcap.com/ja/tidbcloud/transaction-concepts.md): TiDB Cloudのトランザクション概念について学習します。
+    -   [トランザクション](https://docs.pingcap.com/ja/tidbcloud/transaction-concepts.md): TiDB Cloudのトランザクション概念について学習します。
     -   [SQL](https://docs.pingcap.com/ja/tidbcloud/sql-concepts.md): TiDBにおけるSQLの概念について学びましょう。
     -   [AI機能](https://docs.pingcap.com/ja/tidbcloud/ai-feature-concepts.md): TiDB CloudのAI機能について学びましょう。
     -   [拡張性](https://docs.pingcap.com/ja/tidbcloud/scalability-concepts.md): TiDB Cloudのスケーラビリティに関する概念について学びましょう。
@@ -77,7 +77,7 @@
                 -   [MPPに関する質問](https://docs.pingcap.com/ja/tidbcloud/explain-mpp.md): TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
                 -   [サブクエリ](https://docs.pingcap.com/ja/tidbcloud/explain-subqueries.md): TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
                 -   [集計](https://docs.pingcap.com/ja/tidbcloud/explain-aggregation.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
-                -   [閲覧数](https://docs.pingcap.com/ja/tidbcloud/explain-views.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
+                -   [ビュー](https://docs.pingcap.com/ja/tidbcloud/explain-views.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
                 -   [パーティション](https://docs.pingcap.com/ja/tidbcloud/explain-partitions.md): TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
                 -   [インデックスマージ](https://docs.pingcap.com/ja/tidbcloud/explain-index-merge.md): TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
             -   SQL最適化プロセス
@@ -142,7 +142,7 @@
 -   ストリームデータ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     -   [変更フィードの概要](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-overview.md): TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスにデータをストリーミングできます。
     -   [MySQLへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-mysql.md): このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloud Essentialから MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
-    -   [Apache Kafkaへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-kafka.md): このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用チェンジフィードの設定手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの設定が含まれます。
+    -   [Apache Kafkaへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-kafka.md): このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの構成が含まれます。
 -   Security
     -   [Security概要](https://docs.pingcap.com/ja/tidbcloud/security-overview.md): TiDB Cloudの包括的なセキュリティフレームワークについて学びましょう。これには、ID管理、ネットワーク分離、データ保護、アクセス制御、監査などが含まれます。
     -   IDアクセス制御
@@ -158,7 +158,7 @@
         -   [TiDB CloudへのTLS接続](https://docs.pingcap.com/ja/tidbcloud/secure-connections-to-serverless-clusters.md): TiDB Cloud Starter およびTiDB Cloud Essential に TLS 接続を導入します。
     -   プライベートリンク接続
         -   [プライベートリンク接続の概要](https://docs.pingcap.com/ja/tidbcloud/serverless-private-link-connection.md): Dataflow のプライベート リンク接続を設定する方法を学習します。
-        -   [Amazon RDSに接続する](https://docs.pingcap.com/ja/tidbcloud/serverless-private-link-connection-to-aws-rds.md): AWS エンドポイント サービス プライベートリンク接続を使用して Amazon RDS インスタンスに接続する方法を学習します。
+        -   [Amazon RDSに接続する](https://docs.pingcap.com/ja/tidbcloud/serverless-private-link-connection-to-aws-rds.md): AWS Endpoint Serviceのプライベートリンク接続を使用してAmazon RDSインスタンスに接続する方法を学びましょう。
         -   [Alibaba Cloud RDSに接続する](https://docs.pingcap.com/ja/tidbcloud/serverless-private-link-connection-to-alicloud-rds.md): Alibaba Cloud Endpoint Service プライベートリンク接続を使用して Alibaba Cloud ApsaraDB RDS for MySQL インスタンスに接続する方法を学習します。
         -   [AWS上のConfluent Cloudに接続する](https://docs.pingcap.com/ja/tidbcloud/serverless-private-link-connection-to-aws-confluent.md): AWS エンドポイント サービス プライベート リンク接続を使用して AWS 上の Confluent Cloud Dedicated クラスターに接続する方法を学習します。
         -   [Amazon MSK Provisionedに接続](https://docs.pingcap.com/ja/tidbcloud/serverless-private-link-connection-to-amazon-msk.md): Amazon MSK プロビジョニングされたプライベートリンク接続を使用して Amazon MSK プロビジョニングされたクラスターに接続する方法を学習します。
@@ -199,7 +199,7 @@
 ## 参照 {#reference}
 
 -   SQLリファレンス
-    -   [TiDBでSQLを探求しよう](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations.md): TiDB データベースの基本的な SQL ステートメントについて学習します。
+    -   [TiDBでSQLを探求しよう](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations.md): TiDBデータベースの基本的なSQL文について学びましょう。
     -   SQL言語の構造と構文
         -   属性
             -   [自動インクリメント](https://docs.pingcap.com/ja/tidbcloud/auto-increment.md): TiDB の AUTO_INCREMENT` 列属性について学習します。
@@ -384,13 +384,13 @@
     -   [生成された列](https://docs.pingcap.com/ja/tidbcloud/generated-columns.md): 生成された列の使用方法を学習します。
     -   [SQLモード](https://docs.pingcap.com/ja/tidbcloud/sql-mode.md): SQLモードを学習する。
     -   [テーブル属性](https://docs.pingcap.com/ja/tidbcloud/table-attributes.md): TiDB のテーブル属性機能の使用方法を学習します。
-    -   取引
+    -   トランザクション
         -   [概要](https://docs.pingcap.com/ja/tidbcloud/transaction-overview.md): TiDB でのトランザクションについて学習します。
         -   [隔離レベル](https://docs.pingcap.com/ja/tidbcloud/transaction-isolation-levels.md): TiDB のトランザクション分離レベルについて学習します。
-        -   [楽観的な取引](https://docs.pingcap.com/ja/tidbcloud/optimistic-transaction.md): TiDBにおける楽観的トランザクションモデルについて学びましょう。
-        -   [悲観的な取引](https://docs.pingcap.com/ja/tidbcloud/pessimistic-transaction.md): TiDBにおける悲観的トランザクションモードについて学びましょう。
+        -   [楽観的トランザクション](https://docs.pingcap.com/ja/tidbcloud/optimistic-transaction.md): TiDBにおける楽観的トランザクションモデルについて学びましょう。
+        -   [悲観的トランザクション](https://docs.pingcap.com/ja/tidbcloud/pessimistic-transaction.md): TiDBにおける悲観的トランザクションモードについて学びましょう。
         -   [非トランザクションDMLステートメント](https://docs.pingcap.com/ja/tidbcloud/non-transactional-dml.md): TiDBの非トランザクションDMLステートメントについて学びましょう。アトミック性と独立性を犠牲にして、DMLステートメントを複数のステートメントに分割し、順番に実行することで、バッチデータ処理シナリオにおける安定性と使いやすさを向上させます。
-    -   [閲覧数](https://docs.pingcap.com/ja/tidbcloud/views.md): TiDB でビューを使用する方法を学習します。
+    -   [ビュー](https://docs.pingcap.com/ja/tidbcloud/views.md): TiDB でビューを使用する方法を学習します。
     -   [パーティショニング](https://docs.pingcap.com/ja/tidbcloud/partitioned-table.md): TiDBにおけるパーティショニングの使い方を学びましょう。
     -   [一時テーブル](https://docs.pingcap.com/ja/tidbcloud/temporary-tables.md): TiDB の一時テーブル機能について学習し、一時テーブルを使用してアプリケーションの中間データを保存する方法を学習します。これにより、テーブル管理のオーバーヘッドが削減され、パフォーマンスが向上します。
     -   [キャッシュされたテーブル](https://docs.pingcap.com/ja/tidbcloud/cached-tables.md): めったに更新されない小さなホットスポット テーブルで読み取りパフォーマンスを向上させるために使用される、TiDB のキャッシュ テーブル機能について学習します。
@@ -534,7 +534,7 @@
         -   [TSO](https://docs.pingcap.com/ja/tidbcloud/tso.md): TiDB の TimeStamp Oracle (TSO) について学習します。
     -   [TiDB Xアーキテクチャ](https://docs.pingcap.com/ja/tidbcloud/tidb-x-architecture.md): 共有ストレージとクラウドネイティブなアーキテクチャを採用したTiDB Xが、いかにして柔軟な拡張性、予測可能なパフォーマンス、そして最適化された総所有コストを実現するのかをご覧ください。
     -   ストレージエンジン
-        -   ティクヴ
+        -   TiKV
             -   [TiKVの概要](https://docs.pingcap.com/ja/tidbcloud/tikv-overview.md): TiKVstorageエンジンの概要。
             -   [RocksDBの概要](https://docs.pingcap.com/ja/tidbcloud/rocksdb-overview.md): RocksDB の基本的な概念と動作原理を学びます。
         -   TiFlash
