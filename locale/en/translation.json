@@ -117,7 +117,8 @@
       "content1": "Try changing your keywords and search again.",
       "content2": "If you can't find what you're looking for, seek help from our <0>Discord channels</0>."
     },
-    "searchTip": "Use double quotes for exact match. For example, \"time_zone\"."
+    "searchTip": "Use double quotes for exact match. For example, \"time_zone\".",
+    "filters": "Filter search results:"
   },
   "tools": {
     "tidbOperator": {
