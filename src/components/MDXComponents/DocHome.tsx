@@ -342,10 +342,11 @@ export function DocHomeCardContainer(props: any) {
         },
         flexDirection: "column",
         gridTemplateColumns: {
-          sm: "repeat(auto-fit, minmax(224px, 1fr))",
-          md: "repeat(3, minmax(224px, 1fr))",
+          sm: "repeat(2, minmax(0, 1fr))",
+          md: "repeat(3, minmax(0, 1fr))",
         },
         gap: "1.25rem",
+        justifyContent: "start",
 
         "& > a.doc-home-card": {
           backgroundColor: theme.palette.carbon[50],
@@ -365,6 +366,7 @@ interface DocHomeCardProps {
   icon: string;
   label: string;
   colSpan?: 1 | 2 | 3;
+  colspan?: 1 | 2 | 3;
   actionBtnLabel?: string;
   ctaGraphic?: string;
 }
@@ -376,9 +378,11 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
     icon = "global-tidb-product",
     label,
     colSpan,
+    colspan,
     actionBtnLabel,
     ctaGraphic,
   } = props;
+  const cardColSpan = colSpan ?? colspan;
 
   return (
     <Box
@@ -389,12 +393,19 @@ export function DocHomeCard(props: React.PropsWithChildren<DocHomeCardProps>) {
       href={href}
       sx={(theme) => ({
         display: "block",
+        boxSizing: "border-box",
+        height: "100%",
         position: "relative",
         zIndex: 0,
         padding: "24px",
         transition: ".5s",
         border: `1px solid ${theme.palette.carbon[400]}`,
-        gridColumn: colSpan ? `span ${colSpan}` : undefined,
+        gridColumn: cardColSpan
+          ? {
+              sm: `span ${Math.min(cardColSpan, 2)}`,
+              md: `span ${cardColSpan}`,
+            }
+          : undefined,
 
         "&:hover": {
           background:
