@@ -10,14 +10,16 @@ import Chip from "@mui/material/Chip";
 import {
   getSearchCategoryLabelKey,
   resolveSearchCategory,
+  type SearchCategory,
 } from "shared/utils/searchCategory";
 
 export default function SearchResults(props: {
   loading: boolean;
   className?: string;
   data: any[];
+  onFilterChange?: (category: SearchCategory | null) => void;
 }) {
-  const { data, loading } = props;
+  const { data, loading, onFilterChange } = props;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -101,7 +103,11 @@ export default function SearchResults(props: {
       </Typography> */}
       <Stack spacing={4}>
         {filteredDataMemo.map((item) => (
-          <SearchItem key={item.objectID} data={item} />
+          <SearchItem
+            key={item.objectID}
+            data={item}
+            onFilterChange={onFilterChange}
+          />
         ))}
       </Stack>
       {data.length === 0 && !loading && (
@@ -177,8 +183,11 @@ function SearchItemSkeleton() {
   );
 }
 
-function SearchItem(props: { data: any }) {
-  const { data } = props;
+function SearchItem(props: {
+  data: any;
+  onFilterChange?: (category: SearchCategory | null) => void;
+}) {
+  const { data, onFilterChange } = props;
   const { t } = useI18next();
   const category = React.useMemo(
     () => resolveSearchCategory(data.url),
@@ -214,12 +223,27 @@ function SearchItem(props: { data: any }) {
             size="small"
             variant="outlined"
             label={categoryLabel}
+            clickable={!!onFilterChange}
+            onClick={
+              onFilterChange
+                ? (e) => {
+                    e.preventDefault();
+                    onFilterChange(category);
+                  }
+                : undefined
+            }
             sx={{
               height: "20px",
               fontSize: "12px",
               borderRadius: "10px",
               backgroundColor: "carbon.100",
               color: "carbon.800",
+              ...(onFilterChange && {
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "carbon.200",
+                },
+              }),
             }}
           />
         )}
@@ -264,6 +288,77 @@ function SearchItem(props: { data: any }) {
           }}
         ></div>
       </Typography>
+    </Stack>
+  );
+}
+
+export function SearchFilterBar(props: {
+  categoryCountMap: Map<SearchCategory, number>;
+  activeFilter: SearchCategory | null;
+  onFilterChange: (category: SearchCategory | null) => void;
+  visible: boolean;
+}) {
+  const { categoryCountMap, activeFilter, onFilterChange, visible } = props;
+  const { t } = useI18next();
+
+  const entries = Array.from(categoryCountMap.entries()).filter(
+    ([category]) => {
+      const labelKey = getSearchCategoryLabelKey(category);
+      return labelKey && t(labelKey);
+    }
+  );
+
+  if (!visible || entries.length <= 1) {
+    return null;
+  }
+
+  return (
+    <Stack
+      direction="row"
+      alignItems="center"
+      sx={{ paddingTop: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}
+    >
+      <Typography
+        variant="body2"
+        sx={{ fontWeight: 500, color: "carbon.700", whiteSpace: "nowrap" }}
+      >
+        <Trans i18nKey="search.filters" />
+      </Typography>
+      {entries.map(([category, count]) => {
+        const label = t(getSearchCategoryLabelKey(category));
+        const isActive = activeFilter === category;
+        return (
+          <Chip
+            key={category}
+            size="small"
+            variant={isActive ? "filled" : "outlined"}
+            label={`${label} (${count})`}
+            clickable
+            onClick={() => onFilterChange(category)}
+            sx={{
+              height: "24px",
+              fontSize: "12px",
+              borderRadius: "12px",
+              cursor: "pointer",
+              ...(isActive
+                ? {
+                    backgroundColor: "carbon.800",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "carbon.700",
+                    },
+                  }
+                : {
+                    backgroundColor: "carbon.100",
+                    color: "carbon.800",
+                    "&:hover": {
+                      backgroundColor: "carbon.200",
+                    },
+                  }),
+            }}
+          />
+        );
+      })}
     </Stack>
   );
 }
