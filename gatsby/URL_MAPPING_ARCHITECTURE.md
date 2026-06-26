@@ -320,7 +320,31 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: TiDB Index Pages with Folders
+### Rule 8: TiDB Cloud Lake Namespace
+
+**Effect**: Maps TiDB Cloud Lake pages in the stable TiDB branch to the `/tidbcloudlake` namespace.
+
+**Source Pattern**: `/{lang}/tidb/{stable}/tidb-cloud-lake/{...folders}/{filename}`
+
+**Target Pattern**:
+- For `_index`: `/{lang}/tidbcloudlake/{folders}` (keeps folder structure)
+- For other files: `/{lang}/tidbcloudlake/{filename}` (flattens folder structure)
+
+**Filename Transform**:
+- `ignoreIf: ["_index"]`
+- `conditionalTarget.keepIf: ["_index"]`
+
+**Example**:
+- Source: `en/tidb/release-8.5/tidb-cloud-lake/_index.md`
+- Target: `/tidbcloudlake`
+- Source: `en/tidb/release-8.5/tidb-cloud-lake/guides/dashboards.md`
+- Target: `/tidbcloudlake/dashboards`
+
+**Use Case**: TiDB Cloud Lake content is sourced from the stable TiDB docs tree but published under its own top-level namespace.
+
+---
+
+### Rule 9: TiDB Index Pages with Folders
 
 **Effect**: Maps TiDB `_index.md` pages to URLs that keep their folder path, preventing multiple `_index.md` files from collapsing to the same `/tidb/{branch}` URL.
 
@@ -340,7 +364,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: TiDB with Branch Alias
+### Rule 10: TiDB with Branch Alias
 
 **Effect**: Maps TiDB pages with branch aliasing (master → dev, release-* → v*).
 
@@ -365,7 +389,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 10: TiDB-in-Kubernetes with Branch Alias
+### Rule 11: TiDB-in-Kubernetes with Branch Alias
 
 **Effect**: Maps TiDB-in-Kubernetes pages with branch aliasing (main → dev, release-* → v*).
 
@@ -390,7 +414,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: Fallback Rule
+### Rule 12: Fallback Rule
 
 **Effect**: Generic fallback for any remaining paths.
 
@@ -505,16 +529,17 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 6: Namespace Index Links (Direct Mapping)
 
-**Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
+**Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
 **Link Pattern**: `/{namespace}/{...folders}/_index`
 
 **Target Pattern**: `/{curLang}/{namespace}/{folders}`
 
-**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practices", "api", "ai"]`
+**Conditions**: `namespace = ["tidb-cloud", "tidb-cloud-lake", "develop", "best-practices", "api", "ai"]`
 
 **Namespace Transform**:
 - `tidb-cloud` → `tidbcloud`
+- `tidb-cloud-lake` → `tidbcloudlake`
 - `develop` → `developer`
 
 **Example**:
@@ -524,6 +549,9 @@ Rules are evaluated in order; the first matching rule wins.
 - Link: `/best-practices/performance/_index`
 - Current Page: Any page
 - Result: `/best-practices/performance`
+- Link: `/tidb-cloud-lake/_index`
+- Current Page: Any page
+- Result: `/tidbcloudlake`
 
 **Use Case**: Keeps namespace index links consistent with how `_index.md` pages are published.
 
@@ -531,22 +559,26 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 7: Namespace Links (Direct Mapping)
 
-**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`).
+**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`, `tidb-cloud-lake`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
 **Link Pattern**: `/{namespace}/{...any}/{docname}`
 
 **Target Pattern**: `/{curLang}/{namespace}/{docname}`
 
-**Conditions**: `namespace = ["tidb-cloud", "develop", "best-practices", "api", "ai"]`
+**Conditions**: `namespace = ["tidb-cloud", "tidb-cloud-lake", "develop", "best-practices", "api", "ai"]`
 
 **Namespace Transform**:
 - `tidb-cloud` → `tidbcloud`
+- `tidb-cloud-lake` → `tidbcloudlake`
 - `develop` → `developer`
 
 **Example**:
 - Link: `/develop/vector-search`
 - Current Page: Any page
 - Result: `/developer/vector-search`
+- Link: `/tidb-cloud-lake/guides/dashboards`
+- Current Page: Any page
+- Result: `/tidbcloudlake/dashboards`
 
 **Use Case**: Direct links to namespace pages from any location.
 
@@ -574,7 +606,26 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 9: TiDB Cloud Lake Page Links (Path-Based)
+
+**Effect**: Resolves relative links from TiDB Cloud Lake pages to `/tidbcloudlake/*` URLs.
+
+**Path Pattern**: `/{lang}/tidbcloudlake/{...any}`
+
+**Link Pattern**: `/{...any}/{docname}`
+
+**Target Pattern**: `/{lang}/tidbcloudlake/{docname}`
+
+**Example**:
+- Current Page: `/tidbcloudlake`
+- Link: `/guides/dashboards`
+- Result: `/tidbcloudlake/dashboards`
+
+**Use Case**: Relative links within TiDB Cloud Lake documentation preserve the TiDB Cloud Lake namespace.
+
+---
+
+### Rule 10: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -598,7 +649,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 10: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 11: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 
@@ -634,7 +685,7 @@ The URL mapping system provides:
 
 1. **Consistent URL Structure**: Source files are mapped to clean, SEO-friendly URLs
 2. **Context-Aware Link Resolution**: Links are resolved based on the current page's context
-3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`, `ai`) have their own URL structure
+3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`, `ai`, `tidbcloudlake`) have their own URL structure
 4. **Branch Aliasing**: Internal branch names are transformed to user-friendly versions
 5. **Default Language Omission**: Default language (`en`) is omitted from URLs for cleaner paths
 6. **TOC-Driven Build**: Only files referenced in TOC files are built, reducing build size

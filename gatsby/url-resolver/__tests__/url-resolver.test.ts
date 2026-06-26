@@ -286,6 +286,24 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/ai/subfolder");
   });
 
+  it("should resolve tidb cloud lake _index", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/tidb-cloud-lake/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloudlake");
+  });
+
+  it("should resolve tidb cloud lake guide pages", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/tidb-cloud-lake/guides/dashboards.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloudlake/dashboards/");
+  });
+
   it("should resolve releases folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
@@ -490,6 +508,19 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       true
     );
     expect(url).toBe("/api/overview");
+  });
+
+  it("should omit /en/ prefix for English tidb cloud lake files", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb/release-8.5/tidb-cloud-lake/guides/dashboards.md"
+    );
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
+    expect(url).toBe("/tidbcloudlake/dashboards");
   });
 
   it("should omit /en/ prefix for English release branch files", () => {

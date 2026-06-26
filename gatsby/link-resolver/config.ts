@@ -45,27 +45,44 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
     // /best-practices/_index -> /best-practices
     // /api/_index -> /api
     // /ai/_index -> /ai
+    // /tidb-cloud-lake/_index -> /tidbcloudlake
     {
       linkPattern: "/{namespace}/{...folders}/_index",
       targetPattern: "/{curLang}/{namespace}/{folders}",
       conditions: {
-        namespace: ["tidb-cloud", "develop", "best-practices", "api", "ai"],
+        namespace: [
+          "tidb-cloud",
+          "tidb-cloud-lake",
+          "develop",
+          "best-practices",
+          "api",
+          "ai",
+        ],
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
+        "tidb-cloud-lake": "tidbcloudlake",
         develop: "developer",
       },
     },
     // /{namespace}/{...any}/{docname} -> /{curLang}/{namespace}/{docname}
-    // Special: tidb-cloud -> tidbcloud, develop -> developer
+    // Special: tidb-cloud -> tidbcloud, tidb-cloud-lake -> tidbcloudlake, develop -> developer
     {
       linkPattern: "/{namespace}/{...any}/{docname}",
       targetPattern: "/{curLang}/{namespace}/{docname}",
       conditions: {
-        namespace: ["tidb-cloud", "develop", "best-practices", "api", "ai"],
+        namespace: [
+          "tidb-cloud",
+          "tidb-cloud-lake",
+          "develop",
+          "best-practices",
+          "api",
+          "ai",
+        ],
       },
       namespaceTransform: {
         "tidb-cloud": "tidbcloud",
+        "tidb-cloud-lake": "tidbcloudlake",
         develop: "developer",
       },
     },
@@ -77,7 +94,15 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloud/{docname}",
     },
-    // Rule 3: developer, best-practices, api, ai namespace in tidb folder
+    // Rule 3: tidbcloudlake pages (path-based mapping)
+    // Current page: /{lang}/tidbcloudlake/{...any}
+    // Link: /{...any}/{docname} -> /{lang}/tidbcloudlake/{docname}
+    {
+      pathPattern: "/{lang}/tidbcloudlake/{...any}",
+      linkPattern: "/{...any}/{docname}",
+      targetPattern: "/{lang}/tidbcloudlake/{docname}",
+    },
+    // Rule 4: developer, best-practices, api, ai namespace in tidb folder
     // Current page: /{lang}/{namespace}/{...any}
     // Link: /{...any}/{docname} -> /{lang}/{namespace}/{docname}
     {
