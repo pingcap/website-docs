@@ -33,6 +33,7 @@
     "tidbCloudEssential": "TiDB Cloud Essential",
     "tidbCloudPremium": "TiDB Cloud Premium",
     "tidbCloudDedicated": "TiDB Cloud Dedicated",
+    "tidbCloudLake": "TiDB Cloud Lake",
     "tidbShortTerm": "TiDB",
     "tidbOnKubernetes": "TiDB on Kubernetes",
     "tidbCloudReleases": "TiDB Cloud 发布记录",

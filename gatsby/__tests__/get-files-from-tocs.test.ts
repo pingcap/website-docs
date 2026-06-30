@@ -9,6 +9,9 @@ jest.mock("../toc", () => ({
     if (tocSlug.endsWith("/TOC-tidb-cloud-starter")) {
       return [{ type: "nav", link: "/cloud-starter-only.md" }];
     }
+    if (tocSlug.endsWith("/TOC-tidb-cloud-lake")) {
+      return [{ type: "nav", link: "/lake-only.md" }];
+    }
     return [{ type: "nav", link: "/toc-only.md" }];
   }),
 }));
@@ -132,5 +135,30 @@ describe("getFilesFromTocs TOC selection rules", () => {
       new Set(["toc-only", "cloud-starter-only"])
     );
   });
-});
 
+  it("tidb-cloud-lake reads its Lake TOC under master", async () => {
+    const { getFilesFromTocs } = require("../toc-filter");
+
+    const graphql = jest.fn().mockResolvedValue({
+      data: {
+        allMdx: {
+          nodes: [
+            makeNode(
+              "en/tidb-cloud-lake/master/TOC",
+              "docs/markdown-pages/en/tidb-cloud-lake/master/TOC.md"
+            ),
+            makeNode(
+              "en/tidb-cloud-lake/master/TOC-tidb-cloud-lake",
+              "docs/markdown-pages/en/tidb-cloud-lake/master/TOC-tidb-cloud-lake.md"
+            ),
+          ],
+        },
+      },
+    });
+
+    const { tocFilesMap } = await getFilesFromTocs(graphql);
+    expect(new Set(tocFilesMap.get("en/tidb-cloud-lake/master")!)).toEqual(
+      new Set(["toc-only", "lake-only"])
+    );
+  });
+});
