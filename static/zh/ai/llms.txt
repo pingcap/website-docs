@@ -46,7 +46,7 @@
 
 ## 集成指南
 
-- [集成概览](https://docs.pingcap.com/zh/ai/vector-search-integration-overview.md): TiDB 向量搜索集成的概览，包括支持的 AI 框架、嵌入模型和 ORM 库。
+- [集成概览](https://docs.pingcap.com/zh/ai/vector-search-integration-overview.md): TiDB 支持的 AI 集成概览，包括 Auto Embedding 提供商、AI 框架、对象关系映射库、云服务和 MCP server。
 - 自动生成向量
   - [概览](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-overview.md): 了解如何使用 Auto Embedding 通过纯文本而非向量进行语义搜索。
   - [OpenAI](https://docs.pingcap.com/zh/ai/vector-search-auto-embedding-openai.md): 了解如何在 TiDB Cloud 中使用 OpenAI 向量嵌入模型。

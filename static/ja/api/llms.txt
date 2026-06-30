@@ -2,14 +2,14 @@
 
 > TiDBは、クラスタのクエリと操作、データレプリケーションの管理、システムステータスの監視などのための様々なAPIを提供しています。このドキュメントでは、 TiDB CloudとTiDBセルフマネージド両方で利用可能なAPIの概要を説明します。
 
-## TIDBクラウド {#tidb-cloud}
+## TiDB Cloud {#tidb-cloud}
 
 -   [APIの概要](https://docs.pingcap.com/ja/api/tidb-cloud-api-overview.md): TiDB Cloud APIとは何か、その機能、そしてAPIを使用してTiDB Cloudクラスタを管理する方法について学びましょう。
 -   [API v1beta2](https://docs.pingcap.com/ja/api/tidb-cloud-api-v1beta2.md): TiDB Cloudのv1beta2 APIについて学びましょう。
 -   [API v1beta1](https://docs.pingcap.com/ja/api/tidb-cloud-api-v1beta1.md): TiDB Cloudの v1beta1 API について学習します。
 -   [API v1beta](https://docs.pingcap.com/ja/api/tidb-cloud-api-v1beta.md): TiDB Cloudの v1beta API について学習します。
 
-## TIDB セルフマネージド {#tidb-self-managed}
+## TiDB Self-Managed {#tidb-self-managed}
 
 -   [TiProxy API](https://docs.pingcap.com/ja/api/tiproxy-api-overview.md): TiProxy の API について学習します。
 -   [データ移行API](https://docs.pingcap.com/ja/api/dm-api-overview.md): データ移行 (DM) の API を学習します。
