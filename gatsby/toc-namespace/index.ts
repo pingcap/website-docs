@@ -74,10 +74,7 @@ const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   },
   {
     namespace: TOCNamespace.TiDBCloudLake,
-    repo: Repo.tidb,
-    branch: CONFIG.docs.tidb.stable,
-    folder: "tidb-cloud-lake",
-    minRestLength: 1,
+    repo: Repo.tidbcloudlake,
   },
   {
     namespace: TOCNamespace.TiDB,

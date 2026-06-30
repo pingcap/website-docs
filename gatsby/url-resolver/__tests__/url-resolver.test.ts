@@ -289,7 +289,7 @@ describe("calculateFileUrl", () => {
   it("should resolve tidb cloud lake _index", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/release-8.5/tidb-cloud-lake/_index.md"
+      "en/tidb-cloud-lake/master/tidb-cloud-lake/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/tidbcloudlake");
@@ -298,7 +298,25 @@ describe("calculateFileUrl", () => {
   it("should resolve tidb cloud lake guide pages", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/release-8.5/tidb-cloud-lake/guides/dashboards.md"
+      "en/tidb-cloud-lake/master/tidb-cloud-lake/guides/dashboards.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloudlake/dashboards/");
+  });
+
+  it("should resolve tidb cloud lake root _index", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-cloud-lake/master/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloudlake");
+  });
+
+  it("should resolve tidb cloud lake root-level guide pages", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-cloud-lake/master/guides/dashboards.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
     expect(url).toBe("/en/tidbcloudlake/dashboards/");
@@ -513,7 +531,7 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
   it("should omit /en/ prefix for English tidb cloud lake files", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidb/release-8.5/tidb-cloud-lake/guides/dashboards.md"
+      "en/tidb-cloud-lake/master/tidb-cloud-lake/guides/dashboards.md"
     );
     const url = calculateFileUrlWithConfig(
       absolutePath,

@@ -96,6 +96,7 @@ function branchToVersion(repo: Repo, branch: string) {
       return branch.replace("release-", "v");
 
     case Repo.tidbcloud:
+    case Repo.tidbcloudlake:
       return null;
   }
 }

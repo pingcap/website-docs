@@ -322,9 +322,9 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 8: TiDB Cloud Lake Namespace
 
-**Effect**: Maps TiDB Cloud Lake pages in the stable TiDB branch to the `/tidbcloudlake` namespace.
+**Effect**: Maps TiDB Cloud Lake pages to the `/tidbcloudlake` namespace.
 
-**Source Pattern**: `/{lang}/tidb/{stable}/tidb-cloud-lake/{...folders}/{filename}`
+**Source Pattern**: `/{lang}/tidb-cloud-lake/{branch}/{...folders}/{filename}`
 
 **Target Pattern**:
 - For `_index`: `/{lang}/tidbcloudlake/{folders}` (keeps folder structure)
@@ -335,12 +335,14 @@ Rules are evaluated in order; the first matching rule wins.
 - `conditionalTarget.keepIf: ["_index"]`
 
 **Example**:
-- Source: `en/tidb/release-8.5/tidb-cloud-lake/_index.md`
+- Source: `en/tidb-cloud-lake/master/_index.md`
 - Target: `/tidbcloudlake`
-- Source: `en/tidb/release-8.5/tidb-cloud-lake/guides/dashboards.md`
+- Source: `en/tidb-cloud-lake/master/tidb-cloud-lake/_index.md`
+- Target: `/tidbcloudlake`
+- Source: `en/tidb-cloud-lake/master/tidb-cloud-lake/guides/dashboards.md`
 - Target: `/tidbcloudlake/dashboards`
 
-**Use Case**: TiDB Cloud Lake content is sourced from the stable TiDB docs tree but published under its own top-level namespace.
+**Use Case**: TiDB Cloud Lake content is sourced from its own docs tree but published under a compact top-level namespace.
 
 ---
 

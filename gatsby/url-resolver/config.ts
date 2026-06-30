@@ -89,11 +89,26 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
         },
       },
     },
-    // tidb cloud lake namespace in tidb stable folder
-    // When filename = "_index": /en/tidb/release-8.5/tidb-cloud-lake/{folders}/_index.md -> /en/tidbcloudlake/{folders}
-    // When filename != "_index": /en/tidb/release-8.5/tidb-cloud-lake/{folders}/{filename}.md -> /en/tidbcloudlake/{filename}
+    // tidb cloud lake namespace root folder
+    // /en/tidb-cloud-lake/master/tidb-cloud-lake/_index.md -> /en/tidbcloudlake
     {
-      sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/tidb-cloud-lake/{...folders}/{filename}`,
+      sourcePattern:
+        "/{lang}/tidb-cloud-lake/{branch}/tidb-cloud-lake/{...folders}/{filename}",
+      targetPattern: "/{lang}/tidbcloudlake/{filename}",
+      filenameTransform: {
+        ignoreIf: ["_index"],
+        conditionalTarget: {
+          keepIf: ["_index"],
+          keepTargetPattern: "/{lang}/tidbcloudlake/{folders}",
+        },
+      },
+    },
+    // tidb cloud lake namespace
+    // When filename = "_index": /en/tidb-cloud-lake/master/{folders}/_index.md -> /en/tidbcloudlake/{folders}
+    // When filename != "_index": /en/tidb-cloud-lake/master/{folders}/{filename}.md -> /en/tidbcloudlake/{filename}
+    {
+      sourcePattern:
+        "/{lang}/tidb-cloud-lake/{branch}/{...folders}/{filename}",
       targetPattern: "/{lang}/tidbcloudlake/{filename}",
       filenameTransform: {
         ignoreIf: ["_index"],

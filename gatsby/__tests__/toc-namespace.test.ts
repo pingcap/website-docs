@@ -4,12 +4,18 @@ import { getTOCNamespace } from "../toc-namespace";
 describe("getTOCNamespace", () => {
   it("maps TiDB Cloud Lake docs to the TiDB Cloud Lake namespace", () => {
     expect(
-      getTOCNamespace("en/tidb/release-8.5/tidb-cloud-lake/lake-overview")
+      getTOCNamespace("en/tidb-cloud-lake/master/tidb-cloud-lake/lake-overview")
     ).toBe(TOCNamespace.TiDBCloudLake);
   });
 
   it("maps the TiDB Cloud Lake index page to the TiDB Cloud Lake namespace", () => {
-    expect(getTOCNamespace("en/tidb/release-8.5/tidb-cloud-lake/_index")).toBe(
+    expect(
+      getTOCNamespace("en/tidb-cloud-lake/master/tidb-cloud-lake/_index")
+    ).toBe(TOCNamespace.TiDBCloudLake);
+  });
+
+  it("maps root-level TiDB Cloud Lake pages to the TiDB Cloud Lake namespace", () => {
+    expect(getTOCNamespace("en/tidb-cloud-lake/master/_index")).toBe(
       TOCNamespace.TiDBCloudLake
     );
   });
