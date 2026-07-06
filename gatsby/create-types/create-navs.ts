@@ -3,6 +3,39 @@ import { mdxAstToToc } from "../toc";
 import { Root } from "mdast";
 import { calculateFileUrl } from "../url-resolver";
 
+function createCloudPlanNavigationField(cacheKey: string, tocSuffix: string) {
+  return {
+    async resolve(mdxNode: any, args: unknown, context: unknown, info: any) {
+      if (mdxNode[cacheKey]) return mdxNode[cacheKey];
+      const types = info.schema.getType("Mdx").getFields();
+      const slug = await types["slug"].resolve(mdxNode, args, context, {
+        fieldName: "slug",
+      });
+
+      const mdxAST: Root = await types["mdxAST"].resolve(
+        mdxNode,
+        args,
+        context,
+        {
+          fieldName: "mdxAST",
+        }
+      );
+
+      if (!slug.endsWith(tocSuffix))
+        throw new Error(`unsupported query in ${slug}`);
+      const tocPath = calculateFileUrl(slug);
+      const res = mdxAstToToc(
+        mdxAST.children,
+        tocPath || slug,
+        undefined,
+        true
+      );
+      mdxNode[cacheKey] = res;
+      return res;
+    },
+  };
+}
+
 export const createNavs = ({ actions }: CreatePagesArgs) => {
   const { createTypes, createFieldExtension } = actions;
 
@@ -48,82 +81,27 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
   createFieldExtension({
     name: "starterNavigation",
     extend() {
-      return {
-        async resolve(
-          mdxNode: any,
-          args: unknown,
-          context: unknown,
-          info: any
-        ) {
-          if (mdxNode.starterNav) return mdxNode.starterNav;
-          const types = info.schema.getType("Mdx").getFields();
-          const slug = await types["slug"].resolve(mdxNode, args, context, {
-            fieldName: "slug",
-          });
-
-          const mdxAST: Root = await types["mdxAST"].resolve(
-            mdxNode,
-            args,
-            context,
-            {
-              fieldName: "mdxAST",
-            }
-          );
-
-          if (!slug.endsWith("TOC-tidb-cloud-starter"))
-            throw new Error(`unsupported query in ${slug}`);
-          const tocPath = calculateFileUrl(slug);
-          const res = mdxAstToToc(
-            mdxAST.children,
-            tocPath || slug,
-            undefined,
-            true
-          );
-          mdxNode.starterNav = res;
-          return res;
-        },
-      };
+      return createCloudPlanNavigationField(
+        "starterNav",
+        "TOC-tidb-cloud-starter"
+      );
     },
   });
 
   createFieldExtension({
     name: "essentialNavigation",
     extend() {
-      return {
-        async resolve(
-          mdxNode: any,
-          args: unknown,
-          context: unknown,
-          info: any
-        ) {
-          if (mdxNode.essentialNav) return mdxNode.essentialNav;
-          const types = info.schema.getType("Mdx").getFields();
-          const slug = await types["slug"].resolve(mdxNode, args, context, {
-            fieldName: "slug",
-          });
+      return createCloudPlanNavigationField(
+        "essentialNav",
+        "TOC-tidb-cloud-essential"
+      );
+    },
+  });
 
-          const mdxAST: Root = await types["mdxAST"].resolve(
-            mdxNode,
-            args,
-            context,
-            {
-              fieldName: "mdxAST",
-            }
-          );
-
-          if (!slug.endsWith("TOC-tidb-cloud-essential"))
-            throw new Error(`unsupported query in ${slug}`);
-          const tocPath = calculateFileUrl(slug);
-          const res = mdxAstToToc(
-            mdxAST.children,
-            tocPath || slug,
-            undefined,
-            true
-          );
-          mdxNode.essentialNav = res;
-          return res;
-        },
-      };
+  createFieldExtension({
+    name: "byocNavigation",
+    extend() {
+      return createCloudPlanNavigationField("byocNav", "TOC-tidb-cloud-byoc");
     },
   });
 
@@ -132,6 +110,7 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
       navigation: JSON! @navigation
       starterNavigation: JSON! @starterNavigation
       essentialNavigation: JSON! @essentialNavigation
+      byocNavigation: JSON! @byocNavigation
     }
   `);
 };

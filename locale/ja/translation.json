@@ -34,6 +34,7 @@
     "tidbCloudEssential": "TiDB Cloud Essential",
     "tidbCloudDedicated": "TiDB Cloud Dedicated",
     "tidbCloudLake": "TiDB Cloud Lake",
+    "tidbCloudByoc": "TiDB Cloud BYOC",
     "tidbShortTerm": "TiDB",
     "tidbOnKubernetes": "TiDB on Kubernetes",
     "tidbCloudReleases": "TiDB Cloud リリース",

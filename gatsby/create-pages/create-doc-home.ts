@@ -97,6 +97,7 @@ export const createDocHome = async ({
       pathConfig,
       "tidb-cloud-essential"
     );
+    const byocNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-byoc");
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -114,6 +115,7 @@ export const createDocHome = async ({
         navUrl,
         starterNavUrl,
         essentialNavUrl,
+        byocNavUrl,
         pageUrl: path,
         availIn: {
           locale,
