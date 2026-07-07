@@ -79,7 +79,7 @@ const getDefaultNavConfig = (
             type: "item",
             label: t("navbar.tidbCloudByoc"),
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
-            to: `/tidbcloud/premium/?${CLOUD_MODE_KEY}=${CloudPlan.Byoc}`,
+            to: `/tidbcloud/byoc?${CLOUD_MODE_KEY}=${CloudPlan.Byoc}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Byoc,

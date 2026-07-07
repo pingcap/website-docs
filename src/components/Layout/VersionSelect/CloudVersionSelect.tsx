@@ -90,9 +90,7 @@ const VersionItems = (props: {
     const searchParams = new URLSearchParams();
     searchParams.set(CLOUD_MODE_KEY, version);
     if (version === CloudPlan.Byoc) {
-      return `/${pathConfig.repo}/${
-        CloudPlan.Premium
-      }/?${searchParams.toString()}`;
+      return `/${pathConfig.repo}/${CloudPlan.Byoc}?${searchParams.toString()}`;
     }
     return version === CloudPlan.Dedicated
       ? `/${pathConfig.repo}/`
