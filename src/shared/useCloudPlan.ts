@@ -17,6 +17,7 @@ const TOC_NAME_TO_CLOUD_PLAN: Record<string, CloudPlan> = {
   "TOC-tidb-cloud-starter": CloudPlan.Starter,
   "TOC-tidb-cloud-essential": CloudPlan.Essential,
   "TOC-tidb-cloud-premium": CloudPlan.Premium,
+  "TOC-tidb-cloud-byoc": CloudPlan.Byoc,
 };
 
 function isCloudPlan(value: string | null): value is CloudPlan {
@@ -24,7 +25,8 @@ function isCloudPlan(value: string | null): value is CloudPlan {
     value === CloudPlan.Dedicated ||
     value === CloudPlan.Starter ||
     value === CloudPlan.Essential ||
-    value === CloudPlan.Premium
+    value === CloudPlan.Premium ||
+    value === CloudPlan.Byoc
   );
 }
 
@@ -97,10 +99,11 @@ export const useCloudPlan = () => {
   const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
   const isEssential = isTidbcloud && resolvedCloudPlan === CloudPlan.Essential;
   const isPremium = isTidbcloud && resolvedCloudPlan === CloudPlan.Premium;
+  const isByoc = isTidbcloud && resolvedCloudPlan === CloudPlan.Byoc;
   const isClassic =
     !isTidbcloud ||
     !resolvedCloudPlan ||
-    (!isStarter && !isEssential);
+    (!isStarter && !isEssential && !isByoc);
 
   return {
     cloudPlan: resolvedCloudPlan,
@@ -108,6 +111,7 @@ export const useCloudPlan = () => {
     isStarter,
     isEssential,
     isPremium,
+    isByoc,
     isClassic,
   };
 };
@@ -164,21 +168,22 @@ export const useCloudPlanNavigate = (
     if (cloudMode !== CloudPlan.Dedicated) {
       if (cloudModeFromQuery !== cloudMode) {
         searchParams.set(CLOUD_MODE_KEY, cloudMode);
-        navigate(
-          `${pathname}?${searchParams.toString()}${hash || ""}`,
-          { replace: true }
-        );
+        navigate(`${pathname}?${searchParams.toString()}${hash || ""}`, {
+          replace: true,
+        });
       }
       return;
     }
 
     // Dedicated: keep URL without plan param by default; only normalize when an invalid/mismatched plan is present.
-    if (cloudModeFromQueryRaw && cloudModeFromQueryRaw !== CloudPlan.Dedicated) {
+    if (
+      cloudModeFromQueryRaw &&
+      cloudModeFromQueryRaw !== CloudPlan.Dedicated
+    ) {
       searchParams.set(CLOUD_MODE_KEY, CloudPlan.Dedicated);
-      navigate(
-        `${pathname}?${searchParams.toString()}${hash || ""}`,
-        { replace: true }
-      );
+      navigate(`${pathname}?${searchParams.toString()}${hash || ""}`, {
+        replace: true,
+      });
     }
   }, [
     namespace,

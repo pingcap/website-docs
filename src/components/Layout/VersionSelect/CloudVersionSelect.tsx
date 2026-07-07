@@ -18,6 +18,7 @@ export const CLOUD_PLAN_LABEL_STRINGS: Partial<Record<CloudPlan, string>> = {
   [CloudPlan.Dedicated]: "Dedicated",
   [CloudPlan.Starter]: "Starter (formerly Serverless)",
   [CloudPlan.Essential]: "Essential",
+  [CloudPlan.Byoc]: "BYOC",
 };
 
 const CLOUD_VERSIONS = [
@@ -51,6 +52,10 @@ const CLOUD_VERSIONS = [
       />
     ),
   },
+  {
+    label: "BYOC",
+    value: CloudPlan.Byoc,
+  },
 ];
 
 const VersionItems = (props: {
@@ -70,6 +75,11 @@ const VersionItems = (props: {
   const getToUrl = (version: string) => {
     const searchParams = new URLSearchParams();
     searchParams.set(CLOUD_MODE_KEY, version);
+    if (version === CloudPlan.Byoc) {
+      return `/${pathConfig.repo}/${
+        CloudPlan.Premium
+      }/?${searchParams.toString()}`;
+    }
     return version === CloudPlan.Dedicated
       ? `/${pathConfig.repo}/`
       : `/${pathConfig.repo}/${version}/?${searchParams.toString()}`;

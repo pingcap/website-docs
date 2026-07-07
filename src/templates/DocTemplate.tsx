@@ -77,6 +77,9 @@ interface DocTemplateProps {
     essentialNavigation?: {
       essentialNavigation: RepoNav;
     };
+    byocNavigation?: {
+      byocNavigation: RepoNav;
+    };
   };
 }
 
@@ -119,9 +122,11 @@ function DocTemplate({
     navigation: originNav,
     starterNavigation: starterNav,
     essentialNavigation: essentialNav,
+    byocNavigation: byocNav,
   } = data;
 
-  const { cloudPlan, setCloudPlan, isStarter, isEssential } = useCloudPlan();
+  const { cloudPlan, setCloudPlan, isStarter, isEssential, isByoc } =
+    useCloudPlan();
   useCloudPlanNavigate(
     namespace,
     inDefaultPlan ?? null,
@@ -136,6 +141,7 @@ function DocTemplate({
   const essentialNavigation = essentialNav
     ? essentialNav.essentialNavigation
     : [];
+  const byocNavigation = byocNav ? byocNav.byocNavigation : [];
   const navigationByNamespace =
     namespace !== TOCNamespace.TiDBCloud
       ? classicNavigation
@@ -143,18 +149,24 @@ function DocTemplate({
       ? starterNavigation
       : isEssential
       ? essentialNavigation
+      : isByoc
+      ? byocNavigation
       : classicNavigation;
   const navigation = filterTOC(navigationByNamespace);
 
   const { language, t } = useI18next();
   const haveStarter = starterNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
+  const haveByoc = byocNavigation.length > 0;
   const availablePlans: CloudPlan[] = [CloudPlan.Dedicated];
   if (haveStarter) {
     availablePlans.push(CloudPlan.Starter);
   }
   if (haveEssential) {
     availablePlans.push(CloudPlan.Essential);
+  }
+  if (haveByoc) {
+    availablePlans.push(CloudPlan.Byoc);
   }
 
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
@@ -409,6 +421,7 @@ export const query = graphql`
     $navUrl: String!
     $starterNavUrl: String!
     $essentialNavUrl: String!
+    $byocNavUrl: String!
   ) {
     site {
       siteMetadata {
@@ -439,6 +452,10 @@ export const query = graphql`
 
     essentialNavigation: mdx(slug: { eq: $essentialNavUrl }) {
       essentialNavigation
+    }
+
+    byocNavigation: mdx(slug: { eq: $byocNavUrl }) {
+      byocNavigation
     }
 
     locales: allLocale(filter: { language: { eq: $language } }) {

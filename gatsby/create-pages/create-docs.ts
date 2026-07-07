@@ -131,6 +131,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       pathConfig,
       "tidb-cloud-essential"
     );
+    const byocNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-byoc");
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
@@ -162,6 +163,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         navUrl,
         starterNavUrl,
         essentialNavUrl,
+        byocNavUrl,
         availIn: {
           locale,
           version: versionRecord[pathConfig.locale][pathConfig.repo][name],

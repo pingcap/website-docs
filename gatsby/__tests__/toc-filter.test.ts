@@ -22,6 +22,17 @@ describe("toc-filter ignore rules", () => {
     ).toBe(true);
   });
 
+  it("does not ignore the BYOC TiDB Cloud TOC", () => {
+    jest.resetModules();
+    const { isIgnoredTocRelativePath } = require("../toc-ignore");
+
+    expect(
+      isIgnoredTocRelativePath(
+        "markdown-pages/en/tidbcloud/master/TOC-tidb-cloud-byoc.md"
+      )
+    ).toBe(false);
+  });
+
   it("supports env-based ignore substrings", () => {
     process.env.WEBSITE_IGNORED_TOC_RELATIVE_PATH_SUBSTRINGS =
       "custom/TOC-ignore-me.md, TOC-some-other.md";

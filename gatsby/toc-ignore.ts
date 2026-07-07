@@ -25,4 +25,3 @@ export function isIgnoredTocRelativePath(relativePath: string): boolean {
     (substr) => substr && relativePath.includes(substr)
   );
 }
-
