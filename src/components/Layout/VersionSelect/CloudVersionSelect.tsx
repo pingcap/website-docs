@@ -55,6 +55,20 @@ const CLOUD_VERSIONS = [
   {
     label: "BYOC",
     value: CloudPlan.Byoc,
+    icon: (
+      <Chip
+        label="Preview"
+        variant="outlined"
+        size="small"
+        sx={{
+          fontSize: "12px",
+          height: "20px",
+          pointerEvents: "none",
+          borderColor: "#DCE3E5",
+          color: "#6F787B",
+        }}
+      />
+    ),
   },
 ];
 

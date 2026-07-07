@@ -77,6 +77,20 @@ const getDefaultNavConfig = (
           },
           {
             type: "item",
+            label: t("navbar.tidbCloudByoc"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
+            to: `/tidbcloud/premium/?${CLOUD_MODE_KEY}=${CloudPlan.Byoc}`,
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
+              cloudPlan === CloudPlan.Byoc,
+            onClick: () => {
+              if (typeof window !== "undefined") {
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Byoc);
+              }
+            },
+          },
+          {
+            type: "item",
             label: t("navbar.tidbCloudDedicated"),
             to:
               cloudPlan === CloudPlan.Dedicated || !cloudPlan
@@ -100,19 +114,6 @@ const getDefaultNavConfig = (
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);
-              }
-            },
-          },
-          {
-            type: "item",
-            label: t("navbar.tidbCloudByoc"),
-            to: `/tidbcloud/premium/?${CLOUD_MODE_KEY}=${CloudPlan.Byoc}`,
-            selected: (namespace) =>
-              namespace === TOCNamespace.TiDBCloud &&
-              cloudPlan === CloudPlan.Byoc,
-            onClick: () => {
-              if (typeof window !== "undefined") {
-                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Byoc);
               }
             },
           },
