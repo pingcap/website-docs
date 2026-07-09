@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { RepoNavLink, RepoNav } from "shared/interface";
 import LinkComponent from "components/Link";
@@ -190,6 +191,7 @@ export default function ControlledTreeView(props: {
   });
 
   const theme = useTheme();
+  const { t } = useTranslation();
   const [disableTransition, setDisableTransition] = React.useState(false);
   const previousUrlRef = React.useRef<string | null>(null);
 
@@ -313,7 +315,7 @@ export default function ControlledTreeView(props: {
             ) : (
               <Box sx={{ flexShrink: 0 }} width={16} height={16} />
             )}
-            {generateItemLabel(item)}
+            {generateItemLabel(item, theme, t("navbar.badge.preview"))}
           </Stack>
         );
       };
@@ -389,9 +391,15 @@ export default function ControlledTreeView(props: {
   );
 }
 
-const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
+const generateItemLabel = (
+  { content: contents, tag }: RepoNavLink,
+  theme: ReturnType<typeof useTheme>,
+  previewBadgeLabel: string
+) => {
+  const normalizedTagValue = tag?.value?.trim().toUpperCase();
+  const isPreviewTag = normalizedTagValue === "PREVIEW";
   const tagQuery = new URLSearchParams(tag?.query);
-  const tagColor = tagQuery.get("color");
+  const tagColor = isPreviewTag ? null : tagQuery.get("color");
   const tagColor02 = tagColor && alpha(tagColor, 0.2);
   return (
     <Stack sx={{ width: "100%" }} direction="row" gap="4px">
@@ -424,18 +432,36 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
       </Box>
       {tag && (
         <Chip
-          label={tag.value}
+          label={isPreviewTag ? previewBadgeLabel : tag.value}
           variant="outlined"
           size="small"
           sx={{
-            flexShrink: 0,
-            textTransform: "uppercase",
-            pointerEvents: "none",
-            fontSize: "10px",
-            height: "20px",
-            borderColor: tagColor ? tagColor02 : "#c0e1f1",
-            color: tagColor || "#2d9cd2",
-            fontWeight: 500,
+            ...(isPreviewTag
+              ? {
+                  flexShrink: 0,
+                  height: "20px",
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  borderRadius: "10px",
+                  borderColor: theme.palette.carbon[400],
+                  pointerEvents: "none",
+                  "& .MuiChip-label": {
+                    paddingLeft: "8px",
+                    paddingRight: "8px",
+                    lineHeight: "20px",
+                    color: theme.palette.carbon[700],
+                  },
+                }
+              : {
+                  flexShrink: 0,
+                  textTransform: "uppercase",
+                  pointerEvents: "none",
+                  fontSize: "10px",
+                  height: "20px",
+                  borderColor: tagColor ? tagColor02 : "#c0e1f1",
+                  color: tagColor || "#2d9cd2",
+                  fontWeight: 500,
+                }),
           }}
         />
       )}
