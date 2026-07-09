@@ -2,6 +2,7 @@ import {
   ListItem,
   List,
   Link,
+  Image,
   Paragraph,
   Text,
   Content,
@@ -157,10 +158,11 @@ function getContentFromLink(
 
   const child = content.children[0] as Link | Text;
   // use `image` as tag
-  const image = content.children.find((n) => n.type === "image");
+  const image = content.children.find((n): n is Image => n.type === "image");
+  const imageQuery = image?.url.split("?")[1];
   const tag = image && {
     value: image.alt!,
-    query: `?${image.url.split("?")[1]}`,
+    query: imageQuery ? `?${imageQuery}` : undefined,
   };
 
   if (child.type === "link") {

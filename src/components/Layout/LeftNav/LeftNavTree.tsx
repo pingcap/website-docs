@@ -398,9 +398,15 @@ const generateItemLabel = (
 ) => {
   const normalizedTagValue = tag?.value?.trim().toUpperCase();
   const isPreviewTag = normalizedTagValue === "PREVIEW";
-  const tagQuery = new URLSearchParams(tag?.query);
-  const tagColor = isPreviewTag ? null : tagQuery.get("color");
-  const tagColor02 = tagColor && alpha(tagColor, 0.2);
+  let tagColor: string | null = null;
+  let tagColor02: string | null = null;
+
+  if (!isPreviewTag) {
+    const tagQuery = new URLSearchParams(tag?.query);
+    tagColor = tagQuery.get("color");
+    tagColor02 = tagColor ? alpha(tagColor, 0.2) : null;
+  }
+
   return (
     <Stack sx={{ width: "100%" }} direction="row" gap="4px">
       <Box
@@ -438,6 +444,8 @@ const generateItemLabel = (
           sx={{
             ...(isPreviewTag
               ? {
+                  // PREVIEW badges intentionally use a fixed neutral style even if
+                  // the source TOC image URL carries query params such as ?color=...
                   flexShrink: 0,
                   height: "20px",
                   fontSize: "12px",
