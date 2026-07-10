@@ -32,24 +32,6 @@ const PreviewBadge = (props: { label: string }) => {
   );
 };
 
-const BetaTagBadge = (props: { label: string }) => (
-  <Chip
-    label={props.label}
-    variant="outlined"
-    size="small"
-    sx={{
-      flexShrink: 0,
-      textTransform: "uppercase",
-      pointerEvents: "none",
-      fontSize: "10px",
-      height: "20px",
-      borderColor: "#c0e1f1",
-      color: "#2d9cd2",
-      fontWeight: 500,
-    }}
-  />
-);
-
 /**
  * Default navigation configuration
  */
@@ -167,7 +149,7 @@ const getDefaultNavConfig = (
     leftNavLabel: (
       <>
         {t("navbar.tidbForAI")}
-        <BetaTagBadge label={t("navbar.badge.beta")} />
+        <PreviewBadge label={t("navbar.badge.preview")} />
       </>
     ),
     to: "/ai",
