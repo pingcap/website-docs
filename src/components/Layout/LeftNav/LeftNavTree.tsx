@@ -11,6 +11,7 @@ import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { RepoNavLink, RepoNav } from "shared/interface";
 import LinkComponent from "components/Link";
+import PreviewBadge from "components/Badge/PreviewBadge";
 import { scrollToElementIfInView } from "shared/utils";
 import { alpha, Chip } from "@mui/material";
 
@@ -315,7 +316,7 @@ export default function ControlledTreeView(props: {
             ) : (
               <Box sx={{ flexShrink: 0 }} width={16} height={16} />
             )}
-            {generateItemLabel(item, theme, t("navbar.badge.preview"))}
+            {generateItemLabel(item, t("navbar.badge.preview"))}
           </Stack>
         );
       };
@@ -393,7 +394,6 @@ export default function ControlledTreeView(props: {
 
 const generateItemLabel = (
   { content: contents, tag }: RepoNavLink,
-  theme: ReturnType<typeof useTheme>,
   previewBadgeLabel: string
 ) => {
   const normalizedTagValue = tag?.value?.trim().toUpperCase();
@@ -401,6 +401,7 @@ const generateItemLabel = (
   let tagColor: string | null = null;
   let tagColor02: string | null = null;
 
+  // PREVIEW intentionally ignores source color overrides to match shared badges.
   if (tag && !isPreviewTag) {
     const tagQuery = new URLSearchParams(tag.query ?? "");
     tagColor = tagQuery.get("color");
@@ -436,43 +437,25 @@ const generateItemLabel = (
           );
         })}
       </Box>
-      {tag && (
+      {tag && isPreviewTag ? (
+        <PreviewBadge label={previewBadgeLabel} />
+      ) : tag ? (
         <Chip
-          label={isPreviewTag ? previewBadgeLabel : tag.value}
+          label={tag.value}
           variant="outlined"
           size="small"
           sx={{
-            ...(isPreviewTag
-              ? {
-                  // PREVIEW badges intentionally use a fixed neutral style even if
-                  // the source TOC image URL carries query params such as ?color=...
-                  flexShrink: 0,
-                  height: "20px",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  borderRadius: "10px",
-                  borderColor: theme.palette.carbon[400],
-                  pointerEvents: "none",
-                  "& .MuiChip-label": {
-                    paddingLeft: "8px",
-                    paddingRight: "8px",
-                    lineHeight: "20px",
-                    color: theme.palette.carbon[700],
-                  },
-                }
-              : {
-                  flexShrink: 0,
-                  textTransform: "uppercase",
-                  pointerEvents: "none",
-                  fontSize: "10px",
-                  height: "20px",
-                  borderColor: tagColor ? tagColor02 : "#c0e1f1",
-                  color: tagColor || "#2d9cd2",
-                  fontWeight: 500,
-                }),
+            flexShrink: 0,
+            textTransform: "uppercase",
+            pointerEvents: "none",
+            fontSize: "10px",
+            height: "20px",
+            borderColor: tagColor ? tagColor02 : "#c0e1f1",
+            color: tagColor || "#2d9cd2",
+            fontWeight: 500,
           }}
         />
-      )}
+      ) : null}
     </Stack>
   );
 };

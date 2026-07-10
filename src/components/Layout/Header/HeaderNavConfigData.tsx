@@ -2,35 +2,10 @@ import { NavConfig } from "./HeaderNavConfigType";
 import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
 import { CloudPlan, TOCNamespace } from "shared/interface";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import Chip from "@mui/material/Chip";
-import { useTheme } from "@mui/material/styles";
+import PreviewBadge from "components/Badge/PreviewBadge";
 
 import TiDBCloudIcon from "media/icons/cloud-03.svg";
 import TiDBIcon from "media/icons/layers-three-01.svg";
-
-const PreviewBadge = (props: { label: string }) => {
-  const theme = useTheme();
-  return (
-    <Chip
-      label={props.label}
-      size="small"
-      variant="outlined"
-      sx={{
-        height: "20px",
-        fontSize: "12px",
-        fontWeight: 400,
-        borderRadius: "10px",
-        pointerEvents: "none",
-        "& .MuiChip-label": {
-          paddingLeft: "8px",
-          paddingRight: "8px",
-          lineHeight: "20px",
-          color: theme.palette.carbon[700],
-        },
-      }}
-    />
-  );
-};
 
 /**
  * Default navigation configuration
