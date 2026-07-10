@@ -193,6 +193,7 @@ export default function ControlledTreeView(props: {
 
   const theme = useTheme();
   const { t } = useTranslation();
+  const previewBadgeLabel = t("navbar.badge.preview");
   const [disableTransition, setDisableTransition] = React.useState(false);
   const previousUrlRef = React.useRef<string | null>(null);
 
@@ -316,7 +317,7 @@ export default function ControlledTreeView(props: {
             ) : (
               <Box sx={{ flexShrink: 0 }} width={16} height={16} />
             )}
-            {generateItemLabel(item, t("navbar.badge.preview"))}
+            {generateItemLabel(item, previewBadgeLabel)}
           </Stack>
         );
       };

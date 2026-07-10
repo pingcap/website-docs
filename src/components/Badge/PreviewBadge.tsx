@@ -10,7 +10,6 @@ const PreviewBadge = (props: { label: string }) => {
       size="small"
       variant="outlined"
       sx={{
-        flexShrink: 0,
         height: "20px",
         fontSize: "12px",
         fontWeight: 400,
