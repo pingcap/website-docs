@@ -401,8 +401,8 @@ const generateItemLabel = (
   let tagColor: string | null = null;
   let tagColor02: string | null = null;
 
-  if (!isPreviewTag) {
-    const tagQuery = new URLSearchParams(tag?.query);
+  if (tag && !isPreviewTag) {
+    const tagQuery = new URLSearchParams(tag.query ?? "");
     tagColor = tagQuery.get("color");
     tagColor02 = tagColor ? alpha(tagColor, 0.2) : null;
   }

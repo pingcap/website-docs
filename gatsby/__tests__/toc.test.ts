@@ -35,6 +35,37 @@ describe("mdxAstToToc tag query parsing", () => {
     });
   });
 
+  it("does not create a tag when the TOC image has no alt text", () => {
+    const toc = mdxAstToToc(
+      [
+        {
+          type: "list",
+          children: [
+            {
+              type: "listItem",
+              children: [
+                {
+                  type: "paragraph",
+                  children: [
+                    { type: "text", value: "Data Service" },
+                    {
+                      type: "image",
+                      alt: null,
+                      url: "/media/tidb-cloud/blank_transparent_placeholder.png",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ] as any,
+      "en/tidbcloud/master/TOC"
+    );
+
+    expect(toc[0].tag).toBeUndefined();
+  });
+
   it("keeps tag query params when the image URL includes them", () => {
     const toc = mdxAstToToc(
       [

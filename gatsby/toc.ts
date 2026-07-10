@@ -160,10 +160,12 @@ function getContentFromLink(
   // use `image` as tag
   const image = content.children.find((n): n is Image => n.type === "image");
   const imageQuery = image?.url.split("?")[1];
-  const tag = image && {
-    value: image.alt!,
-    query: imageQuery ? `?${imageQuery}` : undefined,
-  };
+  const tag = image?.alt
+    ? {
+        value: image.alt,
+        query: imageQuery ? `?${imageQuery}` : undefined,
+      }
+    : undefined;
 
   if (child.type === "link") {
     if (child.children.length === 0) {
