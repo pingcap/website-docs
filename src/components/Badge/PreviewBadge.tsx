@@ -10,15 +10,18 @@ const PreviewBadge = (props: { label: string }) => {
       size="small"
       variant="outlined"
       sx={{
-        height: "20px",
-        fontSize: "12px",
-        fontWeight: 400,
-        borderRadius: "10px",
+        height: "18px",
+        fontSize: "10px",
+        fontWeight: 500,
+        borderRadius: "1000px",
+        borderColor: theme.palette.carbon[400],
         pointerEvents: "none",
+        textTransform: "uppercase",
+        letterSpacing: "0.25px",
         "& .MuiChip-label": {
           paddingLeft: "8px",
           paddingRight: "8px",
-          lineHeight: "20px",
+          lineHeight: "16px",
           color: theme.palette.carbon[700],
         },
       }}
