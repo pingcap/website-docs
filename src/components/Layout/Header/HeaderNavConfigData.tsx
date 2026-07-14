@@ -2,53 +2,10 @@ import { NavConfig } from "./HeaderNavConfigType";
 import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
 import { CloudPlan, TOCNamespace } from "shared/interface";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import Chip from "@mui/material/Chip";
-import { useTheme } from "@mui/material/styles";
+import PreviewBadge from "components/Badge/PreviewBadge";
 
 import TiDBCloudIcon from "media/icons/cloud-03.svg";
 import TiDBIcon from "media/icons/layers-three-01.svg";
-
-const PreviewBadge = (props: { label: string }) => {
-  const theme = useTheme();
-  return (
-    <Chip
-      label={props.label}
-      size="small"
-      variant="outlined"
-      sx={{
-        height: "20px",
-        fontSize: "12px",
-        fontWeight: 400,
-        borderRadius: "10px",
-        pointerEvents: "none",
-        "& .MuiChip-label": {
-          paddingLeft: "8px",
-          paddingRight: "8px",
-          lineHeight: "20px",
-          color: theme.palette.carbon[700],
-        },
-      }}
-    />
-  );
-};
-
-const BetaTagBadge = (props: { label: string }) => (
-  <Chip
-    label={props.label}
-    variant="outlined"
-    size="small"
-    sx={{
-      flexShrink: 0,
-      textTransform: "uppercase",
-      pointerEvents: "none",
-      fontSize: "10px",
-      height: "20px",
-      borderColor: "#c0e1f1",
-      color: "#2d9cd2",
-      fontWeight: 500,
-    }}
-  />
-);
 
 /**
  * Default navigation configuration
@@ -167,7 +124,7 @@ const getDefaultNavConfig = (
     leftNavLabel: (
       <>
         {t("navbar.tidbForAI")}
-        <BetaTagBadge label={t("navbar.badge.beta")} />
+        <PreviewBadge label={t("navbar.badge.preview")} />
       </>
     ),
     to: "/ai",

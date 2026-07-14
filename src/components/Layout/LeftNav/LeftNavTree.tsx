@@ -7,9 +7,11 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { RepoNavLink, RepoNav } from "shared/interface";
 import LinkComponent from "components/Link";
+import PreviewBadge from "components/Badge/PreviewBadge";
 import { scrollToElementIfInView } from "shared/utils";
 import { alpha, Chip } from "@mui/material";
 
@@ -190,6 +192,8 @@ export default function ControlledTreeView(props: {
   });
 
   const theme = useTheme();
+  const { t } = useTranslation();
+  const previewBadgeLabel = t("navbar.badge.preview");
   const [disableTransition, setDisableTransition] = React.useState(false);
   const previousUrlRef = React.useRef<string | null>(null);
 
@@ -313,7 +317,7 @@ export default function ControlledTreeView(props: {
             ) : (
               <Box sx={{ flexShrink: 0 }} width={16} height={16} />
             )}
-            {generateItemLabel(item)}
+            {generateItemLabel(item, previewBadgeLabel)}
           </Stack>
         );
       };
@@ -389,10 +393,22 @@ export default function ControlledTreeView(props: {
   );
 }
 
-const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
-  const tagQuery = new URLSearchParams(tag?.query);
-  const tagColor = tagQuery.get("color");
-  const tagColor02 = tagColor && alpha(tagColor, 0.2);
+const generateItemLabel = (
+  { content: contents, tag }: RepoNavLink,
+  previewBadgeLabel: string
+) => {
+  const normalizedTagValue = tag?.value?.trim().toUpperCase();
+  const isPreviewTag = normalizedTagValue === "PREVIEW";
+  let tagColor: string | null = null;
+  let tagColor02: string | null = null;
+
+  // PREVIEW intentionally ignores source color overrides to match shared badges.
+  if (tag && !isPreviewTag) {
+    const tagQuery = new URLSearchParams(tag.query ?? "");
+    tagColor = tagQuery.get("color");
+    tagColor02 = tagColor ? alpha(tagColor, 0.2) : null;
+  }
+
   return (
     <Stack sx={{ width: "100%" }} direction="row" gap="4px">
       <Box
@@ -422,7 +438,9 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
           );
         })}
       </Box>
-      {tag && (
+      {tag && isPreviewTag ? (
+        <PreviewBadge label={previewBadgeLabel} />
+      ) : tag ? (
         <Chip
           label={tag.value}
           variant="outlined"
@@ -438,7 +456,7 @@ const generateItemLabel = ({ content: contents, tag }: RepoNavLink) => {
             fontWeight: 500,
           }}
         />
-      )}
+      ) : null}
     </Stack>
   );
 };

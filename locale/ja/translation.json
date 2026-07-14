@@ -43,8 +43,7 @@
     "tidbOperatorReleases": "TiDB Operator リリース",
     "tiupReleases": "TiUP リリース",
     "badge": {
-      "preview": "Preview",
-      "beta": "Beta"
+      "preview": "Preview"
     },
     "appdev": "アプリ開発",
     "asktug": "Forum",
