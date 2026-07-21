@@ -23,7 +23,7 @@
 ## オペレーション {#operations}
 
 -   [負荷分散にHAProxyを使用する](https://docs.pingcap.com/ja/best-practices/haproxy-best-practices.md): HAProxyは、TCPおよびHTTPベースのアプリケーション向けの無料のオープンソースロードバランサおよびプロキシサーバーです。高可用性、負荷分散、ヘルスチェック、スティッキーセッション、SSLサポート、監視機能を提供します。HAProxyを導入するには、ハードウェアとソフトウェアの要件を満たしていることを確認の上、インストールと設定を行ってください。最適な結果を得るには、最新の安定バージョンをご使用ください。
--   [読み取り専用ストレージノードを使用する](https://docs.pingcap.com/ja/best-practices/readonly-nodes.md): このドキュメントでは、オンラインサービスから高許容遅延負荷を分離するための読み取り専用storageノードの設定方法を紹介します。手順としては、TiKVノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードに学習者としてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
+-   [読み取り専用ストレージノードを使用する](https://docs.pingcap.com/ja/best-practices/readonly-nodes.md): このドキュメントでは、オンラインサービスから高許容遅延負荷を分離するための読み取り専用ストレージノードの設定方法を紹介します。手順としては、TiKVノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードに学習者としてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
 -   [Grafana を使用して TiDB を監視する](https://docs.pingcap.com/ja/best-practices/grafana-monitor-best-practices.md): Grafanaを用いたTiDB監視のベストプラクティス。TiUPを使用してTiDBクラスターをデプロイ、監視用にGrafanaとPrometheusを追加します。メトリクスを使用してクラスターの状態を分析し、問題を診断します。PrometheusはTiDBコンポーネントからメトリクスを収集し、Grafanaはそれらを表示します。Grafanaを効率的に使用するためのヒントとしては、クエリ式の変更、Y軸スケールの切り替え、クエリ結果のAPI使用などが挙げられます。このプラットフォームは、TiDBクラスターの状態の分析と診断に非常に役立ちます。
 
 ## 性能チューニング {#performance-tuning}

@@ -21,6 +21,6 @@
 -   [[2024-04-11] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ](https://docs.pingcap.com/ja/tidbcloud/notification-2024-04-11-dm-feature-maintenance.md): 2024 年 4 月 11 日のTiDB Cloud Data Migration (DM) 機能メンテナンスの詳細（メンテナンス ウィンドウや影響など）について説明します。
 -   [[2024-04-09] TiDB Cloud監視機能メンテナンスのお知らせ](https://docs.pingcap.com/ja/tidbcloud/notification-2024-04-09-monitoring-features-maintenance.md): 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナンスの詳細（メンテナンス期間、理由、影響など）についてご確認ください。
 -   以前の通知
-    -   [[2023-11-14] TiDB Cloud専用スケール機能メンテナンスのお知らせ](https://docs.pingcap.com/ja/tidbcloud/notification-2023-11-14-scale-feature-maintenance.md): 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
+    -   [[2023-11-14] TiDB Cloud Dedicatedスケール機能メンテナンスのお知らせ](https://docs.pingcap.com/ja/tidbcloud/notification-2023-11-14-scale-feature-maintenance.md): 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
     -   [[2023-09-26] TiDB Cloudコンソールメンテナンスのお知らせ](https://docs.pingcap.com/ja/tidbcloud/notification-2023-09-26-console-maintenance.md): 2023 年 9 月 26 日のTiDB Cloud Console メンテナンスの詳細 (メンテナンス ウィンドウ、理由、影響など) について説明します。
     -   [[2023-08-31] TiDB Cloudコンソールメンテナンスのお知らせ](https://docs.pingcap.com/ja/tidbcloud/notification-2023-08-31-console-maintenance.md): 2023 年 8 月 31 日のTiDB Cloud Console メンテナンスの詳細 (メンテナンス ウィンドウ、理由、影響など) について説明します。

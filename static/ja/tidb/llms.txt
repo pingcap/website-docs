@@ -2,17 +2,17 @@
 
 > TiDB は平凱星辰（PingCAP）社が自主設計・開発したオープンソースの分散型リレーショナルデータベースです。
 
--   TiDBセルフマネージドについて
-    -   [TiDBセルフマネージドとは何ですか？](https://docs.pingcap.com/ja/tidb/stable/overview.md): TiDBの主な機能と使用例について学びましょう。
+-   TiDB Self-Managedについて
+    -   [TiDB Self-Managedとは何ですか？](https://docs.pingcap.com/ja/tidb/stable/overview.md): TiDBの主な機能と使用例について学びましょう。
     -   [TiDB 8.5 リリースノート](https://docs.pingcap.com/ja/tidb/stable/release-8.5.0.md): TiDB 8.5.0 の新機能、互換性の変更点、改善点、およびバグ修正についてご確認ください。
     -   [特徴](https://docs.pingcap.com/ja/tidb/stable/basic-features.md): TiDBの機能概要について学びましょう。
     -   [MySQLとの互換性](https://docs.pingcap.com/ja/tidb/stable/mysql-compatibility.md): TiDBとMySQLの互換性、およびサポートされていない機能や異なる機能について学びましょう。
     -   [TiDBの制限事項](https://docs.pingcap.com/ja/tidb/stable/tidb-limitations.md): TiDB の使用制限について学習します。
     -   [クレジット](https://docs.pingcap.com/ja/tidb/stable/credits.md): TiDB コミュニティへの貢献者のリストと役割について学びます。
 -   さあ始めましょう
-    -   [TiDB クイックスタート](https://docs.pingcap.com/ja/tidb/stable/quick-start-with-tidb.md): TiUPプレイグラウンドを使ってTiDBセルフマネージドを素早く使い始める方法を学び、TiDBがあなたにとって最適な選択肢かどうかを確認しましょう。
+    -   [TiDB クイックスタート](https://docs.pingcap.com/ja/tidb/stable/quick-start-with-tidb.md): TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める方法を学び、TiDBがあなたにとって最適な選択肢かどうかを確認しましょう。
     -   [HTAP クイックスタート](https://docs.pingcap.com/ja/tidb/stable/quick-start-with-htap.md): TiDB HTAPをすぐに使い始める方法を学びます。
-    -   [TiDBでSQLを探求しよう](https://docs.pingcap.com/ja/tidb/stable/basic-sql-operations.md): TiDB データベースの基本的な SQL ステートメントについて学習します。
+    -   [TiDBでSQLを探求しよう](https://docs.pingcap.com/ja/tidb/stable/basic-sql-operations.md): TiDBデータベースの基本的なSQL文について学びましょう。
     -   [HTAPを探索する](https://docs.pingcap.com/ja/tidb/stable/explore-htap.md): TiDB HTAPの機能を探究し、活用する方法を学びましょう。
     -   [サンプルデータベースのインポート](https://docs.pingcap.com/ja/tidb/stable/import-example-data.md): Bikeshare サンプル データベースをインストールします。
 -   デプロイ
@@ -38,16 +38,16 @@
     -   [移行ツール](https://docs.pingcap.com/ja/tidb/stable/migration-tools.md): TiDB 移行ツールの概要を説明します。
     -   [ベストプラクティスの導入](https://docs.pingcap.com/ja/tidb/stable/data-import-best-practices.md): 大量のデータをインポートするためのベスト プラクティスを学びます。
     -   移住シナリオ
-        -   [Auroraから移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-aurora-to-tidb.md): DB スナップショットを使用して Amazon Auroraから TiDB にデータを移行する方法を学びます。
+        -   [Auroraから移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-aurora-to-tidb.md): DBスナップショットを使用して、Amazon AuroraからTiDBへデータを移行する方法を学びましょう。
         -   [MySQLから小規模データセットを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-small-mysql-to-tidb.md): 小さなデータセットを MySQL から TiDB に移行する方法を学びます。
-        -   [MySQLから大規模データセットを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-large-mysql-to-tidb.md): 大規模なデータセットを MySQL から TiDB に移行する方法を学びます。
+        -   [MySQLから大規模データセットを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-large-mysql-to-tidb.md): MySQLからTiDBへ大規模データセットを移行する方法を学びましょう。
         -   [小規模データセットのMySQLシャードを移行およびマージする](https://docs.pingcap.com/ja/tidb/stable/migrate-small-mysql-shards-to-tidb.md): シャードの小さなデータセットを MySQL から TiDB に移行およびマージする方法を学びます。
-        -   [大規模データセットのMySQLシャードを移行およびマージする](https://docs.pingcap.com/ja/tidb/stable/migrate-large-mysql-shards-to-tidb.md): DumplingとTiDB Lightningを使用して、MySQL から TiDB に大規模なシャード データセットを移行およびマージする方法と、さまざまな MySQL シャードから TiDB に増分データ変更を複製するように DM タスクを構成する方法について学習します。
+        -   [大規模データセットのMySQLシャードを移行およびマージする](https://docs.pingcap.com/ja/tidb/stable/migrate-large-mysql-shards-to-tidb.md): DumplingとTiDB Lightningを使用して、MySQLからTiDBへ大規模なシャードデータセットを移行およびマージする方法、そして異なるMySQLシャードからの増分データ変更をTiDBにレプリケートするようにDMタスクを構成する方法を学びます。
         -   [Vitessから移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-from-vitess.md): Vitess から TiDB にデータを移行するためのツールについて学習します。
         -   [MariaDBからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-mariadb.md): MariaDBからTiDBへのデータ移行方法を学びましょう。
-        -   [CSVファイルからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-csv-files-to-tidb.md): CSV ファイルから TiDB にデータを移行する方法を学びます。
-        -   [SQLファイルからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-sql-files-to-tidb.md): SQL ファイルから TiDB にデータを移行する方法を学習します。
-        -   [Parquetファイルからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-parquet-files-to-tidb.md): parquet ファイルから TiDB にデータを移行する方法を学びます。
+        -   [CSVファイルからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-csv-files-to-tidb.md): CSVファイルからTiDBへのデータ移行方法を学びましょう。
+        -   [SQLファイルからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-sql-files-to-tidb.md): SQLファイルからTiDBへのデータ移行方法を学びましょう。
+        -   [Parquetファイルからの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-parquet-files-to-tidb.md): ParquetファイルからTiDBへのデータ移行方法を学びましょう。
         -   [ある TiDBクラスタから別の TiDBクラスタへ移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-from-tidb-to-tidb.md): ある TiDB クラスターから別の TiDB クラスターにデータを移行する方法を学習します。
         -   [TiDBからMySQL互換データベースへの移行](https://docs.pingcap.com/ja/tidb/stable/migrate-from-tidb-to-mysql.md): TiDB から MySQL 互換データベースにデータを移行する方法を学びます。
     -   高度な移行
@@ -64,7 +64,7 @@
             -   [データをMySQL互換データベースに複製する](https://docs.pingcap.com/ja/tidb/stable/ticdc-sink-to-mysql.md): TiCDCを使用して、データをTiDBまたはMySQLに複製する方法を学びましょう。
             -   [データをKafkaに複製する](https://docs.pingcap.com/ja/tidb/stable/ticdc-sink-to-kafka.md): TiCDC を使用して Apache Kafka にデータを複製する方法を学習します。
             -   [データをPulsarに複製する](https://docs.pingcap.com/ja/tidb/stable/ticdc-sink-to-pulsar.md): TiCDC を使用してデータを Pulsar に複製する方法を学びます。
-            -   [データをストレージサービスに複製する](https://docs.pingcap.com/ja/tidb/stable/ticdc-sink-to-cloud-storage.md): TiCDC を使用してデータをstorageサービスに複製する方法と、複製されたデータのstorageパスについて学習します。
+            -   [データをストレージサービスに複製する](https://docs.pingcap.com/ja/tidb/stable/ticdc-sink-to-cloud-storage.md): TiCDC を使用してデータをストレージサービスに複製する方法と、複製されたデータのストレージパスについて学習します。
         -   [変更フィードを管理する](https://docs.pingcap.com/ja/tidb/stable/ticdc-manage-changefeed.md): TiCDC 変更フィードを管理する方法を学びます。
         -   [ログフィルター](https://docs.pingcap.com/ja/tidb/stable/ticdc-filter.md): TiCDC のテーブル フィルターとイベント フィルターの使用方法を学習します。
         -   [DDLレプリケーション](https://docs.pingcap.com/ja/tidb/stable/ticdc-ddl.md): TiCDC でサポートされている DDL ステートメントといくつかの特殊なケースについて学習します。
@@ -92,21 +92,21 @@
             -   [TiCDC Avroプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-avro-protocol.md): TiCDC Avro プロトコルの概念とその使用方法を学びます。
             -   [TiCDC Canal- JSONプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-canal-json.md): TiCDC Canal-JSON プロトコルの概念とその使用方法を学びます。
             -   [TiCDC CSVプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-csv.md): TiCDC CSVプロトコルの概念と使用方法を学びましょう。
-            -   [TiCDCデベジウムプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-debezium.md): TiCDC Debezium プロトコルの概念とその使用方法を学びます。
+            -   [TiCDCDebeziumプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-debezium.md): TiCDC Debezium プロトコルの概念とその使用方法を学びます。
             -   [TiCDCオープンプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-open-protocol.md): TiCDC オープン プロトコルの概念とその使用方法を学びます。
             -   [TiCDCシンプルプロトコル](https://docs.pingcap.com/ja/tidb/stable/ticdc-simple-protocol.md): TiCDC シンプル プロトコルとデータ形式の実装の使用方法を学習します。
         -   [TiCDCオープンAPI v2](https://docs.pingcap.com/ja/tidb/stable/ticdc-open-api-v2.md): OpenAPI v2 インターフェースを使用してクラスターのステータスとデータレプリケーションを管理する方法を学習します。
         -   [TiCDCオープンAPI v1](https://docs.pingcap.com/ja/tidb/stable/ticdc-open-api.md): OpenAPI インターフェースを使用してクラスターのステータスとデータのレプリケーションを管理する方法を学習します。
         -   TiCDCのデータ消費量
             -   [TiCDC行データチェックサム検証（Avroベース）](https://docs.pingcap.com/ja/tidb/stable/ticdc-avro-checksum-verification.md): TiCDC 行データ チェックサム検証の詳細な実装を紹介します。
-            -   [ストレージシンク消費者の開発ガイド](https://docs.pingcap.com/ja/tidb/stable/ticdc-storage-consumer-dev-guide.md): storageシンク内のデータの変更を消費するコンシューマーを設計および実装する方法を学習します。
+            -   [ストレージシンク消費者の開発ガイド](https://docs.pingcap.com/ja/tidb/stable/ticdc-storage-consumer-dev-guide.md): ストレージシンク内のデータの変更を消費するコンシューマーを設計および実装する方法を学習します。
         -   [TiCDCとの互換性](https://docs.pingcap.com/ja/tidb/stable/ticdc-compatibility.md): TiCDCの互換性に関する問題とその対処方法について学びましょう。
     -   [トラブルシューティング](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-ticdc.md): TiCDC の使用時に発生する可能性のある問題のトラブルシューティング方法を学習します。
     -   [よくある質問](https://docs.pingcap.com/ja/tidb/stable/ticdc-faq.md): TiCDC を使用する際に遭遇する可能性のある FAQ について説明します。
     -   [用語集](https://docs.pingcap.com/ja/tidb/stable/ticdc-glossary.md): Learn the terms about TiCDC and their definitions.
 -   管理
-    -   Security
-        -   [TiDBSecurityコンフィグレーションのベストプラクティス](https://docs.pingcap.com/ja/tidb/stable/best-practices-for-security-configuration.md): 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベスト プラクティスを学習します。
+    -   セキュリティ
+        -   [TiDBセキュリティ設定のベストプラクティス](https://docs.pingcap.com/ja/tidb/stable/best-practices-for-security-configuration.md): 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベスト プラクティスを学習します。
         -   [TiDBクライアントとサーバー間でTLSを有効にする](https://docs.pingcap.com/ja/tidb/stable/enable-tls-between-clients-and-servers.md): データセキュリティを確保するため、安全な接続を使用してください。
         -   [TiDBコンポーネント間でTLSを有効にする](https://docs.pingcap.com/ja/tidb/stable/enable-tls-between-components.md): TiDB コンポーネント間の TLS 認証を有効にする方法を学習します。
         -   [自己署名証明書を生成する](https://docs.pingcap.com/ja/tidb/stable/generate-self-signed-certificates.md): openssl` を使用して自己署名証明書を生成します。
@@ -123,18 +123,18 @@
         -   [TiUPを使用する（推奨）](https://docs.pingcap.com/ja/tidb/stable/scale-tidb-using-tiup.md): TiUPを使用して TiDB クラスターをスケーリングする方法を学びます。
         -   [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
     -   バックアップと復元
-        -   [概要](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-overview.md): TiDB Backup & Restore (BR) は、クラスタの高可用性とデータの安全性を確保します。短い RPO でディザスタリカバリをサポートし、誤操作を処理し、履歴データの監査機能を提供します。バックアップ操作はオフピーク時に実行し、バックアップデータは互換性のあるstorageシステムに保存することをお勧めします。BRは、フルバックアップとログバックアップ、および任意の時点へのデータ復元をサポートします。バックアップと復元には、TiDB クラスタと同じメジャーバージョンのBRを使用することが重要です。
+        -   [概要](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-overview.md): TiDB Backup & Restore (BR) は、クラスタの高可用性とデータの安全性を確保します。短い RPO でディザスタリカバリをサポートし、誤操作を処理し、履歴データの監査機能を提供します。バックアップ操作はオフピーク時に実行し、バックアップデータは互換性のあるストレージシステムに保存することをお勧めします。BRは、フルバックアップとログバックアップ、および任意の時点へのデータ復元をサポートします。バックアップと復元には、TiDB クラスタと同じメジャーバージョンのBRを使用することが重要です。
         -   アーキテクチャ
             -   [アーキテクチャ概要](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-design.md): TiDBは、Backup & Restore（BR）とTiDB Operatorを使用したクラスタデータのバックアップとリストアをサポートしています。TiKVノードからデータをバックアップし、TiKVノードにデータをリストアするタスクを作成できます。アーキテクチャには、フルデータバックアップとリストア、データ変更ログバックアップ、ポイントインタイムリカバリ（PITR）が含まれます。詳細については、各機能のドキュメントを参照してください。
-            -   [スナップショットバックアップおよびリストアのアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-architecture.md): TiDBスナップショットバックアップおよびリストアアーキテクチャでは、バックアップ＆リストア（BR）ツールを使用したプロセスについて説明します。このアーキテクチャには、バックアップおよびリストアプロセス、バックアップファイルの種類、命名形式、storage形式、およびバックアップファイルの構造が含まれます。バックアッププロセスには、スケジューリング、データバックアップ、およびメタデータバックアップが含まれます。リストアプロセスには、スケジューリング、スキーマリストア、リージョン割り当て、データリストア、およびレポートが含まれます。バックアップファイルの種類には、SSTファイル、backupmetaファイル、およびbackup.lockファイルがあります。SSTファイルの命名形式とstorage形式については、詳細に説明します。詳細については、TiDBスナップショットバックアップおよびリストアガイドを参照してください。
+            -   [スナップショットバックアップおよびリストアのアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-architecture.md): TiDBスナップショットバックアップおよびリストアアーキテクチャでは、バックアップ＆リストア（BR）ツールを使用したプロセスについて説明します。このアーキテクチャには、バックアップおよびリストアプロセス、バックアップファイルの種類、命名形式、ストレージ形式、およびバックアップファイルの構造が含まれます。バックアッププロセスには、スケジューリング、データバックアップ、およびメタデータバックアップが含まれます。リストアプロセスには、スケジューリング、スキーマリストア、リージョン割り当て、データリストア、およびレポートが含まれます。バックアップファイルの種類には、SSTファイル、backupmetaファイル、およびbackup.lockファイルがあります。SSTファイルの命名形式とストレージ形式については、詳細に説明します。詳細については、TiDBスナップショットバックアップおよびリストアガイドを参照してください。
             -   [ログバックアップとPITRアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/br-log-architecture.md): TiDBのログバックアップとPITRアーキテクチャは、バックアップ＆リストア（BR）ツールを例として紹介します。このアーキテクチャには、ログバックアッププロセスの設計、システムコンポーネント、および主要な概念が含まれます。PITRプロセスでは、フルバックアップデータとログバックアップデータをリストアします。ログバックアップでは、ログデータ、メタデータ、グローバルチェックポイントなどのファイルが生成されます。
         -   BRを使用する
-            -   [使用概要](https://docs.pingcap.com/ja/tidb/stable/br-use-overview.md): TiDB バックアップ＆リストアは、バックアップ方法の選択、バックアップデータの管理、ツールの導入に関するベストプラクティスを提供します。フルバックアップとログバックアップの両方の使用、推奨storageシステムへのデータの保存、バックアップ保持期間の設定が推奨されています。ツールは、コマンドラインツール、SQL文、またはKubernetes上のTiDB Operatorを使用して導入できます。詳細な使用方法については、付属のドキュメントをご覧ください。
+            -   [使用概要](https://docs.pingcap.com/ja/tidb/stable/br-use-overview.md): TiDB バックアップ＆リストアは、バックアップ方法の選択、バックアップデータの管理、ツールの導入に関するベストプラクティスを提供します。フルバックアップとログバックアップの両方の使用、推奨ストレージシステムへのデータの保存、バックアップ保持期間の設定が推奨されています。ツールは、コマンドラインツール、SQL文、またはKubernetes上のTiDB Operatorを使用して導入できます。詳細な使用方法については、付属のドキュメントをご覧ください。
             -   [スナップショットのバックアップと復元ガイド](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-guide.md): このドキュメントでは、brコマンドラインツールを使用してTiDBスナップショットをバックアップおよび復元する方法について説明します。スナップショットのバックアップ、指定した時点のデータ復元、データベースまたはテーブルの復元に関する手順が含まれています。また、スナップショットのバックアップと復元のパフォーマンスと影響についても解説します。
             -   [ログバックアップとPITRガイド](https://docs.pingcap.com/ja/tidb/stable/br-pitr-guide.md): TiDB ログバックアップおよび PITR ガイドでは、br コマンドラインツールを使用してデータをバックアップおよび復元する方法について説明します。ログバックアップの開始、定期的な完全バックアップの実行、古いデータのクリーンアップの手順が含まれています。また、PITR の実行方法と PITR のパフォーマンス機能に関する情報も提供します。
             -   [コンパクトログバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-compact-log-backup.md): ログ バックアップを SST 形式に圧縮することで、ポイントインタイム リカバリ (PITR) の効率を向上させる方法を学習します。
-            -   [ユースケース](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-use-cases.md): TiDBは、タイムリーなデータリカバリやビジネス監査など、特定のユースケース向けにスナップショットおよびログバックアップソリューションを提供します。ポイントインタイムリカバリ（PITR）を使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンに更新してください。Amazon S3にバックアップstorageを設定し、データ損失とリカバリの要件を満たすバックアップポリシーを設定してください。ログバックアップとスナップショットバックアップを実行し、PITRを使用して特定の時点にデータを復元します。古くなったデータは定期的にクリーンアップしてください。詳細な手順については、TiDBのドキュメントをご覧ください。
-            -   [バックアップストレージ](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-storages.md): TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップstorageをサポートしています。各storageサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各storageサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
+            -   [ユースケース](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-use-cases.md): TiDBは、タイムリーなデータリカバリやビジネス監査など、特定のユースケース向けにスナップショットおよびログバックアップソリューションを提供します。ポイントインタイムリカバリ（PITR）を使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンに更新してください。Amazon S3にバックアップストレージを設定し、データ損失とリカバリの要件を満たすバックアップポリシーを設定してください。ログバックアップとスナップショットバックアップを実行し、PITRを使用して特定の時点にデータを復元します。古くなったデータは定期的にクリーンアップしてください。詳細な手順については、TiDBのドキュメントをご覧ください。
+            -   [バックアップストレージ](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-storages.md): TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
         -   BR CLIマニュアル
             -   [概要](https://docs.pingcap.com/ja/tidb/stable/use-br-command-line-tool.md): br` コマンドラインツールは、TiDB クラスターのスナップショットバックアップ、ログバックアップ、およびポイントインタイムリカバリ (PITR) に使用されます。サブコマンド、オプション、およびパラメータで構成されており、PD サービスアドレスの `--pd` やstorageパスの `-s` などの共通オプションがあります。サブコマンドには、それぞれ特定の機能を持つ `tiup br backup`、`tiup br log`、`tiup br restore` などがあります。バックアップコマンドには `full`、`db`、`table` オプションがあり、ログバックアップおよびリストアコマンドには、バックアップ操作を管理するためのさまざまなタスクがあります。
             -   [スナップショットバックアップおよび復元コマンドマニュアル](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-manual.md): TiDBスナップショットのバックアップと復元コマンドマニュアルでは、クラスタースナップショット、データベース、およびテーブルのバックアップと復元に使用するコマンドについて説明しています。また、バックアップデータの暗号化と暗号化されたスナップショットの復元についても説明しています。BRはGCへの自己適応をサポートし、統計情報のバックアップと復元に--ignore-statsパラメータを導入しています。さらに、バックアップデータの暗号化と、指定されたデータベースまたはテーブルの部分的なデータ復元もサポートしています。
@@ -145,7 +145,7 @@
                 -   [バッチテーブル作成](https://docs.pingcap.com/ja/tidb/stable/br-batch-create-table.md): TiDB v6.0.0では、データ復元時のテーブル作成プロセスを高速化するバッチテーブル作成機能が導入されました。この機能はデフォルトで有効になっており、テーブルをバッチで作成することで、多数のテーブルを持つデータの復元時間を大幅に短縮します。この機能テストでは、1つのTiKVインスタンスの復元速度が平均181.65 MB/秒と高速であることが確認されています。
                 -   [Checkpointのバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-checkpoint-backup.md): TiDB v6.5.0では、中断されたバックアップを再開するためのチェックポイント・バックアップ機能が導入され、最初からやり直す必要性が軽減されます。この機能はバックアップ済みのシャードを記録してバックアップを再開しますが、GCメカニズムに依存するため、一部のデータの再バックアップが必要になる場合があります。br`ツールは、データのガベージコレクションを回避するために定期的に`gc-safepoint`を更新し、必要に応じて保持期間を延長できます。
                 -   [チェックポイント復元](https://docs.pingcap.com/ja/tidb/stable/br-checkpoint-restore.md): TiDB v7.1.0ではチェックポイント復元が導入され、中断されたスナップショットやログの復元を最初からやり直すことなく継続できるようになりました。復元されたシャードとテーブルIDが記録されるため、再試行時に中断発生時に近い進行状況ポイントを利用できます。ただし、GCメカニズムに依存しているため、一部のデータを再度復元する必要がある場合があります。正確性を確保するため、復元中にクラスターデータの変更を避けることが重要です。
-            -   [DumplingとTiDB Lightningを使用してデータをバックアップおよび復元する](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-using-dumpling-lightning.md): DumplingとTiDB Lightningを使用して TiDB の完全なデータをバックアップおよび復元する方法を学びます。
+            -   [DumplingとTiDB Lightningを使用してデータをバックアップおよび復元する](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-using-dumpling-lightning.md): DumplingとTiDB Lightningを使用して、TiDBの完全なデータをバックアップおよび復元する方法を学びましょう。
             -   [RawKVのバックアップと復元](https://docs.pingcap.com/ja/tidb/stable/rawkv-backup-and-restore.md): TiKVとPDは、TiDBなしでRawKVと呼ばれるKVデータベースを形成できます。TiKV- BRはRawKVのデータのバックアップと復元をサポートしています。詳細については、TiKVウェブサイトのTiKV- BRユーザードキュメントをご覧ください。
             -   [増分バックアップと復元](https://docs.pingcap.com/ja/tidb/stable/br-incremental-guide.md): 増分データは、開始スナップショットと終了スナップショット間の差分データとDDLです。これによりバックアップボリュームが削減され、増分バックアップにはtidb_gc_life_time`の設定が必要になります。増分バックアップには`tiup br backup`と`--lastbackupts`オプションを使用し、増分データを復元する前に以前のデータがすべて復元されていることを確認してください。
     -   クラスタ災害復旧（DR）
@@ -154,7 +154,7 @@
         -   [マルチレプリカクラスタDR](https://docs.pingcap.com/ja/tidb/stable/dr-multi-replica.md): 単一クラスターのマルチレプリカ災害復旧ソリューションについて学習します。
         -   [BRベースのDR](https://docs.pingcap.com/ja/tidb/stable/dr-backup-restore.md): TiDB のバックアップと復元機能に基づいて災害復旧を実装する方法を学びます。
     -   リソースマネージャー
-        -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](https://docs.pingcap.com/ja/tidb/stable/tidb-resource-control-ru-groups.md): リソース制御機能を使用して、アプリケーションのリソースを制御およびスケジュールする方法を学びましょう。
+        -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します](https://docs.pingcap.com/ja/tidb/stable/tidb-resource-control-ru-groups.md): リソース制御機能を使用して、アプリケーションのリソースを制御およびスケジュールする方法を学びましょう。
         -   [暴走クエリの管理](https://docs.pingcap.com/ja/tidb/stable/tidb-resource-control-runaway-queries.md): リソース管理機能を使用して、リソースを過剰に消費するクエリ (ランナウェイ クエリ) を制御および低下させる方法を紹介します。
         -   [バックグラウンドタスクの管理](https://docs.pingcap.com/ja/tidb/stable/tidb-resource-control-background-tasks.md): リソース制御を通じてバックグラウンド タスクを制御する方法を紹介します。
     -   [タイムゾーンを設定する](https://docs.pingcap.com/ja/tidb/stable/configure-time-zone.md): TiDBのタイムゾーン設定は、time_zone`システム変数によって制御されます。この変数はセッションレベルまたはグローバルレベルで設定できます。`TIMESTAMP`データ型の表示値はタイムゾーン設定の影響を受けますが、`DATETIME`、`DATE`、`TIME`データ型は影響を受けません。データ移行を行う際は、プライマリデータベースとセカンダリデータベースのタイムゾーン設定が一致しているかどうかを特に注意する必要があります。
@@ -179,8 +179,8 @@
         -   [アクセス](https://docs.pingcap.com/ja/tidb/stable/dashboard-access.md): TiDBダッシュボードにアクセスするには、ブラウザで指定されたURLにアクセスしてください。複数のPDインスタンスの場合は、アドレスを任意のPDインスタンスのアドレスとポートに置き換えてください。Chrome、Firefox、またはEdgeブラウザ（最新バージョン）をご利用ください。TiDBルートアカウントまたはユーザー定義のSQLユーザーでサインインしてください。セッションは24時間有効です。言語は英語と中国語で切り替えられます。ログアウトするには、ユーザー名をクリックし、「ログアウト」ボタンをクリックしてください。
         -   [概要ページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-overview.md): TiDB概要ページには、クラスターのQPS、レイテンシー、上位SQL文、最近のスロークエリ、インスタンスステータス、監視/アラートリンクが表示されます。TiDBダッシュボードまたは左側のナビゲーションメニューからアクセスできます。QPSとレイテンシーにはPrometheusモニタリングが必要です。Top SQLとスロークエリには、SQL文とスロークエリログが有効になっている必要があります。インスタンスステータスには、インスタンスの総数と異常なインスタンスが表示されます。監視とアラートのリンクは、Grafanaダッシュボード、AlertManager、クラスター診断にリンクしています。
         -   [クラスタ情報ページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-cluster-info.md): TiDBダッシュボードのクラスタ情報ページでは、クラスタ全体のTiDB、TiKV、PD、 TiFlashコンポーネントの稼働状況、およびこれらのコンポーネントが配置されているホストの稼働状況を確認できます。このページにアクセスするには、TiDBダッシュボードにログインし、左側のナビゲーションメニューで「クラスタ情報」をクリックするか、ブラウザで特定のURLにアクセスしてください。このページには、インスタンス、ホスト、ディスクのリストが表示され、各コンポーネントの詳細情報と稼働状況が表示されます。
-        -   [Top SQLページ](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): TiDB Dashboard Top SQLは、データベース内のSQLステートメントのCPUオーバーヘッドをリアルタイムで監視および可視化します。CPU負荷の高いステートメントを特定することでパフォーマンスの最適化を支援し、詳細な実行情報を提供します。パフォーマンス問題の分析に適しており、TiDB Dashboardまたはブラウザからアクセスできます。この機能はクラスタのパフォーマンスにわずかな影響を与えますが、現在、本番本番での利用が可能です。
-        -   [キービジュアライザーページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-key-visualizer.md): TiDBダッシュボードのKey Visualizerページでは、TiDBクラスタ内のトラフィックのホットスポットを分析およびトラブルシューティングできます。トラフィックの変化を時間経過とともに視覚的に表示し、特定の期間または地域範囲を拡大表示できます。また、明るさの調整、指標の選択、ヒートマップの更新などの設定も行えます。一般的なヒートマップの種類を特定し、ホットスポットの問題に対処するためのソリューションを提供します。
+        -   [Top SQLページ](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): TiDB Dashboard Top SQLは、データベース内のSQLステートメントのCPUオーバーヘッドをリアルタイムで監視および可視化します。CPU負荷の高いステートメントを特定することでパフォーマンスの最適化を支援し、詳細な実行情報を提供します。パフォーマンス問題の分析に適しており、TiDB Dashboardまたはブラウザからアクセスできます。この機能はクラスタのパフォーマンスにわずかな影響を与えますが、現在、本番での利用が可能です。
+        -   [キービジュアライザーページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-key-visualizer.md): TiDBダッシュボードのKey Visualizerページでは、TiDBクラスタ内のトラフィックのホットスポットを分析およびトラブルシューティングできます。トラフィックの変化を時間経過とともに視覚的に表示し、特定の期間またはリージョン範囲を拡大表示できます。また、明るさの調整、指標の選択、ヒートマップの更新などの設定も行えます。一般的なヒートマップの種類を特定し、ホットスポットの問題に対処するためのソリューションを提供します。
         -   [指標関係グラフ](https://docs.pingcap.com/ja/tidb/stable/dashboard-metrics-relation.md): TiDBダッシュボードに、TiDBクラスタ内の各内部プロセスの所要時間を把握するのに役立つメトリクス関係グラフという機能が導入されました。ログイン後、ユーザーはグラフにアクセスし、各監視メトリクスの所要時間がクエリ総所要時間に対する割合を確認できます。各ボックス領域は監視メトリクスを表し、総所要時間やクエリ総所要時間に対する割合などの情報を提供します。グラフにはノード間の親子関係も表示されるため、各監視メトリクスの関係を理解するのに役立ちます。
         -   SQLステートメントの分析
             -   [SQLステートメントページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-statement-list.md): TiDBダッシュボードのSQLステートメントページには、クラスター内のすべてのSQLステートメントの実行ステータスが表示されます。このページでは、実行時間の長いSQLステートメントを分析でき、アクセス、フィルタリング、列の追加表示、並べ替え、設定の変更などのオプションが提供されます。また、保存するSQLステートメントの数を制限する機能も備えています。詳細については、TiDBダッシュボードのドキュメントをご覧ください。
@@ -194,7 +194,7 @@
         -   [検索ログページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-log-search.md): TiDBダッシュボードのログ検索ページでは、ログの検索、結果のプレビュー、ログのダウンロードが可能です。ログイン後、このページにアクセスし、検索期間、ログレベル、キーワード、コンポーネントを指定できます。検索結果ページには、パラメータオプション、検索の進行状況、検索結果が表示されます。選択したログのダウンロード、実行中のタスクのキャンセル、失敗したタスクの再試行が可能です。検索履歴リストには過去の検索の詳細が表示され、不要な履歴を削除できます。
         -   [リソースマネージャーページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-resource-manager.md): TiDBダッシュボードのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタ容量を推定し、リソース消費量を監視するための方法を提供します。このページには、TiDBダッシュボードまたはブラウザからアクセスできます。このページには、構成、容量推定、およびメトリックのセクションがあります。容量推定方法には、ハードウェアの展開と実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
         -   インスタンスプロファイリング
-            -   [手動プロファイリング](https://docs.pingcap.com/ja/tidb/stable/dashboard-profiling.md): 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDBダッシュボードまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況をビュー、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴をビュー。
+            -   [手動プロファイリング](https://docs.pingcap.com/ja/tidb/stable/dashboard-profiling.md): 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDBダッシュボードまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認する。
             -   [継続的なプロファイリング](https://docs.pingcap.com/ja/tidb/stable/continuous-profiling.md): TiDBダッシュボードの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決することができます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
         -   セッション管理とコンフィグレーション
             -   [セッションを共有](https://docs.pingcap.com/ja/tidb/stable/dashboard-session-share.md): TiDBダッシュボードでは、ユーザーが現在のセッションを他のユーザーと共有できるため、ユーザーパスワードの入力は不要です。招待者は、特定の共有設定を含む認証コードを生成し、招待者に提供できます。招待者は、その認証コードを使用してパスワードなしでサインインできます。
@@ -218,13 +218,13 @@
         -   [ホットスポット](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-hot-spot-issues.md): TiDB の読み取りまたは書き込みホットスポットの問題を特定して解決する方法を学びます。
         -   [読み書きレイテンシの増加](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-cpu-issues.md): 読み取りおよび書き込みのレイテンシーが長くなる問題のトラブルシューティング方法を学びます。
         -   [楽観的トランザクションにおける書き込み競合](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-write-conflicts.md): 楽観的トランザクションにおける書き込み競合の原因と解決策について学習します。
-        -   [ディスクI/O使用率が高い](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-high-disk-io.md): TiDBstorageのI/O 使用率が高い問題を特定して対処する方法を学びます。
+        -   [ディスクI/O使用率が高い](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-high-disk-io.md): TiDBストレージのI/O 使用率が高い問題を特定して対処する方法を学びます。
         -   [ロックの競合](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-lock-conflicts.md): TiDB でのロック競合を分析して解決する方法を学びます。
         -   [データとインデックス間の不整合](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-data-inconsistency-errors.md): データとインデックス間の整合性チェックによって報告されたエラーを処理する方法を学習します。
     -   診断方法
         -   [SQL診断](https://docs.pingcap.com/ja/tidb/stable/information-schema-sql-diagnostics.md): TiDB での SQL 診断を理解します。
         -   [明細書概要表](https://docs.pingcap.com/ja/tidb/stable/statement-summary-tables.md): TiDBのステートメントサマリーテーブルについて学びましょう。
-        -   [Top SQLを使用して高コストなクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): TiDB Dashboard Top SQLは、データベース内のSQLステートメントのCPUオーバーヘッドをリアルタイムで監視および可視化します。CPU負荷の高いステートメントを特定することでパフォーマンスの最適化を支援し、詳細な実行情報を提供します。パフォーマンス問題の分析に適しており、TiDB Dashboardまたはブラウザからアクセスできます。この機能はクラスタのパフォーマンスにわずかな影響を与えますが、現在、本番本番での利用が可能です。
+        -   [Top SQLを使用して高コストなクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): TiDB Dashboard Top SQLは、データベース内のSQLステートメントのCPUオーバーヘッドをリアルタイムで監視および可視化します。CPU負荷の高いステートメントを特定することでパフォーマンスの最適化を支援し、詳細な実行情報を提供します。パフォーマンス問題の分析に適しており、TiDB Dashboardまたはブラウザからアクセスできます。この機能はクラスタのパフォーマンスにわずかな影響を与えますが、現在、本番での利用が可能です。
         -   [ログを使用して高負荷なクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/identify-expensive-queries.md): TiDBは、実行時間またはメモリ使用量のしきい値を超えるステートメントに関する情報を出力することで、高負荷なクエリを特定するのに役立ちます。これにより、SQLパフォーマンスの診断と改善が可能になります。高負荷クエリログには、実行時間、メモリ使用量、ユーザー、データベース、TiKVコプロセッサーのタスク情報などの詳細が含まれます。このログは、ステートメントがリソースしきい値を超えるとすぐに情報を出力ため、低速クエリログとは異なります。
         -   [クラスタのオンサイト情報を保存および復元する](https://docs.pingcap.com/ja/tidb/stable/sql-plan-replayer.md): PLAN REPLAYER を使用してクラスターのオンサイト情報を保存および復元する方法を学びます。
         -   [TiKVにおけるステイル読み取りとsafe-tsの理解](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-stale-read.md): TiKV のステイル読み取りと safe-ts の原則を紹介し、 ステイル読み取りに関連する一般的な問題を診断するためのトラブルシューティングのヒントと例を示します。
@@ -310,7 +310,7 @@
         -   [`tidb_snapshot`システム変数を使用する](https://docs.pingcap.com/ja/tidb/stable/read-historical-data.md): システム変数 tidb_snapshot` を使用して、TiDB が履歴バージョンからデータを読み取る方法について説明します。
     -   [配置ルールを使用する](https://docs.pingcap.com/ja/tidb/stable/configure-placement-rules.md): 配置ルールを構成する方法を学習します。
     -   [ロードベース分割を使用する](https://docs.pingcap.com/ja/tidb/stable/configure-load-base-split.md): Load Base Split の機能について学習します。
-    -   [店舗利用制限](https://docs.pingcap.com/ja/tidb/stable/configure-store-limit.md): ストア制限の機能について学びます。
+    -   [ストア利用制限](https://docs.pingcap.com/ja/tidb/stable/configure-store-limit.md): ストア制限の機能について学びます。
     -   [バッチ処理](https://docs.pingcap.com/ja/tidb/stable/batch-processing.md): パイプライン DML、非トランザクション DML、IMPORT INTO` ステートメント、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
     -   PDマイクロサービスを使用する
         -   [PDマイクロサービスの概要](https://docs.pingcap.com/ja/tidb/stable/pd-microservices.md): PD のマイクロサービス モードを有効にしてサービス品質を向上させる方法を学習します。
@@ -376,14 +376,14 @@
                 -   [tiup cluster prune](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-prune.md): クラスターをスケールアウトする際、 TiUP は一部のコンポーネントのサービスを即時に停止したり、データを削除したりしません。データのスケジューリングが完了するまで待ってから、「tiup cluster prune」コマンドを手動で実行してクリーンアップする必要があります。構文は「tiup cluster prune <cluster-name> [flags]」です。オプション「-h, --help」を指定するとヘルプ情報が出力、クリーンアッププロセスのログが出力されます。
                 -   [tiup cluster reload](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-reload.md): tiup cluster reload` コマンドは、変更されたクラスタ構成を適用し、サービスを再起動するために使用されます。`--force` で強制実行、`--transfer-timeout` で転送タイムアウトを設定、` --ignore-config-check で設定チェックを無視、` -N 、 --node でノードを指定、` -R 、 --role でロールを指定、`--skip-restart` で再起動をスキップできます。出力はtiup-clusterの実行ログです。
                 -   [tiup cluster rename](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-rename.md): tiup cluster renameコマンドは、デプロイ後にクラスター名を変更するために使用します。TiUPTiUP用に `grafana_servers` の `dashboard_dir` フィールドが設定されている場合は、追加の手順が必要です。このコマンドの構文は `tiup cluster rename <old-cluster-name> <new-cluster-name>` です。`-h, --helpオプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。
-                -   [tiup cluster replay](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-replay.md): tiup cluster replay` コマンドを使用すると、失敗したクラスター操作を再試行し、正常に実行された手順をスキップできます。指定した監査IDでコマンドを再試行するには、`tiup cluster replay <audit-id>` を使用します。監査IDは ` tiup cluster audit ` コマンドでビュー。出力は、指定した監査IDの結果です。
+                -   [tiup cluster replay](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-replay.md): tiup cluster replay` コマンドを使用すると、失敗したクラスター操作を再試行し、正常に実行された手順をスキップできます。指定した監査IDでコマンドを再試行するには、`tiup cluster replay <audit-id>` を使用します。監査IDは ` tiup cluster audit ` コマンドで確認する。出力は、指定した監査IDの結果です。
                 -   [tiup cluster restart](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-restart.md): tiup cluster restart` コマンドは、指定されたクラスター内のサービスを再起動するために使用されます。再起動中は、サービスは利用できません。`-N, --node` オプションと `-R, --role` オプションを使用して、再起動するノードまたはロールを指定できます。出力は、サービス再起動プロセスのログです。
                 -   [tiup cluster scale-in](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-scale-in.md): 「tiup cluster scale-in」コマンドは、指定されたノードをオフラインにし、クラスタから削除し、残りのファイルを削除することでクラスタをスケールインするために使用されます。TiKVやTiFlashなどのコンポーネントは非同期的に処理されるため、チェックとクリーンアップのための追加手順が必要です。このコマンドには、ノードの指定、強制削除、転送タイムアウト、ヘルプ情報などのオプションも含まれています。
                 -   [tiup cluster scale-out](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-scale-out.md): tiup cluster scale-outコマンドは、クラスタに新しいノードを追加するために使用されます。このコマンドは、新しいノードへのSSH接続を確立し、必要なディレクトリを作成し、設定を更新します。オプションには、ユーザー名（-u）、IDファイル（-i）、パスワード（-p）、ラベルチェックをスキップする--no-labels 、ユーザーチェックをスキップする --skip-create-user 、ヘルプ（-h）があります。出力はスケールアウトのログです。
                 -   [tiup cluster start](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-start.md): tiup cluster startコマンドは、指定したクラスターのすべてまたは一部のサービスを起動するために使用されます。--init （セーフスタート）、-N （ノード指定）、-R （ロール指定）、-h （ヘルプ）などのオプションがあります。出力はサービス起動のログです。
                 -   [tiup cluster stop](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-stop.md): 「tiup cluster stop」コマンドは、指定されたクラスターのすべてまたは一部のサービスを停止するために使用されます。コアサービスが停止すると、クラスターはサービスを提供できなくなります。コマンド構文は「tiup cluster stop <cluster-name> [flags] 」です。オプションには、停止するノードを指定する -N/--node、停止するノードの役割を指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力は、サービスの停止に関するログです。
                 -   [tiup cluster template](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-template.md): tiup cluster templateコマンドは、クラスタデプロイメント用のトポロジファイルを準備するために使用されます。デフォルト、詳細、ローカル、またはマルチDCトポロジテンプレートを出力するオプションがあります。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
-                -   [TIUP クラスター TLS](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-tls.md): tiup cluster tls` コマンドは、クラスタコンポーネント間の TLS (トランスポート層Security) を有効または無効にするために使用されます。
+                -   [TIUP クラスター TLS](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-tls.md): tiup cluster tls` コマンドは、クラスタコンポーネント間の TLS (Transport Layer Security) を有効または無効にするために使用されます。
                 -   [tiup cluster upgrade](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-upgrade.md): tiup cluster upgradeコマンドは、指定したクラスターを特定のバージョンにアップグレードするために使用されます。入力として、クラスター名とターゲットバージョンが必要です。オプションには、エラーを無視してクラスターを起動する--force 、ノード移行の最大待機時間を設定する--transfer-timeout 、構成チェックをスキップする --ignore-config-check、クラスターを再起動せずにバイナリファイルを置き換える--offlineなどがあります。出力はアップグレードの進行状況のログです。
             -   TiUP DMコマンド
                 -   [概要](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm.md): TiUP DMは、DMクラスタの管理（デプロイ、起動、停止、破棄、スケーリング、アップグレード、構成パラメータの管理など）に使用されます。SSH、タイムアウト、確認のスキップ、バージョン情報の表示、ヘルプ情報などのオプションをサポートしています。サポートされるコマンドは、import、template、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、destroy、audit、replay、enable、disable、helpです。
@@ -412,7 +412,7 @@
         -   [DMクラスタトポロジーリファレンス](https://docs.pingcap.com/ja/tidb/stable/tiup-dm-topology-reference.md): TiUPを使用して TiDB データ移行 (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
         -   [ミラーリファレンスガイド](https://docs.pingcap.com/ja/tidb/stable/tiup-mirror-reference.md): TiUPミラーの一般情報を学びます。
         -   TiUPコンポーネント
-            -   [tiup-playground](https://docs.pingcap.com/ja/tidb/stable/tiup-playground.md): TiUPのプレイグラウンドコンポーネントを使用して、ローカルTiDBクラスタを迅速にデプロイする方法を学びましょう。
+            -   [tiup-playground](https://docs.pingcap.com/ja/tidb/stable/tiup-playground.md): TiUPのPlaygroundコンポーネントを使用して、ローカルTiDBクラスタを迅速にデプロイする方法を学びましょう。
             -   [tiup-cluster](https://docs.pingcap.com/ja/tidb/stable/tiup-cluster.md): TiUPを使用してオンライン TiDB クラスターを展開および保守する方法を学習します。
             -   [sudo なしモード](https://docs.pingcap.com/ja/tidb/stable/tiup-cluster-no-sudo-mode.md): TiUP no-sudo モードを使用してオンライン TiDB クラスターを展開および管理する方法を学習します。
             -   [tiup-mirror](https://docs.pingcap.com/ja/tidb/stable/tiup-mirror.md): プライベートミラーを作成する方法を学びます。
@@ -527,7 +527,7 @@
             -   [圧縮ファイル](https://docs.pingcap.com/ja/tidb/stable/tidb-lightning-data-source.md#compressed-files): TiDB Lightningでサポートされているすべてのデータ ソースについて説明します。
             -   [カスタマイズされたファイル](https://docs.pingcap.com/ja/tidb/stable/tidb-lightning-data-source.md#match-customized-files): TiDB Lightningでサポートされているすべてのデータ ソースについて説明します。
             -   [Amazon S3からデータをインポートする](https://docs.pingcap.com/ja/tidb/stable/tidb-lightning-data-source.md#import-data-from-amazon-s3): TiDB Lightningでサポートされているすべてのデータ ソースについて説明します。
-        -   物理輸入モード
+        -   物理インポートモード
             -   [要件と制限事項](https://docs.pingcap.com/ja/tidb/stable/tidb-lightning-physical-import-mode.md): TiDB Lightningの物理インポート モードについて学習します。
             -   [物理インポートモードを使用する](https://docs.pingcap.com/ja/tidb/stable/tidb-lightning-physical-import-mode-usage.md): TiDB Lightningの物理インポートモードの使い方を学びましょう。
         -   論理インポートモード
@@ -570,15 +570,15 @@
 -   参照
     -   クラスタアーキテクチャ
         -   [概要](https://docs.pingcap.com/ja/tidb/stable/tidb-architecture.md): TiDBプラットフォームの主要なアーキテクチャコンポーネント
-        -   [ストレージ](https://docs.pingcap.com/ja/tidb/stable/tidb-storage.md): TiDB データベースのstorageレイヤーを理解します。
+        -   [ストレージ](https://docs.pingcap.com/ja/tidb/stable/tidb-storage.md): TiDB データベースのストレージレイヤーを理解します。
         -   [コンピューティング](https://docs.pingcap.com/ja/tidb/stable/tidb-computing.md): TiDB データベースのコンピューティングレイヤーを理解します。
         -   [スケジュール](https://docs.pingcap.com/ja/tidb/stable/tidb-scheduling.md): TiDB クラスターに PD スケジューリングコンポーネントを導入します。
         -   [TSO](https://docs.pingcap.com/ja/tidb/stable/tso.md): TiDB の TimeStamp Oracle (TSO) について学習します。
     -   ストレージエンジン - TiKV
-        -   [TiKVの概要](https://docs.pingcap.com/ja/tidb/stable/tikv-overview.md): TiKVstorageエンジンの概要。
+        -   [TiKVの概要](https://docs.pingcap.com/ja/tidb/stable/tikv-overview.md): TiKVストレージエンジンの概要。
         -   [RocksDBの概要](https://docs.pingcap.com/ja/tidb/stable/rocksdb-overview.md): RocksDB の基本的な概念と動作原理を学びます。
-        -   [タイタンの概要](https://docs.pingcap.com/ja/tidb/stable/titan-overview.md): Titanstorageエンジンの概要を学習します。
-        -   [タイタンコンフィグレーション](https://docs.pingcap.com/ja/tidb/stable/titan-configuration.md): Titan の設定方法を学びます。
+        -   [Titanの概要](https://docs.pingcap.com/ja/tidb/stable/titan-overview.md): Titanストレージエンジンの概要を学習します。
+        -   [Titan Configuration](https://docs.pingcap.com/ja/tidb/stable/titan-configuration.md): Titan の設定方法を学びます。
         -   [分割されたRaftKV](https://docs.pingcap.com/ja/tidb/stable/partitioned-raft-kv.md): TiKV のパーティション化されたRaft KV 機能について学習します。
     -   ストレージエンジン - TiFlash
         -   [概要](https://docs.pingcap.com/ja/tidb/stable/tiflash-overview.md): TiFlashのアーキテクチャと主な機能について学びます。
@@ -586,7 +586,7 @@
         -   [TiDBを使用してTiFlashレプリカを読み取る](https://docs.pingcap.com/ja/tidb/stable/use-tidb-to-read-tiflash.md): TiDB を使用してTiFlashレプリカを読み取る方法を学習します。
         -   [MPPモードを使用する](https://docs.pingcap.com/ja/tidb/stable/use-tiflash-mpp-mode.md): TiFlashの MPP モードとその使用方法を学びます。
         -   [FastScanを使用する](https://docs.pingcap.com/ja/tidb/stable/use-fastscan.md): FastScan を使用して OLAP シナリオでのクエリを高速化する方法を紹介します。
-        -   [分散型ストレージおよびコンピューティングアーキテクチャとS3サポート](https://docs.pingcap.com/ja/tidb/stable/tiflash-disaggregated-and-s3.md): TiFlash の分散storageとコンピューティングアーキテクチャ、および S3 サポートについて学習します。
+        -   [分散型ストレージおよびコンピューティングアーキテクチャとS3サポート](https://docs.pingcap.com/ja/tidb/stable/tiflash-disaggregated-and-s3.md): TiFlash の分散ストレージとコンピューティングアーキテクチャ、および S3 サポートについて学習します。
         -   [サポートされているプッシュダウン計算](https://docs.pingcap.com/ja/tidb/stable/tiflash-supported-pushdown-calculations.md): TiFlashでサポートされているプッシュダウン計算について学習します。
         -   [TiFlashクエリ結果の具体化](https://docs.pingcap.com/ja/tidb/stable/tiflash-results-materialization.md): TiFlashのクエリ結果をトランザクションに保存する方法を学びます。
         -   [TiFlashの遅延発生](https://docs.pingcap.com/ja/tidb/stable/tiflash-late-materialization.md): TiFlash の遅延マテリアライゼーション機能を使用して、OLAP シナリオでクエリを高速化する方法について説明します。
@@ -626,7 +626,7 @@
         -   [TiCDC](https://docs.pingcap.com/ja/tidb/stable/monitor-ticdc.md): Grafana TiCDC ダッシュボードに表示されるいくつかの主要なメトリックについて学習します。
         -   [リソース制御](https://docs.pingcap.com/ja/tidb/stable/grafana-resource-control-dashboard.md): Grafana Resource Control ダッシュボードに表示される主要なメトリックをいくつか学習します。
     -   権限
-        -   [MySQLとのSecurity互換性](https://docs.pingcap.com/ja/tidb/stable/security-compatibility-with-mysql.md): TiDB と MySQL のセキュリティ互換性について学習します。
+        -   [MySQLとのセキュリティ互換性](https://docs.pingcap.com/ja/tidb/stable/security-compatibility-with-mysql.md): TiDB と MySQL のセキュリティ互換性について学習します。
         -   [権限管理](https://docs.pingcap.com/ja/tidb/stable/privilege-management.md): 特権を管理する方法を学びましょう。
         -   [列レベルの権限管理](https://docs.pingcap.com/ja/tidb/stable/column-privilege-management.md): TiDBは、MySQL互換の列レベルの権限管理メカニズムをサポートしています。GRANT`または`REVOKE`コマンドを使用することで、テーブルの特定の列に対する`SELECT`、`INSERT`、`UPDATE`、および`REFERENCES`権限を付与または取り消すことができ、よりきめ細かなアクセス制御を実現できます。
         -   [ユーザーアカウント管理](https://docs.pingcap.com/ja/tidb/stable/user-account-management.md): TiDB ユーザー アカウントを管理する方法を学習します。
@@ -636,8 +636,8 @@
     -   SQL
         -   SQL言語の構造と構文
             -   属性
-                -   [自動インクリメント](https://docs.pingcap.com/ja/tidb/stable/auto-increment.md): TiDB の AUTO_INCREMENT` 列属性について学習します。
-                -   [自動乱数](https://docs.pingcap.com/ja/tidb/stable/auto-random.md): AUTO_RANDOM 属性について学習します。
+                -   [AUTO_INCREMENT](https://docs.pingcap.com/ja/tidb/stable/auto-increment.md): TiDB の AUTO_INCREMENT` 列属性について学習します。
+                -   [AUTO_RANDOM](https://docs.pingcap.com/ja/tidb/stable/auto-random.md): AUTO_RANDOM 属性について学習します。
                 -   [_tidb_rowid](https://docs.pingcap.com/ja/tidb/stable/tidb-rowid.md): _tidb_rowid`とは何か、いつ利用できるのか、そして安全に使用する方法について学びましょう。
                 -   [SHARD_ROW_ID_BITS](https://docs.pingcap.com/ja/tidb/stable/shard-row-id-bits.md): SHARD_ROW_ID_BITS属性について学びましょう。
             -   [文字通りの値](https://docs.pingcap.com/ja/tidb/stable/literal-values.md): この記事では、TiDB SQLステートメントのリテラル値を紹介します。
@@ -813,7 +813,7 @@
             -   [日付と時刻の種類](https://docs.pingcap.com/ja/tidb/stable/data-type-date-and-time.md): サポートされている日付と時刻の種類について説明します。
             -   [文字列型](https://docs.pingcap.com/ja/tidb/stable/data-type-string.md): TiDB でサポートされている文字列型について学習します。
             -   [JSONタイプ](https://docs.pingcap.com/ja/tidb/stable/data-type-json.md): TiDB の JSON データ型について学習します。
-            -   [ベクタータイプ](https://docs.pingcap.com/ja/tidb/stable/vector-search-data-types.md): TiDB の Vector データ型について学習します。
+            -   [ベクトルタイプ](https://docs.pingcap.com/ja/tidb/stable/vector-search-data-types.md): TiDB の Vector データ型について学習します。
         -   関数と演算子
             -   [概要](https://docs.pingcap.com/ja/tidb/stable/functions-and-operators-overview.md): 関数と演算子の使い方を学びます。
             -   [式評価における型変換](https://docs.pingcap.com/ja/tidb/stable/type-conversion-in-expression-evaluation.md): 式の評価における型変換について学習します。
@@ -848,7 +848,7 @@
             -   [セット演算](https://docs.pingcap.com/ja/tidb/stable/set-operators.md): TiDB でサポートされているセット操作について学習します。
             -   [プッシュダウンの式一覧](https://docs.pingcap.com/ja/tidb/stable/expressions-pushed-down.md): TiKV にプッシュダウンできる式のリストと関連する操作について学習します。
             -   [OracleとTiDBの関数と構文の比較](https://docs.pingcap.com/ja/tidb/stable/oracle-functions-to-tidb.md): Oracle と TiDB の関数と構文の比較を学習します。
-        -   [クラスター化インデックス](https://docs.pingcap.com/ja/tidb/stable/clustered-indexes.md): クラスタ化インデックスの概念、ユーザーシナリオ、使用方法、制限事項、および互換性について学びます。
+        -   [クラスター化インデックス](https://docs.pingcap.com/ja/tidb/stable/clustered-indexes.md): クラスター化インデックスの概念、ユーザーシナリオ、使用方法、制限事項、および互換性について学びます。
         -   [グローバルインデックス](https://docs.pingcap.com/ja/tidb/stable/global-indexes.md): TiDB グローバル インデックスの使用例、利点、使用方法、動作原理、制限について学習します。
         -   [ベクトルインデックス](https://docs.pingcap.com/ja/tidb/stable/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
         -   [制約](https://docs.pingcap.com/ja/tidb/stable/constraints.md): SQL 制約が TiDB にどのように適用されるかを学習します。
@@ -955,7 +955,7 @@
     -   [テーブルフィルター](https://docs.pingcap.com/ja/tidb/stable/table-filter.md): TiDB ツールでのテーブル フィルター機能の使用。
     -   [TiDBインストールパッケージ](https://docs.pingcap.com/ja/tidb/stable/binary-package.md): TiDB インストール パッケージと、含まれる特定のコンポーネントについて説明します。
     -   [トポロジーラベルによるレプリカのスケジュール設定](https://docs.pingcap.com/ja/tidb/stable/schedule-replicas-by-topology-labels.md): トポロジ ラベルによってレプリカをスケジュールする方法を学習します。
-    -   [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidb/stable/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部storageサービスのstorageURI 形式について説明します。
+    -   [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidb/stable/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
     -   [オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/ja/tidb/stable/online-workloads-and-add-index-operations.md): このドキュメントでは、オンライン ワークロードと ADD INDEX` 操作間の相互作用効果をテストします。
     -   [DDLステートメントに埋め込まれた`ANALYZE`](https://docs.pingcap.com/ja/tidb/stable/ddl_embedded_analyze.md): このドキュメントでは、新しく作成または再編成されたインデックスの DDL ステートメントに埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
 -   よくある質問

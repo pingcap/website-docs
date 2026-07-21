@@ -47,7 +47,7 @@
     - [Migrate from MariaDB](https://docs.pingcap.com/tidb/stable/migrate-from-mariadb.md): Learn how to migrate data from MariaDB to TiDB.
     - [Migrate from CSV Files](https://docs.pingcap.com/tidb/stable/migrate-from-csv-files-to-tidb.md): Learn how to migrate data from CSV files to TiDB.
     - [Migrate from SQL Files](https://docs.pingcap.com/tidb/stable/migrate-from-sql-files-to-tidb.md): Learn how to migrate data from SQL files to TiDB.
-    - [Migrate from Parquet Files](https://docs.pingcap.com/tidb/stable/migrate-from-parquet-files-to-tidb.md): Learn how to migrate data from parquet files to TiDB.
+    - [Migrate from Parquet Files](https://docs.pingcap.com/tidb/stable/migrate-from-parquet-files-to-tidb.md): Learn how to migrate data from Parquet files to TiDB.
     - [Migrate from One TiDB Cluster to Another TiDB Cluster](https://docs.pingcap.com/tidb/stable/migrate-from-tidb-to-tidb.md): Learn how to migrate data from one TiDB cluster to another TiDB cluster.
     - [Migrate from TiDB to MySQL-compatible Databases](https://docs.pingcap.com/tidb/stable/migrate-from-tidb-to-mysql.md): Learn how to migrate data from TiDB to MySQL-compatible databases.
   - Advanced Migration

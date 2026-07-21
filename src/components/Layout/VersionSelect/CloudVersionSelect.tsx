@@ -42,11 +42,20 @@ const CLOUD_VERSIONS = [
         variant="outlined"
         size="small"
         sx={{
-          fontSize: "12px",
-          height: "20px",
+          fontSize: "10px",
+          fontWeight: 500,
+          height: "18px",
+          borderRadius: "1000px",
           pointerEvents: "none",
           borderColor: "#DCE3E5",
           color: "#6F787B",
+          textTransform: "uppercase",
+          letterSpacing: "0.25px",
+          "& .MuiChip-label": {
+            paddingLeft: "8px",
+            paddingRight: "8px",
+            lineHeight: "16px",
+          },
         }}
       />
     ),

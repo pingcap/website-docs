@@ -46,7 +46,7 @@
 
 ## INTEGRATIONS
 
-- [Integration Overview](https://docs.pingcap.com/ai/vector-search-integration-overview.md): An overview of TiDB vector search integration, including supported AI frameworks, embedding models, and ORM libraries.
+- [Integration Overview](https://docs.pingcap.com/ai/vector-search-integration-overview.md): An overview of AI integrations for TiDB, including Auto Embedding providers, AI frameworks, ORM libraries, cloud services, and MCP server support.
 - Auto Embedding
   - [Overview](https://docs.pingcap.com/ai/vector-search-auto-embedding-overview.md): Learn how to use Auto Embedding to perform semantic searches with plain text instead of vectors.
   - [OpenAI](https://docs.pingcap.com/ai/vector-search-auto-embedding-openai.md): Learn how to use OpenAI embedding models in TiDB Cloud.

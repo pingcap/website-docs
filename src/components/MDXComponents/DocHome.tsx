@@ -346,6 +346,7 @@ export function DocHomeCardContainer(props: any) {
         justifyContent: "start",
 
         "& > a.doc-home-card": {
+          width: "auto !important",
           backgroundColor: theme.palette.carbon[50],
           "&:hover": {
             textDecoration: "none",

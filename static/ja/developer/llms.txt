@@ -18,56 +18,56 @@
         -   [DBeaver](https://docs.pingcap.com/ja/developer/dev-guide-gui-dbeaver.md): DBeaver Communityを使用してTiDBに接続する方法を学びましょう。
         -   [VS Code](https://docs.pingcap.com/ja/developer/dev-guide-gui-vscode-sqltools.md): Visual Studio CodeまたはGitHub Codespacesを使用してTiDBに接続する方法を学びましょう。
         -   [MySQL Workbench](https://docs.pingcap.com/ja/developer/dev-guide-gui-mysql-workbench.md): MySQL Workbenchを使用してTiDBに接続する方法を学びましょう。
-        -   [ナビキャット](https://docs.pingcap.com/ja/developer/dev-guide-gui-navicat.md): Navicatを使用してTiDBに接続する方法を学びましょう。
+        -   [Navicat](https://docs.pingcap.com/ja/developer/dev-guide-gui-navicat.md): Navicatを使用してTiDBに接続する方法を学びましょう。
     -   ドライバーとORM
         -   [DriverまたはORMを選択してください](https://docs.pingcap.com/ja/developer/dev-guide-choose-driver-or-orm.md): TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
         -   Java
             -   [JDBC](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-jdbc.md): JDBCを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、JDBCを使用してTiDBと連携するJavaのサンプルコードを紹介します。
             -   [MyBatis](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-mybatis.md): MyBatisを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使用してTiDBと連携するJavaのサンプルコードを紹介します。
-            -   [ハイバネイト](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-hibernate.md): Hibernateを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Hibernateを使用してTiDBと連携するJavaのサンプルコードを紹介します。
-            -   [スプリングブーツ](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-spring-boot.md): Spring Bootを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Spring Bootを使用してTiDBと連携するJavaのサンプルコードを紹介します。
+            -   [Hibernate](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-hibernate.md): Hibernateを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Hibernateを使用してTiDBと連携するJavaのサンプルコードを紹介します。
+            -   [Spring Boot](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-spring-boot.md): Spring Bootを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Spring Bootを使用してTiDBと連携するJavaのサンプルコードを紹介します。
             -   [接続プールと接続パラメータの設定](https://docs.pingcap.com/ja/developer/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを実現するための計算式について解説します。また、パフォーマンス最適化のための JDBC API の使用方法と MySQL Connector/J パラメータの設定についても説明します。
             -   [Javaアプリケーション開発におけるベストプラクティス](https://docs.pingcap.com/ja/developer/java-app-best-practices.md): このドキュメントでは、TiDB を使用したJavaアプリケーション開発におけるベストプラクティスを紹介します。データベース関連コンポーネント、JDBC の使用方法、接続プール構成、データアクセスフレームワーク、Spring トランザクション、およびトラブルシューティングツールについて解説します。TiDB は MySQL と高い互換性があるため、MySQL ベースのJavaアプリケーション開発におけるベストプラクティスのほとんどは TiDB にも適用できます。
         -   行く
             -   [Go-MySQL-Driver](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-sql-driver.md): Go-MySQL-Driver を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、Go-MySQL-Driver を使用して TiDB と連携するGolang のサンプルコードを紹介します。
-            -   [ゴーム](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-gorm.md): GORM を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、GORM を使用して TiDB と連携するGolang のサンプルコードを紹介します。
+            -   [GORM](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-gorm.md): GORM を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、GORM を使用して TiDB と連携するGolang のサンプルコードを紹介します。
         -   Python
             -   [mysqlclient](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-mysqlclient.md): mysqlclientを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、mysqlclientを使用してTiDBと連携するPythonのサンプルコードを紹介します。
-            -   [MySQLコネクタ/Python](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-mysql-connector.md): MySQL Connector/Pythonを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MySQL Connector/Pythonを使用してTiDBと連携するPythonのサンプルコードを紹介します。
+            -   [MySQL Connector/Python](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-mysql-connector.md): MySQL Connector/Pythonを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MySQL Connector/Pythonを使用してTiDBと連携するPythonのサンプルコードを紹介します。
             -   [PyMySQL](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-pymysql.md): PyMySQLを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、PyMySQLを使用してTiDBと連携するPythonのサンプルコードを紹介します。
             -   [SQLAlchemy](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-sqlalchemy.md): SQLAlchemyを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、SQLAlchemyを使用してTiDBを操作するPythonのサンプルコードを紹介します。
-            -   [ピーウィー](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-peewee.md): peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBと連携するPythonのサンプルコードを紹介します。
-            -   [ジャンゴ](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-django.md): Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBと連携するPythonのサンプルコードを紹介します。
+            -   [Peewee](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-peewee.md): peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBと連携するPythonのサンプルコードを紹介します。
+            -   [Django](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-django.md): Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBと連携するPythonのサンプルコードを紹介します。
         -   Node.js
             -   [node-mysql2](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-mysql2.md): node-mysql2 を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、node-mysql2 を使用して TiDB と連携する Node.js のサンプルコードを紹介します。
             -   [mysql.js](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-mysqljs.md): mysql.js を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、mysql.js を使用して TiDB と連携する Node.js のサンプルコードを紹介します。
-            -   [プリズマ](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-prisma.md): Prismaを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Prismaを使用してTiDBと連携するNode.jsのサンプルコードを紹介します。
-            -   [シークエライズ](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-sequelize.md): Sequelize を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、Sequelize を使用して TiDB と連携する Node.js のサンプルコードを紹介します。
+            -   [Prisma](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-prisma.md): Prismaを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Prismaを使用してTiDBと連携するNode.jsのサンプルコードを紹介します。
+            -   [Sequelize](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-sequelize.md): Sequelize を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、Sequelize を使用して TiDB と連携する Node.js のサンプルコードを紹介します。
             -   [TypeORM](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-typeorm.md): TypeORMを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、TypeORMを使用してTiDBと連携するNode.jsのサンプルコードを紹介します。
             -   [Next.js](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nextjs.md): この記事では、Next.jsでTiDBとmysql2を使用してCRUDアプリケーションを構築する方法を説明し、簡単なサンプルコードを提供します。
             -   [AWS Lambda](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-aws-lambda.md): この記事では、AWS Lambda FunctionsでTiDBとmysql2を使用してCRUDアプリケーションを構築する方法を説明し、簡単なサンプルコードを提供します。
-        -   ルビー
+        -   Ruby
             -   [mysql2](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-ruby-mysql2.md): Rubyのmysql2を使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、mysql2 gemを使用してTiDBと連携するRubyのサンプルコードを紹介します。
             -   [Rails](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-ruby-rails.md): Railsフレームワークを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、RailsフレームワークとActiveRecord ORMを使用してTiDBと連携するRubyのサンプルコードを紹介します。
         -   C#
             -   [C#](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-cs.md): C# を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、TiDB とやり取りするための C# コードのサンプルを提供します。
     -   TiDB Cloud Serverless Driver ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
         -   [概要](https://docs.pingcap.com/ja/developer/serverless-driver.md): サーバーレス環境およびエッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialに接続する方法を学びましょう。
-        -   [Node.js の例](https://docs.pingcap.com/ja/developer/serverless-driver-node-example.md): ローカルのNode.jsプロジェクトでTiDB Cloudサーバーレスドライバーを使用する方法を学びましょう。
-        -   [Prismaの例](https://docs.pingcap.com/ja/developer/serverless-driver-prisma-example.md): TiDB CloudサーバーレスドライバーをPrisma ORMで使用する方法を学びましょう。
-        -   [キセリーの例](https://docs.pingcap.com/ja/developer/serverless-driver-kysely-example.md): TiDB CloudサーバーレスドライバーをKyselyで使用する方法を学びましょう。
-        -   [霧雨の例](https://docs.pingcap.com/ja/developer/serverless-driver-drizzle-example.md): TiDB CloudサーバーレスドライバーをDrizzleで使用する方法を学びましょう。
+        -   [Node.js の例](https://docs.pingcap.com/ja/developer/serverless-driver-node-example.md): ローカルのNode.jsプロジェクトでTiDB Cloud Serverless Driverを使用する方法を学びましょう。
+        -   [Prismaの例](https://docs.pingcap.com/ja/developer/serverless-driver-prisma-example.md): TiDB Cloud Serverless DriverをPrisma ORMで使用する方法を学びましょう。
+        -   [Kyselyの例](https://docs.pingcap.com/ja/developer/serverless-driver-kysely-example.md): TiDB Cloud Serverless DriverをKyselyで使用する方法を学びましょう。
+        -   [Drizzleの例](https://docs.pingcap.com/ja/developer/serverless-driver-drizzle-example.md): TiDB Cloud Serverless DriverをDrizzleで使用する方法を学びましょう。
 -   データベーススキーマの設計
     -   [概要](https://docs.pingcap.com/ja/developer/dev-guide-schema-design-overview.md): TiDBデータベースのスキーマ設計の基本を学びましょう。
     -   [データベースを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-database.md): データベースを作成するための手順、ルール、および例を学びましょう。
     -   [テーブルを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-table.md): 表作成における定義、ルール、ガイドラインを学びましょう。
-    -   [セカンダリーインデックスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-secondary-indexes.md): 二次索引を作成するための手順、ルール、および例を学びましょう。
+    -   [セカンダリーインデックスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-secondary-indexes.md): セカンダリインデックスを作成するための手順、ルール、および例を学びましょう。
 -   データを書き込む
     -   [データを挿入する](https://docs.pingcap.com/ja/developer/dev-guide-insert-data.md): データ挿入の方法について学びましょう。
     -   [データの更新](https://docs.pingcap.com/ja/developer/dev-guide-update-data.md): データの更新方法と一括データ更新方法について学びましょう。
     -   [データ削除](https://docs.pingcap.com/ja/developer/dev-guide-delete-data.md): SQL構文、ベストプラクティス、およびデータ削除の例について学びましょう。
     -   [TTL（有効期限）を使用して、期限切れのデータを定期的に削除する](https://docs.pingcap.com/ja/developer/dev-guide-time-to-live.md): TiDB の TTL 機能を使用して、期限切れのデータを自動的かつ定期的に削除する方法を学習します。
-    -   [準備された声明](https://docs.pingcap.com/ja/developer/dev-guide-prepared-statement.md): TiDB 準備済みステートメントの使用方法について学習します。
+    -   [プリペアドステートメント](https://docs.pingcap.com/ja/developer/dev-guide-prepared-statement.md): TiDB 準備済みステートメントの使用方法について学習します。
 -   データ読み取り
     -   [単一テーブルからデータをクエリする](https://docs.pingcap.com/ja/developer/dev-guide-get-data-from-single-table.md): このドキュメントでは、データベース内の単一のテーブルからデータを照会する方法について説明します。
     -   [複数テーブル結合クエリ](https://docs.pingcap.com/ja/developer/dev-guide-join-tables.md): このドキュメントでは、複数テーブル結合クエリの使用方法について説明します。

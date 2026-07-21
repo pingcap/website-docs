@@ -16,7 +16,7 @@
 -   [TiDBに接続する](https://docs.pingcap.com/ja/ai/connect.md): pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
 -   [表の操作](https://docs.pingcap.com/ja/ai/tables.md): TiDB でテーブルを操作する方法を学びます。
 -   検索機能
-    -   [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search.md): アプリケーションでベクター検索を使用する方法を学習します。
+    -   [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search.md): アプリケーションでベクトル検索を使用する方法を学習します。
     -   全文検索
         -   [Pythonによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-python.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用​​することで、検索精度を向上させることができます。
         -   [SQLによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-sql.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用​​することで、検索精度を向上させることができます。
@@ -46,40 +46,40 @@
 
 ## 統合 {#integrations}
 
--   [統合の概要](https://docs.pingcap.com/ja/ai/vector-search-integration-overview.md): サポートされている AI フレームワーク、埋め込みモデル、ORM ライブラリなど、TiDB ベクトル検索統合の概要。
+-   [統合の概要](https://docs.pingcap.com/ja/ai/vector-search-integration-overview.md): Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 連携の概要。
 -   自動埋め込み
     -   [概要](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-overview.md): 自動埋め込み機能を使用して、ベクトルではなくプレーンテキストで意味検索を実行する方法を学びましょう。
     -   [オープンAI](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-openai.md): TiDB CloudでOpenAIの埋め込みモデルを使用する方法を学びましょう。
     -   [OpenAI対応](https://docs.pingcap.com/ja/ai/embedding-openai-compatible.md): TiDB Vector SearchをOpenAI互換の埋め込みモデルと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
-    -   [ジナ・アイ](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-jina-ai.md): TiDB CloudでJina AI埋め込みモデルを使用する方法を学びましょう。
-    -   [コヒア](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-cohere.md): TiDB CloudでCohere埋め込みモデルを使用する方法を学びましょう。
-    -   [Google ジェミニ](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-gemini.md): TiDB CloudでGoogle Geminiの埋め込みモデルを使用する方法を学びましょう。
-    -   [抱きしめる顔](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-huggingface.md): TiDB CloudでHugging Face埋め込みモデルを使用する方法を学びましょう。
+    -   [Jina AI](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-jina-ai.md): TiDB CloudでJina AI埋め込みモデルを使用する方法を学びましょう。
+    -   [Cohere](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-cohere.md): TiDB CloudでCohere埋め込みモデルを使用する方法を学びましょう。
+    -   [Google Gemini](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-gemini.md): TiDB CloudでGoogle Geminiの埋め込みモデルを使用する方法を学びましょう。
+    -   [Hugging Face](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-huggingface.md): TiDB CloudでHugging Face埋め込みモデルを使用する方法を学びましょう。
     -   [NVIDIA NIM](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-nvidia-nim.md): TiDB CloudでNVIDIA NIM埋め込みモデルを使用する方法を学びましょう。
-    -   [アマゾンタイタン](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-amazon-titan.md): TiDB CloudでAmazon Titanの埋め込みモデルを使用する方法を学びましょう。
+    -   [Amazon Titan](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-amazon-titan.md): TiDB CloudでAmazon Titanの埋め込みモデルを使用する方法を学びましょう。
 -   AIフレームワーク
-    -   [ランチェーン](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-langchain.md): TiDB Vector SearchをLangChainと統合する方法を学びましょう。
-    -   [ラマインデックス](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-llamaindex.md): TiDB Vector SearchとLlamaIndexを統合する方法を学びましょう。
+    -   [LangChain](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-langchain.md): TiDB Vector SearchをLangChainと統合する方法を学びましょう。
+    -   [LlamaIndex](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-llamaindex.md): TiDB Vector SearchとLlamaIndexを統合する方法を学びましょう。
 -   ORMライブラリ
-    -   [SQLアルケミー](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-sqlalchemy.md): TiDB Vector SearchをSQLAlchemyと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
+    -   [SQLAlchemy](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-sqlalchemy.md): TiDB Vector SearchをSQLAlchemyと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
     -   [Django ORM](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-django-orm.md): TiDB Vector SearchをDjango ORMと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
-    -   [ピーウィー](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-peewee.md): TiDB Vector Searchをpeeweeと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
+    -   [Peewee](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-peewee.md): TiDB Vector Searchをpeeweeと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
 -   クラウドサービス
     -   [Jina AI埋め込み](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-jinaai-embedding.md): TiDB Vector SearchをJina AI Embeddings APIと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
-    -   [アマゾンの岩盤](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-amazon-bedrock.md): TiDB Vector SearchをAmazon Bedrockと統合して、検索拡張生成（RAG）Q&Aボットを構築する方法を学びましょう。
+    -   [Amazon Bedrock](https://docs.pingcap.com/ja/ai/vector-search-integrate-with-amazon-bedrock.md): TiDB Vector SearchをAmazon Bedrockと統合して、検索拡張生成（RAG）Q&Aボットを構築する方法を学びましょう。
 -   MCP サーバー
     -   [概要](https://docs.pingcap.com/ja/ai/tidb-mcp-server.md): TiDB MCPサーバーを使用すると、自然言語による指示でTiDBデータベースを管理できます。
-    -   [クロード・コード](https://docs.pingcap.com/ja/ai/tidb-mcp-claude-code.md): このガイドでは、Claude CodeでTiDB MCPサーバーを設定する方法を説明します。
-    -   [クロード・デスクトップ](https://docs.pingcap.com/ja/ai/tidb-mcp-claude-desktop.md): このガイドでは、Claude DesktopでTiDB MCPサーバーを設定する方法を説明します。
-    -   [カーソル](https://docs.pingcap.com/ja/ai/tidb-mcp-cursor.md): このガイドでは、カーソルエディタでTiDB MCPサーバーを設定する方法を説明します。
-    -   [VSコード](https://docs.pingcap.com/ja/ai/tidb-mcp-vscode.md): このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設定する方法を説明します。
-    -   [ウィンドサーフィン](https://docs.pingcap.com/ja/ai/tidb-mcp-windsurf.md): このガイドでは、Windsurf で TiDB MCP サーバーを設定する方法を説明します。
+    -   [Claude Code](https://docs.pingcap.com/ja/ai/tidb-mcp-claude-code.md): このガイドでは、Claude CodeでTiDB MCPサーバーを設定する方法を説明します。
+    -   [Claude Desktop](https://docs.pingcap.com/ja/ai/tidb-mcp-claude-desktop.md): このガイドでは、Claude DesktopでTiDB MCPサーバーを設定する方法を説明します。
+    -   [Cursor](https://docs.pingcap.com/ja/ai/tidb-mcp-cursor.md): このガイドでは、CursorエディタでTiDB MCPサーバーを設定する方法を説明します。
+    -   [VS Code](https://docs.pingcap.com/ja/ai/tidb-mcp-vscode.md): このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設定する方法を説明します。
+    -   [Windsurf](https://docs.pingcap.com/ja/ai/tidb-mcp-windsurf.md): このガイドでは、Windsurf で TiDB MCP サーバーを設定する方法を説明します。
 
 ## 参照 {#reference}
 
 -   [ベクトルデータ型](https://docs.pingcap.com/ja/ai/vector-search-data-types.md): TiDB の Vector データ型について学習します。
 -   [関数と演算子](https://docs.pingcap.com/ja/ai/vector-search-functions-and-operators.md): Vector データ型で使用できる関数と演算子について学習します。
--   [ベクター検索インデックス](https://docs.pingcap.com/ja/ai/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
+-   [ベクトル検索インデックス](https://docs.pingcap.com/ja/ai/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
 -   [性能チューニング](https://docs.pingcap.com/ja/ai/vector-search-improve-performance.md): TiDB Vector Search のパフォーマンスを向上させるためのベスト プラクティスを学びます。
 -   [制限事項](https://docs.pingcap.com/ja/ai/vector-search-limitations.md): TiDBベクトル検索の限界について理解しましょう。
--   [変更ログ](https://docs.pingcap.com/ja/ai/vector-search-changelogs.md): TiDB ベクター検索機能の新機能、互換性の変更、改善、バグ修正について説明します。
+-   [変更ログ](https://docs.pingcap.com/ja/ai/vector-search-changelogs.md): TiDB ベクトル検索機能の新機能、互換性の変更、改善、バグ修正について説明します。

@@ -174,6 +174,14 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/api");
     });
 
+    it("should resolve tidb-cloud-lake/_index links to tidbcloudlake root (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud-lake/_index",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/tidbcloudlake");
+    });
+
     it("should resolve best-practices namespace links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/best-practices/optimization/query-optimization",
@@ -428,6 +436,22 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/zh/tidbcloud/getting-started");
     });
 
+    it("should transform tidb-cloud-lake to tidbcloudlake (en - default language omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud-lake/guides/dashboards",
+        "/en/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/tidbcloudlake/dashboards");
+    });
+
+    it("should transform tidb-cloud-lake to tidbcloudlake (zh - language prefix included)", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud-lake/guides/dashboards",
+        "/zh/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/zh/tidbcloudlake/dashboards");
+    });
+
     it("should not match non-namespace links", () => {
       const result = resolveMarkdownLink(
         "/other/path/to/page",
@@ -490,6 +514,24 @@ describe("resolveMarkdownLink", () => {
         "/en/tidbcloud"
       );
       expect(result).toBe("/tidbcloud/vector-search-data-types");
+    });
+  });
+
+  describe("linkMappingsByPath - tidbcloudlake pages", () => {
+    it("should resolve links from tidbcloudlake pages (with lang)", () => {
+      const result = resolveMarkdownLink(
+        "/guides/dashboards",
+        "/en/tidbcloudlake"
+      );
+      expect(result).toBe("/tidbcloudlake/dashboards");
+    });
+
+    it("should resolve links from tidbcloudlake pages (without lang, default omitted)", () => {
+      const result = resolveMarkdownLink(
+        "/guides/dashboards",
+        "/tidbcloudlake"
+      );
+      expect(result).toBe("/tidbcloudlake/dashboards");
     });
   });
 

@@ -35,6 +35,7 @@
     "tidbCloudEssential": "TiDB Cloud Essential",
     "tidbCloudPremium": "TiDB Cloud Premium",
     "tidbCloudDedicated": "TiDB Cloud Dedicated",
+    "tidbCloudLake": "TiDB Cloud Lake",
     "tidbShortTerm": "TiDB",
     "tidbOnKubernetes": "TiDB on Kubernetes",
     "tidbCloudReleases": "TiDB Cloud リリース",
@@ -42,8 +43,7 @@
     "tidbOperatorReleases": "TiDB Operator リリース",
     "tiupReleases": "TiUP リリース",
     "badge": {
-      "preview": "Preview",
-      "beta": "Beta"
+      "preview": "Preview"
     },
     "appdev": "アプリ開発",
     "asktug": "Forum",

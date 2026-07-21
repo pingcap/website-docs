@@ -73,6 +73,10 @@ const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
     minRestLength: 1,
   },
   {
+    namespace: TOCNamespace.TiDBCloudLake,
+    repo: Repo.tidbcloudlake,
+  },
+  {
     namespace: TOCNamespace.TiDB,
     repo: Repo.tidb,
   },
