@@ -18,9 +18,8 @@ export default function SearchResults(props: {
   loading: boolean;
   className?: string;
   data: any[];
-  onFilterChange?: (category: SearchCategory | null) => void;
 }) {
-  const { data, loading, onFilterChange } = props;
+  const { data, loading } = props;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -104,11 +103,7 @@ export default function SearchResults(props: {
       </Typography> */}
       <Stack spacing={4}>
         {filteredDataMemo.map((item) => (
-          <SearchItem
-            key={item.objectID}
-            data={item}
-            onFilterChange={onFilterChange}
-          />
+          <SearchItem key={item.objectID} data={item} />
         ))}
       </Stack>
       {data.length === 0 && !loading && (
@@ -184,11 +179,8 @@ function SearchItemSkeleton() {
   );
 }
 
-function SearchItem(props: {
-  data: any;
-  onFilterChange?: (category: SearchCategory | null) => void;
-}) {
-  const { data, onFilterChange } = props;
+function SearchItem(props: { data: any }) {
+  const { data } = props;
   const { t } = useI18next();
   const category = React.useMemo(
     () => resolveSearchCategory(data.url),
@@ -224,27 +216,12 @@ function SearchItem(props: {
             size="small"
             variant="outlined"
             label={categoryLabel}
-            clickable={!!onFilterChange}
-            onClick={
-              onFilterChange
-                ? (e) => {
-                    e.preventDefault();
-                    onFilterChange(category);
-                  }
-                : undefined
-            }
             sx={{
               height: "20px",
               fontSize: "12px",
               borderRadius: "10px",
               backgroundColor: "carbon.100",
               color: "carbon.800",
-              ...(onFilterChange && {
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "carbon.200",
-                },
-              }),
             }}
           />
         )}

@@ -174,11 +174,7 @@ export default function DocSearchTemplate({
           <Tip>
             <Trans i18nKey="search.searchTip" />
           </Tip>
-          <SearchResults
-            loading={isLoading}
-            data={filteredResults}
-            onFilterChange={handleFilterChange}
-          />
+          <SearchResults loading={isLoading} data={filteredResults} />
           <Box
             sx={{
               width: "fit-content",
