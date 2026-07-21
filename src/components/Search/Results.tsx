@@ -7,6 +7,7 @@ import Skeleton from "@mui/material/Skeleton";
 import clsx from "clsx";
 import TablePagination from "@mui/material/TablePagination";
 import Chip from "@mui/material/Chip";
+import type { SxProps, Theme } from "@mui/material/styles";
 import {
   getSearchCategoryLabelKey,
   resolveSearchCategory,
@@ -292,13 +293,44 @@ function SearchItem(props: {
   );
 }
 
+function getSearchFilterChipSx(isActive: boolean): SxProps<Theme> {
+  return {
+    height: "24px",
+    fontSize: "12px",
+    borderRadius: "12px",
+    cursor: "pointer",
+    ...(isActive
+      ? {
+          backgroundColor: "carbon.800",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "carbon.700",
+          },
+        }
+      : {
+          backgroundColor: "carbon.100",
+          color: "carbon.800",
+          "&:hover": {
+            backgroundColor: "carbon.200",
+          },
+        }),
+  };
+}
+
 export function SearchFilterBar(props: {
   categoryCountMap: Map<SearchCategory, number>;
+  totalCount: number;
   activeFilter: SearchCategory | null;
   onFilterChange: (category: SearchCategory | null) => void;
   visible: boolean;
 }) {
-  const { categoryCountMap, activeFilter, onFilterChange, visible } = props;
+  const {
+    categoryCountMap,
+    totalCount,
+    activeFilter,
+    onFilterChange,
+    visible,
+  } = props;
   const { t } = useI18next();
 
   const entries = Array.from(categoryCountMap.entries()).filter(
@@ -324,6 +356,14 @@ export function SearchFilterBar(props: {
       >
         <Trans i18nKey="search.filters" />
       </Typography>
+      <Chip
+        size="small"
+        variant={activeFilter === null ? "filled" : "outlined"}
+        label={`${t("search.allResults")} (${totalCount})`}
+        clickable
+        onClick={() => onFilterChange(null)}
+        sx={getSearchFilterChipSx(activeFilter === null)}
+      />
       {entries.map(([category, count]) => {
         const label = t(getSearchCategoryLabelKey(category));
         const isActive = activeFilter === category;
@@ -335,27 +375,7 @@ export function SearchFilterBar(props: {
             label={`${label} (${count})`}
             clickable
             onClick={() => onFilterChange(category)}
-            sx={{
-              height: "24px",
-              fontSize: "12px",
-              borderRadius: "12px",
-              cursor: "pointer",
-              ...(isActive
-                ? {
-                    backgroundColor: "carbon.800",
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "carbon.700",
-                    },
-                  }
-                : {
-                    backgroundColor: "carbon.100",
-                    color: "carbon.800",
-                    "&:hover": {
-                      backgroundColor: "carbon.200",
-                    },
-                  }),
-            }}
+            sx={getSearchFilterChipSx(isActive)}
           />
         );
       })}

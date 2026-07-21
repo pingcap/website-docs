@@ -45,8 +45,9 @@ export default function DocSearchTemplate({
 }: DocSearchTemplateProps) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [results, setResults] = React.useState<any[]>([]);
-  const [activeFilter, setActiveFilter] =
-    React.useState<SearchCategory | null>(null);
+  const [activeFilter, setActiveFilter] = React.useState<SearchCategory | null>(
+    null
+  );
 
   const { language } = useI18next();
   const { search } = useLocation();
@@ -165,6 +166,7 @@ export default function DocSearchTemplate({
           </Stack>
           <SearchFilterBar
             categoryCountMap={categoryCountMap}
+            totalCount={results.length}
             activeFilter={activeFilter}
             onFilterChange={handleFilterChange}
             visible={!isLoading && results.length > 0}
