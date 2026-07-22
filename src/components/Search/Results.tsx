@@ -7,9 +7,11 @@ import Skeleton from "@mui/material/Skeleton";
 import clsx from "clsx";
 import TablePagination from "@mui/material/TablePagination";
 import Chip from "@mui/material/Chip";
+import type { SxProps, Theme } from "@mui/material/styles";
 import {
   getSearchCategoryLabelKey,
   resolveSearchCategory,
+  type SearchCategory,
 } from "shared/utils/searchCategory";
 
 export default function SearchResults(props: {
@@ -264,6 +266,97 @@ function SearchItem(props: { data: any }) {
           }}
         ></div>
       </Typography>
+    </Stack>
+  );
+}
+
+function getSearchFilterChipSx(isActive: boolean): SxProps<Theme> {
+  return {
+    height: "24px",
+    fontSize: "12px",
+    borderRadius: "12px",
+    cursor: "pointer",
+    transition: "none",
+    "&:focus-visible": {
+      outline: "2px solid",
+      outlineColor: "carbon.500",
+      outlineOffset: "2px",
+    },
+    ...(isActive
+      ? {
+          backgroundColor: "carbon.800",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "carbon.800",
+          },
+        }
+      : {
+          backgroundColor: "carbon.100",
+          color: "carbon.800",
+          "&:hover": {
+            backgroundColor: "carbon.200",
+          },
+        }),
+  };
+}
+
+export function SearchFilterBar(props: {
+  categories: Set<SearchCategory>;
+  activeFilter: SearchCategory | null;
+  onFilterChange: (category: SearchCategory | null) => void;
+  visible: boolean;
+}) {
+  const { categories, activeFilter, onFilterChange, visible } = props;
+  const { t } = useI18next();
+
+  const entries = Array.from(categories).filter((category) => {
+    const labelKey = getSearchCategoryLabelKey(category);
+    return labelKey && t(labelKey);
+  });
+
+  if (!visible || entries.length <= 1) {
+    return null;
+  }
+
+  return (
+    <Stack
+      direction="row"
+      alignItems="center"
+      sx={{ paddingTop: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}
+    >
+      <Typography
+        variant="body2"
+        sx={{ fontWeight: 500, color: "carbon.700", whiteSpace: "nowrap" }}
+      >
+        <Trans i18nKey="search.filters" />
+      </Typography>
+      <Chip
+        component="button"
+        type="button"
+        size="small"
+        variant={activeFilter === null ? "filled" : "outlined"}
+        label={t("search.allResults")}
+        clickable={false}
+        onClick={() => onFilterChange(null)}
+        sx={getSearchFilterChipSx(activeFilter === null)}
+      />
+      {entries.map((category) => {
+        const label = t(getSearchCategoryLabelKey(category));
+        const isActive = activeFilter === category;
+        return (
+          <Chip
+            component="button"
+            type="button"
+            key={category}
+            size="small"
+            variant={isActive ? "filled" : "outlined"}
+            label={label}
+            clickable={false}
+            onClick={() => onFilterChange(category)}
+            sx={getSearchFilterChipSx(isActive)}
+          />
+        );
+      })}
     </Stack>
   );
 }
