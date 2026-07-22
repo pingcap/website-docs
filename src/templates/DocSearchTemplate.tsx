@@ -52,13 +52,13 @@ export default function DocSearchTemplate({
   const { language } = useI18next();
   const { search } = useLocation();
 
-  const categoryCountMap = React.useMemo(() => {
-    const map = new Map<SearchCategory, number>();
+  const categories = React.useMemo(() => {
+    const set = new Set<SearchCategory>();
     for (const item of results) {
       const cat = resolveSearchCategory(item.url);
-      if (cat) map.set(cat, (map.get(cat) || 0) + 1);
+      if (cat) set.add(cat);
     }
-    return map;
+    return set;
   }, [results]);
 
   const filteredResults = React.useMemo(() => {
@@ -165,8 +165,7 @@ export default function DocSearchTemplate({
             />
           </Stack>
           <SearchFilterBar
-            categoryCountMap={categoryCountMap}
-            totalCount={results.length}
+            categories={categories}
             activeFilter={activeFilter}
             onFilterChange={handleFilterChange}
             visible={!isLoading && results.length > 0}

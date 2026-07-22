@@ -276,12 +276,18 @@ function getSearchFilterChipSx(isActive: boolean): SxProps<Theme> {
     fontSize: "12px",
     borderRadius: "12px",
     cursor: "pointer",
+    transition: "none",
+    "&:focus-visible": {
+      outline: "2px solid",
+      outlineColor: "carbon.500",
+      outlineOffset: "2px",
+    },
     ...(isActive
       ? {
           backgroundColor: "carbon.800",
           color: "white",
           "&:hover": {
-            backgroundColor: "carbon.700",
+            backgroundColor: "carbon.800",
           },
         }
       : {
@@ -295,27 +301,18 @@ function getSearchFilterChipSx(isActive: boolean): SxProps<Theme> {
 }
 
 export function SearchFilterBar(props: {
-  categoryCountMap: Map<SearchCategory, number>;
-  totalCount: number;
+  categories: Set<SearchCategory>;
   activeFilter: SearchCategory | null;
   onFilterChange: (category: SearchCategory | null) => void;
   visible: boolean;
 }) {
-  const {
-    categoryCountMap,
-    totalCount,
-    activeFilter,
-    onFilterChange,
-    visible,
-  } = props;
+  const { categories, activeFilter, onFilterChange, visible } = props;
   const { t } = useI18next();
 
-  const entries = Array.from(categoryCountMap.entries()).filter(
-    ([category]) => {
-      const labelKey = getSearchCategoryLabelKey(category);
-      return labelKey && t(labelKey);
-    }
-  );
+  const entries = Array.from(categories).filter((category) => {
+    const labelKey = getSearchCategoryLabelKey(category);
+    return labelKey && t(labelKey);
+  });
 
   if (!visible || entries.length <= 1) {
     return null;
@@ -334,23 +331,27 @@ export function SearchFilterBar(props: {
         <Trans i18nKey="search.filters" />
       </Typography>
       <Chip
+        component="button"
+        type="button"
         size="small"
         variant={activeFilter === null ? "filled" : "outlined"}
-        label={`${t("search.allResults")} (${totalCount})`}
-        clickable
+        label={t("search.allResults")}
+        clickable={false}
         onClick={() => onFilterChange(null)}
         sx={getSearchFilterChipSx(activeFilter === null)}
       />
-      {entries.map(([category, count]) => {
+      {entries.map((category) => {
         const label = t(getSearchCategoryLabelKey(category));
         const isActive = activeFilter === category;
         return (
           <Chip
+            component="button"
+            type="button"
             key={category}
             size="small"
             variant={isActive ? "filled" : "outlined"}
-            label={`${label} (${count})`}
-            clickable
+            label={label}
+            clickable={false}
             onClick={() => onFilterChange(category)}
             sx={getSearchFilterChipSx(isActive)}
           />
