@@ -51,13 +51,14 @@
   - 监控和告警
     - [概览](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster.md): 了解如何监控你的 TiDB Cloud 资源。
     - [内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring-premium.md): 了解如何查看 TiDB Cloud Premium 内置指标以及这些指标的含义。
-    - [Top RU](https://docs.pingcap.com/zh/tidbcloud/top-ru.md): 了解如何使用 Top RU 以一分钟粒度识别 Request Unit (RU) 消耗最高的 SQL 语句和数据库用户。
+    - [Top RU](https://docs.pingcap.com/zh/tidbcloud/top-ru.md): 了解如何使用 Top RU 以一分钟粒度识别 Request Unit (RU) 消耗最高的 SQL 语句和数据库用户。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [内置告警](https://docs.pingcap.com/zh/tidbcloud/monitor-built-in-alerting.md): 了解如何通过 TiDB Cloud 获取告警通知来监控你的 TiDB Cloud 资源。
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](https://docs.pingcap.com/zh/tidbcloud/prometheus-grafana-integration.md): 了解如何通过 Prometheus 和 Grafana 集成监控你的 TiDB Cloud 实例。
     - 订阅告警通知
       - [通过电子邮件订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-email.md): 了解如何通过 Email 获取报警通知，从而监控 TiDB。
       - [通过 Slack 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-slack.md): 了解如何通过 Slack 获取报警通知，以便监控你的 TiDB 集群。
       - [通过 Zoom 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-zoom.md): 了解如何通过 Zoom 获取报警通知，以便监控你的 TiDB 集群。
+    - [集成 TiDB Cloud 与 Datadog](https://docs.pingcap.com/zh/tidbcloud/monitor-datadog-integration-for-tidb-x.md): 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
   - 性能调优
     - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
     - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
@@ -163,11 +164,12 @@
   - [抵扣金](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#credits): 了解 TiDB Cloud 计费。
   - [支付方式设置](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#payment-method): 了解 TiDB Cloud 计费。
   - [设置通过云提供商的 Marketplace 计费](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace): 了解 TiDB Cloud 计费。
-  - [Changefeed 计费](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing-ticdc-ccu.md): 了解 TiDB Cloud Premium 中 changefeeds 的计费方式。
+  - [Changefeed 计费](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing-ticdc-ccu.md): 了解 TiDB Cloud Essential 和 Premium 中 changefeeds 的计费方式。
   - [管理预算](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-budget.md): 了解如何使用 TiDB Cloud 的预算功能来监控你的成本。
 - 集成
   - [Airbyte](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-airbyte.md): 了解如何使用 Airbyte TiDB 连接器。
   - [Cloudflare](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-cloudflare.md): 了解如何将 Cloudflare Workers 与 TiDB Cloud 部署。
+  - [Datadog](https://docs.pingcap.com/zh/tidbcloud/monitor-datadog-integration-for-tidb-x.md): 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
   - [dbt](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-dbt.md): 了解 dbt 在 TiDB Cloud 中的使用场景。
   - [Gitpod](https://docs.pingcap.com/zh/tidbcloud/dev-guide-playground-gitpod.md): Gitpod 提供了一个完整、自动化且预配置的云原生开发环境。你可以在浏览器中直接开发、运行和测试代码，无需任何本地配置。
   - [n8n](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-n8n.md): 了解在 n8n 中使用 TiDB Cloud 节点的方法。
@@ -221,6 +223,7 @@
     - [`ANALYZE TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-analyze-table.md): 关于在 TiDB 数据库中使用 ANALYZE 的概述。
     - [`BATCH`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-batch.md): TiDB 数据库中 BATCH 的用法概述。
     - [`BEGIN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-begin.md): 关于 TiDB 数据库中 BEGIN 的用法概述。
+    - [`CANCEL DISTRIBUTION JOB`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-cancel-distribution-job.md): TiDB 中 CANCEL DISTRIBUTION JOB 的用法概述。
     - [`CANCEL IMPORT JOB`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-cancel-import-job.md): 关于 TiDB 中 CANCEL IMPORT 的用法概述。
     - [`COMMIT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-commit.md): 关于 TiDB 数据库中 COMMIT 的用法概述。
     - [`CREATE [GLOBAL|SESSION] BINDING`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-create-binding.md): 在 TiDB 数据库中使用 CREATE BINDING。
@@ -236,6 +239,7 @@
     - [`DELETE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-delete.md): 关于在 TiDB 数据库中使用 DELETE 的概述。
     - [`DESC`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-desc.md): 关于在 TiDB 数据库中使用 `DESC` 的概述。
     - [`DESCRIBE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-describe.md): 关于在 TiDB 数据库中使用 DESCRIBE 的概述。
+    - [`DISTRIBUTE TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-distribute-table.md): TiDB 数据库中 DISTRIBUTE TABLE 的用法概述。
     - [`DO`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-do.md): 关于在 TiDB 数据库中使用 DO 的概述。
     - [`DROP [GLOBAL|SESSION] BINDING`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-binding.md): Use of DROP BINDING in TiDB database.
     - [`DROP DATABASE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-drop-database.md): 关于 TiDB 数据库中 DROP DATABASE 的用法概述。
@@ -290,6 +294,7 @@
     - [`SHOW CREATE TABLE`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-create-table.md): 关于在 TiDB 数据库中使用 SHOW CREATE TABLE 的概述。
     - [`SHOW CREATE USER`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-create-user.md): 关于 TiDB 数据库中 SHOW CREATE USER 的用法概述。
     - [`SHOW DATABASES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-databases.md): 关于 TiDB 数据库中 SHOW DATABASES 的用法概述。
+    - [`SHOW DISTRIBUTION JOBS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-distribution-jobs.md): SHOW DISTRIBUTION JOBS 在 TiDB 数据库中的用法概述。
     - [`SHOW ENGINES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-engines.md): 关于 TiDB 数据库中使用 SHOW ENGINES 的概述。
     - [`SHOW ERRORS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-errors.md): 关于 TiDB 数据库中 SHOW ERRORS 的用法概述。
     - [`SHOW FIELDS FROM`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-fields-from.md): 关于 TiDB 数据库中 SHOW [FULL] FIELDS FROM 的用法概述。
@@ -308,6 +313,7 @@
     - [`SHOW STATS_META`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-meta.md): SHOW STATS_META 在 TiDB 数据库中的用法概述。
     - [`SHOW STATS_TOPN`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-stats-topn.md): 关于 TiDB 数据库中 SHOW STATS_TOPN 的用法概述。
     - [`SHOW STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-status.md): 关于 TiDB 数据库中使用 SHOW [GLOBAL|SESSION] STATUS 的概述。
+    - [`SHOW TABLE DISTRIBUTION`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-table-distribution.md): TiDB 数据库中 SHOW TABLE DISTRIBUTION 的用法概述。
     - [`SHOW TABLE NEXT_ROW_ID`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-table-next-rowid.md): 了解在 TiDB 中使用 `SHOW TABLE NEXT_ROW_ID` 的方法。
     - [`SHOW TABLE STATUS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-table-status.md): 关于 TiDB 数据库中使用 SHOW TABLE STATUS 的概述。
     - [`SHOW TABLES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-show-tables.md): 关于 TiDB 数据库中使用 SHOW [FULL] TABLES 的概述。
@@ -456,12 +462,13 @@
     - [TiDB Cloud 合作伙伴](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-partners.md): 了解作为经销商和托管服务提供商（MSP）如何使用 TiDB Cloud 合作伙伴控制台。
     - [MSP 客户](https://docs.pingcap.com/zh/tidbcloud/managed-service-provider-customer.md): 了解如何成为托管服务提供商 (MSP) 客户。
     - [经销商的客户](https://docs.pingcap.com/zh/tidbcloud/cppo-customer.md): 了解如何成为代理商的客户。
-  - [TiDB Cloud 上的 SQL 功能限制](https://docs.pingcap.com/zh/tidbcloud/limited-sql-features.md): 了解 TiDB Cloud 上受限的 SQL 功能。
+  - [TiDB X 实例上的 SQL 功能限制](https://docs.pingcap.com/zh/tidbcloud/limited-sql-features-tidb-x.md): 了解 TiDB X 实例上的 SQL 功能限制。
   - [TiDB 限制](https://docs.pingcap.com/zh/tidbcloud/tidb-limitations.md): 了解 TiDB 的使用限制。
   - [系统变量](https://docs.pingcap.com/zh/tidbcloud/system-variables.md): 使用 TiDB 系统变量来优化性能或修改运行行为。
   - [服务器状态变量](https://docs.pingcap.com/zh/tidbcloud/status-variables.md): 使用状态变量查看系统和会话状态
   - [表库过滤](https://docs.pingcap.com/zh/tidbcloud/table-filter.md): TiDB 工具中表过滤器功能的使用方法。
   - [外部存储服务的 URI 格式](https://docs.pingcap.com/zh/tidbcloud/external-storage-uri.md): 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
+  - [内嵌于 DDL 的 Analyze](https://docs.pingcap.com/zh/tidbcloud/ddl_embedded_analyze.md): 本文档介绍了在新建或重组索引的 DDL 语句中嵌入的 `ANALYZE` 功能，该功能确保新索引的统计信息能够及时更新。
   - [数据索引不一致报错](https://docs.pingcap.com/zh/tidbcloud/troubleshoot-data-inconsistency-errors.md): 了解如何处理由数据与索引一致性检查报告的错误。
   - [通知](https://docs.pingcap.com/zh/tidbcloud/notifications.md): 了解 TiDB Cloud 控制台中的通知，包括通知类型、用途以及如何查看通知。
 - 支持计划

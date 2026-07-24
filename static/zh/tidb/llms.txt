@@ -66,6 +66,7 @@
       - [同步数据到存储服务](https://docs.pingcap.com/zh/tidb/stable/ticdc-sink-to-cloud-storage.md): 了解如何使用 TiCDC 将数据同步到存储服务，以及数据变更记录的存储路径。
     - [管理 Changefeed](https://docs.pingcap.com/zh/tidb/stable/ticdc-manage-changefeed.md): 了解 Changefeed 相关的各种管理手段。
     - [日志过滤器](https://docs.pingcap.com/zh/tidb/stable/ticdc-filter.md): 了解 TiCDC 的表过滤器和事件过滤器使用方法。
+    - [表路由](https://docs.pingcap.com/zh/tidb/stable/ticdc-table-routing.md): 了解 TiCDC 新架构中的表路由配置，包括如何通过 target-schema 和 target-table 改写下游库名和表名、如何处理 DDL 改写和路由冲突，以及如何排查常见问题。
     - [DDL 同步](https://docs.pingcap.com/zh/tidb/stable/ticdc-ddl.md): 了解 TiCDC 支持同步的 DDL 和一些特殊情况
     - [双向复制](https://docs.pingcap.com/zh/tidb/stable/ticdc-bidirectional-replication.md): 了解 TiCDC 双向复制的使用方法。
   - 监控告警
@@ -178,7 +179,7 @@
     - [访问](https://docs.pingcap.com/zh/tidb/stable/dashboard-access.md): TiDB Dashboard 可通过浏览器访问，支持多 PD 实例访问。浏览器兼容性包括 Chrome、Firefox 和 Edge。登录界面可使用 root 用户或自定义 SQL 用户登录。支持简体中文和英文语言切换。可在用户页面登出当前用户。
     - [概况页面](https://docs.pingcap.com/zh/tidb/stable/dashboard-overview.md): TiDB Dashboard 概况页面显示整个集群的 QPS、查询延迟、Top SQL 语句、最近的慢查询、实例状态和监控及告警信息。登录后默认进入该页面，也可通过左侧导航条点击概况进入。包含最近一小时整个集群的 QPS 和查询延迟，以及最近一段时间内累计耗时最多的 SQL 语句和运行时间超过一定阈值的慢查询。还显示各个实例的节点数和状态，以及提供了便捷的链接方便用户查看详细监控或告警。
     - [集群信息页面](https://docs.pingcap.com/zh/tidb/stable/dashboard-cluster-info.md): 查看整个集群中 TiDB、TiKV、PD、TiFlash 组件的运行状态及其所在主机的运行状态
-    - [Top SQL 页面](https://docs.pingcap.com/zh/tidb/stable/top-sql.md): 使用 Top SQL 找到 CPU 开销较大的 SQL 语句
+    - [Top SQL 页面](https://docs.pingcap.com/zh/tidb/stable/top-sql.md): 使用 Top SQL 找到消耗 CPU、网络和逻辑 I/O 资源较多的查询。
     - [流量可视化页面](https://docs.pingcap.com/zh/tidb/stable/dashboard-key-visualizer.md): TiDB Dashboard 的流量可视化页面可用于分析 TiDB 集群的使用模式和排查流量热点。通过登录 TiDB Dashboard 或在浏览器中访问指定链接，可以查看流量可视化页面。页面展示了流量热力图，可观察到整体访问流量随时间的变化情况，以及热力图某个坐标的详细信息。流量可视化页面涉及的基本概念包括 Region、热点、热力图和 Region 压缩。使用介绍包括设置、观察时间段或 Region 范围、调整亮度、选择指标、刷新与自动刷新以及查看详情。常见热力图解读包括均衡结果、X 轴明暗交替、Y 轴明暗交替和明亮斜线。解决热点问题可参考 TiDB 高并发写入场景最佳实践。
     - [监控关系图](https://docs.pingcap.com/zh/tidb/stable/dashboard-metrics-relation.md): 了解 TiDB Dashboard 监控关系图
     - SQL 语句分析
@@ -223,7 +224,7 @@
   - 故障诊断方法
     - [通过 SQL 诊断获取集群诊断信息](https://docs.pingcap.com/zh/tidb/stable/information-schema-sql-diagnostics.md): 了解 SQL 诊断功能。
     - [通过 Statement Summary 排查 SQL 性能问题](https://docs.pingcap.com/zh/tidb/stable/statement-summary-tables.md): MySQL 的 `performance_schema` 提供了 `statement summary tables`，用于监控和统计 SQL 性能。TiDB 在 `information_schema` 中提供了类似功能的系统表，包括 `statements_summary`、`statements_summary_history`、`cluster_statements_summary` 和 `cluster_statements_summary_history`。这些表用于保存 SQL 监控指标聚合后的结果，帮助用户定位 SQL 问题。同时，还提供了参数配置来控制 statement summary 的功能，如清空周期、保存历史的数量等。
-    - [使用 Top SQL 定位系统资源消耗过多的查询](https://docs.pingcap.com/zh/tidb/stable/top-sql.md): 使用 Top SQL 找到 CPU 开销较大的 SQL 语句
+    - [使用 Top SQL 定位系统资源消耗过多的查询](https://docs.pingcap.com/zh/tidb/stable/top-sql.md): 使用 Top SQL 找到消耗 CPU、网络和逻辑 I/O 资源较多的查询。
     - [通过日志定位消耗系统资源多的查询](https://docs.pingcap.com/zh/tidb/stable/identify-expensive-queries.md): TiDB 会将执行时间超过 tidb_expensive_query_time_threshold 限制（默认值为 60s），或使用内存超过 tidb_mem_quota_query 限制（默认值为 1 GB）的语句输出到 tidb-server 日志文件中，用于定位消耗系统资源多的查询语句。expensive query 日志和慢查询日志的区别在于，expensive query 日志可以将正在执行的语句的相关信息打印出来。当一条语句在执行过程中达到资源使用阈值时，TiDB 会即时将这条语句的相关信息写入日志。
     - [保存和恢复集群现场信息](https://docs.pingcap.com/zh/tidb/stable/sql-plan-replayer.md): 了解如何使用 PLAN REPLAY 命令保存和恢复集群现场信息。
     - [理解 TiKV 中的 Stale Read 和 safe-ts](https://docs.pingcap.com/zh/tidb/stable/troubleshoot-stale-read.md): TiKV 中的 Stale Read 依赖于 safe-ts，保证读取历史数据版本的安全性。safe-ts 由每个 Region 中的 peer 维护，resolved-ts 则由 Region leader 维护。诊断 Stale Read 问题可通过 Grafana、tikv-ctl 和日志。常见原因包括事务提交时间过长、事务存在时间过长以及 CheckLeader 信息推送延迟。处理慢事务提交可通过识别锁所属的事务和检查应用程序逻辑。处理长事务可通过识别事务、检查应用程序逻辑和处理慢查询。解决 CheckLeader 问题可通过检查网络和监控面板指标。
@@ -270,6 +271,7 @@
         - [子查询相关的优化](https://docs.pingcap.com/zh/tidb/stable/subquery-optimization.md): 了解子查询相关的优化。
         - [列裁剪](https://docs.pingcap.com/zh/tidb/stable/column-pruning.md): 列裁剪是优化器在优化过程中删除不需要的列的基本思想。这样可以减少 I/O 资源占用并为后续优化带来便利。TiDB 会在逻辑优化阶段进行列裁剪，减少资源浪费。该扫描过程称作“列裁剪”，对应逻辑优化规则中的 columnPruner。如果要关闭这个规则，可以参照优化规则及表达式下推的黑名单中的关闭方法。
         - [关联子查询去关联](https://docs.pingcap.com/zh/tidb/stable/correlated-subquery-optimization.md): 了解如何给关联子查询解除关联。
+        - [横向派生表](https://docs.pingcap.com/zh/tidb/stable/lateral-derived-tables.md): 了解 TiDB 中横向派生表 (`LATERAL` derived table) 的语法和当前限制。
         - [Max/Min 消除](https://docs.pingcap.com/zh/tidb/stable/max-min-eliminate.md): SQL 中的 max/min 函数消除规则能够将 max/min 聚合函数转换为 TopN 算子，利用索引进行查询。当只有一个 max/min 函数时，会重写为 select max(a) from (select a from t where a is not null order by a desc limit 1) t，利用索引只扫描一行数据。存在多个 max/min 函数时，会先检查列是否有索引能够保序，然后重写为两个子查询的笛卡尔积，最终避免对整个表的扫描。
         - [谓词下推](https://docs.pingcap.com/zh/tidb/stable/predicate-push-down.md): TiDB 逻辑优化规则中的谓词下推旨在尽早完成数据过滤，减少数据传输或计算的开销。谓词下推适用于将过滤表达式计算下推到数据源，如示例 1、2、3。但对于存储层不支持的谓词、外连接中的谓词和包含用户变量的谓词则不能下推。
         - [分区裁剪](https://docs.pingcap.com/zh/tidb/stable/partition-pruning.md): 了解 TiDB 分区裁剪的使用场景。
@@ -548,7 +550,7 @@
       - [完整配置文件](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-configuration.md): 使用配置文件或命令行配置 TiDB Lightning。
       - [命令行参数](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-command-line-full.md): 使用命令行配置 TiDB Lightning。
       - [监控告警](https://docs.pingcap.com/zh/tidb/stable/monitor-tidb-lightning.md): TiDB Lightning 支持使用Prometheus采集监控指标。监控配置需手动部署，配置方法在 tidb-lightning.toml 中。Grafana 面板可用于监控速度、进度、资源使用和存储空间。监控指标包括计数器和直方图，用于计算引擎文件数量、闲置 worker、KV 编码器、处理过的表、引擎文件和 Chunks的状态，以及导入每个表所需时间等。
-      - [Web 界面](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-web-interface.md): 了解 TiDB Lightning 的服务器模式——通过 Web 界面来控制 TiDB Lightning。
+      - [Web 界面](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-web-interface.md): 了解 TiDB Lightning Web 界面的移除以及推荐的替代方案。
       - [FAQ](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-faq.md): TiDB Lightning 常见问题的摘要：TiDB Lightning 对TiDB/TiKV/PD 的最低版本要求，支持导入多个库，对下游数据库的账号权限要求，导数据过程中某个表报错不会影响其他表，正确重启 TiDB Lightning 的步骤，校验导入数据的正确性方法，支持的数据源格式，禁止导入不合规数据的方法，结束 tidb-lightning 进程的操作，使用千兆网卡的建议，TiDB Lightning 预留空间的原因，清除与 TiDB Lightning 相关的中间数据的步骤，获取 TiDB Lightning 运行时的 goroutine 信息的方法，TiDB Lightning 不兼容 Placement Rules in SQL 的原因，使用 TiDB Lightning 和 Dumpling 复制 schema 的步骤。
       - [术语表](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-glossary.md): 了解 TiDB Lightning 相关的术语及定义。
   - [Dumpling](https://docs.pingcap.com/zh/tidb/stable/dumpling-overview.md): 使用 Dumpling 从 TiDB 导出数据。
