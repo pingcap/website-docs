@@ -107,8 +107,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // When filename = "_index": /en/tidb-cloud-lake/master/{folders}/_index.md -> /en/tidbcloudlake/{folders}
     // When filename != "_index": /en/tidb-cloud-lake/master/{folders}/{filename}.md -> /en/tidbcloudlake/{filename}
     {
-      sourcePattern:
-        "/{lang}/tidb-cloud-lake/{branch}/{...folders}/{filename}",
+      sourcePattern: "/{lang}/tidb-cloud-lake/{branch}/{...folders}/{filename}",
       targetPattern: "/{lang}/tidbcloudlake/{filename}",
       filenameTransform: {
         ignoreIf: ["_index"],

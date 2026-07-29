@@ -376,6 +376,26 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/releases/tidb-operator/");
   });
 
+  it("should map main and stable-branch release notes to the same stable URL", () => {
+    const mainUrl = calculateFileUrlWithConfig(
+      path.join(
+        sourceBasePath,
+        "en/tidb-in-kubernetes/main/releases/release-2.0.0.md"
+      ),
+      testConfig
+    );
+    const stableBranchUrl = calculateFileUrlWithConfig(
+      path.join(
+        sourceBasePath,
+        "en/tidb-in-kubernetes/release-1.6/releases/release-2.0.0.md"
+      ),
+      testConfig
+    );
+
+    expect(mainUrl).toBe("/en/tidb-in-kubernetes/stable/release-2.0.0/");
+    expect(stableBranchUrl).toBe(mainUrl);
+  });
+
   it("should continue mapping non-release pages from main to dev", () => {
     const absolutePath = path.join(
       sourceBasePath,
