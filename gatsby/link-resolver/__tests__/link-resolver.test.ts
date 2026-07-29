@@ -408,6 +408,45 @@ describe("resolveMarkdownLink", () => {
       );
     });
 
+    it.each([
+      ["en", "/tidb-in-kubernetes/stable/release-2.0.0"],
+      ["zh", "/zh/tidb-in-kubernetes/stable/release-2.0.0"],
+      ["ja", "/ja/tidb-in-kubernetes/stable/release-2.0.0"],
+    ])(
+      "should resolve %s release links from the main tidb-in-kubernetes TOC to stable",
+      (lang, expected) => {
+        const result = resolveMarkdownLink(
+          "/releases/release-2.0.0",
+          `/${lang}/tidb-in-kubernetes/dev/TOC-tidb-operator-releases`
+        );
+        expect(result).toBe(expected);
+      }
+    );
+
+    it("should resolve TOC release links without a leading slash and preserve the hash", () => {
+      const result = resolveMarkdownLink(
+        "releases/release-2.0.0#upgrade",
+        "/tidb-in-kubernetes/dev/TOC-tidb-operator-releases"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/stable/release-2.0.0#upgrade");
+    });
+
+    it("should keep non-release links from the main tidb-in-kubernetes TOC on dev", () => {
+      const result = resolveMarkdownLink(
+        "/deploy/deploy-tidb-on-kubernetes",
+        "/en/tidb-in-kubernetes/dev/TOC-tidb-operator-releases"
+      );
+      expect(result).toBe("/tidb-in-kubernetes/dev/deploy-tidb-on-kubernetes");
+    });
+
+    it("should preserve versioned tidb-in-kubernetes TOC release links", () => {
+      const result = resolveMarkdownLink(
+        "/releases/release-2.0.0",
+        "/zh/tidb-in-kubernetes/v2.0/TOC"
+      );
+      expect(result).toBe("/zh/tidb-in-kubernetes/v2.0/release-2.0.0");
+    });
+
     it("should resolve releases namespace links (en - matches Rule 4, not Rule 1)", () => {
       const result = resolveMarkdownLink(
         "/releases/v8.5/release-notes",

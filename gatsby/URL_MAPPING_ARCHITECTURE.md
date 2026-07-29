@@ -547,7 +547,26 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Namespace Index Links (Direct Mapping)
+### Rule 6: TiDB-in-Kubernetes Main TOC Release Links (Path-Based)
+
+**Effect**: Resolves release-note links from the `main` TiDB-in-Kubernetes TOC to the stable URLs that publish the corresponding `main` release-note files.
+
+**Path Pattern**: `/{lang}/tidb-in-kubernetes/dev/TOC-tidb-operator-releases`
+
+**Link Pattern**: `/releases/{docname}`
+
+**Target Pattern**: `/{lang}/tidb-in-kubernetes/stable/{docname}`
+
+**Example**:
+- Current TOC: `/tidb-in-kubernetes/dev/TOC-tidb-operator-releases`
+- Link: `/releases/release-2.0.0`
+- Result: `/tidb-in-kubernetes/stable/release-2.0.0`
+
+**Use Case**: `TOC-tidb-operator-releases.md` from `main` is resolved under the `dev` branch alias, but its `releases/release-*.md` entries are published under `/stable/*`. Other TOC links continue to resolve under `dev`, and versioned TOCs continue to preserve their version.
+
+---
+
+### Rule 7: Namespace Index Links (Direct Mapping)
 
 **Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
@@ -577,7 +596,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: Namespace Links (Direct Mapping)
+### Rule 8: Namespace Links (Direct Mapping)
 
 **Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`, `tidb-cloud-lake`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
@@ -604,7 +623,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: TiDBCloud Page Links (Path-Based)
+### Rule 9: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -626,7 +645,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: TiDB Cloud Lake Page Links (Path-Based)
+### Rule 10: TiDB Cloud Lake Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB Cloud Lake pages to `/tidbcloudlake/*` URLs.
 
@@ -645,7 +664,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 10: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 11: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -669,7 +688,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 12: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 
