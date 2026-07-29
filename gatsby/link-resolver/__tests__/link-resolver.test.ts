@@ -355,7 +355,7 @@ describe("resolveMarkdownLink", () => {
         "/releases/release-2.0.0",
         "/en/releases/tidb-operator"
       );
-      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+      expect(result).toBe("/tidb-in-kubernetes/stable/release-2.0.0");
     });
 
     it("should resolve /releases/* links from releases/tidb-operator page (en - currentPageUrl without language prefix)", () => {
@@ -363,7 +363,7 @@ describe("resolveMarkdownLink", () => {
         "/releases/release-2.0.0",
         "/releases/tidb-operator"
       );
-      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+      expect(result).toBe("/tidb-in-kubernetes/stable/release-2.0.0");
     });
 
     it("should resolve /releases/* links from releases/tidb-operator page (en - default language omitted)", () => {
@@ -371,7 +371,7 @@ describe("resolveMarkdownLink", () => {
         "/release-2.0.0",
         "/en/releases/tidb-operator"
       );
-      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+      expect(result).toBe("/tidb-in-kubernetes/stable/release-2.0.0");
     });
 
     it("should resolve /releases/* links from releases/tidb-operator page (en - currentPageUrl without language prefix)", () => {
@@ -379,7 +379,7 @@ describe("resolveMarkdownLink", () => {
         "/release-2.0.0",
         "/releases/tidb-operator"
       );
-      expect(result).toBe("/tidb-in-kubernetes/dev/release-2.0.0");
+      expect(result).toBe("/tidb-in-kubernetes/stable/release-2.0.0");
     });
 
     it("should resolve /releases/* links from releases/tidb-operator page (zh - language prefix included)", () => {
@@ -387,7 +387,7 @@ describe("resolveMarkdownLink", () => {
         "/releases/release-2.0.0",
         "/zh/releases/tidb-operator"
       );
-      expect(result).toBe("/zh/tidb-in-kubernetes/dev/release-2.0.0");
+      expect(result).toBe("/zh/tidb-in-kubernetes/stable/release-2.0.0");
     });
 
     it("should resolve /releases/* links from releases/tidb-operator page (zh - language prefix included)", () => {
@@ -395,7 +395,17 @@ describe("resolveMarkdownLink", () => {
         "/release-2.0.0",
         "/zh/releases/tidb-operator"
       );
-      expect(result).toBe("/zh/tidb-in-kubernetes/dev/release-2.0.0");
+      expect(result).toBe("/zh/tidb-in-kubernetes/stable/release-2.0.0");
+    });
+
+    it("should resolve operator release links without a leading slash and preserve the hash", () => {
+      const result = resolveMarkdownLink(
+        "releases/release-2.0.0#upgrade",
+        "/ja/releases/tidb-operator"
+      );
+      expect(result).toBe(
+        "/ja/tidb-in-kubernetes/stable/release-2.0.0#upgrade"
+      );
     });
 
     it("should resolve releases namespace links (en - matches Rule 4, not Rule 1)", () => {
