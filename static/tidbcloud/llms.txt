@@ -19,7 +19,7 @@
   - [Transactions](https://docs.pingcap.com/tidbcloud/transaction-concepts.md): Learn about transaction concepts for TiDB Cloud.
   - [SQL](https://docs.pingcap.com/tidbcloud/sql-concepts.md): Learn about SQL concepts for TiDB.
   - [AI Features](https://docs.pingcap.com/tidbcloud/ai-feature-concepts.md): Learn about AI features for TiDB Cloud.
-  - [Data Service](https://docs.pingcap.com/tidbcloud/data-service-concepts.md): Learn about Data Service concepts for TiDB Cloud. ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Data Service](https://docs.pingcap.com/tidbcloud/data-service-concepts.md): Learn about Data Service concepts for TiDB Cloud. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](https://docs.pingcap.com/tidbcloud/scalability-concepts.md): Learn about scalability concepts for TiDB Cloud.
   - [High Availability](https://docs.pingcap.com/tidbcloud/high-availability-with-multi-az.md): TiDB Cloud Dedicated supports high availability with Multi-AZ deployments.
   - [Monitoring](https://docs.pingcap.com/tidbcloud/monitoring-concepts.md): Learn about monitoring concepts for TiDB Cloud.
@@ -165,9 +165,9 @@
     - [Precheck Errors, Migration Errors, and Alerts for Data Migration](https://docs.pingcap.com/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting.md): Learn how to resolve precheck errors, migration errors, and alerts when using Data Migration.
     - [Connect AWS DMS to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 - Explore Data
-  - [Chat2Query in SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md): Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to maximize your data value. ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Chat2Query in SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md): Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to maximize your data value. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](https://docs.pingcap.com/tidbcloud/sql-proxy-account.md): Learn about the SQL proxy account in TiDB Cloud.
-- Data Service ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- Data Service ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](https://docs.pingcap.com/tidbcloud/data-service-overview.md): Learn about Data Service in TiDB Cloud and its scenarios.
   - [Get Started](https://docs.pingcap.com/tidbcloud/data-service-get-started.md): Learn how to use TiDB Cloud Data Service to access your data with HTTPS requests.
   - Chat2Query API
@@ -588,7 +588,7 @@
     - [Introduction](https://docs.pingcap.com/tidbcloud/tidb-distributed-execution-framework.md): Learn the use cases, limitations, usage, and implementation principles of the TiDB Distributed eXecution Framework (DXF).
     - [TiDB Global Sort](https://docs.pingcap.com/tidbcloud/tidb-global-sort.md): Learn the use cases, limitations, usage, and implementation principles of the TiDB Global Sort.
   - [TiDB Cloud Dedicated Limitations and Quotas](https://docs.pingcap.com/tidbcloud/limitations-and-quotas.md): Learn the limitations and quotas in TiDB Cloud.
-  - [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features.md): Learn about the limited SQL features on TiDB Cloud.
+  - [Limited SQL Features on TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/limited-sql-features.md): Learn about the limited SQL features on TiDB Cloud Dedicated.
   - [TiDB Limitations](https://docs.pingcap.com/tidbcloud/tidb-limitations.md): Learn the usage limitations of TiDB.
   - Benchmarks
     - TiDB v8.5

@@ -11,6 +11,7 @@
 ## 版本发布说明
 
 - v8.5
+  - [8.5.7](https://docs.pingcap.com/zh/tidb/stable/release-8.5.7.md): 了解 TiDB 8.5.7 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [8.5.6](https://docs.pingcap.com/zh/tidb/stable/release-8.5.6.md): 了解 TiDB 8.5.6 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [8.5.5](https://docs.pingcap.com/zh/tidb/stable/release-8.5.5.md): 了解 TiDB 8.5.5 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [8.5.4](https://docs.pingcap.com/zh/tidb/stable/release-8.5.4.md): 了解 TiDB 8.5.4 版本的新功能、兼容性变更、改进提升，以及错误修复。
@@ -79,18 +80,18 @@
   - [6.3.0-DMR](https://docs.pingcap.com/zh/tidb/stable/release-6.3.0.md): 了解 TiDB 6.3.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
 - v6.2
   - [6.2.0-DMR](https://docs.pingcap.com/zh/tidb/stable/release-6.2.0.md): 了解 TiDB 6.2.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
-- v6.1
-  - [6.1.7](https://docs.pingcap.com/zh/tidb/stable/release-6.1.7.md): 了解 TiDB 6.1.7 版本的改进提升与错误修复。
-  - [6.1.6](https://docs.pingcap.com/zh/tidb/stable/release-6.1.6.md): 了解 TiDB 6.1.6 版本的兼容性变更、改进提升，以及错误修复。
-  - [6.1.5](https://docs.pingcap.com/zh/tidb/stable/release-6.1.5.md): 了解 TiDB 6.1.5 版本的兼容性变更、改进提升，以及错误修复。
-  - [6.1.4](https://docs.pingcap.com/zh/tidb/stable/release-6.1.4.md): 了解 TiDB 6.1.4 版本的新功能、兼容性变更、改进提升，以及错误修复。
-  - [6.1.3](https://docs.pingcap.com/zh/tidb/stable/release-6.1.3.md): TiDB 6.1.3 发布日期为 2022 年 12 月 5 日。此版本兼容性变更包括 TiCDC 的默认值修改和事务拆分功能的优化。提升改进方面，PD 优化了锁的粒度，TiCDC 默认关闭 safeMode 并开启大事务拆分功能。此外，为了提升 TiDB 稳定性，Go 编译器版本从 go1.18 升级到了 go1.19。Bug 修复方面，修复了多个 TiDB、PD、TiKV、TiFlash 和 Tools 的问题。
-  - [6.1.2](https://docs.pingcap.com/zh/tidb/stable/release-6.1.2.md): TiDB 6.1.2 发布，包括 TiDB、TiKV、Tools 和 Bug 修复。提升改进包括允许在一张表上同时设置数据放置规则和 TiFlash 副本。Bug 修复包括修复数据库级别的权限清理不正确的问题。
-  - [6.1.1](https://docs.pingcap.com/zh/tidb/stable/release-6.1.1.md): TiDB 6.1.1 发布日期为 2022 年 9 月 1 日。该版本兼容性变更包括大小写敏感语句不再敏感，以及默认关闭持续性能分析特性。其他变更包括新增内容和不同操作系统和 CPU 架构的支持。提升改进方面，引入了新的优化器提示和支持通过 gzip 压缩 metrics 响应减少 HTTP body 大小。Bug 修复方面，修复了多个 TiDB、TiKV、PD 和 TiFlash 的问题。 Tools 方面，TiDB Lightning 修复了多个问题，TiDB Data Migration (DM) 修复了多个问题，TiCDC 修复了多个问题，Backup & Restore (BR) 修复了多个问题，Dumpling 修复了一个问题，TiDB Binlog 修复了一个问题。
-  - [6.1.0](https://docs.pingcap.com/zh/tidb/stable/release-6.1.0.md): 了解 TiDB 6.1.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
-- v6.0
-  - [6.0.0-DMR](https://docs.pingcap.com/zh/tidb/stable/release-6.0.0-dmr.md): 了解 TiDB 6.0.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
 - End of Life 版本
+  - v6.1
+    - [6.1.7](https://docs.pingcap.com/zh/tidb/stable/release-6.1.7.md): 了解 TiDB 6.1.7 版本的改进提升与错误修复。
+    - [6.1.6](https://docs.pingcap.com/zh/tidb/stable/release-6.1.6.md): 了解 TiDB 6.1.6 版本的兼容性变更、改进提升，以及错误修复。
+    - [6.1.5](https://docs.pingcap.com/zh/tidb/stable/release-6.1.5.md): 了解 TiDB 6.1.5 版本的兼容性变更、改进提升，以及错误修复。
+    - [6.1.4](https://docs.pingcap.com/zh/tidb/stable/release-6.1.4.md): 了解 TiDB 6.1.4 版本的新功能、兼容性变更、改进提升，以及错误修复。
+    - [6.1.3](https://docs.pingcap.com/zh/tidb/stable/release-6.1.3.md): TiDB 6.1.3 发布日期为 2022 年 12 月 5 日。此版本兼容性变更包括 TiCDC 的默认值修改和事务拆分功能的优化。提升改进方面，PD 优化了锁的粒度，TiCDC 默认关闭 safeMode 并开启大事务拆分功能。此外，为了提升 TiDB 稳定性，Go 编译器版本从 go1.18 升级到了 go1.19。Bug 修复方面，修复了多个 TiDB、PD、TiKV、TiFlash 和 Tools 的问题。
+    - [6.1.2](https://docs.pingcap.com/zh/tidb/stable/release-6.1.2.md): TiDB 6.1.2 发布，包括 TiDB、TiKV、Tools 和 Bug 修复。提升改进包括允许在一张表上同时设置数据放置规则和 TiFlash 副本。Bug 修复包括修复数据库级别的权限清理不正确的问题。
+    - [6.1.1](https://docs.pingcap.com/zh/tidb/stable/release-6.1.1.md): TiDB 6.1.1 发布日期为 2022 年 9 月 1 日。该版本兼容性变更包括大小写敏感语句不再敏感，以及默认关闭持续性能分析特性。其他变更包括新增内容和不同操作系统和 CPU 架构的支持。提升改进方面，引入了新的优化器提示和支持通过 gzip 压缩 metrics 响应减少 HTTP body 大小。Bug 修复方面，修复了多个 TiDB、TiKV、PD 和 TiFlash 的问题。 Tools 方面，TiDB Lightning 修复了多个问题，TiDB Data Migration (DM) 修复了多个问题，TiCDC 修复了多个问题，Backup & Restore (BR) 修复了多个问题，Dumpling 修复了一个问题，TiDB Binlog 修复了一个问题。
+    - [6.1.0](https://docs.pingcap.com/zh/tidb/stable/release-6.1.0.md): 了解 TiDB 6.1.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
+  - v6.0
+    - [6.0.0-DMR](https://docs.pingcap.com/zh/tidb/stable/release-6.0.0-dmr.md): 了解 TiDB 6.0.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - v5.4
     - [5.4.3](https://docs.pingcap.com/zh/tidb/stable/release-5.4.3.md): TiDB 5.4.3 发布，提升了 TiKV 和 Tools 的功能，修复了多个 Bug。包括 TiKV 支持更小的 RocksDB write stall 参数，TiDB 修复了多个查询和执行时可能出现的问题。PD 也修复了一些请求和权限问题。TiFlash 修复了一些函数和并行聚合的错误。Tools 中的 TiDB Lightning 修复了一些数据导入和连接问题，DM 修复了一些数据同步和连接问题，BR 修复了备份恢复和 Region 不均衡的问题，Dumpling 修复了 IPv6 的支持问题。
     - [5.4.2](https://docs.pingcap.com/zh/tidb/stable/release-5.4.2.md): TiDB 5.4.2 发布日期为 2022 年 7 月 8 日。该版本存在 bug，建议升级至 v5.4.3。此版本提升了 TiDB、TiKV、PD 和 Tools 的稳定性和可用性，并修复了多个 bug。

@@ -19,7 +19,7 @@
   - [事务](https://docs.pingcap.com/zh/tidbcloud/transaction-concepts.md): 了解 TiDB Cloud 的事务概念。
   - [SQL](https://docs.pingcap.com/zh/tidbcloud/sql-concepts.md): 了解 TiDB 的 SQL 概念。
   - [AI 功能](https://docs.pingcap.com/zh/tidbcloud/ai-feature-concepts.md): 了解 TiDB Cloud 的 AI 功能。
-  - [数据服务](https://docs.pingcap.com/zh/tidbcloud/data-service-concepts.md): 了解 TiDB Cloud 的数据服务概念。 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [数据服务](https://docs.pingcap.com/zh/tidbcloud/data-service-concepts.md): 了解 TiDB Cloud 的数据服务概念。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [可扩展性](https://docs.pingcap.com/zh/tidbcloud/scalability-concepts.md): 了解 TiDB Cloud 的可扩展性相关概念。
   - [高可用性](https://docs.pingcap.com/zh/tidbcloud/high-availability-with-multi-az.md): TiDB Cloud Dedicated 通过多可用区部署支持高可用性。
   - [监控](https://docs.pingcap.com/zh/tidbcloud/monitoring-concepts.md): 了解 TiDB Cloud 的监控概念。
@@ -165,9 +165,9 @@
     - [数据迁移的预检查错误、迁移错误和警报](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting.md): 了解如何解决使用数据迁移时的预检查错误、迁移错误和告警。
     - [将 AWS DMS 连接到 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-connect-aws-dms.md): 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cloud 迁移数据或向 TiDB Cloud 迁移数据。
 - 探索数据
-  - [SQL 编辑器中的 Chat2Query](https://docs.pingcap.com/zh/tidbcloud/explore-data-with-chat2query.md): 了解如何在 TiDB Cloud 控制台中使用 AI 辅助 SQL 编辑器，最大化你的数据价值。 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL 编辑器中的 Chat2Query](https://docs.pingcap.com/zh/tidbcloud/explore-data-with-chat2query.md): 了解如何在 TiDB Cloud 控制台中使用 AI 辅助 SQL 编辑器，最大化你的数据价值。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](https://docs.pingcap.com/zh/tidbcloud/sql-proxy-account.md): 了解 TiDB Cloud 中的 SQL 代理账号。
-- 数据服务 ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- 数据服务 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](https://docs.pingcap.com/zh/tidbcloud/data-service-overview.md): 了解 TiDB Cloud 中的 Data Service 及其应用场景。
   - [快速上手](https://docs.pingcap.com/zh/tidbcloud/data-service-get-started.md): 了解如何使用 TiDB Cloud Data Service 通过 HTTPS 请求访问你的数据。
   - Chat2Query API
@@ -588,7 +588,7 @@
     - [介绍](https://docs.pingcap.com/zh/tidbcloud/tidb-distributed-execution-framework.md): 了解 TiDB 分布式执行框架（DXF）的使用场景、限制、用法及实现原理。
     - [TiDB 全局排序](https://docs.pingcap.com/zh/tidbcloud/tidb-global-sort.md): 了解 TiDB 全局排序的使用场景、限制、用法及实现原理。
   - [TiDB Cloud Dedicated 限制和配额](https://docs.pingcap.com/zh/tidbcloud/limitations-and-quotas.md): 了解 TiDB Cloud 中的限制与配额。
-  - [TiDB Cloud 上的 SQL 功能限制](https://docs.pingcap.com/zh/tidbcloud/limited-sql-features.md): 了解 TiDB Cloud 上受限的 SQL 功能。
+  - [TiDB Cloud Dedicated 上的 SQL 功能限制](https://docs.pingcap.com/zh/tidbcloud/limited-sql-features.md): 了解 TiDB Cloud Dedicated 上的 SQL 功能限制。
   - [TiDB 限制](https://docs.pingcap.com/zh/tidbcloud/tidb-limitations.md): 了解 TiDB 的使用限制。
   - 基准测试
     - TiDB v8.5
@@ -619,7 +619,7 @@
   - [Connected Care 概述](https://docs.pingcap.com/zh/tidbcloud/connected-care-overview.md): 介绍新一代 TiDB Cloud 支持服务 —— Connected Care。
   - [Connected Care 详情](https://docs.pingcap.com/zh/tidbcloud/connected-care-detail.md): 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
   - Connected Care 支持服务
-    - [Connected: Clinic Service](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-clinic.md): 了解如何使用 TiDB Cloud Clinic 进行高级监控与诊断。
+    - [Connected: Clinic 服务](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-clinic.md): 了解如何使用 TiDB Cloud Clinic 进行高级监控与诊断。
     - [Connected：IM 中的 AI 聊天](https://docs.pingcap.com/zh/tidbcloud/connected-ai-chat-in-im.md): 介绍 IM（即时消息）中 AI 聊天的详细信息。
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-slack.md): 了解如何通过 Slack 获取报警通知，以便监控你的 TiDB 集群。

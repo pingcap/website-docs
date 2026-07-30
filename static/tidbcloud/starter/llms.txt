@@ -20,7 +20,7 @@
   - [Transactions](https://docs.pingcap.com/tidbcloud/transaction-concepts.md): Learn about transaction concepts for TiDB Cloud.
   - [SQL](https://docs.pingcap.com/tidbcloud/sql-concepts.md): Learn about SQL concepts for TiDB.
   - [AI Features](https://docs.pingcap.com/tidbcloud/ai-feature-concepts.md): Learn about AI features for TiDB Cloud.
-  - [Data Service](https://docs.pingcap.com/tidbcloud/data-service-concepts.md): Learn about Data Service concepts for TiDB Cloud. ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Data Service](https://docs.pingcap.com/tidbcloud/data-service-concepts.md): Learn about Data Service concepts for TiDB Cloud. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](https://docs.pingcap.com/tidbcloud/scalability-concepts.md): Learn about scalability concepts for TiDB Cloud.
   - [High Availability](https://docs.pingcap.com/tidbcloud/serverless-high-availability.md): Learn about the high availability architecture of TiDB Cloud. Discover Zonal and Regional High Availability options, automated backups, failover processes, and how TiDB ensures data durability and business continuity.
   - [Monitoring](https://docs.pingcap.com/tidbcloud/monitoring-concepts.md): Learn about monitoring concepts for TiDB Cloud.
@@ -38,7 +38,7 @@
     - [Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential instance via public endpoint.
     - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md): Learn how to connect to your TiDB Cloud Starter or Essential instance via private endpoint.
     - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-on-alibaba-cloud.md): Learn how to connect to your TiDB Cloud Starter or Essential instance via Alibaba Cloud private endpoint.
-  - Branch ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - Branch ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [Overview](https://docs.pingcap.com/tidbcloud/branch-overview.md): Learn the concept of TiDB Cloud branches.
     - [Manage Branches](https://docs.pingcap.com/tidbcloud/branch-manage.md): Learn How to manage TiDB Cloud branches.
     - [GitHub Integration](https://docs.pingcap.com/tidbcloud/branch-github-integration.md): Learn how to integrate the TiDB Cloud Branching feature with GitHub.
@@ -121,7 +121,7 @@
     - [Migrate and Merge MySQL Shards of Large Datasets](https://docs.pingcap.com/tidbcloud/migrate-sql-shards.md): Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms.md): Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Starter using AWS Database Migration Service (AWS DMS).
   - Import Data into TiDB Cloud
-    - [Import Local Files](https://docs.pingcap.com/tidbcloud/tidb-cloud-import-local-files.md): Learn how to import local files to TiDB Cloud Starter or TiDB Cloud Essential.
+    - [Import Local Files](https://docs.pingcap.com/tidbcloud/tidb-cloud-import-local-files.md): Learn how to import local files to TiDB Cloud Starter.
     - [Import Sample Data (SQL Files) from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-sample-data-serverless.md): Learn how to import sample data into TiDB Cloud Starter or TiDB Cloud Essential via the UI.
     - [Import CSV Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-csv-files-serverless.md): Learn how to import CSV files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter or TiDB Cloud Essential.
     - [Import Parquet Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-parquet-files-serverless.md): Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter or TiDB Cloud Essential.
@@ -134,9 +134,9 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](https://docs.pingcap.com/tidbcloud/troubleshoot-import-access-denied-error.md): Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
     - [Connect AWS DMS to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 - Explore Data
-  - [Chat2Query in SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md): Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to maximize your data value. ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Chat2Query in SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md): Learn how to use AI-assisted SQL Editor in the TiDB Cloud console, to maximize your data value. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](https://docs.pingcap.com/tidbcloud/sql-proxy-account.md): Learn about the SQL proxy account in TiDB Cloud.
-- Data Service ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- Data Service ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](https://docs.pingcap.com/tidbcloud/data-service-overview.md): Learn about Data Service in TiDB Cloud and its scenarios.
   - [Get Started](https://docs.pingcap.com/tidbcloud/data-service-get-started.md): Learn how to use TiDB Cloud Data Service to access your data with HTTPS requests.
   - Chat2Query API
@@ -460,7 +460,7 @@
       - [`schema_unused_indexes`](https://docs.pingcap.com/tidbcloud/sys-schema-unused-indexes.md): Learn about the `schema_unused_indexes` table in the `sys` schema.
   - [Metadata Lock](https://docs.pingcap.com/tidbcloud/metadata-lock.md): Introduce the concept, principles, and implementation details of metadata lock in TiDB.
   - [TiDB Accelerated Table Creation](https://docs.pingcap.com/tidbcloud/accelerated-table-creation.md): Learn the concept, principles, and implementation details of performance optimization for creating tables in TiDB.
-- CLI Reference ![BETA](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- CLI Reference ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](https://docs.pingcap.com/tidbcloud/cli-reference.md): Provides an overview of TiDB Cloud CLI.
   - auth
     - [login](https://docs.pingcap.com/tidbcloud/ticloud-auth-login.md): The reference of `ticloud auth login`.
@@ -535,7 +535,7 @@
     - [MSP Customer](https://docs.pingcap.com/tidbcloud/managed-service-provider-customer.md): Learn how to become a Managed Service Provider (MSP) customer.
     - [Reseller's Customer](https://docs.pingcap.com/tidbcloud/cppo-customer.md): Learn how to become a reseller's customer.
   - [TiDB Cloud Starter and Essential Limitations](https://docs.pingcap.com/tidbcloud/serverless-limitations.md): Learn about the limitations of TiDB Cloud Starter.
-  - [Limited SQL Features on TiDB Cloud](https://docs.pingcap.com/tidbcloud/limited-sql-features.md): Learn about the limited SQL features on TiDB Cloud.
+  - [Limited SQL Features on TiDB X Instances](https://docs.pingcap.com/tidbcloud/limited-sql-features-tidb-x.md): Learn about the limited SQL features on TiDB X Instances.
   - [TiDB Limitations](https://docs.pingcap.com/tidbcloud/tidb-limitations.md): Learn the usage limitations of TiDB.
   - [System Variables](https://docs.pingcap.com/tidbcloud/system-variables.md): Use system variables to optimize performance or alter running behavior.
   - [Server Status Variables](https://docs.pingcap.com/tidbcloud/status-variables.md): Use status variables to see the system and session status
