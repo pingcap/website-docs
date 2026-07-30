@@ -2,16 +2,16 @@
 
 > TiDBは、最新のAIアプリケーション向けに設計された分散SQLデータベースで、統合されたベクトル検索、全文検索、ハイブリッド検索機能を備えています。このドキュメントでは、TiDBを使用してAIを活用したアプリケーションを構築するために利用できるAI機能とツールの概要を説明します。
 
-## クイックスタート
+## クイックスタート {#quick-start}
 
 -   [Pythonで始める](https://docs.pingcap.com/ja/ai/quickstart-via-python.md): Python SDKを使用してTiDBでベクトル検索を開始する方法を学びましょう。
 -   [SQL経由で開始する](https://docs.pingcap.com/ja/ai/quickstart-via-sql.md): SQL文を使用してTiDBのベクトル検索を素早く使い始め、生成型AIアプリケーションを強化する方法を学びましょう。
 
-## コンセプト
+## コンセプト {#concepts}
 
 -   [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search-overview.md): TiDBのベクトル検索について学びましょう。この機能は、文書、画像、音声、動画など、さまざまなデータタイプにわたる意味的類似性検索を実行するための高度な検索ソリューションを提供します。
 
-## ガイド
+## ガイド {#guides}
 
 -   [TiDBに接続する](https://docs.pingcap.com/ja/ai/connect.md): pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
 -   [表の操作](https://docs.pingcap.com/ja/ai/tables.md): TiDB でテーブルを操作する方法を学びます。
@@ -30,7 +30,7 @@
     -   [生のSQLクエリ](https://docs.pingcap.com/ja/ai/raw-queries.md): アプリケーションで生のクエリを使用する方法を学習します。
     -   [トランザクション](https://docs.pingcap.com/ja/ai/transactions.md): アプリケーションでトランザクションを使用する方法を学びます。
 
-## 例
+## 例 {#examples}
 
 -   [基本的なCRUD操作](https://docs.pingcap.com/ja/ai/basic-with-pytidb.md): データベース接続、テーブル作成、データ操作など、pytidb`の基本的な操作を学びましょう。
 -   [自動埋め込み](https://docs.pingcap.com/ja/ai/auto-embedding-with-pytidb.md): 組み込みの埋め込みモデルを使用して、テキストデータの埋め込みを自動的に生成します。
@@ -44,7 +44,7 @@
     -   [会話記憶](https://docs.pingcap.com/ja/ai/memory-with-pytidb.md): チャットボットや対話型AIアプリケーション向けに、会話メモリを実装する。
     -   [テキストからSQLへ](https://docs.pingcap.com/ja/ai/text2sql-with-pytidb.md): AIモデルを使用して、自然言語によるクエリをSQL文に変換する。
 
-## 統合
+## 統合 {#integrations}
 
 -   [統合の概要](https://docs.pingcap.com/ja/ai/vector-search-integration-overview.md): Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 連携の概要。
 -   自動埋め込み
@@ -75,7 +75,7 @@
     -   [VS Code](https://docs.pingcap.com/ja/ai/tidb-mcp-vscode.md): このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設定する方法を説明します。
     -   [Windsurf](https://docs.pingcap.com/ja/ai/tidb-mcp-windsurf.md): このガイドでは、Windsurf で TiDB MCP サーバーを設定する方法を説明します。
 
-## 参照
+## 参照 {#reference}
 
 -   [ベクトルデータ型](https://docs.pingcap.com/ja/ai/vector-search-data-types.md): TiDB の Vector データ型について学習します。
 -   [関数と演算子](https://docs.pingcap.com/ja/ai/vector-search-functions-and-operators.md): Vector データ型で使用できる関数と演算子について学習します。
