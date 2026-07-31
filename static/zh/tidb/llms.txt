@@ -3,7 +3,7 @@
 > TiDB 是平凯星辰公司自主设计、研发的开源分布式关系型数据库。
 
 - 关于 TiDB
-  - [TiDB 简介](https://docs.pingcap.com/zh/tidb/stable/overview.md): TiDB 是平凯星辰自主设计、研发的开源分布式关系型数据库，支持在线事务处理与在线分析处理 (HTAP)。具有水平扩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 协议和 MySQL 生态等特性。适用于高可用、强一致性要求高、数据规模大等各种应用场景。具有一键水平扩缩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 协议和 MySQL 生态等五大核心特性，以及金融行业、海量数据及高并发的 OLTP、实时 HTAP、数据汇聚、二次加工处理等四大核心应用场景。
+  - [TiDB 简介](https://docs.pingcap.com/zh/tidb/stable/overview.md): TiDB 是 PingCAP 自主设计、研发的开源分布式关系型数据库，支持在线事务处理与在线分析处理 (HTAP)。具有水平扩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 协议和 MySQL 生态等特性。适用于高可用、强一致性要求高、数据规模大等各种应用场景。具有一键水平扩缩容、金融级高可用、实时 HTAP、云原生的分布式数据库、兼容 MySQL 协议和 MySQL 生态等五大核心特性，以及金融行业、海量数据及高并发的 OLTP、实时 HTAP、数据汇聚、二次加工处理等四大核心应用场景。
   - [TiDB 8.5 Release Notes](https://docs.pingcap.com/zh/tidb/stable/release-8.5.0.md): 了解 TiDB 8.5.0 版本的新功能、兼容性变更、改进提升，以及错误修复。
   - [功能概览](https://docs.pingcap.com/zh/tidb/stable/basic-features.md): 了解 TiDB 的功能概览。
   - [与 MySQL 的兼容性](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility.md): 本文对 TiDB 和 MySQL 二者之间从语法和功能特性上做出详细的对比。
@@ -86,7 +86,7 @@
     - [TiCDC Changefeed 配置参数](https://docs.pingcap.com/zh/tidb/stable/ticdc-changefeed-config.md): 了解 TiCDC Changefeed 详细的命令行参数和配置文件定义。
     - [TiCDC 客户端鉴权](https://docs.pingcap.com/zh/tidb/stable/ticdc-client-authentication.md): 介绍使用 TiCDC 命令行工具或通过 OpenAPI 访问 TiCDC 时，如何进行客户端鉴权。
     - [单行数据正确性校验](https://docs.pingcap.com/zh/tidb/stable/ticdc-integrity-check.md): 介绍 TiCDC 数据正确性校验功能的实现原理和使用方法。
-    - [主从集群数据校验和快照读](https://docs.pingcap.com/zh/tidb/stable/ticdc-upstream-downstream-check.md): TiCDC 提供了 Syncpoint 功能，通过利用 TiDB 的 snapshot 特性，在同步过程中维护了一个上下游具有一致性 snapshot 的 `ts-map`。启用 Syncpoint 功能后，可以进行一致性快照读和数据一致性校验。要开启 Syncpoint 功能，只需在创建同步任务时把 TiCDC 的配置项 `enable-sync-point` 设置为 `true`。通过配置 `snapshot` 可以对 TiDB 主从集群的数据进行校验。
+    - [主从集群数据校验和快照读](https://docs.pingcap.com/zh/tidb/stable/ticdc-upstream-downstream-check.md): TiCDC 提供了 Syncpoint 功能，通过利用 TiDB 的 snapshot 特性，在同步过程中维护了一个上下游具有一致性 snapshot 的 `ts-map`。启用 Syncpoint 功能后，可以进行一致性快照读和数据一致性校验。要开启 Syncpoint 功能，只需在创建同步任务时把 changefeed 配置项 `enable-sync-point` 设置为 `true`。通过配置 `snapshot` 可以对 TiDB 主从集群的数据进行校验。
     - [拆分 UPDATE 事件行为说明](https://docs.pingcap.com/zh/tidb/stable/ticdc-split-update-behavior.md): 介绍 TiCDC changefeed 拆分 UPDATE 事件的行为变更，说明变更原因以及影响范围。
     - 输出数据协议
       - [TiCDC Avro Protocol](https://docs.pingcap.com/zh/tidb/stable/ticdc-avro-protocol.md): 了解 TiCDC Avro Protocol 的概念和使用方法。
@@ -969,7 +969,7 @@
   - [内嵌于 DDL 的 Analyze](https://docs.pingcap.com/zh/tidb/stable/ddl_embedded_analyze.md): 本文介绍内嵌于新建或重组索引的 DDL 中的 Analyze 特性，用于确保新索引的统计信息及时更新。
 - 常见问题解答 (FAQ)
   - [FAQ 汇总](https://docs.pingcap.com/zh/tidb/stable/faq-overview.md): 汇总 TiDB 产品的常见问题解答。
-  - [产品 FAQ](https://docs.pingcap.com/zh/tidb/stable/tidb-faq.md): TiDB 是平凯星辰公司自主设计、研发的开源分布式关系型数据库，支持在线事务处理与在线分析处理，具备水平扩容、高可用、实时 HTAP、云原生的特性。TiDB 不是基于 MySQL 开发的，而是由平凯星辰团队完全自主开发的产品。TiDB 易用性很高，支持绝大部分 MySQL 8.0 的语法，但不支持触发器、存储过程、自定义函数等。TiDB 支持分布式事务，兼容 MySQL Client/Driver 的编程语言，支持其他存储引擎，如 TiKV、UniStore 和 MockTiKV。获取 TiDB 知识的途径包括官方文档、官方博客、AskTUG 社区论坛和 PingCAP Education。用户名长度限制为 32 个字符，最大列数为 1017，单行大小不超过 6MB。TiDB 不支持 XA，但支持对列存储引擎的高并发 INSERT 或 UPDATE 操作。
+  - [产品 FAQ](https://docs.pingcap.com/zh/tidb/stable/tidb-faq.md): TiDB 是 PingCAP 公司自主设计、研发的开源分布式关系型数据库，支持在线事务处理与在线分析处理，具备水平扩容、高可用、实时 HTAP、云原生的特性。TiDB 不是基于 MySQL 开发的，而是由 PingCAP 团队完全自主开发的产品。TiDB 易用性很高，支持绝大部分 MySQL 8.0 的语法，但不支持触发器、存储过程、自定义函数等。TiDB 支持分布式事务，兼容 MySQL Client/Driver 的编程语言，支持其他存储引擎，如 TiKV、UniStore 和 MockTiKV。获取 TiDB 知识的途径包括官方文档、官方博客、在线课程和 TiDB 社区论坛。用户名长度限制为 32 个字符，最大列数为 1017，单行大小不超过 6MB。TiDB 不支持 XA，但支持对列存储引擎的高并发 INSERT 或 UPDATE 操作。
   - [SQL FAQ](https://docs.pingcap.com/zh/tidb/stable/sql-faq.md): 介绍 SQL 操作相关的常见问题。
   - [安装部署 FAQ](https://docs.pingcap.com/zh/tidb/stable/deploy-and-maintain-faq.md): 介绍 TiDB 集群安装部署的常见问题、原因及解决方法。
   - [迁移 FAQ](https://docs.pingcap.com/zh/tidb/stable/migration-tidb-faq.md): 介绍 TiDB 迁移中的常见问题。
