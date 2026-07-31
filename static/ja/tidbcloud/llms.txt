@@ -217,7 +217,7 @@
   - データベースアクセス制御
     - [クラスタパスワード設定の構成](https://docs.pingcap.com/ja/tidbcloud/configure-security-settings.md): TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードの設定方法を学びましょう。
   - 監査管理
-    - [TiDB Cloud Dedicatedデータベース監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-auditing.md): TiDB Cloudでクラスターを監査する方法について説明します。
+    - [データベース監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-auditing.md): TiDB Cloudでクラスターを監査する方法について説明します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [コンソール監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-console-auditing.md): TiDB Cloudコンソールの監査ログ機能について学習します。
 - 請求する
   - [請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing.md#invoices): TiDB Cloudの課金体系について学びましょう。
@@ -618,7 +618,7 @@
   - [Connected Careの概要](https://docs.pingcap.com/ja/tidbcloud/connected-care-overview.md): 新しい世代のTiDB Cloudサポート サービスである Connected Care を紹介します。
   - [Connected Careの詳細](https://docs.pingcap.com/ja/tidbcloud/connected-care-detail.md): TiDB Cloud向けのConnected Careサポートサービスに関する詳細情報を紹介します。
   - Connected Careサポートサービスの特長
-    - [接続済み: Clinic Service](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-clinic.md): 高度な監視と診断のためにTiDB Cloud Clinic を使用する方法を学習します。
+    - [Connected: Clinic Service](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-clinic.md): 高度な監視と診断のためにTiDB Cloud Clinic を使用する方法を学習します。
     - [Connected: IMでのAIチャット](https://docs.pingcap.com/ja/tidbcloud/connected-ai-chat-in-im.md): インスタント メッセージ (IM) の AI チャットに関する詳細情報を紹介します。
     - Connected: TiDB CloudアラートのIMサブスクリプション
       - [Slack経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-slack.md): Slack経由でアラート通知を受け取ることで、TiDBクラスタを監視する方法を学びましょう。
@@ -639,3 +639,4 @@
 ## _BUILD_ALLOWLIST
 
 - [データベースのユーザーと役割を管理する](https://docs.pingcap.com/ja/tidbcloud/configure-sql-users.md): TiDB Cloudコンソールでデータベースユーザーとロールを管理する方法を学びましょう。
+- [データベース監査ログ（レガシー）](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-auditing-legacy.md): TiDB Cloud でクラスターを監査する方法について説明します。

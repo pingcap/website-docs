@@ -218,7 +218,7 @@
   - 数据库访问控制
     - [配置集群密码设置](https://docs.pingcap.com/zh/tidbcloud/configure-security-settings.md): 了解如何配置 root 密码以连接到你的 TiDB Cloud Dedicated 集群。
   - 审计管理
-    - [数据库审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-auditing.md): 了解如何在 TiDB Cloud 中审计集群。
+    - [数据库审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-auditing.md): 了解如何在 TiDB Cloud 中审计集群。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [控制台审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-console-auditing.md): 了解 TiDB Cloud 控制台的审计日志功能。
 - 账单
   - [发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#invoices): 了解 TiDB Cloud 计费。
@@ -640,3 +640,4 @@
 ## _BUILD_ALLOWLIST
 
 - [Manage Database Users and Roles](https://docs.pingcap.com/zh/tidbcloud/configure-sql-users.md): Learn how to manage database users and roles in the TiDB Cloud console.
+- [数据库审计日志（旧版）](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-auditing-legacy.md): 了解如何在 TiDB Cloud 中审计集群。

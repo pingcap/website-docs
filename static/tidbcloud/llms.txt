@@ -218,7 +218,7 @@
   - Database Access Control
     - [Configure Cluster Password Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings.md): Learn how to configure the root password to connect to your TiDB Cloud Dedicated cluster.
   - Audit Management
-    - [TiDB Cloud Dedicated Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing.md): Learn about how to audit a cluster in TiDB Cloud.
+    - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing.md): Learn about how to audit a cluster in TiDB Cloud. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [Console Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing.md): Learn about the audit logging feature for the TiDB Cloud console.
 - Billing
   - [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#invoices): Learn about TiDB Cloud billing.
@@ -640,3 +640,4 @@
 ## _BUILD_ALLOWLIST
 
 - [Manage Database Users and Roles](https://docs.pingcap.com/tidbcloud/configure-sql-users.md): Learn how to manage database users and roles in the TiDB Cloud console.
+- [Database Audit Logging (Legacy)](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-legacy.md): Learn about how to audit a cluster in TiDB Cloud.

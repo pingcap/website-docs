@@ -78,8 +78,7 @@
 ## REFERENCE
 
 - [Vector Data Types](https://docs.pingcap.com/ai/vector-search-data-types.md): Learn about the Vector data types in TiDB.
-- [Functions and Operators](https://docs.pingcap.com/ai/vector-search-functions-and-operators.md): Learn about functions and operators available for Vector data types.
+- [Vector Functions and Operators](https://docs.pingcap.com/ai/vector-search-functions-and-operators.md): Learn about functions and operators available for Vector data types.
 - [Vector Search Index](https://docs.pingcap.com/ai/vector-search-index.md): Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
-- [Performance Tuning](https://docs.pingcap.com/ai/vector-search-improve-performance.md): Learn best practices for improving the performance of TiDB Vector Search.
-- [Limitations](https://docs.pingcap.com/ai/vector-search-limitations.md): Learn the limitations of the TiDB vector search.
-- [Changelogs](https://docs.pingcap.com/ai/vector-search-changelogs.md): Learn about the new features, compatibility changes, improvements, and bug fixes for the TiDB vector search feature.
+- [Vector Search Performance Tuning](https://docs.pingcap.com/ai/vector-search-improve-performance.md): Learn best practices for improving the performance of TiDB Vector Search.
+- [Vector Search Limitations](https://docs.pingcap.com/ai/vector-search-limitations.md): Learn the limitations of the TiDB vector search.

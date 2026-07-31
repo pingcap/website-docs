@@ -78,8 +78,7 @@
 ## 参考指南
 
 - [向量数据类型](https://docs.pingcap.com/zh/ai/vector-search-data-types.md): 了解 TiDB 中的向量数据类型。
-- [函数和运算符](https://docs.pingcap.com/zh/ai/vector-search-functions-and-operators.md): 了解可用于向量数据类型的函数与运算符。
+- [向量函数和运算符](https://docs.pingcap.com/zh/ai/vector-search-functions-and-operators.md): 了解可用于向量数据类型的函数与运算符。
 - [向量搜索索引](https://docs.pingcap.com/zh/ai/vector-search-index.md): 了解如何在 TiDB 中构建和使用向量搜索索引，以加速 K-最近邻（KNN）查询。
-- [性能调优](https://docs.pingcap.com/zh/ai/vector-search-improve-performance.md): 学习提升 TiDB 向量搜索性能的最佳实践。
-- [限制](https://docs.pingcap.com/zh/ai/vector-search-limitations.md): 了解 TiDB 向量搜索的限制。
-- [更新记录](https://docs.pingcap.com/zh/ai/vector-search-changelogs.md): 了解 TiDB 向量搜索功能的新特性、兼容性变更、改进和缺陷修复。
+- [向量搜索性能调优](https://docs.pingcap.com/zh/ai/vector-search-improve-performance.md): 学习提升 TiDB 向量搜索性能的最佳实践。
+- [向量搜索限制](https://docs.pingcap.com/zh/ai/vector-search-limitations.md): 了解 TiDB 向量搜索的限制。
