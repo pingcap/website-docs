@@ -351,6 +351,60 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/tidb/v8.1/releases");
   });
 
+  it.each([
+    ["en", "/en/tidb-in-kubernetes/stable/release-2.0.0/"],
+    ["zh", "/zh/tidb-in-kubernetes/stable/release-2.0.0/"],
+    ["ja", "/ja/tidb-in-kubernetes/stable/release-2.0.0/"],
+  ])(
+    "should map %s tidb-in-kubernetes release notes from main to stable",
+    (lang, expected) => {
+      const absolutePath = path.join(
+        sourceBasePath,
+        `${lang}/tidb-in-kubernetes/main/releases/release-2.0.0.md`
+      );
+      const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+      expect(url).toBe(expected);
+    }
+  );
+
+  it("should keep the tidb-in-kubernetes releases index mapping", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-in-kubernetes/main/releases/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/releases/tidb-operator/");
+  });
+
+  it("should map main and stable-branch release notes to the same stable URL", () => {
+    const mainUrl = calculateFileUrlWithConfig(
+      path.join(
+        sourceBasePath,
+        "en/tidb-in-kubernetes/main/releases/release-2.0.0.md"
+      ),
+      testConfig
+    );
+    const stableBranchUrl = calculateFileUrlWithConfig(
+      path.join(
+        sourceBasePath,
+        "en/tidb-in-kubernetes/release-1.6/releases/release-2.0.0.md"
+      ),
+      testConfig
+    );
+
+    expect(mainUrl).toBe("/en/tidb-in-kubernetes/stable/release-2.0.0/");
+    expect(stableBranchUrl).toBe(mainUrl);
+  });
+
+  it("should continue mapping non-release pages from main to dev", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-in-kubernetes/main/deploy/deploy-tidb-on-kubernetes.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidb-in-kubernetes/dev/deploy-tidb-on-kubernetes/");
+  });
+
   it("should resolve releases folder zh", () => {
     const absolutePath = path.join(
       sourceBasePath,

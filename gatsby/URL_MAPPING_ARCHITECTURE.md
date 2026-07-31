@@ -391,7 +391,25 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: TiDB-in-Kubernetes with Branch Alias
+### Rule 11: TiDB-in-Kubernetes Release Notes from Main
+
+**Effect**: Publishes TiDB-in-Kubernetes release notes from `main` at stable URLs so they override the copies from the configured stable release branch.
+
+**Source Pattern**: `/{lang}/tidb-in-kubernetes/main/releases/{filename}`
+
+**Target Pattern**: `/{lang}/tidb-in-kubernetes/stable/{filename}`
+
+**Example**:
+- Source: `en/tidb-in-kubernetes/main/releases/release-2.0.0.md`
+- Target: `/tidb-in-kubernetes/stable/release-2.0.0`
+- Source: `zh/tidb-in-kubernetes/main/releases/release-2.0.0.md`
+- Target: `/zh/tidb-in-kubernetes/stable/release-2.0.0`
+
+**Use Case**: Release notes are maintained on `main`, but their canonical published URLs must resolve under `stable`. The earlier releases-index rule continues to map `_index.md` to `/releases/tidb-operator`.
+
+---
+
+### Rule 12: TiDB-in-Kubernetes with Branch Alias
 
 **Effect**: Maps TiDB-in-Kubernetes pages with branch aliasing (main → dev, release-* → v*).
 
@@ -416,7 +434,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 12: Fallback Rule
+### Rule 13: Fallback Rule
 
 **Effect**: Generic fallback for any remaining paths.
 
@@ -512,24 +530,43 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 5: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/*)
 
-**Effect**: Resolves `/releases/*` links from the operator releases landing page to TiDB-in-Kubernetes `dev` branch URLs.
+**Effect**: Resolves `/releases/*` links from the operator releases landing page to TiDB-in-Kubernetes `stable` URLs.
 
 **Path Pattern**: `/{lang}/releases/tidb-operator/{...any}`
 
 **Link Pattern**: `/releases/{docname}`
 
-**Target Pattern**: `/{lang}/tidb-in-kubernetes/dev/{docname}`
+**Target Pattern**: `/{lang}/tidb-in-kubernetes/stable/{docname}`
 
 **Example**:
 - Current Page: `/releases/tidb-operator`
 - Link: `/releases/release-2.0.0`
-- Result: `/tidb-in-kubernetes/dev/release-2.0.0` (or `/en/tidb-in-kubernetes/dev/release-2.0.0` if default language not omitted)
+- Result: `/tidb-in-kubernetes/stable/release-2.0.0` (or `/en/tidb-in-kubernetes/stable/release-2.0.0` if default language not omitted)
 
-**Use Case**: The operator releases landing page is under `/releases/`, but the actual release notes pages are published under `/tidb-in-kubernetes/dev/*` (`main` is published as `dev`).
+**Use Case**: The operator releases landing page is under `/releases/`, while release notes from `main` are published under `/tidb-in-kubernetes/stable/*` to override the copies from the stable release branch.
 
 ---
 
-### Rule 6: Namespace Index Links (Direct Mapping)
+### Rule 6: TiDB-in-Kubernetes Main TOC Release Links (Path-Based)
+
+**Effect**: Resolves release-note links from the `main` TiDB-in-Kubernetes TOC to the stable URLs that publish the corresponding `main` release-note files.
+
+**Path Pattern**: `/{lang}/tidb-in-kubernetes/dev/TOC-tidb-operator-releases`
+
+**Link Pattern**: `/releases/{docname}`
+
+**Target Pattern**: `/{lang}/tidb-in-kubernetes/stable/{docname}`
+
+**Example**:
+- Current TOC: `/tidb-in-kubernetes/dev/TOC-tidb-operator-releases`
+- Link: `/releases/release-2.0.0`
+- Result: `/tidb-in-kubernetes/stable/release-2.0.0`
+
+**Use Case**: `TOC-tidb-operator-releases.md` from `main` is resolved under the `dev` branch alias, but its `releases/release-*.md` entries are published under `/stable/*`. Other TOC links continue to resolve under `dev`, and versioned TOCs continue to preserve their version.
+
+---
+
+### Rule 7: Namespace Index Links (Direct Mapping)
 
 **Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
@@ -559,7 +596,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: Namespace Links (Direct Mapping)
+### Rule 8: Namespace Links (Direct Mapping)
 
 **Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`, `tidb-cloud-lake`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
@@ -586,7 +623,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: TiDBCloud Page Links (Path-Based)
+### Rule 9: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -608,7 +645,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: TiDB Cloud Lake Page Links (Path-Based)
+### Rule 10: TiDB Cloud Lake Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB Cloud Lake pages to `/tidbcloudlake/*` URLs.
 
@@ -627,7 +664,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 10: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 11: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -651,7 +688,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 12: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 

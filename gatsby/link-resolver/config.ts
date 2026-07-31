@@ -33,11 +33,18 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       targetPattern: "/{lang}/tidb/stable/{docname}",
     },
     // Current page: /{lang}/releases/tidb-operator
-    // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/dev/{docname}
+    // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/stable/{docname}
     {
       pathPattern: "/{lang}/releases/tidb-operator",
       linkPattern: "/{...any}/{docname}",
-      targetPattern: "/{lang}/tidb-in-kubernetes/dev/{docname}",
+      targetPattern: "/{lang}/tidb-in-kubernetes/stable/{docname}",
+    },
+    // Current TOC: /{lang}/tidb-in-kubernetes/dev/TOC-tidb-operator-releases
+    // Link: /releases/{docname} -> /{lang}/tidb-in-kubernetes/stable/{docname}
+    {
+      pathPattern: "/{lang}/tidb-in-kubernetes/dev/TOC-tidb-operator-releases",
+      linkPattern: "/releases/{docname}",
+      targetPattern: "/{lang}/tidb-in-kubernetes/stable/{docname}",
     },
     // Rule 1: Links starting with specific namespaces (direct link mapping)
     // Special handling for namespace index links:

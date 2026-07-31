@@ -110,6 +110,32 @@ describe("getFilesFromTocs TOC selection rules", () => {
     ]);
   });
 
+  it("tidb-in-kubernetes main reads the operator releases TOC", async () => {
+    const { getFilesFromTocs } = require("../toc-filter");
+
+    const graphql = jest.fn().mockResolvedValue({
+      data: {
+        allMdx: {
+          nodes: [
+            makeNode(
+              "en/tidb-in-kubernetes/main/TOC",
+              "docs/markdown-pages/en/tidb-in-kubernetes/main/TOC.md"
+            ),
+            makeNode(
+              "en/tidb-in-kubernetes/main/TOC-tidb-operator-releases",
+              "docs/markdown-pages/en/tidb-in-kubernetes/main/TOC-tidb-operator-releases.md"
+            ),
+          ],
+        },
+      },
+    });
+
+    const { tocFilesMap } = await getFilesFromTocs(graphql);
+    expect(new Set(tocFilesMap.get("en/tidb-in-kubernetes/dev")!)).toEqual(
+      new Set(["toc-only", "operator-releases-only"])
+    );
+  });
+
   it("tidbcloud always reads all TOCs under tidbcloud directory", async () => {
     const { getFilesFromTocs } = require("../toc-filter");
 

@@ -1,4 +1,5 @@
 import { mdxAstToToc } from "../toc";
+import { extractFilesFromToc } from "../toc-filter";
 
 describe("mdxAstToToc tag query parsing", () => {
   it("does not emit a bogus ?undefined query when the image URL has no query string", () => {
@@ -98,5 +99,54 @@ describe("mdxAstToToc tag query parsing", () => {
       value: "BETA",
       query: "?color=%232d9cd2",
     });
+  });
+});
+
+describe("mdxAstToToc TiDB Operator releases navigation", () => {
+  it("maps main release TOC links to stable URLs and preserves TOC membership", () => {
+    const toc = mdxAstToToc(
+      [
+        {
+          type: "list",
+          children: [
+            {
+              type: "listItem",
+              children: [
+                {
+                  type: "paragraph",
+                  children: [{ type: "text", value: "v2.0" }],
+                },
+                {
+                  type: "list",
+                  children: [
+                    {
+                      type: "listItem",
+                      children: [
+                        {
+                          type: "paragraph",
+                          children: [
+                            {
+                              type: "link",
+                              url: "releases/release-2.0.0.md",
+                              children: [{ type: "text", value: "2.0 GA" }],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ] as any,
+      "en/tidb-in-kubernetes/main/TOC-tidb-operator-releases"
+    );
+
+    expect(toc[0].children?.[0].link).toBe(
+      "/tidb-in-kubernetes/stable/release-2.0.0"
+    );
+    expect(extractFilesFromToc(toc)).toEqual(["release-2.0.0"]);
   });
 });

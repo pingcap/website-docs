@@ -107,8 +107,7 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // When filename = "_index": /en/tidb-cloud-lake/master/{folders}/_index.md -> /en/tidbcloudlake/{folders}
     // When filename != "_index": /en/tidb-cloud-lake/master/{folders}/{filename}.md -> /en/tidbcloudlake/{filename}
     {
-      sourcePattern:
-        "/{lang}/tidb-cloud-lake/{branch}/{...folders}/{filename}",
+      sourcePattern: "/{lang}/tidb-cloud-lake/{branch}/{...folders}/{filename}",
       targetPattern: "/{lang}/tidbcloudlake/{filename}",
       filenameTransform: {
         ignoreIf: ["_index"],
@@ -139,6 +138,13 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       filenameTransform: {
         ignoreIf: ["_index", "_docHome"],
       },
+    },
+    // tidb-in-kubernetes release notes from main
+    // Release notes from main override the copies from the stable release branch.
+    // /en/tidb-in-kubernetes/main/releases/{filename} -> /en/tidb-in-kubernetes/stable/{filename}
+    {
+      sourcePattern: "/{lang}/tidb-in-kubernetes/main/releases/{filename}",
+      targetPattern: "/{lang}/tidb-in-kubernetes/stable/{filename}",
     },
     // tidb-in-kubernetes with branch and optional folders
     // /en/tidb-in-kubernetes/main/{...folders}/{filename} -> /en/tidb-in-kubernetes/stable/{filename}
