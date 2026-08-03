@@ -254,19 +254,39 @@
     }
 
     .expandable-image-modal-content {
+      display: flex;
+      flex-direction: column;
       padding: 0;
       overflow: hidden;
     }
 
+    .expandable-image-modal-toolbar {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 64px;
+      padding: 8px;
+      border-bottom: 1px solid #d1d9e0;
+      box-sizing: border-box;
+    }
+
+    .expandable-image-modal-close-button {
+      position: static;
+    }
+
     .expandable-image-modal-content .expandable-modal-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
       text-align: center;
-      max-height: calc(100vh - 48px);
+      max-height: calc(100vh - 112px);
     }
 
     .expandable-modal-image {
+      display: block;
       width: 100%;
       max-width: 100%;
-      max-height: calc(100vh - 48px);
+      max-height: calc(100vh - 112px);
       height: auto;
       margin: 0 auto;
       object-fit: contain;
