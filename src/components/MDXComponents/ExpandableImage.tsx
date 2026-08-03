@@ -6,6 +6,11 @@ export function ExpandableImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>
 ) {
   const [open, setOpen] = React.useState(false);
+  const wrapperRef = React.useRef<HTMLSpanElement>(null);
+  const portalContainer =
+    typeof document === "undefined"
+      ? null
+      : wrapperRef.current?.closest(".doc-content") ?? document.body;
 
   React.useEffect(() => {
     if (!open) return;
@@ -28,7 +33,7 @@ export function ExpandableImage(
   }, [open]);
 
   return (
-    <span className="expandable-image">
+    <span ref={wrapperRef} className="expandable-image">
       <img
         {...props}
         className={`expandable-inline-image${
@@ -42,6 +47,7 @@ export function ExpandableImage(
         }}
       />
       {open &&
+        portalContainer &&
         createPortal(
           <div
             className="expandable-modal-backdrop"
@@ -67,7 +73,7 @@ export function ExpandableImage(
               </div>
             </div>
           </div>,
-          document.body
+          portalContainer
         )}
     </span>
   );
