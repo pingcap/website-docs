@@ -1,20 +1,61 @@
 import * as React from "react";
-import { CloseLargeIcon } from "components/MDXComponents/ExpandIcons";
+import { createPortal } from "react-dom";
+import { CloseLargeIcon } from "./ExpandIcons";
+
+interface ExpandableImageModalProps {
+  imageProps: React.ImgHTMLAttributes<HTMLImageElement>;
+  onClose: () => void;
+}
+
+export function ExpandableImageModal({
+  imageProps,
+  onClose,
+}: ExpandableImageModalProps) {
+  return (
+    <div
+      className="expandable-modal-backdrop"
+      role="presentation"
+      onClick={onClose}
+    >
+      <div
+        className="expandable-modal-content expandable-image-modal-content"
+        role="dialog"
+        aria-modal="true"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="expandable-modal-close-button expandable-image-modal-close-button"
+          aria-label="Close expanded image"
+          onClick={onClose}
+        >
+          <CloseLargeIcon />
+        </button>
+        <div className="expandable-modal-scroll">
+          <img {...imageProps} className="expandable-modal-image" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function ExpandableImage(
   props: React.ImgHTMLAttributes<HTMLImageElement>
 ) {
-  const [open, setOpen] = React.useState(false);
+  const [portalContainer, setPortalContainer] = React.useState<Element | null>(
+    null
+  );
+  const wrapperRef = React.useRef<HTMLSpanElement>(null);
 
   React.useEffect(() => {
-    if (!open) return;
+    if (!portalContainer) return;
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOpen(false);
+        setPortalContainer(null);
       }
     };
 
@@ -24,10 +65,10 @@ export function ExpandableImage(
       document.body.style.overflow = originalOverflow;
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [portalContainer]);
 
   return (
-    <div className="expandable-image">
+    <span ref={wrapperRef} className="expandable-image">
       <img
         {...props}
         className={`expandable-inline-image${
@@ -36,36 +77,27 @@ export function ExpandableImage(
         onClick={(event) => {
           props.onClick?.(event);
           if (!event.defaultPrevented) {
-            setOpen(true);
+            const container = wrapperRef.current?.closest(
+              ".PingCAP-Doc .doc-content"
+            );
+            if (container) {
+              setPortalContainer(container);
+            } else if (process.env.NODE_ENV !== "production") {
+              console.warn(
+                "ExpandableImage requires a .doc-content ancestor inside .PingCAP-Doc."
+              );
+            }
           }
         }}
       />
-      {open && (
-        <div
-          className="expandable-modal-backdrop"
-          role="presentation"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="expandable-modal-content expandable-image-modal-content"
-            role="dialog"
-            aria-modal="true"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="expandable-modal-close-button"
-              aria-label="Close expanded image"
-              onClick={() => setOpen(false)}
-            >
-              <CloseLargeIcon />
-            </button>
-            <div className="expandable-modal-scroll">
-              <img {...props} className="expandable-modal-image" />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      {portalContainer &&
+        createPortal(
+          <ExpandableImageModal
+            imageProps={props}
+            onClose={() => setPortalContainer(null)}
+          />,
+          portalContainer
+        )}
+    </span>
   );
 }

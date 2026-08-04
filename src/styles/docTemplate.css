@@ -194,6 +194,8 @@
     }
 
     .expandable-modal-backdrop {
+      --expandable-modal-backdrop-padding: 24px;
+
       position: fixed;
       inset: 0;
       z-index: 1300;
@@ -201,7 +203,7 @@
       align-items: center;
       justify-content: center;
       background: rgba(14, 35, 54, 0.6);
-      padding: 24px;
+      padding: var(--expandable-modal-backdrop-padding);
       box-sizing: border-box;
     }
 
@@ -254,19 +256,48 @@
     }
 
     .expandable-image-modal-content {
-      padding: 0;
+      --expandable-image-modal-padding: clamp(44px, 4vw, 48px);
+      --expandable-image-modal-body-max-height: calc(
+        100vh - var(--expandable-modal-backdrop-padding) -
+          var(--expandable-modal-backdrop-padding) -
+          var(--expandable-image-modal-padding) -
+          var(--expandable-image-modal-padding)
+      );
+
+      display: flex;
+      flex-direction: column;
+      padding: var(--expandable-image-modal-padding);
       overflow: hidden;
     }
 
+    .expandable-image-modal-close-button {
+      top: 2px;
+      right: 2px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .expandable-image-modal-close-button .expandable-close-svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .expandable-image-modal-content .expandable-modal-scroll {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
       text-align: center;
-      max-height: calc(100vh - 48px);
+      max-height: var(--expandable-image-modal-body-max-height);
+      overflow: hidden;
     }
 
     .expandable-modal-image {
-      width: 100%;
+      display: block;
+      width: auto;
       max-width: 100%;
-      max-height: calc(100vh - 48px);
+      max-height: var(--expandable-image-modal-body-max-height);
       height: auto;
       margin: 0 auto;
       object-fit: contain;
