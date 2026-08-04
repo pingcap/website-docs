@@ -7,7 +7,10 @@ import type {
   DefaultTreeParentNode,
 } from "parse5";
 
-import { ExpandableImage } from "../../src/components/MDXComponents/ExpandableImage";
+import {
+  ExpandableImage,
+  ExpandableImageModal,
+} from "../../src/components/MDXComponents/ExpandableImage";
 
 function getChildElements(node: DefaultTreeParentNode): DefaultTreeElement[] {
   return node.childNodes.filter(
@@ -80,39 +83,12 @@ describe("ExpandableImage", () => {
   });
 
   it("renders the close button beside the padded expanded image", () => {
-    const reactModule = jest.requireActual("react") as typeof React;
-    const reactDomModule = jest.requireActual(
-      "react-dom"
-    ) as typeof import("react-dom");
-    const useStateSpy = jest
-      .spyOn(reactModule, "useState")
-      .mockReturnValueOnce([true, jest.fn()]);
-    const createPortalSpy = jest
-      .spyOn(reactDomModule, "createPortal")
-      .mockImplementation((children) => children as React.ReactPortal);
-    const documentDescriptor = Object.getOwnPropertyDescriptor(
-      globalThis,
-      "document"
+    const markup = renderToStaticMarkup(
+      <ExpandableImageModal
+        imageProps={{ src: "/diagram.png", alt: "Diagram" }}
+        onClose={() => undefined}
+      />
     );
-    Object.defineProperty(globalThis, "document", {
-      configurable: true,
-      value: { body: {} },
-    });
-
-    let markup: string;
-    try {
-      markup = renderToStaticMarkup(
-        <ExpandableImage src="/diagram.png" alt="Diagram" />
-      );
-    } finally {
-      useStateSpy.mockRestore();
-      createPortalSpy.mockRestore();
-      if (documentDescriptor) {
-        Object.defineProperty(globalThis, "document", documentDescriptor);
-      } else {
-        Reflect.deleteProperty(globalThis, "document");
-      }
-    }
 
     const fragment = parseFragment(
       markup
