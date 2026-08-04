@@ -257,6 +257,7 @@
 
     .expandable-image-modal-content {
       --expandable-image-modal-toolbar-height: 64px;
+      --expandable-image-modal-body-padding-bottom: 16px;
       --expandable-image-modal-body-max-height: calc(
         100vh - var(--expandable-modal-backdrop-padding) -
           var(--expandable-modal-backdrop-padding) -
@@ -291,6 +292,8 @@
       min-height: 0;
       text-align: center;
       max-height: var(--expandable-image-modal-body-max-height);
+      padding-bottom: var(--expandable-image-modal-body-padding-bottom);
+      box-sizing: border-box;
       overflow: hidden;
     }
 
@@ -298,7 +301,10 @@
       display: block;
       width: auto;
       max-width: 90%;
-      max-height: var(--expandable-image-modal-body-max-height);
+      max-height: calc(
+        var(--expandable-image-modal-body-max-height) -
+          var(--expandable-image-modal-body-padding-bottom)
+      );
       height: auto;
       margin: 0 auto;
       object-fit: contain;
