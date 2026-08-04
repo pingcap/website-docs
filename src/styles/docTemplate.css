@@ -276,7 +276,6 @@
       justify-content: flex-end;
       min-height: var(--expandable-image-modal-toolbar-height);
       padding: 8px;
-      border-bottom: 1px solid #d1d9e0;
       box-sizing: border-box;
     }
 
@@ -285,16 +284,20 @@
     }
 
     .expandable-image-modal-content .expandable-modal-scroll {
+      display: flex;
       flex: 1 1 auto;
+      align-items: center;
+      justify-content: center;
       min-height: 0;
       text-align: center;
       max-height: var(--expandable-image-modal-body-max-height);
+      overflow: hidden;
     }
 
     .expandable-modal-image {
       display: block;
-      width: 100%;
-      max-width: 100%;
+      width: auto;
+      max-width: 90%;
       max-height: var(--expandable-image-modal-body-max-height);
       height: auto;
       margin: 0 auto;
