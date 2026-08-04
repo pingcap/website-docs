@@ -9,11 +9,6 @@ import type {
 
 import { ExpandableImage } from "../../src/components/MDXComponents/ExpandableImage";
 
-jest.mock("react-dom", () => ({
-  ...jest.requireActual("react-dom"),
-  createPortal: (children: React.ReactNode) => children,
-}));
-
 function getChildElements(node: DefaultTreeParentNode): DefaultTreeElement[] {
   return node.childNodes.filter(
     (child): child is DefaultTreeElement => "tagName" in child
@@ -86,9 +81,15 @@ describe("ExpandableImage", () => {
 
   it("renders the close button in a toolbar above the expanded image", () => {
     const reactModule = jest.requireActual("react") as typeof React;
+    const reactDomModule = jest.requireActual(
+      "react-dom"
+    ) as typeof import("react-dom");
     const useStateSpy = jest
       .spyOn(reactModule, "useState")
       .mockReturnValueOnce([true, jest.fn()]);
+    const createPortalSpy = jest
+      .spyOn(reactDomModule, "createPortal")
+      .mockImplementation((children) => children as React.ReactPortal);
     const documentDescriptor = Object.getOwnPropertyDescriptor(
       globalThis,
       "document"
@@ -105,6 +106,7 @@ describe("ExpandableImage", () => {
       );
     } finally {
       useStateSpy.mockRestore();
+      createPortalSpy.mockRestore();
       if (documentDescriptor) {
         Object.defineProperty(globalThis, "document", documentDescriptor);
       } else {
@@ -129,9 +131,14 @@ describe("ExpandableImage", () => {
       class: "expandable-image-modal-toolbar",
     });
     expect(closeButton.tagName).toBe("button");
-    expect(getAttributes(closeButton)).toMatchObject({
-      "aria-label": "Close expanded image",
-    });
+    const closeButtonAttributes = getAttributes(closeButton);
+    expect(closeButtonAttributes["aria-label"]).toBe("Close expanded image");
+    expect(closeButtonAttributes.class?.split(/\s+/)).toEqual(
+      expect.arrayContaining([
+        "expandable-modal-close-button",
+        "expandable-image-modal-close-button",
+      ])
+    );
     expect(getAttributes(imageArea)).toMatchObject({
       class: "expandable-modal-scroll",
     });

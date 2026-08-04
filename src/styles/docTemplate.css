@@ -194,6 +194,8 @@
     }
 
     .expandable-modal-backdrop {
+      --expandable-modal-backdrop-padding: 24px;
+
       position: fixed;
       inset: 0;
       z-index: 1300;
@@ -201,7 +203,7 @@
       align-items: center;
       justify-content: center;
       background: rgba(14, 35, 54, 0.6);
-      padding: 24px;
+      padding: var(--expandable-modal-backdrop-padding);
       box-sizing: border-box;
     }
 
@@ -254,6 +256,13 @@
     }
 
     .expandable-image-modal-content {
+      --expandable-image-modal-toolbar-height: 64px;
+      --expandable-image-modal-body-max-height: calc(
+        100vh - var(--expandable-modal-backdrop-padding) -
+          var(--expandable-modal-backdrop-padding) -
+          var(--expandable-image-modal-toolbar-height)
+      );
+
       display: flex;
       flex-direction: column;
       padding: 0;
@@ -265,7 +274,7 @@
       flex: 0 0 auto;
       align-items: center;
       justify-content: flex-end;
-      min-height: 64px;
+      min-height: var(--expandable-image-modal-toolbar-height);
       padding: 8px;
       border-bottom: 1px solid #d1d9e0;
       box-sizing: border-box;
@@ -279,14 +288,14 @@
       flex: 1 1 auto;
       min-height: 0;
       text-align: center;
-      max-height: calc(100vh - 112px);
+      max-height: var(--expandable-image-modal-body-max-height);
     }
 
     .expandable-modal-image {
       display: block;
       width: 100%;
       max-width: 100%;
-      max-height: calc(100vh - 112px);
+      max-height: var(--expandable-image-modal-body-max-height);
       height: auto;
       margin: 0 auto;
       object-fit: contain;
