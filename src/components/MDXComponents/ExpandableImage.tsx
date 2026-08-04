@@ -60,16 +60,14 @@ export function ExpandableImage(
               aria-modal="true"
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="expandable-image-modal-toolbar">
-                <button
-                  type="button"
-                  className="expandable-modal-close-button expandable-image-modal-close-button"
-                  aria-label="Close expanded image"
-                  onClick={() => setOpen(false)}
-                >
-                  <CloseLargeIcon />
-                </button>
-              </div>
+              <button
+                type="button"
+                className="expandable-modal-close-button expandable-image-modal-close-button"
+                aria-label="Close expanded image"
+                onClick={() => setOpen(false)}
+              >
+                <CloseLargeIcon />
+              </button>
               <div className="expandable-modal-scroll">
                 <img {...props} className="expandable-modal-image" />
               </div>

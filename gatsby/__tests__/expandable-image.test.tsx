@@ -79,7 +79,7 @@ describe("ExpandableImage", () => {
     expect(getAttributes(heading)).toMatchObject({ id: "switch-dashboard" });
   });
 
-  it("renders the close button in a toolbar above the expanded image", () => {
+  it("renders the close button beside the padded expanded image", () => {
     const reactModule = jest.requireActual("react") as typeof React;
     const reactDomModule = jest.requireActual(
       "react-dom"
@@ -123,13 +123,9 @@ describe("ExpandableImage", () => {
     );
     expect(modalContent).toBeDefined();
 
-    const [toolbar, imageArea] = getChildElements(modalContent!);
-    const [closeButton] = getChildElements(toolbar);
+    const [closeButton, imageArea] = getChildElements(modalContent!);
     const [expandedImage] = getChildElements(imageArea);
 
-    expect(getAttributes(toolbar)).toMatchObject({
-      class: "expandable-image-modal-toolbar",
-    });
     expect(closeButton.tagName).toBe("button");
     const closeButtonAttributes = getAttributes(closeButton);
     expect(closeButtonAttributes["aria-label"]).toBe("Close expanded image");
