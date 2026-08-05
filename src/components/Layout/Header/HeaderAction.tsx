@@ -26,6 +26,9 @@ export default function HeaderAction(props: {
   const { docInfo, buildType, namespace } = props;
   const { language, t } = useI18next();
   const isAutoTranslation = useIsAutoTranslation(namespace);
+  // Chinese AI docs are auto-translated but are included in the onsite search index.
+  const showSearchOnAutoTranslation =
+    language === Locale.zh && namespace === TOCNamespace.AI;
 
   return (
     <Stack
@@ -33,9 +36,11 @@ export default function HeaderAction(props: {
       spacing={{ xs: 1, md: 2 }}
       sx={{ alignItems: "center" }}
     >
-      {docInfo && !isAutoTranslation && buildType !== "archive" && (
-        <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
-      )}
+      {docInfo &&
+        (!isAutoTranslation || showSearchOnAutoTranslation) &&
+        buildType !== "archive" && (
+          <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
+        )}
       {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
   );
