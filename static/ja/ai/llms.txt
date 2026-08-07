@@ -7,7 +7,7 @@
 - [Pythonで始める](https://docs.pingcap.com/ja/ai/quickstart-via-python.md): Python SDKを使用してTiDBでベクトル検索を開始する方法を学びましょう。
 - [SQL経由で開始する](https://docs.pingcap.com/ja/ai/quickstart-via-sql.md): SQL文を使用してTiDBのベクトル検索を素早く使い始め、生成型AIアプリケーションを強化する方法を学びましょう。
 
-## 概念
+## 概要
 
 - [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search-overview.md): TiDBのベクトル検索について学びましょう。この機能は、文書、画像、音声、動画など、さまざまなデータタイプにわたる意味的類似性検索を実行するための高度な検索ソリューションを提供します。
 
