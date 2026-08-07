@@ -67,6 +67,9 @@
       - [通过电子邮件订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-email.md): 了解如何通过 Email 获取报警通知，从而监控 TiDB。
       - [通过 Slack 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-slack.md): 了解如何通过 Slack 获取报警通知，以便监控你的 TiDB 集群。
       - [通过 Zoom 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-zoom.md): 了解如何通过 Zoom 获取报警通知，以便监控你的 TiDB 集群。
+      - [通过 Flashduty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-flashduty.md): 了解如何通过 Flashduty 获取 TiDB Cloud 资源的报警通知。
+      - [通过 PagerDuty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-pagerduty.md): 了解如何通过 PagerDuty 获取报警通知，从而监控 TiDB。
+      - [通过 Webhook 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-webhook.md): 了解如何通过通用 webhook 接收告警通知来监控你的 TiDB 集群。
     - [事件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
     - 第三方指标集成
       - [概览](https://docs.pingcap.com/zh/tidbcloud/third-party-monitoring-integrations.md): 了解如何使用第三方指标集成。
@@ -626,6 +629,7 @@
       - [通过 Zoom 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-zoom.md): 了解如何通过 Zoom 获取报警通知，以便监控你的 TiDB 集群。
       - [通过 Flashduty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-flashduty.md): 了解如何通过 Flashduty 获取 TiDB Cloud 资源的报警通知。
       - [通过 PagerDuty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-pagerduty.md): 了解如何通过 PagerDuty 获取报警通知，从而监控 TiDB。
+      - [通过 Webhook 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-webhook.md): 了解如何通过通用 webhook 接收告警通知来监控你的 TiDB 集群。
     - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](https://docs.pingcap.com/zh/tidbcloud/connected-slack-ticket-creation.md): 介绍在 Slack 中创建工单和订阅工单更新的详细信息。
       - [通过 Lark 创建工单并订阅工单更新](https://docs.pingcap.com/zh/tidbcloud/connected-lark-ticket-creation.md): 介绍关于 Lark 工单创建与更新订阅的详细信息。

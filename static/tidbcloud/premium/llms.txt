@@ -58,6 +58,9 @@
       - [Subscribe via Email](https://docs.pingcap.com/tidbcloud/monitor-alert-email.md): Learn how to monitor TiDB by getting alert notifications via Email.
       - [Subscribe via Slack](https://docs.pingcap.com/tidbcloud/monitor-alert-slack.md): Learn how to monitor your TiDB cluster by getting alert notifications via Slack.
       - [Subscribe via Zoom](https://docs.pingcap.com/tidbcloud/monitor-alert-zoom.md): Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
+      - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
+      - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
+      - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
     - [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the Datadog integration.
   - Tune Performance
     - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
@@ -137,6 +140,7 @@
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](https://docs.pingcap.com/tidbcloud/setup-aws-self-hosted-kafka-private-link-service.md): This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
     - [Set Up Private Endpoint for Changefeeds](https://docs.pingcap.com/tidbcloud/set-up-sink-private-endpoint-premium.md): Learn how to set up a private endpoint for changefeeds.
+    - [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](https://docs.pingcap.com/tidbcloud/setup-aws-msk-provisioned-private-link-service.md): This document explains how to set up an Amazon MSK Provisioned cluster and connect it to TiDB Cloud using AWS PrivateLink.
 - Security
   - [Security Overview](https://docs.pingcap.com/tidbcloud/security-overview.md): Learn about the comprehensive security framework of TiDB Cloud, including identity management, network isolation, data protection, access control, and auditing.
   - Identity Access Control
@@ -481,6 +485,7 @@
       - [Subscribe via Zoom](https://docs.pingcap.com/tidbcloud/monitor-alert-zoom.md): Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
       - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
       - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
+      - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-creation.md): Introduces detailed information about the Slack ticket creation and update subscription.
       - [Create Tickets and Subscribe to Ticket Updates via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-creation.md): Introduces detailed information about the Lark ticket creation and update subscription.
