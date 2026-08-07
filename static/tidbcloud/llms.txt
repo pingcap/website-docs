@@ -67,6 +67,9 @@
       - [Subscribe via Email](https://docs.pingcap.com/tidbcloud/monitor-alert-email.md): Learn how to monitor TiDB by getting alert notifications via Email.
       - [Subscribe via Slack](https://docs.pingcap.com/tidbcloud/monitor-alert-slack.md): Learn how to monitor your TiDB cluster by getting alert notifications via Slack.
       - [Subscribe via Zoom](https://docs.pingcap.com/tidbcloud/monitor-alert-zoom.md): Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
+      - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
+      - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
+      - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
     - [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud resources using the Events page.
     - Third-Party Metrics Integrations
       - [Overview](https://docs.pingcap.com/tidbcloud/third-party-monitoring-integrations.md): Learn how to use third-party metrics integrations.
@@ -626,6 +629,7 @@
       - [Subscribe via Zoom](https://docs.pingcap.com/tidbcloud/monitor-alert-zoom.md): Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
       - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
       - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
+      - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-creation.md): Introduces detailed information about the Slack ticket creation and update subscription.
       - [Create Tickets and Subscribe to Ticket Updates via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-creation.md): Introduces detailed information about the Lark ticket creation and update subscription.

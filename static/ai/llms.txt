@@ -58,7 +58,6 @@
   - [NVIDIA NIM](https://docs.pingcap.com/ai/vector-search-auto-embedding-nvidia-nim.md): Learn how to use NVIDIA NIM embedding models in TiDB Cloud.
   - [Amazon Titan](https://docs.pingcap.com/ai/vector-search-auto-embedding-amazon-titan.md): Learn how to use Amazon Titan embedding models in TiDB Cloud.
 - AI Frameworks
-  - [LangChain](https://docs.pingcap.com/ai/vector-search-integrate-with-langchain.md): Learn how to integrate TiDB Vector Search with LangChain.
   - [LlamaIndex](https://docs.pingcap.com/ai/vector-search-integrate-with-llamaindex.md): Learn how to integrate TiDB Vector Search with LlamaIndex.
 - ORM Libraries
   - [SQLAlchemy](https://docs.pingcap.com/ai/vector-search-integrate-with-sqlalchemy.md): Learn how to integrate TiDB Vector Search with SQLAlchemy to store embeddings and perform semantic searches.

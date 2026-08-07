@@ -721,6 +721,7 @@
       - [`FLASHBACK DATABASE`](https://docs.pingcap.com/tidb/stable/sql-statement-flashback-database.md): Learn the usage of FLASHBACK DATABASE in TiDB databases.
       - [`FLASHBACK TABLE`](https://docs.pingcap.com/tidb/stable/sql-statement-flashback-table.md): Learn how to recover tables using the `FLASHBACK TABLE` statement.
       - [`FLUSH PRIVILEGES`](https://docs.pingcap.com/tidb/stable/sql-statement-flush-privileges.md): An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
+      - [`FLUSH STATS_DELTA`](https://docs.pingcap.com/tidb/stable/sql-statement-flush-stats-delta.md): An overview of the usage of FLUSH STATS_DELTA for the TiDB database.
       - [`FLUSH STATUS`](https://docs.pingcap.com/tidb/stable/sql-statement-flush-status.md): An overview of the usage of FLUSH STATUS for the TiDB database.
       - [`FLUSH TABLES`](https://docs.pingcap.com/tidb/stable/sql-statement-flush-tables.md): An overview of the usage of FLUSH TABLES for the TiDB database.
       - [`GRANT <privileges>`](https://docs.pingcap.com/tidb/stable/sql-statement-grant-privileges.md): An overview of the usage of GRANT <privileges> for the TiDB database.

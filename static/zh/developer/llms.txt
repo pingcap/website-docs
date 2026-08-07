@@ -48,7 +48,7 @@
       - [Rails](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-ruby-rails.md): 本文描述了 TiDB 和 Rails 框架的连接步骤，并给出了使用 Rails 框架和 ActiveRecord ORM 连接 TiDB 的简单示例代码片段。
     - C#
       - [C#](https://docs.pingcap.com/zh/developer/dev-guide-sample-application-cs.md): 了解如何使用 C# 连接 TiDB。本教程提供了与 TiDB 交互的 C# 代码示例。
-  - 通过 TiDB Cloud Serverless Driver 连接 ![BETA](https://docs-download.pingcap.com/media/images/docs-cn/blank_transparent_placeholder.png)
+  - 通过 TiDB Cloud Serverless Driver 连接 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs-cn/blank_transparent_placeholder.png)
     - [概览](https://docs.pingcap.com/zh/developer/serverless-driver.md): 了解如何从 serverless 和边缘环境连接到 TiDB Cloud Starter 或 TiDB Cloud Essential。
     - [Node.js 示例](https://docs.pingcap.com/zh/developer/serverless-driver-node-example.md): 学习如何在本地 Node.js 项目中使用 TiDB Cloud serverless driver。
     - [Prisma 示例](https://docs.pingcap.com/zh/developer/serverless-driver-prisma-example.md): 学习如何将 TiDB Cloud serverless driver 与 Prisma ORM 一起使用。
@@ -77,7 +77,7 @@
     - [Follower Read](https://docs.pingcap.com/zh/developer/dev-guide-use-follower-read.md): 使用 Follower Read 在特定情况下加速查询。
     - [Stale Read](https://docs.pingcap.com/zh/developer/dev-guide-use-stale-read.md): 使用 Stale Read 在特定情况下加速查询。
   - [HTAP 查询](https://docs.pingcap.com/zh/developer/dev-guide-hybrid-oltp-and-olap-queries.md): 介绍 TiDB 中的 HTAP 查询功能。
-- [向量搜索](https://docs.pingcap.com/zh/developer/dev-guide-vector-search.md): 为应用开发者介绍 TiDB 中的向量搜索功能，包括相关概念、教程、集成方式以及参考文档。 ![BETA](https://docs-download.pingcap.com/media/images/docs-cn/blank_transparent_placeholder.png)
+- [向量搜索](https://docs.pingcap.com/zh/developer/dev-guide-vector-search.md): 为应用开发者介绍 TiDB 中的向量搜索功能，包括相关概念、教程、集成方式以及参考文档。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs-cn/blank_transparent_placeholder.png)
 - 事务处理
   - [概览](https://docs.pingcap.com/zh/developer/dev-guide-transaction-overview.md): 简单介绍 TiDB 中的事务。
   - [乐观事务和悲观事务](https://docs.pingcap.com/zh/developer/dev-guide-optimistic-and-pessimistic-transaction.md): 介绍 TiDB 中的乐观事务和悲观事务，乐观事务的重试等。
