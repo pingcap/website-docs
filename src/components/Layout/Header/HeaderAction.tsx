@@ -7,7 +7,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import StarIcon from "media/icons/star.svg";
 
 import CloudIcon from "@mui/icons-material/Cloud";
 import { useTheme } from "@mui/material/styles";
@@ -18,41 +17,6 @@ import { Locale, BuildType, TOCNamespace } from "shared/interface";
 import { Link } from "gatsby";
 import { useIsAutoTranslation } from "shared/useIsAutoTranslation";
 
-const useTiDBAIStatus = () => {
-  const [showTiDBAIButton, setShowTiDBAIButton] = React.useState(true);
-  const [initializingTiDBAI, setInitializingTiDBAI] = React.useState(true);
-
-  React.useEffect(() => {
-    if (!!window.tidbai) {
-      setInitializingTiDBAI(false);
-    }
-
-    const onTiDBAIInitialized = () => {
-      setInitializingTiDBAI(false);
-    };
-    const onTiDBAIError = () => {
-      setInitializingTiDBAI(false);
-      setShowTiDBAIButton(false);
-    };
-    window.addEventListener("tidbaiinitialized", onTiDBAIInitialized);
-    window.addEventListener("tidbaierror", onTiDBAIError);
-
-    const timer = setTimeout(() => {
-      if (!window.tidbai) {
-        setInitializingTiDBAI(false);
-        setShowTiDBAIButton(false);
-      }
-    }, 10000);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("tidbaiinitialized", onTiDBAIInitialized);
-      window.removeEventListener("tidbaierror", onTiDBAIError);
-    };
-  }, []);
-
-  return { showTiDBAIButton, initializingTiDBAI };
-};
-
 export default function HeaderAction(props: {
   supportedLocales: Locale[];
   docInfo?: { type: string; version: string };
@@ -61,41 +25,22 @@ export default function HeaderAction(props: {
 }) {
   const { docInfo, buildType, namespace } = props;
   const { language, t } = useI18next();
-  const { showTiDBAIButton, initializingTiDBAI } = useTiDBAIStatus();
   const isAutoTranslation = useIsAutoTranslation(namespace);
+  // Chinese AI docs are auto-translated but are included in the onsite search index.
+  const showSearchOnAutoTranslation =
+    language === Locale.zh && namespace === TOCNamespace.AI;
 
-	  return (
-	    <Stack
-	      direction="row"
-	      spacing={{ xs: 1, md: 2 }}
-	      sx={{ alignItems: "center" }}
-	    >
-      {docInfo && !isAutoTranslation && buildType !== "archive" && (
-        <>
+  return (
+    <Stack
+      direction="row"
+      spacing={{ xs: 1, md: 2 }}
+      sx={{ alignItems: "center" }}
+    >
+      {docInfo &&
+        (!isAutoTranslation || showSearchOnAutoTranslation) &&
+        buildType !== "archive" && (
           <Search placeholder={t("navbar.searchDocs")} docInfo={docInfo} />
-          {language === "en" && showTiDBAIButton && (
-            <Button
-              id="header-ask-ai"
-              variant="outlined"
-              startIcon={<StarIcon />}
-              disabled={initializingTiDBAI}
-              size="medium"
-              sx={{
-                fontSize: "14px",
-                display: {
-                  xs: "none",
-                  xl: "flex",
-                },
-              }}
-              onClick={() => {
-                window.tidbai.open = true;
-              }}
-            >
-              Ask AI
-            </Button>
-          )}
-        </>
-      )}
+        )}
       {language === "en" && <TiDBCloudBtnGroup />}
     </Stack>
   );
