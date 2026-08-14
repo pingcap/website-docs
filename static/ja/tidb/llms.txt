@@ -225,7 +225,7 @@
   - 診断方法
     - [SQL診断](https://docs.pingcap.com/ja/tidb/stable/information-schema-sql-diagnostics.md): TiDB での SQL 診断を理解します。
     - [ステートメントサマリーテーブル](https://docs.pingcap.com/ja/tidb/stable/statement-summary-tables.md): TiDBのステートメントサマリーテーブルについて学びましょう。
-    - [Top SQL を使用して負荷の高いクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): Top SQLを使用して、CPU、ネットワーク、論理I/Oリソースを最も消費するクエリを特定します
+    - [Top SQLを使用してコストの高いクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): Top SQLを使用して、CPU、ネットワーク、論理I/Oリソースを最も消費するクエリを特定します
     - [ログを使用して高負荷なクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/identify-expensive-queries.md): TiDBは、実行時間またはメモリ使用量のしきい値を超えるステートメントに関する情報を出力することで、高負荷なクエリを特定するのに役立ちます。これにより、SQLパフォーマンスの診断と改善が可能になります。高負荷クエリログには、実行時間、メモリ使用量、ユーザー、データベース、TiKVコプロセッサーのタスク情報などの詳細が含まれます。このログは、ステートメントがリソースしきい値を超えるとすぐに情報を出力ため、スロークエリログとは異なります。
     - [クラスタのオンサイト情報を保存および復元する](https://docs.pingcap.com/ja/tidb/stable/sql-plan-replayer.md): PLAN REPLAYER を使用してクラスターのオンサイト情報を保存および復元する方法を学びます。
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-stale-read.md): TiKV のステイル読み取りと safe-ts の原則を紹介し、 ステイル読み取りに関連する一般的な問題を診断するためのトラブルシューティングのヒントと例を示します。
@@ -277,7 +277,7 @@
         - [LATERAL 派生テーブル](https://docs.pingcap.com/ja/tidb/stable/lateral-derived-tables.md): TiDB における LATERAL 派生テーブルの構文と現在の制限事項について説明します。
         - [最大値/最小値を削除する](https://docs.pingcap.com/ja/tidb/stable/max-min-eliminate.md): Max/Min関数を排除するための規則を紹介します。
         - [Predicate Push Down](https://docs.pingcap.com/ja/tidb/stable/predicate-push-down.md): TiDB のロジック最適化ルールの 1 つである述語プッシュ ダウン (PPD) を導入します。
-        - [パーティション剪定](https://docs.pingcap.com/ja/tidb/stable/partition-pruning.md): TiDB パーティション プルーニングの使用シナリオについて学習します。
+        - [パーティションプルーニング](https://docs.pingcap.com/ja/tidb/stable/partition-pruning.md): TiDB パーティション プルーニングの使用シナリオについて学習します。
         - [トップNとリミットプッシュダウン](https://docs.pingcap.com/ja/tidb/stable/topn-limit-push-down.md): TopN および Limit 演算子プッシュダウンの実装を学習します。
         - [結合したテーブルの再配置](https://docs.pingcap.com/ja/tidb/stable/join-reorder.md): 結合したテーブルの再配置アルゴリズムを使用して、TiDB 内の複数のテーブルを結合します。
         - [ウィンドウ関数からTopNまたはLimitを導出する](https://docs.pingcap.com/ja/tidb/stable/derive-topn-from-window.md): ウィンドウ関数から TopN または Limit を導出する最適化ルールと、このルールを有効にする方法を紹介します。
@@ -451,9 +451,9 @@
         - [タスクを停止する](https://docs.pingcap.com/ja/tidb/stable/dm-stop-task.md): データ移行タスクを停止する方法を学びます。
     - 上級チュートリアル
       - シャーディングされたテーブルからデータをマージおよび移行する
-        - [概要](https://docs.pingcap.com/ja/tidb/stable/feature-shard-merge.md): DM がシャード化されたテーブルからデータをマージおよび移行する方法を学習します。
+        - [概要](https://docs.pingcap.com/ja/tidb/stable/feature-shard-merge.md): DM がシャーディングされたテーブルからデータをマージおよび移行する方法を学習します。
         - [悲観的モード](https://docs.pingcap.com/ja/tidb/stable/feature-shard-merge-pessimistic.md): DMが悲観的モードでシャーディングされたテーブルからデータをマージおよび移行する方法を学びましょう。
-        - [楽観モード](https://docs.pingcap.com/ja/tidb/stable/feature-shard-merge-optimistic.md): DM が楽観的モードでシャード テーブルからデータをマージおよび移行する方法を学習します。
+        - [楽観的モード](https://docs.pingcap.com/ja/tidb/stable/feature-shard-merge-optimistic.md): DM が楽観的モードでシャード テーブルからデータをマージおよび移行する方法を学習します。
         - [シャーディングDDLロックを手動で処理する](https://docs.pingcap.com/ja/tidb/stable/manually-handling-sharding-ddl-locks.md): DM でシャーディング DDL ロックを手動で処理する方法を学習します。
       - [GH-ost/PT-oscを使用するMySQLデータベースからの移行](https://docs.pingcap.com/ja/tidb/stable/feature-online-ddl.md): このドキュメントでは、DM の online-ddl/online-ddl-scheme` 機能について説明します。
       - [より多くのカラムを持つダウンストリーム TiDB テーブルにデータを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-with-more-columns-downstream.md): 対応するアップストリーム テーブルよりも多くの列を持つダウンストリーム TiDB テーブルにデータを移行する方法を学習します。
@@ -721,6 +721,7 @@
       - [`FLASHBACK DATABASE`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-flashback-database.md): TiDB データベースでの FLASHBACK DATABASE の使用方法を学習します。
       - [`FLASHBACK TABLE`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-flashback-table.md): FLASHBACK TABLE` ステートメントを使用してテーブルを回復する方法を学習します。
       - [`FLUSH PRIVILEGES`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-flush-privileges.md): TiDB データベースの FLUSH PRIVILEGES の使用法の概要。
+      - [`FLUSH STATS_DELTA`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-flush-stats-delta.md): TiDB データベースにおける FLUSH STATS_DELTA の使用方法の概要。
       - [`FLUSH STATUS`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-flush-status.md): TiDB データベースの FLUSH STATUS の使用法の概要。
       - [`FLUSH TABLES`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-flush-tables.md): TiDB データベースの FLUSH TABLES の使用法の概要。
       - [`GRANT <privileges>`](https://docs.pingcap.com/ja/tidb/stable/sql-statement-grant-privileges.md): TiDBデータベースに対するGRANT <権限>の使用方法の概要。
@@ -854,7 +855,7 @@
     - [グローバルインデックス](https://docs.pingcap.com/ja/tidb/stable/global-indexes.md): TiDB グローバル インデックスの使用例、利点、使用方法、動作原理、制限について学習します。
     - [ベクトルインデックス](https://docs.pingcap.com/ja/tidb/stable/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
     - [制約](https://docs.pingcap.com/ja/tidb/stable/constraints.md): SQL 制約が TiDB にどのように適用されるかを学習します。
-    - [生成された列](https://docs.pingcap.com/ja/tidb/stable/generated-columns.md): 生成された列の使用方法を学習します。
+    - [生成列](https://docs.pingcap.com/ja/tidb/stable/generated-columns.md): 生成列の使用方法を学習します。
     - [SQLモード](https://docs.pingcap.com/ja/tidb/stable/sql-mode.md): SQLモードを学習する。
     - [テーブル属性](https://docs.pingcap.com/ja/tidb/stable/table-attributes.md): TiDB のテーブル属性機能の使用方法を学習します。
     - トランザクション

@@ -6,6 +6,7 @@
   - [2.0 GA](https://docs.pingcap.com/tidb-in-kubernetes/dev/release-2.0.0.md): TiDB Operator 2.0.0 is released. The v2 version introduces major refactoring from v1, with key changes including splitting the `TidbCluster` CRD into multiple CRDs, removing the dependency on StatefulSet, and introducing the Overlay feature for more flexible custom configurations.
   - [2.0.0-beta.0](https://docs.pingcap.com/tidb-in-kubernetes/dev/release-2.0.0-beta.0.md): TiDB Operator 2.0.0-beta.0 is released. The v2 version introduces major refactoring from v1, with key changes including splitting the `TidbCluster` CRD into multiple CRDs, removing the dependency on StatefulSet, and introducing the Overlay feature for more flexible custom configurations.
 - v1.6
+  - [1.6.6](https://docs.pingcap.com/tidb-in-kubernetes/dev/release-1.6.6.md): Learn about new features, improvements, and bug fixes in TiDB Operator 1.6.6.
   - [1.6.5](https://docs.pingcap.com/tidb-in-kubernetes/dev/release-1.6.5.md): Learn about new features, improvements, and bug fixes in TiDB Operator 1.6.5.
   - [1.6.4](https://docs.pingcap.com/tidb-in-kubernetes/dev/release-1.6.4.md): Learn about new features in TiDB Operator 1.6.4.
   - [1.6.3](https://docs.pingcap.com/tidb-in-kubernetes/dev/release-1.6.3.md): Learn about bug fixes in TiDB Operator 1.6.3.
