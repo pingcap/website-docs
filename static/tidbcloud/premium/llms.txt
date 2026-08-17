@@ -61,6 +61,7 @@
       - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
       - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
       - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
+      - [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark.md): Learn how to monitor your TiDB cluster by getting alert notifications via Lark.
     - [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the Datadog integration.
   - Tune Performance
     - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
@@ -486,6 +487,7 @@
       - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
       - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
       - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
+      - [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark.md): Learn how to monitor your TiDB cluster by getting alert notifications via Lark.
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-creation.md): Introduces detailed information about the Slack ticket creation and update subscription.
       - [Create Tickets and Subscribe to Ticket Updates via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-creation.md): Introduces detailed information about the Lark ticket creation and update subscription.

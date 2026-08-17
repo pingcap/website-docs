@@ -120,7 +120,7 @@
     - [Advanced StatefulSet Controller](https://docs.pingcap.com/tidb-in-kubernetes/stable/advanced-statefulset.md): Learn how to enable and use the advanced StatefulSet controller.
     - [Admission Controller](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-admission-webhook.md): Learn how to enable the admission controller in TiDB Operator and the functionality of the admission controller.
   - [Sysbench Performance Test](https://docs.pingcap.com/tidb-in-kubernetes/stable/benchmark-sysbench.md): Learn the Sysbench performance test of TiDB on Kubernetes.
-  - [API References](<https://github.com/pingcap/tidb-operator/blob/v1.6.5/docs/api-references/docs.md>)
+  - [API References](<https://github.com/pingcap/tidb-operator/blob/v1.6.6/docs/api-references/docs.md>)
   - [Cheat Sheet](https://docs.pingcap.com/tidb-in-kubernetes/stable/cheat-sheet.md): Learn the commonly used commands for managing TiDB clusters.
   - [Required RBAC Rules](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-rbac.md): Introduces the RBAC rules required by TiDB Operator.
   - Tools

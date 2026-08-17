@@ -6,6 +6,7 @@
   - [2.0 GA](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/release-2.0.0.md): TiDB Operator 2.0.0 版本发布。v2 版本对 v1 版本进行了大幅重构，主要改动包括将 `TidbCluster` 拆分为多个 CRD、移除对 StatefulSet 的依赖，并引入 Overlay 功能以实现更灵活的自定义配置。
   - [2.0.0-beta.0](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/release-2.0.0-beta.0.md): TiDB Operator 2.0.0-beta.0 版本发布。v2 版本对 v1 版本进行了大幅重构，主要改动包括将 `TidbCluster` 拆分为多个 CRD、移除对 StatefulSet 的依赖，并引入 Overlay 功能以实现更灵活的自定义配置。
 - v1.6
+  - [1.6.6](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/release-1.6.6.md): 了解 TiDB Operator 1.6.6 版本的新功能、优化提升，以及 Bug 修复。
   - [1.6.5](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/release-1.6.5.md): 了解 TiDB Operator 1.6.5 版本的新功能、优化提升，以及 Bug 修复。
   - [1.6.4](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/release-1.6.4.md): 了解 TiDB Operator 1.6.4 版本的新功能。
   - [1.6.3](https://docs.pingcap.com/zh/tidb-in-kubernetes/dev/release-1.6.3.md): 了解 TiDB Operator 1.6.3 版本的 Bug 修复。

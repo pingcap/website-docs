@@ -62,6 +62,7 @@
       - [Flashduty経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-flashduty.md): Flashduty経由でアラート通知を受け取ることで、 TiDB Cloudリソースを監視する方法を学びましょう。
       - [PagerDuty経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-pagerduty.md): PagerDuty経由でアラート通知を受け取ることで、TiDBを監視する方法を学びましょう。
       - [Webhook経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-webhook.md): 汎用webhook を介してアラート通知を受信し、TiDB クラスターを監視する方法を学びます。
+      - [Lark経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-lark.md): Lark経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
     - [イベント](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-events.md): Events ページを使用して TiDB Cloud リソースのイベントを表示する方法を学びます。
     - [TiDB CloudをDatadogと統合する](https://docs.pingcap.com/ja/tidbcloud/monitor-datadog-integration-for-tidb-x.md): Datadog integration を使用して TiDB Cloud インスタンスを監視する方法を学びます。
   - チューニングパフォーマンス
@@ -89,7 +90,7 @@
           - [相関サブクエリのデコヒーレンス](https://docs.pingcap.com/ja/tidbcloud/correlated-subquery-optimization.md): 相関サブクエリの相関を解除する方法を理解します。
           - [最大値/最小値を削除する](https://docs.pingcap.com/ja/tidbcloud/max-min-eliminate.md): Max/Min関数を排除するための規則を紹介します。
           - [Predicate Push Down](https://docs.pingcap.com/ja/tidbcloud/predicate-push-down.md): TiDB のロジック最適化ルールの 1 つである述語プッシュ ダウン (PPD) を導入します。
-          - [パーティション剪定](https://docs.pingcap.com/ja/tidbcloud/partition-pruning.md): TiDB パーティション プルーニングの使用シナリオについて学習します。
+          - [パーティションプルーニング](https://docs.pingcap.com/ja/tidbcloud/partition-pruning.md): TiDB パーティション プルーニングの使用シナリオについて学習します。
           - [トップNとリミットプッシュダウン](https://docs.pingcap.com/ja/tidbcloud/topn-limit-push-down.md): TopN および Limit 演算子プッシュダウンの実装を学習します。
           - [結合したテーブルの再配置](https://docs.pingcap.com/ja/tidbcloud/join-reorder.md): 結合したテーブルの再配置アルゴリズムを使用して、TiDB 内の複数のテーブルを結合します。
           - [ウィンドウ関数からTopNまたはLimitを導出する](https://docs.pingcap.com/ja/tidbcloud/derive-topn-from-window.md): ウィンドウ関数から TopN または Limit を導出する最適化ルールと、このルールを有効にする方法を紹介します。
@@ -383,7 +384,7 @@
   - [クラスター化インデックス](https://docs.pingcap.com/ja/tidbcloud/clustered-indexes.md): クラスター化インデックスの概念、ユーザーシナリオ、使用方法、制限事項、および互換性について学びます。
   - [グローバルインデックス](https://docs.pingcap.com/ja/tidbcloud/global-indexes.md): TiDB グローバル インデックスの使用例、利点、使用方法、動作原理、制限について学習します。
   - [制約](https://docs.pingcap.com/ja/tidbcloud/constraints.md): SQL 制約が TiDB にどのように適用されるかを学習します。
-  - [生成された列](https://docs.pingcap.com/ja/tidbcloud/generated-columns.md): 生成された列の使用方法を学習します。
+  - [生成列](https://docs.pingcap.com/ja/tidbcloud/generated-columns.md): 生成列の使用方法を学習します。
   - [SQLモード](https://docs.pingcap.com/ja/tidbcloud/sql-mode.md): SQLモードを学習する。
   - [テーブル属性](https://docs.pingcap.com/ja/tidbcloud/table-attributes.md): TiDB のテーブル属性機能の使用方法を学習します。
   - トランザクション
@@ -567,6 +568,7 @@
       - [Flashduty経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-flashduty.md): Flashduty経由でアラート通知を受け取ることで、 TiDB Cloudリソースを監視する方法を学びましょう。
       - [PagerDuty経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-pagerduty.md): PagerDuty経由でアラート通知を受け取ることで、TiDBを監視する方法を学びましょう。
       - [Webhook経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-webhook.md): 汎用webhook を介してアラート通知を受信し、TiDB クラスターを監視する方法を学びます。
+      - [Lark経由で購読する](https://docs.pingcap.com/ja/tidbcloud/monitor-alert-lark.md): Lark経由でアラート通知を受信して TiDB クラスターを監視する方法を学びます。
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](https://docs.pingcap.com/ja/tidbcloud/connected-slack-ticket-creation.md): Slack チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
       - [Lark経由でチケットを作成し、チケットの最新情報を購読する](https://docs.pingcap.com/ja/tidbcloud/connected-lark-ticket-creation.md): Lark チケットの作成と更新サブスクリプションに関する詳細情報を紹介します。
