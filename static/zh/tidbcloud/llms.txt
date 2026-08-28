@@ -195,7 +195,7 @@
   - [到 Kafka Sink](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-apache-kafka.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式传输到 Apache Kafka。内容包括限制、前提条件，以及为 Apache Kafka 配置 changefeed 的步骤。该过程涉及设置网络连接、为 Kafka ACL 授权添加权限，以及配置 changefeed 规范。
   - [到 Pulsar Sink](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-apache-pulsar.md): 本文档介绍如何创建变更订阅（changefeed），以将数据从 TiDB Cloud 流式传输到 Apache Pulsar。内容包括限制、前提条件，以及为 Apache Pulsar 配置变更订阅的步骤。该过程涉及网络连接的设置和变更订阅规范的配置。
   - [到 TiDB Cloud Sink](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-tidb-cloud.md): 本文档介绍如何将数据从 TiDB Cloud Dedicated 集群流式同步到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。该功能对 changefeed 和 region 的数量有限制。前提条件包括延长 tidb_gc_life_time、备份数据以及获取 TiDB Cloud sink 的起始位置。要创建 TiDB Cloud sink，请进入集群概览页面，建立连接，自定义表和事件过滤器，填写起始同步位点，指定 changefeed 规格，检查配置并创建 sink。最后，将 tidb_gc_life_time 恢复为原始值。
-  - [到云存储](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-cloud-storage.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到 Amazon S3、Google Cloud Storage (GCS) 或 Azure Blob Storage。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
+  - [到云存储](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-cloud-storage.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到云存储。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](https://docs.pingcap.com/zh/tidbcloud/setup-aws-self-hosted-kafka-private-link-service.md): 本文档介绍如何在 AWS 中为自托管 Kafka 搭建 Private Link 服务，并使其与 TiDB Cloud 协同工作。
     - [在 Azure 中设置自托管 Kafka Private Link 服务](https://docs.pingcap.com/zh/tidbcloud/setup-azure-self-hosted-kafka-private-link-service.md): 本文档说明如何在 Azure 中为自托管 Kafka 设置 Private Link 服务，以及如何使其与 TiDB Cloud 配合使用。

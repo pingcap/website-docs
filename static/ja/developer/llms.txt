@@ -77,7 +77,7 @@
   - [一時テーブル](https://docs.pingcap.com/ja/developer/dev-guide-use-temporary-tables.md): 一時テーブルを作成、表示、クエリ、および削除する方法を学習します。
   - [共通テーブル式](https://docs.pingcap.com/ja/developer/dev-guide-use-common-table-expression.md): SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
   - レプリカデータの読み取り
-    - [Follower Read](https://docs.pingcap.com/ja/developer/dev-guide-use-follower-read.md): Follower Readを使用してクエリ パフォーマンスを最適化する方法を学習します。
+    - [Follower Read](https://docs.pingcap.com/ja/developer/dev-guide-use-follower-read.md): Follower Readを使用してクエリパフォーマンスを最適化する方法を学習します。
     - [ステイル読み取り](https://docs.pingcap.com/ja/developer/dev-guide-use-stale-read.md): 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。
   - [HTAPクエリ](https://docs.pingcap.com/ja/developer/dev-guide-hybrid-oltp-and-olap-queries.md): TiDB に HTAP クエリを導入します。
 - [ベクトル検索](https://docs.pingcap.com/ja/developer/dev-guide-vector-search.md): 概念、チュートリアル、統合、リファレンス ドキュメントなど、開発者向けに TiDB のベクトル検索機能を紹介します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
@@ -85,12 +85,12 @@
   - [概要](https://docs.pingcap.com/ja/developer/dev-guide-transaction-overview.md): TiDB のトランザクションの簡単な紹介。
   - [楽観的トランザクションと悲観的トランザクション](https://docs.pingcap.com/ja/developer/dev-guide-optimistic-and-pessimistic-transaction.md): TiDB の楽観的と悲観的トランザクションについて学習します。
   - [トランザクション制限](https://docs.pingcap.com/ja/developer/dev-guide-transaction-restraints.md): TiDBにおけるトランザクション制約について学びましょう。
-  - [トランザクションエラーの処理](https://docs.pingcap.com/ja/developer/dev-guide-transaction-troubleshoot.md): デッドロックやアプリケーション再試行エラーなどのトランザクション エラーを処理する方法について学習します。
+  - [トランザクションエラーの処理](https://docs.pingcap.com/ja/developer/dev-guide-transaction-troubleshoot.md): デッドロックやアプリケーション再試行エラーなどのトランザクションエラーを処理する方法について学習します。
 - 最適化する
-  - [概要](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql-overview.md): TiDB アプリケーション開発者向けに、SQL パフォーマンス チューニングの概要を説明します。
-  - [SQL性能チューニング](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql.md): TiDB の SQL パフォーマンス チューニング スキームと分析アプローチを紹介します。
-  - [性能チューニングのベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql-best-practices.md): TiDB パフォーマンスをチューニングするためのベスト プラクティスを紹介します。
-  - [インデックス作成のベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-index-best-practice.md): TiDB でインデックスを作成して使用するためのベスト プラクティスをいくつか学習します。
+  - [概要](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql-overview.md): TiDB アプリケーション開発者向けに、SQL パフォーマンスチューニングの概要を説明します。
+  - [SQL性能チューニング](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql.md): TiDB の SQL パフォーマンスチューニング スキームと分析アプローチを紹介します。
+  - [性能チューニングのベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql-best-practices.md): TiDB パフォーマンスをチューニングするためのベストプラクティスを紹介します。
+  - [インデックス作成のベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-index-best-practice.md): TiDB でインデックスを作成して使用するためのベストプラクティスをいくつか学習します。
   - 追加の最適化手法
     - [暗黙的な型変換を避ける](https://docs.pingcap.com/ja/developer/dev-guide-implicit-type-conversion.md): TiDB での暗黙的な型変換によって起こりうる結果と、それを回避する方法を紹介します。
     - [固有シリアル番号生成](https://docs.pingcap.com/ja/developer/dev-guide-unique-serial-number-generation.md): 独自の固有 ID を生成する開発者向けの固有シリアル番号生成ソリューション。
@@ -102,8 +102,8 @@
 ## 統合
 
 - サードパーティサポート
-  - [TiDBがサポートするサードパーティツール](https://docs.pingcap.com/ja/developer/dev-guide-third-party-support.md): TiDB でサポートされているサードパーティ ツールについて説明します。
-  - [サードパーティ製ツールとの互換性に関する既知の問題](https://docs.pingcap.com/ja/developer/dev-guide-third-party-tools-compatibility.md): テスト中に発見されたサードパーティ ツールとの TiDB 互換性の問題について説明します。
+  - [TiDBがサポートするサードパーティツール](https://docs.pingcap.com/ja/developer/dev-guide-third-party-support.md): TiDB でサポートされているサードパーティツールについて説明します。
+  - [サードパーティ製ツールとの互換性に関する既知の問題](https://docs.pingcap.com/ja/developer/dev-guide-third-party-tools-compatibility.md): テスト中に発見されたサードパーティツールとの TiDB 互換性の問題について説明します。
 - [ProxySQL](https://docs.pingcap.com/ja/developer/dev-guide-proxysql-integration.md): TiDB CloudとTiDB（セルフホスト型）をProxySQLと統合する方法を学びましょう。
 - [Amazon AppFlow](https://docs.pingcap.com/ja/developer/dev-guide-aws-appflow-integration.md): TiDBとAmazon AppFlowを統合する方法を、手順を追って説明します。
 - [WordPress](https://docs.pingcap.com/ja/developer/dev-guide-wordpress.md): TiDB Cloud Starterを使ってWordPressを実行する方法を学びましょう。このチュートリアルでは、WordPressとTiDB Cloud Starterを数分で実行するための手順をステップバイステップで解説します。

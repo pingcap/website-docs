@@ -46,7 +46,7 @@
 
 ## 統合
 
-- [統合の概要](https://docs.pingcap.com/ja/ai/vector-search-integration-overview.md): Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 連携の概要。
+- [統合の概要](https://docs.pingcap.com/ja/ai/vector-search-integration-overview.md): Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 統合の概要。
 - 自動埋め込み
   - [概要](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-overview.md): 自動埋め込み機能を使用して、ベクトルではなくプレーンテキストで意味検索を実行する方法を学びましょう。
   - [OpenAI](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-openai.md): TiDB CloudでOpenAIの埋め込みモデルを使用する方法を学びましょう。
@@ -78,6 +78,6 @@
 
 - [ベクトルデータ型](https://docs.pingcap.com/ja/ai/vector-search-data-types.md): TiDB の Vector データ型について学習します。
 - [ベクトル関数と演算子](https://docs.pingcap.com/ja/ai/vector-search-functions-and-operators.md): Vector データ型で使用できる関数と演算子について学習します。
-- [ベクトル検索インデックス](https://docs.pingcap.com/ja/ai/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K 近傍法 (KNN) クエリを高速化する方法を学びます。
-- [ベクトル検索の性能チューニング](https://docs.pingcap.com/ja/ai/vector-search-improve-performance.md): TiDB Vector Search のパフォーマンスを向上させるためのベスト プラクティスを学びます。
+- [ベクトル検索インデックス](https://docs.pingcap.com/ja/ai/vector-search-index.md): ベクトル検索インデックスを構築して使用し、TiDB で K近傍法 (KNN) クエリを高速化する方法を学びます。
+- [ベクトル検索の性能チューニング](https://docs.pingcap.com/ja/ai/vector-search-improve-performance.md): TiDB Vector Search のパフォーマンスを向上させるためのベストプラクティスを学びます。
 - [ベクトル検索の制限事項](https://docs.pingcap.com/ja/ai/vector-search-limitations.md): TiDBベクトル検索の限界について理解しましょう。
