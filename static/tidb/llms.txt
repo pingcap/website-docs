@@ -455,7 +455,7 @@
         - [Pessimistic Mode](https://docs.pingcap.com/tidb/stable/feature-shard-merge-pessimistic.md): Learn how DM merges and migrates data from sharded tables in the pessimistic mode.
         - [Optimistic Mode](https://docs.pingcap.com/tidb/stable/feature-shard-merge-optimistic.md): Learn how DM merges and migrates data from sharded tables in the optimistic mode.
         - [Manually Handle Sharding DDL Lock](https://docs.pingcap.com/tidb/stable/manually-handling-sharding-ddl-locks.md): Learn how to handle sharding DDL locks manually in DM.
-      - [Migrate from MySQL Databases that Use GH-ost/PT-osc](https://docs.pingcap.com/tidb/stable/feature-online-ddl.md): This document introduces the `online-ddl/online-ddl-scheme` feature of DM.
+      - [Migrate from MySQL Databases that Use gh-ost/pt-osc](https://docs.pingcap.com/tidb/stable/feature-online-ddl.md): This document introduces the `online-ddl/online-ddl-scheme` feature of DM.
       - [Migrate Data to a Downstream TiDB Table with More Columns](https://docs.pingcap.com/tidb/stable/migrate-with-more-columns-downstream.md): Learn how to migrate data to a downstream TiDB table with more columns than the corresponding upstream table.
       - [Continuous Data Validation](https://docs.pingcap.com/tidb/stable/dm-continuous-data-validation.md): Learn how to use continuous data validation and the working principles of continuous data validation.
     - Maintain

@@ -52,6 +52,7 @@
     - [概览](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster.md): 了解如何监控你的 TiDB Cloud 资源。
     - [内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring-premium.md): 了解如何查看 TiDB Cloud Premium 内置指标以及这些指标的含义。
     - [Top RU](https://docs.pingcap.com/zh/tidbcloud/top-ru.md): 了解如何使用 Top RU 以一分钟粒度识别 Request Unit (RU) 消耗最高的 SQL 语句和数据库用户。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [Statement Insight](https://docs.pingcap.com/zh/tidbcloud/statement-insight.md): 了解如何使用 Statement Insight 按 DB user、DB、table、SQL type 或 SQL digest 分析历史 RU 消耗、延时和执行次数，并为你的 TiDB Cloud 实例建立 RU 和性能基线。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [内置告警](https://docs.pingcap.com/zh/tidbcloud/monitor-built-in-alerting.md): 了解如何通过 TiDB Cloud 获取告警通知来监控你的 TiDB Cloud 资源。
     - [将 TiDB Cloud 与 Prometheus 和 Grafana 集成](https://docs.pingcap.com/zh/tidbcloud/prometheus-grafana-integration.md): 了解如何通过 Prometheus 和 Grafana 集成监控你的 TiDB Cloud 实例。
     - 订阅告警通知
@@ -138,6 +139,7 @@
   - [Changefeed 概述](https://docs.pingcap.com/zh/tidbcloud/changefeed-overview.md): TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。
   - [到 MySQL Sink](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-mysql.md): 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB Cloud 流式同步到 MySQL。内容包括限制、前提条件，以及创建用于数据同步的 MySQL sink 的步骤。该过程涉及设置网络连接、将已有数据加载到 MySQL，以及在 MySQL 中创建目标表。完成前提条件后，用户即可创建 MySQL sink，将数据同步到 MySQL。
   - [到 Kafka Sink](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-apache-kafka.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式传输到 Apache Kafka。内容包括限制、前提条件，以及为 Apache Kafka 配置 changefeed 的步骤。该过程涉及设置网络连接、为 Kafka ACL 授权添加权限，以及配置 changefeed 规范。
+  - [到 Cloud Storage](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-cloud-storage.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到云存储。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](https://docs.pingcap.com/zh/tidbcloud/setup-aws-self-hosted-kafka-private-link-service.md): 本文档介绍如何在 AWS 中为自托管 Kafka 搭建 Private Link 服务，并使其与 TiDB Cloud 协同工作。
     - [为 Changefeed 设置 Private Endpoint](https://docs.pingcap.com/zh/tidbcloud/set-up-sink-private-endpoint-premium.md): 了解如何为 changefeed 设置 private endpoint。
