@@ -52,7 +52,7 @@
   - 監視と警告
     - [概要](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster.md): TiDB Cloudリソースの監視方法を学びましょう。
     - [組み込みの指標](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring.md): TiDB Cloudに組み込まれているメトリクスを表示する方法と、これらのメトリクスの意味を理解する方法を学びましょう。
-    - [Top RU](https://docs.pingcap.com/ja/tidbcloud/top-ru.md): Top RUを使用して、1分単位の粒度で最もリクエストユニット（RU）消費量が多いSQLステートメントとデータベースユーザーを特定する方法を学びましょう。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [Top RU](https://docs.pingcap.com/ja/tidbcloud/top-ru.md): Top RUを使用して、1分単位の粒度で最もリクエストユニット（RU）消費量が多いSQL文とデータベースユーザーを特定する方法を学びましょう。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [Statement Insight](https://docs.pingcap.com/ja/tidbcloud/statement-insight.md): Statement Insight を使用して、DB user、DB、table、SQL type、または SQL digest ごとの過去の RU 消費量、レイテンシー、実行回数を分析し、TiDB Cloud インスタンスの RU およびパフォーマンスのベースラインを構築する方法を説明します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [内蔵アラート機能](https://docs.pingcap.com/ja/tidbcloud/monitor-built-in-alerting.md): TiDB Cloudからアラート通知を受け取ることで、 TiDB Cloudリソースを監視する方法を学びましょう。
     - [TiDB CloudをPrometheusおよびGrafanaと統合する](https://docs.pingcap.com/ja/tidbcloud/prometheus-grafana-integration.md): PrometheusとGrafanaの連携機能を使って、 TiDB Cloudインスタンスを監視する方法を学びましょう。
@@ -69,54 +69,55 @@
   - チューニングパフォーマンス
     - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tune-performance-overview.md): TiDB Cloudで SQL パフォーマンスを分析および調整する方法について説明します。
     - [パフォーマンスを分析する](https://docs.pingcap.com/ja/tidbcloud/tune-performance.md): TiDB Cloud でパフォーマンスを分析およびチューニングする方法を学びます。
+    - [Plan Replayer を使用して SQL パフォーマンスをトラブルシューティングする](https://docs.pingcap.com/ja/tidbcloud/plan-replayer.md): SQL パフォーマンスのトラブルシューティングのために、インスタンスから Plan Replayer ファイルを生成する方法と、TiDB Cloudサポートに対して限られた期間そのファイルへのアクセスを許可する方法を学びます。
     - SQLチューニング
       - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-sql-tuning-overview.md): TiDB Cloudで SQL のパフォーマンスをチューニングする方法について学びましょう。
       - クエリ実行計画の理解
-        - [概要](https://docs.pingcap.com/ja/tidbcloud/explain-overview.md): TiDB の EXPLAIN` ステートメントによって返される実行計画情報について学習します。
+        - [概要](https://docs.pingcap.com/ja/tidbcloud/explain-overview.md): TiDB の EXPLAIN`文によって返される実行計画情報について学習します。
         - [`EXPLAIN`ウォークスルー](https://docs.pingcap.com/ja/tidbcloud/explain-walkthrough.md): 例文を順に見ながらEXPLAINの使い方を学びます
-        - [索引](https://docs.pingcap.com/ja/tidbcloud/explain-indexes.md): TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
-        - [テーブル結合](https://docs.pingcap.com/ja/tidbcloud/explain-joins.md): TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
-        - [MPPに関する質問](https://docs.pingcap.com/ja/tidbcloud/explain-mpp.md): TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
-        - [サブクエリ](https://docs.pingcap.com/ja/tidbcloud/explain-subqueries.md): TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
-        - [集計](https://docs.pingcap.com/ja/tidbcloud/explain-aggregation.md): TiDB の EXPLAIN` ステートメントによって返される実行計画情報について学習します。
-        - [ビュー](https://docs.pingcap.com/ja/tidbcloud/explain-views.md): TiDB の EXPLAIN` ステートメントによって返される実行計画情報について学習します。
-        - [パーティション](https://docs.pingcap.com/ja/tidbcloud/explain-partitions.md): TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
-        - [インデックスマージ](https://docs.pingcap.com/ja/tidbcloud/explain-index-merge.md): TiDB の EXPLAIN` ステートメントによって返される実行計画情報について学習します。
+        - [索引](https://docs.pingcap.com/ja/tidbcloud/explain-indexes.md): TiDB のEXPLAIN文によって返される実行計画情報について学習します。
+        - [テーブル結合](https://docs.pingcap.com/ja/tidbcloud/explain-joins.md): TiDB のEXPLAIN文によって返される実行計画情報について学習します。
+        - [MPPに関する質問](https://docs.pingcap.com/ja/tidbcloud/explain-mpp.md): TiDB のEXPLAIN文によって返される実行計画情報について学習します。
+        - [サブクエリ](https://docs.pingcap.com/ja/tidbcloud/explain-subqueries.md): TiDB のEXPLAIN文によって返される実行計画情報について学習します。
+        - [集計](https://docs.pingcap.com/ja/tidbcloud/explain-aggregation.md): TiDB の EXPLAIN`文によって返される実行計画情報について学習します。
+        - [ビュー](https://docs.pingcap.com/ja/tidbcloud/explain-views.md): TiDB の EXPLAIN`文によって返される実行計画情報について学習します。
+        - [パーティション](https://docs.pingcap.com/ja/tidbcloud/explain-partitions.md): TiDB のEXPLAIN文によって返される実行計画情報について学習します。
+        - [インデックスマージ](https://docs.pingcap.com/ja/tidbcloud/explain-index-merge.md): TiDB の EXPLAIN`文によって返される実行計画情報について学習します。
       - SQL最適化プロセス
         - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-optimization-concepts.md): TiDB での SQL の論理的および物理的な最適化について学習します。
         - ロジック最適化
-          - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-logical-optimization.md): SQL論理最適化の章では、TiDBクエリプラン生成における主要なロジック書き換えについて説明します。例えば、IN`サブクエリ「ta in (select t1.a from t1 where t1.b=tb)」はTiDB書き換えにより存在しません。主要な書き換えには、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの非相関化、最大値/最小値の除去、Predicate Push Down、パーティションプルーニング、TopN演算子とLimit演算子のプッシュダウン、結合したテーブルの再配置などがあります。
+          - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-logical-optimization.md): SQL論理最適化の章では、TiDBクエリプラン生成における主要なロジック書き換えについて説明します。例えば、IN`サブクエリ「ta in (select t1.a from t1 where t1.b=tb)」はTiDB書き換えにより存在しません。主要な書き換えには、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの非相関化、最大値/最小値の除去、Predicate Push Down、パーティションプルーニング、TopNオペレーターとLimitオペレーターのプッシュダウン、結合したテーブルの再配置などがあります。
           - [サブクエリ関連の最適化](https://docs.pingcap.com/ja/tidbcloud/subquery-optimization.md): サブクエリに関連する最適化を理解します。
           - [カラムの剪定](https://docs.pingcap.com/ja/tidbcloud/column-pruning.md): TiDB での列プルーニングの使用法について学習します。
           - [相関サブクエリのデコヒーレンス](https://docs.pingcap.com/ja/tidbcloud/correlated-subquery-optimization.md): 相関サブクエリの相関を解除する方法を理解します。
           - [最大値/最小値を削除する](https://docs.pingcap.com/ja/tidbcloud/max-min-eliminate.md): Max/Min関数を排除するための規則を紹介します。
           - [Predicate Push Down](https://docs.pingcap.com/ja/tidbcloud/predicate-push-down.md): TiDB のロジック最適化ルールの 1つである述語プッシュダウン (PPD) を導入します。
           - [パーティションプルーニング](https://docs.pingcap.com/ja/tidbcloud/partition-pruning.md): TiDB パーティションプルーニングの使用シナリオについて学習します。
-          - [トップNとリミットプッシュダウン](https://docs.pingcap.com/ja/tidbcloud/topn-limit-push-down.md): TopN および Limit 演算子プッシュダウンの実装を学習します。
+          - [トップNとリミットプッシュダウン](https://docs.pingcap.com/ja/tidbcloud/topn-limit-push-down.md): TopN および Limit オペレータープッシュダウンの実装を学習します。
           - [結合したテーブルの再配置](https://docs.pingcap.com/ja/tidbcloud/join-reorder.md): 結合したテーブルの再配置アルゴリズムを使用して、TiDB 内の複数のテーブルを結合します。
           - [ウィンドウ関数からTopNまたはLimitを導出する](https://docs.pingcap.com/ja/tidbcloud/derive-topn-from-window.md): ウィンドウ関数から TopN または Limit を導出する最適化ルールと、このルールを有効にする方法を紹介します。
         - 物理的最適化
-          - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-physical-optimization.md): 物理最適化は、論理実行計画に基づく物理実行計画を作成するコストベースのプロセスです。オプティマイザーは、データ統計、時間計算量、リソース消費量に基づいて、各演算子に最適な物理実装を選択します。これには、インデックスの選択、統計情報の収集、適切なインデックスの使用、個別のキーワード最適化、そして最適な実行計画選択のためのコストモデルが含まれます。
+          - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-physical-optimization.md): 物理最適化は、論理実行計画に基づく物理実行計画を作成するコストベースのプロセスです。オプティマイザは、データ統計、時間計算量、リソース消費量に基づいて、各オペレーターに最適な物理実装を選択します。これには、インデックスの選択、統計情報の収集、適切なインデックスの使用、個別のキーワード最適化、そして最適な実行計画選択のためのコストモデルが含まれます。
           - [インデックス選択](https://docs.pingcap.com/ja/tidbcloud/choose-index.md): TiDBクエリ最適化に最適なインデックスを選択してください。
           - [統計](https://docs.pingcap.com/ja/tidbcloud/statistics.md): 統計情報がテーブルレベルと列レベルの情報をどのように収集するのかを学びましょう。
-          - [拡張統計](https://docs.pingcap.com/ja/tidbcloud/extended-statistics.md): 拡張統計を使用してオプティマイザーをガイドする方法を学習します。
+          - [拡張統計](https://docs.pingcap.com/ja/tidbcloud/extended-statistics.md): 拡張統計を使用してオプティマイザをガイドする方法を学習します。
           - [インデックス問題の解決方法](https://docs.pingcap.com/ja/tidbcloud/wrong-index-solution.md): 間違ったインデックスの問題を解決する方法を学びます。
-          - [クエリの最適化](https://docs.pingcap.com/ja/tidbcloud/agg-distinct-optimization.md): TiDB クエリ オプティマイザーに distinct` 最適化を導入します。
+          - [クエリの最適化](https://docs.pingcap.com/ja/tidbcloud/agg-distinct-optimization.md): TiDB クエリ オプティマイザに`distinct`最適化を導入します。
           - [コストモデル](https://docs.pingcap.com/ja/tidbcloud/cost-model.md): 物理的な最適化中に TiDB によって使用されるコストモデルがどのように機能するかを学習します。
           - [ランタイムフィルタ](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
         - [プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-prepared-plan-cache.md): TiDB の SQL プリペアドプランキャッシュについて学習します。
         - [非プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアドプランキャッシュの原理、使用法、および例について学習します。
       - 実行計画の制御
-        - [概要](https://docs.pingcap.com/ja/tidbcloud/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
+        - [概要](https://docs.pingcap.com/ja/tidbcloud/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と `tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
         - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザヒントを使用してクエリ実行計画に影響を与える
         - [SQLプラン管理](https://docs.pingcap.com/ja/tidbcloud/sql-plan-management.md): TiDB での SQL プラン管理について学習します。
         - [最適化ルールと式プッシュダウンのブロックリスト](https://docs.pingcap.com/ja/tidbcloud/blocklist-control-plan.md): 最適化ルールと式プッシュダウンの動作を制御するブロックリストについて学習します。
-        - [オプティマイザー修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザー修正制御機能について学習し、tidb_opt_fix_control` を使用して TiDB オプティマイザーをより細かく制御する方法について説明します。
+        - [オプティマイザ修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
     - [TiKV Follower Readの調整](https://docs.pingcap.com/ja/tidbcloud/follower-read.md): このドキュメントでは、 Follower Readの使用と実装について説明します。
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidbcloud/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
     - ガベージコレクション（GC）
        - [概要](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-overview.md): TiDB のガベージコレクションについて学習します。
-       - [コンフィグレーション](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 構成パラメータについて学習します。
+       - [コンフィグレーション](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
     - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
   - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターをアップグレードする方法を学びます。
   - [TiDB Cloud Essentialインスタンスを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-cluster.md): TiDB Cloudリソースを削除する方法を学びましょう。
@@ -210,13 +211,13 @@
       - [AUTO_RANDOM](https://docs.pingcap.com/ja/tidbcloud/auto-random.md): AUTO_RANDOM 属性について学習します。
       - [_tidb_rowid](https://docs.pingcap.com/ja/tidbcloud/tidb-rowid.md): _tidb_rowid`とは何か、いつ利用できるのか、そして安全に使用する方法について学びましょう。
       - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/ja/tidbcloud/shard-row-id-bits.md): SHARD_ROW_ID_BITS属性について学びましょう。
-    - [リテラル値](https://docs.pingcap.com/ja/tidbcloud/literal-values.md): この記事では、TiDB SQLステートメントのリテラル値を紹介します。
-    - [スキーマオブジェクト名](https://docs.pingcap.com/ja/tidbcloud/schema-object-names.md): TiDB SQLステートメントのスキーマオブジェクト名について学習します。
+    - [リテラル値](https://docs.pingcap.com/ja/tidbcloud/literal-values.md): この記事では、TiDB SQL文のリテラル値を紹介します。
+    - [スキーマオブジェクト名](https://docs.pingcap.com/ja/tidbcloud/schema-object-names.md): TiDB SQL文のスキーマオブジェクト名について学習します。
     - [キーワードと予約語](https://docs.pingcap.com/ja/tidbcloud/keywords.md): キーワードと予約語
     - [ユーザー定義変数](https://docs.pingcap.com/ja/tidbcloud/user-defined-variables.md): ユーザー定義変数の使用方法を学習します。
     - [式の構文](https://docs.pingcap.com/ja/tidbcloud/expression-syntax.md): TiDB の式構文について学習します。
     - [コメント構文](https://docs.pingcap.com/ja/tidbcloud/comment-syntax.md): このドキュメントでは、TiDB でサポートされているコメント構文について説明します。
-  - SQLステートメント
+  - SQL文
     - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-statement-overview.md): TiDBでサポートされているSQL文について学びましょう。
     - [`ADMIN`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin.md): TiDBデータベースにおけるADMINの使用方法の概要。
     - [`ADMIN CANCEL DDL`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-admin-cancel-ddl.md): TiDB データベースの ADMIN CANCEL DDL の使用法の概要。
@@ -393,7 +394,7 @@
     - [隔離レベル](https://docs.pingcap.com/ja/tidbcloud/transaction-isolation-levels.md): TiDB のトランザクション分離レベルについて学習します。
     - [楽観的トランザクション](https://docs.pingcap.com/ja/tidbcloud/optimistic-transaction.md): TiDBにおける楽観的トランザクションモデルについて学びましょう。
     - [悲観的トランザクション](https://docs.pingcap.com/ja/tidbcloud/pessimistic-transaction.md): TiDBにおける悲観的トランザクションモードについて学びましょう。
-    - [非トランザクションDMLステートメント](https://docs.pingcap.com/ja/tidbcloud/non-transactional-dml.md): TiDBの非トランザクションDMLステートメントについて学びましょう。アトミック性と独立性を犠牲にして、DMLステートメントを複数のステートメントに分割し、順番に実行することで、バッチデータ処理シナリオにおける安定性と使いやすさを向上させます。
+    - [非トランザクションDML文](https://docs.pingcap.com/ja/tidbcloud/non-transactional-dml.md): TiDBの非トランザクションDML文について学びましょう。アトミック性と独立性を犠牲にして、DML文を複数のステートメントに分割し、順番に実行することで、バッチデータ処理シナリオにおける安定性と使いやすさを向上させます。
   - [ビュー](https://docs.pingcap.com/ja/tidbcloud/views.md): TiDB でビューを使用する方法を学習します。
   - [パーティショニング](https://docs.pingcap.com/ja/tidbcloud/partitioned-table.md): TiDBにおけるパーティショニングの使い方を学びましょう。
   - [一時テーブル](https://docs.pingcap.com/ja/tidbcloud/temporary-tables.md): TiDB の一時テーブル機能について学習し、一時テーブルを使用してアプリケーションの中間データを保存する方法を学習します。これにより、テーブル管理のオーバーヘッドが削減され、パフォーマンスが向上します。
@@ -413,46 +414,46 @@
     - `mysql`スキーマ
       - [概要](https://docs.pingcap.com/ja/tidbcloud/mysql-schema.md): TiDBのシステムテーブルについて学びましょう。
       - [`user`](https://docs.pingcap.com/ja/tidbcloud/mysql-schema-user.md): mysql` スキーマの `user` テーブルについて学習します。
-    - 情報スキーマ
+    - INFORMATION_SCHEMA
       - [概要](https://docs.pingcap.com/ja/tidbcloud/information-schema.md): TiDBは、システムメタデータを表示するためのANSI標準規格であるinformation_schemaを実装しています。
-      - [`ANALYZE_STATUS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-analyze-status.md): ANALYZE_STATUS`情報スキーマテーブルについて学習してください。
-      - [`CHECK_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-check-constraints.md): CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](https://docs.pingcap.com/ja/tidbcloud/client-errors-summary-by-host.md): CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`CLIENT_ERRORS_SUMMARY_BY_USER`](https://docs.pingcap.com/ja/tidbcloud/client-errors-summary-by-user.md): CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`CLIENT_ERRORS_SUMMARY_GLOBAL`](https://docs.pingcap.com/ja/tidbcloud/client-errors-summary-global.md): CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`CHARACTER_SETS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-character-sets.md): CHARACTER_SETS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`COLLATIONS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-collations.md): COLLATIONS` information_schema テーブルについて学習します。
-      - [`COLLATION_CHARACTER_SET_APPLICABILITY`](https://docs.pingcap.com/ja/tidbcloud/information-schema-collation-character-set-applicability.md): COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`COLUMNS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-columns.md): COLUMNS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`DATA_LOCK_WAITS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-data-lock-waits.md): DATA_LOCK_WAITS` information_schema テーブルについて学習します。
-      - [`DDL_JOBS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-ddl-jobs.md): DDL_JOBS` information_schema テーブルについて学習します。
-      - [`DEADLOCKS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-deadlocks.md): DEADLOCKS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`ENGINES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-engines.md): ENGINES` information_schema テーブルについて学習します。
-      - [`KEYWORDS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-keywords.md): KEYWORDS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`KEY_COLUMN_USAGE`](https://docs.pingcap.com/ja/tidbcloud/information-schema-key-column-usage.md): KEY_COLUMN_USAGE` information_schema テーブルについて学習します。
-      - [`MEMORY_USAGE`](https://docs.pingcap.com/ja/tidbcloud/information-schema-memory-usage.md): MEMORY_USAGE` information_schema システムテーブルについて学習します。
-      - [`MEMORY_USAGE_OPS_HISTORY`](https://docs.pingcap.com/ja/tidbcloud/information-schema-memory-usage-ops-history.md): MEMORY_USAGE_OPS_HISTORY` information_schema システムテーブルについて学習します。
-      - [`PARTITIONS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-partitions.md): PARTITIONS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`PROCESSLIST`](https://docs.pingcap.com/ja/tidbcloud/information-schema-processlist.md): PROCESSLIST` information_schema テーブルについて学習します。
-      - [`REFERENTIAL_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-referential-constraints.md): REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`SCHEMATA`](https://docs.pingcap.com/ja/tidbcloud/information-schema-schemata.md): SCHEMATA` information_schema テーブルについて学習します。
-      - [`SEQUENCES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-sequences.md): SEQUENCES` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`SESSION_VARIABLES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-session-variables.md): SESSION_VARIABLES` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`STATISTICS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-statistics.md): STATISTICS` information_schema テーブルについて学習します。
-      - [`TABLES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tables.md): TABLES` information_schema テーブルについて学習します。
-      - [`TABLE_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-table-constraints.md): TABLE_CONSTRAINTS` information_schema テーブルについて学習します。
-      - [`TABLE_STORAGE_STATS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-table-storage-stats.md): TABLE_STORAGE_STATS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`TIDB_CHECK_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-check-constraints.md): TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`TIDB_INDEXES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-indexes.md): TIDB_INDEXES` information_schema テーブルについて学習します。
-      - [`TIDB_INDEX_USAGE`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-index-usage.md): TIDB_INDEX_USAGE` INFORMATION_SCHEMA テーブルについて学習してください。
-      - [`TIDB_TRX`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-trx.md): TIDB_TRX` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`TIFLASH_REPLICA`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tiflash-replica.md): TIFLASH_REPLICA` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`TIFLASH_SEGMENTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tiflash-segments.md): TIFLASH_SEGMENTS` information_schema テーブルについて学習します。
-      - [`TIFLASH_TABLES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tiflash-tables.md): TIFLASH_TABLES` information_schema テーブルについて学習します。
-      - [`USER_ATTRIBUTES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-user-attributes.md): USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習します。
-      - [`USER_PRIVILEGES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-user-privileges.md): USER_PRIVILEGES` information_schema テーブルについて学習します。
-      - [`VARIABLES_INFO`](https://docs.pingcap.com/ja/tidbcloud/information-schema-variables-info.md): VARIABLES_INFO` information_schema テーブルについて学習します。
-      - [`VIEWS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-views.md): VIEWS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`ANALYZE_STATUS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-analyze-status.md): `ANALYZE_STATUS` information_schema テーブルについて学習してください。
+      - [`CHECK_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-check-constraints.md): `CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](https://docs.pingcap.com/ja/tidbcloud/client-errors-summary-by-host.md): `CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`CLIENT_ERRORS_SUMMARY_BY_USER`](https://docs.pingcap.com/ja/tidbcloud/client-errors-summary-by-user.md): `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`CLIENT_ERRORS_SUMMARY_GLOBAL`](https://docs.pingcap.com/ja/tidbcloud/client-errors-summary-global.md): `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`CHARACTER_SETS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-character-sets.md): `CHARACTER_SETS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`COLLATIONS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-collations.md): `COLLATIONS` information_schema テーブルについて学習します。
+      - [`COLLATION_CHARACTER_SET_APPLICABILITY`](https://docs.pingcap.com/ja/tidbcloud/information-schema-collation-character-set-applicability.md): `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`COLUMNS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-columns.md): `COLUMNS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`DATA_LOCK_WAITS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-data-lock-waits.md): `DATA_LOCK_WAITS` information_schema テーブルについて学習します。
+      - [`DDL_JOBS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-ddl-jobs.md): `DDL_JOBS` information_schema テーブルについて学習します。
+      - [`DEADLOCKS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-deadlocks.md): `DEADLOCKS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`ENGINES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-engines.md): `ENGINES` information_schema テーブルについて学習します。
+      - [`KEYWORDS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-keywords.md): `KEYWORDS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`KEY_COLUMN_USAGE`](https://docs.pingcap.com/ja/tidbcloud/information-schema-key-column-usage.md): `KEY_COLUMN_USAGE` information_schema テーブルについて学習します。
+      - [`MEMORY_USAGE`](https://docs.pingcap.com/ja/tidbcloud/information-schema-memory-usage.md): `MEMORY_USAGE` information_schema システムテーブルについて学習します。
+      - [`MEMORY_USAGE_OPS_HISTORY`](https://docs.pingcap.com/ja/tidbcloud/information-schema-memory-usage-ops-history.md): `MEMORY_USAGE_OPS_HISTORY` information_schema システムテーブルについて学習します。
+      - [`PARTITIONS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-partitions.md): `PARTITIONS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`PROCESSLIST`](https://docs.pingcap.com/ja/tidbcloud/information-schema-processlist.md): `PROCESSLIST` information_schema テーブルについて学習します。
+      - [`REFERENTIAL_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-referential-constraints.md): `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`SCHEMATA`](https://docs.pingcap.com/ja/tidbcloud/information-schema-schemata.md): `SCHEMATA` information_schema テーブルについて学習します。
+      - [`SEQUENCES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-sequences.md): `SEQUENCES` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`SESSION_VARIABLES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-session-variables.md): `SESSION_VARIABLES` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`STATISTICS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-statistics.md): `STATISTICS` information_schema テーブルについて学習します。
+      - [`TABLES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tables.md): `TABLES` information_schema テーブルについて学習します。
+      - [`TABLE_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-table-constraints.md): `TABLE_CONSTRAINTS` information_schema テーブルについて学習します。
+      - [`TABLE_STORAGE_STATS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-table-storage-stats.md): `TABLE_STORAGE_STATS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`TIDB_CHECK_CONSTRAINTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-check-constraints.md): `TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`TIDB_INDEXES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-indexes.md): `TIDB_INDEXES` information_schema テーブルについて学習します。
+      - [`TIDB_INDEX_USAGE`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-index-usage.md): `TIDB_INDEX_USAGE` INFORMATION_SCHEMA テーブルについて学習してください。
+      - [`TIDB_TRX`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tidb-trx.md): `TIDB_TRX` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`TIFLASH_REPLICA`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tiflash-replica.md): `TIFLASH_REPLICA` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`TIFLASH_SEGMENTS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tiflash-segments.md): `TIFLASH_SEGMENTS` information_schema テーブルについて学習します。
+      - [`TIFLASH_TABLES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-tiflash-tables.md): `TIFLASH_TABLES` information_schema テーブルについて学習します。
+      - [`USER_ATTRIBUTES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-user-attributes.md): `USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習します。
+      - [`USER_PRIVILEGES`](https://docs.pingcap.com/ja/tidbcloud/information-schema-user-privileges.md): `USER_PRIVILEGES` information_schema テーブルについて学習します。
+      - [`VARIABLES_INFO`](https://docs.pingcap.com/ja/tidbcloud/information-schema-variables-info.md): `VARIABLES_INFO` information_schema テーブルについて学習します。
+      - [`VIEWS`](https://docs.pingcap.com/ja/tidbcloud/information-schema-views.md): `VIEWS` INFORMATION_SCHEMA テーブルについて学習します。
     - パフォーマンススキーマ
       - [概要](https://docs.pingcap.com/ja/tidbcloud/performance-schema.md): TiDB は、システム メタデータを表示するための performance_schema を実装します。
       - [`SESSION_CONNECT_ATTRS`](https://docs.pingcap.com/ja/tidbcloud/performance-schema-session-connect-attrs.md): SESSION_CONNECT_ATTRS` パフォーマンス スキーマ テーブルについて学習します。
