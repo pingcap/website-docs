@@ -66,7 +66,7 @@
   - [データを挿入する](https://docs.pingcap.com/ja/developer/dev-guide-insert-data.md): データ挿入の方法について学びましょう。
   - [データの更新](https://docs.pingcap.com/ja/developer/dev-guide-update-data.md): データの更新方法と一括データ更新方法について学びましょう。
   - [データ削除](https://docs.pingcap.com/ja/developer/dev-guide-delete-data.md): SQL構文、ベストプラクティス、およびデータ削除の例について学びましょう。
-  - [TTL（有効期限）を使用して、期限切れのデータを定期的に削除する](https://docs.pingcap.com/ja/developer/dev-guide-time-to-live.md): TiDB の TTL 機能を使用して、期限切れのデータを自動的かつ定期的に削除する方法を学習します。
+  - [TTL (Time to Live)を使用して、期限切れのデータを定期的に削除する](https://docs.pingcap.com/ja/developer/dev-guide-time-to-live.md): TiDB の TTL 機能を使用して、期限切れのデータを自動的かつ定期的に削除する方法を学習します。
   - [プリペアドステートメント](https://docs.pingcap.com/ja/developer/dev-guide-prepared-statement.md): TiDB プリペアドステートメントの使用方法について学習します。
 - データ読み取り
   - [単一テーブルからデータをクエリする](https://docs.pingcap.com/ja/developer/dev-guide-get-data-from-single-table.md): このドキュメントでは、データベース内の単一のテーブルからデータを照会する方法について説明します。
@@ -75,7 +75,7 @@
   - [結果のページ分割](https://docs.pingcap.com/ja/developer/dev-guide-paginate-results.md): TiDB にページ区切り結果機能を導入します。
   - [ビュー](https://docs.pingcap.com/ja/developer/dev-guide-use-views.md): TiDB でビューを使用する方法を学習します。
   - [一時テーブル](https://docs.pingcap.com/ja/developer/dev-guide-use-temporary-tables.md): 一時テーブルを作成、表示、クエリ、および削除する方法を学習します。
-  - [共通テーブル式](https://docs.pingcap.com/ja/developer/dev-guide-use-common-table-expression.md): SQL ステートメントをより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
+  - [共通テーブル式](https://docs.pingcap.com/ja/developer/dev-guide-use-common-table-expression.md): SQL文をより効率的に記述するのに役立つ TiDB の CTE 機能を学習します。
   - レプリカデータの読み取り
     - [Follower Read](https://docs.pingcap.com/ja/developer/dev-guide-use-follower-read.md): Follower Readを使用してクエリパフォーマンスを最適化する方法を学習します。
     - [ステイル読み取り](https://docs.pingcap.com/ja/developer/dev-guide-use-stale-read.md): 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。

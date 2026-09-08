@@ -69,6 +69,7 @@
   - 性能调优
     - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
     - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
+    - [使用 Plan Replayer 排查 SQL 性能问题](https://docs.pingcap.com/zh/tidbcloud/plan-replayer.md): 了解如何从你的实例生成用于排查 SQL 性能问题的 Plan Replayer 文件，以及如何在有限时间内授予 TiDB Cloud Support 对该文件的访问权限。
     - SQL 调优
       - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-sql-tuning-overview.md): 了解如何在 TiDB Cloud 中调优 SQL 性能。
       - 理解 TiDB 执行计划

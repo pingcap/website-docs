@@ -63,10 +63,12 @@
       - [通过 PagerDuty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-pagerduty.md): 了解如何通过 PagerDuty 获取报警通知，从而监控 TiDB。
       - [通过 Webhook 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-webhook.md): 了解如何通过通用 webhook 接收告警通知来监控你的 TiDB 集群。
       - [通过 Lark 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-lark.md): 了解如何通过 Lark 接收告警通知来监控你的 TiDB 集群。
+    - [事件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
     - [集成 TiDB Cloud 与 Datadog](https://docs.pingcap.com/zh/tidbcloud/monitor-datadog-integration-for-tidb-x.md): 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
   - 性能调优
     - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
     - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
+    - [使用 Plan Replayer 排查 SQL 性能问题](https://docs.pingcap.com/zh/tidbcloud/plan-replayer.md): 了解如何从你的实例生成用于排查 SQL 性能问题的 Plan Replayer 文件，以及如何在有限时间内授予 TiDB Cloud Support 对该文件的访问权限。
     - SQL 调优
       - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-sql-tuning-overview.md): 了解如何在 TiDB Cloud 中调优 SQL 性能。
       - 理解 TiDB 执行计划

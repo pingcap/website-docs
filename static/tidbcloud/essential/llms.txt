@@ -69,6 +69,7 @@
   - Tune Performance
     - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
     - [Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance.md): Learn how to analyze and tune performance in TiDB Cloud.
+    - [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer.md): Learn how to generate a Plan Replayer file from your instance for troubleshooting SQL performance, and how to authorize TiDB Cloud Support to access it for a limited period.
     - SQL Tuning
       - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview.md): Learn about how to tune SQL performance in TiDB Cloud.
       - Understanding the Query Execution Plan
