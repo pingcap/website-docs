@@ -18,8 +18,8 @@
 - 検索機能
   - [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search.md): アプリケーションでベクトル検索を使用する方法を学習します。
   - 全文検索
-    - [Pythonによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-python.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用​​することで、検索精度を向上させることができます。
-    - [SQLによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-sql.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用​​することで、検索精度を向上させることができます。
+    - [Pythonによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-python.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索精度を向上させることができます。
+    - [SQLによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-sql.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索精度を向上させることができます。
   - [ハイブリッド検索](https://docs.pingcap.com/ja/ai/vector-search-hybrid-search.md): 全文検索とベクトル検索を併用することで、検索結果の質を向上させることができます。
   - [画像検索](https://docs.pingcap.com/ja/ai/image-search.md): アプリケーションで画像検索を使用する方法を学びます。
 - 高度な機能

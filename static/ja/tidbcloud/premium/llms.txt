@@ -27,7 +27,7 @@
 ## ガイド
 
 - [プランを選択してください](https://docs.pingcap.com/ja/tidbcloud/select-cluster-tier.md): TiDB Cloudでプランを選択する方法を学びましょう。
-- [TiDB Cloudのリソースとプロジェクトを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-projects-and-resources.md): TiDB Cloudのリソースとプロジェクトの管理方法については、「マイTiDB」ページをご覧ください。
+- [TiDB Cloudのリソースとプロジェクトを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-projects-and-resources.md): TiDB Cloudのリソースとプロジェクトの管理方法については、My TiDBページをご覧ください。
 - TiDB Cloud Premiumインスタンスの管理
   - [TiDB Cloud Premiumインスタンスを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-instance-premium.md): TiDB Cloud Premiumインスタンスの作成方法を学びましょう。
   - TiDB Cloud Premiumインスタンスに接続します
@@ -104,8 +104,8 @@
           - [クエリの最適化](https://docs.pingcap.com/ja/tidbcloud/agg-distinct-optimization.md): TiDB クエリ オプティマイザに`distinct`最適化を導入します。
           - [コストモデル](https://docs.pingcap.com/ja/tidbcloud/cost-model.md): 物理的な最適化中に TiDB によって使用されるコストモデルがどのように機能するかを学習します。
           - [ランタイムフィルタ](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
-        - [プリペアドプランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-prepared-plan-cache.md): TiDB の SQL プリペアドプランキャッシュについて学習します。
-        - [非プリペアドプランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアドプランキャッシュの原理、使用法、および例について学習します。
+        - [プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-prepared-plan-cache.md): TiDB の SQL プリペアド実行プランキャッシュについて学習します。
+        - [非プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアド実行プランキャッシュの原理、使用法、および例について学習します。
       - 実行計画の制御
         - [概要](https://docs.pingcap.com/ja/tidbcloud/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と `tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
         - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザヒントを使用してクエリ実行計画に影響を与える
@@ -247,7 +247,7 @@
     - [`DELETE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-delete.md): TiDB データベースにおける DELETE の使用法の概要。
     - [`DESC`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-desc.md): TiDB データベースにおける DESC` の使用法の概要。
     - [`DESCRIBE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-describe.md): TiDB データベースにおける DESCRIBE の使用法の概要。
-    - [`DISTRIBUTE TABLE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-distribute-table.md): TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法の概要。
+    - [`DISTRIBUTE TABLE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-distribute-table.md): TiDBデータベースにおけるDISTRIBUTE TABLEの使用方法の概要。
     - [`DO`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-do.md): TiDB データベースにおける DO の使用法の概要。
     - [`DROP [GLOBAL|SESSION] BINDING`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-drop-binding.md): TiDB データベースでの DROP BINDING の使用。
     - [`DROP DATABASE`](https://docs.pingcap.com/ja/tidbcloud/sql-statement-drop-database.md): TiDB データベースの DROP DATABASE の使用法の概要。
