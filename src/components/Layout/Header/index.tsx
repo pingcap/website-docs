@@ -414,6 +414,8 @@ const HeaderBanner = (props: HeaderProps) => {
       ? `/ai/${name}`
       : namespace === TOCNamespace.TiDBCloud
       ? `/tidbcloud/${name}`
+      : namespace === TOCNamespace.TiDBCloudLake
+      ? `/tidbcloudlake/${name}`
       : `/${props.pathConfig?.repo}/${
           props.pathConfig?.version || "stable"
         }/${name}`;
