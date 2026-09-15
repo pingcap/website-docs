@@ -11,6 +11,15 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
   languages: ["en", "zh", "ja"],
 
   linkMappings: [
+    // Filesystem documentation is currently published in English only.
+    {
+      linkPattern: "/tidb-cloud-filesystem/{...folders}/_index",
+      targetPattern: "/tidbcloudfs/{folders}",
+    },
+    {
+      linkPattern: "/tidb-cloud-filesystem/{...folders}/{docname}",
+      targetPattern: "/tidbcloudfs/{docname}",
+    },
     {
       linkPattern: "/releases/_index",
       targetPattern: "/{curLang}/releases/tidb-self-managed",
@@ -108,6 +117,13 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       pathPattern: "/{lang}/tidbcloudlake/{...any}",
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloudlake/{docname}",
+    },
+    // Relative Filesystem links stay in the product namespace. Explicit AI
+    // and other namespace links are handled by the rules above.
+    {
+      pathPattern: "/{lang}/tidbcloudfs/{...any}",
+      linkPattern: "/{...folders}/{docname}",
+      targetPattern: "/tidbcloudfs/{docname}",
     },
     // Rule 4: developer, best-practices, api, ai namespace in tidb folder
     // Current page: /{lang}/{namespace}/{...any}
