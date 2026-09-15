@@ -36,6 +36,7 @@
     "tidbCloudPremium": "TiDB Cloud Premium",
     "tidbCloudDedicated": "TiDB Cloud Dedicated",
     "tidbCloudLake": "TiDB Cloud Lake",
+    "tidbCloudFilesystem": "TiDB Cloud Filesystem",
     "tidbShortTerm": "TiDB",
     "tidbOnKubernetes": "TiDB on Kubernetes",
     "tidbCloudReleases": "TiDB Cloud Releases",

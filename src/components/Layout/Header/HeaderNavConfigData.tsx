@@ -93,6 +93,15 @@ const getDefaultNavConfig = (
               }
             },
           },
+          {
+            type: "item",
+            label: t("navbar.tidbCloudFilesystem"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
+            to: "/tidbcloudfs",
+            isI18n: false,
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloudFilesystem,
+          },
         ],
       },
       {
