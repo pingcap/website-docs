@@ -17,12 +17,12 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
     // Filesystem has its own product URL but shares the stable docs source.
     {
       sourcePattern: `/{lang}/tidb/${CONFIG.docs.tidb.stable}/tidb-cloud-filesystem/{...folders}/{filename}`,
-      targetPattern: "/{lang}/tidbcloudfs/{filename}",
+      targetPattern: "/{lang}/tidbcloud-filesystem/{filename}",
       filenameTransform: {
         ignoreIf: ["_index"],
         conditionalTarget: {
           keepIf: ["_index"],
-          keepTargetPattern: "/{lang}/tidbcloudfs/{folders}",
+          keepTargetPattern: "/{lang}/tidbcloud-filesystem/{folders}",
         },
       },
     },

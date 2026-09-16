@@ -34,7 +34,7 @@ describe("Filesystem product menu", () => {
     expect(filesystem).toMatchObject({
       type: "item",
       label: "navbar.tidbCloudFilesystem",
-      to: "/tidbcloudfs",
+      to: "/tidbcloud-filesystem",
       isI18n: false,
     });
     if (filesystem.type !== "item") throw new Error("Missing Filesystem item");

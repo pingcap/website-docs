@@ -33,9 +33,9 @@ const tocAST = [
 
 describe("Filesystem product routing", () => {
   it.each([
-    ["_index", "/tidbcloudfs"],
-    ["filesystem-quick-start", "/tidbcloudfs/filesystem-quick-start"],
-    ["guides/filesystem-mount", "/tidbcloudfs/filesystem-mount"],
+    ["_index", "/tidbcloud-filesystem"],
+    ["filesystem-quick-start", "/tidbcloud-filesystem/filesystem-quick-start"],
+    ["guides/filesystem-mount", "/tidbcloud-filesystem/filesystem-mount"],
   ])("publishes %s with its own namespace and TOC", (name, expected) => {
     const slug = `${source}/tidb-cloud-filesystem/${name}`;
     expect(calculateFileUrl(slug, true)).toBe(expected);
@@ -68,27 +68,31 @@ describe("Filesystem product routing", () => {
   });
 
   it.each([
-    ["/tidb-cloud-filesystem/_index", "/ai", "/tidbcloudfs"],
+    ["/tidb-cloud-filesystem/_index", "/ai", "/tidbcloud-filesystem"],
     [
       "/tidb-cloud-filesystem/filesystem-mount#finish-safely",
       "/ai/ti-quick-start",
-      "/tidbcloudfs/filesystem-mount#finish-safely",
+      "/tidbcloud-filesystem/filesystem-mount#finish-safely",
     ],
     [
       "/tidb-cloud-filesystem/filesystem-mount",
       "/zh/ai",
-      "/tidbcloudfs/filesystem-mount",
+      "/tidbcloud-filesystem/filesystem-mount",
     ],
-    ["/ai/ti/reference/ti-filesystem", "/tidbcloudfs", "/ai/ti-filesystem"],
+    [
+      "/ai/ti/reference/ti-filesystem",
+      "/tidbcloud-filesystem",
+      "/ai/ti-filesystem",
+    ],
     [
       "/tidb-cloud/manage-api-keys",
-      "/tidbcloudfs",
+      "/tidbcloud-filesystem",
       "/tidbcloud/manage-api-keys",
     ],
     [
       "filesystem-mount#finish-safely",
-      "/tidbcloudfs/filesystem-quick-start",
-      "/tidbcloudfs/filesystem-mount#finish-safely",
+      "/tidbcloud-filesystem/filesystem-quick-start",
+      "/tidbcloud-filesystem/filesystem-mount#finish-safely",
     ],
   ])("resolves %s from %s", (link, current, expected) => {
     expect(resolveMarkdownLink(link, current)).toBe(expected);
@@ -97,8 +101,8 @@ describe("Filesystem product routing", () => {
   it("builds pages from the Filesystem TOC and keeps cross-product links", async () => {
     const nav = mdxAstToToc(tocAST as any, tocSlug);
     expect(nav.map((item) => item.link)).toEqual([
-      "/tidbcloudfs",
-      "/tidbcloudfs/filesystem-quick-start",
+      "/tidbcloud-filesystem",
+      "/tidbcloud-filesystem/filesystem-quick-start",
       "/ai/ti-filesystem",
     ]);
     const graphql = jest.fn().mockResolvedValue({

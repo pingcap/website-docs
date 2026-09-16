@@ -93,7 +93,7 @@ module.exports = {
           {
             matchPath: `/:lang?/(${Object.keys(docs.docs).join(
               "|"
-            )}|developer|best-practices|api|ai|releases|tidbcloudlake|tidbcloudfs)/(.*)`,
+            )}|developer|best-practices|api|ai|releases|tidbcloudlake|tidbcloud-filesystem)/(.*)`,
             getLanguageFromPath: true,
           },
           {

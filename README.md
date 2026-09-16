@@ -40,7 +40,7 @@ Put them in `.env.development` to make them take effect. (Ref: <https://www.gats
 ## Filesystem Documentation
 
 TiDB Cloud Filesystem appears after TiDB Cloud Lake in the Product menu. Its
-English documentation is published at `/tidbcloudfs/` with its own
+English documentation is published at `/tidbcloud-filesystem/` with its own
 sidebar and Preview badge.
 
 The content comes from `pingcap/docs` on the stable TiDB documentation branch
