@@ -37,7 +37,7 @@
   - [概要](https://docs.pingcap.com/ja/tidb/stable/migration-overview.md): データ移行シナリオとソリューションの概要を学習します。
   - [移行ツール](https://docs.pingcap.com/ja/tidb/stable/migration-tools.md): TiDB 移行ツールの概要を説明します。
   - [ベストプラクティスの導入](https://docs.pingcap.com/ja/tidb/stable/data-import-best-practices.md): 大量のデータをインポートするためのベストプラクティスを学びます。
-  - 移住シナリオ
+  - 移行シナリオ
     - [Auroraから移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-aurora-to-tidb.md): DBスナップショットを使用して、Amazon AuroraからTiDBへデータを移行する方法を学びましょう。
     - [MySQLから小規模データセットを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-small-mysql-to-tidb.md): 小さなデータセットを MySQL から TiDB に移行する方法を学びます。
     - [MySQLから大規模データセットを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-large-mysql-to-tidb.md): MySQLからTiDBへ大規模データセットを移行する方法を学びましょう。
@@ -81,7 +81,7 @@
   - 参照
     - TiCDCアーキテクチャ
       - [TiCDCの新アーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/ticdc-architecture.md): TiCDCの新しいアーキテクチャの機能、アーキテクチャ設計、導入ガイド、および注意事項を紹介します。
-      - [TiCDCクラシックアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/ticdc-classic-architecture.md): TiCDC の従来のアーキテクチャと動作原理を学びます。
+      - [TiCDCクラシックアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/ticdc-classic-architecture.md): TiCDC のクラシックアーキテクチャと動作原理を学びます。
     - [TiCDCのデータレプリケーション機能](https://docs.pingcap.com/ja/tidb/stable/ticdc-data-replication-capabilities.md): TiCDC のデータ複製機能について学びます。
     - [TiCDCサーバー構成](https://docs.pingcap.com/ja/tidb/stable/ticdc-server-config.md): TiCDC で使用される CLI と設定パラメータについて学習します。
     - [TiCDC Changefeedフィード構成](https://docs.pingcap.com/ja/tidb/stable/ticdc-changefeed-config.md): TiCDCチェンジフィードのCLIの定義と設定パラメータについて学びましょう。
@@ -120,7 +120,7 @@
     - [TiDB スムーズアップグレード](https://docs.pingcap.com/ja/tidb/stable/smooth-upgrade-tidb.md): このドキュメントでは、DDL 操作を手動でキャンセルせずに TiDB クラスターのアップグレードをサポートする、TiDB のスムーズアップグレード機能について説明します。
     - [TiDBクラスタの移行とアップグレード](https://docs.pingcap.com/ja/tidb/stable/tidb-upgrade-migration-guide.md): 完全バックアップと復元のためのBRと、増分データレプリケーションのための TiCDC を使用して、TiDB クラスターを移行およびアップグレードする方法を学習します。
     - [TiFlashアップグレードガイド](https://docs.pingcap.com/ja/tidb/stable/tiflash-upgrade-guide.md): TiFlash をアップグレードする際の注意事項を説明します。
-  - 規模
+  - スケール
     - [TiUPを使用する（推奨）](https://docs.pingcap.com/ja/tidb/stable/scale-tidb-using-tiup.md): TiUPを使用して TiDB クラスターをスケーリングする方法を学びます。
     - [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - バックアップと復元
@@ -189,7 +189,7 @@
     - [スロークエリページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-slow-query.md): TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のスロークエリを検索して表示できます。実行時間が300ミリ秒を超えるクエリはスロークエリとみなされます。ユーザーはしきい値を調整したり、ダッシュボードまたはブラウザからこのページにアクセスしたりできます。また、フィルタの変更、表示する列の追加、クエリのエクスポート、実行の詳細の表示も可能です。
     - クラスタ診断
       - [クラスタ診断ページにアクセス](https://docs.pingcap.com/ja/tidb/stable/dashboard-diagnostics-access.md): TiDB Dashboardのクラスタ診断機能は、クラスタの問題を診断し、結果をWebページにまとめます。ダッシュボードまたはブラウザからこのページにアクセスできます。指定した期間の診断レポートと比較レポートを生成します。履歴レポートも利用可能です。
-      - [診断レポートをビュー](https://docs.pingcap.com/ja/tidb/stable/dashboard-diagnostics-report.md): TiDB Dashboard診断レポートでは、基本情報、診断情報、負荷情報、概要情報、監視情報、構成情報など、診断レポートの内容を紹介します。また、比較レポートの詳細、DIFF_RATIOの説明、最大差異項目テーブルも含まれています。
+      - [診断レポートを表示する](https://docs.pingcap.com/ja/tidb/stable/dashboard-diagnostics-report.md): TiDB Dashboard診断レポートでは、基本情報、診断情報、負荷情報、概要情報、監視情報、構成情報など、診断レポートの内容を紹介します。また、比較レポートの詳細、DIFF_RATIOの説明、最大差異項目テーブルも含まれています。
       - [診断機能を使用する](https://docs.pingcap.com/ja/tidb/stable/dashboard-diagnostics-usage.md): TiDB Dashboardの診断レポートは、異なる時間範囲でのシステムパフォーマンスを比較することで、問題箇所の特定に役立ちます。QPSの低下、レイテンシーの増加、クエリの遅延といった問題を特定し、詳細な分析結果とSQL文を提供することで、さらなる調査に役立ちます。この比較レポートは、パフォーマンスの問題を迅速に特定し、対処するために不可欠です。
     - [監視ページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-monitoring.md): TiDB Dashboardのモニタリングページでは、パフォーマンスを効率的に分析し、データベースのボトルネックを特定できます。主要なメトリクスには、データベース時間、SQL実行時間、QPS、接続数、TiDBおよびTiKVのCPU使用率、接続アイドル時間、解析・コンパイル・実行時間、TiDB KVリクエスト時間、TiKV gRPC時間、PD TSO待機/RPC時間、ストレージ非同期書き込み時間、保存時間、適用時間、ログ追加時間、ログコミット時間、ログ適用時間などがあります。
     - [検索ログページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-log-search.md): TiDB Dashboardのログ検索ページでは、ログの検索、結果のプレビュー、ログのダウンロードが可能です。ログイン後、このページにアクセスし、検索期間、ログレベル、キーワード、コンポーネントを指定できます。検索結果ページには、パラメータオプション、検索の進行状況、検索結果が表示されます。選択したログのダウンロード、実行中のタスクのキャンセル、失敗したタスクの再試行が可能です。検索履歴リストには過去の検索の詳細が表示され、不要な履歴を削除できます。
@@ -312,14 +312,14 @@
     - [`tidb_snapshot`システム変数を使用する](https://docs.pingcap.com/ja/tidb/stable/read-historical-data.md): システム変数 tidb_snapshot` を使用して、TiDB が履歴バージョンからデータを読み取る方法について説明します。
   - [配置ルールを使用する](https://docs.pingcap.com/ja/tidb/stable/configure-placement-rules.md): 配置ルールを構成する方法を学習します。
   - [ロードベース分割を使用する](https://docs.pingcap.com/ja/tidb/stable/configure-load-base-split.md): Load Base Split の機能について学習します。
-  - [店舗利用制限](https://docs.pingcap.com/ja/tidb/stable/configure-store-limit.md): ストア制限の機能について学びます。
+  - [ストア制限を使用する](https://docs.pingcap.com/ja/tidb/stable/configure-store-limit.md): ストア制限の機能について学びます。
   - [バッチ処理](https://docs.pingcap.com/ja/tidb/stable/batch-processing.md): パイプライン DML、非トランザクション DML、IMPORT INTO`文、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
   - PDマイクロサービスを使用する
     - [PDマイクロサービスの概要](https://docs.pingcap.com/ja/tidb/stable/pd-microservices.md): PD のマイクロサービスモードを有効にしてサービス品質を向上させる方法を学習します。
     - [TiUPを使用してPDマイクロサービスノードをスケーリングする](https://docs.pingcap.com/ja/tidb/stable/scale-microservices-using-tiup.md): TiUPを使用してクラスター内の PD マイクロサービス ノードをスケーリングする方法と、PD の動作モードを切り替える方法を学習します。
-    - [TSOコンフィグレーションファイル](https://docs.pingcap.com/ja/tidb/stable/tso-configuration-file.md): TSO 構成ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
+    - [TSOコンフィグレーションファイル](https://docs.pingcap.com/ja/tidb/stable/tso-configuration-file.md): TSO 設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
     - [TSOコンフィグレーションフラグ](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-tso-configuration.md): TSO 構成フラグは、コマンドラインフラグまたは環境変数を介して構成できます。
-    - [スケジュールコンフィグレーションファイル](https://docs.pingcap.com/ja/tidb/stable/scheduling-configuration-file.md): スケジューリング構成ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
+    - [スケジュールコンフィグレーションファイル](https://docs.pingcap.com/ja/tidb/stable/scheduling-configuration-file.md): スケジューリング設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
     - [スケジューリングコンフィグレーションフラグ](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-scheduling-configuration.md): スケジュール構成フラグは、コマンドラインフラグまたは環境変数を介して構成できます。
 - TiDBツール
   - [概要](https://docs.pingcap.com/ja/tidb/stable/ecosystem-tool-user-guide.md): ツールと適用可能なシナリオを学習します。
@@ -360,7 +360,7 @@
       - TiUPクラスタコマンド
         - [概要](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster.md): TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiDBクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、 TiUPクラスタパラメータの管理など、日常的な運用とメンテナンスに使用されます。TiUP クラスタを使用するための構文は「tiup cluster [コマンド] [フラグ]」です。サポートされているコマンドには、import、template、check、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、rename、clean、destroy、audit、replay、enable、disable、meta backup、meta restore、helpなどがあります。
         - [tiup cluster audit](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-audit.md): tiup cluster auditコマンドは、すべてのクラスタで実行されたコマンドの履歴と各コマンドの実行ログを表示します。[audit-id] を指定した場合、対応する実行ログが出力されます。指定しない場合は、ID、時間、コマンドのフィールドを含む表が時系列の逆順に出力されます。 -h, --helpオプションはヘルプ情報を出力、デフォルトでは無効になっています。
-        - [tiup cluster auditクリーンアップ](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-audit-cleanup.md): tiup cluster audit cleanup` コマンドは、`tiup cluster` コマンドによって生成されたログをクリーンアップするために使用されます。ログの保持日数を指定したり、ヘルプ情報を表示したりするオプションがあります。出力結果から、ログのクリーンアップが正常に完了したことを確認できます。
+        - [tiup cluster audit cleanup](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-audit-cleanup.md): tiup cluster audit cleanup` コマンドは、`tiup cluster` コマンドによって生成されたログをクリーンアップするために使用されます。ログの保持日数を指定したり、ヘルプ情報を表示したりするオプションがあります。出力結果から、ログのクリーンアップが正常に完了したことを確認できます。
         - [tiup cluster check](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-check.md): TiUP クラスタは、ハードウェアとソフトウェア環境が本番の要件を満たしていることを確認するための`check`コマンドを提供します。OSバージョン、CPUサポート、時刻同期、システム制限などをチェックします。オプションには、自動修復や、CPUコア数、メモリサイズ、ディスクパフォーマンスのチェックの有効化などがあります。チェックを実行するには、`tiup cluster check <topology.yml | cluster-name> [flags]`コマンドを使用します。自動修復を試行するには、`--apply`を使用します。チェックするノードとロールを指定するには、`-N, --node`および`-R, --role`を使用します。特定のチェックを有効にするには、`--enable-cpu`、`--enable-disk`、`--enable-mem`を使用します。
         - [tiup cluster clean](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-clean.md): tiup cluster clean` コマンドは、テスト環境でクラスターを停止し、すべてのデータを削除することでクラスターをリセットするために使用されます。データ、ログ、またはその両方を消去するオプションがあり、特定のノードまたはロールを無視することもできます。本番環境では注意して使用してください。
         - [tiup cluster deploy](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-deploy.md): tiup cluster deployコマンドは、クラスタ名、バージョン、トポロジファイルなどのオプションを指定して新しいクラスタをデプロイするために使用されます。追加オプションには、ユーザー、IDファイル、パスワード、構成チェックの無視、ラベルのスキップ、ユーザー作成のスキップ、ヘルプなどがあります。出力はデプロイメントログです。
@@ -372,8 +372,8 @@
         - [tiup cluster help](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-help.md): tiup-cluster は、コマンドラインインターフェースでユーザー向けのヘルプ情報を提供します。ヘルプ情報にアクセスするには、help` コマンドまたは `--help` オプションを使用します。特定のコマンドのヘルプ情報を表示するには、`[command]` を指定します。出力は、指定されたコマンドまたはtiup-clusterのヘルプ情報です。
         - [tiup cluster import](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-import.md): TiUP クラスタは、TiDB AnsibleからTiUPにTiDBクラスターを転送して管理するための`import`コマンドを提供しています。特定の構成のクラスターでは`import`を使用しないでください。インポートプロセスをカスタマイズするには、`--dir`や`--rename`などのオプションを使用してください。
         - [tiup cluster list](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-list.md): tiup-cluster は、同一の制御マシンを用いた複数のクラスタのデプロイをサポートします。tiup cluster list` コマンドは、現在ログインしているユーザーがデプロイしたすべてのクラスタを出力します。デプロイされたクラスタのデータは `~/.tiup/ storage/cluster/clusters/` ディレクトリに保存されます。ユーザーは、クラスタ名、デプロイユーザー、バージョン、パス、クラスタへの接続に使用された秘密鍵を確認できます。
-        - [tiup クラスターメタバックアップ](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-meta-backup.md): TiUPメタファイルは、クラスタの運用と保守に不可欠です。定期的にファイルをバックアップするには、tiup cluster meta backup`コマンドを使用してください。クラスタ名を確認するには、`tiup dm listコマンドを使用してください。`--file`オプションでターゲットディレクトリを指定してください。ヘルプ情報を表示するには、`-h, --helpコマンドを使用してください。出力には、tiup-clusterの実行ログが含まれます。
-        - [tiup クラスターメタ復元](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-meta-restore.md): TiUPメタファイルを復元するには、クラスター名とバックアップファイルのパスを指定して`tiup cluster meta restore`コマンドを使用します。復元操作は現在のメタファイルを上書きするため、ファイルが失われた場合にのみ実行してください。`-h`または`--help`オプションを指定するとヘルプ情報が出力。出力には、 tiup-clusterの実行ログが含まれます。
+        - [tiup cluster meta backup](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-meta-backup.md): TiUPメタファイルは、クラスタの運用と保守に不可欠です。定期的にファイルをバックアップするには、tiup cluster meta backup`コマンドを使用してください。クラスタ名を確認するには、`tiup dm listコマンドを使用してください。`--file`オプションでターゲットディレクトリを指定してください。ヘルプ情報を表示するには、`-h, --helpコマンドを使用してください。出力には、tiup-clusterの実行ログが含まれます。
+        - [tiup cluster meta restore](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-meta-restore.md): TiUPメタファイルを復元するには、クラスター名とバックアップファイルのパスを指定して`tiup cluster meta restore`コマンドを使用します。復元操作は現在のメタファイルを上書きするため、ファイルが失われた場合にのみ実行してください。`-h`または`--help`オプションを指定するとヘルプ情報が出力。出力には、 tiup-clusterの実行ログが含まれます。
         - [tiup cluster patch](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-patch.md): tiup cluster patch` コマンドを使用すると、実行中のクラスター内でバイナリを動的に置き換えることができます。このコマンドは、バイナリパッケージをアップロードし、対象サービスを停止し、バイナリを置き換えて、サービスを起動します。準備として、バイナリパッケージをパックし、`--overwrite`、`--transfer-timeout`、`-N, --node `、`-R, --role `、`--offline` などのオプションを使用します。出力はtiup-clusterの実行ログです。
         - [tiup cluster prune](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-prune.md): クラスターをスケールアウトする際、 TiUP は一部のコンポーネントのサービスを即時に停止したり、データを削除したりしません。データのスケジューリングが完了するまで待ってから、'tiup cluster prune'コマンドを手動で実行してクリーンアップする必要があります。構文は'tiup cluster prune <cluster-name> [flags]'です。オプション'-h, --help'を指定するとヘルプ情報が出力、クリーンアッププロセスのログが出力されます。
         - [tiup cluster reload](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-reload.md): tiup cluster reload` コマンドは、変更されたクラスタ構成を適用し、サービスを再起動するために使用されます。`--force` で強制実行、`--transfer-timeout` で転送タイムアウトを設定、` --ignore-config-check で設定チェックを無視、` -N 、 --node でノードを指定、` -R 、 --role でロールを指定、`--skip-restart` で再起動をスキップできます。出力はtiup-clusterの実行ログです。
@@ -385,17 +385,17 @@
         - [tiup cluster start](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-start.md): tiup cluster startコマンドは、指定したクラスターのすべてまたは一部のサービスを起動するために使用されます。--init （セーフスタート）、-N （ノード指定）、-R （ロール指定）、-h （ヘルプ）などのオプションがあります。出力はサービス起動のログです。
         - [tiup cluster stop](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-stop.md): `tiup cluster stop`コマンドは、指定されたクラスターのすべてまたは一部のサービスを停止するために使用されます。コアサービスが停止すると、クラスターはサービスを提供できなくなります。コマンド構文は`tiup cluster stop <cluster-name> [flags]`です。オプションには、停止するノードを指定する -N/--node、停止するノードの役割を指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力は、サービスの停止に関するログです。
         - [tiup cluster template](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-template.md): tiup cluster templateコマンドは、クラスタデプロイメント用のトポロジファイルを準備するために使用されます。デフォルト、詳細、ローカル、またはマルチDCトポロジテンプレートを出力するオプションがあります。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
-        - [TIUP クラスター TLS](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-tls.md): tiup cluster tls` コマンドは、クラスタコンポーネント間の TLS (Transport Layer Security) を有効または無効にするために使用されます。
+        - [tiup cluster tls](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-tls.md): tiup cluster tls` コマンドは、クラスタコンポーネント間の TLS (Transport Layer Security) を有効または無効にするために使用されます。
         - [tiup cluster upgrade](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-upgrade.md): tiup cluster upgradeコマンドは、指定したクラスターを特定のバージョンにアップグレードするために使用されます。入力として、クラスター名とターゲットバージョンが必要です。オプションには、エラーを無視してクラスターを起動する--force 、ノード移行の最大待機時間を設定する--transfer-timeout 、構成チェックをスキップする --ignore-config-check、クラスターを再起動せずにバイナリファイルを置き換える--offlineなどがあります。出力はアップグレードの進行状況のログです。
       - TiUP DMコマンド
         - [概要](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm.md): TiUP DMは、DMクラスタの管理（デプロイ、起動、停止、破棄、スケーリング、アップグレード、設定パラメータの管理など）に使用されます。SSH、タイムアウト、確認のスキップ、バージョン情報の表示、ヘルプ情報などのオプションをサポートしています。サポートされるコマンドは、import、template、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、destroy、audit、replay、enable、disable、helpです。
         - [tiup dm audit](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-audit.md): tiup dm audit`コマンドは、全クラスタで実行されたコマンドの履歴と、各コマンドの実行ログを表示します。`[audit-id]`が指定されていない場合は、`audit-id`、実行時間、コマンドの順に操作記録の表が出力されます。`[audit-id]`が指定されている場合は、指定された`audit-id`の実行ログがチェックされます。`-h, --help`オプションはヘルプ情報を出力。`[audit-id]`が指定されている場合は、対応する実行ログが出力されます。指定されていない場合は、ID、時間、コマンドのフィールドを持つ表が出力されます。
-        - [tiup dm デプロイ](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-deploy.md): tiup dm deploy`コマンドは、新しいクラスタをデプロイするために使用されます。クラスタ名、バージョン、および用意したトポロジファイルが必要です。オプションのフラグとして、ユーザー名、IDファイル、パスワード、ヘルプなどがあります。出力はデプロイメントログです。
+        - [tiup dm deploy](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-deploy.md): tiup dm deploy`コマンドは、新しいクラスタをデプロイするために使用されます。クラスタ名、バージョン、および用意したトポロジファイルが必要です。オプションのフラグとして、ユーザー名、IDファイル、パスワード、ヘルプなどがあります。出力はデプロイメントログです。
         - [tiup dm destroy](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-destroy.md): tiup dm destroy`コマンドはクラスタを停止し、各サービスのログ、デプロイメント、データディレクトリを削除し、`tiup-dm`によって作成された親ディレクトリも削除します。構文は`tiup dm destroy <cluster-name> [flags]`です。オプション`-h, --helpはヘルプ情報を出力。出力はtiup-dmの実行ログです。
-        - [tiup dm 無効化](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-disable.md): tiup dm disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。`-N, --node`オプションを使用してノードを指定し、`-R, --role`オプションを使用して自動有効化を無効にするロールを指定できます。出力はtiup-dmコマンドの実行ログです。
+        - [tiup dm disable](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-disable.md): tiup dm disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。`-N, --node`オプションを使用してノードを指定し、`-R, --role`オプションを使用して自動有効化を無効にするロールを指定できます。出力はtiup-dmコマンドの実行ログです。
         - [tiup dm display](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-display.md): tiup dm displayコマンドは、DMクラスタ内の各コンポーネントの動作状況を効率的に確認します。クラスタ名を指定する必要がありますが、ノードIDとロールも指定できます。出力には、クラスタ名、バージョン、SSHクライアントの種類、およびID、ロール、ホスト、ポート、OS/アーキテクチャ、ステータス、データディレクトリ、デプロイディレクトリなどのフィールドを含むテーブルが含まれます。
         - [tiup dm edit-config](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-edit-config.md): tiup dm edit-config`コマンドを使用すると、デプロイメント後にクラスタサービスの設定を変更できます。エディタを使用して、指定したクラスタのトポロジファイルを変更できます。設定変更時にマシンの追加や削除はできないことに注意してください。コマンド実行後、設定はコントロールマシン上でのみ変更されるため、`tiup dm reloadコマンドを実行して設定を再読み込みする必要があります。
-        - [tiup dm を有効にする](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-enable.md): tiup dm enable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を有効にするために使用されます。このコマンドは、指定されたノードで`systemctl enable <service>`を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。出力はtiup-dmの実行ログです。
+        - [tiup dm enable](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-enable.md): tiup dm enable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を有効にするために使用されます。このコマンドは、指定されたノードで`systemctl enable <service>`を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。出力はtiup-dmの実行ログです。
         - [tiup dm help](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-help.md): tiup-dm コマンドラインインターフェースは豊富なヘルプ情報を提供しており、help` コマンドまたは `--help` オプションを使用してアクセスできます。ヘルプにアクセスするための構文は `tiup dm help [command] [flags]` です。`[command]` には、ヘルプ情報が必要なコマンドを指定します。`-h` または `--help` オプションはヘルプ情報を出力。出力は、指定されたコマンドまたは `tiup-dm` のヘルプ情報です。
         - [tiup dm import](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-import.md): TiUP DMの`import`コマンドは、DMクラスタをv1.0からv2.0以降のバージョンにアップグレードするために使用されます。このコマンドは、v1.0クラスタからのDMポータルコンポーネントのインポートをサポートしておらず、インポート前に元のクラスタを停止する必要があります。このコマンドはDM v2.0.0-rc.2以降のバージョンへのインポートのみをサポートしており、DM v1.0クラスタを新しいDM v2.0クラスタにインポートするために使用できます。インポート後、クラスタ内のDM-masterノードは1つだけになり、一部のコンポーネントのデプロイメントディレクトリは元のクラスタと異なる場合があります。
         - [tiup dm list](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-list.md): tiup-dm は、同一の制御マシンを用いた複数のクラスタのデプロイをサポートします。"tiup dm list"コマンドは、現在ログインしているユーザーがデプロイしたクラスタを確認します。データは ~/.tiup/ storage/dm/clusters/ ディレクトリに保存されます。ユーザーはクラスタ名、デプロイしたユーザー、バージョン、パス、秘密鍵を確認できます。
@@ -406,9 +406,9 @@
         - [tiup dm restart](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-restart.md): tiup dm restart`コマンドは、指定されたクラスタ内のサービスを再起動するために使用されます。再起動中は、サービスは利用できません。構文は`tiup dm restart <cluster-name> [flags]`です。オプションには、再起動するノードを指定する-N、再起動するノードの役割を指定する-R、ヘルプ情報を表示する-hがあります。出力は、サービス再起動プロセスのログです。
         - [tiup dm scale-in](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-scale-in.md): tiup dm scale-inコマンドは、サービスをオフラインにし、指定されたノードをクラスタから削除することで、クラスタをスケールインします。構文は「tiup dm scale-in <cluster-name> [flags]」です。オプションには、ノードの指定、ダウンしているノードの強制削除、ヘルプ情報の表示などを行う -N、 --force、-h があります。出力はスケールインのログです。
         - [tiup dm scale-out](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-scale-out.md): tiup dm scale-out` コマンドは、新しいノードへの SSH 接続を確立し、必要なディレクトリを作成し、デプロイしてサービスを開始することで、クラスターをスケールアウトするために使用されます。
-        - [tiup dm 開始](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-start.md): tiup dm start コマンドは、指定されたクラスタのサービスを起動するために使用されます。構文は「tiup dm start <cluster-name> [flags]」です。オプションには、ノードを指定する -N/--node、ロールを指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力はサービス起動のログです。
-        - [tiup dm 停止](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-stop.md): tiup dm stop` コマンドは、指定したクラスター内のサービスを停止するために使用されます。`-N, --node` オプションと `-R, --role` オプションを使用して、停止するノードとロールを指定できます。出力はサービスの停止ログです。
-        - [tiup dm template](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-template.md): TiUP DMテンプレートコマンドは、クラスターデプロイメント用の組み込みトポロジファイルテンプレートを出力するために使用されます。デフォルトのテンプレートには、DM-masterインスタンス3個、DM-workerインスタンス3個、Prometheusインスタンス1個、Grafanaインスタンス1個、Alertmanagerインスタンス1個が含まれます。-- --fullオプションを指定すると、設定可能なパラメータを含む詳細なトポロジテンプレートが出力されます。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
+        - [tiup dm start](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-start.md): tiup dm start コマンドは、指定されたクラスタのサービスを起動するために使用されます。構文は「tiup dm start <cluster-name> [flags]」です。オプションには、ノードを指定する -N/--node、ロールを指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力はサービス起動のログです。
+        - [tiup dm stop](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-stop.md): tiup dm stop` コマンドは、指定したクラスター内のサービスを停止するために使用されます。`-N, --node` オプションと `-R, --role` オプションを使用して、停止するノードとロールを指定できます。出力はサービスの停止ログです。
+        - [tiup dm template](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-template.md): TiUP DMテンプレートコマンドは、クラスターデプロイメント用の組み込みトポロジファイルテンプレートを出力するために使用されます。デフォルトのテンプレートには、DM-masterインスタンス3個、DM-workerインスタンス3個、Prometheusインスタンス1個、Grafanaインスタンス1個、Alertmanagerインスタンス1個が含まれます。 --fullオプションを指定すると、設定可能なパラメータを含む詳細なトポロジテンプレートが出力されます。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
         - [tiup dm upgrade](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-upgrade.md): tiup dm upgrade`コマンドは、指定されたクラスタを特定のバージョンにアップグレードします。パラメータとして、クラスタ名とターゲットバージョンを指定する必要があります。`--offline`オプションはオフラインアップグレードを可能にし、`-h, --help`オプションはヘルプ情報を出力。出力は、サービスアップグレードプロセスのログです。
     - [TiDBクラスタトポロジーリファレンス](https://docs.pingcap.com/ja/tidb/stable/tiup-cluster-topology-reference.md): TiUPは、トポロジファイルを使用してTiDBのクラスタートポロジをデプロイまたは変更します。また、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。トポロジファイルには、グローバル設定、監視サービス、コンポーネントバージョンなどのセクションが含まれています。各セクションでは、対応するサービスがデプロイされるマシンとその設定を指定します。
     - [DMクラスタトポロジーリファレンス](https://docs.pingcap.com/ja/tidb/stable/tiup-dm-topology-reference.md): TiUPを使用して TiDB Data Migration (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
@@ -562,7 +562,7 @@
   - TiProxy
     - [概要](https://docs.pingcap.com/ja/tidb/stable/tiproxy-overview.md): TiProxyの主な機能、インストール方法、および使用方法について学びましょう。
     - [負荷分散ポリシー](https://docs.pingcap.com/ja/tidb/stable/tiproxy-load-balance.md): TiProxy の負荷分散ポリシーとその適用可能なシナリオを紹介します。
-    - [交通情報リプレイ](https://docs.pingcap.com/ja/tidb/stable/tiproxy-traffic-replay.md): TiProxy トラフィック再生機能の使用例と手順を紹介します。
+    - [トラフィックリプレイ](https://docs.pingcap.com/ja/tidb/stable/tiproxy-traffic-replay.md): TiProxy トラフィック再生機能の使用例と手順を紹介します。
     - [コンフィグレーション](https://docs.pingcap.com/ja/tidb/stable/tiproxy-configuration.md): TiProxy を構成する方法を学びます。
     - [コマンドラインパラメータ](https://docs.pingcap.com/ja/tidb/stable/tiproxy-command-line-flags.md): TiProxy のコマンドライン起動フラグについて学習します。
     - [モニタリング指標](https://docs.pingcap.com/ja/tidb/stable/tiproxy-grafana.md): TiProxy の監視項目について学習します。
@@ -592,7 +592,7 @@
     - [サポートされているプッシュダウン計算](https://docs.pingcap.com/ja/tidb/stable/tiflash-supported-pushdown-calculations.md): TiFlashでサポートされているプッシュダウン計算について学習します。
     - [TiFlashクエリ結果の具体化](https://docs.pingcap.com/ja/tidb/stable/tiflash-results-materialization.md): TiFlashのクエリ結果をトランザクションに保存する方法を学びます。
     - [TiFlashの遅延発生](https://docs.pingcap.com/ja/tidb/stable/tiflash-late-materialization.md): TiFlash の遅延マテリアライゼーション機能を使用して、OLAP シナリオでクエリを高速化する方法について説明します。
-    - [ディスクに書き出す](https://docs.pingcap.com/ja/tidb/stable/tiflash-spill-disk.md): TiFlash がデータをディスクに書き出す方法と、書き出し動作をカスタマイズする方法について説明します。
+    - [ディスクに書き出す](https://docs.pingcap.com/ja/tidb/stable/tiflash-spill-disk.md): TiFlash がデータをディスクにスピルする方法と、スピル動作をカスタマイズする方法について説明します。
     - [データ検証](https://docs.pingcap.com/ja/tidb/stable/tiflash-data-validation.md): TiFlashのデータ検証メカニズムとツールについて学習します。
     - [MinTSOスケジューラ](https://docs.pingcap.com/ja/tidb/stable/tiflash-mintso-scheduler.md): TiFlash MinTSO Scheduler の実装原則を学びます。
     - [互換性](https://docs.pingcap.com/ja/tidb/stable/tiflash-compatibility.md): TiFlashと互換性のない TiDB 機能について説明します。
@@ -605,7 +605,7 @@
   - [サーバーステータス変数](https://docs.pingcap.com/ja/tidb/stable/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
   - コンフィグレーションファイルパラメータ
     - [tidb-server](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file.md): コマンドラインオプションに関係しない、TiDB設定ファイルオプションについて学びましょう。
-    - [tikvサーバー](https://docs.pingcap.com/ja/tidb/stable/tikv-configuration-file.md): TiKVの設定ファイルについて学びましょう。
+    - [tikv-server](https://docs.pingcap.com/ja/tidb/stable/tikv-configuration-file.md): TiKVの設定ファイルについて学びましょう。
     - [tiflash-server](https://docs.pingcap.com/ja/tidb/stable/tiflash-configuration.md): TiFlash の設定方法を学びます。
     - [pd-server](https://docs.pingcap.com/ja/tidb/stable/pd-configuration-file.md): PD 構成ファイルについて学習します。
   - CLI
@@ -615,7 +615,7 @@
     - [pd-recover](https://docs.pingcap.com/ja/tidb/stable/pd-recover.md): PD Recover を使用すると、正常に起動またはサービスを提供できない PD クラスタを復旧できます。
   - コマンドラインフラグ
     - [tidb-server](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-tidb-configuration.md): TiDB の設定オプションについて学習します。
-    - [tikvサーバー](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-tikv-configuration.md): TiKV のいくつかの構成フラグについて学習します。
+    - [tikv-server](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-tikv-configuration.md): TiKV のいくつかの構成フラグについて学習します。
     - [tiflash-server](https://docs.pingcap.com/ja/tidb/stable/tiflash-command-line-flags.md): TiFlashのコマンドライン起動フラグについて学習します。
     - [pd-server](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-pd-configuration.md): PD のいくつかの構成フラグについて学習します。
   - 主要監視指標

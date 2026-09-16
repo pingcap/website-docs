@@ -12,7 +12,7 @@
   - [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart.md): Sign up quickly to try TiDB Cloud and create a TiDB Cloud Starter instance.
   - [Try Out TiDB + AI Tools](https://docs.pingcap.com/tidbcloud/use-tidb-cloud-with-ai-tools.md): Learn how to connect your TiDB Cloud Starter instance to AI-powered development tools that support the Model Context Protocol (MCP), such as Cursor, Claude Code, VS Code, and Windsurf.
   - [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart.md): Learn how to get started with HTAP in TiDB Cloud.
-  - [Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud Starter and Essential instances through the TiDB Cloud CLI.
+  - [Try Out TiDB Cloud CLI (ticloud, Legacy)](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud Starter and Essential instances through the ticloud CLI.
 - Key Concepts
   - [Overview](https://docs.pingcap.com/tidbcloud/key-concepts.md): Learn about the key concepts in TiDB Cloud.
   - [Architecture](https://docs.pingcap.com/tidbcloud/architecture-concepts.md): Learn about architecture concepts for TiDB Cloud.
@@ -460,8 +460,8 @@
       - [`schema_unused_indexes`](https://docs.pingcap.com/tidbcloud/sys-schema-unused-indexes.md): Learn about the `schema_unused_indexes` table in the `sys` schema.
   - [Metadata Lock](https://docs.pingcap.com/tidbcloud/metadata-lock.md): Introduce the concept, principles, and implementation details of metadata lock in TiDB.
   - [TiDB Accelerated Table Creation](https://docs.pingcap.com/tidbcloud/accelerated-table-creation.md): Learn the concept, principles, and implementation details of performance optimization for creating tables in TiDB.
-- CLI Reference ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](https://docs.pingcap.com/tidbcloud/cli-reference.md): Provides an overview of TiDB Cloud CLI.
+- TiDB Cloud CLI (ticloud, Legacy) Reference ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](https://docs.pingcap.com/tidbcloud/cli-reference.md): Provides an overview of the ticloud CLI for TiDB Cloud Starter and Essential.
   - auth
     - [login](https://docs.pingcap.com/tidbcloud/ticloud-auth-login.md): The reference of `ticloud auth login`.
     - [logout](https://docs.pingcap.com/tidbcloud/ticloud-auth-logout.md): The reference of `ticloud auth logout`.

@@ -214,6 +214,7 @@
   - Issue Scenarios
     - Slow Queries
       - [Identify Slow Queries](https://docs.pingcap.com/tidb/stable/identify-slow-queries.md): Use the slow query log to identify problematic SQL statements.
+      - [Configure Trigger Rules for Slow Queries](https://docs.pingcap.com/tidb/stable/config-slow-query-trigger-rules.md): Define the trigger rules for slow query logs.
       - [Analyze Slow Queries](https://docs.pingcap.com/tidb/stable/analyze-slow-queries.md): Learn how to locate and analyze slow queries.
     - [TiDB OOM](https://docs.pingcap.com/tidb/stable/troubleshoot-tidb-oom.md): Learn how to diagnose and resolve TiDB OOM (Out of Memory) issues.
     - [Hotspot](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues.md): Learn how to locate and resolve read or write hotspot issues in TiDB.
