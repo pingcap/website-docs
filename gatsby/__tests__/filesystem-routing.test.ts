@@ -7,7 +7,8 @@ import { filterNodesByToc, getFilesFromTocs } from "../toc-filter";
 import { getTOCNamespace } from "../toc-namespace";
 import { calculateFileUrl } from "../url-resolver";
 
-const source = `en/tidb/${CONFIG.docs.tidb.stable}`;
+const source = "en/tidb-cloud-filesystem/master";
+const stableTidbSource = `en/tidb/${CONFIG.docs.tidb.stable}`;
 const tocSlug = `${source}/TOC-tidb-cloud-filesystem`;
 const tocAST = [
   {
@@ -49,7 +50,7 @@ describe("Filesystem product routing", () => {
     ).toBe(tocSlug);
   });
 
-  it("does not take over other TiDB versions or AI documentation", () => {
+  it("does not take over TiDB or AI documentation", () => {
     expect(
       getTOCNamespace("en/tidb/master/tidb-cloud-filesystem/filesystem-mount")
     ).toBe(TOCNamespace.TiDB);
@@ -59,11 +60,14 @@ describe("Filesystem product routing", () => {
         true
       )
     ).toBe("/tidb/dev/filesystem-mount");
-    expect(getTOCNamespace(`${source}/ai/ti/reference/ti-filesystem`)).toBe(
-      TOCNamespace.AI
-    );
     expect(
-      calculateFileUrl(`${source}/ai/ti/reference/ti-filesystem`, true)
+      getTOCNamespace(`${stableTidbSource}/ai/ti/reference/ti-filesystem`)
+    ).toBe(TOCNamespace.AI);
+    expect(
+      calculateFileUrl(
+        `${stableTidbSource}/ai/ti/reference/ti-filesystem`,
+        true
+      )
     ).toBe("/ai/ti-filesystem");
   });
 

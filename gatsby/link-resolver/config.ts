@@ -11,7 +11,8 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
   languages: ["en", "zh", "ja"],
 
   linkMappings: [
-    // Filesystem documentation is currently published in English only.
+    // Filesystem documentation is currently published in English only, so
+    // direct links intentionally omit the current page language.
     {
       linkPattern: "/tidb-cloud-filesystem/{...folders}/_index",
       targetPattern: "/tidbcloud-filesystem/{folders}",
@@ -55,7 +56,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/releases/{docname}",
       targetPattern: "/{lang}/tidb-in-kubernetes/stable/{docname}",
     },
-    // Rule 1: Links starting with specific namespaces (direct link mapping)
+    // Links starting with specific namespaces (direct link mapping)
     // Special handling for namespace index links:
     // /develop/_index -> /developer
     // /best-practices/_index -> /best-practices
@@ -102,7 +103,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
         develop: "developer",
       },
     },
-    // Rule 2: tidbcloud with prefix pages (path-based mapping)
+    // tidbcloud with prefix pages (path-based mapping)
     // Current page: /{lang}/tidbcloud/{...any}
     // Link: /{...any}/{docname} -> /{lang}/tidbcloud/{docname}
     {
@@ -110,7 +111,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloud/{docname}",
     },
-    // Rule 3: tidbcloudlake pages (path-based mapping)
+    // tidbcloudlake pages (path-based mapping)
     // Current page: /{lang}/tidbcloudlake/{...any}
     // Link: /{...any}/{docname} -> /{lang}/tidbcloudlake/{docname}
     {
@@ -118,14 +119,14 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidbcloudlake/{docname}",
     },
-    // Relative Filesystem links stay in the product namespace. Explicit AI
-    // and other namespace links are handled by the rules above.
+    // Relative Filesystem links stay in the English product namespace.
+    // Explicit AI and other namespace links are handled by the rules above.
     {
       pathPattern: "/{lang}/tidbcloud-filesystem/{...any}",
       linkPattern: "/{...folders}/{docname}",
       targetPattern: "/tidbcloud-filesystem/{docname}",
     },
-    // Rule 4: developer, best-practices, api, ai namespace in tidb folder
+    // developer, best-practices, api, ai namespace in tidb folder
     // Current page: /{lang}/{namespace}/{...any}
     // Link: /{...any}/{docname} -> /{lang}/{namespace}/{docname}
     {
@@ -136,7 +137,7 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       linkPattern: "/{...any}/{docname}",
       targetPattern: "/{lang}/tidb/stable/{docname}",
     },
-    // Rule 4: versioned docs with branch pages (path-based mapping)
+    // Versioned docs with branch pages (path-based mapping)
     // Current page: /{lang}/{repo}/{branch}/{...any} (branch is already aliased, e.g., "stable", "v8.5")
     // Link: /{...any}/{docname} -> /{lang}/{repo}/{branch}/{docname}
     {

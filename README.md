@@ -43,13 +43,17 @@ TiDB Cloud Filesystem appears after TiDB Cloud Lake in the Product menu. Its
 English documentation is published at `/tidbcloud-filesystem/` with its own
 sidebar and Preview badge.
 
-The content comes from `pingcap/docs` on the stable TiDB documentation branch
-(`release-8.5` in `docs/docs.json`), using `tidb-cloud-filesystem/` and
-`TOC-tidb-cloud-filesystem.md`. It shares the existing `tidb` staging source;
-it does not require a separate repository entry in `docs/docs.json`. The
-source pages must reach `docs-staging` before a website deployment can publish
-them. The menu links to English without changing the selected Cloud database
-plan or implying that translated Filesystem pages exist.
+The source content comes from `pingcap/docs` and is published by
+`pingcap/docs-staging` under
+`markdown-pages/en/tidb-cloud-filesystem/master/`. The staging tree contains
+`tidb-cloud-filesystem/` and `TOC-tidb-cloud-filesystem.md`, and requires a
+separate `tidb-cloud-filesystem` entry in the `pingcap/docs-staging`
+`docs.json`, similar to TiDB Cloud Lake. After the staging submodule is
+updated, that file is available in this checkout as `docs/docs.json`. The
+source pages and staging configuration must reach `docs-staging` before a
+website deployment can publish them. The menu links to English without
+changing the selected Cloud database plan or implying that translated
+Filesystem pages exist.
 
 `gatsby/__tests__/filesystem-routing.test.ts` checks published URLs, sidebar
 selection, TOC membership, and links to the existing AI command reference.

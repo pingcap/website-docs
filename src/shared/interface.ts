@@ -53,6 +53,7 @@ export enum Repo {
   operator = "tidb-in-kubernetes",
   tidbcloud = "tidbcloud",
   tidbcloudlake = "tidb-cloud-lake",
+  tidbcloudfilesystem = "tidb-cloud-filesystem",
 }
 
 export enum Locale {

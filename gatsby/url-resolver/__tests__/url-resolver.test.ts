@@ -322,6 +322,33 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/tidbcloudlake/dashboards/");
   });
 
+  it("should resolve tidb cloud filesystem _index", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloud-filesystem");
+  });
+
+  it("should resolve tidb cloud filesystem guide pages", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/guides/filesystem-mount.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloud-filesystem/filesystem-mount/");
+  });
+
+  it("should resolve tidb cloud filesystem root _index", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-cloud-filesystem/master/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloud-filesystem");
+  });
+
   it("should resolve releases folder", () => {
     const absolutePath = path.join(
       sourceBasePath,
@@ -593,6 +620,19 @@ describe("calculateFileUrl with defaultLanguage: 'en'", () => {
       true
     );
     expect(url).toBe("/tidbcloudlake/dashboards");
+  });
+
+  it("should omit /en/ prefix for English tidb cloud filesystem files", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/filesystem-quick-start.md"
+    );
+    const url = calculateFileUrlWithConfig(
+      absolutePath,
+      configWithDefaultLang,
+      true
+    );
+    expect(url).toBe("/tidbcloud-filesystem/filesystem-quick-start");
   });
 
   it("should omit /en/ prefix for English release branch files", () => {

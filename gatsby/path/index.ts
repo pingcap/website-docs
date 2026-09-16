@@ -6,6 +6,15 @@ import {
 } from "../../src/shared/interface";
 import CONFIG from "../../docs/docs.json";
 
+type DocsConfigByRepo = Record<
+  string,
+  {
+    languages: Record<string, { repo: string; versions: string[] }>;
+  }
+>;
+
+const DOCS_CONFIG = CONFIG.docs as unknown as DocsConfigByRepo;
+
 // @deprecated, use calculateFileUrl instead
 export function generateUrl(filename: string, config: PathConfig) {
   const lang = config.locale === Locale.en ? "" : `/${config.locale}`;
@@ -97,15 +106,16 @@ function branchToVersion(repo: Repo, branch: string) {
 
     case Repo.tidbcloud:
     case Repo.tidbcloudlake:
+    case Repo.tidbcloudfilesystem:
       return null;
   }
 }
 
-export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
+export const AllVersion = Object.keys(DOCS_CONFIG).reduce((acc, val) => {
   const repo = val as Repo;
-  acc[repo] = Object.keys(CONFIG.docs[repo].languages).reduce((acc, val) => {
+  acc[repo] = Object.keys(DOCS_CONFIG[repo].languages).reduce((acc, val) => {
     const locale = val as Locale.en;
-    acc[locale] = CONFIG.docs[repo].languages[locale].versions.map((v) =>
+    acc[locale] = DOCS_CONFIG[repo].languages[locale].versions.map((v) =>
       branchToVersion(repo, v)
     );
     return acc;
@@ -114,10 +124,14 @@ export const AllVersion = Object.keys(CONFIG.docs).reduce((acc, val) => {
 }, {} as Record<Repo, Record<Locale, (string | null)[]>>);
 
 export function getRepo(config: PathConfig) {
-  const { languages } = CONFIG.docs[config.repo];
+  const repoConfig = DOCS_CONFIG[config.repo];
+  if (!repoConfig) {
+    throw new Error(`no config for repo ${config.repo}`);
+  }
+  const { languages } = repoConfig;
 
   if (config.locale in languages) {
-    return languages[config.locale as Locale.en].repo;
+    return languages[config.locale].repo;
   }
 
   throw new Error(`no ${config.locale} in repo ${config.repo}`);
