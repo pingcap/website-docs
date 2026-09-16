@@ -4,45 +4,162 @@
 
 ## QUICK START
 
-- [Get Started via Python](https://docs.pingcap.com/ai/quickstart-via-python.md): Learn how to get started with vector search in TiDB using Python SDK.
-- [Get Started via SQL](https://docs.pingcap.com/ai/quickstart-via-sql.md): Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
-
-## CONCEPTS
-
-- [Vector Search](https://docs.pingcap.com/ai/vector-search-overview.md): Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+- [Get Started with Vector Search via Python](https://docs.pingcap.com/ai/quickstart-via-python.md): Learn how to get started with vector search in TiDB using Python SDK.
+- [Get Started with Vector Search via SQL](https://docs.pingcap.com/ai/quickstart-via-sql.md): Learn how to quickly get started with Vector Search in TiDB using SQL statements to power your generative AI applications.
+- [Get Started with TiDB Cloud CLI](https://docs.pingcap.com/ai/ti-quick-start.md): Install and configure TiDB Cloud CLI, then create and use a TiDB Cloud Filesystem or query a TiDB Cloud Starter database.
 
 ## GUIDES
 
-- [Connect to TiDB](https://docs.pingcap.com/ai/connect.md): Learn how to connect to a TiDB database using the `pytidb` client.
-- [Working with Tables](https://docs.pingcap.com/ai/tables.md): Learn how to work with tables in TiDB.
-- Search Features
-  - [Vector Search](https://docs.pingcap.com/ai/vector-search.md): Learn how to use vector search in your application.
+- [Connect to TiDB via Python](https://docs.pingcap.com/ai/connect.md): Learn how to connect to a TiDB database using the `pytidb` client.
+- Search & Retrieval
+  - Vector Search
+    - [Overview](https://docs.pingcap.com/ai/vector-search-overview.md): Learn about Vector Search in TiDB. This feature provides an advanced search solution for performing semantic similarity searches across various data types, including documents, images, audio, and video.
+    - [Vector Search Guide](https://docs.pingcap.com/ai/vector-search.md): Learn how to use vector search in your application.
+    - [Vector Search Example](https://docs.pingcap.com/ai/vector-search-with-pytidb.md): Implement semantic search using vector embeddings to find similar content.
   - Full-Text Search
     - [Full-Text Search via Python](https://docs.pingcap.com/ai/vector-search-full-text-search-python.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
     - [Full-Text Search via SQL](https://docs.pingcap.com/ai/vector-search-full-text-search-sql.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
-  - [Hybrid Search](https://docs.pingcap.com/ai/vector-search-hybrid-search.md): Use full-text search and vector search together to improve the retrieval quality.
-  - [Image Search](https://docs.pingcap.com/ai/image-search.md): Learn how to use image search in your application.
-- Advanced Features
-  - [Auto Embedding](https://docs.pingcap.com/ai/auto-embedding.md): Learn how to use auto embedding in your application.
-  - [Filtering](https://docs.pingcap.com/ai/filtering.md): Learn how to use filtering in your application.
+    - [Full-Text Search Example](https://docs.pingcap.com/ai/fulltext-search-with-pytidb.md): Perform traditional text search using TiDB full-text search.
+  - Hybrid Search
+    - [Hybrid Search Guide](https://docs.pingcap.com/ai/vector-search-hybrid-search.md): Use full-text search and vector search together to improve the retrieval quality.
+    - [Hybrid Search Example](https://docs.pingcap.com/ai/hybrid-search-with-pytidb.md): Combine vector search and full-text search for more comprehensive results.
+  - Auto Embeddings
+    - [Auto Embedding Guide](https://docs.pingcap.com/ai/auto-embedding.md): Learn how to use auto embedding in your application.
+    - [Auto Embedding Example](https://docs.pingcap.com/ai/auto-embedding-with-pytidb.md): Automatically generate embeddings for your text data using built-in embedding models.
+  - Image Search
+    - [Image Search Guide](https://docs.pingcap.com/ai/image-search.md): Learn how to use image search in your application.
+    - [Image Search Example](https://docs.pingcap.com/ai/image-search-with-pytidb.md): Build an image search application using multimodal embeddings for both text-to-image and image-to-image search.
   - [Reranking](https://docs.pingcap.com/ai/reranking.md): Learn how to use reranking in your application.
+- Work with Data
+  - [Work with Tables](https://docs.pingcap.com/ai/tables.md): Learn how to work with tables in TiDB.
+  - [Filtering](https://docs.pingcap.com/ai/filtering.md): Learn how to use filtering in your application.
   - [Join Queries](https://docs.pingcap.com/ai/join-queries.md): Learn how to use multiple table joins in your application.
   - [Raw SQL Queries](https://docs.pingcap.com/ai/raw-queries.md): Learn how to use raw queries in your application.
   - [Transactions](https://docs.pingcap.com/ai/transactions.md): Learn how to use transactions in your application.
-
-## EXAMPLES
-
-- [Basic CRUD Operations](https://docs.pingcap.com/ai/basic-with-pytidb.md): Learn fundamental `pytidb` operations including database connection, table creation, and data manipulation.
-- [Auto Embedding](https://docs.pingcap.com/ai/auto-embedding-with-pytidb.md): Automatically generate embeddings for your text data using built-in embedding models.
-- Search & Retrieval
-  - [Vector Search](https://docs.pingcap.com/ai/vector-search-with-pytidb.md): Implement semantic search using vector embeddings to find similar content.
-  - [Full-Text Search](https://docs.pingcap.com/ai/fulltext-search-with-pytidb.md): Perform traditional text search using TiDB full-text search.
-  - [Hybrid Search](https://docs.pingcap.com/ai/hybrid-search-with-pytidb.md): Combine vector search and full-text search for more comprehensive results.
-  - [Image Search](https://docs.pingcap.com/ai/image-search-with-pytidb.md): Build an image search application using multimodal embeddings for both text-to-image and image-to-image search.
-- AI Applications
-  - [RAG Application](https://docs.pingcap.com/ai/rag-with-pytidb.md): Build a RAG application that combines document retrieval with language generation.
-  - [Conversational Memory](https://docs.pingcap.com/ai/memory-with-pytidb.md): Implement conversation memory for chatbots and conversational AI applications.
-  - [Text-to-SQL](https://docs.pingcap.com/ai/text2sql-with-pytidb.md): Convert natural language queries into SQL statements using AI models.
+- Build AI Applications
+  - [RAG Example](https://docs.pingcap.com/ai/rag-with-pytidb.md): Build a RAG application that combines document retrieval with language generation.
+  - [Conversational Memory Example](https://docs.pingcap.com/ai/memory-with-pytidb.md): Implement conversation memory for chatbots and conversational AI applications.
+  - [Text-to-SQL Example](https://docs.pingcap.com/ai/text2sql-with-pytidb.md): Convert natural language queries into SQL statements using AI models.
+- TiDB Cloud CLI
+  - [Overview](https://docs.pingcap.com/ai/ti-overview.md): Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starter instances and TiDB Cloud Filesystems.
+  - [Install, Configure, and Update TiDB Cloud CLI](https://docs.pingcap.com/ai/ti-install-configure-update.md): Install TiDB Cloud CLI releases, configure profiles, check versions, apply updates, and uninstall the CLI.
+  - [Manage TiDB Cloud Starter Instances](https://docs.pingcap.com/ai/manage-starter-instances.md): Learn how to use TiDB Cloud CLI to create and manage Starter instances, branches, SQL users, connections, and SQL statements.
+  - Manage TiDB Cloud Filesystem
+    - [Manage Filesystem Resources](https://docs.pingcap.com/ai/manage-filesystem-resources.md): Learn how to safely create, inspect, check, select, and delete TiDB Cloud Filesystem resources by using TiDB Cloud CLI.
+    - [Configure Filesystem AI Providers](https://docs.pingcap.com/ai/configure-filesystem-ai-providers.md): Learn how to inspect and configure media extraction and embedding providers for a TiDB Cloud Filesystem by using the CLI.
+    - [Manage Filesystem Tokens](https://docs.pingcap.com/ai/manage-filesystem-tokens.md): Learn how to import, generate, scope, inspect, disable, refresh, and revoke access tokens for a TiDB Cloud Filesystem.
+    - [Work with Filesystem Data](https://docs.pingcap.com/ai/work-with-filesystem-data.md): Learn how to copy, read, organize, search, and inspect files and directories in TiDB Cloud Filesystem by using the CLI.
+    - [Manage Filesystem Layers and Checkpoints](https://docs.pingcap.com/ai/manage-filesystem-layers.md): Learn how to safely create, inspect, fork, checkpoint, roll back, commit, pack, and restore TiDB Cloud Filesystem layers.
+    - [Mount a TiDB Cloud Filesystem](https://docs.pingcap.com/ai/mount-filesystem.md): Learn how to safely mount, use, drain, and unmount a TiDB Cloud Filesystem on macOS, Linux, or in a container.
+    - [Manage Git Workspaces](https://docs.pingcap.com/ai/manage-git-workspaces.md): Learn how to clone, hydrate, create linked worktrees, and remove Git workspaces on a mounted TiDB Cloud Filesystem.
+    - [Use Filesystem Journals](https://docs.pingcap.com/ai/use-filesystem-journals.md): Learn how to create, append, read, search, and verify append-only journals for agent and automation events in a Filesystem.
+    - [Manage Filesystem Vault Secrets](https://docs.pingcap.com/ai/manage-filesystem-vault-secrets.md): Learn how to store, read, delegate, inject, audit, revoke, and mount secrets securely with TiDB Cloud Filesystem Vault.
+  - Scenarios for Users and Automation
+    - [Run a Daily TiDB Cloud CLI Workflow](https://docs.pingcap.com/ai/ti-daily-workflow-example.md): Inspect resources, manage a TiDB Cloud Starter instance and Filesystem, check for TiDB Cloud CLI updates, and clean up resources.
+    - [Query TiDB Cloud Starter with Explicit SQL Roles](https://docs.pingcap.com/ai/ti-query-sql-with-roles-example.md): Prepare TiDB Cloud CLI-managed SQL users and run read-only, read-write, and admin statements with explicit privilege intent.
+    - [Share a TiDB Cloud Filesystem Across Machines](https://docs.pingcap.com/ai/ti-share-filesystem-across-machines-example.md): Create one Filesystem, securely access it from a second machine, and verify data-plane and mount visibility.
+    - [Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-ci-artifact-handoff-example.md): Persist build output in TiDB Cloud Filesystem and consume it from a later CI job without copying a complete TiDB Cloud CLI profile.
+  - Scenarios for AI Agents
+    - [Use TiDB Cloud Filesystem in an Agent Sandbox](https://docs.pingcap.com/ai/ti-agent-sandbox-example.md): Provision a Filesystem on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
+    - [Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-persistent-agent-state-example.md): Preserve plans, checkpoints, outputs, and workflow history in a TiDB Cloud Filesystem while replacing agent sandboxes.
+    - [Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-parallel-agent-dataset-example.md): Upload one unstructured dataset and expose the same read-only mounted namespace to multiple agent workers.
+    - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-git-workspace-for-agents-example.md): Make a large Git workspace visible quickly, hydrate clean objects in the background, and let an agent start work before the full download finishes.
+    - [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](https://docs.pingcap.com/ai/ti-journal-agent-workflow-example.md): Create a journal, append structured agent events, search the workflow, and verify the journal hash chain.
+    - [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](https://docs.pingcap.com/ai/ti-vault-agent-secrets-example.md): Store a secret, grant one field to an agent, inject it into a process, audit access, and revoke the grant.
+  - Command Reference
+    - [Overview](https://docs.pingcap.com/ai/ti-cli-reference.md): Reference TiDB Cloud CLI command groups, syntax, global options, output, dry-run behavior, help forms, and errors.
+    - [configure](https://docs.pingcap.com/ai/ti-configure.md): Configure a local TiDB Cloud CLI profile interactively or non-interactively.
+    - [update](https://docs.pingcap.com/ai/ti-update.md): Check for or install a TiDB Cloud CLI release update.
+    - `ti db` commands for managing TiDB Cloud Starter instances
+      - [Overview](https://docs.pingcap.com/ai/ti-starter-database.md): Reference every `ti db` command for Starter instances, branches, SQL users, connection strings, and SQL execution.
+      - [create-db-cluster](https://docs.pingcap.com/ai/ti-db-create-db-cluster.md): Create a TiDB Cloud Starter cluster.
+      - [list-db-clusters](https://docs.pingcap.com/ai/ti-db-list-db-clusters.md): List TiDB Cloud Starter clusters.
+      - [describe-db-cluster](https://docs.pingcap.com/ai/ti-db-describe-db-cluster.md): Describe a TiDB Cloud Starter cluster.
+      - [update-db-cluster](https://docs.pingcap.com/ai/ti-db-update-db-cluster.md): Update a TiDB Cloud Starter cluster.
+      - [delete-db-cluster](https://docs.pingcap.com/ai/ti-db-delete-db-cluster.md): Delete a TiDB Cloud Starter cluster.
+      - [create-db-cluster-branch](https://docs.pingcap.com/ai/ti-db-create-db-cluster-branch.md): Create a branch for a TiDB Cloud Starter cluster.
+      - [list-db-cluster-branches](https://docs.pingcap.com/ai/ti-db-list-db-cluster-branches.md): List branches for a TiDB Cloud Starter cluster.
+      - [describe-db-cluster-branch](https://docs.pingcap.com/ai/ti-db-describe-db-cluster-branch.md): Describe a branch for a TiDB Cloud Starter cluster.
+      - [delete-db-cluster-branch](https://docs.pingcap.com/ai/ti-db-delete-db-cluster-branch.md): Delete a branch from a TiDB Cloud Starter cluster.
+      - [create-db-sql-users](https://docs.pingcap.com/ai/ti-db-create-db-sql-users.md): Create TiDB Cloud CLI-managed SQL users for a TiDB Cloud Starter instance.
+      - [format-db-connection-string](https://docs.pingcap.com/ai/ti-db-format-db-connection-string.md): Format a connection string for a TiDB Cloud CLI-managed SQL user.
+      - [execute-sql-statement](https://docs.pingcap.com/ai/ti-db-execute-sql-statement.md): Execute one SQL statement against a TiDB Cloud Starter cluster.
+    - `ti fs` commands for managing TiDB Cloud Filesystems
+      - [Overview](https://docs.pingcap.com/ai/ti-filesystem.md): Reference every `ti fs` command for Filesystem resources, files, layers, packs, and mounts.
+      - [create-file-system](https://docs.pingcap.com/ai/ti-fs-create-file-system.md): Create a TiDB Cloud Filesystem.
+      - [import-file-system-token](https://docs.pingcap.com/ai/ti-fs-import-file-system-token.md): Import an existing TiDB Cloud Filesystem token.
+      - [generate-file-system-token](https://docs.pingcap.com/ai/ti-fs-generate-file-system-token.md): Generate an additional owner token for one TiDB Cloud Filesystem.
+      - [generate-file-system-scoped-token](https://docs.pingcap.com/ai/ti-fs-generate-file-system-scoped-token.md): Generate a path-and-operation-limited token for one TiDB Cloud Filesystem.
+      - [list-file-system-tokens](https://docs.pingcap.com/ai/ti-fs-list-file-system-tokens.md): List token metadata for one TiDB Cloud Filesystem.
+      - [enable-file-system-token](https://docs.pingcap.com/ai/ti-fs-enable-file-system-token.md): Enable a disabled TiDB Cloud Filesystem token.
+      - [disable-file-system-token](https://docs.pingcap.com/ai/ti-fs-disable-file-system-token.md): Temporarily disable a TiDB Cloud Filesystem token.
+      - [delete-file-system-token](https://docs.pingcap.com/ai/ti-fs-delete-file-system-token.md): Permanently revoke a TiDB Cloud Filesystem token.
+      - [refresh-file-system-token](https://docs.pingcap.com/ai/ti-fs-refresh-file-system-token.md): Rotate one TiDB Cloud Filesystem token and return its replacement plaintext once.
+      - [list-file-systems](https://docs.pingcap.com/ai/ti-fs-list-file-systems.md): List remote TiDB Cloud Filesystems in a region.
+      - [describe-file-system](https://docs.pingcap.com/ai/ti-fs-describe-file-system.md): Describe a remote TiDB Cloud Filesystem.
+      - [describe-file-system-extract-configuration](https://docs.pingcap.com/ai/ti-fs-describe-file-system-extract-configuration.md): Describe media extraction configuration for a TiDB Cloud Filesystem.
+      - [update-file-system-extract-configuration](https://docs.pingcap.com/ai/ti-fs-update-file-system-extract-configuration.md): Update media extraction configuration for a TiDB Cloud Filesystem.
+      - [describe-file-system-embedding-configuration](https://docs.pingcap.com/ai/ti-fs-describe-file-system-embedding-configuration.md): Describe embedding configuration for a TiDB Cloud Filesystem.
+      - [update-file-system-embedding-configuration](https://docs.pingcap.com/ai/ti-fs-update-file-system-embedding-configuration.md): Replace embedding configuration for a TiDB Cloud Filesystem.
+      - [check-file-system](https://docs.pingcap.com/ai/ti-fs-check-file-system.md): Check TiDB Cloud Filesystem connectivity.
+      - [delete-file-system](https://docs.pingcap.com/ai/ti-fs-delete-file-system.md): Delete a TiDB Cloud Filesystem.
+      - [copy-file](https://docs.pingcap.com/ai/ti-fs-copy-file.md): Copy files to, from, or within a TiDB Cloud Filesystem.
+      - [read-file](https://docs.pingcap.com/ai/ti-fs-read-file.md): Read a file from a TiDB Cloud Filesystem.
+      - [list-files](https://docs.pingcap.com/ai/ti-fs-list-files.md): List files in a TiDB Cloud Filesystem.
+      - [describe-file](https://docs.pingcap.com/ai/ti-fs-describe-file.md): Describe a file in a TiDB Cloud Filesystem.
+      - [move-file](https://docs.pingcap.com/ai/ti-fs-move-file.md): Move a file in a TiDB Cloud Filesystem.
+      - [delete-file](https://docs.pingcap.com/ai/ti-fs-delete-file.md): Delete a file from a TiDB Cloud Filesystem.
+      - [create-directory](https://docs.pingcap.com/ai/ti-fs-create-directory.md): Create a directory in a TiDB Cloud Filesystem.
+      - [chmod-file](https://docs.pingcap.com/ai/ti-fs-chmod-file.md): Change file permissions in a TiDB Cloud Filesystem.
+      - [create-symlink](https://docs.pingcap.com/ai/ti-fs-create-symlink.md): Create a symbolic link in a TiDB Cloud Filesystem.
+      - [create-hardlink](https://docs.pingcap.com/ai/ti-fs-create-hardlink.md): Create a hard link in a TiDB Cloud Filesystem.
+      - [search-file-content](https://docs.pingcap.com/ai/ti-fs-search-file-content.md): Search file content in a TiDB Cloud Filesystem.
+      - [find-files](https://docs.pingcap.com/ai/ti-fs-find-files.md): Find files in a TiDB Cloud Filesystem.
+      - [create-layer](https://docs.pingcap.com/ai/ti-fs-create-layer.md): Create a layer in a TiDB Cloud Filesystem.
+      - [list-layers](https://docs.pingcap.com/ai/ti-fs-list-layers.md): List layers in a TiDB Cloud Filesystem.
+      - [fork-layer](https://docs.pingcap.com/ai/ti-fs-fork-layer.md): Fork a copy-on-write child layer in a TiDB Cloud Filesystem.
+      - [list-layer-chain](https://docs.pingcap.com/ai/ti-fs-list-layer-chain.md): List the ancestry chain for a TiDB Cloud Filesystem layer.
+      - [describe-layer](https://docs.pingcap.com/ai/ti-fs-describe-layer.md): Describe a layer in a TiDB Cloud Filesystem.
+      - [diff-layer](https://docs.pingcap.com/ai/ti-fs-diff-layer.md): Show changes in a TiDB Cloud Filesystem layer.
+      - [create-layer-checkpoint](https://docs.pingcap.com/ai/ti-fs-create-layer-checkpoint.md): Create a checkpoint in a TiDB Cloud Filesystem layer.
+      - [delete-layer](https://docs.pingcap.com/ai/ti-fs-delete-layer.md): Abandon a TiDB Cloud Filesystem layer.
+      - [rollback-layer](https://docs.pingcap.com/ai/ti-fs-rollback-layer.md): Roll back a TiDB Cloud Filesystem layer.
+      - [commit-layer](https://docs.pingcap.com/ai/ti-fs-commit-layer.md): Commit a TiDB Cloud Filesystem layer.
+      - [pack-file-system](https://docs.pingcap.com/ai/ti-fs-pack-file-system.md): Pack local Filesystem overlay state.
+      - [unpack-file-system](https://docs.pingcap.com/ai/ti-fs-unpack-file-system.md): Restore local Filesystem overlay state.
+      - [mount-file-system](https://docs.pingcap.com/ai/ti-fs-mount-file-system.md): Mount a TiDB Cloud Filesystem.
+      - [drain-file-system](https://docs.pingcap.com/ai/ti-fs-drain-file-system.md): Drain a mounted TiDB Cloud Filesystem.
+      - [unmount-file-system](https://docs.pingcap.com/ai/ti-fs-unmount-file-system.md): Unmount a TiDB Cloud Filesystem.
+    - `ti fs-git` commands for managing TiDB Cloud Filesystem Git workspaces
+      - [Overview](https://docs.pingcap.com/ai/ti-filesystem-git.md): Reference every `ti fs-git` command for cloning, hydrating, and managing linked Git worktrees.
+      - [clone-git-workspace](https://docs.pingcap.com/ai/ti-fs-git-clone-git-workspace.md): Clone a Git repository into a mounted TiDB Cloud Filesystem.
+      - [hydrate-git-workspace](https://docs.pingcap.com/ai/ti-fs-git-hydrate-git-workspace.md): Hydrate clean Git objects in a Filesystem Git workspace.
+      - [add-git-worktree](https://docs.pingcap.com/ai/ti-fs-git-add-git-worktree.md): Add a linked Git worktree in a mounted TiDB Cloud Filesystem.
+      - [remove-git-worktree](https://docs.pingcap.com/ai/ti-fs-git-remove-git-worktree.md): Remove a linked Git worktree from a mounted TiDB Cloud Filesystem.
+    - `ti fs-journal` commands for managing TiDB Cloud Filesystem journals
+      - [Overview](https://docs.pingcap.com/ai/ti-filesystem-journal.md): Reference every `ti fs-journal` command for creating, appending, reading, searching, and verifying journals.
+      - [create-journal](https://docs.pingcap.com/ai/ti-fs-journal-create-journal.md): Create an append-only Filesystem journal.
+      - [append-journal-entries](https://docs.pingcap.com/ai/ti-fs-journal-append-journal-entries.md): Append entries to a Filesystem journal.
+      - [read-journal-entries](https://docs.pingcap.com/ai/ti-fs-journal-read-journal-entries.md): Read entries from a Filesystem journal.
+      - [search-journal-entries](https://docs.pingcap.com/ai/ti-fs-journal-search-journal-entries.md): Search Filesystem journals and entries.
+      - [verify-journal](https://docs.pingcap.com/ai/ti-fs-journal-verify-journal.md): Verify a Filesystem journal hash chain.
+    - `ti fs-vault` commands for managing TiDB Cloud Filesystem vault secrets
+      - [Overview](https://docs.pingcap.com/ai/ti-filesystem-vault.md): Reference every `ti fs-vault` command for secrets, delegated access, audit events, process injection, and mounts.
+      - [create-secret](https://docs.pingcap.com/ai/ti-fs-vault-create-secret.md): Create a secret in Filesystem Vault.
+      - [replace-secret](https://docs.pingcap.com/ai/ti-fs-vault-replace-secret.md): Replace all fields in a Filesystem Vault secret.
+      - [read-secret](https://docs.pingcap.com/ai/ti-fs-vault-read-secret.md): Read a secret from Filesystem Vault.
+      - [list-secrets](https://docs.pingcap.com/ai/ti-fs-vault-list-secrets.md): List secrets visible to a Filesystem Vault credential.
+      - [delete-secret](https://docs.pingcap.com/ai/ti-fs-vault-delete-secret.md): Delete a secret from Filesystem Vault.
+      - [create-grant](https://docs.pingcap.com/ai/ti-fs-vault-create-grant.md): Create a delegated Filesystem Vault grant.
+      - [delete-grant](https://docs.pingcap.com/ai/ti-fs-vault-delete-grant.md): Revoke a delegated Filesystem Vault grant.
+      - [list-audit-events](https://docs.pingcap.com/ai/ti-fs-vault-list-audit-events.md): List Filesystem Vault audit events.
+      - [run-with-secret](https://docs.pingcap.com/ai/ti-fs-vault-run-with-secret.md): Run a process with a Filesystem Vault secret.
+      - [mount-vault](https://docs.pingcap.com/ai/ti-fs-vault-mount-vault.md): Mount a read-only Filesystem Vault view.
+      - [unmount-vault](https://docs.pingcap.com/ai/ti-fs-vault-unmount-vault.md): Unmount a Filesystem Vault view.
+  - [TiDB Cloud CLI Configuration and Credentials](https://docs.pingcap.com/ai/ti-configuration-and-credentials.md): Reference TiDB Cloud CLI profiles, precedence rules, local state paths, Filesystem credentials, SQL credentials, mount locators, and operation logs.
+  - [TiDB Cloud CLI Regions, Security, and Limitations](https://docs.pingcap.com/ai/ti-regions-security-and-limitations.md): Reference supported regions, authentication boundaries, platform dependencies, preview constraints, and Filesystem companion behavior.
+  - [Migrate from tdc to TiDB Cloud CLI](https://docs.pingcap.com/ai/ti-migrate-from-tdc.md): Migrate supported local state and automation from tdc v0.1.x to TiDB Cloud CLI.
+  - [Troubleshoot TiDB Cloud CLI](https://docs.pingcap.com/ai/ti-troubleshooting.md): Diagnose TiDB Cloud CLI authentication, project, Filesystem selection, companion, quota, SQL user, mount, and interrupted-cleanup failures.
 
 ## INTEGRATIONS
 

@@ -31,6 +31,7 @@
     - [Superset](https://docs.pingcap.com/tidbcloudlake/superset.md): Learn how to install the TiDB Cloud Lake SQLAlchemy dialect in Apache Superset and connect Superset to a TiDB Cloud Lake warehouse.
   - Network Access
     - [Connect with AWS PrivateLink](https://docs.pingcap.com/tidbcloudlake/connect-with-aws-privatelink.md): PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Azure Private Link, Google Private Service Connect, etc.) let you reach TiDB Cloud Lake through private IP addresses inside your own network boundary, so no traffic has to traverse the public internet. That keeps your datasets, credentials, and admin actions on the provider's backbone and aligned with the network policies you already operate.
+    - [Connect with Alibaba Cloud PrivateLink](https://docs.pingcap.com/tidbcloudlake/connect-with-alibaba-cloud-privatelink.md): Configure an Alibaba Cloud private endpoint, enable its custom domain name, and verify private connectivity to TiDB Cloud Lake.
 - Manage Resources
   - [Dashboards](https://docs.pingcap.com/tidbcloudlake/dashboards.md): Dashboards are employed to present query results through a variety of chart types, including scorecards, pie charts, bar charts, and line charts. These charts are generated from the query results. You have the option to create a chart based on the query result after executing a query in a worksheet. Refreshing a dashboard allows you to re-execute the queries corresponding to the charts, thereby updating the charts with the latest results.
   - [Task Flow](https://docs.pingcap.com/tidbcloudlake/task-flow.md): Task Flow is TiDB Cloud Lake's built-in workflow orchestration feature. It lets you define, schedule, and monitor SQL-based data pipelines as directed acyclic graphs (DAGs).
@@ -133,6 +134,7 @@
   - [Manage Costs](https://docs.pingcap.com/tidbcloudlake/manage-costs.md): You can view the current month's consumption and billing history for your organization under Manage > Billing.
   - [Monitor Usage](https://docs.pingcap.com/tidbcloudlake/monitor-usage.md): TiDB Cloud Lake provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the Monitor page, click Monitor in the sidebar menu on the homepage. The page includes the following tabs.
   - [Data Lifecycle](https://docs.pingcap.com/tidbcloudlake/data-lifecycle.md): TiDB Cloud Lake supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, TiDB Cloud Lake follows the same industry standards you're accustomed to.
+  - [Data Lineage](https://docs.pingcap.com/tidbcloudlake/data-lineage.md): Learn how to enable and explore data lineage in TiDB Cloud Lake.
   - [Data Protection](https://docs.pingcap.com/tidbcloudlake/data-protection.md): TiDB Cloud Lake's Continuous Data Protection (CDP) offers easy-to-use features to keep your data safe from mistakes, harmful actions, and software problems. It ensures your data can always be recovered, even if it's changed, lost, or damaged by accident or on purpose.
   - [Data Purge and Recycle](https://docs.pingcap.com/tidbcloudlake/data-purge-and-recycle.md): In TiDB Cloud Lake, data is not immediately deleted when you run DROP, TRUNCATE, or DELETE commands. This enables TiDB Cloud Lake's time travel feature, allowing you to access previous states of your data. However, this approach means that storage space is not automatically freed up after these operations.
 - [Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing.md): Understand the pricing model and billing details for TiDB Cloud Lake.
@@ -257,11 +259,13 @@
         - [SHOW TABLES](https://docs.pingcap.com/tidbcloudlake/show-tables.md): Lists the tables in the current or a specified database.
       - View
         - [Overview](https://docs.pingcap.com/tidbcloudlake/ddl-view-overview.md): This page provides a comprehensive overview of view operations in TiDB Cloud Lake, organized by functionality for easy reference.
-        - [ALTER VIEW](https://docs.pingcap.com/tidbcloudlake/alter-view.md): Alter the existing view by using another QUERY.
         - [CREATE VIEW](https://docs.pingcap.com/tidbcloudlake/create-view.md): Creates a new view based on a query; the Logical View does not store any physical data, when we access a logical view, it will convert the sql into the subquery format to finish it.
-        - [DROP VIEW](https://docs.pingcap.com/tidbcloudlake/drop-view.md): Drop the view.
+        - [ALTER VIEW](https://docs.pingcap.com/tidbcloudlake/alter-view.md): Alter the existing view by using another QUERY.
         - [DESC VIEW](https://docs.pingcap.com/tidbcloudlake/desc-view.md): Returns the list of columns for a view.
         - [SHOW VIEWS](https://docs.pingcap.com/tidbcloudlake/show-views.md): Returns a list of view names within the specified database, or within the current database if no database name is provided.
+        - [DROP VIEW](https://docs.pingcap.com/tidbcloudlake/drop-view.md): Drop the view.
+        - [Materialized View](https://docs.pingcap.com/tidbcloudlake/materialized-view.md): A materialized view stores the result of a query physically. TiDB Cloud Lake enables change tracking on the source table when the materialized view is created.
+        - [REFRESH LINEAGE](https://docs.pingcap.com/tidbcloudlake/refresh-lineage.md): Backfills or reconciles lineage for existing views in TiDB Cloud Lake.
       - User & Role
         - [Overview](https://docs.pingcap.com/tidbcloudlake/user-role.md): This page provides a comprehensive overview of user and role operations in TiDB Cloud Lake, organized by functionality for easy reference.
         - [CREATE USER](https://docs.pingcap.com/tidbcloudlake/create-user.md): Creates a SQL user for connecting to TiDB Cloud Lake. Users must be granted appropriate privileges to access databases and perform operations.
@@ -1188,6 +1192,7 @@
       - [FLATTEN](https://docs.pingcap.com/tidbcloudlake/flatten.md): Transforms nested JSON or array data into a tabular format, where each element or field is represented as a separate row.
       - [SYSTEM$FUSE_AMEND](https://docs.pingcap.com/tidbcloudlake/system-fuse-amend.md): Recovers table data from S3-compatible object storage.
       - [FUSE_VACUUM_TEMPORARY_TABLE](https://docs.pingcap.com/tidbcloudlake/fuse-vacuum-temporary-table.md): Temporary tables are typically cleaned up automatically at session end (details in CREATE TEMP TABLE). However, this process can fail due to events like query node crashes or abnormal session terminations, leaving orphaned temporary files.
+      - [GET_LINEAGE](https://docs.pingcap.com/tidbcloudlake/get-lineage.md): Returns upstream or downstream lineage for a table, view, stage, or column. Each returned row represents one source-to-target relationship in the lineage path.
       - [ICEBERG_MANIFEST](https://docs.pingcap.com/tidbcloudlake/iceberg-manifest.md): Returns metadata about manifest files of an Iceberg table, including file paths, partitioning details, and snapshot associations.
       - [ICEBERG_SNAPSHOT](https://docs.pingcap.com/tidbcloudlake/iceberg-snapshot.md): Returns metadata about snapshots of an Iceberg table, including information about data changes, operations, and summary statistics.
       - [POLICY_REFERENCES](https://docs.pingcap.com/tidbcloudlake/policy-references.md): Returns the associations between security policies (Masking Policy or Row Access Policy) and tables/views. You can query by policy name to find all tables using it, or by table name to find all policies applied to it.

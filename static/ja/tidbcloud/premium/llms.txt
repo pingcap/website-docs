@@ -465,7 +465,7 @@
       - [RocksDBの概要](https://docs.pingcap.com/ja/tidbcloud/rocksdb-overview.md): RocksDB の基本的な概念と動作原理を学びます。
     - TiFlash
       - [TiFlashの概要](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview.md): TiFlashのアーキテクチャと主な機能について学びます。
-      - [ディスクに書き出す](https://docs.pingcap.com/ja/tidbcloud/tiflash-spill-disk.md): TiFlash がデータをディスクに書き出す方法と、書き出し動作をカスタマイズする方法について説明します。
+      - [ディスクに書き出す](https://docs.pingcap.com/ja/tidbcloud/tiflash-spill-disk.md): TiFlash がデータをディスクにスピルする方法と、スピル動作をカスタマイズする方法について説明します。
   - TiDB CloudパートナーWebコンソール
     - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 再販業者およびマネージドサービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
     - [MSP顧客](https://docs.pingcap.com/ja/tidbcloud/managed-service-provider-customer.md): マネージドサービス プロバイダー (MSP) の顧客になる方法を学びます。

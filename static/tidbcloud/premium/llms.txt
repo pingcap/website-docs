@@ -478,6 +478,7 @@
   - [Table Filter](https://docs.pingcap.com/tidbcloud/table-filter.md): Usage of table filter feature in TiDB tools.
   - [URI Formats of External Storage Services](https://docs.pingcap.com/tidbcloud/external-storage-uri.md): Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
   - [`ANALYZE` Embedded in DDL Statements](https://docs.pingcap.com/tidbcloud/ddl_embedded_analyze.md): This document describes the `ANALYZE` feature embedded in DDL statements for newly created or reorganized indexes, which ensures that statistics for new indexes are updated promptly.
+  - [Configure Trigger Rules for Slow Queries](https://docs.pingcap.com/tidbcloud/config-slow-query-trigger-rules.md): Define the trigger rules for slow query logs.
   - [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidbcloud/troubleshoot-data-inconsistency-errors.md): Learn how to deal with errors reported by the consistency check between data and indexes.
   - [Notifications](https://docs.pingcap.com/tidbcloud/notifications.md): Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
 - Support Plan
