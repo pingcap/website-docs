@@ -8,7 +8,7 @@ jest.mock("../toc", () => ({
   mdxAstToToc: jest.fn((_ast: any, slug: string) => [
     {
       type: "nav",
-      link: slug.endsWith("TOC-tidb-cloud-starter-postgresql")
+      link: slug.endsWith("TOC-tidb-cloud-starter-pg")
         ? "/cloud-starter-postgresql-only.md"
         : "/cloud-starter-only.md",
     },
@@ -40,11 +40,11 @@ describe("TiDB Cloud plan TOC membership", () => {
               },
             },
             {
-              slug: "en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql",
+              slug: "en/tidbcloud/master/TOC-tidb-cloud-starter-pg",
               mdxAST: { children: [] },
               parent: {
                 relativePath:
-                  "docs/markdown-pages/en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql.md",
+                  "docs/markdown-pages/en/tidbcloud/master/TOC-tidb-cloud-starter-pg.md",
               },
             },
           ],

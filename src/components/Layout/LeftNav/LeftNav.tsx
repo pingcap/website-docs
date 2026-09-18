@@ -168,7 +168,10 @@ export function LeftNavDesktop(props: LeftNavProps) {
 
           {isStarter && (
             <Box marginTop={1}>
-              <CloudCompatibilitySelect disableStickyContainer />
+              <CloudCompatibilitySelect
+                disableStickyContainer
+                pathConfig={pathConfig}
+              />
             </Box>
           )}
         </LeftNavStickyContainer>
@@ -258,7 +261,10 @@ export function LeftNavMobile(props: LeftNavProps) {
           )}
           {isStarter && (
             <Box sx={{ marginBottom: 1 }}>
-              <CloudCompatibilitySelect disableStickyContainer />
+              <CloudCompatibilitySelect
+                disableStickyContainer
+                pathConfig={pathConfig}
+              />
             </Box>
           )}
           <LeftNavTree data={data} current={current} />

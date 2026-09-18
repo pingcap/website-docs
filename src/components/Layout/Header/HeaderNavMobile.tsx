@@ -31,7 +31,7 @@ export function HeaderNavStackMobile(props: {
 
   const theme = useTheme();
   const { language, t } = useI18next();
-  const { cloudPlan } = useCloudPlan();
+  const { cloudPlan, cloudCompatibility } = useCloudPlan();
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,8 +42,14 @@ export function HeaderNavStackMobile(props: {
 
   // Generate navigation config
   const navConfig: NavConfig[] = React.useMemo(() => {
-    return generateNavConfig(t, cloudPlan, props.buildType, language);
-  }, [t, cloudPlan, props.buildType, language]);
+    return generateNavConfig(
+      t,
+      cloudPlan,
+      props.buildType,
+      language,
+      cloudCompatibility
+    );
+  }, [t, cloudPlan, cloudCompatibility, props.buildType, language]);
 
   return (
     <Box
@@ -62,9 +68,7 @@ export function HeaderNavStackMobile(props: {
         disableElevation
         onClick={handleClick}
         color="inherit"
-        startIcon={
-          <TiDBLogo width={132} height={28.8} />
-        }
+        startIcon={<TiDBLogo width={132} height={28.8} />}
         endIcon={<ChevronDownIcon />}
       ></Button>
       <Menu
@@ -131,7 +135,12 @@ const RenderNavConfig = (props: {
 
   if (config.type === "item") {
     return (
-      <NavMenuItem item={config} namespace={namespace} onClose={onClose} language={language} />
+      <NavMenuItem
+        item={config}
+        namespace={namespace}
+        onClose={onClose}
+        language={language}
+      />
     );
   }
 
@@ -293,37 +302,37 @@ const NavMenuItem = (props: {
           width: "100%",
         }}
       >
-          {item.startIcon && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {item.startIcon}
-            </Box>
-          )}
-          <Typography
-            component="span"
+        {item.startIcon && (
+          <Box
             sx={{
-              fontSize: "14px",
-              fontWeight: isSelected ? 600 : 400,
+              display: "flex",
+              alignItems: "center",
             }}
           >
-            {item.label}
-          </Typography>
-          {item.endIcon && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "auto",
-              }}
-            >
-              {item.endIcon}
-            </Box>
-          )}
-        </Box>
+            {item.startIcon}
+          </Box>
+        )}
+        <Typography
+          component="span"
+          sx={{
+            fontSize: "14px",
+            fontWeight: isSelected ? 600 : 400,
+          }}
+        >
+          {item.label}
+        </Typography>
+        {item.endIcon && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "auto",
+            }}
+          >
+            {item.endIcon}
+          </Box>
+        )}
+      </Box>
     </MenuItem>
   );
 

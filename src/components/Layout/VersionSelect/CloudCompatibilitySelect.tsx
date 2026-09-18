@@ -4,8 +4,13 @@ import CheckIcon from "@mui/icons-material/Check";
 import MenuItem from "@mui/material/MenuItem";
 import { Box, Typography } from "@mui/material";
 
-import { CloudCompatibility } from "shared/interface";
-import { useCloudPlan } from "shared/useCloudPlan";
+import { CloudCompatibility, CloudPlan, PathConfig } from "shared/interface";
+import {
+  CLOUD_MODE_KEY,
+  CLOUD_COMPATIBILITY_KEY,
+  useCloudPlan,
+} from "shared/useCloudPlan";
+import LinkComponent from "components/Link";
 import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
 
 const COMPATIBILITY_VERSIONS = [
@@ -21,6 +26,7 @@ const COMPATIBILITY_VERSIONS = [
 
 interface CompatibilitySelectProps {
   disableStickyContainer?: boolean;
+  pathConfig: PathConfig;
 }
 
 export default function CloudCompatibilitySelect(
@@ -37,6 +43,17 @@ export default function CloudCompatibilitySelect(
 
   const handleClick = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const getToUrl = (compatibility: CloudCompatibility) => {
+    const searchParams = new URLSearchParams();
+    searchParams.set(CLOUD_MODE_KEY, CloudPlan.Starter);
+    searchParams.set(CLOUD_COMPATIBILITY_KEY, compatibility);
+
+    return compatibility === CloudCompatibility.PostgreSQL
+      ? `/${
+          props.pathConfig.repo
+        }/starter-postgresql/?${searchParams.toString()}`
+      : `/${props.pathConfig.repo}/starter/?${searchParams.toString()}`;
+  };
 
   return (
     <>
@@ -72,6 +89,9 @@ export default function CloudCompatibilitySelect(
             key={version.value}
             value={version.value}
             selected={version.value === currentCompatibility.value}
+            component={LinkComponent}
+            isI18n
+            to={getToUrl(version.value)}
             onClick={() => {
               setCloudCompatibility(version.value);
               handleClose();

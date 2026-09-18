@@ -1,6 +1,6 @@
 import { NavConfig } from "./HeaderNavConfigType";
-import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
-import { CloudPlan, TOCNamespace } from "shared/interface";
+import { CLOUD_MODE_KEY, CLOUD_COMPATIBILITY_KEY } from "shared/useCloudPlan";
+import { CloudCompatibility, CloudPlan, TOCNamespace } from "shared/interface";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import PreviewBadge from "components/Badge/PreviewBadge";
 
@@ -12,7 +12,8 @@ import TiDBIcon from "media/icons/layers-three-01.svg";
  */
 const getDefaultNavConfig = (
   t: (key: string) => string,
-  cloudPlan: CloudPlan | null
+  cloudPlan: CloudPlan | null,
+  cloudCompatibility: CloudCompatibility = CloudCompatibility.MySQL
 ): NavConfig[] => [
   {
     type: "group",
@@ -26,13 +27,21 @@ const getDefaultNavConfig = (
           {
             type: "item",
             label: t("navbar.tidbCloudStarter"),
-            to: `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}`,
+            to:
+              cloudPlan === CloudPlan.Starter &&
+              cloudCompatibility === CloudCompatibility.PostgreSQL
+                ? `/tidbcloud/starter-postgresql?${CLOUD_MODE_KEY}=${CloudPlan.Starter}&${CLOUD_COMPATIBILITY_KEY}=${CloudCompatibility.PostgreSQL}`
+                : `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Starter,
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Starter);
+                sessionStorage.setItem(
+                  CLOUD_COMPATIBILITY_KEY,
+                  cloudCompatibility
+                );
               }
             },
           },
@@ -204,10 +213,11 @@ export const generateNavConfig = (
   t: (key: string) => string,
   cloudPlan: CloudPlan | null,
   buildType?: string,
-  language?: string
+  language?: string,
+  cloudCompatibility?: CloudCompatibility
 ): NavConfig[] => {
   if (buildType === "archive") {
     return archiveNavConfig;
   }
-  return getDefaultNavConfig(t, cloudPlan);
+  return getDefaultNavConfig(t, cloudPlan, cloudCompatibility);
 };

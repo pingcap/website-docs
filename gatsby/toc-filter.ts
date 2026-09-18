@@ -53,7 +53,7 @@ function sortTocNames(tocNames: Iterable<string>): string[] {
   const priority = [
     "TOC",
     "TOC-tidb-cloud-starter",
-    "TOC-tidb-cloud-starter-postgresql",
+    "TOC-tidb-cloud-starter-pg",
     "TOC-tidb-cloud-essential",
     "TOC-tidb-cloud-premium",
   ];

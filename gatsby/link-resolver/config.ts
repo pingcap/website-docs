@@ -20,6 +20,15 @@ export const defaultLinkResolverConfig: LinkResolverConfig = {
       targetPattern: "/{curLang}/releases/tidb-cloud",
     },
     {
+      linkPattern: "/tidb-cloud/starter-pg/_index",
+      targetPattern: "/{curLang}/tidbcloud/starter-postgresql",
+    },
+    {
+      linkPattern: "/tidb-cloud/starter-pg/{...folders}/{docname}",
+      targetPattern:
+        "/{curLang}/tidbcloud/starter-postgresql/{folders}/{docname}",
+    },
+    {
       pathPattern: "/{lang}/tidb-in-kubernetes/{branch}/{...any}",
       linkPattern: "/tidb-in-kubernetes/releases/_index",
       targetPattern: "/{curLang}/releases/tidb-operator",

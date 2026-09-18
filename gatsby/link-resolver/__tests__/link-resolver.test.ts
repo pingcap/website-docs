@@ -125,6 +125,42 @@ describe("resolveMarkdownLink", () => {
     });
   });
 
+  describe("Starter PostgreSQL links", () => {
+    it("should resolve the Starter PostgreSQL index link", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter-pg/_index",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-pg"
+      );
+      expect(result).toBe("/tidbcloud/starter-postgresql");
+    });
+
+    it("should keep the Starter PostgreSQL prefix for page links", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter-pg/get-started",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-pg"
+      );
+      expect(result).toBe("/tidbcloud/starter-postgresql/get-started");
+    });
+
+    it("should preserve hashes for Starter PostgreSQL links", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter-pg/get-started#quick-start",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-pg"
+      );
+      expect(result).toBe(
+        "/tidbcloud/starter-postgresql/get-started#quick-start"
+      );
+    });
+
+    it("should keep the Starter PostgreSQL folder structure", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter-pg/guides/get-started",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-pg"
+      );
+      expect(result).toBe("/tidbcloud/starter-postgresql/guides/get-started");
+    });
+  });
+
   describe("linkMappings - namespace rules", () => {
     it("should resolve develop namespace links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(

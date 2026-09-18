@@ -85,7 +85,7 @@ export const createDocHome = async ({
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
     const starterPostgresqlNavUrl = generateNavTOCPath(
       pathConfig,
-      "tidb-cloud-starter-postgresql"
+      "tidb-cloud-starter-pg"
     );
     const essentialNavUrl = generateNavTOCPath(
       pathConfig,

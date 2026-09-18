@@ -225,10 +225,11 @@ function DocTemplate({
       t,
       cloudPlan,
       buildType,
-      language
+      language,
+      cloudCompatibility
     );
     return getSelectedNavItem(headerNavConfig, namespace);
-  }, [t, cloudPlan, buildType, language, namespace]);
+  }, [t, cloudPlan, cloudCompatibility, buildType, language, namespace]);
 
   return (
     <Layout
