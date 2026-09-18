@@ -117,7 +117,7 @@
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidbcloud/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
     - ガベージコレクション（GC）
        - [概要](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-overview.md): TiDB のガベージコレクションについて学習します。
-       - [コンフィグレーション](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
+       - [設定](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
     - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
   - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターをアップグレードする方法を学びます。
   - [TiDB Cloud Essentialインスタンスを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-cluster.md): TiDB Cloudリソースを削除する方法を学びましょう。

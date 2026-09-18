@@ -48,7 +48,7 @@
 
 - [統合の概要](https://docs.pingcap.com/ja/ai/vector-search-integration-overview.md): Auto Embedding プロバイダー、AI フレームワーク、ORM ライブラリ、クラウドサービス、MCP サーバーサポートを含む、TiDB の AI 統合の概要。
 - 自動埋め込み
-  - [概要](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-overview.md): 自動埋め込み機能を使用して、ベクトルではなくプレーンテキストで意味検索を実行する方法を学びましょう。
+  - [概要](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-overview.md): 自動埋め込み機能を使用して、ベクトルではなくプレーンテキストでセマンティック検索を実行する方法を学びましょう。
   - [OpenAI](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-openai.md): TiDB CloudでOpenAIの埋め込みモデルを使用する方法を学びましょう。
   - [OpenAI対応](https://docs.pingcap.com/ja/ai/embedding-openai-compatible.md): TiDBベクトル検索をOpenAI互換の埋め込みモデルと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
   - [Jina AI](https://docs.pingcap.com/ja/ai/vector-search-auto-embedding-jina-ai.md): TiDB CloudでJina AI埋め込みモデルを使用する方法を学びましょう。
