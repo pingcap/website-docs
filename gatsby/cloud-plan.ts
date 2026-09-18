@@ -86,7 +86,11 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
       console.error(`TOC ${key} has no type`);
       return;
     }
-    entry[tocType] = new Set(files);
+    if (tocType === CloudPlan.Starter) {
+      entry.starter = new Set([...entry.starter, ...files]);
+    } else {
+      entry[tocType] = new Set(files);
+    }
 
     console.info(`TOC ${key} (${tocType}): found ${files.length} files`);
   });

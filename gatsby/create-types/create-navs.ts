@@ -87,6 +87,47 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
   });
 
   createFieldExtension({
+    name: "starterPostgresqlNavigation",
+    extend() {
+      return {
+        async resolve(
+          mdxNode: any,
+          args: unknown,
+          context: unknown,
+          info: any
+        ) {
+          if (mdxNode.starterPostgresqlNav) return mdxNode.starterPostgresqlNav;
+          const types = info.schema.getType("Mdx").getFields();
+          const slug = await types["slug"].resolve(mdxNode, args, context, {
+            fieldName: "slug",
+          });
+
+          const mdxAST: Root = await types["mdxAST"].resolve(
+            mdxNode,
+            args,
+            context,
+            {
+              fieldName: "mdxAST",
+            }
+          );
+
+          if (!slug.endsWith("TOC-tidb-cloud-starter-postgresql"))
+            throw new Error(`unsupported query in ${slug}`);
+          const tocPath = calculateFileUrl(slug);
+          const res = mdxAstToToc(
+            mdxAST.children,
+            tocPath || slug,
+            undefined,
+            true
+          );
+          mdxNode.starterPostgresqlNav = res;
+          return res;
+        },
+      };
+    },
+  });
+
+  createFieldExtension({
     name: "essentialNavigation",
     extend() {
       return {
@@ -172,6 +213,7 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
     type Mdx implements Node {
       navigation: JSON! @navigation
       starterNavigation: JSON! @starterNavigation
+      starterPostgresqlNavigation: JSON! @starterPostgresqlNavigation
       essentialNavigation: JSON! @essentialNavigation
       premiumNavigation: JSON! @premiumNavigation
     }

@@ -1,4 +1,9 @@
-import { TableOfContent, CloudPlan, TOCNamespace } from "./interface";
+import {
+  TableOfContent,
+  CloudPlan,
+  CloudCompatibility,
+  TOCNamespace,
+} from "./interface";
 
 /**
  * Filter right TOC based on CustomContent conditions
@@ -8,7 +13,8 @@ export function filterRightToc(
   items: TableOfContent[],
   namespace: TOCNamespace,
   cloudPlan: CloudPlan | null,
-  language: string
+  language: string,
+  compatibility: CloudCompatibility = CloudCompatibility.MySQL
 ): TableOfContent[] {
   if (!items) return [];
 
@@ -16,7 +22,12 @@ export function filterRightToc(
     .map((item) => {
       // Check if item has condition
       if (item.condition) {
-        const { platform, plan, language: conditionLang } = item.condition;
+        const {
+          platform,
+          plan,
+          language: conditionLang,
+          compatibility: conditionCompatibility,
+        } = item.condition;
 
         // Check platform match (namespace)
         if (platform) {
@@ -41,6 +52,15 @@ export function filterRightToc(
             return null; // Filter out this item
           }
         }
+
+        if (conditionCompatibility) {
+          const compatibilityArray = conditionCompatibility
+            .split(",")
+            .map((item) => item.trim());
+          if (!compatibilityArray.includes(compatibility)) {
+            return null;
+          }
+        }
       }
 
       // Recursively filter nested items
@@ -49,7 +69,8 @@ export function filterRightToc(
           item.items,
           namespace,
           cloudPlan,
-          language
+          language,
+          compatibility
         );
         return {
           ...item,

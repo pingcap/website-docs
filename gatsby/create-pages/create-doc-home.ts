@@ -83,6 +83,10 @@ export const createDocHome = async ({
     const namespaceSlug = TOCNamespaceSlugMap[namespace];
     const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
+    const starterPostgresqlNavUrl = generateNavTOCPath(
+      pathConfig,
+      "tidb-cloud-starter-postgresql"
+    );
     const essentialNavUrl = generateNavTOCPath(
       pathConfig,
       "tidb-cloud-essential"
@@ -104,6 +108,7 @@ export const createDocHome = async ({
         filePath,
         navUrl,
         starterNavUrl,
+        starterPostgresqlNavUrl,
         essentialNavUrl,
         premiumNavUrl,
         pageUrl: path,
