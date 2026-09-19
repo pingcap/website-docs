@@ -111,7 +111,7 @@ export const createNavs = ({ actions }: CreatePagesArgs) => {
             }
           );
 
-          if (!slug.endsWith("TOC-tidb-cloud-starter-pg"))
+          if (!slug.endsWith("TOC-tidb-cloud-starter-postgresql"))
             throw new Error(`unsupported query in ${slug}`);
           const tocPath = calculateFileUrl(slug);
           const res = mdxAstToToc(

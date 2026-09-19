@@ -124,7 +124,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
     const starterPostgresqlNavUrl = generateNavTOCPath(
       pathConfig,
-      "tidb-cloud-starter-pg"
+      "tidb-cloud-starter-postgresql"
     );
     const essentialNavUrl = generateNavTOCPath(
       pathConfig,

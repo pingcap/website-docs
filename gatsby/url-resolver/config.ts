@@ -40,23 +40,6 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
       targetPattern: "/{lang}/releases/tidb-operator",
       conditions: { filename: ["_index"] },
     },
-    // TiDB Cloud Starter PostgreSQL maps its source folder to a stable URL prefix.
-    // /en/tidbcloud/master/tidb-cloud/starter-pg/_index.md
-    // -> /en/tidbcloud/starter-postgresql
-    {
-      sourcePattern:
-        "/{lang}/tidbcloud/{branch}/tidb-cloud/starter-pg/{filename}",
-      targetPattern: "/{lang}/tidbcloud/starter-postgresql",
-      conditions: { filename: ["_index"] },
-    },
-    // /en/tidbcloud/master/tidb-cloud/starter-pg/guides/page.md
-    // -> /en/tidbcloud/starter-postgresql/guides/page
-    {
-      sourcePattern:
-        "/{lang}/tidbcloud/{branch}/tidb-cloud/starter-pg/{...folders}/{filename}",
-      targetPattern:
-        "/{lang}/tidbcloud/starter-postgresql/{folders}/{filename}",
-    },
     // tidbcloud with prefix (dedicated, starter, etc.)
     // When filename = "_index": /en/tidbcloud/tidb-cloud/{prefix}/_index.md -> /en/tidbcloud/{prefix}/
     // When filename != "_index": /en/tidbcloud/tidb-cloud/{prefix}/{filename}.md -> /en/tidbcloud/{filename}/

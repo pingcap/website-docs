@@ -30,7 +30,7 @@ const getDefaultNavConfig = (
             to:
               cloudPlan === CloudPlan.Starter &&
               cloudCompatibility === CloudCompatibility.PostgreSQL
-                ? `/tidbcloud/starter-postgresql?${CLOUD_MODE_KEY}=${CloudPlan.Starter}&${CLOUD_COMPATIBILITY_KEY}=${CloudCompatibility.PostgreSQL}`
+                ? `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}&${CLOUD_COMPATIBILITY_KEY}=${CloudCompatibility.PostgreSQL}`
                 : `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&

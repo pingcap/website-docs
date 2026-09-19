@@ -17,7 +17,7 @@ export const CLOUD_COMPATIBILITY_KEY = "compatibility";
 const TOC_NAME_TO_CLOUD_PLAN: Record<string, CloudPlan> = {
   TOC: CloudPlan.Dedicated,
   "TOC-tidb-cloud-starter": CloudPlan.Starter,
-  "TOC-tidb-cloud-starter-pg": CloudPlan.Starter,
+  "TOC-tidb-cloud-starter-postgresql": CloudPlan.Starter,
   "TOC-tidb-cloud-essential": CloudPlan.Essential,
   "TOC-tidb-cloud-premium": CloudPlan.Premium,
 };
@@ -70,8 +70,6 @@ export const useCloudPlan = () => {
   const pendingCloudCompatibilityRef = useRef<CloudCompatibility | null>(null);
   const { pathname, search, hash } = useLocation();
   const isTidbcloud = repo === Repo.tidbcloud;
-  const isStarterPgPath =
-    isTidbcloud && /\/tidbcloud\/starter-postgresql(?:\/|$)/.test(pathname);
 
   const searchParams = new URLSearchParams(search);
   const cloudPlanFromQueryRaw = isTidbcloud
@@ -87,9 +85,8 @@ export const useCloudPlan = () => {
   const cloudPlanFromSession = isCloudPlan(cloudPlanFromSessionRaw)
     ? cloudPlanFromSessionRaw
     : null;
-  const resolvedCloudPlan = isStarterPgPath
-    ? CloudPlan.Starter
-    : cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
+  const resolvedCloudPlan =
+    cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
 
   const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
   const cloudCompatibilityFromQueryRaw = isStarter
@@ -114,11 +111,10 @@ export const useCloudPlan = () => {
   )
     ? cloudCompatibilityFromSessionRaw
     : null;
-  const requestedCloudCompatibility = isStarterPgPath
-    ? CloudCompatibility.PostgreSQL
-    : cloudCompatibilityFromQuery ||
-      cloudCompatibilityFromSession ||
-      CloudCompatibility.MySQL;
+  const requestedCloudCompatibility =
+    cloudCompatibilityFromQuery ||
+    cloudCompatibilityFromSession ||
+    CloudCompatibility.MySQL;
 
   const setCloudPlan = useCallback(
     (cloudPlan: CloudPlan) => {
@@ -156,16 +152,11 @@ export const useCloudPlan = () => {
       return;
     }
 
-    const shouldNormalizePlan =
-      isStarterPgPath && cloudPlanFromQuery !== CloudPlan.Starter;
     const shouldNormalizeCompatibility =
       isStarter &&
       cloudCompatibilityFromQueryRaw !== requestedCloudCompatibility;
 
-    if (shouldNormalizePlan || shouldNormalizeCompatibility) {
-      if (isStarterPgPath) {
-        searchParams.set(CLOUD_MODE_KEY, CloudPlan.Starter);
-      }
+    if (shouldNormalizeCompatibility) {
       searchParams.set(CLOUD_COMPATIBILITY_KEY, requestedCloudCompatibility);
       navigate(`${pathname}?${searchParams.toString()}${hash || ""}`, {
         replace: true,
@@ -195,8 +186,6 @@ export const useCloudPlan = () => {
     searchParams,
     pathname,
     hash,
-    isStarterPgPath,
-    cloudPlanFromQuery,
   ]);
 
   const isEssential = isTidbcloud && resolvedCloudPlan === CloudPlan.Essential;
@@ -226,13 +215,10 @@ export const useCloudPlanNavigate = (
   setCloudPlan: (plan: CloudPlan) => void
 ) => {
   const { pathname, search, hash } = useLocation();
-  const isStarterPgPath = /\/tidbcloud\/starter-postgresql(?:\/|$)/.test(
-    pathname
-  );
   const tocNamesKey = Array.isArray(tocNames) ? tocNames.join("|") : "";
 
   useEffect(() => {
-    if (namespace !== TOCNamespace.TiDBCloud || isStarterPgPath) {
+    if (namespace !== TOCNamespace.TiDBCloud) {
       return;
     }
     const searchParams = new URLSearchParams(search);
@@ -299,6 +285,5 @@ export const useCloudPlanNavigate = (
     pathname,
     search,
     hash,
-    isStarterPgPath,
   ]);
 };

@@ -135,31 +135,13 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/tidbcloud/dedicated/starter");
   });
 
-  it("should resolve Starter PostgreSQL index to starter-postgresql", () => {
+  it("should resolve Starter index to starter without trailing slash", () => {
     const absolutePath = path.join(
       sourceBasePath,
-      "en/tidbcloud/master/tidb-cloud/starter-pg/_index.md"
+      "en/tidbcloud/master/tidb-cloud/starter/_index.md"
     );
     const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidbcloud/starter-postgresql/");
-  });
-
-  it("should keep Starter PostgreSQL prefix for dedicated pages", () => {
-    const absolutePath = path.join(
-      sourceBasePath,
-      "en/tidbcloud/master/tidb-cloud/starter-pg/get-started.md"
-    );
-    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidbcloud/starter-postgresql/get-started/");
-  });
-
-  it("should keep Starter PostgreSQL folder structure", () => {
-    const absolutePath = path.join(
-      sourceBasePath,
-      "en/tidbcloud/master/tidb-cloud/starter-pg/guides/get-started.md"
-    );
-    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
-    expect(url).toBe("/en/tidbcloud/starter-postgresql/guides/get-started/");
+    expect(url).toBe("/en/tidbcloud/starter");
   });
 
   it("should resolve tidbcloud non-index without prefixes", () => {

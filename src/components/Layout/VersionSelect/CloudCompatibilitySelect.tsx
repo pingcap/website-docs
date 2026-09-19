@@ -48,11 +48,7 @@ export default function CloudCompatibilitySelect(
     searchParams.set(CLOUD_MODE_KEY, CloudPlan.Starter);
     searchParams.set(CLOUD_COMPATIBILITY_KEY, compatibility);
 
-    return compatibility === CloudCompatibility.PostgreSQL
-      ? `/${
-          props.pathConfig.repo
-        }/starter-postgresql/?${searchParams.toString()}`
-      : `/${props.pathConfig.repo}/starter/?${searchParams.toString()}`;
+    return `/${props.pathConfig.repo}/starter/?${searchParams.toString()}`;
   };
 
   return (

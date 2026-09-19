@@ -9,7 +9,7 @@ jest.mock("../toc", () => ({
     if (tocSlug.endsWith("/TOC-tidb-cloud-starter")) {
       return [{ type: "nav", link: "/cloud-starter-only.md" }];
     }
-    if (tocSlug.endsWith("/TOC-tidb-cloud-starter-pg")) {
+    if (tocSlug.endsWith("/TOC-tidb-cloud-starter-postgresql")) {
       return [{ type: "nav", link: "/cloud-starter-postgresql-only.md" }];
     }
     if (tocSlug.endsWith("/TOC-tidb-cloud-lake")) {
@@ -155,8 +155,8 @@ describe("getFilesFromTocs TOC selection rules", () => {
               "docs/markdown-pages/en/tidbcloud/master/TOC-tidb-cloud-starter.md"
             ),
             makeNode(
-              "en/tidbcloud/master/TOC-tidb-cloud-starter-pg",
-              "docs/markdown-pages/en/tidbcloud/master/TOC-tidb-cloud-starter-pg.md"
+              "en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql",
+              "docs/markdown-pages/en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql.md"
             ),
           ],
         },

@@ -265,33 +265,6 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 4a: TiDB Cloud Starter PostgreSQL
-
-**Effect**: Maps the Starter PostgreSQL source folder to a dedicated URL prefix.
-
-**Source Pattern**:
-
-- Index: `/{lang}/tidbcloud/{branch}/tidb-cloud/starter-pg/{filename}`
-- Other pages: `/{lang}/tidbcloud/{branch}/tidb-cloud/starter-pg/{...folders}/{filename}`
-
-**Target Pattern**:
-
-- Index: `/{lang}/tidbcloud/starter-postgresql`
-- Other pages: `/{lang}/tidbcloud/starter-postgresql/{folders}/{filename}`
-
-**Conditions**: Index rule requires `filename = "_index"`.
-
-**Example**:
-
-- Source: `en/tidbcloud/master/tidb-cloud/starter-pg/_index.md`
-- Target: `/tidbcloud/starter-postgresql`
-- Source: `en/tidbcloud/master/tidb-cloud/starter-pg/guides/get-started.md`
-- Target: `/tidbcloud/starter-postgresql/guides/get-started`
-
-**Use Case**: Starter PostgreSQL has an independent index, TOC, and PostgreSQL-only pages while sharing TiDB Cloud page infrastructure.
-
----
-
 ### Rule 5: TiDBCloud with Prefix
 
 **Effect**: Maps TiDBCloud pages with prefixes (dedicated, starter, essential) to TiDBCloud URLs.
@@ -522,24 +495,6 @@ Rules are evaluated in order; the first matching rule wins.
 ## Link Resolver Configuration Rules
 
 Rules are evaluated in order; the first matching rule wins.
-
-### Rule 0: Starter PostgreSQL Links (Direct Mapping)
-
-**Effect**: Keeps Starter PostgreSQL TOC links under the dedicated URL prefix.
-
-**Link Pattern / Target Pattern**:
-
-- Index: `/tidb-cloud/starter-pg/_index` → `/{curLang}/tidbcloud/starter-postgresql`
-- Other links: `/tidb-cloud/starter-pg/{...folders}/{docname}` → `/{curLang}/tidbcloud/starter-postgresql/{folders}/{docname}`
-
-**Example**:
-
-- Link: `/tidb-cloud/starter-pg/guides/get-started`
-- Result: `/tidbcloud/starter-postgresql/guides/get-started`
-
-**Use Case**: PostgreSQL-only Starter pages remain distinguishable from shared TiDB Cloud pages.
-
----
 
 ### Rule 1: Releases Index Links
 
