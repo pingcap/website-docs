@@ -9,6 +9,7 @@ import {
   useEffect,
   useRef,
 } from "react";
+import { getCloudPlanFromPathname } from "./cloud-plan-route";
 import { CloudCompatibility, CloudPlan, Repo, TOCNamespace } from "./interface";
 
 export const CLOUD_MODE_KEY = "plan";
@@ -222,6 +223,7 @@ export const useCloudPlanNavigate = (
       return;
     }
     const searchParams = new URLSearchParams(search);
+    const routeCloudPlan = getCloudPlanFromPathname(pathname);
 
     const cloudModeFromQueryRaw = searchParams.get(CLOUD_MODE_KEY);
     const cloudModeFromSessionRaw = sessionStorage.getItem(CLOUD_MODE_KEY);
@@ -237,7 +239,8 @@ export const useCloudPlanNavigate = (
     const defaultCloudPlan =
       allowedCloudPlans[0] || inDefaultPlan || CloudPlan.Dedicated;
 
-    const requestedCloudPlan = cloudModeFromQuery || cloudModeFromSession;
+    const requestedCloudPlan =
+      routeCloudPlan || cloudModeFromQuery || cloudModeFromSession;
     const shouldFallbackToDefault =
       !requestedCloudPlan ||
       (allowedCloudPlans.length > 0 &&
