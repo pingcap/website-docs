@@ -110,7 +110,7 @@
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidbcloud/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
     - ガベージコレクション（GC）
       - [概要](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-overview.md): TiDB のガベージコレクションについて学習します。
-      - [コンフィグレーション](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
+      - [設定](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
     - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
   - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターをアップグレードする方法を学びます。
   - [TiDB Cloud Starterインスタンスを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-cluster.md): TiDB Cloudリソースを削除する方法を学びましょう。
@@ -151,7 +151,7 @@
   - [Postmanで実行](https://docs.pingcap.com/ja/tidbcloud/data-service-postman-integration.md): Postmanでデータアプリを実行する方法を学びましょう。
   - [GitHubで自動デプロイ](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-github-connection.md): GitHubを使ってデータアプリを自動的にデプロイする方法を学びましょう。
   - [Next.jsでOpenAPI仕様を使用する](https://docs.pingcap.com/ja/tidbcloud/data-service-oas-with-nextjs.md): データアプリのOpenAPI仕様を使用してクライアントコードを生成し、Next.jsアプリケーションを開発する方法を学びます。
-  - [データアプリコンフィグレーションファイル](https://docs.pingcap.com/ja/tidbcloud/data-service-app-config-files.md): このドキュメントでは、TiDB Cloudのデータアプリの設定ファイルについて説明します。
+  - [データアプリ設定ファイル](https://docs.pingcap.com/ja/tidbcloud/data-service-app-config-files.md): このドキュメントでは、TiDB Cloudのデータアプリの設定ファイルについて説明します。
   - [応答とステータスコード](https://docs.pingcap.com/ja/tidbcloud/data-service-response-and-status-code.md): このドキュメントでは、TiDB CloudのData Serviceの応答と HTTP ステータスコードについて説明します。
 - セキュリティ
   - [セキュリティ概要](https://docs.pingcap.com/ja/tidbcloud/security-overview.md): TiDB Cloudの包括的なセキュリティフレームワークについて学びましょう。これには、ID管理、ネットワーク分離、データ保護、アクセス制御、監査などが含まれます。
