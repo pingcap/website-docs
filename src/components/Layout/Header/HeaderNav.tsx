@@ -29,7 +29,7 @@ export default function HeaderNavStack(props: {
   onSelectedNavItemChange?: (item: NavItemConfig | null) => void;
 }) {
   const { language, t } = useI18next();
-  const { cloudPlan } = useCloudPlan();
+  const { cloudPlan, cloudCompatibility } = useCloudPlan();
 
   // Default configuration (backward compatible)
   const defaultConfig: NavConfig[] = React.useMemo(() => {
@@ -37,13 +37,29 @@ export default function HeaderNavStack(props: {
       return props.config;
     }
     // Use new config generator
-    return generateNavConfig(t, cloudPlan, props.buildType, language);
-  }, [props.config, props.buildType, cloudPlan, t, language]);
+    return generateNavConfig(
+      t,
+      cloudPlan,
+      props.buildType,
+      language,
+      cloudCompatibility
+    );
+  }, [
+    props.config,
+    props.buildType,
+    cloudPlan,
+    cloudCompatibility,
+    t,
+    language,
+  ]);
 
   // Find and notify selected item
   React.useEffect(() => {
     if (props.onSelectedNavItemChange) {
-      const selectedNavItem = getSelectedNavItem(defaultConfig, props.namespace);
+      const selectedNavItem = getSelectedNavItem(
+        defaultConfig,
+        props.namespace
+      );
       props.onSelectedNavItemChange(selectedNavItem);
     }
   }, [defaultConfig, props.namespace, props.onSelectedNavItemChange]);

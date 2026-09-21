@@ -53,6 +53,7 @@ function sortTocNames(tocNames: Iterable<string>): string[] {
   const priority = [
     "TOC",
     "TOC-tidb-cloud-starter",
+    "TOC-tidb-cloud-starter-postgresql",
     "TOC-tidb-cloud-essential",
     "TOC-tidb-cloud-premium",
   ];
@@ -71,9 +72,7 @@ function sortTocNames(tocNames: Iterable<string>): string[] {
  * Get files that should be built based on TOC content
  * Returns a Map where key is "locale/repo/version" and value is Set of file names
  */
-export async function getFilesFromTocs(
-  graphql: any
-): Promise<TocFilesResult> {
+export async function getFilesFromTocs(graphql: any): Promise<TocFilesResult> {
   const tocQuery = await graphql(`
     {
       allMdx(filter: { fileAbsolutePath: { regex: "/TOC.*md$/" } }) {

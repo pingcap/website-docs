@@ -122,6 +122,10 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
     const namespaceSlug = TOCNamespaceSlugMap[namespace || TOCNamespace.TiDB];
     const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
+    const starterPostgresqlNavUrl = generateNavTOCPath(
+      pathConfig,
+      "tidb-cloud-starter-postgresql"
+    );
     const essentialNavUrl = generateNavTOCPath(
       pathConfig,
       "tidb-cloud-essential"
@@ -157,6 +161,7 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         pageUrl: path,
         navUrl,
         starterNavUrl,
+        starterPostgresqlNavUrl,
         essentialNavUrl,
         premiumNavUrl,
         availIn: {
