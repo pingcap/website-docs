@@ -37,28 +37,6 @@ In order to debug algolia searches, you need to provide two additional environme
 
 Put them in `.env.development` to make them take effect. (Ref: <https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/>)
 
-## Filesystem Documentation
-
-TiDB Cloud Filesystem appears after TiDB Cloud Lake in the Product menu. Its
-English documentation is published at `/tidbcloud-filesystem/` with its own
-sidebar and Preview badge.
-
-The source content comes from `pingcap/docs` and is published by
-`pingcap/docs-staging` under
-`markdown-pages/en/tidb-cloud-filesystem/master/`. The staging tree contains
-`tidb-cloud-filesystem/` and `TOC-tidb-cloud-filesystem.md`, and requires a
-separate `tidb-cloud-filesystem` entry in the `pingcap/docs-staging`
-`docs.json`, similar to TiDB Cloud Lake. After the staging submodule is
-updated, that file is available in this checkout as `docs/docs.json`. The
-source pages and staging configuration must reach `docs-staging` before a
-website deployment can publish them. The menu links to English without
-changing the selected Cloud database plan or implying that translated
-Filesystem pages exist.
-
-`gatsby/__tests__/filesystem-routing.test.ts` checks published URLs, sidebar
-selection, TOC membership, and links to the existing AI command reference.
-`gatsby/__tests__/filesystem-header.test.ts` checks menu order and selection.
-
 ## Workflow
 
 Because of most of our text data stored in GitHub. It's needed to apply a GitHub API token in development **when you are prompted for `rate-limiting`**.
