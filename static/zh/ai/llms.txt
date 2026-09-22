@@ -4,45 +4,162 @@
 
 ## 快速开始
 
-- [使用 Python 快速上手](https://docs.pingcap.com/zh/ai/quickstart-via-python.md): 学习如何使用 Python SDK 在 TiDB 中开始向量搜索。
-- [使用 SQL 快速上手](https://docs.pingcap.com/zh/ai/quickstart-via-sql.md): 学习如何仅使用 SQL 语句快速上手 TiDB 向量搜索，为你的生成式 AI 应用提供支持。
-
-## 基础概念
-
-- [向量搜索](https://docs.pingcap.com/zh/ai/vector-search-overview.md): 了解 TiDB 中的向量搜索功能。该功能为文档、图片、音频和视频等多种数据类型提供了先进的语义相似性搜索解决方案。
+- [通过 Python 快速上手向量搜索](https://docs.pingcap.com/zh/ai/quickstart-via-python.md): 学习如何使用 Python SDK 在 TiDB 中开始向量搜索。
+- [通过 SQL 快速上手向量搜索](https://docs.pingcap.com/zh/ai/quickstart-via-sql.md): 学习如何仅使用 SQL 语句快速上手 TiDB 向量搜索，为你的生成式 AI 应用提供支持。
+- [快速上手 TiDB Cloud CLI](https://docs.pingcap.com/zh/ai/ti-quick-start.md): 安装并配置 TiDB Cloud CLI，然后创建并使用 TiDB Cloud Filesystem，或查询 TiDB Cloud Starter 数据库。
 
 ## 使用指南
 
-- [连接 TiDB](https://docs.pingcap.com/zh/ai/connect.md): 学习如何使用 `pytidb` 客户端连接到 TiDB 数据库。
-- [使用表](https://docs.pingcap.com/zh/ai/tables.md): 了解如何在 TiDB 中使用表。
-- 搜索功能
-  - [向量搜索](https://docs.pingcap.com/zh/ai/vector-search.md): 了解如何在你的应用中使用向量搜索。
+- [通过 Python 连接到 TiDB](https://docs.pingcap.com/zh/ai/connect.md): 学习如何使用 `pytidb` 客户端连接到 TiDB 数据库。
+- 搜索与检索
+  - 向量搜索
+    - [概览](https://docs.pingcap.com/zh/ai/vector-search-overview.md): 了解 TiDB 中的向量搜索。该功能为跨多种数据类型（包括文档、图像、音频和视频）执行语义相似性搜索提供了一种高级搜索解决方案。
+    - [向量搜索指南](https://docs.pingcap.com/zh/ai/vector-search.md): 了解如何在你的应用中使用向量搜索。
+    - [向量搜索示例](https://docs.pingcap.com/zh/ai/vector-search-with-pytidb.md): 使用向量嵌入实现语义搜索，以查找相似内容。
   - 全文搜索
     - [使用 Python 进行全文搜索](https://docs.pingcap.com/zh/ai/vector-search-full-text-search-python.md): 全文搜索允许你通过精确关键字搜索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提升搜索质量。
     - [使用 SQL 进行全文搜索](https://docs.pingcap.com/zh/ai/vector-search-full-text-search-sql.md): 全文搜索允许你根据精确关键字搜索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提升搜索质量。
-  - [混合搜索](https://docs.pingcap.com/zh/ai/vector-search-hybrid-search.md): 同时使用全文搜索和向量搜索，以提升搜索质量。
-  - [图片搜索](https://docs.pingcap.com/zh/ai/image-search.md): 了解如何在你的应用中使用图像搜索。
-- 高级功能
-  - [自动生成向量](https://docs.pingcap.com/zh/ai/auto-embedding.md): 了解如何在你的应用程序中使用 Auto Embedding 功能。
-  - [过滤](https://docs.pingcap.com/zh/ai/filtering.md): 了解如何在你的应用中使用过滤功能。
+    - [全文搜索示例](https://docs.pingcap.com/zh/ai/fulltext-search-with-pytidb.md): 使用 TiDB 全文搜索执行传统文本搜索。
+  - 混合搜索
+    - [混合搜索指南](https://docs.pingcap.com/zh/ai/vector-search-hybrid-search.md): 同时使用全文搜索和向量搜索，以提升搜索质量。
+    - [混合搜索示例](https://docs.pingcap.com/zh/ai/hybrid-search-with-pytidb.md): 结合向量搜索和全文搜索，以获得更全面的结果。
+  - Auto Embeddings
+    - [auto embedding 指南](https://docs.pingcap.com/zh/ai/auto-embedding.md): 了解如何在你的应用程序中使用 Auto Embedding 功能。
+    - [auto embedding 示例](https://docs.pingcap.com/zh/ai/auto-embedding-with-pytidb.md): 使用内置嵌入模型为你的文本数据自动生成向量嵌入。
+  - 图片搜索
+    - [图片搜索指南](https://docs.pingcap.com/zh/ai/image-search.md): 了解如何在你的应用中使用图像搜索。
+    - [图片搜索示例](https://docs.pingcap.com/zh/ai/image-search-with-pytidb.md): 使用多模态嵌入构建一个支持文搜图和图搜图的图像搜索应用。
   - [重排序](https://docs.pingcap.com/zh/ai/reranking.md): 了解如何在你的应用中使用 reranking。
+- 处理数据
+  - [使用表](https://docs.pingcap.com/zh/ai/tables.md): 了解如何在 TiDB 中使用表。
+  - [过滤](https://docs.pingcap.com/zh/ai/filtering.md): 了解如何在你的应用中使用过滤功能。
   - [Join 查询](https://docs.pingcap.com/zh/ai/join-queries.md): 学习如何在你的应用中使用多表连接。
   - [Raw SQL 查询](https://docs.pingcap.com/zh/ai/raw-queries.md): 学习如何在你的应用程序中使用原始查询。
   - [事务](https://docs.pingcap.com/zh/ai/transactions.md): 了解如何在你的应用中使用事务。
-
-## 代码示例
-
-- [增删改查](https://docs.pingcap.com/zh/ai/basic-with-pytidb.md): 学习使用 `pytidb` 进行数据库连接、建表和数据操作等基础操作。
-- [自动生成向量](https://docs.pingcap.com/zh/ai/auto-embedding-with-pytidb.md): 使用内置嵌入模型为你的文本数据自动生成嵌入向量。
-- 搜索与检索
-  - [向量搜索](https://docs.pingcap.com/zh/ai/vector-search-with-pytidb.md): 使用向量嵌入实现语义搜索，查找相似内容。
-  - [全文搜索](https://docs.pingcap.com/zh/ai/fulltext-search-with-pytidb.md): 使用 TiDB 全文搜索执行传统文本搜索。
-  - [混合搜索](https://docs.pingcap.com/zh/ai/hybrid-search-with-pytidb.md): 结合向量搜索和全文搜索，获得更全面的结果。
-  - [图片搜索](https://docs.pingcap.com/zh/ai/image-search-with-pytidb.md): 使用多模态嵌入构建一个支持文本到图像和图像到图像搜索的图像搜索应用。
-- AI 应用
-  - [RAG 应用](https://docs.pingcap.com/zh/ai/rag-with-pytidb.md): 构建一个结合文档搜索与语言生成的 RAG 应用。
-  - [对话记忆](https://docs.pingcap.com/zh/ai/memory-with-pytidb.md): 为聊天机器人和会话式 AI 应用实现会话内存。
-  - [文本转 SQL](https://docs.pingcap.com/zh/ai/text2sql-with-pytidb.md): 使用 AI 模型将自然语言查询转换为 SQL 语句。
+- 构建 AI 应用
+  - [RAG 示例](https://docs.pingcap.com/zh/ai/rag-with-pytidb.md): 构建一个结合文档检索与语言生成的 RAG 应用。
+  - [对话内存示例](https://docs.pingcap.com/zh/ai/memory-with-pytidb.md): 为聊天机器人和对话式 AI 应用实现对话记忆。
+  - [Text-to-SQL 示例](https://docs.pingcap.com/zh/ai/text2sql-with-pytidb.md): 使用 AI 模型将自然语言查询转换为 SQL 语句。
+- TiDB Cloud CLI
+  - [概览](https://docs.pingcap.com/zh/ai/ti-overview.md): 了解何时使用 TiDB Cloud CLI (`ti`) 来管理 TiDB Cloud Starter 实例和 TiDB Cloud Filesystems。
+  - [安装、配置和更新 TiDB Cloud CLI](https://docs.pingcap.com/zh/ai/ti-install-configure-update.md): 安装 TiDB Cloud CLI 发布版本，配置 Profile，检查版本，应用更新，以及卸载 CLI。
+  - [管理 TiDB Cloud Starter 实例](https://docs.pingcap.com/zh/ai/manage-starter-instances.md): 了解如何使用 TiDB Cloud CLI 创建和管理 Starter 实例、分支、SQL 用户、连接和 SQL 语句。
+  - 管理 TiDB Cloud Filesystem
+    - [管理 Filesystem 资源](https://docs.pingcap.com/zh/ai/manage-filesystem-resources.md): 了解如何使用 TiDB Cloud CLI 安全地创建、检查、验证、选择和删除 TiDB Cloud Filesystem 资源。
+    - [配置 Filesystem AI 提供方](https://docs.pingcap.com/zh/ai/configure-filesystem-ai-providers.md): 了解如何使用 CLI 检查并配置 TiDB Cloud Filesystem 的媒体内容提取和向量嵌入 provider。
+    - [管理 Filesystem 访问令牌](https://docs.pingcap.com/zh/ai/manage-filesystem-tokens.md): 了解如何为 TiDB Cloud Filesystem 导入、生成、设置作用域、查看、禁用、轮转和回收访问令牌。
+    - [使用 Filesystem 数据](https://docs.pingcap.com/zh/ai/work-with-filesystem-data.md): 了解如何使用 CLI 在 TiDB Cloud Filesystem 中复制、读取、组织、搜索和检查文件及目录。
+    - [管理 Filesystem Layers 和 Checkpoints](https://docs.pingcap.com/zh/ai/manage-filesystem-layers.md): 了解如何安全地创建、检查、派生、创建 checkpoints、回滚、提交、打包和恢复 TiDB Cloud Filesystem layers。
+    - [挂载 TiDB Cloud Filesystem](https://docs.pingcap.com/zh/ai/mount-filesystem.md): 了解如何在 macOS、Linux 或容器中安全地挂载、使用、刷写和卸载 TiDB Cloud Filesystem。
+    - [管理 Git 工作区](https://docs.pingcap.com/zh/ai/manage-git-workspaces.md): 了解如何在已挂载的 TiDB Cloud Filesystem 上克隆、hydrate、创建链接工作树以及删除 Git 工作区。
+    - [使用 Filesystem 日志（Journal）](https://docs.pingcap.com/zh/ai/use-filesystem-journals.md): 了解如何在 Filesystem 中为代理和自动化事件创建、追加、读取、搜索和验证仅追加日志（Journal）。
+    - [管理 Filesystem Vault Secrets](https://docs.pingcap.com/zh/ai/manage-filesystem-vault-secrets.md): 了解如何使用 TiDB Cloud Filesystem Vault 安全地存储、读取、委派、注入、审计、回收和挂载 Secret。
+  - 面向用户和自动化的场景
+    - [运行日常 TiDB Cloud CLI 工作流](https://docs.pingcap.com/zh/ai/ti-daily-workflow-example.md): 检查资源、管理 TiDB Cloud Starter 实例和 Filesystem、检查 TiDB Cloud CLI 更新并清理资源。
+    - [使用显式 SQL 角色查询 TiDB Cloud Starter](https://docs.pingcap.com/zh/ai/ti-query-sql-with-roles-example.md): 准备由 TiDB Cloud CLI 管理的 SQL 用户，并以显式权限意图执行只读、读写和管理员语句。
+    - [在多台机器之间共享 TiDB Cloud Filesystem](https://docs.pingcap.com/zh/ai/ti-share-filesystem-across-machines-example.md): 创建一个 Filesystem，从第二台机器安全地访问它，并验证数据面和挂载可见性。
+    - [使用 TiDB Cloud Filesystem 在隔离作业之间交接 CI 制品](https://docs.pingcap.com/zh/ai/ti-ci-artifact-handoff-example.md): 将构建输出持久化到 TiDB Cloud Filesystem，并在后续的 CI 作业中使用，而无需复制完整的 TiDB Cloud CLI 配置（Profile）。
+  - 面向 AI Agent 的场景
+    - [在 Agent 沙箱中使用 TiDB Cloud Filesystem](https://docs.pingcap.com/zh/ai/ti-agent-sandbox-example.md): 在受信任的机器上预配 Filesystem，并让一个干净的 agent 沙箱在无需 TiDB Cloud API keys 和配置的情况下进行访问。
+    - [使用 TiDB Cloud Filesystem 在一次性沙箱之间持久化 Agent 状态](https://docs.pingcap.com/zh/ai/ti-persistent-agent-state-example.md): 在替换 agent 沙箱时，将计划、检查点、输出和工作流历史保存在 TiDB Cloud Filesystem 中。
+    - [使用 TiDB Cloud Filesystem 在并行 Agent 之间共享只读数据集](https://docs.pingcap.com/zh/ai/ti-parallel-agent-dataset-example.md): 上传一份非结构化数据集，并将同一个只读挂载的命名空间暴露给多个代理工作进程。
+    - [在 TiDB Cloud Filesystem 上为 Agent 准备 Git 工作区](https://docs.pingcap.com/zh/ai/ti-git-workspace-for-agents-example.md): 快速让大型 Git 工作区可见，在后台补全干净对象，并让智能体在完整下载完成前开始工作。
+    - [在 TiDB Cloud Filesystem Journal 中记录 Agent 工作流](https://docs.pingcap.com/zh/ai/ti-journal-agent-workflow-example.md): 创建日志，追加结构化的 agent 事件，搜索工作流，并验证日志哈希链。
+    - [将 TiDB Cloud Filesystem Vault Secrets 委托给 Agent](https://docs.pingcap.com/zh/ai/ti-vault-agent-secrets-example.md): 存储一个 Secret，将其中一个字段授予 agent，将其注入到进程中，审计访问，并回收授权。
+  - 命令参考
+    - [概览](https://docs.pingcap.com/zh/ai/ti-cli-reference.md): 参考 TiDB Cloud CLI 命令组、语法、全局选项、输出、dry-run 行为、帮助形式和错误。
+    - [configure](https://docs.pingcap.com/zh/ai/ti-configure.md): 以交互式或非交互式方式配置本地 TiDB Cloud CLI 配置（Profile）。
+    - [update](https://docs.pingcap.com/zh/ai/ti-update.md): 检查或安装 TiDB Cloud CLI 的版本更新。
+    - 用于管理 TiDB Cloud Starter 实例的 `ti db` 命令
+      - [概览](https://docs.pingcap.com/zh/ai/ti-starter-database.md): 参考适用于 Starter 实例、分支、SQL 用户、连接字符串和 SQL 执行的每个 `ti db` 命令。
+      - [create-db-cluster](https://docs.pingcap.com/zh/ai/ti-db-create-db-cluster.md): 创建一个 TiDB Cloud Starter 集群。
+      - [list-db-clusters](https://docs.pingcap.com/zh/ai/ti-db-list-db-clusters.md): 列出 TiDB Cloud Starter 集群。
+      - [describe-db-cluster](https://docs.pingcap.com/zh/ai/ti-db-describe-db-cluster.md): 描述一个 TiDB Cloud Starter 集群。
+      - [update-db-cluster](https://docs.pingcap.com/zh/ai/ti-db-update-db-cluster.md): 修改 TiDB Cloud Starter 集群。
+      - [delete-db-cluster](https://docs.pingcap.com/zh/ai/ti-db-delete-db-cluster.md): 删除一个 TiDB Cloud Starter 集群。
+      - [create-db-cluster-branch](https://docs.pingcap.com/zh/ai/ti-db-create-db-cluster-branch.md): 为 TiDB Cloud Starter 集群创建一个分支。
+      - [list-db-cluster-branches](https://docs.pingcap.com/zh/ai/ti-db-list-db-cluster-branches.md): 列出一个 TiDB Cloud Starter 集群的分支。
+      - [describe-db-cluster-branch](https://docs.pingcap.com/zh/ai/ti-db-describe-db-cluster-branch.md): 描述 TiDB Cloud Starter 集群的一个分支。
+      - [delete-db-cluster-branch](https://docs.pingcap.com/zh/ai/ti-db-delete-db-cluster-branch.md): 从 TiDB Cloud Starter 集群中删除一个分支。
+      - [create-db-sql-users](https://docs.pingcap.com/zh/ai/ti-db-create-db-sql-users.md): 为 TiDB Cloud Starter 实例创建由 TiDB Cloud CLI 管理的 SQL 用户。
+      - [format-db-connection-string](https://docs.pingcap.com/zh/ai/ti-db-format-db-connection-string.md): 为由 TiDB Cloud CLI 管理的 SQL 用户格式化连接字符串。
+      - [execute-sql-statement](https://docs.pingcap.com/zh/ai/ti-db-execute-sql-statement.md): 对 TiDB Cloud Starter 集群执行一条 SQL 语句。
+    - 用于管理 TiDB Cloud Filesystem 的 `ti fs` 命令
+      - [概览](https://docs.pingcap.com/zh/ai/ti-filesystem.md): 参考所有用于 Filesystem 资源、文件、层、打包和挂载的 `ti fs` 命令。
+      - [create-file-system](https://docs.pingcap.com/zh/ai/ti-fs-create-file-system.md): 创建一个 TiDB Cloud Filesystem。
+      - [import-file-system-token](https://docs.pingcap.com/zh/ai/ti-fs-import-file-system-token.md): 导入现有的 TiDB Cloud Filesystem 令牌。
+      - [generate-file-system-token](https://docs.pingcap.com/zh/ai/ti-fs-generate-file-system-token.md): 为一个 TiDB Cloud Filesystem 生成额外的所有者令牌。
+      - [generate-file-system-scoped-token](https://docs.pingcap.com/zh/ai/ti-fs-generate-file-system-scoped-token.md): 为单个 TiDB Cloud Filesystem 生成一个受路径和操作限制的令牌。
+      - [list-file-system-tokens](https://docs.pingcap.com/zh/ai/ti-fs-list-file-system-tokens.md): 列出单个 TiDB Cloud Filesystem 的令牌元信息。
+      - [enable-file-system-token](https://docs.pingcap.com/zh/ai/ti-fs-enable-file-system-token.md): 启用已禁用的 TiDB Cloud Filesystem 令牌。
+      - [disable-file-system-token](https://docs.pingcap.com/zh/ai/ti-fs-disable-file-system-token.md): 临时禁用 TiDB Cloud Filesystem 访问令牌。
+      - [delete-file-system-token](https://docs.pingcap.com/zh/ai/ti-fs-delete-file-system-token.md): 永久（权限）回收 TiDB Cloud Filesystem 访问令牌。
+      - [refresh-file-system-token](https://docs.pingcap.com/zh/ai/ti-fs-refresh-file-system-token.md): 轮转一个 TiDB Cloud Filesystem 访问令牌，并一次性返回其替换后的明文值。
+      - [list-file-systems](https://docs.pingcap.com/zh/ai/ti-fs-list-file-systems.md): 列出指定 Region 中的远程 TiDB Cloud Filesystems。
+      - [describe-file-system](https://docs.pingcap.com/zh/ai/ti-fs-describe-file-system.md): 描述远程 TiDB Cloud Filesystem。
+      - [describe-file-system-extract-configuration](https://docs.pingcap.com/zh/ai/ti-fs-describe-file-system-extract-configuration.md): 描述 TiDB Cloud Filesystem 的媒体内容提取配置。
+      - [update-file-system-extract-configuration](https://docs.pingcap.com/zh/ai/ti-fs-update-file-system-extract-configuration.md): 修改 TiDB Cloud Filesystem 的媒体内容提取配置。
+      - [describe-file-system-embedding-configuration](https://docs.pingcap.com/zh/ai/ti-fs-describe-file-system-embedding-configuration.md): 描述 TiDB Cloud Filesystem 的嵌入配置。
+      - [update-file-system-embedding-configuration](https://docs.pingcap.com/zh/ai/ti-fs-update-file-system-embedding-configuration.md): 替换 TiDB Cloud Filesystem 的向量嵌入配置。
+      - [check-file-system](https://docs.pingcap.com/zh/ai/ti-fs-check-file-system.md): 检查 TiDB Cloud Filesystem 的连通性。
+      - [delete-file-system](https://docs.pingcap.com/zh/ai/ti-fs-delete-file-system.md): 删除 TiDB Cloud Filesystem。
+      - [copy-file](https://docs.pingcap.com/zh/ai/ti-fs-copy-file.md): 复制文件到 TiDB Cloud Filesystem、从中复制文件，或在其中复制文件。
+      - [read-file](https://docs.pingcap.com/zh/ai/ti-fs-read-file.md): 从 TiDB Cloud Filesystem 读取文件。
+      - [list-files](https://docs.pingcap.com/zh/ai/ti-fs-list-files.md): 列出 TiDB Cloud Filesystem 中的文件。
+      - [describe-file](https://docs.pingcap.com/zh/ai/ti-fs-describe-file.md): 描述 TiDB Cloud Filesystem 中的一个文件。
+      - [move-file](https://docs.pingcap.com/zh/ai/ti-fs-move-file.md): 在 TiDB Cloud Filesystem 中移动文件。
+      - [delete-file](https://docs.pingcap.com/zh/ai/ti-fs-delete-file.md): 从 TiDB Cloud Filesystem 中删除文件。
+      - [create-directory](https://docs.pingcap.com/zh/ai/ti-fs-create-directory.md): 在 TiDB Cloud Filesystem 中创建目录。
+      - [chmod-file](https://docs.pingcap.com/zh/ai/ti-fs-chmod-file.md): 更改 TiDB Cloud Filesystem 中的文件权限。
+      - [create-symlink](https://docs.pingcap.com/zh/ai/ti-fs-create-symlink.md): 在 TiDB Cloud Filesystem 中创建符号链接。
+      - [create-hardlink](https://docs.pingcap.com/zh/ai/ti-fs-create-hardlink.md): 在 TiDB Cloud Filesystem 中创建硬链接。
+      - [search-file-content](https://docs.pingcap.com/zh/ai/ti-fs-search-file-content.md): 在 TiDB Cloud Filesystem 中搜索文件内容。
+      - [find-files](https://docs.pingcap.com/zh/ai/ti-fs-find-files.md): 在 TiDB Cloud Filesystem 中查找文件。
+      - [create-layer](https://docs.pingcap.com/zh/ai/ti-fs-create-layer.md): 在 TiDB Cloud Filesystem 中创建一个 layer。
+      - [list-layers](https://docs.pingcap.com/zh/ai/ti-fs-list-layers.md): 列出 TiDB Cloud Filesystem 中的层。
+      - [fork-layer](https://docs.pingcap.com/zh/ai/ti-fs-fork-layer.md): 在 TiDB Cloud Filesystem 中派生一个写时复制的子层。
+      - [list-layer-chain](https://docs.pingcap.com/zh/ai/ti-fs-list-layer-chain.md): 列出 TiDB Cloud Filesystem layer 的祖先链。
+      - [describe-layer](https://docs.pingcap.com/zh/ai/ti-fs-describe-layer.md): 描述 TiDB Cloud Filesystem 中的一个 layer。
+      - [diff-layer](https://docs.pingcap.com/zh/ai/ti-fs-diff-layer.md): 显示 TiDB Cloud Filesystem layer 中的更改。
+      - [create-layer-checkpoint](https://docs.pingcap.com/zh/ai/ti-fs-create-layer-checkpoint.md): 在 TiDB Cloud Filesystem 的层中创建一个检查点。
+      - [delete-layer](https://docs.pingcap.com/zh/ai/ti-fs-delete-layer.md): 放弃一个 TiDB Cloud Filesystem layer。
+      - [rollback-layer](https://docs.pingcap.com/zh/ai/ti-fs-rollback-layer.md): 回滚 TiDB Cloud Filesystem 的一个层。
+      - [commit-layer](https://docs.pingcap.com/zh/ai/ti-fs-commit-layer.md): 提交一个 TiDB Cloud Filesystem 层。
+      - [pack-file-system](https://docs.pingcap.com/zh/ai/ti-fs-pack-file-system.md): 打包本地 Filesystem 叠加层状态。
+      - [unpack-file-system](https://docs.pingcap.com/zh/ai/ti-fs-unpack-file-system.md): 恢复本地 Filesystem 叠加层状态。
+      - [mount-file-system](https://docs.pingcap.com/zh/ai/ti-fs-mount-file-system.md): 挂载一个 TiDB Cloud Filesystem。
+      - [drain-file-system](https://docs.pingcap.com/zh/ai/ti-fs-drain-file-system.md): 刷写已挂载的 TiDB Cloud Filesystem。
+      - [unmount-file-system](https://docs.pingcap.com/zh/ai/ti-fs-unmount-file-system.md): 卸载一个 TiDB Cloud Filesystem。
+    - 用于管理 TiDB Cloud Filesystem Git 工作区的 `ti fs-git` 命令
+      - [概览](https://docs.pingcap.com/zh/ai/ti-filesystem-git.md): 参考所有 `ti fs-git` 命令，用于克隆、hydrate 和管理链接的 Git 工作树。
+      - [clone-git-workspace](https://docs.pingcap.com/zh/ai/ti-fs-git-clone-git-workspace.md): 将 Git 仓库克隆到已挂载的 TiDB Cloud Filesystem 中。
+      - [hydrate-git-workspace](https://docs.pingcap.com/zh/ai/ti-fs-git-hydrate-git-workspace.md): 为 Filesystem Git 工作区补全干净的 Git 对象。
+      - [add-git-worktree](https://docs.pingcap.com/zh/ai/ti-fs-git-add-git-worktree.md): 在已挂载的 TiDB Cloud Filesystem 中添加一个链接的 Git 工作树。
+      - [remove-git-worktree](https://docs.pingcap.com/zh/ai/ti-fs-git-remove-git-worktree.md): 从已挂载的 TiDB Cloud Filesystem 中移除一个已链接的 Git 工作树。
+    - 用于管理 TiDB Cloud Filesystem 日志（Journal）的 `ti fs-journal` 命令
+      - [概览](https://docs.pingcap.com/zh/ai/ti-filesystem-journal.md): 参考所有 `ti fs-journal` 命令，用于创建、追加、读取、搜索和验证日志（Journal）。
+      - [create-journal](https://docs.pingcap.com/zh/ai/ti-fs-journal-create-journal.md): 创建一个仅追加的 Filesystem 日志（Journal）。
+      - [append-journal-entries](https://docs.pingcap.com/zh/ai/ti-fs-journal-append-journal-entries.md): 向 Filesystem 日志（Journal）追加条目。
+      - [read-journal-entries](https://docs.pingcap.com/zh/ai/ti-fs-journal-read-journal-entries.md): 从 Filesystem 日志（Journal）中读取条目。
+      - [search-journal-entries](https://docs.pingcap.com/zh/ai/ti-fs-journal-search-journal-entries.md): 搜索 Filesystem 日志（Journal）及其条目。
+      - [verify-journal](https://docs.pingcap.com/zh/ai/ti-fs-journal-verify-journal.md): 验证一个 Filesystem 日志（Journal）的哈希链。
+    - 用于管理 TiDB Cloud Filesystem Vault Secrets 的 `ti fs-vault` 命令
+      - [概览](https://docs.pingcap.com/zh/ai/ti-filesystem-vault.md): 参考所有 `ti fs-vault` 命令，用于管理 Secret、委派访问、审计事件、向子进程注入 Secret 以及挂载。
+      - [create-secret](https://docs.pingcap.com/zh/ai/ti-fs-vault-create-secret.md): 在 Filesystem Vault 中创建 Secret。
+      - [replace-secret](https://docs.pingcap.com/zh/ai/ti-fs-vault-replace-secret.md): 替换 Filesystem Vault Secret 中的所有字段。
+      - [read-secret](https://docs.pingcap.com/zh/ai/ti-fs-vault-read-secret.md): 从 Filesystem Vault 读取 Secret。
+      - [list-secrets](https://docs.pingcap.com/zh/ai/ti-fs-vault-list-secrets.md): 列出 Filesystem Vault 凭证可见的 Secret。
+      - [delete-secret](https://docs.pingcap.com/zh/ai/ti-fs-vault-delete-secret.md): 从 Filesystem Vault 中删除一个 Secret。
+      - [create-grant](https://docs.pingcap.com/zh/ai/ti-fs-vault-create-grant.md): 创建委派给单个 agent 和作用域的 Filesystem Vault grant。
+      - [delete-grant](https://docs.pingcap.com/zh/ai/ti-fs-vault-delete-grant.md): 回收委派的 Filesystem Vault grant。
+      - [list-audit-events](https://docs.pingcap.com/zh/ai/ti-fs-vault-list-audit-events.md): 列出 Filesystem Vault 审计事件。
+      - [run-with-secret](https://docs.pingcap.com/zh/ai/ti-fs-vault-run-with-secret.md): 使用 Filesystem Vault Secret 运行一个进程。
+      - [mount-vault](https://docs.pingcap.com/zh/ai/ti-fs-vault-mount-vault.md): 挂载一个只读的 Filesystem Vault 视图。
+      - [unmount-vault](https://docs.pingcap.com/zh/ai/ti-fs-vault-unmount-vault.md): 卸载一个 Filesystem Vault 视图。
+  - [TiDB Cloud CLI 配置和凭证](https://docs.pingcap.com/zh/ai/ti-configuration-and-credentials.md): 参考 TiDB Cloud CLI 配置（Profile）、优先级规则、本地状态路径、Filesystem 凭证、SQL 凭证、挂载定位文件和操作日志。
+  - [TiDB Cloud CLI 的 Region、安全性和限制](https://docs.pingcap.com/zh/ai/ti-regions-security-and-limitations.md): 参考支持的区域、认证边界、平台依赖、预览限制以及 Filesystem 伴随组件行为。
+  - [从 tdc 迁移到 TiDB Cloud CLI](https://docs.pingcap.com/zh/ai/ti-migrate-from-tdc.md): 将受支持的本地状态和自动化从 tdc v0.1.x 迁移到 TiDB Cloud CLI。
+  - [排查 TiDB Cloud CLI 故障](https://docs.pingcap.com/zh/ai/ti-troubleshooting.md): 诊断 TiDB Cloud CLI 中与身份验证、项目、Filesystem 选择、配套运行时、配额、SQL 用户、挂载以及清理中断相关的常见故障。
 
 ## 集成指南
 

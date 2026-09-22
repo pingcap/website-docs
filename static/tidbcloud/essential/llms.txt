@@ -11,7 +11,7 @@
 - Get Started
   - [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart.md): Sign up quickly to try TiDB Cloud and create a TiDB Cloud Starter instance.
   - [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart.md): Learn how to get started with HTAP in TiDB Cloud.
-  - [Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud Starter and Essential instances through the TiDB Cloud CLI.
+  - [Try Out TiDB Cloud CLI (ticloud)](https://docs.pingcap.com/tidbcloud/get-started-with-cli.md): Learn how to manage TiDB Cloud Starter and Essential instances through the ticloud CLI.
 - Key Concepts
   - [Overview](https://docs.pingcap.com/tidbcloud/key-concepts.md): Learn about the key concepts in TiDB Cloud.
   - [Architecture](https://docs.pingcap.com/tidbcloud/architecture-concepts.md): Learn about architecture concepts for TiDB Cloud.
@@ -462,8 +462,8 @@
       - [`schema_unused_indexes`](https://docs.pingcap.com/tidbcloud/sys-schema-unused-indexes.md): Learn about the `schema_unused_indexes` table in the `sys` schema.
   - [Metadata Lock](https://docs.pingcap.com/tidbcloud/metadata-lock.md): Introduce the concept, principles, and implementation details of metadata lock in TiDB.
   - [TiDB Accelerated Table Creation](https://docs.pingcap.com/tidbcloud/accelerated-table-creation.md): Learn the concept, principles, and implementation details of performance optimization for creating tables in TiDB.
-- CLI Reference ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-  - [Overview](https://docs.pingcap.com/tidbcloud/cli-reference.md): Provides an overview of TiDB Cloud CLI.
+- TiDB Cloud CLI (ticloud) Reference ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [Overview](https://docs.pingcap.com/tidbcloud/cli-reference.md): Provides an overview of the ticloud CLI for TiDB Cloud Starter and Essential.
   - auth
     - [login](https://docs.pingcap.com/tidbcloud/ticloud-auth-login.md): The reference of `ticloud auth login`.
     - [logout](https://docs.pingcap.com/tidbcloud/ticloud-auth-logout.md): The reference of `ticloud auth logout`.
@@ -556,6 +556,7 @@
   - [Server Status Variables](https://docs.pingcap.com/tidbcloud/status-variables.md): Use status variables to see the system and session status
   - [Table Filter](https://docs.pingcap.com/tidbcloud/table-filter.md): Usage of table filter feature in TiDB tools.
   - [URI Formats of External Storage Services](https://docs.pingcap.com/tidbcloud/external-storage-uri.md): Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+  - [Configure Trigger Rules for Slow Queries](https://docs.pingcap.com/tidbcloud/config-slow-query-trigger-rules.md): Define the trigger rules for slow query logs.
   - [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidbcloud/troubleshoot-data-inconsistency-errors.md): Learn how to deal with errors reported by the consistency check between data and indexes.
   - [Notifications](https://docs.pingcap.com/tidbcloud/notifications.md): Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
   - [Project API Migration Guide for TiDB Cloud Starter and Essential](https://docs.pingcap.com/tidbcloud/tidbx-starter-essential-project-api-migration-guide.md): Learn the minimum changes needed to keep your existing v1beta API calls working after TiDB Cloud introduces separate project types for TiDB X instances.
