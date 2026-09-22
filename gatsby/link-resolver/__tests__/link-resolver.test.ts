@@ -182,6 +182,14 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidbcloudlake");
     });
 
+    it("should resolve tidb-cloud-filesystem/_index links to the English filesystem root", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud-filesystem/_index",
+        "/zh/tidb/stable/alert-rules"
+      );
+      expect(result).toBe("/tidbcloud-filesystem");
+    });
+
     it("should resolve best-practices namespace links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
         "/best-practices/optimization/query-optimization",
@@ -581,6 +589,26 @@ describe("resolveMarkdownLink", () => {
         "/tidbcloudlake"
       );
       expect(result).toBe("/tidbcloudlake/dashboards");
+    });
+  });
+
+  describe("linkMappingsByPath - tidbcloud-filesystem pages", () => {
+    it("should resolve nested relative links in the English filesystem namespace", () => {
+      const result = resolveMarkdownLink(
+        "guides/filesystem-mount#finish-safely",
+        "/tidbcloud-filesystem/filesystem-quick-start"
+      );
+      expect(result).toBe(
+        "/tidbcloud-filesystem/filesystem-mount#finish-safely"
+      );
+    });
+
+    it("should keep explicit AI links in the AI namespace", () => {
+      const result = resolveMarkdownLink(
+        "/ai/ti/reference/ti-filesystem",
+        "/tidbcloud-filesystem"
+      );
+      expect(result).toBe("/ai/ti-filesystem");
     });
   });
 

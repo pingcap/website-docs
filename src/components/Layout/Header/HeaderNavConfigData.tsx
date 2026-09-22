@@ -93,6 +93,18 @@ const getDefaultNavConfig = (
               }
             },
           },
+          // TiDB Cloud Filesystem is intentionally hidden from the Product menu
+          // until its documentation is ready for public preview. Uncomment this
+          // item to expose the entry without changing its build or routing setup.
+          // {
+          //   type: "item",
+          //   label: t("navbar.tidbCloudFilesystem"),
+          //   endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
+          //   to: "/tidbcloud-filesystem",
+          //   isI18n: false,
+          //   selected: (namespace) =>
+          //     namespace === TOCNamespace.TiDBCloudFilesystem,
+          // },
         ],
       },
       {
