@@ -15,35 +15,30 @@ import { getSelectedNavItem } from "../../src/components/Layout/Header/getSelect
 import { CloudPlan, TOCNamespace } from "../../src/shared/interface";
 
 describe("Filesystem product menu", () => {
-  it("appears immediately after Lake and links to English documentation", () => {
-    const nav = generateNavConfig(
-      (key) => key,
-      CloudPlan.Starter,
-      "prod",
-      "zh"
-    );
-    const product = nav[0];
-    if (product.type !== "group") throw new Error("Missing Product menu");
-    const cloud = product.children[0];
-    if (cloud.type !== "group") throw new Error("Missing Cloud products");
-    const lakeIndex = cloud.children.findIndex(
-      (item) => item.type === "item" && item.to === "/tidbcloudlake"
-    );
-    expect(lakeIndex).toBeGreaterThanOrEqual(0);
-    const filesystem = cloud.children[lakeIndex + 1];
-    expect(filesystem).toMatchObject({
-      type: "item",
-      label: "navbar.tidbCloudFilesystem",
-      to: "/tidbcloud-filesystem",
-      isI18n: false,
-    });
-    if (filesystem.type !== "item") throw new Error("Missing Filesystem item");
-    expect(filesystem.endIcon).toBeTruthy();
-    expect(getSelectedNavItem(nav, TOCNamespace.TiDBCloudFilesystem)).toBe(
-      filesystem
-    );
-    expect(filesystem.onClick).toBeUndefined();
-  });
+  it.each(["en", "zh", "ja"])(
+    "does not expose Filesystem in the %s Product menu",
+    (language) => {
+      const nav = generateNavConfig(
+        (key) => key,
+        CloudPlan.Starter,
+        "prod",
+        language
+      );
+      const product = nav[0];
+      if (product.type !== "group") throw new Error("Missing Product menu");
+      const cloud = product.children[0];
+      if (cloud.type !== "group") throw new Error("Missing Cloud products");
+      expect(cloud.children).not.toContainEqual(
+        expect.objectContaining({
+          type: "item",
+          to: "/tidbcloud-filesystem",
+        })
+      );
+      expect(
+        getSelectedNavItem(nav, TOCNamespace.TiDBCloudFilesystem)
+      ).toBeNull();
+    }
+  );
 
   it("does not add Filesystem to the archived documentation site", () => {
     const nav = generateNavConfig((key) => key, null, "archive", "en");
