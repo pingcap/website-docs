@@ -15,11 +15,11 @@ import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
 
 const COMPATIBILITY_VERSIONS = [
   {
-    label: "MySQL",
+    label: "MySQL Compatible",
     value: CloudCompatibility.MySQL,
   },
   {
-    label: "PostgreSQL",
+    label: "PostgreSQL Compatible",
     value: CloudCompatibility.PostgreSQL,
   },
 ];
