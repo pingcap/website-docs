@@ -12,7 +12,7 @@
   - [试用 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-quickstart.md): 快速注册体验 TiDB Cloud 并创建一个 TiDB Cloud Starter 实例。
   - [试用 TiDB + AI 工具](https://docs.pingcap.com/zh/tidbcloud/use-tidb-cloud-with-ai-tools.md): 了解如何将 TiDB Cloud Starter 实例连接到支持 Model Context Protocol (MCP) 的 AI 驱动开发工具，如 Cursor、Claude Code、VS Code 和 Windsurf。
   - [试用 HTAP](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-htap-quickstart.md): 了解如何在 TiDB Cloud 中开始使用 HTAP。
-  - [试用 TiDB Cloud CLI](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli.md): 了解如何通过 TiDB Cloud CLI 管理 TiDB Cloud Starter 和 Essential 实例。
+  - [试用 TiDB Cloud CLI (ticloud, Legacy)](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli.md): 了解如何通过 ticloud CLI 管理 TiDB Cloud Starter 和 Essential 实例。
 - 关键概念
   - [概览](https://docs.pingcap.com/zh/tidbcloud/key-concepts.md): 了解 TiDB Cloud 中的关键概念。
   - [架构](https://docs.pingcap.com/zh/tidbcloud/architecture-concepts.md): 了解 TiDB Cloud 的架构概念。
@@ -460,8 +460,8 @@
       - [`schema_unused_indexes`](https://docs.pingcap.com/zh/tidbcloud/sys-schema-unused-indexes.md): 了解 `schema_unused_indexes` 表在 `sys` 模式中的作用。
   - [元数据锁](https://docs.pingcap.com/zh/tidbcloud/metadata-lock.md): 介绍 TiDB 中元信息锁的概念、原理及实现细节。
   - [TiDB 加速建表](https://docs.pingcap.com/zh/tidbcloud/accelerated-table-creation.md): 了解 TiDB 中创建表的性能优化的概念、原理和实现细节。
-- CLI 参考 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-  - [概述](https://docs.pingcap.com/zh/tidbcloud/cli-reference.md): 提供 TiDB Cloud CLI 的概览。
+- TiDB Cloud CLI (ticloud, Legacy) 参考 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](https://docs.pingcap.com/zh/tidbcloud/cli-reference.md): 提供适用于 TiDB Cloud Starter 和 Essential 的 ticloud CLI 概览。
   - auth
     - [login](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-login.md): `ticloud auth login` 命令的参考。
     - [logout](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-logout.md): `ticloud auth logout` 命令的参考。
