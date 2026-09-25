@@ -12,7 +12,7 @@
   - [TiDB Cloudをお試しください](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
   - [TiDB + AIツールを試してみよう](https://docs.pingcap.com/ja/tidbcloud/use-tidb-cloud-with-ai-tools.md): TiDB Cloud Starter クラスターを、Cursor、Claude Code、VS Code、Windsurf などのモデル コンテキスト プロトコル (MCP) をサポートする AI 搭載開発ツールに接続する方法を学習します。
   - [HTAPを試してみてください](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart.md): TiDB Cloudで HTAP を使い始める方法を学習します。
-  - [TiDB Cloud CLI をお試しください](https://docs.pingcap.com/ja/tidbcloud/get-started-with-cli.md): TiDB Cloud CLI を使用して、TiDB Cloud StarterおよびEssentialインスタンスを管理する方法を学びましょう。
+  - [TiDB Cloud CLI (ticloud, Legacy) を試す](https://docs.pingcap.com/ja/tidbcloud/get-started-with-cli.md): ticloud CLI を使用して、TiDB Cloud Starter および Essential インスタンスを管理する方法を学びましょう。
 - 主要概念
   - [概要](https://docs.pingcap.com/ja/tidbcloud/key-concepts.md): TiDB Cloudの主要な概念について学びましょう。
   - [アーキテクチャ](https://docs.pingcap.com/ja/tidbcloud/architecture-concepts.md): TiDB Cloudのアーキテクチャ概念について学びましょう。
@@ -460,8 +460,8 @@
       - [`schema_unused_indexes`](https://docs.pingcap.com/ja/tidbcloud/sys-schema-unused-indexes.md): sys` スキーマの `schema_unused_indexes` テーブルについて学習します。
   - [メタデータロック](https://docs.pingcap.com/ja/tidbcloud/metadata-lock.md): TiDB のメタデータロックの概念、原則、実装の詳細を紹介します。
   - [TiDB高速テーブル作成](https://docs.pingcap.com/ja/tidbcloud/accelerated-table-creation.md): TiDBでテーブルを作成する際のパフォーマンス最適化の概念、原則、および実装の詳細について学びます。
-- CLI リファレンス ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-  - [概要](https://docs.pingcap.com/ja/tidbcloud/cli-reference.md): TiDB Cloud CLIの概要を説明します。
+- TiDB Cloud CLI (ticloud, Legacy) リファレンス ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概要](https://docs.pingcap.com/ja/tidbcloud/cli-reference.md): TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説明します。
   - 認証
     - [ログイン](https://docs.pingcap.com/ja/tidbcloud/ticloud-auth-login.md): ticloud auth login` のリファレンス。
     - [ログアウト](https://docs.pingcap.com/ja/tidbcloud/ticloud-auth-logout.md): ticloud auth logout` のリファレンス。

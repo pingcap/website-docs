@@ -35,6 +35,7 @@
 - v7.6
   - [7.6.0-DMR](https://docs.pingcap.com/ja/tidb/stable/release-7.6.0.md): TiDB 7.6.0 の新機能、互換性の変更点、改善点、およびバグ修正についてご確認ください。
 - v7.5
+  - [7.5.8](https://docs.pingcap.com/ja/tidb/stable/release-7.5.8.md): TiDB 7.5.8 の改善点とバグ修正について説明します。
   - [7.5.7](https://docs.pingcap.com/ja/tidb/stable/release-7.5.7.md): TiDB 7.5.7 における互換性の変更、改善、およびバグ修正について説明します。
   - [7.5.6](https://docs.pingcap.com/ja/tidb/stable/release-7.5.6.md): TiDB 7.5.6 における互換性の変更、改善、およびバグ修正について説明します。
   - [7.5.5](https://docs.pingcap.com/ja/tidb/stable/release-7.5.5.md): TiDB 7.5.5 における互換性の変更、改善、およびバグ修正について説明します。

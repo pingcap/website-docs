@@ -817,7 +817,7 @@
       - [Date and Time Types](https://docs.pingcap.com/tidb/stable/data-type-date-and-time.md): Learn about the supported date and time types.
       - [String Types](https://docs.pingcap.com/tidb/stable/data-type-string.md): Learn about the string types supported in TiDB.
       - [JSON Type](https://docs.pingcap.com/tidb/stable/data-type-json.md): Learn about the JSON data type in TiDB.
-      - [Vector Types](https://docs.pingcap.com/tidb/stable/vector-search-data-types.md): Learn about the Vector data types in TiDB.
+      - [Vector Types](https://docs.pingcap.com/ai/vector-search-data-types/)
     - Functions and Operators
       - [Overview](https://docs.pingcap.com/tidb/stable/functions-and-operators-overview.md): Learn how to use the functions and operators.
       - [Type Conversion in Expression Evaluation](https://docs.pingcap.com/tidb/stable/type-conversion-in-expression-evaluation.md): Learn about the type conversion in expression evaluation.
@@ -831,7 +831,7 @@
       - [Encryption and Compression Functions](https://docs.pingcap.com/tidb/stable/encryption-and-compression-functions.md): Learn about the encryption and compression functions.
       - [Locking Functions](https://docs.pingcap.com/tidb/stable/locking-functions.md): Learn about user-level locking functions in TiDB.
       - [Information Functions](https://docs.pingcap.com/tidb/stable/information-functions.md): Learn about the information functions.
-      - [Vector Functions and Operators](https://docs.pingcap.com/tidb/stable/vector-search-functions-and-operators.md): Learn about functions and operators available for Vector data types.
+      - [Vector Functions and Operators](https://docs.pingcap.com/ai/vector-search-functions-and-operators/)
       - JSON Functions
         - [Overview](https://docs.pingcap.com/tidb/stable/json-functions.md): Learn about JSON functions.
         - [Functions That Create JSON](https://docs.pingcap.com/tidb/stable/json-functions-create.md): Learn about JSON functions that create JSON values.
@@ -854,7 +854,7 @@
       - [Comparisons between Functions and Syntax of Oracle and TiDB](https://docs.pingcap.com/tidb/stable/oracle-functions-to-tidb.md): Learn the comparisons between functions and syntax of Oracle and TiDB.
     - [Clustered Indexes](https://docs.pingcap.com/tidb/stable/clustered-indexes.md): Learn the concept, user scenarios, usages, limitations, and compatibility of clustered indexes.
     - [Global Indexes](https://docs.pingcap.com/tidb/stable/global-indexes.md): Learn the use cases, advantages, usage, working principles, and limitations of TiDB global indexes.
-    - [Vector Index](https://docs.pingcap.com/tidb/stable/vector-search-index.md): Learn how to build and use the vector search index to accelerate K-Nearest neighbors (KNN) queries in TiDB.
+    - [Vector Index](https://docs.pingcap.com/ai/vector-search-index/)
     - [Constraints](https://docs.pingcap.com/tidb/stable/constraints.md): Learn how SQL Constraints apply to TiDB.
     - [Generated Columns](https://docs.pingcap.com/tidb/stable/generated-columns.md): Learn how to use generated columns.
     - [SQL Mode](https://docs.pingcap.com/tidb/stable/sql-mode.md): Learn SQL mode.
