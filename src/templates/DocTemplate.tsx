@@ -141,6 +141,8 @@ function DocTemplate({
     setCloudPlan,
     cloudCompatibility,
     setCloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending,
     isStarter,
     isEssential,
     isPremium,
@@ -150,7 +152,10 @@ function DocTemplate({
     inDefaultPlan ?? null,
     tocNames,
     cloudPlan,
-    setCloudPlan
+    setCloudPlan,
+    cloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending
   );
   useReportReadingRate(timeToRead);
 

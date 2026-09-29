@@ -10,10 +10,13 @@ import {
   useRef,
 } from "react";
 import { getCloudPlanFromPathname } from "./cloud-plan-route";
+import {
+  buildCloudPlanSearchParams,
+  CLOUD_COMPATIBILITY_KEY,
+  CLOUD_MODE_KEY,
+} from "./cloud-plan-query";
 import { CloudCompatibility, CloudPlan, Repo, TOCNamespace } from "./interface";
-
-export const CLOUD_MODE_KEY = "plan";
-export const CLOUD_COMPATIBILITY_KEY = "compatibility";
+export { CLOUD_COMPATIBILITY_KEY, CLOUD_MODE_KEY } from "./cloud-plan-query";
 
 const TOC_NAME_TO_CLOUD_PLAN: Record<string, CloudPlan> = {
   TOC: CloudPlan.Dedicated,
@@ -29,6 +32,15 @@ function isCloudPlan(value: string | null): value is CloudPlan {
     value === CloudPlan.Starter ||
     value === CloudPlan.Essential ||
     value === CloudPlan.Premium
+  );
+}
+
+function isCloudCompatibility(
+  value: string | null
+): value is CloudCompatibility {
+  return (
+    value === CloudCompatibility.MySQL ||
+    value === CloudCompatibility.PostgreSQL
   );
 }
 
@@ -97,11 +109,6 @@ export const useCloudPlan = () => {
     isStarter && typeof window !== "undefined"
       ? sessionStorage.getItem(CLOUD_COMPATIBILITY_KEY)
       : null;
-  const isCloudCompatibility = (
-    value: string | null
-  ): value is CloudCompatibility =>
-    value === CloudCompatibility.MySQL ||
-    value === CloudCompatibility.PostgreSQL;
   const cloudCompatibilityFromQuery = isCloudCompatibility(
     cloudCompatibilityFromQueryRaw
   )
@@ -138,6 +145,21 @@ export const useCloudPlan = () => {
     [_setCloudCompatibility]
   );
 
+  const syncCloudCompatibility = useCallback(
+    (cloudCompatibility: CloudCompatibility) => {
+      _setCloudCompatibility(cloudCompatibility);
+      if (typeof window === "undefined") return;
+
+      sessionStorage.setItem(CLOUD_COMPATIBILITY_KEY, cloudCompatibility);
+    },
+    [_setCloudCompatibility]
+  );
+
+  const isCloudCompatibilityPending = useCallback(
+    () => pendingCloudCompatibilityRef.current !== null,
+    []
+  );
+
   useEffect(() => {
     if (_cloudPlan !== resolvedCloudPlan) {
       _setCloudPlan(resolvedCloudPlan);
@@ -151,39 +173,6 @@ export const useCloudPlan = () => {
         pendingCloudCompatibilityRef.current = null;
       }
       return;
-    }
-
-    if (typeof window !== "undefined") {
-      if (isStarter) {
-        sessionStorage.setItem(
-          CLOUD_COMPATIBILITY_KEY,
-          requestedCloudCompatibility
-        );
-      } else {
-        sessionStorage.removeItem(CLOUD_COMPATIBILITY_KEY);
-      }
-    }
-
-    const shouldNormalizeCompatibility =
-      isStarter &&
-      cloudCompatibilityFromQueryRaw !== requestedCloudCompatibility;
-
-    if (shouldNormalizeCompatibility) {
-      searchParams.set(CLOUD_COMPATIBILITY_KEY, requestedCloudCompatibility);
-      navigate(`${pathname}?${searchParams.toString()}${hash || ""}`, {
-        replace: true,
-      });
-    }
-
-    if (!isStarter && cloudCompatibilityFromQueryRaw !== null) {
-      searchParams.delete(CLOUD_COMPATIBILITY_KEY);
-      const queryString = searchParams.toString();
-      navigate(
-        `${pathname}${queryString ? `?${queryString}` : ""}${hash || ""}`,
-        {
-          replace: true,
-        }
-      );
     }
 
     if (_cloudCompatibility !== requestedCloudCompatibility) {
@@ -212,6 +201,8 @@ export const useCloudPlan = () => {
     setCloudPlan,
     cloudCompatibility: _cloudCompatibility,
     setCloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending,
     isStarter,
     isEssential,
     isPremium,
@@ -224,13 +215,19 @@ export const useCloudPlanNavigate = (
   inDefaultPlan: CloudPlan | null,
   tocNames: string[] | null | undefined,
   cloudPlan: CloudPlan | null,
-  setCloudPlan: (plan: CloudPlan) => void
+  setCloudPlan: (plan: CloudPlan) => void,
+  cloudCompatibility: CloudCompatibility,
+  syncCloudCompatibility: (compatibility: CloudCompatibility) => void,
+  isCloudCompatibilityPending: () => boolean
 ) => {
   const { pathname, search, hash } = useLocation();
   const tocNamesKey = Array.isArray(tocNames) ? tocNames.join("|") : "";
 
   useEffect(() => {
     if (namespace !== TOCNamespace.TiDBCloud) {
+      return;
+    }
+    if (isCloudCompatibilityPending()) {
       return;
     }
     const searchParams = new URLSearchParams(search);
@@ -260,6 +257,22 @@ export const useCloudPlanNavigate = (
     const cloudMode = shouldFallbackToDefault
       ? defaultCloudPlan
       : requestedCloudPlan;
+    const cloudCompatibilityFromQueryRaw =
+      cloudMode === CloudPlan.Starter
+        ? searchParams.get(CLOUD_COMPATIBILITY_KEY)
+        : null;
+    const cloudCompatibilityFromSessionRaw =
+      typeof window === "undefined"
+        ? null
+        : sessionStorage.getItem(CLOUD_COMPATIBILITY_KEY);
+    const requestedCloudCompatibility =
+      cloudMode === CloudPlan.Starter
+        ? isCloudCompatibility(cloudCompatibilityFromQueryRaw)
+          ? cloudCompatibilityFromQueryRaw
+          : isCloudCompatibility(cloudCompatibilityFromSessionRaw)
+          ? cloudCompatibilityFromSessionRaw
+          : CloudCompatibility.MySQL
+        : CloudCompatibility.MySQL;
 
     if (cloudPlan !== cloudMode) {
       setCloudPlan(cloudMode);
@@ -269,26 +282,33 @@ export const useCloudPlanNavigate = (
       sessionStorage.setItem(CLOUD_MODE_KEY, cloudMode);
     }
 
-    // Ensure URL carries the chosen plan when necessary, and fix invalid/mismatched plan param.
-    if (cloudMode !== CloudPlan.Dedicated) {
-      if (cloudModeFromQuery !== cloudMode) {
-        searchParams.set(CLOUD_MODE_KEY, cloudMode);
-        navigate(`${pathname}?${searchParams.toString()}${hash || ""}`, {
-          replace: true,
-        });
+    if (typeof window !== "undefined") {
+      if (cloudMode === CloudPlan.Starter) {
+        sessionStorage.setItem(
+          CLOUD_COMPATIBILITY_KEY,
+          requestedCloudCompatibility
+        );
+      } else {
+        sessionStorage.removeItem(CLOUD_COMPATIBILITY_KEY);
       }
-      return;
+    }
+    if (cloudCompatibility !== requestedCloudCompatibility) {
+      syncCloudCompatibility(requestedCloudCompatibility);
     }
 
-    // Dedicated: keep URL without plan param by default; only normalize when an invalid/mismatched plan is present.
-    if (
-      cloudModeFromQueryRaw &&
-      cloudModeFromQueryRaw !== CloudPlan.Dedicated
-    ) {
-      searchParams.set(CLOUD_MODE_KEY, CloudPlan.Dedicated);
-      navigate(`${pathname}?${searchParams.toString()}${hash || ""}`, {
-        replace: true,
-      });
+    const { searchParams: normalizedSearchParams, changed } =
+      buildCloudPlanSearchParams(
+        search,
+        cloudMode,
+        cloudMode === CloudPlan.Starter ? requestedCloudCompatibility : null
+      );
+    if (changed) {
+      navigate(
+        `${pathname}?${normalizedSearchParams.toString()}${hash || ""}`,
+        {
+          replace: true,
+        }
+      );
     }
   }, [
     namespace,
@@ -296,6 +316,9 @@ export const useCloudPlanNavigate = (
     tocNamesKey,
     cloudPlan,
     setCloudPlan,
+    cloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending,
     pathname,
     search,
     hash,
