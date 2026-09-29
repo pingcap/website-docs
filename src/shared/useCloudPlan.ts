@@ -153,6 +153,17 @@ export const useCloudPlan = () => {
       return;
     }
 
+    if (typeof window !== "undefined") {
+      if (isStarter) {
+        sessionStorage.setItem(
+          CLOUD_COMPATIBILITY_KEY,
+          requestedCloudCompatibility
+        );
+      } else {
+        sessionStorage.removeItem(CLOUD_COMPATIBILITY_KEY);
+      }
+    }
+
     const shouldNormalizeCompatibility =
       isStarter &&
       cloudCompatibilityFromQueryRaw !== requestedCloudCompatibility;
