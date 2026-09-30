@@ -477,6 +477,7 @@
   - [テーブルフィルター](https://docs.pingcap.com/ja/tidbcloud/table-filter.md): TiDB ツールでのテーブルフィルター機能の使用。
   - [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidbcloud/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
   - [DDL文に埋め込まれた `ANALYZE`](https://docs.pingcap.com/ja/tidbcloud/ddl_embedded_analyze.md): このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
+  - [スロークエリのトリガールールを設定する](https://docs.pingcap.com/ja/tidbcloud/config-slow-query-trigger-rules.md): スロークエリログのトリガールールを定義します。
   - [データとインデックス間の不整合のトラブルシューティング](https://docs.pingcap.com/ja/tidbcloud/troubleshoot-data-inconsistency-errors.md): データとインデックス間の整合性チェックによって報告されたエラーを処理する方法を学習します。
   - [通知](https://docs.pingcap.com/ja/tidbcloud/notifications.md): TiDB Cloudコンソールにおける通知について、通知の種類、目的、表示方法などを学びましょう。
 - サポートプラン

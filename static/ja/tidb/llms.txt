@@ -137,14 +137,14 @@
       - [ユースケース](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-use-cases.md): TiDBは、タイムリーなデータリカバリやビジネス監査など、特定のユースケース向けにスナップショットおよびログバックアップソリューションを提供します。ポイントインタイムリカバリ（PITR）を使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンに更新してください。Amazon S3にバックアップストレージを設定し、データ損失とリカバリの要件を満たすバックアップポリシーを設定してください。ログバックアップとスナップショットバックアップを実行し、PITRを使用して特定の時点にデータを復元します。古くなったデータは定期的にクリーンアップしてください。詳細な手順については、TiDBのドキュメントをご覧ください。
       - [バックアップストレージ](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-storages.md): TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
     - BR CLIマニュアル
-      - [概要](https://docs.pingcap.com/ja/tidb/stable/use-br-command-line-tool.md): br` コマンドラインツールは、TiDB クラスターのスナップショットバックアップ、ログバックアップ、およびポイントインタイムリカバリ (PITR) に使用されます。サブコマンド、オプション、およびパラメータで構成されており、PD サービスアドレスの `--pd` やストレージパスの `-s` などの共通オプションがあります。サブコマンドには、それぞれ特定の機能を持つ `tiup br backup`、`tiup br log`、`tiup br restore` などがあります。バックアップコマンドには `full`、`db`、`table` オプションがあり、ログバックアップおよびリストアコマンドには、バックアップ操作を管理するためのさまざまなタスクがあります。
+      - [概要](https://docs.pingcap.com/ja/tidb/stable/use-br-command-line-tool.md): `br` コマンドラインツールは、TiDB クラスターのスナップショットバックアップ、ログバックアップ、およびポイントインタイムリカバリ (PITR) に使用されます。サブコマンド、オプション、およびパラメータで構成されており、PDサービスアドレスの `--pd` やストレージパスの `-s` などの共通オプションがあります。サブコマンドには、それぞれ特定の機能を持つ `tiup br backup`、`tiup br log`、`tiup br restore` などがあります。バックアップコマンドには `full`、`db`、`table` オプションがあり、ログバックアップおよびリストアコマンドには、バックアップ操作を管理するためのさまざまなタスクがあります。
       - [スナップショットバックアップおよび復元コマンドマニュアル](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-manual.md): TiDBスナップショットのバックアップと復元コマンドマニュアルでは、クラスタースナップショット、データベース、およびテーブルのバックアップと復元に使用するコマンドについて説明しています。また、バックアップデータの暗号化と暗号化されたスナップショットの復元についても説明しています。BRはGCへの自己適応をサポートし、統計情報のバックアップと復元に--ignore-statsパラメータを導入しています。さらに、バックアップデータの暗号化と、指定されたデータベースまたはテーブルの部分的なデータ復元もサポートしています。
       - [ログバックアップおよびPITRコマンドマニュアル](https://docs.pingcap.com/ja/tidb/stable/br-pitr-manual.md): TiDB ログバックアップとポイントインタイムリカバリ (PITR) で使用されるコマンドを紹介します。
     - 参考文献
       - BR機能
         - [バックアップオートチューン](https://docs.pingcap.com/ja/tidb/stable/br-auto-tune.md): TiDB v5.4.0では、バックアップタスクの自動チューニング機能が導入され、デフォルトで有効になっています。この機能は、バックアップタスクが使用するリソースを制限し、クラスタへの影響を軽減します。この機能は、クラスタを再起動することなく、動的に有効化または無効化できます。ただし、自動チューニング機能の制限により、クラスタへのバックアップの影響を完全に排除できない場合があります。バックアップタスクで使用されるスレッド数を調整することで、特定のシナリオでの影響を軽減できる場合があります。
         - [バッチテーブル作成](https://docs.pingcap.com/ja/tidb/stable/br-batch-create-table.md): TiDB v6.0.0では、データ復元時のテーブル作成プロセスを高速化するバッチテーブル作成機能が導入されました。この機能はデフォルトで有効になっており、テーブルをバッチで作成することで、多数のテーブルを持つデータの復元時間を大幅に短縮します。この機能テストでは、1つのTiKVインスタンスの復元速度が平均181.65 MB/秒と高速であることが確認されています。
-        - [Checkpointのバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-checkpoint-backup.md): TiDB v6.5.0では、中断されたバックアップを再開するためのチェックポイントバックアップ機能が導入され、最初からやり直す必要性が軽減されます。この機能はバックアップ済みのシャードを記録してバックアップを再開しますが、GCメカニズムに依存するため、一部のデータの再バックアップが必要になる場合があります。br`ツールは、データのガベージコレクションを回避するために定期的に`gc-safepoint`を更新し、必要に応じて保持期間を延長できます。
+        - [Checkpointのバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-checkpoint-backup.md): TiDB v6.5.0では、中断されたバックアップを再開するためのチェックポイントバックアップ機能が導入され、最初からやり直す必要性が軽減されます。この機能はバックアップ済みのシャードを記録してバックアップを再開しますが、GCメカニズムに依存するため、一部のデータの再バックアップが必要になる場合があります。`br`ツールは、データのガベージコレクションを回避するために定期的に`gc-safepoint`を更新し、必要に応じて保持期間を延長できます。
         - [チェックポイント復元](https://docs.pingcap.com/ja/tidb/stable/br-checkpoint-restore.md): TiDB v7.1.0ではチェックポイント復元が導入され、中断されたスナップショットやログの復元を最初からやり直すことなく継続できるようになりました。復元されたシャードとテーブルIDが記録されるため、再試行時に中断発生時に近い進行状況ポイントを利用できます。ただし、GCメカニズムに依存しているため、一部のデータを再度復元する必要がある場合があります。正確性を確保するため、復元中にクラスターデータの変更を避けることが重要です。
       - [DumplingとTiDB Lightningを使用してデータをバックアップおよび復元する](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-using-dumpling-lightning.md): DumplingとTiDB Lightningを使用して、TiDBの完全なデータをバックアップおよび復元する方法を学びましょう。
       - [RawKVのバックアップと復元](https://docs.pingcap.com/ja/tidb/stable/rawkv-backup-and-restore.md): TiKVとPDは、TiDBなしでRawKVと呼ばれるKVデータベースを形成できます。TiKV- BRはRawKVのデータのバックアップと復元をサポートしています。詳細については、TiKVウェブサイトのTiKV- BRユーザードキュメントをご覧ください。
@@ -214,6 +214,7 @@
   - 問題シナリオ
     - スロークエリ
       - [スロークエリを特定する](https://docs.pingcap.com/ja/tidb/stable/identify-slow-queries.md): スロークエリログを使用して、問題のあるSQL文を特定してください。
+      - [スロークエリのトリガールールを設定する](https://docs.pingcap.com/ja/tidb/stable/config-slow-query-trigger-rules.md): スロークエリログのトリガールールを定義します。
       - [スロークエリを分析する](https://docs.pingcap.com/ja/tidb/stable/analyze-slow-queries.md): スロークエリを見つけて分析する方法を学びます。
     - [TiDB メモリ不足](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-tidb-oom.md): TiDB OOM (メモリ不足) の問題を診断して解決する方法を学びます。
     - [ホットスポット](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-hot-spot-issues.md): TiDB の読み取りまたは書き込みホットスポットの問題を特定して解決する方法を学びます。
@@ -225,7 +226,7 @@
   - 診断方法
     - [SQL診断](https://docs.pingcap.com/ja/tidb/stable/information-schema-sql-diagnostics.md): TiDB での SQL 診断を理解します。
     - [ステートメントサマリーテーブル](https://docs.pingcap.com/ja/tidb/stable/statement-summary-tables.md): TiDBのステートメントサマリーテーブルについて学びましょう。
-    - [Top SQL を使用して高コストなクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): Top SQLを使用して、CPU、ネットワーク、論理I/Oリソースを最も消費するクエリを特定します
+    - [Top SQL を使用して高コストクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/top-sql.md): Top SQLを使用して、CPU、ネットワーク、論理I/Oリソースを最も消費するクエリを特定します
     - [ログを使用して高負荷なクエリを特定する](https://docs.pingcap.com/ja/tidb/stable/identify-expensive-queries.md): TiDBは、実行時間またはメモリ使用量のしきい値を超えるステートメントに関する情報を出力することで、高負荷なクエリを特定するのに役立ちます。これにより、SQLパフォーマンスの診断と改善が可能になります。高負荷クエリログには、実行時間、メモリ使用量、ユーザー、データベース、TiKVコプロセッサーのタスク情報などの詳細が含まれます。このログは、ステートメントがリソースしきい値を超えるとすぐに情報を出力ため、スロークエリログとは異なります。
     - [クラスタのオンサイト情報を保存および復元する](https://docs.pingcap.com/ja/tidb/stable/sql-plan-replayer.md): PLAN REPLAYER を使用してクラスターのオンサイト情報を保存および復元する方法を学びます。
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](https://docs.pingcap.com/ja/tidb/stable/troubleshoot-stale-read.md): TiKV のステイル読み取りと safe-ts の原則を紹介し、 ステイル読み取りに関連する一般的な問題を診断するためのトラブルシューティングのヒントと例を示します。
@@ -456,7 +457,7 @@
         - [楽観的モード](https://docs.pingcap.com/ja/tidb/stable/feature-shard-merge-optimistic.md): DM が楽観的モードでシャードテーブルからデータをマージおよび移行する方法を学習します。
         - [シャーディングDDLロックを手動で処理する](https://docs.pingcap.com/ja/tidb/stable/manually-handling-sharding-ddl-locks.md): DM でシャーディング DDL ロックを手動で処理する方法を学習します。
       - [gh-ost/pt-osc を使用する MySQL データベースから移行する](https://docs.pingcap.com/ja/tidb/stable/feature-online-ddl.md): このドキュメントでは、DM の online-ddl/online-ddl-scheme` 機能について説明します。
-      - [より多くのカラムを持つダウンストリーム TiDB テーブルにデータを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-with-more-columns-downstream.md): 対応するアップストリームテーブルよりも多くの列を持つダウンストリーム TiDB テーブルにデータを移行する方法を学習します。
+      - [より多くのカラムを持つ下流の TiDB テーブルにデータを移行する](https://docs.pingcap.com/ja/tidb/stable/migrate-with-more-columns-downstream.md): 対応するアップストリームテーブルよりも多くの列を持つダウンストリーム TiDB テーブルにデータを移行する方法を学習します。
       - [継続的なデータ検証](https://docs.pingcap.com/ja/tidb/stable/dm-continuous-data-validation.md): 継続的なデータ検証の使用方法と継続的なデータ検証の動作原理を学習します。
     - 管理
       - クラスタのアップグレード

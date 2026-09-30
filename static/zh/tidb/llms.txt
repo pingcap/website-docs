@@ -516,7 +516,7 @@
     - [概述](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-overview.md): TiDB Lightning 是用于导入 TB 级数据到 TiDB 的工具。了解 TiDB Lightning 的基本原理和使用方法。
     - [`IMPORT INTO` 和 TiDB Lightning 对比](https://docs.pingcap.com/zh/tidb/stable/import-into-vs-tidb-lightning.md): 了解 `IMPORT INTO` 和 TiDB Lightning 的差异。
     - [`IMPORT INTO` 和 TiDB Lightning 与日志备份和 TiCDC 的兼容性](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-compatibility-and-scenarios.md): 了解 IMPORT INTO 和 TiDB Lightning 与日志备份和 TiCDC 的兼容性及使用场景。
-    - [快速上手](https://docs.pingcap.com/zh/tidb/stable/get-started-with-tidb-lightning.md): TiDB Lightning 可快速将 MySQL 数据导入到 TiDB 集群中。首先使用 Dumpling 导出数据，然后部署 TiDB 集群。安装最新版本的 TiDB Lightning 并启动，最后检查数据导入情况。详细功能和使用请参考 TiDB Lightning 简介。
+    - [快速上手](https://docs.pingcap.com/zh/tidb/stable/get-started-with-tidb-lightning.md): TiDB Lightning 可快速将 MySQL 数据导入到 TiDB 集群中。首先使用 Dumpling 导出数据，然后部署 TiDB 集群。安装与目标 TiDB 集群相同版本的 TiDB Lightning 并启动，最后检查数据导入情况。详细功能和使用请参考 TiDB Lightning 简介。
     - [部署 TiDB Lightning](https://docs.pingcap.com/zh/tidb/stable/deploy-tidb-lightning.md): 了解如何部署 TiDB Lightning，包括在线部署和离线部署。
     - [目标数据库要求](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-requirements.md): 了解 TiDB Lightning 运行时对目标数据库的必需条件。
     - 数据源
@@ -551,7 +551,7 @@
       - [命令行参数](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-command-line-full.md): 使用命令行配置 TiDB Lightning。
       - [监控告警](https://docs.pingcap.com/zh/tidb/stable/monitor-tidb-lightning.md): TiDB Lightning 支持使用Prometheus采集监控指标。监控配置需手动部署，配置方法在 tidb-lightning.toml 中。Grafana 面板可用于监控速度、进度、资源使用和存储空间。监控指标包括计数器和直方图，用于计算引擎文件数量、闲置 worker、KV 编码器、处理过的表、引擎文件和 Chunks的状态，以及导入每个表所需时间等。
       - [Web 界面](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-web-interface.md): 了解 TiDB Lightning Web 界面的移除以及推荐的替代方案。
-      - [FAQ](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-faq.md): TiDB Lightning 常见问题的摘要：TiDB Lightning 对TiDB/TiKV/PD 的最低版本要求，支持导入多个库，对下游数据库的账号权限要求，导数据过程中某个表报错不会影响其他表，正确重启 TiDB Lightning 的步骤，校验导入数据的正确性方法，支持的数据源格式，禁止导入不合规数据的方法，结束 tidb-lightning 进程的操作，使用千兆网卡的建议，TiDB Lightning 预留空间的原因，清除与 TiDB Lightning 相关的中间数据的步骤，获取 TiDB Lightning 运行时的 goroutine 信息的方法，TiDB Lightning 不兼容 Placement Rules in SQL 的原因，使用 TiDB Lightning 和 Dumpling 复制 schema 的步骤。
+      - [FAQ](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-faq.md): TiDB Lightning 常见问题的摘要：TiDB Lightning 的版本选择建议，支持导入多个库，对下游数据库的账号权限要求，导数据过程中某个表报错不会影响其他表，正确重启 TiDB Lightning 的步骤，校验导入数据的正确性方法，支持的数据源格式，禁止导入不合规数据的方法，结束 tidb-lightning 进程的操作，使用千兆网卡的建议，TiDB Lightning 预留空间的原因，清除与 TiDB Lightning 相关的中间数据的步骤，获取 TiDB Lightning 运行时的 goroutine 信息的方法，TiDB Lightning 不兼容 Placement Rules in SQL 的原因，使用 TiDB Lightning 和 Dumpling 复制 schema 的步骤。
       - [术语表](https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-glossary.md): 了解 TiDB Lightning 相关的术语及定义。
   - [Dumpling](https://docs.pingcap.com/zh/tidb/stable/dumpling-overview.md): 使用 Dumpling 从 TiDB 导出数据。
   - PingCAP Clinic 诊断服务
@@ -823,7 +823,7 @@
       - [日期和时间类型](https://docs.pingcap.com/zh/tidb/stable/data-type-date-and-time.md): TiDB 支持 MySQL 的所有日期和时间类型，包括 DATE、TIME、DATETIME、TIMESTAMP 和 YEAR。每种类型都有有效值范围，值为 0 表示无效值。TIMESTAMP 和 DATETIME 类型能自动生成新的时间值。关于日期和时间值类型，需要注意日期部分必须是“年 - 月 - 日”的格式，如果日期的年份部分是 2 位数，TiDB 会根据具体规则进行转换。不同类型的零值如下表所示：DATE:0000-00-00, TIME:00:00:00, DATETIME:0000-00-00 00:00:00, TIMESTAMP:0000-00-00 00:00:00, YEAR:0000。如果 SQL 模式允许使用无效的 DATE、DATETIME、TIMESTAMP 值，无效值会自动转换为相应的零值。
       - [字符串类型](https://docs.pingcap.com/zh/tidb/stable/data-type-string.md): TiDB 支持 MySQL 所有字符串类型，包括 CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM 和 SET。CHAR 是定长字符串，长度固定为创建表时声明的长度。VARCHAR 是变长字符串，空间占用大小不得超过 65535 字节。TEXT 是文本串，最大列长为 65535 字节。TINYTEXT 最大列长度为 255。MEDIUMTEXT 最大列长度为 16777215。LONGTEXT 最大列长度为 4294967295。BINARY 存储二进制字符串。VARBINARY 存储二进制字符串。BLOB 是二进制大文件，最大列长度为 65535 字节。TINYBLOB 最大列长度为 255。MEDIUMBLOB 最大列长度为 16777215。LONGBLOB 最大列长度为 4294967295。ENUM 是枚举类型，值必须从固定集合中选取。SET 是集合类型，包含零个或多个值的字符串。
       - [JSON 类型](https://docs.pingcap.com/zh/tidb/stable/data-type-json.md): JSON 类型存储半结构化数据，使用 Binary 格式序列化，加快查询和解析速度。JSON 字段不能创建索引，但可以对 JSON 文档中的子字段创建索引。TiDB 仅支持下推部分 JSON 函数到 TiFlash，不建议使用 BR 恢复包含 JSON 列的数据到 v6.3.0 之前的 TiDB 集群。请勿同步非标准 JSON 类型的数据。MySQL 误标记二进制类型数据为 STRING 类型，TiDB 保持正确的二进制类型。ENUM 或 SET 数据类型转换为 JSON 时，TiDB 会检查格式正确性。TiDB 支持使用 ORDER BY 对 JSON Array 或 JSON Object 进行排序。在 INSERT JSON 列时，TiDB 会将值隐式转换为 JSON。
-      - [向量数据类型](https://docs.pingcap.com/zh/tidb/stable/vector-search-data-types.md): 了解 TiDB 中的向量数据类型。
+      - [向量数据类型](https://docs.pingcap.com/zh/ai/vector-search-data-types/)
     - 函数与操作符
       - [函数与操作符概述](https://docs.pingcap.com/zh/tidb/stable/functions-and-operators-overview.md): TiDB 中的函数和操作符使用方法与 MySQL 基本一致。在 SQL 语句中，表达式可用于诸如 SELECT 语句的 ORDER BY 或 HAVING 子句，SELECT/DELETE/UPDATE 语句的 WHERE 子句，或 SET 语句之类的地方。可使用字面值，列名，NULL，内置函数，操作符等来书写表达式。其中有些表达式下推到 TiKV 上执行，详见下推到 TiKV 的表达式列表。
       - [表达式求值的类型转换](https://docs.pingcap.com/zh/tidb/stable/type-conversion-in-expression-evaluation.md): TiDB 中的表达式求值类型转换与 MySQL 基本一致。详情请参见 MySQL 表达式求值类型转换文档。
@@ -837,7 +837,7 @@
       - [加密和压缩函数](https://docs.pingcap.com/zh/tidb/stable/encryption-and-compression-functions.md): TiDB 支持 MySQL 8.0 中提供的大部分加密和压缩函数。
       - [锁函数](https://docs.pingcap.com/zh/tidb/stable/locking-functions.md): 了解 TiDB 中的用户级锁函数。
       - [信息函数](https://docs.pingcap.com/zh/tidb/stable/information-functions.md): TiDB 支持 MySQL 8.0 中提供的大部分信息函数。
-      - [向量函数和操作符](https://docs.pingcap.com/zh/tidb/stable/vector-search-functions-and-operators.md): 了解可用于向量数据类型的函数与运算符。
+      - [向量函数和运算符](https://docs.pingcap.com/zh/ai/vector-search-functions-and-operators/)
       - JSON 函数
         - [概览](https://docs.pingcap.com/zh/tidb/stable/json-functions.md): TiDB 支持 MySQL 8.0 中提供的大部分 JSON 函数。
         - [创建 JSON 的函数](https://docs.pingcap.com/zh/tidb/stable/json-functions-create.md): 了解创建 JSON 值的 JSON 函数。
@@ -860,7 +860,7 @@
       - [Oracle 与 TiDB 函数和语法差异对照](https://docs.pingcap.com/zh/tidb/stable/oracle-functions-to-tidb.md): 了解 Oracle 与 TiDB 函数和语法差异对照。
     - [聚簇索引](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes.md): 本文档介绍了聚簇索引的概念、使用场景、使用方法、限制和兼容性。
     - [全局索引](https://docs.pingcap.com/zh/tidb/stable/global-indexes.md): 介绍 TiDB 全局索引的适用场景、优势、使用方法、工作原理及其限制等。
-    - [向量索引](https://docs.pingcap.com/zh/tidb/stable/vector-search-index.md): 了解如何在 TiDB 中构建和使用向量搜索索引，以加速 K-最近邻（KNN）查询。
+    - [向量索引](https://docs.pingcap.com/zh/ai/vector-search-index/)
     - [约束](https://docs.pingcap.com/zh/tidb/stable/constraints.md): TiDB 支持的约束与 MySQL 基本相同，包括非空约束和 CHECK 约束。非空约束规则与 MySQL 相同，而 CHECK 约束需要在 tidb_enable_check_constraint 设置为 ON 后才能开启。可以通过 CREATE TABLE 或 ALTER TABLE 语句添加 CHECK 约束。唯一约束和主键约束也与 MySQL 相似，但 TiDB 目前仅支持对 NONCLUSTERED 的主键进行添加和删除操作。外键约束从 v6.6.0 开始支持，可以使用 CREATE TABLE 和 ALTER TABLE 命令来添加和删除外键。
     - [生成列](https://docs.pingcap.com/zh/tidb/stable/generated-columns.md): 生成列是由列定义中的表达式计算得到的值。它包括存储生成列和虚拟生成列，存储生成列会将计算得到的值存储起来，而虚拟生成列不会存储其值。生成列可以用于从 JSON 数据类型中解出数据，并为该数据建立索引。在 INSERT 和 UPDATE 语句中，会检查生成列计算得到的值是否满足生成列的定义。生成列的局限性包括不能增加存储生成列，不能转换存储生成列为普通列，不能修改存储生成列的生成列表达式，以及不支持所有的 JSON 函数。
     - [SQL 模式](https://docs.pingcap.com/zh/tidb/stable/sql-mode.md): TiDB 服务器采用不同 SQL 模式来操作，可以使用 `SET [SESSION | GLOBAL] sql_mode='modes'` 语句设置 SQL 模式。`GLOBAL` 级别的 SQL 模式需要 `SUPER` 权限，影响新连接；`SESSION` 级别的 SQL 模式只影响当前客户端。重要的 sql_mode 值包括 `ANSI`、`STRICT_TRANS_TABLES` 和 `TRADITIONAL`。SQL mode 列表包括 `PIPES_AS_CONCAT`、`ANSI_QUOTES`、`IGNORE_SPACE`、`ONLY_FULL_GROUP_BY` 等。

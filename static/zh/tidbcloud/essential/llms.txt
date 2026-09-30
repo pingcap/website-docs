@@ -11,7 +11,7 @@
 - 快速上手
   - [试用 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-quickstart.md): 快速注册体验 TiDB Cloud 并创建一个 TiDB Cloud Starter 实例。
   - [试用 HTAP](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-htap-quickstart.md): 了解如何在 TiDB Cloud 中开始使用 HTAP。
-  - [试用 TiDB Cloud CLI](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli.md): 了解如何通过 TiDB Cloud CLI 管理 TiDB Cloud Starter 和 Essential 实例。
+  - [试用 TiDB Cloud CLI (ticloud)](https://docs.pingcap.com/zh/tidbcloud/get-started-with-cli.md): 了解如何通过 ticloud CLI 管理 TiDB Cloud Starter 和 Essential 实例。
 - 关键概念
   - [概览](https://docs.pingcap.com/zh/tidbcloud/key-concepts.md): 了解 TiDB Cloud 中的关键概念。
   - [架构](https://docs.pingcap.com/zh/tidbcloud/architecture-concepts.md): 了解 TiDB Cloud 的架构概念。
@@ -462,8 +462,8 @@
       - [`schema_unused_indexes`](https://docs.pingcap.com/zh/tidbcloud/sys-schema-unused-indexes.md): 了解 `schema_unused_indexes` 表在 `sys` 模式中的作用。
   - [元数据锁](https://docs.pingcap.com/zh/tidbcloud/metadata-lock.md): 介绍 TiDB 中元信息锁的概念、原理及实现细节。
   - [TiDB 加速建表](https://docs.pingcap.com/zh/tidbcloud/accelerated-table-creation.md): 了解 TiDB 中创建表的性能优化的概念、原理和实现细节。
-- CLI 参考 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-  - [概述](https://docs.pingcap.com/zh/tidbcloud/cli-reference.md): 提供 TiDB Cloud CLI 的概览。
+- TiDB Cloud CLI (ticloud) 参考 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [概述](https://docs.pingcap.com/zh/tidbcloud/cli-reference.md): 提供适用于 TiDB Cloud Starter 和 Essential 的 ticloud CLI 概览。
   - auth
     - [login](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-login.md): `ticloud auth login` 命令的参考。
     - [logout](https://docs.pingcap.com/zh/tidbcloud/ticloud-auth-logout.md): `ticloud auth logout` 命令的参考。
@@ -556,6 +556,7 @@
   - [服务器状态变量](https://docs.pingcap.com/zh/tidbcloud/status-variables.md): 使用状态变量查看系统和会话状态
   - [表库过滤](https://docs.pingcap.com/zh/tidbcloud/table-filter.md): TiDB 工具中表过滤器功能的使用方法。
   - [外部存储服务的 URI 格式](https://docs.pingcap.com/zh/tidbcloud/external-storage-uri.md): 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
+  - [为慢查询配置触发规则](https://docs.pingcap.com/zh/tidbcloud/config-slow-query-trigger-rules.md): 定义慢查询日志的触发规则。
   - [数据索引不一致报错](https://docs.pingcap.com/zh/tidbcloud/troubleshoot-data-inconsistency-errors.md): 了解如何处理由数据与索引一致性检查报告的错误。
   - [通知](https://docs.pingcap.com/zh/tidbcloud/notifications.md): 了解 TiDB Cloud 控制台中的通知，包括通知类型、用途以及如何查看通知。
   - [适用于 TiDB Cloud Starter 和 Essential 的项目 API 迁移指南](https://docs.pingcap.com/zh/tidbcloud/tidbx-starter-essential-project-api-migration-guide.md): 了解在 TiDB Cloud 为 TiDB X 实例引入独立项目类型后，为保持现有 v1beta API 调用正常工作所需的最少变更。

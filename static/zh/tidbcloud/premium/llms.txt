@@ -478,6 +478,7 @@
   - [表库过滤](https://docs.pingcap.com/zh/tidbcloud/table-filter.md): TiDB 工具中表过滤器功能的使用方法。
   - [外部存储服务的 URI 格式](https://docs.pingcap.com/zh/tidbcloud/external-storage-uri.md): 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
   - [内嵌于 DDL 的 Analyze](https://docs.pingcap.com/zh/tidbcloud/ddl_embedded_analyze.md): 本文档介绍了在新建或重组索引的 DDL 语句中嵌入的 `ANALYZE` 功能，该功能确保新索引的统计信息能够及时更新。
+  - [配置慢查询的触发规则](https://docs.pingcap.com/zh/tidbcloud/config-slow-query-trigger-rules.md): 定义慢查询日志的触发规则。
   - [数据索引不一致报错](https://docs.pingcap.com/zh/tidbcloud/troubleshoot-data-inconsistency-errors.md): 了解如何处理由数据与索引一致性检查报告的错误。
   - [通知](https://docs.pingcap.com/zh/tidbcloud/notifications.md): 了解 TiDB Cloud 控制台中的通知，包括通知类型、用途以及如何查看通知。
 - 支持计划

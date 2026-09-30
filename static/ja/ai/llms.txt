@@ -4,45 +4,152 @@
 
 ## クイックスタート
 
-- [Pythonで始める](https://docs.pingcap.com/ja/ai/quickstart-via-python.md): Python SDKを使用してTiDBでベクトル検索を開始する方法を学びましょう。
-- [SQL経由で開始する](https://docs.pingcap.com/ja/ai/quickstart-via-sql.md): SQL文を使用してTiDBのベクトル検索を素早く使い始め、生成型AIアプリケーションを強化する方法を学びましょう。
-
-## 概念
-
-- [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search-overview.md): TiDBのベクトル検索について学びましょう。この機能は、文書、画像、音声、動画など、さまざまなデータタイプにわたる意味的類似性検索を実行するための高度な検索ソリューションを提供します。
+- [Python によるベクトル検索のクイックスタート](https://docs.pingcap.com/ja/ai/quickstart-via-python.md): Python SDKを使用してTiDBでベクトル検索を開始する方法を学びましょう。
+- [SQL によるベクトル検索のクイックスタート](https://docs.pingcap.com/ja/ai/quickstart-via-sql.md): SQL文を使用してTiDBのベクトル検索を素早く使い始め、生成型AIアプリケーションを強化する方法を学びましょう。
+- [TiDB Cloud CLI のクイックスタート](https://docs.pingcap.com/ja/ai/ti-quick-start.md): TiDB Cloud CLI をインストールして設定し、その後ファイルシステムを作成して使用するか、TiDB Cloud Starter データベースを管理してクエリします。
 
 ## ガイド
 
-- [TiDBに接続する](https://docs.pingcap.com/ja/ai/connect.md): pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
-- [表の操作](https://docs.pingcap.com/ja/ai/tables.md): TiDB でテーブルを操作する方法を学びます。
-- 検索機能
-  - [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search.md): アプリケーションでベクトル検索を使用する方法を学習します。
+- [Python から TiDB に接続する](https://docs.pingcap.com/ja/ai/connect.md): pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
+- 検索と取得
+  - ベクトル検索
+    - [概要](https://docs.pingcap.com/ja/ai/vector-search-overview.md): TiDB のベクトル検索について学びます。この機能は、ドキュメント、画像、音声、動画など、さまざまなデータ型に対してセマンティック類似検索を実行するための高度な検索ソリューションを提供します。
+    - [ベクトル検索ガイド](https://docs.pingcap.com/ja/ai/vector-search.md): アプリケーションでベクトル検索を使用する方法を学習します。
+    - [ベクトル検索の例](https://docs.pingcap.com/ja/ai/vector-search-with-pytidb.md): ベクトル埋め込みを使用したセマンティック検索を実装し、類似するコンテンツを見つけます。
   - 全文検索
     - [Pythonによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-python.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索精度を向上させることができます。
     - [SQLによる全文検索](https://docs.pingcap.com/ja/ai/vector-search-full-text-search-sql.md): 全文検索では、正確なキーワードに基づいて文書を検索できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索精度を向上させることができます。
-  - [ハイブリッド検索](https://docs.pingcap.com/ja/ai/vector-search-hybrid-search.md): 全文検索とベクトル検索を併用することで、検索結果の質を向上させることができます。
-  - [画像検索](https://docs.pingcap.com/ja/ai/image-search.md): アプリケーションで画像検索を使用する方法を学びます。
-- 高度な機能
-  - [自動埋め込み](https://docs.pingcap.com/ja/ai/auto-embedding.md): アプリケーションで自動埋め込みを使用する方法を学習します。
-  - [フィルタリング](https://docs.pingcap.com/ja/ai/filtering.md): アプリケーションでフィルタリングを使用する方法を学習します。
+    - [全文検索の例](https://docs.pingcap.com/ja/ai/fulltext-search-with-pytidb.md): TiDB の全文検索を使用して従来型のテキスト検索を実行します。
+  - ハイブリッド検索
+    - [ハイブリッド検索ガイド](https://docs.pingcap.com/ja/ai/vector-search-hybrid-search.md): 全文検索とベクトル検索を併用することで、検索結果の質を向上させることができます。
+    - [ハイブリッド検索の例](https://docs.pingcap.com/ja/ai/hybrid-search-with-pytidb.md): ベクトル検索と全文検索を組み合わせて、より包括的な結果を得ます。
+  - 自動埋め込み
+    - [自動埋め込みガイド](https://docs.pingcap.com/ja/ai/auto-embedding.md): アプリケーションで自動埋め込みを使用する方法を学習します。
+    - [自動埋め込みの例](https://docs.pingcap.com/ja/ai/auto-embedding-with-pytidb.md): 組み込みの埋め込みモデルを使用して、テキストデータの埋め込みを自動生成します。
+  - 画像検索
+    - [画像検索ガイド](https://docs.pingcap.com/ja/ai/image-search.md): アプリケーションで画像検索を使用する方法を学びます。
+    - [画像検索の例](https://docs.pingcap.com/ja/ai/image-search-with-pytidb.md): テキストから画像への検索と画像から画像への検索の両方に対応するために、マルチモーダル埋め込みを使用して画像検索アプリケーションを構築します。
   - [再ランキング](https://docs.pingcap.com/ja/ai/reranking.md): アプリケーションで再ランキングを使用する方法を学習します。
+- データを操作する
+  - [テーブルを操作する](https://docs.pingcap.com/ja/ai/tables.md): TiDB でテーブルを操作する方法を学びます。
+  - [フィルタリング](https://docs.pingcap.com/ja/ai/filtering.md): アプリケーションでフィルタリングを使用する方法を学習します。
   - [結合クエリ](https://docs.pingcap.com/ja/ai/join-queries.md): アプリケーションで複数のテーブル結合を使用する方法を学習します。
   - [生のSQLクエリ](https://docs.pingcap.com/ja/ai/raw-queries.md): アプリケーションで生のクエリを使用する方法を学習します。
   - [トランザクション](https://docs.pingcap.com/ja/ai/transactions.md): アプリケーションでトランザクションを使用する方法を学びます。
-
-## 例
-
-- [基本的なCRUD操作](https://docs.pingcap.com/ja/ai/basic-with-pytidb.md): データベース接続、テーブル作成、データ操作など、pytidb`の基本的な操作を学びましょう。
-- [自動埋め込み](https://docs.pingcap.com/ja/ai/auto-embedding-with-pytidb.md): 組み込みの埋め込みモデルを使用して、テキストデータの埋め込みを自動的に生成します。
-- 検索と取得
-  - [ベクトル検索](https://docs.pingcap.com/ja/ai/vector-search-with-pytidb.md): ベクトル埋め込みを用いたセマンティック検索を実装し、類似コンテンツを検索する。
-  - [全文検索](https://docs.pingcap.com/ja/ai/fulltext-search-with-pytidb.md): TiDBの全文検索を使用して、従来型のテキスト検索を実行します。
-  - [ハイブリッド検索](https://docs.pingcap.com/ja/ai/hybrid-search-with-pytidb.md): より包括的な結果を得るには、ベクトル検索と全文検索を組み合わせてください。
-  - [画像検索](https://docs.pingcap.com/ja/ai/image-search-with-pytidb.md): テキストから画像への検索と画像から画像への検索の両方に対応する、マルチモーダル埋め込みを用いた画像検索アプリケーションを構築する。
-- AIアプリケーション
-  - [RAG アプリケーション](https://docs.pingcap.com/ja/ai/rag-with-pytidb.md): 文書検索と言語生成を組み合わせたRAGアプリケーションを構築する。
-  - [会話記憶](https://docs.pingcap.com/ja/ai/memory-with-pytidb.md): チャットボットや対話型AIアプリケーション向けに、会話メモリを実装する。
-  - [テキストからSQLへ](https://docs.pingcap.com/ja/ai/text2sql-with-pytidb.md): AIモデルを使用して、自然言語によるクエリをSQL文に変換する。
+- AI アプリケーションを構築する
+  - [RAG の例](https://docs.pingcap.com/ja/ai/rag-with-pytidb.md): ドキュメント検索と言語生成を組み合わせた RAG アプリケーションを構築します。
+  - [会話メモリの例](https://docs.pingcap.com/ja/ai/memory-with-pytidb.md): チャットボットや会話型 AI アプリケーション向けに会話メモリを実装します。
+  - [Text-to-SQL の例](https://docs.pingcap.com/ja/ai/text2sql-with-pytidb.md): AI モデルを使用して自然言語クエリを SQL 文に変換します。
+- TiDB Cloud CLI
+  - [概要](https://docs.pingcap.com/ja/ai/ti-overview.md): TiDB Cloud Starter インスタンスと TiDB Cloud Filesystem 内の file system を管理するために、TiDB Cloud CLI (`ti`) をいつ使用するかを学びます。
+  - [TiDB Cloud CLI のインストール、設定、および更新](https://docs.pingcap.com/ja/ai/ti-install-configure-update.md): TiDB Cloud CLI のリリースをインストールし、プロファイルを設定し、バージョンを確認し、更新を適用し、CLI をアンインストールします。
+  - [TiDB Cloud Starter インスタンスを管理する](https://docs.pingcap.com/ja/ai/manage-starter-instances.md): TiDB Cloud CLI を使用して、Starter インスタンス、ブランチ、SQL ユーザー、接続、SQL ステートメントを作成および管理する方法を学びます。
+  - [TiDB Cloud Filesystem を管理する](https://docs.pingcap.com/ja/ai/manage-filesystems-via-cli.md): `ti fs` を使用してファイルシステムを作成し、ファイルの書き込みと読み取りを行う方法、およびその他のファイルシステムタスク向けガイドについて説明します。
+  - ユーザーと自動化のシナリオ
+    - [日次の TiDB Cloud CLI ワークフローを実行する](https://docs.pingcap.com/ja/ai/ti-daily-workflow-example.md): リソースを確認し、TiDB Cloud Starter インスタンスと file system を管理し、TiDB Cloud CLI の更新を確認して、リソースをクリーンアップします。
+    - [明示的な SQL ロールを使用して TiDB Cloud Starter にクエリする](https://docs.pingcap.com/ja/ai/ti-query-sql-with-roles-example.md): TiDB Cloud CLI で管理される SQL ユーザーを準備し、明示的な権限の意図に基づいて読み取り専用、読み書き、管理者ステートメントを実行します。
+    - [TiDB Cloud Filesystem を使用して分離されたジョブ間で CI アーティファクトを受け渡す](https://docs.pingcap.com/ja/ai/ti-ci-artifact-handoff-example.md): ビルド出力を TiDB Cloud Filesystem に永続化し、完全な TiDB Cloud CLI プロファイルをコピーせずに後続の CI ジョブから利用します。
+  - AI エージェントのシナリオ
+    - [エージェントのサンドボックスで TiDB Cloud Filesystem を使用する](https://docs.pingcap.com/ja/ai/ti-agent-sandbox-example.md): 信頼できるマシン上で file system をプロビジョニングし、TiDB Cloud API キーを使わずに、クリーンなエージェントサンドボックスへ設定不要でアクセスを提供します。
+    - [TiDB Cloud Filesystem を使用して使い捨てサンドボックス間でエージェントの状態を永続化する](https://docs.pingcap.com/ja/ai/ti-persistent-agent-state-example.md): エージェントのサンドボックスを置き換える際に、ファイルシステム内でプラン、チェックポイント、出力、ワークフロー履歴を保持します。
+    - [TiDB Cloud Filesystem を使用して並列エージェント間で読み取り専用データセットを共有する](https://docs.pingcap.com/ja/ai/ti-parallel-agent-dataset-example.md): 1 つの非構造化データセットをアップロードし、同じ読み取り専用でマウントされた名前空間を複数のエージェントワーカーに公開します。
+    - [TiDB Cloud Filesystem 上でエージェント用の Git ワークスペースを準備する](https://docs.pingcap.com/ja/ai/ti-git-workspace-for-agents-example.md): 大規模な Git ワークスペースをすばやく利用可能にし、クリーンオブジェクトをバックグラウンドで hydrate して、完全なダウンロードが終わる前にエージェントが作業を開始できるようにします。
+    - [ファイルシステムジャーナルに Agent ワークフローを記録する](https://docs.pingcap.com/ja/ai/ti-journal-agent-workflow-example.md): ジャーナルを作成し、構造化されたエージェントイベントを追記し、ワークフローを検索し、ジャーナルのハッシュチェーンを検証します。
+    - [ファイルシステム Vault シークレットを Agent に委任する](https://docs.pingcap.com/ja/ai/ti-vault-agent-secrets-example.md): シークレットを保存し、1 つのフィールドへのアクセス権をエージェントに付与し、プロセスに注入し、アクセスを監査し、付与を取り消します。
+  - コマンドリファレンス
+    - [概要](https://docs.pingcap.com/ja/ai/ti-cli-reference.md): TiDB Cloud CLI のコマンドグループ、構文、グローバルオプション、出力、dry-run の動作、ヘルプ形式、エラーを参照します。
+    - [configure](https://docs.pingcap.com/ja/ai/ti-configure.md): ローカルの TiDB Cloud CLI プロファイルを対話形式または非対話形式で設定します。
+    - [update](https://docs.pingcap.com/ja/ai/ti-update.md): TiDB Cloud CLI リリースの更新を確認またはインストールします。
+    - TiDB Cloud Starter インスタンスを管理するための `ti db` コマンド
+      - [概要](https://docs.pingcap.com/ja/ai/ti-starter-database.md): Starter インスタンス、ブランチ、SQL ユーザー、接続文字列、SQL 実行向けの `ti db` コマンドを一覧で示します。
+      - [create-db-cluster](https://docs.pingcap.com/ja/ai/ti-db-create-db-cluster.md): TiDB Cloud Starter クラスターを作成します。
+      - [list-db-clusters](https://docs.pingcap.com/ja/ai/ti-db-list-db-clusters.md): TiDB Cloud Starter クラスターを一覧表示します。
+      - [describe-db-cluster](https://docs.pingcap.com/ja/ai/ti-db-describe-db-cluster.md): TiDB Cloud Starter クラスターの詳細を表示します。
+      - [update-db-cluster](https://docs.pingcap.com/ja/ai/ti-db-update-db-cluster.md): TiDB Cloud Starter クラスターを更新します。
+      - [delete-db-cluster](https://docs.pingcap.com/ja/ai/ti-db-delete-db-cluster.md): TiDB Cloud Starter クラスターを削除します。
+      - [create-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-create-db-cluster-branch.md): TiDB Cloud Starter クラスターのブランチを作成します。
+      - [list-db-cluster-branches](https://docs.pingcap.com/ja/ai/ti-db-list-db-cluster-branches.md): TiDB Cloud Starter クラスターのブランチを一覧表示します。
+      - [describe-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-describe-db-cluster-branch.md): TiDB Cloud Starter クラスターのブランチを記述します。
+      - [delete-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-delete-db-cluster-branch.md): TiDB Cloud Starter クラスターからブランチを削除します。
+      - [create-db-sql-users](https://docs.pingcap.com/ja/ai/ti-db-create-db-sql-users.md): TiDB Cloud Starter インスタンス用に、TiDB Cloud CLI が管理する SQL ユーザーを作成します。
+      - [format-db-connection-string](https://docs.pingcap.com/ja/ai/ti-db-format-db-connection-string.md): TiDB Cloud CLI で管理される SQL ユーザー向けの接続文字列を整形します。
+      - [execute-sql-statement](https://docs.pingcap.com/ja/ai/ti-db-execute-sql-statement.md): TiDB Cloud Starter クラスターに対して 1 つの SQL ステートメントを実行します。
+    - TiDB Cloud Filesystem 内のファイルシステムを管理するための `ti fs` コマンド
+      - [概要](https://docs.pingcap.com/ja/ai/ti-filesystem.md): file system リソース、ファイル、レイヤー、パック、マウント向けのすべての `ti fs` コマンドを参照します。
+      - [create-file-system](https://docs.pingcap.com/ja/ai/ti-fs-create-file-system.md): ファイルシステムを作成します。
+      - [import-file-system-token](https://docs.pingcap.com/ja/ai/ti-fs-import-file-system-token.md): 既存のファイルシステムトークンを選択したローカルプロファイルにインポートします。
+      - [generate-file-system-token](https://docs.pingcap.com/ja/ai/ti-fs-generate-file-system-token.md): 1 つの TiDB Cloud Filesystem 用の追加のオーナートークンを生成します。
+      - [generate-file-system-scoped-token](https://docs.pingcap.com/ja/ai/ti-fs-generate-file-system-scoped-token.md): 1 つの TiDB Cloud Filesystem に対して、パスと操作が制限されたトークンを生成します。
+      - [list-file-system-tokens](https://docs.pingcap.com/ja/ai/ti-fs-list-file-system-tokens.md): 1 つの TiDB Cloud Filesystem のトークンメタデータを一覧表示します。
+      - [enable-file-system-token](https://docs.pingcap.com/ja/ai/ti-fs-enable-file-system-token.md): 無効化された file system トークンを再度認証できるように有効化します。
+      - [disable-file-system-token](https://docs.pingcap.com/ja/ai/ti-fs-disable-file-system-token.md): ファイルシステムトークンを削除せずに一時的に無効化します。
+      - [delete-file-system-token](https://docs.pingcap.com/ja/ai/ti-fs-delete-file-system-token.md): ファイルシステムトークンを完全に取り消し、認証に使用できないようにします。
+      - [refresh-file-system-token](https://docs.pingcap.com/ja/ai/ti-fs-refresh-file-system-token.md): 1 つの file system トークンをローテーションし、その置き換え用の平文値を 1 回だけ返します。
+      - [list-file-systems](https://docs.pingcap.com/ja/ai/ti-fs-list-file-systems.md): リージョン内のリモートファイルシステムを一覧表示します。
+      - [describe-file-system](https://docs.pingcap.com/ja/ai/ti-fs-describe-file-system.md): リモートの TiDB Cloud Filesystem の詳細を表示します。
+      - [describe-file-system-extract-configuration](https://docs.pingcap.com/ja/ai/ti-fs-describe-file-system-extract-configuration.md): ファイルシステムのメディア抽出設定を表示します。
+      - [update-file-system-extract-configuration](https://docs.pingcap.com/ja/ai/ti-fs-update-file-system-extract-configuration.md): ファイルシステムのメディア抽出設定を更新します。
+      - [describe-file-system-embedding-configuration](https://docs.pingcap.com/ja/ai/ti-fs-describe-file-system-embedding-configuration.md): ファイルシステムの埋め込み設定を表示します。
+      - [update-file-system-embedding-configuration](https://docs.pingcap.com/ja/ai/ti-fs-update-file-system-embedding-configuration.md): ファイルシステムの埋め込み設定を置き換えます。
+      - [check-file-system](https://docs.pingcap.com/ja/ai/ti-fs-check-file-system.md): TiDB Cloud Filesystem の接続性を確認します。
+      - [delete-file-system](https://docs.pingcap.com/ja/ai/ti-fs-delete-file-system.md): ファイルシステムを削除します。
+      - [copy-file](https://docs.pingcap.com/ja/ai/ti-fs-copy-file.md): ファイルシステムとの間、またはその内部でファイルをコピーします。
+      - [read-file](https://docs.pingcap.com/ja/ai/ti-fs-read-file.md): ファイルシステムからファイルを読み取ります。
+      - [list-files](https://docs.pingcap.com/ja/ai/ti-fs-list-files.md): ファイルシステム内のファイルを一覧表示します。
+      - [describe-file](https://docs.pingcap.com/ja/ai/ti-fs-describe-file.md): ファイルシステム内のファイルの情報を表示します。
+      - [move-file](https://docs.pingcap.com/ja/ai/ti-fs-move-file.md): ファイルシステム内のファイルを移動します。
+      - [delete-file](https://docs.pingcap.com/ja/ai/ti-fs-delete-file.md): ファイルシステムからファイルを削除します。
+      - [create-directory](https://docs.pingcap.com/ja/ai/ti-fs-create-directory.md): ファイルシステムにディレクトリを作成します。
+      - [chmod-file](https://docs.pingcap.com/ja/ai/ti-fs-chmod-file.md): ファイルシステム内のファイル権限を変更します。
+      - [create-symlink](https://docs.pingcap.com/ja/ai/ti-fs-create-symlink.md): ファイルシステムにシンボリックリンクを作成します。
+      - [create-hardlink](https://docs.pingcap.com/ja/ai/ti-fs-create-hardlink.md): ファイルシステムにハードリンクを作成します。
+      - [search-file-content](https://docs.pingcap.com/ja/ai/ti-fs-search-file-content.md): ファイルシステム内のファイル内容を検索します。
+      - [find-files](https://docs.pingcap.com/ja/ai/ti-fs-find-files.md): ファイルシステム内のファイルを検索します。
+      - [create-layer](https://docs.pingcap.com/ja/ai/ti-fs-create-layer.md): file system にレイヤーを作成します。
+      - [list-layers](https://docs.pingcap.com/ja/ai/ti-fs-list-layers.md): ファイルシステム内のレイヤーを一覧表示します。
+      - [fork-layer](https://docs.pingcap.com/ja/ai/ti-fs-fork-layer.md): ファイルシステムで copy-on-write の子レイヤーをフォークします。
+      - [list-layer-chain](https://docs.pingcap.com/ja/ai/ti-fs-list-layer-chain.md): ファイルシステム レイヤーの祖先チェーンを一覧表示します。
+      - [describe-layer](https://docs.pingcap.com/ja/ai/ti-fs-describe-layer.md): ファイルシステムのレイヤーを記述します。
+      - [diff-layer](https://docs.pingcap.com/ja/ai/ti-fs-diff-layer.md): ファイルシステムレイヤー内の変更を表示します。
+      - [create-layer-checkpoint](https://docs.pingcap.com/ja/ai/ti-fs-create-layer-checkpoint.md): ファイルシステムのレイヤーにチェックポイントを作成します。
+      - [delete-layer](https://docs.pingcap.com/ja/ai/ti-fs-delete-layer.md): ファイルシステムのレイヤーを放棄します。
+      - [rollback-layer](https://docs.pingcap.com/ja/ai/ti-fs-rollback-layer.md): ファイルシステムのレイヤーをロールバックします。
+      - [commit-layer](https://docs.pingcap.com/ja/ai/ti-fs-commit-layer.md): ファイルシステムのレイヤーをコミットします。
+      - [pack-file-system](https://docs.pingcap.com/ja/ai/ti-fs-pack-file-system.md): ローカル file system オーバーレイ状態をパックします。
+      - [unpack-file-system](https://docs.pingcap.com/ja/ai/ti-fs-unpack-file-system.md): ローカル file system オーバーレイ状態を復元します。
+      - [mount-file-system](https://docs.pingcap.com/ja/ai/ti-fs-mount-file-system.md): ファイルシステムをマウントします。
+      - [drain-file-system](https://docs.pingcap.com/ja/ai/ti-fs-drain-file-system.md): マウントされた TiDB Cloud Filesystem をドレインします。
+      - [unmount-file-system](https://docs.pingcap.com/ja/ai/ti-fs-unmount-file-system.md): ファイルシステムをアンマウントします。
+    - ファイルシステム Git ワークスペースを管理するための `ti fs-git` コマンド
+      - [概要](https://docs.pingcap.com/ja/ai/ti-filesystem-git.md): クローン、hydrate、リンクされた Git worktree の管理を行う各 `ti fs-git` コマンドのリファレンスです。
+      - [clone-git-workspace](https://docs.pingcap.com/ja/ai/ti-fs-git-clone-git-workspace.md): Git リポジトリをマウントされた TiDB Cloud Filesystem にクローンします。
+      - [hydrate-git-workspace](https://docs.pingcap.com/ja/ai/ti-fs-git-hydrate-git-workspace.md): file system Git ワークスペース内のクリーンな Git オブジェクトを hydrate します。
+      - [add-git-worktree](https://docs.pingcap.com/ja/ai/ti-fs-git-add-git-worktree.md): マウントされた TiDB Cloud Filesystem に、リンクされた Git worktree を追加します。
+      - [remove-git-worktree](https://docs.pingcap.com/ja/ai/ti-fs-git-remove-git-worktree.md): マウントされた TiDB Cloud Filesystem から、リンクされた Git worktree を削除します。
+    - ファイルシステムジャーナルを管理するための `ti fs-journal` コマンド
+      - [概要](https://docs.pingcap.com/ja/ai/ti-filesystem-journal.md): ジャーナルの作成、追記、読み取り、検索、検証を行うすべての `ti fs-journal` コマンドのリファレンスです。
+      - [create-journal](https://docs.pingcap.com/ja/ai/ti-fs-journal-create-journal.md): 追記専用の file system ジャーナルを作成します。
+      - [append-journal-entries](https://docs.pingcap.com/ja/ai/ti-fs-journal-append-journal-entries.md): ファイルシステムジャーナルにエントリを追加します。
+      - [read-journal-entries](https://docs.pingcap.com/ja/ai/ti-fs-journal-read-journal-entries.md): file system ジャーナルからエントリを読み取ります。
+      - [search-journal-entries](https://docs.pingcap.com/ja/ai/ti-fs-journal-search-journal-entries.md): ファイルシステムのジャーナルとエントリを検索します。
+      - [verify-journal](https://docs.pingcap.com/ja/ai/ti-fs-journal-verify-journal.md): file system ジャーナルのハッシュチェーンを検証します。
+    - ファイルシステム Vault シークレットを管理するための `ti fs-vault` コマンド
+      - [概要](https://docs.pingcap.com/ja/ai/ti-filesystem-vault.md): シークレット、委任アクセス、監査イベント、プロセスインジェクション、およびマウントに関するすべての `ti fs-vault` コマンドのリファレンスです。
+      - [create-secret](https://docs.pingcap.com/ja/ai/ti-fs-vault-create-secret.md): file system Vault にシークレットを作成します。
+      - [replace-secret](https://docs.pingcap.com/ja/ai/ti-fs-vault-replace-secret.md): file system Vault シークレット内のすべてのフィールドを置き換えます。
+      - [read-secret](https://docs.pingcap.com/ja/ai/ti-fs-vault-read-secret.md): file system Vault からシークレットを読み取ります。
+      - [list-secrets](https://docs.pingcap.com/ja/ai/ti-fs-vault-list-secrets.md): ファイルシステム Vault の認証情報から参照可能なシークレットを一覧表示します。
+      - [delete-secret](https://docs.pingcap.com/ja/ai/ti-fs-vault-delete-secret.md): file system Vault からシークレットを削除します。
+      - [create-grant](https://docs.pingcap.com/ja/ai/ti-fs-vault-create-grant.md): 委任された file system Vault grant を作成します。
+      - [delete-grant](https://docs.pingcap.com/ja/ai/ti-fs-vault-delete-grant.md): 委任された file system Vault grant を取り消します。
+      - [list-audit-events](https://docs.pingcap.com/ja/ai/ti-fs-vault-list-audit-events.md): file system Vault の監査イベントを一覧表示します。
+      - [run-with-secret](https://docs.pingcap.com/ja/ai/ti-fs-vault-run-with-secret.md): file system Vault シークレットを使用してプロセスを実行します。
+      - [mount-vault](https://docs.pingcap.com/ja/ai/ti-fs-vault-mount-vault.md): 読み取り専用の file system Vault ビューをマウントします。
+      - [unmount-vault](https://docs.pingcap.com/ja/ai/ti-fs-vault-unmount-vault.md): file system Vault ビューをアンマウントします。
+  - [TiDB Cloud CLI の設定と認証情報](https://docs.pingcap.com/ja/ai/ti-configuration-and-credentials.md): TiDB Cloud CLI のプロファイル、優先順位ルール、ローカル状態パス、file system 認証情報、SQL 認証情報、マウントロケーター、および操作ログのリファレンスです。
+  - [TiDB Cloud CLI のリージョン、セキュリティ、および制限事項](https://docs.pingcap.com/ja/ai/ti-regions-security-and-limitations.md): サポートされるリージョン、認証の境界、セキュリティのベストプラクティス、および現在の TiDB Cloud CLI の制限事項について参照します。
+  - [tdc から TiDB Cloud CLI へ移行する](https://docs.pingcap.com/ja/ai/ti-migrate-from-tdc.md): サポートされているローカル状態と自動化を tdc v0.1.x から TiDB Cloud CLI に移行します。
+  - [TiDB Cloud CLI のトラブルシューティング](https://docs.pingcap.com/ja/ai/ti-troubleshooting.md): TiDB Cloud CLI の API 認証、Starter クォータ、SQL 認証情報、中断されたコマンドの失敗を安全に診断する方法を学びます。
 
 ## 統合
 
