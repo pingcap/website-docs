@@ -20,6 +20,7 @@
 ## TiDB X KERNEL リリースノート
 
 - [TiDB Cloud Premium 向けカーネルバージョニング](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-kernel-versioning.md): TiDB Cloud Premium のカーネルのバージョニング規則と形式について説明します。
+- [TiDB-X-CLOUD.202603.1 リリースノート](https://docs.pingcap.com/ja/tidbcloud/tidb-x-cloud.202603.1.md): TiDB-X-CLOUD.202603.1 カーネルの機能について説明します。
 - [TiDB-X-CLOUD.202510.1 リリースノート](https://docs.pingcap.com/ja/tidbcloud/tidb-x-cloud.202510.1.md): TiDB-X-CLOUD.202510.1 カーネルの機能について説明します。
 
 ## メンテナンス通知

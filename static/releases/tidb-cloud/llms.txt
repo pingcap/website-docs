@@ -20,6 +20,7 @@
 ## TiDB X KERNEL RELEASE NOTES
 
 - [Kernel Versioning for TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/tidb-cloud-kernel-versioning.md): Learn about the kernel versioning rules and format for TiDB Cloud Premium.
+- [TiDB-X-CLOUD.202603.1 Release Notes](https://docs.pingcap.com/tidbcloud/tidb-x-cloud.202603.1.md): Learn about the features for the TiDB-X-CLOUD.202603.1 kernel.
 - [TiDB-X-CLOUD.202510.1 Release Notes](https://docs.pingcap.com/tidbcloud/tidb-x-cloud.202510.1.md): Learn about the features for the TiDB-X-CLOUD.202510.1 kernel.
 
 ## MAINTENANCE NOTIFICATIONS

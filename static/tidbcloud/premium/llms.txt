@@ -138,14 +138,21 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](https://docs.pingcap.com/tidbcloud/troubleshoot-import-access-denied-error.md): Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
     - [Connect AWS DMS to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 - Stream Data
-  - [Changefeed Overview](https://docs.pingcap.com/tidbcloud/changefeed-overview.md): TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
+  - [Overview](https://docs.pingcap.com/tidbcloud/stream-data-overview.md): Learn about the options for streaming data changes from TiDB Cloud to downstream systems, including Changefeed and Data Pipeline.
+  - [Changefeed](https://docs.pingcap.com/tidbcloud/changefeed-overview.md): TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
+  - [Data Pipeline](https://docs.pingcap.com/tidbcloud/data-pipeline.md): Learn how to create and manage a data pipeline that replicates full and incremental data from TiDB Cloud to TiDB Cloud Lake.
   - [To MySQL Sink](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-mysql.md): This document explains how to stream data from TiDB Cloud to MySQL using the Sink to MySQL changefeed. It includes restrictions, prerequisites, and steps to create a MySQL sink for data replication. The process involves setting up network connections, loading existing data to MySQL, and creating target tables in MySQL. After completing the prerequisites, users can create a MySQL sink to replicate data to MySQL.
   - [To Kafka Sink](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-apache-kafka.md): This document explains how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed specification.
   - [To Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage.md): This document explains how to create a changefeed to stream data from TiDB Cloud to cloud storage. It includes restrictions, configuration steps for the destination, replication, and specification, as well as starting the replication process.
+  - [To TiDB Cloud Lake](https://docs.pingcap.com/tidbcloud/data-pipeline-sink-to-lake.md): Learn how to create, monitor, and manage a data pipeline that replicates data from a TiDB Cloud instance to TiDB Cloud Lake.
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](https://docs.pingcap.com/tidbcloud/setup-aws-self-hosted-kafka-private-link-service.md): This document explains how to set up Private Link service for self-hosted Kafka in AWS and how to make it work with TiDB Cloud.
     - [Set Up Private Endpoint for Changefeeds](https://docs.pingcap.com/tidbcloud/set-up-sink-private-endpoint-premium.md): Learn how to set up a private endpoint for changefeeds.
     - [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](https://docs.pingcap.com/tidbcloud/setup-aws-msk-provisioned-private-link-service.md): This document explains how to set up an Amazon MSK Provisioned cluster and connect it to TiDB Cloud using AWS PrivateLink.
+    - [Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)](https://docs.pingcap.com/tidbcloud/data-pipeline-configure-external-stage-aws.md): Learn how to configure an Amazon S3 bucket as an external stage for TiDB Cloud Data Pipeline, including bucket access and SQS ingestion.
+    - [Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)](https://docs.pingcap.com/tidbcloud/data-pipeline-configure-external-stage-alibaba-cloud.md): Learn how to configure an Alibaba Cloud OSS bucket as an external stage for TiDB Cloud Data Pipeline, including the RAM user and access keys.
+    - [SQL Compatibility for TiDB Cloud Lake Integration](https://docs.pingcap.com/tidbcloud/data-pipeline-lake-sql-compatibility.md): Reference for DDL, DML, and TiDB-to-TiDB Cloud Lake type mapping behavior in TiDB Cloud Data Pipeline.
+    - [Data Pipeline FAQ](https://docs.pingcap.com/tidbcloud/data-pipeline-lake-faq.md): Frequently asked questions about TiDB Cloud Data Pipeline to TiDB Cloud Lake, including external stages, event-driven ingestion, and billing.
 - Security
   - [Security Overview](https://docs.pingcap.com/tidbcloud/security-overview.md): Learn about the comprehensive security framework of TiDB Cloud, including identity management, network isolation, data protection, access control, and auditing.
   - Identity Access Control
@@ -197,7 +204,7 @@
       - [AUTO_RANDOM](https://docs.pingcap.com/tidbcloud/auto-random.md): Learn the AUTO_RANDOM attribute.
       - [_tidb_rowid](https://docs.pingcap.com/tidbcloud/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
       - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidbcloud/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
-    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
+    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values of TiDB SQL statements.
     - [Schema Object Names](https://docs.pingcap.com/tidbcloud/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
     - [Keywords and Reserved Words](https://docs.pingcap.com/tidbcloud/keywords.md): Keywords and Reserved Words
     - [User-Defined Variables](https://docs.pingcap.com/tidbcloud/user-defined-variables.md): Learn how to use user-defined variables.
@@ -503,3 +510,12 @@
 - FAQs
   - [TiDB Cloud FAQs](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq.md): Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud.
 - [Glossary](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary.md): Learn the terms used in TiDB Cloud.
+
+## _BUILD_ALLOWLIST
+
+- Use Tiered Storage
+  - [Overview](https://docs.pingcap.com/tidbcloud/tiered-storage-overview.md): Learn about tiered storage on TiDB Cloud Premium and BYOC, including its concept, architecture, use cases, and implementation principles.
+  - [Configure and Manage](https://docs.pingcap.com/tidbcloud/tiered-storage-guide.md): Learn how to configure and manage tiered storage on TiDB Cloud Premium or BYOC, including DDL, partition selectors, and best practices.
+  - [Observability](https://docs.pingcap.com/tidbcloud/tiered-storage-observability.md): Learn how to monitor tiered storage on TiDB Cloud Premium or BYOC, including conversion progress, IA read metrics, and cache performance panels.
+  - [Limitations](https://docs.pingcap.com/tidbcloud/tiered-storage-limitations.md): Learn about limitations, throttling, compatibility, and query performance uncertainty of tiered storage on TiDB Cloud Premium or BYOC.
+  - [FAQ](https://docs.pingcap.com/tidbcloud/tiered-storage-faq.md): Learn about common tiered storage questions on TiDB Cloud Premium and BYOC, including DML, replicas, and object storage outages.
