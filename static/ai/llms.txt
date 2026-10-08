@@ -53,7 +53,7 @@
     - [Use TiDB Cloud Filesystem in an Agent Sandbox](https://docs.pingcap.com/ai/ti-agent-sandbox-example.md): Provision a file system on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
     - [Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-persistent-agent-state-example.md): Preserve plans, checkpoints, outputs, and workflow history in a file system while replacing agent sandboxes.
     - [Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-parallel-agent-dataset-example.md): Upload one unstructured dataset and expose the same read-only mounted namespace to multiple agent workers.
-    - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-git-workspace-for-agents-example.md): Make a large Git workspace visible quickly, hydrate clean objects in the background, and let an agent start work before the full download finishes.
+    - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](https://docs.pingcap.com/ai/ti-git-workspace-for-agents-example.md): Learn how to start agent tasks before a large Git repository finishes downloading and preserve work before removing the machine.
     - [Record an Agent Workflow in a File System Journal](https://docs.pingcap.com/ai/ti-journal-agent-workflow-example.md): Create a journal, append structured agent events, search the workflow, and verify the journal hash chain.
     - [Delegate File System Vault Secrets to an Agent](https://docs.pingcap.com/ai/ti-vault-agent-secrets-example.md): Store a secret, grant one field to an agent, inject it into a process, audit access, and revoke the grant.
   - Command Reference
@@ -117,7 +117,7 @@
       - [commit-layer](https://docs.pingcap.com/ai/ti-fs-commit-layer.md): Commit a file system layer.
       - [pack-file-system](https://docs.pingcap.com/ai/ti-fs-pack-file-system.md): Pack local file system overlay state.
       - [unpack-file-system](https://docs.pingcap.com/ai/ti-fs-unpack-file-system.md): Restore local file system overlay state.
-      - [mount-file-system](https://docs.pingcap.com/ai/ti-fs-mount-file-system.md): Mount a file system.
+      - [mount-file-system](https://docs.pingcap.com/ai/ti-fs-mount-file-system.md): Learn how to configure local mounts of TiDB Cloud file systems, including FUSE, WebDAV, read-only access, layers, and checkpoints.
       - [drain-file-system](https://docs.pingcap.com/ai/ti-fs-drain-file-system.md): Drain a mounted TiDB Cloud Filesystem.
       - [unmount-file-system](https://docs.pingcap.com/ai/ti-fs-unmount-file-system.md): Unmount a file system.
     - `ti fs-git` Commands for Managing File System Git Workspaces

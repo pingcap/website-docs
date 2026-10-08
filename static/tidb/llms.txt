@@ -643,7 +643,7 @@
         - [AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random.md): Learn the AUTO_RANDOM attribute.
         - [_tidb_rowid](https://docs.pingcap.com/tidb/stable/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
         - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
-      - [Literal Values](https://docs.pingcap.com/tidb/stable/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
+      - [Literal Values](https://docs.pingcap.com/tidb/stable/literal-values.md): This article introduces the literal values of TiDB SQL statements.
       - [Schema Object Names](https://docs.pingcap.com/tidb/stable/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
       - [Keywords and Reserved Words](https://docs.pingcap.com/tidb/stable/keywords.md): Keywords and Reserved Words
       - [User-Defined Variables](https://docs.pingcap.com/tidb/stable/user-defined-variables.md): Learn how to use user-defined variables.
@@ -707,7 +707,7 @@
       - [`DO`](https://docs.pingcap.com/tidb/stable/sql-statement-do.md): An overview of the usage of DO for the TiDB database.
       - [`DROP BINDING`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-binding.md): Use of DROP BINDING in TiDB database.
       - [`DROP DATABASE`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-database.md): An overview of the usage of DROP DATABASE for the TiDB database.
-      - [`DROP PLACEMENT POLICY`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-placement-policy.md): The usage of ALTER PLACEMENT POLICY in TiDB.
+      - [`DROP PLACEMENT POLICY`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-placement-policy.md): The usage of DROP PLACEMENT POLICY in TiDB.
       - [`DROP RESOURCE GROUP`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-resource-group.md): Learn the usage of DROP RESOURCE GROUP in TiDB.
       - [`DROP ROLE`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-role.md): An overview of the usage of DROP ROLE for the TiDB database.
       - [`DROP SEQUENCE`](https://docs.pingcap.com/tidb/stable/sql-statement-drop-sequence.md): An overview of the usage of DROP SEQUENCE for the TiDB database.
