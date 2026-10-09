@@ -133,7 +133,7 @@
       - [使用概要](https://docs.pingcap.com/ja/tidb/stable/br-use-overview.md): TiDB バックアップ＆リストアは、バックアップ方法の選択、バックアップデータの管理、ツールの導入に関するベストプラクティスを提供します。フルバックアップとログバックアップの両方の使用、推奨ストレージシステムへのデータの保存、バックアップ保持期間の設定が推奨されています。ツールは、コマンドラインツール、SQL文、またはKubernetes上のTiDB Operatorを使用して導入できます。詳細な使用方法については、付属のドキュメントをご覧ください。
       - [スナップショットのバックアップと復元ガイド](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-guide.md): このドキュメントでは、brコマンドラインツールを使用してTiDBスナップショットをバックアップおよび復元する方法について説明します。スナップショットのバックアップ、指定した時点のデータ復元、データベースまたはテーブルの復元に関する手順が含まれています。また、スナップショットのバックアップと復元のパフォーマンスと影響についても解説します。
       - [ログバックアップとPITRガイド](https://docs.pingcap.com/ja/tidb/stable/br-pitr-guide.md): TiDB ログバックアップおよび PITR ガイドでは、br コマンドラインツールを使用してデータをバックアップおよび復元する方法について説明します。ログバックアップの開始、定期的な完全バックアップの実行、古いデータのクリーンアップの手順が含まれています。また、PITR の実行方法と PITR のパフォーマンス機能に関する情報も提供します。
-      - [コンパクトログバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-compact-log-backup.md): ログバックアップを SST 形式に圧縮することで、ポイントインタイムリカバリ (PITR) の効率を向上させる方法を学習します。
+      - [コンパクトログバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-compact-log-backup.md): ログバックアップを SST 形式にコンパクションすることで、ポイントインタイムリカバリ (PITR) の効率を向上させる方法を学習します。
       - [ユースケース](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-use-cases.md): TiDBは、タイムリーなデータリカバリやビジネス監査など、特定のユースケース向けにスナップショットおよびログバックアップソリューションを提供します。ポイントインタイムリカバリ（PITR）を使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンに更新してください。Amazon S3にバックアップストレージを設定し、データ損失とリカバリの要件を満たすバックアップポリシーを設定してください。ログバックアップとスナップショットバックアップを実行し、PITRを使用して特定の時点にデータを復元します。古くなったデータは定期的にクリーンアップしてください。詳細な手順については、TiDBのドキュメントをご覧ください。
       - [バックアップストレージ](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-storages.md): TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
     - BR CLIマニュアル
@@ -589,7 +589,7 @@
     - [TiDBを使用してTiFlashレプリカを読み取る](https://docs.pingcap.com/ja/tidb/stable/use-tidb-to-read-tiflash.md): TiDB を使用してTiFlashレプリカを読み取る方法を学習します。
     - [MPPモードを使用する](https://docs.pingcap.com/ja/tidb/stable/use-tiflash-mpp-mode.md): TiFlashの MPP モードとその使用方法を学びます。
     - [FastScanを使用する](https://docs.pingcap.com/ja/tidb/stable/use-fastscan.md): FastScan を使用して OLAP シナリオでのクエリを高速化する方法を紹介します。
-    - [分散型ストレージおよびコンピューティングアーキテクチャとS3サポート](https://docs.pingcap.com/ja/tidb/stable/tiflash-disaggregated-and-s3.md): TiFlash の分散ストレージとコンピューティングアーキテクチャ、および S3 サポートについて学習します。
+    - [ストレージとコンピューティングの分離アーキテクチャとS3サポート](https://docs.pingcap.com/ja/tidb/stable/tiflash-disaggregated-and-s3.md): TiFlash のストレージとコンピューティングの分離アーキテクチャ、および S3 サポートについて学習します。
     - [サポートされているプッシュダウン計算](https://docs.pingcap.com/ja/tidb/stable/tiflash-supported-pushdown-calculations.md): TiFlashでサポートされているプッシュダウン計算について学習します。
     - [TiFlashクエリ結果の具体化](https://docs.pingcap.com/ja/tidb/stable/tiflash-results-materialization.md): TiFlashのクエリ結果をトランザクションに保存する方法を学びます。
     - [TiFlashの遅延発生](https://docs.pingcap.com/ja/tidb/stable/tiflash-late-materialization.md): TiFlash の遅延マテリアライゼーション機能を使用して、OLAP シナリオでクエリを高速化する方法について説明します。
