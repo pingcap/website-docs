@@ -66,6 +66,21 @@ const getDefaultNavConfig = (
           },
           {
             type: "item",
+            label: t("navbar.tidbCloudBYOC"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
+            to: `/tidbcloud/byoc?${CLOUD_MODE_KEY}=${CloudPlan.BYOC}`,
+            isI18n: false,
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloud &&
+              cloudPlan === CloudPlan.BYOC,
+            onClick: () => {
+              if (typeof window !== "undefined") {
+                sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.BYOC);
+              }
+            },
+          },
+          {
+            type: "item",
             label: t("navbar.tidbCloudDedicated"),
             to:
               cloudPlan === CloudPlan.Dedicated || !cloudPlan

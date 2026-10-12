@@ -18,6 +18,8 @@ export const CLOUD_PLAN_LABEL_STRINGS: Partial<Record<CloudPlan, string>> = {
   [CloudPlan.Dedicated]: "Dedicated",
   [CloudPlan.Starter]: "Starter (formerly Serverless)",
   [CloudPlan.Essential]: "Essential",
+  [CloudPlan.Premium]: "Premium",
+  [CloudPlan.BYOC]: "BYOC",
 };
 
 const CLOUD_VERSIONS = [
@@ -36,6 +38,60 @@ const CLOUD_VERSIONS = [
   {
     label: "Essential",
     value: CloudPlan.Essential,
+    icon: (
+      <Chip
+        label="Preview"
+        variant="outlined"
+        size="small"
+        sx={{
+          fontSize: "10px",
+          fontWeight: 500,
+          height: "18px",
+          borderRadius: "1000px",
+          pointerEvents: "none",
+          borderColor: "#DCE3E5",
+          color: "#6F787B",
+          textTransform: "uppercase",
+          letterSpacing: "0.25px",
+          "& .MuiChip-label": {
+            paddingLeft: "8px",
+            paddingRight: "8px",
+            lineHeight: "16px",
+          },
+        }}
+      />
+    ),
+  },
+  {
+    label: "Premium",
+    value: CloudPlan.Premium,
+    icon: (
+      <Chip
+        label="Preview"
+        variant="outlined"
+        size="small"
+        sx={{
+          fontSize: "10px",
+          fontWeight: 500,
+          height: "18px",
+          borderRadius: "1000px",
+          pointerEvents: "none",
+          borderColor: "#DCE3E5",
+          color: "#6F787B",
+          textTransform: "uppercase",
+          letterSpacing: "0.25px",
+          "& .MuiChip-label": {
+            paddingLeft: "8px",
+            paddingRight: "8px",
+            lineHeight: "16px",
+          },
+        }}
+      />
+    ),
+  },
+  {
+    label: "BYOC",
+    value: CloudPlan.BYOC,
     icon: (
       <Chip
         label="Preview"

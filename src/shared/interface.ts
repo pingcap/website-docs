@@ -113,4 +113,5 @@ export enum CloudPlan {
   Starter = "starter",
   Essential = "essential",
   Premium = "premium",
+  BYOC = "byoc",
 }
