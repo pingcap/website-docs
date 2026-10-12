@@ -49,7 +49,9 @@ module.exports = function ({
             return [
               {
                 type: "jsx",
-                value: `<a href="${ele.url}" target="_blank" referrerPolicy="no-referrer-when-downgrade">`,
+                value: `<a href={${JSON.stringify(
+                  ele.url
+                )}} target="_blank" referrerPolicy="no-referrer-when-downgrade">`,
               },
               ...node.children,
               { type: "jsx", value: "</a>" },
@@ -64,7 +66,7 @@ module.exports = function ({
             return [
               {
                 type: "jsx",
-                value: `<Link to="${resolvedPath}">`,
+                value: `<Link to={${JSON.stringify(resolvedPath)}}>`,
               },
               ...node.children,
               { type: "jsx", value: "</Link>" },
