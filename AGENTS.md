@@ -41,6 +41,6 @@
 
 ## Security & Configuration Tips
 
-- Put local-only env vars in `.env.development` (e.g. `GATSBY_ALGOLIA_APPLICATION_ID`, `GATSBY_ALGOLIA_API_KEY`).
+- Put local-only env vars in `.env.development` (e.g. `GATSBY_ALGOLIA_APPLICATION_ID`, `GATSBY_ALGOLIA_SEARCH_API_KEY`).
 - If GitHub API rate-limits during development, set `GITHUB_AUTHORIZATION_TOKEN=...` when running commands.
 - Never commit `.env*` files (they are gitignored).

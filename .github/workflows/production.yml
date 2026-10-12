@@ -116,7 +116,7 @@ jobs:
         env:
           CI: true
           GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
-          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{ secrets.ALGOLIA_SEARCH_API_KEY }}
           GATSBY_DOC_BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
           GATSBY_DOC_BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}
