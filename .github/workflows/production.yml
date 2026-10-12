@@ -81,10 +81,12 @@ jobs:
 
       - name: Calc gatsby cache key
         id: calc-cache-key
+        env:
+          HASH: ${{ inputs.hash }}
         run: |
           if ${{ !!inputs.fallback }}
           then
-            echo "key=${{ inputs.hash }}" >> $GITHUB_OUTPUT
+            echo "key=$HASH" >> "$GITHUB_OUTPUT"
           else
             echo "key=${{ steps.submodule.outputs.submodule_sha }}" >> $GITHUB_OUTPUT
           fi

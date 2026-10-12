@@ -36,11 +36,13 @@ jobs:
 
       - name: Update submodule
         id: submodule
+        env:
+          SRC: ${{ inputs.src }}
         run: |
           git submodule init
           git submodule update --remote
           cd docs
-          git checkout ${{ inputs.src }}
+          git checkout "$SRC"
           cd ..
           echo "submodule_sha=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
           echo "submodule_status=$(git submodule status)" >> $GITHUB_OUTPUT
