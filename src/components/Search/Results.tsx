@@ -1,4 +1,6 @@
 import * as React from "react";
+import DOMPurify from "dompurify";
+import type { Config } from "dompurify";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -13,6 +15,38 @@ import {
   resolveSearchCategory,
   type SearchCategory,
 } from "shared/utils/searchCategory";
+
+const SAFE_SEARCH_URL_SCHEMES = new Set(["http:", "https:"]);
+const SAFE_SEARCH_URL_BASE = "https://docs.pingcap.com";
+const SEARCH_HIGHLIGHT_CONFIG: Config = {
+  ALLOWED_TAGS: ["em"],
+  ALLOWED_ATTR: [],
+};
+
+const isSafeSearchUrl = (value: unknown): value is string => {
+  if (typeof value !== "string" || value.trim() === "") {
+    return false;
+  }
+
+  if (value.startsWith("//")) {
+    return false;
+  }
+
+  try {
+    const url = new URL(value, SAFE_SEARCH_URL_BASE);
+    return SAFE_SEARCH_URL_SCHEMES.has(url.protocol);
+  } catch (_) {
+    return false;
+  }
+};
+
+const sanitizeSearchHighlight = (value: unknown): string => {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return DOMPurify.sanitize(value, SEARCH_HIGHLIGHT_CONFIG);
+};
 
 export default function SearchResults(props: {
   loading: boolean;
@@ -182,34 +216,61 @@ function SearchItemSkeleton() {
 function SearchItem(props: { data: any }) {
   const { data } = props;
   const { t } = useI18next();
-  const category = React.useMemo(
-    () => resolveSearchCategory(data.url),
-    [data.url]
-  );
+  const url = typeof data.url === "string" ? data.url : "";
+  const safeUrl = isSafeSearchUrl(url) ? url : null;
+  const category = React.useMemo(() => resolveSearchCategory(url), [url]);
   const categoryLabel = category ? t(getSearchCategoryLabelKey(category)) : "";
+  const hierarchyHtml = React.useMemo(
+    () =>
+      sanitizeSearchHighlight(data._highlightResult?.hierarchy?.lvl0?.value),
+    [data._highlightResult?.hierarchy?.lvl0?.value]
+  );
+  const urlHtml = React.useMemo(
+    () => sanitizeSearchHighlight(data._highlightResult?.url?.value),
+    [data._highlightResult?.url?.value]
+  );
+  const contentHtml = React.useMemo(() => {
+    const highlightedContent = data._highlightResult?.content?.value;
+    const snippetContent = data._snippetResult?.content?.value;
+    const content =
+      typeof highlightedContent === "string" &&
+      highlightedContent.length > 500 &&
+      typeof snippetContent === "string"
+        ? snippetContent
+        : highlightedContent;
+
+    return sanitizeSearchHighlight(content);
+  }, [
+    data._highlightResult?.content?.value,
+    data._snippetResult?.content?.value,
+  ]);
 
   return (
     <Stack spacing={1}>
-      <Typography
-        variant="h5"
-        component="a"
-        href={data.url}
-        sx={{
-          textDecoration: "none",
-          "& >div": {
-            width: "100%",
-            maxWidth: "100%",
-          },
-        }}
-      >
-        {!!data._highlightResult?.hierarchy?.lvl0 && (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data._highlightResult.hierarchy.lvl0?.value,
-            }}
-          />
-        )}
-      </Typography>
+      {safeUrl ? (
+        <Typography
+          variant="h5"
+          component="a"
+          href={safeUrl}
+          sx={{
+            textDecoration: "none",
+            "& >div": {
+              width: "100%",
+              maxWidth: "100%",
+            },
+          }}
+        >
+          {hierarchyHtml && (
+            <div dangerouslySetInnerHTML={{ __html: hierarchyHtml }} />
+          )}
+        </Typography>
+      ) : (
+        <Typography variant="h5">
+          {hierarchyHtml && (
+            <div dangerouslySetInnerHTML={{ __html: hierarchyHtml }} />
+          )}
+        </Typography>
+      )}
       <Stack direction="row" spacing={1} alignItems="center">
         {!!category && !!categoryLabel && (
           <Chip
@@ -225,11 +286,11 @@ function SearchItem(props: { data: any }) {
             }}
           />
         )}
-        {data?._highlightResult?.url ? (
+        {safeUrl && urlHtml ? (
           <Typography
             variant="body1"
             component="a"
-            href={data.url}
+            href={safeUrl}
             sx={{
               textDecoration: "none",
               width: "fit-content",
@@ -239,11 +300,7 @@ function SearchItem(props: { data: any }) {
               color: "carbon.700",
             }}
           >
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data._highlightResult.url.value,
-              }}
-            />
+            <div dangerouslySetInnerHTML={{ __html: urlHtml }} />
           </Typography>
         ) : (
           <Typography
@@ -257,14 +314,9 @@ function SearchItem(props: { data: any }) {
         )}
       </Stack>
       <Typography component="div" sx={{}}>
-        <div
-          dangerouslySetInnerHTML={{
-            __html:
-              data._highlightResult.content.value.length > 500
-                ? data._snippetResult.content.value
-                : data._highlightResult.content.value,
-          }}
-        ></div>
+        {contentHtml && (
+          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+        )}
       </Typography>
     </Stack>
   );

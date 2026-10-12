@@ -41,7 +41,7 @@ If you change search route shape or category prefixes, review i18n routing and `
 ### 3) Update Algolia and category logic carefully
 
 When touching search data wiring:
-- Keep `GATSBY_ALGOLIA_APPLICATION_ID` and `GATSBY_ALGOLIA_API_KEY` usage intact unless the task explicitly changes them
+- Keep `GATSBY_ALGOLIA_APPLICATION_ID` and `GATSBY_ALGOLIA_SEARCH_API_KEY` usage intact unless the task explicitly changes them
 - Reuse `normalizeSearchResultPath()` and `resolveSearchCategory()` patterns
 - Update translation keys if new labels or UI strings are introduced
 
