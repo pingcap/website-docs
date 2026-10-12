@@ -70,6 +70,7 @@ const getDefaultNavConfig = (
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: `/tidbcloud/byoc?${CLOUD_MODE_KEY}=${CloudPlan.BYOC}`,
             isI18n: false,
+            disabled: (lang: string) => lang === "zh" || lang === "ja",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.BYOC,

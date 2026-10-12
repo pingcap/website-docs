@@ -15,6 +15,7 @@ import { getSelectedNavItem } from "../../src/components/Layout/Header/getSelect
 import { CloudPlan, Repo, TOCNamespace } from "../../src/shared/interface";
 import { determineInDefaultPlan } from "../cloud-plan";
 import { createNavs } from "../create-types/create-navs";
+import { getLocaleAvailabilityKey } from "../create-pages/create-docs";
 import { generateConfig, generateNavTOCPath } from "../path";
 import { calculateFileUrl } from "../url-resolver";
 
@@ -33,13 +34,22 @@ describe("TiDB Cloud BYOC", () => {
       (item) => item.type === "item" && item.label === "navbar.tidbCloudBYOC"
     );
     expect(byocIndex).toBe(premiumIndex + 1);
-    expect(cloud.children[byocIndex]).toEqual(
+    const byoc = cloud.children[byocIndex];
+    expect(byoc).toEqual(
       expect.objectContaining({
         type: "item",
         to: "/tidbcloud/byoc?plan=byoc",
         isI18n: false,
       })
     );
+    if (byoc.type !== "item") throw new Error("Missing BYOC item");
+    expect(typeof byoc.disabled).toBe("function");
+    if (typeof byoc.disabled !== "function") {
+      throw new Error("Missing BYOC locale availability check");
+    }
+    expect(byoc.disabled("en")).toBe(false);
+    expect(byoc.disabled("zh")).toBe(true);
+    expect(byoc.disabled("ja")).toBe(true);
     expect(getSelectedNavItem(nav, TOCNamespace.TiDBCloud)).toEqual(
       expect.objectContaining({ label: "navbar.tidbCloudBYOC" })
     );
@@ -63,6 +73,20 @@ describe("TiDB Cloud BYOC", () => {
     expect(calculateFileUrl(slug, true)).toBe("/tidbcloud/byoc");
     expect(generateNavTOCPath(config, "tidb-cloud-byoc")).toBe(
       "en/tidbcloud/master/TOC-tidb-cloud-byoc"
+    );
+  });
+
+  it("keys landing-page locale availability by cloud plan", () => {
+    const byoc = generateConfig(
+      "en/tidbcloud/master/tidb-cloud/byoc/_index"
+    );
+    const premium = generateConfig(
+      "zh/tidbcloud/master/tidb-cloud/premium/_index"
+    );
+
+    expect(getLocaleAvailabilityKey(byoc.name, byoc.config)).toBe("byoc/");
+    expect(getLocaleAvailabilityKey(premium.name, premium.config)).toBe(
+      "premium/"
     );
   });
 
