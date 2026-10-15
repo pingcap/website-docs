@@ -72,7 +72,7 @@ export default function APIReferenceTemplate({
     async function setupRedoc() {
       if (typeof Redoc === "undefined")
         await loadScript(
-          "https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"
+          "https://cdn.redoc.ly/redoc/v2.5.3/bundles/redoc.standalone.js"
         );
 
       loadLink(
