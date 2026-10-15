@@ -91,6 +91,15 @@ export default function CloudCompatibilitySelect(
         anchorEl={anchorEl.current}
         open={open}
         onClose={handleClose}
+        PaperProps={{
+          style: { width: anchorEl.current?.getBoundingClientRect().width },
+        }}
+        sx={{
+          "& .MuiPaper-root .MuiMenuItem-root": {
+            paddingLeft: "8px",
+            paddingRight: "8px",
+          },
+        }}
         MenuListProps={{
           "aria-labelledby": "version-select-button",
         }}
