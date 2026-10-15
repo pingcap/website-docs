@@ -7,14 +7,21 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
 } from "react";
-import { CloudPlan, Repo, TOCNamespace } from "./interface";
-
-export const CLOUD_MODE_KEY = "plan";
+import { getCloudPlanFromPathname } from "./cloud-plan-route";
+import {
+  buildCloudPlanSearchParams,
+  CLOUD_COMPATIBILITY_KEY,
+  CLOUD_MODE_KEY,
+} from "./cloud-plan-query";
+import { CloudCompatibility, CloudPlan, Repo, TOCNamespace } from "./interface";
+export { CLOUD_COMPATIBILITY_KEY, CLOUD_MODE_KEY } from "./cloud-plan-query";
 
 const TOC_NAME_TO_CLOUD_PLAN: Record<string, CloudPlan> = {
   TOC: CloudPlan.Dedicated,
   "TOC-tidb-cloud-starter": CloudPlan.Starter,
+  "TOC-tidb-cloud-starter-postgresql": CloudPlan.Starter,
   "TOC-tidb-cloud-essential": CloudPlan.Essential,
   "TOC-tidb-cloud-premium": CloudPlan.Premium,
   "TOC-tidb-cloud-byoc": CloudPlan.BYOC,
@@ -27,6 +34,15 @@ function isCloudPlan(value: string | null): value is CloudPlan {
     value === CloudPlan.Essential ||
     value === CloudPlan.Premium ||
     value === CloudPlan.BYOC
+  );
+}
+
+function isCloudCompatibility(
+  value: string | null
+): value is CloudCompatibility {
+  return (
+    value === CloudCompatibility.MySQL ||
+    value === CloudCompatibility.PostgreSQL
   );
 }
 
@@ -47,10 +63,14 @@ const CloudPlanContext = createContext<{
   repo: Repo;
   cloudPlan: CloudPlan | null;
   setCloudPlan: Dispatch<SetStateAction<CloudPlan | null>>;
+  cloudCompatibility: CloudCompatibility;
+  setCloudCompatibility: Dispatch<SetStateAction<CloudCompatibility>>;
 }>({
   repo: Repo.tidb,
   cloudPlan: null,
   setCloudPlan: () => {},
+  cloudCompatibility: CloudCompatibility.MySQL,
+  setCloudCompatibility: () => {},
 });
 export const CloudPlanProvider = CloudPlanContext.Provider;
 
@@ -58,9 +78,12 @@ export const useCloudPlan = () => {
   const {
     cloudPlan: _cloudPlan,
     setCloudPlan: _setCloudPlan,
+    cloudCompatibility: _cloudCompatibility,
+    setCloudCompatibility: _setCloudCompatibility,
     repo,
   } = useContext(CloudPlanContext);
-  const { search } = useLocation();
+  const pendingCloudCompatibilityRef = useRef<CloudCompatibility | null>(null);
+  const { pathname, search, hash } = useLocation();
   const isTidbcloud = repo === Repo.tidbcloud;
 
   const searchParams = new URLSearchParams(search);
@@ -80,6 +103,29 @@ export const useCloudPlan = () => {
   const resolvedCloudPlan =
     cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
 
+  const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
+  const cloudCompatibilityFromQueryRaw = isStarter
+    ? searchParams.get(CLOUD_COMPATIBILITY_KEY)
+    : null;
+  const cloudCompatibilityFromSessionRaw =
+    isStarter && typeof window !== "undefined"
+      ? sessionStorage.getItem(CLOUD_COMPATIBILITY_KEY)
+      : null;
+  const cloudCompatibilityFromQuery = isCloudCompatibility(
+    cloudCompatibilityFromQueryRaw
+  )
+    ? cloudCompatibilityFromQueryRaw
+    : null;
+  const cloudCompatibilityFromSession = isCloudCompatibility(
+    cloudCompatibilityFromSessionRaw
+  )
+    ? cloudCompatibilityFromSessionRaw
+    : null;
+  const requestedCloudCompatibility =
+    cloudCompatibilityFromQuery ||
+    cloudCompatibilityFromSession ||
+    CloudCompatibility.MySQL;
+
   const setCloudPlan = useCallback(
     (cloudPlan: CloudPlan) => {
       _setCloudPlan(cloudPlan);
@@ -90,13 +136,61 @@ export const useCloudPlan = () => {
     [_setCloudPlan]
   );
 
+  const setCloudCompatibility = useCallback(
+    (cloudCompatibility: CloudCompatibility) => {
+      pendingCloudCompatibilityRef.current = cloudCompatibility;
+      _setCloudCompatibility(cloudCompatibility);
+      if (typeof window === "undefined") return;
+
+      sessionStorage.setItem(CLOUD_COMPATIBILITY_KEY, cloudCompatibility);
+    },
+    [_setCloudCompatibility]
+  );
+
+  const syncCloudCompatibility = useCallback(
+    (cloudCompatibility: CloudCompatibility) => {
+      _setCloudCompatibility(cloudCompatibility);
+      if (typeof window === "undefined") return;
+
+      sessionStorage.setItem(CLOUD_COMPATIBILITY_KEY, cloudCompatibility);
+    },
+    [_setCloudCompatibility]
+  );
+
+  const isCloudCompatibilityPending = useCallback(
+    () => pendingCloudCompatibilityRef.current !== null,
+    []
+  );
+
   useEffect(() => {
     if (_cloudPlan !== resolvedCloudPlan) {
       _setCloudPlan(resolvedCloudPlan);
     }
   }, [_cloudPlan, resolvedCloudPlan, _setCloudPlan]);
 
-  const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
+  useEffect(() => {
+    const pendingCloudCompatibility = pendingCloudCompatibilityRef.current;
+    if (pendingCloudCompatibility) {
+      if (cloudCompatibilityFromQueryRaw === pendingCloudCompatibility) {
+        pendingCloudCompatibilityRef.current = null;
+      }
+      return;
+    }
+
+    if (_cloudCompatibility !== requestedCloudCompatibility) {
+      _setCloudCompatibility(requestedCloudCompatibility);
+    }
+  }, [
+    _cloudCompatibility,
+    requestedCloudCompatibility,
+    _setCloudCompatibility,
+    isStarter,
+    cloudCompatibilityFromQueryRaw,
+    searchParams,
+    pathname,
+    hash,
+  ]);
+
   const isEssential = isTidbcloud && resolvedCloudPlan === CloudPlan.Essential;
   const isPremium = isTidbcloud && resolvedCloudPlan === CloudPlan.Premium;
   const isBYOC = isTidbcloud && resolvedCloudPlan === CloudPlan.BYOC;
@@ -108,6 +202,10 @@ export const useCloudPlan = () => {
   return {
     cloudPlan: resolvedCloudPlan,
     setCloudPlan,
+    cloudCompatibility: _cloudCompatibility,
+    setCloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending,
     isStarter,
     isEssential,
     isPremium,
@@ -121,7 +219,10 @@ export const useCloudPlanNavigate = (
   inDefaultPlan: CloudPlan | null,
   tocNames: string[] | null | undefined,
   cloudPlan: CloudPlan | null,
-  setCloudPlan: (plan: CloudPlan) => void
+  setCloudPlan: (plan: CloudPlan) => void,
+  cloudCompatibility: CloudCompatibility,
+  syncCloudCompatibility: (compatibility: CloudCompatibility) => void,
+  isCloudCompatibilityPending: () => boolean
 ) => {
   const { pathname, search, hash } = useLocation();
   const tocNamesKey = Array.isArray(tocNames) ? tocNames.join("|") : "";
@@ -130,7 +231,11 @@ export const useCloudPlanNavigate = (
     if (namespace !== TOCNamespace.TiDBCloud) {
       return;
     }
+    if (isCloudCompatibilityPending()) {
+      return;
+    }
     const searchParams = new URLSearchParams(search);
+    const routeCloudPlan = getCloudPlanFromPathname(pathname);
 
     const cloudModeFromQueryRaw = searchParams.get(CLOUD_MODE_KEY);
     const cloudModeFromSessionRaw = sessionStorage.getItem(CLOUD_MODE_KEY);
@@ -146,7 +251,8 @@ export const useCloudPlanNavigate = (
     const defaultCloudPlan =
       allowedCloudPlans[0] || inDefaultPlan || CloudPlan.Dedicated;
 
-    const requestedCloudPlan = cloudModeFromQuery || cloudModeFromSession;
+    const requestedCloudPlan =
+      routeCloudPlan || cloudModeFromQuery || cloudModeFromSession;
     const shouldFallbackToDefault =
       !requestedCloudPlan ||
       (allowedCloudPlans.length > 0 &&
@@ -155,6 +261,22 @@ export const useCloudPlanNavigate = (
     const cloudMode = shouldFallbackToDefault
       ? defaultCloudPlan
       : requestedCloudPlan;
+    const cloudCompatibilityFromQueryRaw =
+      cloudMode === CloudPlan.Starter
+        ? searchParams.get(CLOUD_COMPATIBILITY_KEY)
+        : null;
+    const cloudCompatibilityFromSessionRaw =
+      typeof window === "undefined"
+        ? null
+        : sessionStorage.getItem(CLOUD_COMPATIBILITY_KEY);
+    const requestedCloudCompatibility =
+      cloudMode === CloudPlan.Starter
+        ? isCloudCompatibility(cloudCompatibilityFromQueryRaw)
+          ? cloudCompatibilityFromQueryRaw
+          : isCloudCompatibility(cloudCompatibilityFromSessionRaw)
+          ? cloudCompatibilityFromSessionRaw
+          : CloudCompatibility.MySQL
+        : CloudCompatibility.MySQL;
 
     if (cloudPlan !== cloudMode) {
       setCloudPlan(cloudMode);
@@ -164,24 +286,32 @@ export const useCloudPlanNavigate = (
       sessionStorage.setItem(CLOUD_MODE_KEY, cloudMode);
     }
 
-    // Ensure URL carries the chosen plan when necessary, and fix invalid/mismatched plan param.
-    if (cloudMode !== CloudPlan.Dedicated) {
-      if (cloudModeFromQuery !== cloudMode) {
-        searchParams.set(CLOUD_MODE_KEY, cloudMode);
-        navigate(
-          `${pathname}?${searchParams.toString()}${hash || ""}`,
-          { replace: true }
+    if (typeof window !== "undefined") {
+      if (cloudMode === CloudPlan.Starter) {
+        sessionStorage.setItem(
+          CLOUD_COMPATIBILITY_KEY,
+          requestedCloudCompatibility
         );
+      } else {
+        sessionStorage.removeItem(CLOUD_COMPATIBILITY_KEY);
       }
-      return;
+    }
+    if (cloudCompatibility !== requestedCloudCompatibility) {
+      syncCloudCompatibility(requestedCloudCompatibility);
     }
 
-    // Dedicated: keep URL without plan param by default; only normalize when an invalid/mismatched plan is present.
-    if (cloudModeFromQueryRaw && cloudModeFromQueryRaw !== CloudPlan.Dedicated) {
-      searchParams.set(CLOUD_MODE_KEY, CloudPlan.Dedicated);
+    const { searchParams: normalizedSearchParams, changed } =
+      buildCloudPlanSearchParams(
+        search,
+        cloudMode,
+        cloudMode === CloudPlan.Starter ? requestedCloudCompatibility : null
+      );
+    if (changed) {
       navigate(
-        `${pathname}?${searchParams.toString()}${hash || ""}`,
-        { replace: true }
+        `${pathname}?${normalizedSearchParams.toString()}${hash || ""}`,
+        {
+          replace: true,
+        }
       );
     }
   }, [
@@ -190,6 +320,9 @@ export const useCloudPlanNavigate = (
     tocNamesKey,
     cloudPlan,
     setCloudPlan,
+    cloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending,
     pathname,
     search,
     hash,

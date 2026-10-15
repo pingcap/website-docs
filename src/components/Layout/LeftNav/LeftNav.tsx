@@ -23,8 +23,10 @@ import LeftNavTree, { clearAllNavStates } from "./LeftNavTree";
 import VersionSelect, {
   NativeVersionSelect,
 } from "../VersionSelect/VersionSelect";
+import CloudCompatibilitySelect from "../VersionSelect/CloudCompatibilitySelect";
 import { LeftNavStickyContainer } from "../VersionSelect/SharedSelect";
 import { getHeaderStickyHeight } from "shared/headerHeight";
+import { useCloudPlan } from "shared/useCloudPlan";
 
 import TiDBLogoWithoutText from "media/logo/tidb-logo.svg";
 
@@ -120,6 +122,7 @@ export function LeftNavDesktop(props: LeftNavProps) {
     selectedNavItem,
     namespace,
   } = props;
+  const { isStarter } = useCloudPlan();
 
   return (
     <Box
@@ -162,6 +165,15 @@ export function LeftNavDesktop(props: LeftNavProps) {
               />
             </Box>
           )}
+
+          {isStarter && (
+            <Box marginTop={1}>
+              <CloudCompatibilitySelect
+                disableStickyContainer
+                pathConfig={pathConfig}
+              />
+            </Box>
+          )}
         </LeftNavStickyContainer>
 
         <LeftNavTree data={data} current={current} />
@@ -181,6 +193,7 @@ export function LeftNavMobile(props: LeftNavProps) {
     namespace,
     selectedNavItem,
   } = props;
+  const { isStarter } = useCloudPlan();
 
   const [open, setOpen] = React.useState(false);
 
@@ -244,6 +257,14 @@ export function LeftNavMobile(props: LeftNavProps) {
           {selectedNavItem && (
             <Box sx={{ marginBottom: 1 }}>
               <LeftNavTitle selectedNavItem={selectedNavItem} />
+            </Box>
+          )}
+          {isStarter && (
+            <Box sx={{ marginBottom: 1 }}>
+              <CloudCompatibilitySelect
+                disableStickyContainer
+                pathConfig={pathConfig}
+              />
             </Box>
           )}
           <LeftNavTree data={data} current={current} />

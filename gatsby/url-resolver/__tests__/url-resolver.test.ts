@@ -135,6 +135,15 @@ describe("calculateFileUrl", () => {
     expect(url).toBe("/en/tidbcloud/dedicated/starter");
   });
 
+  it("should resolve Starter index to starter without trailing slash", () => {
+    const absolutePath = path.join(
+      sourceBasePath,
+      "en/tidbcloud/master/tidb-cloud/starter/_index.md"
+    );
+    const url = calculateFileUrlWithConfig(absolutePath, testConfig);
+    expect(url).toBe("/en/tidbcloud/starter");
+  });
+
   it("should resolve tidbcloud non-index without prefixes", () => {
     const absolutePath = path.join(
       sourceBasePath,

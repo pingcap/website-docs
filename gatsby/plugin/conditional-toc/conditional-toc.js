@@ -97,6 +97,13 @@ export const createConditionalToc = ({
               attributes.language = languageMatch[1];
             }
 
+            const compatibilityMatch = jsxString.match(
+              /compatibility=["']([^"']+)["']/
+            );
+            if (compatibilityMatch) {
+              attributes.compatibility = compatibilityMatch[1];
+            }
+
             return attributes;
           };
 
