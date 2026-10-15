@@ -47,6 +47,9 @@ jobs:
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
       - name: Run scripts
+        env:
+          PATCH_SCRAPER_REPO: ${{ inputs.scraper_repo }}
+          PATCH_SCRAPER_REF: ${{ inputs.scraper_ref }}
         run: |
           set -o pipefail
           cd docsearch
@@ -59,8 +62,8 @@ jobs:
           export CRAWL_LANG="${{ inputs.language }}"
 
           export BASE_DOCKER_REGISTRY="${{ secrets.DOCKER_REGISTRY }}"
-          export PATCH_SCRAPER_REPO="${{ inputs.scraper_repo }}"
-          export PATCH_SCRAPER_REF="${{ inputs.scraper_ref }}"
+          export PATCH_SCRAPER_REPO="$PATCH_SCRAPER_REPO"
+          export PATCH_SCRAPER_REF="$PATCH_SCRAPER_REF"
           export PATCHED_DOCKER_REGISTRY="local"
           export PATCH_IMAGE_ENV_FILE="/tmp/docsearch-patched-image.env"
 

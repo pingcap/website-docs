@@ -17,6 +17,8 @@ export function getCloudPlanFromPathname(pathname: string): CloudPlan | null {
       return CloudPlan.Essential;
     case "premium":
       return CloudPlan.Premium;
+    case "byoc":
+      return CloudPlan.BYOC;
     default:
       return null;
   }

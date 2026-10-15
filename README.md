@@ -33,7 +33,7 @@ pnpm start
 In order to debug algolia searches, you need to provide two additional environment variables:
 
 - `GATSBY_ALGOLIA_APPLICATION_ID`
-- `GATSBY_ALGOLIA_API_KEY`
+- `GATSBY_ALGOLIA_SEARCH_API_KEY`
 
 Put them in `.env.development` to make them take effect. (Ref: <https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/>)
 

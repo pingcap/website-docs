@@ -20,6 +20,20 @@ describe("getTOCNamespace", () => {
     );
   });
 
+  it("maps TiDB Cloud Filesystem docs to the Filesystem namespace", () => {
+    expect(
+      getTOCNamespace(
+        "en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/filesystem-quick-start"
+      )
+    ).toBe(TOCNamespace.TiDBCloudFilesystem);
+  });
+
+  it("maps the root-level Filesystem index to the Filesystem namespace", () => {
+    expect(getTOCNamespace("en/tidb-cloud-filesystem/master/_index")).toBe(
+      TOCNamespace.TiDBCloudFilesystem
+    );
+  });
+
   it("keeps other TiDB stable docs in the TiDB namespace", () => {
     expect(getTOCNamespace("en/tidb/release-8.5/alert-rules")).toBe(
       TOCNamespace.TiDB

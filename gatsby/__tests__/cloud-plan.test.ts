@@ -71,6 +71,7 @@ describe("TiDB Cloud plan TOC membership", () => {
             starter: new Set(["cloud-starter-postgresql-only"]),
             essential: new Set(),
             premium: new Set(),
+            byoc: new Set(),
           },
         ],
       ])

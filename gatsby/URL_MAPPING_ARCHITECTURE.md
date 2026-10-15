@@ -189,7 +189,37 @@ The following sections describe the effects of each configuration rule in order 
 
 Rules are evaluated in order; the first matching rule wins.
 
-### Rule 1: TiDBCloud Dedicated Index
+### Rule 1: TiDB Cloud Filesystem Namespace
+
+**Effect**: Maps TiDB Cloud Filesystem pages from their independent staging tree to the English `/tidbcloud-filesystem` namespace.
+
+**Source Patterns**:
+
+- `/{lang}/tidb-cloud-filesystem/{branch}/tidb-cloud-filesystem/{...folders}/{filename}`
+- `/{lang}/tidb-cloud-filesystem/{branch}/{...folders}/{filename}`
+
+**Target Pattern**:
+
+- For `_index`: `/{lang}/tidbcloud-filesystem/{folders}` (keeps folder structure)
+- For other files: `/{lang}/tidbcloud-filesystem/{filename}` (flattens folder structure)
+
+**Filename Transform**:
+
+- `ignoreIf: ["_index"]`
+- `conditionalTarget.keepIf: ["_index"]`
+
+**Example**:
+
+- Source: `en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/_index.md`
+- Target: `/tidbcloud-filesystem`
+- Source: `en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/filesystem-quick-start.md`
+- Target: `/tidbcloud-filesystem/filesystem-quick-start`
+
+**Use Case**: TiDB Cloud Filesystem is sourced from its own English-only docs tree while using a product URL that omits the hyphen between `tidb` and `cloud`.
+
+---
+
+### Rule 2: TiDBCloud Dedicated Index
 
 **Effect**: Maps TiDBCloud dedicated `_index.md` files to the TiDBCloud root URL.
 
@@ -208,7 +238,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 2: TiDBCloud Releases Index
+### Rule 3: TiDBCloud Releases Index
 
 **Effect**: Maps TiDBCloud releases `_index.md` to the releases namespace.
 
@@ -227,7 +257,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 3: TiDB Releases Index (Stable)
+### Rule 4: TiDB Releases Index (Stable)
 
 **Effect**: Maps the stable TiDB releases `_index.md` file to the shared releases namespace.
 
@@ -246,7 +276,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 4: TiDB-in-Kubernetes Releases Index
+### Rule 5: TiDB-in-Kubernetes Releases Index
 
 **Effect**: Maps TiDB-in-Kubernetes releases `_index.md` to the releases namespace.
 
@@ -265,9 +295,9 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 5: TiDBCloud with Prefix
+### Rule 6: TiDBCloud with Prefix
 
-**Effect**: Maps TiDBCloud pages with prefixes (dedicated, starter, essential) to TiDBCloud URLs.
+**Effect**: Maps TiDBCloud pages with plan prefixes (dedicated, starter, essential, premium, BYOC) to TiDBCloud URLs.
 
 **Source Pattern**: `/{lang}/tidbcloud/{branch}/tidb-cloud/{...prefixes}/{filename}`
 
@@ -287,12 +317,14 @@ Rules are evaluated in order; the first matching rule wins.
 - Target: `/tidbcloud/dedicated/starter`
 - Source: `en/tidbcloud/master/tidb-cloud/dedicated/starter/getting-started.md`
 - Target: `/tidbcloud/getting-started`
+- Source: `en/tidbcloud/master/tidb-cloud/byoc/_index.md`
+- Target: `/tidbcloud/byoc`
 
-**Use Case**: TiDBCloud has multiple plan types (dedicated, starter, essential) with different URL structures.
+**Use Case**: TiDBCloud has multiple plan types with distinct landing pages and shared guide URLs.
 
 ---
 
-### Rule 6: Developer Namespace
+### Rule 7: Developer Namespace
 
 **Effect**: Maps stable TiDB pages under the `develop` folder (published as `developer`) to the shared `/developer` namespace.
 
@@ -321,7 +353,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: Best-Practices/API/AI Namespace
+### Rule 8: Best-Practices/API/AI Namespace
 
 **Effect**: Maps stable TiDB pages under `best-practices`, `api`, and `ai` to their corresponding shared namespaces.
 
@@ -350,7 +382,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: TiDB Cloud Lake Namespace
+### Rule 9: TiDB Cloud Lake Namespace
 
 **Effect**: Maps TiDB Cloud Lake pages to the `/tidbcloudlake` namespace.
 
@@ -379,7 +411,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: TiDB Index Pages with Folders
+### Rule 10: TiDB Index Pages with Folders
 
 **Effect**: Maps TiDB `_index.md` pages to URLs that keep their folder path, preventing multiple `_index.md` files from collapsing to the same `/tidb/{branch}` URL.
 
@@ -400,7 +432,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 10: TiDB with Branch Alias
+### Rule 11: TiDB with Branch Alias
 
 **Effect**: Maps TiDB pages with branch aliasing (master → dev, release-_ → v_).
 
@@ -427,7 +459,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: TiDB-in-Kubernetes Release Notes from Main
+### Rule 12: TiDB-in-Kubernetes Release Notes from Main
 
 **Effect**: Publishes TiDB-in-Kubernetes release notes from `main` at stable URLs so they override the copies from the configured stable release branch.
 
@@ -446,7 +478,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 12: TiDB-in-Kubernetes with Branch Alias
+### Rule 13: TiDB-in-Kubernetes with Branch Alias
 
 **Effect**: Maps TiDB-in-Kubernetes pages with branch aliasing (main → dev, release-_ → v_).
 
@@ -473,7 +505,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 13: Fallback Rule
+### Rule 14: Fallback Rule
 
 **Effect**: Generic fallback for any remaining paths.
 
@@ -496,7 +528,34 @@ Rules are evaluated in order; the first matching rule wins.
 
 Rules are evaluated in order; the first matching rule wins.
 
-### Rule 1: Releases Index Links
+### Rule 1: TiDB Cloud Filesystem Links (Direct Mapping)
+
+**Effect**: Resolves Filesystem source links to the English `/tidbcloud-filesystem` namespace, regardless of the current page language.
+
+**Link Patterns**:
+
+- `/tidb-cloud-filesystem/{...folders}/_index`
+- `/tidb-cloud-filesystem/{...folders}/{docname}`
+
+**Target Patterns**:
+
+- `/tidbcloud-filesystem/{folders}` for `_index`
+- `/tidbcloud-filesystem/{docname}` for article pages
+
+**Example**:
+
+- Link: `/tidb-cloud-filesystem/_index`
+- Current Page: `/zh/tidb/stable/overview`
+- Result: `/tidbcloud-filesystem`
+- Link: `/tidb-cloud-filesystem/guides/filesystem-mount`
+- Current Page: Any page
+- Result: `/tidbcloud-filesystem/filesystem-mount`
+
+**Use Case**: Filesystem is currently published in English only, so cross-product links must not inherit `/zh` or `/ja`.
+
+---
+
+### Rule 2: Releases Index Links
 
 **Effect**: Resolves `/releases/_index` links to TiDB self-managed releases page.
 
@@ -514,7 +573,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 2: TiDB Cloud Releases Index Links
+### Rule 3: TiDB Cloud Releases Index Links
 
 **Effect**: Resolves `/tidb-cloud/releases/_index` links to TiDB Cloud releases page.
 
@@ -532,7 +591,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 3: TiDB-in-Kubernetes Releases Index Links (Path-Based)
+### Rule 4: TiDB-in-Kubernetes Releases Index Links (Path-Based)
 
 **Effect**: Resolves `/tidb-in-kubernetes/releases/_index` links from TiDB-in-Kubernetes pages.
 
@@ -552,7 +611,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 4: Links from TiDB Releases Landing Page (Path-Based)
+### Rule 5: Links from TiDB Releases Landing Page (Path-Based)
 
 **Effect**: Resolves `/releases/*` links from the releases landing page to TiDB stable branch URLs.
 
@@ -572,7 +631,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 5: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/\*)
+### Rule 6: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/\*)
 
 **Effect**: Resolves `/releases/*` links from the operator releases landing page to TiDB-in-Kubernetes `stable` URLs.
 
@@ -592,7 +651,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: TiDB-in-Kubernetes Main TOC Release Links (Path-Based)
+### Rule 7: TiDB-in-Kubernetes Main TOC Release Links (Path-Based)
 
 **Effect**: Resolves release-note links from the `main` TiDB-in-Kubernetes TOC to the stable URLs that publish the corresponding `main` release-note files.
 
@@ -612,7 +671,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: Namespace Index Links (Direct Mapping)
+### Rule 8: Namespace Index Links (Direct Mapping)
 
 **Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
@@ -644,7 +703,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: Namespace Links (Direct Mapping)
+### Rule 9: Namespace Links (Direct Mapping)
 
 **Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`, `tidb-cloud-lake`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
 
@@ -673,7 +732,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 9: TiDBCloud Page Links (Path-Based)
+### Rule 10: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -696,7 +755,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 10: TiDB Cloud Lake Page Links (Path-Based)
+### Rule 11: TiDB Cloud Lake Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB Cloud Lake pages to `/tidbcloudlake/*` URLs.
 
@@ -716,7 +775,27 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 12: TiDB Cloud Filesystem Page Links (Path-Based)
+
+**Effect**: Resolves relative links from Filesystem pages to English `/tidbcloud-filesystem/*` URLs.
+
+**Path Pattern**: `/{lang}/tidbcloud-filesystem/{...any}`
+
+**Link Pattern**: `/{...folders}/{docname}`
+
+**Target Pattern**: `/tidbcloud-filesystem/{docname}`
+
+**Example**:
+
+- Current Page: `/tidbcloud-filesystem/filesystem-quick-start`
+- Link: `/guides/filesystem-mount`
+- Result: `/tidbcloud-filesystem/filesystem-mount`
+
+**Use Case**: Relative Filesystem links stay in the English product namespace; explicit namespace links such as `/ai/*` are handled by earlier direct rules.
+
+---
+
+### Rule 13: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -741,7 +820,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 12: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 14: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 
@@ -779,7 +858,7 @@ The URL mapping system provides:
 
 1. **Consistent URL Structure**: Source files are mapped to clean, SEO-friendly URLs
 2. **Context-Aware Link Resolution**: Links are resolved based on the current page's context
-3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`, `ai`, `tidbcloudlake`) have their own URL structure
+3. **Namespace Support**: Special namespaces (`developer`, `best-practices`, `api`, `ai`, `tidbcloudlake`, `tidbcloud-filesystem`) have their own URL structure
 4. **Branch Aliasing**: Internal branch names are transformed to user-friendly versions
 5. **Default Language Omission**: Default language (`en`) is omitted from URLs for cleaner paths
 6. **TOC-Driven Build**: Only files referenced in TOC files are built, reducing build size

@@ -143,9 +143,12 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](https://docs.pingcap.com/tidbcloud/troubleshoot-import-access-denied-error.md): Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
     - [Connect AWS DMS to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-connect-aws-dms.md): Learn how to migrate data from or into TiDB Cloud using AWS Database Migration Service (AWS DMS).
 - Stream Data ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-  - [Changefeed Overview](https://docs.pingcap.com/tidbcloud/essential-changefeed-overview.md): TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
+  - [Changefeed](https://docs.pingcap.com/tidbcloud/essential-changefeed-overview.md): TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
   - [Sink to MySQL](https://docs.pingcap.com/tidbcloud/essential-changefeed-sink-to-mysql.md): This document explains how to stream data from TiDB Cloud Essential to MySQL using the Sink to MySQL changefeed. It includes restrictions, prerequisites, and steps to create a MySQL sink for data replication. The process involves setting up network connections, loading existing data to MySQL, and creating target tables in MySQL. After completing the prerequisites, users can create a MySQL sink to replicate data to MySQL.
   - [Sink to Apache Kafka](https://docs.pingcap.com/tidbcloud/essential-changefeed-sink-to-kafka.md): This document explains how to create a changefeed to stream data from TiDB Cloud Essential to Apache Kafka. It includes restrictions, prerequisites, and steps to configure the changefeed for Apache Kafka. The process involves setting up network connections, adding permissions for Kafka ACL authorization, and configuring the changefeed.
+  - [Sink to TiDB Cloud Lake](https://docs.pingcap.com/tidbcloud/data-pipeline-essential-sink-to-lake.md): Manual setup guide for building a TiDB Cloud Lake data pipeline on TiDB Cloud Essential instances using export, a changefeed, and TiDB Cloud Lake integration.
+  - Reference
+    - [SQL Compatibility for TiDB Cloud Lake Integration](https://docs.pingcap.com/tidbcloud/data-pipeline-lake-sql-compatibility.md): Reference for DDL, DML, and TiDB-to-TiDB Cloud Lake type mapping behavior in TiDB Cloud Data Pipeline.
 - Security
   - [Security Overview](https://docs.pingcap.com/tidbcloud/security-overview.md): Learn about the comprehensive security framework of TiDB Cloud, including identity management, network isolation, data protection, access control, and auditing.
   - Identity Access Control
@@ -211,7 +214,7 @@
       - [AUTO_RANDOM](https://docs.pingcap.com/tidbcloud/auto-random.md): Learn the AUTO_RANDOM attribute.
       - [_tidb_rowid](https://docs.pingcap.com/tidbcloud/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
       - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidbcloud/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
-    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
+    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values of TiDB SQL statements.
     - [Schema Object Names](https://docs.pingcap.com/tidbcloud/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
     - [Keywords and Reserved Words](https://docs.pingcap.com/tidbcloud/keywords.md): Keywords and Reserved Words
     - [User-Defined Variables](https://docs.pingcap.com/tidbcloud/user-defined-variables.md): Learn how to use user-defined variables.

@@ -86,6 +86,9 @@ interface DocTemplateProps {
     premiumNavigation?: {
       premiumNavigation: RepoNav;
     };
+    byocNavigation?: {
+      byocNavigation: RepoNav;
+    };
   };
 }
 
@@ -134,6 +137,7 @@ function DocTemplate({
     starterPostgresqlNavigation: starterPostgresqlNav,
     essentialNavigation: essentialNav,
     premiumNavigation: premiumNav,
+    byocNavigation: byocNav,
   } = data;
 
   const {
@@ -146,6 +150,7 @@ function DocTemplate({
     isStarter,
     isEssential,
     isPremium,
+    isBYOC,
   } = useCloudPlan();
   useCloudPlanNavigate(
     namespace,
@@ -172,6 +177,7 @@ function DocTemplate({
     ? essentialNav.essentialNavigation
     : [];
   const premiumNavigation = premiumNav ? premiumNav.premiumNavigation : [];
+  const byocNavigation = byocNav ? byocNav.byocNavigation : [];
   const navigationByNamespace =
     namespace !== TOCNamespace.TiDBCloud
       ? classicNavigation
@@ -181,6 +187,8 @@ function DocTemplate({
       ? essentialNavigation
       : isPremium
       ? premiumNavigation
+      : isBYOC
+      ? byocNavigation
       : classicNavigation;
   const navigation = filterTOC(navigationByNamespace);
 
@@ -189,6 +197,7 @@ function DocTemplate({
     starterMySQLNavigation.length > 0 || starterPostgresqlNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
   const havePremium = premiumNavigation.length > 0;
+  const haveBYOC = byocNavigation.length > 0;
   const availablePlans: CloudPlan[] = [CloudPlan.Dedicated];
   if (haveStarter) {
     availablePlans.push(CloudPlan.Starter);
@@ -198,6 +207,9 @@ function DocTemplate({
   }
   if (havePremium) {
     availablePlans.push(CloudPlan.Premium);
+  }
+  if (haveBYOC) {
+    availablePlans.push(CloudPlan.BYOC);
   }
 
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
@@ -472,6 +484,7 @@ export const query = graphql`
     $starterPostgresqlNavUrl: String!
     $essentialNavUrl: String!
     $premiumNavUrl: String!
+    $byocNavUrl: String!
   ) {
     site {
       siteMetadata {
@@ -510,6 +523,10 @@ export const query = graphql`
 
     premiumNavigation: mdx(slug: { eq: $premiumNavUrl }) {
       premiumNavigation
+    }
+
+    byocNavigation: mdx(slug: { eq: $byocNavUrl }) {
+      byocNavigation
     }
 
     locales: allLocale(filter: { language: { eq: $language } }) {

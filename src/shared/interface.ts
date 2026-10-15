@@ -20,6 +20,7 @@ export enum TOCNamespace {
   TiDB = "tidb",
   TiDBCloud = "tidb-cloud",
   TiDBCloudLake = "tidb-cloud-lake",
+  TiDBCloudFilesystem = "tidb-cloud-filesystem",
   TiDBInKubernetes = "tidb-in-kubernetes",
   AI = "ai",
   Develop = "develop",
@@ -38,6 +39,7 @@ export const TOCNamespaceSlugMap: Record<TOCNamespace, string> = {
   [TOCNamespace.TiDB]: "",
   [TOCNamespace.TiDBCloud]: "",
   [TOCNamespace.TiDBCloudLake]: "tidb-cloud-lake",
+  [TOCNamespace.TiDBCloudFilesystem]: "tidb-cloud-filesystem",
   [TOCNamespace.TiDBInKubernetes]: "",
   [TOCNamespace.AI]: "ai",
   [TOCNamespace.Develop]: "develop",
@@ -54,6 +56,7 @@ export enum Repo {
   operator = "tidb-in-kubernetes",
   tidbcloud = "tidbcloud",
   tidbcloudlake = "tidb-cloud-lake",
+  tidbcloudfilesystem = "tidb-cloud-filesystem",
 }
 
 export enum Locale {
@@ -113,6 +116,7 @@ export enum CloudPlan {
   Starter = "starter",
   Essential = "essential",
   Premium = "premium",
+  BYOC = "byoc",
 }
 
 export enum CloudCompatibility {

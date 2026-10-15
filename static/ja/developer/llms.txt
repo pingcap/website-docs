@@ -113,6 +113,6 @@
 - 開発ガイドライン
   - [オブジェクト命名規則](https://docs.pingcap.com/ja/developer/dev-guide-object-naming-guidelines.md): TiDB におけるオブジェクトの命名規則について学習します。
   - [SQL開発仕様](https://docs.pingcap.com/ja/developer/dev-guide-sql-development-specification.md): TiDB の SQL 開発仕様について学習します。
-- [書店向けアプリケーション例](https://docs.pingcap.com/ja/developer/dev-guide-bookshop-schema-design.md): Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。TiUPまたはTiDB Cloudを使用して、テーブル構造とデータをインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成してインポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、書籍、著者、ユーザー、評価、書籍著者、注文が含まれます。データベース初期化スクリプトdbinit.sql`は、Bookshopアプリケーションのテーブル構造を作成します。
+- [書店向けアプリケーション例](https://docs.pingcap.com/ja/developer/dev-guide-bookshop-schema-design.md): Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。TiUPまたはTiDB Cloudを使用して、テーブル構造とデータをインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成してインポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、books、authors、users、ratings、book_authors、orders が含まれます。データベース初期化スクリプト`dbinit.sql`は、Bookshopアプリケーションのテーブル構造を作成します。
 - クラウドネイティブ開発環境
   - [Gitpod](https://docs.pingcap.com/ja/developer/dev-guide-playground-gitpod.md): Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。

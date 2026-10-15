@@ -13,6 +13,7 @@ describe("getCloudPlanFromPathname", () => {
     expect(getCloudPlanFromPathname("/tidbcloud/premium/")).toBe(
       CloudPlan.Premium
     );
+    expect(getCloudPlanFromPathname("/tidbcloud/byoc/")).toBe(CloudPlan.BYOC);
   });
 
   it("supports localized TiDB Cloud home routes", () => {

@@ -209,7 +209,7 @@
       - [AUTO_RANDOM](https://docs.pingcap.com/tidbcloud/auto-random.md): Learn the AUTO_RANDOM attribute.
       - [_tidb_rowid](https://docs.pingcap.com/tidbcloud/tidb-rowid.md): Learn what `_tidb_rowid` is, when it is available, and how to use it safely.
       - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidbcloud/shard-row-id-bits.md): Learn the SHARD_ROW_ID_BITS attribute.
-    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values ​​of TiDB SQL statements.
+    - [Literal Values](https://docs.pingcap.com/tidbcloud/literal-values.md): This article introduces the literal values of TiDB SQL statements.
     - [Schema Object Names](https://docs.pingcap.com/tidbcloud/schema-object-names.md): Learn about schema object names in TiDB SQL statements.
     - [Keywords and Reserved Words](https://docs.pingcap.com/tidbcloud/keywords.md): Keywords and Reserved Words
     - [User-Defined Variables](https://docs.pingcap.com/tidbcloud/user-defined-variables.md): Learn how to use user-defined variables.
