@@ -297,7 +297,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 6: TiDBCloud with Prefix
 
-**Effect**: Maps TiDBCloud pages with prefixes (dedicated, starter, essential) to TiDBCloud URLs.
+**Effect**: Maps TiDBCloud pages with plan prefixes (dedicated, starter, essential, premium, BYOC) to TiDBCloud URLs.
 
 **Source Pattern**: `/{lang}/tidbcloud/{branch}/tidb-cloud/{...prefixes}/{filename}`
 
@@ -317,8 +317,10 @@ Rules are evaluated in order; the first matching rule wins.
 - Target: `/tidbcloud/dedicated/starter`
 - Source: `en/tidbcloud/master/tidb-cloud/dedicated/starter/getting-started.md`
 - Target: `/tidbcloud/getting-started`
+- Source: `en/tidbcloud/master/tidb-cloud/byoc/_index.md`
+- Target: `/tidbcloud/byoc`
 
-**Use Case**: TiDBCloud has multiple plan types (dedicated, starter, essential) with different URL structures.
+**Use Case**: TiDBCloud has multiple plan types with distinct landing pages and shared guide URLs.
 
 ---
 

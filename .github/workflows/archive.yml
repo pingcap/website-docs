@@ -36,11 +36,13 @@ jobs:
 
       - name: Update submodule
         id: submodule
+        env:
+          SRC: ${{ inputs.src }}
         run: |
           git submodule init
           git submodule update --remote
           cd docs
-          git checkout ${{ inputs.src }}
+          git checkout "$SRC"
           cd ..
           echo "submodule_sha=$(git submodule status | awk '{print $1}' | sed -r 's/[+-]+//g')" >> $GITHUB_OUTPUT
           echo "submodule_status=$(git submodule status)" >> $GITHUB_OUTPUT
@@ -75,7 +77,7 @@ jobs:
         env:
           CI: true
           GATSBY_ALGOLIA_APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
-          GATSBY_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          GATSBY_ALGOLIA_SEARCH_API_KEY: ${{ secrets.ALGOLIA_SEARCH_API_KEY }}
           GATSBY_DOC_BUILD_DATE: ${{ steps.submodule.outputs.build_date }}
           GATSBY_DOC_BUILD_GIT_SHA: ${{ steps.submodule.outputs.git_sha }}
           GATSBY_DOC_BUILD_SUBMODULE_SHA: ${{ steps.submodule.outputs.submodule_status }}

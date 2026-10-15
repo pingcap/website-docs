@@ -5,6 +5,49 @@ import {
 } from "components/Layout/VersionSelect/CloudVersionSelect";
 import docsJson from "./docs/docs.json";
 
+const unsafeInlineScriptPattern = /[<&>\u2028\u2029]/;
+
+const validateInlineScriptValue = (value, path = "docs.json.redirect") => {
+  if (typeof value === "string") {
+    if (unsafeInlineScriptPattern.test(value)) {
+      throw new Error(`Unsafe character in ${path}`);
+    }
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) =>
+      validateInlineScriptValue(item, `${path}[${index}]`)
+    );
+    return;
+  }
+
+  if (value && typeof value === "object") {
+    Object.entries(value).forEach(([key, item]) => {
+      validateInlineScriptValue(key, `${path} key`);
+      validateInlineScriptValue(item, `${path}.${key}`);
+    });
+    return;
+  }
+
+  if (value === null || ["boolean", "number"].includes(typeof value)) {
+    return;
+  }
+
+  throw new Error(`Unsupported value type in ${path}: ${typeof value}`);
+};
+
+const serializeJsonForInlineScript = (value) =>
+  JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+
+const redirectConfig = docsJson.redirect || {};
+validateInlineScriptValue(redirectConfig);
+
 // https://github.com/gatsbyjs/gatsby/issues/1526
 export const onPreRenderHTML = ({ getHeadComponents }) => {
   if (process.env.NODE_ENV !== "production") {
@@ -36,7 +79,7 @@ const script = `if (Promise == null || Promise.allSettled == null) {
 const redirectScript = `
 (function() {
   // Redirect configuration from docs.json
-  const CONFIG_REDIRECT = ${JSON.stringify(docsJson.redirect || {})};
+  const CONFIG_REDIRECT = ${serializeJsonForInlineScript(redirectConfig)};
 
   function checkCustomRedirect(pathname) {
     // First check for exact match

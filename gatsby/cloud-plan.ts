@@ -11,12 +11,13 @@ type TocMap = Map<
     starter: Set<string>;
     essential: Set<string>;
     premium: Set<string>;
+    byoc: Set<string>;
   }
 >;
 
 /**
  * Get files from different TOC types for tidbcloud
- * Returns a Map where key is "locale/repo/version" and value is object with dedicated, starter, essential file sets
+ * Returns a Map where key is "locale/repo/version" and value contains one file set per Cloud plan.
  */
 export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
   const tocQuery = await graphql(`
@@ -68,6 +69,8 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
       tocType = CloudPlan.Essential;
     } else if (relativePath.includes("TOC-tidb-cloud-premium")) {
       tocType = CloudPlan.Premium;
+    } else if (relativePath.includes("TOC-tidb-cloud-byoc")) {
+      tocType = CloudPlan.BYOC;
     }
 
     // Initialize the entry if it doesn't exist
@@ -77,6 +80,7 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
         starter: new Set(),
         essential: new Set(),
         premium: new Set(),
+        byoc: new Set(),
       });
     }
 
@@ -86,7 +90,11 @@ export async function getTidbCloudFilesFromTocs(graphql: any): Promise<TocMap> {
       console.error(`TOC ${key} has no type`);
       return;
     }
-    entry[tocType] = new Set(files);
+    if (tocType === CloudPlan.Starter) {
+      entry.starter = new Set([...entry.starter, ...files]);
+    } else {
+      entry[tocType] = new Set(files);
+    }
 
     console.info(`TOC ${key} (${tocType}): found ${files.length} files`);
   });
@@ -116,7 +124,7 @@ export function determineInDefaultPlan(
     return null;
   }
 
-  const { dedicated, starter, essential, premium } = tocData;
+  const { dedicated, starter, essential, premium, byoc } = tocData;
 
   // Check if article is in TOC.md (dedicated)
   if (dedicated.has(fileName)) {
@@ -144,6 +152,16 @@ export function determineInDefaultPlan(
     !starter.has(fileName)
   ) {
     return CloudPlan.Premium;
+  }
+
+  if (
+    byoc.has(fileName) &&
+    !premium.has(fileName) &&
+    !essential.has(fileName) &&
+    !dedicated.has(fileName) &&
+    !starter.has(fileName)
+  ) {
+    return CloudPlan.BYOC;
   }
 
   return null;

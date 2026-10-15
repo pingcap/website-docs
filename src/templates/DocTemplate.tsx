@@ -21,6 +21,7 @@ import {
   RepoNav,
   BuildType,
   Locale,
+  CloudCompatibility,
   CloudPlan,
   TOCNamespace,
 } from "shared/interface";
@@ -76,11 +77,17 @@ interface DocTemplateProps {
     starterNavigation?: {
       starterNavigation: RepoNav;
     };
+    starterPostgresqlNavigation?: {
+      starterPostgresqlNavigation: RepoNav;
+    };
     essentialNavigation?: {
       essentialNavigation: RepoNav;
     };
     premiumNavigation?: {
       premiumNavigation: RepoNav;
+    };
+    byocNavigation?: {
+      byocNavigation: RepoNav;
     };
   };
 }
@@ -89,11 +96,15 @@ const DocTemplateWithProvider = (props: DocTemplateProps) => {
   const [cloudPlan, setCloudPlan] = React.useState<CloudPlan | null>(
     props.pageContext.inDefaultPlan ?? null
   );
+  const [cloudCompatibility, setCloudCompatibility] =
+    React.useState<CloudCompatibility>(CloudCompatibility.MySQL);
   return (
     <CloudPlanProvider
       value={{
         cloudPlan,
         setCloudPlan,
+        cloudCompatibility,
+        setCloudCompatibility,
         repo: props.pageContext.pathConfig.repo,
       }}
     >
@@ -123,27 +134,50 @@ function DocTemplate({
     mdx: { frontmatter, body, toc, timeToRead },
     navigation: originNav,
     starterNavigation: starterNav,
+    starterPostgresqlNavigation: starterPostgresqlNav,
     essentialNavigation: essentialNav,
     premiumNavigation: premiumNav,
+    byocNavigation: byocNav,
   } = data;
 
-  const { cloudPlan, setCloudPlan, isStarter, isEssential, isPremium } =
-    useCloudPlan();
+  const {
+    cloudPlan,
+    setCloudPlan,
+    cloudCompatibility,
+    setCloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending,
+    isStarter,
+    isEssential,
+    isPremium,
+    isBYOC,
+  } = useCloudPlan();
   useCloudPlanNavigate(
     namespace,
     inDefaultPlan ?? null,
     tocNames,
     cloudPlan,
-    setCloudPlan
+    setCloudPlan,
+    cloudCompatibility,
+    syncCloudCompatibility,
+    isCloudCompatibilityPending
   );
   useReportReadingRate(timeToRead);
 
   const classicNavigation = originNav ? originNav.navigation : [];
-  const starterNavigation = starterNav ? starterNav.starterNavigation : [];
+  const starterMySQLNavigation = starterNav ? starterNav.starterNavigation : [];
+  const starterPostgresqlNavigation = starterPostgresqlNav
+    ? starterPostgresqlNav.starterPostgresqlNavigation
+    : [];
+  const starterNavigation =
+    cloudCompatibility === CloudCompatibility.PostgreSQL
+      ? starterPostgresqlNavigation
+      : starterMySQLNavigation;
   const essentialNavigation = essentialNav
     ? essentialNav.essentialNavigation
     : [];
   const premiumNavigation = premiumNav ? premiumNav.premiumNavigation : [];
+  const byocNavigation = byocNav ? byocNav.byocNavigation : [];
   const navigationByNamespace =
     namespace !== TOCNamespace.TiDBCloud
       ? classicNavigation
@@ -153,13 +187,17 @@ function DocTemplate({
       ? essentialNavigation
       : isPremium
       ? premiumNavigation
+      : isBYOC
+      ? byocNavigation
       : classicNavigation;
   const navigation = filterTOC(navigationByNamespace);
 
   const { language, t } = useI18next();
-  const haveStarter = starterNavigation.length > 0;
+  const haveStarter =
+    starterMySQLNavigation.length > 0 || starterPostgresqlNavigation.length > 0;
   const haveEssential = essentialNavigation.length > 0;
   const havePremium = premiumNavigation.length > 0;
+  const haveBYOC = byocNavigation.length > 0;
   const availablePlans: CloudPlan[] = [CloudPlan.Dedicated];
   if (haveStarter) {
     availablePlans.push(CloudPlan.Starter);
@@ -169,6 +207,9 @@ function DocTemplate({
   }
   if (havePremium) {
     availablePlans.push(CloudPlan.Premium);
+  }
+  if (haveBYOC) {
+    availablePlans.push(CloudPlan.BYOC);
   }
 
   const rightTocData: TableOfContent[] | undefined = React.useMemo(() => {
@@ -180,8 +221,14 @@ function DocTemplate({
     }
 
     // Filter TOC based on CustomContent conditions
-    return filterRightToc(tocItems, namespace, cloudPlan, language);
-  }, [toc, namespace, cloudPlan, language]);
+    return filterRightToc(
+      tocItems,
+      namespace,
+      cloudPlan,
+      language,
+      cloudCompatibility
+    );
+  }, [toc, namespace, cloudPlan, language, cloudCompatibility]);
 
   const stableBranch = getStable(pathConfig.repo);
 
@@ -195,10 +242,11 @@ function DocTemplate({
       t,
       cloudPlan,
       buildType,
-      language
+      language,
+      cloudCompatibility
     );
     return getSelectedNavItem(headerNavConfig, namespace);
-  }, [t, cloudPlan, buildType, language, namespace]);
+  }, [t, cloudPlan, cloudCompatibility, buildType, language, namespace]);
 
   return (
     <Layout
@@ -348,6 +396,7 @@ function DocTemplate({
                     buildType={buildType}
                     pageUrl={pageUrl}
                     cloudPlan={cloudPlan}
+                    cloudCompatibility={cloudCompatibility}
                     namespace={namespace}
                   />
                   {!frontmatter?.hide_commit && buildType !== "archive" && (
@@ -432,8 +481,10 @@ export const query = graphql`
     $language: String!
     $navUrl: String!
     $starterNavUrl: String!
+    $starterPostgresqlNavUrl: String!
     $essentialNavUrl: String!
     $premiumNavUrl: String!
+    $byocNavUrl: String!
   ) {
     site {
       siteMetadata {
@@ -462,12 +513,20 @@ export const query = graphql`
       starterNavigation
     }
 
+    starterPostgresqlNavigation: mdx(slug: { eq: $starterPostgresqlNavUrl }) {
+      starterPostgresqlNavigation
+    }
+
     essentialNavigation: mdx(slug: { eq: $essentialNavUrl }) {
       essentialNavigation
     }
 
     premiumNavigation: mdx(slug: { eq: $premiumNavUrl }) {
       premiumNavigation
+    }
+
+    byocNavigation: mdx(slug: { eq: $byocNavUrl }) {
+      byocNavigation
     }
 
     locales: allLocale(filter: { language: { eq: $language } }) {

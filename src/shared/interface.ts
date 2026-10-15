@@ -2,11 +2,14 @@ export interface TableOfContent {
   title: string;
   url: string;
   items?: TableOfContent[];
-  condition?: {
-    platform?: string;
-    plan?: string;
-    language?: string;
-  };
+  condition?: TOCCondition;
+}
+
+export interface TOCCondition {
+  platform?: string;
+  plan?: string;
+  language?: string;
+  compatibility?: string;
 }
 
 export enum TOCNamespace {
@@ -113,4 +116,10 @@ export enum CloudPlan {
   Starter = "starter",
   Essential = "essential",
   Premium = "premium",
+  BYOC = "byoc",
+}
+
+export enum CloudCompatibility {
+  MySQL = "mysql",
+  PostgreSQL = "postgresql",
 }

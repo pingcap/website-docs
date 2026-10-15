@@ -83,11 +83,16 @@ export const createDocHome = async ({
     const namespaceSlug = TOCNamespaceSlugMap[namespace];
     const navUrl = generateNavTOCPath(pathConfig, namespaceSlug);
     const starterNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-starter");
+    const starterPostgresqlNavUrl = generateNavTOCPath(
+      pathConfig,
+      "tidb-cloud-starter-postgresql"
+    );
     const essentialNavUrl = generateNavTOCPath(
       pathConfig,
       "tidb-cloud-essential"
     );
     const premiumNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-premium");
+    const byocNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-byoc");
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -104,8 +109,10 @@ export const createDocHome = async ({
         filePath,
         navUrl,
         starterNavUrl,
+        starterPostgresqlNavUrl,
         essentialNavUrl,
         premiumNavUrl,
+        byocNavUrl,
         pageUrl: path,
         availIn: {
           locale,
