@@ -92,6 +92,7 @@ export const createDocHome = async ({
       "tidb-cloud-essential"
     );
     const premiumNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-premium");
+    const byocNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-byoc");
     const locale =
       process.env.WEBSITE_BUILD_TYPE === "archive"
         ? [Locale.en, Locale.zh]
@@ -111,6 +112,7 @@ export const createDocHome = async ({
         starterPostgresqlNavUrl,
         essentialNavUrl,
         premiumNavUrl,
+        byocNavUrl,
         pageUrl: path,
         availIn: {
           locale,

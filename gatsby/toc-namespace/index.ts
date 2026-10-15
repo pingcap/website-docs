@@ -25,6 +25,10 @@ export interface NamespaceRule {
  */
 const SHARED_NAMESPACE_RULES: NamespaceRule[] = [
   {
+    namespace: TOCNamespace.TiDBCloudFilesystem,
+    repo: Repo.tidbcloudfilesystem,
+  },
+  {
     namespace: TOCNamespace.AI,
     repo: Repo.tidb,
     branch: CONFIG.docs.tidb.stable,

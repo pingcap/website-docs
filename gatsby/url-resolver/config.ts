@@ -14,6 +14,32 @@ export const defaultUrlResolverConfig: UrlResolverConfig = {
   trailingSlash: "never",
 
   pathMappings: [
+    // TiDB Cloud Filesystem is sourced from its own docs tree and published
+    // under the tidbcloud-filesystem namespace.
+    {
+      sourcePattern:
+        "/{lang}/tidb-cloud-filesystem/{branch}/tidb-cloud-filesystem/{...folders}/{filename}",
+      targetPattern: "/{lang}/tidbcloud-filesystem/{filename}",
+      filenameTransform: {
+        ignoreIf: ["_index"],
+        conditionalTarget: {
+          keepIf: ["_index"],
+          keepTargetPattern: "/{lang}/tidbcloud-filesystem/{folders}",
+        },
+      },
+    },
+    {
+      sourcePattern:
+        "/{lang}/tidb-cloud-filesystem/{branch}/{...folders}/{filename}",
+      targetPattern: "/{lang}/tidbcloud-filesystem/{filename}",
+      filenameTransform: {
+        ignoreIf: ["_index"],
+        conditionalTarget: {
+          keepIf: ["_index"],
+          keepTargetPattern: "/{lang}/tidbcloud-filesystem/{folders}",
+        },
+      },
+    },
     // tidbcloud dedicated _index
     // /en/tidbcloud/master/tidb-cloud/dedicated/_index.md -> /en/tidbcloud/dedicated/
     {

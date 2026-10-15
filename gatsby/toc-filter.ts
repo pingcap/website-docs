@@ -56,6 +56,7 @@ function sortTocNames(tocNames: Iterable<string>): string[] {
     "TOC-tidb-cloud-starter-postgresql",
     "TOC-tidb-cloud-essential",
     "TOC-tidb-cloud-premium",
+    "TOC-tidb-cloud-byoc",
   ];
   const priorityIndex = new Map(priority.map((name, idx) => [name, idx]));
   return [...new Set(tocNames)].sort((a, b) => {
