@@ -17,6 +17,7 @@ const TOC_NAME_TO_CLOUD_PLAN: Record<string, CloudPlan> = {
   "TOC-tidb-cloud-starter": CloudPlan.Starter,
   "TOC-tidb-cloud-essential": CloudPlan.Essential,
   "TOC-tidb-cloud-premium": CloudPlan.Premium,
+  "TOC-tidb-cloud-byoc": CloudPlan.BYOC,
 };
 
 function isCloudPlan(value: string | null): value is CloudPlan {
@@ -24,7 +25,8 @@ function isCloudPlan(value: string | null): value is CloudPlan {
     value === CloudPlan.Dedicated ||
     value === CloudPlan.Starter ||
     value === CloudPlan.Essential ||
-    value === CloudPlan.Premium
+    value === CloudPlan.Premium ||
+    value === CloudPlan.BYOC
   );
 }
 
@@ -97,10 +99,11 @@ export const useCloudPlan = () => {
   const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
   const isEssential = isTidbcloud && resolvedCloudPlan === CloudPlan.Essential;
   const isPremium = isTidbcloud && resolvedCloudPlan === CloudPlan.Premium;
+  const isBYOC = isTidbcloud && resolvedCloudPlan === CloudPlan.BYOC;
   const isClassic =
     !isTidbcloud ||
     !resolvedCloudPlan ||
-    (!isStarter && !isEssential && !isPremium);
+    (!isStarter && !isEssential && !isPremium && !isBYOC);
 
   return {
     cloudPlan: resolvedCloudPlan,
@@ -108,6 +111,7 @@ export const useCloudPlan = () => {
     isStarter,
     isEssential,
     isPremium,
+    isBYOC,
     isClassic,
   };
 };

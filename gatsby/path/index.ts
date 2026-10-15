@@ -69,6 +69,7 @@ export function generateConfig(slug: string): {
       CloudPlan.Starter,
       CloudPlan.Essential,
       CloudPlan.Premium,
+      CloudPlan.BYOC,
     ] as const;
     prefix = simplePrefixes.find((p) => slug.includes(`${p}/`));
   }

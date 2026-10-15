@@ -21,6 +21,11 @@ import {
 import { getFilesFromTocs, filterNodesByToc } from "../toc-filter";
 import { PageQueryData, DEFAULT_BUILD_TYPE } from "./interface";
 
+export const getLocaleAvailabilityKey = (
+  name: string,
+  pathConfig: { prefix?: string }
+) => (pathConfig.prefix ? `${pathConfig.prefix}/${name}` : name);
+
 export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
   const {
     actions: { createPage, createRedirect },
@@ -84,15 +89,21 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
 
   const versionRecord = nodes.reduce(
     (acc, { pathConfig, name }) => {
+      const localeAvailabilityKey = getLocaleAvailabilityKey(name, pathConfig);
+
       if (acc[pathConfig.locale][pathConfig.repo] == null) {
         acc[pathConfig.locale][pathConfig.repo] = {};
       }
 
-      if (acc[pathConfig.locale][pathConfig.repo][name] == null) {
-        acc[pathConfig.locale][pathConfig.repo][name] = [];
+      if (
+        acc[pathConfig.locale][pathConfig.repo][localeAvailabilityKey] == null
+      ) {
+        acc[pathConfig.locale][pathConfig.repo][localeAvailabilityKey] = [];
       }
 
-      acc[pathConfig.locale][pathConfig.repo][name].push(pathConfig.version);
+      acc[pathConfig.locale][pathConfig.repo][localeAvailabilityKey].push(
+        pathConfig.version
+      );
 
       return acc;
     },
@@ -127,10 +138,14 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
       "tidb-cloud-essential"
     );
     const premiumNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-premium");
+    const byocNavUrl = generateNavTOCPath(pathConfig, "tidb-cloud-byoc");
+    const localeAvailabilityKey = getLocaleAvailabilityKey(name, pathConfig);
 
     const locale = [Locale.en, Locale.zh, Locale.ja]
       .map((l) =>
-        versionRecord[l][pathConfig.repo]?.[name]?.includes(pathConfig.version)
+        versionRecord[l][pathConfig.repo]?.[localeAvailabilityKey]?.includes(
+          pathConfig.version
+        )
           ? l
           : undefined
       )
@@ -159,9 +174,13 @@ export const createDocs = async (createPagesArgs: CreatePagesArgs) => {
         starterNavUrl,
         essentialNavUrl,
         premiumNavUrl,
+        byocNavUrl,
         availIn: {
           locale,
-          version: versionRecord[pathConfig.locale][pathConfig.repo][name],
+          version:
+            versionRecord[pathConfig.locale][pathConfig.repo][
+              localeAvailabilityKey
+            ],
         },
         buildType: (process.env.WEBSITE_BUILD_TYPE ??
           DEFAULT_BUILD_TYPE) as BuildType, // prod | archive, default is prod; archive is for archive site
