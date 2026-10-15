@@ -3,6 +3,7 @@ import * as React from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import MenuItem from "@mui/material/MenuItem";
 import { Box, Typography } from "@mui/material";
+import { useTranslation } from "gatsby-plugin-react-i18next";
 
 import { CloudCompatibility, CloudPlan, PathConfig } from "shared/interface";
 import {
@@ -11,6 +12,7 @@ import {
   useCloudPlan,
 } from "shared/useCloudPlan";
 import LinkComponent from "components/Link";
+import PreviewBadge from "components/Badge/PreviewBadge";
 import { VersionSelectButton, VersionSelectMenu } from "./SharedSelect";
 
 const COMPATIBILITY_VERSIONS = [
@@ -33,6 +35,7 @@ export default function CloudCompatibilitySelect(
   props: CompatibilitySelectProps
 ) {
   const { disableStickyContainer } = props;
+  const { t } = useTranslation();
   const { cloudCompatibility, setCloudCompatibility } = useCloudPlan();
   const currentCompatibility =
     COMPATIBILITY_VERSIONS.find(
@@ -59,17 +62,29 @@ export default function CloudCompatibilitySelect(
         ref={anchorEl}
         disableStickyContainer={disableStickyContainer}
       >
-        <Typography
-          component="div"
+        <Box
           sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
             padding: "0 0.25rem",
-            fontSize: "0.875rem",
-            lineHeight: "1.25rem",
-            fontWeight: 700,
+            whiteSpace: "nowrap",
           }}
         >
-          {currentCompatibility.label}
-        </Typography>
+          <Typography
+            component="span"
+            sx={{
+              fontSize: "0.75rem",
+              lineHeight: "1.25rem",
+              fontWeight: 700,
+            }}
+          >
+            {currentCompatibility.label}
+          </Typography>
+          {currentCompatibility.value === CloudCompatibility.PostgreSQL && (
+            <PreviewBadge label={t("navbar.badge.preview")} />
+          )}
+        </Box>
       </VersionSelectButton>
       <VersionSelectMenu
         id="cloud-compatibility-menu"
@@ -93,19 +108,25 @@ export default function CloudCompatibilitySelect(
               handleClose();
             }}
           >
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
               <Typography
                 component="div"
                 sx={{
-                  fontSize: "0.875rem",
+                  fontSize: "0.75rem",
                   lineHeight: "1.25rem",
-                  marginRight: "0.2rem",
                 }}
               >
                 {version.label}
               </Typography>
+              {version.value === CloudCompatibility.PostgreSQL && (
+                <PreviewBadge label={t("navbar.badge.preview")} />
+              )}
             </Box>
-            <Box display="flex" justifyContent="center">
+            <Box
+              display="flex"
+              justifyContent="center"
+              sx={{ marginLeft: "8px", flexShrink: 0 }}
+            >
               {version.value === currentCompatibility.value && (
                 <CheckIcon
                   sx={(theme) => ({ color: theme.palette.primary.main })}
