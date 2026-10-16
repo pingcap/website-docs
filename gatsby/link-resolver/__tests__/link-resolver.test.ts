@@ -208,12 +208,12 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidbcloudlake");
     });
 
-    it("should resolve tidb-cloud-filesystem/_index links to the English filesystem root", () => {
+    it("should resolve tidb-cloud-filesystem/_index links to the Chinese filesystem root", () => {
       const result = resolveMarkdownLink(
         "/tidb-cloud-filesystem/_index",
         "/zh/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/tidbcloud-filesystem");
+      expect(result).toBe("/zh/tidbcloud-filesystem");
     });
 
     it("should resolve best-practices namespace links (en - default language omitted)", () => {

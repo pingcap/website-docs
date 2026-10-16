@@ -33,10 +33,16 @@ describe("Filesystem product menu", () => {
           type: "item",
           label: "navbar.tidbCloudFilesystem",
           to: "/tidbcloud-filesystem",
-          isI18n: false,
         })
       );
-      expect(getSelectedNavItem(nav, TOCNamespace.TiDBCloudFilesystem)).toEqual(
+      const item = getSelectedNavItem(nav, TOCNamespace.TiDBCloudFilesystem);
+      expect(item?.isI18n ?? true).toBe(true);
+      expect(
+        typeof item?.disabled === "function"
+          ? item.disabled(language)
+          : item?.disabled ?? false
+      ).toBe(false);
+      expect(item).toEqual(
         expect.objectContaining({ to: "/tidbcloud-filesystem" })
       );
     }

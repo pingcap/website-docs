@@ -111,7 +111,6 @@ const getDefaultNavConfig = (
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: "/tidbcloudlake",
             selected: (namespace) => namespace === TOCNamespace.TiDBCloudLake,
-            disabled: (lang: string) => lang === "ja",
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);
@@ -123,7 +122,6 @@ const getDefaultNavConfig = (
             label: t("navbar.tidbCloudFilesystem"),
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: "/tidbcloud-filesystem",
-            isI18n: false,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloudFilesystem,
           },
