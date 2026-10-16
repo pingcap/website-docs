@@ -153,7 +153,7 @@ const VersionItems = (props: {
           key={`menu-${version.value}`}
           value={`menu-${version.value}`}
           component={LinkComponent}
-          isI18n={version.value !== CloudPlan.BYOC}
+          isI18n
           to={getToUrl(version.value)}
           clearCloudMode={version.value === CloudPlan.Dedicated}
           onClick={() => onClick(version.value)}
