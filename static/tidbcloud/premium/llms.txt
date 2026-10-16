@@ -31,12 +31,12 @@
 - Manage TiDB Cloud Premium Instances
   - [Create a TiDB Cloud Premium Instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium.md): Learn how to create a TiDB Cloud Premium instance.
   - Connect to Your TiDB Cloud Premium Instance
-    - [Connection Overview](https://docs.pingcap.com/tidbcloud/connect-to-tidb-instance.md): Learn how to connect to your TiDB Cloud Premium instance via different methods.
-    - [Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-public-connection.md): Learn how to connect to your TiDB Cloud Premium via public connection.
-    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via private endpoint with AWS.
+    - [Connection Overview](https://docs.pingcap.com/tidbcloud/connect-to-tidb-instance.md): Learn how to connect to your TiDB Cloud Premium or TiDB Cloud BYOC instance via different methods.
+    - [Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-public-connection.md): Learn how to connect to your TiDB Cloud Premium or TiDB Cloud BYOC via public connection.
+    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium or TiDB Cloud BYOC instance via private endpoint with AWS.
     - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via a private endpoint on Alibaba Cloud.
-  - [Back Up and Restore TiDB Cloud Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium.md): Learn how to back up and restore your TiDB Cloud Premium instances.
-  - [Export Data from TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium-export.md): Learn how to export data from TiDB Cloud Premium instances.
+  - [Back Up and Restore TiDB Cloud Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-premium.md): Learn how to back up and restore your TiDB Cloud Premium or TiDB Cloud BYOC instances.
+  - [Export Data from TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium-export.md): Learn how to export data from TiDB Cloud Premium or TiDB Cloud BYOC instances.
   - Use TiFlash for HTAP
     - [TiFlash Overview](https://docs.pingcap.com/tidbcloud/tiflash-overview.md): Learn the architecture and key features of TiFlash.
     - [Create TiFlash Replicas](https://docs.pingcap.com/tidbcloud/create-tiflash-replicas.md): Learn how to create TiFlash replicas.
@@ -115,7 +115,7 @@
     - [TiKV Follower Read](https://docs.pingcap.com/tidbcloud/follower-read.md): This document describes the use and implementation of Follower Read.
     - [Coprocessor Cache](https://docs.pingcap.com/tidbcloud/coprocessor-cache.md): Learn the features of Coprocessor Cache.
     - [Tune TiFlash Performance](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance.md): Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.
-  - [Delete a TiDB Cloud Premium Instance](https://docs.pingcap.com/tidbcloud/delete-tidb-instance.md): Learn how to delete a TiDB Cloud Premium instance.
+  - [Delete a TiDB Cloud Premium Instance](https://docs.pingcap.com/tidbcloud/delete-tidb-instance.md): Learn how to delete a TiDB Cloud Premium or TiDB Cloud BYOC instance.
 - Migrate or Import Data
   - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview.md): Learn an overview of data migration and import scenarios for TiDB Cloud.
   - Migrate Data into TiDB Cloud
@@ -126,11 +126,11 @@
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms.md): Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Starter using AWS Database Migration Service (AWS DMS).
   - Import Data into TiDB Cloud
     - [Import Sample Data (SQL Files) from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-sample-data-serverless.md): Learn how to import sample data into TiDB Cloud Starter or TiDB Cloud Essential via the UI.
-    - [Import CSV Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-csv-files-premium.md): Learn how to import CSV files from Amazon S3 or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Premium instances.
-    - [Import CSV Files from Amazon S3](https://docs.pingcap.com/tidbcloud/import-from-s3-premium.md): Learn how to import CSV files from Amazon S3 into TiDB Cloud Premium instances using the console wizard.
+    - [Import CSV Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-csv-files-premium.md): Learn how to import CSV files from Amazon Simple Storage Service (Amazon S3) into TiDB Cloud Premium and TiDB Cloud BYOC instances, and from Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Premium instances.
+    - [Import CSV Files from Amazon S3](https://docs.pingcap.com/tidbcloud/import-from-s3-premium.md): Learn how to import CSV files from Amazon S3 into TiDB Cloud Premium or TiDB Cloud BYOC instances using the console wizard.
     - [Import Parquet Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-parquet-files-serverless.md): Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into TiDB Cloud Starter or TiDB Cloud Essential.
     - [Import Snapshot Files from Cloud Storage](https://docs.pingcap.com/tidbcloud/import-snapshot-files-serverless.md): Learn how to import Amazon Aurora or RDS for MySQL snapshot files into TiDB Cloud Starter or Essential.
-    - [Import Data Using MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli-premium.md): Learn how to import small CSV or SQL files into TiDB Cloud Premium instances using the MySQL Command-Line Client (`mysql`).
+    - [Import Data Using MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli-premium.md): Learn how to import small CSV or SQL files into TiDB Cloud Premium or TiDB Cloud BYOC instances using the MySQL Command-Line Client (`mysql`).
   - Reference
     - [Configure External Storage Access for TiDB Cloud](https://docs.pingcap.com/tidbcloud/configure-external-storage-access.md): Learn how to configure cross-account access to an external storage such as Amazon Simple Storage Service (Amazon S3).
     - [Naming Conventions for Data Import](https://docs.pingcap.com/tidbcloud/naming-conventions-for-data-import.md): Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, and SQL files during data import.
@@ -162,15 +162,15 @@
     - [Identity Access Management](https://docs.pingcap.com/tidbcloud/manage-user-access.md): Learn how to manage identity access in TiDB Cloud.
     - [OAuth 2.0](https://docs.pingcap.com/tidbcloud/oauth2.md): Learn about how to use OAuth 2.0 in TiDB Cloud.
   - Network Access Control
-    - [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list-premium.md): Learn how to configure IP addresses that are allowed to access your TiDB Cloud Premium instance.
-    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via private endpoint with AWS.
+    - [Configure an IP Access List](https://docs.pingcap.com/tidbcloud/configure-ip-access-list-premium.md): Learn how to configure IP addresses that are allowed to access your TiDB Cloud Premium or TiDB Cloud BYOC instance.
+    - [Connect via Private Endpoint with AWS](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium or TiDB Cloud BYOC instance via private endpoint with AWS.
     - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via a private endpoint on Alibaba Cloud.
     - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-premium.md): Introduce TLS connections in TiDB Cloud Premium.
   - Data Access Control
     - [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium.md): Learn how to enable and manage Dual-Layer Data Encryption for your TiDB Cloud Premium instance.
     - [User-Controlled Log Redaction](https://docs.pingcap.com/tidbcloud/tidb-cloud-log-redaction.md): Learn how to enable or disable user-controlled log redaction in TiDB Cloud to manage the visibility of sensitive data in execution logs.
   - Audit Management
-    - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium.md): Learn how to audit an instance in TiDB Cloud Premium.
+    - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium.md): Learn how to enable database audit logging for TiDB Cloud Premium or TiDB Cloud BYOC instances and configure audit filters and cloud storage.
     - [Console Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing.md): Learn about the audit logging feature for the TiDB Cloud console.
 - Billing
   - [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing.md#invoices): Learn about TiDB Cloud billing.
