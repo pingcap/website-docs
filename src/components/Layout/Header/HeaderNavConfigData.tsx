@@ -122,7 +122,6 @@ const getDefaultNavConfig = (
             label: t("navbar.tidbCloudFilesystem"),
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: "/tidbcloud-filesystem",
-            isI18n: false,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloudFilesystem,
           },
