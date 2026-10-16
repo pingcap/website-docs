@@ -21,7 +21,8 @@
     - [Full-Text Search via SQL](https://docs.pingcap.com/ai/vector-search-full-text-search-sql.md): Full-text search lets you retrieve documents for exact keywords. In Retrieval-Augmented Generation (RAG) scenarios, you can use full-text search together with vector search to improve the retrieval quality.
     - [Full-Text Search Example](https://docs.pingcap.com/ai/fulltext-search-with-pytidb.md): Perform traditional text search using TiDB full-text search.
   - Hybrid Search
-    - [Hybrid Search Guide](https://docs.pingcap.com/ai/vector-search-hybrid-search.md): Use full-text search and vector search together to improve the retrieval quality.
+    - [Hybrid Search via Python](https://docs.pingcap.com/ai/vector-search-hybrid-search.md): Use full-text search and vector search together to improve the retrieval quality.
+    - [Hybrid Search via SQL](https://docs.pingcap.com/ai/vector-search-hybrid-search-sql.md): Learn how to combine full-text search and vector search in one SQL query in TiDB, with embeddings generated automatically on insert.
     - [Hybrid Search Example](https://docs.pingcap.com/ai/hybrid-search-with-pytidb.md): Combine vector search and full-text search for more comprehensive results.
   - Auto Embeddings
     - [Auto Embedding Guide](https://docs.pingcap.com/ai/auto-embedding.md): Learn how to use auto embedding in your application.
@@ -38,7 +39,8 @@
   - [Transactions](https://docs.pingcap.com/ai/transactions.md): Learn how to use transactions in your application.
 - Build AI Applications
   - [RAG Example](https://docs.pingcap.com/ai/rag-with-pytidb.md): Build a RAG application that combines document retrieval with language generation.
-  - [Conversational Memory Example](https://docs.pingcap.com/ai/memory-with-pytidb.md): Implement conversation memory for chatbots and conversational AI applications.
+  - [Agent Memory Guide](https://docs.pingcap.com/ai/agent-memory.md): Learn how to store AI agent memory in one TiDB table with SQL, using vector search, transactions, per-user recall, and automatic expiry.
+  - [Agent Memory Example](https://docs.pingcap.com/ai/memory-with-pytidb.md): Implement conversation memory for chatbots and conversational AI applications.
   - [Text-to-SQL Example](https://docs.pingcap.com/ai/text2sql-with-pytidb.md): Convert natural language queries into SQL statements using AI models.
 - TiDB Cloud CLI
   - [Overview](https://docs.pingcap.com/ai/ti-overview.md): Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starter instances and file systems in TiDB Cloud Filesystem.

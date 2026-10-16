@@ -281,7 +281,7 @@
     - [`GRANT <role>`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-grant-role.md): 关于在 TiDB 数据库中使用 GRANT <role> 的概述。
     - [`IMPORT INTO`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-import-into.md): TiDB 中 IMPORT INTO 的用法概述。
     - [`INSERT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-insert.md): TiDB 数据库中 INSERT 的用法概述。
-    - [`KILL [TIDB]`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-kill.md): An overview of the usage of KILL for the TiDB database.
+    - [`KILL [TIDB]`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-kill.md): TiDB 数据库中 KILL 语句的使用概况。
     - [`LOAD DATA`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-load-data.md): TiDB 数据库中 LOAD DATA 的用法概述。
     - [`LOCK STATS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-lock-stats.md): 关于 TiDB 数据库中 LOCK STATS 使用情况的概述。
     - [`LOCK TABLES` 和 `UNLOCK TABLES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-lock-tables-and-unlock-tables.md): TiDB 数据库中 LOCK TABLES 和 UNLOCK TABLES 的用法概述。
