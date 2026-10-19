@@ -54,6 +54,32 @@ export default function Header(props: HeaderProps) {
   }, []);
 
   const cssVarRootRef = React.useRef<HTMLDivElement | null>(null);
+  const bannerRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const root = cssVarRootRef.current;
+    const banner = bannerRef.current;
+    if (!root || !banner) {
+      return;
+    }
+
+    // Keep navigation and content offsets aligned as the banner wraps or fonts load.
+    const updateBannerHeight = () => {
+      root.style.setProperty(
+        "--pc-docs-banner-height",
+        `${banner.getBoundingClientRect().height}px`
+      );
+    };
+    updateBannerHeight();
+    const observer = new ResizeObserver(updateBannerHeight);
+    observer.observe(banner);
+
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--pc-docs-banner-height");
+    };
+  }, [bannerVisible]);
+
   const leftClusterRef = React.useRef<HTMLDivElement | null>(null);
   const logoMeasureRef = React.useRef<HTMLDivElement | null>(null);
   const leftClusterWidthRef = React.useRef(0);
@@ -170,6 +196,7 @@ export default function Header(props: HeaderProps) {
     >
       {bannerVisible && (
         <Box
+          ref={bannerRef}
           sx={{
             position: "fixed",
             top: 0,
