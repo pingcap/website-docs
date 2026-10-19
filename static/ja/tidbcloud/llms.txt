@@ -98,9 +98,9 @@
       - SQL最適化プロセス
         - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-optimization-concepts.md): TiDB での SQL の論理的および物理的な最適化について学習します。
         - ロジック最適化
-          - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-logical-optimization.md): SQL論理最適化の章では、TiDBクエリプラン生成における主要なロジック書き換えについて説明します。例えば、`IN`サブクエリ「ta in (select t1.a from t1 where t1.b=tb)」はTiDB書き換えにより存在しません。主要な書き換えには、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの非相関化、最大値/最小値の除去、Predicate Push Down、パーティションプルーニング、TopNオペレーターとLimitオペレーターのプッシュダウン、結合したテーブルの再配置などがあります。
+          - [概要](https://docs.pingcap.com/ja/tidbcloud/sql-logical-optimization.md): SQL論理最適化の章では、TiDBクエリプラン生成における主要なロジック書き換えについて説明します。例えば、`IN`サブクエリ「ta in (select t1.a from t1 where t1.b=tb)」はTiDB書き換えにより存在しません。主要な書き換えには、サブクエリ関連の最適化、列プルーニング、相関サブクエリの非相関化、最大値/最小値の除去、Predicate Push Down、パーティションプルーニング、TopNオペレーターとLimitオペレーターのプッシュダウン、結合したテーブルの再配置などがあります。
           - [サブクエリ関連の最適化](https://docs.pingcap.com/ja/tidbcloud/subquery-optimization.md): サブクエリに関連する最適化を理解します。
-          - [カラムの剪定](https://docs.pingcap.com/ja/tidbcloud/column-pruning.md): TiDB での列プルーニングの使用法について学習します。
+          - [列プルーニング](https://docs.pingcap.com/ja/tidbcloud/column-pruning.md): TiDB での列プルーニングの使用法について学習します。
           - [相関サブクエリのデコヒーレンス](https://docs.pingcap.com/ja/tidbcloud/correlated-subquery-optimization.md): 相関サブクエリの相関を解除する方法を理解します。
           - [最大値/最小値を削除する](https://docs.pingcap.com/ja/tidbcloud/max-min-eliminate.md): Max/Min関数を排除するための規則を紹介します。
           - [Predicate Push Down](https://docs.pingcap.com/ja/tidbcloud/predicate-push-down.md): TiDB のロジック最適化ルールの 1つである述語プッシュダウン (PPD) を導入します。

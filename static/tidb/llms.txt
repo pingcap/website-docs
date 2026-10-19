@@ -416,7 +416,7 @@
     - [Mirror Reference Guide](https://docs.pingcap.com/tidb/stable/tiup-mirror-reference.md): Learn the general information of TiUP mirrors.
     - TiUP Components
       - [tiup-playground](https://docs.pingcap.com/tidb/stable/tiup-playground.md): Learn how to quickly deploy a local TiDB cluster using the playground component of TiUP.
-      - [tiup-cluster](https://docs.pingcap.com/tidb/stable/tiup-cluster.md): Learns how to deploy and maintain an online TiDB cluster using TiUP.
+      - [tiup-cluster](https://docs.pingcap.com/tidb/stable/tiup-cluster.md): Learn how to deploy and maintain an online TiDB cluster using TiUP.
       - [No-sudo Mode](https://docs.pingcap.com/tidb/stable/tiup-cluster-no-sudo-mode.md): Learn how to deploy and maintain an online TiDB cluster using the TiUP no-sudo mode.
       - [tiup-mirror](https://docs.pingcap.com/tidb/stable/tiup-mirror.md): Learn how to create a private mirror.
       - [tiup-bench](https://docs.pingcap.com/tidb/stable/tiup-bench.md): Learn how to stress test TiDB with TPC-C, TPC-H, CH, RawSQL, and YCSB workloads using TiUP.
