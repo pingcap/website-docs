@@ -210,7 +210,7 @@
       "product2": "TiDB Cloud Filesystem",
       "link2": "https://docs.pingcap.com/zh/tidbcloud-filesystem/",
       "separator2": " 和 ",
-      "product3": "兼容 PostgreSQL 的 TiDB Cloud Starter",
+      "product3": "PostgreSQL-compatible TiDB Cloud Starter",
       "link3": "https://docs.pingcap.com/zh/tidbcloud/starter/?plan=starter&compatibility=postgresql",
       "suffix": " 全新发布，开放公测中"
     },
