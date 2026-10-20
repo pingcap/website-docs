@@ -203,14 +203,19 @@
       "viewLatestLTSVersion": "查看最新 LTS 版本文档"
     },
     "campaign": {
-      "title1": "TiDB Cloud Premium",
-      "title2": " 开放公测中。为企业级工作负载提供无限扩展、即时弹性伸缩和高级安全保障。",
-      "end": "立即体验 →",
-      "link": "https://tidbcloud.com/"
+      "prefix": "",
+      "product1": "兼容 PostgreSQL 的 TiDB Cloud Starter",
+      "link1": "https://docs.pingcap.com/zh/tidbcloud/starter/?plan=starter&compatibility=postgresql",
+      "separator1": "、",
+      "product2": "TiDB Cloud BYOC",
+      "link2": "https://docs.pingcap.com/zh/tidbcloud/byoc/?plan=byoc",
+      "separator2": " 和 ",
+      "product3": "TiDB Cloud Filesystem",
+      "link3": "https://docs.pingcap.com/zh/tidbcloud-filesystem/",
+      "suffix": " 全新发布，开放公测中"
     },
     "autoTrans": {
-      "title1": "TiDB Cloud Premium",
-      "title2": " 开放公测中。为企业级工作负载提供无限扩展、即时弹性伸缩和高级安全保障。此页面由 AI 自动翻译，英文原文请见",
+      "notice": "。此页面由 AI 自动翻译，英文原文请见",
       "end": "此处。"
     }
   },

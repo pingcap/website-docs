@@ -188,14 +188,19 @@
       "viewLatestLTSVersion": "最新の LTS バージョンのドキュメントを表示する"
     },
     "campaign": {
-      "title1": "TiDB Cloud Premium",
-      "title2": " はパブリックプレビュー中です。エンタープライズワークロード向けの無制限のスケーリング、即時の弾力性、高度なセキュリティを提供します。",
-      "end": "今すぐお試しください →",
-      "link": "https://tidbcloud.com/"
+      "prefix": "新登場！",
+      "product1": "PostgreSQL 対応",
+      "link1": "https://docs.pingcap.com/ja/tidbcloud/starter/?plan=starter&compatibility=postgresql",
+      "separator1": "、",
+      "product2": "TiDB Cloud BYOC",
+      "link2": "https://docs.pingcap.com/ja/tidbcloud/byoc/?plan=byoc",
+      "separator2": "、",
+      "product3": "TiDB Cloud Filesystem",
+      "link3": "https://docs.pingcap.com/ja/tidbcloud-filesystem/",
+      "suffix": " がパブリックプレビュー中"
     },
     "autoTrans": {
-      "title1": "TiDB Cloud Premium",
-      "title2": " はパブリックプレビュー中です。エンタープライズワークロード向けの無制限のスケーリング、即時の弾力性、高度なセキュリティを提供します。このページは自動翻訳されたものです。",
+      "notice": "。このページは自動翻訳されたものです。",
       "end": "原文はこちらからご覧ください。"
     }
   },

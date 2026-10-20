@@ -448,6 +448,21 @@ const HeaderBanner = (props: HeaderProps) => {
       : `/${props.pathConfig?.repo}/${
           props.pathConfig?.version || "stable"
         }/${name}`;
+  const campaignTextList = [
+    t("banner.campaign.prefix"),
+    <BlueAnchorLink to={t("banner.campaign.link1")} target="_blank">
+      {t("banner.campaign.product1")}
+    </BlueAnchorLink>,
+    t("banner.campaign.separator1"),
+    <BlueAnchorLink to={t("banner.campaign.link2")} target="_blank">
+      {t("banner.campaign.product2")}
+    </BlueAnchorLink>,
+    t("banner.campaign.separator2"),
+    <BlueAnchorLink to={t("banner.campaign.link3")} target="_blank">
+      {t("banner.campaign.product3")}
+    </BlueAnchorLink>,
+    t("banner.campaign.suffix"),
+  ];
 
   let archivedTargetUrl = "";
   if (props.name && props.pathConfig) {
@@ -490,13 +505,8 @@ const HeaderBanner = (props: HeaderProps) => {
         // }
         logo={"📣"}
         textList={[
-          <BlueAnchorLink
-            to="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
-            target="_blank"
-          >
-            {t("banner.autoTrans.title1")}
-          </BlueAnchorLink>,
-          t("banner.autoTrans.title2"),
+          ...campaignTextList,
+          t("banner.autoTrans.notice"),
           <BlueAnchorLink to={urlAutoTranslation} target="_blank">
             {t("banner.autoTrans.end")}
           </BlueAnchorLink>,
@@ -506,20 +516,6 @@ const HeaderBanner = (props: HeaderProps) => {
   }
 
   return props.bannerEnabled ? (
-    <Banner
-      logo={"📣"}
-      textList={[
-        <BlueAnchorLink
-          to="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
-          target="_blank"
-        >
-          {t("banner.campaign.title1")}
-        </BlueAnchorLink>,
-        t("banner.campaign.title2"),
-        <BlueAnchorLink to={t("banner.campaign.link")} target="_blank">
-          {t("banner.campaign.end")}
-        </BlueAnchorLink>,
-      ]}
-    />
+    <Banner logo={"📣"} textList={campaignTextList} />
   ) : null;
 };
