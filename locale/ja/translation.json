@@ -189,14 +189,14 @@
     },
     "campaign": {
       "prefix": "新登場！",
-      "product1": "PostgreSQL 対応",
-      "link1": "https://docs.pingcap.com/ja/tidbcloud/starter/?plan=starter&compatibility=postgresql",
+      "product1": "TiDB Cloud BYOC",
+      "link1": "https://docs.pingcap.com/ja/tidbcloud/byoc/?plan=byoc",
       "separator1": "、",
-      "product2": "TiDB Cloud BYOC",
-      "link2": "https://docs.pingcap.com/ja/tidbcloud/byoc/?plan=byoc",
+      "product2": "TiDB Cloud Filesystem",
+      "link2": "https://docs.pingcap.com/ja/tidbcloud-filesystem/",
       "separator2": "、",
-      "product3": "TiDB Cloud Filesystem",
-      "link3": "https://docs.pingcap.com/ja/tidbcloud-filesystem/",
+      "product3": "PostgreSQL-compatible TiDB Cloud Starter",
+      "link3": "https://docs.pingcap.com/ja/tidbcloud/starter/?plan=starter&compatibility=postgresql",
       "suffix": " がパブリックプレビュー中"
     },
     "autoTrans": {

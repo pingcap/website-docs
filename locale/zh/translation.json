@@ -204,14 +204,14 @@
     },
     "campaign": {
       "prefix": "",
-      "product1": "兼容 PostgreSQL 的 TiDB Cloud Starter",
-      "link1": "https://docs.pingcap.com/zh/tidbcloud/starter/?plan=starter&compatibility=postgresql",
+      "product1": "TiDB Cloud BYOC",
+      "link1": "https://docs.pingcap.com/zh/tidbcloud/byoc/?plan=byoc",
       "separator1": "、",
-      "product2": "TiDB Cloud BYOC",
-      "link2": "https://docs.pingcap.com/zh/tidbcloud/byoc/?plan=byoc",
+      "product2": "TiDB Cloud Filesystem",
+      "link2": "https://docs.pingcap.com/zh/tidbcloud-filesystem/",
       "separator2": " 和 ",
-      "product3": "TiDB Cloud Filesystem",
-      "link3": "https://docs.pingcap.com/zh/tidbcloud-filesystem/",
+      "product3": "兼容 PostgreSQL 的 TiDB Cloud Starter",
+      "link3": "https://docs.pingcap.com/zh/tidbcloud/starter/?plan=starter&compatibility=postgresql",
       "suffix": " 全新发布，开放公测中"
     },
     "autoTrans": {
