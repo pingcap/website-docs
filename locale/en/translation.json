@@ -205,10 +205,16 @@
       "viewLatestLTSVersion": "View the latest LTS version docs"
     },
     "campaign": {
-      "title1": "TiDB Cloud Premium",
-      "title2": " is now in public preview. Unlimited growth, instant elasticity, advanced security for enterprise workloads. ",
-      "end": "Try it out →",
-      "link": "https://tidbcloud.com/"
+      "prefix": "New in Public Preview: ",
+      "product1": "TiDB Cloud BYOC",
+      "link1": "https://www.pingcap.com/blog/tidb-cloud-byoc-public-preview/",
+      "separator1": ", ",
+      "product2": "TiDB Cloud Filesystem",
+      "link2": "https://www.pingcap.com/tidb/tidb-cloud-filesystem/",
+      "separator2": ", ",
+      "product3": "PostgreSQL-compatible TiDB Cloud Starter",
+      "link3": "https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql",
+      "suffix": ""
     }
   },
   "campaign": {
