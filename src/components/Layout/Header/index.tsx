@@ -429,7 +429,7 @@ export default function Header(props: HeaderProps) {
 }
 
 const HeaderBanner = (props: HeaderProps) => {
-  const { t } = useI18next();
+  const { t, language } = useI18next();
   const { namespace, name } = props;
   const isAutoTranslation = useIsAutoTranslation(namespace);
   const urlAutoTranslation =
@@ -448,18 +448,58 @@ const HeaderBanner = (props: HeaderProps) => {
       : `/${props.pathConfig?.repo}/${
           props.pathConfig?.version || "stable"
         }/${name}`;
+  const campaignLinks = [
+    {
+      itemName: "tidb_cloud_byoc",
+      text: t("banner.campaign.product1"),
+      url: t("banner.campaign.link1"),
+    },
+    {
+      itemName: "tidb_cloud_filesystem",
+      text: t("banner.campaign.product2"),
+      url: t("banner.campaign.link2"),
+    },
+    {
+      itemName: "postgresql_compatible_tidb_cloud_starter",
+      text: t("banner.campaign.product3"),
+      url: t("banner.campaign.link3"),
+    },
+  ];
+  const trackCampaignLinkClick = (link: typeof campaignLinks[number]) => {
+    gtmTrack(GTMEvent.ClickBanner, {
+      banner_item: link.itemName,
+      content_language: language,
+      link_text: link.text,
+      link_url: link.url,
+    });
+  };
   const campaignTextList = [
     t("banner.campaign.prefix"),
-    <BlueAnchorLink to={t("banner.campaign.link1")} target="_blank">
-      {t("banner.campaign.product1")}
+    <BlueAnchorLink
+      key={campaignLinks[0].itemName}
+      to={campaignLinks[0].url}
+      target="_blank"
+      onClick={() => trackCampaignLinkClick(campaignLinks[0])}
+    >
+      {campaignLinks[0].text}
     </BlueAnchorLink>,
     t("banner.campaign.separator1"),
-    <BlueAnchorLink to={t("banner.campaign.link2")} target="_blank">
-      {t("banner.campaign.product2")}
+    <BlueAnchorLink
+      key={campaignLinks[1].itemName}
+      to={campaignLinks[1].url}
+      target="_blank"
+      onClick={() => trackCampaignLinkClick(campaignLinks[1])}
+    >
+      {campaignLinks[1].text}
     </BlueAnchorLink>,
     t("banner.campaign.separator2"),
-    <BlueAnchorLink to={t("banner.campaign.link3")} target="_blank">
-      {t("banner.campaign.product3")}
+    <BlueAnchorLink
+      key={campaignLinks[2].itemName}
+      to={campaignLinks[2].url}
+      target="_blank"
+      onClick={() => trackCampaignLinkClick(campaignLinks[2])}
+    >
+      {campaignLinks[2].text}
     </BlueAnchorLink>,
     t("banner.campaign.suffix"),
   ];

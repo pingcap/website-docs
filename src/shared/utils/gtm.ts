@@ -1,5 +1,6 @@
 export const GTMEvent = {
   ClickHeadNav: "docs_navi_click",
+  ClickBanner: "docs_banner_click",
   ClickFooter: "docs_footer_click",
   UseOnsiteSearch: "use_onsite_search",
   UseExternalSearch: "use_external_search",
