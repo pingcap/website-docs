@@ -31,12 +31,12 @@
 - 管理 TiDB Cloud Premium 实例
   - [创建 TiDB Cloud Premium 实例](https://docs.pingcap.com/zh/tidbcloud/create-tidb-instance-premium.md): 了解如何创建 TiDB Cloud Premium 实例。
   - 连接到你的 TiDB Cloud Premium 实例
-    - [网络连接概述](https://docs.pingcap.com/zh/tidbcloud/connect-to-tidb-instance.md): 了解如何通过不同方法连接到你的 TiDB Cloud Premium 实例。
-    - [通过 Public Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-public-connection.md): 了解如何通过公共连接连接到你的 TiDB Cloud Premium。
-    - [通过 AWS Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): 了解如何通过 AWS 的私有端点连接到你的 TiDB Cloud Premium 实例。
+    - [网络连接概述](https://docs.pingcap.com/zh/tidbcloud/connect-to-tidb-instance.md): 了解如何通过不同方法连接到你的 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
+    - [通过 Public Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-public-connection.md): 了解如何通过公共连接连接到你的 TiDB Cloud Premium 或 TiDB Cloud BYOC。
+    - [通过 AWS Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): 了解如何通过 AWS 的私有端点连接到你的 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
     - [通过 Alibaba Cloud Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): 了解如何通过 Alibaba Cloud 上的私有端点连接到你的 TiDB Cloud Premium 实例。
-  - [备份和恢复 TiDB Cloud 数据](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-premium.md): 了解如何备份和恢复你的 TiDB Cloud Premium 实例。
-  - [从 TiDB Cloud Premium 导出数据](https://docs.pingcap.com/zh/tidbcloud/premium-export.md): 了解如何从 TiDB Cloud Premium 实例导出数据。
+  - [备份和恢复 TiDB Cloud 数据](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-premium.md): 了解如何备份和恢复你的 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
+  - [从 TiDB Cloud Premium 导出数据](https://docs.pingcap.com/zh/tidbcloud/premium-export.md): 了解如何从 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例导出数据。
   - 使用 TiFlash 实现 HTAP
     - [TiFlash 简介](https://docs.pingcap.com/zh/tidbcloud/tiflash-overview.md): 了解 TiFlash 的架构和关键特性。
     - [构建 TiFlash 副本](https://docs.pingcap.com/zh/tidbcloud/create-tiflash-replicas.md): 了解如何创建 TiFlash 副本。
@@ -65,6 +65,7 @@
       - [通过 Lark 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-lark.md): 了解如何通过 Lark 接收告警通知来监控你的 TiDB 集群。
     - [事件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
     - [集成 TiDB Cloud 与 Datadog](https://docs.pingcap.com/zh/tidbcloud/monitor-datadog-integration-for-tidb-x.md): 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
+    - [集成 TiDB Cloud 与 New Relic](https://docs.pingcap.com/zh/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
   - 性能调优
     - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
     - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
@@ -115,22 +116,22 @@
     - [TiKV Follower Read](https://docs.pingcap.com/zh/tidbcloud/follower-read.md): 本文档描述了 Follower Read 的使用和实现。
     - [下推计算结果缓存](https://docs.pingcap.com/zh/tidbcloud/coprocessor-cache.md): 了解 Coprocessor Cache 的特性。
     - [TiFlash 调优](https://docs.pingcap.com/zh/tidbcloud/tune-tiflash-performance.md): 了解如何通过规划机器资源和调整 TiDB 参数来调优 TiFlash 的性能。
-  - [删除 TiDB Cloud Premium 实例](https://docs.pingcap.com/zh/tidbcloud/delete-tidb-instance.md): 了解如何删除 TiDB Cloud Premium 实例。
+  - [删除 TiDB Cloud Premium 实例](https://docs.pingcap.com/zh/tidbcloud/delete-tidb-instance.md): 了解如何删除 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
 - 迁移或导入数据
   - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-migration-overview.md): 了解 TiDB Cloud 的数据迁移和导入场景概览。
   - 将数据迁移到 TiDB Cloud
     - [使用 Data Migration 迁移现有数据和增量数据](https://docs.pingcap.com/zh/tidbcloud/migrate-from-mysql-using-data-migration.md): 学习如何使用数据迁移功能，将你的 MySQL 数据库（包括 Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL 或自建 MySQL 实例）无缝迁移到 TiDB Cloud，并实现最小化停机时间。
     - [使用 Data Migration 迁移增量数据](https://docs.pingcap.com/zh/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): 了解如何使用 Data Migration，将托管于 Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、阿里云 RDS，或本地 MySQL 实例的 MySQL 兼容数据库的增量数据迁移到 TiDB Cloud。
-    - [从 TiDB 自管理迁移到 TiDB Cloud Premium](https://docs.pingcap.com/zh/tidbcloud/migrate-from-op-tidb-premium.md): 了解如何将数据从 TiDB Self-Managed 迁移到 TiDB Cloud Premium。
+    - [从 TiDB 自管理迁移到 TiDB Cloud Premium](https://docs.pingcap.com/zh/tidbcloud/migrate-from-op-tidb-premium.md): 了解如何将数据从 TiDB Self-Managed 迁移到 TiDB Cloud Premium 或 TiDB Cloud BYOC。
     - [迁移和合并大型数据集的 MySQL 分片](https://docs.pingcap.com/zh/tidbcloud/migrate-sql-shards.md): 了解如何将大型 MySQL 分片数据集迁移并合并到 TiDB Cloud。
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-oracle-using-aws-dms.md): 了解如何使用 AWS Database Migration Service (AWS DMS) 将数据从 Amazon RDS for Oracle 迁移到 TiDB Cloud Serverless。
   - 将数据导入 TiDB Cloud
     - [从云存储导入示例数据（SQL 文件）](https://docs.pingcap.com/zh/tidbcloud/import-sample-data-serverless.md): 了解如何通过 UI 将示例数据导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
-    - [从云存储导入 CSV 文件](https://docs.pingcap.com/zh/tidbcloud/import-csv-files-premium.md): 了解如何将 Amazon S3 或 Alibaba Cloud Object Storage Service (OSS) 中的 CSV 文件导入到 TiDB Cloud Premium 实例。
-    - [从 Amazon S3 导入 CSV 文件](https://docs.pingcap.com/zh/tidbcloud/import-from-s3-premium.md): 了解如何使用控制台向导将 Amazon S3 中的 CSV 文件导入到 TiDB Cloud Premium 实例。
+    - [从云存储导入 CSV 文件](https://docs.pingcap.com/zh/tidbcloud/import-csv-files-premium.md): 了解如何将 Amazon Simple Storage Service (Amazon S3) 中的 CSV 文件导入到 TiDB Cloud Premium 和 TiDB Cloud BYOC 实例，以及如何将 Alibaba Cloud Object Storage Service (OSS) 中的 CSV 文件导入到 TiDB Cloud Premium 实例。
+    - [从 Amazon S3 导入 CSV 文件](https://docs.pingcap.com/zh/tidbcloud/import-from-s3-premium.md): 了解如何使用控制台向导将 Amazon S3 中的 CSV 文件导入到 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
     - [从云存储导入 Parquet 文件](https://docs.pingcap.com/zh/tidbcloud/import-parquet-files-serverless.md): 了解如何将 Apache Parquet 文件从 Amazon S3、GCS、Azure Blob Storage 或阿里云对象存储服务（OSS）导入到 TiDB Cloud Starter 或 TiDB Cloud Essential。
     - [从云存储导入快照文件](https://docs.pingcap.com/zh/tidbcloud/import-snapshot-files-serverless.md): 了解如何将 Amazon Aurora 或 RDS for MySQL 的快照文件导入 TiDB Cloud Starter 或 Essential。
-    - [使用 MySQL CLI 导入](https://docs.pingcap.com/zh/tidbcloud/import-with-mysql-cli-premium.md): 了解如何使用 MySQL 命令行客户端 (`mysql`) 将小型 CSV 或 SQL 文件导入到 TiDB Cloud Premium 实例。
+    - [使用 MySQL CLI 导入](https://docs.pingcap.com/zh/tidbcloud/import-with-mysql-cli-premium.md): 了解如何使用 MySQL 命令行客户端 (`mysql`) 将小型 CSV 或 SQL 文件导入到 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
   - 参考
     - [为 TiDB Cloud 配置外部存储访问](https://docs.pingcap.com/zh/tidbcloud/configure-external-storage-access.md): 了解如何为外部存储（如 Amazon Simple Storage Service (Amazon S3)）配置跨账户访问。
     - [数据导入的命名约定](https://docs.pingcap.com/zh/tidbcloud/naming-conventions-for-data-import.md): 了解 CSV、Parquet、Aurora Snapshot 和 SQL 文件在数据导入过程中的命名规范。
@@ -162,15 +163,15 @@
     - [身份访问管理](https://docs.pingcap.com/zh/tidbcloud/manage-user-access.md): 了解如何在 TiDB Cloud 中管理身份访问。
     - [OAuth 2.0](https://docs.pingcap.com/zh/tidbcloud/oauth2.md): 了解如何在 TiDB Cloud 中使用 OAuth 2.0。
   - 网络访问控制
-    - [配置 IP 访问列表](https://docs.pingcap.com/zh/tidbcloud/configure-ip-access-list-premium.md): 了解如何配置允许访问你的 TiDB Cloud Premium 实例的 IP 地址。
-    - [通过 AWS Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): 了解如何通过 AWS 的私有端点连接到你的 TiDB Cloud Premium 实例。
+    - [配置 IP 访问列表](https://docs.pingcap.com/zh/tidbcloud/configure-ip-access-list-premium.md): 了解如何配置允许访问你的 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例的 IP 地址。
+    - [通过 AWS Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-aws-private-endpoint.md): 了解如何通过 AWS 的私有端点连接到你的 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例。
     - [通过 Alibaba Cloud Private Endpoint 连接](https://docs.pingcap.com/zh/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): 了解如何通过 Alibaba Cloud 上的私有端点连接到你的 TiDB Cloud Premium 实例。
     - [通过 TLS 连接到 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tls-connect-to-premium.md): 介绍 TiDB Cloud Premium 中的 TLS 连接。
   - 数据访问控制
     - [双层数据加密](https://docs.pingcap.com/zh/tidbcloud/dual-layer-data-encryption-premium.md): 了解如何为 TiDB Cloud Premium 实例启用和管理双层数据加密。
     - [用户可控的日志脱敏](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-log-redaction.md): 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱敏功能，以管理执行日志中敏感数据的可见性。
   - 审计管理
-    - [数据库审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-auditing-premium.md): 了解如何在 TiDB Cloud Premium 中审计实例。
+    - [数据库审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-auditing-premium.md): 了解如何为 TiDB Cloud Premium 或 TiDB Cloud BYOC 实例启用数据库审计日志，并配置审计过滤器和云存储。
     - [控制台审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-console-auditing.md): 了解 TiDB Cloud 控制台的审计日志功能。
 - 账单
   - [发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing.md#invoices): 了解 TiDB Cloud 计费。
@@ -190,6 +191,7 @@
   - [Gitpod](https://docs.pingcap.com/zh/tidbcloud/dev-guide-playground-gitpod.md): Gitpod 提供了一个完整、自动化且预配置的云原生开发环境。你可以在浏览器中直接开发、运行和测试代码，无需任何本地配置。
   - [n8n](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-n8n.md): 了解在 n8n 中使用 TiDB Cloud 节点的方法。
   - [Netlify](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-netlify.md): 学习如何将 TiDB Cloud 集群连接到 Netlify 项目。
+  - [New Relic](https://docs.pingcap.com/zh/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
   - [ProxySQL](https://docs.pingcap.com/zh/tidbcloud/dev-guide-proxysql-integration.md): 了解如何将 TiDB Cloud 和 TiDB（自托管）与 ProxySQL 集成。
   - [Vercel](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-vercel.md): 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
   - [Zapier](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-zapier.md): 了解如何通过 Zapier 将 TiDB Cloud 连接到 5000+ 应用。

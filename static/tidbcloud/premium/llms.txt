@@ -65,6 +65,7 @@
       - [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark.md): Learn how to monitor your TiDB cluster by getting alert notifications via Lark.
     - [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud resources using the Events page.
     - [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the Datadog integration.
+    - [Integrate TiDB Cloud with New Relic](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the New Relic integration.
   - Tune Performance
     - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
     - [Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance.md): Learn how to analyze and tune performance in TiDB Cloud.
@@ -121,7 +122,7 @@
   - Migrate Data into TiDB Cloud
     - [Migrate Existing and Incremental Data Using Data Migration](https://docs.pingcap.com/tidbcloud/migrate-from-mysql-using-data-migration.md): Learn how to seamlessly migrate your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to TiDB Cloud with minimal downtime using the Data Migration feature.
     - [Migrate Incremental Data Using Data Migration](https://docs.pingcap.com/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, Azure Database for MySQL, or Alibaba Cloud RDS, or a local MySQL instance to TiDB Cloud using Data Migration.
-    - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb-premium.md): Learn how to migrate data from TiDB Self-Managed to TiDB Cloud Premium.
+    - [Migrate from TiDB Self-Managed to TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb-premium.md): Learn how to migrate data from TiDB Self-Managed to TiDB Cloud Premium or TiDB Cloud BYOC.
     - [Migrate and Merge MySQL Shards of Large Datasets](https://docs.pingcap.com/tidbcloud/migrate-sql-shards.md): Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
     - [Migrate from Amazon RDS for Oracle Using AWS DMS](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms.md): Learn how to migrate data from Amazon RDS for Oracle into TiDB Cloud Starter using AWS Database Migration Service (AWS DMS).
   - Import Data into TiDB Cloud
@@ -190,6 +191,7 @@
   - [Gitpod](https://docs.pingcap.com/tidbcloud/dev-guide-playground-gitpod.md): Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
   - [n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n.md): Learn the use of TiDB Cloud node in n8n.
   - [Netlify](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify.md): Learn how to connect your TiDB Cloud clusters to Netlify projects.
+  - [New Relic](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the New Relic integration.
   - [ProxySQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration.md): Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
   - [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel.md): Learn how to connect your TiDB Cloud clusters to Vercel projects.
   - [Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier.md): Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.

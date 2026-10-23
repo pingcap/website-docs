@@ -66,6 +66,7 @@
       - [通过 Lark 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-lark.md): 了解如何通过 Lark 接收告警通知来监控你的 TiDB 集群。
     - [事件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
     - [集成 TiDB Cloud 与 Datadog](https://docs.pingcap.com/zh/tidbcloud/monitor-datadog-integration-for-tidb-x.md): 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
+    - [集成 TiDB Cloud 与 New Relic](https://docs.pingcap.com/zh/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
   - 性能调优
     - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
     - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
@@ -191,6 +192,7 @@
   - [Gitpod](https://docs.pingcap.com/zh/tidbcloud/dev-guide-playground-gitpod.md): Gitpod 提供了一个完整、自动化且预配置的云原生开发环境。你可以在浏览器中直接开发、运行和测试代码，无需任何本地配置。
   - [n8n](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-n8n.md): 了解在 n8n 中使用 TiDB Cloud 节点的方法。
   - [Netlify](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-netlify.md): 学习如何将 TiDB Cloud 集群连接到 Netlify 项目。
+  - [New Relic](https://docs.pingcap.com/zh/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
   - [ProxySQL](https://docs.pingcap.com/zh/tidbcloud/dev-guide-proxysql-integration.md): 了解如何将 TiDB Cloud 和 TiDB（自托管）与 ProxySQL 集成。
   - Terraform
     - [Terraform 集成概览](https://docs.pingcap.com/zh/tidbcloud/terraform-tidbcloud-provider-overview.md): 通过 Terraform 创建、管理和更新你的 TiDB Cloud 资源。
