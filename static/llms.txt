@@ -6,7 +6,7 @@
 
 TiDB is available in multiple deployment options:
 
-- **TiDB Cloud**: Fully managed cloud database services, including TiDB Cloud Starter, Essential, Premium, Dedicated, and TiDB Cloud Lake.
+- **TiDB Cloud**: Fully managed cloud database services, including TiDB Cloud Starter, Essential, Premium, BYOC, Dedicated, Lake, and Filesystem.
 - **TiDB Self-Managed**: Deploy and operate TiDB on your own infrastructure.
 - **TiDB on Kubernetes**: Deploy and manage TiDB using TiDB Operator.
 
@@ -14,9 +14,13 @@ TiDB is available in multiple deployment options:
 
 TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, letting you focus on your applications instead of the complexities of your database.
 
-#### TiDB Cloud Starter
+#### MySQL-compatible TiDB Cloud Starter
 
 - [TiDB Cloud Starter Documentation](https://docs.pingcap.com/tidbcloud/starter/llms.txt): Serverless, pay-as-you-go TiDB Cloud offering for development, testing, and small-scale workloads.
+
+#### PostgreSQL-compatible TiDB Cloud Starter
+
+- [PostgreSQL-compatible TiDB Cloud Starter Documentation](https://docs.pingcap.com/tidbcloud/starter-postgresql/llms.txt): Designed for developers building and testing applications with familiar PostgreSQL tools and frameworks. It offers a fully managed, autoscaling database with pgvector-compatible vector search and selected PostgreSQL extensions.
 
 #### TiDB Cloud Essential
 
@@ -26,6 +30,10 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 
 - [TiDB Cloud Premium Documentation](https://docs.pingcap.com/tidbcloud/premium/llms.txt): Designed for mission-critical businesses that demand unlimited real-time scalability, delivering workload-aware auto-scaling and comprehensive enterprise capabilities.
 
+#### TiDB Cloud BYOC
+
+- [TiDB Cloud BYOC Documentation](https://docs.pingcap.com/tidbcloud/byoc/llms.txt): TiDB Cloud BYOC (Bring Your Own Cloud) is an enterprise solution that lets you run the data plane in your own cloud environment while retaining the fully managed experience of TiDB Cloud.
+
 #### TiDB Cloud Dedicated
 
 - [TiDB Cloud Dedicated Documentation](https://docs.pingcap.com/tidbcloud/llms.txt): Enterprise-grade managed TiDB with dedicated resources, advanced security, and compliance features.
@@ -33,6 +41,10 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 #### TiDB Cloud Lake
 
 - [TiDB Cloud Lake Documentation](https://docs.pingcap.com/tidbcloudlake/llms.txt): A cloud-native data warehouse service for analytics workloads, supporting ANSI SQL, semi-structured data processing, and AI-oriented workflows.
+
+#### TiDB Cloud Filesystem
+
+- [TiDB Cloud Filesystem Documentation](https://docs.pingcap.com/tidbcloud-filesystem/llms.txt): Persistent, shared file storage that applications, automation, and AI agents can access across machines and sessions.
 
 ### TiDB Self-Managed
 
