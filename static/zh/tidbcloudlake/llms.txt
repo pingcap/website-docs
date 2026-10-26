@@ -6,11 +6,12 @@
 
 - [概览](https://docs.pingcap.com/zh/tidbcloudlake/lake-overview.md): TiDB Cloud Lake 是面向分析型工作负载的云原生数据仓库服务。它将计算与存储分离，并支持 ANSI SQL、半结构化数据处理以及面向 AI 的工作流。
 - [快速入门](https://docs.pingcap.com/zh/tidbcloudlake/lake-quick-start.md): 通过三个步骤开始使用 TiDB Cloud Lake——注册、初始化你的 lake，并探索你的 lake 工作区。
+- [Lake PoC 指南](https://docs.pingcap.com/zh/tidbcloudlake/lake-poc.md): 使用 schema 映射、cluster key、reclustering、块大小和物化视图，通过具有代表性的工作负载评估 TiDB Cloud Lake。
 
 ## 指南
 
 - 连接
-  - [概览](https://docs.pingcap.com/zh/tidbcloudlake/connection-overview.md): TiDB Cloud Lake 支持多种连接方法，以适应不同的使用场景。以下所有选项同时适用于 **TiDB Cloud Lake** 和 **self-hosted TiDB Cloud Lake**。
+  - [概览](https://docs.pingcap.com/zh/tidbcloudlake/connection-overview.md): TiDB Cloud Lake 支持多种连接方法，以适应不同的使用场景。
   - SQL 客户端
     - [LakeSQL](https://docs.pingcap.com/zh/tidbcloudlake/connect-using-lakesql.md): LakeSQL 是专为 TiDB Cloud Lake 设计的命令行工具。它允许用户建立与 TiDB Cloud Lake 的连接，并直接在 CLI 窗口中执行查询。
   - 驱动
@@ -47,6 +48,7 @@
     - [PostgreSQL - 凭证](https://docs.pingcap.com/zh/tidbcloudlake/postgresql-credentials.md): 本页介绍如何创建 `PostgreSQL - Credentials` 数据源。该数据源存储访问 PostgreSQL 所需的连接信息，并可在多个 PostgreSQL 集成任务中复用。
     - [FeiShuBot](https://docs.pingcap.com/zh/tidbcloudlake/feishubot.md): 本页介绍如何创建 `FeiShuBot` 数据源。该数据源用于存储飞书机器人 webhook 和消息模板，适用于任务失败通知等场景。
     - [Kafka - 凭证](https://docs.pingcap.com/zh/tidbcloudlake/kafka-credentials.md): 创建一个 “Kafka - Credentials” 数据源，用于存储 Kafka 连接信息，以便在 Kafka Consumer 集成任务中复用。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB 数据源](https://docs.pingcap.com/zh/tidbcloudlake/tidb-data-source.md): 介绍如何在 TiDB Cloud Lake 中设置 TiDB 数据源，包括存储和身份验证配置。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - 集成任务
     - [概览](https://docs.pingcap.com/zh/tidbcloudlake/integration-tasks.md): 本页概述 TiDB Cloud Lake 中的集成任务。集成任务定义了数据如何从外部源流入 TiDB Cloud Lake，包括源设置、目标表和运行时参数。
     - [任务管理](https://docs.pingcap.com/zh/tidbcloudlake/task-management.md): 本页介绍数据集成任务的常见操作，包括任务创建流程、启动和下线行为、任务状态以及运行历史。有关特定数据源的配置，请参阅详细的任务指南。
@@ -55,6 +57,7 @@
     - [MySQL 集成任务](https://docs.pingcap.com/zh/tidbcloudlake/integrate-with-mysql.md): MySQL 数据集成支持将 MySQL 数据库中的数据实时同步到 TiDB Cloud Lake，支持全量 `Snapshot` 导入、持续 `Change Data Capture (CDC)`，或两者结合。
     - [PostgreSQL 集成任务](https://docs.pingcap.com/zh/tidbcloudlake/integrate-with-postgresql.md): 本页介绍如何创建一个 PostgreSQL 集成任务，将 PostgreSQL 数据库中的数据同步到 TiDB Cloud Lake。
     - [Kafka Consumer 集成任务](https://docs.pingcap.com/zh/tidbcloudlake/integrate-with-kafka.md): 创建 Kafka Consumer 任务，持续消费 Kafka topic 中的消息，并将消息内容保存到内部对象存储（租户 Stage）。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB 集成任务（预览版）](https://docs.pingcap.com/zh/tidbcloudlake/integrate-with-tidb.md): 使用全量快照导入、持续 CDC 或两者结合的方式，将数据从 TiDB 集群复制到 TiDB Cloud Lake。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
 - 加载数据
   - 使用 Stage
     - [Stage 概述](https://docs.pingcap.com/zh/tidbcloudlake/stage-overview.md): stage 是一个用于存放数据文件的虚拟位置。stage 中的文件可以直接查询，也可以加载到表中。或者，你也可以将表中的数据以文件形式卸载到 stage 中。
@@ -99,10 +102,10 @@
 - 多模态数据分析
   - [概览](https://docs.pingcap.com/zh/tidbcloudlake/multimodal-data-analytics.md): CityDrive Intelligence 记录每一次驾驶的视频。后台处理工具将视频流切分为关键帧图像，从每张图像中提取丰富的多模态信息，并按 `video_id` 存储。这些信号包括关系型元信息、JSON 清单、行为标签、向量嵌入和 GPS 轨迹。
   - [SQL 分析](https://docs.pingcap.com/zh/tidbcloudlake/sql-analytics.md): 场景：CityDrive 将所有行车记录仪记录 stage 到共享关系型表中。这些关系型数据（例如视频元信息、事件标签）由后台处理流水线从原始行车记录仪视频的关键帧中提取而来。
-  - [JSON 与搜索](https://docs.pingcap.com/zh/tidbcloudlake/json-search.md): 在场景 CityDrive 中，每个提取出的帧都会附带一个元信息 JSON 负载。这些 JSON 数据由后台工具从视频关键帧中提取，包含场景识别、目标检测等丰富的非结构化信息。我们需要在 TiDB Cloud Lake 中使用 Elasticsearch 风格的语法过滤这些 JSON，而无需将其复制到外部系统。JSON 无需从 TiDB Cloud Lake 中导出。
+  - [JSON 与搜索](https://docs.pingcap.com/zh/tidbcloudlake/json-search.md): 在场景 CityDrive 中，每个提取出的帧都会附带一个元信息 JSON 负载。这些 JSON 数据由后台工具从视频关键帧中提取，包含场景识别、目标检测等丰富的非结构化信息。我们需要在 TiDB Cloud Lake 中使用 Elasticsearch 风格的语法过滤这些 JSON，而无需将其复制到外部系统。
   - [向量搜索](https://docs.pingcap.com/zh/tidbcloudlake/vector-search-guide.md): 在该场景中，CityDrive 将每一帧的 embedding 直接保存在 TiDB Cloud Lake 中。这些向量 embedding 来自 AI 模型对视频关键帧的推导结果，用于捕获视觉语义特征。语义相似度搜索（“查找看起来像这样的帧”）可以与传统 SQL 分析同时运行——无需单独的向量服务。
   - [地理空间分析](https://docs.pingcap.com/zh/tidbcloudlake/geo-analytics.md): CityDrive 会为每个已标记帧记录精确的 GPS 位置以及到信号源的距离。这些地理空间数据来自行车记录仪的 GPS 模块，并与视频关键帧的时间戳精确对齐。运维团队仅通过 SQL 就能回答“这件事发生在哪里？”。
-  - [Lakehouse ETL](https://docs.pingcap.com/zh/tidbcloudlake/lakehouse-etl.md): 场景：CityDrive 的数据工程团队将每一批行车记录仪数据导出为 Parquet（视频、帧事件、元信息 JSON、嵌入向量、GPS 轨迹、红绿灯距离）。这些 Parquet 文件汇总了从原始视频流中提取的所有多模态信号，构成了计算集群的基础。他们希望通过单个 COPY pipeline 来修改 TiDB Cloud Lake 中的共享表，以刷新 TiDB Cloud Lake 中的共享表。
+  - [Lakehouse ETL](https://docs.pingcap.com/zh/tidbcloudlake/lakehouse-etl.md): 场景：CityDrive 的数据工程团队将每一批行车记录仪数据导出为 Parquet（视频、帧事件、元信息 JSON、嵌入向量、GPS 轨迹、红绿灯距离）。这些 Parquet 文件汇总了从原始视频流中提取的所有多模态信号，构成了计算集群的基础。他们希望通过单个 COPY pipeline 来刷新 TiDB Cloud Lake 中的共享表。
 - 性能优化
   - [概览](https://docs.pingcap.com/zh/tidbcloudlake/performance-optimization.md): TiDB Cloud Lake 主要通过**多种索引技术**来加速查询性能，包括数据聚簇、结果缓存和专用索引，帮助你显著提升查询响应时间。
   - [Cluster Key](https://docs.pingcap.com/zh/tidbcloudlake/cluster-key-performance.md): Cluster key 提供自动数据组织能力，可显著提升大表上的查询性能。TiDB Cloud Lake 在后台无缝且持续地管理所有聚簇操作——你只需定义 cluster key，其余工作由 TiDB Cloud Lake 处理。
@@ -130,8 +133,6 @@
   - [Fail-Safe](https://docs.pingcap.com/zh/tidbcloudlake/fail-safe.md): Fail-Safe 是指旨在从对象存储中恢复丢失或被意外删除数据的机制。
   - [从操作错误中恢复](https://docs.pingcap.com/zh/tidbcloudlake/recovery-from-operational-errors.md): 本指南提供了在 TiDB Cloud Lake 中从常见操作错误中恢复的分步说明。
 - 管理
-  - [AI 驱动功能](https://docs.pingcap.com/zh/tidbcloudlake/ai-powered-features.md): 借助 AI 驱动功能，TiDB Cloud Lake 允许你通过自然语言对话获取帮助、支持和解决方案。
-  - [管理成本](https://docs.pingcap.com/zh/tidbcloudlake/manage-costs.md): 你可以在 **Manage** > **Billing** 下查看组织当月的消耗情况和账单历史。
   - [监控使用情况](https://docs.pingcap.com/zh/tidbcloudlake/monitor-usage.md): TiDB Cloud Lake 提供监控功能，帮助你全面了解你自己以及组织成员在平台上的使用情况。要访问 Monitor 页面，请在首页的侧边栏菜单中点击 Monitor。该页面包含以下标签页。
   - [数据生命周期](https://docs.pingcap.com/zh/tidbcloudlake/data-lifecycle.md): TiDB Cloud Lake 支持常见的数据定义语言（DDL）和数据操纵语言（DML）命令，让你能够轻松管理数据库。无论是组织、存储、查询、修改还是删除数据，TiDB Cloud Lake 都遵循你所熟悉的行业标准。
   - [数据血缘](https://docs.pingcap.com/zh/tidbcloudlake/data-lineage.md): 了解如何在 TiDB Cloud Lake 中启用和探索数据血缘。
@@ -210,10 +211,11 @@
       - [system.views](https://docs.pingcap.com/zh/tidbcloudlake/system-views.md): 提供所有视图的元信息。
       - [system.virtual_columns](https://docs.pingcap.com/zh/tidbcloudlake/system-virtual-columns.md): 包含系统中已创建的虚拟列的信息。
     - 系统历史表
+      - [概述](https://docs.pingcap.com/zh/tidbcloudlake/system-history-tables.md): TiDB Cloud Lake 的系统历史表通过自动跟踪数据库活动，为合规、安全监控和性能分析提供 **Data Governance** 能力。
       - [system_history.access_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-access-history.md): 字段 base_objects_accessed、objects_modified 和 object_modified_by_ddl 都是 JSON 对象数组。每个对象都可能包含以下字段。
-      - [system_history.log_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-log-history.md): 注意：此表包含原始日志数据，并作为其他专用历史表的数据来源。其他表会基于这些数据提供结构化的、面向特定查询的视图。
-      - [system_history.login_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-login-history.md): 登录成功示例 sql SELECT * FROM system_history.login_history LIMIT 1;.
-      - [system_history.profile_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-profile-history.md): `profiles` 字段可用于提取特定信息。例如，要获取每个物理计划的 `OutputRows` 值，可以使用以下查询：sql SELECT jq('[.[] | {id, output_rows.statistics[4]}]', profiles) AS result FROM system_history.profile_history LIMIT 1;.
+      - [system_history.log_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-log-history.md): 使用 system_history.log_history 查询为其他结构化系统历史表提供数据的原始日志数据。
+      - [system_history.login_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-login-history.md): 使用 system_history.login_history 审计成功和失败的用户登录尝试，以进行安全监控和合规性审计。
+      - [system_history.profile_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-profile-history.md): 使用 system_history.profile_history 分析 SQL 查询的详细执行配置文件和统计信息，以进行性能调优。
       - [system_history.query_history](https://docs.pingcap.com/zh/tidbcloudlake/system-history-query-history.md): 使用 query_id 查询特定查询的历史记录。
     - [SQL 标识符](https://docs.pingcap.com/zh/tidbcloudlake/sql-identifiers.md): SQL 标识符是在 TiDB Cloud Lake 中用于不同元素的名称，例如表、视图和数据库。
     - [输入与输出文件格式](https://docs.pingcap.com/zh/tidbcloudlake/input-output-file-formats.md): TiDB Cloud Lake 支持多种文件格式，既可作为数据加载或卸载的源，也可作为目标。本文介绍支持的文件格式及其可用选项。
@@ -264,7 +266,7 @@
         - [DESC VIEW](https://docs.pingcap.com/zh/tidbcloudlake/desc-view.md): 返回视图的列列表。
         - [SHOW VIEWS](https://docs.pingcap.com/zh/tidbcloudlake/show-views.md): 返回指定数据库中的视图名称列表；如果未提供数据库名称，则返回当前数据库中的视图名称列表。
         - [DROP VIEW](https://docs.pingcap.com/zh/tidbcloudlake/drop-view.md): 删除视图。
-        - [物化视图](https://docs.pingcap.com/zh/tidbcloudlake/materialized-view.md): 物化视图会将查询结果以物理方式存储。在创建物化视图时，TiDB Cloud Lake 会对源表启用变更跟踪。
+        - [物化视图](https://docs.pingcap.com/zh/tidbcloudlake/materialized-view.md): 物化视图会以物理方式存储查询结果。在创建物化视图时，TiDB Cloud Lake 会对源表启用变更跟踪。
         - [REFRESH LINEAGE](https://docs.pingcap.com/zh/tidbcloudlake/refresh-lineage.md): 为 TiDB Cloud Lake 中现有视图回填或协调 lineage。
       - 用户和角色
         - [概览](https://docs.pingcap.com/zh/tidbcloudlake/user-role.md): 本页按功能分类，全面概述了 TiDB Cloud Lake 中的用户和角色操作，便于快速查阅。
@@ -487,7 +489,7 @@
       - [UNPIVOT](https://docs.pingcap.com/zh/tidbcloudlake/unpivot.md): UNPIVOT 操作通过将列转换为行来轮转表。
       - [GROUP BY](https://docs.pingcap.com/zh/tidbcloudlake/group-by.md): TiDB Cloud Lake 支持带有多种扩展的 GROUP BY。
       - [CHANGES](https://docs.pingcap.com/zh/tidbcloudlake/changes.md): `CHANGES` 子句允许在定义的时间区间内查询表的变更跟踪元信息。请注意，时间区间必须落在数据保留时间内（默认为 24 小时）。要定义时间区间，可以使用 `AT` 关键字指定某个时间点作为区间起点，区间终点默认使用当前时间。如果希望将过去的某个时间指定为区间终点，请结合使用 `END` 关键字和 `AT` 关键字来设置该区间。
-      - [QUALIFY](https://docs.pingcap.com/zh/tidbcloudlake/qualify.md): QUALIFY 是一个用于过滤窗口函数结果的子句。因此，要成功使用 QUALIFY 子句，SELECT 列表或 QUALIFY 子句中必须至少包含一个窗口函数（每种情况请参见示例）。换句话说，QUALIFY 会在窗口函数计算完成后再进行求值。以下是包含 QUALIFY 语句子句的查询的典型执行顺序。
+      - [QUALIFY](https://docs.pingcap.com/zh/tidbcloudlake/qualify.md): QUALIFY 是一个用于过滤窗口函数结果的子句。
       - [SETTINGS 子句](https://docs.pingcap.com/zh/tidbcloudlake/settings-clause.md): SETTINGS 子句用于配置会影响其前置 SQL 语句执行行为的特定设置。要查看 TiDB Cloud Lake 中可用的设置及其值，请使用 SHOW SETTINGS。
       - [TOP](https://docs.pingcap.com/zh/tidbcloudlake/top.md): 限制查询返回的最大行数。
       - [VALUES](https://docs.pingcap.com/zh/tidbcloudlake/values.md): VALUES 子句通过显式定义数据行来创建内联表。这个临时表可以直接使用，也可以在其他 SQL 语句中使用。
@@ -602,7 +604,7 @@
       - [IS_NOT_NULL](https://docs.pingcap.com/zh/tidbcloudlake/is-not-null.md): 检查一个值是否不是 NULL。
       - [IS_NULL](https://docs.pingcap.com/zh/tidbcloudlake/is-null.md): 检查一个值是否为 NULL。
       - [LEAST](https://docs.pingcap.com/zh/tidbcloudlake/least.md): 返回一组值中的最小值。如果该组中的任意值为 NULL，则该函数返回 NULL。
-      - [LEAST_IGNORE_NULLS](https://docs.pingcap.com/zh/tidbcloudlake/least-ignore-nulls.md): 返回一组值中的最大值，并忽略任何 NULL 值。
+      - [LEAST_IGNORE_NULLS](https://docs.pingcap.com/zh/tidbcloudlake/least-ignore-nulls.md): 返回一组值中的最小值，并忽略任何 NULL 值。
       - [NULLIF](https://docs.pingcap.com/zh/tidbcloudlake/nullif.md): 如果两个表达式相等，则返回 NULL。否则返回 expr1。它们必须具有相同的数据类型。
       - [NVL](https://docs.pingcap.com/zh/tidbcloudlake/nvl.md): 如果 `<expr1>` 为 NULL，则返回 `<expr2>`；否则返回 `<expr1>`。
       - [NVL2](https://docs.pingcap.com/zh/tidbcloudlake/nvl2.md): 如果 `<expr1>` 不为 NULL，则返回 `<expr2>`；否则，返回 `<expr3>`。
@@ -683,7 +685,7 @@
       - [STR_TO_TIMESTAMP](https://docs.pingcap.com/zh/tidbcloudlake/str-to-timestamp.md): TO_TIMESTAMP 的别名。
       - [SUBTRACT TIME INTERVAL](https://docs.pingcap.com/zh/tidbcloudlake/subtract-interval.md): 减去时间间隔函数。
       - [TIME_SLICE](https://docs.pingcap.com/zh/tidbcloudlake/time-slice.md): TIME_SLICE 是一个标量函数，用于将单个日期/时间戳值映射到固定的日历间隔（slice 或 bucket）。
-      - [TIME_SLOT](https://docs.pingcap.com/zh/tidbcloudlake/time-slot.md): 将时间舍入到半小时。## 语法。
+      - [TIME_SLOT](https://docs.pingcap.com/zh/tidbcloudlake/time-slot.md): 将时间舍入到半小时。
       - [TIMESTAMP_DIFF](https://docs.pingcap.com/zh/tidbcloudlake/timestamp-diff.md): 计算两个时间戳之间的差值，并将结果作为 INTERVAL 返回。
       - [TIMEZONE](https://docs.pingcap.com/zh/tidbcloudlake/timezone.md): 返回当前连接的时区。
       - [TO_DATE](https://docs.pingcap.com/zh/tidbcloudlake/to-date.md): 将表达式转换为日期，包括。
@@ -697,10 +699,10 @@
       - [TO_MONTH](https://docs.pingcap.com/zh/tidbcloudlake/to-month.md): 将日期或带时间的日期（timestamp/datetime）转换为包含月份编号（1-12）的 UInt8 数字。
       - [TO_QUARTER](https://docs.pingcap.com/zh/tidbcloudlake/to-quarter.md): 从给定的日期或时间戳中获取季度（1、2、3 或 4）。
       - [TO_SECOND](https://docs.pingcap.com/zh/tidbcloudlake/second.md): 将带时间的日期（timestamp/datetime）转换为一个 UInt8 数字，表示分钟中的秒数（0-59）。
-      - [TO_START_OF_DAY](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-day.md): 将带时间的日期（timestamp/datetime）向下舍入到当天开始时间。## 语法。
-      - [TO_START_OF_FIFTEEN_MINUTES](https://docs.pingcap.com/zh/tidbcloudlake/start-fifteen-minutes.md): 将带时间的日期（timestamp/datetime）向下舍入到十五分钟间隔的起始时间。## 语法。
-      - [TO_START_OF_FIVE_MINUTES](https://docs.pingcap.com/zh/tidbcloudlake/start-five-minutes.md): 将带时间的日期（timestamp/datetime）向下舍入到五分钟时间间隔的起始时间。## 语法。
-      - [TO_START_OF_HOUR](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-hour.md): 将带时间的日期（timestamp/datetime）向下舍入到该小时的开始时间。## 语法。
+      - [TO_START_OF_DAY](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-day.md): 将带时间的日期（timestamp/datetime）向下舍入到当天开始时间。
+      - [TO_START_OF_FIFTEEN_MINUTES](https://docs.pingcap.com/zh/tidbcloudlake/start-fifteen-minutes.md): 将带时间的日期（timestamp/datetime）向下舍入到十五分钟间隔的起始时间。
+      - [TO_START_OF_FIVE_MINUTES](https://docs.pingcap.com/zh/tidbcloudlake/start-five-minutes.md): 将带时间的日期（timestamp/datetime）向下舍入到五分钟时间间隔的起始时间。
+      - [TO_START_OF_HOUR](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-hour.md): 将带时间的日期（timestamp/datetime）向下舍入到该小时的开始时间。
       - [TO_START_OF_ISO_YEAR](https://docs.pingcap.com/zh/tidbcloudlake/start-iso-year.md): 返回某个日期或带时间的日期（timestamp/datetime）所在 ISO 年的第一天。
       - [TO_START_OF_MINUTE](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-minute.md): 将带时间的日期（timestamp/datetime）向下舍入到该分钟的开始时间。
       - [TO_START_OF_MONTH](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-month.md): 将日期或带时间的日期（时间戳/datetime）向下舍入到当月的第一天。返回日期。
@@ -711,11 +713,11 @@
       - [TO_START_OF_YEAR](https://docs.pingcap.com/zh/tidbcloudlake/to-start-of-year.md): 返回日期或带时间的日期（timestamp/datetime）所在年份的第一天。
       - [TO_TIMESTAMP](https://docs.pingcap.com/zh/tidbcloudlake/to-timestamp.md): 将表达式转换为带时间的日期。
       - [TO_TIMESTAMP_TZ](https://docs.pingcap.com/zh/tidbcloudlake/timestamp-tz.md): 将一个值转换为 TIMESTAMP_TZ，同时保留 UTC 时刻和时区偏移。如果你希望在出错时返回 NULL 而不是报错，请使用 TRY_TO_TIMESTAMP_TZ。
-      - [TO_UNIX_TIMESTAMP](https://docs.pingcap.com/zh/tidbcloudlake/unix-timestamp.md): 将日期/时间格式的时间戳转换为 Unix 时间戳格式。Unix 时间戳表示自 1970 年 1 月 1 日 00:00:00 UTC 以来经过的秒数。
+      - [TO_UNIX_TIMESTAMP](https://docs.pingcap.com/zh/tidbcloudlake/unix-timestamp.md): 将日期/时间格式的时间戳转换为 Unix 时间戳格式。
       - [TO_WEEK_OF_YEAR](https://docs.pingcap.com/zh/tidbcloudlake/to-week-of-year.md): 计算给定日期在一年中的周数。
       - [TO_YEAR](https://docs.pingcap.com/zh/tidbcloudlake/to-year.md): 将日期或带时间的日期（timestamp/datetime）转换为包含年份（公元）的 UInt16 数字。
       - [TO_YYYYMM](https://docs.pingcap.com/zh/tidbcloudlake/yyyymm.md): 将日期或带时间的日期（timestamp/datetime）转换为包含年份和月份数字的 UInt32 数字。
-      - [TO_YYYYMMDD](https://docs.pingcap.com/zh/tidbcloudlake/yyyymmdd.md): 将日期或带时间的日期（timestamp/datetime）转换为包含年月日数字的 UInt32 数值（YYYY * 10000 + MM * 100 + DD）。## 语法。
+      - [TO_YYYYMMDD](https://docs.pingcap.com/zh/tidbcloudlake/yyyymmdd.md): 将日期或带时间的日期（timestamp/datetime）转换为包含年、月和日的 UInt32 数值（YYYY * 10000 + MM * 100 + DD）。
       - [TO_YYYYMMDDHH](https://docs.pingcap.com/zh/tidbcloudlake/yyyymmddhh.md): 将给定的日期或时间戳格式化为 "YYYYMMDDHH"（年、月、日、小时）格式的字符串表示。
       - [TO_YYYYMMDDHHMMSS](https://docs.pingcap.com/zh/tidbcloudlake/yyyymmddhhmmss.md): 将日期或带时间的日期（timestamp/datetime）转换为包含年月日时分秒的 UInt64 数字（YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss）。
       - [TODAY](https://docs.pingcap.com/zh/tidbcloudlake/today.md): 返回当前日期。
@@ -960,17 +962,17 @@
       - [ST_GEOGRAPHYFROMWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geographyfromwkt.md): 解析 WKT(well-known-text) 或 EWKT(extended well-known-text) 输入，并返回一个 GEOGRAPHY 类型的值。
       - [ST_GEOHASH](https://docs.pingcap.com/zh/tidbcloudlake/st-geohash.md): 返回 GEOMETRY 或 GEOGRAPHY 值的 geohash 字符串，并支持可选的精度参数来控制结果粒度。
       - [ST_GEOM_POINT](https://docs.pingcap.com/zh/tidbcloudlake/st-geom-point.md): ST_MAKEGEOMPOINT 的别名。
-      - [ST_GEOMETRYFROMEWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromewkb.md): ST_GEOMTRYFROMWKB 的别名。
-      - [ST_GEOMETRYFROMEWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromewkt.md): ST_GEOMTRYFROMWKT 的别名。
+      - [ST_GEOMETRYFROMEWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromewkb.md): ST_GEOMETRYFROMWKB 的别名。
+      - [ST_GEOMETRYFROMEWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromewkt.md): ST_GEOMETRYFROMWKT 的别名。
       - [ST_GEOMETRYFROMTEXT](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromtext.md): ST_GEOMETRYFROMWKT 的别名。
       - [ST_GEOMETRYFROMWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromwkb.md): 解析 WKB(well-known-binary) 或 EWKB(extended well-known-binary) 输入，并返回 GEOMETRY 类型的值。
       - [ST_GEOMETRYFROMWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geometryfromwkt.md): 解析 WKT(well-known-text) 或 EWKT(extended well-known-text) 输入，并返回 GEOMETRY 类型的值。
-      - [ST_GEOMFROMEWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromewkb.md): ST_GEOMTRYFROMWKB 的别名。
-      - [ST_GEOMFROMEWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromewkt.md): ST_GEOMTRYFROMWKT 的别名。
+      - [ST_GEOMFROMEWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromewkb.md): ST_GEOMETRYFROMWKB 的别名。
+      - [ST_GEOMFROMEWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromewkt.md): ST_GEOMETRYFROMWKT 的别名。
       - [ST_GEOMFROMGEOHASH](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromgeohash.md): 返回一个 GEOMETRY 对象，用于表示 geohash 边界的多边形。
-      - [ST_GEOMFROMTEXT](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromtext.md): ST_GEOMTRYFROMWKT 的别名。
-      - [ST_GEOMFROMWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromwkb.md): ST_GEOMTRYFROMWKB 的别名。
-      - [ST_GEOMFROMWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromwkt.md): `ST_GEOMTRYFROMWKT` 的别名。
+      - [ST_GEOMFROMTEXT](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromtext.md): ST_GEOMETRYFROMWKT 的别名。
+      - [ST_GEOMFROMWKB](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromwkb.md): ST_GEOMETRYFROMWKB 的别名。
+      - [ST_GEOMFROMWKT](https://docs.pingcap.com/zh/tidbcloudlake/st-geomfromwkt.md): `ST_GEOMETRYFROMWKT` 的别名。
       - [ST_GEOMPOINTFROMGEOHASH](https://docs.pingcap.com/zh/tidbcloudlake/st-geompointfromgeohash.md): 返回一个 GEOMETRY 对象，表示 geohash 中心点对应的点。
       - [ST_HAUSDORFFDISTANCE](https://docs.pingcap.com/zh/tidbcloudlake/st-hausdorffdistance.md): 返回两个 GEOMETRY 对象之间的离散 Hausdorff 距离。它通过查找一个对象中任意顶点到另一个对象中最近顶点的最大距离，来衡量两个几何对象相距多远。
       - [ST_HILBERT](https://docs.pingcap.com/zh/tidbcloudlake/st-hilbert.md): 将 GEOMETRY 或 GEOGRAPHY 对象编码为 Hilbert 曲线索引。
@@ -1178,7 +1180,7 @@
       - [FUSE_ENCODING](https://docs.pingcap.com/zh/tidbcloudlake/fuse-encoding.md): 返回应用于表中特定列的编码类型。它可帮助你了解数据在表中如何以原生格式被压缩和存储。
       - [FUSE_SEGMENT](https://docs.pingcap.com/zh/tidbcloudlake/fuse-segment.md): 返回指定表快照的 segment 信息。有关 TiDB Cloud Lake 中 segment 的更多信息，请参阅什么是 Snapshot、Segment 和 Block？。
       - [FUSE_SNAPSHOT](https://docs.pingcap.com/zh/tidbcloudlake/fuse-snapshot.md): 返回表的快照信息。有关 TiDB Cloud Lake 中快照的更多信息，请参阅什么是 Snapshot、Segment 和 Block？。
-      - [FUSE_STATISTIC](https://docs.pingcap.com/zh/tidbcloudlake/fuse-statistic.md): 注意：此函数已弃用。请改用 SHOW STATISTICS 查看表统计信息。
+      - [FUSE_STATISTIC](https://docs.pingcap.com/zh/tidbcloudlake/fuse-statistic.md): 此函数已弃用。请改用 SHOW STATISTICS 查看表统计信息。
       - [FUSE_TAG](https://docs.pingcap.com/zh/tidbcloudlake/fuse-tag.md): 返回表的快照标签。有关快照标签的更多信息，请参见 Snapshot Tags。
       - [FUSE_TIME_TRAVEL_SIZE](https://docs.pingcap.com/zh/tidbcloudlake/fuse-time-travel-size.md): 计算表的历史数据（用于 Time Travel）的存储大小。
       - [FUSE_VIRTUAL_COLUMN](https://docs.pingcap.com/zh/tidbcloudlake/fuse-virtual-column.md): 返回表的最新或指定快照的虚拟列信息。详情参见 Virtual Column。

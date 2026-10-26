@@ -1,0 +1,1244 @@
+# TiDB Cloud Lake
+
+> TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データの処理、AI 指向のワークフローをサポートします。
+
+## はじめに
+
+- [概要](https://docs.pingcap.com/ja/tidbcloudlake/lake-overview.md): TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データ処理、AI 指向のワークフローをサポートします。
+- [クイックスタート](https://docs.pingcap.com/ja/tidbcloudlake/lake-quick-start.md): 3 つのステップで TiDB Cloud Lake を使い始めましょう。サインアップし、Lake を初期化し、Lake ワークスペースを確認します。
+- [Lake PoC ガイド](https://docs.pingcap.com/ja/tidbcloudlake/lake-poc.md): スキーママッピング、クラスターキー、reclustering、ブロックサイズ、マテリアライズドビューを使用して、代表的なワークロードで TiDB Cloud Lake を評価します。
+
+## ガイド
+
+- 接続
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/connection-overview.md): TiDB Cloud Lake は、さまざまなユースケースに対応するために複数の接続方法をサポートしています。
+  - SQL クライアント
+    - [LakeSQL](https://docs.pingcap.com/ja/tidbcloudlake/connect-using-lakesql.md): LakeSQL は TiDB Cloud Lake 向けに特別に設計されたコマンドラインツールです。これを使用すると、ユーザーは TiDB Cloud Lake への接続を確立し、CLI ウィンドウから直接クエリを実行できます。
+  - ドライバー
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/driver-overview.md): TiDB Cloud Lake への接続に使用できる公式ドライバーの概要。
+    - [Golang](https://docs.pingcap.com/ja/tidbcloudlake/connect-using-golang.md): このページでは、Golang を使用して TiDB Cloud Lake に接続する方法について説明します。
+    - [Java](https://docs.pingcap.com/ja/tidbcloudlake/connect-using-java.md): このページでは、Java を使用して TiDB Cloud Lake に接続する方法について説明します。
+    - [Node.js](https://docs.pingcap.com/ja/tidbcloudlake/connect-using-node-js.md): このページでは、Node.js を使用して TiDB Cloud Lake に接続する方法について説明します。
+    - [Python](https://docs.pingcap.com/ja/tidbcloudlake/connect-using-python.md): このページでは、Python を使用して TiDB Cloud Lake に接続する方法について説明します。
+    - [Rust](https://docs.pingcap.com/ja/tidbcloudlake/connect-using-rust.md): このページでは、Rust を使用して TiDB Cloud Lake に接続する方法について説明します。
+  - AI ツール
+    - [外部 AI 関数](https://docs.pingcap.com/ja/tidbcloudlake/external-ai-functions.md): TiDB Cloud Lake を独自のインフラストラクチャに接続して、強力な AI/ML 機能を構築します。外部関数を使用すると、データの安全性を保ちながら、カスタムモデルのデプロイ、GPU アクセラレーションの活用、あらゆる ML フレームワークとの統合が可能になります。
+    - [MCP クライアント連携](https://docs.pingcap.com/ja/tidbcloudlake/mcp-client-integration.md): MCP 対応の AI ツールを TiDB Cloud Lake に接続し、安全なデータ探索のためにセッションサンドボックス保護を使用する方法を学びます。
+    - [MCP Server](https://docs.pingcap.com/ja/tidbcloudlake/mcp-server.md): transport、安全制御、利用可能なツールを含め、TiDB Cloud Lake MCP サーバーのインストール、実行、設定方法を学びます。
+  - 可視化
+    - [Tableau](https://docs.pingcap.com/ja/tidbcloudlake/tableau.md): Tableau は、データを使って問題を解決する方法を変革するビジュアル分析プラットフォームです。lake-jdbc ドライバーを使用することで、Tableau の Other Databases (JDBC) インターフェースを介して TiDB Cloud Lake に接続できます。
+    - [Deepnote](https://docs.pingcap.com/ja/tidbcloudlake/deepnote.md): Deepnote を使うと、友人や同僚とリアルタイムで、1 か所で簡単にデータサイエンスプロジェクトに取り組むことができ、アイデアや分析をより速くプロダクトへとつなげられます。Deepnote はブラウザ向けに構築されているため、あらゆるプラットフォーム（Windows、Mac、Linux、または Chromebook）で利用できます。ダウンロードは不要で、更新は毎日自動的に提供されます。すべての変更は即座に保存されます。
+    - [Jupyter Notebook](https://docs.pingcap.com/ja/tidbcloudlake/jupyter-notebook.md): SQLAlchemy を使用して Jupyter Notebook を TiDB Cloud Lake に接続し、クエリを実行して、pandas でクエリ結果を可視化する方法を学びます。
+    - [Superset](https://docs.pingcap.com/ja/tidbcloudlake/superset.md): Apache Superset に TiDB Cloud Lake SQLAlchemy dialect をインストールし、Superset を TiDB Cloud Lake の Warehouse に接続する方法を学びます。
+  - ネットワークアクセス
+    - [AWS PrivateLink による接続](https://docs.pingcap.com/ja/tidbcloudlake/connect-with-aws-privatelink.md): 主要なクラウドが提供する PrivateLink スタイルのプライベートエンドポイント（AWS PrivateLink、Azure Private Link、Google Private Service Connect など）を使用すると、自身のネットワーク境界内のプライベート IP アドレスを通じて TiDB Cloud Lake にアクセスできるため、トラフィックがパブリックインターネットを経由する必要がありません。これにより、データセット、認証情報、管理操作はクラウドプロバイダーのバックボーン上にとどまり、既存のネットワークポリシーにも適合します。
+    - [Alibaba Cloud PrivateLink による接続](https://docs.pingcap.com/ja/tidbcloudlake/connect-with-alibaba-cloud-privatelink.md): Alibaba Cloud のプライベートエンドポイントを設定し、そのカスタムドメイン名を有効化して、TiDB Cloud Lake へのプライベート接続を検証します。
+- リソース管理
+  - [Dashboards](https://docs.pingcap.com/ja/tidbcloudlake/dashboards.md): ダッシュボードは、scorecard、pie chart、bar chart、line chart など、さまざまな種類のチャートを通じてクエリ結果を表示するために使用されます。これらのチャートはクエリ結果から生成されます。Worksheet でクエリを実行した後、そのクエリ結果に基づいてチャートを作成できます。ダッシュボードを更新すると、チャートに対応するクエリを再実行して、最新の結果でチャートを更新できます。
+  - [タスクフロー](https://docs.pingcap.com/ja/tidbcloudlake/task-flow.md): タスクフロー (Task Flow) は TiDB Cloud Lake に組み込まれたワークフローオーケストレーション機能です。これにより、SQL ベースのデータパイプラインを有向非巡回グラフ (DAG) として定義、スケジュール設定、監視できます。
+  - [Warehouses](https://docs.pingcap.com/ja/tidbcloudlake/warehouse.md): Warehouse は TiDB Cloud Lake の重要なコンポーネントです。Warehouse は CPU、メモリ、ローカルキャッシュを含むコンピュートリソースのセットを表します。SQL タスクを実行するには Warehouse を実行する必要があります。
+  - [Worksheets](https://docs.pingcap.com/ja/tidbcloudlake/worksheet.md): TiDB Cloud Lake の Worksheets は、SQL ステートメントの整理、実行、保存に使用されます。また、組織内の他のユーザーと共有することもできます。
+- データ統合
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/data-integration-overview.md): TiDB Cloud Lake の Data Integration 機能は、外部システムから TiDB Cloud Lake にデータをインポートまたは同期するための、ビジュアルでノーコードのインターフェースを提供します。
+  - データソース
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/data-sources.md): TiDB Cloud Lake のデータソースは、外部システムへの接続を表します。外部システムにアクセスするために必要な認証情報と接続の詳細を保存し、複数の統合タスクや通知シナリオで再利用できます。
+    - [Amazon S3 - Credentials](https://docs.pingcap.com/ja/tidbcloudlake/aws-credentials.md): このページでは、`Amazon S3 - Credentials` データソースを作成する方法について説明します。このデータソースには、Amazon S3 へのアクセスに必要な認証情報が保存され、複数の S3 統合タスクで再利用できます。
+    - [Amazon SQS (S3) - IAM ロール](https://docs.pingcap.com/ja/tidbcloudlake/amazon-sqs-s3-iam-role.md): TiDB Cloud Lake で "Amazon SQS (S3) - IAM Role" データソースを作成する方法を説明します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [MySQL - Credentials](https://docs.pingcap.com/ja/tidbcloudlake/mysql-credentials.md): このページでは、`MySQL - Credentials` データソースを作成する方法について説明します。このデータソースには、MySQL へのアクセスに必要な接続情報が保存され、複数の MySQL 統合タスクで再利用できます。
+    - [PostgreSQL - Credentials](https://docs.pingcap.com/ja/tidbcloudlake/postgresql-credentials.md): このページでは、`PostgreSQL - Credentials` データソースを作成する方法について説明します。このデータソースには、PostgreSQL へのアクセスに必要な接続情報が保存され、複数の PostgreSQL 統合タスクで再利用できます。
+    - [FeiShuBot](https://docs.pingcap.com/ja/tidbcloudlake/feishubot.md): このページでは、`FeiShuBot` データソースを作成する方法について説明します。このデータソースには、タスク失敗通知などのシナリオで使用する FeiShu bot の webhook とメッセージテンプレートが保存されます。
+    - [Kafka - 認証情報](https://docs.pingcap.com/ja/tidbcloudlake/kafka-credentials.md): Kafka 接続情報を再利用できるように保存するための「Kafka - Credentials」データソースを作成します。これは Kafka Consumer 統合タスクで使用されます。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB データソース](https://docs.pingcap.com/ja/tidbcloudlake/tidb-data-source.md): TiDB Cloud Lake で TiDB データソースを設定するためのガイド。ストレージおよび認証の設定を含みます。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - 統合タスク
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/integration-tasks.md): このページでは、TiDB Cloud Lake における統合タスクの概要を説明します。統合タスクは、ソース設定、ターゲットテーブル、実行時パラメータなど、外部ソースから TiDB Cloud Lake へのデータフローの定義に使用されます。
+    - [タスク管理](https://docs.pingcap.com/ja/tidbcloudlake/task-management.md): このページでは、タスク作成フロー、開始および停止の動作、タスクの状態、実行履歴など、データ統合タスクの一般的な操作について説明します。ソース固有の設定については、各タスクの詳細ガイドを参照してください。
+    - [Amazon S3 統合タスク](https://docs.pingcap.com/ja/tidbcloudlake/integrate-with-amazon-s3.md): Amazon S3 データ統合を使用すると、S3 バケットから TiDB Cloud Lake にファイルをインポートできます。CSV、Parquet、NDJSON のファイル形式をサポートし、一度限りのインポートまたは新しいファイルを自動的にポーリングする継続的な取り込みを選択できます。
+    - [Amazon SQS (S3) 統合タスク](https://docs.pingcap.com/ja/tidbcloudlake/integrate-with-amazon-sqs-s3.md): SQS キューから S3 オブジェクト作成イベントを消費し、対応するオブジェクトデータを TiDB Cloud Lake に書き込む Amazon SQS (S3) 統合タスクを作成する方法を学びます。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [MySQL 統合タスク](https://docs.pingcap.com/ja/tidbcloudlake/integrate-with-mysql.md): MySQL データ統合を使用すると、MySQL データベースから TiDB Cloud Lake にデータをリアルタイムで同期できます。完全なスナップショットのロード、継続的な Change Data Capture (CDC)、またはその両方の組み合わせをサポートしています。
+    - [PostgreSQL 統合タスク](https://docs.pingcap.com/ja/tidbcloudlake/integrate-with-postgresql.md): このページでは、PostgreSQL データベースから TiDB Cloud Lake にデータを同期する PostgreSQL 統合タスクを作成する方法について説明します。
+    - [Kafka Consumer 統合タスク](https://docs.pingcap.com/ja/tidbcloudlake/integrate-with-kafka.md): Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（テナント Stage）に保存する Kafka Consumer タスクを作成します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB 統合タスク](https://docs.pingcap.com/ja/tidbcloudlake/integrate-with-tidb.md): フル Snapshot ロード、継続的な CDC、またはその両方を使用して、TiDB クラスターから TiDB Cloud Lake にデータをレプリケートします。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- データのロード
+  - stage の操作
+    - [stage の概要](https://docs.pingcap.com/ja/tidbcloudlake/stage-overview.md): stage は、データファイルが存在する仮想的な場所です。stage 内のファイルは直接クエリすることも、テーブルにロードすることもできます。あるいは、テーブルからデータをファイルとして stage にアンロードすることもできます。
+    - [stage へのアップロード](https://docs.pingcap.com/ja/tidbcloudlake/upload-to-stage.md): TiDB Cloud Lake では、stage に対する 2 つのファイルアップロード方法として、PRESIGN と PUT/GET コマンドを推奨しています。これらの方法により、クライアントとストレージ間でデータを直接転送できるため、中継を不要にし、TiDB Cloud Lake とストレージ間のトラフィックを削減してコストを節約できます。
+  - ファイルからのロード
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/load-from-files.md): TiDB Cloud Lake は、データファイルをテーブルにロードするためのシンプルで強力なコマンドを提供します。ほとんどの操作は、1 つのコマンドだけで実行できます。
+    - [stage からのロード](https://docs.pingcap.com/ja/tidbcloudlake/load-from-stage.md): TiDB Cloud Lake では、user stage または internal/external stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず LakeSQL を使用してファイルを stage にアップロードし、その後 COPY INTO コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは TiDB Cloud Lake がサポートする形式である必要があり、そうでない場合はデータをインポートできません。TiDB Cloud Lake がサポートするファイル形式の詳細については、入出力ファイル形式を参照してください。
+    - [バケットからのロード](https://docs.pingcap.com/ja/tidbcloudlake/load-from-bucket.md): データファイルが Amazon S3 などのオブジェクトストレージのバケットに保存されている場合、COPY INTO コマンドを使用してそれらを TiDB Cloud Lake に直接ロードできます。ファイルは TiDB Cloud Lake がサポートする形式である必要があり、そうでない場合はデータをインポートできないことに注意してください。TiDB Cloud Lake がサポートするファイル形式の詳細については、入出力ファイル形式を参照してください。
+    - [ローカルファイルからのロード](https://docs.pingcap.com/ja/tidbcloudlake/load-from-local-file.md): ローカルのデータファイルを TiDB Cloud Lake にロードする前に stage やバケットへアップロードするのは、不要な場合があります。代わりに、TiDB Cloud Lake ネイティブの CLI ツールである LakeSQL を使用して、データを直接インポートできます。これによりワークフローが簡素化され、ストレージ料金を節約できる場合があります。
+    - [リモートファイルからのロード](https://docs.pingcap.com/ja/tidbcloudlake/load-from-remote-file.md): リモートファイルから TiDB Cloud Lake にデータをロードするには、COPY INTO コマンドを使用できます。このコマンドを使用すると、リモートファイルを含むさまざまなソースから TiDB Cloud Lake に簡単にデータをコピーできます。COPY INTO では、ソースファイルの場所、ファイル形式、そのほかの関連パラメータを指定して、インポート処理を要件に合わせて調整できます。ファイルは TiDB Cloud Lake でサポートされている形式である必要があり、そうでない場合はデータをインポートできません。TiDB Cloud Lake でサポートされているファイル形式の詳細については、入出力ファイル形式を参照してください。
+  - プラットフォームを使用したロード
+    - [dbt を使用したロード](https://docs.pingcap.com/ja/tidbcloudlake/load-with-dbt.md): dbt は、より高品質な結果を生み出しながら、より多くの作業をこなせるようにする変換ワークフローです。dbt を使用すると、分析コードをモジュール化して一元管理できるほか、ソフトウェアエンジニアリングのワークフローで一般的なガードレールをデータチームに提供できます。データモデルでコラボレーションし、バージョン管理を行い、クエリを安全に本番へデプロイする前にテストとドキュメント化を実施できます。さらに、監視と可視性も備えています。
+  - 半構造化データのロード
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/load-semi-structured-data.md): 半構造化データには、厳密なデータベース構造には従わない一方で、意味要素を分離するためのタグやマーカーが含まれます。TiDB Cloud Lake は、必要に応じてその場でのデータ変換を行いながら、`COPY INTO` コマンドを使用してこれらのフォーマットを効率的にロードします。
+    - [Parquet のロード](https://docs.pingcap.com/ja/tidbcloudlake/load-parquet.md): Parquet は、データ分析で一般的に使用されるカラム指向のストレージ形式です。複雑なデータ構造をサポートするように設計されており、大規模なデータセットの処理に効率的です。
+    - [CSV のロード](https://docs.pingcap.com/ja/tidbcloudlake/load-csv.md): CSV (Comma Separated Values) は、スプレッドシートやデータベースのような表形式データを保存するためのシンプルなファイル形式です。CSV ファイルはプレーンテキストファイルであり、データを表形式で保持します。各行は改行で表され、カラムは区切り文字で区切られます。
+    - [TSV のロード](https://docs.pingcap.com/ja/tidbcloudlake/load-tsv.md): TSV（Tab Separated Values）は、スプレッドシートやデータベースのような表形式データを保存するためのシンプルなファイル形式です。TSV ファイル形式は CSV と非常によく似ており、レコードは改行で区切られ、各フィールドはタブで区切られます。次の例は、2 つのレコードを含む TSV ファイルを示しています。
+    - [NDJSON のロード](https://docs.pingcap.com/ja/tidbcloudlake/load-ndjson.md): NDJSON は JSON を基にした形式であり、JSON の厳密なサブセットです。各行には、それぞれ独立した有効な JSON オブジェクトが含まれている必要があります。
+    - [ORC のロード](https://docs.pingcap.com/ja/tidbcloudlake/load-orc.md): ORC (Optimized Row Columnar) は、データ分析で一般的に使用されるカラムナストレージ形式です。
+    - [Avro のロード](https://docs.pingcap.com/ja/tidbcloudlake/load-avro.md): Apache Avro™ はレコードデータ向けの代表的なシリアライズ形式であり、ストリーミングデータパイプラインで最初に選ばれる形式です。
+  - クエリと変換
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/query-stage.md): TiDB Cloud Lake は、データを最初にテーブルへロードせずに、stage 上のファイルを直接クエリできます。任意の stage タイプ（user、internal、external）のファイル、またはオブジェクトストレージや HTTPS URL を直接クエリできます。ロードの前後におけるデータの確認、検証、変換に最適です。
+    - [Parquet ファイルのクエリ](https://docs.pingcap.com/ja/tidbcloudlake/query-parquet-files-in-stage.md): Parquet ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
+    - [CSV ファイルのクエリ](https://docs.pingcap.com/ja/tidbcloudlake/query-csv-files-in-stage.md): CSV ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
+    - [TSV ファイルのクエリ](https://docs.pingcap.com/ja/tidbcloudlake/query-tsv-files-in-stage.md): TSV ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
+    - [NDJSON ファイルのクエリ](https://docs.pingcap.com/ja/tidbcloudlake/query-ndjson-files-in-stage.md): TiDB Cloud Lake では、stage に保存された NDJSON ファイルを、事前にデータをテーブルへロードすることなく直接クエリできます。この方法は、データ探索、ETL 処理、アドホック分析のシナリオで特に有用です。
+    - [Avro ファイルのクエリ](https://docs.pingcap.com/ja/tidbcloudlake/query-avro-files-in-stage.md): TiDB Cloud Lake は、stage から直接 Avro ファイルをクエリするための包括的なサポートを提供します。これにより、データを最初にテーブルへロードすることなく、柔軟にデータの探索や変換を行えます。
+    - [stage 内の ORC ファイルのクエリ](https://docs.pingcap.com/ja/tidbcloudlake/query-staged-orc-files-in-stage.md): このチュートリアルでは、ORC 形式の Iris データセットをダウンロードし、Amazon S3 バケットにアップロードし、external stage を作成して、ORC ファイルから直接データをクエリする手順を説明します。
+    - [ロード時のデータ変換](https://docs.pingcap.com/ja/tidbcloudlake/transform-data-on-load.md): TiDB Cloud Lake の `COPY INTO` コマンドでは、ロード処理中にデータ変換を実行できます。これにより、基本的な変換を取り込んで ETL パイプラインを簡素化し、一時テーブルが不要になります。
+    - [Schema Evolution](https://docs.pingcap.com/ja/tidbcloudlake/schema-evolution.md): COPY INTO を使用したデータロード時に、テーブルスキーマを自動的に進化させます。
+  - 継続的データパイプライン
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/continuous-data-pipelines.md): TiDB Cloud Lake で 2 つの基本機能を使って、エンドツーエンドの change data capture (CDC) フローを構築します。
+    - [Stream によるデータの追跡と変換](https://docs.pingcap.com/ja/tidbcloudlake/track-and-transform-data-via-streams.md): TiDB Cloud Lake のストリームは常時稼働する変更テーブルであり、コミットされたすべての INSERT、UPDATE、DELETE は、消費されるまでキャプチャされます。このページは簡潔にまとめています。まず概要をすばやく確認し、その後に実際の出力を含む 1 つのラボで、ストリームの動作を確認できます。
+    - [Task によるデータロードの自動化](https://docs.pingcap.com/ja/tidbcloudlake/automate-data-loading-with-tasks.md): Tasks は SQL をラップし、TiDB Cloud Lake がスケジュールに従って、または条件が満たされたときに実行できるようにします。CREATE TASK で定義する際は、以下の設定項目を考慮してください。
+- データのアンロード
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/unload-data.md): `COPY INTO` コマンドを使用して、TiDB Cloud Lake からさまざまなファイル形式およびストレージ保存先にデータをアンロードする方法を学びます。
+  - [Parquet ファイルのアンロード](https://docs.pingcap.com/ja/tidbcloudlake/unload-parquet-file.md): parquet ファイルをアンロードする方法について説明します。
+  - [CSV ファイルのアンロード](https://docs.pingcap.com/ja/tidbcloudlake/unload-csv-file.md): CSV ファイルをアンロードする方法について説明します。
+  - [TSV ファイルのアンロード](https://docs.pingcap.com/ja/tidbcloudlake/unload-tsv-file.md): TSV ファイルをアンロードする方法について説明します。
+  - [NDJSON ファイルのアンロード](https://docs.pingcap.com/ja/tidbcloudlake/unload-ndjson-file.md): NDJSON ファイルをアンロードする方法について説明します。
+  - [Lance データセットのアンロード](https://docs.pingcap.com/ja/tidbcloudlake/unload-lance-dataset.md): Lance データセットをアンロードする方法について説明します。
+- マルチモーダルデータ分析
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/multimodal-data-analytics.md): CityDrive Intelligence は、すべての走行を動画として記録します。バックグラウンド処理ツールは動画ストリームをキーフレーム画像に分割し、各画像から豊富なマルチモーダル情報を抽出して `video_id` ごとに保存します。これらのシグナルには、リレーショナルメタデータ、JSON マニフェスト、行動タグ、ベクトル埋め込み、GPS トレースが含まれます。
+  - [SQL 分析](https://docs.pingcap.com/ja/tidbcloudlake/sql-analytics.md): シナリオ: CityDrive は、すべてのダッシュカム記録を共有リレーショナルテーブルにステージングします。このリレーショナルデータ（例: 動画メタデータ、イベントタグ）は、生のダッシュカム動画のキーフレームからバックグラウンド処理パイプラインによって抽出されます。
+  - [JSON と検索](https://docs.pingcap.com/ja/tidbcloudlake/json-search.md): シナリオ: CityDrive は、抽出された各フレームにメタデータ JSON ペイロードを付加します。この JSON データはバックグラウンドツールによって動画のキーフレームから抽出され、シーン認識や物体検出のような豊富な非構造化情報を含みます。これを外部システムに複製することなく、Elasticsearch スタイルの構文で TiDB Cloud Lake 内の JSON をフィルタリングする必要があります。
+  - [ベクトル検索](https://docs.pingcap.com/ja/tidbcloudlake/vector-search-guide.md): シナリオ: CityDrive は各フレームの埋め込みを TiDB Cloud Lake に直接保持しています。これらのベクトル埋め込みは、動画キーフレームに対して AI モデルが推論を実行し、視覚的な意味特徴を捉えた結果です。意味的類似検索（「これに似たフレームを探す」）は、従来の SQL 分析と並行して実行でき、別個のベクトルサービスは不要です。
+  - [地理空間分析](https://docs.pingcap.com/ja/tidbcloudlake/geo-analytics.md): CityDrive は、フラグ付きフレームごとに高精度な GPS 位置情報と信号までの距離を記録します。この地理空間データはダッシュカムの GPS モジュールに由来し、動画キーフレームのタイムスタンプと正確に対応付けられています。運用チームは「これはどこで起きたのか？」という問いに、SQL だけで答えられます。
+  - [Lakehouse ETL](https://docs.pingcap.com/ja/tidbcloudlake/lakehouse-etl.md): シナリオ: CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、Warehouse の基盤を形成します。チームは、単一の COPY パイプラインを通じて TiDB Cloud Lake の共有テーブルをリフレッシュしたいと考えています。
+- パフォーマンスチューニング
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/performance-optimization.md): TiDB Cloud Lake は、データクラスタリング、結果キャッシュ、用途別インデックスなどのさまざまなインデックス技術を通じて、主にクエリパフォーマンスを高速化し、クエリ応答時間を大幅に改善します。
+  - [クラスターキー](https://docs.pingcap.com/ja/tidbcloudlake/cluster-key-performance.md): クラスターキーはデータを自動的に整理し、大規模テーブルのクエリ性能を大幅に向上させます。TiDB Cloud Lake はバックグラウンドですべてのクラスタリング操作をシームレスかつ継続的に管理するため、クラスターキーを定義するだけで、残りは TiDB Cloud Lake が処理します。
+  - [仮想カラム](https://docs.pingcap.com/ja/tidbcloudlake/virtual-column.md): 仮想カラムは、VARIANT カラムに格納された半構造化データに対するクエリを自動的に高速化します。この機能は、JSON データアクセスに対して設定不要のパフォーマンス最適化を提供します。
+  - [集計インデックス](https://docs.pingcap.com/ja/tidbcloudlake/aggregating-index.md): 集計インデックスは、集計結果を事前計算して保存することで分析クエリを大幅に高速化し、一般的な分析処理のためにテーブル全体をスキャンする必要をなくします。
+  - [Full-Text Index](https://docs.pingcap.com/ja/tidbcloudlake/full-text-index.md): Full-text indexes（転置インデックス）は、用語をドキュメントに対応付けることで、大規模なドキュメントコレクション全体に対する超高速なテキスト検索を自動的に実現し、低速なテーブルスキャンを不要にします。
+  - [Ngram インデックス](https://docs.pingcap.com/ja/tidbcloudlake/ngram-index.md): Ngram インデックスは、ワイルドカード (`%`) を含む `LIKE` 演算子を使ったパターンマッチングクエリを高速化し、フルテーブルスキャンなしで高速な部分文字列検索を可能にします。
+  - [クエリ結果キャッシュ](https://docs.pingcap.com/ja/tidbcloudlake/query-result-cache.md): TiDB Cloud Lake は、有効化されている場合、実行された各クエリの結果をキャッシュして永続化します。これにより、回答を得るまでの時間を大幅に短縮できます。
+- セキュリティと信頼性
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/security-reliability.md): TiDB Cloud Lake は、データのライフサイクル全体を通じて保護するエンタープライズグレードのセキュリティ機能と信頼性機能を提供します。データにアクセスできるユーザーの制御から、ネットワーク脅威への対策、運用上のエラーからのリカバリまで、TiDB Cloud Lake の多層的なセキュリティアプローチにより、データ整合性、コンプライアンス、ビジネス継続性の管理を支援します。
+  - アクセス制御
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/access-control.md): データベース、テーブル、ビューなどのデータオブジェクトに対する権限を管理するために、Role-Based Access Control (RBAC) と Discretionary Access Control (DAC) の両方を使用する TiDB Cloud Lake のアクセス制御について説明します。
+    - [権限](https://docs.pingcap.com/ja/tidbcloudlake/privileges.md): 権限とは、ある操作を実行するための許可です。ユーザーが TiDB Cloud Lake 内で特定の操作を実行するには、対応する権限が必要です。たとえば、テーブルをクエリするには、そのテーブルに対する SELECT 権限が必要です。同様に、stage 内のデータセットを読み取るには、READ 権限が必要です。
+    - [ロール](https://docs.pingcap.com/ja/tidbcloudlake/roles.md): TiDB Cloud Lake のロールは、権限管理を簡素化するうえで重要な役割を果たします。複数のユーザーに同じ権限セットが必要な場合、権限を個別に付与するのは煩雑になることがあります。ロールを使用すると、権限セットをロールに割り当て、そのロールを複数のユーザーに簡単に割り当てることができます。
+    - [Ownership](https://docs.pingcap.com/ja/tidbcloudlake/ownership.md): Ownership は、TiDB Cloud Lake 内の特定のデータオブジェクト（現在はデータベース、テーブル、UDF、stage を含む）に対して、あるロールが持つ排他的な権利と責任を示す特別な権限です。
+  - データ保護ポリシー
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/data-protection-policies.md): 保存された値を変更せずに機密情報を保護する、マスキングポリシーと行アクセスポリシーについて学びます。
+    - [マスキングポリシー](https://docs.pingcap.com/ja/tidbcloudlake/masking-policy.md): マスキングポリシーは、クエリ実行時にカラム値を動的に変換することで機密データを保護します。これにより、機密情報へのロールベースのアクセス制御が可能になり、権限のあるユーザーには実データが表示され、それ以外のユーザーにはマスクされた値が表示されます。
+    - [行アクセスポリシー](https://docs.pingcap.com/ja/tidbcloudlake/row-access-policy.md): 行アクセスポリシーは、クエリ時にテーブルの行をフィルタリングすることでデータを保護します。一元管理された行レベルの述語を一度定義してテーブルにアタッチすることで、ユーザーにはポリシーを満たす行だけが表示されるようにできます。
+  - [監査証跡](https://docs.pingcap.com/ja/tidbcloudlake/audit-trail.md): TiDB Cloud Lake のシステム履歴テーブルは、データベースアクティビティの詳細な記録を自動的に取得し、コンプライアンス対応とセキュリティ監視のための完全な監査証跡を提供します。
+  - [ネットワークポリシー](https://docs.pingcap.com/ja/tidbcloudlake/network-policy.md): ネットワークポリシーは、クライアント IP に基づいて TiDB Cloud Lake にログインできるユーザーを制御します。認証情報が正しくても、IP がポリシーを満たさない場合は接続要求が拒否されるため、ユーザー名とパスワードに加えて追加のセキュリティレイヤーを提供します。
+  - [パスワードポリシー](https://docs.pingcap.com/ja/tidbcloudlake/password-policy.md): パスワードポリシーは、TiDB Cloud Lake のパスワードにどの程度の強度を求めるか（長さ、文字種、履歴、再試行回数の上限など）と、どのくらいの頻度で変更できるかを定義します。これにより、すべての CREATE USER とパスワード変更に対して一貫したガードレールを設けられます。属性の完全な一覧については、パスワードポリシー属性を参照してください。
+  - [AWS IAM Role による認証](https://docs.pingcap.com/ja/tidbcloudlake/authenticate-with-aws-iam-role.md): クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、TiDB Cloud Lake はアクセスキーを直接扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
+  - [コンプライアンスとセキュリティ](https://docs.pingcap.com/ja/tidbcloudlake/compliance-security.md): TiDB Cloud Lake はセキュリティを中核として構築されており、複数のセキュリティレイヤー、暗号化標準、コンプライアンス認証を通じて、お客様のデータを包括的に保護します。
+  - [Fail-Safe](https://docs.pingcap.com/ja/tidbcloudlake/fail-safe.md): Fail-Safe は、オブジェクトストレージから失われた、または誤って削除されたデータのリカバリを目的とした仕組みを指します。
+  - [運用エラーからのリカバリ](https://docs.pingcap.com/ja/tidbcloudlake/recovery-from-operational-errors.md): このガイドでは、TiDB Cloud Lake における一般的な運用エラーからリカバリするための手順を段階的に説明します。
+- 管理
+  - [使用状況の監視](https://docs.pingcap.com/ja/tidbcloudlake/monitor-usage.md): TiDB Cloud Lake は、プラットフォーム上でのあなたおよび組織メンバーの使用状況を包括的に把握できるようにする監視機能を提供します。Monitor ページにアクセスするには、ホームページのサイドバーメニューで Monitor をクリックします。このページには、以下のタブが含まれています。
+  - [データライフサイクル](https://docs.pingcap.com/ja/tidbcloudlake/data-lifecycle.md): TiDB Cloud Lake は、使い慣れた Data Definition Language (DDL) および Data Manipulation Language (DML) コマンドをサポートしており、データベースを簡単に管理できます。データの整理、保存、クエリ、変更、削除のいずれを行う場合でも、TiDB Cloud Lake は一般的な業界標準に従っています。
+  - [データリネージ](https://docs.pingcap.com/ja/tidbcloudlake/data-lineage.md): TiDB Cloud Lake でデータリネージを有効化して探索する方法を学びます。
+  - [データ保護](https://docs.pingcap.com/ja/tidbcloudlake/data-protection.md): TiDB Cloud Lake の Continuous Data Protection (CDP) は、ミス、悪意のある操作、ソフトウェアの問題からデータを安全に保つための使いやすい機能を提供します。これにより、データが意図的または偶発的に変更、消失、破損した場合でも、常にリカバリできることを保証します。
+  - [データのパージとリサイクル](https://docs.pingcap.com/ja/tidbcloudlake/data-purge-and-recycle.md): TiDB Cloud Lake では、`DROP`、`TRUNCATE`、または `DELETE` コマンドを実行しても、データはすぐには削除されません。これにより、TiDB Cloud Lake のタイムトラベル機能が有効になり、データの過去の状態にアクセスできます。ただし、この方式では、これらの操作の後にストレージ領域が自動的に解放されません。
+- [料金と請求](https://docs.pingcap.com/ja/tidbcloudlake/pricing-billing.md): TiDB Cloud Lake の料金モデルと請求の詳細を理解します。
+- [トラブルシューティング](https://docs.pingcap.com/ja/tidbcloudlake/troubleshooting.md): このページでは、TiDB Cloud Lake における一般的な問題のトラブルシューティング方法について説明します。
+
+## チュートリアル
+
+- データの取り込みとストリーミング
+  - [Vector を使用した JSON ログの取り込み (Cloud)](https://docs.pingcap.com/ja/tidbcloudlake/ingest-json-logs-with-vector-cloud.md): このチュートリアルでは、ローカルでのログ生成をシミュレートし、Vector を使用して収集し、S3 に保存し、スケジュールされたタスクを使用して TiDB Cloud Lake への取り込みを自動化します。
+- データ移行
+  - [Snowflake からの移行](https://docs.pingcap.com/ja/tidbcloudlake/migrate-from-snowflake.md): データを Amazon S3 にエクスポートし、それを TiDB Cloud Lake のテーブルにロードすることで、Snowflake から TiDB Cloud Lake にデータを移行します。
+
+## リファレンス
+
+- SQL リファレンス
+  - [概要](https://docs.pingcap.com/ja/tidbcloudlake/sql-statements-overview.md): これらのトピックでは、TiDB Cloud Lake のさまざまな SQL コマンドに関するリファレンス情報を提供します。
+  - SQL 全般
+    - データ型
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/data-types.md): TiDB Cloud Lake は強い型付けを持つカラムにデータを格納します。このページでは、サポートされるデータ型、自動変換および明示的変換の仕組み、NULL 値やデフォルト値の扱いについて要約します。
+      - [配列](https://docs.pingcap.com/ja/tidbcloudlake/array.md): 定義されたデータ型の配列。
+      - [Binary](https://docs.pingcap.com/ja/tidbcloudlake/binary.md): 生のバイト列を格納する可変長シーケンス。
+      - [Bitmap](https://docs.pingcap.com/ja/tidbcloudlake/bitmap.md): BITMAP は符号なし 64 ビット整数のメンバーシップ情報を格納し、高速な集合演算（count、union、intersection など）をサポートします。SELECT 文ではバイナリ blob として表示されるため、値を解釈するには Bitmap Functions を使用してください。
+      - [Boolean](https://docs.pingcap.com/ja/tidbcloudlake/boolean.md): 基本的な論理データ型。
+      - [日付と時刻](https://docs.pingcap.com/ja/tidbcloudlake/date-time.md): TiDB Cloud Lake の日付および時刻データ型は、さまざまな SQL 標準との標準化と互換性をサポートしており、他のデータベースシステムから移行するユーザーにとって扱いやすくなっています。
+      - [Decimal](https://docs.pingcap.com/ja/tidbcloudlake/decimal.md): Decimal 型は、高精度の数値を保存および操作するための型です。
+      - [Geospatial](https://docs.pingcap.com/ja/tidbcloudlake/geospatial.md): TiDB Cloud Lake は 2 つのデータ型を通じて空間データを格納します。
+      - [Interval](https://docs.pingcap.com/ja/tidbcloudlake/interval.md): INTERVAL は、自然言語テキスト (`'1 year 2 months'`、`'3 days ago'`) またはマイクロ秒数を表す整数として記述できる期間を表します。TiDB Cloud Lake は、千年単位からマイクロ秒単位までの単位をサポートし、interval、日付、timestamp に対する算術演算を可能にします。
+      - [Map](https://docs.pingcap.com/ja/tidbcloudlake/map.md): MAP(K, V) は、キーと値のペアを内部的に ARRAY(TUPLE(key, value)) として格納します。キー型 K は事前に定義する必要があり、Boolean、numeric、decimal、string、date、timestamp を指定できます。キーは NULL 不可かつ一意である必要があり、値にはネストした構造を含む任意の型を使用できます。マップ式を構築するには、マップリテラル ({key value}) または MAP(keys, values) 関数を使用します。
+      - [Numeric](https://docs.pingcap.com/ja/tidbcloudlake/numeric.md): 基本的な数値データ型。
+      - [String](https://docs.pingcap.com/ja/tidbcloudlake/string.md): 基本的な String データ型。
+      - [Tuple](https://docs.pingcap.com/ja/tidbcloudlake/tuple.md): Tuple は、順序付けられた不変の型のコレクションです。
+      - [Variant](https://docs.pingcap.com/ja/tidbcloudlake/variant.md): VARIANT は、NULL、BOOLEAN、NUMBER、STRING、ARRAY、OBJECT を含む任意の型の値を格納できます。また、内部の値は任意のレベルでネストした構造にできるため、さまざまなデータを柔軟に格納できます。VARIANT は JSON とも呼ばれます。詳細は JSON の Web サイトを参照してください。
+      - [Vector](https://docs.pingcap.com/ja/tidbcloudlake/vector.md): VECTOR データ型は、32 ビット浮動小数点数の多次元配列を格納するためのもので、機械学習、AI アプリケーション、類似検索操作向けに設計されています。各ベクトルは、作成時に指定された固定次元（長さ）を持ちます。
+    - Information Schema
+      - [Information_Schema テーブル](https://docs.pingcap.com/ja/tidbcloudlake/information-schema-tables-overview.md): このページでは、TiDB Cloud Lake の Information_Schema Tables について説明します。
+      - [information_schema.columns](https://docs.pingcap.com/ja/tidbcloudlake/information-schema-columns-sql.md): テーブルのカラムに関する情報を含みます。
+      - [information_schema.keywords](https://docs.pingcap.com/ja/tidbcloudlake/information-schema-keywords-sql.md): information_schema.keywords システムテーブルは、TiDB Cloud Lake のすべてのキーワードを提供するビューです。
+      - [information_schema.schemata](https://docs.pingcap.com/ja/tidbcloudlake/information-schema-schemata-sql.md): システム内のすべてのデータベースに関するメタデータを提供します。
+      - [information_schema.tables](https://docs.pingcap.com/ja/tidbcloudlake/information-schema-tables-sql.md): information_schema.tables システムテーブルは、すべてのデータベースにまたがるすべてのテーブルに関するメタデータを提供するビューであり、スキーマ、タイプ、エンジン、作成の詳細などを含みます。また、data length、index length、row count などのストレージメトリクスも含まれており、テーブル構造と使用状況を把握するのに役立ちます。
+      - [information_schema.views](https://docs.pingcap.com/ja/tidbcloudlake/information-schema-views-sql.md): すべてのビューのメタデータ情報を提供します。
+    - テーブルエンジン
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/table-engines.md): TiDB Cloud Lake は、データを移動することなくパフォーマンスと相互運用性の要件のバランスを取れるように、複数のテーブルエンジンを提供します。各エンジンは、TiDB Cloud Lake のネイティブな Fuse ストレージから外部データレイク形式まで、特定のシナリオ向けに最適化されています。
+      - [Fuse Engine Tables](https://docs.pingcap.com/ja/tidbcloudlake/fuse-engine-tables.md): TiDB Cloud Lake はデフォルトのストレージエンジンとして Fuse Engine を使用し、Git のようなデータ管理システムを提供します。
+      - [Apache Iceberg™ Tables](https://docs.pingcap.com/ja/tidbcloudlake/apache-icebergtm-tables.md): TiDB Cloud Lake を Apache Iceberg カタログに接続し、Iceberg テーブルをクエリまたは書き込む方法を学びます。
+      - [Apache Hive Tables](https://docs.pingcap.com/ja/tidbcloudlake/apache-hive-tables.md): Apache Hive によってカタログ化されたデータは、コピーせずに TiDB Cloud Lake からクエリできます。Hive Metastore を TiDB Cloud Lake のカタログとして登録し、テーブルデータを保持するオブジェクトストレージを指定すると、それらのテーブルを TiDB Cloud Lake ネイティブのオブジェクトであるかのようにクエリできます。
+      - [Delta Lake Engine](https://docs.pingcap.com/ja/tidbcloudlake/delta-lake-engine.md): TiDB Cloud Lake の Delta Lake エンジンを使用すると、オブジェクトストレージに保存された Delta Lake テーブル内のデータをシームレスにクエリおよび分析できます。TiDB Cloud Lake で Delta Lake エンジンを使用してテーブルを作成する際には、Delta Lake テーブルのデータファイルが保存されている場所を指定します。この設定により、TiDB Cloud Lake 内からテーブルに直接アクセスし、シームレスにクエリを実行できます。
+    - システムテーブル
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/system-tables.md): TiDB Cloud Lake は、TiDB Cloud Lake のデプロイ、データベース、テーブル、クエリ、およびシステムパフォーマンスに関するメタデータを含む一連のシステムテーブルを提供します。これらのテーブルは読み取り専用であり、システムによって自動的に更新されます。
+      - [system.build_options](https://docs.pingcap.com/ja/tidbcloudlake/system-build-options.md): このシステムテーブルは、現在の TiDB Cloud Lake リリースのビルドオプションを説明します。
+      - [system.caches](https://docs.pingcap.com/ja/tidbcloudlake/system-caches.md): TiDB Cloud Lake で管理されるさまざまなキャッシュの概要。
+      - [system.clusters](https://docs.pingcap.com/ja/tidbcloudlake/system-clusters.md): クラスター ノードに関する情報を含みます。
+      - [system.columns](https://docs.pingcap.com/ja/tidbcloudlake/system-columns.md): テーブルのカラムに関する情報を含みます。
+      - [system.contributors](https://docs.pingcap.com/ja/tidbcloudlake/system-contributors.md): コントリビューターに関する情報を含みます。
+      - [system.copy_history](https://docs.pingcap.com/ja/tidbcloudlake/system-copy-history.md): コピー履歴に関する情報を含みます。
+      - [system.credits](https://docs.pingcap.com/ja/tidbcloudlake/system-credits.md): クレジットに関する情報を含みます。
+      - [system.databases](https://docs.pingcap.com/ja/tidbcloudlake/system-databases.md): システム内のすべてのデータベースに関するメタデータ（catalog、名前、一意の ID、所有者、削除タイムスタンプなど）を提供します。
+      - [system.databases_with_history](https://docs.pingcap.com/ja/tidbcloudlake/system-databases-with-history.md): アクティブなデータベースと削除済みのデータベースを含む、すべてのデータベースを記録します。各データベースの catalog、名前、一意の ID、owner（指定されている場合）、および削除タイムスタンプ（まだアクティブな場合は NULL）を表示します。
+      - [system.functions](https://docs.pingcap.com/ja/tidbcloudlake/system-functions.md): サポートされている組み込みのスカラー関数および集計関数に関する情報を含みます。
+      - [system.indexes](https://docs.pingcap.com/ja/tidbcloudlake/system-indexes.md): 作成されたインデックスに関する情報を含みます。
+      - [system.locks](https://docs.pingcap.com/ja/tidbcloudlake/system-locks.md): システム内のロックに関する情報を含みます。
+      - [system.metrics](https://docs.pingcap.com/ja/tidbcloudlake/system-metrics.md): メトリクスイベントに関する情報を含みます。
+      - [system.numbers](https://docs.pingcap.com/ja/tidbcloudlake/system-numbers.md): このテーブルには、number という名前の単一の UInt64 カラムがあり、0 から始まるほぼすべての自然数が含まれています。
+      - [system.query_cache](https://docs.pingcap.com/ja/tidbcloudlake/system-query-cache.md): クエリ ID、結果サイズ、キャッシュされたデータの場所など、キャッシュされたクエリ結果に関する情報を格納します。
+      - [system.query_log](https://docs.pingcap.com/ja/tidbcloudlake/system-query-log.md): すべてのクエリログを格納する読み取り専用のインメモリテーブルです。クエリログで利用可能な具体的なフィールドについては、「例」セクションを参照してください。
+      - [system.settings](https://docs.pingcap.com/ja/tidbcloudlake/system-settings.md): 現在のセッションのシステム設定を格納します。
+      - [system.streams](https://docs.pingcap.com/ja/tidbcloudlake/system-streams.md): システム内のストリームに関する情報を提供します。このテーブルの各行は 1 つのストリームに対応し、各カラムにはストリームのモード、コメント（ある場合）、関連付けられたテーブル名、テーブル ID、テーブルバージョン、スナップショットの場所、無効な理由（該当する場合）、および所有者などの詳細が含まれます。
+      - [system.table_functions](https://docs.pingcap.com/ja/tidbcloudlake/system-table-functions.md): すべてのテーブル関数名を取得します。
+      - [system.tables](https://docs.pingcap.com/ja/tidbcloudlake/system-tables-sql.md): すべてのテーブルのメタデータ情報を提供します。テーブルのプロパティ、作成時刻、行数、データサイズなどの詳細が含まれます。
+      - [system.tables_with_history](https://docs.pingcap.com/ja/tidbcloudlake/system-tables-with-history.md): 履歴テーブルを含むすべてのテーブルのメタデータ情報を提供します。テーブルのプロパティ、作成時刻、行数、データサイズなどの詳細が含まれます。
+      - [system.temp_files](https://docs.pingcap.com/ja/tidbcloudlake/system-temp-files.md): spill ファイルなど、TiDB Cloud Lake によって作成された一時ファイルに関する情報を含みます。一時ファイルを削除するには、VACUUM TEMPORARY FILES コマンドを使用します。
+      - [system.temporary_tables](https://docs.pingcap.com/ja/tidbcloudlake/system-temporary-tables.md): 現在のセッションに存在するすべての一時テーブルに関する情報を提供します。
+      - [system.user_functions](https://docs.pingcap.com/ja/tidbcloudlake/system-user-functions.md): システム内のユーザー定義関数および外部関数に関する情報を含みます。
+      - [system.views](https://docs.pingcap.com/ja/tidbcloudlake/system-views.md): すべてのビューのメタデータ情報を提供します。
+      - [system.virtual_columns](https://docs.pingcap.com/ja/tidbcloudlake/system-virtual-columns.md): システム内で作成された仮想カラムに関する情報を含みます。
+    - システム履歴テーブル
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/system-history-tables.md): TiDB Cloud Lake のシステム履歴テーブルは、コンプライアンス、セキュリティ監視、パフォーマンス分析のためにデータベースアクティビティを自動的に追跡し、データガバナンス機能を提供します。
+      - [system_history.access_history](https://docs.pingcap.com/ja/tidbcloudlake/system-history-access-history.md): フィールド base_objects_accessed、objects_modified、および object_modified_by_ddl はいずれも JSON オブジェクトの配列です。各オブジェクトには、以下のフィールドが含まれる場合があります。
+      - [system_history.log_history](https://docs.pingcap.com/ja/tidbcloudlake/system-history-log-history.md): system_history.log_history を使用して、他の構造化されたシステム履歴テーブルにデータを提供する生のログデータをクエリします。
+      - [system_history.login_history](https://docs.pingcap.com/ja/tidbcloudlake/system-history-login-history.md): system_history.login_history を使用して、セキュリティ監視とコンプライアンスのために、成功および失敗したユーザーログイン試行を監査します。
+      - [system_history.profile_history](https://docs.pingcap.com/ja/tidbcloudlake/system-history-profile-history.md): system_history.profile_history を使用して、SQL クエリの詳細な実行プロファイルと統計を分析し、性能チューニングを行います。
+      - [system_history.query_history](https://docs.pingcap.com/ja/tidbcloudlake/system-history-query-history.md): query_id を使用して特定のクエリの履歴を照会します。
+    - [SQL 識別子](https://docs.pingcap.com/ja/tidbcloudlake/sql-identifiers.md): SQL 識別子は、テーブル、ビュー、データベースなど、TiDB Cloud Lake 内のさまざまな要素に使用される名前です。
+    - [入出力ファイル形式](https://docs.pingcap.com/ja/tidbcloudlake/input-output-file-formats.md): TiDB Cloud Lake は、データのロードやアンロードのソースおよびターゲットとして、さまざまなファイル形式を受け入れます。このページでは、サポートされているファイル形式と利用可能なオプションについて説明します。
+    - [Connection Parameters](https://docs.pingcap.com/ja/tidbcloudlake/connection-parameters.md): 接続パラメータは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、`COPY` コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、`CREATE CONNECTION` を参照してください。
+    - [SQL 方言と準拠](https://docs.pingcap.com/ja/tidbcloudlake/sql-dialects-conformance.md): このページでは、TiDB Cloud Lake がサポートする SQL 方言の詳細と、SQL 標準への準拠状況、特に SQL:2011 の機能と TiDB Cloud Lake におけるそのサポート状況について説明します。
+  - SQL 文
+    - [概要](https://docs.pingcap.com/ja/tidbcloudlake/sql-statements-reference.md): このページは SQL 文の概要に移動しました。
+    - DDL コマンド
+      - [DDL の概要](https://docs.pingcap.com/ja/tidbcloudlake/ddl.md): これらのトピックでは、TiDB Cloud Lake における DDL (Data Definition Language) コマンドのリファレンス情報を提供します。
+      - データベース
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/ddl-database-overview.md): このページでは、TiDB Cloud Lake におけるデータベース操作の包括的な概要を、参照しやすいよう機能別に整理して紹介します。
+        - [CREATE DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/create-database.md): データベースを作成します。
+        - [SHOW CREATE DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/show-create-database.md): 指定したデータベースを作成する CREATE DATABASE 文を表示します。
+        - [USE DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/use-database.md): 現在のセッションのデータベースを選択します。このステートメントを使用すると、別のデータベースを指定して切り替えることができます。このコマンドで現在のデータベースを設定すると、変更しない限り、セッションの終了までそのまま維持されます。
+        - [ALTER DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/alter-database.md): データベース名を変更するか、データベースのデフォルトストレージオプションを設定します。
+        - [SHOW DATABASES](https://docs.pingcap.com/ja/tidbcloudlake/show-databases.md): インスタンス上に存在するデータベースの一覧を表示します。
+        - [DROP DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/drop-database.md): データベースを削除します。
+        - [SHOW DROP DATABASES](https://docs.pingcap.com/ja/tidbcloudlake/show-drop-databases.md): 削除されたデータベースがある場合、その削除タイムスタンプとともにすべてのデータベースを一覧表示し、削除済みデータベースとその詳細を確認できるようにします。
+        - [UNDROP DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/undrop-database.md): 削除されたデータベースの最新バージョンを復元します。これは TiDB Cloud Lake の Time Travel 機能を利用しており、削除されたオブジェクトを復元できるのは保持期間内のみです（デフォルトは 24 時間）。
+      - テーブル
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/ddl-table-overview.md): このページでは、TiDB Cloud Lake におけるテーブル操作の包括的な概要を、参照しやすいよう機能別に整理して紹介します。
+        - [CREATE TABLE](https://docs.pingcap.com/ja/tidbcloudlake/create-table.md): テーブルの作成は、多くのデータベースにおいて最も複雑な操作の 1 つです。なぜなら、必要に応じてさまざまな指定を行う必要があるためです。
+        - [CREATE EXTERNAL TABLE](https://docs.pingcap.com/ja/tidbcloudlake/create-external-table.md): `CREATE TABLE... CONNECTION = (...)` ステートメントは、デフォルトのローカルストレージを使用する代わりに、データ保存先として S3 互換ストレージのバケットを指定してテーブルを作成します。
+        - [CREATE TEMP TABLE](https://docs.pingcap.com/ja/tidbcloudlake/create-temp-table.md): セッションの終了時に自動的に削除される一時テーブルを作成します。
+        - [CREATE TRANSIENT TABLE](https://docs.pingcap.com/ja/tidbcloudlake/create-transient-table.md): Time Travel 用の履歴データを保存しないテーブルを作成します。
+        - [DROP TABLE](https://docs.pingcap.com/ja/tidbcloudlake/drop-table.md): テーブルを削除します。
+        - [UNDROP TABLE](https://docs.pingcap.com/ja/tidbcloudlake/undrop-table.md): 削除されたテーブルの直近のバージョンを復元します。これは TiDB Cloud Lake の Time Travel 機能を利用しており、削除されたオブジェクトは保持期間内でのみ復元できます（デフォルトは 24 時間）。
+        - [RENAME TABLE](https://docs.pingcap.com/ja/tidbcloudlake/rename-table.md): テーブル名を変更します。
+        - [TRUNCATE TABLE](https://docs.pingcap.com/ja/tidbcloudlake/truncate-table.md): テーブルのスキーマを保持したまま、テーブルからすべてのデータを削除します。テーブル内のすべての行を削除し、同じカラムと制約を持つ空のテーブルにします。なお、テーブルに割り当てられたディスク領域は解放されません。
+        - [DESCRIBE TABLE](https://docs.pingcap.com/ja/tidbcloudlake/describe-table.md): 指定したテーブルのカラムに関する情報を表示します。SHOW FIELDS と同等です。
+        - [OPTIMIZE TABLE](https://docs.pingcap.com/ja/tidbcloudlake/optimize-table.md): TiDB Cloud Lake でテーブルを最適化するには、履歴データを圧縮または削除して、ストレージ容量を節約し、クエリ性能を向上させます。
+        - [FLASHBACK TABLE](https://docs.pingcap.com/ja/tidbcloudlake/flashback-table.md): スナップショット ID またはタイムスタンプを使用してテーブルを以前のバージョンにフラッシュバックします。メタデータ操作のみを伴うため、高速に実行できます。
+        - [ALTER TABLE](https://docs.pingcap.com/ja/tidbcloudlake/alter-table.md): `ALTER TABLE` を使用して、既存のテーブルの構造やプロパティを変更します。対象には、カラム、コメント、ストレージオプション、外部接続、さらには別のテーブルとのメタデータの入れ替えも含まれます。以下の各サブセクションでは、サポートされている各機能について説明します。
+        - [VACUUM DROP TABLE](https://docs.pingcap.com/ja/tidbcloudlake/vacuum-drop-table.md): VACUUM DROP TABLE コマンドは、削除されたテーブルのデータファイルを完全に削除することでストレージ容量を節約し、ストレージ領域を解放し、この処理を効率的に管理できるようにします。特定のデータベースを対象にする、プレビューする、vacuum 対象のデータファイル数を制限するといったオプションパラメータを提供します。データベース内の削除済みテーブルを一覧表示するには、SHOW DROP TABLES を使用します。
+        - [VACUUM TABLE](https://docs.pingcap.com/ja/tidbcloudlake/vacuum-table.md): VACUUM TABLE コマンドは、テーブルから履歴データファイルを完全に削除してストレージ領域を解放することで、システムパフォーマンスの最適化に役立ちます。これには以下が含まれます。
+        - [ATTACH TABLE](https://docs.pingcap.com/ja/tidbcloudlake/attach-table.md): ATTACH TABLE は、既存のテーブルデータをコピーせずに読み取り専用リンクを作成します。
+        - [SHOW CREATE TABLE](https://docs.pingcap.com/ja/tidbcloudlake/show-create-table.md): 指定したテーブルの CREATE TABLE 文を表示します。結果に Fuse Engine のオプションを含めるには、hide_options_in_show_create_table を 0 に設定します。
+        - [SHOW DROP TABLES](https://docs.pingcap.com/ja/tidbcloudlake/show-drop-tables.md): 現在または指定したデータベース内の削除済みテーブルを一覧表示します。
+        - [SHOW FIELDS](https://docs.pingcap.com/ja/tidbcloudlake/show-fields.md): 指定したテーブルのカラムに関する情報を表示します。DESCRIBE TABLE と同等です。
+        - [SHOW COLUMNS](https://docs.pingcap.com/ja/tidbcloudlake/show-columns.md): 指定したテーブルのカラムに関する情報を表示します。
+        - [SHOW STATISTICS](https://docs.pingcap.com/ja/tidbcloudlake/show-statistics.md): テーブルとそのカラムに関する統計情報を表示します。統計情報は、データ分布、行数、一意な値に関する情報を提供することで、クエリオプティマイザがクエリ実行計画についてより適切な判断を行うのに役立ちます。
+        - [SHOW TABLE STATUS](https://docs.pingcap.com/ja/tidbcloudlake/show-table-status.md): データベース内のテーブルのステータスを表示します。ステータス情報には、テーブルに関するさまざまな物理サイズやタイムスタンプが含まれます。詳細は「例」を参照してください。
+        - [SHOW TABLES](https://docs.pingcap.com/ja/tidbcloudlake/show-tables.md): 現在または指定したデータベース内のテーブルを一覧表示します。
+      - ビュー
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/ddl-view-overview.md): このページでは、TiDB Cloud Lake におけるビュー操作の包括的な概要を、参照しやすいよう機能別に整理して紹介します。
+        - [CREATE VIEW](https://docs.pingcap.com/ja/tidbcloudlake/create-view.md): クエリに基づいて新しいビューを作成します。Logical View は物理データを保存せず、論理ビューにアクセスすると、処理を完了するために SQL をサブクエリ形式に変換します。
+        - [ALTER VIEW](https://docs.pingcap.com/ja/tidbcloudlake/alter-view.md): 別の QUERY を使用して既存のビューを変更します。
+        - [DESC VIEW](https://docs.pingcap.com/ja/tidbcloudlake/desc-view.md): ビューのカラム一覧を返します。
+        - [SHOW VIEWS](https://docs.pingcap.com/ja/tidbcloudlake/show-views.md): 指定したデータベース内のビュー名の一覧を返します。データベース名が指定されていない場合は、現在のデータベース内のビュー名の一覧を返します。
+        - [DROP VIEW](https://docs.pingcap.com/ja/tidbcloudlake/drop-view.md): ビューを削除します。
+        - [マテリアライズドビュー](https://docs.pingcap.com/ja/tidbcloudlake/materialized-view.md): マテリアライズドビューは、クエリ結果を物理的に保存するビューです。TiDB Cloud Lake は、マテリアライズドビューの作成時にソーステーブルの変更追跡を有効にします。
+        - [REFRESH LINEAGE](https://docs.pingcap.com/ja/tidbcloudlake/refresh-lineage.md): TiDB Cloud Lake 内の既存のビューに対してリネージをバックフィルまたは整合します。
+      - ユーザーとロール
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/user-role.md): このページでは、TiDB Cloud Lake におけるユーザーおよびロールの操作について、参照しやすいように機能別に整理して包括的に説明します。
+        - [CREATE USER](https://docs.pingcap.com/ja/tidbcloudlake/create-user.md): TiDB Cloud Lake に接続するための SQL ユーザーを作成します。ユーザーがデータベースにアクセスして操作を実行するには、適切な権限を付与する必要があります。
+        - [DESC USER](https://docs.pingcap.com/ja/tidbcloudlake/desc-user.md): 認証タイプ、ロール、ネットワークポリシー、パスワードポリシー、およびその他のユーザー関連設定を含む、特定の SQL ユーザーの詳細情報を表示します。
+        - [DROP USER](https://docs.pingcap.com/ja/tidbcloudlake/drop-user.md): 指定したユーザーをシステムから削除します。
+        - [SHOW USERS](https://docs.pingcap.com/ja/tidbcloudlake/show-users.md): システム内のすべての SQL ユーザーを一覧表示します。TiDB Cloud Lake を使用している場合、このコマンドは TiDB Cloud Lake へのログインに使用される組織内のユーザーアカウント（メールアドレス）も表示します。
+        - [ALTER USER](https://docs.pingcap.com/ja/tidbcloudlake/alter-user.md): ユーザーアカウントを変更します。内容は以下を含みます。
+        - [CREATE ROLE](https://docs.pingcap.com/ja/tidbcloudlake/create-role.md): アクセス制御のための新しいロールを作成します。ロールは権限をグループ化するために使用され、ユーザーまたは他のロールに割り当てることができるため、TiDB Cloud Lake で権限を柔軟に管理できます。
+        - [SET SECONDARY ROLES](https://docs.pingcap.com/ja/tidbcloudlake/set-secondary-roles.md): 現在のセッションですべてのセカンダリロールを有効化します。これにより、ユーザーに付与されたすべてのセカンダリロールが有効になり、ユーザーの権限が拡張されます。アクティブロールとセカンダリロールの詳細については、アクティブロールとセカンダリロールを参照してください。
+        - [SET ROLE](https://docs.pingcap.com/ja/tidbcloudlake/set-role.md): セッションのアクティブなロールを切り替えます。現在アクティブなロールは SHOW ROLES コマンドで確認でき、`is_current` フィールドがアクティブなロールを示します。アクティブロールおよびセカンダリロールの詳細については、アクティブロールとセカンダリロールを参照してください。
+        - [SHOW ROLES](https://docs.pingcap.com/ja/tidbcloudlake/show-roles.md): 現在のユーザーに割り当てられているすべてのロールを一覧表示します。
+        - [DROP ROLE](https://docs.pingcap.com/ja/tidbcloudlake/drop-role.md): 指定したロールをシステムから削除します。
+        - [GRANT](https://docs.pingcap.com/ja/tidbcloudlake/grant.md): 特定のデータベースオブジェクトに対する権限、ロール、および所有権を付与します。これには以下が含まれます。
+        - [REVOKE](https://docs.pingcap.com/ja/tidbcloudlake/revoke.md): 特定のデータベースオブジェクトに対する権限、ロール、および所有権を取り消します。これには以下が含まれます。
+        - [SHOW GRANTS](https://docs.pingcap.com/ja/tidbcloudlake/show-grants.md): ロールに付与された権限、ユーザーへのロール割り当て、または特定のオブジェクトに対する権限を一覧表示します。
+      - Stage
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/stage.md): このページでは、TiDB Cloud Lake における stage 操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [CREATE STAGE](https://docs.pingcap.com/ja/tidbcloudlake/create-stage.md): 内部または外部の stage を作成します。
+        - [DROP STAGE](https://docs.pingcap.com/ja/tidbcloudlake/drop-stage.md): stage を削除します。
+        - [DESC STAGE](https://docs.pingcap.com/ja/tidbcloudlake/desc-stage.md): stage のプロパティを表示します。
+        - [LIST STAGE FILES](https://docs.pingcap.com/ja/tidbcloudlake/list-stage-files.md): stage 内のファイルを一覧表示します。
+        - [REMOVE STAGE FILES](https://docs.pingcap.com/ja/tidbcloudlake/remove-stage-files.md): stage からファイルを削除します。
+        - [SHOW STAGES](https://docs.pingcap.com/ja/tidbcloudlake/show-stages.md): 作成された stage の一覧を返します。出力される一覧には user stage は含まれません。
+        - [PRESIGN](https://docs.pingcap.com/ja/tidbcloudlake/presign.md): 指定した stage 名とファイルパスに基づいて、stage 上のファイル用の事前署名付き URL を生成します。事前署名付き URL を使用すると、Web ブラウザまたは API リクエストを通じてファイルにアクセスできます。
+      - シーケンス
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/sequence.md): このページでは、TiDB Cloud Lake におけるシーケンス操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [CREATE SEQUENCE](https://docs.pingcap.com/ja/tidbcloudlake/create-sequence.md): TiDB Cloud Lake に新しいシーケンスを作成します。
+        - [DESC SEQUENCE](https://docs.pingcap.com/ja/tidbcloudlake/desc-sequence.md): シーケンスのプロパティを表示します。
+        - [DROP SEQUENCE](https://docs.pingcap.com/ja/tidbcloudlake/drop-sequence.md): TiDB Cloud Lake から既存のシーケンスを削除します。
+        - [SHOW SEQUENCES](https://docs.pingcap.com/ja/tidbcloudlake/show-sequences.md): 作成されたシーケンスの一覧を返します。
+      - Stream
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/stream.md): このページでは、TiDB Cloud Lake における stream 操作の全体像を、参照しやすいよう機能別に整理して説明します。
+        - [CREATE STREAM](https://docs.pingcap.com/ja/tidbcloudlake/create-stream.md): ストリームを作成します。
+        - [DESC STREAM](https://docs.pingcap.com/ja/tidbcloudlake/desc-stream.md): 特定のストリームの詳細を説明します。
+        - [DROP STREAM](https://docs.pingcap.com/ja/tidbcloudlake/drop-stream.md): 既存のストリームを削除します。
+        - [SHOW STREAMS](https://docs.pingcap.com/ja/tidbcloudlake/show-streams.md): 特定のデータベースに関連付けられたストリームを一覧表示します。
+      - タスク
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/task.md): このページでは、TiDB Cloud Lake におけるタスク操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [CREATE TASK](https://docs.pingcap.com/ja/tidbcloudlake/create-task.md): CREATE TASK ステートメントは、指定した SQL ステートメントをスケジュールベースまたは DAG ベースのタスクグラフで実行する新しいタスクを定義するために使用されます。
+        - [ALTER TASK](https://docs.pingcap.com/ja/tidbcloudlake/alter-task.md): ALTER TASK ステートメントは、既存のタスクを変更するために使用されます。
+        - [DROP TASK](https://docs.pingcap.com/ja/tidbcloudlake/drop-task.md): DROP TASK ステートメントは、既存のタスクを削除するために使用されます。
+        - [EXECUTE TASK](https://docs.pingcap.com/ja/tidbcloudlake/execute-task.md): EXECUTE TASK ステートメントは、既存のタスクを手動で実行するために使用されます。
+        - [SHOW TASKS](https://docs.pingcap.com/ja/tidbcloudlake/show-tasks.md): 現在のロールから参照可能なタスクを一覧表示します。
+        - [TASK ERROR NOTIFICATION PAYLOAD](https://docs.pingcap.com/ja/tidbcloudlake/task-error-notification-payload.md): タスクエラー通知のペイロード本文。
+      - 通知
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/notification.md): このページでは、TiDB Cloud Lake における Notification 操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [CREATE NOTIFICATION INTEGRATION](https://docs.pingcap.com/ja/tidbcloudlake/create-notification-integration.md): 外部メッセージングサービスに通知を送信するために使用できる、名前付きの通知インテグレーションを作成します。
+        - [ALTER NOTIFICATION INTEGRATION](https://docs.pingcap.com/ja/tidbcloudlake/alter-notification-integration.md): 外部メッセージングサービスに通知を送信するために使用できる、名前付き通知統合の設定を変更します。
+        - [DROP NOTIFICATION INTEGRATION](https://docs.pingcap.com/ja/tidbcloudlake/drop-notification-integration.md): DROP NOTIFICATION INTEGRATION 文は、既存の通知を削除するために使用されます。
+        - [DESCRIBE NOTIFICATION INTEGRATION](https://docs.pingcap.com/ja/tidbcloudlake/describe-notification-integration.md): 通知インテグレーションのプロパティを表示します。
+      - タグ
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/tag-overview.md): TiDB Cloud Lake におけるタグ管理と割り当ての概要。
+        - [CREATE TAG](https://docs.pingcap.com/ja/tidbcloudlake/create-tag.md): オプションの許可値とコメントを指定して新しいタグを作成します。
+        - [DROP TAG](https://docs.pingcap.com/ja/tidbcloudlake/drop-tag.md): タグを削除します。タグがいずれかのオブジェクトからまだ参照されている場合、そのタグは削除できません。
+        - [SHOW TAGS](https://docs.pingcap.com/ja/tidbcloudlake/show-tags.md): 現在のテナント内のタグ定義を一覧表示します。
+        - [SET TAG](https://docs.pingcap.com/ja/tidbcloudlake/set-tag.md): データベースオブジェクトにタグを割り当てる、または削除します。
+      - 接続
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/connection.md): TiDB Cloud Lake における connection とは、外部ストレージサービスとやり取りするために必要な詳細をまとめた、指定済みの設定を指します。これは、アクセス認証情報、エンドポイント URL、ストレージタイプなどのパラメータを一元化して再利用できるセットとして機能し、TiDB Cloud Lake とさまざまなストレージサービスとの統合を容易にします。
+        - [CREATE CONNECTION](https://docs.pingcap.com/ja/tidbcloudlake/create-connection.md): 外部ストレージへの接続を作成します。
+        - [DESC CONNECTION](https://docs.pingcap.com/ja/tidbcloudlake/desc-connection.md): 特定の接続の詳細を表示し、そのタイプと設定に関する情報を提供します。
+        - [DROP CONNECTION](https://docs.pingcap.com/ja/tidbcloudlake/drop-connection.md): 既存の接続を削除します。
+        - [SHOW CONNECTIONS](https://docs.pingcap.com/ja/tidbcloudlake/show-connections.md): 利用可能なすべての接続の一覧を表示します。
+      - カタログ
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/catalog.md): TiDB Cloud Lake における Catalog 操作の概要。
+        - [SHOW CATALOGS](https://docs.pingcap.com/ja/tidbcloudlake/show-catalogs.md): カタログを一覧表示します。
+        - [SHOW CREATE CATALOG](https://docs.pingcap.com/ja/tidbcloudlake/show-create-catalog.md): カタログ定義情報を表示します。
+      - ファイル形式
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/file-format.md): このページでは、TiDB Cloud Lake における File Format 操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [CREATE FILE FORMAT](https://docs.pingcap.com/ja/tidbcloudlake/create-file-format.md): 名前付きファイルフォーマットを作成します。
+        - [DROP FILE FORMAT](https://docs.pingcap.com/ja/tidbcloudlake/drop-file-format.md): ファイル形式を削除します。
+        - [SHOW FILE FORMATS](https://docs.pingcap.com/ja/tidbcloudlake/show-file-formats.md): 作成済みの file format の一覧を返します。
+      - クラスターキー
+        - [ALTER CLUSTER KEY](https://docs.pingcap.com/ja/tidbcloudlake/alter-cluster-key.md): テーブルのクラスターキーを変更します。
+        - [DROP CLUSTER KEY](https://docs.pingcap.com/ja/tidbcloudlake/drop-cluster-key.md): テーブルのクラスターキーを削除します。
+        - [RECLUSTER TABLE](https://docs.pingcap.com/ja/tidbcloudlake/recluster-table.md): テーブルを再クラスタリングします。テーブルを再クラスタリングする理由とタイミングについては、Re-clustering Table を参照してください。
+        - [SET CLUSTER KEY](https://docs.pingcap.com/ja/tidbcloudlake/set-cluster-key.md): テーブル作成時にクラスターキーを設定します。
+        - [クラスターキー](https://docs.pingcap.com/ja/tidbcloudlake/cluster-key.md): このページでは、TiDB Cloud Lake におけるクラスターキー操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+      - 集計インデックス
+        - [CREATE AGGREGATING INDEX](https://docs.pingcap.com/ja/tidbcloudlake/create-aggregating-index.md): TiDB Cloud Lake で新しい集計インデックスを作成します。
+        - [DROP AGGREGATING INDEX](https://docs.pingcap.com/ja/tidbcloudlake/drop-aggregating-index.md): 既存の集計インデックスを削除します。集計インデックスを削除しても、関連するストレージブロックは削除されないことに注意してください。ブロックも削除するには、VACUUM TABLE コマンドを使用します。集計インデックス機能を無効にするには、enable_aggregating_index_scan を 0 に設定します。
+        - [集計インデックス](https://docs.pingcap.com/ja/tidbcloudlake/aggregating-index-sql.md): このページでは、TiDB Cloud Lake における集計インデックスの操作について、参照しやすいよう機能別に整理して包括的に説明します。
+        - [REFRESH AGGREGATING INDEX](https://docs.pingcap.com/ja/tidbcloudlake/refresh-aggregating-index.md): TiDB Cloud Lake は、新しいデータが取り込まれると、`SYNC` モードの集計インデックスを自動的に管理します。すでにデータが含まれているテーブルにインデックスを導入する場合は、以前の行をバックフィルするために REFRESH AGGREGATING INDEX を実行します。
+      - 転置インデックス
+        - [CREATE INVERTED INDEX](https://docs.pingcap.com/ja/tidbcloudlake/create-inverted-index.md): TiDB Cloud Lake で新しい inverted index を作成します。
+        - [DROP INVERTED INDEX](https://docs.pingcap.com/ja/tidbcloudlake/drop-inverted-index.md): TiDB Cloud Lake の転置インデックスを削除します。
+        - [転置インデックス](https://docs.pingcap.com/ja/tidbcloudlake/inverted-index.md): このページでは、TiDB Cloud Lake における転置インデックス操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [REFRESH INVERTED INDEX](https://docs.pingcap.com/ja/tidbcloudlake/refresh-inverted-index.md): TiDB Cloud Lake は、新しいデータが書き込まれるたびに `SYNC` モードで inverted index を自動的に更新します。`REFRESH INVERTED INDEX` は主に、インデックスが宣言される前から存在していた行をバックフィルするために使用します。
+      - Ngram インデックス
+        - [CREATE NGRAM INDEX](https://docs.pingcap.com/ja/tidbcloudlake/create-ngram-index.md): テーブルのカラムに Ngram インデックスを作成します。
+        - [DROP NGRAM INDEX](https://docs.pingcap.com/ja/tidbcloudlake/drop-ngram-index.md): テーブルから既存の NGRAM インデックスを削除します。
+        - [Ngram インデックス](https://docs.pingcap.com/ja/tidbcloudlake/ngram-index-sql.md): このページでは、TiDB Cloud Lake における Ngram index の操作について、参照しやすいよう機能別に包括的に説明します。
+        - [REFRESH NGRAM INDEX](https://docs.pingcap.com/ja/tidbcloudlake/refresh-ngram-index.md): TiDB Cloud Lake は、データが取り込まれると自動的に NGRAM インデックスを更新します。インデックスが定義される前から存在していたデータをバックフィルする必要がある場合は、REFRESH NGRAM INDEX を使用します。
+      - 空間インデックス
+        - [空間インデックス](https://docs.pingcap.com/ja/tidbcloudlake/spatial-index-overview.md): 空間インデックスは、`GEOMETRY` カラムに対する空間述語フィルタリングを高速化します。
+        - [CREATE SPATIAL INDEX](https://docs.pingcap.com/ja/tidbcloudlake/create-spatial-index.md): TiDB Cloud Lake に新しい空間インデックスを作成します。
+        - [REFRESH SPATIAL INDEX](https://docs.pingcap.com/ja/tidbcloudlake/refresh-spatial-index.md): 空間インデックスを更新し、過去の行をバックフィルするか、データ変更後にインデックスを更新します。
+        - [DROP SPATIAL INDEX](https://docs.pingcap.com/ja/tidbcloudlake/drop-spatial-index.md): TiDB Cloud Lake の空間インデックスを削除します。
+      - ベクトルインデックス
+        - [CREATE VECTOR INDEX](https://docs.pingcap.com/ja/tidbcloudlake/create-vector-index.md): HNSW (Hierarchical Navigable Small World) アルゴリズムを使用した効率的な類似検索を可能にするため、テーブルの VECTOR カラムに Vector インデックスを作成します。
+        - [DROP VECTOR INDEX](https://docs.pingcap.com/ja/tidbcloudlake/drop-vector-index.md): テーブルから Vector インデックスを削除します。
+        - [ベクトルインデックス](https://docs.pingcap.com/ja/tidbcloudlake/vector-index.md): TiDB Cloud Lake のベクトルインデックスは、HNSW (Hierarchical Navigable Small World) アルゴリズムを使用して、高次元ベクトルデータに対する効率的な類似検索を可能にします。セマンティック検索、レコメンデーションシステム、AI アプリケーションなどのユースケースをサポートします。
+        - [REFRESH VECTOR INDEX](https://docs.pingcap.com/ja/tidbcloudlake/refresh-vector-index.md): インデックス作成前に挿入された既存データに対して Vector index を構築します。
+      - 仮想カラム
+        - [仮想カラム](https://docs.pingcap.com/ja/tidbcloudlake/virtual-column-overview.md): このページでは、TiDB Cloud Lake における仮想カラム操作の包括的な概要を、機能別に整理してわかりやすく紹介します。
+        - [REFRESH VIRTUAL COLUMN](https://docs.pingcap.com/ja/tidbcloudlake/refresh-virtual-column.md): TiDB Cloud Lake の `REFRESH VIRTUAL COLUMN` コマンドは、既存のテーブルに対する仮想カラムの作成を明示的にトリガーするために使用されます。TiDB Cloud Lake は新しいデータに対して仮想カラムを自動的に管理しますが、この機能を最大限に活用するために手動でのリフレッシュが必要となる特定のシナリオがあります。
+        - [SHOW VIRTUAL COLUMNS](https://docs.pingcap.com/ja/tidbcloudlake/show-virtual-columns.md): システム内で作成された仮想カラムを表示します。`SELECT * FROM system.virtual_columns` と同等です。
+      - ユーザー定義関数
+        - [ユーザー定義関数](https://docs.pingcap.com/ja/tidbcloudlake/user-defined-function.md): TiDB Cloud Lake の User-Defined Functions (UDFs) を使用すると、特定のデータ処理ニーズに合わせたカスタム操作を作成できます。このページでは、最もよく使用するコマンドを紹介し、ユースケースに適した関数タイプを選ぶのに役立ちます。
+        - [ユーザー定義関数タイプを選択する](https://docs.pingcap.com/ja/tidbcloudlake/choose-a-udf-type.md): 戻り値の形状、ランタイム、運用要件に基づいて、TiDB Cloud Lake で SQL、集計、テーブル、または外部 UDF を選択する方法を学びます。
+        - [ALTER FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/alter-function.md): ユーザー定義関数を変更します。Scalar SQL、Tabular SQL、Embedded 関数のすべての関数タイプをサポートします。
+        - [CREATE AGGREGATE FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/create-aggregate-function.md): TiDB Cloud Lake の JavaScript または Python ランタイム内で実行されるユーザー定義集計関数（UDAF）を作成します。
+        - [CREATE SCALAR FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/create-scalar-function.md): スカラーユーザー定義関数（Scalar UDF）を作成します。同じ CREATE FUNCTION ステートメントで 2 つの実装スタイルをサポートします。
+        - [CREATE TABLE FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/create-table-function.md): SQL クエリをテーブル関数としてカプセル化する表形式の SQL UDF（UDTF）を作成します。テーブル関数は SQL で記述され、外部言語は使用しません。
+        - [DROP FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/drop-function.md): ユーザー定義関数を削除します。Scalar SQL、Tabular SQL、Embedded 関数のすべての関数タイプで動作します。
+        - [SHOW USER FUNCTIONS](https://docs.pingcap.com/ja/tidbcloudlake/show-user-functions.md): スカラー関数、テーブル関数、埋め込み関数、外部関数を含む、すべてのユーザー定義関数を一覧表示します。
+      - 外部関数
+        - [外部関数](https://docs.pingcap.com/ja/tidbcloudlake/external-function.md): このページでは、TiDB Cloud Lake における外部関数の操作について、機能別に整理して包括的に説明します。
+        - [CREATE FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/create-function.md): Flight 経由でリモートハンドラーを呼び出す外部関数を作成します（通常は Python またはその他のサービス）。
+        - [ALTER FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/alter-function-sql.md): 外部関数を変更します。
+        - [DROP FUNCTION](https://docs.pingcap.com/ja/tidbcloudlake/drop-function-sql.md): 外部関数を削除します。
+      - マスキングポリシー
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/masking-policy-sql.md): このページでは、TiDB Cloud Lake における Masking Policy の操作について、参照しやすいよう機能別に整理して包括的に説明します。
+        - [CREATE MASKING POLICY](https://docs.pingcap.com/ja/tidbcloudlake/create-masking-policy.md): TiDB Cloud Lake で新しいマスキングポリシーを作成します。
+        - [DESC MASKING POLICY](https://docs.pingcap.com/ja/tidbcloudlake/desc-masking-policy.md): TiDB Cloud Lake 内の特定のマスキングポリシーの詳細情報を表示します。
+        - [DROP MASKING POLICY](https://docs.pingcap.com/ja/tidbcloudlake/drop-masking-policy.md): TiDB Cloud Lake から既存のマスキングポリシーを削除します。マスキングポリシーを削除すると、そのポリシーは TiDB Cloud Lake から削除され、関連付けられているマスキングルールは効力を失います。マスキングポリシーを削除する前に、そのポリシーがどのカラムにも関連付けられていないことを確認してください。
+      - ネットワークポリシー
+        - [ALTER NETWORK POLICY](https://docs.pingcap.com/ja/tidbcloudlake/alter-network-policy.md): TiDB Cloud Lake 内の既存のネットワークポリシーを変更します。
+        - [CREATE NETWORK POLICY](https://docs.pingcap.com/ja/tidbcloudlake/create-network-policy.md): TiDB Cloud Lake で新しいネットワークポリシーを作成します。
+        - [DESC NETWORK POLICY](https://docs.pingcap.com/ja/tidbcloudlake/desc-network-policy.md): TiDB Cloud Lake 内の特定のネットワークポリシーに関する詳細情報を表示します。ポリシーに関連付けられた許可済みおよびブロック済みの IP アドレスリスト、ならびにポリシーの目的や機能を説明するコメント（存在する場合）を確認できます。
+        - [DROP NETWORK POLICY](https://docs.pingcap.com/ja/tidbcloudlake/drop-network-policy.md): TiDB Cloud Lake から既存のネットワークポリシーを削除します。ネットワークポリシーを削除すると、そのポリシーは TiDB Cloud Lake から削除され、関連付けられている許可 IP アドレスリストおよびブロック IP アドレスリストのルールは無効になります。ネットワークポリシーを削除する前に、このポリシーがどのユーザーにも関連付けられていないことを確認してください。
+        - [SHOW NETWORK POLICIES](https://docs.pingcap.com/ja/tidbcloudlake/show-network-policies.md): TiDB Cloud Lake に存在するすべてのネットワークポリシーの一覧を表示します。利用可能なネットワークポリシーについて、名前や、許可またはブロックされた IP アドレスリストが設定されているかどうかなどの情報を提供します。
+        - [ネットワークポリシー](https://docs.pingcap.com/ja/tidbcloudlake/network-policy-sql.md): このページでは、TiDB Cloud Lake における Network Policy の操作について、機能別に整理して包括的に説明します。
+      - パスワードポリシー
+        - [ALTER PASSWORD POLICY](https://docs.pingcap.com/ja/tidbcloudlake/alter-password-policy.md): TiDB Cloud Lake 内の既存のパスワードポリシーを変更します。
+        - [CREATE PASSWORD POLICY](https://docs.pingcap.com/ja/tidbcloudlake/create-password-policy.md): TiDB Cloud Lake に新しいパスワードポリシーを作成します。
+        - [DESC PASSWORD POLICY](https://docs.pingcap.com/ja/tidbcloudlake/desc-password-policy.md): TiDB Cloud Lake 内の特定のパスワードポリシーの詳細情報を表示します。パスワードポリシー属性の詳細な説明については、Password Policy Attributes を参照してください。
+        - [DROP PASSWORD POLICY](https://docs.pingcap.com/ja/tidbcloudlake/drop-password-policy.md): TiDB Cloud Lake から既存のパスワードポリシーを削除します。パスワードポリシーを削除する前に、このポリシーがどのユーザーにも関連付けられていないことを確認してください。
+        - [パスワードポリシー](https://docs.pingcap.com/ja/tidbcloudlake/password-policy-sql.md): このページでは、TiDB Cloud Lake におけるパスワードポリシー操作の包括的な概要を、参照しやすいよう機能別に整理して説明します。
+        - [SHOW PASSWORD POLICIES](https://docs.pingcap.com/ja/tidbcloudlake/show-password-policies.md): TiDB Cloud Lake 内の既存のすべてのパスワードポリシーの一覧を表示します。
+      - 行アクセスポリシー
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/row-access-policy-overview.md): 参照しやすいように機能別に整理した、TiDB Cloud Lake における Row Access Policy 操作の包括的な概要。
+        - [CREATE ROW ACCESS POLICY](https://docs.pingcap.com/ja/tidbcloudlake/create-row-access-policy.md): TiDB Cloud Lake に新しい行アクセスポリシーを作成します。行アクセスポリシーは、ポリシーがテーブルにアタッチされたときに TiDB Cloud Lake が行に適用する Boolean 述語を定義します。
+        - [DESC ROW ACCESS POLICY](https://docs.pingcap.com/ja/tidbcloudlake/desc-row-access-policy.md): TiDB Cloud Lake 内の特定の行アクセスポリシーに関する詳細情報を表示します。
+        - [DROP ROW ACCESS POLICY](https://docs.pingcap.com/ja/tidbcloudlake/drop-row-access-policy.md): TiDB Cloud Lake から既存の行アクセスポリシーを削除します。ポリシーを削除する前に、そのポリシーを参照しているすべてのテーブルからデタッチしてください。
+      - ディクショナリ
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/dictionary.md): 辞書の管理および情報コマンドの概要。
+        - [CREATE DICTIONARY](https://docs.pingcap.com/ja/tidbcloudlake/create-dictionary.md): 辞書を作成します。
+        - [DROP DICTIONARY](https://docs.pingcap.com/ja/tidbcloudlake/drop-dictionary.md): 辞書を削除します。
+        - [RENAME DICTIONARY](https://docs.pingcap.com/ja/tidbcloudlake/rename-dictionary.md): 辞書の名前を変更します。
+        - [SHOW CREATE DICTIONARY](https://docs.pingcap.com/ja/tidbcloudlake/show-create-dictionary.md): 辞書の作成に使用された SQL 文を表示します。
+        - [SHOW DICTIONARIES](https://docs.pingcap.com/ja/tidbcloudlake/show-dictionaries.md): 現在または指定したデータベース内の辞書を一覧表示します。
+      - Pipe
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/pipe.md): TiDB Cloud Lake の取り込みパイプライン向けの Pipe 関連 SQL コマンド。
+        - [CREATE PIPE](https://docs.pingcap.com/ja/tidbcloudlake/create-pipe.md): TiDB Cloud Lake の取り込みパイプラインで CREATE PIPE コマンドを使用する方法を学びます。
+        - [DESCRIBE PIPE](https://docs.pingcap.com/ja/tidbcloudlake/describe-pipe.md): TiDB Cloud Lake で取り込みパイプラインのプロパティを表示するための DESCRIBE PIPE コマンドの使用方法を学びます。
+        - [DROP PIPE](https://docs.pingcap.com/ja/tidbcloudlake/drop-pipe.md): TiDB Cloud Lake で DROP PIPE コマンドを使用して取り込みパイプラインを削除する方法を学びます。
+      - トランザクション
+        - [BEGIN](https://docs.pingcap.com/ja/tidbcloudlake/begin.md): 新しいトランザクションを開始します。BEGIN と COMMIT/ROLLBACK は、トランザクションを開始し、その後コミットまたは取り消しを行うために組み合わせて使用する必要があります。
+        - [COMMIT](https://docs.pingcap.com/ja/tidbcloudlake/commit.md): トランザクション中に行われたすべての変更を保存します。トランザクションを開始し、その後保存または取り消すには、BEGIN と COMMIT/ROLLBACK を組み合わせて使用する必要があります。
+        - [トランザクション](https://docs.pingcap.com/ja/tidbcloudlake/transaction.md): このページでは、TiDB Cloud Lake におけるトランザクション操作の包括的な概要を、参照しやすいよう機能別に整理して提供します。
+        - [ROLLBACK](https://docs.pingcap.com/ja/tidbcloudlake/rollback.md): トランザクション中に行われたすべての変更を取り消します。トランザクションを開始し、その後保存または取り消すには、BEGIN と COMMIT/ROLLBACK を組み合わせて使用する必要があります。
+        - [SHOW LOCKS](https://docs.pingcap.com/ja/tidbcloudlake/show-locks.md): テーブルに対して現在ロックを保持しているアクティブなトランザクションの一覧を表示します。対象は、現在のユーザーのすべてのセッション、または TiDB Cloud Lake システム内のすべてのユーザーです。ロックは、テーブルなどの共有リソースへのアクセスを制限する同期メカニズムであり、TiDB Cloud Lake システム内のプロセスまたはスレッド間のやり取りを秩序立てて制御し、データの整合性を維持して競合を防ぐために使用されます。
+      - 変数
+        - [SQL 変数](https://docs.pingcap.com/ja/tidbcloudlake/sql-variables.md): SQL 変数を使用すると、セッション内で一時データを保存および管理でき、スクリプトをより動的で再利用しやすくできます。
+        - [SET VARIABLE](https://docs.pingcap.com/ja/tidbcloudlake/set-variable.md): セッション内で 1 つ以上の SQL 変数の値を設定します。値には、単純な定数、式、クエリ結果、またはデータベースオブジェクトを指定できます。変数はセッションの継続中保持され、後続のクエリで使用できます。
+        - [SHOW VARIABLES](https://docs.pingcap.com/ja/tidbcloudlake/show-variables.md): 名前、値、型など、すべてのセッション変数とその詳細を表示します。
+        - [UNSET VARIABLE](https://docs.pingcap.com/ja/tidbcloudlake/unset-variable.md): 現在のセッションから 1 つ以上の変数を削除します。
+      - ストアドプロシージャ
+        - [CALL PROCEDURE](https://docs.pingcap.com/ja/tidbcloudlake/call-procedure.md): ストアドプロシージャ名を指定して実行し、必要に応じて引数を渡します。
+        - [CREATE PROCEDURE](https://docs.pingcap.com/ja/tidbcloudlake/create-procedure.md): SQL 操作を実行し、結果を返すストアドプロシージャを定義します。
+        - [DESC PROCEDURE](https://docs.pingcap.com/ja/tidbcloudlake/desc-procedure.md): 特定のストアドプロシージャに関する詳細情報を表示します。
+        - [DROP PROCEDURE](https://docs.pingcap.com/ja/tidbcloudlake/drop-procedure.md): 既存のストアドプロシージャを削除します。
+        - [ストアドプロシージャ](https://docs.pingcap.com/ja/tidbcloudlake/stored-procedure.md): このページでは、TiDB Cloud Lake におけるストアドプロシージャの操作について、参照しやすいように機能別に整理して包括的に説明します。
+        - [SHOW PROCEDURES](https://docs.pingcap.com/ja/tidbcloudlake/show-procedures.md): システム内のすべてのストアドプロシージャの一覧を返します。
+      - Warehouse
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/warehouse-overview.md): TiDB Cloud Lake の Warehouse 関連 SQL コマンド。
+        - [CREATE WAREHOUSE](https://docs.pingcap.com/ja/tidbcloudlake/create-warehouse.md): コンピュートリソース用の新しい Warehouse を作成します。
+        - [USE WAREHOUSE](https://docs.pingcap.com/ja/tidbcloudlake/use-warehouse.md): 現在のセッションを特定の Warehouse にバインドします。以降、このセッション内のクエリは実行時にこの Warehouse を使用します。
+        - [SHOW WAREHOUSES](https://docs.pingcap.com/ja/tidbcloudlake/show-warehouses.md): 現在のテナントから参照可能なすべての Warehouse を一覧表示します。
+        - [ALTER WAREHOUSE](https://docs.pingcap.com/ja/tidbcloudlake/alter-warehouse.md): 既存のWarehouseを一時停止、再開、または設定変更します。
+        - [ALTER WAREHOUSE ASSIGN NODES](https://docs.pingcap.com/ja/tidbcloudlake/alter-warehouse-assign-nodes.md): TiDB Cloud Lake の Warehouse 内のクラスターにノードを割り当てるための ALTER WAREHOUSE ASSIGN NODES コマンドの使用方法を学びます。
+        - [ALTER WAREHOUSE UNASSIGN NODES](https://docs.pingcap.com/ja/tidbcloudlake/alter-warehouse-unassign-nodes.md): TiDB Cloud Lake の Warehouse 内のクラスターから割り当て済みノードを削除するための ALTER WAREHOUSE UNASSIGN NODES コマンドの使用方法を学びます。
+        - [DROP WAREHOUSE](https://docs.pingcap.com/ja/tidbcloudlake/drop-warehouse.md): Warehouse を削除し、それに関連付けられたリソースを解放します。
+        - [QUERY_HISTORY](https://docs.pingcap.com/ja/tidbcloudlake/query-history.md): 分析および監視のためにクエリ実行ログを取得します。
+      - Worker
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/worker-overview.md): cloud control が有効なデプロイ向けの Worker 関連 SQL コマンド。
+        - [CREATE WORKER](https://docs.pingcap.com/ja/tidbcloudlake/create-worker.md): オプションのキーと値のリストを指定して worker を作成します。
+        - [ALTER WORKER](https://docs.pingcap.com/ja/tidbcloudlake/alter-worker.md): ALTER WORKER を使用して worker のタグ、オプション、または状態を変更します。
+        - [DROP WORKER](https://docs.pingcap.com/ja/tidbcloudlake/drop-worker.md): DROP WORKER を使用して worker を削除します。
+        - [SHOW WORKERS](https://docs.pingcap.com/ja/tidbcloudlake/show-workers.md): SHOW WORKERS を使用して、worker とそのメタデータを一覧表示します。
+        - [Worker の例](https://docs.pingcap.com/ja/tidbcloudlake/worker-examples.md): TiDB Cloud Lake で UDF 実行環境を管理するために WORKER コマンドを使用する包括的な例。
+      - Workload Group
+        - [Workload Group](https://docs.pingcap.com/ja/tidbcloudlake/workload-group.md): Workload group は、異なるユーザーグループに CPU、メモリのクォータを割り当て、同時実行クエリ数を制限することで、TiDB Cloud Lake におけるリソース管理とクエリ同時実行制御を可能にします。
+        - [ALTER WORKLOAD GROUP](https://docs.pingcap.com/ja/tidbcloudlake/alter-workload-group.md): 指定したクォータ設定でワークロードグループを更新します。
+        - [CREATE WORKLOAD GROUP](https://docs.pingcap.com/ja/tidbcloudlake/create-workload-group.md): 指定したクォータ設定で workload group を作成します。workload group はユーザーにバインドすることで、リソース割り当てとクエリ同時実行数を制御します。ユーザーがクエリを送信すると、そのユーザーに割り当てられたグループに基づいて workload group の制限が適用されます。
+        - [DROP WORKLOAD GROUP](https://docs.pingcap.com/ja/tidbcloudlake/drop-workload-group.md): 指定したワークロードグループを削除します。
+        - [RENAME WORKLOAD GROUP](https://docs.pingcap.com/ja/tidbcloudlake/rename-workload-group.md): 既存の workload group の名前を新しい名前に変更します。
+        - [SHOW WORKLOAD GROUPS](https://docs.pingcap.com/ja/tidbcloudlake/show-workload-groups.md): 既存のすべての workload group とその quota の一覧を返します。
+      - テーブルバージョニング
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/table-versioning.md): テーブルバージョニングを使用すると、FUSE テーブルの特定のスナップショットに対する名前付き参照を作成できます。これらの参照は自動保持クリーンアップ後も維持されるため、過去のテーブル状態を指す安定した人間にとって読みやすいポインタを提供します。
+        - [CREATE SNAPSHOT TAG](https://docs.pingcap.com/ja/tidbcloudlake/create-snapshot-tag.md): FUSE テーブルに名前付きスナップショットタグを作成し、テーブル履歴内の特定時点をブックマークしてクエリできるようにします。
+        - [DROP SNAPSHOT TAG](https://docs.pingcap.com/ja/tidbcloudlake/drop-snapshot-tag.md): FUSE テーブルから名前付きスナップショットタグを削除します。これにより、他のタグや保持ポリシーで保護されていない場合、参照されていたスナップショットはガベージコレクションの対象になります。
+    - DML コマンド
+      - [DML の概要](https://docs.pingcap.com/ja/tidbcloudlake/dml.md): このページでは、TiDB Cloud Lake における DML (Data Manipulation Language) コマンドのリファレンス情報を提供します。
+      - [`COPY INTO <location>`](https://docs.pingcap.com/ja/tidbcloudlake/copy-into-location.md): COPY INTO を使用すると、テーブルまたはクエリからデータを、以下のいずれかの場所にある 1 つ以上のファイルへアンロードできます。
+      - [`COPY INTO <table>`](https://docs.pingcap.com/ja/tidbcloudlake/copy-into-table.md): COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロードできます。
+      - [DELETE](https://docs.pingcap.com/ja/tidbcloudlake/delete.md): テーブルから1行以上を削除します。
+      - [INSERT](https://docs.pingcap.com/ja/tidbcloudlake/insert.md): 1 つ以上の行をテーブルに挿入します。
+      - [INSERT（マルチテーブル）](https://docs.pingcap.com/ja/tidbcloudlake/insert-multi-table.md): 単一のトランザクションで複数のテーブルに行を挿入します。挿入は、特定の条件に依存して実行することも（条件付き）、条件に関係なく実行することも（無条件）できます。
+      - [MERGE](https://docs.pingcap.com/ja/tidbcloudlake/merge.md): 指定したソースのデータを使用し、ステートメント内で指定された条件および一致条件に従って、ターゲットテーブル内の行に対して INSERT、UPDATE、または DELETE 操作を実行します。
+      - [REPLACE](https://docs.pingcap.com/ja/tidbcloudlake/replace.md): REPLACE INTO は、以下のデータソースを使用して、テーブルに複数の新しい行を挿入することも、行がすでに存在する場合は既存の行を更新することもできます。
+      - [UPDATE](https://docs.pingcap.com/ja/tidbcloudlake/update.md): テーブル内の行を新しい値で更新します。必要に応じて、他のテーブルの値を使用できます。
+    - クエリ構文
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/query-syntax.md): このページでは、TiDB Cloud Lake におけるクエリ構文のリファレンス情報を提供します。各コンポーネントは個別に使用することも、組み合わせて強力なクエリを構築することもできます。
+      - [SELECT](https://docs.pingcap.com/ja/tidbcloudlake/select.md): テーブルからデータを取得します。
+      - [AT](https://docs.pingcap.com/ja/tidbcloudlake/at.md): AT 句を使用すると、スナップショット ID、タイムスタンプ、stream 名、または時間間隔を指定して、データの以前のバージョンを取得できます。
+      - [JOIN](https://docs.pingcap.com/ja/tidbcloudlake/join.md): テーブル結合は、2 つ以上のテーブルのカラムを 1 つの結果セットに結合します。TiDB Cloud Lake は ANSI SQL の JOIN と Lake 固有の拡張の両方を実装しており、同じ構文でディメンショナルデータ、緩やかに変化するファクト、時系列ストリームを扱えます。
+      - [PIVOT](https://docs.pingcap.com/ja/tidbcloudlake/pivot.md): TiDB Cloud Lake の `PIVOT` 操作では、指定したカラムに基づいてテーブルを回転し、結果を集計して変換できます。
+      - [UNPIVOT](https://docs.pingcap.com/ja/tidbcloudlake/unpivot.md): UNPIVOT 操作は、カラムを行に変換することでテーブルを回転させます。
+      - [GROUP BY](https://docs.pingcap.com/ja/tidbcloudlake/group-by.md): TiDB Cloud Lake は、さまざまな拡張を備えた GROUP BY をサポートしています。
+      - [CHANGES](https://docs.pingcap.com/ja/tidbcloudlake/changes.md): CHANGES 句を使用すると、定義した時間区間内におけるテーブルの変更追跡メタデータをクエリできます。時間区間は、データ保持期間（デフォルトは 24 時間）内に収まっている必要があります。時間区間を定義するには、`AT` キーワードを使用して区間の開始時点となる時刻を指定します。区間の終了時点には、デフォルトで現在時刻が適用されます。過去の時刻を区間の終了時点として指定する場合は、`AT` キーワードとあわせて `END` キーワードを使用して区間を設定します。
+      - [QUALIFY](https://docs.pingcap.com/ja/tidbcloudlake/qualify.md): QUALIFY は、ウィンドウ関数の結果をフィルタするために使用される句です。
+      - [SETTINGS 句](https://docs.pingcap.com/ja/tidbcloudlake/settings-clause.md): SETTINGS 句は、直後に続く SQL 文の実行動作に影響する特定の設定を構成します。TiDB Cloud Lake で利用可能な設定とその値を確認するには、SHOW SETTINGS を使用します。
+      - [TOP](https://docs.pingcap.com/ja/tidbcloudlake/top.md): クエリが返す行数の最大数を制限します。
+      - [VALUES](https://docs.pingcap.com/ja/tidbcloudlake/values.md): VALUES 句は、データの行を明示的に定義することでインラインテーブルを作成します。この一時テーブルは、直接使用することも、他の SQL 文の中で使用することもできます。
+      - [WITH 句](https://docs.pingcap.com/ja/tidbcloudlake/clause.md): WITH 句は、SELECT 文の本体の前に置くことができるオプションの句であり、文の後続部分で参照できる 1 つ以上の CTE（共通テーブル式）を定義します。
+      - [WITH CONSUME](https://docs.pingcap.com/ja/tidbcloudlake/with-consume.md): SELECT クエリ内でストリームからデータを消費します。
+      - [WITH ストリームヒント](https://docs.pingcap.com/ja/tidbcloudlake/stream-hints.md): ヒントを使用してさまざまなストリーム設定オプションを指定し、ストリームの処理方法を制御します。
+    - クエリ演算子
+      - [算術演算子](https://docs.pingcap.com/ja/tidbcloudlake/arithmetic-operators.md): このページでは、TiDB Cloud Lake の算術演算子について説明します。
+      - [比較演算子](https://docs.pingcap.com/ja/tidbcloudlake/comparison-operators.md): このページでは、TiDB Cloud Lake の比較演算子について説明します。
+      - [クエリ演算子](https://docs.pingcap.com/ja/tidbcloudlake/query-operators.md): このページでは、TiDB Cloud Lake のクエリ演算子に関するリファレンス情報を提供します。
+      - [JSON 演算子](https://docs.pingcap.com/ja/tidbcloudlake/json-operators.md): このページでは、TiDB Cloud Lake の JSON Operators について説明します。
+      - [論理演算子](https://docs.pingcap.com/ja/tidbcloudlake/logical-operators.md): このページでは、TiDB Cloud Lake の論理演算子について説明します。
+      - [集合演算子](https://docs.pingcap.com/ja/tidbcloudlake/set-operators-sql.md): 集合演算子は、2 つのクエリの結果を 1 つの結果に結合します。TiDB Cloud Lake は次の集合演算子をサポートしています。
+      - [サブクエリ演算子](https://docs.pingcap.com/ja/tidbcloudlake/subquery-operators.md): サブクエリは、別のクエリの中にネストされたクエリです。TiDB Cloud Lake は、以下のサブクエリタイプをサポートしています。
+    - EXPLAIN コマンド
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/explain-commands.md): このページでは、TiDB Cloud Lake の explain 関連コマンドのリファレンス情報を提供します。
+      - [EXPLAIN](https://docs.pingcap.com/ja/tidbcloudlake/explain.md): SQL ステートメントの実行計画を表示します。実行計画は異なる演算子で構成されるツリーとして表示され、TiDB Cloud Lake が SQL ステートメントをどのように実行するかを確認できます。演算子には通常、TiDB Cloud Lake が実行するアクションや、クエリに関連するオブジェクトを説明する 1 つ以上のフィールドが含まれます。
+      - [EXPLAIN ANALYZE](https://docs.pingcap.com/ja/tidbcloudlake/explain-analyze.md): EXPLAIN ANALYZE は、クエリ実行計画と実際の実行時パフォーマンス統計をあわせて表示するために使用されます。
+      - [EXPLAIN ANALYZE GRAPHICAL](https://docs.pingcap.com/ja/tidbcloudlake/explain-analyze-graphical.md): ブラウザでインタラクティブな視覚表現を使用してクエリパフォーマンスを分析します。LakeSQL v0.22.2+ でのみ利用できます。
+      - [EXPLAIN AST](https://docs.pingcap.com/ja/tidbcloudlake/explain-ast.md): SQL 文の抽象構文木（AST）を返します。このコマンドは SQL 文を構文要素に分解し、階層構造で表現します。
+      - [EXPLAIN PERF](https://docs.pingcap.com/ja/tidbcloudlake/explain-perf.md): クエリの CPU 使用状況をプロファイリングし、すべてのクラスター ノードから収集した HTML フレームグラフを返します。
+      - [EXPLAIN RAW](https://docs.pingcap.com/ja/tidbcloudlake/explain-raw.md): クエリの分析、トラブルシューティング、効率改善に使用できる SQL 文の論理実行計画を表示します。
+      - [EXPLAIN SYNTAX](https://docs.pingcap.com/ja/tidbcloudlake/explain-syntax.md): 整形された SQL コードを出力します。このコマンドは SQL フォーマッタとして機能し、コードを読みやすくします。
+    - 管理コマンド
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/administration-commands.md): このページでは、TiDB Cloud Lake のシステム管理コマンドに関するリファレンス情報を提供します。
+      - [KILL](https://docs.pingcap.com/ja/tidbcloudlake/kill.md): 現在実行中のクエリを強制終了します。
+      - [SET](https://docs.pingcap.com/ja/tidbcloudlake/set.md): 現在のセッションのシステム設定の値を変更します。現在のすべての設定を表示するには、SHOW SETTINGS を使用します。
+      - [UNSET](https://docs.pingcap.com/ja/tidbcloudlake/unset.md): 1 つ以上のシステム設定をグローバルまたはデフォルトのレベルと値に戻します。設定レベルの詳細については、Setting Levels を参照してください。現在のすべての設定を表示するには、SHOW SETTINGS を使用します。
+      - [SET_VAR](https://docs.pingcap.com/ja/tidbcloudlake/set-var.md): SET_VAR は、単一の SQL 文内でオプティマイザヒントを指定するために使用され、その特定の文の実行計画をより細かく制御できます。これには以下が含まれます。
+      - [SHOW SETTINGS](https://docs.pingcap.com/ja/tidbcloudlake/show-settings.md): TiDB Cloud Lake には、TiDB Cloud Lake の動作を制御するためのさまざまなシステム設定があります。このコマンドは、利用可能なシステム設定の現在値とデフォルト値、および設定レベルを表示します。設定を更新するには、SET または UNSET コマンドを使用します。
+      - [SHOW INDEXES](https://docs.pingcap.com/ja/tidbcloudlake/show-indexes.md): 作成されたインデックスを表示します。`SELECT * FROM system.indexes` と同等です。
+      - [SHOW FUNCTIONS](https://docs.pingcap.com/ja/tidbcloudlake/show-functions.md): 現在サポートされている組み込みのスカラー関数および集計関数を一覧表示します。
+      - [SHOW USER FUNCTIONS](https://docs.pingcap.com/ja/tidbcloudlake/show-user-functions-sql.md): システム内に存在するユーザー定義関数および外部関数を一覧表示します。`SELECT name, is_aggregate, description, arguments, language FROM system.user_functions....` と同等です。
+      - [SHOW TABLE FUNCTIONS](https://docs.pingcap.com/ja/tidbcloudlake/show-table-functions.md): 現在サポートされているテーブル関数の一覧を表示します。
+      - [SHOW PROCESSLIST](https://docs.pingcap.com/ja/tidbcloudlake/show-processlist.md): TiDB Cloud Lake の process list は、サーバー内で実行されているスレッド群によって現在実行中の操作を示します。
+      - [SHOW METRICS](https://docs.pingcap.com/ja/tidbcloudlake/show-metrics.md): システムメトリクスの一覧を表示します。
+      - [VACUUM DROP TABLE](https://docs.pingcap.com/ja/tidbcloudlake/vacuum-drop-table-sql.md): このページでは、TiDB Cloud Lake の VACUUM DROP TABLE について説明します。
+      - [VACUUM TABLE](https://docs.pingcap.com/ja/tidbcloudlake/vacuum-table-sql.md): このページでは、TiDB Cloud Lake における VACUUM TABLE について説明します。
+      - [VACUUM TEMPORARY FILES](https://docs.pingcap.com/ja/tidbcloudlake/vacuum-temporary-files.md): spill ファイルなど、TiDB Cloud Lake によって作成された一時ファイルを削除します。
+      - [VACUUM VIRTUAL COLUMN](https://docs.pingcap.com/ja/tidbcloudlake/vacuum-virtual-column.md): テーブルの古い仮想カラムファイルを削除します。
+      - [EXECUTE IMMEDIATE](https://docs.pingcap.com/ja/tidbcloudlake/execute-immediate.md): SQL スクリプトを実行します。TiDB Cloud Lake 向けの SQL スクリプトの書き方については、Stored Procedure & SQL Scripting を参照してください。
+      - [SYSTEM FLUSH PRIVILEGES](https://docs.pingcap.com/ja/tidbcloudlake/system-flush-privileges.md): すべてのクエリノードに権限メタデータの更新をブロードキャストし、GRANT と REVOKE の変更を即座に有効にします。
+      - [SYSTEM ENABLE / DISABLE EXCEPTION_BACKTRACE](https://docs.pingcap.com/ja/tidbcloudlake/system-enable-disable-exception-backtrace.md): TiDB Cloud Lake における Rust バックトレースの生成を制御します。SYSTEM ENABLE EXCEPTION_BACKTRACE は、panic 発生時にデバッグ目的でバックトレースを有効にし、SYSTEM DISABLE EXCEPTION_BACKTRACE は、追加のオーバーヘッドや機密情報の露出を避けるためにこれを無効にします。
+  - SQL 関数
+    - [SQL 関数リファレンス](https://docs.pingcap.com/ja/tidbcloudlake/sql-function-reference.md): TiDB Cloud Lake は、あらゆる種類のデータ処理に対応する包括的な SQL 関数を提供します。関数は重要度と使用頻度ごとに整理されています。
+    - Bitmap 関数
+      - [BITMAP_AND](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-and.md): 2 つのビットマップに対してビット単位の AND 演算を実行します。
+      - [BITMAP_AND_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-and-count.md): 論理 AND 演算を実行して、ビットマップ内で 1 に設定されているビット数をカウントします。
+      - [BITMAP_AND_NOT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-and-not.md): BITMAP_NOT のエイリアス。
+      - [BITMAP_CARDINALITY](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-cardinality.md): BITMAP_COUNT のエイリアス。
+      - [BITMAP_CONTAINS](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-contains.md): ビットマップに特定の値が含まれているかを確認します。
+      - [BITMAP_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-count.md): ビットマップ内で 1 に設定されているビット数をカウントします。
+      - [BITMAP_HAS_ALL](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-has-all.md): 1 番目のビットマップに 2 番目のビットマップのすべてのビットが含まれているかを確認します。
+      - [BITMAP_HAS_ANY](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-has-any.md): 1 つ目のビットマップに、2 つ目のビットマップのビットと一致するビットがあるかどうかを確認します。
+      - [BITMAP_INTERSECT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-intersect.md): 論理 INTERSECT 演算を実行して、ビットマップ内で 1 に設定されているビット数をカウントします。
+      - [BITMAP_MAX](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-max.md): ビットマップ内の最大値を取得します。
+      - [BITMAP_MIN](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-min.md): ビットマップ内の最小値を取得します。
+      - [BITMAP_NOT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-not.md): 1 番目のビットマップに含まれ、2 番目のビットマップに含まれない要素から新しいビットマップを生成します。
+      - [BITMAP_NOT_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-not-count.md): 論理 NOT 演算を実行して、ビットマップ内で 0 に設定されているビット数をカウントします。
+      - [BITMAP_OR](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-or.md): 2 つのビットマップに対してビット単位の OR 演算を実行します。
+      - [BITMAP_OR_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-or-count.md): 論理 OR 演算を実行して、ビットマップ内で 1 に設定されているビット数をカウントします。
+      - [BITMAP_SUBSET_IN_RANGE](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-subset-in-range.md): 指定した範囲内で、ソースビットマップのサブビットマップを生成します。
+      - [BITMAP_SUBSET_LIMIT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-subset-limit.md): サイズ制限付きで、開始値からの範囲を起点として、元のビットマップのサブビットマップを生成します。
+      - [BITMAP_TO_ARRAY](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-array.md): Bitmap を Array に変換します。
+      - [BITMAP_UNION](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-union.md): 論理 UNION 演算を実行して、ビットマップ内で 1 に設定されているビット数をカウントします。
+      - [BITMAP_XOR](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-xor.md): 2 つのビットマップに対してビット単位の XOR（排他的 OR）演算を実行します。
+      - [BITMAP_XOR_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-xor-count.md): 論理 XOR（排他的 OR）演算を実行して、ビットマップ内で 1 に設定されているビット数をカウントします。
+      - [Bitmap 関数](https://docs.pingcap.com/ja/tidbcloudlake/bitmap-functions.md): このページでは、TiDB Cloud Lake の Bitmap 関数について、参照しやすいように機能別に整理して包括的に説明します。
+      - [INTERSECT_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/intersect-count.md): 2 つのビットマップカラム間で交差するビット数をカウントします。
+      - [SUB_BITMAP](https://docs.pingcap.com/ja/tidbcloudlake/sub-bitmap.md): 開始インデックスから指定したサイズで、ソースビットマップのサブビットマップを生成します。
+    - 変換関数
+      - [BUILD_BITMAP](https://docs.pingcap.com/ja/tidbcloudlake/build-bitmap.md): 正の整数の配列を BITMAP 値に変換します。
+      - [CAST::](https://docs.pingcap.com/ja/tidbcloudlake/cast.md): 値をあるデータ型から別のデータ型に変換します。`::` は CAST のエイリアスです。
+      - [変換関数](https://docs.pingcap.com/ja/tidbcloudlake/conversion-functions.md): このページでは、TiDB Cloud Lake の変換関数について、参照しやすいように機能別に整理して包括的に説明します。
+      - [TO_BINARY](https://docs.pingcap.com/ja/tidbcloudlake/to-binary.md): string、variant、bitmap、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
+      - [TO_BITMAP](https://docs.pingcap.com/ja/tidbcloudlake/to-bitmap.md): 値を BITMAP データ型に変換します。
+      - [TO_BOOLEAN](https://docs.pingcap.com/ja/tidbcloudlake/to-boolean.md): 値を BOOLEAN データ型に変換します。
+      - [TO_DECIMAL](https://docs.pingcap.com/ja/tidbcloudlake/to-decimal.md): 値を DECIMAL データ型に変換します。
+      - [TO_FLOAT32](https://docs.pingcap.com/ja/tidbcloudlake/to-float32.md): 値を FLOAT32 データ型に変換します。
+      - [TO_FLOAT64](https://docs.pingcap.com/ja/tidbcloudlake/to-float64.md): 値を FLOAT64 データ型に変換します。
+      - [TO_HEX](https://docs.pingcap.com/ja/tidbcloudlake/to-hex.md): 文字列引数 str に対して、TO_HEX() は str の16進文字列表現を返します。このとき、str 内の各文字の各バイトは2桁の16進数に変換されます。この操作の逆は UNHEX() 関数によって実行されます。
+      - [TO_INT16](https://docs.pingcap.com/ja/tidbcloudlake/to-int16.md): 値を INT16 データ型に変換します。
+      - [TO_INT32](https://docs.pingcap.com/ja/tidbcloudlake/to-int32.md): 値を INT32 データ型に変換します。
+      - [TO_INT64](https://docs.pingcap.com/ja/tidbcloudlake/to-int64.md): 値を INT64 データ型に変換します。
+      - [TO_INT8](https://docs.pingcap.com/ja/tidbcloudlake/to-int8.md): 値を INT8 データ型に変換します。
+      - [TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/to-string.md): 値を String データ型に変換するか、Date 値を特定の文字列形式に変換します。TiDB Cloud Lake で日付と時刻の形式をカスタマイズするには、フォーマット指定子を使用できます。これらのフォーマット指定子により、日付および時刻の値に対して必要な形式を定義できます。サポートされているフォーマット指定子の一覧については、日付と時刻の書式設定を参照してください。
+      - [TO_TEXT](https://docs.pingcap.com/ja/tidbcloudlake/to-text.md): TO_STRING のエイリアス。
+      - [TO_UINT16](https://docs.pingcap.com/ja/tidbcloudlake/to-uint16.md): 値を UINT16 データ型に変換します。
+      - [TO_UINT32](https://docs.pingcap.com/ja/tidbcloudlake/to-uint32.md): 値を UINT32 データ型に変換します。
+      - [TO_UINT64](https://docs.pingcap.com/ja/tidbcloudlake/to-uint64.md): 値を UINT64 データ型に変換します。
+      - [TO_UINT8](https://docs.pingcap.com/ja/tidbcloudlake/to-uint8.md): 値を UINT8 データ型に変換します。
+      - [TO_VARCHAR](https://docs.pingcap.com/ja/tidbcloudlake/to-varchar.md): TO_STRING のエイリアス。
+      - [TO_VARIANT](https://docs.pingcap.com/ja/tidbcloudlake/to-variant.md): 値を VARIANT データ型に変換します。
+      - [TRY_CAST](https://docs.pingcap.com/ja/tidbcloudlake/try-cast.md): あるデータ型の値を別のデータ型に変換します。エラー時には NULL を返します。
+      - [TRY_TO_BINARY](https://docs.pingcap.com/ja/tidbcloudlake/try-to-binary.md): 入力式をバイナリ値に変換する TO_BINARY の拡張版で、変換に失敗した場合はエラーを返す代わりに NULL を返します。
+    - 条件関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/conditional-functions.md): このページでは、TiDB Cloud Lake の条件関数について、機能別に整理して包括的に紹介します。
+      - [[ NOT ] BETWEEN](https://docs.pingcap.com/ja/tidbcloudlake/between.md): 指定された数値または文字列 `<expr>` が、定義された下限値と上限値の範囲内にある場合に true を返します。
+      - [CASE](https://docs.pingcap.com/ja/tidbcloudlake/case.md): IF/THEN ロジックを処理します。少なくとも 1 組の WHEN と THEN 文で構成されます。すべての CASE 文は END キーワードで終了する必要があります。ELSE 文は省略可能で、WHEN および THEN 文で明示的に指定されていない値を扱うための方法を提供します。
+      - [COALESCE](https://docs.pingcap.com/ja/tidbcloudlake/coalesce.md): 引数内で最初の非 NULL 式を返します。すべての引数が NULL の場合は、NULL を返します。
+      - [DECODE](https://docs.pingcap.com/ja/tidbcloudlake/decode.md): DECODE 関数は、選択式を各検索式と順番に比較します。検索式が選択式に一致すると、対応する結果式が返されます。一致が見つからず、デフォルト値が指定されている場合は、そのデフォルト値が返されます。
+      - [ERROR_OR](https://docs.pingcap.com/ja/tidbcloudlake/error-or.md): 入力の中から、エラーにならない最初の式を返します。すべての式がエラーになる場合は、NULL を返します。
+      - [GREATEST](https://docs.pingcap.com/ja/tidbcloudlake/greatest.md): 値の集合から最大値を返します。集合内のいずれかの値が NULL の場合、この関数は NULL を返します。
+      - [GREATEST_IGNORE_NULLS](https://docs.pingcap.com/ja/tidbcloudlake/greatest-ignore-nulls.md): NULL 値を無視して、値の集合から最大値を返します。
+      - [IF](https://docs.pingcap.com/ja/tidbcloudlake/if.md): `<cond1>` が TRUE の場合は `<expr1>` を返します。そうでない場合、`<cond2>` が TRUE なら `<expr2>` を返し、以降も同様です。
+      - [IFF](https://docs.pingcap.com/ja/tidbcloudlake/iff.md): IF のエイリアス。
+      - [IFNULL](https://docs.pingcap.com/ja/tidbcloudlake/ifnull.md): `<expr1>` が NULL の場合は `<expr2>` を返し、それ以外の場合は `<expr1>` を返します。
+      - [[ NOT ] IN](https://docs.pingcap.com/ja/tidbcloudlake/in.md): 値が明示的なリストに含まれているか（または含まれていないか）を確認します。
+      - [IS [ NOT ] DISTINCT FROM](https://docs.pingcap.com/ja/tidbcloudlake/is-distinct-from.md): 2 つの式が等しいか（または等しくないか）を、NULL 可能性を考慮して比較します。つまり、等価比較の際に NULL を既知の値として扱います。
+      - [IS_ERROR](https://docs.pingcap.com/ja/tidbcloudlake/is-error.md): 式がエラー値かどうかを示す Boolean 値を返します。
+      - [IS_NOT_ERROR](https://docs.pingcap.com/ja/tidbcloudlake/is-not-error.md): 式がエラー値であるかどうかを示す Boolean 値を返します。
+      - [IS_NOT_NULL](https://docs.pingcap.com/ja/tidbcloudlake/is-not-null.md): 値が NULL ではないかどうかを確認します。
+      - [IS_NULL](https://docs.pingcap.com/ja/tidbcloudlake/is-null.md): 値が NULL かどうかを確認します。
+      - [LEAST](https://docs.pingcap.com/ja/tidbcloudlake/least.md): 値の集合から最小値を返します。集合内のいずれかの値が NULL の場合、この関数は NULL を返します。
+      - [LEAST_IGNORE_NULLS](https://docs.pingcap.com/ja/tidbcloudlake/least-ignore-nulls.md): NULL 値を無視して、一連の値の中から最小値を返します。
+      - [NULLIF](https://docs.pingcap.com/ja/tidbcloudlake/nullif.md): 2 つの式が等しい場合は NULL を返します。それ以外の場合は expr1 を返します。これらは同じデータ型である必要があります。
+      - [NVL](https://docs.pingcap.com/ja/tidbcloudlake/nvl.md): `<expr1>` が NULL の場合は `<expr2>` を返し、それ以外の場合は `<expr1>` を返します。
+      - [NVL2](https://docs.pingcap.com/ja/tidbcloudlake/nvl2.md): `<expr1>` が NULL でない場合は `<expr2>` を返し、それ以外の場合は `<expr3>` を返します。
+    - 数値関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/numeric-functions.md): このページでは、TiDB Cloud Lake の数値関数の包括的な概要を、参照しやすいように機能別に整理して紹介します。
+      - [ABS](https://docs.pingcap.com/ja/tidbcloudlake/abs.md): x の絶対値を返します。
+      - [ACOS](https://docs.pingcap.com/ja/tidbcloudlake/acos.md): x のアークコサイン、つまりコサインが x となる値を返します。x が -1 から 1 の範囲外の場合は NULL を返します。
+      - [ADD](https://docs.pingcap.com/ja/tidbcloudlake/add.md): PLUS のエイリアス。
+      - [ASIN](https://docs.pingcap.com/ja/tidbcloudlake/asin.md): x の逆正弦、つまり正弦が x となる値を返します。x が -1 から 1 の範囲外の場合は NULL を返します。
+      - [ATAN](https://docs.pingcap.com/ja/tidbcloudlake/atan.md): x のアークタンジェント、つまりタンジェントが x となる値を返します。
+      - [ATAN2](https://docs.pingcap.com/ja/tidbcloudlake/atan-sql.md): 2 つの変数 x と y の逆正接を返します。これは y / x の逆正接を計算するのと似ていますが、両方の引数の符号を使用して結果の象限を決定する点が異なります。ATAN(y, x) は ATAN2(y, x) の同義語です。
+      - [CBRT](https://docs.pingcap.com/ja/tidbcloudlake/cbrt.md): 非負の数 x の立方根を返します。
+      - [CEIL](https://docs.pingcap.com/ja/tidbcloudlake/ceil.md): 数値を切り上げます。
+      - [CEILING](https://docs.pingcap.com/ja/tidbcloudlake/ceiling.md): CEIL のエイリアス。
+      - [COS](https://docs.pingcap.com/ja/tidbcloudlake/cos.md): x をラジアン単位で指定したとき、その x のコサインを返します。
+      - [COT](https://docs.pingcap.com/ja/tidbcloudlake/cot.md): x のコタンジェントを返します。x はラジアンで指定します。
+      - [CRC32](https://docs.pingcap.com/ja/tidbcloudlake/crc.md): `x` の CRC32 チェックサムを返します。ここで、`x` は文字列であることが想定されており、文字列でない場合も（可能であれば）文字列として扱われます。
+      - [DEGREES](https://docs.pingcap.com/ja/tidbcloudlake/degrees.md): 引数 x をラジアンから度に変換して返します。x はラジアンで指定します。
+      - [DIV](https://docs.pingcap.com/ja/tidbcloudlake/div.md): 1 番目の数値を 2 番目の数値で割った商を返し、最も近い小さい整数に切り捨てます。除算演算子 // と同等です。
+      - [DIV0](https://docs.pingcap.com/ja/tidbcloudlake/div0.md): 1 番目の数値を 2 番目の数値で割った商を返します。2 番目の数値が 0 の場合は 0 を返します。
+      - [DIVNULL](https://docs.pingcap.com/ja/tidbcloudlake/divnull.md): 1 番目の数値を 2 番目の数値で割った商を返します。2 番目の数値が 0 または NULL の場合は NULL を返します。
+      - [EXP](https://docs.pingcap.com/ja/tidbcloudlake/exp.md): e（自然対数の底）を `x` 乗した値を返します。
+      - [FACTORIAL](https://docs.pingcap.com/ja/tidbcloudlake/factorial.md): x の階乗を返します。x が 0 以下の場合、この関数は 0 を返します。
+      - [FLOOR](https://docs.pingcap.com/ja/tidbcloudlake/floor.md): 数値を切り捨てます。
+      - [INTDIV](https://docs.pingcap.com/ja/tidbcloudlake/intdiv.md): DIV のエイリアス。
+      - [LN](https://docs.pingcap.com/ja/tidbcloudlake/ln.md): x の自然対数、つまり x の底 e の対数を返します。x が 0.0E0 以下の場合、この関数は NULL を返します。
+      - [LOG10](https://docs.pingcap.com/ja/tidbcloudlake/log.md): x の常用対数を返します。x が 0.0E0 以下の場合、この関数は NULL を返します。
+      - [LOG2](https://docs.pingcap.com/ja/tidbcloudlake/log-sql.md): `x` の底 2 の対数を返します。`x` が 0.0E0 以下の場合、この関数は NULL を返します。
+      - [LOG(b, x)](https://docs.pingcap.com/ja/tidbcloudlake/log-b-x.md): x の底 b の対数を返します。x が 0.0E0 以下の場合、この関数は NULL を返します。
+      - [LOG(x)](https://docs.pingcap.com/ja/tidbcloudlake/log-x.md): `x` の自然対数を返します。x が 0.0E0 以下の場合、この関数は NULL を返します。
+      - [MINUS](https://docs.pingcap.com/ja/tidbcloudlake/minus.md): 数値を負の値にします。
+      - [MOD](https://docs.pingcap.com/ja/tidbcloudlake/mod.md): MODULO のエイリアス。
+      - [MODULO](https://docs.pingcap.com/ja/tidbcloudlake/modulo.md): x を y で割った余りを返します。y が 0 の場合は、エラーを返します。
+      - [MULTIPLY](https://docs.pingcap.com/ja/tidbcloudlake/multiply.md): MULTIPLY 関数は 2 つの数値の乗算を実行します。これは `*` 演算子を使用するのと同等です。
+      - [NEG](https://docs.pingcap.com/ja/tidbcloudlake/neg.md): MINUS のエイリアス。
+      - [NEGATE](https://docs.pingcap.com/ja/tidbcloudlake/negate.md): MINUS のエイリアス。
+      - [PI](https://docs.pingcap.com/ja/tidbcloudlake/pi.md): π の値を浮動小数点値として返します。
+      - [PLUS](https://docs.pingcap.com/ja/tidbcloudlake/plus.md): 2 つの数値または decimal 値の合計を計算します。
+      - [POW](https://docs.pingcap.com/ja/tidbcloudlake/pow.md): x の y 乗の値を返します。
+      - [POWER](https://docs.pingcap.com/ja/tidbcloudlake/power.md): POW のエイリアス。
+      - [RADIANS](https://docs.pingcap.com/ja/tidbcloudlake/radians.md): 引数 x を度からラジアンに変換して返します。
+      - [RAND()](https://docs.pingcap.com/ja/tidbcloudlake/rand.md): 範囲 `0 <= v < 1.0` のランダムな浮動小数点値 v を返します。範囲 `i <= R < j` のランダムな整数 R を取得するには、式 `FLOOR(i + RAND() * (j − i))` を使用します。
+      - [RAND(n)](https://docs.pingcap.com/ja/tidbcloudlake/rand-n.md): 範囲 `0 <= v < 1.0` のランダムな浮動小数点値 v を返します。範囲 `i <= R < j` のランダムな整数 R を取得するには、式 `FLOOR(i + RAND() * (j − i))` を使用します。引数 `n` はシード値として使用されます。同じ引数値に対して、RAND(n) は毎回同じ値を返すため、カラム値の再現可能なシーケンスを生成します。
+      - [ROUND](https://docs.pingcap.com/ja/tidbcloudlake/round.md): 引数 x を小数点以下 d 桁に丸めます。丸めアルゴリズムは x のデータ型によって異なります。d を指定しない場合のデフォルト値は 0 です。d には負の値を指定でき、その場合は値 x の小数点の左側にある d 桁が 0 になります。d の絶対値の最大値は 30 で、30（または -30）を超える桁は切り捨てられます。
+      - [SIGN](https://docs.pingcap.com/ja/tidbcloudlake/sign.md): `x` が負、ゼロ、または正のいずれであるかに応じて、引数の符号を -1、0、または 1 として返します。引数が NULL の場合は NULL を返します。
+      - [SIN](https://docs.pingcap.com/ja/tidbcloudlake/sin.md): `x` の正弦を返します。`x` はラジアンで指定します。
+      - [SQRT](https://docs.pingcap.com/ja/tidbcloudlake/sqrt.md): 非負の数 x の平方根を返します。負の入力に対しては Nan を返します。
+      - [SUBTRACT](https://docs.pingcap.com/ja/tidbcloudlake/subtract.md): MINUS のエイリアス。
+      - [TAN](https://docs.pingcap.com/ja/tidbcloudlake/tan.md): x の正接を返します。x はラジアンで指定します。
+      - [TRUNC](https://docs.pingcap.com/ja/tidbcloudlake/trunc.md): 数値 `x` を `d` 桁の小数位で切り捨てて返します。`d` が 0 の場合、結果には小数点や小数部は含まれません。`d` には負の値を指定でき、その場合は値 `x` の小数点の左側にある `d` 桁が 0 になります。`d` の絶対値の最大値は 30 で、30（または -30）を超える桁は切り捨てられます。
+      - [TRUNCATE](https://docs.pingcap.com/ja/tidbcloudlake/truncate.md): 数値 `x` を小数点以下 `d` 桁で切り捨てて返します。`d` が 0 の場合、結果には小数点および小数部分は含まれません。`d` には負の値を指定でき、その場合は値 `x` の小数点の左側にある `d` 桁が 0 になります。`d` の絶対値の最大値は 30 で、30（または -30）を超える桁は切り捨てられます。
+    - 日付・時刻関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/date-time-functions.md): このページでは、TiDB Cloud Lake の日付・時刻関数について、参照しやすいように機能別に整理して包括的に紹介します。
+      - [ADD_MONTHS](https://docs.pingcap.com/ja/tidbcloudlake/add-months.md): add_months() 関数は、指定した月数を指定した日付またはタイムスタンプに加算します。
+      - [ADD TIME INTERVAL](https://docs.pingcap.com/ja/tidbcloudlake/add-interval.md): 日付またはタイムスタンプに時間間隔を加算し、日付型またはタイムスタンプ型の結果を返します。
+      - [AGE](https://docs.pingcap.com/ja/tidbcloudlake/age.md): age() 関数は、2 つのタイムスタンプ間の差、またはタイムスタンプと現在の日時との差を計算します。
+      - [CONVERT_TIMEZONE](https://docs.pingcap.com/ja/tidbcloudlake/convert-timezone.md): タイムスタンプをあるタイムゾーンから別のタイムゾーンに変換します。変換先には有効な IANA タイムゾーン名が必要です。
+      - [CURRENT_TIMESTAMP](https://docs.pingcap.com/ja/tidbcloudlake/current-timestamp.md): NOW のエイリアス。
+      - [DATE](https://docs.pingcap.com/ja/tidbcloudlake/date.md): TO_DATE のエイリアス。
+      - [DATE_ADD](https://docs.pingcap.com/ja/tidbcloudlake/date-add.md): DATE または TIMESTAMP 値に指定した時間間隔を加算します。
+      - [DATE_BETWEEN](https://docs.pingcap.com/ja/tidbcloudlake/date-between.md): 2 つの日付またはタイムスタンプの間の時間間隔を計算し、指定した単位での差を整数で返します。1 つ目の時刻が 2 つ目より前の場合は正の値、逆の場合は負の値を返します。
+      - [DATE_DIFF](https://docs.pingcap.com/ja/tidbcloudlake/date-diff.md): 指定した時間単位に基づいて、2 つの日付またはタイムスタンプの差を計算します。`<end_date>` が `<start_date>` より後の場合は結果は正になり、前の場合は負になります。
+      - [DATE_FORMAT](https://docs.pingcap.com/ja/tidbcloudlake/date-format.md): TO_STRING のエイリアス。
+      - [DATE_PART](https://docs.pingcap.com/ja/tidbcloudlake/date-part.md): 日付またはタイムスタンプの指定した部分を取得します。
+      - [DATE_SUB](https://docs.pingcap.com/ja/tidbcloudlake/date-sub.md): 指定した日付または日時（timestamp/datetime）から、時間間隔または日付間隔を減算します。
+      - [DATE_TRUNC](https://docs.pingcap.com/ja/tidbcloudlake/date-trunc.md): 日付またはタイムスタンプを指定した精度に切り捨て、日付とタイムスタンプを標準化された方法で操作できるようにします。この関数はさまざまなデータベースシステムとの互換性を考慮して設計されており、ユーザーが異なるデータベース間で移行や作業をしやすくします。
+      - [DAY](https://docs.pingcap.com/ja/tidbcloudlake/day.md): TO_DAY_OF_MONTH のエイリアス。
+      - [EXTRACT](https://docs.pingcap.com/ja/tidbcloudlake/extract.md): 日付、タイムスタンプ、または interval の指定された部分を取得します。
+      - [LAST_DAY](https://docs.pingcap.com/ja/tidbcloudlake/last-day.md): 指定された日付またはタイムスタンプに基づいて、指定した期間（週、月、四半期、または年）の最終日を返します。
+      - [MILLENNIUM](https://docs.pingcap.com/ja/tidbcloudlake/millennium.md): 指定された日付またはタイムスタンプの千年紀を返します。第1千年紀は 0001～1000 年、第2千年紀は 1001～2000 年、第3千年紀は 2001～3000 年、以降も同様です。
+      - [MONTH](https://docs.pingcap.com/ja/tidbcloudlake/month.md): TO_MONTH のエイリアス。
+      - [MONTHS_BETWEEN](https://docs.pingcap.com/ja/tidbcloudlake/months-between.md): *date1* と *date2* の間の月数を返します。
+      - [NEXT_DAY](https://docs.pingcap.com/ja/tidbcloudlake/next-day.md): 指定した日付またはタイムスタンプの後に到来する、指定した曜日の日付を返します。
+      - [NOW](https://docs.pingcap.com/ja/tidbcloudlake/now.md): 現在の日付と時刻を返します。
+      - [PREVIOUS_DAY](https://docs.pingcap.com/ja/tidbcloudlake/previous-day.md): 指定された日付またはタイムスタンプより前にある、指定した曜日の直近の日付を返します。
+      - [QUARTER](https://docs.pingcap.com/ja/tidbcloudlake/quarter.md): TO_QUARTER のエイリアス。
+      - [STR_TO_DATE](https://docs.pingcap.com/ja/tidbcloudlake/str-to-date.md): TO_DATE のエイリアス。
+      - [STR_TO_TIMESTAMP](https://docs.pingcap.com/ja/tidbcloudlake/str-to-timestamp.md): TO_TIMESTAMP のエイリアス。
+      - [SUBTRACT TIME INTERVAL](https://docs.pingcap.com/ja/tidbcloudlake/subtract-interval.md): 時間間隔を減算する関数。
+      - [TIME_SLICE](https://docs.pingcap.com/ja/tidbcloudlake/time-slice.md): TIME_SLICE は、単一の日付/タイムスタンプ値を固定のカレンダー間隔（スライスまたはバケット）にマッピングするために使用されるスカラー関数です。
+      - [TIME_SLOT](https://docs.pingcap.com/ja/tidbcloudlake/time-slot.md): 時刻を30分単位に丸めます。
+      - [TIMESTAMP_DIFF](https://docs.pingcap.com/ja/tidbcloudlake/timestamp-diff.md): 2 つのタイムスタンプの差を計算し、結果を INTERVAL として返します。
+      - [TIMEZONE](https://docs.pingcap.com/ja/tidbcloudlake/timezone.md): 現在の接続のタイムゾーンを返します。
+      - [TO_DATE](https://docs.pingcap.com/ja/tidbcloudlake/to-date.md): 式を日付に変換します。変換対象には以下が含まれます。
+      - [TO_DATETIME](https://docs.pingcap.com/ja/tidbcloudlake/datetime.md): TO_TIMESTAMP のエイリアス。
+      - [TO_DAY_OF_MONTH](https://docs.pingcap.com/ja/tidbcloudlake/to-day-of-month.md): 日付または時刻を含む日付（timestamp/datetime）を、月の日（1-31）を表す UInt8 数値に変換します。
+      - [TO_DAY_OF_WEEK](https://docs.pingcap.com/ja/tidbcloudlake/day-week.md): 日付または時刻を含む日付（timestamp/datetime）を、曜日番号を表す UInt8 の数値に変換します（Monday は 1、Sunday は 7）。
+      - [TO_DAY_OF_YEAR](https://docs.pingcap.com/ja/tidbcloudlake/day-year.md): 日付または時刻付きの日付（timestamp/datetime）を、その年の通算日（1-366）を表す UInt16 の数値に変換します。
+      - [TO_HOUR](https://docs.pingcap.com/ja/tidbcloudlake/hour.md): 時刻を含む日付（timestamp/datetime）を、24時間表記の時（0～23）を表す UInt8 数値に変換します。この関数は、時計が進められる場合は 1 時間進み午前 2 時に発生し、時計が戻される場合は 1 時間戻り午前 3 時に発生すると仮定します（これは常に正しいわけではなく、モスクワでさえ異なる時刻に 2 回変更されたことがあります）。
+      - [TO_MINUTE](https://docs.pingcap.com/ja/tidbcloudlake/minute.md): 時刻を含む日付（timestamp/datetime）を、時の中の分数（0-59）を含む UInt8 数値に変換します。
+      - [TO_MONDAY](https://docs.pingcap.com/ja/tidbcloudlake/monday.md): 日付または日時（timestamp/datetime）を直近の月曜日に切り下げます。日付を返します。
+      - [TO_MONTH](https://docs.pingcap.com/ja/tidbcloudlake/to-month.md): 日付または日時（timestamp/datetime）を、月番号（1-12）を含む UInt8 数値に変換します。
+      - [TO_QUARTER](https://docs.pingcap.com/ja/tidbcloudlake/to-quarter.md): 指定された日付またはタイムスタンプから四半期（1、2、3、または4）を取得します。
+      - [TO_SECOND](https://docs.pingcap.com/ja/tidbcloudlake/second.md): 時刻を含む日付（timestamp/datetime）を、分内の秒数（0-59）を含む UInt8 数値に変換します。
+      - [TO_START_OF_DAY](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-day.md): 時刻を含む日付（timestamp/datetime）をその日の開始時刻に切り下げます。
+      - [TO_START_OF_FIFTEEN_MINUTES](https://docs.pingcap.com/ja/tidbcloudlake/start-fifteen-minutes.md): 日時（timestamp/datetime）を15分間隔の開始時刻に切り捨てます。
+      - [TO_START_OF_FIVE_MINUTES](https://docs.pingcap.com/ja/tidbcloudlake/start-five-minutes.md): 時刻を含む日付（timestamp/datetime）を 5 分間隔の開始時刻に切り捨てます。
+      - [TO_START_OF_HOUR](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-hour.md): 時刻を含む日付（timestamp/datetime）を、その時間の開始時刻に切り捨てます。
+      - [TO_START_OF_ISO_YEAR](https://docs.pingcap.com/ja/tidbcloudlake/start-iso-year.md): 日付または時刻を含む日付（timestamp/datetime）に対して、ISO 年の最初の日を返します。
+      - [TO_START_OF_MINUTE](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-minute.md): 時刻を含む日付（timestamp/datetime）をその分の開始時刻に切り下げます。
+      - [TO_START_OF_MONTH](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-month.md): 日付または時刻を含む日付（timestamp/datetime）をその月の初日に切り下げます。日付を返します。
+      - [TO_START_OF_QUARTER](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-quarter.md): 日付または日時（timestamp/datetime）を、その四半期の初日まで切り下げます。四半期の初日は、1 月 1 日、4 月 1 日、7 月 1 日、または 10 月 1 日のいずれかです。日付を返します。
+      - [TO_START_OF_SECOND](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-second.md): 時刻を含む日付（timestamp/datetime）を秒の開始時点に切り下げます。
+      - [TO_START_OF_TEN_MINUTES](https://docs.pingcap.com/ja/tidbcloudlake/start-ten-minutes.md): 時刻を含む日付（timestamp/datetime）を 10 分間隔の開始時刻に切り捨てます。
+      - [TO_START_OF_WEEK](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-week.md): 日付または日時（timestamp/datetime）に対して、その週の最初の日を返します。週の最初の日は、引数 mode で指定された日曜日または月曜日です。
+      - [TO_START_OF_YEAR](https://docs.pingcap.com/ja/tidbcloudlake/to-start-of-year.md): 日付または日時（timestamp/datetime）に対して、その年の最初の日を返します。
+      - [TO_TIMESTAMP](https://docs.pingcap.com/ja/tidbcloudlake/to-timestamp.md): 式を時刻付きの日付に変換します。
+      - [TO_TIMESTAMP_TZ](https://docs.pingcap.com/ja/tidbcloudlake/timestamp-tz.md): 値を TIMESTAMP_TZ に変換し、UTC 時刻とタイムゾーンオフセットの両方を保持します。エラーの代わりに NULL を返したい場合は TRY_TO_TIMESTAMP_TZ を使用します。
+      - [TO_UNIX_TIMESTAMP](https://docs.pingcap.com/ja/tidbcloudlake/unix-timestamp.md): 日付/時刻形式のタイムスタンプを Unix タイムスタンプ形式に変換します。
+      - [TO_WEEK_OF_YEAR](https://docs.pingcap.com/ja/tidbcloudlake/to-week-of-year.md): 指定した日付の年内の週番号を計算します。
+      - [TO_YEAR](https://docs.pingcap.com/ja/tidbcloudlake/to-year.md): 日付または日時（timestamp/datetime）を、西暦の年を含む UInt16 数値に変換します。
+      - [TO_YYYYMM](https://docs.pingcap.com/ja/tidbcloudlake/yyyymm.md): 日付または日時（timestamp/datetime）を、年と月の番号を含む UInt32 の数値に変換します。
+      - [TO_YYYYMMDD](https://docs.pingcap.com/ja/tidbcloudlake/yyyymmdd.md): 日付または時刻を含む日付（timestamp/datetime）を、年・月・日を含む UInt32 の数値（YYYY * 10000 + MM * 100 + DD）に変換します。
+      - [TO_YYYYMMDDHH](https://docs.pingcap.com/ja/tidbcloudlake/yyyymmddhh.md): 指定された日付またはタイムスタンプを、"YYYYMMDDHH"（年、月、日、時）の形式の文字列表現にフォーマットします。
+      - [TO_YYYYMMDDHHMMSS](https://docs.pingcap.com/ja/tidbcloudlake/yyyymmddhhmmss.md): 日付または時刻付きの日付（timestamp/datetime）を、年・月・日・時・分・秒を含む UInt64 数値（YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss）に変換します。
+      - [TODAY](https://docs.pingcap.com/ja/tidbcloudlake/today.md): 現在の日付を返します。
+      - [TOMORROW](https://docs.pingcap.com/ja/tidbcloudlake/tomorrow.md): 明日の日付を返します。`today() + 1` と同じです。
+      - [TRUNC](https://docs.pingcap.com/ja/tidbcloudlake/trunc-sql.md): 日付またはタイムスタンプを指定した精度に切り捨てます。この関数は広く採用されている日付切り捨て構文に従っているため、他のデータベースシステムから移行するユーザーにとって使いやすくなっています。
+      - [TRY_TO_DATETIME](https://docs.pingcap.com/ja/tidbcloudlake/try-to-datetime.md): TRY_TO_TIMESTAMP のエイリアス。
+      - [TRY_TO_TIMESTAMP](https://docs.pingcap.com/ja/tidbcloudlake/try-to-timestamp.md): TiDB Cloud Lake における TO_TIMESTAMP のバリアントで、入力式を timestamp に変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。
+      - [WEEK](https://docs.pingcap.com/ja/tidbcloudlake/week.md): TO_WEEK_OF_YEAR のエイリアス。
+      - [WEEKOFYEAR](https://docs.pingcap.com/ja/tidbcloudlake/weekofyear.md): TO_WEEK_OF_YEAR のエイリアス。
+      - [YEAR](https://docs.pingcap.com/ja/tidbcloudlake/year.md): TO_YEAR のエイリアス。
+      - [YEARWEEK](https://docs.pingcap.com/ja/tidbcloudlake/yearweek.md): ISO 週日付に従って、`YYYYWW` 形式の年と週番号を返します。第 1 週は、その年の最初の木曜日を含む週です。
+      - [YESTERDAY](https://docs.pingcap.com/ja/tidbcloudlake/yesterday.md): 昨日の日付を返します。`today() - 1` と同じです。
+    - インターバル関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/interval-functions.md): このセクションでは、TiDB Cloud Lake の interval 関数に関するリファレンス情報を提供します。interval 関数を使用すると、日付および時刻の計算で使用するさまざまな時間単位の interval 値を作成できます。
+      - [EPOCH](https://docs.pingcap.com/ja/tidbcloudlake/epoch.md): TO_SECONDS のエイリアス。
+      - [TO_CENTURIES](https://docs.pingcap.com/ja/tidbcloudlake/to-centuries.md): 指定した世紀数を Interval 型に変換します。
+      - [TO_DAYS](https://docs.pingcap.com/ja/tidbcloudlake/days.md): 指定した日数を Interval 型に変換します。
+      - [TO_DECADES](https://docs.pingcap.com/ja/tidbcloudlake/decades.md): 指定した数の 10 年（decade）を Interval 型に変換します。
+      - [TO_HOURS](https://docs.pingcap.com/ja/tidbcloudlake/hours.md): 指定した時間数を Interval 型に変換します。
+      - [TO_MICROSECONDS](https://docs.pingcap.com/ja/tidbcloudlake/microseconds.md): 指定したマイクロ秒数を Interval 型に変換します。
+      - [TO_MILLENNIA](https://docs.pingcap.com/ja/tidbcloudlake/millennia.md): 指定した千年紀数を Interval 型に変換します。
+      - [TO_MILLISECONDS](https://docs.pingcap.com/ja/tidbcloudlake/milliseconds.md): 指定したミリ秒数を Interval 型に変換します。
+      - [TO_MINUTES](https://docs.pingcap.com/ja/tidbcloudlake/minutes.md): 指定した分数を Interval 型に変換します。
+      - [TO_MONTHS](https://docs.pingcap.com/ja/tidbcloudlake/months.md): 指定した月数を Interval 型に変換します。
+      - [TO_SECONDS](https://docs.pingcap.com/ja/tidbcloudlake/seconds.md): 指定した秒数を Interval 型に変換します。
+      - [TO_WEEKS](https://docs.pingcap.com/ja/tidbcloudlake/weeks.md): 指定した週数を Interval 型に変換します。
+      - [TO_YEARS](https://docs.pingcap.com/ja/tidbcloudlake/years.md): 指定した年数を Interval 型に変換します。
+    - 文字列関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/string-functions-overview.md): このページでは、TiDB Cloud Lake の文字列関数について、参照しやすいように機能別に整理して包括的に紹介します。
+      - [ASCII](https://docs.pingcap.com/ja/tidbcloudlake/ascii.md): 文字列 str の最も左の文字の数値を返します。
+      - [BIN](https://docs.pingcap.com/ja/tidbcloudlake/bin.md): N のバイナリ値の文字列表現を返します。
+      - [BIT_LENGTH](https://docs.pingcap.com/ja/tidbcloudlake/bit-length.md): 文字列の長さをビット単位で返します。
+      - [CHAR](https://docs.pingcap.com/ja/tidbcloudlake/char.md): 渡された各整数に対応する文字を返します。この関数は、各整数を対応する Unicode 文字に変換します。
+      - [CHAR_LENGTH](https://docs.pingcap.com/ja/tidbcloudlake/char-length.md): LENGTH のエイリアス。
+      - [CHARACTER_LENGTH](https://docs.pingcap.com/ja/tidbcloudlake/character-length.md): LENGTH のエイリアス。
+      - [CONCAT](https://docs.pingcap.com/ja/tidbcloudlake/concat.md): 引数を連結した結果の文字列を返します。引数は 1 つ以上指定できます。すべての引数が非バイナリ文字列の場合、結果は非バイナリ文字列になります。引数にバイナリ文字列が含まれる場合、結果はバイナリ文字列になります。数値引数は、対応する非バイナリ文字列形式に変換されます。
+      - [CONCAT_WS](https://docs.pingcap.com/ja/tidbcloudlake/concat-ws.md): CONCAT_WS() は Concatenate With Separator の略で、CONCAT() の特殊な形式です。最初の引数は、それ以降の引数に対する区切り文字です。区切り文字は連結される文字列の間に追加されます。区切り文字には文字列を指定でき、他の引数も同様に文字列を指定できます。区切り文字が NULL の場合、結果は NULL になります。
+      - [FROM_BASE64](https://docs.pingcap.com/ja/tidbcloudlake/from-base64.md): base-64 エンコード規則でエンコードされた文字列を受け取り、デコード結果をバイナリとして返します。引数が NULL の場合、または有効な base-64 文字列でない場合、結果は NULL になります。
+      - [FROM_HEX](https://docs.pingcap.com/ja/tidbcloudlake/from-hex.md): UNHEX のエイリアス。
+      - [GLOB](https://docs.pingcap.com/ja/tidbcloudlake/glob.md): ワイルドカード文字を使用して、大文字と小文字を区別するパターンマッチングを実行します。
+      - [HEX](https://docs.pingcap.com/ja/tidbcloudlake/hex.md): TO_HEX のエイリアス。
+      - [INSERT](https://docs.pingcap.com/ja/tidbcloudlake/insert-sql.md): 文字列 str のうち、位置 pos から始まる長さ len の部分文字列を文字列 newstr で置き換えた結果を返します。pos が文字列の長さの範囲内にない場合は、元の文字列を返します。len が残りの文字列の長さの範囲内にない場合は、位置 pos から文字列の残りを置き換えます。いずれかの引数が NULL の場合は NULL を返します。
+      - [INSTR](https://docs.pingcap.com/ja/tidbcloudlake/instr.md): 文字列 str 内で部分文字列 substr が最初に出現する位置を返します。これは LOCATE() の 2 引数形式と同じですが、引数の順序が逆です。
+      - [JARO_WINKLER](https://docs.pingcap.com/ja/tidbcloudlake/jaro-winkler.md): 2 つの文字列間の Jaro-Winkler 距離を計算します。これは文字列間の類似度を測定するためによく使用され、値の範囲は 0.0（完全に異なる）から 1.0（同一の文字列）です。
+      - [LCASE](https://docs.pingcap.com/ja/tidbcloudlake/lcase.md): LOWER のエイリアス。
+      - [LEFT](https://docs.pingcap.com/ja/tidbcloudlake/left.md): 文字列 str の左端から len 文字を返します。いずれかの引数が NULL の場合は NULL を返します。len が str の長さより大きい場合は、str 全体を返します。
+      - [LENGTH](https://docs.pingcap.com/ja/tidbcloudlake/length.md): 指定された入力文字列またはバイナリ値の長さを返します。文字列の場合、長さは文字数を表し、各 UTF-8 文字は 1 文字として数えられます。バイナリデータの場合、長さはバイト数に対応します。
+      - [LENGTH_UTF8](https://docs.pingcap.com/ja/tidbcloudlake/length-utf8.md): LENGTH のエイリアス。
+      - [LIKE](https://docs.pingcap.com/ja/tidbcloudlake/like.md): SQL パターンを使用したパターンマッチング。1 (TRUE) または 0 (FALSE) を返します。expr または pat のいずれかが NULL の場合、結果は NULL です。
+      - [LOCATE](https://docs.pingcap.com/ja/tidbcloudlake/locate.md): 最初の構文は、文字列 str 内で部分文字列 substr が最初に出現する位置を返します。2 番目の構文は、位置 pos から検索を開始して、文字列 str 内で部分文字列 substr が最初に出現する位置を返します。substr が str に含まれない場合は 0 を返します。いずれかの引数が NULL の場合は NULL を返します。
+      - [LOWER](https://docs.pingcap.com/ja/tidbcloudlake/lower.md): すべての文字を小文字に変換した文字列を返します。
+      - [LPAD](https://docs.pingcap.com/ja/tidbcloudlake/lpad.md): 文字列 str の左側を文字列 padstr で埋めて、長さ len 文字の文字列を返します。str が len より長い場合、返り値は len 文字に切り詰められます。
+      - [LTRIM](https://docs.pingcap.com/ja/tidbcloudlake/ltrim.md): 指定されたトリム文字列に含まれる任意の文字を、文字列の左側からすべて削除します。
+      - [MID](https://docs.pingcap.com/ja/tidbcloudlake/mid.md): SUBSTR のエイリアス。
+      - [NOT LIKE](https://docs.pingcap.com/ja/tidbcloudlake/not-like.md): SQL パターンを使用してパターンに一致しないことを判定します。1 (TRUE) または 0 (FALSE) を返します。expr または pat のいずれかが NULL の場合、結果は NULL です。
+      - [NOT REGEXP](https://docs.pingcap.com/ja/tidbcloudlake/not-regexp.md): 文字列 expr が pattern pat で指定された正規表現に一致しない場合は 1 を返し、それ以外の場合は 0 を返します。
+      - [NOT RLIKE](https://docs.pingcap.com/ja/tidbcloudlake/not-rlike.md): 文字列 expr が pattern pat で指定された正規表現に一致しない場合は 1 を返し、それ以外の場合は 0 を返します。
+      - [OCT](https://docs.pingcap.com/ja/tidbcloudlake/oct.md): N の 8 進数値の文字列表現を返します。
+      - [OCTET_LENGTH](https://docs.pingcap.com/ja/tidbcloudlake/octet-length.md): OCTET_LENGTH() は LENGTH() の同義語です。
+      - [ORD](https://docs.pingcap.com/ja/tidbcloudlake/ord.md): 左端の文字がマルチバイト文字でない場合、ORD() は ASCII() 関数と同じ値を返します。
+      - [POSITION](https://docs.pingcap.com/ja/tidbcloudlake/position.md): POSITION(substr IN str) は LOCATE(substr,str) の同義語です。文字列 str 内で部分文字列 substr が最初に出現する位置を返します。substr が str に含まれていない場合は 0 を返します。いずれかの引数が NULL の場合は NULL を返します。
+      - [QUOTE](https://docs.pingcap.com/ja/tidbcloudlake/quote.md): 文字列をクォートし、SQL 文で適切にエスケープされたデータ値として使用できる結果を生成します。
+      - [REGEXP](https://docs.pingcap.com/ja/tidbcloudlake/regexp.md): 文字列 `<expr>` が `<pattern>` で指定された正規表現に一致する場合は true を返し、それ以外の場合は false を返します。
+      - [REGEXP_INSTR](https://docs.pingcap.com/ja/tidbcloudlake/regexp-instr.md): パターン `pat` で指定された正規表現に一致する文字列 `expr` の部分文字列の開始インデックスを返します。一致がない場合は `0` を返します。`expr` または `pat` が NULL の場合、戻り値は NULL です。文字インデックスは `1` から始まります。
+      - [REGEXP_LIKE](https://docs.pingcap.com/ja/tidbcloudlake/regexp-like.md): REGEXP_LIKE 関数は、文字列が正規表現に一致するかどうかを確認するために使用されます。
+      - [REGEXP_REPLACE](https://docs.pingcap.com/ja/tidbcloudlake/regexp-replace.md): 文字列 `expr` 内で、パターン `pat` で指定された正規表現に一致する箇所を置換文字列 `repl` に置き換え、結果の文字列を返します。`expr`、`pat`、または `repl` が NULL の場合、戻り値は NULL です。
+      - [REGEXP_SPLIT_TO_ARRAY](https://docs.pingcap.com/ja/tidbcloudlake/regexp-split-array.md): 正規表現パターンを使用して文字列を分割し、各セグメントを配列として返します。
+      - [REGEXP_SPLIT_TO_TABLE](https://docs.pingcap.com/ja/tidbcloudlake/regexp-split-table.md): 正規表現パターンを使用して文字列を分割し、各セグメントをテーブルとして返します。
+      - [REGEXP_SUBSTR](https://docs.pingcap.com/ja/tidbcloudlake/regexp-substr.md): パターン `pat` で指定された正規表現に一致する文字列 `expr` の部分文字列を返します。一致がない場合は NULL を返します。`expr` または `pat` が NULL の場合、戻り値は NULL です。
+      - [REPEAT](https://docs.pingcap.com/ja/tidbcloudlake/repeat.md): 文字列 str を count 回繰り返した文字列を返します。count が 1 未満の場合は空文字列を返します。str または count が NULL の場合は NULL を返します。
+      - [REPLACE](https://docs.pingcap.com/ja/tidbcloudlake/replace-sql.md): 文字列 str 内の文字列 from_str のすべての出現箇所を文字列 to_str に置き換えて返します。
+      - [REVERSE](https://docs.pingcap.com/ja/tidbcloudlake/reverse.md): 文字の順序を逆にした文字列 str を返します。
+      - [RIGHT](https://docs.pingcap.com/ja/tidbcloudlake/right.md): 文字列 str の右端から len 文字を返します。いずれかの引数が NULL の場合は NULL を返します。
+      - [RLIKE](https://docs.pingcap.com/ja/tidbcloudlake/rlike.md): REGEXP のエイリアス。
+      - [RPAD](https://docs.pingcap.com/ja/tidbcloudlake/rpad.md): 文字列 str を、文字列 padstr を使って右側に埋め込み、長さ len 文字にして返します。str が len より長い場合、返り値は len 文字に切り詰められます。
+      - [RTRIM](https://docs.pingcap.com/ja/tidbcloudlake/rtrim.md): 指定したトリム文字列に含まれる任意の文字を、文字列の右側からすべて削除します。
+      - [SOUNDEX](https://docs.pingcap.com/ja/tidbcloudlake/soundex.md): 文字列の Soundex コードを生成します。
+      - [SOUNDS LIKE](https://docs.pingcap.com/ja/tidbcloudlake/sounds-like.md): 2 つの文字列の発音を、それぞれの Soundex コードを使って比較します。Soundex は、文字列の発音を表すコードを生成する音声学的アルゴリズムで、スペルではなく発音に基づいて文字列をおおよそ一致させることができます。TiDB Cloud Lake では、文字列から Soundex コードを取得できる SOUNDEX 関数を提供しています。
+      - [SPACE](https://docs.pingcap.com/ja/tidbcloudlake/space.md): N 個の空白文字からなる文字列を返します。
+      - [SPLIT](https://docs.pingcap.com/ja/tidbcloudlake/split.md): 指定した区切り文字を使用して文字列を分割し、結果の各部分を配列として返します。
+      - [SPLIT_PART](https://docs.pingcap.com/ja/tidbcloudlake/split-part.md): 指定した区切り文字で文字列を分割し、指定した部分を返します。
+      - [STRCMP](https://docs.pingcap.com/ja/tidbcloudlake/strcmp.md): 文字列が同じ場合は 0 を返し、第 1 引数が第 2 引数より小さい場合は -1、それ以外の場合は 1 を返します。
+      - [SUBSTR](https://docs.pingcap.com/ja/tidbcloudlake/substr.md): 指定された文字列の特定の位置から、指定した文字数を含む文字列を抽出します。
+      - [SUBSTRING](https://docs.pingcap.com/ja/tidbcloudlake/substring.md): SUBSTR のエイリアス。
+      - [TO_BASE64](https://docs.pingcap.com/ja/tidbcloudlake/to-base64.md): 文字列引数を base-64 エンコード形式に変換し、その結果を文字列として返します。引数が文字列でない場合は、変換の前に文字列に変換されます。引数が NULL の場合、結果は NULL になります。
+      - [TRANSLATE](https://docs.pingcap.com/ja/tidbcloudlake/translate.md): 指定されたマッピングに基づいて、特定の文字を対応する置換文字に置き換えることで、指定された文字列を変換します。
+      - [TRIM](https://docs.pingcap.com/ja/tidbcloudlake/trim.md): 文字列の先頭、末尾、または両側から、空白、特定の文字、または部分文字列を削除します。
+      - [TRIM_BOTH](https://docs.pingcap.com/ja/tidbcloudlake/trim-both.md): 指定したトリム文字列のすべての出現を、文字列の先頭、末尾、または両端から削除します。
+      - [TRIM_LEADING](https://docs.pingcap.com/ja/tidbcloudlake/trim-leading.md): 指定したトリム文字列のすべての出現を文字列の先頭から削除します。
+      - [TRIM_TRAILING](https://docs.pingcap.com/ja/tidbcloudlake/trim-trailing.md): 指定したトリム文字列を文字列の末尾からすべて削除します。
+      - [UCASE](https://docs.pingcap.com/ja/tidbcloudlake/ucase.md): UPPER のエイリアス。
+      - [UNHEX](https://docs.pingcap.com/ja/tidbcloudlake/unhex.md): 文字列引数 str に対して、UNHEX(str) は引数内の各文字ペアを16進数として解釈し、その数値が表すバイトに変換します。戻り値はバイナリ文字列です。
+      - [UPPER](https://docs.pingcap.com/ja/tidbcloudlake/upper.md): すべての文字を大文字に変換した文字列を返します。
+    - 集計関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/aggregate-functions.md): このページでは、TiDB Cloud Lake の集計関数について、機能別に整理して包括的に紹介します。参照しやすいように構成されています。
+      - [ANY_VALUE](https://docs.pingcap.com/ja/tidbcloudlake/any-value.md): 集計関数。
+      - [APPROX_COUNT_DISTINCT](https://docs.pingcap.com/ja/tidbcloudlake/approx-count-distinct.md): HyperLogLog アルゴリズムを使用して、データセット内の異なる値の数を推定します。
+      - [ARG_MAX](https://docs.pingcap.com/ja/tidbcloudlake/arg-max.md): 最大の val 値に対応する arg 値を計算します。val の最大値に対して arg の値が複数ある場合は、最初に見つかった値を返します。
+      - [ARG_MIN](https://docs.pingcap.com/ja/tidbcloudlake/arg-min.md): 最小の `val` 値に対応する `arg` 値を計算します。`val` の最小値に対して異なる `arg` 値が複数ある場合は、最初に見つかった値を返します。
+      - [ARRAY_AGG](https://docs.pingcap.com/ja/tidbcloudlake/array-agg.md): ARRAY_AGG 関数（別名 LIST とも呼ばれます）は、クエリ結果内の特定のカラムの値のうち、NULL を除くすべての値を配列に変換します。
+      - [AVG](https://docs.pingcap.com/ja/tidbcloudlake/avg.md): 集計関数。
+      - [AVG_IF](https://docs.pingcap.com/ja/tidbcloudlake/avg-if.md): 任意の集計関数の名前に接尾辞 -If を付けることができます。この場合、集計関数は追加の引数、つまり条件を受け取ります。
+      - [bool_and](https://docs.pingcap.com/ja/tidbcloudlake/bool-and.md): すべての入力値が true の場合に true を返し、それ以外の場合は false を返します。
+      - [bool_or](https://docs.pingcap.com/ja/tidbcloudlake/bool-or.md): 少なくとも 1 つの入力値が true の場合に true を返し、それ以外の場合は false を返します。
+      - [COUNT](https://docs.pingcap.com/ja/tidbcloudlake/count.md): COUNT() 関数は、SELECT クエリによって返されるレコード数を返します。
+      - [COUNT_DISTINCT](https://docs.pingcap.com/ja/tidbcloudlake/count-distinct.md): 集計関数。
+      - [COUNT_IF](https://docs.pingcap.com/ja/tidbcloudlake/count-if.md): 接尾辞 `_IF` は任意の集計関数名の末尾に追加できます。この場合、集計関数は追加の引数、つまり条件を受け取ります。
+      - [COVAR_POP](https://docs.pingcap.com/ja/tidbcloudlake/covar-pop.md): 数値ペアの集合の母共分散を返します。
+      - [COVAR_SAMP](https://docs.pingcap.com/ja/tidbcloudlake/covar-samp.md): 2 つのデータカラムの標本共分散 (Σ((x - x̅)(y - y̅)) / (n - 1)) を返します。
+      - [GROUP_ARRAY_MOVING_AVG](https://docs.pingcap.com/ja/tidbcloudlake/group-array-moving-avg.md): GROUP_ARRAY_MOVING_AVG 関数は、入力値の移動平均を計算します。この関数は、ウィンドウサイズをパラメータとして受け取ることができます。指定しない場合、ウィンドウサイズは入力値の数と同じになります。
+      - [GROUP_ARRAY_MOVING_SUM](https://docs.pingcap.com/ja/tidbcloudlake/group-array-moving-sum.md): GROUP_ARRAY_MOVING_SUM 関数は、入力値の移動合計を計算します。この関数は、ウィンドウサイズをパラメータとして受け取ることができます。指定しない場合、ウィンドウサイズは入力値の数と同じになります。
+      - [GROUP_CONCAT](https://docs.pingcap.com/ja/tidbcloudlake/group-concat.md): LISTAGG のエイリアス。
+      - [HISTOGRAM](https://docs.pingcap.com/ja/tidbcloudlake/histogram.md): 「equal height」バケット戦略を使用してデータ分布のヒストグラムを生成します。
+      - [JSON_ARRAY_AGG](https://docs.pingcap.com/ja/tidbcloudlake/json-array-agg.md): NULL をスキップしながら値を JSON 配列に変換します。
+      - [JSON_OBJECT_AGG](https://docs.pingcap.com/ja/tidbcloudlake/json-object-agg.md): キーと値のペアを JSON オブジェクトに変換します。入力内の各行について、キーは `<key_expression>` から導出され、値は `<value_expression>` から導出されるキーと値のペアを生成します。これらのキーと値のペアは、その後 1 つの JSON オブジェクトに結合されます。
+      - [KURTOSIS](https://docs.pingcap.com/ja/tidbcloudlake/kurtosis.md): 集計関数。
+      - [LISTAGG](https://docs.pingcap.com/ja/tidbcloudlake/listagg.md): 指定した区切り文字で複数行の値を 1 つの文字列に連結します。この操作は 2 種類の関数タイプで実行できます。- 集計関数: 連結は結果セット全体のすべての行に対して行われます。- ウィンドウ関数: 連結は `PARTITION BY` 句で定義された結果セット内の各パーティションごとに行われます。
+      - [MARKOV_TRAIN](https://docs.pingcap.com/ja/tidbcloudlake/markov-train.md): マルコフモデルを使用してデータセットからパターンを抽出します。
+      - [MAX](https://docs.pingcap.com/ja/tidbcloudlake/max.md): 集計関数。
+      - [MAX_IF](https://docs.pingcap.com/ja/tidbcloudlake/max-if.md): 接尾辞 `_IF` は任意の集計関数名に追加できます。この場合、集計関数は追加の引数、つまり条件を受け取ります。
+      - [MEDIAN](https://docs.pingcap.com/ja/tidbcloudlake/median.md): MEDIAN() 関数。
+      - [MEDIAN_TDIGEST](https://docs.pingcap.com/ja/tidbcloudlake/median-tdigest.md): t-digest アルゴリズムを使用して、数値データのシーケンスの中央値を計算します。
+      - [MIN](https://docs.pingcap.com/ja/tidbcloudlake/min.md): 集計関数。
+      - [MIN_IF](https://docs.pingcap.com/ja/tidbcloudlake/min-if.md): 接尾辞 `_IF` は任意の集計関数名の末尾に追加できます。この場合、集計関数は追加の引数である条件を受け取ります。
+      - [MODE](https://docs.pingcap.com/ja/tidbcloudlake/mode.md): 値のグループ内で最も頻繁に出現する値を返します。
+      - [QUANTILE_CONT](https://docs.pingcap.com/ja/tidbcloudlake/quantile-cont.md): QUANTILE_CONT() 関数は、数値データのシーケンスの補間された分位数を計算します。
+      - [QUANTILE_DISC](https://docs.pingcap.com/ja/tidbcloudlake/quantile-disc.md): `QUANTILE_DISC()` 関数は、数値データのシーケンスの正確な分位数を計算します。
+      - [QUANTILE_TDIGEST](https://docs.pingcap.com/ja/tidbcloudlake/quantile-tdigest.md): t-digest アルゴリズムを使用して、数値データのシーケンスの近似分位数を計算します。
+      - [QUANTILE_TDIGEST_WEIGHTED](https://docs.pingcap.com/ja/tidbcloudlake/quantile-tdigest-weighted.md): t-digest アルゴリズムを使用して、数値データのシーケンスの近似分位数を計算します。この関数は、シーケンスの各メンバーの重みを考慮します。メモリ消費量は log(n) で、n は値の数です。
+      - [RETENTION](https://docs.pingcap.com/ja/tidbcloudlake/retention.md): 集計関数。
+      - [SKEWNESS](https://docs.pingcap.com/ja/tidbcloudlake/skewness.md): 集計関数。
+      - [ST_COLLECT](https://docs.pingcap.com/ja/tidbcloudlake/st-collect.md): 複数の GEOMETRY 値を 1 つの GEOMETRY 結果にまとめます。
+      - [ST_ENVELOPE_AGG](https://docs.pingcap.com/ja/tidbcloudlake/st-envelope-agg.md): 複数の GEOMETRY 値を集約し、NULL でないすべての入力を包含する最小外接矩形を返します。
+      - [ST_INTERSECTION_AGG](https://docs.pingcap.com/ja/tidbcloudlake/st-intersection-agg.md): 複数の GEOMETRY 値に `ST_INTERSECTION` を繰り返し適用して集約し、共通して重なっている部分を返します。
+      - [ST_UNION_AGG](https://docs.pingcap.com/ja/tidbcloudlake/st-union-agg.md): `ST_UNION` を繰り返し適用して複数の GEOMETRY 値を集約し、マージされた GEOMETRY 結果を返します。
+      - [STDDEV_POP](https://docs.pingcap.com/ja/tidbcloudlake/stddev-pop.md): 集計関数。
+      - [STDDEV_SAMP](https://docs.pingcap.com/ja/tidbcloudlake/stddev-samp.md): 式の標本標準偏差（VAR_SAMP() の平方根）を返します。
+      - [STRING_AGG](https://docs.pingcap.com/ja/tidbcloudlake/string-agg.md): LISTAGG のエイリアス。
+      - [SUM](https://docs.pingcap.com/ja/tidbcloudlake/sum.md): 値の集合の合計を計算します。
+      - [SUM_IF](https://docs.pingcap.com/ja/tidbcloudlake/sum-if.md): 接尾辞 -If は任意の集計関数名に付加できます。この場合、集計関数は追加の引数である条件を受け取ります。
+      - [VAR_POP](https://docs.pingcap.com/ja/tidbcloudlake/var-pop.md): COVAR_POP のエイリアス。
+      - [VAR_SAMP](https://docs.pingcap.com/ja/tidbcloudlake/var-samp.md): COVAR_SAMP のエイリアスです。
+      - [VARIANCE_POP](https://docs.pingcap.com/ja/tidbcloudlake/variance-pop.md): COVAR_POP のエイリアス。
+      - [VARIANCE_SAMP](https://docs.pingcap.com/ja/tidbcloudlake/variance-samp.md): COVAR_SAMP のエイリアス。
+      - [WINDOW_FUNNEL](https://docs.pingcap.com/ja/tidbcloudlake/window-funnel.md): ファネル分析。
+    - ウィンドウ関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/window-functions-overview.md): ウィンドウ関数は、関連する行の集合に対して計算を実行しながら、入力行ごとに 1 つの結果を返します。集計関数とは異なり、ウィンドウ関数は行を 1 つの出力にまとめません。
+      - [CUME_DIST](https://docs.pingcap.com/ja/tidbcloudlake/cume-dist.md): 各行の値の累積分布を計算します。現在の行の値以下の値を持つ行の割合を返します。
+      - [DENSE_RANK](https://docs.pingcap.com/ja/tidbcloudlake/dense-rank.md): パーティション内の各行に順位を割り当てます。同じ値を持つ行には同じ順位が付与され、その後の順位に欠番は発生しません。
+      - [FIRST](https://docs.pingcap.com/ja/tidbcloudlake/first.md): FIRST_VALUE のエイリアスです。
+      - [FIRST_VALUE](https://docs.pingcap.com/ja/tidbcloudlake/first-value.md): ウィンドウフレーム内の最初の値を返します。
+      - [LAG](https://docs.pingcap.com/ja/tidbcloudlake/lag.md): 結果セット内の前の行の値を返します。
+      - [LAST](https://docs.pingcap.com/ja/tidbcloudlake/last.md): LAST_VALUE のエイリアス。
+      - [LAST_VALUE](https://docs.pingcap.com/ja/tidbcloudlake/last-value.md): ウィンドウフレーム内の最後の値を返します。
+      - [LEAD](https://docs.pingcap.com/ja/tidbcloudlake/lead.md): 結果セット内の後続の行から値を返します。
+      - [NTH_VALUE](https://docs.pingcap.com/ja/tidbcloudlake/nth-value.md): ウィンドウフレーム内の指定した位置 (N) にある値を返します。
+      - [NTILE](https://docs.pingcap.com/ja/tidbcloudlake/ntile.md): 行を指定した数のバケットに分割し、各行にバケット番号を割り当てます。行はできるだけ均等に各バケットへ分配されます。
+      - [PERCENT_RANK](https://docs.pingcap.com/ja/tidbcloudlake/percent-rank.md): 各行の相対順位をパーセンテージとして計算します。0 から 1 までの値を返し、0 は最も低い順位、1 は最も高い順位を表します。
+      - [RANGE BETWEEN](https://docs.pingcap.com/ja/tidbcloudlake/range-between.md): ウィンドウ関数に対して、値ベースの境界を使用してウィンドウフレームを定義します。
+      - [RANK](https://docs.pingcap.com/ja/tidbcloudlake/rank.md): パーティション内の各行に順位を割り当てます。同じ値を持つ行には同じ順位が付与され、その後の順位には欠番が生じます。
+      - [ROW_NUMBER](https://docs.pingcap.com/ja/tidbcloudlake/row-number.md): 各パーティション内の各行に、1 から始まる連番を割り当てます。
+      - [ROWS BETWEEN](https://docs.pingcap.com/ja/tidbcloudlake/rows-between.md): ウィンドウ関数に対して、行ベースの境界を使用してウィンドウフレームを定義します。
+    - 地理空間関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/geospatial-functions.md): TiDB Cloud Lake は、相互補完的な 2 つの地理空間機能セットを提供します。1 つは図形の構築と解析のための PostGIS スタイルの geometry 関数、もう 1 つはグローバルな六角形インデックスのための H3 ユーティリティです。以下の表では、Snowflake のドキュメントと同様のレイアウトで、タスクごとに関数を分類しているため、適切なツールをすばやく見つけることができます。
+      - [GEO_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/geo-distance.md): 地球上の2点間のおおよその距離をメートル単位で返します。
+      - [GEO_TO_H3](https://docs.pingcap.com/ja/tidbcloudlake/geo-to-h3.md): 指定した位置が属する六角形セルの H3 インデックスを返します。0 が返る場合は、エラーが発生したことを意味します。
+      - [GEOHASH_DECODE](https://docs.pingcap.com/ja/tidbcloudlake/geohash-decode.md): Geohash でエンコードされた文字列を緯度/経度座標に変換します。
+      - [GEOHASH_ENCODE](https://docs.pingcap.com/ja/tidbcloudlake/geohash-encode.md): 緯度と経度の座標の組を Geohash エンコード文字列に変換します。
+      - [GREAT_CIRCLE_ANGLE](https://docs.pingcap.com/ja/tidbcloudlake/great-circle-angle.md): 球面上の2点間の中心角を度単位で返します。
+      - [GREAT_CIRCLE_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/great-circle-distance.md): 球面上の 2 点間の大円距離をメートル単位で返します。
+      - [H3_CELL_AREA_M2](https://docs.pingcap.com/ja/tidbcloudlake/h3-cell-area-m2.md): 特定のセルの正確な面積を平方メートル単位で返します。
+      - [H3_CELL_AREA_RADS2](https://docs.pingcap.com/ja/tidbcloudlake/h3-cell-area-rads2.md): 特定のセルの正確な面積を平方ラジアンで返します。
+      - [H3_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/h3-distance.md): 指定された 2 つの H3 インデックス間のグリッド距離を返します。
+      - [H3_EDGE_ANGLE](https://docs.pingcap.com/ja/tidbcloudlake/h3-edge-angle.md): グラード単位で H3 六角形の辺の平均長を返します。
+      - [H3_EDGE_LENGTH_KM](https://docs.pingcap.com/ja/tidbcloudlake/h3-edge-length-km.md): 指定した解像度における六角形の平均辺長をキロメートル単位で返します。五角形は含まれません。
+      - [H3_EDGE_LENGTH_M](https://docs.pingcap.com/ja/tidbcloudlake/h3-edge-length-m.md): 指定した解像度における六角形の平均辺長をメートル単位で返します。五角形は含まれません。
+      - [H3_EXACT_EDGE_LENGTH_KM](https://docs.pingcap.com/ja/tidbcloudlake/h3-exact-edge-length-km.md): この有向エッジの長さをキロメートル単位で計算します。
+      - [H3_EXACT_EDGE_LENGTH_M](https://docs.pingcap.com/ja/tidbcloudlake/h3-exact-edge-length-m.md): この有向エッジの長さをメートル単位で計算します。
+      - [H3_EXACT_EDGE_LENGTH_RADS](https://docs.pingcap.com/ja/tidbcloudlake/h3-exact-edge-length-rads.md): この有向エッジの長さをラジアン単位で計算します。
+      - [H3_GET_BASE_CELL](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-base-cell.md): 指定された H3 インデックスのベースセル番号を返します。
+      - [H3_GET_DESTINATION_INDEX_FROM_UNIDIRECTIONAL_EDGE](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-destination-index-unidirectional-edge.md): 単方向エッジ H3Index から終点の六角形インデックスを返します。
+      - [H3_GET_FACES](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-faces.md): 指定された H3 インデックスが交差するすべての二十面体の面を見つけます。面は 0～19 の整数で表されます。
+      - [H3_GET_INDEXES_FROM_UNIDIRECTIONAL_EDGE](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-indexes-unidirectional-edge.md): 指定された単方向エッジ H3Index から、始点および終点の六角形インデックスを返します。
+      - [H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-origin-index-unidirectional-edge.md): 単方向エッジ H3Index から始点の六角形インデックスを返します。
+      - [H3_GET_RESOLUTION](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-resolution.md): 指定された H3 インデックスの解像度を返します。
+      - [H3_GET_UNIDIRECTIONAL_EDGE](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-unidirectional-edge.md): 指定された 2 つの H3 インデックス間のエッジを返します。
+      - [H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-unidirectional-edge-boundary.md): 単方向エッジを定義する座標を返します。
+      - [H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON](https://docs.pingcap.com/ja/tidbcloudlake/h3-get-unidirectional-edges-hexagon.md): 指定された H3Index からすべての単方向エッジを返します。
+      - [H3_HEX_AREA_KM2](https://docs.pingcap.com/ja/tidbcloudlake/h3-hex-area-km2.md): 指定した解像度における六角形の平均面積を平方キロメートル単位で返します。五角形は含まれません。
+      - [H3_HEX_AREA_M2](https://docs.pingcap.com/ja/tidbcloudlake/h3-hex-area-m2.md): 指定した解像度における平均六角形面積を平方メートル単位で返します。五角形は含まれません。
+      - [H3_HEX_RING](https://docs.pingcap.com/ja/tidbcloudlake/h3-hex-ring.md): 指定された H3 インデックスから、ちょうどグリッド距離 k にある六角形の「中空」リングを返します。
+      - [H3_INDEXES_ARE_NEIGHBORS](https://docs.pingcap.com/ja/tidbcloudlake/h3-indexes-are-neighbors.md): 指定された H3 インデックスが隣接しているかどうかを返します。
+      - [H3_IS_PENTAGON](https://docs.pingcap.com/ja/tidbcloudlake/h3-is-pentagon.md): 指定された H3 インデックスが五角形セルを表すかどうかを確認します。
+      - [H3_IS_RES_CLASS_III](https://docs.pingcap.com/ja/tidbcloudlake/h3-is-res-class-iii.md): 指定された H3 インデックスの解像度が Class III の向きかどうかを確認します。
+      - [H3_IS_VALID](https://docs.pingcap.com/ja/tidbcloudlake/h3-is-valid.md): 指定された H3 インデックスが有効かどうかを確認します。
+      - [H3_K_RING](https://docs.pingcap.com/ja/tidbcloudlake/h3-k-ring.md): 入力された H3 インデックスを囲む k-ring 六角形の H3 インデックスを含む配列を返します。この配列の各要素は H3 インデックスです。
+      - [H3_LINE](https://docs.pingcap.com/ja/tidbcloudlake/h3-line.md): 指定された 2 つの H3 インデックス間のインデックスの線を返します。
+      - [H3_NUM_HEXAGONS](https://docs.pingcap.com/ja/tidbcloudlake/h3-num-hexagons.md): 指定した解像度における一意な H3 インデックスの数を返します。
+      - [H3_TO_CENTER_CHILD](https://docs.pingcap.com/ja/tidbcloudlake/h3-to-center-child.md): 指定した解像度における中心の子インデックスを返します。
+      - [H3_TO_CHILDREN](https://docs.pingcap.com/ja/tidbcloudlake/h3-to-children.md): 解像度 `child_res` において `h3` に含まれるインデックスを返します。
+      - [H3_TO_GEO](https://docs.pingcap.com/ja/tidbcloudlake/h3-to-geo.md): 指定された H3 インデックスに対応する経度と緯度を返します。
+      - [H3_TO_GEO_BOUNDARY](https://docs.pingcap.com/ja/tidbcloudlake/h3-to-geo-boundary.md): H3 インデックスに対応する六角形の頂点の経度および緯度座標を含む配列を返します。
+      - [H3_TO_PARENT](https://docs.pingcap.com/ja/tidbcloudlake/h3-to-parent.md): 解像度 `parent_res` において `h3` を含む親インデックスを返します。0 が返される場合は、エラーが発生したことを意味します。
+      - [H3_TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/h3-to-string.md): 指定された H3 インデックスの表現を文字列表現に変換します。
+      - [H3_UNIDIRECTIONAL_EDGE_IS_VALID](https://docs.pingcap.com/ja/tidbcloudlake/h3-unidirectional-edge-is-valid.md): 指定された H3Index が有効な単方向エッジインデックスかどうかを判定します。単方向エッジであれば 1 を返し、それ以外の場合は 0 を返します。
+      - [HAVERSINE](https://docs.pingcap.com/ja/tidbcloudlake/haversine.md): Haversine の公式を使用して、地球表面上の 2 点間の大円距離をキロメートル単位で計算します。2 点は緯度と経度を度単位で指定します。
+      - [POINT_IN_ELLIPSES](https://docs.pingcap.com/ja/tidbcloudlake/point-in-ellipses.md): 点が指定されたいずれかの楕円の内側にある場合は 1 を返し、それ以外の場合は 0 を返します。
+      - [POINT_IN_POLYGON](https://docs.pingcap.com/ja/tidbcloudlake/point-in-polygon.md): 複数の点を結んで形成される多角形の内側に、指定した点が含まれるかどうかを計算します。多角形は、座標の組を出現順に結んでできる閉じた図形です。座標の組の順序を変更すると、異なる図形になる場合があります。
+      - [ST_AREA](https://docs.pingcap.com/ja/tidbcloudlake/st-area.md): GEOMETRY または GEOGRAPHY オブジェクトの面積を返します。GEOMETRY 入力の場合、この関数は shoelace formula に基づく平面面積を使用します。GEOGRAPHY 入力の場合、この関数は Karney (2013) で説明されている手法を使用して、地球の楕円体モデル上の測地面積を計測します。
+      - [ST_ASBINARY](https://docs.pingcap.com/ja/tidbcloudlake/st-asbinary.md): ST_ASWKB のエイリアス。
+      - [ST_ASEWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-asewkb.md): GEOMETRY または GEOGRAPHY オブジェクトを EWKB(extended well-known-binary) 形式の表現に変換します。
+      - [ST_ASEWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-asewkt.md): GEOMETRY または GEOGRAPHY オブジェクトを EWKT(extended well-known-text) 形式の表現に変換します。
+      - [ST_ASGEOJSON](https://docs.pingcap.com/ja/tidbcloudlake/st-asgeojson.md): GEOMETRY または GEOGRAPHY オブジェクトを GeoJSON 表現に変換します。
+      - [ST_ASTEXT](https://docs.pingcap.com/ja/tidbcloudlake/st-astext.md): ST_ASWKT のエイリアス。
+      - [ST_ASWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-aswkb.md): GEOMETRY または GEOGRAPHY オブジェクトを WKB(well-known-binary) 形式の表現に変換します。
+      - [ST_ASWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-aswkt.md): GEOMETRY または GEOGRAPHY オブジェクトを WKT(well-known-text) 形式の表現に変換します。
+      - [ST_AZIMUTH](https://docs.pingcap.com/ja/tidbcloudlake/st-azimuth.md): ある Point から別の Point への線分の方位角をラジアンで返します。方位角は正の Y 軸（北）から時計回りに測定されます。2 つの点が同一の場合は NULL を返します。
+      - [ST_BUFFER](https://docs.pingcap.com/ja/tidbcloudlake/st-buffer.md): 入力ジオメトリからの距離が指定した距離以下であるすべての点を表す GEOMETRY を返します。結果は MultiPolygon または NULL です。
+      - [ST_CENTROID](https://docs.pingcap.com/ja/tidbcloudlake/st-centroid.md): GEOMETRY オブジェクトの重心を返します。
+      - [ST_CONTAINS](https://docs.pingcap.com/ja/tidbcloudlake/st-contains.md): 2 番目の GEOMETRY オブジェクトが 1 番目の GEOMETRY オブジェクトの完全に内側にある場合に TRUE を返します。
+      - [ST_CONVEXHULL](https://docs.pingcap.com/ja/tidbcloudlake/st-convexhull.md): GEOMETRY オブジェクトの凸包を返します。
+      - [ST_COVEREDBY](https://docs.pingcap.com/ja/tidbcloudlake/st-coveredby.md): 最初の GEOMETRY オブジェクトのどの点も、2 番目の GEOMETRY オブジェクトの外側に存在しない場合に TRUE を返します。
+      - [ST_COVERS](https://docs.pingcap.com/ja/tidbcloudlake/st-covers.md): 2 番目の GEOMETRY オブジェクトのどの点も、1 番目の GEOMETRY オブジェクトの外側に存在しない場合に TRUE を返します。
+      - [ST_DIFFERENCE](https://docs.pingcap.com/ja/tidbcloudlake/st-difference.md): 2 番目の GEOMETRY オブジェクトでカバーされていない、1 番目の GEOMETRY オブジェクトの部分を返します。
+      - [ST_DIMENSION](https://docs.pingcap.com/ja/tidbcloudlake/st-dimension.md): ジオメトリオブジェクトの次元を返します。GEOMETRY または GEOGRAPHY オブジェクトの次元は次のとおりです。
+      - [ST_DISJOINT](https://docs.pingcap.com/ja/tidbcloudlake/st-disjoint.md): 2 つの GEOMETRY オブジェクトが交差しない場合に TRUE を返します。
+      - [ST_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/st-distance.md): 2 つのオブジェクト間の最小距離を返します。GEOMETRY 入力の場合、この関数はユークリッド距離を使用します。GEOGRAPHY 入力の場合、この関数は haversine 距離を使用します。
+      - [ST_DWITHIN](https://docs.pingcap.com/ja/tidbcloudlake/st-dwithin.md): 2 つの GEOMETRY オブジェクトが、指定されたユークリッド距離内にある場合に TRUE を返します。
+      - [ST_ENDPOINT](https://docs.pingcap.com/ja/tidbcloudlake/st-endpoint.md): LineString 内の最後の Point を返します。
+      - [ST_ENVELOPE](https://docs.pingcap.com/ja/tidbcloudlake/st-envelope.md): GEOMETRY オブジェクトの最小外接矩形を polygon として返します。
+      - [ST_EQUALS](https://docs.pingcap.com/ja/tidbcloudlake/st-equals.md): 2 つの GEOMETRY オブジェクトが空間的に等しい場合に TRUE を返します。
+      - [ST_GEOGETRYFROMWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geogetryfromwkb.md): ST_GEOGRAPHYFROMWKB のエイリアス。
+      - [ST_GEOGFROMEWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geogfromewkb.md): ST_GEOGRAPHYFROMWKB のエイリアス。
+      - [ST_GEOGFROMGEOHASH](https://docs.pingcap.com/ja/tidbcloudlake/st-geogfromgeohash.md): geohash の境界を表すポリゴンに対応する GEOGRAPHY オブジェクトを返します。
+      - [ST_GEOGFROMTEXT](https://docs.pingcap.com/ja/tidbcloudlake/st-geogfromtext.md): ST_GEOGRAPHYFROMWKT のエイリアス。
+      - [ST_GEOGFROMWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geogfromwkb.md): ST_GEOGRAPHYFROMWKB のエイリアス。
+      - [ST_GEOGFROMWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geogfromwkt.md): ST_GEOGRAPHYFROMWKT のエイリアス。
+      - [ST_GEOGPOINTFROMGEOHASH](https://docs.pingcap.com/ja/tidbcloudlake/st-geogpointfromgeohash.md): geohash の中心を表す点に対応する GEOGRAPHY オブジェクトを返します。
+      - [ST_GEOGRAPHYFROMEWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geographyfromewkt.md): ST_GEOGRAPHYFROMWKT のエイリアス。
+      - [ST_GEOGRAPHYFROMTEXT](https://docs.pingcap.com/ja/tidbcloudlake/st-geographyfromtext.md): ST_GEOGRAPHYFROMWKT のエイリアス。
+      - [ST_GEOGRAPHYFROMWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geographyfromwkb.md): WKB(well-known-binary) または EWKB(extended well-known-binary) の入力を解析し、GEOGRAPHY 型の値を返します。
+      - [ST_GEOGRAPHYFROMWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geographyfromwkt.md): WKT(well-known-text) または EWKT(extended well-known-text) の入力を解析し、GEOGRAPHY 型の値を返します。
+      - [ST_GEOHASH](https://docs.pingcap.com/ja/tidbcloudlake/st-geohash.md): GEOMETRY または GEOGRAPHY 値の geohash 文字列を返し、結果の粒度を制御するためのオプションの精度をサポートします。
+      - [ST_GEOM_POINT](https://docs.pingcap.com/ja/tidbcloudlake/st-geom-point.md): ST_MAKEGEOMPOINT のエイリアス。
+      - [ST_GEOMETRYFROMEWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geometryfromewkb.md): ST_GEOMETRYFROMWKB のエイリアス。
+      - [ST_GEOMETRYFROMEWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geometryfromewkt.md): ST_GEOMETRYFROMWKT のエイリアス。
+      - [ST_GEOMETRYFROMTEXT](https://docs.pingcap.com/ja/tidbcloudlake/st-geometryfromtext.md): ST_GEOMETRYFROMWKT のエイリアスです。
+      - [ST_GEOMETRYFROMWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geometryfromwkb.md): WKB(well-known-binary) または EWKB(extended well-known-binary) の入力を解析し、GEOMETRY 型の値を返します。
+      - [ST_GEOMETRYFROMWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geometryfromwkt.md): WKT(well-known-text) または EWKT(extended well-known-text) の入力を解析し、GEOMETRY 型の値を返します。
+      - [ST_GEOMFROMEWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geomfromewkb.md): ST_GEOMETRYFROMWKB のエイリアス。
+      - [ST_GEOMFROMEWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geomfromewkt.md): ST_GEOMETRYFROMWKT のエイリアス。
+      - [ST_GEOMFROMGEOHASH](https://docs.pingcap.com/ja/tidbcloudlake/st-geomfromgeohash.md): geohash の境界を表すポリゴンに対応する GEOMETRY オブジェクトを返します。
+      - [ST_GEOMFROMTEXT](https://docs.pingcap.com/ja/tidbcloudlake/st-geomfromtext.md): ST_GEOMETRYFROMWKT のエイリアス。
+      - [ST_GEOMFROMWKB](https://docs.pingcap.com/ja/tidbcloudlake/st-geomfromwkb.md): ST_GEOMETRYFROMWKB のエイリアス。
+      - [ST_GEOMFROMWKT](https://docs.pingcap.com/ja/tidbcloudlake/st-geomfromwkt.md): ST_GEOMETRYFROMWKT のエイリアスです。
+      - [ST_GEOMPOINTFROMGEOHASH](https://docs.pingcap.com/ja/tidbcloudlake/st-geompointfromgeohash.md): geohash の中心を表す点に対応する GEOMETRY オブジェクトを返します。
+      - [ST_HAUSDORFFDISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/st-hausdorffdistance.md): 2 つの GEOMETRY オブジェクト間の離散 Hausdorff 距離を返します。これは、一方のオブジェクト内の任意の頂点から他方のオブジェクト内の最も近い頂点までの距離のうち最大のものを求めることで、2 つのジオメトリがどれだけ離れているかを測定します。
+      - [ST_HILBERT](https://docs.pingcap.com/ja/tidbcloudlake/st-hilbert.md): GEOMETRY または GEOGRAPHY オブジェクトを Hilbert 曲線インデックスにエンコードします。
+      - [ST_INTERSECTION](https://docs.pingcap.com/ja/tidbcloudlake/st-intersection.md): 2 つの GEOMETRY オブジェクトの共有部分を返します。
+      - [ST_INTERSECTS](https://docs.pingcap.com/ja/tidbcloudlake/st-intersects.md): 2 つの GEOMETRY オブジェクトが空間の一部を共有している場合に TRUE を返します。
+      - [ST_ISVALID](https://docs.pingcap.com/ja/tidbcloudlake/st-isvalid.md): OGC 仕様で定義されているとおり、GEOMETRY オブジェクトが幾何学的に有効な場合に TRUE を返します。
+      - [ST_LENGTH](https://docs.pingcap.com/ja/tidbcloudlake/st-length.md): GEOMETRY または GEOGRAPHY オブジェクト内の LineString のユークリッド長を返します。
+      - [ST_MAKE_LINE](https://docs.pingcap.com/ja/tidbcloudlake/st-make-line.md): ST_MAKELINE のエイリアス。
+      - [ST_MAKEGEOMPOINT](https://docs.pingcap.com/ja/tidbcloudlake/st-makegeompoint.md): 指定した経度と緯度を持つ Point を表す GEOMETRY オブジェクトを構築します。
+      - [ST_MAKELINE](https://docs.pingcap.com/ja/tidbcloudlake/st-makeline.md): 入力された 2 つの GEOMETRY または GEOGRAPHY オブジェクト内の点を結ぶ線を表す GEOMETRY または GEOGRAPHY オブジェクトを構築します。
+      - [ST_MAKEPOINT](https://docs.pingcap.com/ja/tidbcloudlake/st-makepoint.md): 指定した経度と緯度を持つ Point を表す GEOGRAPHY オブジェクトを構築します。
+      - [ST_MAKEPOLYGON](https://docs.pingcap.com/ja/tidbcloudlake/st-makepolygon.md): 穴のない Polygon を表す GEOMETRY または GEOGRAPHY オブジェクトを構築します。この関数は、指定された LineString を外側のループとして使用します。
+      - [ST_MAKEPOLYGONORIENTED](https://docs.pingcap.com/ja/tidbcloudlake/st-makepolygonoriented.md): 与えられた頂点順序を保持したまま、LineString 入力から Polygon を作成します。ST_MAKEPOLYGON とは異なり、この関数は特定の回転方向を強制するために頂点を並べ替えません。
+      - [ST_NPOINTS](https://docs.pingcap.com/ja/tidbcloudlake/st-npoints.md): GEOMETRY または GEOGRAPHY オブジェクト内の点の数を返します。
+      - [ST_NUMPOINTS](https://docs.pingcap.com/ja/tidbcloudlake/st-numpoints.md): ST_NPOINTS のエイリアス。
+      - [ST_PERIMETER](https://docs.pingcap.com/ja/tidbcloudlake/st-perimeter.md): 座標系の単位で測定された、GEOMETRY オブジェクト内のポリゴンの周長を返します。
+      - [ST_POINT](https://docs.pingcap.com/ja/tidbcloudlake/st-point.md): ST_MAKEPOINT のエイリアス。
+      - [ST_POINTN](https://docs.pingcap.com/ja/tidbcloudlake/st-pointn.md): LineString 内の指定したインデックスにある Point を返します。
+      - [ST_POLYGON](https://docs.pingcap.com/ja/tidbcloudlake/st-polygon.md): ST_MAKEPOLYGON のエイリアス。
+      - [ST_SETSRID](https://docs.pingcap.com/ja/tidbcloudlake/st-setsrid.md): SRID（空間参照系識別子）が指定した値に設定された GEOMETRY オブジェクトを返します。この関数は、オブジェクトの座標に影響を与えずに SRID のみを変更します。新しい SRS（空間参照系）に合わせて座標も変更する必要がある場合は、代わりに ST_TRANSFORM を使用してください。
+      - [ST_SIMPLIFY](https://docs.pingcap.com/ja/tidbcloudlake/st-simplify.md): 指定した許容値以内で結果の辺までの距離に収まる頂点を削除し、GEOMETRY オブジェクトを単純化したバージョンを返します。Ramer-Douglas-Peucker アルゴリズムを使用します。
+      - [ST_SRID](https://docs.pingcap.com/ja/tidbcloudlake/st-srid.md): GEOMETRY または GEOGRAPHY オブジェクトの SRID（空間参照系識別子）を返します。
+      - [ST_STARTPOINT](https://docs.pingcap.com/ja/tidbcloudlake/st-startpoint.md): LineString 内の最初の Point を返します。
+      - [ST_SYMDIFFERENCE](https://docs.pingcap.com/ja/tidbcloudlake/st-symdifference.md): 2 つの GEOMETRY オブジェクトの重なっていない部分を返します。
+      - [ST_TRANSFORM](https://docs.pingcap.com/ja/tidbcloudlake/st-transform.md): GEOMETRY オブジェクトをある空間参照系 (SRS) から別の空間参照系へ変換します。座標を変更せずに SRID のみを変更する必要がある場合（たとえば SRID が誤っていた場合）は、代わりに ST_SETSRID を使用してください。
+      - [ST_UNION](https://docs.pingcap.com/ja/tidbcloudlake/st-union.md): 2 つの入力 GEOMETRY オブジェクトから作成された結合済み GEOMETRY を返します。
+      - [ST_WITHIN](https://docs.pingcap.com/ja/tidbcloudlake/st-within.md): 最初の GEOMETRY オブジェクトが 2 番目の GEOMETRY オブジェクトの完全に内側にある場合に TRUE を返します。
+      - [ST_X](https://docs.pingcap.com/ja/tidbcloudlake/st-x.md): GEOMETRY または GEOGRAPHY オブジェクトで表される Point の経度（X 座標）を返します。
+      - [ST_XMAX](https://docs.pingcap.com/ja/tidbcloudlake/st-xmax.md): 指定した GEOMETRY または GEOGRAPHY オブジェクトに含まれるすべての点の最大経度（X 座標）を返します。
+      - [ST_XMIN](https://docs.pingcap.com/ja/tidbcloudlake/st-xmin.md): 指定された GEOMETRY または GEOGRAPHY オブジェクトに含まれるすべての点の最小経度（X 座標）を返します。
+      - [ST_Y](https://docs.pingcap.com/ja/tidbcloudlake/st-y.md): GEOMETRY または GEOGRAPHY オブジェクトで表される Point の緯度（Y 座標）を返します。
+      - [ST_YMAX](https://docs.pingcap.com/ja/tidbcloudlake/st-ymax.md): 指定した GEOMETRY または GEOGRAPHY オブジェクトに含まれるすべての点の最大緯度（Y 座標）を返します。
+      - [ST_YMIN](https://docs.pingcap.com/ja/tidbcloudlake/st-ymin.md): 指定した GEOMETRY または GEOGRAPHY オブジェクトに含まれるすべての点の最小緯度（Y 座標）を返します。
+      - [STRING_TO_H3](https://docs.pingcap.com/ja/tidbcloudlake/string-to-h3.md): 文字列表現を H3 (uint64) 表現に変換します。
+      - [TO_GEOGRAPHY](https://docs.pingcap.com/ja/tidbcloudlake/to-geography.md): 入力を解析し、GEOGRAPHY 型の値を返します。
+      - [TO_GEOMETRY](https://docs.pingcap.com/ja/tidbcloudlake/geometry.md): 入力を解析し、GEOMETRY 型の値を返します。
+      - [TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/string-geospatial.md): GEOMETRY オブジェクトを String 表現に変換します。出力データの表示形式は `geometry_output_format` 設定によって制御され、この設定には以下の種類があります。
+    - 全文検索関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/full-text-search-functions.md): TiDB Cloud Lake の全文検索関数は、転置インデックスが作成された半構造化 `VARIANT` データおよびプレーンテキストのカラムに対して、検索エンジンのようなフィルタリングを提供します。これらは、アセットとともに保存される AI 生成メタデータ（自動運転の動画フレームから得られる認識結果など）に最適です。
+      - [MATCH](https://docs.pingcap.com/ja/tidbcloudlake/match.md): インデックス付きカラム内でキーワード一致を検索し、`WHERE` 句でのみ使用できます。
+      - [QUERY](https://docs.pingcap.com/ja/tidbcloudlake/query.md): 転置インデックスを持つカラムに対して Lucene スタイルのクエリで行をフィルタリングし、ネストされた VARIANT フィールドに対するドット記法をサポートします。
+      - [SCORE](https://docs.pingcap.com/ja/tidbcloudlake/score.md): 転置インデックス検索条件に一致した行の関連性スコアを返します。
+    - 構造化データ・半構造化データ
+      - [構造化・半構造化関数](https://docs.pingcap.com/ja/tidbcloudlake/structured-semi-structured-functions.md): TiDB Cloud Lake の構造化関数および半構造化関数を使用すると、配列、オブジェクト、マップ、JSON、その他の構造化データ形式を効率的に処理できます。これらの関数は、構造化データおよび半構造化データの作成、解析、クエリ、変換、操作のための包括的な機能を提供します。
+      - JSON 関数
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/json-functions-overview.md): このセクションでは、TiDB Cloud Lake の JSON 関数に関するリファレンス情報を提供します。JSON 関数を使用すると、JSON データ構造の解析、検証、クエリ、および操作を実行できます。
+        - [CHECK_JSON](https://docs.pingcap.com/ja/tidbcloudlake/check-json.md): JSON ドキュメントの妥当性をチェックします。入力文字列が有効な JSON ドキュメントまたは NULL の場合、出力は NULL です。入力を有効な JSON 値に変換できない場合、出力文字列にはエラーメッセージが含まれます。
+        - [GET](https://docs.pingcap.com/ja/tidbcloudlake/get.md): ARRAY を含む Variant から index で値を抽出するか、OBJECT を含む Variant から field_name で値を抽出します。値は Variant として返されます。いずれかの引数が NULL の場合は NULL を返します。
+        - [GET_BY_KEYPATH](https://docs.pingcap.com/ja/tidbcloudlake/get-by-keypath.md): キーパス文字列を使用して `VARIANT` からネストされた値を抽出します。`GET_BY_KEYPATH` は結果を `VARIANT` として返し、`GET_BY_KEYPATH_STRING` は `STRING` として返します。
+        - [GET_IGNORE_CASE](https://docs.pingcap.com/ja/tidbcloudlake/get-ignore-case.md): OBJECT を含む VARIANT から、field_name によって値を抽出します。値は Variant として返されます。いずれかの引数が NULL の場合は NULL を返します。
+        - [GET_PATH](https://docs.pingcap.com/ja/tidbcloudlake/get-path.md): `path_name` によって `VARIANT` から値を抽出します。値は `Variant` として返されます。いずれかの引数が `NULL` の場合は `NULL` を返します。
+        - [JQ](https://docs.pingcap.com/ja/tidbcloudlake/jq.md): JQ 関数は、Variant カラムに格納された JSON データに jq フィルタを適用できる、集合を返す SQL 関数です。この関数を使用すると、指定した jq フィルタを適用して JSON データを処理し、その結果を行の集合として返すことができます。
+        - [JSON_ARRAY_ELEMENTS](https://docs.pingcap.com/ja/tidbcloudlake/json-array-elements.md): JSON 配列から要素を抽出し、結果セット内で個別の行として返します。JSON_ARRAY_ELEMENTS はネストされた配列を再帰的に展開せず、単一の要素として扱います。
+        - [JSON_CONTAINS_IN_LEFT](https://docs.pingcap.com/ja/tidbcloudlake/json-contains-left.md): 2 つの VARIANT 値間の包含関係をテストします。
+        - [JSON_EACH](https://docs.pingcap.com/ja/tidbcloudlake/json-each.md): JSON オブジェクトからキーと値のペアを抽出し、結果セット内で個々の行に分解します。各行は、入力 JSON 式から導出された個別のキーと値のペアを表します。
+        - [JSON_EXISTS_KEY](https://docs.pingcap.com/ja/tidbcloudlake/json-exists-key.md): JSON オブジェクトに 1 つ以上のキーが含まれているかどうかを確認します。
+        - [JSON_EXTRACT_PATH_TEXT](https://docs.pingcap.com/ja/tidbcloudlake/json-extract-path-text.md): `path_name` によって Json 文字列から値を抽出します。値は `String` として返されます。いずれかの引数が `NULL` の場合は `NULL` を返します。この関数は `to_varchar(GET_PATH(PARSE_JSON(JSON), PATH_NAME))` と同等です。
+        - [JSON_PATH_EXISTS](https://docs.pingcap.com/ja/tidbcloudlake/json-path-exists.md): JSON データ内に指定したパスが存在するかどうかを確認します。
+        - [JSON_PATH_MATCH](https://docs.pingcap.com/ja/tidbcloudlake/json-path-match.md): 指定した JSON パス式が JSON データ内の特定の条件に一致するかどうかを確認します。`@@` 演算子はこの関数と同義であることに注意してください。詳細は JSON Operators を参照してください。
+        - [JSON_PATH_QUERY](https://docs.pingcap.com/ja/tidbcloudlake/json-path-query.md): 指定した JSON 値に対して、JSON path によって返されるすべての JSON 項目を取得します。
+        - [JSON_PATH_QUERY_ARRAY](https://docs.pingcap.com/ja/tidbcloudlake/json-path-query-array.md): 指定した JSON 値に対して JSON パスが返すすべての JSON 項目を取得し、結果を配列にラップします。
+        - [JSON_PATH_QUERY_FIRST](https://docs.pingcap.com/ja/tidbcloudlake/json-path-query-first.md): 指定した JSON 値に対して、JSON path が返す最初の JSON 項目を取得します。
+        - [JSON_PRETTY](https://docs.pingcap.com/ja/tidbcloudlake/json-pretty.md): JSON データを整形し、より読みやすく見やすい形式にします。視覚的に分かりやすくするために、JSON データにインデント、改行、その他の書式設定を自動的に追加します。
+        - [JSON_STRIP_NULLS](https://docs.pingcap.com/ja/tidbcloudlake/json-strip-nulls.md): JSON オブジェクトから null 値を持つすべてのプロパティを削除します。
+        - [JSON_TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/json-to-string.md): TO_STRING のエイリアス。
+        - [JSON_TYPEOF](https://docs.pingcap.com/ja/tidbcloudlake/json-typeof.md): JSON 構造の最上位レベルの型を返します。
+        - [PARSE_JSON](https://docs.pingcap.com/ja/tidbcloudlake/parse-json.md): JSON 形式の文字列を解析し、VARIANT 値を返します。無効な入力に対してエラーの代わりに NULL を返すには、TRY_PARSE_JSON を使用します。
+        - [STRIP_NULL_VALUE](https://docs.pingcap.com/ja/tidbcloudlake/strip-null-value.md): JSON の null 値を SQL の NULL 値に変換します。その他の variant 値は変更されずにそのまま渡されます。
+      - 配列関数
+        - [概要](https://docs.pingcap.com/ja/tidbcloudlake/array-functions.md): このセクションでは、TiDB Cloud Lake の配列関数に関するリファレンス情報を提供します。配列関数を使用すると、配列データ構造の作成、操作、検索、変換を行えます。
+        - [ARRAY](https://docs.pingcap.com/ja/tidbcloudlake/array-sql.md): 指定された式から配列リテラルを構築します。各引数は評価され、順番に格納されます。すべての要素は共通の型にキャスト可能である必要があります。
+        - [ARRAY_AGGREGATE](https://docs.pingcap.com/ja/tidbcloudlake/array-aggregate.md): 集計関数を使用して配列内の要素を集約します。
+        - [ARRAY_ANY](https://docs.pingcap.com/ja/tidbcloudlake/array-any.md): 配列から最初の非NULL要素を返します。`ARRAY_AGGREGATE(<array>, 'ANY')` と同等です。
+        - [ARRAY_APPEND](https://docs.pingcap.com/ja/tidbcloudlake/array-append.md): 配列の末尾に要素を追加します。
+        - [ARRAY_APPROX_COUNT_DISTINCT](https://docs.pingcap.com/ja/tidbcloudlake/array-approx-count-distinct.md): 配列内の重複しない要素数のおおよその値を返します。`NULL` 値は無視されます。これは、`APPROX_COUNT_DISTINCT` と同じ HyperLogLog ベースの推定器を使用します。
+        - [ARRAY_AVG](https://docs.pingcap.com/ja/tidbcloudlake/array-avg.md): 配列内の数値項目の平均を返します。`NULL` 要素は無視され、数値以外の値があるとエラーになります。
+        - [ARRAY_COMPACT](https://docs.pingcap.com/ja/tidbcloudlake/array-compact.md): 配列からすべての NULL 値を削除します。
+        - [ARRAY_CONCAT](https://docs.pingcap.com/ja/tidbcloudlake/array-concat.md): 2 つの配列を連結します。
+        - [ARRAY_CONSTRUCT](https://docs.pingcap.com/ja/tidbcloudlake/array-construct.md): 指定した値で JSON 配列を作成します。
+        - [ARRAY_CONTAINS](https://docs.pingcap.com/ja/tidbcloudlake/array-contains.md): 配列に指定した要素が含まれている場合に true を返します。
+        - [ARRAY_COUNT](https://docs.pingcap.com/ja/tidbcloudlake/array-count.md): 配列内の非NULL要素をカウントします。
+        - [ARRAY_DISTINCT](https://docs.pingcap.com/ja/tidbcloudlake/array-distinct.md): JSON 配列から重複する要素を削除し、重複のない要素のみを含む配列を返します。
+        - [ARRAY_EXCEPT](https://docs.pingcap.com/ja/tidbcloudlake/array-except.md): 2 番目の JSON 配列に存在しない、1 番目の JSON 配列の要素を含む新しい JSON 配列を返します。
+        - [ARRAY_FILTER](https://docs.pingcap.com/ja/tidbcloudlake/array-filter.md): 指定した Lambda 式に基づいて JSON 配列から要素をフィルタリングし、条件を満たす要素のみを返します。Lambda 式の詳細については、Lambda Expressions を参照してください。
+        - [ARRAY_FLATTEN](https://docs.pingcap.com/ja/tidbcloudlake/array-flatten.md): ネストされた配列を単一の次元の配列にフラット化します。
+        - [ARRAY_GENERATE_RANGE](https://docs.pingcap.com/ja/tidbcloudlake/array-generate-range.md): 開始値と終了値の間にある、等間隔の整数からなる配列を構築します。`end` の値は範囲に含まれません。
+        - [ARRAY_GET](https://docs.pingcap.com/ja/tidbcloudlake/array-get.md): GET のエイリアス。
+        - [ARRAY_INDEXOF](https://docs.pingcap.com/ja/tidbcloudlake/array-indexof.md): 配列内で要素が最初に出現する位置のインデックスを返します。
+        - [ARRAY_INSERT](https://docs.pingcap.com/ja/tidbcloudlake/array-insert.md): 指定したインデックス位置に JSON 配列へ値を挿入し、更新後の JSON 配列を返します。
+        - [ARRAY_INTERSECTION](https://docs.pingcap.com/ja/tidbcloudlake/array-intersection.md): 2 つの JSON 配列の共通要素を返します。
+        - [ARRAY_KURTOSIS](https://docs.pingcap.com/ja/tidbcloudlake/array-kurtosis.md): 配列内の数値の過剰尖度を返します。`NULL` 要素は無視され、非数値要素があるとエラーになります。
+        - [ARRAY_MAX](https://docs.pingcap.com/ja/tidbcloudlake/array-max.md): 配列内の最大の数値を返します。`NULL` 要素はスキップされ、数値以外の値があるとエラーになります。
+        - [ARRAY_MEDIAN](https://docs.pingcap.com/ja/tidbcloudlake/array-median.md): 配列内の数値の中央値を返します。NULL 要素は無視されます。
+        - [ARRAY_MIN](https://docs.pingcap.com/ja/tidbcloudlake/array-min.md): 配列内の最小の数値を返します。`NULL` 要素はスキップされ、非数値の値があるとエラーになります。
+        - [ARRAY_OVERLAP](https://docs.pingcap.com/ja/tidbcloudlake/array-overlap.md): 2 つの JSON 配列に重複があるかどうかを確認し、共通要素がある場合は true を返し、ない場合は false を返します。
+        - [ARRAY_PREPEND](https://docs.pingcap.com/ja/tidbcloudlake/array-prepend.md): 配列の先頭に要素を追加します。
+        - [ARRAY_REDUCE](https://docs.pingcap.com/ja/tidbcloudlake/array-reduce.md): 指定した Lambda 式を適用して JSON 配列を単一の値に縮約します。Lambda 式の詳細については、Lambda Expressions を参照してください。
+        - [ARRAY_REMOVE](https://docs.pingcap.com/ja/tidbcloudlake/array-remove.md): 配列から要素のすべての出現を削除します。
+        - [ARRAY_REMOVE_FIRST](https://docs.pingcap.com/ja/tidbcloudlake/array-remove-first.md): 配列から要素の最初の出現を削除します。
+        - [ARRAY_REMOVE_LAST](https://docs.pingcap.com/ja/tidbcloudlake/array-remove-last.md): 配列から要素の最後の出現を削除します。
+        - [ARRAY_REVERSE](https://docs.pingcap.com/ja/tidbcloudlake/array-reverse.md): 配列内の要素の順序を逆にします。
+        - [ARRAY_SIZE](https://docs.pingcap.com/ja/tidbcloudlake/array-size.md): NULL 要素を含めて、配列の長さを返します。
+        - [ARRAY_SKEWNESS](https://docs.pingcap.com/ja/tidbcloudlake/array-skewness.md): 配列内の数値の歪度を返します。`NULL` 項目は無視され、数値以外の項目があるとエラーになります。
+        - [ARRAY_SLICE](https://docs.pingcap.com/ja/tidbcloudlake/array-slice.md): start 引数と end 引数の間をスライスして、部分配列を抽出します。
+        - [ARRAY_SORT](https://docs.pingcap.com/ja/tidbcloudlake/array-sort.md): 配列の要素をソートします。デフォルトでは、ARRAY_SORT は昇順で並べ替え、NULL 値を最後に配置します。順序と NULL の配置を制御するには、明示的なバリアントを使用します。
+        - [ARRAY_STDDEV_POP](https://docs.pingcap.com/ja/tidbcloudlake/array-stddev-pop.md): 数値配列の値の母標準偏差を計算します。`NULL` エントリは無視され、非数値エントリはエラーになります。
+        - [ARRAY_STDDEV_SAMP](https://docs.pingcap.com/ja/tidbcloudlake/array-stddev-samp.md): 数値配列の値の標本標準偏差を計算します。`NULL` 項目は無視され、非数値エントリがあるとエラーになります。
+        - [ARRAY_SUM](https://docs.pingcap.com/ja/tidbcloudlake/array-sum.md): 配列内の数値要素を合計します。`NULL` 項目はスキップされ、数値以外の値はエラーになります。
+        - [ARRAY_TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/array-to-string.md): 配列の文字列要素を区切り文字で連結して、1 つの文字列にします。`NULL` 要素はスキップされます。
+        - [JSON_ARRAY_TRANSFORM](https://docs.pingcap.com/ja/tidbcloudlake/json-array-transform.md): 指定した変換 Lambda 式を使用して、JSON 配列の各要素を変換します。Lambda 式の詳細については、Lambda Expressions を参照してください。
+        - [ARRAY_UNIQUE](https://docs.pingcap.com/ja/tidbcloudlake/array-unique.md): 配列内の一意な要素数を返します。
+        - [ARRAYS_ZIP](https://docs.pingcap.com/ja/tidbcloudlake/arrays-zip.md): 複数の配列を 1 つの配列タプルにマージします。
+        - [CONTAINS](https://docs.pingcap.com/ja/tidbcloudlake/contains.md): 配列に特定の要素が含まれているかどうかを確認します。
+        - [GET](https://docs.pingcap.com/ja/tidbcloudlake/get-sql.md): 配列からインデックス（1始まり）で要素を返します。
+        - [RANGE](https://docs.pingcap.com/ja/tidbcloudlake/range.md): [start, end) で収集された配列を返します。
+        - [SLICE](https://docs.pingcap.com/ja/tidbcloudlake/slice.md): インデックス（1始まり）を使用して配列からスライスを抽出します。
+        - [UNNEST](https://docs.pingcap.com/ja/tidbcloudlake/unnest.md): 配列をアンネストし、要素の集合を返します。
+      - オブジェクト関数
+        - [オブジェクト関数](https://docs.pingcap.com/ja/tidbcloudlake/object-functions.md): このセクションでは、TiDB Cloud Lake のオブジェクト関数に関するリファレンス情報を提供します。オブジェクト関数を使用すると、JSON オブジェクトデータ構造の作成、操作、および情報の抽出が可能です。
+        - [OBJECT_CONSTRUCT](https://docs.pingcap.com/ja/tidbcloudlake/object-construct.md): キーと値を持つ JSON オブジェクトを作成します。
+        - [OBJECT_CONSTRUCT_KEEP_NULL](https://docs.pingcap.com/ja/tidbcloudlake/object-construct-keep-null.md): キーと値を持つ JSON オブジェクトを作成します。
+        - [OBJECT_DELETE](https://docs.pingcap.com/ja/tidbcloudlake/object-delete.md): JSON オブジェクトから指定したキーを削除し、変更後のオブジェクトを返します。指定したキーがオブジェクト内に存在しない場合は、無視されます。
+        - [OBJECT_INSERT](https://docs.pingcap.com/ja/tidbcloudlake/object-insert.md): JSON オブジェクトにキーと値のペアを挿入または更新します。
+        - [OBJECT_KEYS](https://docs.pingcap.com/ja/tidbcloudlake/object-keys.md): 最も外側の JSON オブジェクトのキーを文字列の配列として返します。
+        - [OBJECT_PICK](https://docs.pingcap.com/ja/tidbcloudlake/object-pick.md): 入力 JSON オブジェクトから指定したキーのみを含む新しい JSON オブジェクトを作成します。指定したキーが入力オブジェクトに存在しない場合、そのキーは結果から省略されます。
+      - Map 関数
+        - [Map 関数](https://docs.pingcap.com/ja/tidbcloudlake/map-functions.md): このセクションでは、TiDB Cloud Lake の map 関数に関するリファレンス情報を提供します。Map 関数を使用すると、map データ構造（キーと値のペア）を作成、操作、およびそこから情報を抽出できます。
+        - [MAP_CAT](https://docs.pingcap.com/ja/tidbcloudlake/map-cat.md): 2 つの MAP を連結して返します。
+        - [MAP_CONTAINS_KEY](https://docs.pingcap.com/ja/tidbcloudlake/map-contains-key.md): 指定した MAP に指定したキーが含まれているかどうかを判定します。
+        - [MAP_DELETE](https://docs.pingcap.com/ja/tidbcloudlake/map-delete.md): 既存の MAP から 1 つ以上のキーを削除して返します。
+        - [MAP_FILTER](https://docs.pingcap.com/ja/tidbcloudlake/map-filter.md): ラムダ式を使用して定義された指定条件に基づき、JSON オブジェクト内のキーと値のペアをフィルタリングします。
+        - [MAP_INSERT](https://docs.pingcap.com/ja/tidbcloudlake/map-insert.md): 新しいキーと値のペアを挿入した入力 MAP からなる新しい MAP を返します（既存のキーは新しい値で更新されます）。
+        - [MAP_KEYS](https://docs.pingcap.com/ja/tidbcloudlake/map-keys.md): マップ内のキーを返します。
+        - [MAP_PICK](https://docs.pingcap.com/ja/tidbcloudlake/map-pick.md): 既存の MAP から指定したキーと値のペアを含む新しい MAP を返します。
+        - [MAP_SIZE](https://docs.pingcap.com/ja/tidbcloudlake/map-size.md): MAP のサイズを返します。
+        - [MAP_TRANSFORM_KEYS](https://docs.pingcap.com/ja/tidbcloudlake/map-transform-keys.md): ラムダ式を使用して、JSON オブジェクト内の各キーに変換を適用します。
+        - [MAP_TRANSFORM_VALUES](https://docs.pingcap.com/ja/tidbcloudlake/map-transform-values.md): ラムダ式を使用して、JSON オブジェクト内の各値に変換を適用します。
+        - [MAP_VALUES](https://docs.pingcap.com/ja/tidbcloudlake/map-values.md): マップ内の値を返します。
+      - 型変換
+        - [AS_ARRAY](https://docs.pingcap.com/ja/tidbcloudlake/as-array.md): `VARIANT` 値を ARRAY データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_BINARY](https://docs.pingcap.com/ja/tidbcloudlake/as-binary.md): `VARIANT` 値を BINARY データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_BOOLEAN](https://docs.pingcap.com/ja/tidbcloudlake/as-boolean.md): `VARIANT` 値を BOOLEAN データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_DATE](https://docs.pingcap.com/ja/tidbcloudlake/as-date.md): `VARIANT` 値を DATE データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_DECIMAL](https://docs.pingcap.com/ja/tidbcloudlake/as-decimal.md): `VARIANT` 値を DECIMAL データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_FLOAT](https://docs.pingcap.com/ja/tidbcloudlake/as-float.md): `VARIANT` 値を DOUBLE データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_INTEGER](https://docs.pingcap.com/ja/tidbcloudlake/as-integer.md): `VARIANT` 値を BIGINT データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_OBJECT](https://docs.pingcap.com/ja/tidbcloudlake/as-object.md): `VARIANT` 値を OBJECT データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [AS_STRING](https://docs.pingcap.com/ja/tidbcloudlake/as-string.md): `VARIANT` 値を VARCHAR データ型に厳密にキャストします。入力データ型が `VARIANT` でない場合、出力は `NULL` です。`VARIANT` 内の値の型が出力値と一致しない場合、出力は `NULL` です。
+        - [型変換関数](https://docs.pingcap.com/ja/tidbcloudlake/type-conversion-functions.md): このセクションでは、TiDB Cloud Lake における型変換関数のリファレンス情報を提供します。これらの関数を使用すると、VARIANT 値を他の SQL データ型に厳密にキャストできます。
+      - 型述語
+        - [型述語関数](https://docs.pingcap.com/ja/tidbcloudlake/type-predicate-functions.md): このセクションでは、TiDB Cloud Lake の型述語関数に関するリファレンス情報を提供します。これらの関数により、JSON 値の型チェック、検証、および変換が可能になります。
+        - [IS_ARRAY](https://docs.pingcap.com/ja/tidbcloudlake/is-array.md): 入力値が JSON 配列かどうかを確認します。JSON 配列は ARRAY データ型と同じではないことに注意してください。JSON 配列は JSON で一般的に使用されるデータ構造で、角括弧 [] で囲まれた順序付きの値のコレクションを表します。文字列、数値、ブール値、オブジェクト、null など、さまざまなデータ型を整理および交換するための柔軟な形式です。
+        - [IS_BOOLEAN](https://docs.pingcap.com/ja/tidbcloudlake/is-boolean.md): 入力された JSON 値が boolean かどうかをチェックします。
+        - [IS_FLOAT](https://docs.pingcap.com/ja/tidbcloudlake/is-float.md): 入力された JSON 値が float かどうかを確認します。
+        - [IS_INTEGER](https://docs.pingcap.com/ja/tidbcloudlake/is-integer.md): 入力された JSON 値が整数かどうかを確認します。
+        - [IS_NULL_VALUE](https://docs.pingcap.com/ja/tidbcloudlake/is-null-value.md): 入力値が JSON null かどうかを確認します。この関数は SQL NULL ではなく、JSON null を判定することに注意してください。値が SQL NULL かどうかを確認するには、IS_NULL を使用します。
+        - [IS_OBJECT](https://docs.pingcap.com/ja/tidbcloudlake/is-object.md): 入力値が JSON オブジェクトかどうかを確認します。
+        - [IS_STRING](https://docs.pingcap.com/ja/tidbcloudlake/is-string.md): 入力 JSON 値が文字列かどうかを確認します。
+    - ベクトル関数
+      - [COSINE_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/cosine-distance.md): TiDB Cloud Lake における cosine_distance 関数を使用した類似度の測定。
+      - [L2_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/l2-distance.md): 2 つのベクトル間のユークリッド（L2）距離を計算し、ベクトル空間におけるそれらの直線距離を測定します。
+      - [L1_DISTANCE](https://docs.pingcap.com/ja/tidbcloudlake/l1-distance.md): 2 つのベクトル間のマンハッタン（L1）距離を計算し、対応する要素間の絶対差の総和を測定します。
+      - [INNER_PRODUCT](https://docs.pingcap.com/ja/tidbcloudlake/inner-product.md): 2 つのベクトルの内積（ドット積）を計算します。これは、ベクトル間の類似性と射影を測定します。
+      - [VECTOR_DIMS](https://docs.pingcap.com/ja/tidbcloudlake/vector-dims.md): ベクトルの次元数（要素数）を返します。
+      - [VECTOR_NORM](https://docs.pingcap.com/ja/tidbcloudlake/vector-norm.md): ベクトルの長さまたは大きさを表す、ベクトルの L2 ノルム（ユークリッドノルム）を計算します。
+      - [ベクトル関数](https://docs.pingcap.com/ja/tidbcloudlake/vector-functions.md): TiDB Cloud Lake におけるベクトル演算と分析のためのベクトル関数。
+    - ハッシュ関数
+      - [BLAKE3](https://docs.pingcap.com/ja/tidbcloudlake/blake.md): 文字列に対して BLAKE3 256-bit チェックサムを計算します。値は 64 桁の16進数文字列として返され、引数が NULL の場合は NULL が返されます。
+      - [CITY64WITHSEED](https://docs.pingcap.com/ja/tidbcloudlake/city-withseed.md): 文字列に対して City64WithSeed の 64 ビットハッシュを計算します。
+      - [ハッシュ関数](https://docs.pingcap.com/ja/tidbcloudlake/hash-functions.md): このページでは、TiDB Cloud Lake の Hash 関数について、機能別に整理して包括的に紹介します。
+      - [MD5](https://docs.pingcap.com/ja/tidbcloudlake/md.md): 文字列の MD5 128 ビットチェックサムを計算します。値は 32 桁の 16 進数文字列として返され、引数が NULL の場合は NULL が返されます。
+      - [SHA](https://docs.pingcap.com/ja/tidbcloudlake/sha.md): RFC 3174（Secure Hash Algorithm）で説明されているとおり、文字列の SHA-1 160-bit チェックサムを計算します。値は 40 桁の 16 進数文字列として返されます。引数が NULL の場合は NULL を返します。
+      - [SHA1](https://docs.pingcap.com/ja/tidbcloudlake/sha-sql.md): SHA のエイリアス。
+      - [SHA2](https://docs.pingcap.com/ja/tidbcloudlake/sha-functions.md): SHA-2 ファミリーのハッシュ関数（SHA-224、SHA-256、SHA-384、SHA-512）を計算します。ハッシュ長が許可された値のいずれでもない場合、戻り値は NULL です。それ以外の場合、この関数の結果は、必要なビット数を含むハッシュ値を16進数の文字列として返します。
+      - [SIPHASH](https://docs.pingcap.com/ja/tidbcloudlake/siphash.md): SIPHASH64 のエイリアス。
+      - [SIPHASH64](https://docs.pingcap.com/ja/tidbcloudlake/siphash-sql.md): 64 ビットの SipHash ハッシュ値を生成します。
+      - [XXHASH32](https://docs.pingcap.com/ja/tidbcloudlake/xxhash.md): 文字列の xxHash32 32-bit ハッシュ値を計算します。値は UInt32 として返されます。引数が NULL の場合は NULL を返します。
+      - [XXHASH64](https://docs.pingcap.com/ja/tidbcloudlake/xxhash-sql.md): 文字列の xxHash64 64-bit ハッシュ値を計算します。値は UInt64 として返されます。引数が NULL の場合は NULL を返します。
+    - UUID 関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/uuid-functions.md): このページでは、TiDB Cloud Lake の UUID 関連の関数に関するリファレンス情報を提供します。これらの関数は、Universally Unique Identifier (UUID) を生成し、操作するためのものです。
+      - [GEN_RANDOM_UUID](https://docs.pingcap.com/ja/tidbcloudlake/gen-random-uuid.md): バージョン 1.2.658 以降では、バージョン 7 に基づくランダム UUID を生成します。以前は、この関数はバージョン 4 に基づく UUID を生成していました。
+      - [UUID](https://docs.pingcap.com/ja/tidbcloudlake/uuid-sql.md): GEN_RANDOM_UUID のエイリアス。
+    - IP アドレス関数
+      - [IP アドレス関数](https://docs.pingcap.com/ja/tidbcloudlake/ip-address-functions.md): このページでは、TiDB Cloud Lake における IP アドレス関連の関数のリファレンス情報を提供します。これらの関数は、IP アドレスの文字列表現と数値表現の相互変換に役立ちます。
+      - [INET_ATON](https://docs.pingcap.com/ja/tidbcloudlake/inet-aton.md): IPv4 アドレスを 32 ビット整数に変換します。
+      - [INET_NTOA](https://docs.pingcap.com/ja/tidbcloudlake/inet-ntoa.md): 32 ビット整数を IPv4 アドレスに変換します。
+      - [IPV4_NUM_TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/ipv4-num-to-string.md): INET_NTOA のエイリアス。
+      - [IPV4_STRING_TO_NUM](https://docs.pingcap.com/ja/tidbcloudlake/ipv4-string-to-num.md): INET_ATON のエイリアス。
+      - [TRY_INET_ATON](https://docs.pingcap.com/ja/tidbcloudlake/try-inet-aton.md): try_inet_aton 関数は、IPv4 アドレスのドット区切り 4 要素表記を文字列として受け取り、指定された IP アドレスの数値を整数形式で返します。
+      - [TRY_INET_NTOA](https://docs.pingcap.com/ja/tidbcloudlake/try-inet-ntoa.md): ネットワークバイトオーダーの IPv4 アドレスを受け取り、ドット区切り 4 要素の文字列表現として返します。
+      - [TRY_IPV4_NUM_TO_STRING](https://docs.pingcap.com/ja/tidbcloudlake/try-ipv4-num-to-string.md): TRY_INET_NTOA のエイリアス。
+      - [TRY_IPV4_STRING_TO_NUM](https://docs.pingcap.com/ja/tidbcloudlake/try-ipv4-string-to-num.md): TRY_INET_ATON のエイリアス。
+    - コンテキスト関数
+      - [CONNECTION_ID](https://docs.pingcap.com/ja/tidbcloudlake/connection-id.md): 現在の接続の接続 ID を返します。
+      - [CURRENT_CATALOG](https://docs.pingcap.com/ja/tidbcloudlake/current-catalog.md): セッションで現在使用中のカタログ名を返します。
+      - [CURRENT_USER](https://docs.pingcap.com/ja/tidbcloudlake/current-user.md): サーバーが現在のクライアントを認証するために使用したアカウントの、ユーザー名とホスト名の組み合わせを返します。このアカウントによって、あなたのアクセス権限が決まります。戻り値は utf8 文字セットの文字列です。
+      - [DATABASE](https://docs.pingcap.com/ja/tidbcloudlake/database-function.md): 現在選択されているデータベースの名前を返します。データベースが選択されていない場合、この関数は default を返します。
+      - [コンテキスト関数](https://docs.pingcap.com/ja/tidbcloudlake/context-functions.md): このページでは、TiDB Cloud Lake のコンテキスト関連の関数に関するリファレンス情報を提供します。これらの関数は、現在のセッション、データベース、またはシステムコンテキストに関する情報を返します。
+      - [LAST_QUERY_ID](https://docs.pingcap.com/ja/tidbcloudlake/last-query-id.md): 順序に基づいて現在のセッション内のクエリ ID を返します。
+      - [VERSION](https://docs.pingcap.com/ja/tidbcloudlake/version.md): LakeQuery の現在のバージョンを返します。
+    - システム関数
+      - [CLUSTERING_INFORMATION](https://docs.pingcap.com/ja/tidbcloudlake/clustering-information.md): テーブルのクラスタリング情報を返します。
+      - [FUSE_BLOCK](https://docs.pingcap.com/ja/tidbcloudlake/fuse-block.md): テーブルの最新または指定したスナップショットのブロック情報を返します。TiDB Cloud Lake におけるブロックについて詳しくは、Snapshot、Segment、Block とは何か？ を参照してください。
+      - [FUSE_COLUMN](https://docs.pingcap.com/ja/tidbcloudlake/fuse-column.md): テーブルの最新または指定したスナップショットのカラム情報を返します。TiDB Cloud Lake におけるブロックについて詳しくは、「Snapshot、Segment、Block とは何か？」を参照してください。
+      - [FUSE_ENCODING](https://docs.pingcap.com/ja/tidbcloudlake/fuse-encoding.md): テーブル内の特定のカラムに適用されているエンコーディングの種類を返します。これにより、データがテーブル内でどのように圧縮され、ネイティブ形式で保存されているかを理解できます。
+      - [FUSE_SEGMENT](https://docs.pingcap.com/ja/tidbcloudlake/fuse-segment.md): 指定したテーブルスナップショットのセグメント情報を返します。TiDB Cloud Lake におけるセグメントについて詳しくは、Snapshot、Segment、Block とは何か？ を参照してください。
+      - [FUSE_SNAPSHOT](https://docs.pingcap.com/ja/tidbcloudlake/fuse-snapshot.md): テーブルのスナップショット情報を返します。TiDB Cloud Lake におけるスナップショットについて詳しくは、「Snapshot、Segment、Block とは何か？」を参照してください。
+      - [FUSE_STATISTIC](https://docs.pingcap.com/ja/tidbcloudlake/fuse-statistic.md): この関数は非推奨です。テーブル統計を表示するには、代わりに SHOW STATISTICS を使用してください。
+      - [FUSE_TAG](https://docs.pingcap.com/ja/tidbcloudlake/fuse-tag.md): テーブルのスナップショットタグを返します。スナップショットタグの詳細については、Snapshot Tags を参照してください。
+      - [FUSE_TIME_TRAVEL_SIZE](https://docs.pingcap.com/ja/tidbcloudlake/fuse-time-travel-size.md): テーブルの履歴データ（Time Travel 用）のストレージサイズを計算します。
+      - [FUSE_VIRTUAL_COLUMN](https://docs.pingcap.com/ja/tidbcloudlake/fuse-virtual-column.md): テーブルの最新または指定したスナップショットの仮想カラム情報を返します。詳細は、Virtual Column を参照してください。
+      - [システム関数](https://docs.pingcap.com/ja/tidbcloudlake/system-functions-sql.md): このページでは、TiDB Cloud Lake のシステム関連関数のリファレンス情報を提供します。これらの関数は、TiDB Cloud Lake デプロイメントの内部ストレージおよびパフォーマンスに関する側面を分析および監視するのに役立ちます。
+    - テーブル関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/table-functions.md): このページでは、TiDB Cloud Lake のテーブル関数に関するリファレンス情報を提供します。テーブル関数は、行の集合（テーブルに類似）を返し、クエリの FROM 句で使用できます。
+      - [INFER_SCHEMA](https://docs.pingcap.com/ja/tidbcloudlake/infer-schema.md): ファイルメタデータのスキーマを自動検出し、カラム定義を取得します。
+      - [INSPECT_PARQUET](https://docs.pingcap.com/ja/tidbcloudlake/inspect-parquet.md): stage 上の Parquet ファイルから包括的なメタデータのテーブルを取得します。取得されるカラムは以下のとおりです。
+      - [LIST_STAGE](https://docs.pingcap.com/ja/tidbcloudlake/list-stage.md): stage 内のファイルを一覧表示します。これにより、拡張子に基づいて stage 内のファイルをフィルタリングし、各ファイルの詳細情報を取得できます。この関数は DDL コマンド LIST STAGE FILES に似ていますが、すべてのファイル情報ではなく、ファイル名、サイズ、MD5 ハッシュ、最終更新タイムスタンプ、作成者などの特定のファイル情報を SELECT 文で柔軟に取得できます。
+      - [GENERATE_SERIES](https://docs.pingcap.com/ja/tidbcloudlake/generate-series.md): 指定した開始点から別の指定した終了点まで、必要に応じて増分値を指定してデータセットを生成します。GENERATE_SERIES 関数は、以下のデータ型で動作します。
+      - [FLATTEN](https://docs.pingcap.com/ja/tidbcloudlake/flatten.md): ネストされた JSON または配列データを表形式に変換し、各要素またはフィールドを個別の行として表します。
+      - [SYSTEM$FUSE_AMEND](https://docs.pingcap.com/ja/tidbcloudlake/system-fuse-amend.md): S3互換オブジェクトストレージからテーブルデータを復旧します。
+      - [FUSE_VACUUM_TEMPORARY_TABLE](https://docs.pingcap.com/ja/tidbcloudlake/fuse-vacuum-temporary-table.md): 一時テーブルは通常、セッション終了時に自動的にクリーンアップされます（詳細は CREATE TEMP TABLE を参照）。ただし、query node のクラッシュや異常なセッション終了などのイベントにより、この処理が失敗し、孤立した一時ファイルが残ることがあります。
+      - [GET_LINEAGE](https://docs.pingcap.com/ja/tidbcloudlake/get-lineage.md): テーブル、ビュー、stage、またはカラムの上流または下流のリネージを返します。返される各行は、リネージパス内の 1 つのソースからターゲットへの関係を表します。
+      - [ICEBERG_MANIFEST](https://docs.pingcap.com/ja/tidbcloudlake/iceberg-manifest.md): Iceberg テーブルの manifest ファイルに関するメタデータ（ファイルパス、パーティションの詳細、スナップショットとの関連付けなど）を返します。
+      - [ICEBERG_SNAPSHOT](https://docs.pingcap.com/ja/tidbcloudlake/iceberg-snapshot.md): データ変更、操作、要約統計情報など、Iceberg テーブルのスナップショットに関するメタデータを返します。
+      - [POLICY_REFERENCES](https://docs.pingcap.com/ja/tidbcloudlake/policy-references.md): セキュリティポリシー（Masking Policy または Row Access Policy）とテーブル/ビューの関連付けを返します。ポリシー名でクエリしてそのポリシーを使用しているすべてのテーブルを見つけることも、テーブル名でクエリしてそのテーブルに適用されているすべてのポリシーを見つけることもできます。
+      - [RESULT_SCAN](https://docs.pingcap.com/ja/tidbcloudlake/result-scan.md): クエリ ID を使用して、以前のクエリのキャッシュされた結果を取得します。
+      - [SYSTEM$SET_CACHE_CAPACITY](https://docs.pingcap.com/ja/tidbcloudlake/set-cache-capacity.md): 実行時に名前付きキャッシュの容量を調整します。
+      - [SHOW_GRANTS](https://docs.pingcap.com/ja/tidbcloudlake/show-grants-sql.md): ロールに付与された権限、ユーザーへのロール割り当て、または特定のオブジェクトに対する権限を一覧表示します。
+      - [SHOW_VARIABLES](https://docs.pingcap.com/ja/tidbcloudlake/show-variables-sql.md): すべてのセッション変数と、その名前、値、型などの詳細を表示します。
+      - [STREAM_STATUS](https://docs.pingcap.com/ja/tidbcloudlake/stream-status.md): 指定した stream のステータスに関する情報を提供し、`true` または `false` を取りうる単一カラムの結果 (`has_data`) を返します。
+      - [TAG_REFERENCES](https://docs.pingcap.com/ja/tidbcloudlake/tag-references.md): 指定したデータベースオブジェクトに割り当てられているすべてのタグを返します。
+      - [TASK_HISTORY](https://docs.pingcap.com/ja/tidbcloudlake/task-history.md): 指定した変数に基づいてタスクの実行履歴を表示します。
+    - シーケンス関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/sequence-functions-overview.md): このセクションでは、TiDB Cloud Lake のシーケンス関数に関するリファレンス情報を提供します。シーケンス関数を使用すると、一意で自動増分される数値を生成するシーケンスオブジェクトを操作できます。
+      - [NEXTVAL](https://docs.pingcap.com/ja/tidbcloudlake/nextval.md): シーケンスから次の値を取得します。
+    - データ匿名化関数
+      - [FEISTEL_OBFUSCATE](https://docs.pingcap.com/ja/tidbcloudlake/feistel-obfuscate.md): ビット長と値の濃度を保持したまま整数（例: ID や電話番号）を決定論的に難読化するため、テーブル結合が引き続き機能します。
+      - [データ匿名化関数](https://docs.pingcap.com/ja/tidbcloudlake/data-anonymization-functions.md): データ匿名化とは、個人のプライバシーを保護するために、データセットから個人を特定できる情報（PII）を変更または削除するプロセスです。その目的は、分析、調査、テストにおけるデータの有用性を維持しながら、特定の個人に結び付けられないようにデータを変換することです。
+      - [MARKOV_GENERATE](https://docs.pingcap.com/ja/tidbcloudlake/markov-generate.md): MARKOV_TRAIN で学習したモデルを使用してデータセットを匿名化します。
+      - [OBFUSCATE](https://docs.pingcap.com/ja/tidbcloudlake/obfuscate.md): データセットの匿名化。これは簡易ツールであり、より複雑なシナリオでは、基盤となる関数 MARKOV_TRAIN、MARKOV_GENERATE、FEISTEL_OBFUSCATE を直接使用することを推奨します。
+    - テスト関数
+      - [テスト関数](https://docs.pingcap.com/ja/tidbcloudlake/test-functions.md): このページでは、TiDB Cloud Lake のテスト関数に関するリファレンス情報を提供します。これらの関数は主にテストおよびデバッグ目的で使用されます。
+      - [SLEEP](https://docs.pingcap.com/ja/tidbcloudlake/sleep.md): 各データブロックで `seconds` 秒スリープします。
+    - その他の関数
+      - [概要](https://docs.pingcap.com/ja/tidbcloudlake/other-functions.md): このセクションでは、主要な機能グループに分類されない各種ユーティリティをまとめています。
+      - [ASSUME_NOT_NULL](https://docs.pingcap.com/ja/tidbcloudlake/assume-not-null.md): Nullable 型に対して、等価な非 Nullable 値を返します。元の値が NULL の場合、結果は不定です。
+      - [EXISTS](https://docs.pingcap.com/ja/tidbcloudlake/exists.md): exists 条件はサブクエリと組み合わせて使用され、サブクエリが少なくとも 1 行を返す場合に「満たされる」と見なされます。
+      - [GROUPING](https://docs.pingcap.com/ja/tidbcloudlake/grouping.md): 現在の grouping set に含まれていない `GROUP BY` 式を示すビットマスクを返します。ビットは右端の引数が最下位ビットに対応するように割り当てられます。各ビットは、現在の結果行を生成した grouping set のグループ化条件に対応する式が含まれている場合は 0、含まれていない場合は 1 です。
+      - [HUMANIZE_NUMBER](https://docs.pingcap.com/ja/tidbcloudlake/humanize-number.md): 読みやすい数値を返します。
+      - [HUMANIZE_SIZE](https://docs.pingcap.com/ja/tidbcloudlake/humanize-size.md): 接尾辞 (KiB、MiB など) 付きの読みやすいサイズを返します。
+      - [READ_FILE](https://docs.pingcap.com/ja/tidbcloudlake/read-file.md): stage からファイルを読み取り、その生バイトを返します。
+      - [REMOVE_NULLABLE](https://docs.pingcap.com/ja/tidbcloudlake/remove-nullable.md): ASSUME_NOT_NULL のエイリアス。
+      - [TO_NULLABLE](https://docs.pingcap.com/ja/tidbcloudlake/nullable.md): 値を nullable な等価値に変換します。
+      - [TYPEOF](https://docs.pingcap.com/ja/tidbcloudlake/typeof.md): TYPEOF 関数は、データ型の名前を返すために使用されます。
+  - [ストアドプロシージャとスクリプト](https://docs.pingcap.com/ja/tidbcloudlake/stored-procedure-scripting.md): TiDB Cloud Lake のストアドプロシージャを使用すると、制御フロー、変数、カーソル、動的ステートメントにアクセスしながら、サーバー上で実行される SQL ロジックをパッケージ化できます。このページでは、プロシージャの作成方法と、それを支えるインラインスクリプトの記述方法について説明します。
+- 一般リファレンス
+  - [アーキテクチャ](https://docs.pingcap.com/ja/tidbcloudlake/tidb-cloud-lake-architecture.md): TiDB Cloud Lake のアーキテクチャ。
+  - 実装の詳細解説
+    - [Fuse Engine](https://docs.pingcap.com/ja/tidbcloudlake/how-fuse-engine-works.md): Fuse Engine は TiDB Cloud Lake の中核となるストレージエンジンであり、クラウドオブジェクトストレージ上でペタバイト規模のデータを効率的に管理できるよう最適化されています。デフォルトでは、TiDB Cloud Lake で作成されたテーブルは自動的にこのエンジン (ENGINE=FUSE) を使用します。Git に着想を得たスナップショットベースの設計により、強力なデータバージョニング機能 (Time Travel など) を実現し、高度な pruning と indexing によって高いクエリ性能を提供します。
+    - [オプティマイザ](https://docs.pingcap.com/ja/tidbcloudlake/how-optimizer-works.md): TiDB Cloud Lake のクエリオプティマイザは、SQL テキストを実行可能なプランへ変換する一連の変換を統括します。オプティマイザはクエリの抽象表現を構築し、リアルタイム統計で補強し、ルールベースの書き換えを適用し、結合の代替案を探索し、最後に最もコストの低い物理演算子を選択します。
+    - [JSON](https://docs.pingcap.com/ja/tidbcloudlake/how-json-variant-works.md): TiDB Cloud Lake は、ネイティブなバイナリレイアウトと自動 JSON インデックスを組み合わせることで JSON 分析を再構築し、半構造化データを第一級のカラムのように扱えるようにします。
+    - [データ共有](https://docs.pingcap.com/ja/tidbcloudlake/how-data-sharing-works.md): 異なるチームは、同じデータの異なる部分を必要とします。従来のソリューションではデータを何度もコピーする必要があり、コストが高く、管理も困難です。
+  - [エディション](https://docs.pingcap.com/ja/tidbcloudlake/editions.md): TiDB Cloud Lake には Personal、Business、Dedicated の 3 つのエディションがあり、幅広いニーズに対応し、さまざまなユースケースで最適なパフォーマンスを確保できるよう選択できます。
+  - [プラットフォームとリージョン](https://docs.pingcap.com/ja/tidbcloudlake/platforms-regions.md): TiDB Cloud Lake でサポートされているクラウドプラットフォームとリージョンについて説明します。
+  - ベンチマーク
+    - [データ取り込みベンチマーク](https://docs.pingcap.com/ja/tidbcloudlake/benchmark-data-ingestion.md): このページでは、TPC-H SF100 データセットのロード、ClickBench Hits データセットのロード、および鮮度ベンチマークに焦点を当て、TiDB Cloud Lake と Snowflake のデータ取り込み性能とコストを比較したベンチマークを紹介します。
+    - [TPC-H SF100 ベンチマーク](https://docs.pingcap.com/ja/tidbcloudlake/benchmark-tpch-sf100.md): このガイドでは、TPC-H SF100 データセットを使用して TiDB Cloud Lake と Snowflake のパフォーマンスおよびコストを比較します。データのロードとクエリ実行のベンチマークに加え、結果を再現するための手順も含まれています。
+    - [TPC-H SF1000 ベンチマーク](https://docs.pingcap.com/ja/tidbcloudlake/benchmark-tpch-sf1000.md): このガイドでは、TPC-H SF1000 データセットを使用して、Small、Medium、Large の TiDB Cloud Lake Warehouse のパフォーマンスを比較します。各 Warehouse サイズのクエリ実行時間と、ベンチマーク結果を再現するための手順を含みます。
+- [サポートサービス](https://docs.pingcap.com/ja/tidbcloudlake/support-services.md): TiDB Cloud Lake は、TiDB Cloud Lake のユーザーおよびお客様向けに包括的なサポートサービスを提供します。私たちの目標は、TiDB Cloud Lake 製品の中核となる価値である高性能、使いやすさ、そして迅速で高品質な結果を反映した優れたサポートを提供することです。

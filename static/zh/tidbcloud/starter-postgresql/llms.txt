@@ -1,0 +1,111 @@
+# PostgreSQL-compatible TiDB Cloud Starter
+
+> 兼容 PostgreSQL 的 TiDB Cloud Starter 专门为使用 PostgreSQL 常用工具和框架开发、测试应用程序的开发者而设计。它提供全托管、可自动扩缩容的数据库服务，支持兼容 pgvector 的向量搜索功能以及部分 PostgreSQL 扩展。
+
+## 快速开始
+
+- 为什么选择 TiDB Cloud
+  - [简介](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-intro.md): 了解 TiDB Cloud 及其架构。
+  - [功能概览](https://docs.pingcap.com/zh/tidbcloud/features.md): 了解不同 TiDB Cloud 套餐的功能支持状态。
+  - [与 PostgreSQL 的兼容性](https://docs.pingcap.com/zh/tidbcloud/postgresql-compatibility.md): 了解兼容 PostgreSQL 的 TiDB Cloud Starter 与 PostgreSQL 的兼容性，包括不支持的功能和行为差异。
+- 快速开始
+  - [试用 TiDB Cloud Starter](https://docs.pingcap.com/zh/tidbcloud/pg-quickstart.md): 了解如何创建并连接到兼容 PostgreSQL 的 TiDB Cloud Starter 实例。
+
+## 指南
+
+- [选择 TiDB Cloud 方案](https://docs.pingcap.com/zh/tidbcloud/select-cluster-tier.md): 了解如何在 TiDB Cloud 上选择方案。
+- [管理 TiDB Cloud 资源和项目](https://docs.pingcap.com/zh/tidbcloud/manage-projects-and-resources.md): 了解如何在 My TiDB 页面上管理你的 TiDB Cloud 资源和项目。
+- 管理 TiDB Cloud Starter 实例
+  - [创建 TiDB Cloud Starter 实例](https://docs.pingcap.com/zh/tidbcloud/create-tidb-cluster-serverless.md): 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
+  - [通过公共端点连接到你的 TiDB Cloud Starter 实例](https://docs.pingcap.com/zh/tidbcloud/connect-via-standard-connection-serverless.md): 了解如何通过公共端点连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
+  - [备份和恢复 TiDB Cloud 数据](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-serverless.md): 了解如何备份和恢复你的 TiDB Cloud Starter 或 TiDB Cloud Essential 集群。
+  - 监控和告警
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster.md): 了解如何监控你的 TiDB Cloud 资源。
+    - [内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring-pg.md): 了解 PostgreSQL 兼容 TiDB Cloud Starter 实例可用的内置指标。
+    - [Events](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
+  - [删除 TiDB Cloud Starter 实例](https://docs.pingcap.com/zh/tidbcloud/delete-tidb-cluster.md): 了解如何删除 TiDB Cloud 资源。
+- [从 PostgreSQL 迁移到 TiDB Cloud Starter](https://docs.pingcap.com/zh/tidbcloud/import-with-psql.md): 了解如何使用 `psql` 和 `\copy` 将数据库模式和数据从 PostgreSQL 迁移到兼容 PostgreSQL 的 TiDB Cloud Starter 实例。
+- 安全
+  - [安全概览](https://docs.pingcap.com/zh/tidbcloud/security-overview.md): 了解 TiDB Cloud 的全面安全框架，包括身份管理、网络隔离、数据保护、访问控制和审计。
+  - 身份访问控制
+    - [密码认证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-password-authentication.md): 了解如何在 TiDB Cloud 控制台中管理密码和启用多因素认证（MFA）。
+    - [标准 SSO 身份验证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-sso-authentication.md): 了解如何通过 Google、GitHub 或 Microsoft 账号登录 TiDB Cloud 控制台。
+    - [组织 SSO 身份验证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-org-sso-authentication.md): 了解如何通过自定义的组织认证登录 TiDB Cloud 控制台。
+    - [身份访问管理](https://docs.pingcap.com/zh/tidbcloud/manage-user-access.md): 了解如何在 TiDB Cloud 中管理身份访问。
+    - [OAuth 2.0](https://docs.pingcap.com/zh/tidbcloud/oauth2.md): 了解如何在 TiDB Cloud 中使用 OAuth 2.0。
+  - 网络访问控制
+    - [通过 TLS 连接](https://docs.pingcap.com/zh/tidbcloud/secure-connections-to-serverless-clusters.md): Introduce TLS connections in TiDB Cloud Starter and TiDB Cloud Essential.
+  - 审计管理
+    - [控制台审计日志](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-console-auditing.md): 了解 TiDB Cloud 控制台的审计日志功能。
+
+## 参考
+
+- PostgreSQL 扩展
+  - [PostgreSQL 扩展](https://docs.pingcap.com/zh/tidbcloud/pg-extensions-overview.md): 了解 PostgreSQL-compatible TiDB Cloud Starter 支持的 PostgreSQL 扩展和内置能力。
+  - [向量搜索](https://docs.pingcap.com/zh/tidbcloud/pg-vector-search.md): 了解如何在 PostgreSQL-compatible TiDB Cloud Starter 中存储向量嵌入、执行相似性搜索以及创建 HNSW 索引。
+  - [全文搜索](https://docs.pingcap.com/zh/tidbcloud/pg-full-text-search.md): 了解如何在兼容 PostgreSQL 的 TiDB Cloud Starter 上使用全文搜索。
+  - [导入 Parquet 数据](https://docs.pingcap.com/zh/tidbcloud/pg-parquet-import.md): 了解如何在兼容 PostgreSQL 的 TiDB Cloud Starter 中查询并导入 Parquet 数据。
+- SQL 参考
+  - [概览](https://docs.pingcap.com/zh/tidbcloud/pg-sql-reference-overview.md): 了解兼容 PostgreSQL 的 TiDB Cloud Starter 支持的基本 SQL 语句。
+  - [DDL](https://docs.pingcap.com/zh/tidbcloud/pg-ddl.md): 了解 PostgreSQL 兼容的 TiDB Cloud Starter 支持的 PostgreSQL 数据定义语言语句。
+  - [DML 和查询](https://docs.pingcap.com/zh/tidbcloud/pg-dml-queries.md): 了解 PostgreSQL 兼容的 TiDB Cloud Starter 支持的 PostgreSQL 数据操纵和查询功能。
+  - [数据类型](https://docs.pingcap.com/zh/tidbcloud/pg-data-types.md): 了解 PostgreSQL-compatible TiDB Cloud Starter 支持的 PostgreSQL 兼容数据类型。
+  - [内置函数](https://docs.pingcap.com/zh/tidbcloud/pg-built-in-functions.md): 了解 PostgreSQL 兼容的 TiDB Cloud Starter 支持的内置函数。
+  - [高级 SQL](https://docs.pingcap.com/zh/tidbcloud/pg-advanced-sql.md): 了解 PostgreSQL 兼容的 TiDB Cloud Starter 中的 PL/pgSQL、触发器、序列、自定义类型和排序规则。
+  - [PostgreSQL 身份验证和角色](https://docs.pingcap.com/zh/tidbcloud/pg-auth-roles.md): 了解如何在兼容 PostgreSQL 的 TiDB Cloud Starter 上管理数据库角色和权限。
+  - [事务和 COPY](https://docs.pingcap.com/zh/tidbcloud/pg-transactions-copy.md): 了解 PostgreSQL 兼容的 TiDB Cloud Starter 中的事务控制和 COPY 支持。
+  - [会话参数](https://docs.pingcap.com/zh/tidbcloud/pg-session-parameters.md): 了解如何在兼容 PostgreSQL 的 TiDB Cloud Starter 上查看和配置 PostgreSQL 会话参数。
+  - [系统目录](https://docs.pingcap.com/zh/tidbcloud/pg-system-catalog.md): 了解如何在兼容 PostgreSQL 的 TiDB Cloud Starter 中使用系统目录检查数据库对象。
+  - [PostgreSQL 行级安全](https://docs.pingcap.com/zh/tidbcloud/pg-row-level-security.md): 了解如何在兼容 PostgreSQL 的 TiDB Cloud Starter 上使用行级安全策略。
+  - [PostgreSQL 限制与约束](https://docs.pingcap.com/zh/tidbcloud/pg-limits-constraints.md): 了解适用于 PostgreSQL-compatible TiDB Cloud Starter 的 SQL 引擎限制与约束。
+- 通用参考
+  - TiDB 经典架构
+    - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-architecture.md): TiDB 平台的关键架构组件
+    - [存储](https://docs.pingcap.com/zh/tidbcloud/tidb-storage.md): 了解 TiDB 数据库的存储层。
+    - [计算](https://docs.pingcap.com/zh/tidbcloud/tidb-computing.md): 了解 TiDB 数据库的计算层。
+    - [调度](https://docs.pingcap.com/zh/tidbcloud/tidb-scheduling.md): 介绍 TiDB 集群中的 PD 调度组件。
+    - [TSO](https://docs.pingcap.com/zh/tidbcloud/tso.md): 了解 TiDB 中的 TimeStamp Oracle (TSO)。
+  - [TiDB X 架构](https://docs.pingcap.com/zh/tidbcloud/tidb-x-architecture.md): 了解基于 shared-storage（共享存储）的云原生 TiDB X 架构如何实现弹性扩展、可预测性能以及优化的总体拥有成本。
+  - 存储引擎
+    - TiKV
+      - [TiKV 简介](https://docs.pingcap.com/zh/tidbcloud/tikv-overview.md): TiKV 存储引擎的概述。
+      - [RocksDB 简介](https://docs.pingcap.com/zh/tidbcloud/rocksdb-overview.md): 了解 RocksDB 的基本概念和工作原理。
+    - TiFlash
+      - [TiFlash 简介](https://docs.pingcap.com/zh/tidbcloud/tiflash-overview.md): 了解 TiFlash 的架构和关键特性。
+      - [TiFlash 数据落盘](https://docs.pingcap.com/zh/tidbcloud/tiflash-spill-disk.md): 了解 TiFlash 如何将数据溢写到磁盘以及如何自定义溢写行为。
+  - TiDB Cloud 合作伙伴 Web 控制台
+    - [TiDB Cloud 合作伙伴](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-partners.md): 了解作为经销商和托管服务提供商（MSP）如何使用 TiDB Cloud 合作伙伴控制台。
+    - [MSP 客户](https://docs.pingcap.com/zh/tidbcloud/managed-service-provider-customer.md): 了解如何成为托管服务提供商 (MSP) 客户。
+    - [代理商的客户](https://docs.pingcap.com/zh/tidbcloud/cppo-customer.md): 了解如何成为代理商的客户。
+  - [TiDB Cloud Starter 和 Essential 的使用限制](https://docs.pingcap.com/zh/tidbcloud/serverless-limitations.md): 了解 TiDB Cloud Starter 的限制。
+  - [TiDB X 实例上的 SQL 功能限制](https://docs.pingcap.com/zh/tidbcloud/limited-sql-features-tidb-x.md): 了解 TiDB X 实例上的 SQL 功能限制。
+  - [TiDB 限制](https://docs.pingcap.com/zh/tidbcloud/tidb-limitations.md): 了解 TiDB 的使用限制。
+  - [系统变量](https://docs.pingcap.com/zh/tidbcloud/system-variables.md): 使用 TiDB 系统变量来优化性能或修改运行行为。
+  - [服务器状态变量](https://docs.pingcap.com/zh/tidbcloud/status-variables.md): 使用状态变量查看系统和会话状态
+  - [表库过滤](https://docs.pingcap.com/zh/tidbcloud/table-filter.md): TiDB 工具中表过滤器功能的使用方法。
+  - [外部存储服务的 URI 格式](https://docs.pingcap.com/zh/tidbcloud/external-storage-uri.md): 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
+  - [排查数据与索引不一致问题](https://docs.pingcap.com/zh/tidbcloud/troubleshoot-data-inconsistency-errors.md): 了解如何处理由数据与索引一致性检查报告的错误。
+  - [通知](https://docs.pingcap.com/zh/tidbcloud/notifications.md): 了解 TiDB Cloud 控制台中的通知，包括通知类型、用途以及如何查看通知。
+- 支持计划
+  - [Connected Care 概览](https://docs.pingcap.com/zh/tidbcloud/connected-care-overview.md): 介绍新一代 TiDB Cloud 支持服务 —— Connected Care。
+  - [Connected Care 详情](https://docs.pingcap.com/zh/tidbcloud/connected-care-detail.md): 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
+  - Connected Care 支持服务功能
+    - [Connected: IM 中的 AI 对话](https://docs.pingcap.com/zh/tidbcloud/connected-ai-chat-in-im.md): 介绍 IM（即时消息）中 AI 聊天的详细信息。
+    - Connected: TiDB Cloud Alerts 的 IM 订阅
+      - [通过 Slack 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-slack.md): 了解如何通过 Slack 获取报警通知，以便监控你的 TiDB 集群。
+      - [通过 Zoom 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-zoom.md): 了解如何通过 Zoom 获取报警通知，以便监控你的 TiDB 集群。
+      - [通过 Flashduty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-flashduty.md): 了解如何通过 Flashduty 获取 TiDB Cloud 资源的报警通知。
+      - [通过 PagerDuty 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-pagerduty.md): 了解如何通过 PagerDuty 获取报警通知，从而监控 TiDB。
+      - [通过 Webhook 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-webhook.md): 了解如何通过通用 webhook 接收告警通知来监控你的 TiDB 集群。
+      - [通过 Lark 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-lark.md): 了解如何通过 Lark 接收告警通知来监控你的 TiDB 集群。
+    - Connected: 工单创建与修改订阅的 IM 集成
+      - [通过 Slack 创建工单并订阅工单更新](https://docs.pingcap.com/zh/tidbcloud/connected-slack-ticket-creation.md): 介绍在 Slack 中创建工单和订阅工单更新的详细信息。
+      - [通过 Lark 创建工单并订阅工单更新](https://docs.pingcap.com/zh/tidbcloud/connected-lark-ticket-creation.md): 介绍关于 Lark 工单创建与更新订阅的详细信息。
+    - Connected: 支持工单的 IM 交互
+      - [通过 Slack 与支持工单交互](https://docs.pingcap.com/zh/tidbcloud/connected-slack-ticket-interaction.md): 介绍 Slack 支持工单交互的详细信息。
+      - [通过 Lark 交互支持工单](https://docs.pingcap.com/zh/tidbcloud/connected-lark-ticket-interaction.md): 介绍通过 Lark 交互支持工单的详细信息
+  - [TiDB Cloud 支持](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-support.md): 了解如何联系 TiDB Cloud 支持团队。
+- 常见问题
+  - [TiDB Cloud 常见问题](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-faq.md): 了解与 TiDB Cloud 相关的最常见问题（FAQ）。
+  - [PostgreSQL 兼容的 TiDB Cloud Starter 常见问题](https://docs.pingcap.com/zh/tidbcloud/pg-faq.md): 查找关于 PostgreSQL 兼容的 TiDB Cloud Starter 在公测期间的常见问题解答。
+- [术语表](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-glossary.md): 了解 TiDB Cloud 中使用的术语。
