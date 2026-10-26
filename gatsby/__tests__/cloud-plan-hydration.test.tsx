@@ -10,6 +10,8 @@ import {
   TOCNamespace,
 } from "../../src/shared/interface";
 
+const { JSDOM } = require("jsdom");
+
 let mockSearch = "";
 jest.mock(
   "@reach/router",
@@ -31,6 +33,11 @@ const toc = [
     condition: { plan: "dedicated" },
   },
   { title: "BYOC alert", url: "#byoc-alert", condition: { plan: "byoc" } },
+  {
+    title: "Premium alert",
+    url: "#premium-alert",
+    condition: { plan: "premium" },
+  },
   {
     title: "Maximum number of migration jobs",
     url: "#migration-jobs",
@@ -59,25 +66,44 @@ function Content() {
       <CustomContent plan={CloudPlan.BYOC} cloudPlanFromURL={cloudPlan}>
         <h3 id="byoc-alert">BYOC alert</h3>
       </CustomContent>
+      <CustomContent plan={CloudPlan.Premium} cloudPlanFromURL={cloudPlan}>
+        <h3 id="premium-alert">Premium alert</h3>
+      </CustomContent>
+      <CustomContent
+        plan={"essential,dedicated" as CloudPlan}
+        cloudPlanFromURL={cloudPlan}
+      >
+        <h3 id="migration-jobs">Maximum number of migration jobs</h3>
+      </CustomContent>
       <span>{cloudCompatibility}</span>
     </>
   );
 }
 
-function renderPage(defaultPlan: CloudPlan) {
-  return renderToString(
+function Page({ defaultPlan }: { defaultPlan: CloudPlan }) {
+  const [cloudPlan, setCloudPlan] = React.useState<CloudPlan | null>(
+    defaultPlan
+  );
+  const [cloudCompatibility, setCloudCompatibility] = React.useState(
+    CloudCompatibility.MySQL
+  );
+  return (
     <CloudPlanProvider
       value={{
         repo: Repo.tidbcloud,
-        cloudPlan: defaultPlan,
-        setCloudPlan: () => {},
-        cloudCompatibility: CloudCompatibility.MySQL,
-        setCloudCompatibility: () => {},
+        cloudPlan,
+        setCloudPlan,
+        cloudCompatibility,
+        setCloudCompatibility,
       }}
     >
       <Content />
     </CloudPlanProvider>
   );
+}
+
+function renderPage(defaultPlan: CloudPlan) {
+  return renderToString(<Page defaultPlan={defaultPlan} />);
 }
 
 describe("cloud plan hydration", () => {
@@ -121,4 +147,89 @@ describe("cloud plan hydration", () => {
 
     expect(renderPage(CloudPlan.Starter)).toBe(serverMarkup);
   });
+});
+
+describe("cloud plan navigation after hydration", () => {
+  let dom: InstanceType<typeof JSDOM>;
+  let container: HTMLDivElement;
+  let reactDOM: typeof import("react-dom");
+  let act: typeof import("react-dom/test-utils").act;
+  let consoleError: jest.SpyInstance;
+  const globalKeys = [
+    "window",
+    "document",
+    "navigator",
+    "sessionStorage",
+    "MessageChannel",
+  ] as const;
+  let originalGlobals: (PropertyDescriptor | undefined)[];
+
+  beforeEach(() => {
+    mockSearch = "";
+    dom = new JSDOM('<div id="root"></div>', {
+      url: "https://example.com/tidbcloud/test/",
+    });
+    originalGlobals = globalKeys.map((key) =>
+      Object.getOwnPropertyDescriptor(global, key)
+    );
+    globalKeys.forEach((key) => {
+      Object.defineProperty(global, key, {
+        configurable: true,
+        value: dom.window[key],
+      });
+    });
+    // Load the DOM renderer after browser globals are available.
+    reactDOM = require("react-dom");
+    act = require("react-dom/test-utils").act;
+    container = document.getElementById("root") as HTMLDivElement;
+    consoleError = jest.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    act(() => {
+      reactDOM.unmountComponentAtNode(container);
+    });
+    consoleError.mockRestore();
+    dom.window.close();
+    globalKeys.forEach((key, index) => {
+      const descriptor = originalGlobals[index];
+      if (descriptor) Object.defineProperty(global, key, descriptor);
+      else delete (global as any)[key];
+    });
+    mockSearch = "";
+  });
+
+  it.each([
+    [CloudPlan.BYOC, "#byoc-alert"],
+    [CloudPlan.Premium, "#premium-alert"],
+  ])(
+    "updates the TOC and headings to %s after effects settle",
+    async (plan, expectedHref) => {
+      container.innerHTML = renderPage(CloudPlan.Dedicated);
+      expect(
+        container.querySelector('a[href="#dedicated-alert"]')
+      ).not.toBeNull();
+      expect(
+        container.querySelector('a[href="#migration-jobs"]')
+      ).not.toBeNull();
+      mockSearch = `?plan=${plan}`;
+
+      await act(async () => {
+        reactDOM.hydrate(<Page defaultPlan={CloudPlan.Dedicated} />, container);
+      });
+
+      const links = Array.from(container.querySelectorAll("a"));
+      expect(links.map((link) => link.getAttribute("href"))).toEqual([
+        expectedHref,
+      ]);
+      expect(container.querySelector("#dedicated-alert")).toBeNull();
+      expect(container.querySelector("#migration-jobs")).toBeNull();
+      links.forEach((link) => {
+        const heading = container.querySelector(link.getAttribute("href")!);
+        expect(heading).not.toBeNull();
+        expect(heading!.textContent).toBe(link.textContent);
+      });
+      expect(consoleError).not.toHaveBeenCalled();
+    }
+  );
 });
