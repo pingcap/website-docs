@@ -21,7 +21,8 @@
     - [使用 SQL 进行全文搜索](https://docs.pingcap.com/zh/ai/vector-search-full-text-search-sql.md): 全文搜索允许你根据精确关键字搜索文档。在检索增强生成（RAG）场景中，你可以将全文搜索与向量搜索结合使用，以提升搜索质量。
     - [全文搜索示例](https://docs.pingcap.com/zh/ai/fulltext-search-with-pytidb.md): 使用 TiDB 全文搜索执行传统文本搜索。
   - 混合搜索
-    - [混合搜索指南](https://docs.pingcap.com/zh/ai/vector-search-hybrid-search.md): 同时使用全文搜索和向量搜索，以提升搜索质量。
+    - [混合搜索](https://docs.pingcap.com/zh/ai/vector-search-hybrid-search.md): 同时使用全文搜索和向量搜索，以提升搜索质量。
+    - [使用 SQL 进行混合搜索](https://docs.pingcap.com/zh/ai/vector-search-hybrid-search-sql.md): 了解如何在 TiDB 中通过一条 SQL 查询结合全文搜索和向量搜索，并在插入时自动生成向量嵌入。
     - [混合搜索示例](https://docs.pingcap.com/zh/ai/hybrid-search-with-pytidb.md): 结合向量搜索和全文搜索，以获得更全面的结果。
   - Auto Embeddings
     - [auto embedding 指南](https://docs.pingcap.com/zh/ai/auto-embedding.md): 了解如何在你的应用程序中使用 Auto Embedding 功能。
@@ -38,7 +39,8 @@
   - [事务](https://docs.pingcap.com/zh/ai/transactions.md): 了解如何在你的应用中使用事务。
 - 构建 AI 应用
   - [RAG 示例](https://docs.pingcap.com/zh/ai/rag-with-pytidb.md): 构建一个结合文档检索与语言生成的 RAG 应用。
-  - [对话内存示例](https://docs.pingcap.com/zh/ai/memory-with-pytidb.md): 为聊天机器人和对话式 AI 应用实现对话记忆。
+  - [Agent 内存指南](https://docs.pingcap.com/zh/ai/agent-memory.md): 了解如何使用 SQL 在一张 TiDB 表中存储 AI agent memory，并利用向量搜索、事务、按用户召回和自动过期功能。
+  - [AI Agent Memory 示例](https://docs.pingcap.com/zh/ai/memory-with-pytidb.md): 为聊天机器人和对话式 AI 应用实现对话记忆。
   - [Text-to-SQL 示例](https://docs.pingcap.com/zh/ai/text2sql-with-pytidb.md): 使用 AI 模型将自然语言查询转换为 SQL 语句。
 - TiDB Cloud CLI
   - [概览](https://docs.pingcap.com/zh/ai/ti-overview.md): 了解何时使用 TiDB Cloud CLI (`ti`) 来管理 TiDB Cloud Starter 实例和 TiDB Cloud Filesystem 中的文件系统。

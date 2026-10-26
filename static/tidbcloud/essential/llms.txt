@@ -66,6 +66,7 @@
       - [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark.md): Learn how to monitor your TiDB cluster by getting alert notifications via Lark.
     - [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud resources using the Events page.
     - [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the Datadog integration.
+    - [Integrate TiDB Cloud with New Relic](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the New Relic integration.
   - Tune Performance
     - [Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview.md): Learn about how to analyze and tune SQL performance in TiDB Cloud.
     - [Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance.md): Learn how to analyze and tune performance in TiDB Cloud.
@@ -191,6 +192,7 @@
   - [Gitpod](https://docs.pingcap.com/tidbcloud/dev-guide-playground-gitpod.md): Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
   - [n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n.md): Learn the use of TiDB Cloud node in n8n.
   - [Netlify](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify.md): Learn how to connect your TiDB Cloud clusters to Netlify projects.
+  - [New Relic](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): Learn how to monitor your TiDB Cloud instances with the New Relic integration.
   - [ProxySQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration.md): Learn how to integrate TiDB Cloud and TiDB (self-hosted) with ProxySQL.
   - Terraform
     - [Terraform Integration Overview](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview.md): Create, manage, and update your TiDB Cloud resources through Terraform.
