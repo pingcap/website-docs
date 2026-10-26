@@ -6,7 +6,7 @@
 
 TiDB 提供多种部署方式：
 
-- **TiDB Cloud**：全托管数据库服务，提供 Starter、Essential、Premium、Dedicated，以及 TiDB Cloud Lake 方案。
+- **TiDB Cloud**：全托管数据库服务，提供 Starter、Essential、Premium、BYOC、Dedicated，以及 Lake、Filesystem 方案。
 - **TiDB Self-Managed**：在自有基础设施上部署和运行 TiDB。
 - **TiDB on Kubernetes**：使用 TiDB Operator 在 Kubernetes 上部署和管理 TiDB。
 

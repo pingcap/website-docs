@@ -6,7 +6,7 @@
 
 TiDB は複数のデプロイオプションで利用できます。
 
-- **TiDB Cloud**: Dedicated、Premium、Essential、Starter プランを備えたフルマネージドデータベースサービス。
+- **TiDB Cloud**: TiDB Cloud Starter、Essential、Premium、BYOC、Dedicated、Lake、Filesystem などのフルマネージドクラウドデータベースサービスを提供します。
 - **TiDB Self-Managed**: 独自のインフラストラクチャで TiDB をデプロイおよび運用します。
 - **TiDB on Kubernetes**: TiDB Operator を使用して TiDB をデプロイおよび管理します。
 

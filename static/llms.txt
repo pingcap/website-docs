@@ -6,7 +6,7 @@
 
 TiDB is available in multiple deployment options:
 
-- **TiDB Cloud**: Fully managed cloud database services, including TiDB Cloud Starter, Essential, Premium, Dedicated, and TiDB Cloud Lake.
+- **TiDB Cloud**: Fully managed cloud database services, including TiDB Cloud Starter, Essential, Premium, BYOC, Dedicated, Lake, and Filesystem.
 - **TiDB Self-Managed**: Deploy and operate TiDB on your own infrastructure.
 - **TiDB on Kubernetes**: Deploy and manage TiDB using TiDB Operator.
 
@@ -44,7 +44,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 
 #### TiDB Cloud Filesystem
 
-- [TiDB Cloud Filesystem Documentation](https://docs.pingcap.com/tidbcloud-filesystem/llms.txt): persistent, shared file storage that applications, automation, and AI agents can access across machines and sessions.
+- [TiDB Cloud Filesystem Documentation](https://docs.pingcap.com/tidbcloud-filesystem/llms.txt): Persistent, shared file storage that applications, automation, and AI agents can access across machines and sessions.
 
 ### TiDB Self-Managed
 
