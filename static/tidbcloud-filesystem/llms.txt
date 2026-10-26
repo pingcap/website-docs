@@ -1,0 +1,41 @@
+# TiDB Cloud Filesystem
+
+> TiDB Cloud Filesystem is persistent, shared file storage that applications, automation, and AI agents can access across machines and sessions.
+
+## GET STARTED
+
+- [Introduction](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro.md): Learn what TiDB Cloud Filesystem is, when to use it, and how to access and share persistent files across applications, automation, and AI agents.
+- [Quick Start via Console](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-quick-start-console.md): Create a file system in the TiDB Cloud console, connect to it from your computer, write a test file, and view the file in the console.
+- [Quick Start via CLI](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-quick-start.md): Learn how to create a persistent TiDB Cloud file system, read and write files, and optionally access them through a local mount.
+- Key Concepts
+  - [Authorization](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-authorization.md): Learn how TiDB Cloud API credentials, owner tokens, and scoped tokens provide different levels of access to TiDB Cloud Filesystem.
+  - [Layers and Checkpoints](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-layers-checkpoints.md): TiDB Cloud Filesystem layers isolate changes from the base file system, while forks and checkpoints preserve layer history until changes are committed.
+
+## GUIDES
+
+- [Manage File Systems](https://docs.pingcap.com/tidbcloud-filesystem/manage-filesystem-resources.md): Learn how to manage file systems using the TiDB Cloud console or TiDB Cloud CLI, rename them in the console, and check CLI access.
+- [Manage File System Tokens](https://docs.pingcap.com/tidbcloud-filesystem/manage-filesystem-tokens.md): Learn how to import, create, scope, inspect, rotate, and revoke file system tokens to control access for users and automation.
+- [Access an Existing File System](https://docs.pingcap.com/tidbcloud-filesystem/access-filesystem.md): Learn how to access an existing file system from your current machine, another machine, CI job, or agent environment.
+- Mount a File System
+  - [Overview](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-mount.md): Learn when to mount a file system, which mount method to use, and the capabilities and limitations of file system mounts.
+  - [Linux](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-mount-linux.md): Install FUSE userspace tools, mount a file system on Linux, verify access, and troubleshoot common mount permission issues.
+  - [macOS](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-mount-macos.md): Learn how to mount a TiDB Cloud file system on macOS using WebDAV or macFUSE, verify file access, and safely unmount it.
+  - [Docker and Docker Compose](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-mount-docker.md): Mount a file system inside a Docker container on a Linux host by enabling FUSE and the required container permissions.
+- [Work with Files and Directories](https://docs.pingcap.com/tidbcloud-filesystem/work-with-filesystem-data.md): Learn how to view file metadata in the console and upload, download, read, organize, and search files with TiDB Cloud CLI.
+- [Share a File System](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-sharing.md): Learn how to share files across machines with a separate scoped token for each recipient, verify permissions, and revoke access independently.
+- [Manage Usage Limits](https://docs.pingcap.com/tidbcloud-filesystem/manage-filesystem-limits.md): Learn how to view file system usage and free limits in the TiDB Cloud console, and edit usage limits after adding a credit card.
+- [Manage File System Layers and Checkpoints](https://docs.pingcap.com/tidbcloud-filesystem/manage-filesystem-layers.md): Learn how to create file system layers, checkpoint and fork changes, verify isolation, and commit or discard your work.
+- [Manage Git Workspaces](https://docs.pingcap.com/tidbcloud-filesystem/manage-git-workspaces.md): Learn how to clone Git repositories into a mounted TiDB Cloud Filesystem, speed up large repository setup, and manage linked worktrees.
+- [Use Journals in a File System](https://docs.pingcap.com/tidbcloud-filesystem/use-filesystem-journals.md): Learn how to create file system journals, record workflow events, paginate read and search results, and verify the recorded history.
+- [Manage Vault Secrets for a File System](https://docs.pingcap.com/tidbcloud-filesystem/manage-filesystem-vault-secrets.md): Learn how to store and rotate Vault secrets, grant temporary access to specific fields, use them in processes, and revoke access.
+- [Configure AI Providers for a File System](https://docs.pingcap.com/tidbcloud-filesystem/configure-filesystem-ai-providers.md): Configure AI providers for media extraction and embeddings in a file system.
+- [Automation and AI Agent Workflows](https://docs.pingcap.com/tidbcloud-filesystem/use-filesystem-for-automation-and-ai-agents.md): Find TiDB for AI examples for sharing file system workspaces, handing off CI artifacts, and supporting agents with data, Git, journals, and secrets.
+- [Pricing & Billing](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)
+
+## REFERENCES
+
+- [Command Reference](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-command-reference.md): Find TiDB Cloud CLI command references for configuring `ti` and managing TiDB Cloud Filesystem resources, data, Git workspaces, journals, and Vault secrets.
+- [SDKs](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-sdks.md): Learn how TiDB Cloud Filesystem relates to the Drive9 workspace engine and find client SDK documentation for six programming languages.
+- [Regions and Limitations](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-regions-and-limitations.md): Review supported TiDB Cloud Filesystem regions, mount platform requirements, durability boundaries, and current product limitations.
+- [FAQ](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-faq.md): Find answers about TiDB Cloud Filesystem usage, shared writes, regions, mounts, SDKs, search, checkpoints, preview policies, and pricing.
+- [Troubleshooting](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-troubleshooting.md): Learn how to diagnose file system token, region, runtime, mount, and access failures and choose a safe recovery path.
