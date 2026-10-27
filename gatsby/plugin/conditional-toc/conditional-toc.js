@@ -118,7 +118,26 @@ export const createConditionalToc = ({
 
             // MDX can group adjacent closing and opening tags in one JSX node.
             // Process every tag in source order to keep nested blocks balanced.
-            const tags = node.value.match(/<\/?CustomContent\b[^>]*>/g) || [];
+            const tags = [];
+            let tagStart = -1;
+            let quote = null;
+            for (let i = 0; i < node.value.length; i++) {
+              const char = node.value[i];
+              if (tagStart === -1) {
+                if (char === "<") tagStart = i;
+                continue;
+              }
+              // Quoted attributes can contain angle brackets and tag-like text.
+              if (quote) {
+                if (char === quote) quote = null;
+              } else if (char === '"' || char === "'") {
+                quote = char;
+              } else if (char === ">") {
+                const tag = node.value.slice(tagStart, i + 1);
+                if (/^<\/?CustomContent(?=[\s/>])/.test(tag)) tags.push(tag);
+                tagStart = -1;
+              }
+            }
             for (const tag of tags) {
               if (tag.startsWith("</")) {
                 const blockInfo = tempStack.pop();
