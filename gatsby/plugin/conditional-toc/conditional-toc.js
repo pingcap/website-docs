@@ -113,31 +113,27 @@ export const createConditionalToc = ({
           let tempStack = [];
 
           // First pass: identify all CustomContent block ranges
-          visit(mdast, (node, index, parent) => {
-            if (node.type === "jsx" && node.value) {
-              const trimmedValue = node.value.trim();
+          visit(mdast, (node) => {
+            if (node.type !== "jsx" || !node.value || !node.position) return;
 
-              // Check for opening tag (not self-closing)
-              if (
-                trimmedValue.includes("<CustomContent") &&
-                !trimmedValue.includes("/>")
-              ) {
-                const attributes = parseCustomContentAttributes(node.value);
-                tempStack.push({
-                  startPosition: node.position,
-                  attributes,
-                });
-              }
-              // Check for closing tag
-              else if (trimmedValue.includes("</CustomContent>")) {
-                if (tempStack.length > 0) {
-                  const blockInfo = tempStack.pop();
+            // MDX can group adjacent closing and opening tags in one JSX node.
+            // Process every tag in source order to keep nested blocks balanced.
+            const tags = node.value.match(/<\/?CustomContent\b[^>]*>/g) || [];
+            for (const tag of tags) {
+              if (tag.startsWith("</")) {
+                const blockInfo = tempStack.pop();
+                if (blockInfo) {
                   customContentRanges.push({
                     start: blockInfo.startPosition,
                     end: node.position,
                     attributes: blockInfo.attributes,
                   });
                 }
+              } else if (!/\/\s*>$/.test(tag)) {
+                tempStack.push({
+                  startPosition: node.position,
+                  attributes: parseCustomContentAttributes(tag),
+                });
               }
             }
           });
