@@ -8,6 +8,7 @@ import {
   useContext,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import { getCloudPlanFromPathname } from "./cloud-plan-route";
 import {
@@ -85,15 +86,19 @@ export const useCloudPlan = () => {
   const pendingCloudCompatibilityRef = useRef<CloudCompatibility | null>(null);
   const { pathname, search, hash } = useLocation();
   const isTidbcloud = repo === Repo.tidbcloud;
+  const [hasMounted, setHasMounted] = useState(false);
+
+  // Match the server render before applying browser-only plan preferences.
+  // Otherwise hydration can retain links and headings from the default plan.
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const searchParams = new URLSearchParams(search);
-  const cloudPlanFromQueryRaw = isTidbcloud
-    ? searchParams.get(CLOUD_MODE_KEY)
-    : null;
+  const cloudPlanFromQueryRaw =
+    isTidbcloud && hasMounted ? searchParams.get(CLOUD_MODE_KEY) : null;
   const cloudPlanFromSessionRaw =
-    isTidbcloud && typeof window !== "undefined"
-      ? sessionStorage.getItem(CLOUD_MODE_KEY)
-      : null;
+    isTidbcloud && hasMounted ? sessionStorage.getItem(CLOUD_MODE_KEY) : null;
   const cloudPlanFromQuery = isCloudPlan(cloudPlanFromQueryRaw)
     ? cloudPlanFromQueryRaw
     : null;
@@ -104,11 +109,10 @@ export const useCloudPlan = () => {
     cloudPlanFromQuery || cloudPlanFromSession || _cloudPlan;
 
   const isStarter = isTidbcloud && resolvedCloudPlan === CloudPlan.Starter;
-  const cloudCompatibilityFromQueryRaw = isStarter
-    ? searchParams.get(CLOUD_COMPATIBILITY_KEY)
-    : null;
+  const cloudCompatibilityFromQueryRaw =
+    isStarter && hasMounted ? searchParams.get(CLOUD_COMPATIBILITY_KEY) : null;
   const cloudCompatibilityFromSessionRaw =
-    isStarter && typeof window !== "undefined"
+    isStarter && hasMounted
       ? sessionStorage.getItem(CLOUD_COMPATIBILITY_KEY)
       : null;
   const cloudCompatibilityFromQuery = isCloudCompatibility(
@@ -169,6 +173,8 @@ export const useCloudPlan = () => {
   }, [_cloudPlan, resolvedCloudPlan, _setCloudPlan]);
 
   useEffect(() => {
+    if (!hasMounted) return;
+
     const pendingCloudCompatibility = pendingCloudCompatibilityRef.current;
     if (pendingCloudCompatibility) {
       if (cloudCompatibilityFromQueryRaw === pendingCloudCompatibility) {
@@ -181,6 +187,7 @@ export const useCloudPlan = () => {
       _setCloudCompatibility(requestedCloudCompatibility);
     }
   }, [
+    hasMounted,
     _cloudCompatibility,
     requestedCloudCompatibility,
     _setCloudCompatibility,

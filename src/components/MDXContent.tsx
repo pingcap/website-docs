@@ -65,7 +65,14 @@ export default function MDXContent(props: {
       pathConfig.repo,
       pathConfig.version || ""
     );
-  }, [pageUrl, pathConfig.locale, pathConfig.repo, pathConfig.version]);
+  }, [
+    pageUrl,
+    pathConfig.locale,
+    pathConfig.repo,
+    pathConfig.version,
+    cloudPlan,
+    cloudCompatibility,
+  ]);
 
   // Create H1 wrapper with props
   const H1WithProps = React.useCallback(
