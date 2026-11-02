@@ -170,15 +170,11 @@
     - [数据迁移的预检查错误、迁移错误和警报](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting.md): 了解如何解决使用数据迁移时的预检查错误、迁移错误和告警。
     - [将 AWS DMS 连接到 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-connect-aws-dms.md): 了解如何使用 AWS Database Migration Service (AWS DMS) 从 TiDB Cloud 迁移数据或向 TiDB Cloud 迁移数据。
 - 探索数据
-  - [SQL 编辑器中的 Chat2Query](https://docs.pingcap.com/zh/tidbcloud/explore-data-with-chat2query.md): 了解如何在 TiDB Cloud 控制台中使用 AI 辅助 SQL 编辑器，最大化你的数据价值。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL 编辑器](https://docs.pingcap.com/zh/tidbcloud/explore-data-with-sql-editor.md): 了解如何在 TiDB Cloud 控制台中使用 SQL Editor 编写和运行 SQL 查询、管理 SQL 文件以及查看查询结果。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](https://docs.pingcap.com/zh/tidbcloud/sql-proxy-account.md): 了解 TiDB Cloud 中的 SQL 代理账号。
 - 数据服务 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](https://docs.pingcap.com/zh/tidbcloud/data-service-overview.md): 了解 TiDB Cloud 中的 Data Service 及其应用场景。
   - [快速上手](https://docs.pingcap.com/zh/tidbcloud/data-service-get-started.md): 了解如何使用 TiDB Cloud Data Service 通过 HTTPS 请求访问你的数据。
-  - Chat2Query API
-    - [快速上手](https://docs.pingcap.com/zh/tidbcloud/use-chat2query-api.md): 了解如何通过 TiDB Cloud Chat2Query API 提供指令，利用 AI 生成并执行 SQL 语句。
-    - [启动多轮 Chat2Query](https://docs.pingcap.com/zh/tidbcloud/use-chat2query-sessions.md): 了解如何使用 Chat2Query 会话相关的 API 开始多轮对话。
-    - [使用知识库](https://docs.pingcap.com/zh/tidbcloud/use-chat2query-knowledge.md): 了解如何通过使用 Chat2Query 知识库 API 提升 Chat2Query 的查询结果。
   - [管理数据应用](https://docs.pingcap.com/zh/tidbcloud/data-service-manage-data-app.md): 了解如何在 TiDB Cloud 控制台中创建、查看、修改和删除 Data App。
   - [管理端点](https://docs.pingcap.com/zh/tidbcloud/data-service-manage-endpoint.md): 了解如何在 TiDB Cloud 控制台中创建、开发、测试、部署和删除 Data App 中的 endpoint。
   - [API 密钥](https://docs.pingcap.com/zh/tidbcloud/data-service-api-key.md): 了解如何为 Data App 创建、编辑和删除 API 密钥。

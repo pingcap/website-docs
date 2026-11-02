@@ -196,7 +196,7 @@
     - [リソースマネージャーページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-resource-manager.md): TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタキャパシティを推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。キャパシティ推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
     - インスタンスプロファイリング
       - [手動プロファイリング](https://docs.pingcap.com/ja/tidb/stable/dashboard-profiling.md): 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDB Dashboardまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認します。
-      - [継続的なプロファイリング](https://docs.pingcap.com/ja/tidb/stable/continuous-profiling.md): TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決することができます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
+      - [継続的プロファイリング](https://docs.pingcap.com/ja/tidb/stable/continuous-profiling.md): TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決することができます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
     - セッション管理と設定
       - [セッションを共有](https://docs.pingcap.com/ja/tidb/stable/dashboard-session-share.md): TiDB Dashboardでは、ユーザーが現在のセッションを他のユーザーと共有できるため、ユーザーパスワードの入力は不要です。招待者は、特定の共有設定を含む認証コードを生成し、招待された人に提供できます。招待された人は、その認証コードを使用してパスワードなしでサインインできます。
       - [SSOの設定](https://docs.pingcap.com/ja/tidb/stable/dashboard-session-sso.md): TiDB Dashboardは、サインイン認証にOIDCベースのSSOをサポートしています。SSOを有効にするには、OIDCクライアントIDと検出URLを入力し、偽装を承認して設定を保存します。SSOを無効にするには、オプションの選択を解除して設定を更新します。SQLユーザーのパスワードが変更された場合は、パスワードを再入力してSSOを再度有効にしてください。設定後、"Sign in via Company Account"をクリックしてサインインプロセスを完了することで、SSO経由でサインインできます。Okta、Auth0、Casdoorを使用したSSO設定の例も提供されています。
@@ -869,7 +869,7 @@
     - [ビュー](https://docs.pingcap.com/ja/tidb/stable/views.md): TiDB でビューを使用する方法を学習します。
     - [パーティショニング](https://docs.pingcap.com/ja/tidb/stable/partitioned-table.md): TiDBにおけるパーティショニングの使い方を学びましょう。
     - [一時テーブル](https://docs.pingcap.com/ja/tidb/stable/temporary-tables.md): TiDB の一時テーブル機能について学習し、一時テーブルを使用してアプリケーションの中間データを保存する方法を学習します。これにより、テーブル管理のオーバーヘッドが削減され、パフォーマンスが向上します。
-    - [キャッシュされたテーブル](https://docs.pingcap.com/ja/tidb/stable/cached-tables.md): めったに更新されない小さなホットスポット テーブルで読み取りパフォーマンスを向上させるために使用される、TiDB のキャッシュテーブル機能について学習します。
+    - [キャッシュテーブル](https://docs.pingcap.com/ja/tidb/stable/cached-tables.md): めったに更新されない小さなホットスポット テーブルで読み取りパフォーマンスを向上させるために使用される、TiDB のキャッシュテーブル機能について学習します。
     - [外部キー制約](https://docs.pingcap.com/ja/tidb/stable/foreign-key.md): TiDBデータベースにおける外部キー制約の使用方法の概要。
     - [テーブルレベルのデータ親和性](https://docs.pingcap.com/ja/tidb/stable/table-affinity.md): テーブルまたはパーティションのアフィニティ制約を構成してリージョンレプリカの分散を制御する方法と、スケジュールステータスを表示する方法について説明します。
     - 文字セットと照合順序

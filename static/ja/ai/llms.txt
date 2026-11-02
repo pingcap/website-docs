@@ -57,7 +57,7 @@
     - [TiDB Cloud Filesystem を使用して並列エージェント間で読み取り専用データセットを共有する](https://docs.pingcap.com/ja/ai/ti-parallel-agent-dataset-example.md): 1 つの非構造化データセットをアップロードし、同じ読み取り専用でマウントされた名前空間を複数のエージェントワーカーに公開します。
     - [TiDB Cloud Filesystem 上でエージェント用の Git ワークスペースを準備する](https://docs.pingcap.com/ja/ai/ti-git-workspace-for-agents-example.md): 大規模な Git リポジトリのダウンロードが完了する前にエージェントタスクを開始し、マシンを削除する前に作業を保持する方法を学びます。
     - [ファイルシステムジャーナルにエージェントワークフローを記録する](https://docs.pingcap.com/ja/ai/ti-journal-agent-workflow-example.md): ジャーナルを作成し、構造化されたエージェントイベントを追記し、ワークフローを検索し、ジャーナルのハッシュチェーンを検証します。
-    - [ファイルシステム Vault シークレットをエージェントに委任する](https://docs.pingcap.com/ja/ai/ti-vault-agent-secrets-example.md): シークレットを保存し、1 つのフィールドへのアクセス権をエージェントに付与し、プロセスに注入し、アクセスを監査し、付与を取り消します。
+    - [ファイルシステム Vault シークレットをエージェントに委任する](https://docs.pingcap.com/ja/ai/ti-vault-agent-secrets-example.md): シークレットを保存し、1 つのフィールドへのアクセス権をエージェントに付与し、プロセスに注入し、アクセスを監査し、grant を取り消します。
   - コマンドリファレンス
     - [概要](https://docs.pingcap.com/ja/ai/ti-cli-reference.md): TiDB Cloud CLI のコマンドグループ、構文、グローバルオプション、出力、dry-run の動作、ヘルプ形式、エラーを参照します。
     - [configure](https://docs.pingcap.com/ja/ai/ti-configure.md): ローカルの TiDB Cloud CLI プロファイルを対話形式または非対話形式で設定します。
@@ -71,7 +71,7 @@
       - [delete-db-cluster](https://docs.pingcap.com/ja/ai/ti-db-delete-db-cluster.md): TiDB Cloud Starter クラスターを削除します。
       - [create-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-create-db-cluster-branch.md): TiDB Cloud Starter クラスターのブランチを作成します。
       - [list-db-cluster-branches](https://docs.pingcap.com/ja/ai/ti-db-list-db-cluster-branches.md): TiDB Cloud Starter クラスターのブランチを一覧表示します。
-      - [describe-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-describe-db-cluster-branch.md): TiDB Cloud Starter クラスターのブランチを記述します。
+      - [describe-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-describe-db-cluster-branch.md): TiDB Cloud Starter クラスターのブランチの詳細を表示します。
       - [delete-db-cluster-branch](https://docs.pingcap.com/ja/ai/ti-db-delete-db-cluster-branch.md): TiDB Cloud Starter クラスターからブランチを削除します。
       - [create-db-sql-users](https://docs.pingcap.com/ja/ai/ti-db-create-db-sql-users.md): TiDB Cloud Starter インスタンス用に、TiDB Cloud CLI が管理する SQL ユーザーを作成します。
       - [format-db-connection-string](https://docs.pingcap.com/ja/ai/ti-db-format-db-connection-string.md): TiDB Cloud CLI で管理される SQL ユーザー向けの接続文字列を整形します。
@@ -111,7 +111,7 @@
       - [list-layers](https://docs.pingcap.com/ja/ai/ti-fs-list-layers.md): ファイルシステム内のレイヤーを一覧表示します。
       - [fork-layer](https://docs.pingcap.com/ja/ai/ti-fs-fork-layer.md): ファイルシステムで copy-on-write の子レイヤーをフォークします。
       - [list-layer-chain](https://docs.pingcap.com/ja/ai/ti-fs-list-layer-chain.md): ファイルシステムレイヤーの祖先チェーンを一覧表示します。
-      - [describe-layer](https://docs.pingcap.com/ja/ai/ti-fs-describe-layer.md): ファイルシステムのレイヤーを記述します。
+      - [describe-layer](https://docs.pingcap.com/ja/ai/ti-fs-describe-layer.md): ファイルシステムのレイヤーの詳細を表示します。
       - [diff-layer](https://docs.pingcap.com/ja/ai/ti-fs-diff-layer.md): ファイルシステムレイヤー内の変更を表示します。
       - [create-layer-checkpoint](https://docs.pingcap.com/ja/ai/ti-fs-create-layer-checkpoint.md): ファイルシステムのレイヤーにチェックポイントを作成します。
       - [delete-layer](https://docs.pingcap.com/ja/ai/ti-fs-delete-layer.md): ファイルシステムのレイヤーを放棄します。

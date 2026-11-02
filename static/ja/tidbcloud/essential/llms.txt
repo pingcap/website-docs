@@ -20,7 +20,7 @@
   - [SQL](https://docs.pingcap.com/ja/tidbcloud/sql-concepts.md): TiDBにおけるSQLの概念について学びましょう。
   - [AI機能](https://docs.pingcap.com/ja/tidbcloud/ai-feature-concepts.md): TiDB CloudのAI機能について学びましょう。
   - [拡張性](https://docs.pingcap.com/ja/tidbcloud/scalability-concepts.md): TiDB Cloudのスケーラビリティに関する概念について学びましょう。
-  - [高可用性](https://docs.pingcap.com/ja/tidbcloud/serverless-high-availability.md): TiDB Cloudの高可用性アーキテクチャについて学びましょう。ゾーン別およびリージョン別の高可用性オプション、自動バックアップ、フェイルオーバープロセス、そしてTiDBがデータの永続性と事業継続性をどのように確保しているかをご覧ください。
+  - [高可用性](https://docs.pingcap.com/ja/tidbcloud/serverless-high-availability.md): TiDB Cloudの高可用性アーキテクチャについて学びましょう。ゾーン高可用性およびリージョン高可用性オプション、自動バックアップ、フェイルオーバープロセス、そしてTiDBがデータの永続性と事業継続性をどのように確保しているかをご覧ください。
   - [監視](https://docs.pingcap.com/ja/tidbcloud/monitoring-concepts.md): TiDB Cloudの監視に関する概念について学びましょう。
   - [バックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-concepts.md): TiDB Cloudのバックアップと復元に関する概念について学びましょう。
   - [セキュリティ](https://docs.pingcap.com/ja/tidbcloud/security-concepts.md): TiDB Cloudのセキュリティ概念について学びましょう。
@@ -147,6 +147,7 @@
   - [変更フィード](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-overview.md): TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスにデータをストリーミングできます。
   - [MySQLへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-mysql.md): このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloud Essentialから MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
   - [Apache Kafkaへのシンク](https://docs.pingcap.com/ja/tidbcloud/essential-changefeed-sink-to-kafka.md): このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの構成が含まれます。
+  - [クラウドストレージへのシンク](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-cloud-storage.md): このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様に関する設定手順、およびレプリケーションプロセスの開始方法についても説明します。
   - [TiDB Cloud Lake へのシンク](https://docs.pingcap.com/ja/tidbcloud/data-pipeline-essential-sink-to-lake.md): エクスポート、changefeed、および TiDB Cloud Lake 統合を使用して、TiDB Cloud Essential インスタンス上に TiDB Cloud Lake データパイプラインを構築するための手動セットアップガイドです。
   - 参照
     - [TiDB Cloud Lake 統合の SQL 互換性](https://docs.pingcap.com/ja/tidbcloud/data-pipeline-lake-sql-compatibility.md): TiDB Cloud Data Pipeline における DDL、DML、および TiDB から TiDB Cloud Lake への型マッピング動作のリファレンスです。
@@ -403,7 +404,7 @@
   - [ビュー](https://docs.pingcap.com/ja/tidbcloud/views.md): TiDB でビューを使用する方法を学習します。
   - [パーティショニング](https://docs.pingcap.com/ja/tidbcloud/partitioned-table.md): TiDBにおけるパーティショニングの使い方を学びましょう。
   - [一時テーブル](https://docs.pingcap.com/ja/tidbcloud/temporary-tables.md): TiDB の一時テーブル機能について学習し、一時テーブルを使用してアプリケーションの中間データを保存する方法を学習します。これにより、テーブル管理のオーバーヘッドが削減され、パフォーマンスが向上します。
-  - [キャッシュされたテーブル](https://docs.pingcap.com/ja/tidbcloud/cached-tables.md): めったに更新されない小さなホットスポット テーブルで読み取りパフォーマンスを向上させるために使用される、TiDB のキャッシュテーブル機能について学習します。
+  - [キャッシュテーブル](https://docs.pingcap.com/ja/tidbcloud/cached-tables.md): めったに更新されない小さなホットスポット テーブルで読み取りパフォーマンスを向上させるために使用される、TiDB のキャッシュテーブル機能について学習します。
   - [外部キー制約](https://docs.pingcap.com/ja/tidbcloud/foreign-key.md): TiDBデータベースにおける外部キー制約の使用方法の概要。
   - 文字セットと照合順序
     - [概要](https://docs.pingcap.com/ja/tidbcloud/character-set-and-collation.md): TiDB でサポートされている文字セットと照合順序について学習します。
@@ -536,7 +537,7 @@
   - [upgrade](https://docs.pingcap.com/ja/tidbcloud/ticloud-upgrade.md): `ticloud upgrade` のリファレンス。
   - [help](https://docs.pingcap.com/ja/tidbcloud/ticloud-help.md): `ticloud help` のリファレンス。
 - 一般参考資料
-  - TiDBクラシックアーキテクチャ
+  - TiDB Classic アーキテクチャ
     - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-architecture.md): TiDBプラットフォームの主要なアーキテクチャコンポーネント
     - [ストレージ](https://docs.pingcap.com/ja/tidbcloud/tidb-storage.md): TiDB データベースのストレージレイヤーを理解します。
     - [コンピューティング](https://docs.pingcap.com/ja/tidbcloud/tidb-computing.md): TiDB データベースのコンピューティングレイヤーを理解します。
