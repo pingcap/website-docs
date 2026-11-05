@@ -34,10 +34,10 @@ exports.createSchemaCustomization = (options) => {
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   if (stage === "build-html") {
     actions.setWebpackConfig({
-      externals: {
-        os: "commonjs os",
-        tty: "commonjs tty",
-        process: "commonjs process",
+      resolve: {
+        alias: {
+          axios: require.resolve("axios/dist/browser/axios.cjs"),
+        },
       },
     });
   }
