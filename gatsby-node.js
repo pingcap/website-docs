@@ -30,3 +30,15 @@ exports.createSchemaCustomization = (options) => {
   createNavs(options);
   createConditionalToc(options);
 };
+
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      resolve: {
+        alias: {
+          "supports-color$": false,
+        },
+      },
+    });
+  }
+};
