@@ -16,7 +16,7 @@ import { CloudPlan, TOCNamespace } from "../../src/shared/interface";
 
 describe("Filesystem product menu", () => {
   it.each(["en", "zh", "ja"])(
-    "does not expose Filesystem in the %s Product menu",
+    "exposes Filesystem in the %s Product menu",
     (language) => {
       const nav = generateNavConfig(
         (key) => key,
@@ -28,15 +28,23 @@ describe("Filesystem product menu", () => {
       if (product.type !== "group") throw new Error("Missing Product menu");
       const cloud = product.children[0];
       if (cloud.type !== "group") throw new Error("Missing Cloud products");
-      expect(cloud.children).not.toContainEqual(
+      expect(cloud.children).toContainEqual(
         expect.objectContaining({
           type: "item",
+          label: "navbar.tidbCloudFilesystem",
           to: "/tidbcloud-filesystem",
         })
       );
+      const item = getSelectedNavItem(nav, TOCNamespace.TiDBCloudFilesystem);
+      expect(item?.isI18n ?? true).toBe(true);
       expect(
-        getSelectedNavItem(nav, TOCNamespace.TiDBCloudFilesystem)
-      ).toBeNull();
+        typeof item?.disabled === "function"
+          ? item.disabled(language)
+          : item?.disabled ?? false
+      ).toBe(false);
+      expect(item).toEqual(
+        expect.objectContaining({ to: "/tidbcloud-filesystem" })
+      );
     }
   );
 

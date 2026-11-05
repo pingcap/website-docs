@@ -66,6 +66,7 @@
       - [通过 Lark 订阅](https://docs.pingcap.com/zh/tidbcloud/monitor-alert-lark.md): 了解如何通过 Lark 接收告警通知来监控你的 TiDB 集群。
     - [事件](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-events.md): 了解如何使用 Events 页面查看 TiDB Cloud 资源的事件。
     - [集成 TiDB Cloud 与 Datadog](https://docs.pingcap.com/zh/tidbcloud/monitor-datadog-integration-for-tidb-x.md): 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
+    - [集成 TiDB Cloud 与 New Relic](https://docs.pingcap.com/zh/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
   - 性能调优
     - [概览](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-tune-performance-overview.md): 了解如何在 TiDB Cloud 中分析和调优 SQL 性能。
     - [分析性能](https://docs.pingcap.com/zh/tidbcloud/tune-performance.md): 了解如何在 TiDB Cloud 中分析与调优性能。
@@ -146,7 +147,8 @@
   - [Changefeed](https://docs.pingcap.com/zh/tidbcloud/essential-changefeed-overview.md): TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。
   - [同步到 MySQL](https://docs.pingcap.com/zh/tidbcloud/essential-changefeed-sink-to-mysql.md): 本文档介绍如何使用 **Sink to MySQL** changefeed 将数据从 TiDB Cloud Essential 实时同步到 MySQL。内容包括限制、前置条件，以及创建 MySQL sink 进行数据复制的步骤。该过程涉及网络连接设置、将已有数据加载到 MySQL 以及在 MySQL 中创建目标表。完成前置条件后，用户即可创建 MySQL sink，将数据复制到 MySQL。
   - [同步到 Apache Kafka](https://docs.pingcap.com/zh/tidbcloud/essential-changefeed-sink-to-kafka.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud Essential 流式传输到 Apache Kafka。内容包括限制、前提条件，以及为 Apache Kafka 配置 changefeed 的步骤。该过程涉及设置网络连接、为 Kafka ACL 授权添加权限，以及配置 changefeed。
-  - [Sink to TiDB Cloud Lake](https://docs.pingcap.com/zh/tidbcloud/data-pipeline-essential-sink-to-lake.md): 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB Cloud Lake 集成构建 TiDB Cloud Lake Data Pipeline 的手动设置指南。
+  - [同步到 Cloud Storage](https://docs.pingcap.com/zh/tidbcloud/changefeed-sink-to-cloud-storage.md): 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到云存储。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
+  - [同步到 TiDB Cloud Lake](https://docs.pingcap.com/zh/tidbcloud/data-pipeline-essential-sink-to-lake.md): 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB Cloud Lake 集成构建 TiDB Cloud Lake Data Pipeline 的手动设置指南。
   - 参考
     - [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](https://docs.pingcap.com/zh/tidbcloud/data-pipeline-lake-sql-compatibility.md): TiDB Cloud Data Pipeline 中 DDL、DML 以及 TiDB 到 TiDB Cloud Lake 类型映射行为的参考。
 - 安全
@@ -191,6 +193,7 @@
   - [Gitpod](https://docs.pingcap.com/zh/tidbcloud/dev-guide-playground-gitpod.md): Gitpod 提供了一个完整、自动化且预配置的云原生开发环境。你可以在浏览器中直接开发、运行和测试代码，无需任何本地配置。
   - [n8n](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-n8n.md): 了解在 n8n 中使用 TiDB Cloud 节点的方法。
   - [Netlify](https://docs.pingcap.com/zh/tidbcloud/integrate-tidbcloud-with-netlify.md): 学习如何将 TiDB Cloud 集群连接到 Netlify 项目。
+  - [New Relic](https://docs.pingcap.com/zh/tidbcloud/monitor-new-relic-integration-for-tidb-x.md): 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
   - [ProxySQL](https://docs.pingcap.com/zh/tidbcloud/dev-guide-proxysql-integration.md): 了解如何将 TiDB Cloud 和 TiDB（自托管）与 ProxySQL 集成。
   - Terraform
     - [Terraform 集成概览](https://docs.pingcap.com/zh/tidbcloud/terraform-tidbcloud-provider-overview.md): 通过 Terraform 创建、管理和更新你的 TiDB Cloud 资源。
@@ -286,7 +289,7 @@
     - [`GRANT <role>`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-grant-role.md): 关于在 TiDB 数据库中使用 GRANT <role> 的概述。
     - [`IMPORT INTO`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-import-into.md): TiDB 中 IMPORT INTO 的用法概述。
     - [`INSERT`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-insert.md): TiDB 数据库中 INSERT 的用法概述。
-    - [`KILL [TIDB]`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-kill.md): An overview of the usage of KILL for the TiDB database.
+    - [`KILL [TIDB]`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-kill.md): TiDB 数据库中 KILL 语句的使用概况。
     - [`LOAD DATA`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-load-data.md): TiDB 数据库中 LOAD DATA 的用法概述。
     - [`LOCK STATS`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-lock-stats.md): 关于 TiDB 数据库中 LOCK STATS 使用情况的概述。
     - [`LOCK TABLES` 和 `UNLOCK TABLES`](https://docs.pingcap.com/zh/tidbcloud/sql-statement-lock-tables-and-unlock-tables.md): TiDB 数据库中 LOCK TABLES 和 UNLOCK TABLES 的用法概述。

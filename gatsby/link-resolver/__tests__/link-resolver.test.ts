@@ -125,6 +125,32 @@ describe("resolveMarkdownLink", () => {
     });
   });
 
+  describe("Starter links", () => {
+    it("should resolve the Starter index link", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter/_index",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql"
+      );
+      expect(result).toBe("/tidbcloud/starter");
+    });
+
+    it("should resolve Starter page links to the shared TiDB Cloud namespace", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter/get-started",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql"
+      );
+      expect(result).toBe("/tidbcloud/get-started");
+    });
+
+    it("should preserve hashes for Starter links", () => {
+      const result = resolveMarkdownLink(
+        "/tidb-cloud/starter/get-started#quick-start",
+        "/en/tidbcloud/master/TOC-tidb-cloud-starter-postgresql"
+      );
+      expect(result).toBe("/tidbcloud/get-started#quick-start");
+    });
+  });
+
   describe("linkMappings - namespace rules", () => {
     it("should resolve develop namespace links (en - default language omitted)", () => {
       const result = resolveMarkdownLink(
@@ -182,12 +208,12 @@ describe("resolveMarkdownLink", () => {
       expect(result).toBe("/tidbcloudlake");
     });
 
-    it("should resolve tidb-cloud-filesystem/_index links to the English filesystem root", () => {
+    it("should resolve tidb-cloud-filesystem/_index links to the Chinese filesystem root", () => {
       const result = resolveMarkdownLink(
         "/tidb-cloud-filesystem/_index",
         "/zh/tidb/stable/alert-rules"
       );
-      expect(result).toBe("/tidbcloud-filesystem");
+      expect(result).toBe("/zh/tidbcloud-filesystem");
     });
 
     it("should resolve best-practices namespace links (en - default language omitted)", () => {

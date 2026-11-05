@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { HEADER_HEIGHT } from "shared/headerHeight";
 
 export function Banner({
@@ -19,7 +19,7 @@ export function Banner({
     <Box
       sx={{
         flexShrink: 0,
-        height: HEADER_HEIGHT.BANNER,
+        minHeight: HEADER_HEIGHT.BANNER_MIN,
         backgroundColor: bgColor || "var(--tiui-palette-peacock-100)",
         // backgroundImage: `url(${bgImgSrc})`,
         backgroundPosition: "bottom left",
@@ -27,29 +27,35 @@ export function Banner({
         backgroundRepeat: "no-repeat",
       }}
     >
-      <Stack
+      <Box
         component={url ? "a" : "div"}
         href={url}
         target={url ? "_blank" : undefined}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        flexWrap="wrap"
-        sx={(theme) => ({
+        sx={{
           textDecoration: "none",
           color: textColor || "text.primary",
-          height: "100%",
+          display: "block",
+          textAlign: "center",
+          fontSize: "14px",
+          lineHeight: "24px",
+          overflowWrap: "anywhere",
+          py: 1,
           px: 2,
-          [theme.breakpoints.down("md")]: {
-            px: 1,
-          },
           ":hover span": {
             textDecoration: url ? "underline" : "none",
           },
-        })}
+        }}
       >
         {logo && (
-          <Box sx={{ display: "flex", alignItems: "center", pr: "8px" }}>
+          <Box
+            component="span"
+            sx={{
+              display: "inline-flex",
+              verticalAlign: "middle",
+              alignItems: "center",
+              pr: "8px",
+            }}
+          >
             {logo}
           </Box>
         )}
@@ -60,7 +66,7 @@ export function Banner({
               component="span"
               variant="body2"
               color="inherit"
-              sx={{ whiteSpace: "pre" }}
+              sx={{ whiteSpace: "normal" }}
             >
               {text}
             </Typography>
@@ -68,7 +74,7 @@ export function Banner({
             <React.Fragment key={`banner-node-${index}`}>{text}</React.Fragment>
           )
         )}
-      </Stack>
+      </Box>
     </Box>
   );
 }

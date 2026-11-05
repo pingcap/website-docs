@@ -191,7 +191,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ### Rule 1: TiDB Cloud Filesystem Namespace
 
-**Effect**: Maps TiDB Cloud Filesystem pages from their independent staging tree to the English `/tidbcloud-filesystem` namespace.
+**Effect**: Maps TiDB Cloud Filesystem pages from their independent staging tree to the localized `/tidbcloud-filesystem` namespace.
 
 **Source Patterns**:
 
@@ -214,8 +214,12 @@ Rules are evaluated in order; the first matching rule wins.
 - Target: `/tidbcloud-filesystem`
 - Source: `en/tidb-cloud-filesystem/master/tidb-cloud-filesystem/filesystem-quick-start.md`
 - Target: `/tidbcloud-filesystem/filesystem-quick-start`
+- Source: `zh/tidb-cloud-filesystem/master/_index.md`
+- Target: `/zh/tidbcloud-filesystem`
+- Source: `ja/tidb-cloud-filesystem/master/guides/filesystem-mount.md`
+- Target: `/ja/tidbcloud-filesystem/filesystem-mount`
 
-**Use Case**: TiDB Cloud Filesystem is sourced from its own English-only docs tree while using a product URL that omits the hyphen between `tidb` and `cloud`.
+**Use Case**: TiDB Cloud Filesystem is sourced from its own localized docs trees while using a product URL that omits the hyphen between `tidb` and `cloud`.
 
 ---
 
@@ -526,36 +530,9 @@ Rules are evaluated in order; the first matching rule wins.
 
 ## Link Resolver Configuration Rules
 
-Rules are evaluated in order; the first matching rule wins.
+Rules are evaluated in order; the first matching rule wins. Explicit namespace links are matched before page-based relative-link rules, including on release landing pages.
 
-### Rule 1: TiDB Cloud Filesystem Links (Direct Mapping)
-
-**Effect**: Resolves Filesystem source links to the English `/tidbcloud-filesystem` namespace, regardless of the current page language.
-
-**Link Patterns**:
-
-- `/tidb-cloud-filesystem/{...folders}/_index`
-- `/tidb-cloud-filesystem/{...folders}/{docname}`
-
-**Target Patterns**:
-
-- `/tidbcloud-filesystem/{folders}` for `_index`
-- `/tidbcloud-filesystem/{docname}` for article pages
-
-**Example**:
-
-- Link: `/tidb-cloud-filesystem/_index`
-- Current Page: `/zh/tidb/stable/overview`
-- Result: `/tidbcloud-filesystem`
-- Link: `/tidb-cloud-filesystem/guides/filesystem-mount`
-- Current Page: Any page
-- Result: `/tidbcloud-filesystem/filesystem-mount`
-
-**Use Case**: Filesystem is currently published in English only, so cross-product links must not inherit `/zh` or `/ja`.
-
----
-
-### Rule 2: Releases Index Links
+### Rule 1: Releases Index Links
 
 **Effect**: Resolves `/releases/_index` links to TiDB self-managed releases page.
 
@@ -573,7 +550,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 3: TiDB Cloud Releases Index Links
+### Rule 2: TiDB Cloud Releases Index Links
 
 **Effect**: Resolves `/tidb-cloud/releases/_index` links to TiDB Cloud releases page.
 
@@ -591,7 +568,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 4: TiDB-in-Kubernetes Releases Index Links (Path-Based)
+### Rule 3: TiDB-in-Kubernetes Releases Index Links (Path-Based)
 
 **Effect**: Resolves `/tidb-in-kubernetes/releases/_index` links from TiDB-in-Kubernetes pages.
 
@@ -611,7 +588,76 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 5: Links from TiDB Releases Landing Page (Path-Based)
+### Rule 4: Namespace Index Links (Direct Mapping)
+
+**Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`, `/tidbcloud-filesystem`).
+
+**Link Pattern**: `/{namespace}/{...folders}/_index`
+
+**Target Pattern**: `/{curLang}/{namespace}/{folders}`
+
+**Conditions**: `namespace = ["tidb-cloud", "tidb-cloud-lake", "tidb-cloud-filesystem", "develop", "best-practices", "api", "ai"]`
+
+**Namespace Transform**:
+
+- `tidb-cloud` → `tidbcloud`
+- `tidb-cloud-lake` → `tidbcloudlake`
+- `tidb-cloud-filesystem` → `tidbcloud-filesystem`
+- `develop` → `developer`
+
+**Example**:
+
+- Link: `/develop/_index`
+- Current Page: Any page
+- Result: `/developer`
+- Link: `/best-practices/performance/_index`
+- Current Page: Any page
+- Result: `/best-practices/performance`
+- Link: `/tidb-cloud-lake/_index`
+- Current Page: Any page
+- Result: `/tidbcloudlake`
+- Link: `/tidb-cloud-filesystem/_index`
+- Current Page: `/zh/tidb/stable/overview`
+- Result: `/zh/tidbcloud-filesystem`
+
+**Use Case**: Keeps namespace index links consistent with how `_index.md` pages are published.
+
+---
+
+### Rule 5: Namespace Links (Direct Mapping)
+
+**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`, `tidb-cloud-lake`, `tidb-cloud-filesystem`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`, `/tidbcloud-filesystem`).
+
+**Link Pattern**: `/{namespace}/{...any}/{docname}`
+
+**Target Pattern**: `/{curLang}/{namespace}/{docname}`
+
+**Conditions**: `namespace = ["tidb-cloud", "tidb-cloud-lake", "tidb-cloud-filesystem", "develop", "best-practices", "api", "ai"]`
+
+**Namespace Transform**:
+
+- `tidb-cloud` → `tidbcloud`
+- `tidb-cloud-lake` → `tidbcloudlake`
+- `tidb-cloud-filesystem` → `tidbcloud-filesystem`
+- `develop` → `developer`
+
+**Example**:
+
+- Link: `/develop/vector-search`
+- Current Page: Any page
+- Result: `/developer/vector-search`
+- Link: `/tidb-cloud-lake/guides/dashboards`
+- Current Page: Any page
+- Result: `/tidbcloudlake/dashboards`
+- Link: `/tidb-cloud-filesystem/guides/filesystem-mount`
+- Current Page: `/ja/ai`
+- Result: `/ja/tidbcloud-filesystem/filesystem-mount`
+
+**Use Case**: Direct links to namespace pages from any location.
+
+---
+
+### Rule 6: Links from TiDB Releases Landing Page (Path-Based)
 
 **Effect**: Resolves `/releases/*` links from the releases landing page to TiDB stable branch URLs.
 
@@ -631,7 +677,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 6: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/\*)
+### Rule 7: Links from TiDB Operator Releases Landing Page (Path-Based, /releases/\*)
 
 **Effect**: Resolves `/releases/*` links from the operator releases landing page to TiDB-in-Kubernetes `stable` URLs.
 
@@ -651,7 +697,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 7: TiDB-in-Kubernetes Main TOC Release Links (Path-Based)
+### Rule 8: TiDB-in-Kubernetes Main TOC Release Links (Path-Based)
 
 **Effect**: Resolves release-note links from the `main` TiDB-in-Kubernetes TOC to the stable URLs that publish the corresponding `main` release-note files.
 
@@ -671,68 +717,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 8: Namespace Index Links (Direct Mapping)
-
-**Effect**: Resolves namespace index links (ending with `/_index`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
-
-**Link Pattern**: `/{namespace}/{...folders}/_index`
-
-**Target Pattern**: `/{curLang}/{namespace}/{folders}`
-
-**Conditions**: `namespace = ["tidb-cloud", "tidb-cloud-lake", "develop", "best-practices", "api", "ai"]`
-
-**Namespace Transform**:
-
-- `tidb-cloud` → `tidbcloud`
-- `tidb-cloud-lake` → `tidbcloudlake`
-- `develop` → `developer`
-
-**Example**:
-
-- Link: `/develop/_index`
-- Current Page: Any page
-- Result: `/developer`
-- Link: `/best-practices/performance/_index`
-- Current Page: Any page
-- Result: `/best-practices/performance`
-- Link: `/tidb-cloud-lake/_index`
-- Current Page: Any page
-- Result: `/tidbcloudlake`
-
-**Use Case**: Keeps namespace index links consistent with how `_index.md` pages are published.
-
----
-
-### Rule 9: Namespace Links (Direct Mapping)
-
-**Effect**: Resolves namespace links (`develop`, `best-practices`, `api`, `ai`, `tidb-cloud`, `tidb-cloud-lake`) to namespace URLs (published as `/developer`, `/best-practices`, `/api`, `/ai`, `/tidbcloud`, `/tidbcloudlake`).
-
-**Link Pattern**: `/{namespace}/{...any}/{docname}`
-
-**Target Pattern**: `/{curLang}/{namespace}/{docname}`
-
-**Conditions**: `namespace = ["tidb-cloud", "tidb-cloud-lake", "develop", "best-practices", "api", "ai"]`
-
-**Namespace Transform**:
-
-- `tidb-cloud` → `tidbcloud`
-- `tidb-cloud-lake` → `tidbcloudlake`
-- `develop` → `developer`
-
-**Example**:
-
-- Link: `/develop/vector-search`
-- Current Page: Any page
-- Result: `/developer/vector-search`
-- Link: `/tidb-cloud-lake/guides/dashboards`
-- Current Page: Any page
-- Result: `/tidbcloudlake/dashboards`
-
-**Use Case**: Direct links to namespace pages from any location.
-
----
-
-### Rule 10: TiDBCloud Page Links (Path-Based)
+### Rule 9: TiDBCloud Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDBCloud pages to TiDBCloud URLs.
 
@@ -755,7 +740,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 11: TiDB Cloud Lake Page Links (Path-Based)
+### Rule 10: TiDB Cloud Lake Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB Cloud Lake pages to `/tidbcloudlake/*` URLs.
 
@@ -775,15 +760,15 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 12: TiDB Cloud Filesystem Page Links (Path-Based)
+### Rule 11: TiDB Cloud Filesystem Page Links (Path-Based)
 
-**Effect**: Resolves relative links from Filesystem pages to English `/tidbcloud-filesystem/*` URLs.
+**Effect**: Resolves relative links from Filesystem pages to localized `/tidbcloud-filesystem/*` URLs.
 
 **Path Pattern**: `/{lang}/tidbcloud-filesystem/{...any}`
 
-**Link Pattern**: `/{...folders}/{docname}`
+**Link Pattern**: `/{...any}/{docname}`
 
-**Target Pattern**: `/tidbcloud-filesystem/{docname}`
+**Target Pattern**: `/{lang}/tidbcloud-filesystem/{docname}`
 
 **Example**:
 
@@ -791,11 +776,11 @@ Rules are evaluated in order; the first matching rule wins.
 - Link: `/guides/filesystem-mount`
 - Result: `/tidbcloud-filesystem/filesystem-mount`
 
-**Use Case**: Relative Filesystem links stay in the English product namespace; explicit namespace links such as `/ai/*` are handled by earlier direct rules.
+**Use Case**: Relative Filesystem links preserve the page language; explicit namespace links such as `/ai/*` are handled by earlier direct rules.
 
 ---
 
-### Rule 13: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
+### Rule 12: Developer/Best-Practices/API/AI Namespace Page Links (Path-Based)
 
 **Effect**: Resolves relative links from namespace pages to TiDB stable branch URLs.
 
@@ -820,7 +805,7 @@ Rules are evaluated in order; the first matching rule wins.
 
 ---
 
-### Rule 14: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
+### Rule 13: TiDB/TiDB-in-Kubernetes Page Links (Path-Based)
 
 **Effect**: Resolves relative links from TiDB or TiDB-in-Kubernetes pages, preserving branch/version.
 

@@ -20,40 +20,47 @@ import { generateConfig, generateNavTOCPath } from "../path";
 import { calculateFileUrl } from "../url-resolver";
 
 describe("TiDB Cloud BYOC", () => {
-  it("places the English-only BYOC preview entry immediately after Premium", () => {
-    const nav = generateNavConfig((key) => key, CloudPlan.BYOC, "prod", "zh");
-    const product = nav[0];
-    if (product.type !== "group") throw new Error("Missing Product menu");
-    const cloud = product.children[0];
-    if (cloud.type !== "group") throw new Error("Missing Cloud products");
+  it.each(["en", "zh", "ja"])(
+    "enables the BYOC preview entry immediately after Premium in %s",
+    (locale) => {
+      const nav = generateNavConfig(
+        (key) => key,
+        CloudPlan.BYOC,
+        "prod",
+        locale
+      );
+      const product = nav[0];
+      if (product.type !== "group") throw new Error("Missing Product menu");
+      const cloud = product.children[0];
+      if (cloud.type !== "group") throw new Error("Missing Cloud products");
 
-    const premiumIndex = cloud.children.findIndex(
-      (item) => item.type === "item" && item.label === "navbar.tidbCloudPremium"
-    );
-    const byocIndex = cloud.children.findIndex(
-      (item) => item.type === "item" && item.label === "navbar.tidbCloudBYOC"
-    );
-    expect(byocIndex).toBe(premiumIndex + 1);
-    const byoc = cloud.children[byocIndex];
-    expect(byoc).toEqual(
-      expect.objectContaining({
-        type: "item",
-        to: "/tidbcloud/byoc?plan=byoc",
-        isI18n: false,
-      })
-    );
-    if (byoc.type !== "item") throw new Error("Missing BYOC item");
-    expect(typeof byoc.disabled).toBe("function");
-    if (typeof byoc.disabled !== "function") {
-      throw new Error("Missing BYOC locale availability check");
+      const premiumIndex = cloud.children.findIndex(
+        (item) =>
+          item.type === "item" && item.label === "navbar.tidbCloudPremium"
+      );
+      const byocIndex = cloud.children.findIndex(
+        (item) => item.type === "item" && item.label === "navbar.tidbCloudBYOC"
+      );
+      expect(byocIndex).toBe(premiumIndex + 1);
+      const byoc = cloud.children[byocIndex];
+      expect(byoc).toEqual(
+        expect.objectContaining({
+          type: "item",
+          to: "/tidbcloud/byoc?plan=byoc",
+        })
+      );
+      if (byoc.type !== "item") throw new Error("Missing BYOC item");
+      expect(byoc.isI18n).not.toBe(false);
+      expect(byoc.disabled).toBeUndefined();
+      const premium = cloud.children[premiumIndex];
+      if (premium.type !== "item") throw new Error("Missing Premium item");
+      expect(byoc.isI18n).toBe(premium.isI18n);
+      expect(byoc.disabled).toBe(premium.disabled);
+      expect(getSelectedNavItem(nav, TOCNamespace.TiDBCloud)).toEqual(
+        expect.objectContaining({ label: "navbar.tidbCloudBYOC" })
+      );
     }
-    expect(byoc.disabled("en")).toBe(false);
-    expect(byoc.disabled("zh")).toBe(true);
-    expect(byoc.disabled("ja")).toBe(true);
-    expect(getSelectedNavItem(nav, TOCNamespace.TiDBCloud)).toEqual(
-      expect.objectContaining({ label: "navbar.tidbCloudBYOC" })
-    );
-  });
+  );
 
   it("keeps BYOC out of the archived documentation menu", () => {
     const nav = generateNavConfig(
@@ -65,21 +72,25 @@ describe("TiDB Cloud BYOC", () => {
     expect(getSelectedNavItem(nav, TOCNamespace.TiDBCloud)).toBeNull();
   });
 
-  it("publishes the BYOC landing page at the plan URL", () => {
-    const slug = "en/tidbcloud/master/tidb-cloud/byoc/_index";
-    const { config } = generateConfig(slug);
+  it.each(["en", "zh", "ja"])(
+    "publishes the BYOC landing page at the plan URL in %s",
+    (locale) => {
+      const slug = `${locale}/tidbcloud/master/tidb-cloud/byoc/_index`;
+      const { config } = generateConfig(slug);
 
-    expect(config.prefix).toBe(CloudPlan.BYOC);
-    expect(calculateFileUrl(slug, true)).toBe("/tidbcloud/byoc");
-    expect(generateNavTOCPath(config, "tidb-cloud-byoc")).toBe(
-      "en/tidbcloud/master/TOC-tidb-cloud-byoc"
-    );
-  });
+      expect(config.prefix).toBe(CloudPlan.BYOC);
+      const localePrefix = locale === "en" ? "" : `/${locale}`;
+      expect(calculateFileUrl(slug, true)).toBe(
+        `${localePrefix}/tidbcloud/byoc`
+      );
+      expect(generateNavTOCPath(config, "tidb-cloud-byoc")).toBe(
+        `${locale}/tidbcloud/master/TOC-tidb-cloud-byoc`
+      );
+    }
+  );
 
   it("keys landing-page locale availability by cloud plan", () => {
-    const byoc = generateConfig(
-      "en/tidbcloud/master/tidb-cloud/byoc/_index"
-    );
+    const byoc = generateConfig("en/tidbcloud/master/tidb-cloud/byoc/_index");
     const premium = generateConfig(
       "zh/tidbcloud/master/tidb-cloud/premium/_index"
     );

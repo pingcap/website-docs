@@ -20,7 +20,7 @@
     - [MySQL Workbench](https://docs.pingcap.com/ja/developer/dev-guide-gui-mysql-workbench.md): MySQL Workbenchを使用してTiDBに接続する方法を学びましょう。
     - [Navicat](https://docs.pingcap.com/ja/developer/dev-guide-gui-navicat.md): Navicatを使用してTiDBに接続する方法を学びましょう。
   - ドライバーとORM
-    - [DriverまたはORMを選択してください](https://docs.pingcap.com/ja/developer/dev-guide-choose-driver-or-orm.md): TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
+    - [ドライバーまたはORMを選択する](https://docs.pingcap.com/ja/developer/dev-guide-choose-driver-or-orm.md): TiDB に接続するためのドライバーまたは ORM フレームワークを選択する方法を学習します。
     - Java
       - [JDBC](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-jdbc.md): JDBCを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、JDBCを使用してTiDBと連携するJavaのサンプルコードを紹介します。
       - [MyBatis](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-mybatis.md): MyBatisを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使用してTiDBと連携するJavaのサンプルコードを紹介します。
@@ -28,7 +28,7 @@
       - [Spring Boot](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-spring-boot.md): Spring Bootを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Spring Bootを使用してTiDBと連携するJavaのサンプルコードを紹介します。
       - [接続プールと接続パラメータの設定](https://docs.pingcap.com/ja/developer/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを実現するための計算式について解説します。また、パフォーマンス最適化のための JDBC API の使用方法と MySQL Connector/J パラメータの設定についても説明します。
       - [Javaアプリケーション開発におけるベストプラクティス](https://docs.pingcap.com/ja/developer/java-app-best-practices.md): このドキュメントでは、TiDB を使用したJavaアプリケーション開発におけるベストプラクティスを紹介します。データベース関連コンポーネント、JDBC の使用方法、接続プール構成、データアクセスフレームワーク、Spring トランザクション、およびトラブルシューティングツールについて解説します。TiDB は MySQL と高い互換性があるため、MySQL ベースのJavaアプリケーション開発におけるベストプラクティスのほとんどは TiDB にも適用できます。
-    - 行く
+    - Go
       - [Go-MySQL-Driver](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-sql-driver.md): Go-MySQL-Driver を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、Go-MySQL-Driver を使用して TiDB と連携するGolang のサンプルコードを紹介します。
       - [GORM](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-gorm.md): GORM を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、GORM を使用して TiDB と連携するGolang のサンプルコードを紹介します。
     - Python
@@ -36,7 +36,7 @@
       - [MySQL Connector/Python](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-mysql-connector.md): MySQL Connector/Pythonを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MySQL Connector/Pythonを使用してTiDBと連携するPythonのサンプルコードを紹介します。
       - [PyMySQL](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-pymysql.md): PyMySQLを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、PyMySQLを使用してTiDBと連携するPythonのサンプルコードを紹介します。
       - [SQLAlchemy](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-sqlalchemy.md): SQLAlchemyを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、SQLAlchemyを使用してTiDBを操作するPythonのサンプルコードを紹介します。
-      - [Peewee](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-peewee.md): peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBと連携するPythonのサンプルコードを紹介します。
+      - [peewee](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-peewee.md): peeweeを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、peeweeを使ってTiDBと連携するPythonのサンプルコードを紹介します。
       - [Django](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-python-django.md): Djangoを使ってTiDBに接続する方法を学びましょう。このチュートリアルでは、Djangoを使ってTiDBと連携するPythonのサンプルコードを紹介します。
     - Node.js
       - [node-mysql2](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-nodejs-mysql2.md): node-mysql2 を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、node-mysql2 を使用して TiDB と連携する Node.js のサンプルコードを紹介します。
@@ -93,7 +93,7 @@
   - [インデックス作成のベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-index-best-practice.md): TiDB でインデックスを作成して使用するためのベストプラクティスをいくつか学習します。
   - 追加の最適化手法
     - [暗黙的な型変換を避ける](https://docs.pingcap.com/ja/developer/dev-guide-implicit-type-conversion.md): TiDB での暗黙的な型変換によって起こりうる結果と、それを回避する方法を紹介します。
-    - [固有シリアル番号生成](https://docs.pingcap.com/ja/developer/dev-guide-unique-serial-number-generation.md): 独自の固有 ID を生成する開発者向けの固有シリアル番号生成ソリューション。
+    - [ユニークなシリアル番号の生成](https://docs.pingcap.com/ja/developer/dev-guide-unique-serial-number-generation.md): 独自の固有 ID を生成する開発者向けの固有シリアル番号生成ソリューション。
 - トラブルシューティング
   - [SQLまたはトランザクションの問題](https://docs.pingcap.com/ja/developer/dev-guide-troubleshoot-overview.md): アプリケーション開発中に発生する可能性のある SQL またはトランザクションの問題をトラブルシューティングする方法を学習します。
   - [不安定な結果セット](https://docs.pingcap.com/ja/developer/dev-guide-unstable-result-set.md): 不安定な結果セットのエラーを処理する方法を学習します。

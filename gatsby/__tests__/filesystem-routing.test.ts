@@ -33,6 +33,67 @@ const tocAST = [
 ];
 
 describe("Filesystem product routing", () => {
+  it.each(["en", "zh", "ja"])(
+    "preserves %s in page URLs, TOCs and article links",
+    (language) => {
+      const prefix = language === "en" ? "" : `/${language}`;
+      const localizedSource = `${language}/tidb-cloud-filesystem/master`;
+      for (const layout of ["", "tidb-cloud-filesystem/"]) {
+        expect(
+          calculateFileUrl(`${localizedSource}/${layout}_index`, true)
+        ).toBe(`${prefix}/tidbcloud-filesystem`);
+        expect(
+          calculateFileUrl(
+            `${localizedSource}/${layout}guides/filesystem-mount`,
+            true
+          )
+        ).toBe(`${prefix}/tidbcloud-filesystem/filesystem-mount`);
+      }
+      const nav = mdxAstToToc(
+        tocAST as any,
+        `${localizedSource}/TOC-tidb-cloud-filesystem`
+      );
+      expect(nav.map((item) => item.link)).toEqual([
+        `${prefix}/tidbcloud-filesystem`,
+        `${prefix}/tidbcloud-filesystem/filesystem-quick-start`,
+        `${prefix}/ai/ti-filesystem`,
+      ]);
+      const current = `${prefix}/tidbcloud-filesystem/filesystem-quick-start`;
+      for (const link of [
+        "guides/filesystem-mount#finish-safely",
+        "/tidb-cloud-filesystem/guides/filesystem-mount#finish-safely",
+      ]) {
+        expect(resolveMarkdownLink(link, current)).toBe(
+          `${prefix}/tidbcloud-filesystem/filesystem-mount#finish-safely`
+        );
+      }
+      expect(
+        resolveMarkdownLink("/ai/ti/reference/ti-filesystem", current)
+      ).toBe(`${prefix}/ai/ti-filesystem`);
+    }
+  );
+
+  it.each(["en", "zh", "ja"])(
+    "keeps explicit product links ahead of release landing-page rules in %s",
+    (language) => {
+      const prefix = language === "en" ? "" : `/${language}`;
+      for (const landing of ["tidb-self-managed", "tidb-operator"]) {
+        const current = `${prefix}/releases/${landing}`;
+        for (const [source, target] of [
+          ["tidb-cloud-filesystem", "tidbcloud-filesystem"],
+          ["tidb-cloud-lake", "tidbcloudlake"],
+        ]) {
+          expect(resolveMarkdownLink(`/${source}/_index`, current)).toBe(
+            `${prefix}/${target}`
+          );
+          expect(
+            resolveMarkdownLink(`/${source}/guides/quick-start#setup`, current)
+          ).toBe(`${prefix}/${target}/quick-start#setup`);
+        }
+      }
+    }
+  );
+
   it.each([
     ["_index", "/tidbcloud-filesystem"],
     ["filesystem-quick-start", "/tidbcloud-filesystem/filesystem-quick-start"],
@@ -81,7 +142,7 @@ describe("Filesystem product routing", () => {
     [
       "/tidb-cloud-filesystem/filesystem-mount",
       "/zh/ai",
-      "/tidbcloud-filesystem/filesystem-mount",
+      "/zh/tidbcloud-filesystem/filesystem-mount",
     ],
     [
       "/ai/ti/reference/ti-filesystem",

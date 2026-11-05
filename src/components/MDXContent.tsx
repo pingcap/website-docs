@@ -12,6 +12,7 @@ import {
   PathConfig,
   BuildType,
   CloudPlan,
+  CloudCompatibility,
   TOCNamespace,
 } from "shared/interface";
 import replaceInternalHref from "shared/utils/anchor";
@@ -30,6 +31,7 @@ export default function MDXContent(props: {
   buildType: BuildType;
   pageUrl: string;
   cloudPlan: CloudPlan | null;
+  cloudCompatibility: CloudCompatibility;
   namespace?: TOCNamespace;
 }) {
   const {
@@ -43,13 +45,15 @@ export default function MDXContent(props: {
     buildType,
     pageUrl,
     cloudPlan,
+    cloudCompatibility,
     namespace,
   } = props;
 
   const CustomContent = useCustomContent(
     namespace || TOCNamespace.TiDB,
     cloudPlan,
-    language
+    language,
+    cloudCompatibility
   );
   // const isAutoTranslation = useIsAutoTranslation(pageUrl || "");
 
@@ -61,7 +65,14 @@ export default function MDXContent(props: {
       pathConfig.repo,
       pathConfig.version || ""
     );
-  }, [pageUrl, pathConfig.locale, pathConfig.repo, pathConfig.version]);
+  }, [
+    pageUrl,
+    pathConfig.locale,
+    pathConfig.repo,
+    pathConfig.version,
+    cloudPlan,
+    cloudCompatibility,
+  ]);
 
   // Create H1 wrapper with props
   const H1WithProps = React.useCallback(

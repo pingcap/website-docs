@@ -6,7 +6,7 @@
 
 TiDB は複数のデプロイオプションで利用できます。
 
-- **TiDB Cloud**: Dedicated、Premium、Essential、Starter プランを備えたフルマネージドデータベースサービス。
+- **TiDB Cloud**: TiDB Cloud Starter、Essential、Premium、BYOC、Dedicated、Lake、Filesystem などのフルマネージドクラウドデータベースサービスを提供します。
 - **TiDB Self-Managed**: 独自のインフラストラクチャで TiDB をデプロイおよび運用します。
 - **TiDB on Kubernetes**: TiDB Operator を使用して TiDB をデプロイおよび管理します。
 
@@ -14,21 +14,37 @@ TiDB は複数のデプロイオプションで利用できます。
 
 TiDB Cloud は、TiDB の優れた機能をすべてクラウドにもたらすフルマネージドの Database-as-a-Service (DBaaS) であり、データベースの複雑さではなくアプリケーションに集中できます。
 
-#### TiDB Cloud Dedicated
+#### MySQL-compatible TiDB Cloud Starter
 
-- [TiDB Cloud Dedicated ドキュメント](https://docs.pingcap.com/ja/tidbcloud/llms.txt): 専用リソース、高度なセキュリティ、コンプライアンス機能を備えたエンタープライズグレードのマネージド TiDB。
+- [TiDB Cloud Starter ドキュメント](https://docs.pingcap.com/ja/tidbcloud/starter/llms.txt): 開発、テスト、小規模なワークロード向けのサーバーレスで従量課金制の TiDB Cloud オファリング。
 
-#### TiDB Cloud Premium
+#### PostgreSQL-compatible TiDB Cloud Starter
 
-- [TiDB Cloud Premium ドキュメント](https://docs.pingcap.com/ja/tidbcloud/premium/llms.txt): 無制限のリアルタイムスケーラビリティを必要とするミッションクリティカルなビジネス向けに設計されており、ワークロードを認識した自動スケーリングと包括的なエンタープライズ機能を提供します。
+- [PostgreSQL-compatible TiDB Cloud Starter ドキュメント](https://docs.pingcap.com/ja/tidbcloud/starter-postgresql/llms.txt): PostgreSQL 互換の TiDB Cloud Starter は、使い慣れた PostgreSQL のツールやフレームワークを使用してアプリケーションを開発・テストする開発者向けに設計されています。フルマネージドで自動スケーリングに対応したデータベースを提供し、pgvector 互換のベクトル検索機能と一部の PostgreSQL 拡張機能をサポートしています。
 
 #### TiDB Cloud Essential
 
 - [TiDB Cloud Essential ドキュメント](https://docs.pingcap.com/ja/tidbcloud/essential/llms.txt): 成長するアプリケーション向けの費用対効果の高いマネージド TiDB で、パフォーマンスと手頃な価格のバランスが取れています。
 
-#### TiDB Cloud Starter
+#### TiDB Cloud Premium
 
-- [TiDB Cloud Starter ドキュメント](https://docs.pingcap.com/ja/tidbcloud/starter/llms.txt): 開発、テスト、小規模なワークロード向けのサーバーレスで従量課金制の TiDB Cloud オファリング。
+- [TiDB Cloud Premium ドキュメント](https://docs.pingcap.com/ja/tidbcloud/premium/llms.txt): 無制限のリアルタイムスケーラビリティを必要とするミッションクリティカルなビジネス向けに設計されており、ワークロードを認識した自動スケーリングと包括的なエンタープライズ機能を提供します。
+
+#### TiDB Cloud BYOC
+
+- [TiDB Cloud BYOC ドキュメント](https://docs.pingcap.com/ja/tidbcloud/byoc/llms.txt): TiDB Cloud BYOC (Bring Your Own Cloud) は、TiDB Cloud のフルマネージドな体験を維持しながら、お客様自身のクラウド環境でデータプレーンを実行できるエンタープライズ向けソリューションです。
+
+#### TiDB Cloud Dedicated
+
+- [TiDB Cloud Dedicated ドキュメント](https://docs.pingcap.com/ja/tidbcloud/llms.txt): 専用リソース、高度なセキュリティ、コンプライアンス機能を備えたエンタープライズグレードのマネージド TiDB。
+
+#### TiDB Cloud Lake
+
+- [TiDB Cloud Lake ドキュメント](https://docs.pingcap.com/ja/tidbcloudlake/llms.txt): 分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データの処理、AI 指向のワークフローをサポートします。
+
+#### TiDB Cloud Filesystem
+
+- [TiDB Cloud Filesystem ドキュメント](https://docs.pingcap.com/ja/tidbcloud-filesystem/llms.txt): アプリケーション、自動化、AI エージェントが異なるマシンやセッション間でアクセスできる、永続的な共有ファイルストレージです。
 
 ### TiDB Self-Managed
 

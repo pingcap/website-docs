@@ -54,6 +54,32 @@ export default function Header(props: HeaderProps) {
   }, []);
 
   const cssVarRootRef = React.useRef<HTMLDivElement | null>(null);
+  const bannerRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const root = cssVarRootRef.current;
+    const banner = bannerRef.current;
+    if (!root || !banner) {
+      return;
+    }
+
+    // Keep navigation and content offsets aligned as the banner wraps or fonts load.
+    const updateBannerHeight = () => {
+      root.style.setProperty(
+        "--pc-docs-banner-height",
+        `${banner.getBoundingClientRect().height}px`
+      );
+    };
+    updateBannerHeight();
+    const observer = new ResizeObserver(updateBannerHeight);
+    observer.observe(banner);
+
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--pc-docs-banner-height");
+    };
+  }, [bannerVisible]);
+
   const leftClusterRef = React.useRef<HTMLDivElement | null>(null);
   const logoMeasureRef = React.useRef<HTMLDivElement | null>(null);
   const leftClusterWidthRef = React.useRef(0);
@@ -170,6 +196,7 @@ export default function Header(props: HeaderProps) {
     >
       {bannerVisible && (
         <Box
+          ref={bannerRef}
           sx={{
             position: "fixed",
             top: 0,
@@ -402,7 +429,7 @@ export default function Header(props: HeaderProps) {
 }
 
 const HeaderBanner = (props: HeaderProps) => {
-  const { t } = useI18next();
+  const { t, language } = useI18next();
   const { namespace, name } = props;
   const isAutoTranslation = useIsAutoTranslation(namespace);
   const urlAutoTranslation =
@@ -421,6 +448,61 @@ const HeaderBanner = (props: HeaderProps) => {
       : `/${props.pathConfig?.repo}/${
           props.pathConfig?.version || "stable"
         }/${name}`;
+  const campaignLinks = [
+    {
+      itemName: "tidb_cloud_byoc",
+      text: t("banner.campaign.product1"),
+      url: t("banner.campaign.link1"),
+    },
+    {
+      itemName: "tidb_cloud_filesystem",
+      text: t("banner.campaign.product2"),
+      url: t("banner.campaign.link2"),
+    },
+    {
+      itemName: "postgresql_compatible_tidb_cloud_starter",
+      text: t("banner.campaign.product3"),
+      url: t("banner.campaign.link3"),
+    },
+  ];
+  const trackCampaignLinkClick = (link: typeof campaignLinks[number]) => {
+    gtmTrack(GTMEvent.ClickBanner, {
+      banner_item: link.itemName,
+      content_language: language,
+      link_text: link.text,
+      link_url: link.url,
+    });
+  };
+  const campaignTextList = [
+    t("banner.campaign.prefix"),
+    <BlueAnchorLink
+      key={campaignLinks[0].itemName}
+      to={campaignLinks[0].url}
+      target="_blank"
+      onClick={() => trackCampaignLinkClick(campaignLinks[0])}
+    >
+      {campaignLinks[0].text}
+    </BlueAnchorLink>,
+    t("banner.campaign.separator1"),
+    <BlueAnchorLink
+      key={campaignLinks[1].itemName}
+      to={campaignLinks[1].url}
+      target="_blank"
+      onClick={() => trackCampaignLinkClick(campaignLinks[1])}
+    >
+      {campaignLinks[1].text}
+    </BlueAnchorLink>,
+    t("banner.campaign.separator2"),
+    <BlueAnchorLink
+      key={campaignLinks[2].itemName}
+      to={campaignLinks[2].url}
+      target="_blank"
+      onClick={() => trackCampaignLinkClick(campaignLinks[2])}
+    >
+      {campaignLinks[2].text}
+    </BlueAnchorLink>,
+    t("banner.campaign.suffix"),
+  ];
 
   let archivedTargetUrl = "";
   if (props.name && props.pathConfig) {
@@ -463,13 +545,8 @@ const HeaderBanner = (props: HeaderProps) => {
         // }
         logo={"📣"}
         textList={[
-          <BlueAnchorLink
-            to="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
-            target="_blank"
-          >
-            {t("banner.autoTrans.title1")}
-          </BlueAnchorLink>,
-          t("banner.autoTrans.title2"),
+          ...campaignTextList,
+          t("banner.autoTrans.notice"),
           <BlueAnchorLink to={urlAutoTranslation} target="_blank">
             {t("banner.autoTrans.end")}
           </BlueAnchorLink>,
@@ -479,20 +556,6 @@ const HeaderBanner = (props: HeaderProps) => {
   }
 
   return props.bannerEnabled ? (
-    <Banner
-      logo={"📣"}
-      textList={[
-        <BlueAnchorLink
-          to="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/"
-          target="_blank"
-        >
-          {t("banner.campaign.title1")}
-        </BlueAnchorLink>,
-        t("banner.campaign.title2"),
-        <BlueAnchorLink to={t("banner.campaign.link")} target="_blank">
-          {t("banner.campaign.end")}
-        </BlueAnchorLink>,
-      ]}
-    />
+    <Banner logo={"📣"} textList={campaignTextList} />
   ) : null;
 };

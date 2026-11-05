@@ -1,0 +1,41 @@
+# TiDB Cloud Filesystem
+
+> TiDB Cloud Filesystem 提供持久化的共享文件存储服务，支持应用程序、自动化工具和 AI 智能体跨机器、跨会话访问文件。
+
+## 快速开始
+
+- [TiDB Cloud Filesystem](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-intro.md): 了解什么是 TiDB Cloud Filesystem、何时使用它，以及如何在应用程序、自动化流程和 AI 代理之间访问和共享持久化文件。
+- [通过控制台快速开始](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-quick-start-console.md): 在 TiDB Cloud 控制台中创建一个文件系统，从你的计算机连接到它，写入一个测试文件，并在控制台中查看该文件。
+- [通过 CLI 快速开始](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-quick-start.md): 了解如何创建持久化的 TiDB Cloud 文件系统、读写文件，以及可选地通过本地挂载访问这些文件。
+- 核心概念
+  - [授权](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-authorization.md): 了解 TiDB Cloud API 凭证、所有者 Token 和范围受限 Token 如何为 TiDB Cloud Filesystem 提供不同级别的访问控制。
+  - [Layers 和 Checkpoints](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-layers-checkpoints.md): TiDB Cloud Filesystem layer 用于将更改与基础文件系统隔离，而派生和 checkpoint 则可在更改提交前保留 layer 历史。
+
+## 指南
+
+- [管理文件系统](https://docs.pingcap.com/zh/tidbcloud-filesystem/manage-filesystem-resources.md): 了解如何使用 TiDB Cloud 控制台或 TiDB Cloud CLI 管理文件系统、在控制台中重命名文件系统，以及检查 CLI 访问。
+- [管理文件系统 Token](https://docs.pingcap.com/zh/tidbcloud-filesystem/manage-filesystem-tokens.md): 了解如何导入、创建、限定作用域、检查、轮转和（权限）回收文件系统 Token，以控制用户和自动化程序的访问。
+- [访问现有文件系统](https://docs.pingcap.com/zh/tidbcloud-filesystem/access-filesystem.md): 了解如何从当前机器、另一台机器、CI 作业或代理环境访问现有文件系统。
+- 挂载文件系统
+  - [挂载文件系统](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-mount.md): 了解何时挂载文件系统、应使用哪种挂载方法，以及文件系统挂载的能力和限制。
+  - [Linux](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-mount-linux.md): 安装 FUSE 用户态工具，在 Linux 上挂载文件系统，验证访问，并排查常见的挂载权限问题。
+  - [macOS](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-mount-macos.md): 了解如何在 macOS 上使用 WebDAV 或 macFUSE 挂载 TiDB Cloud 文件系统、验证文件访问并安全卸载。
+  - [Docker 和 Docker Compose](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-mount-docker.md): 通过启用 FUSE 和所需的容器权限，在 Linux 主机上的 Docker 容器内挂载文件系统。
+- [使用文件和目录](https://docs.pingcap.com/zh/tidbcloud-filesystem/work-with-filesystem-data.md): 了解如何在控制台中查看文件元信息，以及如何使用 TiDB Cloud CLI 上传、下载、读取、组织和搜索文件。
+- [共享文件系统](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-sharing.md): 了解如何通过为每个接收方使用单独的范围受限 Token 在多台机器之间共享文件，验证权限，并独立回收访问权限。
+- [管理使用限制](https://docs.pingcap.com/zh/tidbcloud-filesystem/manage-filesystem-limits.md): 了解如何在 TiDB Cloud 控制台中查看文件系统用量和免费限制，以及如何在添加信用卡后修改使用限制。
+- [管理文件系统 layer 和 checkpoint](https://docs.pingcap.com/zh/tidbcloud-filesystem/manage-filesystem-layers.md): 了解如何创建文件系统 layer、对更改创建 checkpoint 和进行派生、验证隔离，以及提交或丢弃你的工作。
+- [管理 Git 工作区](https://docs.pingcap.com/zh/tidbcloud-filesystem/manage-git-workspaces.md): 了解如何将 Git 仓库克隆到已挂载的 TiDB Cloud Filesystem 中、加速大型仓库的初始化，以及管理链接工作树。
+- [在文件系统中使用日志（Journal）](https://docs.pingcap.com/zh/tidbcloud-filesystem/use-filesystem-journals.md): 了解如何创建文件系统日志（Journal）、记录工作流事件、对读取和搜索结果进行分页，以及验证已记录的历史。
+- [管理文件系统的 Vault Secret](https://docs.pingcap.com/zh/tidbcloud-filesystem/manage-filesystem-vault-secrets.md): 了解如何存储和轮转 Vault Secret、向特定字段授予临时访问权限、在进程中使用它们，以及回收访问权限。
+- [为文件系统配置 AI 提供方](https://docs.pingcap.com/zh/tidbcloud-filesystem/configure-filesystem-ai-providers.md): 为文件系统配置用于媒体内容提取和向量嵌入的 AI 提供方。
+- [自动化与 AI Agent 工作流](https://docs.pingcap.com/zh/tidbcloud-filesystem/use-filesystem-for-automation-and-ai-agents.md): 查找 TiDB for AI 示例，了解如何共享文件系统工作区、交接 CI 制品，以及使用数据、Git、日志（Journal）和 Secret 为 agent 提供支持。
+- [定价与计费](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)
+
+## 参考
+
+- [命令参考](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-command-reference.md): 查找用于配置 `ti` 以及管理 TiDB Cloud Filesystem 资源、数据、Git 工作区、日志（Journal）和 Vault Secret 的 TiDB Cloud CLI 命令参考。
+- [TiDB Cloud Filesystem SDK](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-sdks.md): 了解 TiDB Cloud Filesystem 与 Drive9 workspace engine 的关系，并查找六种编程语言的客户端 SDK 文档。
+- [区域和限制](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-regions-and-limitations.md): 了解 TiDB Cloud Filesystem 支持的区域、挂载平台要求、持久性边界以及当前产品限制。
+- [常见问题](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-faq.md): 查找有关 TiDB Cloud Filesystem 使用、共享写入、Region、挂载、SDK、搜索、checkpoint、公测策略和定价的答案。
+- [故障排查](https://docs.pingcap.com/zh/tidbcloud-filesystem/filesystem-troubleshooting.md): 了解如何诊断文件系统 Token、Region、运行时、挂载和访问故障，并选择安全的恢复路径。

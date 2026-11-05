@@ -1,6 +1,6 @@
 import { NavConfig } from "./HeaderNavConfigType";
-import { CLOUD_MODE_KEY } from "shared/useCloudPlan";
-import { CloudPlan, TOCNamespace } from "shared/interface";
+import { CLOUD_MODE_KEY, CLOUD_COMPATIBILITY_KEY } from "shared/useCloudPlan";
+import { CloudCompatibility, CloudPlan, TOCNamespace } from "shared/interface";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import PreviewBadge from "components/Badge/PreviewBadge";
 
@@ -12,7 +12,8 @@ import TiDBIcon from "media/icons/layers-three-01.svg";
  */
 const getDefaultNavConfig = (
   t: (key: string) => string,
-  cloudPlan: CloudPlan | null
+  cloudPlan: CloudPlan | null,
+  cloudCompatibility: CloudCompatibility = CloudCompatibility.MySQL
 ): NavConfig[] => [
   {
     type: "group",
@@ -26,13 +27,21 @@ const getDefaultNavConfig = (
           {
             type: "item",
             label: t("navbar.tidbCloudStarter"),
-            to: `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}`,
+            to:
+              cloudPlan === CloudPlan.Starter &&
+              cloudCompatibility === CloudCompatibility.PostgreSQL
+                ? `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}&${CLOUD_COMPATIBILITY_KEY}=${CloudCompatibility.PostgreSQL}`
+                : `/tidbcloud/starter?${CLOUD_MODE_KEY}=${CloudPlan.Starter}`,
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.Starter,
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Starter);
+                sessionStorage.setItem(
+                  CLOUD_COMPATIBILITY_KEY,
+                  cloudCompatibility
+                );
               }
             },
           },
@@ -69,8 +78,6 @@ const getDefaultNavConfig = (
             label: t("navbar.tidbCloudBYOC"),
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: `/tidbcloud/byoc?${CLOUD_MODE_KEY}=${CloudPlan.BYOC}`,
-            isI18n: false,
-            disabled: (lang: string) => lang === "zh" || lang === "ja",
             selected: (namespace) =>
               namespace === TOCNamespace.TiDBCloud &&
               cloudPlan === CloudPlan.BYOC,
@@ -102,25 +109,20 @@ const getDefaultNavConfig = (
             endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
             to: "/tidbcloudlake",
             selected: (namespace) => namespace === TOCNamespace.TiDBCloudLake,
-            disabled: (lang: string) => lang === "ja",
             onClick: () => {
               if (typeof window !== "undefined") {
                 sessionStorage.setItem(CLOUD_MODE_KEY, CloudPlan.Dedicated);
               }
             },
           },
-          // TiDB Cloud Filesystem is intentionally hidden from the Product menu
-          // until its documentation is ready for public preview. Uncomment this
-          // item to expose the entry without changing its build or routing setup.
-          // {
-          //   type: "item",
-          //   label: t("navbar.tidbCloudFilesystem"),
-          //   endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
-          //   to: "/tidbcloud-filesystem",
-          //   isI18n: false,
-          //   selected: (namespace) =>
-          //     namespace === TOCNamespace.TiDBCloudFilesystem,
-          // },
+          {
+            type: "item",
+            label: t("navbar.tidbCloudFilesystem"),
+            endIcon: <PreviewBadge label={t("navbar.badge.preview")} />,
+            to: "/tidbcloud-filesystem",
+            selected: (namespace) =>
+              namespace === TOCNamespace.TiDBCloudFilesystem,
+          },
         ],
       },
       {
@@ -232,10 +234,11 @@ export const generateNavConfig = (
   t: (key: string) => string,
   cloudPlan: CloudPlan | null,
   buildType?: string,
-  language?: string
+  language?: string,
+  cloudCompatibility?: CloudCompatibility
 ): NavConfig[] => {
   if (buildType === "archive") {
     return archiveNavConfig;
   }
-  return getDefaultNavConfig(t, cloudPlan);
+  return getDefaultNavConfig(t, cloudPlan, cloudCompatibility);
 };

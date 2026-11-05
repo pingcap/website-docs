@@ -6,11 +6,12 @@
 
 - [Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview.md): TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, and supports ANSI SQL, semi-structured data processing, and AI-oriented workflows.
 - [Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start.md): Get started with TiDB Cloud Lake in three steps — sign up, initialize your lake, and explore your lake workspace.
+- [Lake PoC Guide](https://docs.pingcap.com/tidbcloudlake/lake-poc.md): Evaluate TiDB Cloud Lake with a representative workload using schema mapping, cluster keys, reclustering, block sizes, and materialized views.
 
 ## Guides
 
 - Connect
-  - [Overview](https://docs.pingcap.com/tidbcloudlake/connection-overview.md): TiDB Cloud Lake supports multiple connection methods to suit different use cases. All options below work with both **TiDB Cloud Lake** and **self-hosted TiDB Cloud Lake**.
+  - [Overview](https://docs.pingcap.com/tidbcloudlake/connection-overview.md): TiDB Cloud Lake supports multiple connection methods to suit different use cases.
   - SQL Clients
     - [LakeSQL](https://docs.pingcap.com/tidbcloudlake/connect-using-lakesql.md): LakeSQL is a command line tool that has been designed specifically for TiDB Cloud Lake. It allows users to establish a connection with TiDB Cloud Lake and execute queries directly from a CLI window.
   - Drivers
@@ -47,6 +48,7 @@
     - [PostgreSQL - Credentials](https://docs.pingcap.com/tidbcloudlake/postgresql-credentials.md): This page describes how to create a "PostgreSQL - Credentials" data source. This data source stores the connection information required to access PostgreSQL and can be reused across multiple PostgreSQL integration tasks.
     - [FeiShuBot](https://docs.pingcap.com/tidbcloudlake/feishubot.md): This page describes how to create a "FeiShuBot" data source. This data source stores a FeiShu bot webhook and message template for task failure notifications and similar scenarios.
     - [Kafka - Credentials](https://docs.pingcap.com/tidbcloudlake/kafka-credentials.md): Create a "Kafka - Credentials" data source to store Kafka connection information for reuse in Kafka Consumer integration tasks. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Data Source](https://docs.pingcap.com/tidbcloudlake/tidb-data-source.md): Guide on setting up a TiDB data source in TiDB Cloud Lake, including storage and authentication configurations. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
   - Integration Tasks
     - [Overview](https://docs.pingcap.com/tidbcloudlake/integration-tasks.md): This page provides an overview of integration tasks in TiDB Cloud Lake. Integration tasks define how data flows from external sources into TiDB Cloud Lake, including source settings, target tables, and runtime parameters.
     - [Task Management](https://docs.pingcap.com/tidbcloudlake/task-management.md): This page describes common operations for integration tasks, including the task creation flow, start and stop behavior, task states, and run history. For source-specific configuration, see the detailed task guides.
@@ -55,6 +57,7 @@
     - [MySQL Integration Task](https://docs.pingcap.com/tidbcloudlake/integrate-with-mysql.md): The MySQL data integration enables you to sync data from MySQL databases into TiDB Cloud Lake in real-time, with support for full snapshot loads, continuous Change Data Capture (CDC), or a combination of both.
     - [PostgreSQL Integration Task](https://docs.pingcap.com/tidbcloudlake/integrate-with-postgresql.md): This page describes how to create a PostgreSQL integration task that synchronizes data from a PostgreSQL database into TiDB Cloud Lake.
     - [Kafka Consumer Integration Task](https://docs.pingcap.com/tidbcloudlake/integrate-with-kafka.md): Create a Kafka Consumer task to continuously consume messages from Kafka topics and save the message content to internal object storage (tenant Stage). ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Integration Task](https://docs.pingcap.com/tidbcloudlake/integrate-with-tidb.md): Replicate data from a TiDB cluster into TiDB Cloud Lake using full snapshot loads, continuous CDC, or both. ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
 - Load Data
   - Work with Stages
     - [Stage Overview](https://docs.pingcap.com/tidbcloudlake/stage-overview.md): A stage is a virtual location where data files reside. Files in a stage can be queried directly or loaded into a table. Alternatively, you can unload data from a table into a stage as a file.
@@ -99,10 +102,10 @@
 - Multimodal Data Analytics
   - [Overview](https://docs.pingcap.com/tidbcloudlake/multimodal-data-analytics.md): CityDrive Intelligence records video of every drive. Background processing tools split the video stream into keyframe images, extracting rich multimodal information from each image and storing it by video_id. These signals include relational metadata, JSON manifests, behavior tags, vector embeddings, and GPS traces.
   - [SQL Analytics](https://docs.pingcap.com/tidbcloudlake/sql-analytics.md): Scenario CityDrive stages all dash-cam records into shared relational tables. This relational data (e.g., video metadata, event tags) is extracted by background processing pipelines from keyframes of the raw dash-cam video.
-  - [JSON & Search](https://docs.pingcap.com/tidbcloudlake/json-search.md): Scenario CityDrive attaches a metadata JSON payload to every extracted frame. This JSON data is extracted from video keyframes by background tools, containing rich unstructured information like scene recognition and object detection. We need to filter this JSON in TiDB Cloud Lake with Elasticsearch-style syntax without replicating it to an external system. JSON without copying it out of TiDB Cloud Lake.
+  - [JSON & Search](https://docs.pingcap.com/tidbcloudlake/json-search.md): Scenario CityDrive attaches a metadata JSON payload to every extracted frame. This JSON data is extracted from video keyframes by background tools, containing rich unstructured information like scene recognition and object detection. We need to filter this JSON in TiDB Cloud Lake with Elasticsearch-style syntax without replicating it to an external system.
   - [Vector Search](https://docs.pingcap.com/tidbcloudlake/vector-search-guide.md): Scenario CityDrive keeps embeddings for every frame directly in TiDB Cloud Lake. These vector embeddings are the result of AI models inferencing on video keyframes to capture visual semantic features. Semantic similarity search ("find frames that look like this") can run alongside traditional SQL analytics—no separate vector service required.
   - [Geo Analytics](https://docs.pingcap.com/tidbcloudlake/geo-analytics.md): CityDrive records precise GPS positioning and distance-to-signal for every flagged frame. This geospatial data originates from the dash-cam's GPS module and is precisely aligned with the timestamps of video keyframes. Ops teams can answer "where did this happen?" purely in SQL.
-  - [Lakehouse ETL](https://docs.pingcap.com/tidbcloudlake/lakehouse-etl.md): Scenario CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to update TiDB Cloud Lake's shared tables via a single COPY pipeline. to refresh the shared tables in TiDB Cloud Lake.
+  - [Lakehouse ETL](https://docs.pingcap.com/tidbcloudlake/lakehouse-etl.md): Scenario CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to refresh TiDB Cloud Lake's shared tables via a single COPY pipeline.
 - Performance Tuning
   - [Overview](https://docs.pingcap.com/tidbcloudlake/performance-optimization.md): TiDB Cloud Lake primarily accelerates query performance through various indexing technologies, including data clustering, result caching, and specialized indexes, helping you significantly improve query response times.
   - [Cluster Key](https://docs.pingcap.com/tidbcloudlake/cluster-key-performance.md): Cluster keys provide automatic data organization to dramatically improve query performance on large tables. TiDB Cloud Lake seamlessly and continually manages all clustering operations in the background - you simply define the cluster key and TiDB Cloud Lake handles the rest.
@@ -130,8 +133,6 @@
   - [Fail-Safe](https://docs.pingcap.com/tidbcloudlake/fail-safe.md): Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage.
   - [Recovery from Operational Errors](https://docs.pingcap.com/tidbcloudlake/recovery-from-operational-errors.md): This guide provides step-by-step instructions for recovering from common operational errors in TiDB Cloud Lake.
 - Management
-  - [AI-Powered Features](https://docs.pingcap.com/tidbcloudlake/ai-powered-features.md): With the inclusion of AI-powered features, TiDB Cloud Lake allows you to engage in natural language conversations to receive help, assistance, and solutions.
-  - [Manage Costs](https://docs.pingcap.com/tidbcloudlake/manage-costs.md): You can view the current month's consumption and billing history for your organization under Manage > Billing.
   - [Monitor Usage](https://docs.pingcap.com/tidbcloudlake/monitor-usage.md): TiDB Cloud Lake provides monitoring functionality to help you gain a comprehensive understanding of your and your organization members' usage on the platform. To access the Monitor page, click Monitor in the sidebar menu on the homepage. The page includes the following tabs.
   - [Data Lifecycle](https://docs.pingcap.com/tidbcloudlake/data-lifecycle.md): TiDB Cloud Lake supports familiar Data Definition Language (DDL) and Data Manipulation Language (DML) commands, making it easy for you to manage your database. Whether you're organizing, storing, querying, modifying, or deleting data, TiDB Cloud Lake follows the same industry standards you're accustomed to.
   - [Data Lineage](https://docs.pingcap.com/tidbcloudlake/data-lineage.md): Learn how to enable and explore data lineage in TiDB Cloud Lake.
@@ -210,10 +211,11 @@
       - [system.views](https://docs.pingcap.com/tidbcloudlake/system-views.md): Provides metadata information for all views.
       - [system.virtual_columns](https://docs.pingcap.com/tidbcloudlake/system-virtual-columns.md): Contains information about the created virtual columns in the system.
     - System History Tables
+      - [Overview](https://docs.pingcap.com/tidbcloudlake/system-history-tables.md): TiDB Cloud Lake's system history tables provide Data Governance capabilities by automatically tracking database activities for compliance, security monitoring, and performance analysis.
       - [system_history.access_history](https://docs.pingcap.com/tidbcloudlake/system-history-access-history.md): The fields base_objects_accessed, objects_modified, and object_modified_by_ddl are all arrays of JSON objects. Each object may include the following fields.
-      - [system_history.log_history](https://docs.pingcap.com/tidbcloudlake/system-history-log-history.md): Note This table contains raw log data that feeds into other specialized history tables. Other tables provide structured, query-specific views of this data.
-      - [system_history.login_history](https://docs.pingcap.com/tidbcloudlake/system-history-login-history.md): Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
-      - [system_history.profile_history](https://docs.pingcap.com/tidbcloudlake/system-history-profile-history.md): The profiles field can be used to extract specific information. For example, to get the OutputRows value for every physical plan, the following query can be used sql SELECT jq('[.[] | {id, output_rows.statistics[4]}]', profiles) AS result FROM system_history.profile_history LIMIT 1;.
+      - [system_history.log_history](https://docs.pingcap.com/tidbcloudlake/system-history-log-history.md): Use system_history.log_history to query the raw log data that feeds the other, structured system history tables.
+      - [system_history.login_history](https://docs.pingcap.com/tidbcloudlake/system-history-login-history.md): Use system_history.login_history to audit successful and failed user login attempts for security monitoring and compliance.
+      - [system_history.profile_history](https://docs.pingcap.com/tidbcloudlake/system-history-profile-history.md): Use system_history.profile_history to analyze detailed execution profiles and statistics of SQL queries for performance tuning.
       - [system_history.query_history](https://docs.pingcap.com/tidbcloudlake/system-history-query-history.md): Query the history for a specific query using its query_id.
     - [SQL Identifiers](https://docs.pingcap.com/tidbcloudlake/sql-identifiers.md): SQL identifiers are names used for different elements within TiDB Cloud Lake, such as tables, views, and databases.
     - [Input & Output File Formats](https://docs.pingcap.com/tidbcloudlake/input-output-file-formats.md): TiDB Cloud Lake accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options.
@@ -487,7 +489,7 @@
       - [UNPIVOT](https://docs.pingcap.com/tidbcloudlake/unpivot.md): The UNPIVOT operation rotates a table by transforming columns into rows.
       - [GROUP BY](https://docs.pingcap.com/tidbcloudlake/group-by.md): TiDB Cloud Lake supports GROUP BY with a variety of extensions.
       - [CHANGES](https://docs.pingcap.com/tidbcloudlake/changes.md): The CHANGES clause allows querying the change tracking metadata for a table within a defined time interval. Please note that the time interval must fall within the data retention period (defaulted to 24 hours). To define a time interval, use the AT keyword to specify a time point as the start of the interval, with the current time being applied as the default end of the interval. If you wish to specify a past time as the end of the interval, use the END keyword in conjunction with the AT keyword to set the interval.
-      - [QUALIFY](https://docs.pingcap.com/tidbcloudlake/qualify.md): QUALIFY is a clause used to filter the results of a window function. Therefore, to successfully utilize the QUALIFY clause, there must be at least one window function in the SELECT list or the QUALIFY clause (See Examples for each case). In other words, QUALIFY is evaluated after window functions are computed. Here’s the typical order of execution for a query with a QUALIFY statement clause.
+      - [QUALIFY](https://docs.pingcap.com/tidbcloudlake/qualify.md): QUALIFY is a clause used to filter the results of a window function.
       - [SETTINGS Clause](https://docs.pingcap.com/tidbcloudlake/settings-clause.md): The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in TiDB Cloud Lake and their values, use SHOW SETTINGS.
       - [TOP](https://docs.pingcap.com/tidbcloudlake/top.md): Limits the maximum number of rows returned by a query.
       - [VALUES](https://docs.pingcap.com/tidbcloudlake/values.md): The VALUES clause creates an inline table by explicitly defining rows of data. This temporary table can be used directly or within other SQL statements.
@@ -602,7 +604,7 @@
       - [IS_NOT_NULL](https://docs.pingcap.com/tidbcloudlake/is-not-null.md): Checks whether a value is not NULL.
       - [IS_NULL](https://docs.pingcap.com/tidbcloudlake/is-null.md): Checks whether a value is NULL.
       - [LEAST](https://docs.pingcap.com/tidbcloudlake/least.md): Returns the minimum value from a set of values. If any value in the set is NULL, the function returns NULL.
-      - [LEAST_IGNORE_NULLS](https://docs.pingcap.com/tidbcloudlake/least-ignore-nulls.md): Returns the maximum value from a set of values, ignoring any NULL values.
+      - [LEAST_IGNORE_NULLS](https://docs.pingcap.com/tidbcloudlake/least-ignore-nulls.md): Returns the minimum value from a set of values, ignoring any NULL values.
       - [NULLIF](https://docs.pingcap.com/tidbcloudlake/nullif.md): Returns NULL if two expressions are equal. Otherwise return expr1. They must have the same data type.
       - [NVL](https://docs.pingcap.com/tidbcloudlake/nvl.md): If <expr1> is NULL, returns <expr2>, otherwise returns <expr1>.
       - [NVL2](https://docs.pingcap.com/tidbcloudlake/nvl2.md): Returns <expr2> if <expr1> is not NULL; otherwise, it returns <expr3>.
@@ -625,7 +627,7 @@
       - [DIV0](https://docs.pingcap.com/tidbcloudlake/div0.md): Returns the quotient by dividing the first number by the second one. Returns 0 if the second number is 0.
       - [DIVNULL](https://docs.pingcap.com/tidbcloudlake/divnull.md): Returns the quotient by dividing the first number by the second one. Returns NULL if the second number is 0 or NULL.
       - [EXP](https://docs.pingcap.com/tidbcloudlake/exp.md): Returns the value of e (the base of natural logarithms) raised to the power of x.
-      - [FACTORIAL](https://docs.pingcap.com/tidbcloudlake/factorial.md): Returns the factorial logarithm of x. If x is less than or equal to 0, the function returns 0.
+      - [FACTORIAL](https://docs.pingcap.com/tidbcloudlake/factorial.md): Returns the factorial of x. If x is less than or equal to 0, the function returns 0.
       - [FLOOR](https://docs.pingcap.com/tidbcloudlake/floor.md): Rounds the number down.
       - [INTDIV](https://docs.pingcap.com/tidbcloudlake/intdiv.md): Alias for DIV.
       - [LN](https://docs.pingcap.com/tidbcloudlake/ln.md): Returns the natural logarithm of x; that is, the base-e logarithm of x. If x is less than or equal to 0.0E0, the function returns NULL.
@@ -683,7 +685,7 @@
       - [STR_TO_TIMESTAMP](https://docs.pingcap.com/tidbcloudlake/str-to-timestamp.md): Alias for TO_TIMESTAMP.
       - [SUBTRACT TIME INTERVAL](https://docs.pingcap.com/tidbcloudlake/subtract-interval.md): Subtract time interval function.
       - [TIME_SLICE](https://docs.pingcap.com/tidbcloudlake/time-slice.md): TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
-      - [TIME_SLOT](https://docs.pingcap.com/tidbcloudlake/time-slot.md): Rounds the time to the half-hour. ## Syntax.
+      - [TIME_SLOT](https://docs.pingcap.com/tidbcloudlake/time-slot.md): Rounds the time to the half-hour.
       - [TIMESTAMP_DIFF](https://docs.pingcap.com/tidbcloudlake/timestamp-diff.md): Calculates the difference between two timestamps and returns the result as an INTERVAL.
       - [TIMEZONE](https://docs.pingcap.com/tidbcloudlake/timezone.md): Returns the timezone for the current connection.
       - [TO_DATE](https://docs.pingcap.com/tidbcloudlake/to-date.md): Converts an expression to a date, including.
@@ -697,10 +699,10 @@
       - [TO_MONTH](https://docs.pingcap.com/tidbcloudlake/to-month.md): Convert a date or date with time (timestamp/datetime) to a UInt8 number containing the month number (1-12).
       - [TO_QUARTER](https://docs.pingcap.com/tidbcloudlake/to-quarter.md): Retrieves the quarter (1, 2, 3, or 4) from a given date or timestamp.
       - [TO_SECOND](https://docs.pingcap.com/tidbcloudlake/second.md): Converts a date with time (timestamp/datetime) to a UInt8 number containing the number of the second in the minute (0-59).
-      - [TO_START_OF_DAY](https://docs.pingcap.com/tidbcloudlake/to-start-of-day.md): Rounds down a date with time (timestamp/datetime) to the start of the day. ## Syntax.
-      - [TO_START_OF_FIFTEEN_MINUTES](https://docs.pingcap.com/tidbcloudlake/start-fifteen-minutes.md): Rounds down the date with time (timestamp/datetime) to the start of the fifteen-minute interval. ## Syntax.
-      - [TO_START_OF_FIVE_MINUTES](https://docs.pingcap.com/tidbcloudlake/start-five-minutes.md): Rounds down a date with time (timestamp/datetime) to the start of the five-minute interval. ## Syntax.
-      - [TO_START_OF_HOUR](https://docs.pingcap.com/tidbcloudlake/to-start-of-hour.md): Rounds down a date with time (timestamp/datetime) to the start of the hour. ## Syntax.
+      - [TO_START_OF_DAY](https://docs.pingcap.com/tidbcloudlake/to-start-of-day.md): Rounds down a date with time (timestamp/datetime) to the start of the day.
+      - [TO_START_OF_FIFTEEN_MINUTES](https://docs.pingcap.com/tidbcloudlake/start-fifteen-minutes.md): Rounds down the date with time (timestamp/datetime) to the start of the fifteen-minute interval.
+      - [TO_START_OF_FIVE_MINUTES](https://docs.pingcap.com/tidbcloudlake/start-five-minutes.md): Rounds down a date with time (timestamp/datetime) to the start of the five-minute interval.
+      - [TO_START_OF_HOUR](https://docs.pingcap.com/tidbcloudlake/to-start-of-hour.md): Rounds down a date with time (timestamp/datetime) to the start of the hour.
       - [TO_START_OF_ISO_YEAR](https://docs.pingcap.com/tidbcloudlake/start-iso-year.md): Returns the first day of the ISO year for a date or a date with time (timestamp/datetime).
       - [TO_START_OF_MINUTE](https://docs.pingcap.com/tidbcloudlake/to-start-of-minute.md): Rounds down a date with time (timestamp/datetime) to the start of the minute.
       - [TO_START_OF_MONTH](https://docs.pingcap.com/tidbcloudlake/to-start-of-month.md): Rounds down a date or date with time (timestamp/datetime) to the first day of the month. Returns the date.
@@ -711,13 +713,13 @@
       - [TO_START_OF_YEAR](https://docs.pingcap.com/tidbcloudlake/to-start-of-year.md): Returns the first day of the year for a date or a date with time (timestamp/datetime).
       - [TO_TIMESTAMP](https://docs.pingcap.com/tidbcloudlake/to-timestamp.md): Converts an expression to a date with time.
       - [TO_TIMESTAMP_TZ](https://docs.pingcap.com/tidbcloudlake/timestamp-tz.md): Converts a value to TIMESTAMP_TZ, keeping both the UTC moment and the timezone offset. Use TRY_TO_TIMESTAMP_TZ if you prefer NULL instead of an error.
-      - [TO_UNIX_TIMESTAMP](https://docs.pingcap.com/tidbcloudlake/unix-timestamp.md): Converts a timestamp in a date/time format to a Unix timestamp format. A Unix timestamp represents the number of seconds that have elapsed since January 1, 1970, at 000000 UTC.
+      - [TO_UNIX_TIMESTAMP](https://docs.pingcap.com/tidbcloudlake/unix-timestamp.md): Converts a timestamp in a date/time format to a Unix timestamp format.
       - [TO_WEEK_OF_YEAR](https://docs.pingcap.com/tidbcloudlake/to-week-of-year.md): Calculates the week number within a year for a given date.
       - [TO_YEAR](https://docs.pingcap.com/tidbcloudlake/to-year.md): Converts a date or date with time (timestamp/datetime) to a UInt16 number containing the year number (AD).
       - [TO_YYYYMM](https://docs.pingcap.com/tidbcloudlake/yyyymm.md): Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year and month number.
-      - [TO_YYYYMMDD](https://docs.pingcap.com/tidbcloudlake/yyyymmdd.md): Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year and month number (YYYY * 10000 + MM * 100 + DD). ## Syntax.
+      - [TO_YYYYMMDD](https://docs.pingcap.com/tidbcloudlake/yyyymmdd.md): Converts a date or date with time (timestamp/datetime) to a UInt32 number containing the year, month, and day (YYYY * 10000 + MM * 100 + DD).
       - [TO_YYYYMMDDHH](https://docs.pingcap.com/tidbcloudlake/yyyymmddhh.md): Formats a given date or timestamp into a string representation in the format "YYYYMMDDHH" (Year, Month, Day, Hour).
-      - [TO_YYYYMMDDHHMMSS](https://docs.pingcap.com/tidbcloudlake/yyyymmddhhmmss.md): Convert a date or date with time (timestamp/datetime) to a UInt64 number containing the year and month number (YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss).
+      - [TO_YYYYMMDDHHMMSS](https://docs.pingcap.com/tidbcloudlake/yyyymmddhhmmss.md): Convert a date or date with time (timestamp/datetime) to a UInt64 number containing the year, month, day, hour, minute, and second (YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss).
       - [TODAY](https://docs.pingcap.com/tidbcloudlake/today.md): Returns current date.
       - [TOMORROW](https://docs.pingcap.com/tidbcloudlake/tomorrow.md): Returns tomorrow date, same as today() + 1.
       - [TRUNC](https://docs.pingcap.com/tidbcloudlake/trunc-sql.md): Truncates a date or timestamp to a specified precision. This function follows a widely adopted date truncation syntax, making it easier for users migrating from other database systems.
@@ -888,7 +890,7 @@
       - [GREAT_CIRCLE_DISTANCE](https://docs.pingcap.com/tidbcloudlake/great-circle-distance.md): Returns the great-circle distance in meters between two points on a sphere.
       - [H3_CELL_AREA_M2](https://docs.pingcap.com/tidbcloudlake/h3-cell-area-m2.md): Returns the exact area of specific cell in square meters.
       - [H3_CELL_AREA_RADS2](https://docs.pingcap.com/tidbcloudlake/h3-cell-area-rads2.md): Returns the exact area of specific cell in square radians.
-      - [H3_DISTANCE](https://docs.pingcap.com/tidbcloudlake/h3-distance.md): Returns the grid distance between the the given two H3 indexes.
+      - [H3_DISTANCE](https://docs.pingcap.com/tidbcloudlake/h3-distance.md): Returns the grid distance between the given two H3 indexes.
       - [H3_EDGE_ANGLE](https://docs.pingcap.com/tidbcloudlake/h3-edge-angle.md): Returns the average length of the H3 hexagon edge in grades.
       - [H3_EDGE_LENGTH_KM](https://docs.pingcap.com/tidbcloudlake/h3-edge-length-km.md): Returns the average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
       - [H3_EDGE_LENGTH_M](https://docs.pingcap.com/tidbcloudlake/h3-edge-length-m.md): Returns the average hexagon edge length in meters at the given resolution. Excludes pentagons.
@@ -960,17 +962,17 @@
       - [ST_GEOGRAPHYFROMWKT](https://docs.pingcap.com/tidbcloudlake/st-geographyfromwkt.md): Parses a WKT(well-known-text) or EWKT(extended well-known-text) input and returns a value of type GEOGRAPHY.
       - [ST_GEOHASH](https://docs.pingcap.com/tidbcloudlake/st-geohash.md): Returns the geohash string for a GEOMETRY or GEOGRAPHY value and supports optional precision to control result granularity.
       - [ST_GEOM_POINT](https://docs.pingcap.com/tidbcloudlake/st-geom-point.md): Alias for ST_MAKEGEOMPOINT.
-      - [ST_GEOMETRYFROMEWKB](https://docs.pingcap.com/tidbcloudlake/st-geometryfromewkb.md): Alias for ST_GEOMTRYFROMWKB.
-      - [ST_GEOMETRYFROMEWKT](https://docs.pingcap.com/tidbcloudlake/st-geometryfromewkt.md): Alias for ST_GEOMTRYFROMWKT.
+      - [ST_GEOMETRYFROMEWKB](https://docs.pingcap.com/tidbcloudlake/st-geometryfromewkb.md): Alias for ST_GEOMETRYFROMWKB.
+      - [ST_GEOMETRYFROMEWKT](https://docs.pingcap.com/tidbcloudlake/st-geometryfromewkt.md): Alias for ST_GEOMETRYFROMWKT.
       - [ST_GEOMETRYFROMTEXT](https://docs.pingcap.com/tidbcloudlake/st-geometryfromtext.md): Alias for ST_GEOMETRYFROMWKT.
       - [ST_GEOMETRYFROMWKB](https://docs.pingcap.com/tidbcloudlake/st-geometryfromwkb.md): Parses a WKB(well-known-binary) or EWKB(extended well-known-binary) input and returns a value of type GEOMETRY.
       - [ST_GEOMETRYFROMWKT](https://docs.pingcap.com/tidbcloudlake/st-geometryfromwkt.md): Parses a WKT(well-known-text) or EWKT(extended well-known-text) input and returns a value of type GEOMETRY.
-      - [ST_GEOMFROMEWKB](https://docs.pingcap.com/tidbcloudlake/st-geomfromewkb.md): Alias for ST_GEOMTRYFROMWKB.
-      - [ST_GEOMFROMEWKT](https://docs.pingcap.com/tidbcloudlake/st-geomfromewkt.md): Alias for ST_GEOMTRYFROMWKT.
+      - [ST_GEOMFROMEWKB](https://docs.pingcap.com/tidbcloudlake/st-geomfromewkb.md): Alias for ST_GEOMETRYFROMWKB.
+      - [ST_GEOMFROMEWKT](https://docs.pingcap.com/tidbcloudlake/st-geomfromewkt.md): Alias for ST_GEOMETRYFROMWKT.
       - [ST_GEOMFROMGEOHASH](https://docs.pingcap.com/tidbcloudlake/st-geomfromgeohash.md): Returns a GEOMETRY object for the polygon that represents the boundaries of a geohash.
-      - [ST_GEOMFROMTEXT](https://docs.pingcap.com/tidbcloudlake/st-geomfromtext.md): Alias for ST_GEOMTRYFROMWKT.
-      - [ST_GEOMFROMWKB](https://docs.pingcap.com/tidbcloudlake/st-geomfromwkb.md): Alias for ST_GEOMTRYFROMWKB.
-      - [ST_GEOMFROMWKT](https://docs.pingcap.com/tidbcloudlake/st-geomfromwkt.md): Alias for ST_GEOMTRYFROMWKT.
+      - [ST_GEOMFROMTEXT](https://docs.pingcap.com/tidbcloudlake/st-geomfromtext.md): Alias for ST_GEOMETRYFROMWKT.
+      - [ST_GEOMFROMWKB](https://docs.pingcap.com/tidbcloudlake/st-geomfromwkb.md): Alias for ST_GEOMETRYFROMWKB.
+      - [ST_GEOMFROMWKT](https://docs.pingcap.com/tidbcloudlake/st-geomfromwkt.md): Alias for ST_GEOMETRYFROMWKT.
       - [ST_GEOMPOINTFROMGEOHASH](https://docs.pingcap.com/tidbcloudlake/st-geompointfromgeohash.md): Returns a GEOMETRY object for the point that represents center of a geohash.
       - [ST_HAUSDORFFDISTANCE](https://docs.pingcap.com/tidbcloudlake/st-hausdorffdistance.md): Returns the discrete Hausdorff distance between two GEOMETRY objects. This measures how far apart two geometries are by finding the greatest distance from any vertex in one object to the nearest vertex in the other.
       - [ST_HILBERT](https://docs.pingcap.com/tidbcloudlake/st-hilbert.md): Encodes a GEOMETRY or GEOGRAPHY object into a Hilbert curve index.
@@ -1098,7 +1100,7 @@
         - [OBJECT_PICK](https://docs.pingcap.com/tidbcloudlake/object-pick.md): Creates a new JSON object containing only the specified keys from the input JSON object. If a specified key doesn't exist in the input object, it is omitted from the result.
       - Map Functions
         - [Map Functions](https://docs.pingcap.com/tidbcloudlake/map-functions.md): This section provides reference information for the map functions in TiDB Cloud Lake. Map functions allow you to create, manipulate, and extract information from map data structures (key-value pairs).
-        - [MAP_CAT](https://docs.pingcap.com/tidbcloudlake/map-cat.md): Returns the concatenatation of two MAPs.
+        - [MAP_CAT](https://docs.pingcap.com/tidbcloudlake/map-cat.md): Returns the concatenation of two MAPs.
         - [MAP_CONTAINS_KEY](https://docs.pingcap.com/tidbcloudlake/map-contains-key.md): Determines whether the specified MAP contains the specified key.
         - [MAP_DELETE](https://docs.pingcap.com/tidbcloudlake/map-delete.md): Returns an existing MAP with one or more keys removed.
         - [MAP_FILTER](https://docs.pingcap.com/tidbcloudlake/map-filter.md): Filters key-value pairs in a JSON object based on a specified condition, defined using a lambda expression.
@@ -1178,7 +1180,7 @@
       - [FUSE_ENCODING](https://docs.pingcap.com/tidbcloudlake/fuse-encoding.md): Returns the encoding types applied to a specific column within a table. It helps you understand how data is compressed and stored in a native format within the table.
       - [FUSE_SEGMENT](https://docs.pingcap.com/tidbcloudlake/fuse-segment.md): Returns the segment information of a specified table snapshot. For more information about what is segment in TiDB Cloud Lake, see What are Snapshot, Segment, and Block?.
       - [FUSE_SNAPSHOT](https://docs.pingcap.com/tidbcloudlake/fuse-snapshot.md): Returns the snapshot information of a table. For more information about what is snapshot in TiDB Cloud Lake, see What are Snapshot, Segment, and Block?.
-      - [FUSE_STATISTIC](https://docs.pingcap.com/tidbcloudlake/fuse-statistic.md): note This function is deprecated. Use SHOW STATISTICS instead to view table statistics..
+      - [FUSE_STATISTIC](https://docs.pingcap.com/tidbcloudlake/fuse-statistic.md): This function is deprecated. Use SHOW STATISTICS instead to view table statistics.
       - [FUSE_TAG](https://docs.pingcap.com/tidbcloudlake/fuse-tag.md): Returns the snapshot tags of a table. For more information about snapshot tags, see Snapshot Tags.
       - [FUSE_TIME_TRAVEL_SIZE](https://docs.pingcap.com/tidbcloudlake/fuse-time-travel-size.md): Calculates the storage size of historical data (for Time Travel) for tables.
       - [FUSE_VIRTUAL_COLUMN](https://docs.pingcap.com/tidbcloudlake/fuse-virtual-column.md): Returns the virtual column information of the latest or specified snapshot of a table. For details, see Virtual Column.

@@ -1,0 +1,111 @@
+# PostgreSQL-compatible TiDB Cloud Starter
+
+> PostgreSQL-compatible TiDB Cloud Starter is designed for developers building and testing applications with familiar PostgreSQL tools and frameworks. It offers a fully managed, autoscaling database with pgvector-compatible vector search and selected PostgreSQL extensions.
+
+## GET STARTED
+
+- Why TiDB Cloud
+  - [Introduction](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro.md): Learn about TiDB Cloud and its architecture.
+  - [Features](https://docs.pingcap.com/tidbcloud/features.md): Learn about feature support status for different TiDB Cloud plans.
+  - [PostgreSQL Compatibility](https://docs.pingcap.com/tidbcloud/postgresql-compatibility.md): Learn about the compatibility of PostgreSQL-compatible TiDB Cloud Starter with PostgreSQL, including unsupported features and behavioral differences.
+- Get Started
+  - [Try Out TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/pg-quickstart.md): Learn how to create and connect to a PostgreSQL-compatible TiDB Cloud Starter instance.
+
+## GUIDES
+
+- [Select Your Plan](https://docs.pingcap.com/tidbcloud/select-cluster-tier.md): Learn how to select a plan on TiDB Cloud.
+- [Manage TiDB Cloud Resources and Projects](https://docs.pingcap.com/tidbcloud/manage-projects-and-resources.md): Learn how to manage your TiDB Cloud resources and projects on the My TiDB page.
+- Manage TiDB Cloud Starter Instances
+  - [Create a TiDB Cloud Starter Instance](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless.md): Learn how to create a TiDB Cloud Starter or TiDB Cloud Essential instance.
+  - [Connect to Your TiDB Cloud Starter Instance via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection-serverless.md): Learn how to connect to your TiDB Cloud Starter or TiDB Cloud Essential instance via public endpoint.
+  - [Back Up and Restore TiDB Cloud Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless.md): Learn how to back up and restore your TiDB Cloud Starter or TiDB Cloud Essential instances.
+  - Monitor and Alert
+    - [Overview](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster.md): Learn how to monitor your TiDB Cloud resource.
+    - [Built-in Metrics](https://docs.pingcap.com/tidbcloud/built-in-monitoring-pg.md): Learn about the built-in metrics available for PostgreSQL-compatible TiDB Cloud Starter instances.
+    - [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events.md): Learn how to view the events for TiDB Cloud resources using the Events page.
+  - [Delete a TiDB Cloud Starter Instance](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster.md): Learn how to delete a TiDB Cloud Resource.
+- [Migrate from PostgreSQL to TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/import-with-psql.md): Learn how to migrate schema and data from PostgreSQL to a PostgreSQL-compatible TiDB Cloud Starter instance using `psql` and `\copy`.
+- Security
+  - [Security Overview](https://docs.pingcap.com/tidbcloud/security-overview.md): Learn about the comprehensive security framework of TiDB Cloud, including identity management, network isolation, data protection, access control, and auditing.
+  - Identity Access Control
+    - [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication.md): Learn how to manage passwords and enable multi-factor authentication (MFA) in the TiDB Cloud console.
+    - [Standard SSO Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-sso-authentication.md): Learn how to log in to the TiDB Cloud console via your Google, GitHub, or Microsoft account.
+    - [Organization SSO Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-org-sso-authentication.md): Learn how to log in to the TiDB Cloud console via your customized organization authentication.
+    - [Identity Access Management](https://docs.pingcap.com/tidbcloud/manage-user-access.md): Learn how to manage identity access in TiDB Cloud.
+    - [OAuth 2.0](https://docs.pingcap.com/tidbcloud/oauth2.md): Learn about how to use OAuth 2.0 in TiDB Cloud.
+  - Network Access Control
+    - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters.md): Introduce TLS connections in TiDB Cloud Starter and TiDB Cloud Essential.
+  - Audit Management
+    - [Console Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing.md): Learn about the audit logging feature for the TiDB Cloud console.
+
+## REFERENCE
+
+- PostgreSQL Extensions
+  - [Overview](https://docs.pingcap.com/tidbcloud/pg-extensions-overview.md): Learn about the PostgreSQL extensions and built-in capabilities supported by PostgreSQL-compatible TiDB Cloud Starter.
+  - [Vector Search](https://docs.pingcap.com/tidbcloud/pg-vector-search.md): Learn how to store embeddings, perform similarity search, and create HNSW indexes on PostgreSQL-compatible TiDB Cloud Starter.
+  - [Full-Text Search](https://docs.pingcap.com/tidbcloud/pg-full-text-search.md): Learn how to use full-text search on PostgreSQL-compatible TiDB Cloud Starter.
+  - [Import Parquet Data](https://docs.pingcap.com/tidbcloud/pg-parquet-import.md): Learn how to query and import Parquet data into PostgreSQL-compatible TiDB Cloud Starter.
+- SQL Reference
+  - [Overview](https://docs.pingcap.com/tidbcloud/pg-sql-reference-overview.md): Learn about the basic SQL statements supported by PostgreSQL-compatible TiDB Cloud Starter.
+  - [DDL](https://docs.pingcap.com/tidbcloud/pg-ddl.md): Learn about the PostgreSQL Data Definition Language statements supported by PostgreSQL-compatible TiDB Cloud Starter.
+  - [DML and Queries](https://docs.pingcap.com/tidbcloud/pg-dml-queries.md): Learn about the PostgreSQL data manipulation and query features supported by PostgreSQL-compatible TiDB Cloud Starter.
+  - [Data Types](https://docs.pingcap.com/tidbcloud/pg-data-types.md): Learn about the PostgreSQL-compatible data types supported by PostgreSQL-compatible TiDB Cloud Starter.
+  - [Built-in Functions](https://docs.pingcap.com/tidbcloud/pg-built-in-functions.md): Learn about the built-in functions supported by PostgreSQL-compatible TiDB Cloud Starter.
+  - [Advanced SQL](https://docs.pingcap.com/tidbcloud/pg-advanced-sql.md): Learn about PL/pgSQL, triggers, sequences, custom types, and collations on PostgreSQL-compatible TiDB Cloud Starter.
+  - [Authentication and Roles](https://docs.pingcap.com/tidbcloud/pg-auth-roles.md): Learn how to manage database roles and privileges on PostgreSQL-compatible TiDB Cloud Starter.
+  - [Transactions and COPY](https://docs.pingcap.com/tidbcloud/pg-transactions-copy.md): Learn about transaction control and COPY support in PostgreSQL-compatible TiDB Cloud Starter.
+  - [Session Parameters](https://docs.pingcap.com/tidbcloud/pg-session-parameters.md): Learn how to view and configure PostgreSQL session parameters on PostgreSQL-compatible TiDB Cloud Starter.
+  - [System Catalog](https://docs.pingcap.com/tidbcloud/pg-system-catalog.md): Learn how to inspect database objects using system catalogs on PostgreSQL-compatible TiDB Cloud Starter.
+  - [Row-Level Security](https://docs.pingcap.com/tidbcloud/pg-row-level-security.md): Learn how to use row-level security policies on PostgreSQL-compatible TiDB Cloud Starter.
+  - [Limits and Constraints](https://docs.pingcap.com/tidbcloud/pg-limits-constraints.md): Learn about SQL engine limits and constraints for PostgreSQL-compatible TiDB Cloud Starter.
+- General Reference
+  - TiDB Classic Architecture
+    - [Overview](https://docs.pingcap.com/tidbcloud/tidb-architecture.md): The key architecture components of the TiDB platform
+    - [Storage](https://docs.pingcap.com/tidbcloud/tidb-storage.md): Understand the storage layer of a TiDB database.
+    - [Computing](https://docs.pingcap.com/tidbcloud/tidb-computing.md): Understand the computing layer of the TiDB database.
+    - [Scheduling](https://docs.pingcap.com/tidbcloud/tidb-scheduling.md): Introduces the PD scheduling component in a TiDB cluster.
+    - [TSO](https://docs.pingcap.com/tidbcloud/tso.md): Learn about TimeStamp Oracle (TSO) in TiDB.
+  - [TiDB X Architecture](https://docs.pingcap.com/tidbcloud/tidb-x-architecture.md): Learn how the shared-storage, cloud-native TiDB X architecture delivers elastic scalability, predictable performance, and optimized total cost of ownership.
+  - Storage Engines
+    - TiKV
+      - [TiKV Overview](https://docs.pingcap.com/tidbcloud/tikv-overview.md): An overview of the TiKV storage engine.
+      - [RocksDB Overview](https://docs.pingcap.com/tidbcloud/rocksdb-overview.md): Learn the basic concepts and working principles of RocksDB.
+    - TiFlash
+      - [TiFlash Overview](https://docs.pingcap.com/tidbcloud/tiflash-overview.md): Learn the architecture and key features of TiFlash.
+      - [Spill to Disk](https://docs.pingcap.com/tidbcloud/tiflash-spill-disk.md): Learn how TiFlash spills data to disk and how to customize the spill behavior.
+  - TiDB Cloud Partner Web Console
+    - [TiDB Cloud Partners](https://docs.pingcap.com/tidbcloud/tidb-cloud-partners.md): Learn how to use the TiDB Cloud Partner web console as a reseller and Managed Service Provider (MSP).
+    - [MSP Customer](https://docs.pingcap.com/tidbcloud/managed-service-provider-customer.md): Learn how to become a Managed Service Provider (MSP) customer.
+    - [Reseller's Customer](https://docs.pingcap.com/tidbcloud/cppo-customer.md): Learn how to become a reseller's customer.
+  - [TiDB Cloud Starter and Essential Limitations](https://docs.pingcap.com/tidbcloud/serverless-limitations.md): Learn about the limitations of TiDB Cloud Starter.
+  - [Limited SQL Features on TiDB X Instances](https://docs.pingcap.com/tidbcloud/limited-sql-features-tidb-x.md): Learn about the limited SQL features on TiDB X Instances.
+  - [TiDB Limitations](https://docs.pingcap.com/tidbcloud/tidb-limitations.md): Learn the usage limitations of TiDB.
+  - [System Variables](https://docs.pingcap.com/tidbcloud/system-variables.md): Use system variables to optimize performance or alter running behavior.
+  - [Server Status Variables](https://docs.pingcap.com/tidbcloud/status-variables.md): Use status variables to see the system and session status
+  - [Table Filter](https://docs.pingcap.com/tidbcloud/table-filter.md): Usage of table filter feature in TiDB tools.
+  - [URI Formats of External Storage Services](https://docs.pingcap.com/tidbcloud/external-storage-uri.md): Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
+  - [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidbcloud/troubleshoot-data-inconsistency-errors.md): Learn how to deal with errors reported by the consistency check between data and indexes.
+  - [Notifications](https://docs.pingcap.com/tidbcloud/notifications.md): Learn about notifications in the TiDB Cloud console, including notification types, purposes, and how to view them.
+- Support Plan
+  - [Connected Care Overview](https://docs.pingcap.com/tidbcloud/connected-care-overview.md): Introduces the new generation of TiDB Cloud support services - Connected Care.
+  - [Connected Care Details](https://docs.pingcap.com/tidbcloud/connected-care-detail.md): Introduces detailed information about the Connected Care support services for TiDB Cloud.
+  - Connected Care Support Service Features
+    - [Connected: AI Chat in IM](https://docs.pingcap.com/tidbcloud/connected-ai-chat-in-im.md): Introduces detailed information about the AI chat in Instant Message (IM).
+    - Connected: IM Subscription for TiDB Cloud Alerts
+      - [Subscribe via Slack](https://docs.pingcap.com/tidbcloud/monitor-alert-slack.md): Learn how to monitor your TiDB cluster by getting alert notifications via Slack.
+      - [Subscribe via Zoom](https://docs.pingcap.com/tidbcloud/monitor-alert-zoom.md): Learn how to monitor your TiDB cluster by getting alert notifications via Zoom.
+      - [Subscribe via Flashduty](https://docs.pingcap.com/tidbcloud/monitor-alert-flashduty.md): Learn how to monitor your TiDB Cloud resource by getting alert notifications via Flashduty.
+      - [Subscribe via PagerDuty](https://docs.pingcap.com/tidbcloud/monitor-alert-pagerduty.md): Learn how to monitor TiDB by getting alert notifications via PagerDuty.
+      - [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook.md): Learn how to monitor your TiDB cluster by getting alert notifications via a generic webhook.
+      - [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark.md): Learn how to monitor your TiDB cluster by getting alert notifications via Lark.
+    - Connected: IM Ticket Creation and Update Subscription
+      - [Create Tickets and Subscribe to Ticket Updates via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-creation.md): Introduces detailed information about the Slack ticket creation and update subscription.
+      - [Create Tickets and Subscribe to Ticket Updates via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-creation.md): Introduces detailed information about the Lark ticket creation and update subscription.
+    - Connected: IM Interaction for Support Tickets
+      - [Interact with Support Tickets via Slack](https://docs.pingcap.com/tidbcloud/connected-slack-ticket-interaction.md): Introduces detailed information about the Slack interaction for support tickets.
+      - [Interact with Support Tickets via Lark](https://docs.pingcap.com/tidbcloud/connected-lark-ticket-interaction.md): Introduces detailed information about the Lark interaction for support tickets
+  - [Get Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support.md): Learn how to contact the support team of TiDB Cloud.
+- FAQs
+  - [TiDB Cloud FAQs](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq.md): Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud.
+  - [PostgreSQL-Compatible TiDB Cloud Starter FAQs](https://docs.pingcap.com/tidbcloud/pg-faq.md): Find answers to frequently asked questions about PostgreSQL-compatible TiDB Cloud Starter during the public preview period.
+- [Glossary](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary.md): Learn the terms used in TiDB Cloud.

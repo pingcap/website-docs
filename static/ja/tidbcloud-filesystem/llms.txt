@@ -1,0 +1,41 @@
+# TiDB Cloud Filesystem
+
+> TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージェントが異なるマシンやセッション間でアクセスできる、永続的な共有ファイルストレージです。
+
+## はじめに
+
+- [概要](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-intro.md): TiDB Cloud Filesystem とは何か、どのような場合に使用するか、またアプリケーション、自動化、AI エージェント間で永続ファイルにアクセスして共有する方法を学びます。
+- [コンソールでのクイックスタート](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-quick-start-console.md): TiDB Cloud コンソールでファイルシステムを作成し、コンピュータから接続して、テストファイルを書き込み、コンソールでそのファイルを表示します。
+- [CLI でのクイックスタート](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-quick-start.md): 永続的な TiDB Cloud ファイルシステムを作成し、ファイルの読み書きを行い、必要に応じてローカルマウント経由でアクセスする方法を学びます。
+- 主要な概念
+  - [認可](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-authorization.md): TiDB Cloud API 認証情報、オーナートークン、スコープ付きトークンが、TiDB Cloud Filesystem に対してどのように異なるレベルのアクセスを提供するかを学びます。
+  - [レイヤーとチェックポイント](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-layers-checkpoints.md): TiDB Cloud Filesystem のレイヤーはベースファイルシステムから変更を分離し、フォークとチェックポイントは変更がコミットされるまでレイヤーの履歴を保持します。
+
+## ガイド
+
+- [ファイルシステムを管理する](https://docs.pingcap.com/ja/tidbcloud-filesystem/manage-filesystem-resources.md): TiDB Cloud コンソールまたは TiDB Cloud CLI を使用してファイルシステムを管理し、コンソールで名前を変更し、CLI アクセスを確認する方法を学びます。
+- [ファイルシステムトークンの管理](https://docs.pingcap.com/ja/tidbcloud-filesystem/manage-filesystem-tokens.md): ユーザーや自動化のアクセス制御のために、ファイルシステムトークンをインポート、作成、スコープ設定、確認、ローテーション、失効する方法を学びます。
+- [既存のファイルシステムにアクセスする](https://docs.pingcap.com/ja/tidbcloud-filesystem/access-filesystem.md): 現在のマシン、別のマシン、CI ジョブ、またはエージェント環境から既存のファイルシステムにアクセスする方法を説明します。
+- ファイルシステムをマウントする
+  - [概要](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-mount.md): ファイルシステムをいつマウントするか、どのマウント方法を使用するか、ファイルシステムのマウントで利用できる機能と制限について説明します。
+  - [Linux](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-mount-linux.md): FUSE ユーザースペースツールをインストールし、Linux でファイルシステムをマウントして、アクセスを確認し、一般的なマウント権限の問題をトラブルシュートします。
+  - [macOS](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-mount-macos.md): WebDAV または macFUSE を使用して macOS で TiDB Cloud ファイルシステムをマウントし、ファイルアクセスを確認して安全にアンマウントする方法を学びます。
+  - [Docker と Docker Compose](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-mount-docker.md): FUSE と必要なコンテナ権限を有効にして、Linux ホスト上の Docker コンテナ内にファイルシステムをマウントします。
+- [ファイルとディレクトリを操作する](https://docs.pingcap.com/ja/tidbcloud-filesystem/work-with-filesystem-data.md): コンソールでファイルメタデータを表示し、TiDB Cloud CLI を使用してファイルのアップロード、ダウンロード、読み取り、整理、検索を行う方法を学びます。
+- [ファイルシステムを共有する](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-sharing.md): 受信者ごとに個別のスコープ付きトークンを使ってマシン間でファイルを共有し、権限を確認して、アクセスを個別に取り消す方法を学びます。
+- [使用量制限を管理する](https://docs.pingcap.com/ja/tidbcloud-filesystem/manage-filesystem-limits.md): TiDB Cloud コンソールでファイルシステムの使用量と無料枠の制限を確認し、クレジットカード追加後に使用量制限を編集する方法を説明します。
+- [ファイルシステムのレイヤーとチェックポイントを管理する](https://docs.pingcap.com/ja/tidbcloud-filesystem/manage-filesystem-layers.md): ファイルシステムのレイヤーを作成し、変更をチェックポイント化してフォークし、分離を検証し、作業をコミットまたは破棄する方法を学びます。
+- [Git ワークスペースを管理する](https://docs.pingcap.com/ja/tidbcloud-filesystem/manage-git-workspaces.md): マウントされた TiDB Cloud Filesystem に Git リポジトリをクローンし、大規模リポジトリのセットアップを高速化し、リンクされた worktree を管理する方法を学びます。
+- [ファイルシステムでジャーナルを使用する](https://docs.pingcap.com/ja/tidbcloud-filesystem/use-filesystem-journals.md): ファイルシステムジャーナルの作成、ワークフローイベントの記録、読み取り結果と検索結果のページネーション、記録された履歴の検証方法を学びます。
+- [ファイルシステムの Vault シークレットを管理する](https://docs.pingcap.com/ja/tidbcloud-filesystem/manage-filesystem-vault-secrets.md): Vault シークレットの保存とローテーション、特定フィールドへの一時的なアクセス権の付与、プロセスでの利用、アクセス権の取り消し方法を学びます。
+- [ファイルシステムの AI プロバイダーを設定する](https://docs.pingcap.com/ja/tidbcloud-filesystem/configure-filesystem-ai-providers.md): ファイルシステムでメディア抽出と埋め込みのための AI プロバイダーを設定します。
+- [自動化と AI エージェントのワークフロー](https://docs.pingcap.com/ja/tidbcloud-filesystem/use-filesystem-for-automation-and-ai-agents.md): ファイルシステムのワークスペース共有、CI アーティファクトの受け渡し、データ、Git、ジャーナル、シークレットによるエージェント支援のための TiDB for AI の例を紹介します。
+- [料金と請求](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)
+
+## リファレンス
+
+- [コマンドリファレンス](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-command-reference.md): `ti` の設定、TiDB Cloud Filesystem リソース、データ、Git ワークスペース、ジャーナル、Vault シークレットの管理に関する TiDB Cloud CLI のコマンドリファレンスを確認できます。
+- [SDK](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-sdks.md): TiDB Cloud Filesystem と Drive9 ワークスペースエンジンの関係を理解し、6 つのプログラミング言語向けクライアント SDK ドキュメントを確認します。
+- [リージョンと制限事項](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-regions-and-limitations.md): サポートされている TiDB Cloud Filesystem のリージョン、マウントプラットフォーム要件、耐久性の境界、および現在の製品上の制限事項を確認します。
+- [FAQ](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-faq.md): TiDB Cloud Filesystem の使用方法、共有書き込み、リージョン、マウント、SDK、検索、チェックポイント、プレビュー期間中のポリシー、料金に関する回答を確認できます。
+- [トラブルシューティング](https://docs.pingcap.com/ja/tidbcloud-filesystem/filesystem-troubleshooting.md): ファイルシステムのトークン、リージョン、ランタイム、マウント、アクセスの失敗を診断し、安全なリカバリ手順を選択する方法を学びます。
