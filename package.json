@@ -57,7 +57,7 @@
     "i18next": "^21.6.9",
     "katex": "^0.15.6",
     "mermaid": "^11.12.3",
-    "postcss": "^8.5.32",
+    "postcss": "^8.4.16",
     "postcss-mixins": "^9.0.3",
     "postcss-nested": "^5.0.6",
     "postcss-preset-env": "^7.8.0",
@@ -73,7 +73,7 @@
     "rehype-katex": "5.0.0",
     "remark-math": "3.0.1",
     "signale": "^1.4.0",
-    "zod": "^4.6.7"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@prantlf/railroad-diagrams": "^1.0.1",
@@ -101,7 +101,7 @@
     "sass": "^1.45.0",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.4.0",
-    "typescript": "^5.9.3"
+    "typescript": "^4.9.5"
   },
   "keywords": [
     "gatsby"
