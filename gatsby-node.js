@@ -36,7 +36,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     actions.setWebpackConfig({
       resolve: {
         alias: {
-          axios: require.resolve("axios/dist/browser/axios.cjs"),
+          "supports-color$": false,
         },
       },
     });
