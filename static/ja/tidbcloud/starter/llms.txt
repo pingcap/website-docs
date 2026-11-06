@@ -9,8 +9,8 @@
   - [機能](https://docs.pingcap.com/ja/tidbcloud/features.md): TiDB Cloudの各プランにおける機能サポート状況についてご確認ください。
   - [MySQLとの互換性](https://docs.pingcap.com/ja/tidbcloud/mysql-compatibility.md): TiDBとMySQLとの互換性、およびサポートされていない機能や異なる機能について学びましょう。
 - はじめに
-  - [TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
-  - [TiDB + AIツールを試してみよう](https://docs.pingcap.com/ja/tidbcloud/use-tidb-cloud-with-ai-tools.md): TiDB Cloud Starter クラスターを、Cursor、Claude Code、VS Code、Windsurf などのモデル コンテキスト プロトコル (MCP) をサポートする AI 搭載開発ツールに接続する方法を学習します。
+  - [TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB Cloud Starter インスタンスを作成してください。
+  - [TiDB + AIツールを試してみよう](https://docs.pingcap.com/ja/tidbcloud/use-tidb-cloud-with-ai-tools.md): TiDB Cloud Starter インスタンスを、Cursor、Claude Code、VS Code、Windsurf などのモデルコンテキストプロトコル (MCP) をサポートする AI 搭載開発ツールに接続する方法を学習します。
   - [HTAPを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart.md): TiDB Cloudで HTAP を使い始める方法を学習します。
   - [TiDB Cloud CLI (ticloud, Legacy) を試す](https://docs.pingcap.com/ja/tidbcloud/get-started-with-cli.md): ticloud CLI を使用して、TiDB Cloud Starter および Essential インスタンスを管理する方法を学びましょう。
 - 主要概念
@@ -97,25 +97,25 @@
           - [インデックス問題の解決方法](https://docs.pingcap.com/ja/tidbcloud/wrong-index-solution.md): 間違ったインデックスの問題を解決する方法を学びます。
           - [Distinct最適化](https://docs.pingcap.com/ja/tidbcloud/agg-distinct-optimization.md): TiDB クエリ オプティマイザに`distinct`最適化を導入します。
           - [コストモデル](https://docs.pingcap.com/ja/tidbcloud/cost-model.md): 物理的な最適化中に TiDB によって使用されるコストモデルがどのように機能するかを学習します。
-          - [ランタイムフィルタ](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
+          - [ランタイムフィルター](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
         - [プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-prepared-plan-cache.md): TiDB の SQL プリペアド実行プランキャッシュについて学習します。
         - [非プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアド実行プランキャッシュの原理、使用法、および例について学習します。
       - 実行計画の制御
         - [概要](https://docs.pingcap.com/ja/tidbcloud/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と `tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
-        - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザヒントを使用してクエリ実行計画に影響を与える
+        - [オプティマイザーのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザーヒントを使用してクエリ実行計画に影響を与える
         - [SQLプラン管理](https://docs.pingcap.com/ja/tidbcloud/sql-plan-management.md): TiDB での SQL プラン管理について学習します。
         - [最適化ルールと式プッシュダウンのブロックリスト](https://docs.pingcap.com/ja/tidbcloud/blocklist-control-plan.md): 最適化ルールと式プッシュダウンの動作を制御するブロックリストについて学習します。
-        - [オプティマイザ修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
+        - [オプティマイザー修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
     - [TiKV Follower Read](https://docs.pingcap.com/ja/tidbcloud/follower-read.md): このドキュメントでは、 Follower Readの使用と実装について説明します。
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidbcloud/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
     - ガベージコレクション（GC）
       - [概要](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-overview.md): TiDB のガベージコレクションについて学習します。
       - [設定](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
-    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
-  - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターをアップグレードする方法を学びます。
+    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシンリソースを計画し、TiDB パラメーターを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+  - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターまたはインスタンスの TiDB バージョンをアップグレードする方法を学びます。
   - [TiDB Cloud Starterインスタンスを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-cluster.md): TiDB Cloudリソースを削除する方法を学びましょう。
 - データの移行またはインポート
-  - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
+  - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポートシナリオの概要について説明します。
   - TiDB Cloudへのデータ移行
     - [TiDB Self-ManagedからTiDB Cloudへの移行](https://docs.pingcap.com/ja/tidbcloud/migrate-from-op-tidb.md): TiDB Self-ManagedからTiDB Cloudへのデータ移行方法を学びましょう。
     - [大規模データセットのMySQLシャードを移行およびマージする](https://docs.pingcap.com/ja/tidbcloud/migrate-sql-shards.md): 大規模データセットのMySQLシャードをTiDB Cloudに移行およびマージする方法を学びましょう。
@@ -140,7 +140,7 @@
   - [概要](https://docs.pingcap.com/ja/tidbcloud/data-service-overview.md): TiDB CloudのData Serviceとそのシナリオについて学習します。
   - [はじめに](https://docs.pingcap.com/ja/tidbcloud/data-service-get-started.md): TiDB Cloud Data Serviceを使用してHTTPSリクエストでデータにアクセスする方法を学びましょう。
   - [データ管理アプリ](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-data-app.md): TiDB Cloudコンソールでデータアプリを作成、表示、変更、削除する方法を学習します。
-  - [エンドポイントの管理](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-endpoint.md): TiDB Cloudコンソールで、データアプリのエンドポイントを作成、開発、テスト、デプロイ、削除する方法を学びましょう。
+  - [エンドポイントを管理する](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-endpoint.md): TiDB Cloudコンソールで、データアプリのエンドポイントを作成、開発、テスト、デプロイ、削除する方法を学びましょう。
   - [APIキー](https://docs.pingcap.com/ja/tidbcloud/data-service-api-key.md): データアプリのAPIキーの作成、編集、削除方法を学びましょう。
   - [カスタムドメイン](https://docs.pingcap.com/ja/tidbcloud/data-service-custom-domain.md): TiDB Cloud Data Serviceでカスタムドメインを使用してデータアプリにアクセスする方法を学びましょう。
   - [統合](https://docs.pingcap.com/ja/tidbcloud/data-service-integrations.md): TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTsやDifyなどのサードパーティツールと統合する方法を学びましょう。
@@ -186,12 +186,12 @@
   - Terraform
     - [Terraform統合の概要](https://docs.pingcap.com/ja/tidbcloud/terraform-tidbcloud-provider-overview.md): Terraform を使用してTiDB Cloudリソースを作成、管理、更新します。
     - [TiDB Cloud Terraform プロバイダーを取得する](https://docs.pingcap.com/ja/tidbcloud/terraform-get-tidbcloud-provider.md): TiDB Cloud Terraform Provider を取得する方法を学びます。
-    - [`tidbcloud_serverless_cluster`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-serverless-cluster-resource.md): `tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Starter クラスターを作成および変更する方法を学習します。
-    - [`tidbcloud_serverless_branch`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-serverless-branch-resource.md): サーバーレス ブランチ リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成および変更する方法を学習します。
-    - [`tidbcloud_serverless_export`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-serverless-export-resource.md): `tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成および変更する方法を学習します。
+    - [`tidbcloud_serverless_cluster`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-serverless-cluster-resource.md): `tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Starter インスタンスを作成および変更する方法を学習します。
+    - [`tidbcloud_serverless_branch`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-serverless-branch-resource.md): サーバーレスブランチリソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成および変更する方法を学習します。
+    - [`tidbcloud_serverless_export`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-serverless-export-resource.md): `tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクを作成および変更する方法を学習します。
     - [`tidbcloud_sql_user`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-sql-user-resource.md): `tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。
     - [`tidbcloud_import`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-import-resource.md): `tidbcloud_import` リソースを使用してインポートタスクを管理する方法を学習します。
-    - [クラスタリソースの移行](https://docs.pingcap.com/ja/tidbcloud/terraform-migrate-cluster-resource.md): クラスター リソースをサーバーレスまたは専用のクラスター リソースに移行する方法を学習します。
+    - [クラスターリソースの移行](https://docs.pingcap.com/ja/tidbcloud/terraform-migrate-cluster-resource.md): クラスターリソースをサーバーレスまたは専用のクラスターリソースに移行する方法を学習します。
   - [Vercel](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-vercel.md): TiDB CloudクラスターをVercelプロジェクトに接続する方法を学びましょう。
   - [Zapier](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-zapier.md): TiDB CloudをZapierを使って5000以上のアプリに接続する方法を学びましょう。
 
@@ -527,9 +527,9 @@
       - [TiFlashの概要](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview.md): TiFlashのアーキテクチャと主な機能について学びます。
       - [ディスクへのスピル](https://docs.pingcap.com/ja/tidbcloud/tiflash-spill-disk.md): TiFlash がデータをディスクにスピルする方法と、スピル動作をカスタマイズする方法について説明します。
   - TiDB CloudパートナーWebコンソール
-    - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 再販業者およびマネージドサービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
+    - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 販売代理店およびマネージドサービスプロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
     - [MSP顧客](https://docs.pingcap.com/ja/tidbcloud/managed-service-provider-customer.md): マネージドサービス プロバイダー (MSP) の顧客になる方法を学びます。
-    - [再販業者の顧客](https://docs.pingcap.com/ja/tidbcloud/cppo-customer.md): 再販業者の顧客になる方法を学びます。
+    - [販売代理店の顧客](https://docs.pingcap.com/ja/tidbcloud/cppo-customer.md): 販売代理店の顧客になる方法を学びます。
   - [TiDB Cloud StarterとEssentialの制限事項](https://docs.pingcap.com/ja/tidbcloud/serverless-limitations.md): TiDB Cloud Starter の制限について説明します。
   - [TiDB X インスタンスでの制限付き SQL 機能](https://docs.pingcap.com/ja/tidbcloud/limited-sql-features-tidb-x.md): TiDB X インスタンスで制限される SQL 機能について説明します。
   - [TiDBの制限事項](https://docs.pingcap.com/ja/tidbcloud/tidb-limitations.md): TiDB の使用制限について学習します。

@@ -9,7 +9,7 @@
   - [機能](https://docs.pingcap.com/ja/tidbcloud/features.md): TiDB Cloudの各プランにおける機能サポート状況についてご確認ください。
   - [MySQLとの互換性](https://docs.pingcap.com/ja/tidbcloud/mysql-compatibility.md): TiDBとMySQLとの互換性、およびサポートされていない機能や異なる機能について学びましょう。
 - はじめに
-  - [TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
+  - [TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB Cloud Starter インスタンスを作成してください。
   - [HTAPを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart.md): TiDB Cloudで HTAP を使い始める方法を学習します。
   - [PoC（概念実証）を実施する](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-poc.md): TiDB Cloudを使用して概念実証 (PoC) を実行する方法について説明します。
 - 主要概念
@@ -23,30 +23,30 @@
   - [拡張性](https://docs.pingcap.com/ja/tidbcloud/scalability-concepts.md): TiDB Cloudのスケーラビリティに関する概念について学びましょう。
   - [高可用性](https://docs.pingcap.com/ja/tidbcloud/high-availability-with-multi-az.md): TiDB Cloud Dedicated は、マルチ AZ デプロイメントによる高可用性をサポートします。
   - [監視](https://docs.pingcap.com/ja/tidbcloud/monitoring-concepts.md): TiDB Cloudの監視に関する概念について学びましょう。
-  - [データストリーミング](https://docs.pingcap.com/ja/tidbcloud/data-streaming-concepts.md): TiDB Cloudのデータ ストリーミングの概念について学習します。
+  - [データストリーミング](https://docs.pingcap.com/ja/tidbcloud/data-streaming-concepts.md): TiDB Cloudのデータストリーミングの概念について学習します。
   - [バックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-concepts.md): TiDB Cloudのバックアップと復元に関する概念について学びましょう。
   - [セキュリティ](https://docs.pingcap.com/ja/tidbcloud/security-concepts.md): TiDB Cloudのセキュリティ概念について学びましょう。
 
 ## ガイド
 
-- クラスタを計画する
+- クラスターを計画する
   - [プランを選択する](https://docs.pingcap.com/ja/tidbcloud/select-cluster-tier.md): TiDB Cloudでプランを選択する方法を学びましょう。
   - [TiDBサイズを決定する](https://docs.pingcap.com/ja/tidbcloud/size-your-cluster.md): TiDB Cloudクラスターのサイズを決定する方法を学びます。
-  - [TiDB Cloudパフォーマンスリファレンス](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-performance-reference.md): TiDB Cloud のパフォーマンス テスト結果を確認します。
+  - [TiDB Cloudパフォーマンスリファレンス](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-performance-reference.md): TiDB Cloud のパフォーマンステスト結果を確認します。
 - [TiDB Cloudのリソースとプロジェクトを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-projects-and-resources.md): My TiDBページでTiDB Cloudのリソースとプロジェクトを管理する方法を学びます。
 - TiDB Cloud Dedicatedクラスターの管理
-  - [TiDB Cloud Dedicatedクラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster.md): TiDB Cloud Dedicatedクラスターの作成方法を学びましょう。
-  - TiDB Cloud Dedicatedクラスタに接続する
+  - [TiDB Cloud Dedicatedクラスターを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster.md): TiDB Cloud Dedicatedクラスターの作成方法を学びましょう。
+  - TiDB Cloud Dedicatedクラスターに接続する
     - [ネットワーク接続の概要](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-cluster.md): さまざまな方法でTiDB Cloud Dedicatedクラスターに接続する方法を学びましょう。
     - [公共接続経由で接続する](https://docs.pingcap.com/ja/tidbcloud/connect-via-standard-connection.md): パブリック接続を使用してTiDB Cloudクラスターに接続する方法を学びましょう。
     - [AWS のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections.md): AWS を使用してプライベートエンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
-    - [Azure のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-azure.md): Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する方法を学びましょう。
+    - [Azure のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-azure.md): Azure Private Linkを介してTiDB Cloud Dedicatedクラスターに接続する方法を学びましょう。
     - [Google Cloud のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-google-cloud.md): Google Cloud Private Service Connectを使用してTiDB Cloudクラスターに接続する方法を学びましょう。
     - [VPCピアリング経由で接続](https://docs.pingcap.com/ja/tidbcloud/set-up-vpc-peering-connections.md): VPC ピアリング経由でTiDB Cloud Dedicated に接続する方法を学習します。
     - [SQL Shell経由で接続する](https://docs.pingcap.com/ja/tidbcloud/connect-via-sql-shell.md): SQLシェルを使用してTiDBクラスタに接続する方法を学びましょう。
-  - [TiDB Cloud Dedicatedクラスタを拡張する](https://docs.pingcap.com/ja/tidbcloud/scale-tidb-cluster.md): TiDB Cloudクラスターを拡張する方法を学びます。
+  - [TiDB Cloud Dedicatedクラスターを拡張する](https://docs.pingcap.com/ja/tidbcloud/scale-tidb-cluster.md): TiDB Cloudクラスターを拡張する方法を学びます。
   - [TiDB Cloud Dedicatedデータのバックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore.md): TiDB Cloud Dedicatedクラスターのバックアップと復元方法を学びましょう。
-  - [TiDB Cloud Dedicatedクラスタの一時停止または再開](https://docs.pingcap.com/ja/tidbcloud/pause-or-resume-tidb-cluster.md): TiDB Cloud Dedicatedクラスターの一時停止または再開方法について説明します。
+  - [TiDB Cloud Dedicatedクラスターの一時停止または再開](https://docs.pingcap.com/ja/tidbcloud/pause-or-resume-tidb-cluster.md): TiDB Cloud Dedicatedクラスターの一時停止または再開方法について説明します。
   - [メンテナンスウィンドウの設定](https://docs.pingcap.com/ja/tidbcloud/configure-maintenance-window.md): TiDB Cloud Dedicatedクラスターのメンテナンスウィンドウを設定する方法を学びましょう。
   - HTAPにTiFlashを使用する
     - [TiFlashの概要](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview.md): TiFlashのアーキテクチャと主な機能について学びます。
@@ -116,22 +116,22 @@
           - [インデックス問題の解決方法](https://docs.pingcap.com/ja/tidbcloud/wrong-index-solution.md): 間違ったインデックスの問題を解決する方法を学びます。
           - [Distinct最適化](https://docs.pingcap.com/ja/tidbcloud/agg-distinct-optimization.md): TiDB クエリ オプティマイザに`distinct`最適化を導入します。
           - [コストモデル](https://docs.pingcap.com/ja/tidbcloud/cost-model.md): 物理的な最適化中に TiDB によって使用されるコストモデルがどのように機能するかを学習します。
-          - [ランタイムフィルタ](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
+          - [ランタイムフィルター](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
         - [プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-prepared-plan-cache.md): TiDB の SQL プリペアド実行プランキャッシュについて学習します。
         - [非プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアド実行プランキャッシュの原理、使用法、および例について学習します。
       - 実行計画の制御
         - [概要](https://docs.pingcap.com/ja/tidbcloud/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と `tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
-        - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザヒントを使用してクエリ実行計画に影響を与える
+        - [オプティマイザーのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザーヒントを使用してクエリ実行計画に影響を与える
         - [SQLプラン管理](https://docs.pingcap.com/ja/tidbcloud/sql-plan-management.md): TiDB での SQL プラン管理について学習します。
         - [最適化ルールと式プッシュダウンのブロックリスト](https://docs.pingcap.com/ja/tidbcloud/blocklist-control-plan.md): 最適化ルールと式プッシュダウンの動作を制御するブロックリストについて学習します。
-        - [オプティマイザ修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
+        - [オプティマイザー修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
       - [インデックスアドバイザー](https://docs.pingcap.com/ja/tidbcloud/index-advisor.md): TiDB Index Advisorを使用してクエリパフォーマンスを最適化する方法を学びましょう。
     - [TiKV Follower Read](https://docs.pingcap.com/ja/tidbcloud/follower-read.md): このドキュメントでは、 Follower Readの使用と実装について説明します。
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidbcloud/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
     - ガベージコレクション（GC）
       - [概要](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-overview.md): TiDB のガベージコレクションについて学習します。
       - [設定](https://docs.pingcap.com/ja/tidbcloud/garbage-collection-configuration.md): GC 設定パラメータについて学習します。
-    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシンリソースを計画し、TiDB パラメーターを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
   - リソース割り当ての最適化
     - [リソース割り当ての概要](https://docs.pingcap.com/ja/tidbcloud/optimize-resource-allocation.md): TiDB Cloud Dedicated クラスターのリソース割り当てを最適化する方法について説明します。
     - リソースマネージャー
@@ -145,10 +145,10 @@
   - TiProxyによる接続管理
     - [TiProxyの概要](https://docs.pingcap.com/ja/tidbcloud/tiproxy-overview-for-cloud.md): TiDB Cloud向け TiProxy の利用シナリオについて学びましょう。
     - [TiProxyを管理する](https://docs.pingcap.com/ja/tidbcloud/tiproxy-management.md): TiProxyの有効化、無効化、表示、および変更方法について学びましょう。
-  - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターをアップグレードする方法を学びます。
-  - [TiDB Cloud Dedicatedクラスタを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-cluster.md): TiDB Cloudリソースを削除する方法を学びましょう。
+  - [TiDBのバージョンをアップグレードする](https://docs.pingcap.com/ja/tidbcloud/upgrade-tidb-cluster.md): TiDB クラスターまたはインスタンスの TiDB バージョンをアップグレードする方法を学びます。
+  - [TiDB Cloud Dedicatedクラスターを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-cluster.md): TiDB Cloudリソースを削除する方法を学びましょう。
 - データの移行またはインポート
-  - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
+  - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポートシナリオの概要について説明します。
   - TiDB Cloudへのデータ移行
     - [データ移行を使用して既存データと増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-from-mysql-using-data-migration.md): データ移行機能を使用して、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはSelf-ManagedのMySQLインスタンスから、ダウンタイムを最小限に抑えながらMySQLデータベースをTiDB Cloudにシームレスに移行する方法を学びましょう。
     - [データ移行を使用して増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): データ移行を使用して、Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS、またはローカルのMySQLインスタンスでホストされているMySQL互換データベースからTiDB Cloudへ増分データを移行する方法を学びましょう。
@@ -176,7 +176,7 @@
   - [概要](https://docs.pingcap.com/ja/tidbcloud/data-service-overview.md): TiDB CloudのData Serviceとそのシナリオについて学習します。
   - [はじめに](https://docs.pingcap.com/ja/tidbcloud/data-service-get-started.md): TiDB Cloud Data Serviceを使用してHTTPSリクエストでデータにアクセスする方法を学びましょう。
   - [データ管理アプリ](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-data-app.md): TiDB Cloudコンソールでデータアプリを作成、表示、変更、削除する方法を学習します。
-  - [エンドポイントの管理](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-endpoint.md): TiDB Cloudコンソールで、データアプリのエンドポイントを作成、開発、テスト、デプロイ、削除する方法を学びましょう。
+  - [エンドポイントを管理する](https://docs.pingcap.com/ja/tidbcloud/data-service-manage-endpoint.md): TiDB Cloudコンソールで、データアプリのエンドポイントを作成、開発、テスト、デプロイ、削除する方法を学びましょう。
   - [APIキー](https://docs.pingcap.com/ja/tidbcloud/data-service-api-key.md): データアプリのAPIキーの作成、編集、削除方法を学びましょう。
   - [カスタムドメイン](https://docs.pingcap.com/ja/tidbcloud/data-service-custom-domain.md): TiDB Cloud Data Serviceでカスタムドメインを使用してデータアプリにアクセスする方法を学びましょう。
   - [統合](https://docs.pingcap.com/ja/tidbcloud/data-service-integrations.md): TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTsやDifyなどのサードパーティツールと統合する方法を学びましょう。
@@ -188,9 +188,9 @@
 - ストリームデータ
   - [変更フィード](https://docs.pingcap.com/ja/tidbcloud/changefeed-overview.md): TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスにデータをストリーミングできます。
   - [MySQLシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-mysql.md): このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloudから MySQL へデータをストリーミングする方法について説明します。制限事項、前提条件、およびデータレプリケーション用の MySQL シンクを作成する手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
-  - [Kafkaシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-kafka.md): このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィード仕様の構成が含まれます。
+  - [Kafkaシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-kafka.md): このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認可のための権限の追加、およびチェンジフィード仕様の構成が含まれます。
   - [Pulsarシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-pulsar.md): このドキュメントでは、TiDB Cloudから Apache Pulsar へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制約事項、前提条件、および Apache Pulsar 用のチェンジフィードの設定手順が含まれています。このプロセスには、ネットワーク接続の設定とチェンジフィード仕様の設定が含まれます。
-  - [TiDB Cloud Sinkへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-tidb-cloud.md): このドキュメントでは、TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスタの概要ページに移動し、接続を確立し、テーブルとイベントのフィルタをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
+  - [TiDB Cloud Sinkへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-tidb-cloud.md): このドキュメントでは、TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスターの概要ページに移動し、接続を確立し、テーブルとイベントのフィルターをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
   - [クラウドストレージへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-cloud-storage.md): このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様に関する設定手順、およびレプリケーションプロセスの開始方法についても説明します。
   - [TiDB Cloud Lake へ](https://docs.pingcap.com/ja/tidbcloud/data-pipeline-dedicated-sink-to-lake.md): Dumpling と changefeed を使用して、TiDB Cloud Dedicated クラスター上に TiDB Cloud Lake データパイプラインを構築するための手動セットアップガイドです。
   - 参照
@@ -210,15 +210,15 @@
   - ネットワークアクセス制御
     - [IPアクセスリストを設定する](https://docs.pingcap.com/ja/tidbcloud/configure-ip-access-list.md): TiDB Cloud Dedicatedクラスターへのアクセスを許可するIPアドレスを設定する方法を学びましょう。
     - [AWS のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections.md): AWS を使用してプライベートエンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
-    - [Azure のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-azure.md): Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する方法を学びましょう。
+    - [Azure のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-azure.md): Azure Private Linkを介してTiDB Cloud Dedicatedクラスターに接続する方法を学びましょう。
     - [Google Cloud のプライベートエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/set-up-private-endpoint-connections-on-google-cloud.md): Google Cloud Private Service Connectを使用してTiDB Cloudクラスターに接続する方法を学びましょう。
     - [VPCピアリング経由で接続](https://docs.pingcap.com/ja/tidbcloud/set-up-vpc-peering-connections.md): VPC ピアリング経由でTiDB Cloud Dedicated に接続する方法を学習します。
     - [TiDB Cloud DedicatedへのTLS接続](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tls-connect-to-dedicated.md): TiDB Cloud Dedicated に TLS 接続を導入します。
   - データアクセス制御
-    - [AWS 上で顧客管理暗号化キーを使用した保存時の暗号化](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-encrypt-cmek-aws.md): AWS でホストされているTiDB Cloudクラスター内のデータをカスタマー管理暗号化キー (CMEK) を使用して暗号化する方法を学びます。
+    - [AWS 上で顧客管理暗号化キーを使用した保存時の暗号化](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-encrypt-cmek-aws.md): AWS でホストされているTiDB Cloudクラスター内のデータを顧客管理暗号化キー (CMEK) を使用して暗号化する方法を学びます。
     - [Azure 上で顧客管理暗号化キーを使用した保存時の暗号化](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-encrypt-cmek-azure.md): 顧客管理暗号化キー (CMEK) を使用して、Azure でホストされているTiDB Cloudクラスター内のデータを暗号化する方法について説明します。
   - データベースアクセス制御
-    - [クラスタパスワード設定の構成](https://docs.pingcap.com/ja/tidbcloud/configure-security-settings.md): TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードの設定方法を学びましょう。
+    - [クラスターパスワード設定の構成](https://docs.pingcap.com/ja/tidbcloud/configure-security-settings.md): TiDB Cloud Dedicatedクラスターに接続するためのルートパスワードの設定方法を学びましょう。
   - 監査管理
     - [データベース監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-auditing.md): TiDB Cloudでクラスターを監査する方法について説明します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [コンソール監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-console-auditing.md): TiDB Cloudコンソールの監査ログ機能について学習します。
@@ -252,13 +252,13 @@
     - [`tidbcloud_dedicated_cluster`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-dedicated-cluster-resource.md): `tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedicated クラスターを作成および変更する方法を学習します。
     - [`tidbcloud_dedicated_private_endpoint_connection`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-dedicated-private-endpoint-connection-resource.md): `tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベートエンドポイント接続を作成および変更する方法を学習します。
     - [`tidbcloud_dedicated_vpc_peering`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-dedicated-vpc-peering-resource.md): `tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cloud Dedicated VPC ピアリングを作成および変更する方法を学習します。
-    - [`tidbcloud_dedicated_network_container`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-dedicated-network-container-resource.md): `tidbcloud_dedicated_network_container` リソースを使用して、 TiDB Cloud Dedicated ネットワークコンテナを作成および変更する方法を学習します。
+    - [`tidbcloud_dedicated_network_container`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-dedicated-network-container-resource.md): `tidbcloud_dedicated_network_container` リソースを使用して、 TiDB Cloud Dedicated ネットワークコンテナーを作成および変更する方法を学習します。
     - [`tidbcloud_sql_user`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-sql-user-resource.md): `tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。
-    - [`tidbcloud_cluster`リソースを使用する (非推奨)](https://docs.pingcap.com/ja/tidbcloud/terraform-use-cluster-resource.md): クラスター リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
+    - [`tidbcloud_cluster`リソースを使用する (非推奨)](https://docs.pingcap.com/ja/tidbcloud/terraform-use-cluster-resource.md): クラスターリソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
     - [`tidbcloud_backup`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-backup-resource.md): `tidbcloud_backup`リソースを使用してTiDB Cloudクラスターのバックアップを作成する方法を学習します。
     - [`tidbcloud_restore`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-restore-resource.md): `tidbcloud_restore` リソースを使用して復元タスクを作成および変更する方法を学習します。
     - [`tidbcloud_import`リソースを使用する](https://docs.pingcap.com/ja/tidbcloud/terraform-use-import-resource.md): `tidbcloud_import` リソースを使用してインポートタスクを管理する方法を学習します。
-    - [クラスタリソースの移行](https://docs.pingcap.com/ja/tidbcloud/terraform-migrate-cluster-resource.md): クラスター リソースをサーバーレスまたは専用のクラスター リソースに移行する方法を学習します。
+    - [クラスターリソースの移行](https://docs.pingcap.com/ja/tidbcloud/terraform-migrate-cluster-resource.md): クラスターリソースをサーバーレスまたは専用のクラスターリソースに移行する方法を学習します。
   - [Vercel](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-vercel.md): TiDB CloudクラスターをVercelプロジェクトに接続する方法を学びましょう。
   - [Zapier](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-zapier.md): TiDB CloudをZapierを使って5000以上のアプリに接続する方法を学びましょう。
 
@@ -583,9 +583,9 @@
       - [TiFlashの概要](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview.md): TiFlashのアーキテクチャと主な機能について学びます。
       - [ディスクへのスピル](https://docs.pingcap.com/ja/tidbcloud/tiflash-spill-disk.md): TiFlash がデータをディスクにスピルする方法と、スピル動作をカスタマイズする方法について説明します。
   - TiDB CloudパートナーWebコンソール
-    - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 再販業者およびマネージドサービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
+    - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 販売代理店およびマネージドサービスプロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
     - [MSP顧客](https://docs.pingcap.com/ja/tidbcloud/managed-service-provider-customer.md): マネージドサービス プロバイダー (MSP) の顧客になる方法を学びます。
-    - [再販業者の顧客](https://docs.pingcap.com/ja/tidbcloud/cppo-customer.md): 再販業者の顧客になる方法を学びます。
+    - [販売代理店の顧客](https://docs.pingcap.com/ja/tidbcloud/cppo-customer.md): 販売代理店の顧客になる方法を学びます。
   - TiDB分散実行フレームワーク（DXF）
     - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-distributed-execution-framework.md): TiDB Distributed eXecution Framework (DXF) のユースケース、制限、使用法、実装の原則について学習します。
     - [TiDB グローバルソート](https://docs.pingcap.com/ja/tidbcloud/tidb-global-sort.md): TiDB グローバルソートの使用例、制限、使用方法、実装の原則について学習します。
@@ -595,20 +595,20 @@
   - ベンチマーク
     - TiDB v8.5
       - [パフォーマンスのハイライト](https://docs.pingcap.com/ja/tidbcloud/v8.5-performance-highlights.md): TiDB バージョン v8.5.0 では、 TiDB Cloud Dedicated クラスターのパフォーマンスが向上しました。
-      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v8.5-performance-benchmarking-with-tpcc.md): TiDB バージョン v8.5.0 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンス テストの結果を紹介します。
-      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v8.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v8.5.0 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンス テストの結果を紹介します。
+      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v8.5-performance-benchmarking-with-tpcc.md): TiDB バージョン v8.5.0 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンステストの結果を紹介します。
+      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v8.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v8.5.0 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンステストの結果を紹介します。
     - TiDB v8.1
-      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v8.1-performance-benchmarking-with-tpcc.md): TiDB バージョン v8.1.0 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンス テストの結果を紹介します。
-      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v8.1-performance-benchmarking-with-sysbench.md): TiDB バージョン v8.1.0 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンス テストの結果を紹介します。
+      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v8.1-performance-benchmarking-with-tpcc.md): TiDB バージョン v8.1.0 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンステストの結果を紹介します。
+      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v8.1-performance-benchmarking-with-sysbench.md): TiDB バージョン v8.1.0 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンステストの結果を紹介します。
     - TiDB v7.5
-      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v7.5-performance-benchmarking-with-tpcc.md): TiDB バージョン v7.5.0 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンス テストの結果を紹介します。
-      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v7.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v7.5.0 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンス テストの結果を紹介します。
+      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v7.5-performance-benchmarking-with-tpcc.md): TiDB バージョン v7.5.0 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンステストの結果を紹介します。
+      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v7.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v7.5.0 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンステストの結果を紹介します。
     - TiDB v7.1
-      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v7.1-performance-benchmarking-with-tpcc.md): TiDB バージョン v7.1.3 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンス テストの結果を紹介します。
-      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v7.1-performance-benchmarking-with-sysbench.md): TiDB バージョン v7.1.3 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンス テストの結果を紹介します。
+      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v7.1-performance-benchmarking-with-tpcc.md): TiDB バージョン v7.1.3 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンステストの結果を紹介します。
+      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v7.1-performance-benchmarking-with-sysbench.md): TiDB バージョン v7.1.3 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンステストの結果を紹介します。
     - TiDB v6.5
-      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v6.5-performance-benchmarking-with-tpcc.md): TiDB バージョン v6.5.6 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンス テストの結果を紹介します。
-      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v6.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v6.5.6 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンス テストの結果を紹介します。
+      - [TPC-C性能試験報告書](https://docs.pingcap.com/ja/tidbcloud/v6.5-performance-benchmarking-with-tpcc.md): TiDB バージョン v6.5.6 を使用したTiDB Cloud Dedicated クラスターの TPC-C パフォーマンステストの結果を紹介します。
+      - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v6.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v6.5.6 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンステストの結果を紹介します。
   - [システム変数](https://docs.pingcap.com/ja/tidbcloud/system-variables.md): システム変数を使用して、パフォーマンスを最適化したり、実行時の動作を変更したりできます。
   - [サーバーステータス変数](https://docs.pingcap.com/ja/tidbcloud/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
   - [テーブルフィルター](https://docs.pingcap.com/ja/tidbcloud/table-filter.md): TiDB ツールでのテーブルフィルター機能の使用。

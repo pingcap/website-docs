@@ -9,7 +9,7 @@
   - [機能](https://docs.pingcap.com/ja/tidbcloud/features.md): TiDB Cloudの各プランにおける機能サポート状況についてご確認ください。
   - [MySQLとの互換性](https://docs.pingcap.com/ja/tidbcloud/mysql-compatibility.md): TiDBとMySQLとの互換性、およびサポートされていない機能や異なる機能について学びましょう。
 - はじめに
-  - [TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
+  - [TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart.md): すぐにサインアップしてTiDB Cloudを試し、TiDB Cloud Starter インスタンスを作成してください。
   - [HTAPを試す](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart.md): TiDB Cloudで HTAP を使い始める方法を学習します。
 - 主要概念
   - [概要](https://docs.pingcap.com/ja/tidbcloud/key-concepts.md): TiDB Cloudの主要な概念について学びましょう。
@@ -52,7 +52,7 @@
     - [概要](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster.md): TiDB Cloudリソースの監視方法を学びましょう。
     - [組み込みの指標](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring-premium.md): TiDB Cloud Premiumに組み込まれているメトリクスを表示する方法と、これらのメトリクスの意味を理解する方法を学びましょう。
     - [Top RU](https://docs.pingcap.com/ja/tidbcloud/top-ru.md): Top RUを使用して、1分単位の粒度で最もリクエストユニット（RU）消費量が多いSQL文とデータベースユーザーを特定する方法を学びましょう。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
-    - [Statement Insight](https://docs.pingcap.com/ja/tidbcloud/statement-insight.md): Statement Insight を使用して、DB user、DB、table、SQL type、または SQL digest ごとの過去の RU 消費量、レイテンシー、実行回数を分析し、TiDB Cloud インスタンスの RU およびパフォーマンスのベースラインを構築する方法を説明します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+    - [Statement Insight](https://docs.pingcap.com/ja/tidbcloud/statement-insight.md): Statement Insight を使用して、DB ユーザー、DB、テーブル、SQL タイプ、または SQL digest ごとの過去の RU 消費量、レイテンシー、実行回数を分析し、TiDB Cloud インスタンスの RU およびパフォーマンスのベースラインを構築する方法を説明します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
     - [組み込みアラート](https://docs.pingcap.com/ja/tidbcloud/monitor-built-in-alerting.md): TiDB Cloudからアラート通知を受け取ることで、 TiDB Cloudリソースを監視する方法を学びましょう。
     - [TiDB CloudをPrometheusおよびGrafanaと統合する](https://docs.pingcap.com/ja/tidbcloud/prometheus-grafana-integration.md): PrometheusとGrafanaの連携機能を使って、 TiDB Cloudインスタンスを監視する方法を学びましょう。
     - アラート通知を購読する
@@ -104,21 +104,21 @@
           - [インデックス問題の解決方法](https://docs.pingcap.com/ja/tidbcloud/wrong-index-solution.md): 間違ったインデックスの問題を解決する方法を学びます。
           - [Distinct最適化](https://docs.pingcap.com/ja/tidbcloud/agg-distinct-optimization.md): TiDB クエリ オプティマイザに`distinct`最適化を導入します。
           - [コストモデル](https://docs.pingcap.com/ja/tidbcloud/cost-model.md): 物理的な最適化中に TiDB によって使用されるコストモデルがどのように機能するかを学習します。
-          - [ランタイムフィルタ](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
+          - [ランタイムフィルター](https://docs.pingcap.com/ja/tidbcloud/runtime-filter.md): ランタイムフィルターの動作原理とその使用方法を学びます。
         - [プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-prepared-plan-cache.md): TiDB の SQL プリペアド実行プランキャッシュについて学習します。
         - [非プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidbcloud/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアド実行プランキャッシュの原理、使用法、および例について学習します。
       - 実行計画の制御
         - [概要](https://docs.pingcap.com/ja/tidbcloud/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と `tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
-        - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザヒントを使用してクエリ実行計画に影響を与える
+        - [オプティマイザーのヒント](https://docs.pingcap.com/ja/tidbcloud/optimizer-hints.md): オプティマイザーヒントを使用してクエリ実行計画に影響を与える
         - [SQLプラン管理](https://docs.pingcap.com/ja/tidbcloud/sql-plan-management.md): TiDB での SQL プラン管理について学習します。
         - [最適化ルールと式プッシュダウンのブロックリスト](https://docs.pingcap.com/ja/tidbcloud/blocklist-control-plan.md): 最適化ルールと式プッシュダウンの動作を制御するブロックリストについて学習します。
-        - [オプティマイザ修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
+        - [オプティマイザー修正コントロール](https://docs.pingcap.com/ja/tidbcloud/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
     - [TiKV Follower Read](https://docs.pingcap.com/ja/tidbcloud/follower-read.md): このドキュメントでは、 Follower Readの使用と実装について説明します。
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidbcloud/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
-    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidbcloud/tune-tiflash-performance.md): マシンリソースを計画し、TiDB パラメーターを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
   - [TiDB Cloud Premiumインスタンスを削除する](https://docs.pingcap.com/ja/tidbcloud/delete-tidb-instance.md): TiDB Cloud PremiumまたはTiDB Cloud BYOCインスタンスを削除する方法を学びましょう。
 - データの移行またはインポート
-  - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
+  - [概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-migration-overview.md): TiDB Cloudのデータ移行およびインポートシナリオの概要について説明します。
   - TiDB Cloudへのデータ移行
     - [データ移行を使用して既存データと増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-from-mysql-using-data-migration.md): データ移行機能を使用して、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはSelf-ManagedのMySQLインスタンスから、ダウンタイムを最小限に抑えながらMySQLデータベースをTiDB Cloudにシームレスに移行する方法を学びましょう。
     - [データ移行を使用して増分データを移行する](https://docs.pingcap.com/ja/tidbcloud/migrate-incremental-data-from-mysql-using-data-migration.md): データ移行を使用して、Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、Alibaba Cloud RDS、またはローカルのMySQLインスタンスでホストされているMySQL互換データベースからTiDB Cloudへ増分データを移行する方法を学びましょう。
@@ -143,7 +143,7 @@
   - [変更フィード](https://docs.pingcap.com/ja/tidbcloud/changefeed-overview.md): TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスにデータをストリーミングできます。
   - [Data Pipeline](https://docs.pingcap.com/ja/tidbcloud/data-pipeline.md): TiDB Cloud から TiDB Cloud Lake に完全データと増分データをレプリケートするデータパイプラインの作成方法と管理方法を学びます。
   - [MySQLシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-mysql.md): このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloudから MySQL へデータをストリーミングする方法について説明します。制限事項、前提条件、およびデータレプリケーション用の MySQL シンクを作成する手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
-  - [Kafkaシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-kafka.md): このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィード仕様の構成が含まれます。
+  - [Kafkaシンクへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-apache-kafka.md): このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認可のための権限の追加、およびチェンジフィード仕様の構成が含まれます。
   - [クラウドストレージへ](https://docs.pingcap.com/ja/tidbcloud/changefeed-sink-to-cloud-storage.md): このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするための変更フィードの作成方法について説明します。制限事項、宛先、レプリケーション、仕様に関する設定手順、およびレプリケーションプロセスの開始方法についても説明します。
   - [TiDB Cloud Lake へ](https://docs.pingcap.com/ja/tidbcloud/data-pipeline-sink-to-lake.md): TiDB Cloud インスタンスから TiDB Cloud Lake にデータをレプリケートするデータパイプラインを作成、監視、管理する方法を学びます。
   - 参照
@@ -476,9 +476,9 @@
       - [TiFlashの概要](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview.md): TiFlashのアーキテクチャと主な機能について学びます。
       - [ディスクへのスピル](https://docs.pingcap.com/ja/tidbcloud/tiflash-spill-disk.md): TiFlash がデータをディスクにスピルする方法と、スピル動作をカスタマイズする方法について説明します。
   - TiDB CloudパートナーWebコンソール
-    - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 再販業者およびマネージドサービス プロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
+    - [TiDB Cloudパートナー](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-partners.md): 販売代理店およびマネージドサービスプロバイダー (MSP) としてTiDB Cloud Partner Web コンソールを使用する方法を学習します。
     - [MSP顧客](https://docs.pingcap.com/ja/tidbcloud/managed-service-provider-customer.md): マネージドサービス プロバイダー (MSP) の顧客になる方法を学びます。
-    - [再販業者の顧客](https://docs.pingcap.com/ja/tidbcloud/cppo-customer.md): 再販業者の顧客になる方法を学びます。
+    - [販売代理店の顧客](https://docs.pingcap.com/ja/tidbcloud/cppo-customer.md): 販売代理店の顧客になる方法を学びます。
   - [TiDB X インスタンスで制限される SQL 機能](https://docs.pingcap.com/ja/tidbcloud/limited-sql-features-tidb-x.md): TiDB X インスタンスで制限される SQL 機能について説明します。
   - [TiDBの制限事項](https://docs.pingcap.com/ja/tidbcloud/tidb-limitations.md): TiDB の使用制限について学習します。
   - [システム変数](https://docs.pingcap.com/ja/tidbcloud/system-variables.md): システム変数を使用して、パフォーマンスを最適化したり、実行時の動作を変更したりできます。
