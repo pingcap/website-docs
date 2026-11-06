@@ -124,7 +124,7 @@
     - [TiUPを使用する（推奨）](https://docs.pingcap.com/ja/tidb/stable/scale-tidb-using-tiup.md): TiUPを使用して TiDB クラスターをスケーリングする方法を学びます。
     - [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - バックアップと復元
-    - [概要](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-overview.md): TiDB Backup & Restore (BR) は、クラスタの高可用性とデータの安全性を確保します。短い RPO でディザスタリカバリをサポートし、誤操作を処理し、履歴データの監査機能を提供します。バックアップ操作はオフピーク時に実行し、バックアップデータは互換性のあるストレージシステムに保存することをお勧めします。BRは、フルバックアップとログバックアップ、および任意の時点へのデータ復元をサポートします。バックアップと復元には、TiDB クラスタと同じメジャーバージョンのBRを使用することが重要です。
+    - [概要](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-overview.md): TiDB Backup & Restore (BR) は、クラスターの高可用性とデータの安全性を確保します。短い RPO でディザスターリカバリをサポートし、誤操作を処理し、履歴データの監査機能を提供します。バックアップ操作はオフピーク時に実行し、バックアップデータは互換性のあるストレージシステムに保存することをお勧めします。BRは、フルバックアップとログバックアップ、および任意の時点へのデータ復元をサポートします。バックアップと復元には、TiDB クラスターと同じメジャーバージョンのBRを使用することが重要です。
     - アーキテクチャ
       - [アーキテクチャ概要](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-design.md): TiDBは、Backup & Restore（BR）とTiDB Operatorを使用したクラスタデータのバックアップとリストアをサポートしています。TiKVノードからデータをバックアップし、TiKVノードにデータをリストアするタスクを作成できます。アーキテクチャには、フルデータバックアップとリストア、データ変更ログバックアップ、ポイントインタイムリカバリ（PITR）が含まれます。詳細については、各機能のドキュメントを参照してください。
       - [スナップショットバックアップおよびリストアのアーキテクチャ](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-architecture.md): TiDBスナップショットバックアップおよびリストアアーキテクチャでは、バックアップ＆リストア（BR）ツールを使用したプロセスについて説明します。このアーキテクチャには、バックアップおよびリストアプロセス、バックアップファイルの種類、命名形式、ストレージ形式、およびバックアップファイルの構造が含まれます。バックアッププロセスには、スケジューリング、データバックアップ、およびメタデータバックアップが含まれます。リストアプロセスには、スケジューリング、スキーマリストア、リージョン割り当て、データリストア、およびレポートが含まれます。バックアップファイルの種類には、SSTファイル、backupmetaファイル、およびbackup.lockファイルがあります。SSTファイルの命名形式とストレージ形式については、詳細に説明します。詳細については、TiDBスナップショットバックアップおよびリストアガイドを参照してください。
@@ -135,7 +135,7 @@
       - [ログバックアップとPITRガイド](https://docs.pingcap.com/ja/tidb/stable/br-pitr-guide.md): TiDB ログバックアップおよび PITR ガイドでは、br コマンドラインツールを使用してデータをバックアップおよび復元する方法について説明します。ログバックアップの開始、定期的な完全バックアップの実行、古いデータのクリーンアップの手順が含まれています。また、PITR の実行方法と PITR のパフォーマンス機能に関する情報も提供します。
       - [コンパクトログバックアップ](https://docs.pingcap.com/ja/tidb/stable/br-compact-log-backup.md): ログバックアップを SST 形式にコンパクションすることで、ポイントインタイムリカバリ (PITR) の効率を向上させる方法を学習します。
       - [ユースケース](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-use-cases.md): TiDBは、タイムリーなデータリカバリやビジネス監査など、特定のユースケース向けにスナップショットおよびログバックアップソリューションを提供します。ポイントインタイムリカバリ（PITR）を使用するには、TiDBクラスター（v6.2.0以上）をデプロイし、 BRをTiDBクラスターと同じバージョンに更新してください。Amazon S3にバックアップストレージを設定し、データ損失とリカバリの要件を満たすバックアップポリシーを設定してください。ログバックアップとスナップショットバックアップを実行し、PITRを使用して特定の時点にデータを復元します。古くなったデータは定期的にクリーンアップしてください。詳細な手順については、TiDBのドキュメントをご覧ください。
-      - [バックアップストレージ](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-storages.md): TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
+      - [バックアップストレージ](https://docs.pingcap.com/ja/tidb/stable/backup-and-restore-storages.md): TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にできます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
     - BR CLIマニュアル
       - [概要](https://docs.pingcap.com/ja/tidb/stable/use-br-command-line-tool.md): `br` コマンドラインツールは、TiDB クラスターのスナップショットバックアップ、ログバックアップ、およびポイントインタイムリカバリ (PITR) に使用されます。サブコマンド、オプション、およびパラメータで構成されており、PDサービスアドレスの `--pd` やストレージパスの `-s` などの共通オプションがあります。サブコマンドには、それぞれ特定の機能を持つ `tiup br backup`、`tiup br log`、`tiup br restore` などがあります。バックアップコマンドには `full`、`db`、`table` オプションがあり、ログバックアップおよびリストアコマンドには、バックアップ操作を管理するためのさまざまなタスクがあります。
       - [スナップショットバックアップおよび復元コマンドマニュアル](https://docs.pingcap.com/ja/tidb/stable/br-snapshot-manual.md): TiDBスナップショットのバックアップと復元コマンドマニュアルでは、クラスタースナップショット、データベース、およびテーブルのバックアップと復元に使用するコマンドについて説明しています。また、バックアップデータの暗号化と暗号化されたスナップショットの復元についても説明しています。BRはGCへの自己適応をサポートし、統計情報のバックアップと復元に--ignore-statsパラメータを導入しています。さらに、バックアップデータの暗号化と、指定されたデータベースまたはテーブルの部分的なデータ復元もサポートしています。
@@ -150,8 +150,8 @@
       - [RawKVのバックアップと復元](https://docs.pingcap.com/ja/tidb/stable/rawkv-backup-and-restore.md): TiKVとPDは、TiDBなしでRawKVと呼ばれるKVデータベースを形成できます。TiKV- BRはRawKVのデータのバックアップと復元をサポートしています。詳細については、TiKVウェブサイトのTiKV- BRユーザードキュメントをご覧ください。
       - [増分バックアップと復元](https://docs.pingcap.com/ja/tidb/stable/br-incremental-guide.md): 増分データは、開始スナップショットと終了スナップショット間の差分データとDDLです。これによりバックアップボリュームが削減され、増分バックアップには`tidb_gc_life_time`の設定が必要になります。増分バックアップには`tiup br backup`と`--lastbackupts`オプションを使用し、増分データを復元する前に以前のデータがすべて復元されていることを確認してください。
   - クラスタ災害復旧（DR）
-    - [DRソリューションの概要](https://docs.pingcap.com/ja/tidb/stable/dr-solution-introduction.md): TiDBが提供するディザスタリカバリソリューションについて学びましょう。これには、プライマリ/セカンダリクラスタに基づくディザスタリカバリ、単一クラスタ内の複数レプリカに基づくディザスタリカバリ、バックアップとリストアに基づくディザスタリカバリなどが含まれます。
-    - [プライマリ・セカンダリDR](https://docs.pingcap.com/ja/tidb/stable/dr-secondary-cluster.md): TiCDCに基づいたプライマリセカンダリディザスタリカバリの実装方法を学びましょう。
+    - [DRソリューションの概要](https://docs.pingcap.com/ja/tidb/stable/dr-solution-introduction.md): TiDBが提供するディザスターリカバリソリューションについて学びましょう。これには、プライマリ/セカンダリクラスターに基づくディザスターリカバリ、単一クラスター内の複数レプリカに基づくディザスターリカバリ、バックアップとリストアに基づくディザスターリカバリなどが含まれます。
+    - [プライマリ・セカンダリDR](https://docs.pingcap.com/ja/tidb/stable/dr-secondary-cluster.md): TiCDCに基づいたプライマリセカンダリディザスターリカバリの実装方法を学びましょう。
     - [マルチレプリカクラスタDR](https://docs.pingcap.com/ja/tidb/stable/dr-multi-replica.md): 単一クラスターのマルチレプリカ災害復旧ソリューションについて学習します。
     - [BRベースのDR](https://docs.pingcap.com/ja/tidb/stable/dr-backup-restore.md): TiDB のバックアップと復元機能に基づいて災害復旧を実装する方法を学びます。
   - リソースマネージャー
@@ -171,7 +171,7 @@
   - [監視サービスをデプロイ](https://docs.pingcap.com/ja/tidb/stable/deploy-monitoring-services.md): TiDB クラスターの監視サービスをデプロイする方法を学習します。
   - [監視サービスのアップグレード](https://docs.pingcap.com/ja/tidb/stable/upgrade-monitoring-services.md): TiDB クラスターの Prometheus、Grafana、および Alertmanager 監視サービスをアップグレードする方法を学習します。
   - TiDB Dashboard
-    - [概要](https://docs.pingcap.com/ja/tidb/stable/dashboard-intro.md): TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIです。クラスタ全体の稼働状況、コンポーネントとホストのステータス、トラフィック分布、SQL文の実行情報、スロークエリ、クラスタ診断、ログ検索、リソース制御、プロファイリングデータ収集などを表示します。
+    - [概要](https://docs.pingcap.com/ja/tidb/stable/dashboard-intro.md): TiDB Dashboardは、TiDBクラスターの監視、診断、管理のためのWeb UIです。クラスター全体の稼働状況、コンポーネントとホストのステータス、トラフィック分布、SQL文の実行情報、スロークエリ、クラスター診断、ログ検索、リソース制御、プロファイリングデータ収集などを表示します。
     - 管理
       - [デプロイ](https://docs.pingcap.com/ja/tidb/stable/dashboard-ops-deploy.md): TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードを提供するのは1つだけです。`tiup cluster display`コマンドを使用して、ダッシュボードの機能を確認してください。ダッシュボードの無効化と有効化は`tiup ctl`コマンドを使用して行うことができます。
       - [リバースプロキシ](https://docs.pingcap.com/ja/tidb/stable/dashboard-ops-reverse-proxy.md): TiDB Dashboardは、リバースプロキシを使用して安全に公開できます。これを行うには、TiDB Dashboardの実際のアドレスを取得し、HAProxyまたはNGINXを使用してリバースプロキシを設定します。TiDB Dashboardサービスのパスプレフィックスをカスタマイズすることもできます。セキュリティを強化するには、ファイアウォールの設定を検討してください。
@@ -186,7 +186,7 @@
     - SQL文の分析
       - [SQL Statementsページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-statement-list.md): TiDB DashboardのSQL Statementsページには、クラスター内のすべてのSQL文の実行ステータスが表示されます。このページでは、実行時間の長いSQL文を分析でき、アクセス、フィルタリング、列の追加表示、並べ替え、設定の変更などのオプションが提供されます。また、保存するSQL文の数を制限する機能も備えています。詳細については、TiDB Dashboardのドキュメントをご覧ください。
       - [SQL詳細ページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-statement-details.md): TiDB Dashboardは、SQLテンプレートの概要、実行計画一覧、プランバインディング機能など、SQL文の実行に関する詳細情報を提供します。v6.6.0以降では、高速プランバインディングにより、実行計画の迅速なバインディングと削除が可能になりました。ただし、この機能には制限があり、SUPER権限が必要です。プランの実行詳細には、SQLサンプル、完全な実行計画情報、基本的な実行詳細が含まれます。実行計画は、表、テキスト、グラフ形式で視覚的に表示できます。追加のタブには、実行時間、コプロセッサー読み取り、トランザクション、スロークエリに関する情報が表示されます。
-    - [スロークエリページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-slow-query.md): TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のスロークエリを検索して表示できます。実行時間が300ミリ秒を超えるクエリはスロークエリとみなされます。ユーザーはしきい値を調整したり、ダッシュボードまたはブラウザからこのページにアクセスしたりできます。また、フィルタの変更、表示する列の追加、クエリのエクスポート、実行の詳細の表示も可能です。
+    - [スロークエリページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-slow-query.md): TiDB Dashboardの「スロークエリ」ページでは、クラスター内のスロークエリを検索して表示できます。実行時間が300ミリ秒を超えるクエリはスロークエリとみなされます。ユーザーはしきい値を調整したり、ダッシュボードまたはブラウザーからこのページにアクセスしたりできます。また、フィルターの変更、表示する列の追加、クエリのエクスポート、実行の詳細の表示も可能です。
     - クラスタ診断
       - [クラスタ診断ページにアクセス](https://docs.pingcap.com/ja/tidb/stable/dashboard-diagnostics-access.md): TiDB Dashboardのクラスタ診断機能は、クラスタの問題を診断し、結果をWebページにまとめます。ダッシュボードまたはブラウザからこのページにアクセスできます。指定した期間の診断レポートと比較レポートを生成します。履歴レポートも利用可能です。
       - [診断レポートを表示する](https://docs.pingcap.com/ja/tidb/stable/dashboard-diagnostics-report.md): TiDB Dashboard診断レポートでは、基本情報、診断情報、負荷情報、概要情報、監視情報、構成情報など、診断レポートの内容を紹介します。また、比較レポートの詳細、DIFF_RATIOの説明、最大差異項目テーブルも含まれています。
@@ -196,7 +196,7 @@
     - [リソースマネージャーページ](https://docs.pingcap.com/ja/tidb/stable/dashboard-resource-manager.md): TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタキャパシティを推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。キャパシティ推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
     - インスタンスプロファイリング
       - [手動プロファイリング](https://docs.pingcap.com/ja/tidb/stable/dashboard-profiling.md): 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDB Dashboardまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認します。
-      - [継続的プロファイリング](https://docs.pingcap.com/ja/tidb/stable/continuous-profiling.md): TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決することができます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
+      - [継続的プロファイリング](https://docs.pingcap.com/ja/tidb/stable/continuous-profiling.md): TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決できます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザーからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
     - セッション管理と設定
       - [セッションを共有](https://docs.pingcap.com/ja/tidb/stable/dashboard-session-share.md): TiDB Dashboardでは、ユーザーが現在のセッションを他のユーザーと共有できるため、ユーザーパスワードの入力は不要です。招待者は、特定の共有設定を含む認証コードを生成し、招待された人に提供できます。招待された人は、その認証コードを使用してパスワードなしでサインインできます。
       - [SSOの設定](https://docs.pingcap.com/ja/tidb/stable/dashboard-session-sso.md): TiDB Dashboardは、サインイン認証にOIDCベースのSSOをサポートしています。SSOを有効にするには、OIDCクライアントIDと検出URLを入力し、偽装を承認して設定を保存します。SSOを無効にするには、オプションの選択を解除して設定を更新します。SQLユーザーのパスワードが変更された場合は、パスワードを再入力してSSOを再度有効にしてください。設定後、"Sign in via Company Account"をクリックしてサインインプロセスを完了することで、SSO経由でサインインできます。Okta、Auth0、Casdoorを使用したSSO設定の例も提供されています。
@@ -243,14 +243,14 @@
       - [TiCDCの性能分析方法](https://docs.pingcap.com/ja/tidb/stable/ticdc-performance-tuning-methods.md): パフォーマンス概要ダッシュボードに TiCDC メトリックを導入し、TiCDC ワークロードをより適切に理解して監視できるようにします。
       - [レイテンシーの内訳](https://docs.pingcap.com/ja/tidb/stable/latency-breakdown.md): TiDB のレイテンシーと、実際の使用例でレイテンシーを分析する方法について詳しく紹介します。
   - 設定調整
-    - [オペレーティングシステムのパフォーマンスを調整する](https://docs.pingcap.com/ja/tidb/stable/tune-operating-system.md): オペレーティングシステムのパラメータを調整する方法を学びます。
+    - [オペレーティングシステムのパフォーマンスを調整する](https://docs.pingcap.com/ja/tidb/stable/tune-operating-system.md): オペレーティングシステムのパラメーターを調整する方法を学びます。
     - [TiDBメモリのチューニング](https://docs.pingcap.com/ja/tidb/stable/configure-memory-usage.md): クエリのメモリクォータを構成して OOM (メモリ不足) を回避する方法を学習します。
     - [TiKVスレッドを調整](https://docs.pingcap.com/ja/tidb/stable/tune-tikv-thread-performance.md): 最適なパフォーマンスを得るために TiKV スレッドプールを調整する方法を学習します。
     - [TiKVメモリのチューニング](https://docs.pingcap.com/ja/tidb/stable/tune-tikv-memory-performance.md): 最適なパフォーマンスを得るために TiKV パラメータを調整する方法を学びます。
     - [TiKV Follower Read](https://docs.pingcap.com/ja/tidb/stable/follower-read.md): このドキュメントでは、 Follower Readの使用と実装について説明します。
     - [TiKV MVCC インメモリエンジン](https://docs.pingcap.com/ja/tidb/stable/tikv-in-memory-engine.md): インメモリエンジンの適用シナリオと動作原理、およびMVCCバージョンのクエリを高速化するためにインメモリエンジンを使用する方法を学びます。
     - [リージョンのパフォーマンスをチューニングする](https://docs.pingcap.com/ja/tidb/stable/tune-region-performance.md): リージョンサイズを調整してリージョンのパフォーマンスを調整する方法と、リージョンサイズが大きい場合にバケットを使用して同時クエリを最適化する方法を学習します。
-    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidb/stable/tune-tiflash-performance.md): マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+    - [TiFlashのパフォーマンスをチューニング](https://docs.pingcap.com/ja/tidb/stable/tune-tiflash-performance.md): マシンリソースを計画し、TiDB パラメーターを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
     - [コプロセッサーキャッシュ](https://docs.pingcap.com/ja/tidb/stable/coprocessor-cache.md): コプロセッサーキャッシュの機能について学習します。
     - ガベージコレクション（GC）
       - [概要](https://docs.pingcap.com/ja/tidb/stable/garbage-collection-overview.md): TiDB のガベージコレクションについて学習します。
@@ -295,7 +295,7 @@
       - [非プリペアド実行プランキャッシュ](https://docs.pingcap.com/ja/tidb/stable/sql-non-prepared-plan-cache.md): TiDB の SQL 非プリペアド実行プランキャッシュの原理、使用法、および例について学習します。
     - 実行計画の制御
       - [概要](https://docs.pingcap.com/ja/tidb/stable/control-execution-plan.md): この章では、TiDB における実行計画の生成を制御する方法について説明します。これには、ヒントの使用、SQL プラン管理、および最適化ルールのブロックリストが含まれます。さらに、システム変数と `tidb_opt_fix_control` 変数を変更することで、実行計画を制御できます。これらの方法は、クラスタのアップグレード後にオプティマイザの動作が変更されることによって発生するパフォーマンスの低下を防ぐのに役立ちます。
-      - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidb/stable/optimizer-hints.md): オプティマイザヒントを使用してクエリ実行計画に影響を与える
+      - [オプティマイザのヒント](https://docs.pingcap.com/ja/tidb/stable/optimizer-hints.md): オプティマイザーヒントを使用してクエリ実行計画に影響を与える
       - [SQLプラン管理](https://docs.pingcap.com/ja/tidb/stable/sql-plan-management.md): TiDB での SQL プラン管理について学習します。
       - [最適化ルールと式プッシュダウンのブロックリスト](https://docs.pingcap.com/ja/tidb/stable/blocklist-control-plan.md): 最適化ルールと式プッシュダウンの動作を制御するブロックリストについて学習します。
       - [オプティマイザ修正コントロール](https://docs.pingcap.com/ja/tidb/stable/optimizer-fix-controls.md): オプティマイザ修正コントロール機能について学習し、`tidb_opt_fix_control` を使用して TiDB オプティマイザをより細かく制御する方法について説明します。
@@ -364,7 +364,7 @@
         - [tiup cluster audit cleanup](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-audit-cleanup.md): `tiup cluster audit cleanup` コマンドは、`tiup cluster` コマンドによって生成されたログをクリーンアップするために使用されます。ログの保持日数を指定したり、ヘルプ情報を表示したりするオプションがあります。出力結果から、ログのクリーンアップが正常に完了したことを確認できます。
         - [tiup cluster check](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-check.md): TiUP クラスタは、ハードウェアとソフトウェア環境が本番の要件を満たしていることを確認するための`check`コマンドを提供します。OSバージョン、CPUサポート、時刻同期、システム制限などをチェックします。オプションには、自動修復や、CPUコア数、メモリサイズ、ディスクパフォーマンスのチェックの有効化などがあります。チェックを実行するには、`tiup cluster check <topology.yml | cluster-name> [flags]`コマンドを使用します。自動修復を試行するには、`--apply`を使用します。チェックするノードとロールを指定するには、`-N, --node`および`-R, --role`を使用します。特定のチェックを有効にするには、`--enable-cpu`、`--enable-disk`、`--enable-mem`を使用します。
         - [tiup cluster clean](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-clean.md): `tiup cluster clean` コマンドは、テスト環境でクラスターを停止し、すべてのデータを削除することでクラスターをリセットするために使用されます。データ、ログ、またはその両方を消去するオプションがあり、特定のノードまたはロールを無視することもできます。本番環境では注意して使用してください。
-        - [tiup cluster deploy](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-deploy.md): tiup cluster deployコマンドは、クラスタ名、バージョン、トポロジファイルなどのオプションを指定して新しいクラスタをデプロイするために使用されます。追加オプションには、ユーザー、IDファイル、パスワード、構成チェックの無視、ラベルのスキップ、ユーザー作成のスキップ、ヘルプなどがあります。出力はデプロイメントログです。
+        - [tiup cluster deploy](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-deploy.md): tiup cluster deployコマンドは、クラスター名、バージョン、トポロジーファイルなどのオプションを指定して新しいクラスターをデプロイするために使用されます。追加オプションには、ユーザー、IDファイル、パスワード、構成チェックの無視、ラベルのスキップ、ユーザー作成のスキップ、ヘルプなどがあります。出力はデプロイメントログです。
         - [tiup cluster destroy](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-destroy.md): tiup cluster destroyコマンドは、クラスターを停止し、各サービスのログ、デプロイメント、およびデータディレクトリを削除します。また、 tiup-clusterによって作成された親ディレクトリも削除します。オプションには、エラーを無視する--force 、データを保持するノードを指定する --retain-node-data 、データを保持するロールを指定する --retain-role-data 、ヘルプ情報を表示する -h または --help があります。出力はtiup-clusterの実行ログです。
         - [tiup cluster disable](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-disable.md): `tiup cluster disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。指定されたノードで`systemctl disable <service>`を実行します。オプションには、ノードを指定するための-Nとロールを指定するための-Rがあります。出力はtiup-clusterの実行ログです。
         - [tiup cluster display](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-display.md): tiup cluster displayコマンドは、クラスタ内の各コンポーネントの動作状況を効率的に表示します。ダッシュボード情報、ノードステータス、CPUおよびメモリ使用率などを表示するオプションが用意されています。出力には、クラスタ名、バージョン、SSHクライアントの種類、ダッシュボードアドレス、ノードの詳細を含む表が含まれます。ノードのサービスステータスは、Up、Down、Tombstone、Pending Offline、Unknownのいずれかになります。
@@ -382,7 +382,7 @@
         - [tiup cluster replay](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-replay.md): `tiup cluster replay` コマンドを使用すると、失敗したクラスター操作を再試行し、正常に実行された手順をスキップできます。指定した監査IDでコマンドを再試行するには、`tiup cluster replay <audit-id>` を使用します。監査IDは `tiup cluster audit` コマンドで確認する。出力は、指定した監査IDの結果です。
         - [tiup cluster restart](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-restart.md): `tiup cluster restart` コマンドは、指定されたクラスター内のサービスを再起動するために使用されます。再起動中は、サービスは利用できません。`-N, --node` オプションと `-R, --role` オプションを使用して、再起動するノードまたはロールを指定できます。出力は、サービス再起動プロセスのログです。
         - [tiup cluster scale-in](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-scale-in.md): 「tiup cluster scale-in」コマンドは、指定されたノードをオフラインにし、クラスタから削除し、残りのファイルを削除することでクラスタをスケールインするために使用されます。TiKVやTiFlashなどのコンポーネントは非同期的に処理されるため、チェックとクリーンアップのための追加手順が必要です。このコマンドには、ノードの指定、強制削除、転送タイムアウト、ヘルプ情報などのオプションも含まれています。
-        - [tiup cluster scale-out](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-scale-out.md): tiup cluster scale-outコマンドは、クラスタに新しいノードを追加するために使用されます。このコマンドは、新しいノードへのSSH接続を確立し、必要なディレクトリを作成し、設定を更新します。オプションには、ユーザー名（-u）、IDファイル（-i）、パスワード（-p）、ラベルチェックをスキップする--no-labels 、ユーザーチェックをスキップする --skip-create-user 、ヘルプ（-h）があります。出力はスケールアウトのログです。
+        - [tiup cluster scale-out](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-scale-out.md): tiup cluster scale-outコマンドは、クラスターに新しいノードを追加するために使用されます。このコマンドは、新しいノードへのSSH接続を確立し、必要なディレクトリを作成し、設定を更新します。オプションには、ユーザー名（-u）、IDファイル（-i）、パスワード（-p）、ラベルチェックをスキップする--no-labels 、ユーザーチェックをスキップする --skip-create-user 、ヘルプ（-h）があります。出力はスケールアウトのログです。
         - [tiup cluster start](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-start.md): tiup cluster startコマンドは、指定したクラスターのすべてまたは一部のサービスを起動するために使用されます。--init （セーフスタート）、-N （ノード指定）、-R （ロール指定）、-h （ヘルプ）などのオプションがあります。出力はサービス起動のログです。
         - [tiup cluster stop](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-stop.md): `tiup cluster stop`コマンドは、指定されたクラスターのすべてまたは一部のサービスを停止するために使用されます。コアサービスが停止すると、クラスターはサービスを提供できなくなります。コマンド構文は`tiup cluster stop <cluster-name> [flags]`です。オプションには、停止するノードを指定する -N/--node、停止するノードの役割を指定する -R/--role、ヘルプ情報を表示する -h/--help があります。出力は、サービスの停止に関するログです。
         - [tiup cluster template](https://docs.pingcap.com/ja/tidb/stable/tiup-component-cluster-template.md): tiup cluster templateコマンドは、クラスタデプロイメント用のトポロジファイルを準備するために使用されます。デフォルト、詳細、ローカル、またはマルチDCトポロジテンプレートを出力するオプションがあります。出力は、デプロイメント用のトポロジファイルにリダイレクトできます。
@@ -403,7 +403,7 @@
         - [tiup dm patch](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-patch.md): DM クラスターにホットフィックス パッチを適用する方法を学習します。
         - [tiup dm prune](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-prune.md): クラスターをスケールインする際、etcd内の少量のメタデータがクリーンアップされない場合がありますが、通常は問題にはなりません。必要に応じて、"tiup dm prune"コマンドを手動で実行してメタデータをクリーンアップできます。コマンド構文は"tiup dm prune <cluster-name> [flags]"です。オプション"-h, --help"を指定するとヘルプ情報が出力され、出力はクリーンアッププロセスのログです。
         - [tiup dm reload](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-reload.md): `tiup dm reload`コマンドは、変更されたクラスタ構成を適用し、サービスを再起動するために使用されます。再起動するノードとロールを指定したり、再起動プロセスをスキップしたりできます。また、このコマンドにはヘルプ情報を表示するオプションがあり、tiup-dmの実行ログも出力されます。
-        - [tiup dm replay](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-replay.md): `tiup dm replay` コマンドを使用すると、失敗したクラスタ操作を再試行し、正常に実行された手順をスキップできます。再試行するコマンドの `audit-id` を使用してください。このIDは `tiup dm audit` コマンドで確認できます。これにより、大規模クラスタで操作を再実行する際の時間節約に役立ちます。
+        - [tiup dm replay](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-replay.md): `tiup dm replay` コマンドを使用すると、失敗したクラスター操作を再試行し、正常に実行された手順をスキップできます。再試行するコマンドの `audit-id` を使用してください。このIDは `tiup dm audit` コマンドで確認できます。これにより、大規模クラスターで操作を再実行する際の時間節約に役立ちます。
         - [tiup dm restart](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-restart.md): `tiup dm restart`コマンドは、指定されたクラスタ内のサービスを再起動するために使用されます。再起動中は、サービスは利用できません。構文は`tiup dm restart <cluster-name> [flags]`です。オプションには、再起動するノードを指定する-N、再起動するノードの役割を指定する-R、ヘルプ情報を表示する-hがあります。出力は、サービス再起動プロセスのログです。
         - [tiup dm scale-in](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-scale-in.md): tiup dm scale-inコマンドは、サービスをオフラインにし、指定されたノードをクラスタから削除することで、クラスタをスケールインします。構文は「tiup dm scale-in <cluster-name> [flags]」です。オプションには、ノードの指定、ダウンしているノードの強制削除、ヘルプ情報の表示などを行う -N、 --force、-h があります。出力はスケールインのログです。
         - [tiup dm scale-out](https://docs.pingcap.com/ja/tidb/stable/tiup-component-dm-scale-out.md): `tiup dm scale-out` コマンドは、新しいノードへの SSH 接続を確立し、必要なディレクトリを作成し、デプロイしてサービスを開始することで、クラスターをスケールアウトするために使用されます。
@@ -415,11 +415,11 @@
     - [DMクラスタトポロジーリファレンス](https://docs.pingcap.com/ja/tidb/stable/tiup-dm-topology-reference.md): TiUPを使用して TiDB Data Migration (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
     - [ミラーリファレンスガイド](https://docs.pingcap.com/ja/tidb/stable/tiup-mirror-reference.md): TiUPミラーの一般情報を学びます。
     - TiUPコンポーネント
-      - [tiup-playground](https://docs.pingcap.com/ja/tidb/stable/tiup-playground.md): TiUPのPlaygroundコンポーネントを使用して、ローカルTiDBクラスタを迅速にデプロイする方法を学びましょう。
+      - [tiup-playground](https://docs.pingcap.com/ja/tidb/stable/tiup-playground.md): TiUPのPlaygroundコンポーネントを使用して、ローカルTiDBクラスターを迅速にデプロイする方法を学びましょう。
       - [tiup-cluster](https://docs.pingcap.com/ja/tidb/stable/tiup-cluster.md): TiUPを使用してオンライン TiDB クラスターをデプロイおよび保守する方法を学習します。
       - [sudo なしモード](https://docs.pingcap.com/ja/tidb/stable/tiup-cluster-no-sudo-mode.md): TiUP no-sudo モードを使用してオンライン TiDB クラスターをデプロイおよび管理する方法を学習します。
       - [tiup-mirror](https://docs.pingcap.com/ja/tidb/stable/tiup-mirror.md): プライベートミラーを作成する方法を学びます。
-      - [tiup-bench](https://docs.pingcap.com/ja/tidb/stable/tiup-bench.md): TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレス テストを実行する方法を学習します。
+      - [tiup-bench](https://docs.pingcap.com/ja/tidb/stable/tiup-bench.md): TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレステストを実行する方法を学習します。
   - [TiDB Operator](https://docs.pingcap.com/ja/tidb/stable/tidb-operator-overview.md): Kubernetes 上の TiDB クラスターの自動運用システムでTiDB Operatorについて学習します。
   - TiDB Data Migration
     - [TiDB Data Migrationについて](https://docs.pingcap.com/ja/tidb/stable/dm-overview.md): データ移行ツール、そのアーキテクチャ、主要コンポーネント、および機能について学びましょう。
@@ -551,9 +551,9 @@
       - [用語集](https://docs.pingcap.com/ja/tidb/stable/tidb-lightning-glossary.md): TiDB Lightningで使用される特殊用語のリスト。
   - [Dumpling](https://docs.pingcap.com/ja/tidb/stable/dumpling-overview.md): TiDBからデータをエクスポートするには、Dumplingツールを使用してください。
   - PingCAP Clinic診断サービス
-    - [概要](https://docs.pingcap.com/ja/tidb/stable/clinic-introduction.md): PingCAP Clinicは、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスタ向けの診断サービスです。クラスタの問題をリモートでトラブルシューティングし、安定した運用を保証し、クラスタの状態を迅速に確認できます。このサービスには、データ収集用のDiagクライアントと、オンライン診断レポート用のClinic Serverが含まれています。ユーザーはリモートで問題をトラブルシューティングし、クラスタの状態を迅速に確認できます。Diagはさまざまな方法で診断データを収集しますが、Clinic Serverにはクラスタ、ストレージ、およびデータサイズに制限があります。このサービスは2025年4月15日まで無料でご利用いただけます。今後の展開としては、 PingCAP Clinicをさまざまな環境で活用していく予定です。
+    - [概要](https://docs.pingcap.com/ja/tidb/stable/clinic-introduction.md): PingCAP Clinicは、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスター向けの診断サービスです。クラスターの問題をリモートでトラブルシューティングし、安定した運用を保証し、クラスターの状態を迅速に確認できます。このサービスには、データ収集用のDiagクライアントと、オンライン診断レポート用のClinic Serverが含まれています。ユーザーはリモートで問題をトラブルシューティングし、クラスターの状態を迅速に確認できます。Diagはさまざまな方法で診断データを収集しますが、Clinic Serverにはクラスター、ストレージ、およびデータサイズに制限があります。このサービスは2025年4月15日まで無料でご利用いただけます。今後の展開としては、 PingCAP Clinicをさまざまな環境で活用していく予定です。
     - [クイックスタート](https://docs.pingcap.com/ja/tidb/stable/quick-start-with-clinic.md): PingCAP Clinicは、クラスター診断データを迅速に収集・閲覧できるサービスです。DiagクライアントとClinic Serverで構成されています。ユーザーはDiagで診断データを収集し、Clinic Serverにアップロードして、Health Reportの結果を閲覧できます。ご利用前に、Diagをインストールし、Clinic Serverにログインし、組織を作成し、アクセストークンを取得して、Diagでトークンとリージョンを設定する必要があります。データを収集・アップロードした後、データアクセスリンクを取得し、Health Reportを閲覧できるようになります。
-    - [PingCAP Clinicを使用してクラスターのトラブルシューティングを行う](https://docs.pingcap.com/ja/tidb/stable/clinic-user-guide-for-tiup.md): PingCAP Clinic診断サービス (PingCAP Clinic) は、 TiUPを使用して導入された TiDB および DM クラスターのトラブルシューティングに役立ちます。Diag クライアントと Clinic Server を使用して、リモート トラブルシューティングとローカル クラスターの状態確認が可能です。前提条件として、Diag のインストール、アクセストークンの設定、リージョンの構成が必要です。リモートでのトラブルシューティングには、診断データの収集、表示、アップロードが含まれます。ローカルでのクラスター状態のクイック チェックには、構成データの収集と診断が含まれます。データのアップロードはブレークポイント アップロードをサポートしており、アップロードされたデータは Clinic Server に最大 180日間保存されます。
+    - [PingCAP Clinicを使用してクラスターのトラブルシューティングを行う](https://docs.pingcap.com/ja/tidb/stable/clinic-user-guide-for-tiup.md): PingCAP Clinic診断サービス (PingCAP Clinic) は、 TiUPを使用して導入された TiDB および DM クラスターのトラブルシューティングに役立ちます。Diag クライアントと Clinic Server を使用して、リモートトラブルシューティングとローカルクラスターの状態確認が可能です。前提条件として、Diag のインストール、アクセストークンの設定、リージョンの構成が必要です。リモートでのトラブルシューティングには、診断データの収集、表示、アップロードが含まれます。ローカルでのクラスター状態のクイックチェックには、構成データの収集と診断が含まれます。データのアップロードはブレークポイントアップロードをサポートしており、アップロードされたデータは Clinic Server に最大 180日間保存されます。
     - [PingCAP Clinicの診断データ](https://docs.pingcap.com/ja/tidb/stable/clinic-data-instruction-for-tiup.md): PingCAP Clinic診断サービスは、 TiUPを使用してTiDBおよびDMクラスターから診断データを収集します。収集されるデータの種類には、クラスター情報、TiDBの診断データ、TiKV、PD、 TiFlash、TiCDC、Prometheusモニタリング、システム変数、ノードシステム情報が含まれます。データは、国際ユーザーおよび中国本土のユーザー向けにClinic Serverに保存されます。収集されたデータは、クラスターの問題のトラブルシューティングにのみ使用されます。
   - sync-diff-inspector
     - [概要](https://docs.pingcap.com/ja/tidb/stable/sync-diff-inspector-overview.md): sync-diff-inspectorを使用してデータを比較し、不整合なデータを修復します。
@@ -958,7 +958,7 @@
   - [エラーコード](https://docs.pingcap.com/ja/tidb/stable/error-codes.md): TiDB のエラーコードと解決策について学習します。
   - [テーブルフィルター](https://docs.pingcap.com/ja/tidb/stable/table-filter.md): TiDB ツールでのテーブルフィルター機能の使用。
   - [TiDBインストールパッケージ](https://docs.pingcap.com/ja/tidb/stable/binary-package.md): TiDB インストールパッケージと、含まれる特定のコンポーネントについて説明します。
-  - [トポロジーラベルによるレプリカのスケジュール設定](https://docs.pingcap.com/ja/tidb/stable/schedule-replicas-by-topology-labels.md): トポロジ ラベルによってレプリカをスケジュールする方法を学習します。
+  - [トポロジーラベルによるレプリカのスケジュール設定](https://docs.pingcap.com/ja/tidb/stable/schedule-replicas-by-topology-labels.md): トポロジーラベルによってレプリカをスケジュールする方法を学習します。
   - [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidb/stable/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
   - [オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/ja/tidb/stable/online-workloads-and-add-index-operations.md): このドキュメントでは、オンラインワークロードと`ADD INDEX`操作間の相互作用効果をテストします。
   - [DDL文に埋め込まれた`ANALYZE`](https://docs.pingcap.com/ja/tidb/stable/ddl_embedded_analyze.md): このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた `ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。

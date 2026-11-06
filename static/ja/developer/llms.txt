@@ -5,7 +5,7 @@
 ## クイックスタート
 
 - [TiDB Cloud Starterインスタンスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-build-cluster-in-cloud.md): TiDB Cloud Starterインスタンスの作成方法と接続方法を学びましょう。
-- [TiDBの基本](https://docs.pingcap.com/ja/developer/dev-guide-tidb-basics.md): トランザクション メカニズムやアプリケーションが TiDB と対話する方法など、開発者向けの TiDB の基礎を学習します。
+- [TiDBの基本](https://docs.pingcap.com/ja/developer/dev-guide-tidb-basics.md): トランザクションメカニズムやアプリケーションが TiDB と対話する方法など、開発者向けの TiDB の基礎を学習します。
 - [TiDBにおけるCRUD SQL](https://docs.pingcap.com/ja/developer/dev-guide-tidb-crud-sql.md): TiDBのCRUD SQLに関する簡単な紹介。
 
 ## ガイド
@@ -26,7 +26,7 @@
       - [MyBatis](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-mybatis.md): MyBatisを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使用してTiDBと連携するJavaのサンプルコードを紹介します。
       - [Hibernate](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-hibernate.md): Hibernateを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Hibernateを使用してTiDBと連携するJavaのサンプルコードを紹介します。
       - [Spring Boot](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-spring-boot.md): Spring Bootを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Spring Bootを使用してTiDBと連携するJavaのサンプルコードを紹介します。
-      - [接続プールと接続パラメータの設定](https://docs.pingcap.com/ja/developer/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを実現するための計算式について解説します。また、パフォーマンス最適化のための JDBC API の使用方法と MySQL Connector/J パラメータの設定についても説明します。
+      - [接続プールと接続パラメーターの設定](https://docs.pingcap.com/ja/developer/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを実現するための計算式について解説します。また、パフォーマンス最適化のための JDBC API の使用方法と MySQL Connector/J パラメータの設定についても説明します。
       - [Javaアプリケーション開発におけるベストプラクティス](https://docs.pingcap.com/ja/developer/java-app-best-practices.md): このドキュメントでは、TiDB を使用したJavaアプリケーション開発におけるベストプラクティスを紹介します。データベース関連コンポーネント、JDBC の使用方法、接続プール構成、データアクセスフレームワーク、Spring トランザクション、およびトラブルシューティングツールについて解説します。TiDB は MySQL と高い互換性があるため、MySQL ベースのJavaアプリケーション開発におけるベストプラクティスのほとんどは TiDB にも適用できます。
     - Go
       - [Go-MySQL-Driver](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-sql-driver.md): Go-MySQL-Driver を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、Go-MySQL-Driver を使用して TiDB と連携するGolang のサンプルコードを紹介します。
@@ -61,7 +61,7 @@
   - [概要](https://docs.pingcap.com/ja/developer/dev-guide-schema-design-overview.md): TiDBデータベースのスキーマ設計の基本を学びましょう。
   - [データベースを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-database.md): データベースを作成するための手順、ルール、および例を学びましょう。
   - [テーブルを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-table.md): 表作成における定義、ルール、ガイドラインを学びましょう。
-  - [セカンダリーインデックスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-secondary-indexes.md): セカンダリインデックスを作成するための手順、ルール、および例を学びましょう。
+  - [セカンダリインデックスを作成する](https://docs.pingcap.com/ja/developer/dev-guide-create-secondary-indexes.md): セカンダリインデックスを作成するための手順、ルール、および例を学びましょう。
 - データを書き込む
   - [データを挿入する](https://docs.pingcap.com/ja/developer/dev-guide-insert-data.md): データ挿入の方法について学びましょう。
   - [データの更新](https://docs.pingcap.com/ja/developer/dev-guide-update-data.md): データの更新方法と一括データ更新方法について学びましょう。
