@@ -560,6 +560,7 @@
   - [TiDB Limitations](https://docs.pingcap.com/tidbcloud/tidb-limitations.md): Learn the usage limitations of TiDB.
   - [System Variables](https://docs.pingcap.com/tidbcloud/system-variables.md): Use system variables to optimize performance or alter running behavior.
   - [Server Status Variables](https://docs.pingcap.com/tidbcloud/status-variables.md): Use status variables to see the system and session status
+  - [Privilege Management](https://docs.pingcap.com/tidbcloud/privilege-management.md): Learn how to manage the privilege.
   - [Table Filter](https://docs.pingcap.com/tidbcloud/table-filter.md): Usage of table filter feature in TiDB tools.
   - [URI Formats of External Storage Services](https://docs.pingcap.com/tidbcloud/external-storage-uri.md): Learn about the storage URI formats of external storage services, including Amazon S3, GCS, and Azure Blob Storage.
   - [Configure Trigger Rules for Slow Queries](https://docs.pingcap.com/tidbcloud/config-slow-query-trigger-rules.md): Define the trigger rules for slow query logs.

@@ -179,7 +179,7 @@
   - [概要](https://docs.pingcap.com/ja/ai/tidb-mcp-server.md): TiDB MCPサーバーを使用すると、自然言語による指示でTiDBデータベースを管理できます。
   - [Claude Code](https://docs.pingcap.com/ja/ai/tidb-mcp-claude-code.md): このガイドでは、Claude CodeでTiDB MCPサーバーを設定する方法を説明します。
   - [Claude Desktop](https://docs.pingcap.com/ja/ai/tidb-mcp-claude-desktop.md): このガイドでは、Claude DesktopでTiDB MCPサーバーを設定する方法を説明します。
-  - [Cursor](https://docs.pingcap.com/ja/ai/tidb-mcp-cursor.md): このガイドでは、CursorエディタでTiDB MCPサーバーを設定する方法を説明します。
+  - [Cursor](https://docs.pingcap.com/ja/ai/tidb-mcp-cursor.md): このガイドでは、CursorエディターでTiDB MCPサーバーを設定する方法を説明します。
   - [VS Code](https://docs.pingcap.com/ja/ai/tidb-mcp-vscode.md): このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設定する方法を説明します。
   - [Windsurf](https://docs.pingcap.com/ja/ai/tidb-mcp-windsurf.md): このガイドでは、Windsurf で TiDB MCP サーバーを設定する方法を説明します。
 
