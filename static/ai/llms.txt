@@ -61,6 +61,7 @@
   - Command Reference
     - [Overview](https://docs.pingcap.com/ai/ti-cli-reference.md): Reference TiDB Cloud CLI command groups, syntax, global options, output, dry-run behavior, help forms, and errors.
     - [configure](https://docs.pingcap.com/ai/ti-configure.md): Configure a local TiDB Cloud CLI profile interactively or non-interactively.
+    - [exec](https://docs.pingcap.com/ai/ti-exec.md): Run remote commands against a TiDB Cloud Filesystem, preserve workspace files, select execution options, and handle failures safely.
     - [update](https://docs.pingcap.com/ai/ti-update.md): Check for or install a TiDB Cloud CLI release update.
     - `ti db` Commands for Managing TiDB Cloud Starter Instances
       - [Overview](https://docs.pingcap.com/ai/ti-starter-database.md): Reference every `ti db` command for Starter instances, branches, SQL users, connection strings, and SQL execution.

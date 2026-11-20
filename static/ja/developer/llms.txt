@@ -26,7 +26,7 @@
       - [MyBatis](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-mybatis.md): MyBatisを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、MyBatisを使用してTiDBと連携するJavaのサンプルコードを紹介します。
       - [Hibernate](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-hibernate.md): Hibernateを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Hibernateを使用してTiDBと連携するJavaのサンプルコードを紹介します。
       - [Spring Boot](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-java-spring-boot.md): Spring Bootを使用してTiDBに接続する方法を学びましょう。このチュートリアルでは、Spring Bootを使用してTiDBと連携するJavaのサンプルコードを紹介します。
-      - [接続プールと接続パラメーターの設定](https://docs.pingcap.com/ja/developer/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメータの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを実現するための計算式について解説します。また、パフォーマンス最適化のための JDBC API の使用方法と MySQL Connector/J パラメータの設定についても説明します。
+      - [接続プールと接続パラメーターの設定](https://docs.pingcap.com/ja/developer/dev-guide-connection-parameters.md): このドキュメントでは、TiDB の接続プールとパラメーターの設定方法について説明します。接続プールのサイズ、プローブの設定、最適なスループットを実現するための計算式について解説します。また、パフォーマンス最適化のための JDBC API の使用方法と MySQL Connector/J パラメーターの設定についても説明します。
       - [Javaアプリケーション開発におけるベストプラクティス](https://docs.pingcap.com/ja/developer/java-app-best-practices.md): このドキュメントでは、TiDB を使用したJavaアプリケーション開発におけるベストプラクティスを紹介します。データベース関連コンポーネント、JDBC の使用方法、接続プール構成、データアクセスフレームワーク、Spring トランザクション、およびトラブルシューティングツールについて解説します。TiDB は MySQL と高い互換性があるため、MySQL ベースのJavaアプリケーション開発におけるベストプラクティスのほとんどは TiDB にも適用できます。
     - Go
       - [Go-MySQL-Driver](https://docs.pingcap.com/ja/developer/dev-guide-sample-application-golang-sql-driver.md): Go-MySQL-Driver を使用して TiDB に接続する方法を学びましょう。このチュートリアルでは、Go-MySQL-Driver を使用して TiDB と連携するGolang のサンプルコードを紹介します。
@@ -80,7 +80,7 @@
     - [Follower Read](https://docs.pingcap.com/ja/developer/dev-guide-use-follower-read.md): Follower Readを使用してクエリパフォーマンスを最適化する方法を学習します。
     - [ステイル読み取り](https://docs.pingcap.com/ja/developer/dev-guide-use-stale-read.md): 特定の条件下でステイル読み取りを使用してクエリを高速化する方法を学習します。
   - [HTAPクエリ](https://docs.pingcap.com/ja/developer/dev-guide-hybrid-oltp-and-olap-queries.md): TiDB に HTAP クエリを導入します。
-- [ベクトル検索](https://docs.pingcap.com/ja/developer/dev-guide-vector-search.md): 概念、チュートリアル、統合、リファレンス ドキュメントなど、開発者向けに TiDB のベクトル検索機能を紹介します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
+- [ベクトル検索](https://docs.pingcap.com/ja/developer/dev-guide-vector-search.md): 概念、チュートリアル、統合、リファレンスドキュメントなど、開発者向けに TiDB のベクトル検索機能を紹介します。 ![PREVIEW](https://docs-download.pingcap.com/media/images/docs/tidb-cloud/blank_transparent_placeholder.png)
 - トランザクションの管理
   - [概要](https://docs.pingcap.com/ja/developer/dev-guide-transaction-overview.md): TiDB のトランザクションの簡単な紹介。
   - [楽観的トランザクションと悲観的トランザクション](https://docs.pingcap.com/ja/developer/dev-guide-optimistic-and-pessimistic-transaction.md): TiDB の楽観的と悲観的トランザクションについて学習します。
@@ -88,7 +88,7 @@
   - [トランザクションエラーの処理](https://docs.pingcap.com/ja/developer/dev-guide-transaction-troubleshoot.md): デッドロックやアプリケーション再試行エラーなどのトランザクションエラーを処理する方法について学習します。
 - 最適化する
   - [概要](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql-overview.md): TiDB アプリケーション開発者向けに、SQL パフォーマンスチューニングの概要を説明します。
-  - [SQL性能チューニング](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql.md): TiDB の SQL パフォーマンスチューニング スキームと分析アプローチを紹介します。
+  - [SQL性能チューニング](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql.md): TiDB の SQL パフォーマンスチューニングスキームと分析アプローチを紹介します。
   - [性能チューニングのベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-optimize-sql-best-practices.md): TiDB パフォーマンスをチューニングするためのベストプラクティスを紹介します。
   - [インデックス作成のベストプラクティス](https://docs.pingcap.com/ja/developer/dev-guide-index-best-practice.md): TiDB でインデックスを作成して使用するためのベストプラクティスをいくつか学習します。
   - 追加の最適化手法
@@ -115,4 +115,4 @@
   - [SQL開発仕様](https://docs.pingcap.com/ja/developer/dev-guide-sql-development-specification.md): TiDB の SQL 開発仕様について学習します。
 - [書店向けアプリケーション例](https://docs.pingcap.com/ja/developer/dev-guide-bookshop-schema-design.md): Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。TiUPまたはTiDB Cloudを使用して、テーブル構造とデータをインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成してインポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、books、authors、users、ratings、book_authors、orders が含まれます。データベース初期化スクリプト`dbinit.sql`は、Bookshopアプリケーションのテーブル構造を作成します。
 - クラウドネイティブ開発環境
-  - [Gitpod](https://docs.pingcap.com/ja/developer/dev-guide-playground-gitpod.md): Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
+  - [Gitpod](https://docs.pingcap.com/ja/developer/dev-guide-playground-gitpod.md): Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザー内で直接コードを開発、実行、テストできます。
