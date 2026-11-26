@@ -225,7 +225,7 @@ module.exports = {
             ? "https://docs-archive.pingcap.com"
             : "https://docs.pingcap.com"
         }/sitemap/sitemap-index.xml`,
-        policy: [{ userAgent: "*", allow: "/" }],
+        policy: [{ userAgent: "*", allow: "/", disallow: ["/page-data/"] }],
       },
     },
     {
