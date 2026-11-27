@@ -560,6 +560,7 @@
   - [TiDB 限制](https://docs.pingcap.com/zh/tidbcloud/tidb-limitations.md): 了解 TiDB 的使用限制。
   - [系统变量](https://docs.pingcap.com/zh/tidbcloud/system-variables.md): 使用 TiDB 系统变量来优化性能或修改运行行为。
   - [服务器状态变量](https://docs.pingcap.com/zh/tidbcloud/status-variables.md): 使用状态变量查看系统和会话状态
+  - [权限管理](https://docs.pingcap.com/zh/tidbcloud/privilege-management.md): 了解如何管理权限。
   - [表库过滤](https://docs.pingcap.com/zh/tidbcloud/table-filter.md): TiDB 工具中表过滤器功能的使用方法。
   - [外部存储服务的 URI 格式](https://docs.pingcap.com/zh/tidbcloud/external-storage-uri.md): 了解外部存储服务的存储 URI 格式，包括 Amazon S3、GCS 和 Azure Blob Storage。
   - [为慢查询配置触发规则](https://docs.pingcap.com/zh/tidbcloud/config-slow-query-trigger-rules.md): 定义慢查询日志的触发规则。

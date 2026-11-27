@@ -611,6 +611,7 @@
       - [Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/ja/tidbcloud/v6.5-performance-benchmarking-with-sysbench.md): TiDB バージョン v6.5.6 を使用したTiDB Cloud Dedicated クラスターの Sysbench パフォーマンステストの結果を紹介します。
   - [システム変数](https://docs.pingcap.com/ja/tidbcloud/system-variables.md): システム変数を使用して、パフォーマンスを最適化したり、実行時の動作を変更したりできます。
   - [サーバーステータス変数](https://docs.pingcap.com/ja/tidbcloud/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
+  - [権限管理](https://docs.pingcap.com/ja/tidbcloud/privilege-management.md): 特権を管理する方法を学びましょう。
   - [テーブルフィルター](https://docs.pingcap.com/ja/tidbcloud/table-filter.md): TiDB ツールでのテーブルフィルター機能の使用。
   - [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidbcloud/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
   - [DDL文に埋め込まれた`ANALYZE`](https://docs.pingcap.com/ja/tidbcloud/ddl_embedded_analyze.md): このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた `ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。

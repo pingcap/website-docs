@@ -61,6 +61,7 @@
   - コマンドリファレンス
     - [概要](https://docs.pingcap.com/ja/ai/ti-cli-reference.md): TiDB Cloud CLI のコマンドグループ、構文、グローバルオプション、出力、dry-run の動作、ヘルプ形式、エラーを参照します。
     - [configure](https://docs.pingcap.com/ja/ai/ti-configure.md): ローカルの TiDB Cloud CLI プロファイルを対話形式または非対話形式で設定します。
+    - [exec](https://docs.pingcap.com/ja/ai/ti-exec.md): TiDB Cloud Filesystem に対してリモートコマンドを実行し、ワークスペースファイルを保持し、実行オプションを選択して、安全に障害に対処します。
     - [update](https://docs.pingcap.com/ja/ai/ti-update.md): TiDB Cloud CLI リリースの更新を確認またはインストールします。
     - TiDB Cloud Starter インスタンスを管理するための `ti db` コマンド
       - [概要](https://docs.pingcap.com/ja/ai/ti-starter-database.md): Starter インスタンス、ブランチ、SQL ユーザー、接続文字列、SQL 実行向けの `ti db` コマンドを一覧で示します。

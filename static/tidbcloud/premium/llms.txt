@@ -168,7 +168,7 @@
     - [Connect via Private Endpoint with Alibaba Cloud](https://docs.pingcap.com/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Learn how to connect to your TiDB Cloud Premium instance via a private endpoint on Alibaba Cloud.
     - [TLS Connections to TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-premium.md): Introduce TLS connections in TiDB Cloud Premium.
   - Data Access Control
-    - [Dual-Layer Data Encryption](https://docs.pingcap.com/tidbcloud/dual-layer-data-encryption-premium.md): Learn how to enable and manage Dual-Layer Data Encryption for your TiDB Cloud Premium instance.
+    - [Enhanced Data Encryption](https://docs.pingcap.com/tidbcloud/enhanced-data-encryption-premium.md): Learn how to register a Customer-Managed Encryption Key (CMEK) and enable Enhanced Data Encryption for your TiDB Cloud Premium instances.
     - [User-Controlled Log Redaction](https://docs.pingcap.com/tidbcloud/tidb-cloud-log-redaction.md): Learn how to enable or disable user-controlled log redaction in TiDB Cloud to manage the visibility of sensitive data in execution logs.
   - Audit Management
     - [Database Audit Logging](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium.md): Learn how to enable database audit logging for TiDB Cloud Premium or TiDB Cloud BYOC instances and configure audit filters and cloud storage.
