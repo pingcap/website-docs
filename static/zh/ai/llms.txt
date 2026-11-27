@@ -61,6 +61,7 @@
   - 命令参考
     - [概览](https://docs.pingcap.com/zh/ai/ti-cli-reference.md): 参考 TiDB Cloud CLI 命令组、语法、全局选项、输出、dry-run 行为、帮助形式和错误。
     - [configure](https://docs.pingcap.com/zh/ai/ti-configure.md): 以交互式或非交互式方式配置本地 TiDB Cloud CLI 配置（Profile）。
+    - [exec](https://docs.pingcap.com/zh/ai/ti-exec.md): 在不将 Filesystem 挂载到本地的情况下，对 TiDB Cloud Filesystem 运行远程命令，保留工作区文件，选择执行选项，并安全地处理失败情况。
     - [update](https://docs.pingcap.com/zh/ai/ti-update.md): 检查或安装 TiDB Cloud CLI 的版本更新。
     - 用于管理 TiDB Cloud Starter 实例的 `ti db` 命令
       - [概览](https://docs.pingcap.com/zh/ai/ti-starter-database.md): 参考适用于 Starter 实例、分支、SQL 用户、连接字符串和 SQL 执行的每个 `ti db` 命令。

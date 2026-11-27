@@ -560,6 +560,7 @@
   - [TiDBの制限事項](https://docs.pingcap.com/ja/tidbcloud/tidb-limitations.md): TiDB の使用制限について学習します。
   - [システム変数](https://docs.pingcap.com/ja/tidbcloud/system-variables.md): システム変数を使用して、パフォーマンスを最適化したり、実行時の動作を変更したりできます。
   - [サーバーステータス変数](https://docs.pingcap.com/ja/tidbcloud/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
+  - [権限管理](https://docs.pingcap.com/ja/tidbcloud/privilege-management.md): 特権を管理する方法を学びましょう。
   - [テーブルフィルター](https://docs.pingcap.com/ja/tidbcloud/table-filter.md): TiDB ツールでのテーブルフィルター機能の使用。
   - [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidbcloud/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
   - [スロークエリのトリガールールを設定する](https://docs.pingcap.com/ja/tidbcloud/config-slow-query-trigger-rules.md): スロークエリログのトリガールールを定義します。

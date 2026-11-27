@@ -168,7 +168,7 @@
     - [Alibaba Cloudとプライベートエンドポイント経由で接続](https://docs.pingcap.com/ja/tidbcloud/connect-to-premium-via-alibaba-cloud-private-endpoint.md): Alibaba Cloud上のプライベートエンドポイントを介してTiDB Cloud Premiumインスタンスに接続する方法を学びましょう。
     - [TiDB CloudへのTLS接続](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tls-connect-to-premium.md): TiDB Cloud PremiumにおけるTLS接続について説明します。
   - データアクセス制御
-    - [二重層データ暗号化](https://docs.pingcap.com/ja/tidbcloud/dual-layer-data-encryption-premium.md): TiDB Cloud Premiumインスタンスで二重層データ暗号化を有効化および管理する方法を学びましょう。
+    - [Enhanced Data Encryption](https://docs.pingcap.com/ja/tidbcloud/enhanced-data-encryption-premium.md): TiDB Cloud Premium インスタンス向けに Customer-Managed Encryption Key (CMEK) を登録し、Enhanced Data Encryption を有効にする方法を学びます。
   - 監査管理
     - [データベース監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-auditing-premium.md): TiDB Cloud Premium または TiDB Cloud BYOC インスタンスでデータベース監査ログを有効にし、監査フィルターとクラウドストレージを設定する方法を学びましょう。
     - [コンソール監査ログ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-console-auditing.md): TiDB Cloudコンソールの監査ログ機能について学習します。
@@ -483,6 +483,7 @@
   - [TiDBの制限事項](https://docs.pingcap.com/ja/tidbcloud/tidb-limitations.md): TiDB の使用制限について学習します。
   - [システム変数](https://docs.pingcap.com/ja/tidbcloud/system-variables.md): システム変数を使用して、パフォーマンスを最適化したり、実行時の動作を変更したりできます。
   - [サーバーステータス変数](https://docs.pingcap.com/ja/tidbcloud/status-variables.md): ステータス変数を使用してシステムとセッションのステータスを確認します
+  - [権限管理](https://docs.pingcap.com/ja/tidbcloud/privilege-management.md): 特権を管理する方法を学びましょう。
   - [テーブルフィルター](https://docs.pingcap.com/ja/tidbcloud/table-filter.md): TiDB ツールでのテーブルフィルター機能の使用。
   - [外部ストレージサービスのURI形式](https://docs.pingcap.com/ja/tidbcloud/external-storage-uri.md): Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
   - [DDL文に埋め込まれた `ANALYZE`](https://docs.pingcap.com/ja/tidbcloud/ddl_embedded_analyze.md): このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた `ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
